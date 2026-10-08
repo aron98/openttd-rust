@@ -15,7 +15,10 @@ test "$(git -C .reference/OpenTTD rev-parse HEAD)" = "$commit"
 git -C .reference/OpenTTD diff --exit-code HEAD
 
 cmake -S .reference/OpenTTD -B .reference/build \
-    -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release
+    -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release \
+    "-DCMAKE_C_COMPILER_LAUNCHER=${REFERENCE_COMPILER_LAUNCHER:-}" \
+    "-DCMAKE_CXX_COMPILER_LAUNCHER=${REFERENCE_COMPILER_LAUNCHER:-}" \
+    "-DCMAKE_DISABLE_PRECOMPILE_HEADERS=${REFERENCE_DISABLE_PCH:-OFF}"
 cmake --build .reference/build --parallel "${JOBS:-4}"
 
 archive=.reference/opengfx-7.1-all.zip

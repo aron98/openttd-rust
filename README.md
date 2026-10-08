@@ -76,6 +76,10 @@ bash scripts/check-simulation.sh
 bash scripts/check-callbacks.sh
 ```
 
+CI caches native compiler results while still building and running every
+interoperability check. See [reference-build caching](docs/ci.md) for cache keys,
+local opt-in settings and validation limits.
+
 Setup builds the pinned original in `.reference/` and downloads a checksummed
 OpenGFX 7.1 base set. It does not install a game globally. The compatibility
 script uses isolated directories under `.artifacts/`, retaining engine logs and

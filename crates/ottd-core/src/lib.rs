@@ -211,3 +211,10 @@ pub struct DateFraction(pub u16);
 /// Saved simulation tick counter.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct TickCounter(pub u64);
+
+mod clock;
+mod clock_types;
+pub use clock::ClockState;
+pub use clock_types::{
+    ClockCache, ClockError, ClockEvent, ClockEvents, ClockSettings, ClockSnapshot, TimekeepingUnits,
+};

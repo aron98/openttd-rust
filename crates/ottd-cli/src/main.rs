@@ -11,6 +11,7 @@ use clap::{Parser, Subcommand, ValueEnum};
 use ottd_save::{Compression, DEFAULT_MAX_BYTES, Savegame};
 use serde_json::json;
 
+mod callbacks;
 /// Exact JSON comparison helpers.
 pub mod compare;
 mod simulation;
@@ -30,6 +31,10 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Action {
+    #[command(
+        about = "Run one supported object callback on explicit JSON state; not a full game tick"
+    )]
+    SimulateCallbacks { input: PathBuf },
     #[command(about = "Advance isolated temperate clear-landscape JSON; not a full game or save")]
     SimulateLandscape {
         input: PathBuf,
@@ -83,6 +88,7 @@ fn load(path: &Path, limit: usize) -> Result<Savegame> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Action::SimulateCallbacks { input } => callbacks::run(&input, cli.max_bytes)?,
         Action::SimulateLandscape { input, ticks } => {
             simulation::run(&input, cli.max_bytes, ticks)?;
         }

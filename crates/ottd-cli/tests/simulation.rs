@@ -115,3 +115,52 @@ fn native_landscape_checkpoints() -> Result<(), Box<dyn std::error::Error>> {
     }
     Ok(())
 }
+
+#[test]
+#[ignore = "requires OTTD_GAMEPLAY_JSON and OTTD_SIMULATION_DIR"]
+fn native_snapshot_negative_controls() -> Result<(), Box<dyn std::error::Error>> {
+    let oracle: Oracle = serde_json::from_slice(&fs::read(std::env::var("OTTD_GAMEPLAY_JSON")?)?)?;
+    let dir = std::path::PathBuf::from(std::env::var("OTTD_SIMULATION_DIR")?);
+    fs::create_dir_all(&dir)?;
+    let baseline = &oracle
+        .landscape_cases
+        .first()
+        .ok_or("native case")?
+        .checkpoints
+        .last()
+        .ok_or("checkpoint")?
+        .after;
+    let expected = dir.join("control-baseline.json");
+    fs::write(&expected, serde_json::to_vec(baseline)?)?;
+    for (name, path) in [
+        ("tile", "$.state.map.tiles[0].m5"),
+        ("clock", "$.state.clock.date"),
+        ("cursor", "$.state.cur_tileloop_tile"),
+        ("rng", "$.state.random_state[0]"),
+        ("event", "$.events[0].calendar_progressed"),
+    ] {
+        let mut changed = baseline.clone();
+        match name {
+            "tile" => changed.state.map.tiles.first_mut().ok_or("tile")?.m5 ^= 1,
+            "clock" => changed.state.clock.date = changed.state.clock.date.wrapping_add(1),
+            "cursor" => changed.state.cur_tileloop_tile ^= 1,
+            "rng" => changed.state.random_state[0] ^= 1,
+            "event" => {
+                let event = changed.events.first_mut().ok_or("event")?;
+                event.calendar_progressed = !event.calendar_progressed;
+            }
+            _ => return Err("unknown control".into()),
+        }
+        let actual = dir.join(format!("control-{name}.json"));
+        fs::write(&actual, serde_json::to_vec(&changed)?)?;
+        let output = Command::new(env!("CARGO_BIN_EXE_ottd"))
+            .arg("compare")
+            .arg(&expected)
+            .arg(&actual)
+            .output()?;
+        fs::write(dir.join(format!("control-{name}.log")), &output.stderr)?;
+        assert!(!output.status.success());
+        assert!(String::from_utf8_lossy(&output.stderr).contains(path));
+    }
+    Ok(())
+}

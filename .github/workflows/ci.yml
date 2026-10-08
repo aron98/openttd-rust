@@ -30,3 +30,4 @@ jobs:
       - run: bash scripts/check-compatibility.sh
       - run: bash scripts/setup-snapshot-reference.sh
       - run: bash scripts/check-snapshots.sh
+      - run: bash scripts/check-simulation.sh

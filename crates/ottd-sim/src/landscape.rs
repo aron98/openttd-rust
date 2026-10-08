@@ -58,7 +58,7 @@ impl Landscape {
         for (index, tile) in map.tiles.iter().enumerate() {
             match tile.tile_type >> 4 {
                 0 if tile.m3 & 16 == 0 && (tile.m5 >> 2) & 7 <= 2 => {}
-                6 => {}
+                7 => {}
                 _ => return Err(LandscapeError::Tile(index)),
             }
         }
@@ -111,6 +111,11 @@ impl Landscape {
     /// Current map, including all unchanged raw tile bits.
     pub const fn map(&self) -> &Map {
         &self.map
+    }
+
+    /// Returns the owned map after simulation without copying tile storage.
+    pub fn into_map(self) -> Map {
+        self.map
     }
 
     /// Next nonzero tile scheduled by the LFSR.

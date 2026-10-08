@@ -93,7 +93,7 @@ fn rectangular_sweeps_preserve_raw_fields_and_saturated_terrain()
     for (width, height) in [(64, 128), (128, 64), (256, 64), (64, 256)] {
         let tiles = (0..width * height)
             .map(|i| Tile {
-                tile_type: if i % 4 == 0 { 0x6f } else { 0x0f },
+                tile_type: if i % 4 == 0 { 0x7f } else { 0x0f },
                 height: 29,
                 m1: 255,
                 m2: 65535,
@@ -145,4 +145,32 @@ fn invalid_map_shapes_are_rejected() {
             .is_err()
         );
     }
+}
+
+#[test]
+fn upstream_void_is_seven_and_water_is_unsupported() {
+    let map = Map {
+        width: 64,
+        height: 64,
+        tiles: vec![
+            Tile {
+                tile_type: 0x70,
+                ..grass(0)
+            };
+            4096
+        ],
+    };
+    assert!(Landscape::new(map, 1).is_ok());
+    let map = Map {
+        width: 64,
+        height: 64,
+        tiles: vec![
+            Tile {
+                tile_type: 0x60,
+                ..grass(0)
+            };
+            4096
+        ],
+    };
+    assert!(Landscape::new(map, 1).is_err());
 }

@@ -57,8 +57,47 @@ struct WorldWire {
     savegame_version: u16,
     map: MapState,
     date: DateState,
+    #[serde(deserialize_with = "unique_settings")]
     settings: BTreeMap<String, FieldValue>,
     script_random: Vec<ScriptRandomState>,
+}
+
+fn unique_settings<'de, D>(deserializer: D) -> Result<table::Fields, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    struct SettingsVisitor;
+
+    impl<'de> serde::de::Visitor<'de> for SettingsVisitor {
+        type Value = table::Fields;
+
+        fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            formatter.write_str("settings with unique field names")
+        }
+
+        fn visit_map<M>(self, mut input: M) -> Result<Self::Value, M::Error>
+        where
+            M: serde::de::MapAccess<'de>,
+        {
+            let mut fields = BTreeMap::new();
+            while let Some(name) = input.next_key::<String>()? {
+                match fields.entry(name) {
+                    std::collections::btree_map::Entry::Occupied(entry) => {
+                        return Err(serde::de::Error::custom(format!(
+                            "duplicate setting {}",
+                            entry.key()
+                        )));
+                    }
+                    std::collections::btree_map::Entry::Vacant(entry) => {
+                        entry.insert(input.next_value()?);
+                    }
+                }
+            }
+            Ok(fields)
+        }
+    }
+
+    deserializer.deserialize_map(SettingsVisitor)
 }
 
 impl TryFrom<WorldWire> for WorldSnapshot {

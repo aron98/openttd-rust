@@ -8,6 +8,8 @@ license.workspace = true
 
 [dependencies]
 thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 flate2 = "1.1"
 xz2 = "0.1.7"
 lzokay = "2"

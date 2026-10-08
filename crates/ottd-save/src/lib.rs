@@ -1,7 +1,11 @@
-//! Lossless save-container handling. Game-object fields are not yet interpreted.
+//! Lossless save-container handling and typed version-362 world snapshots.
 
 mod chunk;
 mod compression;
+mod snapshot;
+pub use snapshot::{
+    DateState, FieldValue, MapState, ScriptRandomState, SnapshotError, TileState, WorldSnapshot,
+};
 
 pub use chunk::{Chunk, ChunkKind};
 

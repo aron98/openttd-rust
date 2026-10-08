@@ -8,6 +8,8 @@
 #include "../timer/timer_game_calendar.h"
 #include <fstream>
 
+#include "reference_gameplay.hpp"
+
 extern const SaveLoadVersion SAVEGAME_VERSION;
 
 namespace ReferenceSnapshot {
@@ -103,6 +105,7 @@ inline void Begin()
 }
 inline void Finish()
 {
+    if (const char *path = std::getenv("OTTD_GAMEPLAY_PROBES_PATH")) ReferenceGameplay::Run(path);
     if (!Enabled()) return;
     state["map"] = {{"width", Map::SizeX()}, {"height", Map::SizeY()}, {"tiles", Json::array()}};
     for (uint32_t i = 0; i < Map::Size(); ++i) {

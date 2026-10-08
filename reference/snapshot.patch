@@ -1,0 +1,77 @@
+--- a/src/saveload/misc_sl.cpp
++++ b/src/saveload/misc_sl.cpp
+@@ -24,6 +24,7 @@
+ #include "../timer/timer.h"
+ #include "../timer/timer_game_tick.h"
+ 
++#include "reference_snapshot.hpp"
+ #include "../safeguards.h"
+ 
+ extern TileIndex _cur_tileloop_tile;
+@@ -119,6 +120,7 @@
+ 
+ 	void Save() const override
+ 	{
++		ReferenceSnapshot::Capture("date", nullptr, _date_desc);
+ 		SlTableHeader(_date_desc);
+ 
+ 		SlSetArrayIndex(0);
+--- a/src/saveload/settings_sl.cpp
++++ b/src/saveload/settings_sl.cpp
+@@ -18,6 +18,7 @@
+ #include "../network/network.h"
+ #include "../fios.h"
+ 
++#include "reference_snapshot.hpp"
+ #include "../safeguards.h"
+ 
+ /**
+@@ -134,6 +135,7 @@
+ {
+ 	const std::vector<SaveLoad> slt = GetSettingsDesc(settings, false);
+ 
++	ReferenceSnapshot::Capture("settings", object, slt);
+ 	SlTableHeader(slt);
+ 
+ 	SlSetArrayIndex(0);
+--- a/src/saveload/randomizer_sl.cpp
++++ b/src/saveload/randomizer_sl.cpp
+@@ -11,6 +11,7 @@
+ #include "../script/api/script_object.hpp"
+ #include "saveload.h"
+ #include "saveload_internal.h"
++#include "reference_snapshot.hpp"
+ #include "../safeguards.h"
+ 
+ static const SaveLoad _randomizer_desc[] = {
+@@ -29,6 +30,10 @@
+ 		for (Owner owner = OWNER_BEGIN; owner < OWNER_END; ++owner) {
+ 			SlSetArrayIndex(owner);
+ 			SlObject(&ScriptObject::GetRandomizer(owner), _randomizer_desc);
++			if (ReferenceSnapshot::Enabled()) {
++				auto &r = ScriptObject::GetRandomizer(owner);
++				ReferenceSnapshot::state["script_random"].push_back({{"owner", owner.base()}, {"state", {r.state[0], r.state[1]}}});
++			}
+ 		}
+ 	}
+ 
+--- a/src/saveload/saveload.cpp
++++ b/src/saveload/saveload.cpp
+@@ -70,6 +70,7 @@
+ 
+ #include "table/strings.h"
+ 
++#include "reference_snapshot.hpp"
+ #include "../safeguards.h"
+ 
+ extern const SaveLoadVersion SAVEGAME_VERSION = (SaveLoadVersion)(SL_MAX_VERSION - 1); ///< Current savegame version of OpenTTD.
+@@ -3053,7 +3054,9 @@
+ 	_sl_version = SAVEGAME_VERSION;
+ 
+ 	SaveViewportBeforeSaveGame();
++	ReferenceSnapshot::Begin();
+ 	SlSaveChunks();
++	ReferenceSnapshot::Finish();
+ 
+ 	SaveFileStart();
+ 

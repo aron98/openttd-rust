@@ -318,8 +318,18 @@ dependencies = [
  "anyhow",
  "clap",
  "ottd-save",
+ "serde",
  "serde_json",
  "tempfile",
+]
+
+[[package]]
+name = "ottd-core"
+version = "0.1.0"
+dependencies = [
+ "proptest",
+ "serde_json",
+ "thiserror",
 ]
 
 [[package]]

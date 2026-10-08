@@ -95,3 +95,112 @@ fn missing_input_fails_cleanly() {
     assert!(!output.status.success());
     assert!(!output.stderr.is_empty());
 }
+
+#[test]
+fn compare_reports_exact_integer_and_structural_differences() {
+    let dir = tempdir().unwrap();
+    let expected = dir.path().join("expected.json");
+    let actual = dir.path().join("actual.json");
+    for (left, right, path) in [
+        (
+            r#"{"date":{"tick":9007199254740993}}"#,
+            r#"{"date":{"tick":9007199254740992}}"#,
+            "$.date.tick",
+        ),
+        (r#"{"tiles":[1,2]}"#, r#"{"tiles":[1]}"#, "$.tiles[1]"),
+        ("{}", r#"{"unknown":1}"#, "$.unknown"),
+        (r#"{"missing":null}"#, "{}", "$.missing"),
+    ] {
+        fs::write(&expected, left).unwrap();
+        fs::write(&actual, right).unwrap();
+        let result = command()
+            .arg("compare")
+            .arg(&expected)
+            .arg(&actual)
+            .output()
+            .unwrap();
+        assert!(!result.status.success());
+        assert!(
+            String::from_utf8_lossy(&result.stderr).contains(path),
+            "{}",
+            String::from_utf8_lossy(&result.stderr)
+        );
+    }
+}
+
+#[test]
+fn compare_accepts_equal_objects_with_different_key_order() {
+    let dir = tempdir().unwrap();
+    let expected = dir.path().join("expected.json");
+    let actual = dir.path().join("actual.json");
+    fs::write(
+        &expected,
+        r#"{"a":18446744073709551615,"b":-9223372036854775808}"#,
+    )
+    .unwrap();
+    fs::write(
+        &actual,
+        r#"{"b":-9223372036854775808,"a":18446744073709551615}"#,
+    )
+    .unwrap();
+    let result = command()
+        .arg("compare")
+        .arg(expected)
+        .arg(actual)
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+}
+
+#[test]
+fn compare_rejects_malformed_and_oversized_inputs() {
+    let dir = tempdir().unwrap();
+    let path = dir.path().join("input.json");
+    fs::write(&path, "{").unwrap();
+    assert!(
+        !command()
+            .arg("compare")
+            .arg(&path)
+            .arg(&path)
+            .status()
+            .unwrap()
+            .success()
+    );
+    fs::write(&path, "{\"a\":1234}").unwrap();
+    assert!(
+        !command()
+            .args(["--max-bytes", "4", "compare"])
+            .arg(&path)
+            .arg(&path)
+            .status()
+            .unwrap()
+            .success()
+    );
+}
+
+#[test]
+fn compare_rejects_lossy_numbers_and_duplicate_keys() {
+    let dir = tempdir().unwrap();
+    let path = dir.path().join("input.json");
+    for document in [
+        r#"{"n":18446744073709551616}"#,
+        r#"{"n":-9223372036854775809}"#,
+        r#"{"n":1,"n":2}"#,
+        r#"{"nested":[{"n":1,"n":2}]}"#,
+        r#"{"n":1.0}"#,
+    ] {
+        fs::write(&path, document).unwrap();
+        let output = command()
+            .arg("compare")
+            .arg(&path)
+            .arg(&path)
+            .output()
+            .unwrap();
+        assert!(!output.status.success(), "accepted {document}");
+        assert!(String::from_utf8_lossy(&output.stderr).contains("invalid JSON"));
+    }
+}

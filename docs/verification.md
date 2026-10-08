@@ -1,5 +1,36 @@
 # Compatibility foundation verification
 
+## Typed snapshot milestone
+
+Verified locally on macOS ARM64 on 2026-10-08 against the same pinned upstream
+revision below. `cargo test --workspace --locked` passed 50 self-contained tests;
+the two external-oracle tests are explicitly run by `scripts/check-snapshots.sh`
+instead of being counted as coverage from the ordinary test invocation.
+Formatting and strict all-target/all-feature Clippy passed.
+
+The differential run in `.artifacts/snapshots-FSzzy4/` passed all three fixtures
+at 1 and 16 null-driver ticks. Each of the six directories retains the actual
+C++ runtime `snapshot.json`, its paired `save/autosave/exit.sav`, two byte-identical
+Rust snapshots, exact comparator results, typed-library parity results, and
+primitive parity results. Tile, date, saved RNG and setting mutations all
+returned nonzero with their exact paths and expected/actual values: 24 negative
+controls total. No fields were filtered. The previous 12-case preservation matrix
+also passed again in `.artifacts/compat-ZmI26y/`.
+
+The new core tests replay actual upstream randomizer/scaling, calendar and map
+vectors and check coordinate bounds, leap/century/max-year dates and checked date
+arithmetic. The CLI additionally rejects duplicate JSON keys, inexact or
+out-of-range numeric inputs, malformed JSON and byte-limit violations. Existing
+rewrite no-clobber tests remain green. `snapshot` rejects historical versions;
+the C++ engine performs the migrations in the differential fixture matrix.
+
+This verifies typed map/clock/settings/randomness decoding and the deterministic
+primitives. Simulation, game-object decoding, historical Rust migrations,
+scripting, networking and UI remain unimplemented. CI now invokes both reference
+matrices; the new CI configuration has only been validated locally at this stage.
+
+## Earlier save-container milestone
+
 Date: 2026-10-08. Platform: macOS ARM64. Rust: 1.96.0.
 Upstream: OpenTTD 15.3 at `14ec60f248547d4d062a1160f0fc26d742319888`.
 The GitHub releases API identified 15.3 as the latest stable release when pinned.

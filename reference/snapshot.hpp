@@ -9,6 +9,7 @@
 #include <fstream>
 
 #include "reference_gameplay.hpp"
+#include "reference_callbacks.hpp"
 
 extern const SaveLoadVersion SAVEGAME_VERSION;
 
@@ -105,6 +106,7 @@ inline void Begin()
 }
 inline void Finish()
 {
+    if (const char *path = std::getenv("OTTD_CALLBACK_PROBES_PATH")) ReferenceCallbacks::Run(path);
     if (const char *path = std::getenv("OTTD_GAMEPLAY_PROBES_PATH")) ReferenceGameplay::Run(path);
     if (!Enabled()) return;
     state["map"] = {{"width", Map::SizeX()}, {"height", Map::SizeY()}, {"tiles", Json::array()}};

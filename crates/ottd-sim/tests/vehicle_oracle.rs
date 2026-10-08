@@ -3,7 +3,6 @@ use ottd_sim::{VehicleCallbacks, VehicleOperation, run_vehicle_callback};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
 struct Oracle {
     schema_version: u32,
     vehicle_cases: Vec<Case>,

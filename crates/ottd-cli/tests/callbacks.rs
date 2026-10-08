@@ -26,24 +26,28 @@ fn native_callbacks_match_through_cli_with_rejection_controls()
         .to_owned()
     });
     let corpus: serde_json::Value = serde_json::from_reader(std::fs::File::open(source)?)?;
-    let cases = corpus
+    let vehicle_cases = corpus
         .get("vehicle_cases")
         .and_then(serde_json::Value::as_array)
         .ok_or("missing cases")?;
-    assert!(cases.len() >= 10);
+    let periodic_cases = corpus
+        .get("periodic_cases")
+        .and_then(serde_json::Value::as_array)
+        .ok_or("missing periodic cases")?;
+    let cases: Vec<_> = vehicle_cases.iter().chain(periodic_cases).collect();
+    assert!(vehicle_cases.len() >= 12);
+    assert_eq!(periodic_cases.len(), 8);
     let temp = tempfile::tempdir()?;
     let root = std::env::var_os("OTTD_CALLBACK_ARTIFACTS")
         .map_or_else(|| temp.path().to_path_buf(), std::path::PathBuf::from);
     std::fs::create_dir_all(&root)?;
-    for case in cases {
+    for case in &cases {
         let name = case
             .get("name")
             .and_then(serde_json::Value::as_str)
             .ok_or("missing name")?;
-        let request = serde_json::json!({"schema_version":1,"callback":{"kind":"vehicle",
-            "operation":case.get("operation").ok_or("missing operation")?,"state":case.get("before").ok_or("missing before")?}});
-        let expected = serde_json::json!({"schema_version":1,"callback":{"kind":"vehicle",
-            "operation":case.get("operation").ok_or("missing operation")?,"state":case.get("after").ok_or("missing after")?}});
+        let request = request_for(case, "before")?;
+        let expected = request_for(case, "after")?;
         let path = root.join(format!("{name}.input.json"));
         std::fs::write(&path, serde_json::to_vec(&request)?)?;
         // When the public command executes the original callback boundary twice.
@@ -110,4 +114,26 @@ fn native_callbacks_match_through_cli_with_rejection_controls()
         assert!(!output.stderr.is_empty());
     }
     Ok(())
+}
+
+fn request_for(
+    case: &serde_json::Value,
+    phase: &str,
+) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+    let operation = case.get("operation").ok_or("missing operation")?;
+    let kind = operation
+        .get("kind")
+        .and_then(serde_json::Value::as_str)
+        .ok_or("missing kind")?;
+    let state = case.get(phase).ok_or("missing state")?;
+    let callback = match kind {
+        "house_year" | "company_year" | "station_month" => {
+            serde_json::json!({"kind":kind,"state":state})
+        }
+        "calendar_day" | "economy_year" => {
+            serde_json::json!({"kind":"vehicle","operation":operation,"state":state})
+        }
+        _ => return Err("unsupported oracle operation".into()),
+    };
+    Ok(serde_json::json!({"schema_version":1,"callback":callback}))
 }

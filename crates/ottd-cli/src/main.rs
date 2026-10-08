@@ -11,7 +11,8 @@ use clap::{Parser, Subcommand, ValueEnum};
 use ottd_save::{Compression, DEFAULT_MAX_BYTES, Savegame};
 use serde_json::json;
 
-mod compare;
+/// Exact JSON comparison helpers.
+pub mod compare;
 
 #[derive(Debug, Parser)]
 #[command(

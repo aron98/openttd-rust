@@ -108,8 +108,8 @@ fn compare_reports_exact_integer_and_structural_differences() {
             "$.date.tick",
         ),
         (r#"{"tiles":[1,2]}"#, r#"{"tiles":[1]}"#, "$.tiles[1]"),
-        (r#"{}"#, r#"{"unknown":1}"#, "$.unknown"),
-        (r#"{"missing":null}"#, r#"{}"#, "$.missing"),
+        ("{}", r#"{"unknown":1}"#, "$.unknown"),
+        (r#"{"missing":null}"#, "{}", "$.missing"),
     ] {
         fs::write(&expected, left).unwrap();
         fs::write(&actual, right).unwrap();

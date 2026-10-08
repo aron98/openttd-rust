@@ -2,6 +2,9 @@ use anyhow::{Context, Result, ensure};
 use serde_json::Value;
 use std::{fs::File, io::Read, path::Path};
 
+/// Reads a JSON document within a byte limit.
+/// # Errors
+/// Returns an error for unreadable, oversized or malformed input.
 pub fn load_json(path: &Path, limit: usize) -> Result<Value> {
     let file = File::open(path).with_context(|| format!("cannot open {}", path.display()))?;
     let mut bytes = Vec::new();
@@ -15,6 +18,7 @@ pub fn load_json(path: &Path, limit: usize) -> Result<Value> {
     serde_json::from_slice(&bytes).with_context(|| format!("invalid JSON: {}", path.display()))
 }
 
+/// Returns the first differing path and values, retaining unknown fields.
 pub fn first_difference(expected: &Value, actual: &Value, path: &str) -> Option<String> {
     match (expected, actual) {
         (Value::Object(left), Value::Object(right)) => {

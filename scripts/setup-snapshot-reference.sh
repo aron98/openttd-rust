@@ -32,7 +32,10 @@ for header in callback_vehicle callback_timer callback_house callback_company ca
     cp "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
 done
 cmake -S "$source_dir" -B "$build_dir" \
-    -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release
+    -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release \
+    "-DCMAKE_C_COMPILER_LAUNCHER=${REFERENCE_COMPILER_LAUNCHER:-}" \
+    "-DCMAKE_CXX_COMPILER_LAUNCHER=${REFERENCE_COMPILER_LAUNCHER:-}" \
+    "-DCMAKE_DISABLE_PRECOMPILE_HEADERS=${REFERENCE_DISABLE_PCH:-OFF}"
 cmake --build "$build_dir" --parallel "${JOBS:-4}"
 archive="${REFERENCE_OPENGFX_ARCHIVE:-$root/.reference/opengfx-7.1-all.zip}"
 if [ ! -f "$archive" ]; then

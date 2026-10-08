@@ -1,6 +1,6 @@
 name: Rust compatibility foundation
 
-on: [push, pull_request]
+on: [pull_request]
 
 permissions:
   contents: read
@@ -25,10 +25,17 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.96.0
-      - run: sudo apt-get update && sudo apt-get install -y cmake g++ zlib1g-dev liblzma-dev liblzo2-dev libpng-dev libcurl4-openssl-dev xz-utils unzip
+      - name: Set up native reference compiler cache
+        id: reference-cache
+        uses: ./.github/actions/reference-cache
       - run: bash scripts/setup-reference.sh
       - run: bash scripts/check-compatibility.sh
       - run: bash scripts/setup-snapshot-reference.sh
+        env:
+          REFERENCE_SOURCE: ${{ github.workspace }}/.reference/OpenTTD
       - run: bash scripts/check-snapshots.sh
       - run: bash scripts/check-simulation.sh
       - run: bash scripts/check-callbacks.sh
+      - name: Report native compiler-cache statistics
+        if: always() && steps.reference-cache.outcome == 'success'
+        run: ccache --show-stats --verbose

@@ -76,6 +76,12 @@ bash scripts/check-simulation.sh
 bash scripts/check-callbacks.sh
 ```
 
+Pull-request CI caches native compiler results while still building and running
+every interoperability check. A separate job warms the shared cache only after
+a PR is merged into `main`; neither workflow runs on pushes. See
+[reference-build caching](docs/ci.md) for cache keys, local opt-in settings and
+validation limits.
+
 Setup builds the pinned original in `.reference/` and downloads a checksummed
 OpenGFX 7.1 base set. It does not install a game globally. The compatibility
 script uses isolated directories under `.artifacts/`, retaining engine logs and
@@ -168,14 +174,20 @@ remain under `.artifacts/callbacks-*`; CI invokes the same driver.
 
 ## Porting direction
 
-Next are typed game-object decoding, historical migrations, additional simulation
-procedures and the command system, checked against upstream state comparisons.
-Full content, script, network, and UI parity follow those semantics.
-All upstream behavior remains in the product scope.
+The target is mixed multiplayer between original OpenTTD 15.3 and Rust clients,
+hosted by either implementation, with compatible saves and existing add-ons.
+One deterministic Rust engine will serve desktop, browser and headless server
+builds. All upstream behavior remains in the product scope.
+
+The [compatibility roadmap](docs/roadmap.md) defines the eight stages and their
+acceptance gates. The [development workflow](CONTRIBUTING.md) defines subagent
+ownership, atomic commits, independent review and verification. Each stage gets
+one PR; the maintainer's merge is required before work on the next stage begins.
 
 The simulation must preserve IDs, integer behavior, random-number sequences and
-consumption, update order, and command results. A graphics engine or ECS will not
-be chosen before those semantics are mapped. See the
+consumption, update order, and command results. Rendering choices must preserve
+those semantics; the preferred direction is a shared Rust renderer for native
+and WebAssembly clients. See the
 [verification results](docs/verification.md) and [fixture provenance](fixtures/README.md).
 
 Licensed under GPL-2.0-only. See [COPYING.md](COPYING.md) and [NOTICE.md](NOTICE.md).

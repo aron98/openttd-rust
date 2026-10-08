@@ -4,13 +4,14 @@ A Rust port targeting **OpenTTD 15.3**, with behavioral parity and two-way save
 compatibility as the end goal. The exact upstream commit is recorded in
 [`upstream.toml`](upstream.toml).
 
-**Current state: typed snapshots and a deterministic clock/clear-landscape subsystem. This is not yet a playable game.**
+**Current state: typed snapshots, a deterministic clock/clear-landscape subsystem, and selected object callback bodies. This is not yet a playable game.**
 The Rust code reads and rewrites save containers while preserving chunk contents.
 Version-362 saves additionally decode into typed map, clock, settings and saved
 random-state snapshots. Rust randomizer, map-coordinate and Gregorian calendar
 primitives are checked against independently generated C++ vectors.
 An explicit subsystem fixture can advance calendar/economy clocks and temperate
-clear terrain against original C++ results. Full object simulation, rendering,
+clear terrain against original C++ results. A separate typed-state runner executes
+selected vehicle, house, company, station, and industry callbacks. Full object simulation, rendering,
 scripts and multiplayer are not implemented.
 
 ## Use
@@ -72,6 +73,7 @@ bash scripts/check-compatibility.sh
 bash scripts/setup-snapshot-reference.sh
 bash scripts/check-snapshots.sh
 bash scripts/check-simulation.sh
+bash scripts/check-callbacks.sh
 ```
 
 Setup builds the pinned original in `.reference/` and downloads a checksummed
@@ -126,8 +128,8 @@ away from void is allowed. The accepted terrain never changes its heights.
 
 Clock advancement reports calendar/economy boundary order, including wallclock,
 slow/frozen calendar settings, pause, tick overflow and maximum-year rewinds.
-**Boundary callback bodies are not executed**: vehicles, companies, industries,
-towns, scripts, commands and other object behavior remain future work. Terrain
+**This landscape runner does not execute boundary callback bodies.** Selected
+object callbacks have a separate explicit runner described below. Terrain
 uses the original LFSR schedule and grass recovery counters. Supported tile
 procedures consume no gameplay RNG; the state is preserved exactly.
 
@@ -137,6 +139,32 @@ tile, clock, cursor, RNG and event changes fail exact comparison. It retains nat
 logs and every compared JSON document under `.artifacts/simulation-*`. Ordinary
 Rust tests also replay the committed independent native vectors. This proves the
 stated subsystem contract, not full-game tick equivalence or save simulation.
+
+## Selected object callbacks
+
+`simulate-callbacks` executes one selected original callback from explicit typed
+JSON state. It does not step a full world, decode object pools from a save, or
+write an advanced save. For a vehicle fixture:
+
+```sh
+jq '{schema_version:1,callback:{kind:"vehicle",operation:.vehicle_cases[0].operation,state:.vehicle_cases[0].before}}' reference/callbacks.json > /tmp/callback.json
+cargo run -- simulate-callbacks /tmp/callback.json > /tmp/callback-after.json
+```
+
+Implemented bodies cover vehicle calendar aging and annual profit/group accounting,
+yearly house aging, yearly company expense rollover, monthly station cargo flags,
+and the complete monthly industry callback in original economy with live vanilla
+industries. News/AI/UI branches and other unsupported contexts are rejected.
+Industry requests carry the actual callback phase before clock resets or rewinds.
+See [vehicle](docs/vehicle-callbacks.md), [bookkeeping](docs/periodic-callbacks.md),
+and [industry](docs/industry-callbacks.md) contracts for exact fields and limits.
+
+`check-callbacks.sh` regenerates 34 independent native cases, compares every modeled
+field through the library and CLI, and requires byte-identical repeated output.
+Seven malformed/unsupported-input controls and nine deliberate output mutations
+must fail. Output mutations run the real `compare` command and check the exact
+path, expected value, and actual value. All compared documents and diagnostics
+remain under `.artifacts/callbacks-*`; CI invokes the same driver.
 
 ## Porting direction
 

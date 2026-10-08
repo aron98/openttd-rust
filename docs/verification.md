@@ -92,8 +92,10 @@ a Rust implementation of the simulation.
 
 ## Limits and environment notes
 
-This milestone has no Rust gameplay, object-field interpretation, historical
-state migrations, UI, scripting, or network implementation. It does not establish
+The initial save-container milestone had no Rust gameplay or object-field
+interpretation. The later sections below record the typed snapshot, landscape,
+and selected callback work; historical state migrations, UI, scripting, and
+network implementation remain outside the implemented slices. It does not establish
 compatibility for every old save or third-party content package. The full port
 remains the product goal described in the README.
 
@@ -127,3 +129,40 @@ callback bodies, NewGRF callbacks, water simulation or game-object updates. The
 positive-height invariant around void prevents the original void procedure from
 leaving the supported terrain domain. These checks do not establish full-game
 simulation parity or writing advanced state back to save files.
+
+
+## Selected object callback bodies
+
+Verified locally against the pinned OpenTTD 15.3 callbacks on 2026-10-08. Run
+`bash scripts/setup-snapshot-reference.sh` and `bash scripts/check-callbacks.sh`.
+The latter records each fresh native process, library replay, real CLI invocation,
+comparison input/output, and diagnostic under `.artifacts/callbacks-*`.
+
+There are 34 native cases: 12 vehicle, 8 house/company/station bookkeeping, and
+14 original-economy industry cases. Each case is replayed through Rust and twice
+through the public command (68 successful callback processes), with exact equality
+of every modeled output field and byte-identical repeats. Regenerating the corpus
+must reproduce `reference/callbacks.json` byte for byte.
+
+Seven input controls reject malformed JSON, unknown callbacks, enabled vehicle
+advice, closure-marked industries, NewGRF, smooth economy, and incomplete industry
+history. Nine separate output controls mutate vehicle age/profit, group totals,
+house age, company expenses, station status, industry history, RNG, and callback
+phase. Each invokes the actual `ottd compare` command, requires failure with empty
+stdout, and checks the exact diagnostic path and expected/actual integer values.
+Unmodified comparison baselines must succeed. No comparator algorithm is duplicated
+in these tests, and no modeled field is filtered from the positive comparisons.
+
+The native probes select original registered timers by trigger and priority, or
+invoke the original calendar vehicle scheduler. Industry phase is observed during
+native callback dispatch, before day-count reset and maximum-year rewind. No
+native callback body is copied into the oracle. Ordinary workspace tests replay
+the committed native corpus; CI additionally regenerates it with the original
+engine. Remote CI execution is not claimed by these local results.
+
+These checks prove only the documented typed-state callback contracts. They do
+not establish full-world ticks, object-pool save decoding, serialization of advanced
+state, vehicle motion, daily operating callbacks, full town growth, cargo routing,
+industry random policy/closure, UI, scripts, or network parity. The existing
+landscape runner continues to report clock boundaries without dispatching these
+object callback bodies automatically.

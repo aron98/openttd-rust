@@ -11,6 +11,8 @@ use clap::{Parser, Subcommand, ValueEnum};
 use ottd_save::{Compression, DEFAULT_MAX_BYTES, Savegame};
 use serde_json::json;
 
+mod compare;
+
 #[derive(Debug, Parser)]
 #[command(
     name = "ottd",
@@ -26,6 +28,8 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Action {
+    #[command(about = "Compare every JSON field and report the first differing path")]
+    Compare { expected: PathBuf, actual: PathBuf },
     #[command(
         about = "Inspect save version and chunk framing as JSON; does not validate game objects"
     )]
@@ -69,6 +73,14 @@ fn load(path: &Path, limit: usize) -> Result<Savegame> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Action::Compare { expected, actual } => {
+            let expected = compare::load_json(&expected, cli.max_bytes)?;
+            let actual = compare::load_json(&actual, cli.max_bytes)?;
+            if let Some(difference) = compare::first_difference(&expected, &actual, "$") {
+                anyhow::bail!("{difference}");
+            }
+            writeln!(std::io::stdout().lock(), "snapshots match")?;
+        }
         Action::Inspect { input } => {
             let save = load(&input, cli.max_bytes)?;
             let chunks: Vec<_> = save

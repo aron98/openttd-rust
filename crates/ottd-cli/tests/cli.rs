@@ -95,3 +95,89 @@ fn missing_input_fails_cleanly() {
     assert!(!output.status.success());
     assert!(!output.stderr.is_empty());
 }
+
+#[test]
+fn compare_reports_exact_integer_and_structural_differences() {
+    let dir = tempdir().unwrap();
+    let expected = dir.path().join("expected.json");
+    let actual = dir.path().join("actual.json");
+    for (left, right, path) in [
+        (
+            r#"{"date":{"tick":9007199254740993}}"#,
+            r#"{"date":{"tick":9007199254740992}}"#,
+            "$.date.tick",
+        ),
+        (r#"{"tiles":[1,2]}"#, r#"{"tiles":[1]}"#, "$.tiles[1]"),
+        (r#"{}"#, r#"{"unknown":1}"#, "$.unknown"),
+        (r#"{"missing":null}"#, r#"{}"#, "$.missing"),
+    ] {
+        fs::write(&expected, left).unwrap();
+        fs::write(&actual, right).unwrap();
+        let result = command()
+            .arg("compare")
+            .arg(&expected)
+            .arg(&actual)
+            .output()
+            .unwrap();
+        assert!(!result.status.success());
+        assert!(
+            String::from_utf8_lossy(&result.stderr).contains(path),
+            "{}",
+            String::from_utf8_lossy(&result.stderr)
+        );
+    }
+}
+
+#[test]
+fn compare_accepts_equal_objects_with_different_key_order() {
+    let dir = tempdir().unwrap();
+    let expected = dir.path().join("expected.json");
+    let actual = dir.path().join("actual.json");
+    fs::write(
+        &expected,
+        r#"{"a":18446744073709551615,"b":-9223372036854775808}"#,
+    )
+    .unwrap();
+    fs::write(
+        &actual,
+        r#"{"b":-9223372036854775808,"a":18446744073709551615}"#,
+    )
+    .unwrap();
+    let result = command()
+        .arg("compare")
+        .arg(expected)
+        .arg(actual)
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+}
+
+#[test]
+fn compare_rejects_malformed_and_oversized_inputs() {
+    let dir = tempdir().unwrap();
+    let path = dir.path().join("input.json");
+    fs::write(&path, "{").unwrap();
+    assert!(
+        !command()
+            .arg("compare")
+            .arg(&path)
+            .arg(&path)
+            .status()
+            .unwrap()
+            .success()
+    );
+    fs::write(&path, "{\"a\":1234}").unwrap();
+    assert!(
+        !command()
+            .args(["--max-bytes", "4", "compare"])
+            .arg(&path)
+            .arg(&path)
+            .status()
+            .unwrap()
+            .success()
+    );
+}

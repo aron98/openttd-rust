@@ -26,3 +26,11 @@ pub use periodic_types::{
     CompanyCallbacks, CompanyExpenses, HouseCallbacks, StationCallbacks, StationCargo,
     StationStatus,
 };
+mod industry_callbacks;
+mod industry_history;
+mod industry_types;
+pub use industry_callbacks::{IndustryCallbackError, run_industry_month};
+pub use industry_types::{
+    AcceptedHistory, CallbackIndustry, IndustryAccepted, IndustryCallbacks, IndustryMonth,
+    IndustryProduced, ProducedHistory,
+};

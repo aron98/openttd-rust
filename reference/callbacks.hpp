@@ -5,6 +5,7 @@
 #include "reference_callback_house.hpp"
 #include "reference_callback_company.hpp"
 #include "reference_callback_station.hpp"
+#include "reference_callback_industry.hpp"
 namespace ReferenceCallbacks {
 inline void Run(const char *path)
 {
@@ -16,6 +17,7 @@ inline void Run(const char *path)
     for (auto cases : {ReferenceCallbackHouse::Run(), ReferenceCallbackCompany::Run(), ReferenceCallbackStation::Run()}) {
         for (auto &entry : cases) output["periodic_cases"].push_back(std::move(entry));
     }
+    output["industry_cases"] = ReferenceCallbackIndustry::Run();
     std::ofstream stream(path);
     stream.exceptions(std::ios::failbit | std::ios::badbit);
     stream << output.dump() << '\n';

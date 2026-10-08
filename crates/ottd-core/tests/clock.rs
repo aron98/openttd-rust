@@ -70,3 +70,50 @@ fn rejects_unattainable_settings_and_invalid_fractions() {
         .is_err()
     );
 }
+
+#[test]
+fn rejects_invalid_economy_dates_and_caches() {
+    let settings = ClockSettings::new(TimekeepingUnits::Wallclock, 24).unwrap();
+    for raw in [-1, 1_800_000_360, i32::MAX] {
+        let mut saved = snapshot().unwrap();
+        saved.economy_date = EconomyDate(raw);
+        assert!(ClockState::new(saved, settings).is_err());
+    }
+    let valid = ClockState::new(snapshot().unwrap(), settings).unwrap();
+    let mut cache = valid.cache();
+    cache.calendar_month = 12;
+    assert!(ClockState::restore(valid.snapshot(), settings, cache).is_err());
+    cache = valid.cache();
+    cache.economy_year = 5_000_000;
+    cache.economy_month = 0;
+    assert!(ClockState::restore(valid.snapshot(), settings, cache).is_err());
+    let mut saved = snapshot().unwrap();
+    saved.economy_date_fract = DateFraction(74);
+    assert!(ClockState::new(saved, settings).is_err());
+}
+
+proptest::proptest! {
+    #[test]
+    fn restore_preserves_continuation(
+        date in 0i32..1_826_212_866,
+        economy in 0i32..1_800_000_360,
+        fraction in 0u16..74,
+        subfraction in proptest::prelude::any::<u16>(),
+        minutes in 12u16..=10080,
+        ticks in proptest::prelude::any::<u64>(),
+    ) {
+        let settings = ClockSettings::new(TimekeepingUnits::Wallclock,minutes).unwrap();
+        let saved = ClockSnapshot {
+            date: CalendarDate::from_raw(date).unwrap(),date_fract:DateFraction(fraction),calendar_sub_date_fract:subfraction,
+            economy_date:EconomyDate(economy),economy_date_fract:DateFraction(fraction),days_since_last_month:0,tick_counter:TickCounter(ticks),
+        };
+        let mut state = ClockState::new(saved,settings).unwrap();
+        for _ in 0..75 {
+            state.advance(false);
+            let restored = ClockState::restore(state.snapshot(),settings,state.cache()).unwrap();
+            proptest::prop_assert_eq!(state,restored);
+            proptest::prop_assert!(state.snapshot().date_fract.0 <74);
+            proptest::prop_assert!(state.snapshot().economy_date_fract.0 <74);
+        }
+    }
+}

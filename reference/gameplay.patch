@@ -1,0 +1,11 @@
+--- a/src/timer/timer_manager.h
++++ b/src/timer/timer_manager.h
+@@ -122,6 +122,8 @@
+ 	};
+ 
+ 	/** Singleton list, to store all the active timers. */
++public:
++	/* Reference instrumentation exposes registries for isolated subsystem probes. */
+ 	static std::set<BaseTimer<TTimerType> *, base_timer_sorter> &GetTimers()
+ 	{
+ 		static std::set<BaseTimer<TTimerType> *, base_timer_sorter> timers;

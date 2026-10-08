@@ -4,7 +4,11 @@ use serde_json::Value;
 
 #[test]
 fn primitives_match_upstream_vectors() {
-    let vectors: Value = serde_json::from_str(include_str!("fixtures/primitives.json")).unwrap();
+    let source = std::env::var_os("OTTD_PRIMITIVES_JSON").map_or_else(
+        || include_str!("fixtures/primitives.json").to_owned(),
+        |path| std::fs::read_to_string(path).unwrap(),
+    );
+    let vectors: Value = serde_json::from_str(&source).unwrap();
     for vector in vectors.get("rng").unwrap().as_array().unwrap() {
         let state: [u32; 2] =
             serde_json::from_value(vector.get("initial_state").unwrap().clone()).unwrap();

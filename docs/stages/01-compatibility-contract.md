@@ -1,8 +1,9 @@
 # Stage 1: compatibility contract
 
-Status: **In progress**. Branch: `stage/01-compatibility-contract`, based on
+Status: **Ready for review**. Branch: `stage/01-compatibility-contract`, based on
 PR #1's maintainer merge `1dcf23da8d1ceada37c0fc2d92b734011572b51e`.
-The maintainer must merge this stage's PR before stage 2 begins.
+[PR #2](https://github.com/aron98/openttd-rust/pull/2) awaits the maintainer.
+The maintainer must merge it before stage 2 begins; this stage is not completed.
 
 ## Scope and design
 
@@ -44,18 +45,18 @@ reproducible. General NewGRF/Squirrel compatibility remains unimplemented.
 
 ## Acceptance checklist
 
-- [ ] Release/source/save/protocol/settings/content pins are machine checked.
-- [ ] Every current compatibility claim has a named scenario, supported domain,
+- [x] Release/source/save/protocol/settings/content pins are machine checked.
+- [x] Every current compatibility claim has a named scenario, supported domain,
       executable command, expected observation and evidence paths.
-- [ ] Fixture and content hashes, IDs, references and status/scope distinctions
+- [x] Fixture and content hashes, IDs, references and status/scope distinctions
       reject meaningful mutations; malformed metadata fails before execution.
-- [ ] Vanilla and modded original baselines execute from recorded recipes;
+- [x] Vanilla and modded original baselines execute from recorded recipes;
       native parameter controls and missing-content rejection are retained.
-- [ ] Existing Rust tests and all four native matrices pass through the runner;
+- [x] Existing Rust tests and all four native matrices pass through the runner;
       failed commands or missing evidence cannot produce a passing report.
-- [ ] Future world/gameplay/content/script, four native client/server pairings,
+- [x] Future world/gameplay/content/script, four native client/server pairings,
       mixed-client sessions and desktop/browser requirements remain explicit.
-- [ ] Independent review and integrated CI pass; evidence identifies the tested
+- [x] Independent review and integrated CI pass; evidence identifies the tested
       tree and input hashes. The PR awaits the maintainer's merge.
 
 ## Verification
@@ -75,3 +76,34 @@ per-driver logs identify the exact command, exit status and child artifacts;
 validation alone is never a compatibility pass. Retain artifacts in CI even
 when a driver fails. Native outputs depend on the pinned build; regenerate
 fixtures only through their documented recipe and review changed identities.
+
+## Handoff evidence
+
+The reviewed implementation is
+`17e5641baec6041fa1c7957a7fc656d084cb13d2`. Independent review approved this
+commit with no blocking findings. Integrated local QA and
+[CI run 37837626494](https://github.com/aron98/openttd-rust/actions/runs/37837626494)
+passed for that branch head; both the Rust and interoperability jobs succeeded.
+CI checked out GitHub's synthetic PR merge
+`69aee7612c9cfebe4c017405834751ef6b316b77`, while local QA and independent
+review checked the implementation commit above. This readiness update changes
+documentation only.
+
+The contract has 83 declarations. All six baseline drivers passed: 64 scenarios
+passed (61 implemented and **three original-only reference scenarios**), while
+all 19 future requirements remained `not_run`. Verification includes 13 Python
+test methods with rejection subtests, 94 Rust tests, the four native comparison
+matrices and the original-only content/protocol baseline. External-oracle tests
+ignored by plain workspace testing were exercised by their native drivers.
+Formatting and strict Clippy also passed.
+
+The [retained CI artifact](https://github.com/aron98/openttd-rust/actions/runs/37837626494/artifacts/11576910894),
+`compatibility-contract-37837626494-1`, contains the fresh contract report,
+per-driver logs and native captures. The report identifies the manifest hash,
+input hashes, commands, exit statuses and concrete evidence paths. Reproduce it
+with the verification commands above; validation alone is not a baseline run.
+
+The original-only scenarios establish content effects, a recorded native
+command and prejoin game-info metadata. They do not demonstrate Rust NewGRF/AI
+execution, command replay, multiplayer joining or synchronized sessions.
+Maintainer review and merge remain outstanding; no later stage has started.

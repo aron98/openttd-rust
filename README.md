@@ -4,13 +4,14 @@ A Rust port targeting **OpenTTD 15.3**, with behavioral parity and two-way save
 compatibility as the end goal. The exact upstream commit is recorded in
 [`upstream.toml`](upstream.toml).
 
-**Current state: typed world snapshots and deterministic primitives. This is not yet a playable game.**
+**Current state: typed snapshots and a deterministic clock/clear-landscape subsystem. This is not yet a playable game.**
 The Rust code reads and rewrites save containers while preserving chunk contents.
 Version-362 saves additionally decode into typed map, clock, settings and saved
 random-state snapshots. Rust randomizer, map-coordinate and Gregorian calendar
 primitives are checked against independently generated C++ vectors.
-It does not yet advance a simulation, render the game,
-run scripts, or connect to multiplayer servers.
+An explicit subsystem fixture can advance calendar/economy clocks and temperate
+clear terrain against original C++ results. Full object simulation, rendering,
+scripts and multiplayer are not implemented.
 
 ## Use
 
@@ -70,6 +71,7 @@ bash scripts/setup-reference.sh
 bash scripts/check-compatibility.sh
 bash scripts/setup-snapshot-reference.sh
 bash scripts/check-snapshots.sh
+bash scripts/check-simulation.sh
 ```
 
 Setup builds the pinned original in `.reference/` and downloads a checksummed
@@ -97,11 +99,50 @@ tile, date, RNG and settings fields to verify that mismatches fail. Artifacts an
 diagnostics are retained under `.artifacts/snapshots-*`. No clock, ID or random
 state fields are excluded.
 
+## Landscape subsystem
+
+`simulate-landscape` consumes explicit schema-version-1 subsystem JSON, not a
+save file or a world snapshot. To extract a runnable fixture (using `jq`):
+
+```sh
+jq '.landscape_cases[0].before' reference/gameplay.json > /tmp/landscape.json
+cargo run -- simulate-landscape /tmp/landscape.json --ticks 256 > /tmp/landscape-after.json
+```
+
+The contract includes context, raw tiles, both clocks and cached year/month values,
+tile-loop cursor, gameplay RNG, and ordered per-tick events. Output can be resumed;
+each request replaces the prior event trace with its newly requested ticks. Input
+JSON respects `--max-bytes`; each call accepts at most 1,000,000 ticks. Paused calls
+preserve all state and report empty boundary events.
+
+Supported terrain is normal-mode temperate grass, rough, rocks and void, with
+ambient NewGRF callbacks disabled. Snow, fields, water and all other tile kinds
+are rejected before advancement. Void procedures can flood their neighbors in the
+original game: this subsystem therefore requires all four corner heights of every
+clear tile adjoining void (including diagonal neighbors and void corner heights)
+to be above zero. This deliberately conservative boundary rejects potential
+flooding rather than executing unported water rules. Interior sea-level terrain
+away from void is allowed. The accepted terrain never changes its heights.
+
+Clock advancement reports calendar/economy boundary order, including wallclock,
+slow/frozen calendar settings, pause, tick overflow and maximum-year rewinds.
+**Boundary callback bodies are not executed**: vehicles, companies, industries,
+towns, scripts, commands and other object behavior remain future work. Terrain
+uses the original LFSR schedule and grass recovery counters. Supported tile
+procedures consume no gameplay RNG; the state is preserved exactly.
+
+`check-simulation.sh` regenerates native subsystem probes, replays all clock cases
+and terrain checkpoints, verifies repeatable CLI output, and checks that deliberate
+tile, clock, cursor, RNG and event changes fail exact comparison. It retains native
+logs and every compared JSON document under `.artifacts/simulation-*`. Ordinary
+Rust tests also replay the committed independent native vectors. This proves the
+stated subsystem contract, not full-game tick equivalence or save simulation.
+
 ## Porting direction
 
-The next milestone is typed game-object decoding and historical migrations. Then
-the deterministic simulation and command system can be ported against upstream
-state comparisons, followed by full content, script, network, and UI parity.
+Next are typed game-object decoding, historical migrations, additional simulation
+procedures and the command system, checked against upstream state comparisons.
+Full content, script, network, and UI parity follow those semantics.
 All upstream behavior remains in the product scope.
 
 The simulation must preserve IDs, integer behavior, random-number sequences and

@@ -13,6 +13,7 @@ use serde_json::json;
 
 /// Exact JSON comparison helpers.
 pub mod compare;
+mod simulation;
 
 #[derive(Debug, Parser)]
 #[command(
@@ -29,6 +30,12 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Action {
+    #[command(about = "Advance isolated temperate clear-landscape JSON; not a full game or save")]
+    SimulateLandscape {
+        input: PathBuf,
+        #[arg(long)]
+        ticks: u32,
+    },
     #[command(about = "Decode a version-362 save into a typed world snapshot as JSON")]
     Snapshot { input: PathBuf },
     #[command(about = "Compare every JSON field and report the first differing path")]
@@ -76,6 +83,9 @@ fn load(path: &Path, limit: usize) -> Result<Savegame> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Action::SimulateLandscape { input, ticks } => {
+            simulation::run(&input, cli.max_bytes, ticks)?;
+        }
         Action::Snapshot { input } => {
             let snapshot = load(&input, cli.max_bytes)?.snapshot()?;
             let mut output = std::io::stdout().lock();

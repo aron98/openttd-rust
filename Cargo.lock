@@ -318,6 +318,7 @@ dependencies = [
  "anyhow",
  "clap",
  "ottd-save",
+ "ottd-sim",
  "serde",
  "serde_json",
  "tempfile",

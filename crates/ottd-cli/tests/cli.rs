@@ -204,3 +204,54 @@ fn compare_rejects_lossy_numbers_and_duplicate_keys() {
         assert!(String::from_utf8_lossy(&output.stderr).contains("invalid JSON"));
     }
 }
+
+#[test]
+fn snapshot_emits_typed_current_world() {
+    let fixture =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/generated-v362.sav");
+    let output = command().arg("snapshot").arg(fixture).output().unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let value: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(value.get("schema_version").unwrap(), 1);
+    assert_eq!(value.get("savegame_version").unwrap(), 362);
+    assert_eq!(value.pointer("/map/width").unwrap(), 64);
+    assert_eq!(
+        value
+            .pointer("/map/tiles")
+            .unwrap()
+            .as_array()
+            .unwrap()
+            .len(),
+        4096
+    );
+    assert_eq!(
+        value
+            .pointer("/date/random_state")
+            .unwrap()
+            .as_array()
+            .unwrap()
+            .len(),
+        2
+    );
+}
+
+#[test]
+fn snapshot_rejects_historical_or_oversized_input_without_output() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+    let fixture = root.join("../../fixtures/upstream-regression-v308.sav");
+    let output = command().arg("snapshot").arg(fixture).output().unwrap();
+    assert!(!output.status.success());
+    assert!(output.stdout.is_empty());
+    let fixture = root.join("../../fixtures/generated-v362.sav");
+    let output = command()
+        .args(["--max-bytes", "8", "snapshot"])
+        .arg(fixture)
+        .output()
+        .unwrap();
+    assert!(!output.status.success());
+    assert!(output.stdout.is_empty());
+}

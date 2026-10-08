@@ -29,6 +29,8 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Action {
+    #[command(about = "Decode a version-362 save into a typed world snapshot as JSON")]
+    Snapshot { input: PathBuf },
     #[command(about = "Compare every JSON field and report the first differing path")]
     Compare { expected: PathBuf, actual: PathBuf },
     #[command(
@@ -74,6 +76,12 @@ fn load(path: &Path, limit: usize) -> Result<Savegame> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Action::Snapshot { input } => {
+            let snapshot = load(&input, cli.max_bytes)?.snapshot()?;
+            let mut output = std::io::stdout().lock();
+            serde_json::to_writer(&mut output, &snapshot)?;
+            writeln!(output)?;
+        }
         Action::Compare { expected, actual } => {
             let expected = compare::load_json(&expected, cli.max_bytes)?;
             let actual = compare::load_json(&actual, cli.max_bytes)?;

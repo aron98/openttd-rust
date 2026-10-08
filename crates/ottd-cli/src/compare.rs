@@ -1,4 +1,5 @@
 use anyhow::{Context, Result, ensure};
+use serde::de::{Deserialize, Deserializer, Error, MapAccess, SeqAccess, Visitor};
 use serde_json::Value;
 use std::{fs::File, io::Read, path::Path};
 
@@ -15,7 +16,71 @@ pub fn load_json(path: &Path, limit: usize) -> Result<Value> {
         "JSON exceeds {limit} byte limit: {}",
         path.display()
     );
-    serde_json::from_slice(&bytes).with_context(|| format!("invalid JSON: {}", path.display()))
+    serde_json::from_slice::<ExactValue>(&bytes)
+        .map(|value| value.0)
+        .with_context(|| format!("invalid JSON: {}", path.display()))
+}
+
+struct ExactValue(Value);
+
+impl<'de> Deserialize<'de> for ExactValue {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> std::result::Result<Self, D::Error> {
+        deserializer.deserialize_any(ExactVisitor)
+    }
+}
+
+struct ExactVisitor;
+
+impl<'de> Visitor<'de> for ExactVisitor {
+    type Value = ExactValue;
+
+    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("JSON with unique keys and exact i64/u64 integer numbers")
+    }
+
+    fn visit_map<M: MapAccess<'de>>(
+        self,
+        mut map: M,
+    ) -> std::result::Result<Self::Value, M::Error> {
+        let mut object = serde_json::Map::new();
+        while let Some((key, value)) = map.next_entry::<String, ExactValue>()? {
+            if object.insert(key.clone(), value.0).is_some() {
+                return Err(M::Error::custom(format!("duplicate object key: {key}")));
+            }
+        }
+        Ok(ExactValue(Value::Object(object)))
+    }
+
+    fn visit_seq<S: SeqAccess<'de>>(
+        self,
+        mut seq: S,
+    ) -> std::result::Result<Self::Value, S::Error> {
+        let mut values = Vec::new();
+        while let Some(value) = seq.next_element::<ExactValue>()? {
+            values.push(value.0);
+        }
+        Ok(ExactValue(Value::Array(values)))
+    }
+
+    fn visit_i64<E: Error>(self, value: i64) -> std::result::Result<Self::Value, E> {
+        Ok(ExactValue(value.into()))
+    }
+
+    fn visit_u64<E: Error>(self, value: u64) -> std::result::Result<Self::Value, E> {
+        Ok(ExactValue(value.into()))
+    }
+
+    fn visit_bool<E: Error>(self, value: bool) -> std::result::Result<Self::Value, E> {
+        Ok(ExactValue(value.into()))
+    }
+
+    fn visit_str<E: Error>(self, value: &str) -> std::result::Result<Self::Value, E> {
+        Ok(ExactValue(value.into()))
+    }
+
+    fn visit_unit<E: Error>(self) -> std::result::Result<Self::Value, E> {
+        Ok(ExactValue(Value::Null))
+    }
 }
 
 /// Returns the first differing path and values, retaining unknown fields.

@@ -318,6 +318,7 @@ dependencies = [
  "anyhow",
  "clap",
  "ottd-save",
+ "serde",
  "serde_json",
  "tempfile",
 ]

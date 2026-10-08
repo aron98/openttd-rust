@@ -181,3 +181,26 @@ fn compare_rejects_malformed_and_oversized_inputs() {
             .success()
     );
 }
+
+#[test]
+fn compare_rejects_lossy_numbers_and_duplicate_keys() {
+    let dir = tempdir().unwrap();
+    let path = dir.path().join("input.json");
+    for document in [
+        r#"{"n":18446744073709551616}"#,
+        r#"{"n":-9223372036854775809}"#,
+        r#"{"n":1,"n":2}"#,
+        r#"{"nested":[{"n":1,"n":2}]}"#,
+        r#"{"n":1.0}"#,
+    ] {
+        fs::write(&path, document).unwrap();
+        let output = command()
+            .arg("compare")
+            .arg(&path)
+            .arg(&path)
+            .output()
+            .unwrap();
+        assert!(!output.status.success(), "accepted {document}");
+        assert!(String::from_utf8_lossy(&output.stderr).contains("invalid JSON"));
+    }
+}

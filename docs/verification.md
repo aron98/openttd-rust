@@ -3,19 +3,19 @@
 ## Typed snapshot milestone
 
 Verified locally on macOS ARM64 on 2026-10-08 against the same pinned upstream
-revision below. `cargo test --workspace --locked` passed 50 self-contained tests;
+revision below. `cargo test --workspace --locked` passed 50 self-contained tests at initial integration;
 the two external-oracle tests are explicitly run by `scripts/check-snapshots.sh`
 instead of being counted as coverage from the ordinary test invocation.
 Formatting and strict all-target/all-feature Clippy passed.
 
-The differential run in `.artifacts/snapshots-FSzzy4/` passed all three fixtures
+The differential run in `.artifacts/snapshots-RzmpVh/` passed all three fixtures
 at 1 and 16 null-driver ticks. Each of the six directories retains the actual
 C++ runtime `snapshot.json`, its paired `save/autosave/exit.sav`, two byte-identical
 Rust snapshots, exact comparator results, typed-library parity results, and
 primitive parity results. Tile, date, saved RNG and setting mutations all
 returned nonzero with their exact paths and expected/actual values: 24 negative
 controls total. No fields were filtered. The previous 12-case preservation matrix
-also passed again in `.artifacts/compat-ZmI26y/`.
+also passed again in `.artifacts/compat-lFXq6R/`.
 
 The new core tests replay actual upstream randomizer/scaling, calendar and map
 vectors and check coordinate bounds, leap/century/max-year dates and checked date

@@ -11,6 +11,7 @@ name = "ottd"
 path = "src/main.rs"
 
 [dependencies]
+ottd-sim = { path = "../ottd-sim" }
 ottd-save = { path = "../ottd-save" }
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }

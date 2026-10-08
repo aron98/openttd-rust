@@ -123,11 +123,11 @@ inline void Run(const char *path)
         for (uint i = 0; i < Map::Size(); ++i) {
             Tile t(i);
             t.type() = 0;
-            if (TileX(t) == Map::MaxX() || TileY(t) == Map::MaxY()) { MakeVoid(t); continue; }
+            if (TileX(t) == Map::MaxX() || TileY(t) == Map::MaxY()) { MakeVoid(t); t.height() = 1; continue; }
             MakeClear(t, i % 6 == 4 ? CLEAR_ROUGH : i % 6 == 5 ? CLEAR_ROCKS : CLEAR_GRASS, i % 4);
             SetClearCounter(t, (i / 4) % 8);
             t.type() |= i % 4;
-            t.height() = i % 16;
+            t.height() = 1 + TileX(t) % 2;
             t.m3() = i % 16;
             t.m6() = (i * 13) % 256;
             t.m2() = i % 65536;

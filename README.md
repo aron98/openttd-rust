@@ -50,6 +50,25 @@ original TTD saves, patchpacks, future save versions, and historical semantic
 migrations are not implemented by Rust yet. A rewrite never upgrades a header
 without migrating its state.
 
+## Compatibility contract
+
+The [versioned scenario contract](compatibility/contract.json) separates Rust
+behavior, lossless container preservation, original-only baselines and future
+requirements. Use Python 3.11+ to validate input hashes and scenario references
+without running a game, or execute the existing checks with fresh reports:
+
+```sh
+python3 scripts/check-contract.py --validate
+python3 scripts/check-contract.py --list
+# After both reference setup scripts below:
+python3 scripts/check-contract.py --run baseline
+```
+
+See the [contract guide](compatibility/README.md) and
+[stage 1 plan](docs/stages/01-compatibility-contract.md). Native NewGRF/AI and
+prejoin protocol probes are reference baselines; they do not establish Rust mod
+execution or multiplayer support.
+
 ## Verify
 
 Rust 1.96.0 is pinned in `rust-toolchain.toml`. The XZ dependency uses `liblzma`

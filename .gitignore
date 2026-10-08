@@ -6,3 +6,7 @@
 .DS_Store
 
 /.omo/teams/
+
+# Python verification tooling
+__pycache__/
+*.py[cod]

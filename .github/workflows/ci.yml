@@ -10,10 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.96.0
           components: rustfmt, clippy
+      - run: python3 scripts/check-contract.py --validate
+      - run: python3 -m unittest discover -s scripts/tests -p 'test_*.py' -v
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked
@@ -22,6 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.96.0
@@ -29,13 +37,25 @@ jobs:
         id: reference-cache
         uses: ./.github/actions/reference-cache
       - run: bash scripts/setup-reference.sh
-      - run: bash scripts/check-compatibility.sh
       - run: bash scripts/setup-snapshot-reference.sh
         env:
           REFERENCE_SOURCE: ${{ github.workspace }}/.reference/OpenTTD
-      - run: bash scripts/check-snapshots.sh
-      - run: bash scripts/check-simulation.sh
-      - run: bash scripts/check-callbacks.sh
+      - name: Run the versioned compatibility baseline
+        run: python3 scripts/check-contract.py --run baseline
+      - name: Retain compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          include-hidden-files: true
+          if-no-files-found: warn
+          path: |
+            .omo/evidence/contract-*/
+            .omo/evidence/native-contract-*/
+            .artifacts/compat-*/
+            .artifacts/snapshots-*/
+            .artifacts/simulation-*/
+            .artifacts/callbacks-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

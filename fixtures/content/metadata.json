@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "license": "GPL-2.0-only",
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "savegame_version": 362,
+  "assets": [
+    {
+      "path": "fixtures/contracts/modded-v362.sav",
+      "sha256": "446a61b38c36d535019826a01ad5a499b9231df48b6acc6f25e3937869d4436f"
+    },
+    {
+      "path": "fixtures/content/contract-speed.grf",
+      "sha256": "dd8325f1398ca34c44a7d9071597f108b8a67bf90883069a6357d19139ec5a69"
+    },
+    {
+      "path": "fixtures/content/contract-speed.hex",
+      "sha256": "cbfc7863528f1530c1d7ed622c182266e9f9f23ec4d090fadfe9c75de5300f2a"
+    },
+    {
+      "path": "fixtures/content/contract-probe/info.nut",
+      "sha256": "055290590c355de3ff435247539902c456cf267b546326a146ea83e94ab7abac"
+    },
+    {
+      "path": "fixtures/content/contract-probe/main.nut",
+      "sha256": "dbc98164c9a91f9b63178b2a74426d127141eae4254217997f89d1c28bb44d4f"
+    },
+    {
+      "path": "fixtures/contracts/commands-out.log",
+      "sha256": "59dbc475d319d410ea04ee4e0d16c1c891c0df8fc7ddd10a4caa46a04efe6acb"
+    },
+    {
+      "path": "fixtures/contracts/game-info-modded.bin",
+      "sha256": "c2de4781d548c019e8b93ae8d53ae2168e529cf3679e55dce010ff5dcf3018cf"
+    },
+    {
+      "path": "fixtures/contracts/game-info-vanilla.bin",
+      "sha256": "08ae477227148a0cffd06cf04ec2649c646d948cc73785fefda7641bc4eee3d1"
+    }
+  ],
+  "newgrf": {
+    "grfid": "52555354",
+    "grfid_byte_order": "display/file bytes; little-endian numeric ID 0x54535552",
+    "md5": "a5039c06887193868752bdec1694de4c",
+    "parameters": [
+      123
+    ],
+    "load_order": [
+      "fixtures/content/contract-speed.grf"
+    ],
+    "name": "Contract Speed",
+    "version": 0
+  },
+  "ai": {
+    "name": "ContractProbe",
+    "version": 1,
+    "api_version": "15",
+    "saved_marker": 123
+  },
+  "effect": {
+    "engine_id": 0,
+    "property": "PROP_TRAIN_SPEED (0x09)",
+    "unit": "native km-ish/h (AIEngine.GetMaxSpeed, no conversion)",
+    "parameter123": 123,
+    "parameter77": 77
+  },
+  "command": {
+    "name": "CmdRenameCompany",
+    "date": 712223,
+    "date_fract": 4,
+    "company": 0,
+    "command_id": 62,
+    "serialized_args": "436F6E74726163742050726F626500",
+    "expected_result": true,
+    "company_name": "Contract Probe",
+    "date_clock": "economy"
+  },
+  "limits": [
+    "native-only baseline",
+    "No Rust NewGRF, AI or network implementation",
+    "No gameplay join or replay verification",
+    "Single content entry does not establish multi-GRF order compatibility"
+  ]
+}

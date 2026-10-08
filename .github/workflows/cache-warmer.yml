@@ -1,0 +1,42 @@
+name: Warm shared C++ compiler cache
+
+on:
+  pull_request_target:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  warm-native:
+    if: >-
+      github.event_name == 'pull_request_target' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.repository.default_branch == 'main' &&
+      github.event.pull_request.base.repo.full_name == 'aron98/openttd-rust' &&
+      github.repository == 'aron98/openttd-rust'
+    runs-on: ubuntu-latest
+    cache-mode: write
+    steps:
+      - name: Require an immutable merged commit
+        env:
+          MERGED_COMMIT: ${{ github.event.pull_request.merge_commit_sha }}
+        run: '[[ "$MERGED_COMMIT" =~ ^[0-9a-f]{40}$ ]]'
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          persist-credentials: false
+      - name: Set up native reference compiler cache
+        id: reference-cache
+        uses: ./.github/actions/reference-cache
+      - run: bash scripts/setup-reference.sh
+      - run: bash scripts/setup-snapshot-reference.sh
+        env:
+          REFERENCE_SOURCE: ${{ github.workspace }}/.reference/OpenTTD
+      - name: Report native compiler-cache statistics
+        if: always() && steps.reference-cache.outcome == 'success'
+        run: ccache --show-stats --verbose

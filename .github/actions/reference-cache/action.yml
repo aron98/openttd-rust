@@ -1,0 +1,44 @@
+name: Set up native reference compiler cache
+description: Shared native dependencies, compiler settings, fingerprint and cache for PR checks and merged-code warming.
+runs:
+  using: composite
+  steps:
+    - name: Configure native compiler environment
+      shell: bash
+      run: |
+        {
+          printf '%s\n' 'CC=/usr/bin/gcc' 'CXX=/usr/bin/g++'
+          printf '%s\n' 'REFERENCE_COMPILER_LAUNCHER=ccache' 'REFERENCE_DISABLE_PCH=ON'
+          printf 'CCACHE_DIR=%s/.reference/ccache\n' "$GITHUB_WORKSPACE"
+          printf 'CCACHE_BASEDIR=%s\n' "$GITHUB_WORKSPACE"
+          printf '%s\n' 'CCACHE_COMPILERCHECK=content' 'CCACHE_MAXSIZE=2G' 'CCACHE_SLOPPINESS='
+        } >> "$GITHUB_ENV"
+    - name: Install native dependencies
+      shell: bash
+      run: sudo apt-get update && sudo apt-get install -y cmake g++ ccache zlib1g-dev liblzma-dev liblzo2-dev libpng-dev libcurl4-openssl-dev xz-utils unzip
+    - name: Fingerprint the native toolchain
+      id: cpp-toolchain
+      shell: bash
+      run: |
+        fingerprint="$(
+          {
+            printf '%s\n' "${ImageOS:-unknown}" "${ImageVersion:-unknown}"
+            "$CXX" --version
+            cmake --version
+            ccache --version
+            sha256sum "$(readlink -f "$CXX")" "$("$CXX" -print-prog-name=cc1plus)"
+          } | sha256sum | cut -d ' ' -f 1
+        )"
+        echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
+    - name: Restore native compiler artifacts
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.CCACHE_DIR }}
+        key: cpp-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cpp-toolchain.outputs.fingerprint }}-${{ hashFiles('upstream.toml', 'scripts/setup-reference.sh', 'scripts/setup-snapshot-reference.sh', 'reference/*.patch', 'reference/*.hpp', '.github/workflows/ci.yml', '.github/workflows/cache-warmer.yml', '.github/actions/reference-cache/**') }}
+        restore-keys: |
+          cpp-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cpp-toolchain.outputs.fingerprint }}-
+    - name: Initialize compiler-cache statistics
+      shell: bash
+      run: |
+        ccache --zero-stats
+        ccache --show-config

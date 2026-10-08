@@ -221,3 +221,25 @@ proptest::proptest! {
         }
     }
 }
+
+#[test]
+fn rejects_duplicate_setting_keys_in_json() {
+    // Given a valid snapshot whose settings contain conflicting duplicate keys.
+    let snapshot = support::native().snapshot().unwrap();
+    let json = serde_json::to_string(&snapshot).unwrap();
+    let original = format!(
+        "\"difficulty.max_loan\":{}",
+        snapshot
+            .settings()
+            .get("difficulty.max_loan")
+            .map(|value| serde_json::to_string(value).unwrap())
+            .unwrap()
+    );
+    let duplicated = json.replace(
+        &original,
+        "\"difficulty.max_loan\":1,\"difficulty.max_loan\":2",
+    );
+    assert_ne!(duplicated, json);
+    // When JSON crosses the typed boundary, then no last-wins overwrite is accepted.
+    assert!(serde_json::from_str::<ottd_save::WorldSnapshot>(&duplicated).is_err());
+}

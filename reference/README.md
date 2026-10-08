@@ -115,3 +115,25 @@ tile. All corner heights, including void-edge corners, are positive: the origina
 void procedure invokes water flooding, and its neighboring clear tiles must remain
 above sea level to stay within this subsystem. Clock-only maximum-year cases may adjust inherited object dates internally;
 the expendable process isolates those changes from ordinary snapshots and saves.
+
+
+## Object callback probes
+
+`callback_*.hpp` constructs native fixture objects and captures state around the
+original registered economy callbacks and original calendar vehicle scheduler.
+`callbacks.hpp` is selected only by `OTTD_CALLBACK_PROBES_PATH` at the existing
+save boundary. Like the landscape probe, it writes its result and exits without
+producing an advanced save. The callback bodies are unmodified upstream code;
+registries are isolated and restored between probe families. Industry type-count
+caches are populated alongside actual native pool entries.
+
+Run `bash scripts/check-callbacks.sh` after the snapshot-reference setup. Its
+`run-callback-reference.cmake` process rejects stale output, native/load failures,
+and incomplete collections. The unedited `callbacks.json` contains 12 vehicle,
+8 periodic bookkeeping, and 14 industry cases with before/operation/after state.
+Industry phase is captured by an observer during dispatch rather than derived
+from the post-reset clock. Native and Rust preserve all fields within each
+explicit state boundary, including raw histories, masks, RNG and untouched scalars.
+The driver also executes nine real-comparator output mutations with exact path
+and value assertions, separately from seven rejected-input controls. Captured
+JSON, command arguments, and diagnostics remain in `.artifacts/callbacks-*`.

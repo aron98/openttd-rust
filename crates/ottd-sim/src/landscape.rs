@@ -26,6 +26,11 @@ pub enum LandscapeError {
     /// Tile requires an unported tile procedure or climate rule.
     #[error("unsupported terrain at tile {0}; expected snow-free grass, rough, rocks or void")]
     Tile(usize),
+    /// A void neighbor may flood; water procedures are outside this domain.
+    #[error(
+        "potential flooding beside void tile {0}; neighboring clear tiles require all corner heights above zero"
+    )]
+    UnsupportedBoundary(usize),
     /// The tile scheduler requires an in-bounds nonzero cursor.
     #[error("tile-loop cursor must be nonzero and inside the map")]
     Cursor,
@@ -62,6 +67,7 @@ impl Landscape {
                 _ => return Err(LandscapeError::Tile(index)),
             }
         }
+        validate_boundary(&map)?;
         let bits = count.trailing_zeros().saturating_sub(12);
         let feedback = *FEEDBACKS
             .get(usize::try_from(bits).map_err(|_| LandscapeError::Map)?)
@@ -122,4 +128,46 @@ impl Landscape {
     pub const fn cursor(&self) -> usize {
         self.cursor
     }
+}
+
+fn validate_boundary(map: &Map) -> Result<(), LandscapeError> {
+    let width = usize::try_from(map.width).map_err(|_| LandscapeError::Map)?;
+    let height = usize::try_from(map.height).map_err(|_| LandscapeError::Map)?;
+    for (index, tile) in map.tiles.iter().enumerate() {
+        if tile.tile_type >> 4 != 7 {
+            continue;
+        }
+        let (x, y) = (
+            index & width.wrapping_sub(1),
+            index >> width.trailing_zeros(),
+        );
+        for dy in -1..=1 {
+            for dx in -1..=1 {
+                let (Some(nx), Some(ny)) = (x.checked_add_signed(dx), y.checked_add_signed(dy))
+                else {
+                    continue;
+                };
+                if nx >= width || ny >= height {
+                    continue;
+                }
+                let neighbor = ny.wrapping_mul(width).wrapping_add(nx);
+                let candidate = map.tiles.get(neighbor).ok_or(LandscapeError::Map)?;
+                if candidate.tile_type >> 4 == 7 {
+                    continue;
+                }
+                let east = nx.saturating_add(1).min(width.saturating_sub(1));
+                let south = ny.saturating_add(1).min(height.saturating_sub(1));
+                for (cx, cy) in [(nx, ny), (east, ny), (nx, south), (east, south)] {
+                    let corner = map
+                        .tiles
+                        .get(cy.wrapping_mul(width).wrapping_add(cx))
+                        .ok_or(LandscapeError::Map)?;
+                    if corner.height == 0 {
+                        return Err(LandscapeError::UnsupportedBoundary(index));
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
 }

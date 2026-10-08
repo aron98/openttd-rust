@@ -28,7 +28,9 @@ GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 cp reference/snapshot.hpp "$source_dir/src/saveload/reference_snapshot.hpp"
 cp reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
 cp reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"
-cp reference/callback_vehicle.hpp "$source_dir/src/saveload/reference_callback_vehicle.hpp"
+for header in callback_vehicle callback_timer callback_house callback_company callback_station; do
+    cp "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
+done
 cmake -S "$source_dir" -B "$build_dir" \
     -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release
 cmake --build "$build_dir" --parallel "${JOBS:-4}"

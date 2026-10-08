@@ -12,7 +12,7 @@ cmake "-DORACLE=$oracle" "-DRUN_DIR=$run/native" \
     -P scripts/run-callback-reference.cmake > "$run/native-run.log" 2>&1
 export OTTD_CALLBACK_JSON="$run/native/callbacks.json"
 export OTTD_CALLBACK_ARTIFACTS="$run/cli"
-cargo test --locked -p ottd-sim --test vehicle_oracle > "$run/library.log" 2>&1
+cargo test --locked -p ottd-sim --test vehicle_oracle --test periodic_oracle > "$run/library.log" 2>&1
 cargo test --locked -p ottd-cli --test callbacks > "$run/cli.log" 2>&1
 cmp reference/callbacks.json "$OTTD_CALLBACK_JSON"
 printf 'PASS: original callback state, CLI repeated output, rejected unsupported requests, reproducible corpus\n'

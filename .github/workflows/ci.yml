@@ -28,3 +28,5 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y cmake g++ zlib1g-dev liblzma-dev liblzo2-dev libpng-dev libcurl4-openssl-dev xz-utils unzip
       - run: bash scripts/setup-reference.sh
       - run: bash scripts/check-compatibility.sh
+      - run: bash scripts/setup-snapshot-reference.sh
+      - run: bash scripts/check-snapshots.sh

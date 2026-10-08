@@ -4,15 +4,20 @@ A Rust port targeting **OpenTTD 15.3**, with behavioral parity and two-way save
 compatibility as the end goal. The exact upstream commit is recorded in
 [`upstream.toml`](upstream.toml).
 
-**Current state: save compatibility foundation. This is not yet a playable game.**
+**Current state: typed world snapshots and deterministic primitives. This is not yet a playable game.**
 The Rust code reads and rewrites save containers while preserving chunk contents.
-It does not yet interpret game objects, advance a simulation, render the game,
+Version-362 saves additionally decode into typed map, clock, settings and saved
+random-state snapshots. Rust randomizer, map-coordinate and Gregorian calendar
+primitives are checked against independently generated C++ vectors.
+It does not yet advance a simulation, render the game,
 run scripts, or connect to multiplayer servers.
 
 ## Use
 
 ```sh
 cargo run -- inspect fixtures/generated-v362.sav
+cargo run -- snapshot fixtures/generated-v362.sav > /tmp/world.json
+cargo run -- compare /tmp/upstream.json /tmp/world.json
 cargo run -- rewrite fixtures/generated-v362.sav /tmp/openttd-roundtrip.sav --compression lzma
 cargo run -- --help
 ```
@@ -23,6 +28,14 @@ preserves the source format. The destination must not exist; writes are publishe
 only after successful decoding and encoding. Versions and all chunk bodies are
 preserved, including unknown chunks. An unknown chunk may still be rejected by
 OpenTTD itself: this tool checks container structure, not gameplay validity.
+
+`snapshot` emits schema-version-1 JSON for save version 362 only. Every tile is
+listed in linear index order, preserving raw fields; DATE, PATS and SRND retain
+their saved fields. Older saves require migration by upstream before typed
+decoding. `compare` checks every JSON field, including unknown fields, and reports
+the first mismatching path with expected and actual values. Duplicate keys,
+non-integer numbers and numbers outside the exact i64/u64 domain are rejected.
+Both JSON inputs are bounded by `--max-bytes`.
 
 The default encoded/decompressed byte limit is 256 MiB; change it with
 `--max-bytes`. This is not a total process-memory cap. The XZ decoder separately
@@ -55,6 +68,8 @@ Linux use your distribution's development packages. Then run:
 ```sh
 bash scripts/setup-reference.sh
 bash scripts/check-compatibility.sh
+bash scripts/setup-snapshot-reference.sh
+bash scripts/check-snapshots.sh
 ```
 
 Setup builds the pinned original in `.reference/` and downloads a checksummed
@@ -74,9 +89,17 @@ OpenTTD creates a random savegame ID when independently migrating older saves;
 using one migrated starting state makes the comparison meaningful. These checks
 prove preservation for the corpus, not full compatibility or Rust simulation.
 
+The separate snapshot reference build applies the recorded instrumentation in
+`reference/` to an isolated upstream checkout. The differential harness compares
+the paired native save and C++ runtime snapshot for all three fixtures at 1 and
+16 null-driver ticks. It checks repeatable Rust output and deliberately mutates
+tile, date, RNG and settings fields to verify that mismatches fail. Artifacts and
+diagnostics are retained under `.artifacts/snapshots-*`. No clock, ID or random
+state fields are excluded.
+
 ## Porting direction
 
-The next milestone is typed game-state decoding and historical migrations. Then
+The next milestone is typed game-object decoding and historical migrations. Then
 the deterministic simulation and command system can be ported against upstream
 state comparisons, followed by full content, script, network, and UI parity.
 All upstream behavior remains in the product scope.

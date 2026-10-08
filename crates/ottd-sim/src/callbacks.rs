@@ -3,6 +3,7 @@ use crate::{
     CompanyCallbacks, HouseCallbacks, PeriodicCallbackError, StationCallbacks, run_company_year,
     run_house_year, run_station_month,
 };
+use crate::{IndustryCallbackError, IndustryCallbacks, IndustryMonth, run_industry_month};
 use crate::{VehicleCallbackError, VehicleCallbacks, VehicleOperation, run_vehicle_callback};
 use serde::{Deserialize, Serialize};
 
@@ -10,6 +11,13 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Callback {
+    /// Original economy MONTH/INDUSTRY callback in original economy.
+    IndustryMonth {
+        /// Actual callback phase, before clock accumulator reset or year rewind.
+        phase: IndustryMonth,
+        /// Live vanilla industry statistics and builder state.
+        state: IndustryCallbacks,
+    },
     /// Original economy YEAR/TOWN house age scan.
     HouseYear {
         /// Entire raw map and random state.
@@ -50,6 +58,9 @@ pub enum CallbackError {
     /// Only the current callback boundary version is accepted.
     #[error("expected callback schema version 1")]
     Schema,
+    /// Industry callback context or state was rejected.
+    #[error(transparent)]
+    Industry(#[from] IndustryCallbackError),
     /// Periodic bookkeeping context or state was rejected.
     #[error(transparent)]
     Periodic(#[from] PeriodicCallbackError),
@@ -66,6 +77,10 @@ pub fn simulate_callback(fixture: CallbackFixture) -> Result<CallbackFixture, Ca
         return Err(CallbackError::Schema);
     }
     let callback = match fixture.callback {
+        Callback::IndustryMonth { phase, state } => Callback::IndustryMonth {
+            phase,
+            state: run_industry_month(state, phase)?,
+        },
         Callback::HouseYear { state } => Callback::HouseYear {
             state: run_house_year(state)?,
         },

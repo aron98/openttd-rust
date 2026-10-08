@@ -15,8 +15,7 @@ fn callback_command_is_exposed_with_explicit_scope() -> Result<(), Box<dyn std::
 }
 
 #[test]
-fn native_callbacks_match_through_cli_with_rejection_controls()
--> Result<(), Box<dyn std::error::Error>> {
+fn native_callbacks_match_through_cli() -> Result<(), Box<dyn std::error::Error>> {
     // Given the independent native callback corpus.
     let source = std::env::var("OTTD_CALLBACK_JSON").unwrap_or_else(|_| {
         concat!(
@@ -34,7 +33,16 @@ fn native_callbacks_match_through_cli_with_rejection_controls()
         .get("periodic_cases")
         .and_then(serde_json::Value::as_array)
         .ok_or("missing periodic cases")?;
-    let cases: Vec<_> = vehicle_cases.iter().chain(periodic_cases).collect();
+    let industry_cases = corpus
+        .get("industry_cases")
+        .and_then(serde_json::Value::as_array)
+        .ok_or("missing industry cases")?;
+    let cases: Vec<_> = vehicle_cases
+        .iter()
+        .chain(periodic_cases)
+        .chain(industry_cases)
+        .collect();
+    assert_eq!(industry_cases.len(), 14);
     assert!(vehicle_cases.len() >= 12);
     assert_eq!(periodic_cases.len(), 8);
     let temp = tempfile::tempdir()?;
@@ -82,8 +90,31 @@ fn native_callbacks_match_through_cli_with_rejection_controls()
             previous = Some(output.stdout);
         }
     }
-    // Given malformed, unknown, and unsupported boundary requests.
-    let case = cases.first().ok_or("missing case")?;
+    Ok(())
+}
+
+#[test]
+fn unsupported_callbacks_return_no_state() -> Result<(), Box<dyn std::error::Error>> {
+    // Given otherwise valid native states with one unsupported field at a time.
+    let source = std::env::var("OTTD_CALLBACK_JSON").unwrap_or_else(|_| {
+        concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../reference/callbacks.json"
+        )
+        .to_owned()
+    });
+    let corpus: serde_json::Value = serde_json::from_reader(std::fs::File::open(source)?)?;
+    let industry_cases = corpus
+        .get("industry_cases")
+        .and_then(serde_json::Value::as_array)
+        .ok_or("missing industry cases")?;
+    let case = corpus
+        .pointer("/vehicle_cases/0")
+        .ok_or("missing vehicle case")?;
+    let temp = tempfile::tempdir()?;
+    let root = std::env::var_os("OTTD_CALLBACK_ARTIFACTS")
+        .map_or_else(|| temp.path().to_path_buf(), std::path::PathBuf::from);
+    std::fs::create_dir_all(&root)?;
     let mut unsupported = serde_json::json!({"schema_version":1,"callback":{"kind":"vehicle",
         "operation":{"kind":"economy_year"},"state":case.get("before").ok_or("missing before")?}});
     let state = unsupported
@@ -92,14 +123,47 @@ fn native_callbacks_match_through_cli_with_rejection_controls()
         .and_then(serde_json::Value::as_object_mut)
         .ok_or("missing state")?;
     state.insert("old_vehicle_warn".to_owned(), true.into());
-    for (name, input) in [
+    let mut invalid = vec![
         ("malformed", "{".to_owned()),
         (
             "unknown",
             "{\"schema_version\":1,\"callback\":{\"kind\":\"movement\"}}".to_owned(),
         ),
         ("unsupported_news", unsupported.to_string()),
+    ];
+    let industry = industry_cases
+        .iter()
+        .find(|case| case.pointer("/before/industries/0").is_some())
+        .ok_or("missing populated industry")?;
+    for (name, path, value) in [
+        (
+            "industry_closure",
+            "/callback/state/industries/0/prod_level",
+            serde_json::json!(0),
+        ),
+        (
+            "industry_newgrf",
+            "/callback/state/newgrf",
+            serde_json::json!(true),
+        ),
+        (
+            "industry_smooth",
+            "/callback/state/economy_type",
+            serde_json::json!(1),
+        ),
+        (
+            "industry_history",
+            "/callback/state/industries/0/produced/0/history",
+            serde_json::json!([]),
+        ),
     ] {
+        let mut input = request_for(industry, "before")?;
+        *input
+            .pointer_mut(path)
+            .ok_or("missing industry control field")? = value;
+        invalid.push((name, input.to_string()));
+    }
+    for (name, input) in invalid {
         let path = root.join(format!("{name}.input.json"));
         std::fs::write(&path, input)?;
         // When the binary reads an unsupported request.
@@ -127,6 +191,9 @@ fn request_for(
         .ok_or("missing kind")?;
     let state = case.get(phase).ok_or("missing state")?;
     let callback = match kind {
+        "industry_month" => {
+            serde_json::json!({"kind":kind,"phase":operation.get("phase").ok_or("missing phase")?,"state":state})
+        }
         "house_year" | "company_year" | "station_month" => {
             serde_json::json!({"kind":kind,"state":state})
         }

@@ -1,0 +1,48 @@
+cmake_minimum_required(VERSION 3.20)
+foreach(required ORACLE RUN_DIR CONFIG INPUT)
+    if(NOT DEFINED ${required})
+        message(FATAL_ERROR "Missing ${required}")
+    endif()
+endforeach()
+get_filename_component(RUN_DIR "${RUN_DIR}" ABSOLUTE)
+if(EXISTS "${RUN_DIR}/gameplay.json")
+    message(FATAL_ERROR "Run directory contains stale gameplay oracle output")
+endif()
+if(NOT EXISTS "${INPUT}")
+    message(FATAL_ERROR "Missing input save: ${INPUT}")
+endif()
+file(MAKE_DIRECTORY "${RUN_DIR}")
+file(COPY_FILE "${CONFIG}" "${RUN_DIR}/openttd.cfg")
+set(ENV{OTTD_GAMEPLAY_PROBES_PATH} "${RUN_DIR}/gameplay.json")
+execute_process(
+    COMMAND "${ORACLE}" -X -x -c "${RUN_DIR}/openttd.cfg"
+        -vnull:ticks=1 -snull -mnull -g "${INPUT}" -d sl=2
+    WORKING_DIRECTORY "${RUN_DIR}"
+    OUTPUT_FILE "${RUN_DIR}/stdout.log"
+    ERROR_FILE "${RUN_DIR}/stderr.log"
+    RESULT_VARIABLE result
+    TIMEOUT 60
+)
+if(NOT result STREQUAL "0")
+    message(FATAL_ERROR "Gameplay reference failed (${result}); see stderr.log")
+endif()
+file(READ "${RUN_DIR}/stderr.log" engine_log)
+if(engine_log MATCHES "\\[sl:0\\]")
+    message(FATAL_ERROR "Gameplay reference reported a save/load error")
+endif()
+string(REGEX MATCHALL "Loading savegame version [0-9]+" loaded_versions "${engine_log}")
+list(LENGTH loaded_versions load_count)
+if(NOT load_count EQUAL 2)
+    message(FATAL_ERROR "Gameplay reference did not load the requested fixture")
+endif()
+if(NOT EXISTS "${RUN_DIR}/gameplay.json")
+    message(FATAL_ERROR "Gameplay reference did not emit probes")
+endif()
+file(READ "${RUN_DIR}/gameplay.json" probes)
+string(JSON schema GET "${probes}" schema_version)
+string(JSON clocks LENGTH "${probes}" clock_cases)
+string(JSON landscapes LENGTH "${probes}" landscape_cases)
+if(NOT schema EQUAL 1 OR clocks LESS 15 OR landscapes LESS 2)
+    message(FATAL_ERROR "Incomplete gameplay probes")
+endif()
+message(STATUS "Native gameplay probes: ${clocks} clock cases, ${landscapes} landscape cases")

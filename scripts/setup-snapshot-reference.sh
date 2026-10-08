@@ -11,19 +11,22 @@ if [ ! -d "$source_dir/.git" ]; then
     git -C "$source_dir" checkout --detach "$commit"
 fi
 test "$(git -C "$source_dir" rev-parse HEAD)" = "$commit"
-if git -C "$source_dir" apply --check "$root/reference/snapshot.patch" 2>/dev/null; then
-    git -C "$source_dir" apply "$root/reference/snapshot.patch"
-else
-    git -C "$source_dir" apply --reverse --check "$root/reference/snapshot.patch"
-fi
+for patch in snapshot gameplay; do
+    if git -C "$source_dir" apply --check "$root/reference/$patch.patch" 2>/dev/null; then
+        git -C "$source_dir" apply "$root/reference/$patch.patch"
+    else
+        git -C "$source_dir" apply --reverse --check "$root/reference/$patch.patch"
+    fi
+done
 # Compare tracked source with precisely HEAD plus our patch, without changing its index.
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 cp reference/snapshot.hpp "$source_dir/src/saveload/reference_snapshot.hpp"
+cp reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
 cmake -S "$source_dir" -B "$build_dir" \
     -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release
 cmake --build "$build_dir" --parallel "${JOBS:-4}"

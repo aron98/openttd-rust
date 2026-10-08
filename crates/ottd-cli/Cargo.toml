@@ -1,0 +1,21 @@
+[package]
+name = "ottd-cli"
+description = "Compatibility tools for the OpenTTD Rust port"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "ottd"
+path = "src/main.rs"
+
+[dependencies]
+ottd-save = { path = "../ottd-save" }
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+tempfile = "3"
+serde_json = "1"
+
+[lints]
+workspace = true

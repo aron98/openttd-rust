@@ -1,0 +1,19 @@
+# Attribution
+
+This is an independent Rust port of OpenTTD targeting the revision in
+`upstream.toml`. It is not an official OpenTTD release.
+
+Save-container framing and format behavior are ported from OpenTTD's
+`src/saveload/saveload.cpp` and `src/saveload/saveload.h` at commit
+`14ec60f248547d4d062a1160f0fc26d742319888`.
+Copyright belongs to the OpenTTD contributors; see upstream
+[CREDITS.md](https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/CREDITS.md).
+The project is licensed under GNU GPL version 2 only; see `COPYING.md`.
+
+The two `upstream-*.sav` fixtures are verbatim files from the same upstream
+revision's regression suite. `generated-v362.sav` was created locally by that
+revision with OpenGFX 7.1. See `fixtures/README.md` for provenance and hashes.
+
+OpenGFX is downloaded only for the reference engine. Its license and credits
+remain in `.reference/build/baseset/opengfx-7.1/`. Rust dependencies retain their
+respective licenses; Cargo.lock records their exact versions.

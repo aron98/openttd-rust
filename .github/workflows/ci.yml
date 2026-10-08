@@ -1,0 +1,30 @@
+name: Rust compatibility foundation
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.96.0
+          components: rustfmt, clippy
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - run: cargo test --workspace --locked
+
+  interoperability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.96.0
+      - run: sudo apt-get update && sudo apt-get install -y cmake g++ zlib1g-dev liblzma-dev liblzo2-dev libpng-dev libcurl4-openssl-dev xz-utils unzip
+      - run: bash scripts/setup-reference.sh
+      - run: bash scripts/check-compatibility.sh

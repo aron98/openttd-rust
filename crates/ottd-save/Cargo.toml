@@ -1,0 +1,20 @@
+[package]
+name = "ottd-save"
+description = "Lossless OpenTTD save-container codec for the Rust port"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+thiserror = "2"
+flate2 = "1.1"
+xz2 = "0.1.7"
+lzokay = "2"
+adler2 = "2"
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

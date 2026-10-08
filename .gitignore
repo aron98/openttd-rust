@@ -1,0 +1,6 @@
+/target/
+/.reference/
+/.artifacts/
+/.omo/evidence/
+/docs/superpowers/
+.DS_Store

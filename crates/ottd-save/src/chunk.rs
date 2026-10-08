@@ -90,13 +90,13 @@ impl<'a> Reader<'a> {
         Ok(*word)
     }
 
-    fn byte(&mut self) -> Result<u8, Error> {
+    pub(crate) fn byte(&mut self) -> Result<u8, Error> {
         let (value, rest) = self.remaining.split_first().ok_or(Error::Truncated)?;
         self.remaining = rest;
         Ok(*value)
     }
 
-    fn gamma(&mut self) -> Result<usize, Error> {
+    pub(crate) fn gamma(&mut self) -> Result<usize, Error> {
         let first = self.byte()?;
         let (mut value, extra) = match first {
             0x00..=0x7f => (u32::from(first), 0),

@@ -1,0 +1,18 @@
+[package]
+name = "ottd-sim"
+description = "Explicit deterministic OpenTTD landscape subsystem simulation"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+ottd-core = { path = "../ottd-core" }
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+
+[dev-dependencies]
+serde_json = "1"
+
+[lints]
+workspace = true

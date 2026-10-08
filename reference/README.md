@@ -111,5 +111,7 @@ mode, temperate grass/rough/rocks and void tiles, no snow/fields/object pools,
 no ordinary timer callbacks, and no ambient NewGRF callbacks. The harness selects
 whether to advance for paused probes; it does not test the engine's UI pause
 control. Synthetic terrain uses non-freeform edges so tile zero is an active clear
-tile. Clock-only maximum-year cases may adjust inherited object dates internally;
+tile. All corner heights, including void-edge corners, are positive: the original
+void procedure invokes water flooding, and its neighboring clear tiles must remain
+above sea level to stay within this subsystem. Clock-only maximum-year cases may adjust inherited object dates internally;
 the expendable process isolates those changes from ordinary snapshots and saves.

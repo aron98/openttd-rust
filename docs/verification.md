@@ -105,3 +105,25 @@ checks passed without warnings. Editor LSP requests were intermittently cancelle
 the compiler, Clippy, tests, and real executable runs are the validation evidence.
 
 These checks were performed locally before the initial repository publication.
+
+## Clock and clear-landscape subsystem
+
+Run `bash scripts/setup-snapshot-reference.sh` followed by
+`bash scripts/check-simulation.sh`. The script starts a fresh native probe process,
+then captures clock replay and CLI comparisons under `.artifacts/simulation-*`.
+The native source and fixture provenance are documented in
+[`reference/README.md`](../reference/README.md).
+
+Coverage is 15 clock cases and 4 landscape cases with 22 checkpoints: 64x64 and
+128x64 terrain, scheduling boundaries, recovery through 6144 ticks, pause and
+u64 tick wrap. Every tile field, cached clock value, cursor, gameplay RNG and
+ordered event record is compared. Repeated CLI output must be byte-identical.
+Five deliberate mutations (tile, date, cursor, RNG, event) must exit unsuccessfully
+and report the expected JSON path. Unit tests additionally reject unsupported
+contexts, terrain, flood-prone void boundaries, malformed clocks and input limits.
+
+This is isolated clock dispatch plus temperate clear-tile behavior, without timer
+callback bodies, NewGRF callbacks, water simulation or game-object updates. The
+positive-height invariant around void prevents the original void procedure from
+leaving the supported terrain domain. These checks do not establish full-game
+simulation parity or writing advanced state back to save files.

@@ -287,7 +287,8 @@ The saved transaction prerequisite in `61acfe3` passed independent review:
 original-engine reload with complete saved/derived comparisons. Integration
 checks passed 248 workspace tests and all 29 replay cases. The prepared-discard
 test was subsequently clarified in `725711a`; it makes no cache-failure claim.
-Runtime cache/allocator publication and populated-tick performance remain open.
+Road purchase now exercises cache/allocator publication; other mutation families
+and populated-tick performance remain open.
 
 ## Shared integration rules
 
@@ -364,6 +365,32 @@ the normal driver passes. `4e2fcfe` gives the service CLI a typed argument
 boundary; the exact scoped type check now reports no warnings. Fresh independent
 review approved both corrections with no findings, reproducing the real negative
 probe, normal foundation run and all 475 service process receipts.
+
+### Owned-runtime road purchases
+
+The purchase increment `5d4a78a` constructs every saved field explicitly for
+single-part vanilla road vehicles. Allocation, unit numbers and RNG remain
+tentative until saved-state validation and creation-cache computation succeed.
+The original acceleration model's creation caches differ from after-load caches;
+native observations compare them before saving. The obsolete `cargo_paid_for`
+serializer global is retained separately, including a nonzero value, instead of
+being reset when a new vehicle is constructed.
+
+The native matrix covers 15 cases, 335 actions and all 88 vanilla road engines,
+including four climates, both acceleration models, sloped depots, failures,
+limits, cash and save/resume. It compares 192 successful executions and rejects
+11 altered observations. The dedicated CI driver verifies all 821 process
+receipts, 5,571 retained evidence files, and the identity of the two actual Rust
+test executables across 18 invocations. Integration passed 294 Rust tests,
+22 Python tests, strict Clippy/formatting and all 44 existing native replay cases.
+Independent review is in progress. Refits, articulated/modded vehicles, order
+backup restoration, sales and movement remain subsequent required work.
+
+The next parallel increments are depot allocation/infrastructure restoration
+and NewGRF loading control. Loader control follows the original stage-major
+order, with explicit standalone-batch scope; baseline-dependent queries remain
+unsupported until their context is derived by the full Rust content loader.
+Neither increment closes a broad stage requirement.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

@@ -94,14 +94,14 @@ engine types and native price arithmetic. Explicitly distinguish base specs from
 mutable saved engine state and NewGRF-resolved properties. Do not manufacture
 modded properties from vanilla defaults.
 
-- [ ] Record exact native source fields and Rust API before editing.
-- [ ] Write failing comparisons for all vanilla climates and supported base
+- [x] Record exact native source fields and Rust API before editing.
+- [x] Write failing comparisons for all vanilla climates and supported base
       specifications, including price settings, inflation and numeric bounds.
-- [ ] Implement typed catalogs and price restoration with no fixture/runtime
+- [x] Implement typed catalogs and price restoration with no fixture/runtime
       C++ dependency; retain source attribution for ported static tables.
-- [ ] Export the corresponding original runtime values through a passive native
+- [x] Export the corresponding original runtime values through a passive native
       observer, compare actual native output, and retain negative controls.
-- [ ] Verify the atomic increment, review it independently and integrate it.
+- [x] Verify the atomic increment, review it independently and integrate it.
 
 ### B. Validated saved-object lifecycle
 
@@ -111,17 +111,17 @@ Use `TableRecord` values and existing schema/limit/reference validation. Native
 ID allocation policy belongs to runtime, not the save serializer. Add focused
 tests in `crates/ottd-save/tests/world_runtime.rs` or a dedicated lifecycle test.
 
-- [ ] Test linked cargo insertion and owner update in one transaction; compare
+- [x] Test linked cargo insertion and owner update in one transaction; compare
       rebuilt ownership/aggregates and serialized reload with expected state.
-- [ ] Test unlink plus deletion and invalid intermediate-but-valid-final edits.
-- [ ] Require duplicate insertion, missing remove/replace, invalid target pool,
+- [x] Test unlink plus deletion and invalid intermediate-but-valid-final edits.
+- [x] Require duplicate insertion, missing remove/replace, invalid target pool,
       malformed schema, out-of-range IDs and dangling references to roll back
       the entire batch, including earlier unrelated valid edits.
-- [ ] Implement the minimal explicit record operations. Preserve complete-world
+- [x] Implement the minimal explicit record operations. Preserve complete-world
       validation; do not bypass it or add runtime allocation to `ottd-save`.
-- [ ] Reopen the resulting native save in original OpenTTD and compare complete
+- [x] Reopen the resulting native save in original OpenTTD and compare complete
       saved/structural observations at matching lifecycle boundaries.
-- [ ] Verify, independently review and integrate this prerequisite atomically.
+- [x] Verify, independently review and integrate this prerequisite atomically.
 
 ### C. Native terrain geometry
 
@@ -131,14 +131,15 @@ Create `crates/ottd-core/src/terrain.rs` for typed slopes/corners/foundations an
 native tree, including `GetPartialPixelZ`, `GetSlopeZInCorner`,
 `GetSlopePixelZOnEdge`, `ApplyFoundationToSlope` and `GetTileSlopeZ`.
 
-- [ ] Define checked native slope/foundation values and supported combinations.
-- [ ] Test every valid slope across the 16-by-16 pixel grid, steep slopes,
+- [x] Define checked native slope/foundation values and supported combinations.
+- [x] Test every valid slope across the 16-by-16 pixel grid, steep slopes,
       corners/edges, foundations and map borders against original functions.
-- [ ] Implement geometry without modifying command/tick admission yet.
-- [ ] Add a separate passive native observer and reproducible vector comparison;
+- [x] Implement geometry without modifying command/tick admission yet.
+- [x] Add a separate passive native observer and reproducible vector comparison;
       do not use a probe that disables ambient callbacks as whole-world evidence.
-- [ ] Verify, independently review and integrate, then use the geometry in
-      native construction commands with actual costs/limits/partial results.
+- [x] Verify, independently review and integrate the geometry prerequisite.
+- [ ] Use the geometry in native construction commands with actual
+      costs, limits and partial results.
 
 ## Second implementation wave
 
@@ -146,8 +147,12 @@ The first save-object increment is committed with native interop evidence. Its
 independent review found that `ENGN` records must be contiguous from zero;
 common world validation now rejects holes transactionally, and a fresh reviewer
 verified the correction. Terrain and vanilla catalog increments have passed
-isolated workspace checks and fresh exhaustive native comparisons; their
-independent review remains a separate gate.
+isolated workspace checks and fresh exhaustive native comparisons. Independent
+review approved the catalog, terrain and observers at `8c4ef60`, with no blockers.
+That tree passed 220 Rust tests, strict workspace Clippy and formatting. Native
+comparisons covered 52 catalog configurations and exhaustive terrain vectors in
+both map-edge modes; deliberately altered observations were rejected. These are
+prerequisite milestones, not evidence of complete gameplay execution.
 
 Proceed with these disjoint slices while reviews run. Fixes to a prerequisite
 take precedence over dependent integration, and no milestone closes the stage.

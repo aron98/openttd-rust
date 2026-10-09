@@ -2,6 +2,7 @@
 pub mod content;
 mod landscape;
 mod replay;
+pub mod runtime;
 pub mod terrain;
 pub use replay::{
     ReplayAction, ReplayCursor, ReplayError, ReplayEvent, ReplayObservation, ReplayOutcome,

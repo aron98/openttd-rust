@@ -1,6 +1,6 @@
 {
   "sources": {
-    "crates/ottd-sim/src/content/grf.rs": "197dd22be2a5e084bb3503787cea4e5939a367c24b5c4113ad3d90daa3d127ae",
+    "crates/ottd-sim/src/content/grf.rs": "b8a3e3424beb26628aa0dcaed3f4cbdebb6508452e9f87419cd9b9f60b3aa519",
     "crates/ottd-sim/src/content/grf/load.rs": "95949078a3e287d01d3f7980478fb31ee555be18ed01b1794187ff87c1fad83a",
     "crates/ottd-sim/src/content/grf/load_conditions.rs": "9c25864aad18db948f3be70d7c0b17fc741d46b981961546578cad09f240fb77",
     "crates/ottd-sim/src/content/grf/load_parameters.rs": "130653eb2fe89aa10fb4a6244bd3cab412a554d589d66a0a98746d2c4dbe6696",
@@ -1565,6 +1565,8 @@
     "stale/stale-source/reference/grf_load_control.hpp",
     "stale/stale-source/reference/grf_load_control.patch",
     "stale/stale-source/reference/grf_metadata.hpp",
+    "stale/stale-source/reference/grf_safety.hpp",
+    "stale/stale-source/reference/grf_safety.patch",
     "stale/stale-source/reference/grf_scan.hpp",
     "stale/stale-source/reference/primitives.json",
     "stale/stale-source/reference/replay-format.json",
@@ -1574,6 +1576,8 @@
     "stale/stale-source/reference/replay_cost.hpp",
     "stale/stale-source/reference/replay_fixture.hpp",
     "stale/stale-source/reference/replay_hooks.hpp",
+    "stale/stale-source/reference/road_slope.hpp",
+    "stale/stale-source/reference/road_slope.patch",
     "stale/stale-source/reference/runtime_road.hpp",
     "stale/stale-source/reference/runtime_road_fixture.hpp",
     "stale/stale-source/reference/runtime_road_fixture_tiles.hpp",

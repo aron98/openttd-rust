@@ -214,14 +214,21 @@ def execute(matrix: ReplayMatrix) -> None:
     )
 
 
+class Arguments(argparse.Namespace):
+    oracle: Path = ROOT / ".reference/snapshot-build/openttd"
+    ottd: Path = ROOT / "target/debug/ottd"
+    artifacts: Path = Path()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
+    _ = parser.add_argument(
         "--oracle", type=Path, default=ROOT / ".reference/snapshot-build/openttd"
     )
-    parser.add_argument("--ottd", type=Path, default=ROOT / "target/debug/ottd")
-    parser.add_argument("--artifacts", type=Path, required=True)
-    args = parser.parse_args()
+    _ = parser.add_argument("--ottd", type=Path, default=ROOT / "target/debug/ottd")
+    _ = parser.add_argument("--artifacts", type=Path, required=True)
+    args = Arguments()
+    _ = parser.parse_args(namespace=args)
     artifacts = args.artifacts.resolve()
     artifacts.mkdir(parents=True, exist_ok=False)
     matrix = ReplayMatrix(

@@ -1672,7 +1672,7 @@
     {
       "id": "service-scripts-service-replay-py",
       "path": "scripts/service_replay.py",
-      "sha256": "7e0f9a66edde791a8c13fd3225b39794dd7a8322ca96bb25852a974224ecf1c0",
+      "sha256": "926bafcc9fb2b6222a6b75abc51130ef62e65ffdaa2649724a2fd7fea7657d99",
       "kind": "recipe",
       "provenance": "Native service command corpus/typed preparation/public CLI comparison, or tested service implementation; original command body unchanged; upstream.toml",
       "save_version": null,

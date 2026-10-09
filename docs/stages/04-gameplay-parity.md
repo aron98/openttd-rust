@@ -231,6 +231,45 @@ Shared native headers/builds remain frozen during a running comparison. The
 lead batches new hooks into scheduled builds, retains exact source/binary
 provenance, and integrates each reviewed behavior atomically.
 
+## Saved-world transaction prerequisite
+
+The allocation primitive is committed in `2e35e16` and under independent review.
+Its isolated tree passed 224 Rust tests, strict workspace Clippy and formatting;
+fresh original pool traces matched 1,177 operations plus 17 unit-number
+operations, and a changed cursor was rejected. The save transaction work below
+is independent of that frozen primitive and can proceed in parallel with review.
+
+The transport/save owner implements an exclusive undo journal in `ottd-save`,
+with minimal private table/snapshot adapters. The runtime and construction
+owners retain their simulation files. No simulation dependency enters the save
+crate. The current clone/encode/decode edit path remains a differential test
+oracle until the new boundary passes its equivalence checks.
+
+- [ ] Provide `World::transaction`, staged `apply` and candidate reads, fallible
+      `prepare`, then infallible `commit`. Retain each original touched record or
+      tile once. Failed staging poisons the transaction; failure or drop restores
+      all saved state and cached projections.
+- [ ] Candidate reads observe prior writes without exposing a partially valid
+      World or stale derived indexes. Prepared reads expose validated candidate
+      projections so simulation caches can be computed before publication.
+- [ ] Share exact wire validation and budget accounting with table encoding;
+      reuse native limits, semantic, reference, ownership, chain, script and
+      snapshot checks. Validate final coupled state, preserving temporarily
+      invalid intermediate relationships and dense ENGN loading requirements.
+- [ ] Avoid whole-world cloning and whole-save serialization during mutation.
+      A complete validation and structural reconstruction once per batch is an
+      intermediate implementation, not a claim of incremental validation.
+- [ ] Compare all edit variants with the existing implementation, including
+      repeated writes, insert/remove/reinsert, nested lists, map-object links,
+      malformed data, failure after valid changes, and uncommitted drop.
+      Reopen coupled output in the original and compare full saved/derived state.
+- [ ] Coordinate tentative allocator, RNG and simulation cache values under one
+      runtime borrow: all fallible work precedes saved-state commit and the
+      remaining publication operations are infallible. Failed cache computation
+      must still roll back the prepared saved transaction.
+- [ ] Measure the batch boundary on realistic maps/pools before admitting broad
+      populated ticks. Preserve all compatibility checks when optimizing it.
+
 ## Shared integration rules
 
 World operations must preserve native identity, iteration/allocation order and

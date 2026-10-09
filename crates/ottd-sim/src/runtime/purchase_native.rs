@@ -60,6 +60,21 @@ fn live(runtime: &SimulationRuntime) -> Result<Value> {
         json!({"road":runtime.road.values().collect::<Vec<_>>(),"pool":runtime.allocation.pool.snapshot(),"units":units}),
     )
 }
+fn depot_live(runtime: &SimulationRuntime) -> Result<Value> {
+    let vehicles = live(runtime)?;
+    if std::env::var_os("OTTD_DEPOT_LIVE").is_some() {
+        let road: BTreeMap<_, _> = runtime
+            .depot
+            .road
+            .iter()
+            .map(|(id, counts)| (id.to_string(), counts.as_slice()))
+            .collect();
+        Ok(json!({"depot":{"pool":runtime.depot.pool.snapshot(),"road":road},"vehicles":vehicles}))
+    } else {
+        Ok(vehicles)
+    }
+}
+
 #[test]
 #[ignore = "owned-runtime native purchase harness: PURCHASE_INPUT, PURCHASE_PLAN, PURCHASE_OUTPUT"]
 fn run_native_purchase_sequence() -> Result {
@@ -81,9 +96,9 @@ fn run_native_purchase_sequence() -> Result {
         let ordinal = action.ordinal();
         let observation = match action {
             ReplayAction::Command { request, .. } => {
-                let pre = live(&runtime)?;
+                let pre = depot_live(&runtime)?;
                 let receipt = runtime.execute_command(&request)?;
-                caches.push(json!({"ordinal":ordinal,"before":pre,"after":live(&runtime)?}));
+                caches.push(json!({"ordinal":ordinal,"before":pre,"after":depot_live(&runtime)?}));
                 json!({"ordinal":ordinal,"op":"command","before":before,"after":observe(runtime.world())?,"receipt":receipt})
             }
             ReplayAction::Checkpoint { label, .. } => {

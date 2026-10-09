@@ -137,6 +137,43 @@ pub(crate) fn new_road_record(
 ) -> Result<ottd_save::TableRecord, RuntimeError> {
     road_record::build(schema, state, cargo_paid_for)
 }
+pub(crate) struct DepotContext<'a> {
+    pub content: &'a ContentCatalog,
+    pub pool: &'a mut pools::PoolAllocator,
+    pub road: &'a mut BTreeMap<u8, [u32; 63]>,
+}
+impl DepotContext<'_> {
+    pub(crate) fn publish(
+        self,
+        world: &mut World,
+        edits: Vec<ottd_save::world::WorldEdit>,
+        pool: Option<pools::PoolAllocator>,
+        infrastructure: Option<(u8, u8, u32)>,
+    ) -> Result<(), crate::CommandError> {
+        let counter = match infrastructure {
+            Some((company, road_type, count)) => Some((
+                self.road
+                    .get_mut(&company)
+                    .and_then(|v| v.get_mut(usize::from(road_type)))
+                    .ok_or(RuntimeError::Invalid("depot infrastructure"))?,
+                count,
+            )),
+            None => None,
+        };
+        let mut transaction = world.transaction();
+        for edit in edits {
+            transaction.apply(edit)?;
+        }
+        transaction.prepare()?.commit();
+        if let Some(pool) = pool {
+            *self.pool = pool;
+        }
+        if let Some((target, value)) = counter {
+            *target = value;
+        }
+        Ok(())
+    }
+}
 pub(crate) struct PurchaseContext<'a> {
     pub serializer_cargo_paid_for: u16,
     pub content: &'a ContentCatalog,
@@ -192,6 +229,12 @@ impl SimulationRuntime {
         request: &crate::CommandRequest,
     ) -> Result<crate::CommandReceipt, crate::CommandError> {
         match request.command {
+            crate::Command::BuildRoadDepot { .. } => DepotContext {
+                content: &self.content,
+                pool: &mut self.depot.pool,
+                road: &mut self.depot.road,
+            }
+            .execute(&mut self.world, request),
             crate::Command::BuildVehicle { .. } => PurchaseContext {
                 serializer_cargo_paid_for: self.serializer_cargo_paid_for,
                 content: &self.content,

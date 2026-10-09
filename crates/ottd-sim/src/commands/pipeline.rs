@@ -24,13 +24,26 @@ impl crate::runtime::PurchaseContext<'_> {
         world: &mut World,
         request: &CommandRequest,
     ) -> Result<CommandReceipt, CommandError> {
-        execute(world, request, Some(self))
+        execute(world, request, Some(OwnedContext::Purchase(self)))
+    }
+}
+enum OwnedContext<'a> {
+    Purchase(crate::runtime::PurchaseContext<'a>),
+    Depot(crate::runtime::DepotContext<'a>),
+}
+impl crate::runtime::DepotContext<'_> {
+    pub(crate) fn execute(
+        self,
+        world: &mut World,
+        request: &CommandRequest,
+    ) -> Result<CommandReceipt, CommandError> {
+        execute(world, request, Some(OwnedContext::Depot(self)))
     }
 }
 fn execute(
     world: &mut World,
     request: &CommandRequest,
-    context: Option<crate::runtime::PurchaseContext<'_>>,
+    context: Option<OwnedContext<'_>>,
 ) -> Result<CommandReceipt, CommandError> {
     let tile = tile(&request.command);
     let tuple = matches!(
@@ -50,7 +63,8 @@ fn execute(
 }
 const fn tile(command: &Command) -> u32 {
     match command {
-        Command::BuildRoad { tile, .. }
+        Command::BuildRoadDepot { tile, .. }
+        | Command::BuildRoad { tile, .. }
         | Command::BuildVehicle { tile, .. }
         | Command::LandscapeClear { tile }
         | Command::TerraformLand { tile, .. }
@@ -67,7 +81,7 @@ fn execute_valid_tile(
     world: &mut World,
     request: &CommandRequest,
     tile: u32,
-    context: Option<crate::runtime::PurchaseContext<'_>>,
+    context: Option<OwnedContext<'_>>,
 ) -> Result<CommandReceipt, CommandError> {
     let server = matches!(request.command, Command::Pause { .. });
     let tuple = matches!(
@@ -136,11 +150,34 @@ fn execute_admitted(
     world: &mut World,
     request: &CommandRequest,
     tile: u32,
-    context: Option<crate::runtime::PurchaseContext<'_>>,
+    context: Option<OwnedContext<'_>>,
     estimate: bool,
-    mut returns: Option<CommandReturnPhases>,
+    returns: Option<CommandReturnPhases>,
     company_exists: bool,
 ) -> Result<CommandReceipt, CommandError> {
+    if let Command::BuildRoadDepot {
+        tile,
+        road_type,
+        direction,
+    } = request.command
+    {
+        let Some(OwnedContext::Depot(context)) = context else {
+            return Err(CommandError::Unsupported(
+                "depot construction needs owned runtime",
+            ));
+        };
+        return super::road_depot::run(
+            world,
+            request.company,
+            super::road_depot::Args {
+                tile,
+                road_type,
+                direction,
+            },
+            estimate,
+            context,
+        );
+    }
     if let Command::BuildVehicle {
         tile,
         engine,
@@ -158,9 +195,14 @@ fn execute_admitted(
                 cargo,
             },
             estimate,
-            context.ok_or(CommandError::Unsupported(
-                "vehicle construction needs owned runtime",
-            ))?,
+            match context {
+                Some(OwnedContext::Purchase(context)) => context,
+                _ => {
+                    return Err(CommandError::Unsupported(
+                        "vehicle construction needs owned runtime",
+                    ));
+                }
+            },
         );
     }
     if let Command::LevelLand {
@@ -182,6 +224,16 @@ fn execute_admitted(
             estimate,
         );
     }
+    execute_planned(world, request, tile, estimate, returns, company_exists)
+}
+fn execute_planned(
+    world: &mut World,
+    request: &CommandRequest,
+    tile: u32,
+    estimate: bool,
+    mut returns: Option<CommandReturnPhases>,
+    company_exists: bool,
+) -> Result<CommandReceipt, CommandError> {
     let plan = super::body(world, request)?;
     if let Some(values) = &mut returns {
         values.test.clone_from(&plan.returns);
@@ -219,6 +271,7 @@ fn execute_admitted(
     }
     publish(world, request, tile, plan, test, result, returns)
 }
+
 fn publish(
     world: &mut World,
     request: &CommandRequest,
@@ -272,7 +325,8 @@ fn gated(gate: CommandGate, request: &CommandRequest) -> CommandReceipt {
 const fn pause_level(command: &Command) -> u64 {
     match command {
         Command::ChangeServiceInterval { .. } => 1,
-        Command::BuildRoad { .. }
+        Command::BuildRoadDepot { .. }
+        | Command::BuildRoad { .. }
         | Command::LandscapeClear { .. }
         | Command::TerraformLand { .. }
         | Command::LevelLand { .. } => 3,

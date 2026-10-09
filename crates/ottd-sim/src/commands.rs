@@ -10,6 +10,7 @@ mod occupancy;
 mod pause;
 mod pipeline;
 mod road;
+mod road_depot;
 mod road_vehicle;
 mod terraform;
 mod terrain_read;
@@ -32,6 +33,15 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Build or rotate a vanilla road depot.
+    BuildRoadDepot {
+        /// Map tile.
+        tile: u32,
+        /// Native road type.
+        road_type: u8,
+        /// Native entrance direction.
+        direction: u8,
+    },
     /// Buy one admitted vanilla road vehicle in an existing depot.
     BuildVehicle {
         /// Native depot tile.
@@ -274,9 +284,9 @@ impl Plan {
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
-        Command::BuildVehicle { .. } => Err(CommandError::Unsupported(
-            "vehicle construction needs owned runtime",
-        )),
+        Command::BuildRoadDepot { .. } | Command::BuildVehicle { .. } => Err(
+            CommandError::Unsupported("vehicle construction needs owned runtime"),
+        ),
         Command::ChangeServiceInterval {
             vehicle,
             interval,

@@ -1969,7 +1969,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-rs",
       "path": "crates/ottd-sim/src/commands.rs",
-      "sha256": "65111c3572b585c745112badc9d2720128b4f31a313dbe3afef4959e757192df",
+      "sha256": "b598342393bb50a72aeddf43684d68d5bfeccda4c1ca51eecbf00fa8104c8292",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -1978,7 +1978,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-pipeline-rs",
       "path": "crates/ottd-sim/src/commands/pipeline.rs",
-      "sha256": "278136ed0e18423d2d2fc898de2fee726c19f84381727f16b1364f2b09a0cf4c",
+      "sha256": "9f586b852a86f828f15f7b260a398a338a13eeff75a1dda3d6128903e34d2a46",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "c993fee2e05d11494a194334faac348a7018ff3ad25ca08d70259963b24ec973",
+      "sha256": "7e86be66bbc6ba0797f9d6df647f3374a452b5a1b0a688076cb5db2388f35f34",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2086,7 +2086,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-native-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_native.rs",
-      "sha256": "b90b44d6a1601b74d4d438b5ce8ee023d358899c946630ff0759cddb42edb24f",
+      "sha256": "024cdca00b97041ea77b37a47da65683b534f9a05ee07231abd0a8a653a520e0",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,

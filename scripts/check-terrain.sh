@@ -4,8 +4,14 @@ root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$root"
 oracle="${OTTD_TERRAIN_ORACLE:-$root/.reference/snapshot-build/openttd}"
 test -x "$oracle"
-mkdir -p .omo/evidence
-run="$(mktemp -d "$root/.omo/evidence/stage04-terrain-XXXXXX")"
+if [ -n "${OTTD_TERRAIN_ARTIFACTS:-}" ]; then
+    run="$OTTD_TERRAIN_ARTIFACTS"
+    test ! -e "$run"
+    mkdir -p "$run"
+else
+    mkdir -p .omo/evidence
+    run="$(mktemp -d "$root/.omo/evidence/stage04-terrain-XXXXXX")"
+fi
 printf 'Artifacts: %s\n' "$run"
 git rev-parse HEAD > "$run/rust-commit.txt"
 git -C .reference/OpenTTD rev-parse HEAD > "$run/native-commit.txt"

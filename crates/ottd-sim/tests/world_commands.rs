@@ -578,3 +578,209 @@ fn deity_construction_is_explicitly_unsupported_not_native_failure() -> Result {
     assert_eq!(world.saved_json()?, before);
     Ok(())
 }
+
+#[test]
+fn explicit_loan_saturates_balance_at_native_money_maximum() -> Result {
+    let mut world = populated()?;
+    set(&mut world, *b"DATE", "pause_mode", WireValue::Unsigned(0))?;
+    set(&mut world, *b"PLYR", "money", WireValue::Signed(1_000_000))?;
+    set(
+        &mut world,
+        *b"PLYR",
+        "current_loan",
+        WireValue::Signed(9_223_372_036_854_774_807),
+    )?;
+    set(
+        &mut world,
+        *b"PLYR",
+        "max_loan",
+        WireValue::Signed(i64::MAX),
+    )?;
+    let receipt = execute_command(
+        &mut world,
+        &request(Command::IncreaseLoan {
+            method: 2,
+            amount: 10_000,
+        }),
+    )?;
+    let success = ottd_sim::CommandCost {
+        success: true,
+        cost: 0,
+        expenses: 12,
+        error: None,
+        error_params: Vec::new(),
+    };
+    assert_eq!(
+        receipt,
+        ottd_sim::CommandReceipt {
+            posted: true,
+            gate: None,
+            test: Some(success.clone()),
+            exec: Some(success.clone()),
+            result: Some(success)
+        }
+    );
+    assert_eq!(
+        field(&world, b"PLYR", 0, "money")?,
+        &WireValue::Signed(1_010_000)
+    );
+    assert_eq!(
+        field(&world, b"PLYR", 0, "current_loan")?,
+        &WireValue::Signed(i64::MAX)
+    );
+    Ok(())
+}
+
+#[test]
+fn loan_rejects_cash_overflow_even_when_loan_balance_can_increase() -> Result {
+    let mut world = populated()?;
+    set(&mut world, *b"DATE", "pause_mode", WireValue::Unsigned(0))?;
+    set(
+        &mut world,
+        *b"PLYR",
+        "money",
+        WireValue::Signed(9_223_372_036_854_770_807),
+    )?;
+    set(&mut world, *b"PLYR", "current_loan", WireValue::Signed(0))?;
+    set(
+        &mut world,
+        *b"PLYR",
+        "max_loan",
+        WireValue::Signed(i64::MAX),
+    )?;
+    let before = world.saved_json()?;
+    let receipt = execute_command(
+        &mut world,
+        &request(Command::IncreaseLoan {
+            method: 2,
+            amount: 10_000,
+        }),
+    )?;
+    assert_eq!(
+        receipt.result.ok_or("result")?.error.as_deref(),
+        Some("CMD_ERROR")
+    );
+    assert!(receipt.exec.is_none());
+    assert_eq!(world.saved_json()?, before);
+    Ok(())
+}
+
+#[test]
+fn infinite_money_repayment_saturates_cash_at_native_minimum() -> Result {
+    let mut world = populated()?;
+    set(&mut world, *b"DATE", "pause_mode", WireValue::Unsigned(0))?;
+    set(
+        &mut world,
+        *b"PATS",
+        "difficulty.infinite_money",
+        WireValue::Signed(1),
+    )?;
+    set(&mut world, *b"PLYR", "money", WireValue::Signed(i64::MIN))?;
+    set(
+        &mut world,
+        *b"PLYR",
+        "current_loan",
+        WireValue::Signed(10_000),
+    )?;
+    let receipt = execute_command(
+        &mut world,
+        &request(Command::DecreaseLoan {
+            method: 2,
+            amount: 10_000,
+        }),
+    )?;
+    assert!(receipt.posted);
+    assert_eq!(
+        field(&world, b"PLYR", 0, "money")?,
+        &WireValue::Signed(i64::MIN)
+    );
+    assert_eq!(
+        field(&world, b"PLYR", 0, "current_loan")?,
+        &WireValue::Signed(0)
+    );
+    Ok(())
+}
+
+#[test]
+fn construction_saturates_native_money_debit_and_expense_total() -> Result {
+    let mut world = populated()?;
+    set(&mut world, *b"DATE", "pause_mode", WireValue::Unsigned(0))?;
+    set(
+        &mut world,
+        *b"PATS",
+        "difficulty.infinite_money",
+        WireValue::Signed(1),
+    )?;
+    set(&mut world, *b"PLYR", "money", WireValue::Signed(i64::MIN))?;
+    world.edit_field(
+        *b"PLYR",
+        0,
+        &[
+            PathElement::Field("yearly_expenses".into()),
+            PathElement::Index(0),
+        ],
+        WireValue::Signed(9_223_372_036_854_775_707),
+    )?;
+    let tile = flat_clear(&world)?;
+    let receipt = execute_command(
+        &mut world,
+        &request(Command::BuildRoad {
+            tile,
+            pieces: 5,
+            road_type: 0,
+            toggle_disallowed: 0,
+            town_id: u16::MAX,
+        }),
+    )?;
+    assert!(receipt.posted);
+    assert_eq!(
+        field(&world, b"PLYR", 0, "money")?,
+        &WireValue::Signed(i64::MIN)
+    );
+    let WireValue::Array(expenses) = field(&world, b"PLYR", 0, "yearly_expenses")? else {
+        return Err("expenses".into());
+    };
+    assert_eq!(expenses.first(), Some(&WireValue::Signed(i64::MAX)));
+    Ok(())
+}
+
+#[test]
+fn construction_affordability_failure_keeps_boundary_balances_unchanged() -> Result {
+    let mut world = populated()?;
+    set(&mut world, *b"DATE", "pause_mode", WireValue::Unsigned(0))?;
+    set(
+        &mut world,
+        *b"PATS",
+        "difficulty.infinite_money",
+        WireValue::Signed(0),
+    )?;
+    set(&mut world, *b"PLYR", "money", WireValue::Signed(0))?;
+    world.edit_field(
+        *b"PLYR",
+        0,
+        &[
+            PathElement::Field("yearly_expenses".into()),
+            PathElement::Index(0),
+        ],
+        WireValue::Signed(9_223_372_036_854_775_707),
+    )?;
+    let tile = flat_clear(&world)?;
+    let before = world.saved_json()?;
+    let receipt = execute_command(
+        &mut world,
+        &request(Command::BuildRoad {
+            tile,
+            pieces: 5,
+            road_type: 0,
+            toggle_disallowed: 0,
+            town_id: u16::MAX,
+        }),
+    )?;
+    assert_eq!(
+        receipt.result.ok_or("result")?.error.as_deref(),
+        Some("STR_ERROR_NOT_ENOUGH_CASH_REQUIRES_CURRENCY")
+    );
+    assert!(receipt.exec.is_none());
+    assert_eq!(world.saved_json()?, before);
+    Ok(())
+}

@@ -36,9 +36,7 @@ pub(super) fn loan(
         }
         1 => {
             if increase {
-                maximum
-                    .checked_sub(current)
-                    .ok_or(CommandError::Overflow("maximum loan"))?
+                maximum.saturating_sub(current)
             } else {
                 let value = current.min(available).max(10_000);
                 value
@@ -49,7 +47,7 @@ pub(super) fn loan(
         2 => {
             if amount < 10_000
                 || amount % 10_000 != 0
-                || (increase && current.checked_add(amount).is_none_or(|n| n > maximum))
+                || (increase && current.saturating_add(amount) > maximum)
                 || (!increase && amount > current)
             {
                 return Ok(Plan::empty(CommandCost::failure("CMD_ERROR")));
@@ -58,7 +56,7 @@ pub(super) fn loan(
         }
         _ => return Ok(Plan::empty(CommandCost::failure("CMD_ERROR"))),
     };
-    if increase && money.checked_add(value).is_none() {
+    if increase && money > i64::MAX.saturating_sub(value) {
         return Ok(Plan::empty(CommandCost::failure("CMD_ERROR")));
     }
     if !increase && available < value {
@@ -68,17 +66,15 @@ pub(super) fn loan(
         )));
     }
     let next_money = if increase {
-        money.checked_add(value)
+        money.saturating_add(value)
     } else {
-        money.checked_sub(value)
-    }
-    .ok_or(CommandError::Overflow("loan cash"))?;
+        money.saturating_sub(value)
+    };
     let next_loan = if increase {
-        current.checked_add(value)
+        current.saturating_add(value)
     } else {
-        current.checked_sub(value)
-    }
-    .ok_or(CommandError::Overflow("loan balance"))?;
+        current.saturating_sub(value)
+    };
     Ok(Plan {
         cost: CommandCost::success(0, if increase { 12 } else { 255 }),
         edits: vec![

@@ -145,9 +145,7 @@ fn accounting(
 ) -> Result<Vec<WorldEdit>, CommandError> {
     let mut edits = Vec::new();
     if result.cost != 0 {
-        let money = signed(world, b"PLYR", company, "money")?
-            .checked_sub(result.cost)
-            .ok_or(CommandError::Overflow("company money"))?;
+        let money = signed(world, b"PLYR", company, "money")?.saturating_sub(result.cost);
         edits.push(field_edit(
             *b"PLYR",
             company,
@@ -168,11 +166,7 @@ fn accounting(
                 PathElement::Field("yearly_expenses".into()),
                 PathElement::Index(index),
             ],
-            value: WireValue::Signed(
-                expense
-                    .checked_add(result.cost)
-                    .ok_or(CommandError::Overflow("yearly expenses"))?,
-            ),
+            value: WireValue::Signed(expense.saturating_add(result.cost)),
         });
     }
     Ok(edits)

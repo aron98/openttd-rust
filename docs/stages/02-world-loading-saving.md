@@ -1,9 +1,11 @@
 # Stage 2: world loading and saving
 
-Status: **In progress**. Branch: `stage/02-world-loading-saving`, based on the
+Status: **Ready for review**. Branch: `stage/02-world-loading-saving`, based on the
 maintainer merge of [PR #2](https://github.com/aron98/openttd-rust/pull/2),
-`e35f0f7375d84124f8047adff404eb4273b7277b`. One stage PR will collect atomic
-increments and await the maintainer's merge before stage 3 begins.
+`e35f0f7375d84124f8047adff404eb4273b7277b`. [PR #3](https://github.com/aron98/openttd-rust/pull/3)
+collects the atomic increments and awaits the maintainer's merge. Implementation
+review and required Linux CI have passed; final documentation CI remains tracked
+in the PR checks before removing draft status. Stage 3 is planned, not started.
 
 ## Approved scope
 
@@ -94,25 +96,26 @@ publishing output. Existing snapshot/simulation APIs remain supported.
 
 ## Acceptance checklist
 
-- [ ] Every native v362 saved domain has a decoded representation and documented
+- [x] Every native v362 saved domain has a decoded representation and documented
       serialization/preservation policy, with no unexplained opaque chunks.
-- [ ] Sparse pool identity, variants, references, null/special sentinels and
+- [x] Sparse pool identity, variants, references, null/special sentinels and
       ownership are validated; malformed controls fail without partial output.
-- [ ] The named content-independent derived fields match native restored objects
+- [x] The named content-independent derived fields match native restored objects
       for populated worlds, including shared orders and nonempty cargo.
-- [ ] Rust edits to each of vehicles, companies, towns, industries, stations,
+- [x] Rust edits to each of vehicles, companies, towns, industries, stations,
       orders, cargo and infrastructure survive original load and are observed
       with exact expected values; unchanged fields remain equal.
-- [ ] Original re-save of Rust-edited worlds reloads in Rust with equal saved
+- [x] Original re-save of Rust-edited worlds reloads in Rust with equal saved
       state and the defined structural runtime state.
-- [ ] Real mod/script fixtures preserve configuration, parameters, mapping,
+- [x] Real mod/script fixtures preserve configuration, parameters, mapping,
       persistent storage, AI/GS serialized state and randomizers across edits.
-- [ ] Native comparison negative controls detect changed values and missing
+- [x] Native comparison negative controls detect changed values and missing
       fields; unexecuted native scenarios are never reported as passing.
-- [ ] Formatting, strict Clippy, workspace and existing native regressions pass;
+- [x] Formatting, strict Clippy, workspace and existing native regressions pass;
       fresh evidence records commands, input hashes, tested tree and results.
-- [ ] Independent review resolves all blocking findings, required CI passes, and
-      one stage PR is ready for maintainer review. No stage 3 work begins.
+- [x] Independent review resolves all blocking implementation findings and
+      required implementation CI passes. One stage PR awaits final documentation
+      checks and maintainer review; no stage 3 work begins.
 
 ## Verification scenarios and artifacts
 
@@ -195,6 +198,34 @@ not claim JSON instrumentation in the unmodified engine.
 The [contract](../../compatibility/contract.json) requires 334 concrete nonempty
 world artifacts. Its report records manifest/input hashes, tested commit and
 working-tree state; PR CI retains the scoped world directories with the reports.
-Local world-driver and contract-entry-point runs have passed. The integration
-lead will reconcile the acceptance checklist after the final baseline,
-independent review and required CI; the stage remains **In progress**.
+
+## Review and CI evidence
+
+Implementation `3e7a4ac7294647768a7a700a76aa21c874b4673d` passed independent
+review of the portability correction, following the approved integrated review
+at `c126b39b96d8afed96480892c5782334631be197`. Blocking findings are closed.
+The initial Linux failure exposed ABI-dependent `std::string` descriptor sizes;
+the correction excludes that non-wire metadata while retaining native array
+bounds and exact saved-state comparisons.
+
+[Linux CI run 37911048378](https://github.com/aron98/openttd-rust/actions/runs/37911048378)
+passed both `rust` and `interoperability` jobs on clean synthetic merge
+`84e84cf1e329ee00e71679d4f7e57518719f3438`. Its downloadable
+[`compatibility-contract-37911048378-1` artifact](https://github.com/aron98/openttd-rust/actions/runs/37911048378/artifacts/11607037551) retains
+`.omo/evidence/contract-pj_scgcw/report.json` and
+`.artifacts/worlds-vvMluN/results/`. The raw report records all seven drivers
+passing, 65 passing compatibility scenarios (62 implemented and three reference
+baselines), and 19 future scenarios unimplemented and not run. Test logs record
+152 passing Rust tests and 13 passing Python tests; skipped external tests are
+not included as passes.
+
+The retained world evidence contains all 334 required nonempty artifacts: five
+populated cases, all eight required edit families, actual modded-AI and GameScript
+edits, fourteen native re-save structural comparisons, eight negative controls,
+and four reload witnesses from the unmodified original engine. This establishes
+the approved stage 2 saved-state and structural-restoration boundary; it does not
+claim content-dependent runtime restoration, which remains the stage 4 gate.
+
+Final documentation CI is tracked by [PR #3's checks](https://github.com/aron98/openttd-rust/pull/3/checks).
+The PR remains draft until those checks pass. The maintainer's merge is still
+required before stage 2 becomes completed or stage 3 implementation begins.

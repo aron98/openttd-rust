@@ -15,6 +15,8 @@ mod callbacks;
 /// Exact JSON comparison helpers.
 pub mod compare;
 mod simulation;
+/// Saved-world command adapters.
+pub mod world;
 
 #[derive(Debug, Parser)]
 #[command(
@@ -31,6 +33,20 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Action {
+    #[command(about = "Export version-362 saved state and structural indexes; not gameplay caches")]
+    World {
+        input: PathBuf,
+        #[arg(long, value_enum, default_value_t = world::View::All)]
+        view: world::View,
+    },
+    #[command(about = "Apply a bounded JSON saved-state edit batch; destination must not exist")]
+    EditWorld {
+        input: PathBuf,
+        edits: PathBuf,
+        output: PathBuf,
+        #[arg(long, value_enum)]
+        compression: Option<OutputCompression>,
+    },
     #[command(
         about = "Run one supported object callback on explicit JSON state; not a full game tick"
     )]
@@ -88,6 +104,19 @@ fn load(path: &Path, limit: usize) -> Result<Savegame> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Action::World { input, view } => world::inspect(&input, cli.max_bytes, view)?,
+        Action::EditWorld {
+            input,
+            edits,
+            output,
+            compression,
+        } => world::edit(
+            &input,
+            &edits,
+            &output,
+            compression.map(Compression::from),
+            cli.max_bytes,
+        )?,
         Action::SimulateCallbacks { input } => callbacks::run(&input, cli.max_bytes)?,
         Action::SimulateLandscape { input, ticks } => {
             simulation::run(&input, cli.max_bytes, ticks)?;
@@ -143,18 +172,23 @@ fn main() -> Result<()> {
             let save = load(&input, cli.max_bytes)?;
             let format = compression.map_or_else(|| save.compression(), Compression::from);
             let bytes = save.encode(format)?;
-            let parent = output
-                .parent()
-                .filter(|path| !path.as_os_str().is_empty())
-                .unwrap_or_else(|| Path::new("."));
-            let mut temporary = tempfile::NamedTempFile::new_in(parent)?;
-            temporary.write_all(&bytes)?;
-            temporary.as_file().sync_all()?;
-            temporary
-                .persist_noclobber(&output)
-                .with_context(|| format!("cannot create {}", output.display()))?;
+            publish(&output, &bytes)?;
             writeln!(std::io::stdout().lock(), "{}", output.display())?;
         }
     }
+    Ok(())
+}
+
+fn publish(output: &Path, bytes: &[u8]) -> Result<()> {
+    let parent = output
+        .parent()
+        .filter(|path| !path.as_os_str().is_empty())
+        .unwrap_or_else(|| Path::new("."));
+    let mut temporary = tempfile::NamedTempFile::new_in(parent)?;
+    temporary.write_all(bytes)?;
+    temporary.as_file().sync_all()?;
+    temporary
+        .persist_noclobber(output)
+        .with_context(|| format!("cannot create {}", output.display()))?;
     Ok(())
 }

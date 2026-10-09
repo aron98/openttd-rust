@@ -790,7 +790,7 @@
     {
       "id": "replay-source-reference-replay-commands-hpp",
       "path": "reference/replay_commands.hpp",
-      "sha256": "bca8b17cc77e778a1dba4c132f12a636215fb57bb172357554a75c575f500a5b",
+      "sha256": "8e21ee84114665d58151926284fc58731caecb0d98be086ec7db8a0225f024b0",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -799,7 +799,7 @@
     {
       "id": "replay-source-reference-replay-cost-hpp",
       "path": "reference/replay_cost.hpp",
-      "sha256": "ba5153e6e8249ae1cc7ffc11746483be57f6cd5e45b1631ace1578a0d5600795",
+      "sha256": "82078562de1123b3a796e9470c7194781080d042345c8abcfe4d44ffdcf3b6b9",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1573,7 +1573,7 @@
     {
       "id": "foundation-reference-runtime-road-hpp",
       "path": "reference/runtime_road.hpp",
-      "sha256": "cef9f513b8b92beeb9fe557e8eb68c123be45520e5ef8a53c6cc87eb7dfc4a41",
+      "sha256": "6a70175ee8ff525315fcac4e2b99acc53f5850449330619b25d18f1de2aaf365",
       "kind": "recipe",
       "provenance": "Committed stage4 prerequisite test/observer/driver or input; pinned OpenTTD15.3 native callbacks retained; foundation source manifest records executed identity",
       "save_version": null,

@@ -53,6 +53,23 @@ inline Json Live()
     for (const Company *c : Company::Iterate()) units.push_back({{"company", c->index.base()}, {"next", c->freeunits[VEH_ROAD].NextID()}, {"count", c->group_all[VEH_ROAD].num_vehicle}});
     return {{"road", Snapshot().at("road")}, {"pool", {{"first_free", _vehicle_pool.first_free}, {"first_unused", _vehicle_pool.first_unused}, {"items", _vehicle_pool.items}, {"slots", _vehicle_pool.data.size()}, {"occupied", occupied}}}, {"units", units}};
 }
+inline Json SaleSnapshot()
+{
+    Json groups = Json::object();
+    for (const Company *c : Company::Iterate()) {
+        Json all = Json::object(), ungrouped = Json::object();
+        for (const Engine *engine : Engine::IterateType(VEH_ROAD)) {
+            const std::string id = std::to_string(engine->index.base());
+            all[id] = c->group_all[VEH_ROAD].GetNumEngines(engine->index);
+            ungrouped[id] = c->group_default[VEH_ROAD].GetNumEngines(engine->index);
+        }
+        groups[std::to_string(c->index.base())] = {
+            {"all", {{"vehicles", c->group_all[VEH_ROAD].num_vehicle}, {"engines", all}}},
+            {"default_group", {{"vehicles", c->group_default[VEH_ROAD].num_vehicle}, {"engines", ungrouped}}},
+        };
+    }
+    return {{"vehicle", Live()}, {"groups", groups}};
+}
 inline void Observe()
 {
     const char *path = std::getenv("OTTD_RUNTIME_ROAD_PATH");

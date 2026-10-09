@@ -12,6 +12,8 @@ inline Json ErrorSymbol(StringID id)
 {
     switch (id) {
         case INVALID_STRING_ID: return "CMD_ERROR";
+        case STR_ERROR_VEHICLE_IS_DESTROYED: return "STR_ERROR_VEHICLE_IS_DESTROYED";
+        case STR_ERROR_ROAD_VEHICLE_MUST_BE_STOPPED_INSIDE_DEPOT: return "STR_ERROR_ROAD_VEHICLE_MUST_BE_STOPPED_INSIDE_DEPOT";
 #define REPLAY_ERROR(name) case name: return #name;
         REPLAY_ERROR(STR_ERROR_MAXIMUM_PERMITTED_LOAN)
         REPLAY_ERROR(STR_ERROR_ALREADY_AT_SEA_LEVEL)
@@ -32,6 +34,10 @@ inline Json ErrorSymbol(StringID id)
         REPLAY_ERROR(STR_ERROR_ONEWAY_ROADS_CAN_T_HAVE_JUNCTION)
         REPLAY_ERROR(STR_ERROR_ROAD_WORKS_IN_PROGRESS)
         REPLAY_ERROR(STR_ERROR_LAND_SLOPED_IN_WRONG_DIRECTION)
+        REPLAY_ERROR(STR_ERROR_TRAIN_IN_THE_WAY)
+        REPLAY_ERROR(STR_ERROR_ROAD_VEHICLE_IN_THE_WAY)
+        REPLAY_ERROR(STR_ERROR_SHIP_IN_THE_WAY)
+        REPLAY_ERROR(STR_ERROR_AIRCRAFT_IN_THE_WAY)
         REPLAY_ERROR(STR_ERROR_FLAT_LAND_REQUIRED)
         REPLAY_ERROR(STR_ERROR_MUST_DEMOLISH_BRIDGE_FIRST)
         REPLAY_ERROR(STR_ERROR_MUST_REMOVE_ROAD_FIRST)
@@ -73,6 +79,8 @@ void Phase(const char *phase, const CommandCost &cost)
     (*receipt)[phase] = Cost(cost);
     metadata[phase] = {{"error_id", cost.GetErrorMessage()}, {"extra_error_id", cost.GetExtraErrorMessage()},
         {"owner", cost.GetErrorOwner().base()}};
+    if (metadata.contains("sale_before")) metadata[phase]["sale"] = ReferenceRuntimeRoad::SaleSnapshot();
+    if (metadata.contains("depot_before")) metadata[phase]["depot"] = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
 }
 void Gate(const char *gate)
 {

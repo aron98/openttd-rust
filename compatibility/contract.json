@@ -1771,7 +1771,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-records-rs",
       "path": "crates/ottd-sim/src/content/grf/records.rs",
-      "sha256": "a7e33c7ed9b303b978b7ffb9dea591957f94c81c957b295c0b62267eeaf2aa37",
+      "sha256": "6fc31af1cf0669fff24d9aa4e6f0a9aa95306547fe90baf63f90870a5a749a7c",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -1780,7 +1780,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-scan-rs",
       "path": "crates/ottd-sim/src/content/grf/scan.rs",
-      "sha256": "3b049a5349ae9de0b47cb325c852e4c9761bd67f3f9623e25cb4a88cfcb8770d",
+      "sha256": "6379c90002b189666022a6dfb463c472c1f72fd7871417d2c54d8503138ccbe0",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,

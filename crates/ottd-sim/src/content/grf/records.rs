@@ -129,6 +129,43 @@ impl<'a> Reader<'a> {
             kind,
         }))
     }
+    pub(super) fn skip_native_record(
+        &mut self,
+        version: u8,
+        kind: u8,
+        length: u32,
+    ) -> Result<(), Error> {
+        if kind == 255 || (version == 2 && kind == 253) {
+            self.take(usize::try_from(length).map_err(|_| Error::ResourceLimit)?)?;
+            return Ok(());
+        }
+        self.take(7)?;
+        let [low, high, _, _] = length.wrapping_sub(8).to_le_bytes();
+        let mut remaining = u16::from_le_bytes([low, high]);
+        if kind & 2 != 0 {
+            self.take(usize::from(remaining))?;
+            return Ok(());
+        }
+        while remaining > 0 {
+            let control = i8::from_ne_bytes([self.byte()?]);
+            if control >= 0 {
+                let count = if control == 0 {
+                    128
+                } else {
+                    u16::from(control.unsigned_abs())
+                };
+                if count > remaining {
+                    return Ok(());
+                }
+                remaining = remaining.wrapping_sub(count);
+                self.take(usize::from(count))?;
+            } else {
+                remaining = remaining.wrapping_sub(u16::from((control >> 3).unsigned_abs()));
+                self.byte()?;
+            }
+        }
+        Ok(())
+    }
     pub(super) fn record_header(&mut self, version: u8) -> Result<Option<(u32, u8)>, Error> {
         let length = self.length(version)?;
         if length == 0 {

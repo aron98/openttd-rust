@@ -141,14 +141,15 @@ pub fn scan_file_with_options(
             outcome.failure = Some((ScanFailure::UnexpectedSprite, line));
             break;
         }
+        if skip_count > 0 {
+            reader.skip_native_record(version, kind, length)?;
+            skip_count = skip_count.saturating_sub(1);
+            continue;
+        }
         reader.pos = record_start;
         let Some(record) = reader.record(version)? else {
             break;
         };
-        if skip_count > 0 {
-            skip_count = skip_count.saturating_sub(1);
-            continue;
-        }
         let RecordKind::Pseudo(payload) = record.kind else {
             return Err(GrfParseError::InlineSprite(record_start).into());
         };

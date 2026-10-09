@@ -239,19 +239,23 @@ fresh original pool traces matched 1,177 operations plus 17 unit-number
 operations, and a changed cursor was rejected. The save transaction work below
 is independent of that frozen primitive and can proceed in parallel with review.
 
-The transport/save owner implements an exclusive undo journal in `ottd-save`,
+The transport/save owner implements a sparse transaction overlay in `ottd-save`,
 with minimal private table/snapshot adapters. The runtime and construction
 owners retain their simulation files. No simulation dependency enters the save
 crate. The current clone/encode/decode edit path remains a differential test
 oracle until the new boundary passes its equivalence checks.
 
 - [ ] Provide `World::transaction`, staged `apply` and candidate reads, fallible
-      `prepare`, then infallible `commit`. Retain each original touched record or
-      tile once. Failed staging poisons the transaction; failure or drop restores
-      all saved state and cached projections.
+      `prepare`, then infallible `commit`. Retain each touched record or tile once.
+      Failed staging poisons the transaction. The public transaction leaves World
+      unchanged until commit, including when safe code uses `mem::forget`.
 - [ ] Candidate reads observe prior writes without exposing a partially valid
       World or stale derived indexes. Prepared reads expose validated candidate
       projections so simulation caches can be computed before publication.
+- [ ] If prepare temporarily installs candidate values to reuse validators, keep
+      that swap/restore guard private and unexposed. No user callback executes
+      while candidate values are installed; all error/unwind paths restore the
+      original before returning a prepared overlay or failure.
 - [ ] Share exact wire validation and budget accounting with table encoding;
       reuse native limits, semantic, reference, ownership, chain, script and
       snapshot checks. Validate final coupled state, preserving temporarily

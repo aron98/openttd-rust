@@ -12,6 +12,11 @@ def validate_archive_paths(directory: Path, paths: list[Path]) -> None:
     for path in paths:
         if path.is_symlink() or not path.resolve().is_relative_to(directory.resolve()):
             raise WorldCheckError("Loader archive path escaped evidence directory")
+        if any(
+            character in '\\:"<>|*?' or ord(character) < 32
+            for character in str(path.relative_to(directory))
+        ):
+            raise WorldCheckError(f"Evidence path is not upload portable: {path}")
         if not path.stat().st_size and path.name not in {"stdout.log", "stderr.log"}:
             raise WorldCheckError(f"Empty substantive loader archive artifact: {path}")
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 from scripts.context_ci_support import OCCUPANCY_TEST, exact, process, verify_identity
 from scripts.depot_build_archive import bounded_paths
-from scripts.gameplay_foundations import digest
+from scripts.gameplay_foundations import digest, log_name
 from scripts.grf_control_evidence import sequence, text
 from scripts.world_check_support import Json, WorldCheckError, at, read_json, write_json
 
@@ -95,7 +95,7 @@ def validate_occupancy(root: Path, output: Path, layout: Json) -> None:
     binary = Path(text(at(identities, ("ottd_sim", "retained"))))
     for name in ("flat", "sloped"):
         case = output / name
-        process(case / "logs" / OCCUPANCY_TEST, binary, OCCUPANCY_TEST)
+        process(case / "logs" / log_name(OCCUPANCY_TEST), binary, OCCUPANCY_TEST)
         compare_occupancy(
             read_json(case / "vectors/depot-runtime.json"),
             read_json(case / "rust-vectors.json"),

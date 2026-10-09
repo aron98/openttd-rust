@@ -24,6 +24,7 @@ from scripts.context_ci_support import (
     zero,
 )
 from scripts.depot_build_archive import package_raw
+from scripts.gameplay_foundations import log_name
 from scripts.grf_control_run import ControlRun
 from scripts.safety_ci_bindings import bind_safety
 from scripts.safety_ci_evidence import live_probes, validate_safety
@@ -88,7 +89,7 @@ def main() -> None:
     zero(job, binary)
     verify_identity(root, output)
     for name in [MATRIX, GUARDS]:
-        process(output / "logs" / name, binary, name)
+        process(output / "logs" / log_name(name), binary, name)
     retain_native(output, oracle)
     package_raw(output)
     _ = (output / "summary.txt").write_text(

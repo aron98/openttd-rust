@@ -1447,7 +1447,7 @@
     {
       "id": "foundation-scripts-gameplay-foundations-py",
       "path": "scripts/gameplay_foundations.py",
-      "sha256": "7db80d2ac3cb795f80b2ee3cdbe778d6a6e054d0e2d4c1be288bf9dc7c4af8f3",
+      "sha256": "64e71e50a3b110c8c2e7b24c7825c9ccf8eea840d1fa16052225d577848cadec",
       "kind": "recipe",
       "provenance": "Committed stage4 prerequisite test/observer/driver or input; pinned OpenTTD15.3 native callbacks retained; foundation source manifest records executed identity",
       "save_version": null,
@@ -2338,7 +2338,7 @@
     {
       "id": "grf-control-scripts-grf-control-archive-py",
       "path": "scripts/grf_control_archive.py",
-      "sha256": "a28fa167095d90811858932c52e1fd60ecafccea72d5a2440bd77fbb957a8bc9",
+      "sha256": "dde0f7beaadc01fcb506a531035eb1eefc68558564ff155849e3eeb76cc29e67",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2365,7 +2365,7 @@
     {
       "id": "grf-control-scripts-grf-control-run-py",
       "path": "scripts/grf_control_run.py",
-      "sha256": "b6122029acc1e499e7836756a902b8f746bb9c9aea9912a66a266599fb0ea8d1",
+      "sha256": "35bbf64c751a3cfaeca04a847b2d256548c6a07d7081bab3c2996d17d1886333",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -3049,7 +3049,7 @@
     {
       "id": "occupancy-ci-evidence",
       "path": "scripts/occupancy_ci_evidence.py",
-      "sha256": "8ecd66f53a453c187165f6d2df6d67ddc0e52338f7adbf9337606078d5d6059e",
+      "sha256": "5e6bc35c3fdc69d0db5800940eaa378ec4111c33033e80ee5b4418b752413634",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3058,7 +3058,7 @@
     {
       "id": "context-ci-driver",
       "path": "scripts/check-grf-context-ci.py",
-      "sha256": "b8aa52d05a09900cc4298782c1f07e960055a1006abf9e612c3da53419468ca9",
+      "sha256": "d4a423744c979bf8d39859ac7a23b97c216d191ab78c7cbb2a7bbe2e6c5f6fb7",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3094,7 +3094,7 @@
     {
       "id": "occupancy-ci-layout",
       "path": "scripts/occupancy-ci-layout.json",
-      "sha256": "ded6c7aed9a03d163aa75b1edb02574eb9025fc755cd5ea944197b2c61aa10fe",
+      "sha256": "865e025a27b79c35d9122fa09f35e0309eb1b13badd997dad9aab8b6c4c9ff9f",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3139,7 +3139,7 @@
     {
       "id": "road-slope-ci-road-slope-ci-evidence",
       "path": "scripts/road_slope_ci_evidence.py",
-      "sha256": "52fe62b2af2db6bc0106f4a1be1f19f81a2271405485161563faf574315fec58",
+      "sha256": "0495a02d835a07989cdf4a2a085563b1cc04cee91b13eff5c8243ee249d51810",
       "kind": "recipe",
       "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
       "save_version": null,
@@ -3148,7 +3148,7 @@
     {
       "id": "road-slope-ci-road-slope-ci-layout",
       "path": "scripts/road-slope-ci-layout.json",
-      "sha256": "a7dfdfacff3e87a41dcfaa2c1aa7e69e3fe419ce83dba285ea7e10597f46ef58",
+      "sha256": "2aca359b37558bca9eae1ff906ceb41f419cb4ba9793fc9afae8d3dddf0fb167",
       "kind": "recipe",
       "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
       "save_version": null,
@@ -3193,7 +3193,7 @@
     {
       "id": "safety-ci-check-grf-safety-ci",
       "path": "scripts/check-grf-safety-ci.py",
-      "sha256": "64777e94e4a935d8ce8bc6cb35bad45a636bd42120868c200fbb3cecd18504f4",
+      "sha256": "1fcf783e8254aae916257f7c8f583029a68d7156c64070d828f080ba2bb67959",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,

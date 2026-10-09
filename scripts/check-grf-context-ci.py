@@ -29,7 +29,7 @@ from scripts.context_ci_support import (
     zero,
 )
 from scripts.depot_build_archive import package_raw
-from scripts.gameplay_foundations import digest
+from scripts.gameplay_foundations import digest, log_name
 from scripts.grf_control_evidence import sequence, text
 from scripts.grf_control_run import ControlRun
 from scripts.world_check_support import WorldCheckError, at, read_json
@@ -82,7 +82,7 @@ def main() -> None:
     zero(job, binary)
     verify_identity(root, output)
     for name in (CONTEXT_TEST, GUARD_TEST):
-        process(output / "logs" / name, binary, name)
+        process(output / "logs" / log_name(name), binary, name)
     if digest(output / "results/context-test-binary") != digest(binary):
         raise WorldCheckError("Context actual executable differs from Cargo selection")
     baseline = output / "baselines"

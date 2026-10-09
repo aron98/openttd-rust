@@ -7,12 +7,17 @@ import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import quote
 
 from scripts.world_check_support import Json, WorldCheckError, decode_json, write_json
 
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def log_name(name: str) -> str:
+    return quote(name, safe="/-_.")
 
 
 def fresh_directory(root: Path, requested: str | None) -> Path:
@@ -61,7 +66,7 @@ class FoundationRun:
     def run(
         self, name: str, argv: list[str], variables: dict[str, str] | None = None
     ) -> subprocess.CompletedProcess[str]:
-        directory = self.output / "logs" / name
+        directory = self.output / "logs" / log_name(name)
         directory.mkdir(parents=True)
         write_json(directory / "argv.json", list(argv))
         environment = os.environ.copy()

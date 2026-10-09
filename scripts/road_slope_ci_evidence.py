@@ -13,7 +13,7 @@ from typing import Final
 from scripts.context_ci_support import exact, process, verify_identity
 from scripts.depot_build_archive import bounded_paths
 from scripts.depot_build_provenance import snapshot
-from scripts.gameplay_foundations import digest
+from scripts.gameplay_foundations import digest, log_name
 from scripts.grf_control_evidence import sequence, text
 from scripts.world_check_support import (
     Json,
@@ -201,7 +201,7 @@ def validate_slope(root: Path, output: Path, layout: Json) -> None:
     ):
         raise WorldCheckError("Slope raw driver coverage differs")
     binary = Path(text(at(identities, ("ottd_sim", "retained"))))
-    process(output / "case/logs" / SLOPE_TEST, binary, SLOPE_TEST)
+    process(output / "case/logs" / log_name(SLOPE_TEST), binary, SLOPE_TEST)
     process(
         output / "logs/prepare_fleet_source",
         Path(text(at(identities, ("native_depot_build", "retained")))),

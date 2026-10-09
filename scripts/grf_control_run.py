@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 
-from scripts.gameplay_foundations import digest, require_test
+from scripts.gameplay_foundations import digest, log_name, require_test
 from scripts.world_check_support import Json, WorldCheckError, decode_json, write_json
 
 
@@ -25,7 +25,7 @@ class ControlRun:
         *,
         expected: int = 0,
     ) -> subprocess.CompletedProcess[str]:
-        directory = self.output / "logs" / name
+        directory = self.output / "logs" / log_name(name)
         directory.mkdir(parents=True, exist_ok=False)
         environment = os.environ.copy()
         environment.update(variables or {})

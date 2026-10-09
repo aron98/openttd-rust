@@ -2,6 +2,16 @@
 mod action14;
 mod action14_parameters;
 mod container;
+mod load;
+mod load_budget;
+mod load_conditions;
+mod load_cursor;
+mod load_dispatch;
+mod load_execute;
+mod load_parameters;
+mod load_registry;
+mod load_substitution;
+mod load_types;
 mod metadata_types;
 mod records;
 mod scan;
@@ -13,6 +23,12 @@ mod text_reader;
 mod text_translate;
 mod types;
 pub use container::GrfContainer;
+pub use load::{run_control_load, run_control_load_with_prefix};
+pub use load_types::{
+    ControlLoadError, ControlLoadReport, ControlOptions, FileControlState, LoadDiagnostic,
+    LoadEvent, LoadFailure, LoadFlags, LoadInput, LoadLabel, LoadLocation, LoadStage, LoadStatus,
+    OverrideState,
+};
 pub use metadata_types::{
     GrfStaticInfo, LocalizedText, Palette, ParameterInfo, ParameterType, ScanLimits, ScanOptions,
     TextList,

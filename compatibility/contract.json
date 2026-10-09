@@ -1465,7 +1465,7 @@
     {
       "id": "foundation-scripts-check-terrain-sh",
       "path": "scripts/check-terrain.sh",
-      "sha256": "a729792c78cb6493101cc6e23fedf4dfa70b53d77a2568bf96719a417d4eb2b8",
+      "sha256": "75684e67b6e50facb253ac217d650f7ee896b7b6343cfeafda16c41eff9b6d96",
       "kind": "recipe",
       "provenance": "Committed stage4 prerequisite test/observer/driver or input; pinned OpenTTD15.3 native callbacks retained; foundation source manifest records executed identity",
       "save_version": null,

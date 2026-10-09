@@ -166,24 +166,30 @@ Create `ottd-sim/src/runtime.rs`, `runtime/road_cache.rs`,
 tests. Add a passive `reference/runtime_road.hpp` observer and native runner.
 The content owner also serializes shared module/observer registration.
 
-- [ ] Introduce an owned `SimulationRuntime::restore_vanilla(World)` with private
+- [x] Introduce an owned `SimulationRuntime::restore_vanilla(World)` with private
       authoritative World, immutable content snapshot and only implemented
       typed caches; expose borrowed world/content/cache access and `into_world`.
       The initial constructor admits the declared ordinary road-vehicle domain;
       no placeholder caches or broad gameplay `advance` method are introduced.
-- [ ] Restore actual native road/consist length, speed, power, cargo age period,
+- [x] Restore actual native road/consist length, speed, power, cargo age period,
       mass, tractive effort, slope/axle resistance, drag and roadtype properties.
       Separate load-initialized trip/speed history from recomputable physics.
-- [ ] Read saved ENGN state, cargo capacity, age/reliability and saved road paths
+- [x] Read saved ENGN state, cargo capacity, age/reliability and saved road paths
       through borrowed typed views. Do not rerun engine introduction RNG or
       overwrite saved fields with constructor defaults.
-- [ ] Observe native after-load order and represent saved fixups explicitly.
+- [x] Observe native after-load order and represent saved fixups explicitly.
       Compare empty/loaded buses and trucks, original/realistic acceleration,
       different engines, slope settings and sparse IDs. Reject unimplemented
       contexts before claiming restoration success.
-- [ ] Verify complete saved-state/RNG preservation for no-fixup cases, exact
+- [x] Verify complete saved-state/RNG preservation for no-fixup cases, exact
       runtime field equality, and wrong-cache/missing/stale negative controls.
       Invalidation and live ticking remain subsequent implementation work.
+
+Road restoration and its coverage correction passed independent review at
+`1f6945b`: 24 configurations, 870 native rows, sparse IDs through 128, all eight
+admitted road tile categories and 32 precise unsupported-shape checks. Saved
+JSON, encoded bytes and RNG remain unchanged. Live cache invalidation and
+vehicle movement are separate outstanding gates.
 
 ### B. Native ID allocation
 
@@ -192,18 +198,18 @@ native allocation observer. The transport owner owns allocation algorithms;
 the runtime owner registers the module. Authority is `core/pool_type.hpp`,
 `core/pool_func.hpp` and native `FreeUnitIDGenerator`.
 
-- [ ] Reproduce logical pool allocation after sparse explicit-ID loading, first
+- [x] Reproduce logical pool allocation after sparse explicit-ID loading, first
       free selection, release/reuse, high-water behavior, reset and exhaustion.
       Keep native per-pool limits authoritative; do not substitute monotonic IDs
       or a different free-list order.
-- [ ] Separately reproduce per-company/per-vehicle-type unit numbers, including
+- [x] Separately reproduce per-company/per-vehicle-type unit numbers, including
       their reserved values. These are not global vehicle pool indices.
-- [ ] Compare operation traces against the actual native allocator templates
+- [x] Compare operation traces against the actual native allocator templates
       and unit-number generator, including holes and boundary capacities.
 - [ ] Keep allocation metadata transactional with its future World insertion.
       This increment must not expose unvalidated object creation or claim that
       logical allocation alone implements vehicle construction.
-- [ ] Specify the saved-world journal/read-through transaction API before
+- [x] Specify the saved-world journal/read-through transaction API before
       replacing whole-world cloning/serialization in hot gameplay paths.
 
 ### C. Terraform construction command
@@ -212,17 +218,17 @@ Create `ottd-sim/src/commands/terraform.rs` and command/native replay tests.
 The world owner owns command enum/pipeline changes and replay command/return
 instrumentation; coordinate shared library exports with the runtime owner.
 
-- [ ] Add `TerraformLand { tile, slope: u8, dir_up }` with native AllTiles/Auto
+- [x] Add `TerraformLand { tile, slope: u8, dir_up }` with native AllTiles/Auto
       traits, raw low-four-bit corner mask semantics and native company/pause
       gates. Do not reject native successful zero/high-only masks as geometry.
-- [ ] Preserve native requested-corner order, depth-first neighbor propagation,
+- [x] Preserve native requested-corner order, depth-first neighbor propagation,
       sorted two-pass surface checks, typed prices, limit/error/cash precedence,
       merged clearing/height changes and read-only tunnel obstruction checks.
-- [ ] Extend receipts additively with typed test/exec/result tuple returns,
+- [x] Extend receipts additively with typed test/exec/result tuple returns,
       preserving money and tile sentinels from the actual native command.
       Existing cost-only receipts remain unchanged. The native observer records
       actual return tuples instead of reconstructing them from input arguments.
-- [ ] Compare basic/cascading/multi-mask changes, bounds, limits, cash, pause,
+- [x] Compare basic/cascading/multi-mask changes, bounds, limits, cash, pause,
       tunnel obstruction and resumed execution on native prepared populated
       worlds. Validate all map bytes, receipts, money, limits, RNG and saves.
 - [ ] Keep bridge-over-clear and other not-yet-ported tile procedures explicit.
@@ -235,11 +241,11 @@ provenance, and integrates each reviewed behavior atomically.
 
 ## Saved-world transaction prerequisite
 
-The allocation primitive is committed in `2e35e16` and under independent review.
+The allocation primitive in `2e35e16` passed independent review.
 Its isolated tree passed 224 Rust tests, strict workspace Clippy and formatting;
 fresh original pool traces matched 1,177 operations plus 17 unit-number
 operations, and a changed cursor was rejected. The save transaction work below
-is independent of that frozen primitive and can proceed in parallel with review.
+is independent of that frozen primitive.
 
 The transport/save owner implements a sparse transaction overlay in `ottd-save`,
 with minimal private table/snapshot adapters. The runtime and construction
@@ -285,6 +291,20 @@ Runtime cache/allocator publication and populated-tick performance remain open.
 
 ## Shared integration rules
 
+### NewGRF file scanning milestone
+
+The v1/v2 framing and bounded FILESCAN implementation `1f6945b` passed
+independent review, 64 fresh native scanner cases and 96 additional native
+boundary probes. It retains compressed physical spans, sprite variants,
+native checksum extent, raw Action8 metadata and skip-handler behavior.
+Comparator controls were strengthened in `7abb45d` and all 64 cases rerun.
+
+Action14 metadata is the next increment: ordered recursive nodes, localized
+text, parameter masks/defaults/ranges, version and palette rules, and original
+text-code translation. Loading passes, properties, spritegroups, callbacks,
+modded runtime restoration and Squirrel execution remain required. Parsing
+files does not activate content or satisfy the broad `content.newgrf` gate.
+
 ### LevelLand execution extension
 
 The clear/void TerraformLand increment `ac73117` passed independent review,
@@ -292,26 +312,31 @@ The clear/void TerraformLand increment `ac73117` passed independent review,
 are separated before expansion. The next command uses the saved transaction
 overlay; it must preserve the original's distinct NoTest semantics.
 
-- [ ] Add a private terrain reader over either committed World or CandidateView,
+- [x] Add a private terrain reader over either committed World or CandidateView,
       with immutable map dimensions captured from the validated starting world.
       Reuse borrowed records and typed prices; do not introduce a general World
       trait or expose partially valid mutable state.
-- [ ] Preserve native rectangle and diagonal iterator order, target-height rules
+- [x] Preserve native rectangle and diagonal iterator order, target-height rules
       and raw mode validation. Test the outer command even with NoTest enabled.
-- [ ] Estimates repeatedly query unchanged terrain and preserve the native
+- [x] Estimates repeatedly query unchanged terrain and preserve the native
       local-limit decrement/order, including limit-one zero-cost behavior.
-- [ ] Execution observes each successfully staged prefix. Failed native steps
+- [x] Execution observes each successfully staged prefix. Failed native steps
       add no edits; partial-money completion retains its prefix and reports the
       next full step cost, not the cash deficit. Test, execution and final costs
       and tuples may differ.
-- [ ] Stage prefix and final accounting in one transaction, with one terminal
+- [x] Stage prefix and final accounting in one transaction, with one terminal
       prepare/commit. Never clone, encode or validate the complete world for
       each nested Terraform call. Rust scope/invariant failures remain explicit
       and roll back the candidate instead of impersonating native partial success.
-- [ ] Compare ordinary/diagonal selections, overlap, limits, cash, errors and
+- [x] Compare ordinary/diagonal selections, overlap, limits, cash, errors and
       save/resume against actual native dispatch, with altered extra-money,
       prefix and order controls. Initial tile scope matches current clear/void
       Terraform; remaining tile procedures are subsequent required increments.
+
+The LevelLand increment `b0720d5` passed 262 isolated workspace tests and all
+44 replay cases, including 15 new LevelLand cases, controls, save/resume and
+original continuation. All 5,689 required replay evidence paths were present.
+Independent review is in progress; this does not close construction parity.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

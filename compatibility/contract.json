@@ -3189,6 +3189,51 @@
       "provenance": "Original FillGRFDetails static-safety admission observer and guarded runner; passive native record decisions, original metadata and context restoration; no Rust gameplay delegation.",
       "save_version": null,
       "profile": null
+    },
+    {
+      "id": "safety-ci-check-grf-safety-ci",
+      "path": "scripts/check-grf-safety-ci.py",
+      "sha256": "64777e94e4a935d8ce8bc6cb35bad45a636bd42120868c200fbb3cecd18504f4",
+      "kind": "recipe",
+      "provenance": "Pinned safety source, native observations and complete raw proof.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "safety-ci-safety-ci-evidence",
+      "path": "scripts/safety_ci_evidence.py",
+      "sha256": "d6028ce4ced5e6fe75268147c0f5069b81c757a9c9eb00003e9783f5d5cf4fb3",
+      "kind": "recipe",
+      "provenance": "Pinned safety source, native observations and complete raw proof.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "safety-ci-safety-ci-bindings",
+      "path": "scripts/safety_ci_bindings.py",
+      "sha256": "baf0482265ef0ee22d95a34fd7f10e4610edbf0d8edfe82f51f64c657f95356f",
+      "kind": "recipe",
+      "provenance": "Pinned safety source, native observations and complete raw proof.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "safety-ci-safety-ci-layout",
+      "path": "scripts/safety-ci-layout.json",
+      "sha256": "bc65968890f6d954662d931fdb4f285af9514b0dac3c3326c340b321d6b48006",
+      "kind": "recipe",
+      "provenance": "Pinned safety source, native observations and complete raw proof.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "safety-ci-safety-ci-evidence-test",
+      "path": "scripts/tests/safety_ci_evidence_test.py",
+      "sha256": "ebadf373fd9c57e49857d6caefb39d86c5975030824b32d575a5a8607874d66e",
+      "kind": "recipe",
+      "provenance": "Pinned safety source, native observations and complete raw proof.",
+      "save_version": null,
+      "profile": null
     }
   ],
   "profiles": [
@@ -9500,6 +9545,31 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "grf-safety",
+      "argv": [
+        "python3",
+        "scripts/check-grf-safety-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "native-invocations.json",
+        "bin/ottd_sim"
+      ],
+      "success_text": "PASS static safety CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -13874,6 +13944,47 @@
         "case/canonical/save/autosave/exit.sav",
         "case/vectors/save/autosave/exit.sav",
         "case/reload/save/autosave/exit.sav"
+      ]
+    },
+    {
+      "id": "content.original-static-safety",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Fresh FILESCAN/static safety; no activation, GRM or catalog admission.",
+      "expected": "893 cases;1867 decisions;13794 rejections;10 guards;6 native runs.",
+      "driver": "grf-safety",
+      "assets": [
+        "safety-ci-check-grf-safety-ci",
+        "safety-ci-safety-ci-evidence",
+        "safety-ci-safety-ci-bindings",
+        "safety-ci-safety-ci-layout",
+        "safety-ci-safety-ci-evidence-test",
+        "grf-safety-observer",
+        "grf-safety-observer-patch",
+        "grf-safety-reference-runner",
+        "context-ci-runtime",
+        "foundation-scripts-gameplay-foundations-py",
+        "grf-control-scripts-grf-control-run-py",
+        "depot-build-scripts-depot-build-archive-py"
+      ],
+      "source_refs": [
+        "scripts/check-grf-safety-ci.py",
+        "scripts/safety_ci_evidence.py",
+        "scripts/safety_ci_bindings.py",
+        "scripts/safety-ci-layout.json",
+        "scripts/tests/safety_ci_evidence_test.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "native-invocations.json",
+        "bin/ottd_sim"
       ]
     }
   ]

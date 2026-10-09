@@ -376,14 +376,22 @@ native observations compare them before saving. The obsolete `cargo_paid_for`
 serializer global is retained separately, including a nonzero value, instead of
 being reset when a new vehicle is constructed.
 
-The native matrix covers 15 cases, 335 actions and all 88 vanilla road engines,
+The native matrix covers 16 cases, 345 actions and all 88 vanilla road engines,
 including four climates, both acceleration models, sloped depots, failures,
-limits, cash and save/resume. It compares 192 successful executions and rejects
-11 altered observations. The dedicated CI driver verifies all 821 process
-receipts, 5,571 retained evidence files, and the identity of the two actual Rust
-test executables across 18 invocations. Integration passed 294 Rust tests,
+limits, cash and save/resume. It compares 194 successful executions and rejects
+11 altered observations. The dedicated CI driver verifies all 869 process
+receipts, 5,896 retained evidence files, and the identity of the two actual Rust
+test executables across 19 invocations. Integration passed 295 Rust tests,
 22 Python tests, strict Clippy/formatting and all 44 existing native replay cases.
-Independent review is in progress. Refits, articulated/modded vehicles, order
+Review found that the affordability check incorrectly rejected a zero-cost
+purchase when company cash was negative. `86ad8c3` restores the original
+positive-cost guard and adds the exact regression to the native CI matrix.
+Fresh independent review approved the correction after reproducing the exact
+native mismatch, the expanded CI matrix and rejection of a zero-test run.
+The follow-up `dc9146e` separates immutable purchase planning and cohesive test
+modules. A fresh review verified unchanged function bodies, assertions and
+native test selectors; the full expanded purchase matrix still passes.
+Refits, articulated/modded vehicles, order
 backup restoration, sales and movement remain subsequent required work.
 
 The next parallel increments are depot allocation/infrastructure restoration

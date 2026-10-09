@@ -1,5 +1,7 @@
 //! Deterministic primitives ported from OpenTTD 15.3.
 
+pub mod terrain;
+
 /// The two-word OpenTTD game randomizer; all state is explicitly restorable.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Randomizer {

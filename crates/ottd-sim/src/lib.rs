@@ -1,6 +1,7 @@
 //! Deterministic, explicitly scoped landscape simulation for OpenTTD 15.3.
 mod landscape;
 mod replay;
+pub mod terrain;
 pub use replay::{
     ReplayAction, ReplayCursor, ReplayError, ReplayEvent, ReplayObservation, ReplayOutcome,
     ReplayPlan, ReplayRuntime, run_replay,

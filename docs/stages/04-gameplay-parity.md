@@ -247,25 +247,25 @@ owners retain their simulation files. No simulation dependency enters the save
 crate. The current clone/encode/decode edit path remains a differential test
 oracle until the new boundary passes its equivalence checks.
 
-- [ ] Provide `World::transaction`, staged `apply` and candidate reads, fallible
+- [x] Provide `World::transaction`, staged `apply` and candidate reads, fallible
       `prepare`, then infallible `commit`. Retain each touched record or tile once.
       Failed staging poisons the transaction. The public transaction leaves World
       unchanged until commit, including when safe code uses `mem::forget`.
-- [ ] Candidate reads observe prior writes without exposing a partially valid
+- [x] Candidate reads observe prior writes without exposing a partially valid
       World or stale derived indexes. Prepared reads expose validated candidate
       projections so simulation caches can be computed before publication.
-- [ ] If prepare temporarily installs candidate values to reuse validators, keep
+- [x] If prepare temporarily installs candidate values to reuse validators, keep
       that swap/restore guard private and unexposed. No user callback executes
       while candidate values are installed; all error/unwind paths restore the
       original before returning a prepared overlay or failure.
-- [ ] Share exact wire validation and budget accounting with table encoding;
+- [x] Share exact wire validation and budget accounting with table encoding;
       reuse native limits, semantic, reference, ownership, chain, script and
       snapshot checks. Validate final coupled state, preserving temporarily
       invalid intermediate relationships and dense ENGN loading requirements.
-- [ ] Avoid whole-world cloning and whole-save serialization during mutation.
+- [x] Avoid whole-world cloning and whole-save serialization during mutation.
       A complete validation and structural reconstruction once per batch is an
       intermediate implementation, not a claim of incremental validation.
-- [ ] Compare all edit variants with the existing implementation, including
+- [x] Compare all edit variants with the existing implementation, including
       repeated writes, insert/remove/reinsert, nested lists, map-object links,
       malformed data, failure after valid changes, and uncommitted drop.
       Reopen coupled output in the original and compare full saved/derived state.
@@ -275,6 +275,13 @@ oracle until the new boundary passes its equivalence checks.
       must still roll back the prepared saved transaction.
 - [ ] Measure the batch boundary on realistic maps/pools before admitting broad
       populated ticks. Preserve all compatibility checks when optimizing it.
+
+The saved transaction prerequisite in `61acfe3` passed independent review:
+108 focused save tests, independent lifecycle/map/unwind probes and a fresh
+original-engine reload with complete saved/derived comparisons. Integration
+checks passed 248 workspace tests and all 29 replay cases. The prepared-discard
+test was subsequently clarified in `725711a`; it makes no cache-failure claim.
+Runtime cache/allocator publication and populated-tick performance remain open.
 
 ## Shared integration rules
 

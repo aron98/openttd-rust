@@ -6,7 +6,7 @@ mod schema;
 mod table;
 
 pub use date::DateState;
-pub use map::{MapState, TileState};
+pub use map::{MapState, TileRawParts, TileState};
 pub use model::{FieldValue, ScriptRandomState, WorldSnapshot};
 
 use crate::{Chunk, Savegame};

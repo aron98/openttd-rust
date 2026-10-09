@@ -12,6 +12,27 @@ impl World {
         let mut candidate = self.clone();
         for edit in edits {
             match edit {
+                WorldEdit::StructList {
+                    chunk,
+                    record,
+                    path,
+                    rows,
+                } => {
+                    let table = candidate
+                        .tables
+                        .get_mut(&chunk)
+                        .ok_or_else(|| invalid(&name(chunk), "missing table"))?;
+                    let schema = table.schema().clone();
+                    let row = table
+                        .records_mut()
+                        .get_mut(&record)
+                        .ok_or_else(|| invalid(&name(chunk), "missing record"))?;
+                    let target = select_mut(&schema, row, &path)?;
+                    if !matches!(target, WireValue::Structs(_)) {
+                        return Err(invalid("edit", "expected structure list"));
+                    }
+                    *target = WireValue::Structs(rows);
+                }
                 WorldEdit::Field {
                     chunk,
                     record,
@@ -61,11 +82,10 @@ impl World {
         path: &[PathElement],
         value: WireValue,
     ) -> Result<(), WorldError> {
-        let mut table = self
+        let table = self
             .tables
-            .get(&chunk)
-            .ok_or_else(|| invalid(&name(chunk), "missing table"))?
-            .clone();
+            .get_mut(&chunk)
+            .ok_or_else(|| invalid(&name(chunk), "missing table"))?;
         let schema = table.schema().clone();
         let row = table
             .records_mut()
@@ -88,8 +108,6 @@ impl World {
             _ => {}
         }
         *target = value;
-        table.encode()?;
-        self.tables.insert(chunk, table);
         Ok(())
     }
 
@@ -98,7 +116,6 @@ impl World {
         if index >= self.map().tiles().len() {
             return Err(invalid("tile", "index out of range"));
         }
-        let mut planes = self.planes.clone();
         for (id, bytes) in [
             (*b"MAPT", vec![tile.tile_type()]),
             (*b"MAPH", vec![tile.height()]),
@@ -111,7 +128,8 @@ impl World {
             (*b"MAP7", vec![tile.m7()]),
             (*b"MAP8", tile.m8().to_be_bytes().to_vec()),
         ] {
-            let plane = planes
+            let plane = self
+                .planes
                 .get_mut(&id)
                 .ok_or_else(|| invalid(&name(id), "missing plane"))?;
             let start = index
@@ -125,7 +143,6 @@ impl World {
                 .ok_or_else(|| invalid("tile", "plane too short"))?
                 .copy_from_slice(&bytes);
         }
-        self.planes = planes;
         Ok(())
     }
 }

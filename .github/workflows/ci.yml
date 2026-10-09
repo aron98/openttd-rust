@@ -59,6 +59,7 @@ jobs:
             .artifacts/worlds-*/
             .artifacts/replays-*/
             .artifacts/gameplay-foundations-*/
+            .artifacts/service-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

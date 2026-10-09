@@ -7,6 +7,7 @@ mod occupancy;
 mod pause;
 mod pipeline;
 mod road;
+mod road_vehicle;
 mod terraform;
 mod terrain_read;
 
@@ -28,6 +29,17 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Change a primary road vehicle's automatic service interval.
+    ChangeServiceInterval {
+        /// Native vehicle pool index.
+        vehicle: u32,
+        /// Requested interval in days, minutes or percent.
+        interval: u16,
+        /// Use this interval instead of the company default.
+        custom: bool,
+        /// Interpret a custom interval as a reliability percentage.
+        percent: bool,
+    },
     /// Level a native rectangular or diagonal selection with partial completion.
     LevelLand {
         /// End tile of the selection, including native void tiles.
@@ -232,6 +244,19 @@ impl Plan {
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
+        Command::ChangeServiceInterval {
+            vehicle,
+            interval,
+            custom,
+            percent,
+        } => road_vehicle::service_interval(
+            world,
+            request.company,
+            *vehicle,
+            *interval,
+            *custom,
+            *percent,
+        ),
         Command::LevelLand {
             tile,
             start_tile,

@@ -38,7 +38,8 @@ const fn tile(command: &Command) -> u32 {
         | Command::LandscapeClear { tile }
         | Command::TerraformLand { tile, .. }
         | Command::LevelLand { tile, .. } => *tile,
-        Command::IncreaseLoan { .. }
+        Command::ChangeServiceInterval { .. }
+        | Command::IncreaseLoan { .. }
         | Command::DecreaseLoan { .. }
         | Command::RenameCompany { .. }
         | Command::RenamePresident { .. }
@@ -195,6 +196,7 @@ fn gated(gate: CommandGate, tuple: bool) -> CommandReceipt {
 
 const fn pause_level(command: &Command) -> u64 {
     match command {
+        Command::ChangeServiceInterval { .. } => 1,
         Command::BuildRoad { .. }
         | Command::LandscapeClear { .. }
         | Command::TerraformLand { .. }

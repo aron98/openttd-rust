@@ -1,4 +1,4 @@
-//! Read-only vanilla runtime restoration over one authoritative saved world.
+//! Vanilla runtime over one authoritative saved world and derived road caches.
 pub mod pools;
 mod road_cache;
 mod saved_engine;
@@ -87,6 +87,30 @@ pub struct SimulationRuntime {
     road: BTreeMap<VehicleId, RoadVehicleCache>,
 }
 impl SimulationRuntime {
+    /// Execute a cache-independent service command over the owned saved world.
+    /// # Errors
+    /// Rejects other commands until their live cache publication is implemented.
+    pub fn execute_command(
+        &mut self,
+        request: &crate::CommandRequest,
+    ) -> Result<crate::CommandReceipt, crate::CommandError> {
+        match request.command {
+            crate::Command::ChangeServiceInterval { .. } => {
+                crate::commands::execute_command(&mut self.world, request)
+            }
+            crate::Command::LevelLand { .. }
+            | crate::Command::TerraformLand { .. }
+            | crate::Command::BuildRoad { .. }
+            | crate::Command::LandscapeClear { .. }
+            | crate::Command::IncreaseLoan { .. }
+            | crate::Command::DecreaseLoan { .. }
+            | crate::Command::RenameCompany { .. }
+            | crate::Command::RenamePresident { .. }
+            | crate::Command::Pause { .. } => Err(crate::CommandError::Unsupported(
+                "runtime command cache publication",
+            )),
+        }
+    }
     /// Restore vanilla single-part road vehicles without modifying saved fields or RNG.
     ///
     /// # Errors
@@ -145,7 +169,7 @@ impl SimulationRuntime {
     pub fn engine(&self, id: u16) -> Result<SavedEngineView<'_>, RuntimeError> {
         SavedEngineView::new(&self.world, id)
     }
-    /// Release ownership of the unchanged authoritative world.
+    /// Release ownership of the current authoritative world.
     pub fn into_world(self) -> World {
         self.world
     }

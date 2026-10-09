@@ -6,12 +6,14 @@
 #include "../misc_cmd.h"
 #include "../road_cmd.h"
 #include "../terraform_cmd.h"
+#include "../vehicle_cmd.h"
 #include "../command_func.h"
 
 namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "change_service_interval") return Command<CMD_CHANGE_SERVICE_INT>::Post(VehicleID(command.at("vehicle").get<uint32_t>()), command.at("interval").get<uint16_t>(), command.at("custom").get<bool>(), command.at("percent").get<bool>());
     if (kind == "level_land") return Command<CMD_LEVEL_LAND>::Post(TileIndex(command.at("tile").get<uint32_t>()), TileIndex(command.at("start_tile").get<uint32_t>()), command.at("diagonal").get<bool>(), static_cast<LevelMode>(command.at("level_mode").get<uint8_t>()));
     if (kind == "terraform_land") return Command<CMD_TERRAFORM_LAND>::Post(TileIndex(command.at("tile").get<uint32_t>()), static_cast<Slope>(command.at("slope").get<uint8_t>()), command.at("dir_up").get<bool>());
     if (kind == "build_road") return Command<CMD_BUILD_ROAD>::Post(TileIndex(command.at("tile").get<uint32_t>()),

@@ -103,6 +103,33 @@ fn year_boundary_charges_month_before_expense_rollover() -> Result {
     assert_eq!(company["cur_economy"][0]["expenses"], -166);
     Ok(())
 }
+
+#[test]
+fn large_loan_interest_saturates_native_money_before_division() -> Result {
+    let mut world = clear_world()?;
+    boundary(&mut world, 0, 31)?;
+    world.edit_batch(vec![
+        edit(*b"PLYR", 0, "money", WireValue::Signed(i64::MAX)),
+        edit(*b"PLYR", 0, "current_loan", WireValue::Signed(i64::MAX)),
+        edit(*b"PLYR", 0, "max_loan", WireValue::Signed(i64::MAX)),
+    ])?;
+    advance_world(&mut world, 1)?;
+    let saved = world.saved_json()?;
+    let company = &saved["chunks"]["PLYR"]["records"]["0"];
+    assert_eq!(
+        (
+            company["money"].as_i64(),
+            company["yearly_expenses"][11].as_i64(),
+            company["cur_economy"][0]["expenses"].as_i64(),
+        ),
+        (
+            Some(9_215_685_893_490_730_135),
+            Some(7_686_143_364_045_647),
+            Some(-7_686_143_364_045_647),
+        )
+    );
+    Ok(())
+}
 #[test]
 fn later_disaster_expiry_rolls_back_earlier_ticks() -> Result {
     let mut world = clear_world()?;

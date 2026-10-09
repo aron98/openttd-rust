@@ -57,10 +57,9 @@ pub(super) fn monthly(state: &mut State, world: &World, month: u8) -> Result<(),
     let rate = state.number(b"ECMY", 0, "interest_rate")?;
     for id in state.company_ids() {
         let loan = state.number(b"PLYR", id, "current_loan")?;
-        let annual = checked(i128::from(loan).saturating_mul(i128::from(rate)) / 100)?;
-        let previous = checked(i128::from(annual).saturating_mul(i128::from(month)) / 12)?;
-        let next =
-            checked(i128::from(annual).saturating_mul(i128::from(month).saturating_add(1)) / 12)?;
+        let annual = loan.saturating_mul(rate) / 100;
+        let previous = annual.saturating_mul(i64::from(month)) / 12;
+        let next = annual.saturating_mul(i64::from(month).saturating_add(1)) / 12;
         debit(
             state,
             id,
@@ -75,10 +74,6 @@ pub(super) fn monthly(state: &mut State, world: &World, month: u8) -> Result<(),
     }
     Ok(())
 }
-fn checked(value: i128) -> Result<i64, WorldTickError> {
-    i64::try_from(value).map_err(|_| unsupported("company_month", "accounting overflow"))
-}
-
 fn solvent(state: &State, world: &World, id: u32) -> Result<(), WorldTickError> {
     if unsigned(world, b"PATS", 0, "difficulty.infinite_money")? != 0 {
         return Ok(());

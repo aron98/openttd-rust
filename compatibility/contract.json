@@ -3027,6 +3027,78 @@
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
       "profile": null
+    },
+    {
+      "id": "context-ci-runtime",
+      "path": "scripts/context_ci_support.py",
+      "sha256": "19e15e8eddbb16e6bd41e75995820cc564f150ac7f085fafa7884c8ffc7b0827",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "context-ci-evidence",
+      "path": "scripts/context_ci_evidence.py",
+      "sha256": "6b78f39d8d26eb27e9e6cab841782a546afca1e39a6518d99c28896f7b654a31",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "occupancy-ci-evidence",
+      "path": "scripts/occupancy_ci_evidence.py",
+      "sha256": "8ecd66f53a453c187165f6d2df6d67ddc0e52338f7adbf9337606078d5d6059e",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "context-ci-driver",
+      "path": "scripts/check-grf-context-ci.py",
+      "sha256": "b8aa52d05a09900cc4298782c1f07e960055a1006abf9e612c3da53419468ca9",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "occupancy-ci-driver",
+      "path": "scripts/check-occupancy-ci.py",
+      "sha256": "42d2968e01dd79d0c7730164cc513a1dab20a80b2ebdbf022ce2741d51c34cbf",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "witness-ci-tests",
+      "path": "scripts/tests/context_ci_evidence_test.py",
+      "sha256": "3611c02607162519cdb999068a1d46ed439c7de8298a995d1a6597c3382b3fc0",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "context-ci-layout",
+      "path": "scripts/context-ci-layout.json",
+      "sha256": "6bfca6ec31585692ee40757c9af16c888d0cc1a3b9726e79ae62e8b56f2f26cf",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "occupancy-ci-layout",
+      "path": "scripts/occupancy-ci-layout.json",
+      "sha256": "ded6c7aed9a03d163aa75b1edb02574eb9025fc755cd5ea944197b2c61aa10fe",
+      "kind": "recipe",
+      "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
     }
   ],
   "profiles": [
@@ -14944,6 +15016,54 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1800
+    },
+    {
+      "id": "grf-context",
+      "argv": [
+        "python3",
+        "scripts/check-grf-context-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "bin/ottd_sim"
+      ],
+      "success_text": "PASS private GRF context CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
+    },
+    {
+      "id": "road-occupancy",
+      "argv": [
+        "python3",
+        "scripts/check-occupancy-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "bin/ottd_sim"
+      ],
+      "success_text": "PASS pure occupancy CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -19204,6 +19324,72 @@
         "tests/stdout.log",
         "zero-tests/stdout.log",
         "native/variant.txt"
+      ]
+    },
+    {
+      "id": "content.private-native-loading-context",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Private stage-major loading environment, source globals/patch flags and special targets; actual baselines remain visible and scoped mutations refused. No general baseline/spec/GRM/language/error/safety or catalog admission.",
+      "expected": "66 cases/67828 events/67300 record decisions/121 configs;2046 real comparator rejections;18 native host guards;exact source/trace/domain admission tests;zero/subset rejection and full indexed raw archive.",
+      "driver": "grf-context",
+      "assets": [
+        "context-ci-runtime",
+        "context-ci-evidence",
+        "occupancy-ci-evidence",
+        "context-ci-driver",
+        "occupancy-ci-driver",
+        "witness-ci-tests",
+        "context-ci-layout",
+        "occupancy-ci-layout"
+      ],
+      "source_refs": [
+        "scripts/check-grf-context-ci.py",
+        "scripts/context-ci-layout.json"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "bin/ottd_sim"
+      ]
+    },
+    {
+      "id": "commands.pure-native-road-ground-cutoff",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Pure occupancy helper for one actual loaded road object on flat/legal sloped depot sources, exact native at-maximum/above-maximum cutoff. No impossible saved-runtime restoration, mixed vehicle families or movement admission.",
+      "expected": "4 original vectors from2 independent sources, actual mutated-native rejection, complete saved/live/reload and native hash membership restoration;exact Cargo-selected executable/process bindings,zero/subset rejection and full indexed raw archive.",
+      "driver": "road-occupancy",
+      "assets": [
+        "context-ci-runtime",
+        "context-ci-evidence",
+        "occupancy-ci-evidence",
+        "context-ci-driver",
+        "occupancy-ci-driver",
+        "witness-ci-tests",
+        "context-ci-layout",
+        "occupancy-ci-layout"
+      ],
+      "source_refs": [
+        "scripts/check-occupancy-ci.py",
+        "scripts/occupancy-ci-layout.json"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "bin/ottd_sim"
       ]
     }
   ]

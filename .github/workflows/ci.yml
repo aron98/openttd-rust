@@ -28,6 +28,11 @@ jobs:
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/grf_control_evidence.py scripts/grf_control_run.py scripts/grf_control_guards.py scripts/grf_control_archive.py scripts/grf_control_provenance.py scripts/check-grf-control.py scripts/tests/grf_control_evidence_test.py
       - name: Validate fresh road sale evidence admission
         run: uv run --with pytest python -m pytest scripts/tests/sale_evidence_test.py scripts/tests/sale_lifetime_test.py -q
+      - name: Validate context and occupancy evidence admission
+        run: |
+          uv run --with pytest python -m pytest scripts/tests/context_ci_evidence_test.py -q
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/context_ci_*.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/context_ci_support.py scripts/context_ci_evidence.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked
@@ -74,6 +79,9 @@ jobs:
             .artifacts/purchase-*/
             .artifacts/depot-build-*/
             .artifacts/script-vm-*/
+            .artifacts/grf-context-*/
+            .artifacts/depot-occupancy-*/
+            .artifacts/occupancy-invocation-*/
             .artifacts/road-sale-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'

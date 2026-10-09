@@ -2914,7 +2914,7 @@
     {
       "id": "depot-build-crates-ottd-sim-src-commands-road-depot-occupancy-rs",
       "path": "crates/ottd-sim/src/commands/road_depot/occupancy.rs",
-      "sha256": "7bd85841755b5e00c542f7c4dc3055b7b9146e734b3ed05bdcea90d51830f299",
+      "sha256": "e4b2bf4487a1c067d0606efcbd452adcbfd4b68a43f079d89018c7fa820f7e5e",
       "kind": "recipe",
       "provenance": "Vanilla depot create/rotate only: exact original command phases, authoritative sparse pool and 63-slot company infrastructure; frozen native 178-case matrix. Removal and other construction remain pending.",
       "save_version": null,

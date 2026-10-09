@@ -5,6 +5,9 @@ use crate::{
 use ottd_core::terrain::Corner;
 use ottd_save::{TableRecord, TableSchema, WireValue, world::World};
 
+#[cfg(test)]
+mod native;
+
 pub(super) fn occupied(world: &World, tile: u32) -> Result<Option<CommandCost>, CommandError> {
     let (slope, base) = crate::terrain::tile_slope_z(world, tile)
         .map_err(|_| CommandError::Unsupported("depot ground geometry"))?;

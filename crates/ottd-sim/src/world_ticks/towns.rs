@@ -139,17 +139,20 @@ fn supplied(
                 }
             } else if mask & (1_u64 << first.saturating_sub(division)) != 0 {
                 for name in ["production", "transported"] {
-                    let mut sum = 0_u64;
+                    // Native std::accumulate(..., 0, ...) uses int32, including its final sign extension.
+                    let mut sum = 0_u32;
                     for source in history
                         .get(first.saturating_sub(division)..first)
                         .ok_or_else(|| unsupported("town_month", "history source"))?
                     {
-                        sum = sum.saturating_add(
-                            u64::try_from(number(row_field(history_schema, source, name)?)?)
+                        sum = sum.wrapping_add(
+                            u32::try_from(number(row_field(history_schema, source, name)?)?)
                                 .map_err(|_| unsupported("town_month", "history value"))?,
                         );
                     }
-                    let average = sum
+                    let signed_sum = i32::from_ne_bytes(sum.to_ne_bytes());
+                    let native_sum = u64::from_ne_bytes(i64::from(signed_sum).to_ne_bytes());
+                    let average = native_sum
                         .checked_div(
                             u64::try_from(division)
                                 .map_err(|_| unsupported("town_month", "history division"))?,

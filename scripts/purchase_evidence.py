@@ -10,7 +10,10 @@ if __package__ in (None, ""):
 
 from scripts.gameplay_foundations import require_test
 from scripts.grf_metadata_evidence import digest
+from scripts.purchase_duration_controls import CONTROLS as DURATION_CONTROLS
 from scripts.purchase_provenance import verify
+from scripts.purchase_saved_state import compare, compare_fields
+from scripts.replay_matrix import checkpoint_labels
 from scripts.world_check_support import Json, WorldCheckError, at, read_json, write_json
 
 CASES = (
@@ -74,9 +77,12 @@ def validate_paths(root: Path, expected: set[str]) -> list[Path]:
 
 def validate_receipts(root: Path, paths: list[Path]) -> None:
     receipts = [path for path in paths if path.name == "process.json"]
-    if len(receipts) != 869:
+    if len(receipts) != 1011:
         raise WorldCheckError("Purchase process receipt count changed")
     failures = {f"controls/{name}/compare/process.json" for name in CONTROLS}
+    failures.update(
+        f"duration-controls/{name}/compare/process.json" for name in DURATION_CONTROLS
+    )
     for path in receipts:
         expected = int(str(path.relative_to(root)) in failures)
         if read_json(path) != {"returncode": expected, "expected": expected}:
@@ -95,6 +101,42 @@ def validate_receipts(root: Path, paths: list[Path]) -> None:
         assertion = read_json(root / "controls" / name / "assertion.json")
         if at(assertion, ("rejected",)) is not True:
             raise WorldCheckError(f"Purchase corruption was not rejected: {name}")
+    for name in DURATION_CONTROLS:
+        assertion = read_json(root / "duration-controls" / name / "assertion.json")
+        if at(assertion, ("rejected",)) is not True:
+            raise WorldCheckError(f"Duration corruption was not rejected: {name}")
+
+
+def validate_saved_state(root: Path) -> None:
+    for name in (*CASES, "split/prefix", "split/suffix"):
+        case = root / name
+        plan = (
+            root / f"{name}.json"
+            if name.startswith("split/")
+            else case / "actions.json"
+        )
+        native = read_json(case / "native/results.json")
+        rust = read_json(case / "rust/results.json")
+        for label in checkpoint_labels(native):
+            expected = read_json(case / f"native/{label}.world.json")
+            actual = read_json(case / f"rust/{label}.world.json")
+            decoded = read_json(case / f"compare/{label}.decoded-save.json")
+            compare_fields(actual, decoded, set())
+            ledger = compare(
+                read_json(plan),
+                native,
+                rust,
+                read_json(case / "native/initial.world.json"),
+                read_json(case / "rust/initial.world.json"),
+                label,
+                expected,
+                actual,
+            )
+            for comparison in ("world.json", "save"):
+                recorded = read_json(
+                    case / f"compare/{label}-{comparison}-compare/admitted.json"
+                )
+                compare_fields(ledger, recorded, set())
 
 
 def validate_cases(root: Path) -> None:
@@ -181,6 +223,7 @@ def package(directory: Path) -> None:
     paths = validate_paths(root, expected)
     validate_cases(root)
     validate_receipts(root, paths)
+    validate_saved_state(root)
     verify(directory, (*CASES, "split/prefix", "split/suffix"))
     archive_files(directory, paths)
 

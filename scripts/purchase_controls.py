@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from scripts.purchase_duration_controls import controls as duration_controls
 from scripts.purchase_replay import scenario
 from scripts.replay_controls import Mutation, value_control
 from scripts.replay_matrix import ReplayMatrix
@@ -51,6 +52,7 @@ def coverage(case: Json, results: Json) -> None:
 
 
 def controls(matrix: ReplayMatrix) -> None:
+    duration_controls(matrix)
     case = matrix.artifacts / "temperate-original"
     results = case / "compare/native-results.json"
     world = case / "native/final.world.json"

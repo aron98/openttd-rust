@@ -379,8 +379,8 @@ being reset when a new vehicle is constructed.
 The native matrix covers 16 cases, 345 actions and all 88 vanilla road engines,
 including four climates, both acceleration models, sloped depots, failures,
 limits, cash and save/resume. It compares 194 successful executions and rejects
-11 altered observations. The dedicated CI driver verifies all 869 process
-receipts, 5,896 retained evidence files, and the identity of the two actual Rust
+27 altered observations. The dedicated CI driver verifies all 1,011 process
+receipts, 6,844 retained evidence files, and the identity of the two actual Rust
 test executables across 19 invocations. Integration passed 295 Rust tests,
 22 Python tests, strict Clippy/formatting and all 44 existing native replay cases.
 Review found that the affordability check incorrectly rejected a zero-cost
@@ -391,6 +391,19 @@ native mismatch, the expanded CI matrix and rejection of a zero-test run.
 The follow-up `dc9146e` separates immutable purchase planning and cohesive test
 modules. A fresh review verified unchanged function bodies, assertions and
 native test selectors; the full expanded purchase matrix still passes.
+The original `BaseConsist::round_trip_time` has no initializer. Linux emitted
+48 for a fresh stopped vehicle; native allocator poisoning emitted the exact
+0xAAAAAAAA allocation pattern. This is an explicit fresh-initialization
+exception: Rust initializes new vehicles to zero, while every loaded value is
+preserved. The purchase comparator admits only that signed-int32 native field
+for IDs proved by matching successful execution receipts, absent at initial
+load, and still stopped in depot with no orders. Every admitted path, native
+value and creation ordinal is recorded without changing raw worlds or saves.
+Initial/resumed vehicles, other fields, receipts and all reloads remain strict;
+every Rust checkpoint is also compared strictly against its decoded save.
+Sixteen additional real comparator rejection controls enforce the boundary.
+This purchase-only lifetime model rejects ticks and commands other than build;
+future sale/depot matrices must explicitly track reset, removal and ID reuse.
 Refits, articulated/modded vehicles, order
 backup restoration, sales and movement remain subsequent required work.
 

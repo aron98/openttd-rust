@@ -205,7 +205,7 @@ def execute(matrix: ReplayMatrix) -> None:
         {
             "passed": True,
             "cases": passed,
-            "negative_controls": 11,
+            "negative_controls": 27,
             "command_only_resume": True,
             "climate_inputs_original_canonicalized": True,
         },

@@ -14,6 +14,8 @@ python3 scripts/purchase_provenance.py "$parent" "$oracle"
 shasum -a 256 Cargo.toml Cargo.lock scripts/check-purchase.sh scripts/purchase_evidence.py \
     scripts/purchase-evidence-layout.json scripts/purchase_matrix.py scripts/purchase_replay.py \
     scripts/purchase_controls.py scripts/purchase_provenance.py \
+    scripts/purchase_creation.py scripts/purchase_saved_state.py \
+    scripts/purchase_duration_controls.py scripts/replay_matrix.py \
     crates/ottd-sim/src/commands.rs crates/ottd-sim/src/commands/pipeline.rs \
     crates/ottd-sim/src/lib.rs reference/replay_commands.hpp reference/replay_cost.hpp \
     reference/runtime_road.hpp reference/replay_hooks.hpp \

@@ -9,8 +9,10 @@
 from __future__ import annotations
 
 import argparse
+from functools import partial
 from pathlib import Path
 
+from scripts.purchase_saved_state import compare_saved
 from scripts.replay_matrix import ReplayMatrix
 from scripts.world_check_support import (
     ROOT,
@@ -124,7 +126,12 @@ def scenario(matrix: ReplayMatrix, source: Path, plan: Path, case: Path) -> None
             case / f"canonical-reload-{extension}",
         )
     actual = rust(loaded / "final.sav", plan, case)
-    matrix.compare_outputs(native, actual, case / "compare")
+    matrix.compare_outputs(
+        native,
+        actual,
+        case / "compare",
+        saved_world_compare=partial(compare_saved, plan, native, actual),
+    )
     compare_live(matrix, native, actual, case / "compare")
     reloaded = matrix.native(actual / "final.sav", empty, case / "rust-reload")
     for extension in ("world.json", "derived.json"):

@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -95,7 +96,14 @@ class ReplayMatrix:
         )
         return output
 
-    def compare_outputs(self, native: Path, rust: Path, case: Path) -> None:
+    def compare_outputs(
+        self,
+        native: Path,
+        rust: Path,
+        case: Path,
+        *,
+        saved_world_compare: Callable[[str, Path, Path, Path], None] | None = None,
+    ) -> None:
         expected = read_json(native / "results.json")
         actual = read_json(rust / "results.json")
         labels = checkpoint_labels(expected)
@@ -111,11 +119,13 @@ class ReplayMatrix:
         )
         for label in labels:
             for extension in ("world.json", "derived.json"):
-                self.compare(
-                    native / f"{label}.{extension}",
-                    rust / f"{label}.{extension}",
-                    case / f"{label}-{extension}-compare",
-                )
+                expected_path = native / f"{label}.{extension}"
+                actual_path = rust / f"{label}.{extension}"
+                log = case / f"{label}-{extension}-compare"
+                if extension == "world.json" and saved_world_compare is not None:
+                    saved_world_compare(label, expected_path, actual_path, log)
+                else:
+                    self.compare(expected_path, actual_path, log)
             runtime = case / f"{label}.native.runtime.json"
             write_json(
                 runtime, deterministic(read_json(native / f"{label}.runtime.json"))
@@ -131,9 +141,22 @@ class ReplayMatrix:
             )
             path = case / f"{label}.decoded-save.json"
             _ = path.write_text(exported.stdout)
-            self.compare(
-                native / f"{label}.world.json", path, case / f"{label}-save-compare"
-            )
+            if saved_world_compare is None:
+                self.compare(
+                    native / f"{label}.world.json", path, case / f"{label}-save-compare"
+                )
+            else:
+                self.compare(
+                    rust / f"{label}.world.json",
+                    path,
+                    case / f"{label}-self-save-compare",
+                )
+                saved_world_compare(
+                    label,
+                    native / f"{label}.world.json",
+                    path,
+                    case / f"{label}-save-compare",
+                )
 
     def scenario(self, name: str, fixture: str) -> Path:
         case = self.artifacts / name

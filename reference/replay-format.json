@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "actions": [
+    {"ordinal": 0, "op": "command", "request": {"company": 0, "mode": "estimate", "command": {"kind": "build_road", "tile": 650, "pieces": 5, "road_type": 0, "toggle_disallowed": 0, "town_id": 65535}}},
+    {"ordinal": 1, "op": "command", "request": {"company": 0, "mode": "post", "command": {"kind": "build_road", "tile": 650, "pieces": 5, "road_type": 0, "toggle_disallowed": 0, "town_id": 65535}}},
+    {"ordinal": 2, "op": "checkpoint", "label": "built"},
+    {"ordinal": 3, "op": "tick", "count": 1}
+  ]
+}

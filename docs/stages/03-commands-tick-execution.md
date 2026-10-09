@@ -68,10 +68,13 @@ clock/landscape probes remain regression evidence only; stripping native
 callbacks cannot prove this stage.
 
 The initial unpaused domain is vanilla temperate clear/void terrain, with no
-unsupported active vehicles, towns, stations, industries, objects, animations,
+unsupported active vehicles, stations, industries, objects, animations,
 scripts or linkgraph jobs. Settings, loaded counters and the requested horizon
 must make unsupported creation/expiry events unreachable. Check this against
 native state rather than assuming empty pools suppress all global work.
+Native normal-game loading requires at least one town. Admit towns without
+house tiles with custom growth disabled, and execute their native counters,
+monthly ratings/history and yearly callbacks; do not bypass the native guard.
 Human companies without unsupported assets exercise meaningful company
 bookkeeping. Validate no active bankruptcy/HQ/assets, infrastructure maintenance
 disabled, inflation disabled, steady economy, no subsidies and no tree spread;
@@ -90,6 +93,10 @@ than a skipped phase. Port the bounded human-company monthly finance/statistics
 and yearly expense rollover needed for meaningful month/year acceptance cases.
 World field/list operations needed for native history rollover must retain
 wire and structural validation.
+
+Replay load admission also requires an existing playable human company. Native
+loading creates one and consumes RNG when none exists; that company-creation
+lifecycle remains unsupported rather than being mistaken for a tick effect.
 
 Preconditions will be recorded alongside the implementation and scenario
 inventory. No arbitrary loaded save is declared safe to tick merely because

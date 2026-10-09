@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "savegame_version": 362,
+  "fixtures": [
+    {
+      "file": "clear-v362.sav",
+      "sha256": "26a604958172a84ddfd895836da5e55666baf28a085bc438236cbdc8931464d2",
+      "recipe": "prepare-clear.json",
+      "source": "fixtures/generated-v362.sav",
+      "source_sha256": "1bcf1edd1ca409a520d08c1b2dbff48a143fa4f499b52fc4a660f07e69f94f2f",
+      "reload_invariant": "all 62 native saved chunks equal; no filtered fields"
+    },
+    {
+      "file": "populated-v362.sav",
+      "sha256": "4b12b7d5860526387b156da2e3c8fcf96673f0685cc1032d2a5be6e645128dcf",
+      "recipe": "prepare-populated.json",
+      "source": "fixtures/world/populated-v362.sav",
+      "source_sha256": "73307d4e750b22684df94db659f0d40495ad5265a8711e24ef77f758328fb1be",
+      "reload_invariant": "all 62 native saved chunks equal; no filtered fields"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+diff --git a/src/command_func.h b/src/command_func.h
+index ecbaba2..16f3731 100644
+--- a/src/command_func.h
++++ b/src/command_func.h
+@@ -17,6 +17,7 @@
+ #include "core/backup_type.hpp"
+ #include "misc/endian_buffer.hpp"
+ #include "tile_map.h"
++#include "reference_replay_hooks.hpp"
+ 
+ /**
+  * Define a default return value for a failed command.
+@@ -285,15 +286,16 @@ protected:
+ 	static bool InternalPost(StringID err_message, Tcallback *callback, bool my_cmd, bool network_command, TileIndex tile, std::tuple<Targs...> args)
+ 	{
+ 		/* Do not even think about executing out-of-bounds tile-commands. */
+-		if (tile != 0 && (tile >= Map::Size() || (!IsValidTile(tile) && !GetCommandFlags<Tcmd>().Test(CommandFlag::AllTiles)))) return false;
++		if (tile != 0 && (tile >= Map::Size() || (!IsValidTile(tile) && !GetCommandFlags<Tcmd>().Test(CommandFlag::AllTiles)))) { ReferenceReplay::Gate("tile"); return false; }
+ 
+ 		auto [err, estimate_only, only_sending] = InternalPostBefore(Tcmd, GetCommandFlags<Tcmd>(), tile, err_message, network_command);
+-		if (err) return false;
++		if (err) { ReferenceReplay::Gate("pause"); return false; }
+ 
+ 		/* Only set client IDs when the command does not come from the network. */
+ 		if (!network_command && GetCommandFlags<Tcmd>().Test(CommandFlag::ClientID)) SetClientIds(args, std::index_sequence_for<Targs...>{});
+ 
+ 		Tret res = Execute(err_message, reinterpret_cast<CommandCallback *>(reinterpret_cast<void(*)()>(callback)), my_cmd, estimate_only, network_command, tile, args);
++		ReferenceReplay::Phase("result", ExtractCommandCost(res));
+ 		InternalPostResult(ExtractCommandCost(res), tile, estimate_only, only_sending, err_message, my_cmd);
+ 
+ 		if (!estimate_only && !only_sending && callback != nullptr) {
+@@ -374,6 +376,8 @@ protected:
+ 		DoCommandFlags flags = CommandFlagsToDCFlags(cmd_flags);
+ 		Tret res = std::apply(CommandTraits<Tcmd>::proc, std::tuple_cat(std::make_tuple(flags), args));
+ 
++		ReferenceReplay::Phase("test", ExtractCommandCost(res));
++
+ 		auto [exit_test, desync_log, send_net] = InternalExecuteValidateTestAndPrepExec(ExtractCommandCost(res), cmd_flags, estimate_only, network_command, cur_company);
+ 		if (exit_test) {
+ 			if (desync_log) LogCommandExecution(Tcmd, err_message, EndianBufferWriter<CommandDataBuffer>::FromValue(args), true);
+@@ -399,6 +403,8 @@ protected:
+ 		/* Actually try and execute the command. */
+ 		Tret res2 = std::apply(CommandTraits<Tcmd>::proc, std::tuple_cat(std::make_tuple(flags | DoCommandFlag::Execute), args));
+ 
++		ReferenceReplay::Phase("exec", ExtractCommandCost(res2));
++
+ 		/* Convention: If the second result element is of type Money,
+ 		 * this is the additional cash required for the command. */
+ 		Money additional_money{};
+diff --git a/src/openttd.cpp b/src/openttd.cpp
+index 7d585b0..7f5262b 100644
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -93,6 +93,7 @@
+ #	include <emscripten/html5.h>
+ #endif
+ 
++#include "saveload/reference_replay.hpp"
+ #include "safeguards.h"
+ 
+ void CallLandscapeTick();
+@@ -1209,6 +1210,7 @@ void SwitchToMode(SwitchMode new_mode)
+  */
+ void StateGameLoop()
+ {
++	if (ReferenceReplay::Run()) return;
+ 	if (!_networking || _network_server) {
+ 		StateGameLoop_LinkGraphPauseControl();
+ 	}
+diff --git a/src/strings_type.h b/src/strings_type.h
+index 131433e..36a2cef 100644
+--- a/src/strings_type.h
++++ b/src/strings_type.h
+@@ -106,6 +106,7 @@ public:
+ 
+ 	inline void clear() { this->string.clear(); }
+ 	inline bool empty() const { return this->string.empty(); }
++	const std::string &ReferenceEncodedData() const { return this->string; }
+ 
+ private:
+ 	std::string string; ///< The encoded string.
+diff --git a/src/video/null_v.cpp b/src/video/null_v.cpp
+index 65fc9f3..1c601d7 100644
+--- a/src/video/null_v.cpp
++++ b/src/video/null_v.cpp
+@@ -12,6 +12,7 @@
+ #include "../blitter/factory.hpp"
+ #include "../saveload/saveload.h"
+ #include "../window_func.h"
++#include "../openttd.h"
+ #include "null_v.h"
+ 
+ #include "../safeguards.h"
+@@ -52,6 +53,7 @@ void VideoDriver_Null::MainLoop()
+ 
+ 	for (i = 0; i < this->ticks; i++) {
+ 		::GameLoop();
++		if (_exit_game) break;
+ 		::InputLoop();
+ 		::UpdateWindows();
+ 	}

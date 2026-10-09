@@ -96,12 +96,17 @@ python3 scripts/check-contract.py --validate
 python3 scripts/check-contract.py --list
 # After both reference setup scripts below:
 python3 scripts/check-contract.py --run baseline
+python3 scripts/check-contract.py --run worlds
 ```
 
 See the [contract guide](compatibility/README.md) and
 [stage 1 plan](docs/stages/01-compatibility-contract.md). Native NewGRF/AI and
 prejoin protocol probes are reference baselines; they do not establish Rust mod
-execution or multiplayer support.
+execution or multiplayer support. The world driver covers five native fixtures,
+exact saved/structural comparisons, changed-state reloads in the instrumented and
+unmodified original engines, and deliberate comparison/cache failures. Its
+artifacts are retained with the contract report in PR CI. Content-dependent
+runtime restoration remains an explicit stage 4 gate.
 
 ## Verify
 

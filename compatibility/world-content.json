@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "license": "GPL-2.0-only",
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "savegame_version": 362,
+  "assets": [
+    {
+      "path": "fixtures/world/modded-v362.sav",
+      "sha256": "92a6b30530abdac1ee949edec87cf030d15dfe975eae14e86cfa1411b65326b6"
+    },
+    {
+      "path": "fixtures/content/contract-speed.grf",
+      "sha256": "dd8325f1398ca34c44a7d9071597f108b8a67bf90883069a6357d19139ec5a69"
+    },
+    {
+      "path": "fixtures/world/world-probe/info.nut",
+      "sha256": "919714668421a0de035a8585aaac0ca8506d7c491a8bd8cd5a563f06eb4cd9c4"
+    },
+    {
+      "path": "fixtures/world/world-probe/main.nut",
+      "sha256": "1606648bdf81af9a8a45eed08f1c36bb0101cfefa31ae48ba12cb34133397c8e"
+    }
+  ],
+  "newgrf": {
+    "grfid": "52555354",
+    "grfid_byte_order": "display/file bytes; little-endian numeric ID 0x54535552",
+    "md5": "a5039c06887193868752bdec1694de4c",
+    "parameters": [123],
+    "load_order": ["fixtures/content/contract-speed.grf"],
+    "name": "Contract Speed",
+    "version": 0
+  },
+  "ai": {
+    "name": "WorldProbe",
+    "version": 1,
+    "api_version": "15",
+    "saved_marker": 362,
+    "retained_vehicle_ids": [2, 4],
+    "removed_vehicle_id": 3,
+    "nested_saved_data": {"signed": -7, "truth": true, "nothing": null}
+  },
+  "effect": {
+    "engine_id": 0,
+    "native_observer": "AIEngine.GetMaxSpeed",
+    "parameter123": 123,
+    "required_marker": "WORLD_SPEED engine=0 speed=123"
+  },
+  "command": {
+    "recipe": "scripts/check-world-builder.cmake",
+    "script": "fixtures/world/world-probe/main.nut",
+    "required_completion_marker": "WORLD_READY first=2 second=4 hole=3",
+    "required_reload_marker": "WORLD_RESTORED true",
+    "operations": ["company-name", "company-loan", "build-depot", "build-first", "build-discarded", "build-second", "vehicle-name", "depot-order", "shared-orders", "parent-group", "child-group", "parent-vehicle", "child-vehicle", "sell-middle"]
+  },
+  "limits": [
+    "Provenance and reproduction: fixtures/world/README.md",
+    "Native command/script execution creates the fixture; Rust only decodes, edits and reencodes saved state and structural indexes",
+    "The road vehicles do not use the GRF-modified train engine; the native observer independently checks engine 0",
+    "No Rust NewGRF evaluation, GameScript or AI execution is claimed",
+    "Single authored GRF does not establish multi-GRF ordering compatibility"
+  ]
+}

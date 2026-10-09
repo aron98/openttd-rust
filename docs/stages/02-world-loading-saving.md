@@ -47,7 +47,20 @@ roadstop chain membership; group hierarchy; reverse persistent-storage and
 cargo-payment bindings. Native authorities are `saveload/vehicle_sl.cpp`,
 `order_cmd.cpp`, `saveload/cargopacket_sl.cpp`, `cargopacket.cpp`,
 `saveload/station_sl.cpp`, `group_cmd.cpp`, and `saveload/afterload.cpp`.
-The final implemented export must enumerate each restored field explicitly.
+The structural export contains:
+
+- `vehicles`: `id`, `previous`, `first`, `previous_shared`.
+- `order_lists`: `id`, `first_shared`, `vehicles`, `num_manual_orders`,
+  `total_duration`, `timetable_duration`.
+- `cargo_lists`: `owner`, `cargo_type`, `next_hop`, `packets`, `count`,
+  `periods_in_transit`, `feeder_share`.
+- `groups`: `id`, `children`; `road_stop_chains`: `station`, `kind`, `stops`.
+- `storage_owners`: `id`, `owner`; `cargo_payments`: `id`, `vehicle`.
+
+An `owner` identifies its typed pool and ID. Nullable links are JSON null;
+saved-wire references remain native ID-plus-one values in the separate saved
+tree. The implementations are documented in the
+[world module](../../crates/ottd-save/src/world/README.md).
 
 Content-dependent caches include vehicle capacity/length/speed/weight/rail-road
 compatibility, town population/building/radius values, custom station flags and
@@ -103,12 +116,20 @@ publishing output. Existing snapshot/simulation APIs remain supported.
 
 ## Verification scenarios and artifacts
 
-The populated corpus must include every transport family, sparse IDs, ordinary
-stations and waypoints, shared and current orders, cargo waiting and aboard,
-companies, towns, industries and owned infrastructure. A converted upstream
-save can seed the corpus, but actual exported coverage determines missing
-extensions. Mod/script preservation uses the existing native content fixture
-plus additional nonempty state if required.
+The retained [native corpus](../../fixtures/world/README.md) has five version-362
+cases, each observed independently by the world driver:
+
+| Case | Retained save | Nonempty coverage |
+| --- | --- | --- |
+| `populated` | `fixtures/world/populated-v362.sav` | Four transport families, towns, industries, stations, orders, cargo and infrastructure |
+| `extended` | `fixtures/world/populated-extended-v362.sav` | Shared orders, parent/child groups, removed vehicle slot and nested WorldProbe AI data |
+| `modded` | `fixtures/world/modded-v362.sav` | Authored GRF parameter123 and WorldProbe saved state; native engine speed observation |
+| `storage-payment` | `fixtures/world/storage-payment-v362.sav` | Synthetic town/industry persistent storage, cargo-payment binding and native-built buoy waypoint |
+| `game` | `fixtures/world/game-v362.sav` | Nested GameScript data, goal, story page/element and league table/entry |
+
+Synthetic storage uses an inert authored GRF identity; it is not a callback
+execution claim. Native script builders and restore markers prove serialized
+state preservation, not Rust AI or GameScript execution.
 
 For each native scenario retain input hashes and files, invocation log and exit
 status, Rust saved/structural JSON, native saved/structural JSON, exact comparison
@@ -129,9 +150,34 @@ cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
 cargo test --workspace --locked
 python3 scripts/check-contract.py --validate
 python3 -m unittest discover -s scripts/tests -p 'test_*.py' -v
+bash scripts/setup-reference.sh
+REFERENCE_SOURCE="$PWD/.reference/OpenTTD" bash scripts/setup-snapshot-reference.sh
+bash scripts/check-worlds.sh
+# The contract entry point runs the same world driver and admits its evidence:
+python3 scripts/check-contract.py --run world.complete-load-save
+# Run all seven drivers for the integrated baseline:
 python3 scripts/check-contract.py --run baseline
 ```
 
-The new world-native driver command and per-scenario retained evidence will be
-recorded here after the interface is implemented and executed. This plan is not
-a passing test report; all stage 2 acceptance boxes remain open during analysis.
+The world driver writes `.artifacts/worlds-*/results/`. Each named case has
+`baseline/native/{world.json,derived.json}`, Rust equivalents and exact
+`saved-compare`/`derived-compare` logs. `mutations/{vehicles,companies,towns,
+industries,stations,orders,cargo,infrastructure}.json` records each edit's path
+and before/after values; `mutations/change-compare/stdout.log` witnesses equality
+of the complete expected native result. `storage-payment-map/` covers PSAC,
+CAPY, a roadside map-plane edit and saturated feeder totals. `game-script-reload/`
+contains the native nested-marker restoration evidence.
+
+`negative-{mutation,missing-field,missing-content,stale,builder-marker,
+group-children,cargo-cache,cargo-payment}/` retains the eight controls. Cache
+controls also prove saved-state observations did not change. `unmodified/`
+contains original-engine process receipts, loader logs and exit saves for
+`eight-families`, `storage-payment-map`, `modded` and `game` Rust outputs; it does
+not claim JSON instrumentation in the unmodified engine.
+
+The [contract](../../compatibility/contract.json) requires 144 concrete nonempty
+world artifacts. Its report records manifest/input hashes, tested commit and
+working-tree state; PR CI retains the scoped world directories with the reports.
+Local world-driver and contract-entry-point runs have passed. The integration
+lead will reconcile the acceptance checklist after the final baseline,
+independent review and required CI; the stage remains **In progress**.

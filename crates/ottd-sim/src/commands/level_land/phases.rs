@@ -49,7 +49,7 @@ pub(in crate::commands) fn run(
             exec: None,
             result: Some(test.cost),
             returns: Some(CommandReturnPhases {
-                test: Some(returns),
+                test: Some(returns.clone()),
                 exec: None,
                 result: Some(returns),
             }),

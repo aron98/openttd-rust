@@ -1,8 +1,15 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
+mod allocation;
 pub mod pools;
+#[cfg(test)]
+mod purchase_native;
+#[cfg(test)]
+mod purchase_tests;
 mod road_cache;
+mod road_record;
 mod saved_engine;
 mod saved_vehicle;
+mod serialization;
 use crate::content::{ContentCatalog, ContentError};
 use ottd_save::world::World;
 pub use saved_engine::SavedEngineView;
@@ -28,6 +35,9 @@ impl VehicleId {
 /// Rejected or malformed runtime restoration input.
 #[derive(Debug, thiserror::Error)]
 pub enum RuntimeError {
+    /// Invalid native vehicle allocation metadata.
+    #[error(transparent)]
+    Pool(#[from] pools::PoolError),
     /// Unsupported content configuration.
     #[error(transparent)]
     Content(#[from] ContentError),
@@ -85,16 +95,108 @@ pub struct SimulationRuntime {
     world: World,
     content: ContentCatalog,
     road: BTreeMap<VehicleId, RoadVehicleCache>,
+    allocation: VehicleAllocation,
+    serializer_cargo_paid_for: u16,
+}
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct VehicleAllocation {
+    pub pool: pools::PoolAllocator,
+    pub road_units: BTreeMap<u8, pools::UnitNumberAllocator>,
+}
+#[derive(Debug, Clone, Copy)]
+pub(crate) struct RoadBuildState {
+    pub owner: u8,
+    pub unit: u16,
+    pub tile: u32,
+    pub x: u32,
+    pub y: u32,
+    pub z: i32,
+    pub direction: u8,
+    pub engine: u16,
+    pub image: u8,
+    pub cargo: u8,
+    pub capacity: u16,
+    pub reliability: u16,
+    pub reliability_decay: u16,
+    pub max_age: i32,
+    pub economy_date: i32,
+    pub calendar_date: i32,
+    pub build_year: i32,
+    pub service_interval: u16,
+    pub service_percent: bool,
+    pub preview: bool,
+    pub value: i64,
+    pub random_bits: u16,
+}
+pub(crate) fn new_road_record(
+    schema: &ottd_save::TableSchema,
+    state: RoadBuildState,
+    cargo_paid_for: u16,
+) -> Result<ottd_save::TableRecord, RuntimeError> {
+    road_record::build(schema, state, cargo_paid_for)
+}
+pub(crate) struct PurchaseContext<'a> {
+    pub serializer_cargo_paid_for: u16,
+    pub content: &'a ContentCatalog,
+    pub allocation: &'a mut VehicleAllocation,
+    pub road: &'a mut BTreeMap<VehicleId, RoadVehicleCache>,
+}
+impl PurchaseContext<'_> {
+    pub(crate) fn publish(
+        self,
+        world: &mut World,
+        edits: Vec<ottd_save::world::WorldEdit>,
+        allocation: VehicleAllocation,
+        id: VehicleId,
+    ) -> Result<(), crate::CommandError> {
+        let mut transaction = world.transaction();
+        for edit in edits {
+            transaction.apply(edit)?;
+        }
+        let prepared = transaction.prepare()?;
+        let cache = creation_cache(prepared.view(), id, self.content)?;
+        prepared.commit();
+        self.road.insert(id, cache);
+        *self.allocation = allocation;
+        Ok(())
+    }
+}
+pub(crate) fn creation_cache(
+    view: ottd_save::world::CandidateView<'_>,
+    id: VehicleId,
+    content: &ContentCatalog,
+) -> Result<RoadVehicleCache, RuntimeError> {
+    road_cache::create(SavedVehicleView::candidate(view, id)?, content)
+}
+pub(crate) fn road_company_count(world: &World, company: u8) -> Result<u64, RuntimeError> {
+    world
+        .tables()
+        .get(b"VEHS")
+        .ok_or(RuntimeError::Invalid("VEHS"))?
+        .records()
+        .keys()
+        .try_fold(0_u64, |count, id| {
+            Ok(count.saturating_add(u64::from(
+                SavedVehicleView::new(world, VehicleId::new(*id))?.owner()? == company,
+            )))
+        })
 }
 impl SimulationRuntime {
-    /// Execute a cache-independent service command over the owned saved world.
+    /// Execute admitted service and road-purchase commands over the owned world.
     /// # Errors
-    /// Rejects other commands until their live cache publication is implemented.
+    /// Rejects unsupported contexts and commands without live cache publication.
     pub fn execute_command(
         &mut self,
         request: &crate::CommandRequest,
     ) -> Result<crate::CommandReceipt, crate::CommandError> {
         match request.command {
+            crate::Command::BuildVehicle { .. } => PurchaseContext {
+                serializer_cargo_paid_for: self.serializer_cargo_paid_for,
+                content: &self.content,
+                allocation: &mut self.allocation,
+                road: &mut self.road,
+            }
+            .execute(&mut self.world, request),
             crate::Command::ChangeServiceInterval { .. } => {
                 crate::commands::execute_command(&mut self.world, request)
             }
@@ -132,6 +234,8 @@ impl SimulationRuntime {
             })
             .collect::<Result<BTreeMap<_, _>, RuntimeError>>()?;
         Ok(Self {
+            serializer_cargo_paid_for: serialization::restore(&world)?,
+            allocation: VehicleAllocation::restore(&world)?,
             world,
             content,
             road,

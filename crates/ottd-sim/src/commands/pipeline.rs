@@ -16,6 +16,22 @@ pub fn execute_command(
     world: &mut World,
     request: &CommandRequest,
 ) -> Result<CommandReceipt, CommandError> {
+    execute(world, request, None)
+}
+impl crate::runtime::PurchaseContext<'_> {
+    pub(crate) fn execute(
+        self,
+        world: &mut World,
+        request: &CommandRequest,
+    ) -> Result<CommandReceipt, CommandError> {
+        execute(world, request, Some(self))
+    }
+}
+fn execute(
+    world: &mut World,
+    request: &CommandRequest,
+    context: Option<crate::runtime::PurchaseContext<'_>>,
+) -> Result<CommandReceipt, CommandError> {
     let tile = tile(&request.command);
     let tuple = matches!(
         request.command,
@@ -28,13 +44,14 @@ pub fn execute_command(
             .get(usize::try_from(tile).map_err(|_| CommandError::Overflow("tile index"))?)
             .is_none_or(|t| !tuple && t.tile_type() >> 4 == 7)
     {
-        return Ok(gated(CommandGate::Tile, tuple));
+        return Ok(gated(CommandGate::Tile, request));
     }
-    execute_valid_tile(world, request, tile)
+    execute_valid_tile(world, request, tile, context)
 }
 const fn tile(command: &Command) -> u32 {
     match command {
         Command::BuildRoad { tile, .. }
+        | Command::BuildVehicle { tile, .. }
         | Command::LandscapeClear { tile }
         | Command::TerraformLand { tile, .. }
         | Command::LevelLand { tile, .. } => *tile,
@@ -50,13 +67,15 @@ fn execute_valid_tile(
     world: &mut World,
     request: &CommandRequest,
     tile: u32,
+    context: Option<crate::runtime::PurchaseContext<'_>>,
 ) -> Result<CommandReceipt, CommandError> {
     let server = matches!(request.command, Command::Pause { .. });
     let tuple = matches!(
         request.command,
         Command::TerraformLand { .. } | Command::LevelLand { .. }
     );
-    let mut returns = tuple.then(CommandReturnPhases::default);
+    let mut returns = (tuple || matches!(request.command, Command::BuildVehicle { .. }))
+        .then(CommandReturnPhases::default);
     let estimate = request.mode == CommandMode::Estimate && !server;
     let pause = unsigned(world, b"DATE", 0, "pause_mode")?;
     if pause != 0
@@ -64,7 +83,7 @@ fn execute_valid_tile(
         && unsigned(world, b"PATS", 0, "construction.command_pause_level")?
             < pause_level(&request.command)
     {
-        return Ok(gated(CommandGate::Pause, tuple));
+        return Ok(gated(CommandGate::Pause, request));
     }
     let company_exists = world
         .tables()
@@ -80,9 +99,18 @@ fn execute_valid_tile(
     }
     if !server && !company_exists {
         if let Some(values) = &mut returns {
-            values.result = Some(CommandReturn::Landscape {
-                additional_money: 0,
-                tile: 0,
+            values.result = Some(if matches!(request.command, Command::BuildVehicle { .. }) {
+                CommandReturn::Vehicle {
+                    vehicle: 0,
+                    capacity: 0,
+                    mail_capacity: 0,
+                    cargo_capacities: Box::new(super::CargoCapacities([0; 64])),
+                }
+            } else {
+                CommandReturn::Landscape {
+                    additional_money: 0,
+                    tile: 0,
+                }
             });
         }
         return Ok(CommandReceipt {
@@ -93,6 +121,47 @@ fn execute_valid_tile(
             exec: None,
             result: Some(CommandCost::failure("CMD_ERROR")),
         });
+    }
+    execute_admitted(
+        world,
+        request,
+        tile,
+        context,
+        estimate,
+        returns,
+        company_exists,
+    )
+}
+fn execute_admitted(
+    world: &mut World,
+    request: &CommandRequest,
+    tile: u32,
+    context: Option<crate::runtime::PurchaseContext<'_>>,
+    estimate: bool,
+    mut returns: Option<CommandReturnPhases>,
+    company_exists: bool,
+) -> Result<CommandReceipt, CommandError> {
+    if let Command::BuildVehicle {
+        tile,
+        engine,
+        cargo,
+        use_free_vehicles: _,
+        client_id: _,
+    } = request.command
+    {
+        return super::vehicle_build::run(
+            world,
+            request.company,
+            super::vehicle_build::Args {
+                tile,
+                engine,
+                cargo,
+            },
+            estimate,
+            context.ok_or(CommandError::Unsupported(
+                "vehicle construction needs owned runtime",
+            ))?,
+        );
     }
     if let Command::LevelLand {
         tile,
@@ -115,8 +184,8 @@ fn execute_valid_tile(
     }
     let plan = super::body(world, request)?;
     if let Some(values) = &mut returns {
-        values.test = plan.returns;
-        values.result = plan.returns;
+        values.test.clone_from(&plan.returns);
+        values.result.clone_from(&plan.returns);
     }
     let test = plan.cost.clone();
     let mut result = test.clone();
@@ -183,9 +252,15 @@ fn publish(
         result: Some(result),
     })
 }
-fn gated(gate: CommandGate, tuple: bool) -> CommandReceipt {
+fn gated(gate: CommandGate, request: &CommandRequest) -> CommandReceipt {
     CommandReceipt {
-        returns: tuple.then(CommandReturnPhases::default),
+        returns: matches!(
+            request.command,
+            Command::TerraformLand { .. }
+                | Command::LevelLand { .. }
+                | Command::BuildVehicle { .. }
+        )
+        .then(CommandReturnPhases::default),
         posted: false,
         gate: Some(gate),
         test: None,
@@ -201,7 +276,9 @@ const fn pause_level(command: &Command) -> u64 {
         | Command::LandscapeClear { .. }
         | Command::TerraformLand { .. }
         | Command::LevelLand { .. } => 3,
-        Command::IncreaseLoan { .. } | Command::DecreaseLoan { .. } => 2,
+        Command::IncreaseLoan { .. }
+        | Command::DecreaseLoan { .. }
+        | Command::BuildVehicle { .. } => 2,
         Command::RenameCompany { .. } | Command::RenamePresident { .. } | Command::Pause { .. } => {
             0
         }

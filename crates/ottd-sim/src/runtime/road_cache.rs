@@ -1,12 +1,25 @@
 use super::{RoadVehicleCache, RuntimeError, SavedVehicleView};
-use crate::{
-    content::{ContentCatalog, VehicleSpec},
-    world_access::unsigned,
-};
+use crate::content::{ContentCatalog, VehicleSpec};
+
+pub(super) fn create(
+    vehicle: SavedVehicleView<'_>,
+    content: &ContentCatalog,
+) -> Result<RoadVehicleCache, RuntimeError> {
+    let realistic = vehicle.setting("vehicle.roadveh_acceleration_model")? != 0;
+    calculate(vehicle, content, realistic, false)
+}
 
 pub(super) fn restore(
     vehicle: SavedVehicleView<'_>,
     content: &ContentCatalog,
+) -> Result<RoadVehicleCache, RuntimeError> {
+    calculate(vehicle, content, true, true)
+}
+fn calculate(
+    vehicle: SavedVehicleView<'_>,
+    content: &ContentCatalog,
+    acceleration: bool,
+    after_load: bool,
 ) -> Result<RoadVehicleCache, RuntimeError> {
     let engine = content
         .engines()
@@ -21,10 +34,7 @@ pub(super) fn restore(
     if spec.roadtype != 0 || spec.power == 0 {
         return Err(RuntimeError::Unsupported("custom or powerless road engine"));
     }
-    let tile = usize::try_from(vehicle.tile()?)
-        .ok()
-        .and_then(|id| vehicle.world().map().tiles().get(id))
-        .ok_or(RuntimeError::Invalid("vehicle tile"))?;
+    let tile = vehicle.tile_state()?;
     let has_road = match tile.tile_type() >> 4 {
         2 => true,
         5 => matches!((tile.m6() >> 3) & 15, 2 | 3 | 8),
@@ -44,16 +54,7 @@ pub(super) fn restore(
     let weight = u16::try_from(cargo_weight & 0xffff)
         .map_err(|_| RuntimeError::Invalid("cargo weight"))?
         .wrapping_add(u16::from(spec.weight) / 4);
-    let slope = u32::try_from(
-        unsigned(
-            vehicle.world(),
-            b"PATS",
-            0,
-            "vehicle.roadveh_slope_steepness",
-        )
-        .map_err(|_| RuntimeError::Invalid("road slope steepness"))?,
-    )
-    .map_err(|_| RuntimeError::Invalid("road slope steepness"))?;
+    let slope = vehicle.setting("vehicle.roadveh_slope_steepness")?;
     let display_speed = spec.max_speed / 2;
     let drag = match spec.air_drag {
         0 if display_speed <= 10 => 192,
@@ -66,7 +67,7 @@ pub(super) fn restore(
     };
     let weight = u32::from(weight);
     let length = 8_u8.saturating_sub(spec.shorten_factor.min(7));
-    Ok(RoadVehicleCache {
+    let mut cache = RoadVehicleCache {
         id: vehicle.id(),
         road_type: spec.roadtype,
         compatible_roadtypes: 1,
@@ -87,9 +88,27 @@ pub(super) fn restore(
             / 256,
         max_track_speed: spec.max_speed,
         air_drag: u32::from(drag).wrapping_add(3_u32.wrapping_mul(u32::from(drag)) / 20),
-        last_speed: vehicle.current_speed()?,
-        trip_occupancy: occupancy(stored, vehicle.capacity()?)?,
-    })
+        last_speed: if after_load {
+            vehicle.current_speed()?
+        } else {
+            0
+        },
+        trip_occupancy: if after_load {
+            occupancy(stored, vehicle.capacity()?)?
+        } else {
+            0
+        },
+    };
+    if !acceleration {
+        cache.weight = 0;
+        cache.slope_resistance = 0;
+        cache.axle_resistance = 0;
+        cache.power = 0;
+        cache.max_tractive_effort = 0;
+        cache.max_track_speed = 0;
+        cache.air_drag = 0;
+    }
+    Ok(cache)
 }
 
 fn occupancy(stored: u32, capacity: u16) -> Result<i8, RuntimeError> {

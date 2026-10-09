@@ -4,14 +4,12 @@
 #include "../3rdparty/nlohmann/json.hpp"
 #include "../roadveh.h"
 #include "../engine_base.h"
+#include "../company_base.h"
 #include <fstream>
 namespace ReferenceRuntimeRoad {
 using Json = nlohmann::json;
-inline void Observe()
+inline Json Snapshot()
 {
-    const char *path = std::getenv("OTTD_RUNTIME_ROAD_PATH");
-    if (path == nullptr || _game_mode == GM_MENU) return;
-    if (std::ifstream(path).good()) throw std::runtime_error("Road runtime observation already exists");
     Json result = {{"road", Json::array()}, {"saved", Json::array()}};
     for (const Vehicle *vehicle : Vehicle::Iterate()) {
         if (vehicle->type != VEH_ROAD) throw std::runtime_error("Non-road vehicle in road runtime scenario");
@@ -45,6 +43,22 @@ inline void Observe()
             {"engine_reliability", e->reliability}, {"engine_decay", e->reliability_spd_dec},
             {"engine_age", e->age}, {"engine_company_availability", e->company_avail.base()}});
     }
+    return result;
+}
+inline Json Live()
+{
+    Json occupied = Json::array();
+    for (const Vehicle *v : Vehicle::Iterate()) occupied.push_back(v->index.base());
+    Json units = Json::array();
+    for (const Company *c : Company::Iterate()) units.push_back({{"company", c->index.base()}, {"next", c->freeunits[VEH_ROAD].NextID()}, {"count", c->group_all[VEH_ROAD].num_vehicle}});
+    return {{"road", Snapshot().at("road")}, {"pool", {{"first_free", _vehicle_pool.first_free}, {"first_unused", _vehicle_pool.first_unused}, {"items", _vehicle_pool.items}, {"slots", _vehicle_pool.data.size()}, {"occupied", occupied}}}, {"units", units}};
+}
+inline void Observe()
+{
+    const char *path = std::getenv("OTTD_RUNTIME_ROAD_PATH");
+    if (path == nullptr || _game_mode == GM_MENU) return;
+    if (std::ifstream(path).good()) throw std::runtime_error("Road runtime observation already exists");
+    const Json result = Snapshot();
     std::ofstream output(path);
     output << result.dump(2) << '\n';
     if (!output) throw std::runtime_error("Road runtime observation write failed");

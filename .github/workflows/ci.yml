@@ -61,6 +61,7 @@ jobs:
             .artifacts/gameplay-foundations-*/
             .artifacts/service-*/
             .artifacts/grf-metadata-*/
+            .artifacts/purchase-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

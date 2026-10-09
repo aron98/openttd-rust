@@ -9,7 +9,7 @@ pub struct SavedEngineView<'a> {
     id: u16,
 }
 impl<'a> SavedEngineView<'a> {
-    pub(super) fn new(world: &'a World, id: u16) -> Result<Self, RuntimeError> {
+    pub(crate) fn new(world: &'a World, id: u16) -> Result<Self, RuntimeError> {
         if !world
             .tables()
             .get(b"ENGN")
@@ -36,6 +36,12 @@ impl<'a> SavedEngineView<'a> {
     /// Rejects an invalid saved availability field.
     pub fn company_availability(self) -> Result<u16, RuntimeError> {
         self.word("company_avail")
+    }
+    /// Saved availability and exclusive-preview flags used by live construction.
+    /// # Errors
+    /// Rejects malformed saved flag bits.
+    pub fn flags(self) -> Result<u8, RuntimeError> {
+        u8::try_from(self.word("flags")?).map_err(|_| RuntimeError::Invalid("ENGN/flags"))
     }
     /// Saved engine-model age in months.
     /// # Errors

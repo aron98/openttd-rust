@@ -1,5 +1,8 @@
 //! Native top-level command phases over the authoritative saved world.
+mod cargo_capacities;
 mod finance;
+mod vehicle_build;
+pub use cargo_capacities::CargoCapacities;
 mod landscape;
 mod level_land;
 mod naming;
@@ -29,6 +32,19 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Buy one admitted vanilla road vehicle in an existing depot.
+    BuildVehicle {
+        /// Native depot tile.
+        tile: u32,
+        /// Native engine ID.
+        engine: u16,
+        /// Requested cargo or 255 for the default.
+        cargo: u8,
+        /// Native flag, with no effect for road vehicles.
+        use_free_vehicles: bool,
+        /// Native order-backup client identity; zero is the local server.
+        client_id: u32,
+    },
     /// Change a primary road vehicle's automatic service interval.
     ChangeServiceInterval {
         /// Native vehicle pool index.
@@ -188,9 +204,20 @@ pub struct CommandReceipt {
     pub returns: Option<CommandReturnPhases>,
 }
 /// Native non-cost results, retaining successful tiles and invalid sentinels.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub enum CommandReturn {
+    /// Native vehicle construction return tuple.
+    Vehicle {
+        /// Allocated ID, or native invalid ID 0xFFFFF.
+        vehicle: u32,
+        /// Default/refitted cargo capacity.
+        capacity: u32,
+        /// Mail capacity, zero for road vehicles.
+        mail_capacity: u16,
+        /// Capacity by native cargo slot.
+        cargo_capacities: Box<CargoCapacities>,
+    },
     /// Terraform/level-land native result tuple.
     Landscape {
         /// Additional cash required, distinct from the completed cost.
@@ -200,7 +227,7 @@ pub enum CommandReturn {
     },
 }
 /// Tuple values at exactly the command phases entered.
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct CommandReturnPhases {
     /// Body test tuple before outer validation.
     pub test: Option<CommandReturn>,
@@ -212,6 +239,9 @@ pub struct CommandReturnPhases {
 /// Rust scope or saved-state failure; never impersonates a native command error.
 #[derive(Debug, thiserror::Error)]
 pub enum CommandError {
+    /// Runtime allocation or candidate-cache restoration failure.
+    #[error(transparent)]
+    Runtime(#[from] crate::runtime::RuntimeError),
     /// Vanilla specification or price restoration failure.
     #[error(transparent)]
     Content(#[from] crate::content::ContentError),
@@ -244,6 +274,9 @@ impl Plan {
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
+        Command::BuildVehicle { .. } => Err(CommandError::Unsupported(
+            "vehicle construction needs owned runtime",
+        )),
         Command::ChangeServiceInterval {
             vehicle,
             interval,

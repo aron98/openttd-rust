@@ -1,5 +1,49 @@
 use super::{RuntimeError, VehicleId};
-use ottd_save::{TableRecord, TableSchema, WireValue, world::World};
+use ottd_save::{
+    TableRecord, TableSchema, TileState, WireValue,
+    world::{CandidateView, World},
+};
+
+#[derive(Debug, Clone, Copy)]
+enum Source<'a> {
+    Committed(&'a World),
+    Candidate(CandidateView<'a>),
+}
+impl<'a> Source<'a> {
+    fn row(self, chunk: [u8; 4], id: u32) -> Result<Row<'a>, RuntimeError> {
+        let (schema, record) = match self {
+            Self::Committed(world) => {
+                let table = world
+                    .tables()
+                    .get(&chunk)
+                    .ok_or(RuntimeError::Invalid("runtime table"))?;
+                (table.schema(), table.records().get(&id))
+            }
+            Self::Candidate(view) => {
+                let table = view
+                    .table(chunk)
+                    .ok_or(RuntimeError::Invalid("runtime table"))?;
+                (table.schema(), table.record(id))
+            }
+        };
+        Ok(Row {
+            schema,
+            record: record.ok_or(RuntimeError::Invalid("runtime record"))?,
+        })
+    }
+    fn tile(self, id: u32) -> Result<TileState, RuntimeError> {
+        match self {
+            Self::Committed(world) => usize::try_from(id)
+                .ok()
+                .and_then(|id| world.map().tiles().get(id))
+                .cloned()
+                .ok_or(RuntimeError::Invalid("vehicle tile")),
+            Self::Candidate(view) => view
+                .tile(id)
+                .map_err(|_| RuntimeError::Invalid("vehicle tile")),
+        }
+    }
+}
 
 #[derive(Debug, Clone, Copy)]
 struct Row<'a> {
@@ -43,23 +87,19 @@ impl<'a> Row<'a> {
 /// Borrowed saved fields of one vanilla road front; no mutable vehicle mirror.
 #[derive(Debug, Clone, Copy)]
 pub struct SavedVehicleView<'a> {
-    world: &'a World,
+    source: Source<'a>,
     id: VehicleId,
     common: Row<'a>,
 }
 impl<'a> SavedVehicleView<'a> {
     pub(super) fn new(world: &'a World, id: VehicleId) -> Result<Self, RuntimeError> {
-        let table = world
-            .tables()
-            .get(b"VEHS")
-            .ok_or(RuntimeError::Invalid("VEHS"))?;
-        let row = Row {
-            schema: table.schema(),
-            record: table
-                .records()
-                .get(&id.raw())
-                .ok_or(RuntimeError::Invalid("vehicle ID"))?,
-        };
+        Self::read(Source::Committed(world), id)
+    }
+    pub(super) fn candidate(view: CandidateView<'a>, id: VehicleId) -> Result<Self, RuntimeError> {
+        Self::read(Source::Candidate(view), id)
+    }
+    fn read(source: Source<'a>, id: VehicleId) -> Result<Self, RuntimeError> {
+        let row = source.row(*b"VEHS", id.raw())?;
         if row.number("type")? != 1 {
             return Err(RuntimeError::Unsupported("non-road vehicle"));
         }
@@ -69,14 +109,29 @@ impl<'a> SavedVehicleView<'a> {
                 "non-front or articulated road vehicle",
             ));
         }
-        Ok(Self { world, id, common })
+        Ok(Self { source, id, common })
     }
     /// Native sparse pool ID.
     pub const fn id(self) -> VehicleId {
         self.id
     }
-    pub(super) const fn world(self) -> &'a World {
-        self.world
+    pub(super) fn owner(self) -> Result<u8, RuntimeError> {
+        u8::try_from(self.common.number("owner")?).map_err(|_| RuntimeError::Invalid("owner"))
+    }
+    pub(super) fn unit_number(self) -> Result<u16, RuntimeError> {
+        u16::try_from(self.common.number("unitnumber")?)
+            .map_err(|_| RuntimeError::Invalid("unitnumber"))
+    }
+    pub(super) fn cargo_paid_for(self) -> Result<u16, RuntimeError> {
+        u16::try_from(self.common.number("cargo_paid_for")?)
+            .map_err(|_| RuntimeError::Invalid("cargo_paid_for"))
+    }
+    pub(super) fn tile_state(self) -> Result<TileState, RuntimeError> {
+        self.source.tile(self.tile()?)
+    }
+    pub(super) fn setting(self, name: &'static str) -> Result<u32, RuntimeError> {
+        u32::try_from(self.source.row(*b"PATS", 0)?.number(name)?)
+            .map_err(|_| RuntimeError::Invalid(name))
     }
     /// Saved engine ID.
     /// # Errors

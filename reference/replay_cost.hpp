@@ -4,6 +4,7 @@
 #include "../table/strings.h"
 #include "../table/control_codes.h"
 #include "../core/utf8.hpp"
+#include "reference_runtime_road.hpp"
 #include <charconv>
 
 namespace ReferenceReplay {
@@ -23,6 +24,9 @@ inline Json ErrorSymbol(StringID id)
         REPLAY_ERROR(STR_ERROR_CURRENCY_REQUIRED)
         REPLAY_ERROR(STR_ERROR_NOT_ENOUGH_CASH_REQUIRES_CURRENCY)
         REPLAY_ERROR(STR_ERROR_OWNED_BY)
+        REPLAY_ERROR(STR_ERROR_ROAD_VEHICLE_NOT_AVAILABLE)
+        REPLAY_ERROR(STR_ERROR_TOO_MANY_VEHICLES_IN_GAME)
+        REPLAY_ERROR(STR_ERROR_DEPOT_WRONG_DEPOT_TYPE)
         REPLAY_ERROR(STR_ERROR_NAME_MUST_BE_UNIQUE)
         REPLAY_ERROR(STR_ERROR_ALREADY_BUILT)
         REPLAY_ERROR(STR_ERROR_ONEWAY_ROADS_CAN_T_HAVE_JUNCTION)
@@ -78,6 +82,14 @@ void LandscapeReturns(const char *phase, int64_t additional_money, uint32_t tile
 {
     if (receipt == nullptr || !receipt->contains("returns")) return;
     (*receipt)["returns"][phase] = {{"kind", "landscape"}, {"additional_money", additional_money}, {"tile", tile}};
+}
+void VehicleReturns(const char *phase, VehicleID id, uint capacity, uint16_t mail, const CargoArray &capacities)
+{
+    if (receipt == nullptr || !receipt->contains("returns")) return;
+    Json cargo = Json::array();
+    for (uint amount : capacities) cargo.push_back(amount);
+    (*receipt)["returns"][phase] = {{"kind", "vehicle"}, {"vehicle", id.base()}, {"capacity", capacity}, {"mail_capacity", mail}, {"cargo_capacities", cargo}};
+    metadata[phase]["live"] = ReferenceRuntimeRoad::Live();
 }
 }
 #endif

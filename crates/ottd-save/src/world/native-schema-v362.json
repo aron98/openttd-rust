@@ -3251,21 +3251,21 @@
       {
         "command": 4,
         "file_type": 10,
-        "length": 24,
+        "length": 0,
         "memory_type": 208,
         "name": "locale.digit_group_separator"
       },
       {
         "command": 4,
         "file_type": 10,
-        "length": 24,
+        "length": 0,
         "memory_type": 208,
         "name": "locale.digit_group_separator_currency"
       },
       {
         "command": 4,
         "file_type": 10,
-        "length": 24,
+        "length": 0,
         "memory_type": 208,
         "name": "locale.digit_decimal_separator"
       },

@@ -65,7 +65,8 @@ inline Json Describe(SaveLoadTable table)
         if (!SlIsObjectCurrentlyValid(field.version_from, field.version_to)) continue;
         Json item = {{"name", field.name}, {"command", field.cmd},
             {"file_type", GetVarFileType(field.conv)}, {"memory_type", GetVarMemType(field.conv)},
-            {"length", field.length}};
+            // SDT_SSTR uses sizeof(std::string); native string serialization ignores this ABI-specific size.
+            {"length", field.cmd == SL_STDSTR ? 0 : field.length}};
         switch (field.cmd) {
             case SL_REF: case SL_REFLIST: case SL_REFVECTOR: item["reference_kind"] = field.conv; break;
             case SL_STRUCT: case SL_STRUCTLIST: item["children"] = Describe(field.handler->GetDescription()); break;

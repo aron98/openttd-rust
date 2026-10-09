@@ -47,6 +47,8 @@ copy_header reference/terrain.hpp "$source_dir/src/saveload/reference_terrain.hp
 copy_header reference/allocation.hpp "$source_dir/src/saveload/reference_allocation.hpp"
 copy_header reference/runtime_road.hpp "$source_dir/src/saveload/reference_runtime_road.hpp"
 copy_header reference/runtime_road_fixture.hpp "$source_dir/src/saveload/reference_runtime_road_fixture.hpp"
+copy_header reference/runtime_road_fixture_tiles.hpp "$source_dir/src/saveload/reference_runtime_road_fixture_tiles.hpp"
+copy_header reference/grf_scan.hpp "$source_dir/src/saveload/reference_grf_scan.hpp"
 copy_header reference/world_fixture.hpp "$source_dir/src/saveload/reference_world_fixture.hpp"
 copy_header reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
 copy_header reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"

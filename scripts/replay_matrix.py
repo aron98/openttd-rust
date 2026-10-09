@@ -139,7 +139,7 @@ class ReplayMatrix:
         case = self.artifacts / name
         save = FIXTURES / f"{fixture}-v362.sav"
         actions = FIXTURES / f"{name}.json"
-        if name.startswith("terraform-"):
+        if name.startswith(("terraform-", "level-")):
             prepared = self.native(
                 save, FIXTURES / f"prepare-{name}.json", case / "prepare"
             )

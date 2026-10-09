@@ -1,4 +1,4 @@
-use super::{CommandCost, CommandError, Plan};
+use super::{CommandCost, CommandError, Plan, terrain_read::TerrainRead};
 use crate::content::{ContentCatalog, Price, Prices};
 use crate::world_access::{field_edit, unsigned};
 use ottd_save::{
@@ -36,21 +36,27 @@ pub(super) fn clear(
     automatic: bool,
 ) -> Result<Plan, CommandError> {
     let catalog = ContentCatalog::from_world(world)?;
-    clear_with_prices(world, company, tile, automatic, catalog.prices())
+    clear_with_prices(
+        TerrainRead::Committed(world),
+        company,
+        tile,
+        automatic,
+        catalog.prices(),
+    )
 }
 pub(super) fn clear_with_prices(
-    world: &World,
+    world: TerrainRead<'_>,
     company: u8,
     tile: u32,
     automatic: bool,
     prices: &Prices,
 ) -> Result<Plan, CommandError> {
-    let source = tile_at(world, tile)?;
+    let source = world.tile(tile)?;
     if source.tile_type() >> 4 != 0 {
         return Err(CommandError::Unsupported("clearing non-clear terrain"));
     }
     let company = u32::from(company);
-    let limit = unsigned(world, b"PLYR", company, "clear_limit")?;
+    let limit = world.unsigned(*b"PLYR", company, "clear_limit")?;
     if !automatic && limit >> 16 == 0 {
         return Ok(Plan::empty(CommandCost::failure(
             "STR_ERROR_CLEARING_LIMIT_REACHED",
@@ -116,9 +122,9 @@ pub(super) fn clear_with_prices(
         edits,
     })
 }
-fn clear_neighbor_water(world: &World, tile: u32) -> Result<Vec<WorldEdit>, CommandError> {
+fn clear_neighbor_water(world: TerrainRead<'_>, tile: u32) -> Result<Vec<WorldEdit>, CommandError> {
     let mut edits = Vec::new();
-    let width = i64::from(world.map().width());
+    let width = i64::from(world.size().width());
     let previous = width
         .checked_sub(1)
         .ok_or(CommandError::Overflow("map width"))?;
@@ -141,14 +147,12 @@ fn clear_neighbor_water(world: &World, tile: u32) -> Result<Vec<WorldEdit>, Comm
         else {
             continue;
         };
-        let Some(neighbour) = usize::try_from(index)
-            .ok()
-            .and_then(|i| world.map().tiles().get(i))
-        else {
+        if index >= world.size().count()? {
             continue;
-        };
+        }
+        let neighbour = world.tile(index)?;
         if neighbour.tile_type() >> 4 == 6 {
-            let mut parts = TileRawParts::from(neighbour);
+            let mut parts = TileRawParts::from(&neighbour);
             parts.m3 &= !1;
             edits.push(WorldEdit::Tile {
                 index,

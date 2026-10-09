@@ -1,12 +1,14 @@
 //! Native top-level command phases over the authoritative saved world.
 mod finance;
 mod landscape;
+mod level_land;
 mod naming;
 mod occupancy;
 mod pause;
 mod pipeline;
 mod road;
 mod terraform;
+mod terrain_read;
 
 use crate::world_access::WorldAccessError;
 use ottd_save::world::{World, WorldEdit, WorldError};
@@ -26,6 +28,17 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Level a native rectangular or diagonal selection with partial completion.
+    LevelLand {
+        /// End tile of the selection, including native void tiles.
+        tile: u32,
+        /// Start tile whose initial height determines the target.
+        start_tile: u32,
+        /// Use native diagonal iteration instead of a rectangle.
+        diagonal: bool,
+        /// Native raw mode: level zero, lower one, raise two.
+        level_mode: u8,
+    },
     /// Change selected terrain corners by one height level.
     TerraformLand {
         /// Linear tile index, including native void tiles.
@@ -219,6 +232,21 @@ impl Plan {
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
+        Command::LevelLand {
+            tile,
+            start_tile,
+            diagonal,
+            level_mode,
+        } => level_land::estimate(
+            world,
+            request.company,
+            level_land::Args {
+                tile: *tile,
+                start: *start_tile,
+                diagonal: *diagonal,
+                mode: *level_mode,
+            },
+        ),
         Command::TerraformLand {
             tile,
             slope,

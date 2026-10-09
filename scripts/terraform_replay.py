@@ -44,22 +44,22 @@ def verify_terraform(matrix: ReplayMatrix, selected: list[str]) -> None:
         original_continuation(matrix)
 
 
-def wrong_order(matrix: ReplayMatrix) -> None:
-    case = matrix.artifacts / "controls/terraform-order"
+def wrong_order(matrix: ReplayMatrix, family: str = "terraform") -> None:
+    case = matrix.artifacts / f"controls/{family}-order"
     case.mkdir(parents=True)
-    actions = copy.deepcopy(read_json(FIXTURES / "terraform-basic.json"))
+    actions = copy.deepcopy(read_json(FIXTURES / f"{family}-basic.json"))
     replace(actions, ("actions", 0, "request", "mode"), "post")
     replace(actions, ("actions", 2, "request", "mode"), "estimate")
     path = case / "actions.json"
     write_json(path, actions)
     actual = matrix.rust(
-        matrix.artifacts / "terraform-basic/native/initial.sav", path, case
+        matrix.artifacts / f"{family}-basic/native/initial.sav", path, case
     )
     result = run(
         [
             str(matrix.cli),
             "compare",
-            str(matrix.artifacts / "terraform-basic/compare/native-results.json"),
+            str(matrix.artifacts / f"{family}-basic/compare/native-results.json"),
             str(actual / "results.json"),
         ],
         case / "compare",
@@ -71,15 +71,15 @@ def wrong_order(matrix: ReplayMatrix) -> None:
         )
 
 
-def resumed_execution(matrix: ReplayMatrix) -> None:
-    case = matrix.artifacts / "terraform-split"
+def resumed_execution(matrix: ReplayMatrix, family: str = "terraform") -> None:
+    case = matrix.artifacts / f"{family}-split"
     case.mkdir(parents=True)
-    actions = at(read_json(FIXTURES / "terraform-resume.json"), ("actions",))
+    actions = at(read_json(FIXTURES / f"{family}-resume.json"), ("actions",))
     if not isinstance(actions, list):
         raise WorldCheckError("Terraform actions must be a list")
     write_json(case / "prefix.json", {"schema_version": 1, "actions": actions[:2]})
     write_json(case / "suffix.json", {"schema_version": 1, "actions": actions[2:]})
-    source = matrix.artifacts / "terraform-resume/native/initial.sav"
+    source = matrix.artifacts / f"{family}-resume/native/initial.sav"
     native_prefix = matrix.native(source, case / "prefix.json", case / "prefix")
     rust_prefix = case / "prefix/rust"
     _ = run(
@@ -87,7 +87,7 @@ def resumed_execution(matrix: ReplayMatrix) -> None:
             str(matrix.cli),
             "replay-world",
             str(source),
-            str(FIXTURES / "terraform-resume.json"),
+            str(FIXTURES / f"{family}-resume.json"),
             str(rust_prefix),
             "--through",
             "1",
@@ -112,15 +112,15 @@ def resumed_execution(matrix: ReplayMatrix) -> None:
     for engine, directory in [("native", native_suffix), ("rust", rust_suffix)]:
         for extension in ("world.json", "derived.json"):
             matrix.compare(
-                matrix.artifacts / f"terraform-resume/{engine}/final.{extension}",
+                matrix.artifacts / f"{family}-resume/{engine}/final.{extension}",
                 directory / f"final.{extension}",
                 case / f"continuous-{engine}-{extension}",
             )
 
 
-def original_continuation(matrix: ReplayMatrix) -> None:
-    case = matrix.artifacts / "terraform-original-continuation"
-    source = matrix.artifacts / "terraform-resume/rust/final.sav"
+def original_continuation(matrix: ReplayMatrix, family: str = "terraform") -> None:
+    case = matrix.artifacts / f"{family}-original-continuation"
+    source = matrix.artifacts / f"{family}-resume/rust/final.sav"
     output = case / "native"
     _ = run(
         [
@@ -145,7 +145,7 @@ def original_continuation(matrix: ReplayMatrix) -> None:
     )
     path = case / "continued.world.json"
     _ = path.write_text(exported.stdout)
-    before = read_json(matrix.artifacts / "terraform-resume/rust/final.world.json")
+    before = read_json(matrix.artifacts / f"{family}-resume/rust/final.world.json")
     after = read_json(path)
     tick_path = ("chunks", "DATE", "records", "0", "tick_counter")
     before_tick, after_tick = at(before, tick_path), at(after, tick_path)

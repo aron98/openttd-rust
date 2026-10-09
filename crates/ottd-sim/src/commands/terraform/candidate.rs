@@ -1,9 +1,9 @@
-use super::{CommandError, Failure, landscape, native};
-use ottd_save::world::World;
+use super::super::terrain_read::TerrainRead;
+use super::{CommandError, Failure, native};
 use std::collections::{BTreeMap, BTreeSet};
 
 pub(super) struct Candidate<'a> {
-    pub(super) world: &'a World,
+    pub(super) world: TerrainRead<'a>,
     pub(super) heights: BTreeMap<u32, u8>,
     pub(super) dirty: BTreeSet<u32>,
     pub(super) freeform: bool,
@@ -23,15 +23,15 @@ enum Step {
 }
 impl Candidate<'_> {
     pub(super) fn height(&self, tile: u32) -> Result<u8, CommandError> {
-        self.heights.get(&tile).copied().map_or_else(
-            || landscape::tile_at(self.world, tile).map(ottd_save::TileState::height),
-            Ok,
-        )
+        self.heights
+            .get(&tile)
+            .copied()
+            .map_or_else(|| self.world.tile(tile).map(|tile| tile.height()), Ok)
     }
     pub(super) fn change(&mut self, tile: u32, height: i16) -> Result<i64, Failure> {
         let mut stack = vec![Step::Enter { tile, height }];
         let mut cost = 0_i64;
-        let width = self.world.map().width();
+        let width = self.world.size().width();
         while let Some(step) = stack.pop() {
             match step {
                 Step::Enter { tile, height } => {
@@ -53,7 +53,7 @@ impl Candidate<'_> {
                         && (x <= 1
                             || y <= 1
                             || x >= width.saturating_sub(2)
-                            || y >= self.world.map().height().saturating_sub(2))
+                            || y >= self.world.size().height().saturating_sub(2))
                     {
                         let error_x = if x == 1 { 0 } else { x };
                         let error_y = if y == 1 { 0 } else { y };
@@ -116,12 +116,12 @@ impl Candidate<'_> {
         Ok(cost)
     }
 }
-pub(super) fn neighbor(world: &World, tile: u32, direction: u8) -> Option<u32> {
-    let width = std::num::NonZeroU32::new(world.map().width())?;
+pub(super) fn neighbor(world: TerrainRead<'_>, tile: u32, direction: u8) -> Option<u32> {
+    let width = std::num::NonZeroU32::new(world.size().width())?;
     let (x, y) = (tile % width, tile / width);
     match direction {
         0 if x > 0 => tile.checked_sub(1),
-        1 if y.checked_add(1)? < world.map().height() => tile.checked_add(width.get()),
+        1 if y.checked_add(1)? < world.size().height() => tile.checked_add(width.get()),
         2 if x.checked_add(1)? < width.get() => tile.checked_add(1),
         3 if y > 0 => tile.checked_sub(width.get()),
         _ => None,

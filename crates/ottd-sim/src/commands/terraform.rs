@@ -3,10 +3,10 @@ mod surfaces;
 use candidate::Candidate;
 use surfaces::clear_surfaces;
 
-use super::{CommandCost, CommandError, CommandReturn, Plan, landscape};
+use super::{CommandCost, CommandError, CommandReturn, Plan, terrain_read::TerrainRead};
 use crate::{
-    content::{ContentCatalog, Price},
-    world_access::{field_edit, unsigned},
+    content::{ContentCatalog, Price, Prices},
+    world_access::field_edit,
 };
 use ottd_save::{
     TileRawParts, WireValue,
@@ -47,28 +47,48 @@ pub(super) fn plan(
     mask: u8,
     up: bool,
 ) -> Result<Plan, CommandError> {
-    match build(world, company, tile, mask, up) {
+    let catalog = ContentCatalog::from_world(world)?;
+    step(
+        TerrainRead::Committed(world),
+        company,
+        tile,
+        mask,
+        up,
+        catalog.prices(),
+    )
+}
+pub(super) fn step(
+    world: TerrainRead<'_>,
+    company: u8,
+    tile: u32,
+    mask: u8,
+    up: bool,
+    prices: &Prices,
+) -> Result<Plan, CommandError> {
+    match build(world, company, tile, mask, up, prices) {
         Ok(plan) => Ok(plan),
         Err(Failure::Scope(error)) => Err(error),
         Err(Failure::Native { cost, tile }) => Ok(outcome(cost, tile, Vec::new())),
     }
 }
 
-fn build(world: &World, company: u8, tile: u32, mask: u8, up: bool) -> Result<Plan, Failure> {
-    let catalog = ContentCatalog::from_world(world).map_err(CommandError::from)?;
-    let width = world.map().width();
-    let count =
-        u32::try_from(world.map().tiles().len()).map_err(|_| CommandError::Overflow("map size"))?;
+fn build(
+    world: TerrainRead<'_>,
+    company: u8,
+    tile: u32,
+    mask: u8,
+    up: bool,
+    prices: &Prices,
+) -> Result<Plan, Failure> {
+    let width = world.size().width();
+    let count = world.size().count()?;
     let mut state = Candidate {
         world,
         heights: BTreeMap::new(),
         dirty: BTreeSet::new(),
-        freeform: unsigned(world, b"PATS", 0, "construction.freeform_edges")
-            .map_err(CommandError::from)?
-            != 0,
-        maximum: unsigned(world, b"PATS", 0, "construction.map_height_limit")
-            .map_err(CommandError::from)?,
-        price: catalog.prices().get(Price::Terraform),
+        freeform: world.unsigned(*b"PATS", 0, "construction.freeform_edges")? != 0,
+        maximum: world.unsigned(*b"PATS", 0, "construction.map_height_limit")?,
+        price: prices.get(Price::Terraform),
     };
     let mut cost = 0_i64;
     for (bit, offset) in [(1, 1), (2, width.saturating_add(1)), (4, width), (8, 0)] {
@@ -78,7 +98,7 @@ fn build(world: &World, company: u8, tile: u32, mask: u8, up: bool) -> Result<Pl
         let Some(corner) = tile.checked_add(offset).filter(|n| *n < count) else {
             continue;
         };
-        let height = i16::from(landscape::tile_at(world, corner)?.height());
+        let height = i16::from(world.tile(corner)?.height());
         cost = cost.saturating_add(state.change(
             corner,
             if up {
@@ -88,10 +108,9 @@ fn build(world: &World, company: u8, tile: u32, mask: u8, up: bool) -> Result<Pl
             },
         )?);
     }
-    let (surface_cost, mut tiles) = clear_surfaces(&state, company, up, catalog.prices())?;
+    let (surface_cost, mut tiles) = clear_surfaces(&state, company, up, prices)?;
     cost = cost.saturating_add(surface_cost);
-    let limit = unsigned(world, b"PLYR", u32::from(company), "terraform_limit")
-        .map_err(CommandError::from)?;
+    let limit = world.unsigned(*b"PLYR", u32::from(company), "terraform_limit")?;
     let changed = u64::try_from(state.heights.len())
         .map_err(|_| CommandError::Overflow("changed corners"))?;
     if ((limit >> 16) & 65535) < changed {
@@ -100,7 +119,7 @@ fn build(world: &World, company: u8, tile: u32, mask: u8, up: bool) -> Result<Pl
     for (index, height) in state.heights {
         let parts = tiles
             .entry(index)
-            .or_insert(TileRawParts::from(landscape::tile_at(world, index)?));
+            .or_insert(TileRawParts::from(&world.tile(index)?));
         parts.height = height;
     }
     let mut edits: Vec<_> = tiles

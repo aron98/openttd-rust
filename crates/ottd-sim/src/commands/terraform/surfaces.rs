@@ -1,17 +1,14 @@
+use super::super::{landscape, terrain_read::TerrainRead};
 use super::{
     CommandError, Failure,
     candidate::{Candidate, neighbor},
-    landscape, native,
+    native,
 };
-use crate::terrain::tile_slope_z;
-use ottd_save::{
-    TileRawParts,
-    world::{World, WorldEdit},
-};
+use ottd_save::{TileRawParts, world::WorldEdit};
 use std::collections::BTreeMap;
 
-fn tunnel_in_way(world: &World, tile: u32, z: u8) -> Result<bool, CommandError> {
-    let width = std::num::NonZeroU32::new(world.map().width())
+fn tunnel_in_way(world: TerrainRead<'_>, tile: u32, z: u8) -> Result<bool, CommandError> {
+    let width = std::num::NonZeroU32::new(world.size().width())
         .ok_or(CommandError::Overflow("map width"))?;
     let (x, y) = (tile % width, tile / width);
     let directions = [
@@ -20,7 +17,7 @@ fn tunnel_in_way(world: &World, tile: u32, z: u8) -> Result<bool, CommandError> 
         } else {
             2
         },
-        if y > world.map().height().saturating_sub(1) / 2 {
+        if y > world.size().height().saturating_sub(1) / 2 {
             3
         } else {
             1
@@ -30,12 +27,11 @@ fn tunnel_in_way(world: &World, tile: u32, z: u8) -> Result<bool, CommandError> 
         let mut cursor = tile;
         while let Some(next) = neighbor(world, cursor, direction ^ 2) {
             cursor = next;
-            let source = landscape::tile_at(world, cursor)?;
+            let source = world.tile(cursor)?;
             if source.tile_type() >> 4 == 7 {
                 break;
             }
-            let (_, height) = tile_slope_z(world, cursor)
-                .map_err(|_| CommandError::Unsupported("invalid tunnel scan geometry"))?;
+            let height = world.base_height(cursor)?;
             if z < height {
                 continue;
             }
@@ -58,12 +54,12 @@ pub(super) fn clear_surfaces(
     prices: &crate::content::Prices,
 ) -> Result<(i64, BTreeMap<u32, TileRawParts>), Failure> {
     let world = state.world;
-    let width = world.map().width();
+    let width = world.size().width();
     let mut cost = 0_i64;
     let mut tiles = BTreeMap::<u32, TileRawParts>::new();
     for pass in 0..2 {
         for &dirty in &state.dirty {
-            let source = landscape::tile_at(world, dirty)?;
+            let source = world.tile(dirty)?;
             if source.tile_type() >> 4 == 7 {
                 continue;
             }

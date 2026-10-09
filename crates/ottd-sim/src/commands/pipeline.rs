@@ -1,12 +1,11 @@
+mod accounting;
 use super::{
     Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt, CommandRequest,
-    CommandReturn, CommandReturnPhases,
+    CommandReturn, CommandReturnPhases, level_land, terrain_read::TerrainRead,
 };
-use crate::world_access::{field, field_edit, signed, unsigned};
-use ottd_save::{
-    WireValue,
-    world::{PathElement, World, WorldEdit},
-};
+use crate::world_access::{signed, unsigned};
+pub(super) use accounting::completion_edits;
+use ottd_save::world::World;
 
 /// Run native Post gates, body test, affordability and execution bookkeeping.
 ///
@@ -18,7 +17,10 @@ pub fn execute_command(
     request: &CommandRequest,
 ) -> Result<CommandReceipt, CommandError> {
     let tile = tile(&request.command);
-    let tuple = matches!(request.command, Command::TerraformLand { .. });
+    let tuple = matches!(
+        request.command,
+        Command::TerraformLand { .. } | Command::LevelLand { .. }
+    );
     if tile != 0
         && world
             .map()
@@ -34,7 +36,8 @@ const fn tile(command: &Command) -> u32 {
     match command {
         Command::BuildRoad { tile, .. }
         | Command::LandscapeClear { tile }
-        | Command::TerraformLand { tile, .. } => *tile,
+        | Command::TerraformLand { tile, .. }
+        | Command::LevelLand { tile, .. } => *tile,
         Command::IncreaseLoan { .. }
         | Command::DecreaseLoan { .. }
         | Command::RenameCompany { .. }
@@ -48,22 +51,17 @@ fn execute_valid_tile(
     tile: u32,
 ) -> Result<CommandReceipt, CommandError> {
     let server = matches!(request.command, Command::Pause { .. });
-    let tuple = matches!(request.command, Command::TerraformLand { .. });
+    let tuple = matches!(
+        request.command,
+        Command::TerraformLand { .. } | Command::LevelLand { .. }
+    );
     let mut returns = tuple.then(CommandReturnPhases::default);
     let estimate = request.mode == CommandMode::Estimate && !server;
     let pause = unsigned(world, b"DATE", 0, "pause_mode")?;
-    let required_level = match request.command {
-        Command::BuildRoad { .. }
-        | Command::LandscapeClear { .. }
-        | Command::TerraformLand { .. } => 3,
-        Command::IncreaseLoan { .. } | Command::DecreaseLoan { .. } => 2,
-        Command::RenameCompany { .. } | Command::RenamePresident { .. } | Command::Pause { .. } => {
-            0
-        }
-    };
     if pause != 0
         && !estimate
-        && unsigned(world, b"PATS", 0, "construction.command_pause_level")? < required_level
+        && unsigned(world, b"PATS", 0, "construction.command_pause_level")?
+            < pause_level(&request.command)
     {
         return Ok(gated(CommandGate::Pause, tuple));
     }
@@ -94,6 +92,25 @@ fn execute_valid_tile(
             exec: None,
             result: Some(CommandCost::failure("CMD_ERROR")),
         });
+    }
+    if let Command::LevelLand {
+        tile,
+        start_tile,
+        diagonal,
+        level_mode,
+    } = request.command
+    {
+        return level_land::run(
+            world,
+            request.company,
+            level_land::Args {
+                tile,
+                start: start_tile,
+                diagonal,
+                mode: level_mode,
+            },
+            estimate,
+        );
     }
     let plan = super::body(world, request)?;
     if let Some(values) = &mut returns {
@@ -143,26 +160,14 @@ fn publish(
 ) -> Result<CommandReceipt, CommandError> {
     let server = matches!(request.command, Command::Pause { .. });
     let company = u32::from(request.company);
-    let pause = unsigned(world, b"DATE", 0, "pause_mode")?;
     let mut edits = plan.edits;
     if !server {
-        if tile != 0 {
-            edits.push(field_edit(
-                *b"PLYR",
-                company,
-                "last_build_coordinate",
-                WireValue::Unsigned(u64::from(tile)),
-            ));
-        }
-        edits.extend(accounting(world, company, &result)?);
-    }
-    if pause != 0 && !server {
-        edits.push(field_edit(
-            *b"DATE",
-            0,
-            "pause_mode",
-            WireValue::Unsigned(pause | 128),
-        ));
+        edits.extend(completion_edits(
+            TerrainRead::Committed(world),
+            company,
+            tile,
+            &result,
+        )?);
     }
     world.edit_batch(edits)?;
     if let Some(values) = &mut returns {
@@ -177,39 +182,6 @@ fn publish(
         result: Some(result),
     })
 }
-fn accounting(
-    world: &World,
-    company: u32,
-    result: &CommandCost,
-) -> Result<Vec<WorldEdit>, CommandError> {
-    let mut edits = Vec::new();
-    if result.cost != 0 {
-        let money = signed(world, b"PLYR", company, "money")?.saturating_sub(result.cost);
-        edits.push(field_edit(
-            *b"PLYR",
-            company,
-            "money",
-            WireValue::Signed(money),
-        ));
-        let WireValue::Array(expenses) = field(world, b"PLYR", company, "yearly_expenses")? else {
-            return Err(CommandError::Unsupported("yearly expense wire layout"));
-        };
-        let index = usize::from(result.expenses);
-        let Some(WireValue::Signed(expense)) = expenses.get(index) else {
-            return Err(CommandError::Unsupported("expense category"));
-        };
-        edits.push(WorldEdit::Field {
-            chunk: *b"PLYR",
-            record: company,
-            path: vec![
-                PathElement::Field("yearly_expenses".into()),
-                PathElement::Index(index),
-            ],
-            value: WireValue::Signed(expense.saturating_add(result.cost)),
-        });
-    }
-    Ok(edits)
-}
 fn gated(gate: CommandGate, tuple: bool) -> CommandReceipt {
     CommandReceipt {
         returns: tuple.then(CommandReturnPhases::default),
@@ -218,5 +190,18 @@ fn gated(gate: CommandGate, tuple: bool) -> CommandReceipt {
         test: None,
         exec: None,
         result: None,
+    }
+}
+
+const fn pause_level(command: &Command) -> u64 {
+    match command {
+        Command::BuildRoad { .. }
+        | Command::LandscapeClear { .. }
+        | Command::TerraformLand { .. }
+        | Command::LevelLand { .. } => 3,
+        Command::IncreaseLoan { .. } | Command::DecreaseLoan { .. } => 2,
+        Command::RenameCompany { .. } | Command::RenamePresident { .. } | Command::Pause { .. } => {
+            0
+        }
     }
 }

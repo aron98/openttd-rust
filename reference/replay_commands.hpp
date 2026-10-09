@@ -12,6 +12,7 @@ namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "level_land") return Command<CMD_LEVEL_LAND>::Post(TileIndex(command.at("tile").get<uint32_t>()), TileIndex(command.at("start_tile").get<uint32_t>()), command.at("diagonal").get<bool>(), static_cast<LevelMode>(command.at("level_mode").get<uint8_t>()));
     if (kind == "terraform_land") return Command<CMD_TERRAFORM_LAND>::Post(TileIndex(command.at("tile").get<uint32_t>()), static_cast<Slope>(command.at("slope").get<uint8_t>()), command.at("dir_up").get<bool>());
     if (kind == "build_road") return Command<CMD_BUILD_ROAD>::Post(TileIndex(command.at("tile").get<uint32_t>()),
         static_cast<RoadBits>(command.at("pieces").get<uint8_t>()), static_cast<RoadType>(command.at("road_type").get<uint8_t>()),
@@ -29,7 +30,7 @@ inline Json Execute(const Json &request)
     const std::string mode = request.at("mode");
     Require(mode == "post" || mode == "estimate", "invalid command request mode");
     Json result = {{"posted", false}, {"gate", nullptr}, {"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
-    if (request.at("command").at("kind") == "terraform_land") result["returns"] = {{"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
+    if (request.at("command").at("kind") == "terraform_land" || request.at("command").at("kind") == "level_land") result["returns"] = {{"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
     const CompanyID company(request.at("company").get<uint8_t>());
     AutoRestoreBackup current(_current_company, company);
     AutoRestoreBackup local(_local_company, company);

@@ -16,6 +16,7 @@ from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.level_replay import verify_level
 from scripts.replay_controls import evidence_controls, output_controls
 from scripts.replay_lifecycle import original_continuation, split_replay
 from scripts.replay_matrix import ReplayMatrix
@@ -23,6 +24,21 @@ from scripts.terraform_replay import verify_terraform
 from scripts.world_check_support import ROOT, Json, WorldCheckError, write_json
 
 CASES = {
+    "level-basic": "populated",
+    "level-diagonal": "populated",
+    "level-diagonal-edges": "populated",
+    "level-limits": "populated",
+    "level-limit-one": "populated",
+    "level-limit-zero": "populated",
+    "level-cash": "populated",
+    "level-partial-cash": "populated",
+    "level-partial-diagonal": "populated",
+    "level-exact-cash": "populated",
+    "level-bounds": "populated",
+    "level-freeform": "populated",
+    "level-gates": "populated",
+    "level-tunnel": "populated",
+    "level-resume": "populated",
     "terraform-basic": "populated",
     "terraform-cascade": "populated",
     "terraform-masks": "populated",
@@ -91,6 +107,7 @@ def main() -> None:
         _ = matrix.scenario(name, CASES[name])
         print(f"PASS {name}", flush=True)
     verify_terraform(matrix, selected)
+    verify_level(matrix, selected)
     if not arguments.case:
         split_replay(matrix)
         original_continuation(matrix)
@@ -103,6 +120,9 @@ def main() -> None:
         "full_matrix": not bool(arguments.case),
         "controls_and_resume": not bool(arguments.case),
         "terraform_controls": "terraform-basic" in selected,
+        "level_controls": "level-basic" in selected
+        and "level-partial-cash" in selected,
+        "level_resume_and_continuation": "level-resume" in selected,
         "terraform_resume_and_continuation": "terraform-resume" in selected,
         "native_binary": str(matrix.oracle),
         "rust_binary": str(matrix.cli),

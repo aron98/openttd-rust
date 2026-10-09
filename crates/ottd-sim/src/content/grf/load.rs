@@ -36,8 +36,32 @@ pub(super) struct Session<'i, 'a> {
     pub budget: Budget,
     pub overrides: BTreeMap<(u32, u32), Arc<[u8]>>,
     pub events: Vec<LoadEvent>,
+    pub environment: Option<super::load_context::Environment>,
 }
 impl Session<'_, '_> {
+    fn finish_environment(
+        &mut self,
+        location: LoadLocation,
+    ) -> Result<Option<super::load_context::EnvironmentReport>, ControlLoadError> {
+        let Some(mut state) = self.environment.take() else {
+            return Ok(None);
+        };
+        state.restore_clock();
+        self.budget.payload(
+            std::mem::size_of::<super::load_context::EnvironmentReport>().saturating_add(
+                self.inputs.len().saturating_mul(std::mem::size_of::<
+                    Option<super::load_context::FileGlobals>,
+                >()),
+            ),
+            location,
+        )?;
+        Ok(Some((
+            state,
+            (0..self.inputs.len())
+                .map(|index| self.registry.file(index).map(|file| file.globals))
+                .collect(),
+        )))
+    }
     pub(super) fn check_preceding(
         &self,
         id: u32,
@@ -119,6 +143,48 @@ impl Session<'_, '_> {
                 | LoadStage::Init => 0,
                 LoadStage::Reserve => 0x101,
                 LoadStage::Activation => 0x201,
+            });
+        }
+        if let Some(environment) = &self.environment {
+            if let Some(file) = self.registry.file(location.file) {
+                let palette = if number == 0x8d {
+                    self.check_preceding(file.grfid, u32::MAX, location, action)?;
+                    self.registry
+                        .config_by_id(file.grfid, u32::MAX)
+                        .and_then(|index| self.inputs.get(index))
+                        .ok_or(ControlLoadError::InvalidNativeDomain {
+                            location,
+                            detail: "global palette lookup has no matching GRF config",
+                        })?
+                        .palette
+                } else {
+                    self.inputs
+                        .get(location.file)
+                        .ok_or(ControlLoadError::InvalidNativeDomain {
+                            location,
+                            detail: "global read has no owning GRF input",
+                        })?
+                        .palette
+                };
+                if let Some(value) = environment
+                    .global(
+                        number.wrapping_sub(0x80),
+                        file.globals,
+                        file.version,
+                        palette,
+                    )
+                    .map_err(|_| ControlLoadError::InvalidNativeDomain {
+                        location,
+                        detail: "invalid global calendar context",
+                    })?
+                {
+                    return Ok(value);
+                }
+            }
+            return Ok(if matches!(number, 0x85 | 0x88) {
+                0
+            } else {
+                u32::MAX
             });
         }
         Err(Self::unsupported(
@@ -310,19 +376,53 @@ pub fn run_control_load_with_prefix(
     preceding_ids: &[u32],
     options: ControlOptions,
 ) -> Result<ControlLoadReport, ControlLoadError> {
+    run_with_environment(inputs, preceding_ids, options, None).map(|(report, _)| report)
+}
+
+pub(super) fn run_with_environment(
+    inputs: &[LoadInput<'_>],
+    preceding_ids: &[u32],
+    options: ControlOptions,
+    input_environment: Option<super::load_context::EnvironmentInput>,
+) -> Result<
+    (
+        ControlLoadReport,
+        Option<super::load_context::EnvironmentReport>,
+    ),
+    ControlLoadError,
+> {
     let location = LoadLocation {
         stage: LoadStage::LabelScan,
         file: 0,
         line: 0,
         offset: 0,
     };
+    let environment = input_environment
+        .map(|input| {
+            super::load_context::Environment::new(input.saved, input.settings, options.networking)
+        })
+        .transpose()
+        .map_err(|_| ControlLoadError::InvalidNativeDomain {
+            location,
+            detail: "invalid load environment",
+        })?;
     if inputs.len().saturating_add(preceding_ids.len()) > options.max_files {
         return Err(ControlLoadError::ResourceLimit {
             location,
             resource: "configured files",
         });
     }
-    let mut size = preceding_ids.len().saturating_mul(4);
+    let mut size = preceding_ids.len().saturating_mul(4).saturating_add(
+        environment.as_ref().map_or(0, |_| {
+            std::mem::size_of::<super::load_context::EnvironmentInput>()
+        }),
+    );
+    if size > options.max_source_bytes {
+        return Err(ControlLoadError::ResourceLimit {
+            location,
+            resource: "source/config bytes",
+        });
+    }
     let mut sources = BTreeMap::new();
     for (file, input) in inputs.iter().enumerate() {
         if let Some(previous) = sources.insert(input.name, input.bytes) {
@@ -363,6 +463,7 @@ pub fn run_control_load_with_prefix(
         budget: Budget::new(options),
         overrides: BTreeMap::new(),
         events: Vec::new(),
+        environment,
     };
     for stage in [
         LoadStage::LabelScan,
@@ -373,11 +474,15 @@ pub fn run_control_load_with_prefix(
         session.phase(stage)?;
     }
     session.overrides.clear();
+    let environment = session.finish_environment(location)?;
     session
         .budget
         .payload(session.registry.snapshot_bytes(), location)?;
-    Ok(ControlLoadReport {
-        files: session.registry.snapshots(),
-        events: session.events,
-    })
+    Ok((
+        ControlLoadReport {
+            files: session.registry.snapshots(),
+            events: session.events,
+        },
+        environment,
+    ))
 }

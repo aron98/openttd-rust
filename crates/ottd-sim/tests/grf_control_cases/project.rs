@@ -1,8 +1,6 @@
 //! Exact trace projection without fixture expectations.
 use super::Result;
-use ottd_sim::content::grf::{
-    ControlLoadReport, FileControlState, LoadEvent, LoadStage, OverrideState,
-};
+use super::{ControlLoadReport, FileControlState, LoadEvent, LoadStage, OverrideState};
 use serde_json::{Value, json};
 const fn stage(stage: LoadStage) -> u8 {
     match stage {

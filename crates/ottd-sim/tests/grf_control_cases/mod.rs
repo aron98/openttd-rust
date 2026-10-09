@@ -1,5 +1,5 @@
 //! Deterministic independently encoded loading-control programs.
-use ottd_sim::content::grf::{GrfIdentity, LoadFlags, LoadInput, Palette};
+use super::{GrfIdentity, LoadFlags, LoadInput, Palette};
 /// Fallible fixture construction.
 pub type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 /// One explicitly configured file.

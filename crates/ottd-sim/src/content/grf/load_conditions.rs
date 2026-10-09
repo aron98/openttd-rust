@@ -6,6 +6,20 @@ use super::{
 };
 
 impl Session<'_, '_> {
+    fn condition_parameter(
+        &self,
+        number: u8,
+        value: &mut u32,
+        location: LoadLocation,
+        action: u8,
+    ) -> Result<u32, ControlLoadError> {
+        if number == 0x85 {
+            if let Some(environment) = &self.environment {
+                return Ok(environment.patch_flags(value));
+            }
+        }
+        self.parameter(number, location, action)
+    }
     fn grf_condition(
         &mut self,
         action: u8,
@@ -60,7 +74,7 @@ impl Session<'_, '_> {
         if kind < 2 {
             width = 1;
         }
-        let (value, mask) = match width {
+        let (mut value, mask) = match width {
             8 => (reader.dword()?, reader.dword()?),
             4 => (reader.dword()?, u32::MAX),
             2 => (u32::from(reader.word()?), 0xffff),
@@ -88,7 +102,7 @@ impl Session<'_, '_> {
         } else if parameter == 0x88 {
             self.grf_condition(action, kind, value, mask, location)?
         } else {
-            let parameter = self.parameter(parameter, location, action)?;
+            let parameter = self.condition_parameter(parameter, &mut value, location, action)?;
             match kind {
                 0 | 1 => {
                     if value >= 32 {

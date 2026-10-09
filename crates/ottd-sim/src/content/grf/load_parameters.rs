@@ -130,7 +130,7 @@ impl Session<'_, '_> {
             operation &= 0x7f;
         }
         let (left, right) = if source2 == 0xfe {
-            if data & 0xff == 0xff {
+            if data & 0xff == 0xff && !(data == 0xffff && self.environment.is_some()) {
                 return Err(Self::unsupported(
                     location,
                     0x0d,
@@ -139,7 +139,13 @@ impl Session<'_, '_> {
                 .into());
             }
             (
-                self.external_parameter(source1, data, location)?,
+                if data == 0xffff {
+                    self.environment
+                        .as_ref()
+                        .map_or(0, |environment| environment.patch_variable(source1))
+                } else {
+                    self.external_parameter(source1, data, location)?
+                },
                 u32::from(source2),
             )
         } else {
@@ -160,6 +166,16 @@ impl Session<'_, '_> {
             return Ok(());
         };
         if target >= 0x80 {
+            if let Some(environment) = &mut self.environment {
+                let is_static = self
+                    .inputs
+                    .get(location.file)
+                    .is_some_and(|input| input.flags.is_static);
+                if let Some(file) = self.registry.file_mut(location.file) {
+                    environment.target(target, value, is_static, &mut file.globals);
+                }
+                return Ok(());
+            }
             return Err(Self::unsupported(
                 location,
                 0x0d,

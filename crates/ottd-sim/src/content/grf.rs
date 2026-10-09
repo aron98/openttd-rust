@@ -5,10 +5,15 @@ mod container;
 mod load;
 mod load_budget;
 mod load_conditions;
+mod load_context;
+#[cfg(test)]
+pub mod load_context_tests;
 mod load_cursor;
 mod load_dispatch;
 mod load_execute;
+mod load_globals;
 mod load_parameters;
+mod load_patch;
 mod load_registry;
 mod load_substitution;
 mod load_types;

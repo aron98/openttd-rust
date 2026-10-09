@@ -1726,7 +1726,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-rs",
       "path": "crates/ottd-sim/src/content/grf.rs",
-      "sha256": "d5e4902a5c157b8117b280b208508fa11ad9634982b3e8ca9c05f484c29234a9",
+      "sha256": "197dd22be2a5e084bb3503787cea4e5939a367c24b5c4113ad3d90daa3d127ae",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -2410,7 +2410,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-rs",
       "path": "crates/ottd-sim/src/content/grf/load.rs",
-      "sha256": "ca5d065bbebd75f8a3e53f9c3aea37606880d0eed2f6f7bfceb0f8e3194ec5f5",
+      "sha256": "95949078a3e287d01d3f7980478fb31ee555be18ed01b1794187ff87c1fad83a",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2428,7 +2428,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-conditions-rs",
       "path": "crates/ottd-sim/src/content/grf/load_conditions.rs",
-      "sha256": "1a0ecb0dab03e95a9ffb71f0312d06ec533f0a04f211880ba2ff52a4aeefebcd",
+      "sha256": "9c25864aad18db948f3be70d7c0b17fc741d46b981961546578cad09f240fb77",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2464,7 +2464,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-parameters-rs",
       "path": "crates/ottd-sim/src/content/grf/load_parameters.rs",
-      "sha256": "39f7338e991912f5f87e49e693be5c72f8c57635bd1e1df95d2eb6ff8e555f57",
+      "sha256": "130653eb2fe89aa10fb4a6244bd3cab412a554d589d66a0a98746d2c4dbe6696",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2473,7 +2473,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-registry-rs",
       "path": "crates/ottd-sim/src/content/grf/load_registry.rs",
-      "sha256": "4c043dc9cc91ba0d73a53ecd88803d32df66d6e8e6e382bb0c34e4a905fe9a69",
+      "sha256": "d06c435623c5b20026779869990a53df8b415f78e3e620f5f12c18f3f832b944",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2509,7 +2509,7 @@
     {
       "id": "grf-control-crates-ottd-sim-tests-native-grf-control-rs",
       "path": "crates/ottd-sim/tests/native_grf_control.rs",
-      "sha256": "78423ac115b5ad3f44d05a4cbdaf76c1b250f827fceef67c99bebf26ec624925",
+      "sha256": "2372d11bdb6ce07d5b41ff02b8dfbdf81bc4bed882a624b005e533d7f931077a",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2545,7 +2545,7 @@
     {
       "id": "grf-control-crates-ottd-sim-tests-grf-control-cases-mod-rs",
       "path": "crates/ottd-sim/tests/grf_control_cases/mod.rs",
-      "sha256": "d4bffeb7b9501b2b7f0ff961bc3c9eed422225ad8904bce3ec8a6899ac8b82ad",
+      "sha256": "8f2618dc93415f5ca347a7745f06cf9ce0fc073f4c09744580edec50cbb3fac0",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2563,7 +2563,7 @@
     {
       "id": "grf-control-crates-ottd-sim-tests-grf-control-cases-project-rs",
       "path": "crates/ottd-sim/tests/grf_control_cases/project.rs",
-      "sha256": "b0baf9369b89211eca8e274e4959ccdce402ad79d2ae34fd2f2767ed8b9f2f3d",
+      "sha256": "4939a5071c0a2bf9df49aba761de1d2e5f34be1541a347bf7b7ce12c5d1b3873",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,

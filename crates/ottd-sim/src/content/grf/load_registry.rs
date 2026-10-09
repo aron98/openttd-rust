@@ -3,6 +3,7 @@ use super::load_types::{
 };
 
 pub(super) struct File<'a> {
+    pub globals: super::load_context::FileGlobals,
     pub name: &'a str,
     pub grfid: u32,
     pub version: u8,
@@ -40,6 +41,7 @@ impl<'a> Registry<'a> {
     pub(super) fn initialize(&mut self, input: LoadInput<'a>) {
         if !self.files.iter().any(|file| file.name == input.name) {
             self.files.push(File {
+                globals: super::load_context::FileGlobals::default(),
                 name: input.name,
                 grfid: input.identity.grfid,
                 version: 0,

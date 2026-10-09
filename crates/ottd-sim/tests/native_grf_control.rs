@@ -4,7 +4,9 @@ use grf_control_cases::{Case, Result};
 #[path = "grf_control_cases/project.rs"]
 pub mod project;
 use ottd_sim::content::grf::{
-    ControlOptions, run_control_load, run_control_load_with_prefix, scan_file,
+    ControlLoadReport, ControlOptions, FileControlState, GrfIdentity, LoadEvent, LoadFlags,
+    LoadInput, LoadStage, OverrideState, Palette, run_control_load, run_control_load_with_prefix,
+    scan_file,
 };
 use serde_json::{Value, json};
 use std::{

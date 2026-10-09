@@ -72,6 +72,7 @@ jobs:
             .artifacts/grf-metadata-*/
             .artifacts/grf-control-*/
             .artifacts/purchase-*/
+            .artifacts/depot-build-*/
             .artifacts/road-sale-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'

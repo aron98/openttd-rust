@@ -1,6 +1,8 @@
+#[cfg(test)]
+use super::name;
 use super::{
     PathElement, TableRecord, TableSchema, TileState, WireValue, World, WorldEdit, WorldError,
-    invalid, name,
+    invalid,
 };
 
 impl World {
@@ -9,6 +11,16 @@ impl World {
     /// # Errors
     /// On failure all saved state and derived indexes remain unchanged.
     pub fn edit_batch(&mut self, edits: Vec<WorldEdit>) -> Result<(), WorldError> {
+        let mut transaction = self.transaction();
+        for edit in edits {
+            transaction.apply(edit)?;
+        }
+        transaction.prepare()?.commit();
+        Ok(())
+    }
+
+    #[cfg(test)]
+    pub(super) fn edit_batch_legacy(&mut self, edits: Vec<WorldEdit>) -> Result<(), WorldError> {
         let mut candidate = self.clone();
         for edit in edits {
             match edit {
@@ -106,6 +118,7 @@ impl World {
         }])
     }
 
+    #[cfg(test)]
     fn stage_field(
         &mut self,
         chunk: [u8; 4],
@@ -142,6 +155,7 @@ impl World {
         Ok(())
     }
 
+    #[cfg(test)]
     fn pool_records_mut(
         &mut self,
         chunk: [u8; 4],
@@ -185,6 +199,7 @@ impl World {
             .ok_or_else(|| invalid(&name(chunk), "missing table"))
     }
 
+    #[cfg(test)]
     fn stage_tile(&mut self, index: u32, tile: &TileState) -> Result<(), WorldError> {
         let index = usize::try_from(index).map_err(|_| invalid("tile", "index out of range"))?;
         if index >= self.map().tiles().len() {
@@ -221,7 +236,7 @@ impl World {
     }
 }
 
-fn select_mut<'a>(
+pub(super) fn select_mut<'a>(
     schema: &TableSchema,
     row: &'a mut TableRecord,
     path: &[PathElement],

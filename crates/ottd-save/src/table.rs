@@ -171,6 +171,22 @@ impl TableChunk {
     pub fn encode(&self) -> Result<Chunk, TableError> {
         write::encode(self)
     }
+
+    pub(crate) fn validated_wire_len(&self) -> Result<usize, TableError> {
+        write::validate(self)
+    }
+
+    pub(crate) fn normalize_slots(&mut self) {
+        self.slots = match self.kind {
+            ChunkKind::Table => self.slots.max(
+                self.records
+                    .last_key_value()
+                    .map_or(0, |(id, _)| id.saturating_add(1)),
+            ),
+            ChunkKind::SparseTable => u32::try_from(self.records.len()).unwrap_or(u32::MAX),
+            ChunkKind::Riff | ChunkKind::Array | ChunkKind::SparseArray => self.slots,
+        };
+    }
     /// Four-byte chunk identity.
     pub const fn id(&self) -> [u8; 4] {
         self.id

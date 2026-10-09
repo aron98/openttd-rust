@@ -23,6 +23,31 @@ replacement can change variable-length arrays; `StructList` replaces structure
 lists. Native fixed-array lengths remain enforced. All nested fields remain
 addressable with exact field names and list positions.
 
+## Candidate transactions
+
+`World::transaction()` stages a sparse record/tile overlay. `apply` retains one
+candidate per touched identity; candidate views read earlier writes and merge
+record IDs in ascending order. Any staging error poisons the transaction.
+Dropping or forgetting either the transaction or its prepared result leaves the
+world unchanged. `prepare` runs full candidate validation and structural cache
+reconstruction; callers may compute their dependent caches before the infallible
+`commit`. No mutable `World` or stale structural indexes escape through a view.
+
+Preparation temporarily installs touched values through a private restore guard
+solely to reuse the existing validators. No caller code runs while installed;
+error and unwind restore the originals before control returns. Wire validation
+uses the same counting traversal as encoding and accounts for both encoding and
+decoding resource budgets and the whole-container size limit. MAPS, DATE, PATS
+and SRND alone are encoded to reuse the exact typed metadata parsers. The map
+allocation is reused when dimensions are unchanged; changed dimensions produce
+a validated replacement. Committing publishes ready metadata and derived state.
+
+This is a full validation/reconstruction phase per batch, not incremental
+validation or a claim of final hot-loop performance. It avoids per-object full
+world cloning and whole-save serialization. The former clone/encode/decode path
+is retained only as a differential test oracle. Allocation during staging and
+publication retains Rust's existing abort-on-out-of-memory behavior.
+
 ## Schema provenance and regeneration
 
 Both manifests target the revision in `upstream.toml`:

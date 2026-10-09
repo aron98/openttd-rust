@@ -2,6 +2,10 @@
 mod cargo;
 mod derived;
 mod edit;
+mod journal;
+pub use journal::{
+    CandidateMap, CandidateTable, CandidateView, PreparedWorldTransaction, WorldTransaction,
+};
 mod export;
 mod limits;
 mod orders;

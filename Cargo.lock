@@ -352,6 +352,7 @@ name = "ottd-sim"
 version = "0.1.0"
 dependencies = [
  "ottd-core",
+ "ottd-save",
  "serde",
  "serde_json",
  "thiserror",

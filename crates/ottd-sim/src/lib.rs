@@ -1,6 +1,12 @@
 //! Deterministic, explicitly scoped landscape simulation for OpenTTD 15.3.
+mod commands;
 mod landscape;
+pub use commands::{
+    Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt, CommandRequest,
+    execute_command,
+};
 mod map;
+pub(crate) mod world_access;
 
 pub use landscape::{Landscape, LandscapeError};
 pub use map::{Map, Tile};

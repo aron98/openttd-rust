@@ -8,6 +8,7 @@ license.workspace = true
 
 [dependencies]
 ottd-core = { path = "../ottd-core" }
+ottd-save = { path = "../ottd-save" }
 serde = { version = "1", features = ["derive"] }
 thiserror = "2"
 

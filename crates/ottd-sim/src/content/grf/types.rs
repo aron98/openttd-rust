@@ -124,6 +124,10 @@ pub enum ScanFailure {
 /// FILESCAN result independent of complete container validation.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ScanOutcome<'a> {
+    /// Requested language for convenience text selection.
+    pub language: u8,
+    /// Finalized Action14 and translated Action8 metadata.
+    pub static_info: super::metadata_types::GrfStaticInfo<'a>,
     /// Native error class and one-based data record number, if disabled.
     pub failure: Option<(ScanFailure, u32)>,
     /// Native FILESCAN status.
@@ -140,13 +144,39 @@ pub struct ScanOutcome<'a> {
     pub system: bool,
 }
 
-/// Unsupported Rust scanner behavior is distinct from native disabling.
+impl<'a> ScanOutcome<'a> {
+    pub(super) fn fresh(language: u8) -> Self {
+        Self {
+            language,
+            static_info: super::metadata_types::GrfStaticInfo::default(),
+            failure: None,
+            status: ScanStatus::Unknown,
+            accepted: false,
+            identity: None,
+            metadata: None,
+            invalid_version: false,
+            system: false,
+        }
+    }
+    /// Display name selected with the requested native language fallback.
+    #[must_use]
+    pub fn selected_name(&self) -> Option<&super::metadata_types::LocalizedText<'a>> {
+        self.static_info.name.select(self.language)
+    }
+}
+
+/// Host scanner errors are distinct from original native disabling.
 #[derive(Debug, thiserror::Error)]
 pub enum ScanError {
+    /// Caller-selected cumulative host bound was exceeded.
+    #[error("GRF {resource} limit exceeded at byte {offset}")]
+    ResourceLimit {
+        /// Bound being enforced.
+        resource: &'static str,
+        /// Input location when the bound was reached.
+        offset: usize,
+    },
     /// Container could not be safely read.
     #[error(transparent)]
     Structure(#[from] GrfParseError),
-    /// Metadata action has not yet been implemented.
-    #[error("unsupported metadata scan action {0:#x}")]
-    UnsupportedAction(u8),
 }

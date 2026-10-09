@@ -8,6 +8,7 @@
 #include "reference_runtime_road.hpp"
 #include "reference_runtime_road_fixture.hpp"
 #include "reference_grf_scan.hpp"
+#include "reference_grf_metadata.hpp"
 #include "../station_base.h"
 #include "../group.h"
 #include "../industry.h"
@@ -60,6 +61,7 @@ inline void AfterLoad()
     ReferenceAllocation::Observe();
     ReferenceRuntimeRoad::Observe();
     ReferenceGrfScan::Observe();
+    ReferenceGrfMetadata::Observe();
     const char *path = std::getenv("OTTD_WORLD_DERIVED_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (const char *control = std::getenv("OTTD_WORLD_CORRUPT_DERIVED")) {

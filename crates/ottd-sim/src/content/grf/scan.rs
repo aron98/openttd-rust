@@ -1,9 +1,12 @@
 use super::{
+    action14,
     container::checksum_extent,
+    metadata_types::ScanOptions,
     records::{Reader, header},
+    text::{Budget, localized},
     types::{
-        GrfIdentity, GrfParseError, Metadata, ParseLimits, RecordKind, ScanError, ScanFailure,
-        ScanOutcome, ScanStatus,
+        GrfIdentity, GrfParseError, Metadata, RecordKind, ScanError, ScanFailure, ScanOutcome,
+        ScanStatus,
     },
 };
 use md5::{Digest, Md5};
@@ -52,26 +55,72 @@ fn metadata<'a>(reader: &mut Reader<'a>) -> Result<Metadata<'a>, GrfParseError> 
     })
 }
 
+fn apply_action8<'a>(
+    outcome: &mut ScanOutcome<'a>,
+    metadata: Metadata<'a>,
+    bytes: &[u8],
+    budget: &mut Budget,
+    offset: usize,
+) -> Result<(), ScanError> {
+    outcome.invalid_version = !(2..=8).contains(&metadata.version);
+    outcome.static_info.name.insert(localized(
+        metadata.name,
+        127,
+        metadata.grfid,
+        false,
+        budget,
+        offset,
+    )?);
+    if let Some(raw) = metadata.info {
+        outcome.static_info.description.insert(localized(
+            raw,
+            127,
+            metadata.grfid,
+            true,
+            budget,
+            offset,
+        )?);
+    }
+    outcome.system = metadata.grfid & 255 == 255;
+    outcome.accepted = metadata.grfid != 0 && !outcome.system;
+    if outcome.accepted {
+        let data = bytes
+            .get(..checksum_extent(bytes))
+            .ok_or(GrfParseError::SectionOffset)?;
+        outcome.identity = Some(GrfIdentity {
+            grfid: metadata.grfid,
+            md5: Md5::digest(data).into(),
+        });
+    }
+    outcome.metadata = Some(metadata);
+    Ok(())
+}
+
 /// Scan until native FILESCAN stops; subsequent malformed bytes are not executed.
-/// Action14 remains explicitly unsupported until its metadata interpreter is added.
 /// # Errors
-/// Returns unsafe framing, resource-limit or unsupported metadata-action errors.
+/// Returns structural or host resource-limit errors.
 pub fn scan_file(bytes: &[u8]) -> Result<ScanOutcome<'_>, ScanError> {
-    let limits = ParseLimits::default();
+    scan_file_with_options(bytes, ScanOptions::default())
+}
+
+/// Fresh-registry FILESCAN with explicit client settings and host bounds.
+/// # Errors
+/// Returns structural or host resource-limit errors.
+pub fn scan_file_with_options(
+    bytes: &[u8],
+    options: ScanOptions,
+) -> Result<ScanOutcome<'_>, ScanError> {
+    let limits = options.limits;
+    let mut budget = Budget::new(limits);
     if bytes.len() > limits.bytes {
-        return Err(GrfParseError::ResourceLimit.into());
+        return Err(ScanError::ResourceLimit {
+            resource: "bytes",
+            offset: 0,
+        });
     }
     let (mut reader, version, _) = header(bytes)?;
     reader.initial(version)?;
-    let mut outcome = ScanOutcome {
-        failure: None,
-        status: ScanStatus::Unknown,
-        accepted: false,
-        identity: None,
-        metadata: None,
-        invalid_version: false,
-        system: false,
-    };
+    let mut outcome = ScanOutcome::fresh(options.language);
     let mut skip_count = 0_u32;
     let mut count = 0_usize;
     loop {
@@ -81,7 +130,10 @@ pub fn scan_file(bytes: &[u8]) -> Result<ScanOutcome<'_>, ScanError> {
         };
         count = count.saturating_add(1);
         if count > limits.records {
-            return Err(GrfParseError::ResourceLimit.into());
+            return Err(ScanError::ResourceLimit {
+                resource: "records",
+                offset: record_start,
+            });
         }
         let line = u32::try_from(count).map_err(|_| GrfParseError::ResourceLimit)?;
         if skip_count == 0 && (kind != 255 || length > 1024 * 1024) {
@@ -100,6 +152,7 @@ pub fn scan_file(bytes: &[u8]) -> Result<ScanOutcome<'_>, ScanError> {
         let RecordKind::Pseudo(payload) = record.kind else {
             return Err(GrfParseError::InlineSprite(record_start).into());
         };
+        let payload_start = reader.pos.saturating_sub(payload.len());
         let mut action_reader = Reader {
             bytes: payload,
             pos: 0,
@@ -110,26 +163,29 @@ pub fn scan_file(bytes: &[u8]) -> Result<ScanOutcome<'_>, ScanError> {
             break;
         };
         match action {
-            0x14 => return Err(ScanError::UnsupportedAction(action)),
+            0x14 => {
+                match action14::parse(
+                    &mut action_reader,
+                    &mut outcome.static_info,
+                    &mut budget,
+                    payload_start,
+                ) {
+                    Ok(()) => (),
+                    Err(ScanError::Structure(GrfParseError::Truncated(_))) => {
+                        outcome.status = ScanStatus::Disabled;
+                        outcome.failure = Some((ScanFailure::ReadBounds, line));
+                        break;
+                    }
+                    Err(error) => return Err(error),
+                }
+            }
             8 => {
                 let Ok(metadata) = metadata(&mut action_reader) else {
                     outcome.status = ScanStatus::Disabled;
                     outcome.failure = Some((ScanFailure::ReadBounds, line));
                     break;
                 };
-                outcome.invalid_version = !(2..=8).contains(&metadata.version);
-                outcome.system = metadata.grfid & 255 == 255;
-                outcome.accepted = metadata.grfid != 0 && !outcome.system;
-                if outcome.accepted {
-                    let data = bytes
-                        .get(..checksum_extent(bytes))
-                        .ok_or(GrfParseError::SectionOffset)?;
-                    outcome.identity = Some(GrfIdentity {
-                        grfid: metadata.grfid,
-                        md5: Md5::digest(data).into(),
-                    });
-                }
-                outcome.metadata = Some(metadata);
+                apply_action8(&mut outcome, metadata, bytes, &mut budget, record_start)?;
                 break;
             }
             _ => {
@@ -143,5 +199,6 @@ pub fn scan_file(bytes: &[u8]) -> Result<ScanOutcome<'_>, ScanError> {
             }
         }
     }
+    outcome.static_info.finalize(options.default_palette);
     Ok(outcome)
 }

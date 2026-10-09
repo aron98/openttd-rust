@@ -1,6 +1,6 @@
 //! Actual `NewGRF` framing, identity and file-scan semantics.
 use ottd_sim::content::grf::{
-    GrfContainer, GrfParseError, ParseLimits, RecordKind, ScanError, ScanStatus, scan_file,
+    GrfContainer, GrfParseError, ParseLimits, RecordKind, ScanStatus, scan_file,
 };
 
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
@@ -81,7 +81,7 @@ fn v2_identity_excludes_sprite_data_and_retains_variants() -> Result {
 }
 
 #[test]
-fn statuses_metadata_and_unsupported_are_distinct() -> Result {
+fn statuses_and_empty_action14_metadata_are_distinct() -> Result {
     let invalid = file(&[b"\x08\x01TESTname"], 1)?;
     let scan = scan_file(&invalid)?;
     assert!(scan.invalid_version);
@@ -90,10 +90,12 @@ fn statuses_metadata_and_unsupported_are_distinct() -> Result {
     let system = scan_file(&system_bytes)?;
     assert!(system.system);
     assert!(!system.accepted);
-    assert!(matches!(
-        scan_file(&file(&[b"\x14\0"], 1)?),
-        Err(ScanError::UnsupportedAction(0x14))
-    ));
+    let empty_bytes = file(&[b"\x14\0"], 1)?;
+    let empty = scan_file(&empty_bytes)?;
+    assert_eq!(empty.status, ScanStatus::Unknown);
+    assert!(!empty.accepted);
+    assert_eq!(empty.static_info.num_valid_params, 128);
+    assert!(empty.static_info.parameters.is_empty());
     let truncated_bytes = file(&[b"\x08\x08"], 1)?;
     let truncated = scan_file(&truncated_bytes)?;
     assert_eq!(truncated.status, ScanStatus::Disabled);

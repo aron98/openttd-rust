@@ -166,3 +166,50 @@ state, vehicle motion, daily operating callbacks, full town growth, cargo routin
 industry random policy/closure, UI, scripts, or network parity. The existing
 landscape runner continues to report clock boundaries without dispatching these
 object callback bodies automatically.
+
+## Complete saved worlds and structural restoration
+
+Stage 2 targets pinned version-362 saved state and content-independent
+restoration. It does not claim content-dependent engine/spec/callback caches,
+command execution or playable simulation. Those remain later-stage gates. The
+[stage plan](stages/02-world-loading-saving.md) records review and integration
+status separately from the executable capability declarations.
+
+After both reference builds, run
+`python3 scripts/check-contract.py --run world.complete-load-save` or
+`bash scripts/check-worlds.sh`. The driver creates a fresh
+`.artifacts/worlds-*/results/` tree, records native/Rust executable hashes and
+checks all five retained [world fixtures](../fixtures/world/README.md). Saved
+JSON comes from native memory during actual save traversal; structural JSON
+comes from native objects after loading, before gameplay ticks. Comparison
+retains every field, including script data and raw map planes.
+
+One edit batch changes vehicles, companies, towns, industries, stations, orders,
+cargo and infrastructure. Each family has its own before/after/path receipt,
+and the complete expected native state must match after reload. Additional
+cases change persistent storage, cargo payment state and a roadside map-plane
+field, and exercise native saturating cargo-feeder totals. Modded-AI and
+GameScript worlds also receive nonempty unrelated edits, with complete expected
+state comparisons and explicit NGRF/AIPL/GSDT/PSAC preservation checks. Original
+and Rust-edited content trees match exactly; native re-saves and script continuation
+compare with unedited controls at matching load/save phases to retain native
+Squirrel table ordering without normalization. The entire restored native world
+must match its control plus the declared edit. Each native exit save is loaded again; its native
+post-load structural state is compared with Rust decoding that identical file,
+with the path and SHA-256 retained in a `resaved/input.json` receipt. Uninstrumented
+original reload witnesses cover edited eight-family and storage/payment/map
+saves, plus the edited modded and GameScript saves; their role is load acceptance,
+not a fabricated JSON observation from an unmodified engine.
+
+Eight controls require observable failure for a changed field, omitted field,
+missing content, stale artifacts, absent AI restore marker, corrupted native
+group cache, corrupted native cargo cache and corrupted cargo-payment binding.
+The cache controls additionally require unchanged saved-state observations.
+Native GameScript reload verifies a nonempty nested marker and goal/story/league
+IDs. Native fixture commands and script execution establish source behavior;
+Rust script execution is not claimed.
+
+The contract requires concrete per-case artifacts and refuses missing/empty
+evidence. PR CI executes the seven-driver baseline and retains the world trees
+alongside contract reports, including failures. A local passing run does not
+substitute for the final independent review, CI, or maintainer merge.

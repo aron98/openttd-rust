@@ -1,0 +1,5756 @@
+{
+  "native_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "savegame_version": 362,
+  "schemas": {
+    "AIPL": {
+      "fields": [
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "settings",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "version",
+          "wire_type": 6
+        }
+      ]
+    },
+    "ANIT": {
+      "fields": [
+        {
+          "child": null,
+          "name": "tiles",
+          "wire_type": 22
+        }
+      ]
+    },
+    "APID": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "entity_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 4
+        }
+      ]
+    },
+    "ATID": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "entity_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 4
+        }
+      ]
+    },
+    "BKOR": {
+      "fields": [
+        {
+          "child": null,
+          "name": "user",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "tile",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "group",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "service_interval",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "clone",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "cur_real_order_index",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "cur_implicit_order_index",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "current_order_time",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "lateness_counter",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "timetable_start",
+          "wire_type": 8
+        },
+        {
+          "child": null,
+          "name": "vehicle_flags",
+          "wire_type": 4
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "type",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "flags",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "dest",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "refit_cargo",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "wait_time",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "travel_time",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "max_speed",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "orders",
+          "wire_type": 27
+        }
+      ]
+    },
+    "CAPA": {
+      "fields": [
+        {
+          "child": null,
+          "name": "source",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "source_xy",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "loaded_at_xy",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "count",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "periods_in_transit",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "feeder_share",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "source_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "source_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "travelled.x",
+          "wire_type": 3
+        },
+        {
+          "child": null,
+          "name": "travelled.y",
+          "wire_type": 3
+        }
+      ]
+    },
+    "CAPY": {
+      "fields": [
+        {
+          "child": null,
+          "name": "front",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "route_profit",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "visual_profit",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "visual_transfer",
+          "wire_type": 7
+        }
+      ]
+    },
+    "CHTS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "magic_bulldozer.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "magic_bulldozer.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "switch_company.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "switch_company.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "money.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "money.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "crossing_tunnels.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "crossing_tunnels.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "no_jetcrash.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "no_jetcrash.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "change_date.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "change_date.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "setup_prod.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "setup_prod.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "edit_max_hl.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "edit_max_hl.value",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "station_rating.been_used",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "station_rating.value",
+          "wire_type": 1
+        }
+      ]
+    },
+    "CITY": {
+      "fields": [
+        {
+          "child": null,
+          "name": "xy",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "townnamegrfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "townnametype",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "townnameparts",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "flags",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "statues",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "have_ratings",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "ratings",
+          "wire_type": 19
+        },
+        {
+          "child": null,
+          "name": "unwanted",
+          "wire_type": 17
+        },
+        {
+          "child": null,
+          "name": "goal",
+          "wire_type": 22
+        },
+        {
+          "child": null,
+          "name": "text",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "time_until_rebuild",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "grow_counter",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "growth_rate",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "fund_buildings_months",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "road_build_months",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "exclusivity",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "exclusive_counter",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "larger_town",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "layout",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "valid_history",
+          "wire_type": 8
+        },
+        {
+          "child": null,
+          "name": "psa_list",
+          "wire_type": 22
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "cargo",
+                "wire_type": 2
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "production",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "transported",
+                      "wire_type": 6
+                    }
+                  ]
+                },
+                "name": "history",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "supplied",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "old_max",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "new_max",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "old_act",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "new_act",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "received",
+          "wire_type": 27
+        }
+      ]
+    },
+    "CMDL": {
+      "fields": [
+        {
+          "child": null,
+          "name": "number",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "amount",
+          "wire_type": 6
+        }
+      ]
+    },
+    "CMPU": {
+      "fields": [
+        {
+          "child": null,
+          "name": "number",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "amount",
+          "wire_type": 6
+        }
+      ]
+    },
+    "DATE": {
+      "fields": [
+        {
+          "child": null,
+          "name": "date",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "date_fract",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "tick_counter",
+          "wire_type": 8
+        },
+        {
+          "child": null,
+          "name": "economy_date",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "economy_date_fract",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "days_since_last_month",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "calendar_sub_date_fract",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "cur_tileloop_tile",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "next_disaster_start",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "random_state[0]",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "random_state[1]",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "company_tick_counter",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "trees_tick_counter",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "pause_mode",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "id",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "competitors_interval",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "competitors_interval_elapsed",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "competitors_interval_fired",
+          "wire_type": 1
+        }
+      ]
+    },
+    "DEPT": {
+      "fields": [
+        {
+          "child": null,
+          "name": "xy",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "town",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "town_cn",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "build_date",
+          "wire_type": 5
+        }
+      ]
+    },
+    "ECMY": {
+      "fields": [
+        {
+          "child": null,
+          "name": "inflation_prices",
+          "wire_type": 8
+        },
+        {
+          "child": null,
+          "name": "inflation_payment",
+          "wire_type": 8
+        },
+        {
+          "child": null,
+          "name": "fluct",
+          "wire_type": 3
+        },
+        {
+          "child": null,
+          "name": "interest_rate",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "infl_amount",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "infl_amount_pr",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "industry_daily_change_counter",
+          "wire_type": 6
+        }
+      ]
+    },
+    "EIDS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "internal_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 2
+        }
+      ]
+    },
+    "ENGN": {
+      "fields": [
+        {
+          "child": null,
+          "name": "intro_date",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "age",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "reliability",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "reliability_spd_dec",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "reliability_start",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "reliability_max",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "reliability_final",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "duration_phase_1",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "duration_phase_2",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "duration_phase_3",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "flags",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "preview_asked",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "preview_company",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "preview_wait",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "company_avail",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "company_hidden",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        }
+      ]
+    },
+    "ERNW": {
+      "fields": [
+        {
+          "child": null,
+          "name": "from",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "to",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "next",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "group_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "replace_when_old",
+          "wire_type": 1
+        }
+      ]
+    },
+    "GLOG": {
+      "fields": [
+        {
+          "child": null,
+          "name": "at",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "tick",
+          "wire_type": 8
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "ct",
+                "wire_type": 2
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "mode.mode",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "mode.landscape",
+                      "wire_type": 2
+                    }
+                  ]
+                },
+                "name": "mode",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "revision.text",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "revision.newgrf",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "revision.slver",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "revision.modified",
+                      "wire_type": 2
+                    }
+                  ]
+                },
+                "name": "revision",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "oldver.type",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "oldver.version",
+                      "wire_type": 6
+                    }
+                  ]
+                },
+                "name": "oldver",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "setting.name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "setting.oldval",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "setting.newval",
+                      "wire_type": 5
+                    }
+                  ]
+                },
+                "name": "setting",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "grfadd.grfid",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "grfadd.md5sum",
+                      "wire_type": 18
+                    }
+                  ]
+                },
+                "name": "grfadd",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "grfrem.grfid",
+                      "wire_type": 6
+                    }
+                  ]
+                },
+                "name": "grfrem",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "grfcompat.grfid",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "grfcompat.md5sum",
+                      "wire_type": 18
+                    }
+                  ]
+                },
+                "name": "grfcompat",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "grfparam.grfid",
+                      "wire_type": 6
+                    }
+                  ]
+                },
+                "name": "grfparam",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "grfmove.grfid",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "grfmove.offset",
+                      "wire_type": 5
+                    }
+                  ]
+                },
+                "name": "grfmove",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "grfbug.data",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "grfbug.grfid",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "grfbug.bug",
+                      "wire_type": 2
+                    }
+                  ]
+                },
+                "name": "grfbug",
+                "wire_type": 27
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "is_emergency_save",
+                      "wire_type": 1
+                    }
+                  ]
+                },
+                "name": "emergency",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "action",
+          "wire_type": 27
+        }
+      ]
+    },
+    "GOAL": {
+      "fields": [
+        {
+          "child": null,
+          "name": "company",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "type",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "dst",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "text",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "progress",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "completed",
+          "wire_type": 1
+        }
+      ]
+    },
+    "GRPS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "owner",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "flags",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "livery.in_use",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "livery.colour1",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "livery.colour2",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "parent",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "number",
+          "wire_type": 4
+        }
+      ]
+    },
+    "GSDT": {
+      "fields": [
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "settings",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "version",
+          "wire_type": 6
+        }
+      ]
+    },
+    "GSTR": {
+      "fields": [
+        {
+          "child": null,
+          "name": "language",
+          "wire_type": 26
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "string",
+                "wire_type": 26
+              }
+            ]
+          },
+          "name": "strings",
+          "wire_type": 27
+        }
+      ]
+    },
+    "HIDS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "entity_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 4
+        }
+      ]
+    },
+    "IBLD": {
+      "fields": [
+        {
+          "child": null,
+          "name": "wanted_inds",
+          "wire_type": 6
+        }
+      ]
+    },
+    "IIDS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "entity_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 4
+        }
+      ]
+    },
+    "INDY": {
+      "fields": [
+        {
+          "child": null,
+          "name": "location.tile",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "location.w",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "location.h",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "town",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "neutral_station",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "prod_level",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "counter",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "owner",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "random_colour",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "last_prod_year",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "was_cargo_delivered",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "ctlflags",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "founder",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction_date",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "construction_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "selected_layout",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "exclusive_supplier",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "exclusive_consumer",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "psa",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "random",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "text",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "valid_history",
+          "wire_type": 8
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "cargo",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "waiting",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "last_accepted",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "accumulated_waiting",
+                "wire_type": 6
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "accepted",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting",
+                      "wire_type": 4
+                    }
+                  ]
+                },
+                "name": "history",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "accepted",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "cargo",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "waiting",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "rate",
+                "wire_type": 2
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "production",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "transported",
+                      "wire_type": 4
+                    }
+                  ]
+                },
+                "name": "history",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "produced",
+          "wire_type": 27
+        }
+      ]
+    },
+    "ITBL": {
+      "fields": [
+        {
+          "child": null,
+          "name": "probability",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "min_number",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "target_count",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "max_wait",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "wait_count",
+          "wire_type": 4
+        }
+      ]
+    },
+    "LEAE": {
+      "fields": [
+        {
+          "child": null,
+          "name": "table",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "rating",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "company",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "text",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "score",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "link.type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "link.target",
+          "wire_type": 6
+        }
+      ]
+    },
+    "LEAT": {
+      "fields": [
+        {
+          "child": null,
+          "name": "title",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "header",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "footer",
+          "wire_type": 26
+        }
+      ]
+    },
+    "LGRJ": {
+      "fields": [
+        {
+          "child": null,
+          "name": "linkgraph.recalc_interval",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "linkgraph.recalc_time",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_pax",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_mail",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_armoured",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_default",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.accuracy",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.demand_distance",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.demand_size",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.short_path_saturation",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "join_date",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "link_graph.index",
+          "wire_type": 4
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "last_compression",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "cargo",
+                "wire_type": 2
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "xy",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "supply",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "demand",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "station",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "last_update",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": {
+                        "fields": [
+                          {
+                            "child": null,
+                            "name": "capacity",
+                            "wire_type": 6
+                          },
+                          {
+                            "child": null,
+                            "name": "usage",
+                            "wire_type": 6
+                          },
+                          {
+                            "child": null,
+                            "name": "travel_time_sum",
+                            "wire_type": 8
+                          },
+                          {
+                            "child": null,
+                            "name": "last_unrestricted_update",
+                            "wire_type": 5
+                          },
+                          {
+                            "child": null,
+                            "name": "last_restricted_update",
+                            "wire_type": 5
+                          },
+                          {
+                            "child": null,
+                            "name": "dest_node",
+                            "wire_type": 4
+                          }
+                        ]
+                      },
+                      "name": "edges",
+                      "wire_type": 27
+                    }
+                  ]
+                },
+                "name": "nodes",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "linkgraph",
+          "wire_type": 27
+        }
+      ]
+    },
+    "LGRP": {
+      "fields": [
+        {
+          "child": null,
+          "name": "last_compression",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "cargo",
+          "wire_type": 2
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "xy",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "supply",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "demand",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "station",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "last_update",
+                "wire_type": 5
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "capacity",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "usage",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "travel_time_sum",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "last_unrestricted_update",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "last_restricted_update",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "dest_node",
+                      "wire_type": 4
+                    }
+                  ]
+                },
+                "name": "edges",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "nodes",
+          "wire_type": 27
+        }
+      ]
+    },
+    "LGRS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "schedule",
+          "wire_type": 22
+        },
+        {
+          "child": null,
+          "name": "running",
+          "wire_type": 22
+        }
+      ]
+    },
+    "MAPS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "dim_x",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "dim_y",
+          "wire_type": 6
+        }
+      ]
+    },
+    "NGRF": {
+      "fields": [
+        {
+          "child": null,
+          "name": "filename",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "ident.grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "ident.md5sum",
+          "wire_type": 18
+        },
+        {
+          "child": null,
+          "name": "version",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "param",
+          "wire_type": 22
+        },
+        {
+          "child": null,
+          "name": "num_params",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "palette",
+          "wire_type": 2
+        }
+      ]
+    },
+    "OBID": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "entity_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 4
+        }
+      ]
+    },
+    "OBJS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "location.tile",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "location.w",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "location.h",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "town",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "build_date",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "colour",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "view",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "type",
+          "wire_type": 4
+        }
+      ]
+    },
+    "ORDL": {
+      "fields": [
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "type",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "flags",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "dest",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "refit_cargo",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "wait_time",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "travel_time",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "max_speed",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "orders",
+          "wire_type": 27
+        }
+      ]
+    },
+    "PATS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "difficulty.max_no_competitors",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.competitors_interval",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "difficulty.number_towns",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.industry_density",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.max_loan",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "difficulty.initial_interest",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.vehicle_costs",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.competitor_speed",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.vehicle_breakdowns",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.subsidy_multiplier",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.subsidy_duration",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "difficulty.construction_cost",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.terrain_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.quantity_sea_lakes",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.economy",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "difficulty.line_reverse_mode",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "difficulty.disasters",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "difficulty.town_council_tolerance",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "difficulty.infinite_money",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.town_layout",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.allow_town_roads",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.found_town",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.place_houses",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.allow_town_level_crossings",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.town_cargogen_mode",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.station_noise_level",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.inflation",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.multiple_industry_per_town",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.bribe",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.exclusive_rights",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.fund_buildings",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.fund_roads",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.give_money",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.feeder_payment_share",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.town_growth_rate",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.larger_towns",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.initial_city_size",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.mod_road_rebuild",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.dist_local_authority",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.town_noise_population[0]",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "economy.town_noise_population[1]",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "economy.town_noise_population[2]",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "economy.town_noise_population[3]",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "economy.infrastructure_maintenance",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "economy.timekeeping_units",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "economy.minutes_per_calendar_year",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "economy.town_cargo_scale",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "economy.industry_cargo_scale",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "order.no_servicing_if_no_breakdowns",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "order.improved_load",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "order.selectgoods",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "order.serviceathelipad",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "order.station_length_loading_penalty",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "order.gradual_loading",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "station.never_expire_airports",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "station.station_spread",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "station.modified_catchment",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "station.serve_neutral_industries",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "station.distant_join_stations",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "vehicle.road_side",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.train_acceleration_model",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.roadveh_acceleration_model",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.train_slope_steepness",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.roadveh_slope_steepness",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.max_train_length",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.smoke_amount",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.never_expire_vehicles",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "vehicle.max_trains",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "vehicle.max_roadveh",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "vehicle.max_aircraft",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "vehicle.max_ships",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "vehicle.wagon_speed_limits",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "vehicle.disable_elrails",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "vehicle.freight_trains",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.plane_speed",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.dynamic_engines",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "vehicle.plane_crashes",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "vehicle.extend_vehicle_life",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.recalc_interval",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "linkgraph.recalc_time",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_pax",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_mail",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_armoured",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.distribution_default",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.accuracy",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.demand_distance",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.demand_size",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "linkgraph.short_path_saturation",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.currency",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_velocity",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_velocity_nautical",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_power",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_weight",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_volume",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_force",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.units_height",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "locale.digit_group_separator",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "locale.digit_group_separator_currency",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "locale.digit_decimal_separator",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "pf.forbid_90_deg",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "pf.roadveh_queue",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "pf.reverse_at_signals",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "pf.wait_oneway_signal",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "pf.wait_twoway_signal",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "pf.wait_for_pbs_path",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "pf.reserve_paths",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "pf.path_backoff_interval",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.max_search_nodes",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_firstred_twoway_eol",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_firstred_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_firstred_exit_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_lastred_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_lastred_exit_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_station_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_slope_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_curve45_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_curve90_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_depot_reverse_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_crossing_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_look_ahead_max_signals",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_look_ahead_signal_p0",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_look_ahead_signal_p1",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_look_ahead_signal_p2",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_pbs_cross_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_pbs_station_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_pbs_signal_back_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_doubleslip_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_longer_platform_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_longer_platform_per_tile_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_shorter_platform_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.rail_shorter_platform_per_tile_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.road_slope_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.road_curve_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.road_crossing_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.road_stop_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.road_stop_occupied_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.road_stop_bay_occupied_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.maximum_go_to_depot_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.ship_curve45_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "pf.yapf.ship_curve90_penalty",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "script.script_max_opcode_till_suspend",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "script.script_max_memory_megabytes",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "ai.ai_in_multiplayer",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "ai.ai_disable_veh_train",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "ai.ai_disable_veh_roadveh",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "ai.ai_disable_veh_aircraft",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "ai.ai_disable_veh_ship",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "game_creation.town_name",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.landscape",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.heightmap_height",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.snow_line_height",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.snow_coverage",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.desert_coverage",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.starting_year",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "game_creation.ending_year",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "game_creation.land_generator",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.oil_refinery_limit",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.tgen_smoothness",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.variety",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.generation_seed",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "game_creation.tree_placer",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.water_borders",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.water_border_presets",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.custom_town_number",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "game_creation.custom_industry_number",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "game_creation.custom_terrain_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.custom_sea_level",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.min_river_length",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.river_route_random",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "game_creation.amount_of_rivers",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.map_height_limit",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.build_on_slopes",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.command_pause_level",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.terraform_per_64k_frames",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "construction.terraform_frame_burst",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "construction.clear_per_64k_frames",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "construction.clear_frame_burst",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "construction.tree_per_64k_frames",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "construction.tree_frame_burst",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "construction.build_object_per_64k_frames",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "construction.build_object_frame_burst",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "construction.autoslope",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.extra_dynamite",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.max_bridge_length",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "construction.max_bridge_height",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.max_tunnel_length",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "construction.train_signal_side",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.road_stop_on_town_road",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.road_stop_on_competitor_road",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.crossing_with_competitor",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.raw_industry_construction",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.industry_platform",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "construction.freeform_edges",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "construction.extra_tree_placement",
+          "wire_type": 2
+        }
+      ]
+    },
+    "PLYR": {
+      "fields": [
+        {
+          "child": null,
+          "name": "name_2",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "name_1",
+          "wire_type": 9
+        },
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "president_name_1",
+          "wire_type": 9
+        },
+        {
+          "child": null,
+          "name": "president_name_2",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "president_name",
+          "wire_type": 26
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "key",
+                "wire_type": 26
+              }
+            ]
+          },
+          "name": "allow_list",
+          "wire_type": 27
+        },
+        {
+          "child": null,
+          "name": "face",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "face_style",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "money",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "current_loan",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "max_loan",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "colour",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "money_fraction",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "block_preview",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "location_of_HQ",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "last_build_coordinate",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "inaugurated_year",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "inaugurated_year_calendar",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "months_of_bankruptcy",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "bankrupt_asked",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "bankrupt_timeout",
+          "wire_type": 3
+        },
+        {
+          "child": null,
+          "name": "bankrupt_value",
+          "wire_type": 7
+        },
+        {
+          "child": null,
+          "name": "yearly_expenses",
+          "wire_type": 23
+        },
+        {
+          "child": null,
+          "name": "is_ai",
+          "wire_type": 1
+        },
+        {
+          "child": null,
+          "name": "terraform_limit",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "clear_limit",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "tree_limit",
+          "wire_type": 6
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "engine_renew_list",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "settings.engine_renew",
+                "wire_type": 1
+              },
+              {
+                "child": null,
+                "name": "settings.engine_renew_months",
+                "wire_type": 3
+              },
+              {
+                "child": null,
+                "name": "settings.engine_renew_money",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "settings.renew_keep_length",
+                "wire_type": 1
+              },
+              {
+                "child": null,
+                "name": "settings.vehicle.servint_ispercent",
+                "wire_type": 1
+              },
+              {
+                "child": null,
+                "name": "settings.vehicle.servint_trains",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "settings.vehicle.servint_roadveh",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "settings.vehicle.servint_aircraft",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "settings.vehicle.servint_ships",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "settings",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "income",
+                "wire_type": 7
+              },
+              {
+                "child": null,
+                "name": "expenses",
+                "wire_type": 7
+              },
+              {
+                "child": null,
+                "name": "company_value",
+                "wire_type": 7
+              },
+              {
+                "child": null,
+                "name": "delivered_cargo",
+                "wire_type": 22
+              },
+              {
+                "child": null,
+                "name": "performance_history",
+                "wire_type": 5
+              }
+            ]
+          },
+          "name": "cur_economy",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "income",
+                "wire_type": 7
+              },
+              {
+                "child": null,
+                "name": "expenses",
+                "wire_type": 7
+              },
+              {
+                "child": null,
+                "name": "company_value",
+                "wire_type": 7
+              },
+              {
+                "child": null,
+                "name": "delivered_cargo",
+                "wire_type": 22
+              },
+              {
+                "child": null,
+                "name": "performance_history",
+                "wire_type": 5
+              }
+            ]
+          },
+          "name": "old_economy",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "in_use",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "colour1",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "colour2",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "liveries",
+          "wire_type": 27
+        }
+      ]
+    },
+    "PSAC": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "storage",
+          "wire_type": 22
+        }
+      ]
+    },
+    "RAIL": {
+      "fields": [
+        {
+          "child": null,
+          "name": "label",
+          "wire_type": 6
+        }
+      ]
+    },
+    "ROAD": {
+      "fields": [
+        {
+          "child": null,
+          "name": "xy",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "status",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "next",
+          "wire_type": 6
+        }
+      ]
+    },
+    "ROTT": {
+      "fields": [
+        {
+          "child": null,
+          "name": "label",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "subtype",
+          "wire_type": 2
+        }
+      ]
+    },
+    "SIGN": {
+      "fields": [
+        {
+          "child": null,
+          "name": "name",
+          "wire_type": 26
+        },
+        {
+          "child": null,
+          "name": "x",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "y",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "owner",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "z",
+          "wire_type": 5
+        }
+      ]
+    },
+    "SRND": {
+      "fields": [
+        {
+          "child": null,
+          "name": "state[0]",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "state[1]",
+          "wire_type": 6
+        }
+      ]
+    },
+    "STNN": {
+      "fields": [
+        {
+          "child": null,
+          "name": "facilities",
+          "wire_type": 2
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "xy",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "town",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "string_id",
+                      "wire_type": 9
+                    },
+                    {
+                      "child": null,
+                      "name": "name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "delete_ctr",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "owner",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "facilities",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "build_date",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "random_bits",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting_triggers",
+                      "wire_type": 2
+                    }
+                  ]
+                },
+                "name": "base",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "train_station.tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "train_station.w",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "train_station.h",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "bus_stops",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "truck_stops",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "ship_station.tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "ship_station.w",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "ship_station.h",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "docking_station.tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "docking_station.w",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "docking_station.h",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "airport.tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "airport.w",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "airport.h",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "airport.type",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "airport.layout",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "airport.flags",
+                "wire_type": 8
+              },
+              {
+                "child": null,
+                "name": "airport.rotation",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "airport.psa",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "indtype",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "time_since_load",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "time_since_unload",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "last_vehicle_type",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "had_vehicle_of_type",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "loading_vehicles",
+                "wire_type": 22
+              },
+              {
+                "child": null,
+                "name": "always_accepted",
+                "wire_type": 8
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "status",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "time_since_pickup",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "rating",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "last_speed",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "last_age",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "amount_fract",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.reserved_count",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "link_graph",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "node",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "max_waiting_cargo",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": {
+                        "fields": [
+                          {
+                            "child": null,
+                            "name": "source",
+                            "wire_type": 4
+                          },
+                          {
+                            "child": null,
+                            "name": "via",
+                            "wire_type": 4
+                          },
+                          {
+                            "child": null,
+                            "name": "share",
+                            "wire_type": 6
+                          },
+                          {
+                            "child": null,
+                            "name": "restricted",
+                            "wire_type": 1
+                          }
+                        ]
+                      },
+                      "name": "flow",
+                      "wire_type": 27
+                    },
+                    {
+                      "child": {
+                        "fields": [
+                          {
+                            "child": null,
+                            "name": "first",
+                            "wire_type": 4
+                          },
+                          {
+                            "child": null,
+                            "name": "second",
+                            "wire_type": 22
+                          }
+                        ]
+                      },
+                      "name": "cargo",
+                      "wire_type": 27
+                    }
+                  ]
+                },
+                "name": "goods",
+                "wire_type": 27
+              }
+            ]
+          },
+          "name": "normal",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "xy",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "town",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "string_id",
+                      "wire_type": 9
+                    },
+                    {
+                      "child": null,
+                      "name": "name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "delete_ctr",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "owner",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "facilities",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "build_date",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "random_bits",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting_triggers",
+                      "wire_type": 2
+                    }
+                  ]
+                },
+                "name": "base",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "town_cn",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "train_station.tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "train_station.w",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "train_station.h",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "waypoint_flags",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "road_waypoint_area.tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "road_waypoint_area.w",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "road_waypoint_area.h",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "waypoint",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "grfid",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "localidx",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "speclist",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "grfid",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "localidx",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "roadstopspeclist",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "random_bits",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "animation_frame",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "roadstoptiledata",
+          "wire_type": 27
+        }
+      ]
+    },
+    "STPA": {
+      "fields": [
+        {
+          "child": null,
+          "name": "sort_value",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "date",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "company",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "title",
+          "wire_type": 26
+        }
+      ]
+    },
+    "STPE": {
+      "fields": [
+        {
+          "child": null,
+          "name": "sort_value",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "page",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "referenced_id",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "text",
+          "wire_type": 26
+        }
+      ]
+    },
+    "SUBS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "cargo_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "remaining",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "awarded",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "src_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "dst_type",
+          "wire_type": 2
+        },
+        {
+          "child": null,
+          "name": "src",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "dst",
+          "wire_type": 4
+        }
+      ]
+    },
+    "TIDS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "grfid",
+          "wire_type": 6
+        },
+        {
+          "child": null,
+          "name": "entity_id",
+          "wire_type": 4
+        },
+        {
+          "child": null,
+          "name": "substitute_id",
+          "wire_type": 4
+        }
+      ]
+    },
+    "VEHS": {
+      "fields": [
+        {
+          "child": null,
+          "name": "type",
+          "wire_type": 2
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "unitnumber",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "owner",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "dest_tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "x_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "y_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "z_pos",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "direction",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "spritenum",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "engine_type",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "subspeed",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "acceleration",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "motion_counter",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "progress",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "vehstatus",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "last_station_visited",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_station",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "refit_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.packets",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.action_counts",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_age_counter",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "day_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tick_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "running_ticks",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_implicit_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_real_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.flags",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.dest",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.refit_cargo",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.wait_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.travel_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.max_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "timetable_start",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "orders",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "economy_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "max_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service_newgrf",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "service_interval",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability_spd_dec",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_ctr",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_delay",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdowns_since_last_service",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_chance",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "build_year",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "load_unload_ticks",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_paid_for",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "vehicle_flags",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_this_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_last_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "value",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "random_bits",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting_triggers",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next_shared",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "group_id",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order_time",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_tick",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "lateness_counter",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_last_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_next_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "round_trip_time",
+                      "wire_type": 5
+                    }
+                  ]
+                },
+                "name": "common",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "crash_anim_pos",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "force_proceed",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "track",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "flags",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "wait_counter",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "gv_flags",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "train",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "unitnumber",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "owner",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "dest_tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "x_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "y_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "z_pos",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "direction",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "spritenum",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "engine_type",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "subspeed",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "acceleration",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "motion_counter",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "progress",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "vehstatus",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "last_station_visited",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_station",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "refit_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.packets",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.action_counts",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_age_counter",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "day_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tick_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "running_ticks",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_implicit_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_real_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.flags",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.dest",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.refit_cargo",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.wait_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.travel_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.max_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "timetable_start",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "orders",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "economy_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "max_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service_newgrf",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "service_interval",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability_spd_dec",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_ctr",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_delay",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdowns_since_last_service",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_chance",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "build_year",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "load_unload_ticks",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_paid_for",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "vehicle_flags",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_this_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_last_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "value",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "random_bits",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting_triggers",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next_shared",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "group_id",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order_time",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_tick",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "lateness_counter",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_last_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_next_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "round_trip_time",
+                      "wire_type": 5
+                    }
+                  ]
+                },
+                "name": "common",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "state",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "frame",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "blocked_ctr",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "overtaking",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "overtaking_ctr",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "crashed_ctr",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "reverse_ctr",
+                "wire_type": 2
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "trackdir",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tile",
+                      "wire_type": 6
+                    }
+                  ]
+                },
+                "name": "path",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "gv_flags",
+                "wire_type": 4
+              }
+            ]
+          },
+          "name": "roadveh",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "unitnumber",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "owner",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "dest_tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "x_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "y_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "z_pos",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "direction",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "spritenum",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "engine_type",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "subspeed",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "acceleration",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "motion_counter",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "progress",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "vehstatus",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "last_station_visited",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_station",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "refit_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.packets",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.action_counts",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_age_counter",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "day_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tick_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "running_ticks",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_implicit_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_real_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.flags",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.dest",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.refit_cargo",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.wait_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.travel_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.max_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "timetable_start",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "orders",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "economy_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "max_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service_newgrf",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "service_interval",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability_spd_dec",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_ctr",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_delay",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdowns_since_last_service",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_chance",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "build_year",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "load_unload_ticks",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_paid_for",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "vehicle_flags",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_this_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_last_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "value",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "random_bits",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting_triggers",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next_shared",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "group_id",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order_time",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_tick",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "lateness_counter",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_last_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_next_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "round_trip_time",
+                      "wire_type": 5
+                    }
+                  ]
+                },
+                "name": "common",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "state",
+                "wire_type": 2
+              },
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "trackdir",
+                      "wire_type": 2
+                    }
+                  ]
+                },
+                "name": "path",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "rotation",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "ship",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": {
+                  "fields": [
+                    {
+                      "child": null,
+                      "name": "subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "name",
+                      "wire_type": 26
+                    },
+                    {
+                      "child": null,
+                      "name": "unitnumber",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "owner",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "dest_tile",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "x_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "y_pos",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "z_pos",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "direction",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "spritenum",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "engine_type",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "subspeed",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "acceleration",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "motion_counter",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "progress",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "vehstatus",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "last_station_visited",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_station",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_subtype",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "refit_cap",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.packets",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo.action_counts",
+                      "wire_type": 22
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_age_counter",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "day_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "tick_counter",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "running_ticks",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_implicit_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "cur_real_order_index",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.type",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.flags",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.dest",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.refit_cargo",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.wait_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.travel_time",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order.max_speed",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "timetable_start",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "orders",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "economy_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "max_age",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "date_of_last_service_newgrf",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "service_interval",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "reliability_spd_dec",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_ctr",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_delay",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdowns_since_last_service",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "breakdown_chance",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "build_year",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "load_unload_ticks",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "cargo_paid_for",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "vehicle_flags",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_this_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "profit_last_year",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "value",
+                      "wire_type": 7
+                    },
+                    {
+                      "child": null,
+                      "name": "random_bits",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "waiting_triggers",
+                      "wire_type": 2
+                    },
+                    {
+                      "child": null,
+                      "name": "next_shared",
+                      "wire_type": 6
+                    },
+                    {
+                      "child": null,
+                      "name": "group_id",
+                      "wire_type": 4
+                    },
+                    {
+                      "child": null,
+                      "name": "current_order_time",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "last_loading_tick",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "lateness_counter",
+                      "wire_type": 5
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_last_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "depot_unbunching_next_departure",
+                      "wire_type": 8
+                    },
+                    {
+                      "child": null,
+                      "name": "round_trip_time",
+                      "wire_type": 5
+                    }
+                  ]
+                },
+                "name": "common",
+                "wire_type": 27
+              },
+              {
+                "child": null,
+                "name": "crashed_counter",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "pos",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "targetairport",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "state",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "previous_pos",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "last_direction",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "number_consecutive_turns",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "turn_counter",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "flags",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "aircraft",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "subtype",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "x_pos",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "y_pos",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "z_pos",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "sprite_cache.sprite_seq.seq[0].sprite",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "progress",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "vehstatus",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "animation_state",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "animation_substate",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "spritenum",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "effect",
+          "wire_type": 27
+        },
+        {
+          "child": {
+            "fields": [
+              {
+                "child": null,
+                "name": "next",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "subtype",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "dest_tile",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "x_pos",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "y_pos",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "z_pos",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "direction",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "owner",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "vehstatus",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "state",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "sprite_cache.sprite_seq.seq[0].sprite",
+                "wire_type": 4
+              },
+              {
+                "child": null,
+                "name": "age",
+                "wire_type": 5
+              },
+              {
+                "child": null,
+                "name": "tick_counter",
+                "wire_type": 2
+              },
+              {
+                "child": null,
+                "name": "image_override",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "big_ufo_destroyer_target",
+                "wire_type": 6
+              },
+              {
+                "child": null,
+                "name": "flags",
+                "wire_type": 2
+              }
+            ]
+          },
+          "name": "disaster",
+          "wire_type": 27
+        }
+      ]
+    },
+    "VIEW": {
+      "fields": [
+        {
+          "child": null,
+          "name": "x",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "y",
+          "wire_type": 5
+        },
+        {
+          "child": null,
+          "name": "zoom",
+          "wire_type": 2
+        }
+      ]
+    }
+  }
+}

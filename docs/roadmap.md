@@ -31,23 +31,33 @@ clients or multiplayer interoperability. See the [README](../README.md) and
 The stages below are the next roadmap, not retrospective claims that these
 foundations complete a stage. The [stage 1 plan](stages/01-compatibility-contract.md) and
 [versioned contract](../compatibility/contract.json) record the active concrete
-matrix, fixtures and executable checks. Stage 1 is ready for maintainer review
-in [PR #2](https://github.com/aron98/openttd-rust/pull/2); the stage plan records
-the reviewed implementation, passing CI and retained evidence. Its maintainer
-merge remains pending.
+matrix, fixtures and executable checks. Stage 1 was completed by the maintainer merge of
+[PR #2](https://github.com/aron98/openttd-rust/pull/2), commit
+`e35f0f7375d84124f8047adff404eb4273b7277b`. Stage 2 is ready for review in
+[PR #3](https://github.com/aron98/openttd-rust/pull/3); its
+[plan](stages/02-world-loading-saving.md) records the approved boundary and
+passing implementation review and Linux CI evidence. Final documentation CI is
+tracked in the PR checks before removing draft status. The maintainer's merge
+remains pending; stage 3 is planned and has not started.
 
 ## Stages and acceptance gates
 
 | Stage | Deliverables | Acceptance gate | Status |
 | --- | --- | --- | --- |
-| 1. Compatibility contract | Pin save, protocol, settings and content requirements; inventory missing behavior; define representative vanilla/modded fixtures, recorded commands, expected state and reproducible test procedures. | Every compatibility claim has a named scenario, observable result and verification procedure; baseline checks execute, unsupported contexts fail explicitly, and future scenarios are identified as unimplemented. | Ready for review |
-| 2. Complete world loading and saving | Decode object pools, IDs, references and settings; restore derived state; serialize modified state for vehicles, companies, towns, industries, stations, orders, cargo and infrastructure. | Populated worlds load with matching modeled runtime state; supported state changes survive Rust save/original reload and original save/Rust reload. Container preservation alone does not pass this gate. | Planned |
+| 1. Compatibility contract | Pin save, protocol, settings and content requirements; inventory missing behavior; define representative vanilla/modded fixtures, recorded commands, expected state and reproducible test procedures. | Every compatibility claim has a named scenario, observable result and verification procedure; baseline checks execute, unsupported contexts fail explicitly, and future scenarios are identified as unimplemented. | Completed |
+| 2. Complete world loading and saving | Decode complete saved state, object pools, IDs, references and settings; restore content-independent derived state; serialize modified vehicles, companies, towns, industries, stations, orders, cargo and infrastructure; preserve mod/script state. | Populated worlds match saved state and the defined structural runtime state; supported edits survive Rust save/original reload and original save/Rust reload. Container preservation alone does not pass. Content-dependent runtime restoration is an explicit stage 4 gate. | Ready for review |
 | 3. Commands and tick execution | Implement command validation, costs, execution and ordering; integrate callback dispatch, clocks and RNG into the world loop. | The engines replay supported command sequences with equal state at defined checkpoints, including pause, timing boundaries and save/reload. Unsupported gameplay remains explicit pending stage 4. | Planned |
-| 4. Gameplay parity | Complete construction, terrain/water, vehicles/pathfinding, orders/service/breakdowns, cargo/stations, towns, industries, economy and company lifecycle in vertical slices, with applicable content/script behavior. | The stage's baseline gameplay inventory is covered by original-versus-Rust scenarios, including vanilla/modded worlds and save/reload during execution; no required gameplay family is silently deferred. | Planned |
+| 4. Gameplay parity | Restore content-dependent runtime state, including NewGRF-derived vehicle, town, station and infrastructure caches; complete construction, terrain/water, vehicles/pathfinding, orders/service/breakdowns, cargo/stations, towns, industries, economy and company lifecycle in vertical slices, with applicable content/script behavior. | The stage's baseline gameplay inventory is covered by original-versus-Rust scenarios, including vanilla/modded worlds and save/reload during execution; no required gameplay family is silently deferred. | Planned |
 | 5. Native mixed multiplayer | Complete negotiation, packet/command encoding, joining, scheduling, synchronization, reconnects and headless server operation. | Original and Rust clients run together on original and Rust servers, including late join, reconnect and save/reload, without desynchronization across the defined corpus. | Planned |
 | 6. Desktop client | Shared renderer, sprites/palettes/text, audio, windows, tools, shortcuts and game management. | Original workflows are usable through the Rust client; representative visual/input checks and mixed multiplayer scenarios pass. | Planned |
 | 7. Browser client | Wasm client, browser storage/content import, audio/input and multiplayer transport/gateway. | Browser, native Rust and original clients share games on both server implementations through the documented transports; simulation parity and browser save workflows pass. | Planned |
 | 8. Compatibility hardening | Extended sessions, large worlds, mod combinations, malformed input, performance, cross-platform determinism and historical save coverage. | Publish a versioned compatibility matrix supported by repeatable tests and extended mixed-session evidence, with remaining limits stated explicitly. | Planned |
+
+The maintainer approved the stage 2 boundary refinement on 2026-10-09:
+complete saved-state loading/editing and structural restoration belong to stage 2;
+content-dependent runtime restoration belongs to stage 4. This changes sequencing,
+not the final compatibility goal. Stage 2 must not claim full gameplay-ready or
+NewGRF-derived runtime parity.
 
 Stages proceed through the [development workflow](../CONTRIBUTING.md). Only the
 current stage is implemented. Each stage has one PR containing atomic commits;

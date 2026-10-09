@@ -4,10 +4,12 @@ A Rust port targeting **OpenTTD 15.3**, with behavioral parity and two-way save
 compatibility as the end goal. The exact upstream commit is recorded in
 [`upstream.toml`](upstream.toml).
 
-**Current state: typed snapshots, a deterministic clock/clear-landscape subsystem, and selected object callback bodies. This is not yet a playable game.**
+**Current state: saved-world tools, typed snapshots, a deterministic clock/clear-landscape subsystem, and selected object callback bodies. This is not yet a playable game.**
 The Rust code reads and rewrites save containers while preserving chunk contents.
 Version-362 saves additionally decode into typed map, clock, settings and saved
-random-state snapshots. Rust randomizer, map-coordinate and Gregorian calendar
+random-state snapshots. The `world` tools expose pinned saved tables and maps,
+validate object references, and restore content-independent structural indexes.
+Content-dependent gameplay caches remain a stage 4 requirement. Rust randomizer, map-coordinate and Gregorian calendar
 primitives are checked against independently generated C++ vectors.
 An explicit subsystem fixture can advance calendar/economy clocks and temperate
 clear terrain against original C++ results. A separate typed-state runner executes
@@ -19,6 +21,9 @@ scripts and multiplayer are not implemented.
 ```sh
 cargo run -- inspect fixtures/generated-v362.sav
 cargo run -- snapshot fixtures/generated-v362.sav > /tmp/world.json
+cargo run -- world fixtures/generated-v362.sav --view saved > /tmp/saved-world.json
+cargo run -- world fixtures/generated-v362.sav --view derived > /tmp/structural-state.json
+cargo run -- edit-world fixtures/generated-v362.sav edits.json /tmp/edited-world.sav
 cargo run -- compare /tmp/upstream.json /tmp/world.json
 cargo run -- rewrite fixtures/generated-v362.sav /tmp/openttd-roundtrip.sav --compression lzma
 cargo run -- --help
@@ -38,6 +43,35 @@ decoding. `compare` checks every JSON field, including unknown fields, and repor
 the first mismatching path with expected and actual values. Duplicate keys,
 non-integer numbers and numbers outside the exact i64/u64 domain are rejected.
 Both JSON inputs are bounded by `--max-bytes`.
+
+`world` loads version 362 against the pinned schema manifest. Its default JSON
+envelope contains `schema_version`, `saved` and `derived`; `--view saved` and
+`--view derived` export those trees separately for exact comparison. Saved strings
+are byte arrays and pointer fields retain native `id + 1` encoding, with zero
+meaning null. Ordinary ID fields use their native sentinels. The derived tree
+contains structural links and aggregates, not content-dependent gameplay caches.
+
+`edit-world` applies a strict JSON edit document, validates the resulting world
+as one transaction, then publishes a new native save. For example, `edits.json`
+can contain:
+
+```json
+{"schema_version":1,"edits":[{"kind":"field","chunk":"PATS","record":0,"path":["difficulty.max_no_competitors"],"value":{"unsigned":3}}]}
+```
+
+Field paths alternate exact field names and list indices; dots inside a field
+name are literal. Values have explicit `signed`, `unsigned`, `bytes` or `array`
+tags, with tagged elements inside arrays. Existing nested leaves can be edited;
+struct-list replacement and primitive-array resizing are unsupported. A tile
+edit uses `{"kind":"tile","index":N,"value":TILE}` with all raw tile fields
+from `snapshot`: `type`, `height`, and `m1` through `m8`. This is saved-state
+editing, not construction or gameplay-command validation.
+
+Edit files reject duplicate/unknown keys and inexact numbers. They are limited
+to 1 MiB, 1024 operations and 64 path elements; a smaller `--max-bytes` also limits
+the document. No destination is created if any edit fails, and an existing
+destination is never overwritten. The default compression matches the source;
+`--compression` accepts the same formats as `rewrite`.
 
 The default encoded/decompressed byte limit is 256 MiB; change it with
 `--max-bytes`. This is not a total process-memory cap. The XZ decoder separately
@@ -62,12 +96,17 @@ python3 scripts/check-contract.py --validate
 python3 scripts/check-contract.py --list
 # After both reference setup scripts below:
 python3 scripts/check-contract.py --run baseline
+python3 scripts/check-contract.py --run worlds
 ```
 
 See the [contract guide](compatibility/README.md) and
 [stage 1 plan](docs/stages/01-compatibility-contract.md). Native NewGRF/AI and
 prejoin protocol probes are reference baselines; they do not establish Rust mod
-execution or multiplayer support.
+execution or multiplayer support. The world driver covers five native fixtures,
+exact saved/structural comparisons, changed-state reloads in the instrumented and
+unmodified original engines, and deliberate comparison/cache failures. Its
+artifacts are retained with the contract report in PR CI. Content-dependent
+runtime restoration remains an explicit stage 4 gate.
 
 ## Verify
 

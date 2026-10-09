@@ -1,0 +1,186 @@
+{
+  "list_limits": {
+    "CITY": {
+      "received": {
+        "maximum": 6,
+        "minimum": 0,
+        "source": "saveload/town_sl.cpp:SlTownReceived::Load; cargotype.h:TAE_END"
+      },
+      "supplied/history": {
+        "maximum": 61,
+        "minimum": 0,
+        "source": "saveload/town_sl.cpp:SlTownSuppliedHistory::Load; misc/history_type.hpp:HISTORY_RECORDS"
+      }
+    },
+    "INDY": {
+      "accepted": {
+        "maximum": 16,
+        "minimum": 0,
+        "source": "saveload/industry_sl.cpp:SlIndustryAccepted/SlIndustryProduced; industry_type.h:INDUSTRY_NUM_INPUTS/OUTPUTS"
+      },
+      "accepted/history": {
+        "maximum": 61,
+        "minimum": 0,
+        "source": "saveload/industry_sl.cpp:SlIndustryAcceptedHistory/SlIndustryProducedHistory::Load; misc/history_type.hpp:HISTORY_RECORDS"
+      },
+      "produced": {
+        "maximum": 16,
+        "minimum": 0,
+        "source": "saveload/industry_sl.cpp:SlIndustryAccepted/SlIndustryProduced; industry_type.h:INDUSTRY_NUM_INPUTS/OUTPUTS"
+      },
+      "produced/history": {
+        "maximum": 61,
+        "minimum": 0,
+        "source": "saveload/industry_sl.cpp:SlIndustryAcceptedHistory/SlIndustryProducedHistory::Load; misc/history_type.hpp:HISTORY_RECORDS"
+      }
+    },
+    "LGRJ": {
+      "linkgraph": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      },
+      "linkgraph/nodes": {
+        "maximum": 65535,
+        "minimum": 0,
+        "source": "saveload/linkgraph_sl.cpp:SlLinkgraphNode/SlLinkgraphEdge::Load; UINT16_MAX"
+      },
+      "linkgraph/nodes/edges": {
+        "maximum": 65535,
+        "minimum": 0,
+        "source": "saveload/linkgraph_sl.cpp:SlLinkgraphNode/SlLinkgraphEdge::Load; UINT16_MAX"
+      }
+    },
+    "LGRP": {
+      "nodes": {
+        "maximum": 65535,
+        "minimum": 0,
+        "source": "saveload/linkgraph_sl.cpp:SlLinkgraphNode/SlLinkgraphEdge::Load; UINT16_MAX"
+      },
+      "nodes/edges": {
+        "maximum": 65535,
+        "minimum": 0,
+        "source": "saveload/linkgraph_sl.cpp:SlLinkgraphNode/SlLinkgraphEdge::Load; UINT16_MAX"
+      }
+    },
+    "PLYR": {
+      "cur_economy": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      },
+      "liveries": {
+        "maximum": 23,
+        "minimum": 0,
+        "source": "saveload/company_sl.cpp:SlCompanyLiveries::GetNumLiveries; livery.h:LS_END"
+      },
+      "old_economy": {
+        "maximum": 24,
+        "minimum": 0,
+        "source": "saveload/company_sl.cpp:SlCompanyOldEconomy::Load; company_type.h:MAX_HISTORY_QUARTERS"
+      },
+      "settings": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      }
+    },
+    "STNN": {
+      "normal/base": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      },
+      "normal/goods": {
+        "maximum": 64,
+        "minimum": 0,
+        "source": "saveload/station_sl.cpp:SlStationGoods::GetNumCargo; cargo_type.h:NUM_CARGO"
+      },
+      "roadstopspeclist": {
+        "maximum": 255,
+        "minimum": 0,
+        "source": "saveload/station_sl.cpp:SlStationSpecList::GetLength; UINT8_MAX"
+      },
+      "speclist": {
+        "maximum": 255,
+        "minimum": 0,
+        "source": "saveload/station_sl.cpp:SlStationSpecList::GetLength; UINT8_MAX"
+      },
+      "waypoint/base": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      }
+    },
+    "VEHS": {
+      "aircraft/common": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      },
+      "roadveh/common": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      },
+      "ship/common": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      },
+      "train/common": {
+        "maximum": 1,
+        "minimum": 1,
+        "source": "required structural state: native SLEG_STRUCT; stricter than optional default-initialized native object"
+      }
+    }
+  },
+  "native_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "record_limits": {
+    "APID": {
+      "exclusive": 128,
+      "source": "newgrf_airport.cpp:_airport_mngr; airport.h:NUM_AIRPORTS"
+    },
+    "ATID": {
+      "exclusive": 256,
+      "source": "newgrf_airporttiles.cpp:_airporttile_mngr; airport.h:NUM_AIRPORTTILES"
+    },
+    "EIDS": {
+      "exclusive": 64000,
+      "source": "saveload/engine_sl.cpp:EIDSChunkHandler::Load; engine_type.h:EngineID"
+    },
+    "HIDS": {
+      "exclusive": 4096,
+      "source": "newgrf_house.cpp:_house_mngr; house.h:NUM_HOUSES"
+    },
+    "IIDS": {
+      "exclusive": 240,
+      "source": "newgrf_industries.cpp:_industry_mngr; industry_type.h:NUM_INDUSTRYTYPES"
+    },
+    "ITBL": {
+      "exclusive": 240,
+      "source": "saveload/industry_sl.cpp:ITBLChunkHandler::Load; industry_type.h:NUM_INDUSTRYTYPES"
+    },
+    "OBID": {
+      "exclusive": 64000,
+      "source": "newgrf_object.cpp:_object_mngr; object_type.h:NUM_OBJECTS"
+    },
+    "TIDS": {
+      "exclusive": 512,
+      "source": "newgrf_industries.cpp:_industile_mngr; industry_type.h:NUM_INDUSTRYTILES"
+    }
+  },
+  "savegame_version": 362,
+  "singletons": {
+    "ANIT": "saveload/animated_tile_sl.cpp:ANITChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "CHTS": "saveload/cheat_sl.cpp:CHTSChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "DATE": "saveload/misc_sl.cpp:DATEChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "ECMY": "saveload/economy_sl.cpp:ECMYChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "GSDT": "saveload/game_sl.cpp:GSDTChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "IBLD": "saveload/industry_sl.cpp:IBLDChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "LGRS": "saveload/linkgraph_sl.cpp:LGRSChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "MAPS": "saveload/map_sl.cpp:MAPSChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "PATS": "saveload/settings_sl.cpp:PATSChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)",
+    "VIEW": "saveload/misc_sl.cpp:VIEWChunkHandler::Load (settings uses LoadSettings; consumes at most one SlIterateArray record)"
+  }
+}

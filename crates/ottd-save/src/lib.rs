@@ -3,8 +3,14 @@
 mod chunk;
 mod compression;
 mod snapshot;
+mod table;
+pub mod world;
 pub use snapshot::{
     DateState, FieldValue, MapState, ScriptRandomState, SnapshotError, TileState, WorldSnapshot,
+};
+pub use table::{
+    FieldSchema, TableChunk, TableError, TableLimits, TableRecord, TableSchema, TableTailPolicy,
+    WireValue,
 };
 
 pub use chunk::{Chunk, ChunkKind};
@@ -71,6 +77,28 @@ pub enum Error {
 }
 
 impl Savegame {
+    /// Replace exactly one existing chunk, preserving the surrounding order.
+    ///
+    /// # Errors
+    /// Rejects a missing or duplicate chunk identity without changing the save.
+    pub fn replace_chunk(&mut self, replacement: Chunk) -> Result<(), Error> {
+        let mut found = self
+            .chunks
+            .iter()
+            .enumerate()
+            .filter(|(_, chunk)| chunk.id() == replacement.id());
+        let index = found.next().map(|(index, _)| index);
+        if found.next().is_some() {
+            return Err(Error::Framing("replacement chunk ID is duplicated"));
+        }
+        let index = index.ok_or(Error::Framing("replacement chunk ID is absent"))?;
+        let chunk = self
+            .chunks
+            .get_mut(index)
+            .ok_or(Error::Framing("replacement chunk index is absent"))?;
+        *chunk = replacement;
+        Ok(())
+    }
     /// Decode a container with an encoded and decoded byte limit.
     ///
     /// # Errors

@@ -14,6 +14,7 @@ REFERENCE_SOURCE="$PWD/.reference/OpenTTD" bash scripts/setup-snapshot-reference
 python3 scripts/check-contract.py --run baseline
 # Or one driver/scenario, still exercising that driver's complete matrix:
 python3 scripts/check-contract.py --run callbacks
+python3 scripts/check-contract.py --run worlds
 python3 scripts/check-contract.py --run reference.game-info
 ```
 
@@ -47,11 +48,21 @@ otherwise valid fixtures.
 
 A selected scenario runs its entire shared driver once. `baseline` executes
 workspace tests, container rewriting, typed snapshots/primitives, clock/terrain,
-selected callbacks and the original-only content/protocol suite. The existing
-four shell comparison drivers remain authoritative; ignored external tests are
-executed by those drivers, not counted from a plain `cargo test` skip. Setup
-builds are explicit prerequisites. No source checkout, comparison or test result
+selected callbacks, complete saved-world comparisons and the original-only
+content/protocol suite: seven drivers in total. External comparisons execute
+through these drivers; plain `cargo test` skips are never counted as passes.
+Setup builds are explicit prerequisites. No source checkout, comparison or test result
 is cached by this runner.
+
+Stage 2 separates complete persisted state and content-independent structural
+restoration from content-dependent gameplay restoration. The latter remains an
+explicit stage 4 requirement, `world.content-dependent-restoration`. The `world`
+and `edit-world` CLI commands expose saved tables, structural indexes and bounded
+transactional edits. The `worlds` driver runs the populated native oracle and
+both directions of modified-state save/reload comparisons required by
+`world.complete-load-save`; it also loads the Rust outputs in an uninstrumented
+original binary. It does not implement command replay or content-dependent
+gameplay restoration.
 
 ## Corpus and evidence
 
@@ -65,6 +76,30 @@ is original-only, with a self-authored parameterized GRF and native observer AI.
 It demonstrates a real speed effect, AI save/reload, recorded company rename and
 prejoin metadata. One GRF does not establish multi-GRF load-order semantics;
 opaque save preservation does not implement NewGRF or Squirrel execution.
+
+The [saved-world corpus](../fixtures/world/README.md) adds populated, extended,
+modded, synthetic storage/payment/waypoint, and GameScript fixtures. The separate
+[WorldProbe metadata](world-content.json) pins its authored GRF identity,
+parameter123 and AI saved marker362; it does not reuse the older ContractProbe
+profile. Synthetic persistent storage carries an inert authored GRF ID, not an
+active callback execution claim. Native AI/GameScript builders provide saved
+state and restore markers; Rust preserves their state without executing them.
+
+World evidence is under `.artifacts/worlds-*/results/`. The contract names every
+case's saved and structural observations and comparison logs, all eight domain
+mutation receipts, storage/payment/map and saturated-feeder edits, each negative
+control, and uninstrumented original reload witnesses. Each native exit save is
+loaded again for a structural comparison against Rust decoding that same file;
+`resaved/input.json` records its path and SHA-256. Modded-AI and GameScript cases
+make nonempty unrelated edits and compare the complete expected saved result,
+then explicitly compare NGRF/AIPL/GSDT/PSAC state before and after Rust editing.
+Native re-saving and script continuation use paired unedited controls at matching
+load/save phases, retaining exact trees and complete expected edited worlds.
+Native Squirrel table reordering is not normalized away. Their
+uninstrumented witnesses load the edited outputs. These are exact paths,
+not a wildcard that could silently omit a required case. The driver requires
+unchanged native saved fields during cache-corruption controls, so independent
+structural comparisons cannot pass merely by re-reading saved pointers.
 
 Each invocation creates `.omo/evidence/contract-*` (or an absent `--run-dir`).
 `report.json` records the manifest path/hash, tested commit, working-tree status,
@@ -83,7 +118,8 @@ failure remains a failure even if a checked-in golden output looks correct.
 
 For review, change a claim and its scenario together. Regenerating an asset
 changes its hash and requires reviewing its recipe and native result; never
-update a golden merely to silence a mismatch. Required future world, gameplay,
+update a golden merely to silence a mismatch. Required future content-dependent
+world restoration, gameplay,
 content/scripts, native mixed sessions, desktop and browser gates are listed
 explicitly and remain unimplemented until their own stages establish evidence.
 

@@ -116,7 +116,7 @@ fn run(root: &Path, directory: &Path, guard: Guard) -> Result {
             }
         }
     };
-    let output = command
+    command
         .arg(format!("-DORACLE={}", std::env::var("OTTD_GRF_ORACLE")?))
         .arg(format!("-DRUN_DIR={}", native.display()))
         .arg(format!("-DMANIFEST={}", manifest.display()))
@@ -127,8 +127,8 @@ fn run(root: &Path, directory: &Path, guard: Guard) -> Result {
         ))
         .arg("-DTICKS=1")
         .arg("-P")
-        .arg(runner)
-        .output()?;
+        .arg(runner);
+    let output = recorded_command(&mut command, directory)?;
     std::fs::write(directory.join("stdout.log"), &output.stdout)?;
     std::fs::write(directory.join("stderr.log"), &output.stderr)?;
     verify_guard(directory, guard, &output, diagnostic, early)
@@ -204,6 +204,7 @@ fn native_safety_host_guards() -> Result {
 
 fn menu_control(root: &Path, directory: &Path) -> Result {
     std::fs::create_dir(directory)?;
+    std::fs::create_dir(directory.join("native"))?;
     let manifest = directory.join("manifest.json");
     std::fs::write(&manifest, b"[]\n")?;
     let observation = directory.join("safety.json");
@@ -213,14 +214,15 @@ fn menu_control(root: &Path, directory: &Path) -> Result {
         r#"cmake_minimum_required(VERSION 3.20)
 file(COPY_FILE "${CONFIG}" "${RUN_DIR}/openttd.cfg")
 execute_process(COMMAND "${ORACLE}" -X -x -c "${RUN_DIR}/openttd.cfg" -vnull:ticks=1 -snull -mnull
-    WORKING_DIRECTORY "${RUN_DIR}" OUTPUT_FILE "${RUN_DIR}/native-stdout.log" ERROR_FILE "${RUN_DIR}/native-stderr.log"
+    WORKING_DIRECTORY "${RUN_DIR}" OUTPUT_FILE "${RUN_DIR}/native/stdout.log" ERROR_FILE "${RUN_DIR}/native/stderr.log"
     RESULT_VARIABLE result TIMEOUT 15)
 if(NOT result STREQUAL "0")
     message(FATAL_ERROR "Menu control failed: ${result}")
 endif()
 "#,
     )?;
-    let output = Command::new("cmake")
+    let mut command = Command::new("cmake");
+    command
         .env("OTTD_GRF_SAFETY_INPUT", &manifest)
         .env("OTTD_GRF_SAFETY_OUTPUT", &observation)
         .arg(format!("-DORACLE={}", std::env::var("OTTD_GRF_ORACLE")?))
@@ -230,8 +232,8 @@ endif()
             root.join("scripts/reference.cfg").display()
         ))
         .arg("-P")
-        .arg(script)
-        .output()?;
+        .arg(script);
+    let output = recorded_command(&mut command, directory)?;
     std::fs::write(directory.join("stdout.log"), &output.stdout)?;
     std::fs::write(directory.join("stderr.log"), &output.stderr)?;
     if !output.status.success() || observation.exists() {
@@ -244,4 +246,49 @@ endif()
         )?,
     )?;
     Ok(())
+}
+
+fn recorded_command(command: &mut Command, directory: &Path) -> Result<std::process::Output> {
+    let argv: Vec<_> = std::iter::once(command.get_program())
+        .chain(command.get_args())
+        .map(|value| value.to_str().ok_or("non-UTF8 command argument"))
+        .collect::<std::result::Result<_, _>>()?;
+    std::fs::write(directory.join("argv.json"), serde_json::to_vec(&argv)?)?;
+    let mut environment = std::collections::BTreeMap::new();
+    for key in [
+        "OTTD_GRF_ORACLE",
+        "OTTD_GRF_SAFETY_INPUT",
+        "OTTD_GRF_SAFETY_OUTPUT",
+        "OTTD_REPLAY_PATH",
+        "OTTD_GRF_SAFETY_CASE",
+        "OTTD_GRF_CONTROL_CASE",
+    ] {
+        let value = command
+            .get_envs()
+            .find(|(name, _)| *name == key)
+            .map_or_else(
+                || std::env::var_os(key),
+                |(_, value)| value.map(std::ffi::OsStr::to_os_string),
+            );
+        environment.insert(
+            key,
+            value
+                .map(|value| {
+                    value
+                        .into_string()
+                        .map_err(|_| "non-UTF8 witness environment")
+                })
+                .transpose()?,
+        );
+    }
+    std::fs::write(
+        directory.join("environment.json"),
+        serde_json::to_vec(&environment)?,
+    )?;
+    let output = command.output()?;
+    std::fs::write(
+        directory.join("process.json"),
+        serde_json::to_vec(&json!({"returncode":output.status.code()}))?,
+    )?;
+    Ok(output)
 }

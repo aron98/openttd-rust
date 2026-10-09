@@ -90,7 +90,7 @@ fn failed_apply_poison_and_failed_prepare_restore_everything() -> Result {
     Ok(())
 }
 #[test]
-fn prepared_candidate_can_be_discarded_after_dependent_cache_failure() -> Result {
+fn discarding_prepared_candidate_preserves_world_and_map_storage() -> Result {
     let mut world = world()?;
     let before = world.saved_json()?;
     let derived = serde_json::to_value(world.derived())?;
@@ -105,8 +105,6 @@ fn prepared_candidate_can_be_discarded_after_dependent_cache_failure() -> Result
             prepared.map().tile(0).ok_or("tile")?,
             map_storage
         ));
-        let dependent_cache: Result = Err("simulated cache restoration failure".into());
-        assert!(dependent_cache.is_err());
         drop(prepared);
     }
     assert_eq!(world.saved_json()?, before);

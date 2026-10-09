@@ -132,6 +132,33 @@ mod boundaries;
 mod branches;
 mod mutations;
 mod reexecution;
+/// Overflow a config alias after its shared dynamic file has collected a branch label.
+/// # Errors
+/// Returns an error when fixture encoding cannot represent a length.
+pub fn capacity_alias_case() -> Result<Case> {
+    let records = vec![
+        condition(9, 0, 1, 2, 1, 255, 42),
+        set(1, 0, 255, 255, 7),
+        vec![0x10, 42],
+        set(2, 0, 255, 255, 9),
+    ];
+    let mut sources = Vec::new();
+    for index in 0..255_u32 {
+        let body = if index == 0 { records.as_slice() } else { &[] };
+        sources.push(source(
+            0x4141_0000_u32.wrapping_add(index.wrapping_mul(256)),
+            body,
+            &[1],
+            1,
+        )?);
+    }
+    sources.push(source(0x4141_0000, &records, &[1], 1)?);
+    Ok(Case {
+        name: "capacity-filename-alias-label-branch".into(),
+        sources,
+        networking: false,
+    })
+}
 /// Build the corresponding deterministic fixture data.
 /// # Errors
 /// Returns an error when a generated size cannot be represented.
@@ -141,5 +168,6 @@ pub fn all() -> Result<Vec<Case>> {
     cases.extend(mutations::cases()?);
     cases.extend(boundaries::cases()?);
     cases.extend(reexecution::cases()?);
+    cases.push(capacity_alias_case()?);
     Ok(cases)
 }

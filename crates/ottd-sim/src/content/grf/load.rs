@@ -6,8 +6,8 @@ use super::{
     load_budget::Budget,
     load_registry::Registry,
     load_types::{
-        ControlLoadError, ControlLoadReport, ControlOptions, LoadEvent, LoadFailure, LoadInput,
-        LoadLocation, LoadStage, LoadStatus, OverrideState,
+        ControlLoadError, ControlLoadReport, ControlOptions, LoadDiagnostic, LoadEvent,
+        LoadFailure, LoadInput, LoadLocation, LoadStage, LoadStatus, OverrideState,
     },
 };
 use std::{collections::BTreeMap, sync::Arc};
@@ -146,6 +146,24 @@ impl Session<'_, '_> {
         }
         Ok(())
     }
+    fn reject_capacity(&mut self, location: LoadLocation) -> Result<(), ControlLoadError> {
+        if let Some(config) = self.registry.configs.get_mut(location.file) {
+            config.status = LoadStatus::Disabled;
+            config.errors.push(LoadDiagnostic {
+                failure: LoadFailure::TooManyFiles,
+                line: 0,
+            });
+        }
+        self.emit(
+            LoadEvent::Status {
+                location,
+                target_file: location.file,
+                status: LoadStatus::Disabled,
+            },
+            0,
+            location,
+        )
+    }
     fn phase(&mut self, stage: LoadStage) -> Result<(), ControlLoadError> {
         let base = LoadLocation {
             stage,
@@ -195,7 +213,7 @@ impl Session<'_, '_> {
             }
             if !input.flags.is_static && !input.flags.system {
                 if non_static == 255 {
-                    self.disable(index, location, Some(LoadFailure::TooManyFiles))?;
+                    self.reject_capacity(location)?;
                     continue;
                 }
                 non_static = non_static.saturating_add(1);

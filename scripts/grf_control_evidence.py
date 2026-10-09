@@ -61,7 +61,7 @@ def validate_paths(root: Path, layout: Json) -> None:
     actual = {str(path.relative_to(root)) for path in root.rglob("*") if path.is_file()}
     if actual != expected:
         raise WorldCheckError(
-            "Loader evidence path set differs from complete 247-case layout"
+            "Loader evidence path set differs from complete 248-case layout"
         )
     for name in expected:
         path = root / name
@@ -95,7 +95,7 @@ def validate(root: Path, layout_path: Path) -> tuple[int, int, int, int]:
     validate_paths(root, layout)
     events = decisions = configs = rejected = 0
     cases = sequence(at(layout, ("cases",)))
-    if len(cases) != 247 or len({text(case) for case in cases}) != 247:
+    if len(cases) != 248 or len({text(case) for case in cases}) != 248:
         raise WorldCheckError("Incomplete loader identity set")
     for case in cases:
         directory = root / text(case)
@@ -110,7 +110,7 @@ def validate(root: Path, layout_path: Path) -> tuple[int, int, int, int]:
         rejected += controls(rust, read_json(directory / "negative-controls.json"))
         validate_inputs(directory)
     totals = events, decisions, configs, rejected
-    if totals != (8673, 6697, 1293, 4746):
+    if totals != (9711, 7727, 1549, 4766):
         raise WorldCheckError(f"Loader coverage totals changed: {totals}")
     write_json(
         root.parent / "coverage.json",

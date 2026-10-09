@@ -2347,7 +2347,7 @@
     {
       "id": "grf-control-scripts-grf-control-evidence-py",
       "path": "scripts/grf_control_evidence.py",
-      "sha256": "b97d3acefa5243d97e36849add9f5f7c73fe63e0209d9e813aa45b6c00dbe98c",
+      "sha256": "ced905de494306ee5773fb3badcca40d0f3c1ac3260fbfc5d9578f03a93e674b",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2374,7 +2374,7 @@
     {
       "id": "grf-control-scripts-check-grf-control-py",
       "path": "scripts/check-grf-control.py",
-      "sha256": "a32a0edbc676c743fe01f7b610216400ce30487b519e8e028a89def505dad1cb",
+      "sha256": "0bed9ce5d88974c4dfce3d3b14c71d612450e364876e49afc12b26c1c0bfb6e9",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2383,7 +2383,7 @@
     {
       "id": "grf-control-scripts-grf-control-layout-json",
       "path": "scripts/grf-control-layout.json",
-      "sha256": "db0b4150a151235838312edf59558e6d8e0cef9df2e92049115cf1f8e11521cb",
+      "sha256": "8294e8832abaf8f65dbb3872f366ba1bdce072c9d571c603b40a4957c6d6de7f",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2410,7 +2410,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-rs",
       "path": "crates/ottd-sim/src/content/grf/load.rs",
-      "sha256": "e3d91c0756fad9f0eb634fa4dd4e15f33b30e443853ce7431cb85bffa80ff139",
+      "sha256": "ca5d065bbebd75f8a3e53f9c3aea37606880d0eed2f6f7bfceb0f8e3194ec5f5",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2500,7 +2500,7 @@
     {
       "id": "grf-control-crates-ottd-sim-tests-grf-load-control-rs",
       "path": "crates/ottd-sim/tests/grf_load_control.rs",
-      "sha256": "493c276abf0da757d0488ea43f5bf19373b0fa7a48c83cb5ece6ab368af69285",
+      "sha256": "3cdf89b2c540bc6102cc8694037032932c87d2b9d4274880e14f695ad1fe20b5",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2545,7 +2545,7 @@
     {
       "id": "grf-control-crates-ottd-sim-tests-grf-control-cases-mod-rs",
       "path": "crates/ottd-sim/tests/grf_control_cases/mod.rs",
-      "sha256": "89e71e35e4a099728fbd68c90213b8c804e0b355804d5fc5d60583594ba85a7e",
+      "sha256": "d4bffeb7b9501b2b7f0ff961bc3c9eed422225ad8904bce3ec8a6899ac8b82ad",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -18402,7 +18402,7 @@
       "status": "implemented",
       "scope": "rust_behavior",
       "domain": "Configured standalone four-stage Action6/7/8/9/D/10 control profile with identity-only refusal prefix. Native oracle retains original baseline execution; Rust scans actual baseline identities and refuses baseline-targeted runtime lookups. Full baseline and specification execution, strings, callbacks, storage and scripts remain mandatory outside this increment.",
-      "expected": "Exactly one native matrix test executes all 247 case identities, 8673 normalized events, 6697 configured record decisions, 1293 final configs and 4746 altered-result comparator rejections. Three exact cumulative host-bound tests execute. Actual stale/replay/reused-directory/non-save/unarmed/duplicate-output guards and genuine zero-test/subset rejection pass. Complete raw artifacts are checked against pinned layout, indexed and archived without deleting originals; Cargo-selected test binaries, native binary, sources/config/input hashes and actual baseline files retained.",
+      "expected": "Exactly one native matrix test executes all 248 case identities, 9711 normalized events, 7727 configured record decisions, 1549 final configs and 4766 altered-result comparator rejections. Three exact cumulative host-bound tests execute. Actual stale/replay/reused-directory/non-save/unarmed/duplicate-output guards and genuine zero-test/subset rejection pass. Complete raw artifacts are checked against pinned layout, indexed and archived without deleting originals; Cargo-selected test binaries, native binary, sources/config/input hashes and actual baseline files retained. Capacity overflow of a filename alias preserves collected label42 and later Action9 branch parameters [1,0,9], while ordinary DisableGrf still clears labels.",
       "driver": "grf-control",
       "assets": [
         "grf-control-scripts-grf-control-archive-py",

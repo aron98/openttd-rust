@@ -62,8 +62,8 @@ def main() -> None:
         if path.is_file() and not path.is_relative_to(output / "target")
     )
     archive_files(output, paths)
-    coverage = "PASS 247 cases, 8673 events, 6697 record decisions, 1293 final configs"
-    checks = "4746 comparator rejections; all host guards and exact budget tests"
+    coverage = "PASS 248 cases, 9711 events, 7727 record decisions, 1549 final configs"
+    checks = "4766 comparator rejections; all host guards and exact budget tests"
     _ = (output / "summary.txt").write_text(f"{coverage}\n{checks}\n")
     print("PASS configured GRF control and complete evidence")
 

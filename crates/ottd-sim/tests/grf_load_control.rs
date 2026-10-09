@@ -1,10 +1,87 @@
 //! Original loading phases and parameter control, without catalog activation.
+pub mod grf_control_cases;
 use ottd_sim::content::grf::{
     ControlLoadError, ControlOptions, GrfIdentity, LoadEvent, LoadFlags, LoadInput, LoadStage,
     LoadStatus, Palette, run_control_load, run_control_load_with_prefix,
 };
 
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
+
+#[test]
+fn capacity_rejection_preserves_aliased_labels_and_later_branch() -> Result {
+    let case = grf_control_cases::capacity_alias_case()?;
+    let inputs = case
+        .sources
+        .iter()
+        .map(grf_control_cases::Source::input)
+        .collect::<Vec<_>>();
+    let report = run_control_load(
+        &inputs,
+        ControlOptions {
+            networking: case.networking,
+            ..ControlOptions::default()
+        },
+    )
+    .map_err(|error| format!("{}: {error}", case.name))?;
+    let labels = report
+        .events
+        .iter()
+        .find_map(|event| match event {
+            LoadEvent::StageEnd {
+                stage: LoadStage::LabelScan,
+                files,
+                ..
+            } => files.first().and_then(|file| file.labels.as_ref()),
+            _ => None,
+        })
+        .ok_or("missing LabelScan state")?;
+    assert_eq!(
+        labels.iter().map(|label| label.id).collect::<Vec<_>>(),
+        vec![42]
+    );
+    assert_eq!(
+        report
+            .files
+            .first()
+            .and_then(|file| file.parameters.as_deref()),
+        Some([1, 0, 9].as_slice())
+    );
+    let overflow = report.files.last().ok_or("missing overflow config")?;
+    assert_eq!(overflow.status, LoadStatus::Disabled);
+    assert_eq!(
+        overflow.errors,
+        vec![ottd_sim::content::grf::LoadDiagnostic {
+            failure: ottd_sim::content::grf::LoadFailure::TooManyFiles,
+            line: 0,
+        }]
+    );
+    Ok(())
+}
+
+#[test]
+fn ordinary_disable_still_clears_dynamic_labels() -> Result {
+    let bytes = file(
+        *b"AAAA",
+        &[
+            vec![0x10, 42],
+            grf_control_cases::info(u32::from_le_bytes(*b"AAAA")),
+        ],
+    )?;
+    let report = run_control_load(
+        &[input("a", Some(&bytes), *b"AAAA", &[])],
+        ControlOptions::default(),
+    )?;
+    let first = report.files.first().ok_or("missing disabled config")?;
+    assert_eq!(first.status, LoadStatus::Disabled);
+    assert_eq!(first.labels.as_deref(), Some([].as_slice()));
+    assert!(
+        first
+            .errors
+            .iter()
+            .any(|error| error.failure == ottd_sim::content::grf::LoadFailure::MultipleAction8)
+    );
+    Ok(())
+}
 
 fn file(id: [u8; 4], records: &[Vec<u8>]) -> Result<Vec<u8>> {
     let mut name = vec![8, 8];

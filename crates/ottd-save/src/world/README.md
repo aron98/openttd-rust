@@ -4,10 +4,20 @@
 field semantics, resolves saved pointers, reconstructs the fields in
 `DerivedState`, and stages field/tile batches before validating the final state.
 It never executes commands, script code, NewGRF callbacks or game ticks.
-Object creation/deletion and changing list cardinality are not exposed mutation
-operations. Existing scalar/string fields and existing primitive array elements
-can be edited; whole primitive array replacement must preserve cardinality.
-All nested fields remain addressable with exact field names and list positions.
+`InsertRecord`, `RemoveRecord` and `ReplaceRecord` operate on native pool tables
+with caller-supplied IDs and complete `TableRecord` values. Insert requires a
+vacant ID; remove and replace require an existing ID. These operations reject
+singletons, content mappings, script configurations and map planes. They do not
+allocate IDs, initialize gameplay objects or cascade deletions. Callers must
+include all coupled reference, ownership and map edits in the same batch.
+Only the final world must be consistent; failure preserves saved and derived
+state. All existing schema, native limits and relationship checks still apply.
+
+Existing scalar/string fields and existing primitive array elements can be
+edited; `Field` array replacement must preserve cardinality. Complete pool record
+replacement can change variable-length arrays; `StructList` replaces structure
+lists. Native fixed-array lengths remain enforced. All nested fields remain
+addressable with exact field names and list positions.
 
 ## Schema provenance and regeneration
 

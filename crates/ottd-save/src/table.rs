@@ -112,6 +112,14 @@ pub struct TableRecord {
     tail: Vec<u8>,
 }
 impl TableRecord {
+    /// Construct an ordinary wire record without a script tail.
+    /// Schema, widths and relationships are checked by table encoding and world edits.
+    pub const fn new(values: Vec<WireValue>) -> Self {
+        Self {
+            values,
+            tail: Vec::new(),
+        }
+    }
     /// Values in the owning schema's field order.
     pub fn values(&self) -> &[WireValue] {
         &self.values

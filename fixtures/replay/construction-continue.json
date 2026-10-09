@@ -1,0 +1,1 @@
+{"schema_version":1,"actions":[{"ordinal":0,"op":"command","request":{"company":0,"mode":"post","command":{"kind":"build_road","tile":3184,"pieces":5,"road_type":0,"toggle_disallowed":0,"town_id":65535}}},{"ordinal":1,"op":"command","request":{"company":0,"mode":"post","command":{"kind":"pause","mode":0,"paused":false}}}]}

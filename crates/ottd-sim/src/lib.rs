@@ -1,6 +1,19 @@
 //! Deterministic, explicitly scoped landscape simulation for OpenTTD 15.3.
 mod landscape;
+mod replay;
+pub use replay::{
+    ReplayAction, ReplayCursor, ReplayError, ReplayEvent, ReplayObservation, ReplayOutcome,
+    ReplayPlan, ReplayRuntime, run_replay,
+};
+mod world_ticks;
+pub use world_ticks::{WorldTickError, WorldTickReport, advance_world};
+mod commands;
+pub use commands::{
+    Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt, CommandRequest,
+    execute_command,
+};
 mod map;
+pub(crate) mod world_access;
 
 pub use landscape::{Landscape, LandscapeError};
 pub use map::{Map, Tile};

@@ -14,6 +14,8 @@ use serde_json::json;
 mod callbacks;
 /// Exact JSON comparison helpers.
 pub mod compare;
+/// Transactional saved-world replay and resume adapters.
+pub mod replay;
 mod simulation;
 /// Saved-world command adapters.
 pub mod world;
@@ -33,6 +35,21 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Action {
+    #[command(about = "Replay supported commands and state-loop calls into a new output directory")]
+    ReplayWorld {
+        input: PathBuf,
+        actions: PathBuf,
+        output_dir: PathBuf,
+        #[arg(long)]
+        through: Option<u64>,
+    },
+    #[command(about = "Resume a verified replay checkpoint into a new output directory")]
+    ResumeWorld {
+        checkpoint: PathBuf,
+        output_dir: PathBuf,
+        #[arg(long)]
+        through: Option<u64>,
+    },
     #[command(about = "Export version-362 saved state and structural indexes; not gameplay caches")]
     World {
         input: PathBuf,
@@ -104,6 +121,17 @@ fn load(path: &Path, limit: usize) -> Result<Savegame> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
+        Action::ReplayWorld {
+            input,
+            actions,
+            output_dir,
+            through,
+        } => replay::start(&input, &actions, &output_dir, through, cli.max_bytes)?,
+        Action::ResumeWorld {
+            checkpoint,
+            output_dir,
+            through,
+        } => replay::resume(&checkpoint, &output_dir, through, cli.max_bytes)?,
         Action::World { input, view } => world::inspect(&input, cli.max_bytes, view)?,
         Action::EditWorld {
             input,

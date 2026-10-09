@@ -20,21 +20,33 @@ if ! git -C "$source_dir" apply --reverse --check "$root/reference/world.patch" 
         fi
     done
 fi
+if git -C "$source_dir" apply --check "$root/reference/replay.patch" 2>/dev/null; then
+    git -C "$source_dir" apply "$root/reference/replay.patch"
+else
+    git -C "$source_dir" apply --reverse --check "$root/reference/replay.patch"
+fi
 # Compare tracked source with precisely HEAD plus our patch, without changing its index.
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
-cp reference/snapshot.hpp "$source_dir/src/saveload/reference_snapshot.hpp"
-cp reference/world.hpp "$source_dir/src/saveload/reference_world.hpp"
-cp reference/world_derived.hpp "$source_dir/src/saveload/reference_world_derived.hpp"
-cp reference/world_fixture.hpp "$source_dir/src/saveload/reference_world_fixture.hpp"
-cp reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
-cp reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"
+copy_header() {
+    if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
+}
+copy_header reference/replay_hooks.hpp "$source_dir/src/reference_replay_hooks.hpp"
+for header in replay replay_cost replay_commands replay_fixture; do
+    copy_header "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
+done
+copy_header reference/snapshot.hpp "$source_dir/src/saveload/reference_snapshot.hpp"
+copy_header reference/world.hpp "$source_dir/src/saveload/reference_world.hpp"
+copy_header reference/world_derived.hpp "$source_dir/src/saveload/reference_world_derived.hpp"
+copy_header reference/world_fixture.hpp "$source_dir/src/saveload/reference_world_fixture.hpp"
+copy_header reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
+copy_header reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"
 for header in callback_vehicle callback_timer callback_house callback_company callback_station callback_industry callback_industry_state; do
-    cp "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
+    copy_header "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
 done
 cmake -S "$source_dir" -B "$build_dir" \
     -DOPTION_DEDICATED=ON -DOPTION_USE_ASSERTS=ON -DCMAKE_BUILD_TYPE=Release \
@@ -42,6 +54,7 @@ cmake -S "$source_dir" -B "$build_dir" \
     "-DCMAKE_CXX_COMPILER_LAUNCHER=${REFERENCE_COMPILER_LAUNCHER:-}" \
     "-DCMAKE_DISABLE_PRECOMPILE_HEADERS=${REFERENCE_DISABLE_PCH:-OFF}"
 cmake --build "$build_dir" --parallel "${JOBS:-4}"
+cmake -E sha256sum "$build_dir/openttd" reference/*.patch reference/*.hpp > "$build_dir/replay-build.sha256"
 archive="${REFERENCE_OPENGFX_ARCHIVE:-$root/.reference/opengfx-7.1-all.zip}"
 if [ ! -f "$archive" ]; then
     curl --fail --location --max-time 120 https://cdn.openttd.org/opengfx-releases/7.1/opengfx-7.1-all.zip --output "$archive.part"

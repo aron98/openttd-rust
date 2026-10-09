@@ -37,6 +37,17 @@ pub enum PathElement {
 /// One mutation staged in a complete saved-world transaction.
 #[derive(Debug, Clone)]
 pub enum WorldEdit {
+    /// Replace a structure list, validating its wire schema and final world.
+    StructList {
+        /// Native chunk.
+        chunk: [u8; 4],
+        /// Existing object identity.
+        record: u32,
+        /// Path to a structure list.
+        path: Vec<PathElement>,
+        /// Replacement list, including native cardinality changes.
+        rows: Vec<TableRecord>,
+    },
     /// Replace an existing field while preserving object identity.
     Field {
         /// Native chunk name.

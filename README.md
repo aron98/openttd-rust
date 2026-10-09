@@ -4,7 +4,8 @@ A Rust port targeting **OpenTTD 15.3**, with behavioral parity and two-way save
 compatibility as the end goal. The exact upstream commit is recorded in
 [`upstream.toml`](upstream.toml).
 
-**Current state: saved-world tools, typed snapshots, a deterministic clock/clear-landscape subsystem, and selected object callback bodies. This is not yet a playable game.**
+**Current state: saved-world tools, supported command replay, bounded world ticks,
+typed snapshots, and selected object callback bodies. This is not yet a playable game.**
 The Rust code reads and rewrites save containers while preserving chunk contents.
 Version-362 saves additionally decode into typed map, clock, settings and saved
 random-state snapshots. The `world` tools expose pinned saved tables and maps,
@@ -13,7 +14,9 @@ Content-dependent gameplay caches remain a stage 4 requirement. Rust randomizer,
 primitives are checked against independently generated C++ vectors.
 An explicit subsystem fixture can advance calendar/economy clocks and temperate
 clear terrain against original C++ results. A separate typed-state runner executes
-selected vehicle, house, company, station, and industry callbacks. Full object simulation, rendering,
+selected vehicle, house, company, station, and industry callbacks. Saved-world replay
+integrates clocks, terrain and admitted company/town callbacks with command
+validation, costs and execution. General gameplay, rendering,
 scripts and multiplayer are not implemented.
 
 ## Use
@@ -84,6 +87,48 @@ original TTD saves, patchpacks, future save versions, and historical semantic
 migrations are not implemented by Rust yet. A rewrite never upgrades a header
 without migrating its state.
 
+## Saved-world replay
+
+`replay-world` executes an ordered versioned action file against a version-362
+save. `resume-world` continues a checkpoint's pending actions in a fresh process.
+These examples use the committed [replay corpus](fixtures/replay/README.md):
+
+```sh
+cargo run -- replay-world fixtures/replay/clear-v362.sav fixtures/replay/ticks.json /tmp/ottd-prefix --through 3
+cargo run -- resume-world /tmp/ottd-prefix/checkpoint.json /tmp/ottd-suffix
+cargo run -- replay-world fixtures/replay/populated-v362.sav fixtures/replay/populated-road.json /tmp/ottd-road
+```
+
+Choose output directories that do not already exist. Each result contains action
+receipts, named native-compatible saves, complete saved and structural JSON,
+deterministic runtime observations, and `checkpoint.json`. The envelope pins the
+native revision, save version and sibling `final.sav` SHA-256, and retains the
+action cursor and pending actions. It is separate from the native save format.
+`--through` is an inclusive action ordinal, independent of the saved simulation
+tick. Commands preserve FIFO order while paused. Checkpoint labels are unique
+ignoring ASCII case, including the reserved `initial` and `final` labels.
+
+Supported commands are flat vanilla road construction, supported clear-ground
+clearing, loans, company/president names, and headless pause transitions. Receipts
+retain native test, affordability and execution behavior, including estimates
+and early failures. Populated command fixtures stay paused for Rust state-loop
+calls. Unpaused ticks admit temperate clear/void worlds with dormant towns, human
+companies, no unsupported active pools, and settings/counters that keep events
+inside the implemented domain. Company finance, expense/history rollover, town
+ratings/history, clocks, tile scheduling, global counters and paused construction
+limit refill execute. See the [stage 3 domain](docs/stages/03-commands-tick-execution.md)
+for exact admission and rejection rules.
+
+Load admission rejects missing companies/towns, active scripts/NewGRFs and
+unsupported linkgraph load state. A later unsupported event rejects the whole
+replay before publication. The pure Rust replay kernel performs no filesystem
+I/O; the CLI adds checkpoint SHA-256 verification using `sha2` and stages output
+privately. Publication reserves a new directory and never overwrites an existing
+one. A filesystem failure during final publication can leave a partial directory
+of validated artifacts; `results.json` is published last and the error reports
+that limitation. Plans are limited to 10,000 actions and 100,000 cumulative ticks;
+the CLI bounds action/envelope JSON at 16 MiB and total output at 512 MiB.
+
 ## Compatibility contract
 
 The [versioned scenario contract](compatibility/contract.json) separates Rust
@@ -97,6 +142,7 @@ python3 scripts/check-contract.py --list
 # After both reference setup scripts below:
 python3 scripts/check-contract.py --run baseline
 python3 scripts/check-contract.py --run worlds
+python3 scripts/check-contract.py --run commands.world-ticks
 ```
 
 See the [contract guide](compatibility/README.md) and
@@ -107,6 +153,10 @@ exact saved/structural comparisons, changed-state reloads in the instrumented an
 unmodified original engines, and deliberate comparison/cache failures. Its
 artifacts are retained with the contract report in PR CI. Content-dependent
 runtime restoration remains an explicit stage 4 gate.
+The replay driver compares complete checkpoints through the public CLI and the
+unchanged native state loop, including fresh-process resume, numeric overflow
+compatibility and original continuation of Rust road construction. It does not
+claim general gameplay, content runtime or multiplayer parity.
 
 ## Verify
 
@@ -132,6 +182,7 @@ bash scripts/setup-snapshot-reference.sh
 bash scripts/check-snapshots.sh
 bash scripts/check-simulation.sh
 bash scripts/check-callbacks.sh
+bash scripts/check-replays.sh
 ```
 
 Pull-request CI caches native compiler results while still building and running

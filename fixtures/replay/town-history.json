@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "actions": [
+    {
+      "ordinal": 0,
+      "op": "tick",
+      "count": 1
+    },
+    {
+      "ordinal": 1,
+      "op": "checkpoint",
+      "label": "after-0"
+    },
+    {
+      "ordinal": 2,
+      "op": "tick",
+      "count": 3
+    },
+    {
+      "ordinal": 3,
+      "op": "checkpoint",
+      "label": "after-2"
+    }
+  ]
+}

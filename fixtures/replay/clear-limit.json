@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "actions": [
+    {
+      "ordinal": 0,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "landscape_clear",
+          "tile": 650
+        }
+      }
+    },
+    {
+      "ordinal": 1,
+      "op": "checkpoint",
+      "label": "after-0"
+    },
+    {
+      "ordinal": 2,
+      "op": "tick",
+      "count": 1
+    },
+    {
+      "ordinal": 3,
+      "op": "checkpoint",
+      "label": "after-2"
+    },
+    {
+      "ordinal": 4,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "landscape_clear",
+          "tile": 650
+        }
+      }
+    },
+    {
+      "ordinal": 5,
+      "op": "checkpoint",
+      "label": "after-4"
+    },
+    {
+      "ordinal": 6,
+      "op": "tick",
+      "count": 2
+    },
+    {
+      "ordinal": 7,
+      "op": "checkpoint",
+      "label": "after-6"
+    },
+    {
+      "ordinal": 8,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "landscape_clear",
+          "tile": 650
+        }
+      }
+    },
+    {
+      "ordinal": 9,
+      "op": "checkpoint",
+      "label": "after-8"
+    }
+  ]
+}

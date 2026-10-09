@@ -21,10 +21,11 @@ changes must not silently remove behavior.
 
 ## Current foundation
 
-The repository has lossless save-container rewriting, partial typed snapshots,
-deterministic primitives, clock/clear-landscape simulation, and selected object
-callback bodies. These are tested against the pinned original implementation.
-They do not establish complete world simulation, general mod support, playable
+The repository has lossless save-container rewriting, complete version-362 saved
+worlds and structural restoration, deterministic primitives, bounded command/tick
+replay, clock/clear-landscape simulation, and selected object callback bodies.
+These are tested against the pinned original implementation. They do not
+establish general gameplay simulation, content-dependent restoration, mod runtime, playable
 clients or multiplayer interoperability. See the [README](../README.md) and
 [verification record](verification.md) for the implemented boundaries.
 
@@ -33,20 +34,28 @@ foundations complete a stage. The [stage 1 plan](stages/01-compatibility-contrac
 [versioned contract](../compatibility/contract.json) record the active concrete
 matrix, fixtures and executable checks. Stage 1 was completed by the maintainer merge of
 [PR #2](https://github.com/aron98/openttd-rust/pull/2), commit
-`e35f0f7375d84124f8047adff404eb4273b7277b`. Stage 2 is ready for review in
-[PR #3](https://github.com/aron98/openttd-rust/pull/3); its
+`e35f0f7375d84124f8047adff404eb4273b7277b`. Stage 2 was completed by the
+maintainer merge of [PR #3](https://github.com/aron98/openttd-rust/pull/3), commit
+`251da64b1b0c9eb8de897ecd3dba81f2872972ca`. Its
 [plan](stages/02-world-loading-saving.md) records the approved boundary and
-passing implementation review and Linux CI evidence. Final documentation CI is
-tracked in the PR checks before removing draft status. The maintainer's merge
-remains pending; stage 3 is planned and has not started.
+passing evidence. Stage 3 is ready for review; its
+[plan](stages/03-commands-tick-execution.md) records the command, tick and native
+replay gates. Stage 4 has not started.
+
+The stage 3 branch has local native evidence for its supported command/tick
+domain, including public replay/resume and three native integer-overflow edge
+cases. Independent review approved the implementation and
+[PR CI passed](https://github.com/aron98/openttd-rust/actions/runs/37921879534).
+[PR #4](https://github.com/aron98/openttd-rust/pull/4) is **Ready for review**;
+the maintainer merge remains required before stage 4 begins.
 
 ## Stages and acceptance gates
 
 | Stage | Deliverables | Acceptance gate | Status |
 | --- | --- | --- | --- |
 | 1. Compatibility contract | Pin save, protocol, settings and content requirements; inventory missing behavior; define representative vanilla/modded fixtures, recorded commands, expected state and reproducible test procedures. | Every compatibility claim has a named scenario, observable result and verification procedure; baseline checks execute, unsupported contexts fail explicitly, and future scenarios are identified as unimplemented. | Completed |
-| 2. Complete world loading and saving | Decode complete saved state, object pools, IDs, references and settings; restore content-independent derived state; serialize modified vehicles, companies, towns, industries, stations, orders, cargo and infrastructure; preserve mod/script state. | Populated worlds match saved state and the defined structural runtime state; supported edits survive Rust save/original reload and original save/Rust reload. Container preservation alone does not pass. Content-dependent runtime restoration is an explicit stage 4 gate. | Ready for review |
-| 3. Commands and tick execution | Implement command validation, costs, execution and ordering; integrate callback dispatch, clocks and RNG into the world loop. | The engines replay supported command sequences with equal state at defined checkpoints, including pause, timing boundaries and save/reload. Unsupported gameplay remains explicit pending stage 4. | Planned |
+| 2. Complete world loading and saving | Decode complete saved state, object pools, IDs, references and settings; restore content-independent derived state; serialize modified vehicles, companies, towns, industries, stations, orders, cargo and infrastructure; preserve mod/script state. | Populated worlds match saved state and the defined structural runtime state; supported edits survive Rust save/original reload and original save/Rust reload. Container preservation alone does not pass. Content-dependent runtime restoration is an explicit stage 4 gate. | Completed |
+| 3. Commands and tick execution | Implement command validation, costs, execution and ordering; integrate callback dispatch, clocks and RNG into the world loop. | The engines replay supported command sequences with equal state at defined checkpoints, including pause, timing boundaries and save/reload. Unsupported gameplay remains explicit pending stage 4. | Ready for review |
 | 4. Gameplay parity | Restore content-dependent runtime state, including NewGRF-derived vehicle, town, station and infrastructure caches; complete construction, terrain/water, vehicles/pathfinding, orders/service/breakdowns, cargo/stations, towns, industries, economy and company lifecycle in vertical slices, with applicable content/script behavior. | The stage's baseline gameplay inventory is covered by original-versus-Rust scenarios, including vanilla/modded worlds and save/reload during execution; no required gameplay family is silently deferred. | Planned |
 | 5. Native mixed multiplayer | Complete negotiation, packet/command encoding, joining, scheduling, synchronization, reconnects and headless server operation. | Original and Rust clients run together on original and Rust servers, including late join, reconnect and save/reload, without desynchronization across the defined corpus. | Planned |
 | 6. Desktop client | Shared renderer, sprites/palettes/text, audio, windows, tools, shortcuts and game management. | Original workflows are usable through the Rust client; representative visual/input checks and mixed multiplayer scenarios pass. | Planned |
@@ -110,3 +119,5 @@ Across stages 2 and 3, reach: load a small populated world, execute a supported
 construction command in Rust, save it, and continue it in original OpenTTD.
 Stage 2 establishes the world/save prerequisites; stage 3 adds the command.
 This is a useful intermediate proof, not a replacement for either stage's gate.
+The stage 3 replay driver now exercises that milestone: a Rust-built road in a
+populated save survives reload and 16 ticks in the uninstrumented original.

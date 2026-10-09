@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "fixture": {
+    "profile": "clear",
+    "paused": false,
+    "town_history": true,
+    "date": {
+      "year": 2100,
+      "month": 11,
+      "day": 31,
+      "fract": 73
+    }
+  },
+  "actions": []
+}

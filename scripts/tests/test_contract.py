@@ -62,13 +62,22 @@ class ContractTests(unittest.TestCase):
             [
                 (
                     "content identity",
-                    lambda d: d["profiles"][-1]["content"][0].update(grfid="00000000"),
+                    lambda d: next(p for p in d["profiles"] if p["id"] == "modded")[
+                        "content"
+                    ][0].update(grfid="00000000"),
                 ),
                 (
                     "content identity",
-                    lambda d: d["profiles"][-1]["content"][0].update(parameters=[42]),
+                    lambda d: next(p for p in d["profiles"] if p["id"] == "modded")[
+                        "content"
+                    ][0].update(parameters=[42]),
                 ),
-                ("content identity", lambda d: d["profiles"][-1].update(content=[])),
+                (
+                    "content identity",
+                    lambda d: next(p for p in d["profiles"] if p["id"] == "modded").update(
+                        content=[]
+                    ),
+                ),
             ]
         )
         with tempfile.TemporaryDirectory() as directory:

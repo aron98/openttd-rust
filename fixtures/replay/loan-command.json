@@ -1,0 +1,1 @@
+{"schema_version":1,"actions":[{"ordinal":0,"op":"command","request":{"company":0,"mode":"post","command":{"kind":"increase_loan","method":2,"amount":10000}}},{"ordinal":1,"op":"checkpoint","label":"after"}]}

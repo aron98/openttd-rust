@@ -6,7 +6,8 @@ mod snapshot;
 mod table;
 pub mod world;
 pub use snapshot::{
-    DateState, FieldValue, MapState, ScriptRandomState, SnapshotError, TileState, WorldSnapshot,
+    DateState, FieldValue, MapState, ScriptRandomState, SnapshotError, TileRawParts, TileState,
+    WorldSnapshot,
 };
 pub use table::{
     FieldSchema, TableChunk, TableError, TableLimits, TableRecord, TableSchema, TableTailPolicy,

@@ -1,11 +1,11 @@
 # Stage 2: world loading and saving
 
-Status: **Ready for review**. Branch: `stage/02-world-loading-saving`, based on the
-maintainer merge of [PR #2](https://github.com/aron98/openttd-rust/pull/2),
-`e35f0f7375d84124f8047adff404eb4273b7277b`. [PR #3](https://github.com/aron98/openttd-rust/pull/3)
-collects the atomic increments and awaits the maintainer's merge. Implementation
-review and required Linux CI have passed; final documentation CI remains tracked
-in the PR checks before removing draft status. Stage 3 is planned, not started.
+Status: **Completed**. The maintainer merged
+[PR #3](https://github.com/aron98/openttd-rust/pull/3) on 2026-10-09 as
+`251da64b1b0c9eb8de897ecd3dba81f2872972ca`. Its atomic increments were based on
+stage1 merge `e35f0f7375d84124f8047adff404eb4273b7277b`. Implementation review,
+required Linux CI and final documentation CI passed before handoff. Stage3 now
+starts from the observed merge under its separate plan and PR.
 
 ## Approved scope
 
@@ -226,6 +226,6 @@ and four reload witnesses from the unmodified original engine. This establishes
 the approved stage 2 saved-state and structural-restoration boundary; it does not
 claim content-dependent runtime restoration, which remains the stage 4 gate.
 
-Final documentation CI is tracked by [PR #3's checks](https://github.com/aron98/openttd-rust/pull/3/checks).
-The PR remains draft until those checks pass. The maintainer's merge is still
-required before stage 2 becomes completed or stage 3 implementation begins.
+Final documentation [CI run37912412835](https://github.com/aron98/openttd-rust/actions/runs/37912412835)
+passed on head `399966a6b6c5b673224f48b1ce63b3f56626881d` before PR readiness.
+The subsequent maintainer merge completed this stage and authorized stage3.

@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.20)
+foreach(required ORACLE RUN_DIR CONFIG INPUT REPLAY)
+    if(NOT DEFINED ${required})
+        message(FATAL_ERROR "Missing ${required}")
+    endif()
+endforeach()
+get_filename_component(RUN_DIR "${RUN_DIR}" ABSOLUTE)
+get_filename_component(INPUT "${INPUT}" ABSOLUTE)
+get_filename_component(REPLAY "${REPLAY}" ABSOLUTE)
+if(EXISTS "${RUN_DIR}")
+    message(FATAL_ERROR "Replay run directory already exists (stale evidence): ${RUN_DIR}")
+endif()
+file(MAKE_DIRECTORY "${RUN_DIR}")
+file(COPY_FILE "${CONFIG}" "${RUN_DIR}/openttd.cfg")
+file(COPY_FILE "${REPLAY}" "${RUN_DIR}/actions.json")
+file(SHA256 "${ORACLE}" oracle_hash)
+file(SHA256 "${INPUT}" input_hash)
+file(SHA256 "${REPLAY}" replay_hash)
+file(WRITE "${RUN_DIR}/invocation.txt" "ORACLE=${ORACLE}\nORACLE_SHA256=${oracle_hash}\nINPUT=${INPUT}\nINPUT_SHA256=${input_hash}\nREPLAY=${REPLAY}\nREPLAY_SHA256=${replay_hash}\nCONFIG=${CONFIG}\nARGV=-X -x -c ${RUN_DIR}/openttd.cfg -vnull:ticks=8 -snull -mnull -g ${INPUT} -d sl=2\n")
+include("${CMAKE_CURRENT_LIST_DIR}/check-replay-build.cmake")
+foreach(reference IN LISTS references)
+    file(SHA256 "${root}/${reference}" reference_hash)
+    file(APPEND "${RUN_DIR}/invocation.txt" "SOURCE_SHA256=${reference_hash} ${reference}\n")
+endforeach()
+set(ENV{OTTD_REPLAY_PATH} "${REPLAY}")
+set(ENV{OTTD_REPLAY_OUTPUT} "${RUN_DIR}")
+execute_process(
+    COMMAND "${ORACLE}" -X -x -c "${RUN_DIR}/openttd.cfg"
+        -vnull:ticks=8 -snull -mnull -g "${INPUT}" -d sl=2
+    WORKING_DIRECTORY "${RUN_DIR}"
+    OUTPUT_FILE "${RUN_DIR}/stdout.log"
+    ERROR_FILE "${RUN_DIR}/stderr.log"
+    RESULT_VARIABLE result TIMEOUT 60)
+file(WRITE "${RUN_DIR}/process.txt" "exit=${result}\n")
+if(NOT result STREQUAL "0")
+    message(FATAL_ERROR "Native replay failed (${result}); see ${RUN_DIR}/stderr.log")
+endif()
+include("${CMAKE_CURRENT_LIST_DIR}/check-replay-evidence.cmake")

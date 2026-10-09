@@ -2,6 +2,64 @@ use super::{SnapshotError, invalid, required, schema, table};
 use crate::{ChunkKind, Reader, Savegame};
 use serde::{Deserialize, Serialize};
 
+/// All raw tile fields, before world-level validation.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct TileRawParts {
+    /// Type nibble and flags.
+    pub tile_type: u8,
+    /// Height.
+    pub height: u8,
+    /// Raw field.
+    pub m1: u8,
+    /// Raw field.
+    pub m2: u16,
+    /// Raw field.
+    pub m3: u8,
+    /// Raw field.
+    pub m4: u8,
+    /// Raw field.
+    pub m5: u8,
+    /// Raw field.
+    pub m6: u8,
+    /// Raw field.
+    pub m7: u8,
+    /// Raw field.
+    pub m8: u16,
+}
+
+impl From<TileRawParts> for TileState {
+    fn from(p: TileRawParts) -> Self {
+        Self {
+            tile_type: p.tile_type,
+            height: p.height,
+            m1: p.m1,
+            m2: p.m2,
+            m3: p.m3,
+            m4: p.m4,
+            m5: p.m5,
+            m6: p.m6,
+            m7: p.m7,
+            m8: p.m8,
+        }
+    }
+}
+impl From<&TileState> for TileRawParts {
+    fn from(p: &TileState) -> Self {
+        Self {
+            tile_type: p.tile_type,
+            height: p.height,
+            m1: p.m1,
+            m2: p.m2,
+            m3: p.m3,
+            m4: p.m4,
+            m5: p.m5,
+            m6: p.m6,
+            m7: p.m7,
+            m8: p.m8,
+        }
+    }
+}
+
 /// Raw tile bytes, preserving every bit of the ten saved tile planes.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

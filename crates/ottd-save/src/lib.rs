@@ -4,6 +4,7 @@ mod chunk;
 mod compression;
 mod snapshot;
 mod table;
+pub mod world;
 pub use snapshot::{
     DateState, FieldValue, MapState, ScriptRandomState, SnapshotError, TileState, WorldSnapshot,
 };

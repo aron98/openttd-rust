@@ -1,0 +1,7788 @@
+{
+  "chunks": {
+    "AIPL": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "settings"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "version"
+      }
+    ],
+    "ANIT": [
+      {
+        "command": 7,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "tiles"
+      }
+    ],
+    "APID": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "entity_id"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "substitute_id"
+      }
+    ],
+    "ATID": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "entity_id"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "substitute_id"
+      }
+    ],
+    "BKOR": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "user"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "tile"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "group"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "service_interval"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 1,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "clone",
+        "reference_kind": 1
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "cur_real_order_index"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "cur_implicit_order_index"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "current_order_time"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "lateness_counter"
+      },
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "timetable_start"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "vehicle_flags"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "type"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "flags"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "dest"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "refit_cargo"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "wait_time"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "travel_time"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "max_speed"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "orders"
+      }
+    ],
+    "CAPA": [
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "source"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "source_xy"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "loaded_at_xy"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "count"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "periods_in_transit"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "feeder_share"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "source_type"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "source_id"
+      },
+      {
+        "command": 0,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 48,
+        "name": "travelled.x"
+      },
+      {
+        "command": 0,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 48,
+        "name": "travelled.y"
+      }
+    ],
+    "CAPY": [
+      {
+        "command": 1,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "front",
+        "reference_kind": 1
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "route_profit"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "visual_profit"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "visual_transfer"
+      }
+    ],
+    "CHTS": [
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "magic_bulldozer.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "magic_bulldozer.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "switch_company.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "switch_company.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "money.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "money.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "crossing_tunnels.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "crossing_tunnels.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "no_jetcrash.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "no_jetcrash.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "change_date.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "change_date.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "setup_prod.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "setup_prod.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "edit_max_hl.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "edit_max_hl.value"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "station_rating.been_used"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "station_rating.value"
+      }
+    ],
+    "CITY": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "xy"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "townnamegrfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "townnametype"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "townnameparts"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "flags"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "statues"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "have_ratings"
+      },
+      {
+        "command": 5,
+        "file_type": 3,
+        "length": 15,
+        "memory_type": 48,
+        "name": "ratings"
+      },
+      {
+        "command": 5,
+        "file_type": 1,
+        "length": 15,
+        "memory_type": 16,
+        "name": "unwanted"
+      },
+      {
+        "command": 5,
+        "file_type": 6,
+        "length": 6,
+        "memory_type": 96,
+        "name": "goal"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "text"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "time_until_rebuild"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "grow_counter"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "growth_rate"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "fund_buildings_months"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "road_build_months"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "exclusivity"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "exclusive_counter"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "larger_town"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "layout"
+      },
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "valid_history"
+      },
+      {
+        "command": 12,
+        "file_type": 9,
+        "length": 0,
+        "memory_type": 0,
+        "name": "psa_list",
+        "reference_kind": 9
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "cargo"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "production"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "transported"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "history"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "supplied"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "old_max"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "new_max"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "old_act"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "new_act"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "received"
+      }
+    ],
+    "CMDL": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "number"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "amount"
+      }
+    ],
+    "CMPU": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "number"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "amount"
+      }
+    ],
+    "DATE": [
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "date"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "date_fract"
+      },
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "tick_counter"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "economy_date"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "economy_date_fract"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "days_since_last_month"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "calendar_sub_date_fract"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "cur_tileloop_tile"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "next_disaster_start"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "random_state[0]"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "random_state[1]"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 96,
+        "name": "company_tick_counter"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "trees_tick_counter"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "pause_mode"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "id"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "competitors_interval"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "competitors_interval_elapsed"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "competitors_interval_fired"
+      }
+    ],
+    "DEPT": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "xy"
+      },
+      {
+        "command": 1,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 0,
+        "name": "town",
+        "reference_kind": 3
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "town_cn"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "build_date"
+      }
+    ],
+    "ECMY": [
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "inflation_prices"
+      },
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "inflation_payment"
+      },
+      {
+        "command": 0,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 48,
+        "name": "fluct"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "interest_rate"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "infl_amount"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "infl_amount_pr"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "industry_daily_change_counter"
+      }
+    ],
+    "EIDS": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "internal_id"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "substitute_id"
+      }
+    ],
+    "ENGN": [
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "intro_date"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "age"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "reliability"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "reliability_spd_dec"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "reliability_start"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "reliability_max"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "reliability_final"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "duration_phase_1"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "duration_phase_2"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "duration_phase_3"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "flags"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "preview_asked"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "preview_company"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "preview_wait"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "company_avail"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "company_hidden"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      }
+    ],
+    "ERNW": [
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "from"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "to"
+      },
+      {
+        "command": 1,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 0,
+        "name": "next",
+        "reference_kind": 6
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "group_id"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "replace_when_old"
+      }
+    ],
+    "GLOG": [
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "at"
+      },
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "tick"
+      },
+      {
+        "children": [
+          {
+            "command": 10,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "ct"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "mode.mode"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "mode.landscape"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "mode"
+          },
+          {
+            "children": [
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "revision.text"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "revision.newgrf"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "revision.slver"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "revision.modified"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "revision"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "oldver.type"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "oldver.version"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "oldver"
+          },
+          {
+            "children": [
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "setting.name"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "setting.oldval"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "setting.newval"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "setting"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "grfadd.grfid"
+              },
+              {
+                "command": 5,
+                "file_type": 2,
+                "length": 16,
+                "memory_type": 32,
+                "name": "grfadd.md5sum"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "grfadd"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "grfrem.grfid"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "grfrem"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "grfcompat.grfid"
+              },
+              {
+                "command": 5,
+                "file_type": 2,
+                "length": 16,
+                "memory_type": 32,
+                "name": "grfcompat.md5sum"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "grfcompat"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "grfparam.grfid"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "grfparam"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "grfmove.grfid"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "grfmove.offset"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "grfmove"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "grfbug.data"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "grfbug.grfid"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "grfbug.bug"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "grfbug"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 1,
+                "length": 0,
+                "memory_type": 0,
+                "name": "is_emergency_save"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "emergency"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "action"
+      }
+    ],
+    "GOAL": [
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 32,
+        "name": "company"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 32,
+        "name": "type"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "dst"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "text"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "progress"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "completed"
+      }
+    ],
+    "GRPS": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "owner"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "vehicle_type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "flags"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "livery.in_use"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "livery.colour1"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "livery.colour2"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "parent"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "number"
+      }
+    ],
+    "GSDT": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "settings"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "version"
+      }
+    ],
+    "GSTR": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "language"
+      },
+      {
+        "children": [
+          {
+            "command": 4,
+            "file_type": 10,
+            "length": 0,
+            "memory_type": 192,
+            "name": "string"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "strings"
+      }
+    ],
+    "HIDS": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "entity_id"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "substitute_id"
+      }
+    ],
+    "IBLD": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "wanted_inds"
+      }
+    ],
+    "IIDS": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "entity_id"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "substitute_id"
+      }
+    ],
+    "INDY": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "location.tile"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 64,
+        "name": "location.w"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 64,
+        "name": "location.h"
+      },
+      {
+        "command": 1,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 0,
+        "name": "town",
+        "reference_kind": 3
+      },
+      {
+        "command": 1,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 0,
+        "name": "neutral_station",
+        "reference_kind": 2
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "prod_level"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "counter"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "owner"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "random_colour"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "last_prod_year"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "was_cargo_delivered"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "ctlflags"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "founder"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "construction_date"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "construction_type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "selected_layout"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "exclusive_supplier"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "exclusive_consumer"
+      },
+      {
+        "command": 1,
+        "file_type": 9,
+        "length": 0,
+        "memory_type": 0,
+        "name": "psa",
+        "reference_kind": 9
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "random"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "text"
+      },
+      {
+        "command": 0,
+        "file_type": 8,
+        "length": 0,
+        "memory_type": 128,
+        "name": "valid_history"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "cargo"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "waiting"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "last_accepted"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "accumulated_waiting"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "accepted"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "waiting"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "history"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "accepted"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "cargo"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "waiting"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "rate"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "production"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "transported"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "history"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "produced"
+      }
+    ],
+    "ITBL": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "probability"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "min_number"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "target_count"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "max_wait"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "wait_count"
+      }
+    ],
+    "LEAE": [
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "table"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "rating"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "company"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "text"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "score"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "link.type"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "link.target"
+      }
+    ],
+    "LEAT": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "title"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "header"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "footer"
+      }
+    ],
+    "LGRJ": [
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "linkgraph.recalc_interval"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "linkgraph.recalc_time"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_pax"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_mail"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_armoured"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_default"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.accuracy"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.demand_distance"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.demand_size"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.short_path_saturation"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "join_date"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "link_graph.index"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "last_compression"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "cargo"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "xy"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "supply"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "demand"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "station"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "last_update"
+              },
+              {
+                "children": [
+                  {
+                    "command": 0,
+                    "file_type": 6,
+                    "length": 0,
+                    "memory_type": 96,
+                    "name": "capacity"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 6,
+                    "length": 0,
+                    "memory_type": 96,
+                    "name": "usage"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 8,
+                    "length": 0,
+                    "memory_type": 128,
+                    "name": "travel_time_sum"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 5,
+                    "length": 0,
+                    "memory_type": 80,
+                    "name": "last_unrestricted_update"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 5,
+                    "length": 0,
+                    "memory_type": 80,
+                    "name": "last_restricted_update"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 4,
+                    "length": 0,
+                    "memory_type": 64,
+                    "name": "dest_node"
+                  }
+                ],
+                "command": 9,
+                "file_type": 0,
+                "length": 0,
+                "memory_type": 0,
+                "name": "edges"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "nodes"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "linkgraph"
+      }
+    ],
+    "LGRP": [
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "last_compression"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "cargo"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "xy"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "supply"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "demand"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "station"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "last_update"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "capacity"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "usage"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "travel_time_sum"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "last_unrestricted_update"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "last_restricted_update"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "dest_node"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "edges"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "nodes"
+      }
+    ],
+    "LGRS": [
+      {
+        "command": 8,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 0,
+        "name": "schedule",
+        "reference_kind": 10
+      },
+      {
+        "command": 8,
+        "file_type": 11,
+        "length": 0,
+        "memory_type": 0,
+        "name": "running",
+        "reference_kind": 11
+      }
+    ],
+    "MAPS": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "dim_x"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "dim_y"
+      }
+    ],
+    "NGRF": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "filename"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "ident.grfid"
+      },
+      {
+        "command": 5,
+        "file_type": 2,
+        "length": 16,
+        "memory_type": 32,
+        "name": "ident.md5sum"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "version"
+      },
+      {
+        "command": 5,
+        "file_type": 6,
+        "length": 128,
+        "memory_type": 96,
+        "name": "param"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "num_params"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "palette"
+      }
+    ],
+    "OBID": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "entity_id"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "substitute_id"
+      }
+    ],
+    "OBJS": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "location.tile"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 64,
+        "name": "location.w"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 64,
+        "name": "location.h"
+      },
+      {
+        "command": 1,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 0,
+        "name": "town",
+        "reference_kind": 3
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "build_date"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "colour"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "view"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "type"
+      }
+    ],
+    "ORDL": [
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "type"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "flags"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "dest"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "refit_cargo"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "wait_time"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "travel_time"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "max_speed"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "orders"
+      }
+    ],
+    "PATS": [
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.max_no_competitors"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "difficulty.competitors_interval"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.number_towns"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.industry_density"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "difficulty.max_loan"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.initial_interest"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.vehicle_costs"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.competitor_speed"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.vehicle_breakdowns"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.subsidy_multiplier"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "difficulty.subsidy_duration"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.construction_cost"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.terrain_type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.quantity_sea_lakes"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "difficulty.economy"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "difficulty.line_reverse_mode"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "difficulty.disasters"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "difficulty.town_council_tolerance"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "difficulty.infinite_money"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.town_layout"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.allow_town_roads"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.found_town"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.place_houses"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.allow_town_level_crossings"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.town_cargogen_mode"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.station_noise_level"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.inflation"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.multiple_industry_per_town"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.bribe"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.exclusive_rights"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.fund_buildings"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.fund_roads"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.give_money"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.feeder_payment_share"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.town_growth_rate"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.larger_towns"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.initial_city_size"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.mod_road_rebuild"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.dist_local_authority"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.town_noise_population[0]"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.town_noise_population[1]"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.town_noise_population[2]"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.town_noise_population[3]"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "economy.infrastructure_maintenance"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "economy.timekeeping_units"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.minutes_per_calendar_year"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.town_cargo_scale"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "economy.industry_cargo_scale"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "order.no_servicing_if_no_breakdowns"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "order.improved_load"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "order.selectgoods"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "order.serviceathelipad"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "order.station_length_loading_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "order.gradual_loading"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "station.never_expire_airports"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "station.station_spread"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "station.modified_catchment"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "station.serve_neutral_industries"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "station.distant_join_stations"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.road_side"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.train_acceleration_model"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.roadveh_acceleration_model"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.train_slope_steepness"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.roadveh_slope_steepness"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.max_train_length"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.smoke_amount"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "vehicle.never_expire_vehicles"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "vehicle.max_trains"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "vehicle.max_roadveh"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "vehicle.max_aircraft"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "vehicle.max_ships"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "vehicle.wagon_speed_limits"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "vehicle.disable_elrails"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.freight_trains"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.plane_speed"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "vehicle.dynamic_engines"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.plane_crashes"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "vehicle.extend_vehicle_life"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "linkgraph.recalc_interval"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "linkgraph.recalc_time"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_pax"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_mail"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_armoured"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.distribution_default"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.accuracy"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.demand_distance"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.demand_size"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "linkgraph.short_path_saturation"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.currency"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_velocity"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_velocity_nautical"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_power"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_weight"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_volume"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_force"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "locale.units_height"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 24,
+        "memory_type": 208,
+        "name": "locale.digit_group_separator"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 24,
+        "memory_type": 208,
+        "name": "locale.digit_group_separator_currency"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 24,
+        "memory_type": 208,
+        "name": "locale.digit_decimal_separator"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "pf.forbid_90_deg"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "pf.roadveh_queue"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "pf.reverse_at_signals"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "pf.wait_oneway_signal"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "pf.wait_twoway_signal"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "pf.wait_for_pbs_path"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "pf.reserve_paths"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "pf.path_backoff_interval"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.max_search_nodes"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "pf.yapf.rail_firstred_twoway_eol"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_firstred_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_firstred_exit_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_lastred_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_lastred_exit_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_station_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_slope_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_curve45_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_curve90_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_depot_reverse_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_crossing_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_look_ahead_max_signals"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 1,
+        "memory_type": 80,
+        "name": "pf.yapf.rail_look_ahead_signal_p0"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 1,
+        "memory_type": 80,
+        "name": "pf.yapf.rail_look_ahead_signal_p1"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 1,
+        "memory_type": 80,
+        "name": "pf.yapf.rail_look_ahead_signal_p2"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_pbs_cross_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_pbs_station_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_pbs_signal_back_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_doubleslip_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_longer_platform_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_longer_platform_per_tile_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_shorter_platform_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.rail_shorter_platform_per_tile_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.road_slope_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.road_curve_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.road_crossing_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.road_stop_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.road_stop_occupied_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.road_stop_bay_occupied_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.maximum_go_to_depot_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.ship_curve45_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "pf.yapf.ship_curve90_penalty"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "script.script_max_opcode_till_suspend"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "script.script_max_memory_megabytes"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "ai.ai_in_multiplayer"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "ai.ai_disable_veh_train"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "ai.ai_disable_veh_roadveh"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "ai.ai_disable_veh_aircraft"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "ai.ai_disable_veh_ship"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.town_name"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.landscape"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.heightmap_height"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.snow_line_height"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.snow_coverage"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.desert_coverage"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 1,
+        "memory_type": 80,
+        "name": "game_creation.starting_year"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 1,
+        "memory_type": 80,
+        "name": "game_creation.ending_year"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.land_generator"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.oil_refinery_limit"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.tgen_smoothness"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.variety"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "game_creation.generation_seed"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.tree_placer"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.water_borders"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.water_border_presets"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "game_creation.custom_town_number"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "game_creation.custom_industry_number"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.custom_terrain_type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.custom_sea_level"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.min_river_length"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.river_route_random"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "game_creation.amount_of_rivers"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.map_height_limit"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.build_on_slopes"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.command_pause_level"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "construction.terraform_per_64k_frames"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "construction.terraform_frame_burst"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "construction.clear_per_64k_frames"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "construction.clear_frame_burst"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "construction.tree_per_64k_frames"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "construction.tree_frame_burst"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 1,
+        "memory_type": 96,
+        "name": "construction.build_object_per_64k_frames"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "construction.build_object_frame_burst"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.autoslope"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.extra_dynamite"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "construction.max_bridge_length"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.max_bridge_height"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 1,
+        "memory_type": 64,
+        "name": "construction.max_tunnel_length"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.train_signal_side"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.road_stop_on_town_road"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.road_stop_on_competitor_road"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.crossing_with_competitor"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.raw_industry_construction"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.industry_platform"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 1,
+        "memory_type": 0,
+        "name": "construction.freeform_edges"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 1,
+        "memory_type": 32,
+        "name": "construction.extra_tree_placement"
+      }
+    ],
+    "PLYR": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "name_2"
+      },
+      {
+        "command": 0,
+        "file_type": 9,
+        "length": 0,
+        "memory_type": 96,
+        "name": "name_1"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 0,
+        "file_type": 9,
+        "length": 0,
+        "memory_type": 96,
+        "name": "president_name_1"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "president_name_2"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "president_name"
+      },
+      {
+        "children": [
+          {
+            "command": 4,
+            "file_type": 10,
+            "length": 0,
+            "memory_type": 192,
+            "name": "key"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "allow_list"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "face"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "face_style"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "money"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "current_loan"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "max_loan"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "colour"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "money_fraction"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "block_preview"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "location_of_HQ"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "last_build_coordinate"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "inaugurated_year"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "inaugurated_year_calendar"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "months_of_bankruptcy"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "bankrupt_asked"
+      },
+      {
+        "command": 0,
+        "file_type": 3,
+        "length": 0,
+        "memory_type": 48,
+        "name": "bankrupt_timeout"
+      },
+      {
+        "command": 0,
+        "file_type": 7,
+        "length": 0,
+        "memory_type": 112,
+        "name": "bankrupt_value"
+      },
+      {
+        "command": 5,
+        "file_type": 7,
+        "length": 39,
+        "memory_type": 112,
+        "name": "yearly_expenses"
+      },
+      {
+        "command": 0,
+        "file_type": 1,
+        "length": 0,
+        "memory_type": 0,
+        "name": "is_ai"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "terraform_limit"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "clear_limit"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "tree_limit"
+      },
+      {
+        "children": [
+          {
+            "command": 1,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 0,
+            "name": "engine_renew_list",
+            "reference_kind": 6
+          },
+          {
+            "command": 0,
+            "file_type": 1,
+            "length": 0,
+            "memory_type": 0,
+            "name": "settings.engine_renew"
+          },
+          {
+            "command": 0,
+            "file_type": 3,
+            "length": 0,
+            "memory_type": 48,
+            "name": "settings.engine_renew_months"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "settings.engine_renew_money"
+          },
+          {
+            "command": 0,
+            "file_type": 1,
+            "length": 0,
+            "memory_type": 0,
+            "name": "settings.renew_keep_length"
+          },
+          {
+            "command": 0,
+            "file_type": 1,
+            "length": 0,
+            "memory_type": 0,
+            "name": "settings.vehicle.servint_ispercent"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "settings.vehicle.servint_trains"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "settings.vehicle.servint_roadveh"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "settings.vehicle.servint_aircraft"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "settings.vehicle.servint_ships"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "settings"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 7,
+            "length": 0,
+            "memory_type": 112,
+            "name": "income"
+          },
+          {
+            "command": 0,
+            "file_type": 7,
+            "length": 0,
+            "memory_type": 112,
+            "name": "expenses"
+          },
+          {
+            "command": 0,
+            "file_type": 7,
+            "length": 0,
+            "memory_type": 112,
+            "name": "company_value"
+          },
+          {
+            "command": 5,
+            "file_type": 6,
+            "length": 64,
+            "memory_type": 96,
+            "name": "delivered_cargo"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "performance_history"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "cur_economy"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 7,
+            "length": 0,
+            "memory_type": 112,
+            "name": "income"
+          },
+          {
+            "command": 0,
+            "file_type": 7,
+            "length": 0,
+            "memory_type": 112,
+            "name": "expenses"
+          },
+          {
+            "command": 0,
+            "file_type": 7,
+            "length": 0,
+            "memory_type": 112,
+            "name": "company_value"
+          },
+          {
+            "command": 5,
+            "file_type": 6,
+            "length": 64,
+            "memory_type": 96,
+            "name": "delivered_cargo"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "performance_history"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "old_economy"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "in_use"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "colour1"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "colour2"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "liveries"
+      }
+    ],
+    "PSAC": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 5,
+        "file_type": 6,
+        "length": 256,
+        "memory_type": 96,
+        "name": "storage"
+      }
+    ],
+    "RAIL": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "label"
+      }
+    ],
+    "ROAD": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "xy"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "status"
+      },
+      {
+        "command": 1,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 0,
+        "name": "next",
+        "reference_kind": 5
+      }
+    ],
+    "ROTT": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "label"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "subtype"
+      }
+    ],
+    "SIGN": [
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "name"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "x"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "y"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "owner"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "z"
+      }
+    ],
+    "SRND": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "state[0]"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "state[1]"
+      }
+    ],
+    "STNN": [
+      {
+        "command": 10,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "facilities"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "xy"
+              },
+              {
+                "command": 1,
+                "file_type": 3,
+                "length": 0,
+                "memory_type": 0,
+                "name": "town",
+                "reference_kind": 3
+              },
+              {
+                "command": 0,
+                "file_type": 9,
+                "length": 0,
+                "memory_type": 96,
+                "name": "string_id"
+              },
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "name"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "delete_ctr"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "owner"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "facilities"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "build_date"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "random_bits"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "waiting_triggers"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "base"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "train_station.tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "train_station.w"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "train_station.h"
+          },
+          {
+            "command": 1,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 0,
+            "name": "bus_stops",
+            "reference_kind": 5
+          },
+          {
+            "command": 1,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 0,
+            "name": "truck_stops",
+            "reference_kind": 5
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "ship_station.tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "ship_station.w"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "ship_station.h"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "docking_station.tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "docking_station.w"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "docking_station.h"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "airport.tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "airport.w"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "airport.h"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "airport.type"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "airport.layout"
+          },
+          {
+            "command": 0,
+            "file_type": 8,
+            "length": 0,
+            "memory_type": 128,
+            "name": "airport.flags"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "airport.rotation"
+          },
+          {
+            "command": 1,
+            "file_type": 9,
+            "length": 0,
+            "memory_type": 0,
+            "name": "airport.psa",
+            "reference_kind": 9
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "indtype"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "time_since_load"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "time_since_unload"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "last_vehicle_type"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "had_vehicle_of_type"
+          },
+          {
+            "command": 8,
+            "file_type": 1,
+            "length": 0,
+            "memory_type": 0,
+            "name": "loading_vehicles",
+            "reference_kind": 1
+          },
+          {
+            "command": 0,
+            "file_type": 8,
+            "length": 0,
+            "memory_type": 128,
+            "name": "always_accepted"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "status"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "time_since_pickup"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "rating"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "last_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "last_age"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "amount_fract"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "cargo.reserved_count"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "link_graph"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "node"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "max_waiting_cargo"
+              },
+              {
+                "children": [
+                  {
+                    "command": 0,
+                    "file_type": 4,
+                    "length": 0,
+                    "memory_type": 64,
+                    "name": "source"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 4,
+                    "length": 0,
+                    "memory_type": 64,
+                    "name": "via"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 6,
+                    "length": 0,
+                    "memory_type": 96,
+                    "name": "share"
+                  },
+                  {
+                    "command": 0,
+                    "file_type": 1,
+                    "length": 0,
+                    "memory_type": 0,
+                    "name": "restricted"
+                  }
+                ],
+                "command": 9,
+                "file_type": 0,
+                "length": 0,
+                "memory_type": 0,
+                "name": "flow"
+              },
+              {
+                "children": [
+                  {
+                    "command": 0,
+                    "file_type": 4,
+                    "length": 0,
+                    "memory_type": 64,
+                    "name": "first"
+                  },
+                  {
+                    "command": 8,
+                    "file_type": 7,
+                    "length": 0,
+                    "memory_type": 0,
+                    "name": "second",
+                    "reference_kind": 7
+                  }
+                ],
+                "command": 9,
+                "file_type": 0,
+                "length": 0,
+                "memory_type": 0,
+                "name": "cargo"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "goods"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "normal"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "xy"
+              },
+              {
+                "command": 1,
+                "file_type": 3,
+                "length": 0,
+                "memory_type": 0,
+                "name": "town",
+                "reference_kind": 3
+              },
+              {
+                "command": 0,
+                "file_type": 9,
+                "length": 0,
+                "memory_type": 96,
+                "name": "string_id"
+              },
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "name"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "delete_ctr"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "owner"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "facilities"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "build_date"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "random_bits"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "waiting_triggers"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "base"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "town_cn"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "train_station.tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "train_station.w"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "train_station.h"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "waypoint_flags"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "road_waypoint_area.tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "road_waypoint_area.w"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 64,
+            "name": "road_waypoint_area.h"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "waypoint"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "grfid"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "localidx"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "speclist"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "grfid"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "localidx"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "roadstopspeclist"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "tile"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "random_bits"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "animation_frame"
+          }
+        ],
+        "command": 9,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "roadstoptiledata"
+      }
+    ],
+    "STPA": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "sort_value"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "date"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "company"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "title"
+      }
+    ],
+    "STPE": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "sort_value"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "page"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "type"
+      },
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "referenced_id"
+      },
+      {
+        "command": 4,
+        "file_type": 10,
+        "length": 0,
+        "memory_type": 192,
+        "name": "text"
+      }
+    ],
+    "SUBS": [
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "cargo_type"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "remaining"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "awarded"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "src_type"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "dst_type"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "src"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "dst"
+      }
+    ],
+    "TIDS": [
+      {
+        "command": 0,
+        "file_type": 6,
+        "length": 0,
+        "memory_type": 96,
+        "name": "grfid"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "entity_id"
+      },
+      {
+        "command": 0,
+        "file_type": 4,
+        "length": 0,
+        "memory_type": 64,
+        "name": "substitute_id"
+      }
+    ],
+    "VEHS": [
+      {
+        "command": 10,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "type"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subtype"
+              },
+              {
+                "command": 1,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next",
+                "reference_kind": 4
+              },
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "name"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "unitnumber"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "owner"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "dest_tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "x_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "y_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "z_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "direction"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "spritenum"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "engine_type"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cur_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subspeed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "acceleration"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "motion_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "progress"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "vehstatus"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_station_visited"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_loading_station"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_subtype"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_cap"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "refit_cap"
+              },
+              {
+                "command": 8,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 0,
+                "name": "cargo.packets",
+                "reference_kind": 7
+              },
+              {
+                "command": 5,
+                "file_type": 6,
+                "length": 4,
+                "memory_type": 96,
+                "name": "cargo.action_counts"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_age_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "day_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "tick_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "running_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_implicit_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_real_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.flags"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.dest"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.refit_cargo"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.wait_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.travel_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.max_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "timetable_start"
+              },
+              {
+                "command": 1,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 0,
+                "name": "orders",
+                "reference_kind": 8
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "economy_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "max_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service_newgrf"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "service_interval"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability_spd_dec"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_ctr"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_delay"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdowns_since_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_chance"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "build_year"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "load_unload_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_paid_for"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "vehicle_flags"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_this_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_last_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "value"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "random_bits"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "waiting_triggers"
+              },
+              {
+                "command": 1,
+                "file_type": 1,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next_shared",
+                "reference_kind": 1
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "group_id"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "current_order_time"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "last_loading_tick"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "lateness_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_last_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_next_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "round_trip_time"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "common"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "crash_anim_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "force_proceed"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "track"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "flags"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "wait_counter"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "gv_flags"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "train"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subtype"
+              },
+              {
+                "command": 1,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next",
+                "reference_kind": 4
+              },
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "name"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "unitnumber"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "owner"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "dest_tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "x_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "y_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "z_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "direction"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "spritenum"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "engine_type"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cur_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subspeed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "acceleration"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "motion_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "progress"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "vehstatus"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_station_visited"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_loading_station"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_subtype"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_cap"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "refit_cap"
+              },
+              {
+                "command": 8,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 0,
+                "name": "cargo.packets",
+                "reference_kind": 7
+              },
+              {
+                "command": 5,
+                "file_type": 6,
+                "length": 4,
+                "memory_type": 96,
+                "name": "cargo.action_counts"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_age_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "day_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "tick_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "running_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_implicit_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_real_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.flags"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.dest"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.refit_cargo"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.wait_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.travel_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.max_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "timetable_start"
+              },
+              {
+                "command": 1,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 0,
+                "name": "orders",
+                "reference_kind": 8
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "economy_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "max_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service_newgrf"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "service_interval"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability_spd_dec"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_ctr"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_delay"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdowns_since_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_chance"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "build_year"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "load_unload_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_paid_for"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "vehicle_flags"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_this_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_last_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "value"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "random_bits"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "waiting_triggers"
+              },
+              {
+                "command": 1,
+                "file_type": 1,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next_shared",
+                "reference_kind": 1
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "group_id"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "current_order_time"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "last_loading_tick"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "lateness_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_last_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_next_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "round_trip_time"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "common"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "state"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "frame"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "blocked_ctr"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "overtaking"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "overtaking_ctr"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "crashed_ctr"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "reverse_ctr"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "trackdir"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "tile"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "path"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "gv_flags"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "roadveh"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subtype"
+              },
+              {
+                "command": 1,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next",
+                "reference_kind": 4
+              },
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "name"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "unitnumber"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "owner"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "dest_tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "x_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "y_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "z_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "direction"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "spritenum"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "engine_type"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cur_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subspeed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "acceleration"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "motion_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "progress"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "vehstatus"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_station_visited"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_loading_station"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_subtype"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_cap"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "refit_cap"
+              },
+              {
+                "command": 8,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 0,
+                "name": "cargo.packets",
+                "reference_kind": 7
+              },
+              {
+                "command": 5,
+                "file_type": 6,
+                "length": 4,
+                "memory_type": 96,
+                "name": "cargo.action_counts"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_age_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "day_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "tick_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "running_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_implicit_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_real_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.flags"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.dest"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.refit_cargo"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.wait_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.travel_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.max_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "timetable_start"
+              },
+              {
+                "command": 1,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 0,
+                "name": "orders",
+                "reference_kind": 8
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "economy_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "max_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service_newgrf"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "service_interval"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability_spd_dec"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_ctr"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_delay"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdowns_since_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_chance"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "build_year"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "load_unload_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_paid_for"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "vehicle_flags"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_this_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_last_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "value"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "random_bits"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "waiting_triggers"
+              },
+              {
+                "command": 1,
+                "file_type": 1,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next_shared",
+                "reference_kind": 1
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "group_id"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "current_order_time"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "last_loading_tick"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "lateness_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_last_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_next_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "round_trip_time"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "common"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "state"
+          },
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "trackdir"
+              }
+            ],
+            "command": 9,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "path"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "rotation"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "ship"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subtype"
+              },
+              {
+                "command": 1,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next",
+                "reference_kind": 4
+              },
+              {
+                "command": 4,
+                "file_type": 10,
+                "length": 0,
+                "memory_type": 192,
+                "name": "name"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "unitnumber"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "owner"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "dest_tile"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "x_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "y_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "z_pos"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "direction"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "spritenum"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "engine_type"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cur_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "subspeed"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "acceleration"
+              },
+              {
+                "command": 0,
+                "file_type": 6,
+                "length": 0,
+                "memory_type": 96,
+                "name": "motion_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "progress"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "vehstatus"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_station_visited"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "last_loading_station"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cargo_subtype"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_cap"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "refit_cap"
+              },
+              {
+                "command": 8,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 0,
+                "name": "cargo.packets",
+                "reference_kind": 7
+              },
+              {
+                "command": 5,
+                "file_type": 6,
+                "length": 4,
+                "memory_type": 96,
+                "name": "cargo.action_counts"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_age_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "day_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "tick_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "running_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_implicit_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "cur_real_order_index"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.type"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.flags"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.dest"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "current_order.refit_cargo"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.wait_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.travel_time"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "current_order.max_speed"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "timetable_start"
+              },
+              {
+                "command": 1,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 0,
+                "name": "orders",
+                "reference_kind": 8
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "economy_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "max_age"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "date_of_last_service_newgrf"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "service_interval"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "reliability_spd_dec"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_ctr"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_delay"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdowns_since_last_service"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "breakdown_chance"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "build_year"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "load_unload_ticks"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "cargo_paid_for"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "vehicle_flags"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_this_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "profit_last_year"
+              },
+              {
+                "command": 0,
+                "file_type": 7,
+                "length": 0,
+                "memory_type": 112,
+                "name": "value"
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "random_bits"
+              },
+              {
+                "command": 0,
+                "file_type": 2,
+                "length": 0,
+                "memory_type": 32,
+                "name": "waiting_triggers"
+              },
+              {
+                "command": 1,
+                "file_type": 1,
+                "length": 0,
+                "memory_type": 0,
+                "name": "next_shared",
+                "reference_kind": 1
+              },
+              {
+                "command": 0,
+                "file_type": 4,
+                "length": 0,
+                "memory_type": 64,
+                "name": "group_id"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "current_order_time"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "last_loading_tick"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "lateness_counter"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_last_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 8,
+                "length": 0,
+                "memory_type": 128,
+                "name": "depot_unbunching_next_departure"
+              },
+              {
+                "command": 0,
+                "file_type": 5,
+                "length": 0,
+                "memory_type": 80,
+                "name": "round_trip_time"
+              }
+            ],
+            "command": 2,
+            "file_type": 0,
+            "length": 0,
+            "memory_type": 0,
+            "name": "common"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "crashed_counter"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "pos"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "targetairport"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "state"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "previous_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "last_direction"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "number_consecutive_turns"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "turn_counter"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "flags"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "aircraft"
+      },
+      {
+        "children": [
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "subtype"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "tile"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "x_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "y_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "z_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 96,
+            "name": "sprite_cache.sprite_seq.seq[0].sprite"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "progress"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "vehstatus"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "animation_state"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "animation_substate"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "spritenum"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "effect"
+      },
+      {
+        "children": [
+          {
+            "command": 1,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 0,
+            "name": "next",
+            "reference_kind": 4
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "subtype"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "tile"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "dest_tile"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "x_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "y_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "z_pos"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "direction"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "owner"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "vehstatus"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 64,
+            "name": "state"
+          },
+          {
+            "command": 0,
+            "file_type": 4,
+            "length": 0,
+            "memory_type": 96,
+            "name": "sprite_cache.sprite_seq.seq[0].sprite"
+          },
+          {
+            "command": 0,
+            "file_type": 5,
+            "length": 0,
+            "memory_type": 80,
+            "name": "age"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "tick_counter"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "image_override"
+          },
+          {
+            "command": 0,
+            "file_type": 6,
+            "length": 0,
+            "memory_type": 96,
+            "name": "big_ufo_destroyer_target"
+          },
+          {
+            "command": 0,
+            "file_type": 2,
+            "length": 0,
+            "memory_type": 32,
+            "name": "flags"
+          }
+        ],
+        "command": 2,
+        "file_type": 0,
+        "length": 0,
+        "memory_type": 0,
+        "name": "disaster"
+      }
+    ],
+    "VIEW": [
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "x"
+      },
+      {
+        "command": 0,
+        "file_type": 5,
+        "length": 0,
+        "memory_type": 80,
+        "name": "y"
+      },
+      {
+        "command": 0,
+        "file_type": 2,
+        "length": 0,
+        "memory_type": 32,
+        "name": "zoom"
+      }
+    ]
+  },
+  "native_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "savegame_version": 362,
+  "schema_version": 1
+}

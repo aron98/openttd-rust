@@ -5,6 +5,7 @@ use ottd_save::{
 };
 use ottd_sim::runtime::{SimulationRuntime, VehicleId};
 use serde_json::{Value, json};
+pub mod road_coverage;
 use std::{
     path::{Path, PathBuf},
     process::Command,
@@ -78,6 +79,7 @@ fn check_case(directory: &Path, world: World) -> Result<usize> {
     std::fs::write(&input, &bytes)?;
     native(&directory.join("native"), &input, false)?;
     let runtime = SimulationRuntime::restore_vanilla(world)?;
+    road_coverage::assert_admitted(&runtime, directory)?;
     assert_eq!(
         runtime.world().saved_json()?,
         before,
@@ -156,6 +158,11 @@ fn road_cache_native_matrix() -> Result {
         let preparation = directory.join(format!("prepare-{climate}"));
         native(&preparation, &source_path, true)?;
         let prepared = load(&preparation.join("save/autosave/exit.sav"))?;
+        road_coverage::assert_admitted(
+            &SimulationRuntime::restore_vanilla(prepared.clone())?,
+            &preparation,
+        )?;
+        road_coverage::assert_rejections(&prepared, &preparation)?;
         for model in 0..2 {
             for steepness in [0, 3, 10] {
                 let mut world = prepared.clone();

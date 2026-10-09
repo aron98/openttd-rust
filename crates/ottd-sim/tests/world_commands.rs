@@ -613,6 +613,7 @@ fn explicit_loan_saturates_balance_at_native_money_maximum() -> Result {
     assert_eq!(
         receipt,
         ottd_sim::CommandReceipt {
+            returns: None,
             posted: true,
             gate: None,
             test: Some(success.clone()),

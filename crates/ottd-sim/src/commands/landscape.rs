@@ -1,4 +1,5 @@
 use super::{CommandCost, CommandError, Plan};
+use crate::content::{ContentCatalog, Price, Prices};
 use crate::world_access::{field_edit, unsigned};
 use ottd_save::{
     TileRawParts, TileState, WireValue,
@@ -34,6 +35,16 @@ pub(super) fn clear(
     tile: u32,
     automatic: bool,
 ) -> Result<Plan, CommandError> {
+    let catalog = ContentCatalog::from_world(world)?;
+    clear_with_prices(world, company, tile, automatic, catalog.prices())
+}
+pub(super) fn clear_with_prices(
+    world: &World,
+    company: u8,
+    tile: u32,
+    automatic: bool,
+    prices: &Prices,
+) -> Result<Plan, CommandError> {
     let source = tile_at(world, tile)?;
     if source.tile_type() >> 4 != 0 {
         return Err(CommandError::Unsupported("clearing non-clear terrain"));
@@ -47,23 +58,24 @@ pub(super) fn clear(
     }
     let ground = (source.m5() >> 2) & 7;
     let base = match ground {
-        0 => 20,
-        1 | 4 | 5 => 40,
-        2 => 200,
-        3 => 500,
+        0 => Price::ClearGrass,
+        1 | 4 | 5 => Price::ClearRough,
+        2 => Price::ClearRocks,
+        3 => Price::ClearFields,
         _ => return Err(CommandError::Unsupported("invalid clear ground")),
     };
     let snow = source.m3() & 16 != 0;
     let mut cost = if snow || ground != 0 || source.m5() & 3 != 0 {
-        price(world, base)?
+        prices.get(base)
     } else {
         0
     };
     if snow {
         cost = cost
             .checked_add(
-                price(world, 40)?
-                    .checked_sub(price(world, 20)?)
+                prices
+                    .get(Price::ClearRough)
+                    .checked_sub(prices.get(Price::ClearGrass))
                     .and_then(i64::checked_abs)
                     .ok_or(CommandError::Overflow("snow price"))?,
             )
@@ -99,6 +111,7 @@ pub(super) fn clear(
         ));
     }
     Ok(Plan {
+        returns: None,
         cost: CommandCost::success(cost, 0),
         edits,
     })

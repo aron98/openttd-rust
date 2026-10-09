@@ -1,5 +1,6 @@
 use super::{
     Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt, CommandRequest,
+    CommandReturn, CommandReturnPhases,
 };
 use crate::world_access::{field, field_edit, signed, unsigned};
 use ottd_save::{
@@ -17,20 +18,23 @@ pub fn execute_command(
     request: &CommandRequest,
 ) -> Result<CommandReceipt, CommandError> {
     let tile = tile(&request.command);
+    let tuple = matches!(request.command, Command::TerraformLand { .. });
     if tile != 0
         && world
             .map()
             .tiles()
             .get(usize::try_from(tile).map_err(|_| CommandError::Overflow("tile index"))?)
-            .is_none_or(|t| t.tile_type() >> 4 == 7)
+            .is_none_or(|t| !tuple && t.tile_type() >> 4 == 7)
     {
-        return Ok(gated(CommandGate::Tile));
+        return Ok(gated(CommandGate::Tile, tuple));
     }
     execute_valid_tile(world, request, tile)
 }
 const fn tile(command: &Command) -> u32 {
     match command {
-        Command::BuildRoad { tile, .. } | Command::LandscapeClear { tile } => *tile,
+        Command::BuildRoad { tile, .. }
+        | Command::LandscapeClear { tile }
+        | Command::TerraformLand { tile, .. } => *tile,
         Command::IncreaseLoan { .. }
         | Command::DecreaseLoan { .. }
         | Command::RenameCompany { .. }
@@ -44,10 +48,14 @@ fn execute_valid_tile(
     tile: u32,
 ) -> Result<CommandReceipt, CommandError> {
     let server = matches!(request.command, Command::Pause { .. });
+    let tuple = matches!(request.command, Command::TerraformLand { .. });
+    let mut returns = tuple.then(CommandReturnPhases::default);
     let estimate = request.mode == CommandMode::Estimate && !server;
     let pause = unsigned(world, b"DATE", 0, "pause_mode")?;
     let required_level = match request.command {
-        Command::BuildRoad { .. } | Command::LandscapeClear { .. } => 3,
+        Command::BuildRoad { .. }
+        | Command::LandscapeClear { .. }
+        | Command::TerraformLand { .. } => 3,
         Command::IncreaseLoan { .. } | Command::DecreaseLoan { .. } => 2,
         Command::RenameCompany { .. } | Command::RenamePresident { .. } | Command::Pause { .. } => {
             0
@@ -57,7 +65,7 @@ fn execute_valid_tile(
         && !estimate
         && unsigned(world, b"PATS", 0, "construction.command_pause_level")? < required_level
     {
-        return Ok(gated(CommandGate::Pause));
+        return Ok(gated(CommandGate::Pause, tuple));
     }
     let company_exists = world
         .tables()
@@ -72,7 +80,14 @@ fn execute_valid_tile(
         return Err(CommandError::Unsupported("deity construction"));
     }
     if !server && !company_exists {
+        if let Some(values) = &mut returns {
+            values.result = Some(CommandReturn::Landscape {
+                additional_money: 0,
+                tile: 0,
+            });
+        }
         return Ok(CommandReceipt {
+            returns,
             posted: false,
             gate: None,
             test: None,
@@ -81,10 +96,15 @@ fn execute_valid_tile(
         });
     }
     let plan = super::body(world, request)?;
+    if let Some(values) = &mut returns {
+        values.test = plan.returns;
+        values.result = plan.returns;
+    }
     let test = plan.cost.clone();
     let mut result = test.clone();
     if !result.success || estimate {
         return Ok(CommandReceipt {
+            returns,
             posted: result.success,
             gate: None,
             test: Some(test),
@@ -102,6 +122,7 @@ fn execute_valid_tile(
         result.error = Some("STR_ERROR_NOT_ENOUGH_CASH_REQUIRES_CURRENCY".into());
         result.error_params = vec![result.cost];
         return Ok(CommandReceipt {
+            returns,
             posted: false,
             gate: None,
             test: Some(test),
@@ -109,8 +130,22 @@ fn execute_valid_tile(
             result: Some(result),
         });
     }
+    publish(world, request, tile, plan, test, result, returns)
+}
+fn publish(
+    world: &mut World,
+    request: &CommandRequest,
+    tile: u32,
+    plan: super::Plan,
+    test: CommandCost,
+    result: CommandCost,
+    mut returns: Option<CommandReturnPhases>,
+) -> Result<CommandReceipt, CommandError> {
+    let server = matches!(request.command, Command::Pause { .. });
+    let company = u32::from(request.company);
+    let pause = unsigned(world, b"DATE", 0, "pause_mode")?;
     let mut edits = plan.edits;
-    if company_exists && !server {
+    if !server {
         if tile != 0 {
             edits.push(field_edit(
                 *b"PLYR",
@@ -130,7 +165,11 @@ fn execute_valid_tile(
         ));
     }
     world.edit_batch(edits)?;
+    if let Some(values) = &mut returns {
+        values.exec = plan.returns;
+    }
     Ok(CommandReceipt {
+        returns,
         posted: true,
         gate: None,
         test: Some(test),
@@ -171,8 +210,9 @@ fn accounting(
     }
     Ok(edits)
 }
-const fn gated(gate: CommandGate) -> CommandReceipt {
+fn gated(gate: CommandGate, tuple: bool) -> CommandReceipt {
     CommandReceipt {
+        returns: tuple.then(CommandReturnPhases::default),
         posted: false,
         gate: Some(gate),
         test: None,

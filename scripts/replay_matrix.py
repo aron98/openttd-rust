@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+
 from scripts.world_check_support import (
     ROOT,
     Json,
@@ -138,6 +139,11 @@ class ReplayMatrix:
         case = self.artifacts / name
         save = FIXTURES / f"{fixture}-v362.sav"
         actions = FIXTURES / f"{name}.json"
+        if name.startswith("terraform-"):
+            prepared = self.native(
+                save, FIXTURES / f"prepare-{name}.json", case / "prepare"
+            )
+            save = prepared / "final.sav"
         native = self.native(save, actions, case)
         rust = self.rust(save, actions, case)
         exported = run(

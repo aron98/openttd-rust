@@ -6,6 +6,7 @@ mod occupancy;
 mod pause;
 mod pipeline;
 mod road;
+mod terraform;
 
 use crate::world_access::WorldAccessError;
 use ottd_save::world::{World, WorldEdit, WorldError};
@@ -25,6 +26,15 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Change selected terrain corners by one height level.
+    TerraformLand {
+        /// Linear tile index, including native void tiles.
+        tile: u32,
+        /// Native raw slope byte; only its four corner bits select work.
+        slope: u8,
+        /// Raise if true, lower otherwise.
+        dir_up: bool,
+    },
     /// Build vanilla road pieces on supported terrain.
     BuildRoad {
         /// Linear tile index.
@@ -148,10 +158,38 @@ pub struct CommandReceipt {
     pub exec: Option<CommandCost>,
     /// Final Execute result, including affordability errors.
     pub result: Option<CommandCost>,
+    /// Actual native tuple values, absent for cost-only commands.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub returns: Option<CommandReturnPhases>,
+}
+/// Native non-cost results, retaining successful tiles and invalid sentinels.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum CommandReturn {
+    /// Terraform/level-land native result tuple.
+    Landscape {
+        /// Additional cash required, distinct from the completed cost.
+        additional_money: i64,
+        /// Native returned tile, including zero and `INVALID_TILE`.
+        tile: u32,
+    },
+}
+/// Tuple values at exactly the command phases entered.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CommandReturnPhases {
+    /// Body test tuple before outer validation.
+    pub test: Option<CommandReturn>,
+    /// Body execution tuple before accounting.
+    pub exec: Option<CommandReturn>,
+    /// Final Execute tuple after outer validation/accounting.
+    pub result: Option<CommandReturn>,
 }
 /// Rust scope or saved-state failure; never impersonates a native command error.
 #[derive(Debug, thiserror::Error)]
 pub enum CommandError {
+    /// Vanilla specification or price restoration failure.
+    #[error(transparent)]
+    Content(#[from] crate::content::ContentError),
     /// A native gameplay context not implemented by this stage.
     #[error("unsupported command context: {0}")]
     Unsupported(&'static str),
@@ -168,17 +206,24 @@ pub enum CommandError {
 struct Plan {
     cost: CommandCost,
     edits: Vec<WorldEdit>,
+    returns: Option<CommandReturn>,
 }
 impl Plan {
     const fn empty(cost: CommandCost) -> Self {
         Self {
             cost,
             edits: Vec::new(),
+            returns: None,
         }
     }
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
+        Command::TerraformLand {
+            tile,
+            slope,
+            dir_up,
+        } => terraform::plan(world, request.company, *tile, *slope, *dir_up),
         Command::IncreaseLoan { method, amount } => {
             finance::loan(world, request.company, (*method, *amount), true)
         }

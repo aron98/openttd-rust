@@ -15,6 +15,7 @@ Command tags and arguments:
 
 - `build_road`: tile u32, pieces u8, road_type u8, toggle_disallowed u8, town_id u16.
 - `landscape_clear`: tile u32.
+- `terraform_land`: tile u32, slope u8 (raw corner mask), dir_up bool.
 - `increase_loan` / `decrease_loan`: method u8 (interval=0, max=1, amount=2), amount i64.
 - `rename_company` / `rename_president`: text string.
 - `pause`: mode u8 (native bit index), paused bool.
@@ -28,6 +29,13 @@ native_metadata contains numeric error/extra-error IDs and owner for each phase.
 Native test costs are captured before affordability validation; final cost can
 therefore differ. An invalid company produces final CMD_ERROR without a test.
 Pause's NoEst flag causes execution even when mode is estimate.
+
+TerraformLand receipts additionally carry `returns` with nullable `test`, `exec`,
+and `result` entries. Each entry is `{kind: "landscape", additional_money: i64,
+tile: u32}` captured from the native command tuple. This preserves the distinction
+between a body error's invalid tile, an invalid-company default tile zero, and a
+successful test tuple retained by a later affordability failure. Cost-only command
+receipts keep their existing shape.
 
 Each checkpoint has `.sav`, `.world.json`, `.schema.json`, `.derived.json`,
 `.runtime.json`. Saved descriptors and defined structural state describe the same
@@ -121,3 +129,20 @@ division; `loan-command` exercises saturated explicit-loan addition; `town-sum`
 exercises the native signed 32-bit accumulator and unsigned conversion when
 averaging filled town histories. Their native preparation recipes author inputs;
 expected costs and checkpoints come exclusively from original command/loop calls.
+
+The eleven `terraform-*` cases prepare fresh paused populated worlds from
+`populated-v362.sav` using their corresponding `prepare-terraform-*` recipes.
+Native preparation authors a checked clear-terrain pad, valid freeform borders,
+an optional legal height-limit cone, or an actual command-built tunnel. It rejects
+overlapping vehicles and infrastructure. Costs and expected results come from
+actual native TerraformLand calls, including recursion, raw masks, limits,
+affordability, command gates, void borders and tunnel obstruction. Every checkpoint
+compares complete saved state and derived/runtime observations. Other tile
+procedures and LevelLand partial success remain outside this increment.
+
+Selecting `terraform-basic` also runs tuple, cost, height and command-order failure
+controls. Selecting `terraform-resume` runs fresh-process split/resume equality
+and an uninstrumented original sixteen-tick continuation that preserves the edited
+height. Summary fields `terraform_controls` and
+`terraform_resume_and_continuation` record these checks independently of the
+legacy full-matrix controls. No populated Rust tick parity is claimed.

@@ -19,9 +19,21 @@ if __package__ in (None, ""):
 from scripts.replay_controls import evidence_controls, output_controls
 from scripts.replay_lifecycle import original_continuation, split_replay
 from scripts.replay_matrix import ReplayMatrix
-from scripts.world_check_support import ROOT, WorldCheckError, write_json
+from scripts.terraform_replay import verify_terraform
+from scripts.world_check_support import ROOT, Json, WorldCheckError, write_json
 
 CASES = {
+    "terraform-basic": "populated",
+    "terraform-cascade": "populated",
+    "terraform-masks": "populated",
+    "terraform-limits": "populated",
+    "terraform-bounds": "populated",
+    "terraform-freeform": "populated",
+    "terraform-cash": "populated",
+    "terraform-exact-cash": "populated",
+    "terraform-gates": "populated",
+    "terraform-tunnel": "populated",
+    "terraform-resume": "populated",
     "commands": "populated",
     "populated-road": "populated",
     "construction-continue": "populated",
@@ -65,7 +77,7 @@ def main() -> None:
         arguments.original.resolve(),
         artifacts,
     )
-    selected = arguments.case or list(CASES)
+    selected: list[str] = arguments.case or list(CASES)
     write_json(
         artifacts / "provenance.json",
         {
@@ -78,22 +90,24 @@ def main() -> None:
     for name in selected:
         _ = matrix.scenario(name, CASES[name])
         print(f"PASS {name}", flush=True)
+    verify_terraform(matrix, selected)
     if not arguments.case:
         split_replay(matrix)
         original_continuation(matrix)
         output_controls(matrix)
         evidence_controls(matrix)
-    write_json(
-        artifacts / "summary.json",
-        {
-            "passed": True,
-            "cases": selected,
-            "full_matrix": not bool(arguments.case),
-            "controls_and_resume": not bool(arguments.case),
-            "native_binary": str(matrix.oracle),
-            "rust_binary": str(matrix.cli),
-        },
-    )
+    case_values: list[Json] = list(selected)
+    summary: dict[str, Json] = {
+        "passed": True,
+        "cases": case_values,
+        "full_matrix": not bool(arguments.case),
+        "controls_and_resume": not bool(arguments.case),
+        "terraform_controls": "terraform-basic" in selected,
+        "terraform_resume_and_continuation": "terraform-resume" in selected,
+        "native_binary": str(matrix.oracle),
+        "rust_binary": str(matrix.cli),
+    }
+    write_json(artifacts / "summary.json", summary)
     print(f"PASS replay matrix: {artifacts}")
 
 

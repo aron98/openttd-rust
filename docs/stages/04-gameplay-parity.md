@@ -140,6 +140,92 @@ native tree, including `GetPartialPixelZ`, `GetSlopeZInCorner`,
 - [ ] Verify, independently review and integrate, then use the geometry in
       native construction commands with actual costs/limits/partial results.
 
+## Second implementation wave
+
+The first save-object increment is committed with native interop evidence. Its
+independent review found that `ENGN` records must be contiguous from zero;
+common world validation now rejects holes transactionally, and a fresh reviewer
+verified the correction. Terrain and vanilla catalog increments have passed
+isolated workspace checks and fresh exhaustive native comparisons; their
+independent review remains a separate gate.
+
+Proceed with these disjoint slices while reviews run. Fixes to a prerequisite
+take precedence over dependent integration, and no milestone closes the stage.
+
+### A. Road runtime restoration
+
+Create `ottd-sim/src/runtime.rs`, `runtime/road_cache.rs`,
+`runtime/saved_vehicle.rs`, `runtime/saved_engine.rs` and focused/runtime-native
+tests. Add a passive `reference/runtime_road.hpp` observer and native runner.
+The content owner also serializes shared module/observer registration.
+
+- [ ] Introduce an owned `SimulationRuntime::restore_vanilla(World)` with private
+      authoritative World, immutable content snapshot and only implemented
+      typed caches; expose borrowed world/content/cache access and `into_world`.
+      The initial constructor admits the declared ordinary road-vehicle domain;
+      no placeholder caches or broad gameplay `advance` method are introduced.
+- [ ] Restore actual native road/consist length, speed, power, cargo age period,
+      mass, tractive effort, slope/axle resistance, drag and roadtype properties.
+      Separate load-initialized trip/speed history from recomputable physics.
+- [ ] Read saved ENGN state, cargo capacity, age/reliability and saved road paths
+      through borrowed typed views. Do not rerun engine introduction RNG or
+      overwrite saved fields with constructor defaults.
+- [ ] Observe native after-load order and represent saved fixups explicitly.
+      Compare empty/loaded buses and trucks, original/realistic acceleration,
+      different engines, slope settings and sparse IDs. Reject unimplemented
+      contexts before claiming restoration success.
+- [ ] Verify complete saved-state/RNG preservation for no-fixup cases, exact
+      runtime field equality, and wrong-cache/missing/stale negative controls.
+      Invalidation and live ticking remain subsequent implementation work.
+
+### B. Native ID allocation
+
+Create `ottd-sim/src/runtime/pools.rs` with focused tests and a separate passive
+native allocation observer. The transport owner owns allocation algorithms;
+the runtime owner registers the module. Authority is `core/pool_type.hpp`,
+`core/pool_func.hpp` and native `FreeUnitIDGenerator`.
+
+- [ ] Reproduce logical pool allocation after sparse explicit-ID loading, first
+      free selection, release/reuse, high-water behavior, reset and exhaustion.
+      Keep native per-pool limits authoritative; do not substitute monotonic IDs
+      or a different free-list order.
+- [ ] Separately reproduce per-company/per-vehicle-type unit numbers, including
+      their reserved values. These are not global vehicle pool indices.
+- [ ] Compare operation traces against the actual native allocator templates
+      and unit-number generator, including holes and boundary capacities.
+- [ ] Keep allocation metadata transactional with its future World insertion.
+      This increment must not expose unvalidated object creation or claim that
+      logical allocation alone implements vehicle construction.
+- [ ] Specify the saved-world journal/read-through transaction API before
+      replacing whole-world cloning/serialization in hot gameplay paths.
+
+### C. Terraform construction command
+
+Create `ottd-sim/src/commands/terraform.rs` and command/native replay tests.
+The world owner owns command enum/pipeline changes and replay command/return
+instrumentation; coordinate shared library exports with the runtime owner.
+
+- [ ] Add `TerraformLand { tile, slope: u8, dir_up }` with native AllTiles/Auto
+      traits, raw low-four-bit corner mask semantics and native company/pause
+      gates. Do not reject native successful zero/high-only masks as geometry.
+- [ ] Preserve native requested-corner order, depth-first neighbor propagation,
+      sorted two-pass surface checks, typed prices, limit/error/cash precedence,
+      merged clearing/height changes and read-only tunnel obstruction checks.
+- [ ] Extend receipts additively with typed test/exec/result tuple returns,
+      preserving money and tile sentinels from the actual native command.
+      Existing cost-only receipts remain unchanged. The native observer records
+      actual return tuples instead of reconstructing them from input arguments.
+- [ ] Compare basic/cascading/multi-mask changes, bounds, limits, cash, pause,
+      tunnel obstruction and resumed execution on native prepared populated
+      worlds. Validate all map bytes, receipts, money, limits, RNG and saves.
+- [ ] Keep bridge-over-clear and other not-yet-ported tile procedures explicit.
+      Follow with every remaining tile procedure and `LevelLand`'s distinct
+      NoTest/partial-money semantics before closing construction parity.
+
+Shared native headers/builds remain frozen during a running comparison. The
+lead batches new hooks into scheduled builds, retains exact source/binary
+provenance, and integrates each reviewed behavior atomically.
+
 ## Shared integration rules
 
 World operations must preserve native identity, iteration/allocation order and

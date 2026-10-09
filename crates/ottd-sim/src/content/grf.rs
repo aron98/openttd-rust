@@ -19,7 +19,20 @@ mod load_substitution;
 mod load_types;
 mod metadata_types;
 mod records;
+mod safety;
+#[cfg(test)]
+mod safety_cases;
+#[cfg(test)]
+mod safety_guards;
+#[cfg(test)]
+mod safety_native;
 mod scan;
+pub use safety::{
+    SafetyConfig, SafetyDecision, SafetyError, SafetyLimits, SafetyOutcome, SafetyReport,
+    StaticScan, scan_static_file,
+};
+#[cfg(test)]
+mod safety_tests;
 mod string_ids;
 mod text;
 mod text_choices;

@@ -1726,7 +1726,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-rs",
       "path": "crates/ottd-sim/src/content/grf.rs",
-      "sha256": "197dd22be2a5e084bb3503787cea4e5939a367c24b5c4113ad3d90daa3d127ae",
+      "sha256": "b8a3e3424beb26628aa0dcaed3f4cbdebb6508452e9f87419cd9b9f60b3aa519",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -3176,6 +3176,15 @@
       "id": "grf-safety-observer-patch",
       "path": "reference/grf_safety.patch",
       "sha256": "15886cdb915bf545a04f2783353378692af02f7feb5416099209b433049fe404",
+      "kind": "recipe",
+      "provenance": "Original FillGRFDetails static-safety admission observer and guarded runner; passive native record decisions, original metadata and context restoration; no Rust gameplay delegation.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "grf-safety-reference-runner",
+      "path": "scripts/check-grf-safety-reference.cmake",
+      "sha256": "8f036423dec27290146fa3d61542e69d8a3f910351f604c1c17059ccbea38320",
       "kind": "recipe",
       "provenance": "Original FillGRFDetails static-safety admission observer and guarded runner; passive native record decisions, original metadata and context restoration; no Rust gameplay delegation.",
       "save_version": null,

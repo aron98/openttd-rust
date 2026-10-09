@@ -1,6 +1,8 @@
 //! Deterministic, explicitly scoped landscape simulation for OpenTTD 15.3.
-mod commands;
 mod landscape;
+mod world_ticks;
+pub use world_ticks::{WorldTickError, WorldTickReport, advance_world};
+mod commands;
 pub use commands::{
     Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt, CommandRequest,
     execute_command,

@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "a2087bf5aa39292f76e3a73e5fd525f2a06554a85af070c5e5732eb1fbf84579",
+      "sha256": "d553cd75c6f0c95900286683738c596017920d574e3df3296b3f5a0ace170155",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -2284,7 +2284,7 @@
     {
       "id": "depot-reference-depot-runtime-hpp",
       "path": "reference/depot_runtime.hpp",
-      "sha256": "ec811808b9996bdff3cedc3c219deee1f3ccfa1966b30b974aee06368d87d75d",
+      "sha256": "d7e2b834a276780efb8fe0ead4bc66dd09aeb648672a01abf00bc09a83fb3740",
       "kind": "recipe",
       "provenance": "Depot restoration prerequisite; original passive pool and infrastructure observer, counter-only vectors with canonical saved-state equality; not construction or activated NewGRF gameplay.",
       "save_version": null,
@@ -2971,6 +2971,24 @@
       "sha256": "d0a92aee8a802a5f34bc0310219803716135d1bd15a1b61f7b21d051c9df9bff",
       "kind": "recipe",
       "provenance": "Vanilla depot create/rotate only: exact original command phases, authoritative sparse pool and 63-slot company infrastructure; frozen native 178-case matrix. Removal and other construction remain pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "grf-context-reference-grf-load-context-hpp",
+      "path": "reference/grf_load_context.hpp",
+      "sha256": "ace85354882bb16a7adf4ba134f9f35e5a4cf9798280596224d263c204d42c1a",
+      "kind": "recipe",
+      "provenance": "Original configured-loader context fixture and passive normalized clock/global observations; no Rust gameplay delegation.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "grf-context-reference-grf-load-context-patch",
+      "path": "reference/grf_load_context.patch",
+      "sha256": "8c93d801129c32bb84aee8fafd698169c1560a69001616fec76b97108bdf5b17",
+      "kind": "recipe",
+      "provenance": "Original configured-loader context fixture and passive normalized clock/global observations; no Rust gameplay delegation.",
       "save_version": null,
       "profile": null
     }
@@ -18877,7 +18895,9 @@
         "replay-source-scripts-setup-snapshot-reference-sh",
         "grf-control-scripts-grf-control-provenance-py",
         "replay-clear-v362-sav",
-        "reference-settings"
+        "reference-settings",
+        "grf-context-reference-grf-load-context-hpp",
+        "grf-context-reference-grf-load-context-patch"
       ],
       "source_refs": [
         "scripts/check-grf-control.py",

@@ -2,6 +2,7 @@
 #define OTTD_REFERENCE_DEPOT_RUNTIME_HPP
 #include "reference_runtime_road_fixture.hpp"
 #include "../depot_base.h"
+#include "../vehicle_func.h"
 #include "../tunnelbridge_map.h"
 #include "../town.h"
 #include "../saveload/saveload_internal.h"
@@ -104,13 +105,62 @@ inline Json Vectors()
     if (Snapshot() != before) throw std::runtime_error("Counter-only vector state leaked");
     return vectors;
 }
+inline Json OccupancyVectors()
+{
+    if (Vehicle::GetNumItems() != 1) throw std::runtime_error("Ground vectors require one original vehicle");
+    Vehicle *vehicle = nullptr;
+    for (Vehicle *candidate : Vehicle::Iterate()) vehicle = candidate;
+    if (vehicle == nullptr || vehicle->type != VEH_ROAD || !IsRoadDepotTile(vehicle->tile)) throw std::runtime_error("Ground vectors require a road vehicle in its original depot");
+    const Json before = {{"depot", Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
+    const auto tile = vehicle->tile;
+    const auto x = vehicle->x_pos, y = vehicle->y_pos, z = vehicle->z_pos;
+    const auto type = vehicle->type;
+    const auto subtype = vehicle->subtype;
+    const auto current = vehicle->hash_tile_current;
+    const auto previous = vehicle->hash_tile_prev;
+    const auto next = vehicle->hash_tile_next;
+    auto hash_ids = [tile]() {
+        Json result = Json::array();
+        for (const Vehicle *v : VehiclesOnTile(tile)) result.push_back(v->index.base());
+        return result;
+    };
+    const Json members = hash_ids();
+    struct RestoreHeight {
+        Vehicle *vehicle;
+        decltype(Vehicle::z_pos) height;
+        ~RestoreHeight() { this->vehicle->z_pos = this->height; this->vehicle->UpdatePosition(); }
+    };
+    Json vectors = Json::array();
+    const int maximum = GetTileMaxPixelZ(tile);
+    for (int height : {maximum, maximum + 1}) {
+        RestoreHeight restore{vehicle, z};
+        vehicle->z_pos = height;
+        vehicle->UpdatePosition();
+        const CommandCost result = EnsureNoVehicleOnGround(tile);
+        vectors.push_back({{"vehicle", vehicle->index.base()}, {"tile", tile.base()}, {"z", height},
+            {"maximum_z", maximum}, {"success", result.Succeeded()}, {"error_id", result.GetErrorMessage()},
+            {"cost", static_cast<int64_t>(result.GetCost())}, {"expenses", static_cast<uint8_t>(result.GetExpensesType())}});
+    }
+    const Json hash_restored = {{"current", vehicle->hash_tile_current == current}, {"previous", vehicle->hash_tile_prev == previous}, {"next", vehicle->hash_tile_next == next}};
+    const Json members_after = hash_ids();
+    if (vehicle->tile != tile || vehicle->x_pos != x || vehicle->y_pos != y || vehicle->z_pos != z ||
+        vehicle->type != type || vehicle->subtype != subtype || vehicle->hash_tile_current != current ||
+        vehicle->hash_tile_prev != previous || vehicle->hash_tile_next != next || members_after != members ||
+        Json{{"depot", Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}} != before) {
+        throw std::runtime_error("Ground occupancy vector state leaked");
+    }
+    return {{"before", before}, {"after", Json{{"depot", Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}}}, {"vectors", vectors},
+        {"road_error_id", STR_ERROR_ROAD_VEHICLE_IN_THE_WAY}, {"invalid_error_id", INVALID_STRING_ID},
+        {"hash_restored", hash_restored}, {"members_before", members}, {"members_after", members_after}};
+}
 inline void Observe()
 {
     const char *path = std::getenv("OTTD_DEPOT_RUNTIME_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (std::ifstream(path).good()) throw std::runtime_error("Depot runtime observation already exists");
     if (std::getenv("OTTD_DEPOT_RUNTIME_PREPARE") != nullptr) Prepare();
-    Json result = {{"schema_version", 1}, {"runtime", Snapshot()}};
+    Json result = {{"schema_version", 1}, {"runtime", Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
+    if (std::getenv("OTTD_DEPOT_OCCUPANCY_VECTORS") != nullptr) result["occupancy"] = OccupancyVectors();
     if (std::getenv("OTTD_DEPOT_RUNTIME_VECTORS") != nullptr) result["counter_vectors"] = Vectors();
     std::ofstream output(path);
     output << result.dump(2) << '\n';

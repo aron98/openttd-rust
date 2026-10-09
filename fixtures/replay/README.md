@@ -5,7 +5,10 @@ in strictly increasing ordinal order, independent of the saved tick counter.
 `command` contains `request` (company u8, mode `post` or `estimate`, tagged
 `command`); `tick` contains count u32; `checkpoint` contains a unique safe label.
 The native runner writes `initial` and `final` checkpoints automatically.
-User checkpoint labels must therefore differ from these reserved labels.
+Rust checkpoint labels must be unique ignoring ASCII case and differ from the
+reserved `initial`/`final` labels ignoring case, so publication is portable across
+case-sensitive and case-insensitive filesystems. Labels use ASCII letters, digits,
+underscore and hyphen.
 Maximum actions: 10,000; cumulative state-loop calls: 100,000.
 
 Command tags and arguments:
@@ -70,3 +73,51 @@ fixture. Prepared fixture reloads must compare all saved fields without filterin
 RNG, pause bits, GLOG, or any object pool. Source/binary freshness stamps cover every
 instrumentation patch/header and the executable; the native driver rejects a
 missing or stale stamp.
+
+## Full comparison matrix
+
+After `scripts/setup-snapshot-reference.sh` and `cargo build --locked -p ottd-cli`:
+
+```sh
+bash scripts/check-replays.sh
+# Or select an explicit fresh directory:
+python3 -m scripts.check-replay --artifacts "$PWD/.artifacts/replay-new-run"
+```
+
+The output directory must be new. `--case NAME` runs an explicitly partial named
+scenario and marks `full_matrix` false; the full invocation also runs resume,
+original continuation and negative controls. Native and Rust action receipts,
+deterministic runtime fields, every saved descriptor/raw map byte, defined
+structural state, and the Rust output saves decoded again must agree. Only the
+native host observers `interactive_random`, `current_company` and supplemental
+numeric error metadata are absent from the Rust results comparison; saved state
+is always compared without field filtering.
+
+`cases.json` retains source recipes and hashes for boundary and branch fixtures.
+They cover month, quarter, year, leap day, u64 tick wrap, growing grass across
+4096 ticks, nonempty town history and monthly counters, insufficient funds,
+pause admission, construction-limit refill while paused, and nested president
+renaming. The ordinary command corpus exercises successful, estimated, duplicate,
+invalid, ownership and ordering-sensitive calls.
+
+`construction-continue.json` executes road construction and unpauses without
+requesting unsupported populated Rust ticks. Its Rust output is loaded by the
+uninstrumented original for 16 null-driver iterations; the witness requires a
+strictly increased saved tick counter and preservation of the constructed road.
+This is original continuation evidence, not populated Rust gameplay parity.
+
+The shell entry point checks the native build stamp, builds the CLI with `--locked`,
+prints `Artifacts: <directory>`, and reports `PASS replay checks` only after the full
+matrix passes. `OTTD_REPLAY_ARTIFACTS` selects a fresh explicit directory; default
+outputs are `.artifacts/replays-*/results`; the announced default artifact directory
+is the parent `.artifacts/replays-*`, with evidence paths relative to its `results/`
+child. An explicit `OTTD_REPLAY_ARTIFACTS` is the actual runner output directory
+and is announced directly. Binary overrides are
+`OTTD_REPLAY_ORACLE`, `OTTD_REPLAY_ORIGINAL_ORACLE`, and `OTTD_REPLAY_CLI`.
+
+Three numeric edge cases retain independently observed original behavior:
+`large-loan` exercises saturated Money multiplication before monthly interest
+division; `loan-command` exercises saturated explicit-loan addition; `town-sum`
+exercises the native signed 32-bit accumulator and unsigned conversion when
+averaging filled town histories. Their native preparation recipes author inputs;
+expected costs and checkpoints come exclusively from original command/loop calls.

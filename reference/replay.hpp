@@ -73,7 +73,10 @@ inline bool Run()
     std::filesystem::create_directories(directory);
     Require(!std::filesystem::exists(directory / "results.json"), "stale native replay results");
     Json results = {{"schema_version", 1}, {"actions", Json::array()}, {"checkpoints", Json::array()}};
-    if (protocol.contains("fixture")) PrepareFixture(protocol.at("fixture"));
+    if (protocol.contains("fixture")) {
+        Require(protocol.at("actions").empty(), "fixture preparation cannot execute replay actions before native reload");
+        PrepareFixture(protocol.at("fixture"));
+    }
     results["checkpoints"].push_back(Checkpoint(directory, "initial"));
     const Json &actions = protocol.at("actions");
     Require(actions.is_array() && actions.size() <= 10000, "invalid replay action collection");

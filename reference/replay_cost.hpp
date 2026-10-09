@@ -29,6 +29,9 @@ inline Json ErrorSymbol(StringID id)
         REPLAY_ERROR(STR_ERROR_LOCAL_AUTHORITY_REFUSES_TO_ALLOW_THIS)
         REPLAY_ERROR(STR_ERROR_OBJECT_IN_THE_WAY)
         REPLAY_ERROR(STR_ERROR_CAN_T_CLEAR_THIS_AREA)
+        REPLAY_ERROR(STR_ERROR_CLEARING_LIMIT_REACHED)
+        REPLAY_ERROR(STR_ERROR_CAN_T_BUILD_ON_WATER)
+        REPLAY_ERROR(STR_ERROR_MUST_DEMOLISH_CANAL_FIRST)
 #undef REPLAY_ERROR
         default: throw std::runtime_error("unmapped native command error " + std::to_string(id));
     }

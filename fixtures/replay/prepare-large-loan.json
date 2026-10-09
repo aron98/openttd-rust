@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "fixture": {
+    "profile": "clear",
+    "paused": false,
+    "date": {
+      "year": 2100,
+      "month": 0,
+      "day": 31,
+      "fract": 73
+    },
+    "tick": 0,
+    "company_money": 9223372036854775807,
+    "company_loan": 9223372036854775807,
+    "company_max_loan": 9223372036854775807
+  },
+  "actions": []
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "fixture": {
+    "profile": "clear",
+    "paused": false,
+    "date": {
+      "year": 2100,
+      "month": 0,
+      "day": 1,
+      "fract": 0
+    },
+    "tick": 18446744073709551615
+  },
+  "actions": []
+}

@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "commands",
+      "save": "populated-v362.sav",
+      "sha256": "4b12b7d5860526387b156da2e3c8fcf96673f0685cc1032d2a5be6e645128dcf",
+      "recipe": "prepare-populated.json",
+      "recipe_sha256": "f7dd21ee01b80d111c1fc58232c53789a4d5f2d7489ab716af552c0de07a8389",
+      "actions": "commands.json",
+      "actions_sha256": "849b6f76f8285f7463405b181f4828b3d2e48f15d3aaa995908a5e04c5f4a808"
+    },
+    {
+      "name": "populated-road",
+      "save": "populated-v362.sav",
+      "sha256": "4b12b7d5860526387b156da2e3c8fcf96673f0685cc1032d2a5be6e645128dcf",
+      "recipe": "prepare-populated.json",
+      "recipe_sha256": "f7dd21ee01b80d111c1fc58232c53789a4d5f2d7489ab716af552c0de07a8389",
+      "actions": "populated-road.json",
+      "actions_sha256": "10414ae4be063d2abb210ddf13e980c1ae42472c6e409c4709f57d4844a272ab"
+    },
+    {
+      "name": "construction-continue",
+      "save": "populated-v362.sav",
+      "sha256": "4b12b7d5860526387b156da2e3c8fcf96673f0685cc1032d2a5be6e645128dcf",
+      "recipe": "prepare-populated.json",
+      "recipe_sha256": "f7dd21ee01b80d111c1fc58232c53789a4d5f2d7489ab716af552c0de07a8389",
+      "actions": "construction-continue.json",
+      "actions_sha256": "68df4725d8458982283d3424becc1975a9aa9600b30653a96ccfade8541a9d58"
+    },
+    {
+      "name": "ticks",
+      "save": "clear-v362.sav",
+      "sha256": "26a604958172a84ddfd895836da5e55666baf28a085bc438236cbdc8931464d2",
+      "recipe": "prepare-clear.json",
+      "recipe_sha256": "0395e33c5dd3ddefe2013e3554c14abf76d5df554535d9797dfff66b49da13c7",
+      "actions": "ticks.json",
+      "actions_sha256": "9a45c2801509fb31cb2082d79501179ddf74946c414bdc95a9c78a5db689ef43"
+    },
+    {
+      "name": "month",
+      "save": "month-v362.sav",
+      "sha256": "5466b6905a163655dd72b9aace8d7fe1177fc05b9be2aba4e93ef11352a145b1",
+      "recipe": "prepare-month.json",
+      "recipe_sha256": "606b9b30845a6fc0b09984e0183ceb6607d1c1447388b0a16cdd4a224218cced",
+      "actions": "month.json",
+      "actions_sha256": "bce717dbe684616f733da497f8bd6fc191f7cff39a66034bd93e2eea83ad304b"
+    },
+    {
+      "name": "quarter",
+      "save": "quarter-v362.sav",
+      "sha256": "260d4344f7209c3c77a4d9fd3427e72c6808798e862cfdb6cd6d723f4b29edf0",
+      "recipe": "prepare-quarter.json",
+      "recipe_sha256": "665b6c587ee8484849cc66b86f1b3aea6e12dcee6a0291b08755a41f20165429",
+      "actions": "quarter.json",
+      "actions_sha256": "bce717dbe684616f733da497f8bd6fc191f7cff39a66034bd93e2eea83ad304b"
+    },
+    {
+      "name": "year",
+      "save": "year-v362.sav",
+      "sha256": "5684bfe7f8b2ac64809db9be0c0ce2d1ce1a7c9710dac6b153f5a3fbb69c2a95",
+      "recipe": "prepare-year.json",
+      "recipe_sha256": "8f117d1aed4b5f15f54d11d17d37e36af0917aa95fff5747a4ec3099198fa246",
+      "actions": "year.json",
+      "actions_sha256": "bce717dbe684616f733da497f8bd6fc191f7cff39a66034bd93e2eea83ad304b"
+    },
+    {
+      "name": "leap",
+      "save": "leap-v362.sav",
+      "sha256": "a57efad2c600002eed35f97ea668825a39bf5684ceba3802382f75cdccfda262",
+      "recipe": "prepare-leap.json",
+      "recipe_sha256": "22a90c8df7ed581d5fc8a808ba5c421f9ea6c0ed56ea09916e61cdaa6d0694b8",
+      "actions": "leap.json",
+      "actions_sha256": "bce717dbe684616f733da497f8bd6fc191f7cff39a66034bd93e2eea83ad304b"
+    },
+    {
+      "name": "wrap",
+      "save": "wrap-v362.sav",
+      "sha256": "4cf42cd6ae8e18ffbe794b145dc1bdefbfa1754d4bef75bf44128a59bbdd5a0d",
+      "recipe": "prepare-wrap.json",
+      "recipe_sha256": "5e8251f2ea7f7d645a4b15ce797cb54a7b289787171d0d18ca0c38c60a09386b",
+      "actions": "wrap.json",
+      "actions_sha256": "bce717dbe684616f733da497f8bd6fc191f7cff39a66034bd93e2eea83ad304b"
+    },
+    {
+      "name": "growth",
+      "save": "growth-v362.sav",
+      "sha256": "ce87c708d1e38f251029c0ff90f725e1ed27c903f1acaa2b1a3734d27fa0e8b7",
+      "recipe": "prepare-growth.json",
+      "recipe_sha256": "5b9fce1d87bdf17cb851198dd511e276d22c383863f600a7b0bb1a2d4adcedf2",
+      "actions": "growth.json",
+      "actions_sha256": "92bcae86bd01ea58d1773b10e9100d169223b29728cc4f666af06142fc13cf0d"
+    },
+    {
+      "name": "town-history",
+      "save": "town-history-v362.sav",
+      "sha256": "8381e5f11cfdc85053901bf20451c18c209aef276d070bed4638d63be2c91b3a",
+      "recipe": "prepare-town-history.json",
+      "recipe_sha256": "0091ab6045ceed3e03eb2f0b774643fefdb4675b639d546acb4158ba0b78b4a7",
+      "actions": "town-history.json",
+      "actions_sha256": "ad23250ea02a0ec788946fa04a78cc24493e048bd434ade782162dcf0e05de4f"
+    },
+    {
+      "name": "low-cash",
+      "save": "low-cash-v362.sav",
+      "sha256": "362a5f9fa463d646484b0da786d9d92efc4585222e57a1ce83ae7eda19a563bb",
+      "recipe": "prepare-low-cash.json",
+      "recipe_sha256": "8b86fab86b53b686206247c8f795f45b7c21381847169b9aa9e0e3c6bad7b46c",
+      "actions": "low-cash.json",
+      "actions_sha256": "1c73fa91032b1219c56563716e5882166761c7a07700b60066692eba202ecf1d"
+    },
+    {
+      "name": "pause-gates",
+      "save": "pause-gates-v362.sav",
+      "sha256": "8946c9da0f658f556c697c07e0369455edfd2007a3acc8a203e3fdd1c62c8ca8",
+      "recipe": "prepare-pause-gates.json",
+      "recipe_sha256": "12ce263e5dda32586c1430d6b8ad9a9e523fcdcd1fb7463f504e424d458fe63c",
+      "actions": "pause-gates.json",
+      "actions_sha256": "5a2348e3217f4a297618a829f0a3ff943a53f0a389a28dab51449004fdbb920d"
+    },
+    {
+      "name": "clear-limit",
+      "save": "clear-limit-v362.sav",
+      "sha256": "f3ba153c420a6f478064a28c74b818a92d8cec44141e3dcef7df9cbfd7f4d91a",
+      "recipe": "prepare-clear-limit.json",
+      "recipe_sha256": "15a842109a5fd8f85c2970d06bf9089d23a71121483d4feb29c911a4ed668936",
+      "actions": "clear-limit.json",
+      "actions_sha256": "0f5caa09038c96deee2743d1ae41a4a1cc55c369d26797ef622fc51c361562f0"
+    },
+    {
+      "name": "nested-name",
+      "save": "nested-name-v362.sav",
+      "sha256": "e8897adb1044b6e7eeb14531d07e11f1df9da2d5c4fc0734fb4b131e3193146a",
+      "recipe": "prepare-nested-name.json",
+      "recipe_sha256": "0c607bab0f2839379bf972f9357348f203485d7f85490d43176fba2c8e254718",
+      "actions": "nested-name.json",
+      "actions_sha256": "26493e6d5c0c0d19c3ac72790318b57e2271ed63a7c7e8373cc2203955b101f3"
+    },
+    {
+      "name": "large-loan",
+      "save": "large-loan-v362.sav",
+      "sha256": "ef0641c5bbf9c3387121cf97be4661c5b757791d07c8a5ba6e398b25e581924a",
+      "recipe": "prepare-large-loan.json",
+      "recipe_sha256": "650c9a0df27a5040ff6d22b269d58174ba5ebed8f6b803cc887101960887c6fd",
+      "actions": "large-loan.json",
+      "actions_sha256": "52a159523881661cc27b6cff9c390186af9b964520871f3c519fff30e6120e0b"
+    },
+    {
+      "name": "loan-command",
+      "save": "loan-command-v362.sav",
+      "sha256": "55c78050e0de8593329d7637362823faf8673b974af6fe57781fa1357f51a30d",
+      "recipe": "prepare-loan-command.json",
+      "recipe_sha256": "829e56e69fb62144afa62594311aab5dd58a8ff36eda40d559f59240bb04152e",
+      "actions": "loan-command.json",
+      "actions_sha256": "d1ddf9cd2f91ab56c9b55bcfb811f3084c7594e3a3d2a2c4b7a823fc6c8b8352"
+    },
+    {
+      "name": "town-sum",
+      "save": "town-sum-v362.sav",
+      "sha256": "c76b7700a1b41deca5143fb53479573c71fa2bd0ed22bfbd355ca963dfe75bd7",
+      "recipe": "prepare-town-sum.json",
+      "recipe_sha256": "86d864ddbc47513360f2b9dc31613b58da0d27ddb30ec849ffff462e443882bc",
+      "actions": "town-sum.json",
+      "actions_sha256": "52a159523881661cc27b6cff9c390186af9b964520871f3c519fff30e6120e0b"
+    }
+  ]
+}

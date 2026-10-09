@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "actions": [
+    {
+      "ordinal": 0,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "estimate",
+        "command": {
+          "kind": "build_road",
+          "tile": 3184,
+          "pieces": 5,
+          "road_type": 0,
+          "toggle_disallowed": 0,
+          "town_id": 65535
+        }
+      }
+    },
+    {
+      "ordinal": 1,
+      "op": "checkpoint",
+      "label": "after-0"
+    },
+    {
+      "ordinal": 2,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "build_road",
+          "tile": 3184,
+          "pieces": 5,
+          "road_type": 0,
+          "toggle_disallowed": 0,
+          "town_id": 65535
+        }
+      }
+    },
+    {
+      "ordinal": 3,
+      "op": "checkpoint",
+      "label": "after-2"
+    },
+    {
+      "ordinal": 4,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "decrease_loan",
+          "method": 0,
+          "amount": 0
+        }
+      }
+    },
+    {
+      "ordinal": 5,
+      "op": "checkpoint",
+      "label": "after-4"
+    },
+    {
+      "ordinal": 6,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "increase_loan",
+          "method": 0,
+          "amount": 0
+        }
+      }
+    },
+    {
+      "ordinal": 7,
+      "op": "checkpoint",
+      "label": "after-6"
+    },
+    {
+      "ordinal": 8,
+      "op": "command",
+      "request": {
+        "company": 0,
+        "mode": "post",
+        "command": {
+          "kind": "build_road",
+          "tile": 3184,
+          "pieces": 5,
+          "road_type": 0,
+          "toggle_disallowed": 0,
+          "town_id": 65535
+        }
+      }
+    },
+    {
+      "ordinal": 9,
+      "op": "checkpoint",
+      "label": "after-8"
+    }
+  ]
+}

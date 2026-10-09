@@ -46,12 +46,29 @@ inline void PrepareFixture(const Json &setup)
         town->townnametype = SPECSTR_TOWNNAME_START;
         town->flags.Set(TownFlag::CustomGrowth);
         town->growth_rate = UINT16_MAX;
+        if (setup.value("town_history", false)) {
+            auto &supplied = town->GetOrCreateCargoSupplied(0);
+            for (size_t i = 0; i < supplied.history.size(); ++i) {
+                supplied.history[i].production = setup.value("history_fill", static_cast<uint32_t>(100 + i));
+                supplied.history[i].transported = setup.value("history_fill", static_cast<uint32_t>(20 + i));
+            }
+            town->valid_history = setup.value("valid_history", uint64_t{0x1FFF});
+            town->received[0] = {5, 9, 3, 7};
+            town->road_build_months = 2;
+            town->exclusive_counter = 1;
+            town->exclusivity = CompanyID(0);
+            town->unwanted[CompanyID(0)] = 2;
+            town->ratings[CompanyID(0)] = 198;
+        }
         _settings_game.economy.town_growth_rate = 0;
         _settings_game.construction.freeform_edges = false;
         for (uint32_t index = 0; index < Map::Size(); ++index) {
             const TileIndex tile(index);
             if (TileX(tile) == Map::MaxX() || TileY(tile) == Map::MaxY()) MakeVoid(tile);
-            else MakeClear(tile, index % 7 == 0 ? CLEAR_ROUGH : CLEAR_GRASS, 3);
+            else {
+                MakeClear(tile, index % 7 == 0 ? CLEAR_ROUGH : CLEAR_GRASS, setup.value("terrain_growth", false) ? index % 4 : 3);
+                if (setup.value("terrain_growth", false)) SetClearCounter(tile, index % 8);
+            }
             SetTileHeight(tile, 4);
         }
         _settings_game.game_creation.landscape = LandscapeType::Temperate;
@@ -77,11 +94,22 @@ inline void PrepareFixture(const Json &setup)
         company->name_1 = 0;
         company->name = "Replay Company " + std::to_string(company->index.base());
         company->president_name = "Replay President " + std::to_string(company->index.base());
-        company->money = 1000000;
-        company->current_loan = 100000;
+        company->money = setup.value("company_money", int64_t{1000000});
+        company->current_loan = setup.value("company_loan", int64_t{100000});
+        if (setup.contains("company_max_loan")) company->max_loan = setup.at("company_max_loan").get<int64_t>();
+        if (setup.contains("company_limit")) {
+            company->clear_limit = setup.at("company_limit").get<uint32_t>();
+            company->terraform_limit = company->clear_limit;
+            company->tree_limit = company->clear_limit;
+            company->build_object_limit = company->clear_limit;
+        }
+        if (setup.value("unnamed_company", false) && company->index == CompanyID(0)) {
+            company->name_1 = STR_SV_UNNAMED;
+            company->name.clear();
+        }
     }
     _pause_mode = setup.value("paused", profile == "populated") ? PauseModes{PauseMode::Normal} : PauseModes{};
-    _settings_game.construction.command_pause_level = CommandPauseLevel::AllActions;
+    _settings_game.construction.command_pause_level = static_cast<CommandPauseLevel>(setup.value("pause_level", uint8_t{3}));
     if (setup.contains("date")) {
         const auto &date = setup.at("date");
         const int year = date.at("year");

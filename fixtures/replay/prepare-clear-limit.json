@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "fixture": {
+    "profile": "clear",
+    "paused": true,
+    "company_limit": 0,
+    "date": {
+      "year": 2100,
+      "month": 0,
+      "day": 1,
+      "fract": 0
+    }
+  },
+  "actions": []
+}

@@ -80,7 +80,7 @@ index 131433e..36a2cef 100644
  private:
  	std::string string; ///< The encoded string.
 diff --git a/src/video/null_v.cpp b/src/video/null_v.cpp
-index 65fc9f3..1c601d7 100644
+index 65fc9f3..2bba720 100644
 --- a/src/video/null_v.cpp
 +++ b/src/video/null_v.cpp
 @@ -12,6 +12,7 @@
@@ -95,7 +95,7 @@ index 65fc9f3..1c601d7 100644
  
  	for (i = 0; i < this->ticks; i++) {
  		::GameLoop();
-+		if (_exit_game) break;
++		if (std::getenv("OTTD_REPLAY_PATH") != nullptr && _exit_game) break;
  		::InputLoop();
  		::UpdateWindows();
  	}

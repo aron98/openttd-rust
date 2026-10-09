@@ -188,10 +188,17 @@ One edit batch changes vehicles, companies, towns, industries, stations, orders,
 cargo and infrastructure. Each family has its own before/after/path receipt,
 and the complete expected native state must match after reload. Additional
 cases change persistent storage, cargo payment state and a roadside map-plane
-field, and exercise native saturating cargo-feeder totals. Both native-resaved
-state and structural observations are compared with Rust. Uninstrumented
+field, and exercise native saturating cargo-feeder totals. Modded-AI and
+GameScript worlds also receive nonempty unrelated edits, with complete expected
+state comparisons and explicit NGRF/AIPL/GSDT/PSAC preservation checks. Original
+and Rust-edited content trees match exactly; native re-saves and script continuation
+compare with unedited controls at matching load/save phases to retain native
+Squirrel table ordering without normalization. The entire restored native world
+must match its control plus the declared edit. Each native exit save is loaded again; its native
+post-load structural state is compared with Rust decoding that identical file,
+with the path and SHA-256 retained in a `resaved/input.json` receipt. Uninstrumented
 original reload witnesses cover edited eight-family and storage/payment/map
-saves, plus the modded and GameScript saves; their role is load acceptance,
+saves, plus the edited modded and GameScript saves; their role is load acceptance,
 not a fabricated JSON observation from an unmodified engine.
 
 Eight controls require observable failure for a changed field, omitted field,

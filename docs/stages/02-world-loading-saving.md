@@ -168,14 +168,31 @@ of the complete expected native result. `storage-payment-map/` covers PSAC,
 CAPY, a roadside map-plane edit and saturated feeder totals. `game-script-reload/`
 contains the native nested-marker restoration evidence.
 
+`resaved/` under every baseline and mutation case records `input.json` (path and
+SHA-256), Rust structural JSON, native structural JSON from reloading that exact
+native exit save, and `derived-compare/` receipts. This separately checks the
+original re-save to Rust direction rather than reusing pre-save structural
+observations. `modded/mutation/` and `game/mutation/` perform nonempty unrelated
+town-name edits, require the full expected native saved-state delta, and retain
+`content-{before,after,native,restored}.json` with explicit equality receipts for
+NGRF/AIPL/GSDT/PSAC state. Rust preserves the original bytes exactly. Native
+re-saves and script continuation compare against unedited controls at matching
+load/save phases, retained as `content-{native,restored}-baseline.json` with
+`content-checkpoints.json`; native Squirrel table reordering is not normalized.
+Entire restored worlds must equal their corresponding control plus the one
+declared edit. Native script continuation must restore its markers in both arms.
+`game-script-resaved/` and each content mutation's `script-resaved/` and
+`script-baseline-resaved/` repeat the same exact-input structural comparison
+after those script-continuation saves, for fourteen pairs in total.
+
 `negative-{mutation,missing-field,missing-content,stale,builder-marker,
 group-children,cargo-cache,cargo-payment}/` retains the eight controls. Cache
 controls also prove saved-state observations did not change. `unmodified/`
 contains original-engine process receipts, loader logs and exit saves for
-`eight-families`, `storage-payment-map`, `modded` and `game` Rust outputs; it does
+`eight-families`, `storage-payment-map`, `modded` and `game` edited Rust outputs; it does
 not claim JSON instrumentation in the unmodified engine.
 
-The [contract](../../compatibility/contract.json) requires 144 concrete nonempty
+The [contract](../../compatibility/contract.json) requires 334 concrete nonempty
 world artifacts. Its report records manifest/input hashes, tested commit and
 working-tree state; PR CI retains the scoped world directories with the reports.
 Local world-driver and contract-entry-point runs have passed. The integration

@@ -13,7 +13,7 @@ import hashlib
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
-from scripts.world_check_support import ROOT, Json, WorldCheckError, at, decode_json, read_json, replace, run, write_json
+from scripts.world_check_support import ROOT, Json, WorldCheckError, at, content_mutation, decode_json, read_json, replace, resaved_checkpoint, run, write_json
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,6 +61,7 @@ class Matrix:
         self.compare(native / "derived.json", case / "rust-derived.json", case / "derived-compare")
         self.export(native / "save/autosave/exit.sav", "saved", case / "rust-saved.json", case / "saved-command")
         self.compare(native / "world.json", case / "rust-saved.json", case / "saved-compare")
+        resaved_checkpoint(self, native, case / "resaved", modded=modded)
         if name == "populated":
             metadata = read_json(ROOT / "crates/ottd-save/src/world/native-schema-v362.json")
             if not isinstance(metadata, dict):
@@ -112,6 +113,7 @@ class Matrix:
         write_json(case / "expected-native.json", expected)
         self.compare(case / "expected-native.json", native / "world.json", case / "change-compare")
         write_json(case / "assertions.json", assertions)
+        resaved_checkpoint(self, native, case / "resaved")
         for assertion in assertions:
             if not isinstance(assertion, dict):
                 raise WorldCheckError("Expected mutation assertion")
@@ -203,6 +205,7 @@ class Matrix:
         if len(vehicle) != 1 or vehicle[0]["feeder_share"] != 9223372036854775807:
             raise WorldCheckError("Native vehicle feeder cache did not saturate")
         write_json(case / "saturation.json", {"expected": 9223372036854775807, "native": vehicle[0]["feeder_share"]})
+        resaved_checkpoint(self, native, case / "resaved")
 
 
 class Arguments(argparse.Namespace):
@@ -227,24 +230,28 @@ def main() -> None:
     modded = ROOT / "fixtures/world/modded-v362.sav"
     baseline = matrix.baseline("populated", populated)
     _ = matrix.baseline("extended", ROOT / "fixtures/world/populated-extended-v362.sav")
-    _ = matrix.baseline("modded", modded, modded=True)
+    modded_baseline = matrix.baseline("modded", modded, modded=True)
     storage = ROOT / "fixtures/world/storage-payment-v362.sav"
     storage_baseline = matrix.baseline("storage-payment", storage)
     game = ROOT / "fixtures/world/game-v362.sav"
-    _ = matrix.baseline("game", game)
+    game_baseline = matrix.baseline("game", game)
     _ = run(["cmake", f"-DORACLE={matrix.oracle}", f"-DRUN_DIR={matrix.artifacts / 'game-script-reload'}",
              f"-DINPUT={game}", "-DRELOAD=ON", "-P", str(ROOT / "scripts/check-world-game.cmake")], matrix.artifacts / "game-script-command")
+    resaved_checkpoint(matrix, matrix.artifacts / "game-script-reload", matrix.artifacts / "game-script-resaved")
+    modded_edited = content_mutation(matrix, "modded", modded, modded_baseline, modded=True)
+    game_edited = content_mutation(matrix, "game", game, game_baseline)
     matrix.mutations(populated, baseline)
     matrix.storage_payment_map(storage, storage_baseline)
     matrix.negatives(baseline, modded)
     for name, save, has_grf in [("eight-families", matrix.artifacts / "mutations/edited.sav", False),
                                ("storage-payment-map", matrix.artifacts / "storage-payment-map/edited.sav", False),
-                               ("modded", matrix.artifacts / "modded/baseline/no-op.sav", True),
-                               ("game", matrix.artifacts / "game/baseline/no-op.sav", False)]:
+                               ("modded", modded_edited, True),
+                               ("game", game_edited, False)]:
         _ = matrix.native(save, matrix.artifacts / "unmodified" / name, modded=has_grf, instrumented=False)
     write_json(matrix.artifacts / "summary.json", {"passed": True, "fixtures": ["populated", "extended", "modded", "storage-payment", "game"],
         "mutation_families": ["vehicles", "companies", "towns", "industries", "stations", "orders", "cargo", "infrastructure"],
         "additional_mutations": ["persistent-storage", "cargo-payment", "roadside-map-tile", "saturated-cargo-feeder"],
+        "active_content_mutations": ["modded", "game"], "native_resave_derived_pairs": 14,
         "unmodified_original_loads": ["eight-families", "storage-payment-map", "modded", "game"],
         "negative_controls": ["mutation", "missing-field", "missing-content", "stale", "builder-marker", "group-children", "cargo-cache", "cargo-payment"]})
     print(f"PASS world loading/saving matrix: {matrix.artifacts}")

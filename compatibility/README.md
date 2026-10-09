@@ -88,7 +88,15 @@ state and restore markers; Rust preserves their state without executing them.
 World evidence is under `.artifacts/worlds-*/results/`. The contract names every
 case's saved and structural observations and comparison logs, all eight domain
 mutation receipts, storage/payment/map and saturated-feeder edits, each negative
-control, and uninstrumented original reload witnesses. These are exact paths,
+control, and uninstrumented original reload witnesses. Each native exit save is
+loaded again for a structural comparison against Rust decoding that same file;
+`resaved/input.json` records its path and SHA-256. Modded-AI and GameScript cases
+make nonempty unrelated edits and compare the complete expected saved result,
+then explicitly compare NGRF/AIPL/GSDT/PSAC state before and after Rust editing.
+Native re-saving and script continuation use paired unedited controls at matching
+load/save phases, retaining exact trees and complete expected edited worlds.
+Native Squirrel table reordering is not normalized away. Their
+uninstrumented witnesses load the edited outputs. These are exact paths,
 not a wildcard that could silently omit a required case. The driver requires
 unchanged native saved fields during cache-corruption controls, so independent
 structural comparisons cannot pass merely by re-reading saved pointers.

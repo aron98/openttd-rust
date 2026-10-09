@@ -104,7 +104,19 @@ fixture environment variables must preserve the storage and payment bindings.
 
 Run `bash scripts/check-worlds.sh` for native/Rust full saved-state and structural
 comparisons, no-op controls, changes across the eight required domain families,
-storage/payment/map changes and failure controls. Native cache controls opt into
+storage/payment/map changes and failure controls. Modded-AI and GameScript
+fixtures also receive nonempty unrelated town-name edits; the driver checks the
+entire expected native state and explicit NGRF/AIPL/GSDT/PSAC preservation before
+and after Rust editing. Native re-saving and script continuation compare against
+unedited controls at matching load/save phases, including complete expected
+worlds. This retains exact native Squirrel table ordering without normalization. The
+uninstrumented original witnesses load those edited outputs.
+
+Each baseline and mutation case has `resaved/` evidence: an input path/SHA-256
+receipt, Rust structural state from the native `exit.sav`, native structural
+state from loading that same `exit.sav`, and the exact comparison result. The
+original input's after-load observation is never substituted for this check.
+Native cache controls opt into
 `OTTD_WORLD_CORRUPT_DERIVED` solely inside isolated test processes; they deliberately
 damage group children, vehicle cargo cache or the reverse payment binding and
 must be detected by full structural comparison. Content-dependent vehicle or

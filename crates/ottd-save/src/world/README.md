@@ -80,6 +80,15 @@ The source is `script/script_instance.cpp`, `saveload/ai_sl.cpp` and
 `saveload/game_sl.cpp`. Content identities, parameters, map labels and persistent
 storage are ordinary decoded tables and survive unrelated mutations.
 
+The world oracle driver exercises nonempty unrelated edits in both the modded
+AI and GameScript fixtures. It compares complete expected saved-state deltas
+and exact NGRF/AIPL/GSDT/PSAC preservation across Rust editing. Native re-saving
+and script continuation use unedited controls at matching load/save phases,
+comparing complete worlds and script trees without normalizing native Squirrel
+table ordering. Structural parity is also checked after reloading
+each native exit save in both engines; the `resaved/` artifacts identify that
+same input by path and SHA-256. These checks do not execute scripts in Rust.
+
 ## Restored fields and limits
 
 The complete modeled structural result is exactly the public `DerivedState`:

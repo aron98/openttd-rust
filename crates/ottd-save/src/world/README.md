@@ -12,6 +12,10 @@ allocate IDs, initialize gameplay objects or cascade deletions. Callers must
 include all coupled reference, ownership and map edits in the same batch.
 Only the final world must be consistent; failure preserves saved and derived
 state. All existing schema, native limits and relationship checks still apply.
+`ENGN` occupied IDs must form a contiguous prefix starting at zero, including an
+empty prefix. Native `saveload/engine_sl.cpp::GetTempDataEngine` loads these rows
+into a sequential temporary array and cannot accept interior or leading gaps.
+Coupled removal/reinsertion is allowed when the final record set is contiguous.
 
 Existing scalar/string fields and existing primitive array elements can be
 edited; `Field` array replacement must preserve cardinality. Complete pool record

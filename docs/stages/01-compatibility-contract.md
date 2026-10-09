@@ -1,9 +1,9 @@
 # Stage 1: compatibility contract
 
-Status: **Ready for review**. Branch: `stage/01-compatibility-contract`, based on
+Status: **Completed**. Branch: `stage/01-compatibility-contract`, based on
 PR #1's maintainer merge `1dcf23da8d1ceada37c0fc2d92b734011572b51e`.
-[PR #2](https://github.com/aron98/openttd-rust/pull/2) awaits the maintainer.
-The maintainer must merge it before stage 2 begins; this stage is not completed.
+[PR #2](https://github.com/aron98/openttd-rust/pull/2) was merged by the maintainer
+as `e35f0f7375d84124f8047adff404eb4273b7277b`; stage 2 starts from that merge.
 
 ## Scope and design
 
@@ -57,7 +57,7 @@ reproducible. General NewGRF/Squirrel compatibility remains unimplemented.
 - [x] Future world/gameplay/content/script, four native client/server pairings,
       mixed-client sessions and desktop/browser requirements remain explicit.
 - [x] Independent review and integrated CI pass; evidence identifies the tested
-      tree and input hashes. The PR awaits the maintainer's merge.
+      tree and input hashes. The maintainer merged PR #2.
 
 ## Verification
 
@@ -106,4 +106,4 @@ with the verification commands above; validation alone is not a baseline run.
 The original-only scenarios establish content effects, a recorded native
 command and prejoin game-info metadata. They do not demonstrate Rust NewGRF/AI
 execution, command replay, multiplayer joining or synchronized sessions.
-Maintainer review and merge remain outstanding; no later stage has started.
+The maintainer merge completes this stage; stage 2 is tracked in its own plan.

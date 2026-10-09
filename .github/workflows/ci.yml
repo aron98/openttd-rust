@@ -35,9 +35,9 @@ jobs:
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/context_ci_support.py scripts/context_ci_evidence.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
       - name: Check road slope CI admission
         run: |
-          uv run --with pytest pytest -q scripts/tests/test_road_slope_ci.py
-          uvx ruff check --config scripts/grf-control-ruff.toml scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/test_road_slope_ci.py
-          uv run --with basedpyright --with pytest basedpyright --warnings scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/test_road_slope_ci.py
+          uv run --with pytest python -m pytest -q scripts/tests/road_slope_ci_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/road_slope_ci_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/road_slope_ci_test.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked

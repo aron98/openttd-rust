@@ -3156,7 +3156,7 @@
     },
     {
       "id": "road-slope-ci-test-road-slope-ci",
-      "path": "scripts/tests/test_road_slope_ci.py",
+      "path": "scripts/tests/road_slope_ci_test.py",
       "sha256": "9a38469dc2a30eab7b43e65ec96d0a97071e5b8b1ba0784c3da256d31f499c7b",
       "kind": "recipe",
       "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
@@ -13820,7 +13820,7 @@
         "scripts/check-road-slope-ci.py",
         "scripts/road_slope_ci_evidence.py",
         "scripts/road-slope-ci-layout.json",
-        "scripts/tests/test_road_slope_ci.py",
+        "scripts/tests/road_slope_ci_test.py",
         "crates/ottd-sim/src/commands/road.rs",
         "crates/ottd-sim/src/commands/road/slope.rs",
         "crates/ottd-sim/src/commands/road/slope/tests.rs",

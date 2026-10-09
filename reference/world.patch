@@ -1,0 +1,215 @@
+--- a/src/saveload/saveload.cpp
++++ b/src/saveload/saveload.cpp
+@@ -71,6 +71,8 @@
+ #include "table/strings.h"
+ 
+ #include "reference_snapshot.hpp"
++#include "reference_world.hpp"
++#include "reference_world_derived.hpp"
+ #include "../safeguards.h"
+ 
+ extern const SaveLoadVersion SAVEGAME_VERSION = (SaveLoadVersion)(SL_MAX_VERSION - 1); ///< Current savegame version of OpenTTD.
+@@ -217,6 +219,8 @@
+ };
+ 
+ static SaveLoadParams _sl; ///< Parameters used for/at saveload.
++
++bool ReferenceWorld::IsWriting() { return _sl.action == SLA_SAVE && _sl.need_length != NL_CALCLENGTH; }
+ 
+ static const std::vector<ChunkHandlerRef> &ChunkHandlers()
+ {
+@@ -420,6 +424,7 @@
+ void SlWriteByte(uint8_t b)
+ {
+ 	_sl.dumper->WriteByte(b);
++	ReferenceWorld::Byte(b);
+ }
+ 
+ static inline int SlReadUint16()
+@@ -667,6 +672,7 @@
+ {
+ 	_sl.need_length = NL_WANTLENGTH;
+ 	_sl.array_index = index;
++	ReferenceWorld::SetIndex(index);
+ }
+ 
+ static size_t _next_offs;
+@@ -1372,6 +1378,13 @@
+ 
+ 	static void SlSaveLoadMember(SaveLoadType cmd, Tvar *item, VarType conv)
+ 	{
++		if (ReferenceWorld::Active() && _sl.action == SLA_SAVE && _sl.need_length != NL_CALCLENGTH) {
++			switch (cmd) {
++				case SL_VAR: ReferenceWorld::Value(ReferenceWorld::Scalar(item, conv)); break;
++				case SL_REF: ReferenceWorld::Value(ReferenceToInt(*(void **)item, (SLRefType)conv)); break;
++				default: NOT_REACHED();
++			}
++		}
+ 		switch (cmd) {
+ 			case SL_VAR: SlSaveLoadConv(item, conv); break;
+ 			case SL_REF: SlSaveLoadRef(item, conv); break;
+@@ -1712,6 +1725,8 @@
+ {
+ 	if (!SlIsObjectValidInSavegame(sld)) return false;
+ 
++	const bool observe = ReferenceWorld::Active() && _sl.action == SLA_SAVE && _sl.need_length != NL_CALCLENGTH;
++	if (observe) ReferenceWorld::BeginField(sld);
+ 	VarType conv = GB(sld.conv, 0, 8);
+ 	switch (sld.cmd) {
+ 		case SL_VAR:
+@@ -1723,6 +1738,19 @@
+ 		case SL_VECTOR:
+ 		case SL_STDSTR: {
+ 			void *ptr = GetVariableAddress(object, sld);
++			if (observe) {
++				switch (sld.cmd) {
++					case SL_VAR: ReferenceWorld::Value(ReferenceWorld::Scalar(ptr, conv)); break;
++					case SL_REF: ReferenceWorld::Value(ReferenceToInt(*(void **)ptr, (SLRefType)conv)); break;
++					case SL_ARR: ReferenceWorld::Array(ptr, sld.length, conv); break;
++					case SL_STDSTR: {
++						const auto &str = *static_cast<const std::string *>(ptr);
++						ReferenceWorld::Value(ReferenceWorld::Bytes(str.data(), str.size()));
++						break;
++					}
++					default: break;
++				}
++			}
+ 
+ 			switch (sld.cmd) {
+ 				case SL_VAR: SlSaveLoadConv(ptr, conv); break;
+@@ -1743,6 +1771,7 @@
+ 		 * object description to use. */
+ 		case SL_SAVEBYTE: {
+ 			void *ptr = GetVariableAddress(object, sld);
++			if (observe) ReferenceWorld::Value(*static_cast<uint8_t *>(ptr));
+ 
+ 			switch (_sl.action) {
+ 				case SLA_SAVE: SlWriteByte(*(uint8_t *)ptr); break;
+@@ -1808,6 +1837,7 @@
+ 
+ 		default: NOT_REACHED();
+ 	}
++	if (observe) ReferenceWorld::EndField();
+ 	return true;
+ }
+ 
+@@ -1823,6 +1853,7 @@
+ 		if (_sl.need_length == NL_CALCLENGTH) return;
+ 	}
+ 
++	if (ReferenceWorld::Active() && _sl.action == SLA_SAVE) ReferenceWorld::Count(length);
+ 	SlWriteArrayLength(length);
+ }
+ 
+@@ -1852,9 +1883,12 @@
+ 		if (_sl.need_length == NL_CALCLENGTH) return;
+ 	}
+ 
++	const bool observe = ReferenceWorld::Active() && _sl.action == SLA_SAVE;
++	if (observe) ReferenceWorld::BeginObject();
+ 	for (auto &sld : slt) {
+ 		SlObjectMember(object, sld);
+ 	}
++	if (observe) ReferenceWorld::EndObject();
+ }
+ 
+ /**
+@@ -1899,6 +1933,7 @@
+  */
+ std::vector<SaveLoad> SlTableHeader(const SaveLoadTable &slt)
+ {
++	if (_sl.action == SLA_SAVE && _sl.need_length != NL_CALCLENGTH) ReferenceWorld::Schema(slt);
+ 	/* You can only use SlTableHeader if you are a CH_TABLE. */
+ 	assert(_sl.block_mode == CH_TABLE || _sl.block_mode == CH_SPARSE_TABLE);
+ 
+@@ -2255,6 +2290,7 @@
+ 	if (ch.type == CH_READONLY) return;
+ 
+ 	SlWriteUint32(ch.id);
++	ReferenceWorld::BeginChunk(ch.id, ch.type == CH_RIFF);
+ 	Debug(sl, 2, "Saving chunk {}", ch.GetName());
+ 
+ 	_sl.block_mode = ch.type;
+@@ -2283,17 +2319,20 @@
+ 	}
+ 
+ 	if (_sl.expect_table_header) SlErrorCorrupt("Table chunk without header");
++	ReferenceWorld::EndChunk();
+ }
+ 
+ /** Save all chunks */
+ static void SlSaveChunks()
+ {
++	ReferenceWorld::Begin(SAVEGAME_VERSION);
+ 	for (auto &ch : ChunkHandlers()) {
+ 		SlSaveChunk(ch);
+ 	}
+ 
+ 	/* Terminator */
+ 	SlWriteUint32(0);
++	ReferenceWorld::Finish();
+ }
+ 
+ /**
+@@ -3228,6 +3267,7 @@
+ 		}
+ 
+ 		_gamelog.StopAction();
++		ReferenceWorld::AfterLoad();
+ 	}
+ 
+ 	return SL_OK;
+--- a/src/cargopacket.h
++++ b/src/cargopacket.h
+@@ -270,8 +270,11 @@
+  * Simple collection class for a list of cargo packets.
+  * @tparam Tinst Actual instantiation of this cargo list.
+  */
++namespace ReferenceWorld { struct CargoAccess; }
++
+ template <class Tinst, class Tcont>
+ class CargoList {
++	friend struct ReferenceWorld::CargoAccess;
+ public:
+ 	/** The iterator for our container. */
+ 	typedef typename Tcont::iterator Iterator;
+--- a/src/saveload/ai_sl.cpp
++++ b/src/saveload/ai_sl.cpp
+@@ -11,6 +11,7 @@
+ #include "../debug.h"
+ 
+ #include "saveload.h"
++#include "reference_world.hpp"
+ #include "compat/ai_sl_compat.h"
+ 
+ #include "../company_base.h"
+@@ -68,7 +69,9 @@
+ 	_ai_saveload_settings = config->SettingsToString();
+ 
+ 	SlObject(nullptr, _ai_running_desc);
++	ReferenceWorld::BeginScript();
+ 	AI::Save(index);
++	ReferenceWorld::EndScript();
+ 
+ }
+ 
+--- a/src/saveload/game_sl.cpp
++++ b/src/saveload/game_sl.cpp
+@@ -11,6 +11,7 @@
+ #include "../debug.h"
+ 
+ #include "saveload.h"
++#include "reference_world.hpp"
+ #include "compat/game_sl_compat.h"
+ 
+ #include "../string_func.h"
+@@ -48,7 +49,9 @@
+ 	_game_saveload_settings = config->SettingsToString();
+ 
+ 	SlObject(nullptr, _game_script_desc);
++	ReferenceWorld::BeginScript();
+ 	Game::Save();
++	ReferenceWorld::EndScript();
+ }
+ 
+ struct GSDTChunkHandler : ChunkHandler {

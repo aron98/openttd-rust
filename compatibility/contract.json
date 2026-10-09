@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "d553cd75c6f0c95900286683738c596017920d574e3df3296b3f5a0ace170155",
+      "sha256": "0fc8098de56991646e9320885e2a8312693a3db1c39ad0583f280a7cdbf695c2",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1933,7 +1933,7 @@
     {
       "id": "metadata-reference-world-derived-hpp",
       "path": "reference/world_derived.hpp",
-      "sha256": "a14dc37f1fb452273abffe5825bb96bda034fd070c8e92466f9cf138bf0de29f",
+      "sha256": "88df1ddb4d15d29c6103d2c4a1806e59e46811383dbb81e46732f8f246d6c64b",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -3097,6 +3097,24 @@
       "sha256": "ded6c7aed9a03d163aa75b1edb02574eb9025fc755cd5ea944197b2c61aa10fe",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "road-slope-reference-road-slope-hpp",
+      "path": "reference/road_slope.hpp",
+      "sha256": "9764ba89184db509e753befb539384b1a3b8b8f45fdc681f514f01a89e84b7cb",
+      "kind": "recipe",
+      "provenance": "Pinned original CheckRoadSlope observer; opt-in pure-helper vectors and complete live state restoration. No Rust gameplay delegation.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "road-slope-reference-road-slope-patch",
+      "path": "reference/road_slope.patch",
+      "sha256": "5a96a40121c09e150c1cfa1369fb35725901930567b172d2e43cc03633ccc115",
+      "kind": "recipe",
+      "provenance": "Pinned original CheckRoadSlope observer; opt-in pure-helper vectors and complete live state restoration. No Rust gameplay delegation.",
       "save_version": null,
       "profile": null
     }

@@ -17,6 +17,8 @@
 #include "../economy_base.h"
 #include <cstdio>
 
+namespace ReferenceRoadSlope { nlohmann::json Probe(); }
+
 namespace ReferenceWorld {
 struct CargoAccess {
     template <class Instance, class Container>
@@ -64,6 +66,18 @@ inline void AfterLoad()
     ReferenceGrfScan::Observe();
     ReferenceGrfMetadata::Observe();
     ReferenceDepotRuntime::Observe();
+    if (const char *road_slope_path = std::getenv("OTTD_ROAD_SLOPE_PATH"); road_slope_path != nullptr && _game_mode != GM_MENU) {
+        if (std::ifstream(road_slope_path).good()) throw std::runtime_error("Road slope observation already exists");
+        const Json before = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
+        Json result = ReferenceRoadSlope::Probe();
+        const Json after = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
+        if (before != after) throw std::runtime_error("Road slope live state leaked");
+        result["live_before"] = before;
+        result["live_after"] = after;
+        std::ofstream output(road_slope_path);
+        output << result.dump() << '\n';
+        if (!output) throw std::runtime_error("Road slope observation write failed");
+    }
     const char *path = std::getenv("OTTD_WORLD_DERIVED_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (const char *control = std::getenv("OTTD_WORLD_CORRUPT_DERIVED")) {

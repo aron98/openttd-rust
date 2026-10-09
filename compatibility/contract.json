@@ -2991,6 +2991,42 @@
       "provenance": "Original configured-loader context fixture and passive normalized clock/global observations; no Rust gameplay delegation.",
       "save_version": null,
       "profile": null
+    },
+    {
+      "id": "scalar-vm-driver",
+      "path": "scripts/check-script-vm.py",
+      "sha256": "99e85907ed8c6db8d2b519991d11d4322ae80a50830b7f1435162daa3641f204",
+      "kind": "recipe",
+      "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "scalar-vm-validator",
+      "path": "scripts/script_vm_evidence.py",
+      "sha256": "c0eb61a35d1991758e2f596a2da734af98a8a8cc9b46fe8ad21c4ab2458ffcfa",
+      "kind": "recipe",
+      "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "scalar-vm-provenance",
+      "path": "scripts/script_vm_provenance.py",
+      "sha256": "0d20c3df8ffade42fc35f77fb06943331fc53cd7fa4afbceea1e76f2d695fe49",
+      "kind": "recipe",
+      "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "scalar-vm-manifest",
+      "path": "scripts/script-vm-manifest.json",
+      "sha256": "ba591178b698c61b750671dc4827f692848640c077db1ca41ccfffc76c39ab04",
+      "kind": "recipe",
+      "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
+      "save_version": null,
+      "profile": null
     }
   ],
   "profiles": [
@@ -14884,6 +14920,30 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1800
+    },
+    {
+      "id": "script-vm",
+      "argv": [
+        "python3",
+        "scripts/check-script-vm.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.json",
+        "manifest.json",
+        "identities.json",
+        "identity-after.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "tests/stdout.log",
+        "zero-tests/stdout.log",
+        "native/variant.txt"
+      ],
+      "success_text": "PASS scalar VM 378 comparisons",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1800
     }
   ],
   "scenarios": [
@@ -19114,6 +19174,36 @@
         "original-fleet/native/final.sav",
         "results/continuation/continuous-world.json/process.json",
         "results/continuation/continuous-derived.json/process.json"
+      ]
+    },
+    {
+      "id": "script.scalar-vm",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Initial scalar source grammar and11/62bundled Squirrel opcodes; i64/f32/GC-enabled variant. No locals/control flow/objects/host APIs/AI/GS/saved-script integration. Signed overflow is deliberately unsupported, not parity.",
+      "expected": "Fresh pinned native build and actual Cargo example:42fixtures x9credit sequences=378strict observations of instructions/literals/raw scalar bits/IP/debt/results/error stage;12exact tests and4corruption controls. Manifest pins all source/fixture/native blobs and complete raw evidence paths; archive hashes and executable identities verified.",
+      "driver": "script-vm",
+      "assets": [
+        "scalar-vm-driver",
+        "scalar-vm-validator",
+        "scalar-vm-provenance",
+        "scalar-vm-manifest"
+      ],
+      "source_refs": [
+        "scripts/check-script-vm.py",
+        "scripts/script_vm_evidence.py",
+        "scripts/script-vm-manifest.json"
+      ],
+      "evidence": [
+        "summary.json",
+        "manifest.json",
+        "identities.json",
+        "identity-after.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "tests/stdout.log",
+        "zero-tests/stdout.log",
+        "native/variant.txt"
       ]
     }
   ]

@@ -69,6 +69,47 @@ fn request(tile: u32) -> CommandRequest {
     }
 }
 #[test]
+fn zero_cost_purchase_executes_with_negative_cash() -> Result {
+    let (runtime, tile) = fixture()?;
+    let mut world = runtime.into_world();
+    world.edit_batch(vec![
+        crate::world_access::field_edit(*b"ECMY", 0, "inflation_prices", WireValue::Unsigned(0)),
+        crate::world_access::field_edit(*b"PLYR", 0, "money", WireValue::Signed(-1)),
+        crate::world_access::field_edit(
+            *b"PATS",
+            0,
+            "difficulty.infinite_money",
+            WireValue::Signed(0),
+        ),
+    ])?;
+    let mut runtime = SimulationRuntime::restore_vanilla(world)?;
+    let before = runtime.world.saved_json()?;
+    let mut estimate = request(tile);
+    estimate.mode = CommandMode::Estimate;
+    assert_eq!(
+        runtime
+            .execute_command(&estimate)?
+            .result
+            .ok_or("estimate")?
+            .cost,
+        0
+    );
+    assert_eq!(runtime.world.saved_json()?, before);
+    let rng = random(runtime.world())?;
+    let count = runtime.road.len();
+    let receipt = runtime.execute_command(&request(tile))?;
+    let executed = receipt.exec.ok_or("zero-cost purchase must execute")?;
+    assert!(executed.success);
+    assert_eq!(executed.cost, 0);
+    assert_eq!(runtime.road.len(), count + 1);
+    assert_eq!(
+        crate::world_access::signed(runtime.world(), b"PLYR", 0, "money")?,
+        -1
+    );
+    assert_ne!(random(runtime.world())?, rng);
+    Ok(())
+}
+#[test]
 fn missing_company_value_initializes_native_result_tuple() -> Result {
     let (mut runtime, tile) = fixture()?;
     let mut command = request(tile);

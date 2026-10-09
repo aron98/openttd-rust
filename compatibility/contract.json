@@ -2050,7 +2050,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build.rs",
-      "sha256": "dcf5dd99754073febd69d4ba43d81c4ad90b1ea51ae11bb364f857a9e084458f",
+      "sha256": "a69597363d56dc0274504df60b7a77dfe8faef6699219ea56aa25d163235bb80",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2095,7 +2095,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests.rs",
-      "sha256": "ba120846465a3c337c023d9f7973584c087c7992db143363480aaf6f590e2486",
+      "sha256": "3c5e77e1bfa55f3ee430c6601f31173ccee504c8378f5ee5712c1a83e2a44c46",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2122,7 +2122,7 @@
     {
       "id": "purchase-crates-ottd-sim-tests-native-purchase-rs",
       "path": "crates/ottd-sim/tests/native_purchase.rs",
-      "sha256": "a855ede1e98dc3570e35a876720fbda8a58ee7e0b95218ce0d7e7e3651f526a1",
+      "sha256": "295cbe55dd264990f8c182a186baaeb38077895a247c40b69f748cf3feaf89d8",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2149,7 +2149,7 @@
     {
       "id": "purchase-scripts-purchase-controls-py",
       "path": "scripts/purchase_controls.py",
-      "sha256": "f78280bad71d7e7988acf1684439bc3aeff550d0fdace220b32fe97773f51e09",
+      "sha256": "210964edd80c390d339cb1d2508c8346c2d888f7f2a56046e97c4c03e4c5885f",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2167,7 +2167,7 @@
     {
       "id": "purchase-scripts-purchase-evidence-py",
       "path": "scripts/purchase_evidence.py",
-      "sha256": "8f72d3ff7c51628fc78b755ffbc1ae20376d079da21ee1e909e2111a49455d94",
+      "sha256": "346562e0861f3301e6ab199491b2af854eb5074b76a0efa2e4e699ff4e7d2315",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2176,7 +2176,7 @@
     {
       "id": "purchase-scripts-purchase-evidence-layout-json",
       "path": "scripts/purchase-evidence-layout.json",
-      "sha256": "6b3bd38ccd6a65b4210ecf81bcb7ad5ab30fb335467499eaf38b21fdc1804bce",
+      "sha256": "cc64a6dc8da254e7f360fc423c8a476cd692b9293bf24741fd7425461641e5f7",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -13849,7 +13849,13 @@
         "executed-test-binaries.json",
         "logs/build-purchase-tests/stdout.log",
         "logs/build-purchase-tests/argv.json",
-        "logs/build-purchase-tests/process.json"
+        "logs/build-purchase-tests/process.json",
+        "results/zero-cost-negative-cash/actions.json",
+        "results/zero-cost-negative-cash/native/results.json",
+        "results/zero-cost-negative-cash/rust/live.json",
+        "results/zero-cost-negative-cash/compare/native-live-phases.json",
+        "results/zero-cost-negative-cash/compare/rust-live-phases.json",
+        "results/zero-cost-negative-cash/rust-command/stdout.log"
       ],
       "success_text": "PASS owned-runtime road purchases",
       "scopes": [
@@ -17586,8 +17592,8 @@
       "id": "commands.owned-runtime-road-purchase",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Vanilla single-part no-refit road purchases in existing road depots through the owned SimulationRuntime. All four climates, both acceleration models, all88vanilla road engines, dynamic engine fields, legacy cargo_paid_for serialization global, allocation/RNG/cache atomic publication. Not movement, sell/refit, orders, articulated/modded vehicles, direct QueryCost/AutoReplace or whole-world tick admission.",
-      "expected": "15 exact cases and335actions/255commands match original native test/exec/result receipts, full64-entry cargo returns, saved/derived/checkpoint state and immediate original creation caches/pool/unit counts.821 expected-exit process receipts,11 named comparator corruptions, every Rust-output native reload and split/resume. Complete5571-path evidence identity set is SHA-indexed and archived with verified membership/content; raw files retained, substantive proof nonempty, only named stdout/stderr logs may be empty.",
+      "domain": "Vanilla single-part no-refit road purchases in existing road depots through the owned SimulationRuntime. All four climates, both acceleration models, all88vanilla road engines, dynamic engine fields, legacy cargo_paid_for serialization global, allocation/RNG/cache atomic publication. Not movement, sell/refit, orders, articulated/modded vehicles, direct QueryCost/AutoReplace or whole-world tick admission. Includes zero-cost purchase with negative company cash, preserving the original positive-cost affordability guard.",
+      "expected": "16 exact cases and345actions/260commands match original native test/exec/result receipts, full64-entry cargo returns, saved/derived/checkpoint state and immediate original creation caches/pool/unit counts.869 expected-exit process receipts,11 named comparator corruptions, every Rust-output native reload and split/resume. Complete5896-path evidence identity set is SHA-indexed and archived with verified membership/content; raw files retained, substantive proof nonempty, only named stdout/stderr logs may be empty.",
       "driver": "road-purchases",
       "assets": [
         "purchase-crates-ottd-sim-src-commands-rs",

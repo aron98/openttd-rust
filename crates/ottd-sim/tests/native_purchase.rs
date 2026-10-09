@@ -17,6 +17,24 @@ fn field(chunk: [u8; 4], record: u32, name: &str, value: WireValue) -> WorldEdit
 fn setting(name: &str, value: u64) -> WorldEdit {
     field(*b"PATS", 0, name, WireValue::Unsigned(value))
 }
+const CASES: &[(&str, u64, u64, u8)] = &[
+    ("temperate-original", 0, 0, 0),
+    ("temperate-realistic", 0, 1, 1),
+    ("arctic", 1, 1, 2),
+    ("tropic", 2, 0, 3),
+    ("toyland", 3, 1, 0),
+    ("limit", 0, 0, 0),
+    ("money", 0, 0, 0),
+    ("exact-money", 0, 0, 0),
+    ("zero-cost-negative-cash", 0, 0, 0),
+    ("nonowner", 0, 0, 0),
+    ("unavailable", 0, 0, 0),
+    ("wrong-depot", 0, 0, 0),
+    ("pause", 0, 0, 0),
+    ("dynamic", 0, 1, 3),
+    ("legacy-paid", 0, 0, 0),
+    ("errors", 0, 0, 0),
+];
 #[test]
 #[ignore = "fresh original purchase setup: PURCHASE_SOURCE and PURCHASE_INPUT_DIR"]
 fn prepare_purchase_inputs() -> Result {
@@ -35,23 +53,7 @@ fn prepare_purchase_inputs() -> Result {
         .ok_or("depot")?;
     let tile = u32::try_from(tile)?;
     let mut manifest = Vec::new();
-    for (name, climate, model, direction) in [
-        ("temperate-original", 0, 0, 0),
-        ("temperate-realistic", 0, 1, 1),
-        ("arctic", 1, 1, 2),
-        ("tropic", 2, 0, 3),
-        ("toyland", 3, 1, 0),
-        ("limit", 0, 0, 0),
-        ("money", 0, 0, 0),
-        ("exact-money", 0, 0, 0),
-        ("nonowner", 0, 0, 0),
-        ("unavailable", 0, 0, 0),
-        ("wrong-depot", 0, 0, 0),
-        ("pause", 0, 0, 0),
-        ("dynamic", 0, 1, 3),
-        ("legacy-paid", 0, 0, 0),
-        ("errors", 0, 0, 0),
-    ] {
+    for &(name, climate, model, direction) in CASES {
         let mut world = base.clone();
         let mut raw = TileRawParts::from(depot);
         raw.m5 = (raw.m5 & !3) | direction;
@@ -124,6 +126,18 @@ fn prepare_purchase_inputs() -> Result {
 
 fn configure(world: &mut World, name: &str, engine: &ottd_sim::content::EngineSpec) -> Result {
     let mut edits = Vec::new();
+    if name == "zero-cost-negative-cash" {
+        edits.extend([
+            field(*b"ECMY", 0, "inflation_prices", WireValue::Unsigned(0)),
+            field(*b"PLYR", 0, "money", WireValue::Signed(-1)),
+            field(
+                *b"PATS",
+                0,
+                "difficulty.infinite_money",
+                WireValue::Signed(0),
+            ),
+        ]);
+    }
     if name == "legacy-paid" {
         edits.extend(legacy_paid_edits(world)?);
     }

@@ -40,7 +40,7 @@ def coverage(case: Json, results: Json) -> None:
             expected = 0
         case "exact-money":
             expected = 1
-        case "dynamic" | "legacy-paid" | "errors":
+        case "dynamic" | "legacy-paid" | "errors" | "zero-cost-negative-cash":
             expected = 2
         case _:
             raise WorldCheckError("Unregistered native purchase coverage")

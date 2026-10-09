@@ -22,6 +22,7 @@ CASES = (
     "limit",
     "money",
     "exact-money",
+    "zero-cost-negative-cash",
     "nonowner",
     "unavailable",
     "wrong-depot",
@@ -73,7 +74,7 @@ def validate_paths(root: Path, expected: set[str]) -> list[Path]:
 
 def validate_receipts(root: Path, paths: list[Path]) -> None:
     receipts = [path for path in paths if path.name == "process.json"]
-    if len(receipts) != 821:
+    if len(receipts) != 869:
         raise WorldCheckError("Purchase process receipt count changed")
     failures = {f"controls/{name}/compare/process.json" for name in CONTROLS}
     for path in receipts:
@@ -132,7 +133,7 @@ def validate_cases(root: Path) -> None:
                             raise WorldCheckError("Invalid purchased engine identity")
             case _:
                 raise WorldCheckError("Native purchase action coverage differs")
-    if (total_actions, total_commands, successful, len(engines)) != (335, 255, 192, 88):
+    if (total_actions, total_commands, successful, len(engines)) != (345, 260, 194, 88):
         raise WorldCheckError("Purchase action coverage changed")
 
 

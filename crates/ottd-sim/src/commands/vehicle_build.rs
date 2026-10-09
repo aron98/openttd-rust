@@ -75,7 +75,8 @@ pub(super) fn run(
             false,
         ));
     }
-    if unsigned(world, b"PATS", 0, "difficulty.infinite_money")? == 0
+    if plan.cost.cost > 0
+        && unsigned(world, b"PATS", 0, "difficulty.infinite_money")? == 0
         && plan.cost.cost > signed(world, b"PLYR", u32::from(company), "money")?
     {
         let mut result = plan.cost.clone();

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import shutil
 import subprocess
 import tempfile
 from dataclasses import dataclass
@@ -89,6 +90,7 @@ class FoundationRun:
                 "native_runtime_pools",
                 "native_runtime_road",
                 "native_grf_scan",
+                "native_depot_runtime",
                 "terrain",
             ],
             "ottd-core": ["terrain_oracle"],
@@ -112,7 +114,8 @@ class FoundationRun:
                     case {
                         "reason": "compiler-artifact",
                         "executable": str() as executable,
-                        "target": {"name": str() as name},
+                        "target": {"name": str() as name, "kind": ["test"]},
+                        "profile": {"test": True},
                     } if name in names:
                         binaries[name] = Path(executable).resolve()
                     case _:
@@ -121,10 +124,19 @@ class FoundationRun:
             raise WorldCheckError(
                 "Cargo did not produce every foundation test executable"
             )
+        retained = self.output / "bin"
+        retained.mkdir()
+        originals = dict(binaries)
+        for name, path in originals.items():
+            binaries[name] = Path(shutil.copy2(path, retained / name))
         write_json(
             self.output / "test-binaries.json",
             {
-                name: {"path": str(path), "sha256": digest(path)}
+                name: {
+                    "path": str(path),
+                    "original_path": str(originals[name]),
+                    "sha256": digest(path),
+                }
                 for name, path in binaries.items()
             },
         )
@@ -156,10 +168,22 @@ class FoundationRun:
         paths.update((self.root / "reference").glob("*.patch"))
         paths.update((self.root / "scripts").glob("*.cmake"))
         paths.update(
+            path
+            for name in [
+                "rust-toolchain",
+                "rust-toolchain.toml",
+                ".cargo/config",
+                ".cargo/config.toml",
+            ]
+            if (path := self.root / name).is_file()
+        )
+        paths.update(
             self.root / path
             for path in [
                 "scripts/check-gameplay-foundations.py",
                 "scripts/gameplay_foundations.py",
+                "scripts/depot_evidence.py",
+                "scripts/setup-snapshot-reference.sh",
                 "scripts/check-terrain.sh",
                 "fixtures/generated-v362.sav",
                 "fixtures/replay/clear-v362.sav",
@@ -193,6 +217,7 @@ class FoundationRun:
                 "pools/rust/comparison.log",
                 "road/summary.txt",
                 "grf/summary.txt",
+                "depot/comparison.txt",
                 "provenance.json",
                 "test-binaries.json",
             ],
@@ -224,7 +249,7 @@ class FoundationRun:
             self.output / "summary.json",
             {
                 "passed": True,
-                "families": ["content", "terrain", "pools", "road", "grf"],
+                "families": ["content", "terrain", "pools", "road", "grf", "depot"],
                 "nonempty_artifacts": len(names),
             },
         )

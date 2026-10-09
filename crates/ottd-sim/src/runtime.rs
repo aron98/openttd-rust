@@ -1,5 +1,6 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
+mod depot;
 pub mod pools;
 #[cfg(test)]
 mod purchase_native;
@@ -96,6 +97,7 @@ pub struct SimulationRuntime {
     content: ContentCatalog,
     road: BTreeMap<VehicleId, RoadVehicleCache>,
     allocation: VehicleAllocation,
+    depot: depot::DepotRuntime,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -234,6 +236,7 @@ impl SimulationRuntime {
             })
             .collect::<Result<BTreeMap<_, _>, RuntimeError>>()?;
         Ok(Self {
+            depot: depot::DepotRuntime::restore(&world)?,
             serializer_cargo_paid_for: serialization::restore(&world)?,
             allocation: VehicleAllocation::restore(&world)?,
             world,
@@ -244,6 +247,16 @@ impl SimulationRuntime {
     /// Authoritative saved state; mutable access is intentionally absent.
     pub const fn world(&self) -> &World {
         &self.world
+    }
+
+    /// Native depot pool identity metadata restored from the authoritative world.
+    pub fn depot_pool(&self) -> pools::PoolSnapshot {
+        self.depot.pool.snapshot()
+    }
+
+    /// Company road/tram infrastructure for all 63 native road-type slots.
+    pub const fn road_infrastructure(&self) -> &BTreeMap<u8, [u32; 63]> {
+        &self.depot.road
     }
     /// Initialized vanilla content snapshot.
     pub const fn content(&self) -> &ContentCatalog {

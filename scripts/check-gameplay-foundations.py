@@ -7,6 +7,7 @@ from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.depot_evidence import require_depot_evidence
 from scripts.gameplay_foundations import FoundationRun, fresh_directory
 
 
@@ -71,6 +72,15 @@ def main() -> None:
         "native_file_scan_matrix",
         {"OTTD_GRF_NATIVE_DIR": str(output / "grf"), "OTTD_GRF_ORACLE": str(oracle)},
     )
+    run.test(
+        binaries["native_depot_runtime"],
+        "original_depot_runtime_matrix",
+        {
+            "OTTD_DEPOT_EVIDENCE": str(output / "depot"),
+            "OTTD_DEPOT_ORACLE": str(oracle),
+        },
+    )
+    require_depot_evidence(output / "depot")
     run.finish()
     print("PASS gameplay foundations", flush=True)
 

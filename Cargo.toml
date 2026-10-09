@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/ottd-core", "crates/ottd-save", "crates/ottd-cli", "crates/ottd-sim"]
+members = ["crates/ottd-core", "crates/ottd-save", "crates/ottd-cli", "crates/ottd-sim", "crates/ottd-script"]
 resolver = "3"
 
 [workspace.package]

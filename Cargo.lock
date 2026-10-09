@@ -412,6 +412,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "ottd-script"
+version = "0.1.0"
+
+[[package]]
 name = "ottd-sim"
 version = "0.1.0"
 dependencies = [

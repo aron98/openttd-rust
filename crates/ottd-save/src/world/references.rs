@@ -1,6 +1,4 @@
-use super::{
-    MapState, Row, TableChunk, TableRecord, TableSchema, WireValue, WorldError, invalid, name, rows,
-};
+use super::{MapState, Row, TableChunk, WorldError, invalid, name, rows};
 use std::collections::{BTreeMap, BTreeSet};
 
 type Tables = BTreeMap<[u8; 4], TableChunk>;
@@ -19,12 +17,11 @@ pub(super) fn validate(tables: &Tables, map: &MapState) -> Result<(), WorldError
             b"LGRP" | b"LGRJ" => 65535,
             _ => u32::MAX,
         };
-        for (id, record) in table.records() {
+        for id in table.records().keys() {
             let path = format!("{}[{id}]", name(*chunk));
             if *id >= limit {
                 return Err(invalid(&path, "pool ID out of range"));
             }
-            validate_shapes(*chunk, table.schema(), record, &path)?;
         }
     }
     validate_variants(tables)?;
@@ -67,26 +64,6 @@ pub(super) fn validate(tables: &Tables, map: &MapState) -> Result<(), WorldError
         };
         if let Some((pool, id)) = object {
             require(tables, pool, id, &format!("map[{index}]"))?;
-        }
-    }
-    Ok(())
-}
-fn validate_shapes(
-    chunk: [u8; 4],
-    schema: &TableSchema,
-    row: &TableRecord,
-    path: &str,
-) -> Result<(), WorldError> {
-    for (field, value) in schema.fields().iter().zip(row.values()) {
-        let path = format!("{path}/{}", field.name());
-        cardinality(chunk, field.name(), value, &path)?;
-        if let WireValue::Structs(records) = value {
-            let child = field
-                .child()
-                .ok_or_else(|| invalid(&path, "missing child schema"))?;
-            for (index, record) in records.iter().enumerate() {
-                validate_shapes(chunk, child, record, &format!("{path}[{index}]"))?;
-            }
         }
     }
     Ok(())
@@ -202,7 +179,7 @@ fn validate_variants(tables: &Tables) -> Result<(), WorldError> {
         }
     }
     for (id, row) in rows(tables, *b"STNN")? {
-        let waypoint = row.unsigned("facilities")? & 0x40 != 0;
+        let waypoint = row.unsigned("facilities")? & super::WAYPOINT_FACILITY != 0;
         if row.child("normal")?.len() != usize::from(!waypoint)
             || row.child("waypoint")?.len() != usize::from(waypoint)
         {
@@ -219,42 +196,6 @@ fn validate_variants(tables: &Tables) -> Result<(), WorldError> {
                 "STNN/facilities",
                 "variant disagrees with base facilities",
             ));
-        }
-    }
-    Ok(())
-}
-
-fn cardinality(
-    chunk: [u8; 4],
-    field: &str,
-    value: &WireValue,
-    path: &str,
-) -> Result<(), WorldError> {
-    if let WireValue::Structs(rows) = value {
-        let singleton = matches!(
-            (&chunk, field),
-            (b"PLYR", "settings" | "cur_economy")
-                | (b"LGRJ", "linkgraph")
-                | (b"VEHS", "common")
-                | (b"STNN", "base")
-        );
-        if singleton && rows.len() != 1 {
-            return Err(invalid(path, "expected one structure"));
-        }
-        let maximum = match (&chunk, field) {
-            (
-                b"GLOG",
-                "mode" | "revision" | "oldver" | "setting" | "grfadd" | "grfrem" | "grfcompat"
-                | "grfparam" | "grfmove" | "grfbug" | "emergency",
-            ) => 1,
-            (b"STNN", "goods") => 64,
-            (b"INDY", "accepted" | "produced") => 16,
-            (b"PLYR", "liveries") => 23,
-            (b"PLYR", "old_economy") => 24,
-            _ => usize::MAX,
-        };
-        if rows.len() > maximum {
-            return Err(invalid(path, "too many nested records"));
         }
     }
     Ok(())

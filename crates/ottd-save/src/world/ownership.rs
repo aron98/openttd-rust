@@ -56,7 +56,7 @@ pub(super) fn restore_ownership(
     let mut used = BTreeSet::new();
     let mut storage = BTreeSet::new();
     for (id, row) in rows(tables, *b"STNN")? {
-        if row.unsigned("facilities")? & 0x40 != 0 {
+        if row.unsigned("facilities")? & super::WAYPOINT_FACILITY != 0 {
             continue;
         }
         let station = row.single("normal")?;

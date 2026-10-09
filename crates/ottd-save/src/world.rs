@@ -3,6 +3,7 @@ mod cargo;
 mod derived;
 mod edit;
 mod export;
+mod limits;
 mod orders;
 mod ownership;
 mod references;
@@ -19,6 +20,9 @@ pub use derived::{
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
+
+// station_type.h: StationFacility::Waypoint is bit 7; bit 6 is UI ghost state.
+const WAYPOINT_FACILITY: u64 = 1 << 7;
 
 /// A field name or a zero-based list position in an edit path.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -165,6 +169,7 @@ impl World {
                 return Err(invalid(required, "missing required chunk"));
             }
         }
+        limits::validate(&tables)?;
         let snapshot = save.snapshot()?;
         semantics::validate(&tables)?;
         references::validate(&tables, snapshot.map())?;

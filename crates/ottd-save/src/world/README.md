@@ -54,6 +54,12 @@ obsolete chunk names, duplicate chunks and missing current chunks reject.
 | Settings, world globals, schedules, counters and metadata | `PATS`, `DATE`, `SRND`, `ECMY`, `CHTS`, `ANIT`, `LGRS`, `IBLD`, `ITBL`, `CMDL`, `CMPU`, `VIEW`, `GLOG` |
 | Script configuration plus separately serialized state | `AIPL`, `GSDT` |
 
+The global handlers `ANIT`, `CHTS`, `DATE`, `VIEW`, `ECMY`, `IBLD`, `LGRS`,
+`MAPS`, `PATS` and `GSDT` accept at most one occupied table row, matching native
+`SlIterateArray` cardinality checks. Native loaders permit no row and ignore its
+index. This API preserves that behavior for the optional globals; its existing
+typed map/date/settings and script contracts require their index-zero record.
+
 All table fields, including metadata and future-gameplay values, decode to their
 exact primitive/recursive wire types. The structural runtime is an additional
 validated projection, not a claim that every saved scalar has gameplay behavior.

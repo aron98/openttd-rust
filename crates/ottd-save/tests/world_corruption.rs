@@ -140,3 +140,56 @@ fn roundtrips_extended_script_and_mod_state_without_execution() -> Result {
     }
     Ok(())
 }
+
+#[test]
+fn rejects_duplicate_global_records_like_native_loaders() -> Result {
+    let world = world()?;
+    let mut accepted = Vec::new();
+    for chunk in [
+        *b"ANIT", *b"CHTS", *b"DATE", *b"VIEW", *b"ECMY", *b"IBLD", *b"LGRS", *b"MAPS", *b"PATS",
+        *b"GSDT",
+    ] {
+        let mut save = world.to_savegame()?;
+        let mut table = world.tables().get(&chunk).ok_or("global table")?.clone();
+        let record = table
+            .records()
+            .values()
+            .next()
+            .ok_or("global record")?
+            .clone();
+        table.records_mut().insert(1, record);
+        save.replace_chunk(table.encode()?)?;
+        if World::decode(&save).is_ok() {
+            accepted.push(String::from_utf8_lossy(&chunk).into_owned());
+        }
+    }
+    assert!(
+        accepted.is_empty(),
+        "duplicate records accepted: {accepted:?}"
+    );
+    Ok(())
+}
+
+#[test]
+fn accepts_native_optional_global_empty_or_nonzero_slot() -> Result {
+    let world = world()?;
+    for chunk in [*b"ANIT", *b"CHTS", *b"VIEW", *b"ECMY", *b"IBLD", *b"LGRS"] {
+        for nonzero in [false, true] {
+            let mut save = world.to_savegame()?;
+            let mut table = world.tables().get(&chunk).ok_or("global table")?.clone();
+            let record = table
+                .records()
+                .values()
+                .next()
+                .ok_or("global record")?
+                .clone();
+            table.records_mut().clear();
+            if nonzero {
+                table.records_mut().insert(3, record);
+            }
+            save.replace_chunk(table.encode()?)?;
+            World::decode(&save)?;
+        }
+    }
+    Ok(())
+}

@@ -159,7 +159,7 @@ fn reference(
             schema: table.schema(),
             record,
         };
-        if station.unsigned("facilities")? & 0x40 != 0 {
+        if station.unsigned("facilities")? & super::WAYPOINT_FACILITY != 0 {
             return Err(invalid(path, "station reference points to waypoint"));
         }
     }

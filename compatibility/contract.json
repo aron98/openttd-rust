@@ -2050,7 +2050,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build.rs",
-      "sha256": "a69597363d56dc0274504df60b7a77dfe8faef6699219ea56aa25d163235bb80",
+      "sha256": "d506648d7d4670ddd73bb4c6fa51bfbafc24a18e2a36c361b1a729d57fa1e113",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2059,7 +2059,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-state-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build/state.rs",
-      "sha256": "2e433e991f65f93c842d8c85c00d8099d6115a240e335220345865782520e181",
+      "sha256": "a0e9c1c6894ed65d8aea126aaee26e9e16e4498dfd15a1ae1a615667a833fccb",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2095,7 +2095,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests.rs",
-      "sha256": "3c5e77e1bfa55f3ee430c6601f31173ccee504c8378f5ee5712c1a83e2a44c46",
+      "sha256": "37af43535bccbb9220d44aa3c5b9d6b171491b7e6a08763ad96843eb519a29ef",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2197,6 +2197,51 @@
       "sha256": "fa3518156480eb893c893b55d1993a5ef41d50ff33ba51c0397df70bcac431f9",
       "kind": "recipe",
       "provenance": "Exact Cargo test executable identity and actual invocation path/hash binding; full source manifest",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-planning-rs",
+      "path": "crates/ottd-sim/src/commands/vehicle_build/planning.rs",
+      "sha256": "4ec0e23d24baa2d0ef42689e60556e5d703c06480cd6cdc61f11689a98b6b002",
+      "kind": "recipe",
+      "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-fixture-rs",
+      "path": "crates/ottd-sim/src/runtime/purchase_tests/fixture.rs",
+      "sha256": "5aba91752d0bcbcccf30f1c10aaa331311f1f70d9c92d68580d736bd68078d4c",
+      "kind": "recipe",
+      "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-admission-rs",
+      "path": "crates/ottd-sim/src/runtime/purchase_tests/admission.rs",
+      "sha256": "e806345e4afbcfb723390853bb687595127bb2135511de5b4dfdedf1f7a9676c",
+      "kind": "recipe",
+      "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-constructor-rs",
+      "path": "crates/ottd-sim/src/runtime/purchase_tests/constructor.rs",
+      "sha256": "5b5dd03dc1521a2124fd00800f227b87a93473d2d02921887543cbcd9e78a020",
+      "kind": "recipe",
+      "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs",
+      "path": "crates/ottd-sim/src/runtime/purchase_tests/publication.rs",
+      "sha256": "bca54d3f3df52fb2d08a48d3628ad2abf2e79fca93a00a8e20e3769e49e7e49a",
+      "kind": "recipe",
+      "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
       "profile": null
     }
@@ -17627,7 +17672,12 @@
         "purchase-scripts-tests-test-purchase-evidence-py",
         "replay-clear-v362-sav",
         "reference-settings",
-        "purchase-scripts-purchase-provenance-py"
+        "purchase-scripts-purchase-provenance-py",
+        "purchase-crates-ottd-sim-src-commands-vehicle-build-planning-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-fixture-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-admission-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-constructor-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs"
       ],
       "source_refs": [
         "scripts/check-purchase.sh",

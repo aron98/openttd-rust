@@ -394,7 +394,25 @@ native test selectors; the full expanded purchase matrix still passes.
 Refits, articulated/modded vehicles, order
 backup restoration, sales and movement remain subsequent required work.
 
-The next parallel increments are depot allocation/infrastructure restoration
+### Depot runtime restoration
+
+`5c94483` adds original loader/depot observation hooks, and `bac7236` restores
+depot allocation metadata and all 63 road/tram infrastructure counters per
+company. The native matrix covers sparse depot IDs, all counter slots, road
+surfaces, ownership and both ends of bridges and tunnels across 428 vectors.
+The counter-only road-type fixtures restore the original registry and tiles;
+complete saved-state comparisons confirm that the probes leave no changes.
+They do not claim activated NewGRF road-type compatibility.
+
+Native comparison exposed a tunnel endpoint bug: height means the minimum of
+the four clamped tile corners. A shared corner reader now supplies both that
+query and the existing slope query. Integration passed 302 Rust tests, 22 Python
+tests, strict checks and the expanded foundation CI driver. Independent review
+approved both commits after another native 428-vector run and source audit.
+The observation hooks also preserve all 44 existing replay cases and metadata
+comparisons. Depot create/rotate/remove commands remain subsequent work.
+
+The next parallel increments are vehicle sales, depot create/rotate commands
 and NewGRF loading control. Loader control follows the original stage-major
 order, with explicit standalone-batch scope; baseline-dependent queries remain
 unsupported until their context is derived by the full Rust content loader.

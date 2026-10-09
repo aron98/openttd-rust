@@ -1,23 +1,11 @@
 #![expect(
     clippy::redundant_pub_crate,
-    reason = "Crate-private lexer types must also satisfy workspace unreachable_pub"
+    reason = "Crate-private lexer types must satisfy unreachable_pub"
 )]
-
 use crate::{CompileError, CompileErrorKind, Value};
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(crate) enum TokenKind {
-    Return,
-    Scalar(Value),
-    Symbol(u8),
-    End,
-}
-#[derive(Clone, Copy, Debug)]
-pub(crate) struct Token {
-    pub kind: TokenKind,
-    pub offset: usize,
-    pub newline: bool,
-}
+mod numbers;
+mod token;
+pub(crate) use token::{Token, TokenKind};
 pub(crate) struct Lexer<'a> {
     source: &'a str,
     position: usize,
@@ -41,7 +29,7 @@ impl<'a> Lexer<'a> {
             kind,
         }
     }
-    pub(super) fn next(&mut self) -> Result<Token, CompileError> {
+    pub(super) fn next(&mut self) -> Result<Token<'a>, CompileError> {
         let mut newline = false;
         while let Some(c) = self.peek() {
             if matches!(c, b' ' | b'\t' | b'\r' | b'\n') {
@@ -68,29 +56,36 @@ impl<'a> Lexer<'a> {
                 {
                     self.advance();
                 }
-                match self.source.get(offset..self.position) {
-                    Some("return") => TokenKind::Return,
-                    Some("null") => TokenKind::Scalar(Value::Null),
-                    Some("true") => TokenKind::Scalar(Value::Bool(true)),
-                    Some("false") => TokenKind::Scalar(Value::Bool(false)),
-                    _ => {
+                let name = self
+                    .source
+                    .get(offset..self.position)
+                    .ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
+                match name {
+                    "return" => TokenKind::Return,
+                    "local" => TokenKind::Local,
+                    "if" => TokenKind::If,
+                    "else" => TokenKind::Else,
+                    "while" => TokenKind::While,
+                    "break" => TokenKind::Break,
+                    "continue" => TokenKind::Continue,
+                    "null" => TokenKind::Scalar(Value::Null),
+                    "true" => TokenKind::Scalar(Value::Bool(true)),
+                    "false" => TokenKind::Scalar(Value::Bool(false)),
+                    "do" | "function" | "for" | "foreach" | "in" | "typeof" | "delegate"
+                    | "delete" | "try" | "catch" | "throw" | "clone" | "yield" | "resume"
+                    | "switch" | "case" | "default" | "this" | "parent" | "class" | "extends"
+                    | "constructor" | "instanceof" | "vargc" | "vargv" | "static" | "enum"
+                    | "const" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,
                         });
                     }
+                    _ => TokenKind::Identifier(name),
                 }
             }
-            b'+' | b'-' | b'*' | b'/' | b'%' | b'!' | b'~' | b'(' | b')' | b';' => {
-                self.advance();
-                if matches!(c, b'+' | b'-') && self.peek() == Some(c) {
-                    return Err(CompileError {
-                        offset,
-                        kind: CompileErrorKind::UnsupportedSyntax,
-                    });
-                }
-                TokenKind::Symbol(c)
-            }
+            b'+' | b'-' | b'*' | b'/' | b'%' | b'!' | b'~' | b'(' | b')' | b';' | b'{' | b'}'
+            | b',' | b'=' | b'<' | b'>' | b'&' | b'|' => self.symbol(c)?,
             _ => return Err(self.error(CompileErrorKind::UnsupportedSyntax)),
         };
         Ok(Token {
@@ -99,86 +94,34 @@ impl<'a> Lexer<'a> {
             newline,
         })
     }
-    fn number(&mut self) -> Result<Value, CompileError> {
-        let start = self.position;
-        let first = self.peek();
+    fn symbol(&mut self, first: u8) -> Result<TokenKind<'a>, CompileError> {
+        let offset = self.position;
         self.advance();
-        let radix = if first == Some(b'0') {
-            match self.peek() {
-                Some(b'x' | b'X') => {
-                    self.advance();
-                    Some(16)
-                }
-                Some(b'0'..=b'7') => Some(8),
-                _ => None,
+        let pair = (first, self.peek());
+        let combined = match pair {
+            (b'=', Some(b'=')) => Some(TokenKind::Equal),
+            (b'!', Some(b'=')) => Some(TokenKind::NotEqual),
+            (b'<', Some(b'=')) => Some(TokenKind::LessEqual),
+            (b'>', Some(b'=')) => Some(TokenKind::GreaterEqual),
+            (b'&', Some(b'&')) => Some(TokenKind::And),
+            (b'|', Some(b'|')) => Some(TokenKind::Or),
+            (b'+', Some(b'+' | b'='))
+            | (b'-', Some(b'-' | b'='))
+            | (b'*' | b'%', Some(b'='))
+            | (b'/', Some(b'/' | b'*' | b'=' | b'>'))
+            | (b'<', Some(b'<' | b'-' | b'/'))
+            | (b'>', Some(b'>'))
+            | (b'&' | b'|', _) => {
+                return Err(CompileError {
+                    offset,
+                    kind: CompileErrorKind::UnsupportedSyntax,
+                });
             }
-        } else {
-            None
+            _ => None,
         };
-        if let Some(radix) = radix {
-            let digits = self.position;
-            while self.peek().is_some_and(|b| {
-                if radix == 16 {
-                    b.is_ascii_hexdigit()
-                } else {
-                    (b'0'..=b'7').contains(&b)
-                }
-            }) {
-                self.advance();
-            }
-            if (radix == 8 && self.peek().is_some_and(|b| b.is_ascii_digit()))
-                || (radix == 16 && self.position.saturating_sub(digits) > 16)
-            {
-                return Err(self.error(CompileErrorKind::InvalidNumber));
-            }
-            let text = self
-                .source
-                .get(digits..self.position)
-                .ok_or_else(|| self.error(CompileErrorKind::InvalidNumber))?;
-            return Ok(integer(text, radix));
-        }
-        let mut float = false;
-        while let Some(c) = self.peek() {
-            match c {
-                b'0'..=b'9' => self.advance(),
-                b'.' => {
-                    float = true;
-                    self.advance();
-                }
-                b'e' | b'E' => {
-                    float = true;
-                    self.advance();
-                    if matches!(self.peek(), Some(b'+' | b'-')) {
-                        self.advance();
-                    }
-                    if !self.peek().is_some_and(|b| b.is_ascii_digit()) {
-                        return Err(self.error(CompileErrorKind::InvalidNumber));
-                    }
-                }
-                _ => break,
-            }
-        }
-        let text = self
-            .source
-            .get(start..self.position)
-            .ok_or_else(|| self.error(CompileErrorKind::InvalidNumber))?;
-        if float {
-            parse_float(text)
-                .map(Value::Float)
-                .ok_or_else(|| self.error(CompileErrorKind::InvalidNumber))
-        } else {
-            Ok(integer(text, 10))
-        }
+        combined.map_or(Ok(TokenKind::Symbol(first)), |token| {
+            self.advance();
+            Ok(token)
+        })
     }
-}
-fn integer(text: &str, radix: u32) -> Value {
-    let unsigned = u64::from_str_radix(text, radix).unwrap_or(0);
-    Value::Integer(i64::from_ne_bytes(unsigned.to_ne_bytes()))
-}
-#[expect(
-    clippy::cast_possible_truncation,
-    reason = "Native lexing uses strtod followed by an explicit SQFloat=f32 cast"
-)]
-fn parse_float(text: &str) -> Option<u32> {
-    text.parse::<f64>().ok().map(|n| (n as f32).to_bits())
 }

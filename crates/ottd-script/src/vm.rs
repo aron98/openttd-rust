@@ -112,6 +112,46 @@ impl<'a> Vm<'a> {
             .ok_or(VmError::InvalidBytecode)? = value;
         Ok(())
     }
+    fn jump(&mut self, offset: i32) -> Result<(), VmError> {
+        let offset = isize::try_from(offset).map_err(|_| VmError::InvalidBytecode)?;
+        let target = self
+            .ip
+            .checked_add_signed(offset)
+            .ok_or(VmError::InvalidBytecode)?;
+        if target >= self.program.instructions.len() {
+            return Err(VmError::InvalidBytecode);
+        }
+        self.ip = target;
+        Ok(())
+    }
+    fn scope_end(&mut self, instruction: Instruction) -> Result<(), VmError> {
+        let from = usize::from(instruction.arg0);
+        let count = instruction
+            .arg1
+            .checked_sub(i32::from(instruction.arg0))
+            .and_then(|n| n.checked_add(2))
+            .ok_or(VmError::InvalidBytecode)?;
+        if from == 0 || from > self.registers.len() {
+            return Err(VmError::InvalidBytecode);
+        }
+        // Nested-loop native last_stacksize may outlive inner local scopes.
+        // A nonpositive signed cleanup count performs no stores in the native loop.
+        if count <= 0 {
+            return Ok(());
+        }
+        let count = usize::try_from(count).map_err(|_| VmError::InvalidBytecode)?;
+        let end = from.checked_add(count).ok_or(VmError::InvalidBytecode)?;
+        if from == 0 {
+            return Err(VmError::InvalidBytecode);
+        }
+        if end <= self.registers.len() {
+            self.registers
+                .get_mut(from..end)
+                .ok_or(VmError::InvalidBytecode)?
+                .fill(Value::Null);
+        }
+        Ok(())
+    }
     fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
             0x01 => self.literal(i.arg1)?,
@@ -122,6 +162,46 @@ impl<'a> Vm<'a> {
                 let second = self.literal(i32::from(i.arg3))?;
                 self.write(i.arg0, first)?;
                 self.write(i.arg2, second)?;
+                return Ok(None);
+            }
+            0x0a => self.register(i.arg1)?,
+            0x0f | 0x10 => {
+                let right = if i.arg3 == 0 {
+                    self.register(i.arg1)?
+                } else {
+                    self.literal(i.arg1)?
+                };
+                let equal = self.register(i32::from(i.arg2))?.equal(right)?;
+                Value::Bool(if i.opcode == 0x0f { equal } else { !equal })
+            }
+            0x17 => {
+                self.write(i.arg0, self.register(i.arg1)?)?;
+                self.write(i.arg2, self.register(i32::from(i.arg3))?)?;
+                return Ok(None);
+            }
+            0x18 => {
+                self.jump(i.arg1)?;
+                return Ok(None);
+            }
+            0x1a => {
+                if self.register(i32::from(i.arg0))?.is_false() {
+                    self.jump(i.arg1)?;
+                }
+                return Ok(None);
+            }
+            0x28 => self
+                .register(i32::from(i.arg2))?
+                .compare(self.register(i.arg1)?, i.arg3)?,
+            0x2b | 0x2c => {
+                let source = self.register(i32::from(i.arg2))?;
+                if source.is_false() == (i.opcode == 0x2b) {
+                    self.write(i.arg0, source)?;
+                    self.jump(i.arg1)?;
+                }
+                return Ok(None);
+            }
+            0x3d => {
+                self.scope_end(i)?;
                 return Ok(None);
             }
             0x11 => self
@@ -160,3 +240,6 @@ impl<'a> Vm<'a> {
         Ok(None)
     }
 }
+
+#[cfg(test)]
+mod tests;

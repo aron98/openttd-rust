@@ -256,3 +256,47 @@ fn line_feed_ends_return_when_preceded_by_carriage_return() -> Result<(), Box<dy
     assert_eq!(result, Execution::Returned(Value::Null));
     Ok(())
 }
+
+#[test]
+fn assignment_preserves_native_aliasing_when_rhs_changes_local()
+-> Result<(), Box<dyn std::error::Error>> {
+    // Given: the native left operand remains a reference to local a.
+    let program = compile("local a=1,b=2; return a+(a=b);")?;
+    // When: assignment changes a before arithmetic reads it.
+    let result = Vm::new(&program)?.resume(100)?;
+    // Then: both reads observe two, matching the native probe.
+    assert_eq!(result, Execution::Returned(Value::Integer(4)));
+    Ok(())
+}
+
+#[test]
+fn loop_resumes_when_credit_runs_out_between_branches() -> Result<(), Box<dyn std::error::Error>> {
+    // Given: the pinned native while-sum probe.
+    let program = compile("local n=0,total=0; while(n<4) { total=total+n; n=n+1; } return total;")?;
+    let mut vm = Vm::new(&program)?;
+    // When: separate credits fund one persistent frame.
+    let mut trace = Vec::new();
+    for credit in [0, 1, 2, 3, 5, 10, 100] {
+        trace.push((
+            vm.resume(credit)?,
+            vm.remaining_ops(),
+            vm.instruction_pointer(),
+        ));
+    }
+    // Then: native suspension positions and operation debt are preserved.
+    assert_eq!(
+        trace,
+        vec![
+            (Execution::Suspended, -1, 0),
+            (Execution::Suspended, -1, 0),
+            (Execution::Suspended, 0, 0),
+            (Execution::Suspended, 0, 2),
+            (Execution::Suspended, 0, 6),
+            (Execution::Suspended, 0, 7),
+            (Execution::Returned(Value::Integer(6)), 77, 11)
+        ]
+    );
+    Ok(())
+}
+
+mod branches;

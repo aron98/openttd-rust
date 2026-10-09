@@ -27,6 +27,8 @@ int main(int argc, char **argv){
  if(argc < 2) return 64;
  std::ifstream input(argv[1],std::ios::binary); if(!input) return 66;
  std::string source((std::istreambuf_iterator<char>(input)),{});
+ const bool frames=argc>2 && std::string_view(argv[2])=="--frames";
+ const int first_credit=frames?3:2;
  auto v=sq_open(256);
  static_assert(sizeof(SQInteger)==8 && sizeof(SQFloat)==4);
 #if defined(SQUSEDOUBLE) || defined(NO_GARBAGE_COLLECTOR)
@@ -45,14 +47,17 @@ int main(int argc, char **argv){
  sq_pushroottable(v);
  SQObjectPtr result;
  v->_can_suspend=true;
- v->_ops_till_suspend=argc>2?std::stoll(argv[2]):10000;
+ v->_ops_till_suspend=argc>first_credit?std::stoll(argv[first_credit]):10000;
  bool ok=v->Call(closure,1,v->_top-1,result,SQFalse,SQTrue);
  for(int step=0;;++step){
   if(!ok){std::cout<<"runtime_error "<<v->_ops_till_suspend<<'\n';std::cerr<<_stringval(v->_lasterror)<<'\n';break;}
   if(!v->_suspended){std::cout<<"return "<<v->_ops_till_suspend<<' ';value(result);break;}
   std::cout<<"suspend "<<v->_ops_till_suspend<<' '<<(v->ci->_ip-proto->_instructions)<<'\n';
-  if(step+3>=argc) break;
-  v->_ops_till_suspend+=std::stoll(argv[step+3]);
+  if(frames) for(SQInteger slot=1;slot<proto->_stacksize;++slot){
+   std::cout<<"frame "<<slot<<' '; value(v->GetAt(v->_stackbase+slot));
+  }
+  if(step+first_credit+1>=argc) break;
+  v->_ops_till_suspend+=std::stoll(argv[step+first_credit+1]);
   ok=v->Execute(_null_,v->_top,-1,-1,result,SQFalse,SQVM::ET_RESUME_OPENTTD);
  }
  }

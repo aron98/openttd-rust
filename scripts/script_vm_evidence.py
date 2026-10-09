@@ -6,10 +6,13 @@
 # Run: python3 -m scripts.script_vm_evidence ARTIFACT_DIRECTORY
 """Exact scalar VM observations, execution and source admission."""
 
-import re
 import sys
 from pathlib import Path
 
+from scripts.script_vm_observation import (
+    compare_observation,
+    require_tests,
+)
 from scripts.script_vm_provenance import (
     archive_files,
     digest,
@@ -20,6 +23,16 @@ from scripts.script_vm_provenance import (
 )
 from scripts.world_check_support import ROOT, WorldCheckError, at, read_json
 
+__all__ = (
+    "CONTROLS",
+    "MANIFEST",
+    "compare_observation",
+    "package",
+    "require_paths",
+    "require_tests",
+    "validate",
+)
+
 CONTROLS = {
     "value": ("integer 25", "integer 26"),
     "opcode": ("op 17 1 2 1 43", "op 17 1 2 1 45"),
@@ -27,32 +40,6 @@ CONTROLS = {
     "debt": ("suspend -1 0", "suspend 0 0"),
 }
 MANIFEST = ROOT / "scripts/script-vm-manifest.json"
-
-
-def require_tests(output: str, names: tuple[str, ...] | list[str]) -> None:
-    actual = re.findall(r"^test (\S+) \.\.\. ok$", output, re.MULTILINE)
-    summaries = re.findall(
-        r"^test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored;",
-        output,
-        re.MULTILINE,
-    )
-    if sorted(actual) != sorted(names) or summaries != [(str(len(names)), "0", "0")]:
-        raise WorldCheckError("VM tests did not execute exact membership")
-
-
-def compare_observation(native: str, rust: str, stage: str) -> None:
-    if not native.strip() or native != rust:
-        raise WorldCheckError("VM observation differs or is empty")
-    lines = native.splitlines()
-    if lines[-1].split()[0] != stage:
-        raise WorldCheckError("VM outcome stage differs")
-    if stage == "compile_error":
-        if lines != ["compile_error"]:
-            raise WorldCheckError("Invalid compile failure observation")
-    elif not lines[0].startswith("stack ") or not any(
-        line.startswith("op ") for line in lines
-    ):
-        raise WorldCheckError("Missing compiled scalar instructions")
 
 
 def require_paths(
@@ -218,12 +205,18 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
             str(Path(origin) / changed.relative_to(directory)),
         ]:
             raise WorldCheckError("VM corruption was not compared")
+    from scripts.script_vm_branches import validate_branches
+
+    validate_branches(directory)
     if read_json(directory / "summary.json") != {
-        "cases": 414,
-        "fixtures": 46,
+        "cases": 2014,
+        "fixtures": 222,
         "credits": 9,
-        "tests": 16,
-        "controls": 4,
+        "tests": 26,
+        "controls": 10,
+        "frame_tests": 3,
+        "native_frames": 3,
+        "branch_budget_cases": 16,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

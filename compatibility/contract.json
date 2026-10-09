@@ -2995,7 +2995,7 @@
     {
       "id": "scalar-vm-driver",
       "path": "scripts/check-script-vm.py",
-      "sha256": "5450b0fca6e70ac4512beb1db9a0621aed579446bafa6592930e5417a0c3626b",
+      "sha256": "a95560079e68bd6793c54838d1d7b88e006d4632d60f8f5c9ce1d0d23132b5fe",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3004,7 +3004,7 @@
     {
       "id": "scalar-vm-validator",
       "path": "scripts/script_vm_evidence.py",
-      "sha256": "7b85eb16028cb6ee623dbd1ab73c1ba5450aae17ec55cd3e567deb385c123ce6",
+      "sha256": "8cbf420c9b3b91554246fff02d1a2f432b6d19040370056e907f478205535b6c",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3013,7 +3013,7 @@
     {
       "id": "scalar-vm-provenance",
       "path": "scripts/script_vm_provenance.py",
-      "sha256": "a0d783c5d5e0f61170578e8e6ce04e63e61b75325b53be4efef65c67d311b593",
+      "sha256": "8fd234772fb473e4e329abba9cd19b16938f8b128899f4f76c464875c2bb7239",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "454f251651c6898b8c31f59b55c295ac0a6d720be331104a66a01139c9519473",
+      "sha256": "c5a8ba500166cc883d25323278622647de2fbdb2c8f15126a798c17d5512aa7b",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -9458,7 +9458,7 @@
         "zero-tests/stdout.log",
         "native/variant.txt"
       ],
-      "success_text": "PASS scalar VM 414 comparisons",
+      "success_text": "PASS scalar VM 2014 comparisons",
       "scopes": [
         "rust_behavior"
       ],
@@ -13806,8 +13806,8 @@
       "id": "script.scalar-vm",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Initial scalar source grammar and11/62bundled Squirrel opcodes; i64/f32/GC-enabled variant. No locals/control flow/objects/host APIs/AI/GS/saved-script integration. Signed overflow is deliberately unsupported, not parity.",
-      "expected": "Fresh pinned native build and actual Cargo example:46fixtures x9credit sequences=414strict observations of instructions/literals/raw scalar bits/IP/debt/results/error stage;16exact tests and4corruption controls. Manifest pins all source/fixture/native blobs and complete raw evidence paths; archive hashes and executable identities verified.",
+      "domain": "Scalar locals/assignment/if/while/break/continue/comparisons/short-circuit and21/62bundled Squirrel opcodes; i64/f32/GC-enabled variant. No binary bitwise/shifts/objects/functions/host APIs/AI/GS/saved-script integration. Signed arithmetic overflow remains unsupported.",
+      "expected": "Fresh pinned native compiler/VM versus actual Cargo example:222fixtures x9credit sequences plus16targeted budget probes=2014strict comparisons;26exact integration tests,3private register tests bound to3fresh native frame captures,10corruption controls. Previous46fixtures/16tests retained. Manifest pins all source/native blobs and complete raw evidence; archives/executables verified.",
       "driver": "script-vm",
       "assets": [
         "scalar-vm-driver",

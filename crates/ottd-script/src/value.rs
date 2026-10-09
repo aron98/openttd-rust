@@ -1,3 +1,5 @@
+mod comparison;
+
 use crate::VmError;
 
 /// Scalar value; float bits preserve negative zero and nonfinite payloads.

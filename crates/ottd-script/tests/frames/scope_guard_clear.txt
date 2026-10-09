@@ -1,0 +1,33 @@
+stack 5
+op 2 1 1 0 0
+op 2 2 2 0 0
+op 61 2 3 0 0
+op 2 2 3 0 0
+op 2 3 4 0 0
+op 17 2 3 2 43
+op 2 3 5 0 0
+op 2 4 6 0 0
+op 17 3 4 3 43
+op 17 2 3 2 42
+op 2 3 7 0 0
+op 2 4 8 0 0
+op 17 3 4 3 43
+op 17 2 3 2 42
+op 19 1 2 0 0
+op 19 255 0 0 0
+suspend 0 2
+frame 1 integer 1
+frame 2 integer 2
+frame 3 null
+frame 4 null
+suspend 0 3
+frame 1 integer 1
+frame 2 null
+frame 3 null
+frame 4 null
+suspend 0 4
+frame 1 integer 1
+frame 2 integer 3
+frame 3 null
+frame 4 null
+return 89 integer 1155

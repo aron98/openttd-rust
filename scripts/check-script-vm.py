@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.gameplay_foundations import FoundationRun
+from scripts.script_vm_branches import finish_branches, run_branches
 from scripts.script_vm_evidence import (
     CONTROLS,
     MANIFEST,
@@ -140,7 +141,9 @@ def main() -> None:
         target = directory / "changed.stdout"
         _ = target.write_text(base.read_text().replace(old, new))
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
+    branch_tests = run_branches(builder, rust)
     verify_sources(ROOT, native, spec)
+    finish_branches(output, branch_tests)
     write_json(
         output / "identity-after.json",
         {
@@ -157,16 +160,19 @@ def main() -> None:
     write_json(
         output / "summary.json",
         {
-            "cases": 414,
-            "fixtures": 46,
+            "cases": 2014,
+            "fixtures": 222,
             "credits": 9,
-            "tests": 16,
-            "controls": 4,
+            "tests": 26,
+            "controls": 10,
+            "frame_tests": 3,
+            "native_frames": 3,
+            "branch_budget_cases": 16,
             "passed": True,
         },
     )
     package(output)
-    print("PASS scalar VM 414 comparisons", flush=True)
+    print("PASS scalar VM 2014 comparisons", flush=True)
 
 
 if __name__ == "__main__":

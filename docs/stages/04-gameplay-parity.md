@@ -360,7 +360,8 @@ renamed terrain test could silently execute zero tests. `9edc1bf` requires exact
 test execution; the reviewer's actual zero-test dispatcher probe now fails and
 the normal driver passes. `4e2fcfe` gives the service CLI a typed argument
 boundary; the exact scoped type check now reports no warnings. Fresh independent
-review of these corrections is pending.
+review approved both corrections with no findings, reproducing the real negative
+probe, normal foundation run and all 475 service process receipts.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

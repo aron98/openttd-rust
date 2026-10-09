@@ -78,6 +78,12 @@ fn project(bytes: &[u8], trace: bool) -> Result<Value> {
     }
     Ok(value)
 }
+fn compare(native: &Value, rust: &Value) -> Result {
+    if native != rust {
+        return Err("native scan mismatch".into());
+    }
+    Ok(())
+}
 fn run(root: &Path, directory: &Path, bytes: &[u8], trace: bool) -> Result {
     std::fs::create_dir(directory)?;
     let input = directory.join("input.grf");
@@ -107,13 +113,11 @@ fn run(root: &Path, directory: &Path, bytes: &[u8], trace: bool) -> Result {
         serde_json::from_slice(&std::fs::read(directory.join("native/scan.json"))?)?;
     let rust = project(bytes, trace)?;
     std::fs::write(directory.join("rust.json"), serde_json::to_vec(&rust)?)?;
-    if native != rust {
-        return Err(format!("native scan mismatch: {}", directory.display()).into());
-    }
+    compare(&native, &rust).map_err(|error| format!("{error}: {}", directory.display()))?;
     for key in ["grfid", "status", "accepted"] {
         let mut wrong = rust.clone();
         *wrong.get_mut(key).ok_or("negative field")? = json!("deliberate wrong value");
-        assert_ne!(wrong, native);
+        assert!(compare(&native, &wrong).is_err());
         std::fs::write(
             directory.join(format!("negative-{key}.json")),
             serde_json::to_vec(&wrong)?,
@@ -126,7 +130,7 @@ fn run(root: &Path, directory: &Path, bytes: &[u8], trace: bool) -> Result {
         let mut wrong = rust.clone();
         if let Some(field) = wrong.pointer_mut(pointer) {
             *field = json!("deliberate wrong value");
-            assert_ne!(wrong, native);
+            assert!(compare(&native, &wrong).is_err());
             std::fs::write(
                 directory.join(format!("negative-{name}.json")),
                 serde_json::to_vec(&wrong)?,

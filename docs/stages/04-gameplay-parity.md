@@ -299,9 +299,15 @@ boundary probes. It retains compressed physical spans, sprite variants,
 native checksum extent, raw Action8 metadata and skip-handler behavior.
 Comparator controls were strengthened in `7abb45d` and all 64 cases rerun.
 
-Action14 metadata is the next increment: ordered recursive nodes, localized
-text, parameter masks/defaults/ranges, version and palette rules, and original
-text-code translation. Loading passes, properties, spritegroups, callbacks,
+Action14 metadata now has ordered recursive nodes, localized text, parameter
+masks/defaults/ranges, version and palette rules, and original text-code
+translation. Its fresh-config native matrix covers 1,720 scans, 2,446 direct
+translations and 17,200 compatibility decisions, with 11,456 altered-observation
+controls. The integrated Rust tree passed 280 tests and strict workspace Clippy;
+the actual metadata CI dispatcher and its archived control evidence passed.
+Independent review is pending. This increment assumes fresh language/string
+registries; later loading must supply the populated registry context.
+Loading passes, properties, spritegroups, callbacks,
 modded runtime restoration and Squirrel execution remain required. Parsing
 files does not activate content or satisfy the broad `content.newgrf` gate.
 
@@ -336,7 +342,25 @@ overlay; it must preserve the original's distinct NoTest semantics.
 The LevelLand increment `b0720d5` passed 262 isolated workspace tests and all
 44 replay cases, including 15 new LevelLand cases, controls, save/resume and
 original continuation. All 5,689 required replay evidence paths were present.
-Independent review is in progress; this does not close construction parity.
+Independent review approved the increment with no findings, including additional
+native boundary probes; this does not close construction parity.
+
+### Road service and native CI admission
+
+The service-interval command in `ceca244` preserves original owner/error order,
+percent/calendar/wallclock bounds, company defaults and flag updates. Its ten
+native scenarios cover 88 command actions, complete saved/derived comparisons,
+original reloads and split/resume, with five comparator controls and 475 process
+receipts. The owned runtime admits this cache-independent mutation. Vehicle
+construction, movement and actual servicing remain separate requirements.
+
+Dedicated foundation and service drivers now run their native matrices in
+pull-request CI. Independent review passed service semantics but found that a
+renamed terrain test could silently execute zero tests. `9edc1bf` requires exact
+test execution; the reviewer's actual zero-test dispatcher probe now fails and
+the normal driver passes. `4e2fcfe` gives the service CLI a typed argument
+boundary; the exact scoped type check now reports no warnings. Fresh independent
+review of these corrections is pending.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

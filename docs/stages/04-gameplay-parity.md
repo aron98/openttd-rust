@@ -305,8 +305,10 @@ translation. Its fresh-config native matrix covers 1,720 scans, 2,446 direct
 translations and 17,200 compatibility decisions, with 11,456 altered-observation
 controls. The integrated Rust tree passed 280 tests and strict workspace Clippy;
 the actual metadata CI dispatcher and its archived control evidence passed.
-Independent review is pending. This increment assumes fresh language/string
-registries; later loading must supply the populated registry context.
+Independent review approved the increment with no findings, including another
+1,792 mixed text comparisons and the unchanged 64-case native scanner matrix.
+This increment assumes fresh language/string registries; later loading must
+supply the populated registry context.
 Loading passes, properties, spritegroups, callbacks,
 modded runtime restoration and Squirrel execution remain required. Parsing
 files does not activate content or satisfy the broad `content.newgrf` gate.

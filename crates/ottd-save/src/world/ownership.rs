@@ -35,13 +35,16 @@ pub(super) fn restore_groups(tables: &Tables, state: &mut DerivedState) -> Resul
         }
         finished.extend(branch);
     }
+    let mut children: BTreeMap<u32, Vec<u32>> = BTreeMap::new();
+    for (child, parent) in &parents {
+        if let Some(parent) = parent {
+            children.entry(*parent).or_default().push(*child);
+        }
+    }
     for id in groups.keys() {
         state.groups.push(GroupChildren {
             id: *id,
-            children: parents
-                .iter()
-                .filter_map(|(child, parent)| (*parent == Some(*id)).then_some(*child))
-                .collect(),
+            children: children.remove(id).unwrap_or_default(),
         });
     }
     Ok(())

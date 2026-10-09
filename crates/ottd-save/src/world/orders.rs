@@ -9,11 +9,14 @@ pub(super) fn restore_orders(
     previous_shared: &BTreeMap<u32, u32>,
     state: &mut DerivedState,
 ) -> Result<(), WorldError> {
+    let mut membership: BTreeMap<u32, Vec<u32>> = BTreeMap::new();
+    for (vehicle, list) in order_ids {
+        if let Some(list) = list {
+            membership.entry(*list).or_default().push(*vehicle);
+        }
+    }
     for (id, row) in rows(tables, *b"ORDL")? {
-        let members: Vec<_> = order_ids
-            .iter()
-            .filter_map(|(vehicle, list)| (*list == Some(id)).then_some(*vehicle))
-            .collect();
+        let members = membership.remove(&id).unwrap_or_default();
         let roots: Vec<_> = members
             .iter()
             .filter(|id| !previous_shared.contains_key(id))

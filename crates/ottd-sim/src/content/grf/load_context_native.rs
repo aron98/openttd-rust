@@ -342,8 +342,15 @@ fn input_save(root: &Path, directory: &Path, case: &matrix::Case) -> Result<Path
         .args(["-DINPUT=GENERATE", "-DTICKS=1", "-P"])
         .arg(root.join("scripts/run-reference.cmake"))
         .output()?;
-    std::fs::write(directory.join("generation-stdout.log"), &output.stdout)?;
-    std::fs::write(directory.join("generation-stderr.log"), &output.stderr)?;
+    std::fs::create_dir(directory.join("generation-command"))?;
+    std::fs::write(
+        directory.join("generation-command/stdout.log"),
+        &output.stdout,
+    )?;
+    std::fs::write(
+        directory.join("generation-command/stderr.log"),
+        &output.stderr,
+    )?;
     if !output.status.success() {
         return Err("native map generation failed".into());
     }
@@ -379,8 +386,9 @@ fn original_loader_context_matrix() -> Result {
         .into());
     }
     std::fs::create_dir(&directory)?;
-    std::fs::write(directory.join("freshness-stdout.log"), &freshness.stdout)?;
-    std::fs::write(directory.join("freshness-stderr.log"), &freshness.stderr)?;
+    std::fs::create_dir(directory.join("freshness"))?;
+    std::fs::write(directory.join("freshness/stdout.log"), &freshness.stdout)?;
+    std::fs::write(directory.join("freshness/stderr.log"), &freshness.stderr)?;
     std::fs::copy(
         std::env::current_exe()?,
         directory.join("context-test-binary"),

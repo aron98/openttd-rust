@@ -26,7 +26,8 @@ else
     git -C "$source_dir" apply --reverse --check "$root/reference/replay.patch"
 fi
 # Compare tracked source with precisely HEAD plus our patch, without changing its index.
-if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_load_context.patch" 2>/dev/null; then
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch" 2>/dev/null &&
+   ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_load_context.patch" 2>/dev/null; then
     if git -C "$source_dir" apply --check "$root/reference/grf_load_control.patch" 2>/dev/null; then
         git -C "$source_dir" apply "$root/reference/grf_load_control.patch"
     else
@@ -39,11 +40,16 @@ if git -C "$source_dir" apply --check "$root/reference/road_slope.patch" 2>/dev/
 else
     git -C "$source_dir" apply --reverse --check "$root/reference/road_slope.patch"
 fi
+if git -C "$source_dir" apply --check "$root/reference/grf_safety.patch" 2>/dev/null; then
+    git -C "$source_dir" apply "$root/reference/grf_safety.patch"
+else
+    git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch"
+fi
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 copy_header() {
     if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
@@ -52,6 +58,7 @@ copy_header reference/replay_hooks.hpp "$source_dir/src/reference_replay_hooks.h
 copy_header reference/grf_load_control.hpp "$source_dir/src/reference_grf_load_control.hpp"
 copy_header reference/grf_load_context.hpp "$source_dir/src/reference_grf_load_context.hpp"
 copy_header reference/road_slope.hpp "$source_dir/src/reference_road_slope.hpp"
+copy_header reference/grf_safety.hpp "$source_dir/src/reference_grf_safety.hpp"
 for header in replay replay_cost replay_commands replay_fixture; do
     copy_header "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
 done

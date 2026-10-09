@@ -18,6 +18,7 @@
 #include <cstdio>
 
 namespace ReferenceRoadSlope { nlohmann::json Probe(); }
+namespace ReferenceGrfSafety { void Observe(); }
 
 namespace ReferenceWorld {
 struct CargoAccess {
@@ -65,6 +66,7 @@ inline void AfterLoad()
     ReferenceRuntimeRoad::Observe();
     ReferenceGrfScan::Observe();
     ReferenceGrfMetadata::Observe();
+    ReferenceGrfSafety::Observe();
     ReferenceDepotRuntime::Observe();
     if (const char *road_slope_path = std::getenv("OTTD_ROAD_SLOPE_PATH"); road_slope_path != nullptr && _game_mode != GM_MENU) {
         if (std::ifstream(road_slope_path).good()) throw std::runtime_error("Road slope observation already exists");

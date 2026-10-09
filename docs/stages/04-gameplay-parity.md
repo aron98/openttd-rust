@@ -434,13 +434,15 @@ aliases, labels, conditional jumps, parameters and persistent byte overrides.
 Source, record visits, labels, override work and emitted trace storage have
 explicit cumulative limits; host limits never become native disabled results.
 
-The original-engine matrix matches 247 case identities, 8,673 events, 6,697
-configured record decisions and 1,293 final configurations. Its actual
-comparator rejects 4,746 altered observations. The dedicated CI driver checks
+The corrected original-engine matrix matches 248 case identities, 9,711 events,
+7,727 configured record decisions and 1,549 final configurations. Its actual
+comparator rejects 4,766 altered observations. The dedicated CI driver checks
 complete case membership, actual test-executable identities, source hashes,
-5,083 retained raw/archive files and real stale/reused/zero-test/subset guards.
-Integration passed 318 Rust tests, nine new Python validator tests, strict
-Clippy, formatting and typing. Independent review is pending.
+5,353 retained raw/archive files and real stale/reused/zero-test/subset guards.
+Independent review found that maximum-file rejection must preserve labels on
+an earlier file with the same filename. `a73999c` fixes that native divergence;
+a fresh reviewer approved the correction after executing the counterexample,
+focused tests and complete evidence audit.
 
 The native oracle executes its original baseline files. Rust independently
 scans their actual source identities and rejects queries that need their
@@ -449,8 +451,62 @@ This control profile cannot yet publish a gameplay content catalog. Actual
 baseline sprite/group/language handlers, properties and finalization, callback
 execution and content-dependent restoration remain required next work.
 
-The next parallel increments are vehicle sale CI, depot create/rotate commands
-and the remaining content load context. None closes a broad stage requirement.
+### Road sales and depot creation
+
+`cd7f904` implements sale of supported fresh, stopped, single-part vanilla road
+vehicles, with transactional saved removal, pool/unit reuse and survivor cache
+preservation. All/default group and engine counts derive from authoritative
+records. Order backups, shared orders, cargo destruction, aged/group profit
+and renewal lifecycle remain explicit unsupported dependencies.
+
+The native sale matrix covers 22 cases, 571 commands and 370 executions across
+88 engines, with 26 corruption controls and 4,542 archived matrix files. Its
+native uninitialized-duration exception is bound to successful build/sale
+incarnations and occupied IDs. Reuse cannot inherit eligibility from a loaded
+vehicle; Rust fresh values must be zero. Loaded fields, other state, receipts,
+self-decode and original reload comparisons remain strict.
+
+`c92868e` creates and rotates vanilla road depots on supported clear terrain.
+It preserves native validation and cost precedence, including nested failure
+expense/foundation cost, naming holes and maximum-ground-corner occupancy.
+Tile and depot insertion validate together before allocation and infrastructure
+publication. `9df6b13` adds the complete native CI driver: 178 scenarios,
+676 commands, 201 executions, seven corruption controls, original reload and
+split/resume, with 49,998 archived files and 182 actual test bindings.
+
+The combined product passed 333 workspace tests, strict Clippy/formatting and
+20 focused Python tests. Independent review approved exact `9df6b13`, audited
+complete source/executable/raw evidence, revalidated all saved/live/receipt
+comparisons and ran five fresh native cases. Linux PR CI for this revision is
+separate from that local approval. Depot removal, broader clearing/occupancy,
+orders/destructors and vehicle movement remain required.
+
+### Loading context and occupancy witnesses
+
+`ff4226c` adds test-only original loader-context and road-ground observers;
+production Rust never delegates gameplay to them. `ebf0e49` supplies typed
+saved clocks/settings to the existing private loader executor, including
+network normalization/restoration, globals, patch flags and special targets.
+Public control-profile admission remains bounded until actual baseline,
+specification, resource allocation, language/error/safety and callback handlers
+are complete.
+
+The integrated private context matches 66 original cases, 67,828 events,
+67,300 decisions and 121 configurations. Its comparators reject 1,980 altered
+context fields and 66 altered traces; 18 actual host-refusal controls pass.
+Host date-domain admission errors remain distinct from native GRF disabling.
+`8b1132c` separately checks four original road occupancy cutoffs on valid flat
+and sloped sources, with complete saved/live/reload and hash-order restoration
+and an actual corrupted-result rejection. This does not admit arbitrary
+above-ground saved vehicles or mixed vehicle families.
+
+The combined source passed 346 workspace tests, strict checks and direct
+66/18/4 native executions. The new original observer also passed all 44 existing
+replays and the 428-vector depot regression. Independent review and dedicated
+CI admission for these new witnesses are pending. Executable Squirrel
+compiler/VM foundations are being developed in parallel; unchanged AI/GS,
+host APIs and complete script scheduling/persistence remain open. None of
+these increments closes a broad stage requirement.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

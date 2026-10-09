@@ -209,13 +209,13 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
 
     validate_branches(directory)
     if read_json(directory / "summary.json") != {
-        "cases": 2014,
-        "fixtures": 222,
+        "cases": 3058,
+        "fixtures": 338,
         "credits": 9,
-        "tests": 26,
-        "controls": 10,
-        "frame_tests": 3,
-        "native_frames": 3,
+        "tests": 30,
+        "controls": 11,
+        "frame_tests": 4,
+        "native_frames": 4,
         "branch_budget_cases": 16,
         "passed": True,
     }:

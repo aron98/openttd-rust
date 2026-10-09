@@ -20,9 +20,11 @@ FRAME_TESTS = (
     "vm::tests::scope_clear_matches_native_frames",
     "vm::tests::scope_noop_matches_native_frames",
     "vm::tests::local_alias_matches_native_frames",
+    "vm::tests::expression_assignment_matches_native_frames",
 )
-FRAMES = ("scope_guard_clear", "scope_guard_noop", "local_alias")
+FRAMES = ("scope_guard_clear", "scope_guard_noop", "local_alias", "expstate_target")
 FRAME_CREDITS = (3, 2, 2, 100)
+FRAME_SCHEDULES = {"expstate_target": (3, 2, 2, 2, 2, 100)}
 BUDGETS = (
     ("while_sum", (0,), "suspend"),
     ("while_sum", (1,), "suspend"),
@@ -43,6 +45,7 @@ BUDGETS = (
 )
 # Each target is actual retained native output, compared with a deliberately wrong record.
 BRANCH_CONTROLS = {
+    "assignment": ("expstate_target", "op 10 3 4 0 0", "op 10 1 4 0 0"),
     "jump": ("while_sum", "op 24 0 -8 0 0", "op 24 0 -7 0 0"),
     "polarity": ("if_true", "op 26 ", "op 25 "),
     "local": ("dmove", "op 23 3 1 4 2", "op 23 3 1 4 1"),
@@ -77,7 +80,12 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
     for name in FRAMES:
         source = output / "inputs" / f"branch_{name}.nut"
         observed = run(
-            [str(builder.oracle), str(source), "--frames", *map(str, FRAME_CREDITS)],
+            [
+                str(builder.oracle),
+                str(source),
+                "--frames",
+                *map(str, FRAME_SCHEDULES.get(name, FRAME_CREDITS)),
+            ],
             output / "frames" / name,
         )
         if (
@@ -156,7 +164,7 @@ def validate_branches(directory: Path) -> None:
             native,
             str(origin / "inputs" / f"branch_{name}.nut"),
             "--frames",
-            *map(str, FRAME_CREDITS),
+            *map(str, FRAME_SCHEDULES.get(name, FRAME_CREDITS)),
         ]
         if (
             read_json(destination / "argv.json") != argv

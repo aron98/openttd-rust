@@ -1,16 +1,28 @@
 //! Scalar expression lowering with native local aliasing and precedence.
 use super::{Compiler, Register};
 use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+/// One native PushExpState/PopExpState lifetime, owned by a recursive expression.
+/// Operators share this state; parenthesized expressions create a separate owner.
+#[derive(Default)]
+pub(super) struct ExpressionState {
+    dereference: Option<Register>,
+}
 impl Compiler<'_> {
-    pub(super) fn expression(&mut self, depth: u8) -> Result<Option<Register>, CompileError> {
+    pub(super) fn expression(&mut self, depth: u8) -> Result<ExpressionState, CompileError> {
         self.depth(depth)?;
-        let local = self.logical(0, depth)?;
+        let mut state = ExpressionState::default();
+        self.logical(0, depth, &mut state)?;
         if self.token.kind == TokenKind::Symbol(b'=') {
-            let destination =
-                local.ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
+            if state.dereference.is_none() {
+                return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            }
             self.advance()?;
             let _rhs = self.expression(self.depth(depth)?)?;
             let source = self.pop()?;
+            let destination = self
+                .registers
+                .top()
+                .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
             self.emit(Instruction {
                 opcode: 0x0a,
                 arg0: destination.0,
@@ -19,22 +31,27 @@ impl Compiler<'_> {
                 arg3: 0,
             });
         }
-        Ok(local)
+        Ok(state)
     }
-    fn logical(&mut self, level: u8, depth: u8) -> Result<Option<Register>, CompileError> {
+    fn logical(
+        &mut self,
+        level: u8,
+        depth: u8,
+        state: &mut ExpressionState,
+    ) -> Result<(), CompileError> {
         self.depth(depth)?;
-        let local = if level == 0 {
-            self.logical(1, depth)?
+        if level == 0 {
+            self.logical(1, depth, state)?;
         } else {
-            self.binary(0, depth)?
-        };
+            self.binary(0, depth, state)?;
+        }
         let token = if level == 0 {
             TokenKind::Or
         } else {
             TokenKind::And
         };
         if self.token.kind != token {
-            return Ok(local);
+            return Ok(());
         }
         let first = self.pop()?;
         let target = self.push()?;
@@ -50,7 +67,7 @@ impl Compiler<'_> {
             self.move_to(target, first);
         }
         self.advance()?;
-        let _rhs = self.logical(level, self.depth(depth)?)?;
+        self.logical(level, self.depth(depth)?, state)?;
         self.emitter.barrier();
         let second = self.pop()?;
         if target != second {
@@ -58,17 +75,22 @@ impl Compiler<'_> {
         }
         self.emitter.barrier();
         self.patch(branch, self.position()?)?;
-        Ok(None)
+        Ok(())
     }
-    fn binary(&mut self, precedence: u8, depth: u8) -> Result<Option<Register>, CompileError> {
+    fn binary(
+        &mut self,
+        precedence: u8,
+        depth: u8,
+        state: &mut ExpressionState,
+    ) -> Result<(), CompileError> {
         let depth = self.depth(depth)?;
-        let mut local = self.factor(depth)?;
+        self.factor(depth, state)?;
         while let Some((rank, opcode, operation)) = self.token.kind.binary() {
             if rank <= precedence {
                 break;
             }
             self.advance()?;
-            let _rhs = self.binary(rank, depth)?;
+            self.binary(rank, depth, state)?;
             let right = self.pop()?;
             let left = self.pop()?;
             let target = self.push()?;
@@ -79,18 +101,18 @@ impl Compiler<'_> {
                 arg2: left.0,
                 arg3: operation,
             });
-            local = None;
         }
-        Ok(local)
+        Ok(())
     }
-    fn factor(&mut self, depth: u8) -> Result<Option<Register>, CompileError> {
+    fn factor(&mut self, depth: u8, state: &mut ExpressionState) -> Result<(), CompileError> {
         let depth = self.depth(depth)?;
+        state.dereference = None;
         match self.token.kind {
             TokenKind::Scalar(value) => {
                 let target = self.push()?;
                 self.load(target, value)?;
                 self.advance()?;
-                Ok(None)
+                Ok(())
             }
             TokenKind::Identifier(name) => {
                 let register = self
@@ -99,17 +121,18 @@ impl Compiler<'_> {
                     .ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
                 self.advance()?;
                 self.registers.reference(register);
-                Ok(Some(register))
+                state.dereference = Some(register);
+                Ok(())
             }
             TokenKind::Symbol(b'(') => {
                 self.advance()?;
-                let local = self.expression(depth)?;
+                let _nested = self.expression(depth)?;
                 self.expect(b')')?;
-                Ok(local)
+                Ok(())
             }
             TokenKind::Symbol(operator @ (b'-' | b'!' | b'~')) => {
                 self.advance()?;
-                let _source_local = self.factor(depth)?;
+                self.factor(depth, state)?;
                 let source = self.pop()?;
                 let target = self.push()?;
                 let opcode = match operator {
@@ -124,7 +147,7 @@ impl Compiler<'_> {
                     arg2: 0,
                     arg3: 0,
                 });
-                Ok(None)
+                Ok(())
             }
             TokenKind::Return
             | TokenKind::Local

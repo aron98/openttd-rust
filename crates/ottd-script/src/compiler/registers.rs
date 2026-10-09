@@ -53,6 +53,9 @@ impl<'a> Registers<'a> {
     pub(super) fn reference(&mut self, register: Register) {
         self.targets.push(register);
     }
+    pub(super) fn top(&self) -> Option<Register> {
+        self.targets.last().copied()
+    }
     pub(super) fn pop(&mut self) -> Option<Register> {
         let register = self.targets.pop()?;
         match self.slots.get(usize::from(register.0))? {

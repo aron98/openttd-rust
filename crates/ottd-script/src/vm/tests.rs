@@ -10,13 +10,17 @@ fn scalar(value: Value) -> String {
         Value::Bool(b) => format!("bool {}", u8::from(b)),
     }
 }
-fn check_frames(source: &str, native: &str) -> Result<(), Box<dyn std::error::Error>> {
+fn check_frames(
+    source: &str,
+    native: &str,
+    credits: &[u32],
+) -> Result<(), Box<dyn std::error::Error>> {
     // Given: independently captured native state and source bytes.
     let program = compile(source)?;
     let mut vm = Vm::new(&program)?;
     let mut actual = String::new();
     // When: the real VM resumes on the same credit sequence as native.
-    for credit in [3, 2, 2, 100] {
+    for &credit in credits {
         match vm.resume(credit)? {
             Execution::Suspended => {
                 writeln!(
@@ -50,6 +54,7 @@ fn scope_clear_matches_native_frames() -> Result<(), Box<dyn std::error::Error>>
     check_frames(
         include_str!("../../../../scripts/compat/script-vm/fixtures/branch_scope_guard_clear.nut"),
         include_str!("../../tests/frames/scope_guard_clear.txt"),
+        &[3, 2, 2, 100],
     )
 }
 #[test]
@@ -57,6 +62,7 @@ fn scope_noop_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> 
     check_frames(
         include_str!("../../../../scripts/compat/script-vm/fixtures/branch_scope_guard_noop.nut"),
         include_str!("../../tests/frames/scope_guard_noop.txt"),
+        &[3, 2, 2, 100],
     )
 }
 #[test]
@@ -64,5 +70,15 @@ fn local_alias_matches_native_frames() -> Result<(), Box<dyn std::error::Error>>
     check_frames(
         include_str!("../../../../scripts/compat/script-vm/fixtures/branch_local_alias.nut"),
         include_str!("../../tests/frames/local_alias.txt"),
+        &[3, 2, 2, 100],
+    )
+}
+
+#[test]
+fn expression_assignment_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!("../../../../scripts/compat/script-vm/fixtures/branch_expstate_target.nut"),
+        include_str!("../../tests/frames/expstate_target.txt"),
+        &[3, 2, 2, 2, 2, 100],
     )
 }

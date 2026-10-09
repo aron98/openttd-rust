@@ -21,6 +21,9 @@ assignment aliasing, shadowing and initializer lookup. For example,
 `local a=1,b=2; return a+(a=b);` returns 4 as native does. The emitter preserves
 native register high-water size, literal order, DLOAD/LOADNULLS/DMOVE merging,
 ARITH destination redirection, literal EQ/NE fusion and optimization barriers.
+Assignment validity follows native expression-state lifetimes, separately from the
+current target register: `(a)=2` is rejected, while `a+a=2` assigns the temporary
+expression result. Nested expressions restore their caller state.
 It retains unreachable instructions and the implicit final return.
 
 Float payloads are stored as raw f32 bits. Native same-type equality compares

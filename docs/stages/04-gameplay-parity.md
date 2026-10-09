@@ -502,11 +502,47 @@ above-ground saved vehicles or mixed vehicle families.
 
 The combined source passed 346 workspace tests, strict checks and direct
 66/18/4 native executions. The new original observer also passed all 44 existing
-replays and the 428-vector depot regression. Independent review and dedicated
-CI admission for these new witnesses are pending. Executable Squirrel
-compiler/VM foundations are being developed in parallel; unchanged AI/GS,
-host APIs and complete script scheduling/persistence remain open. None of
-these increments closes a broad stage requirement.
+replays and the 428-vector depot regression. `aab990e` adds complete CI admission,
+retaining 1,586 context and 535 occupancy evidence files with 80 and eight native
+invocation bindings. Independent review approved this increment after repeating
+the context matrix, guards and actual occupancy restoration/control probes.
+
+### Scalar script execution and road-slope prerequisites
+
+`c822d7e` and `9eb9cc5` introduce the initial scalar Squirrel compiler, register VM
+and original-VM CI comparisons. Review found that Rust accepted form-feed
+whitespace rejected by native Squirrel; `733d5a9` fixes that boundary and retains
+actual control-byte fixtures. Fresh review approved the correction and initial
+scalar domain. Debug and optimization-level-3 dispatchers each pass 414 native
+comparisons and 16 tests; each archive retains 5,012 evidence files, 73 source
+inputs and 1,523 pristine native source blobs. The remaining 51 opcodes, objects,
+GC, host APIs and full AI/GameScript scheduling and persistence remain required.
+
+`1757e19` and `b724296` add original CheckRoadSlope observations and a private Rust
+primitive. All 155,648 combinations of natural slope, requested/existing/other
+road bits and build-on-slopes setting match, including requested-piece mutation
+on failure. Five signed price probes and four actual corrupted-output rejections
+pass. Complete saved/live state and temporary settings/prices restore. The
+integrated workspace passes 368 tests and the new observer passes all 44 existing
+replay scenarios, controls and save/resume checks. This helper remains test-only
+until a real road command consumes it; it does not implement BuildRoad or removal.
+
+`4bf5419` moves the unchanged 5,689 replay evidence requirements into a SHA-pinned
+literal asset. The effective drivers and scenario declarations are unchanged;
+the root manifest's 1 MiB cap remains, with separate bounded external reads.
+`a69c7c1` adds the road-slope CI driver and complete 223-file archive admission.
+Independent review of these road-slope and manifest increments is pending.
+
+The Linux PR run for `9df6b13` passed both jobs, including loader, sale and depot
+milestones, with 1,046 of 1,050 native compiler calls served from cache (99.62%).
+The subsequent PR run for `733d5a9` is separate from local acceptance and remains
+pending here. CI continues to run on pull requests only.
+
+Current parallel work covers complete static-GRF safety admission, its original
+FillGRFDetails witness, and the shared-order/live-backup prerequisites for depot
+removal. Language maps, diagnostics/inhibition, GRM and actual baseline/spec
+execution remain required before content-dependent restoration can close.
+None of these increments closes a broad stage requirement.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

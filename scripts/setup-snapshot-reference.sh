@@ -26,16 +26,22 @@ else
     git -C "$source_dir" apply --reverse --check "$root/reference/replay.patch"
 fi
 # Compare tracked source with precisely HEAD plus our patch, without changing its index.
+if git -C "$source_dir" apply --check "$root/reference/grf_load_control.patch" 2>/dev/null; then
+    git -C "$source_dir" apply "$root/reference/grf_load_control.patch"
+else
+    git -C "$source_dir" apply --reverse --check "$root/reference/grf_load_control.patch"
+fi
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 copy_header() {
     if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
 }
 copy_header reference/replay_hooks.hpp "$source_dir/src/reference_replay_hooks.hpp"
+copy_header reference/grf_load_control.hpp "$source_dir/src/reference_grf_load_control.hpp"
 for header in replay replay_cost replay_commands replay_fixture; do
     copy_header "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
 done
@@ -50,6 +56,7 @@ copy_header reference/runtime_road_fixture.hpp "$source_dir/src/saveload/referen
 copy_header reference/runtime_road_fixture_tiles.hpp "$source_dir/src/saveload/reference_runtime_road_fixture_tiles.hpp"
 copy_header reference/grf_scan.hpp "$source_dir/src/saveload/reference_grf_scan.hpp"
 copy_header reference/grf_metadata.hpp "$source_dir/src/saveload/reference_grf_metadata.hpp"
+copy_header reference/depot_runtime.hpp "$source_dir/src/saveload/reference_depot_runtime.hpp"
 copy_header reference/world_fixture.hpp "$source_dir/src/saveload/reference_world_fixture.hpp"
 copy_header reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
 copy_header reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"

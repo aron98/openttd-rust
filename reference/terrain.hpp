@@ -12,7 +12,8 @@ namespace ReferenceTerrain {
 inline void Observe()
 {
     const char *path = std::getenv("OTTD_TERRAIN_PROBES_PATH");
-    if (path == nullptr) return;
+    if (path == nullptr || _game_mode == GM_MENU) return;
+    if (std::ifstream(path).good()) throw std::runtime_error("Terrain observation already exists");
     using Json = nlohmann::json;
     Json result = {{"schema_version", 1}, {"slopes", Json::array()}, {"foundations", Json::array()}};
     const std::array<uint8_t, 20> bases = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,23,27,29,30};

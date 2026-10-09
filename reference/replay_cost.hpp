@@ -13,6 +13,11 @@ inline Json ErrorSymbol(StringID id)
         case INVALID_STRING_ID: return "CMD_ERROR";
 #define REPLAY_ERROR(name) case name: return #name;
         REPLAY_ERROR(STR_ERROR_MAXIMUM_PERMITTED_LOAN)
+        REPLAY_ERROR(STR_ERROR_ALREADY_AT_SEA_LEVEL)
+        REPLAY_ERROR(STR_ERROR_TOO_HIGH)
+        REPLAY_ERROR(STR_ERROR_TOO_CLOSE_TO_EDGE_OF_MAP)
+        REPLAY_ERROR(STR_ERROR_TERRAFORM_LIMIT_REACHED)
+        REPLAY_ERROR(STR_ERROR_EXCAVATION_WOULD_DAMAGE)
         REPLAY_ERROR(STR_ERROR_LOAN_ALREADY_REPAID)
         REPLAY_ERROR(STR_ERROR_CURRENCY_REQUIRED)
         REPLAY_ERROR(STR_ERROR_NOT_ENOUGH_CASH_REQUIRES_CURRENCY)
@@ -67,6 +72,11 @@ void Phase(const char *phase, const CommandCost &cost)
 void Gate(const char *gate)
 {
     if (receipt != nullptr) (*receipt)["gate"] = gate;
+}
+void LandscapeReturns(const char *phase, int64_t additional_money, uint32_t tile)
+{
+    if (receipt == nullptr || !receipt->contains("returns")) return;
+    (*receipt)["returns"][phase] = {{"kind", "landscape"}, {"additional_money", additional_money}, {"tile", tile}};
 }
 }
 #endif

@@ -781,7 +781,7 @@
     {
       "id": "replay-source-reference-replay-patch",
       "path": "reference/replay.patch",
-      "sha256": "a16cc95031151324735c9655169fd0f24acc56d406588a1cfe58a23cef99e1e2",
+      "sha256": "2df9ff3e92cdc8852771cfd9b7769b7f8e9923aaebde40bdb0f13e1e25abcf73",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -790,7 +790,7 @@
     {
       "id": "replay-source-reference-replay-commands-hpp",
       "path": "reference/replay_commands.hpp",
-      "sha256": "0c4f8587d0dc092bccccd2234d719dca745d8ffcecf4a4b060b7c51e32876e2f",
+      "sha256": "9b72ebb4556c36f61c6fa006e2e63fbc32c0f90da08ea6ea0f666007030289b1",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -799,7 +799,7 @@
     {
       "id": "replay-source-reference-replay-cost-hpp",
       "path": "reference/replay_cost.hpp",
-      "sha256": "43bcfa8c2a609474da605731ac9491c28cfabc1ce4c61ff7723a45a12fd4859d",
+      "sha256": "fedb208066eb0939d5d4823fc1b1130361393124791e708e1f4663889a8921df",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -808,7 +808,7 @@
     {
       "id": "replay-source-reference-replay-fixture-hpp",
       "path": "reference/replay_fixture.hpp",
-      "sha256": "2f2a798e8c97cdfd23d882867cacbec46346251802c9249f8be25c09ff66f830",
+      "sha256": "37d0af7e4a3877027b88b6fc9b953657d01ba60cdc10a7190ba146ab6a09b94d",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -817,7 +817,7 @@
     {
       "id": "replay-source-reference-replay-hooks-hpp",
       "path": "reference/replay_hooks.hpp",
-      "sha256": "bcf0f8e32b6e2bb896cca875a21cb6abaaab8cb0990ceed1cfcbce58bb94915f",
+      "sha256": "31894264e492bf5b829d6a6c8d944bcbb0cf88a519971830e9edfc7ce7095c1e",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "05cf021f4aed922e4855caebb7c05a7065403e32b4b9ab23f0593bb3e89ee7a1",
+      "sha256": "e328eb1aa50be4472d70f1aa8afacb55af993113c347d1a8fc6a639ce2677291",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,

@@ -12,6 +12,8 @@
 #include "../timer/timer.h"
 #include "../linkgraph/linkgraphschedule.h"
 #include "../linkgraph/linkgraphjob.h"
+#include "../tunnelbridge_cmd.h"
+#include "../bridge_map.h"
 
 extern TimeoutTimer<TimerGameTick> _new_competitor_timeout;
 extern uint16_t _disaster_delay;
@@ -19,6 +21,61 @@ extern TileIndex _cur_tileloop_tile;
 Company *DoStartupNewCompany(bool is_ai, CompanyID company);
 
 namespace ReferenceReplay {
+inline void PrepareTerraform(const Json &setup)
+{
+    Require(Map::SizeX() == 256 && Map::SizeY() == 256, "terraform fixture requires populated 256-square world");
+    for (const Vehicle *vehicle : Vehicle::Iterate()) {
+        Require(vehicle->x_pos < 0 || vehicle->y_pos < 0 || vehicle->x_pos >= 17 * TILE_SIZE || vehicle->y_pos >= 17 * TILE_SIZE, "terraform pad overlaps vehicle position");
+    }
+    for (uint y = 0; y <= 16; ++y) for (uint x = 0; x <= 16; ++x) {
+        const TileIndex tile = TileXY(x, y);
+        Require(IsTileType(tile, MP_CLEAR) || IsTileType(tile, MP_TREES) || ((IsWaterTile(tile) || IsCoastTile(tile)) && GetWaterClass(tile) == WaterClass::Sea), "terraform pad overlaps infrastructure");
+        MakeClear(tile, setup.value("bare", false) ? CLEAR_GRASS : static_cast<ClearGround>((x + y) % 3), setup.value("bare", false) ? 0 : (x + 2 * y) % 4);
+        SetTileHeight(tile, std::min({x, y, 16 - x, 16 - y, 4U}));
+    }
+    const bool freeform = setup.value("freeform", false);
+    if (freeform) {
+        for (const Vehicle *vehicle : Vehicle::Iterate()) Require(vehicle->x_pos < 0 || vehicle->y_pos < 0 || (vehicle->x_pos >= TILE_SIZE && vehicle->y_pos >= TILE_SIZE), "terraform freeform border overlaps vehicle position");
+        for (uint i = 0; i < Map::SizeX(); ++i) {
+            Require(IsTileType(TileXY(i, Map::MaxY()), MP_VOID) && IsTileType(TileXY(Map::MaxX(), i), MP_VOID), "terraform lower border is not void");
+            for (TileIndex tile : {TileXY(i, 0), TileXY(0, i)}) {
+                Require(!IsBridgeAbove(tile) && (IsTileType(tile, MP_VOID) || IsTileType(tile, MP_CLEAR) || ((IsWaterTile(tile) || IsCoastTile(tile)) && GetWaterClass(tile) == WaterClass::Sea)), "terraform freeform border overlaps infrastructure");
+            }
+        }
+    }
+    _settings_game.construction.freeform_edges = freeform;
+    _settings_game.difficulty.construction_cost = 1;
+    _economy.inflation_prices = 1 << 16;
+    RecomputePrices();
+    if (freeform) {
+        for (uint i = 0; i < Map::SizeX(); ++i) for (TileIndex tile : {TileXY(i, 0), TileXY(0, i)}) {
+            const uint height = TileHeight(tile);
+            MakeVoid(tile);
+            SetTileHeight(tile, height);
+        }
+    }
+    if (setup.contains("height_limit")) _settings_game.construction.map_height_limit = setup.at("height_limit").get<uint8_t>();
+    if (setup.value("high_hill", false)) {
+        for (const Vehicle *vehicle : Vehicle::Iterate()) Require(vehicle->x_pos < 56 * TILE_SIZE || vehicle->x_pos >= 89 * TILE_SIZE || vehicle->y_pos < 0 || vehicle->y_pos >= 33 * TILE_SIZE, "terraform hill overlaps vehicle position");
+        for (int y = 0; y <= 32; ++y) for (int x = 56; x <= 88; ++x) {
+            const TileIndex tile = TileXY(x, y);
+            const int height = std::max(static_cast<int>(TileHeight(tile)), 15 - std::abs(x - 72) - std::abs(y - 16));
+            if (height == TileHeight(tile)) continue;
+            Require(IsTileType(tile, MP_CLEAR) || IsTileType(tile, MP_TREES) || ((IsWaterTile(tile) || IsCoastTile(tile)) && GetWaterClass(tile) == WaterClass::Sea), "terraform hill overlaps infrastructure");
+            MakeClear(tile, CLEAR_GRASS, 3);
+            SetTileHeight(tile, height);
+        }
+        for (uint y = 0; y <= 32; ++y) for (uint x = 56; x <= 88; ++x) {
+            const int height = TileHeight(TileXY(x, y));
+            Require(std::abs(height - static_cast<int>(TileHeight(TileXY(x + 1, y)))) <= 1 && std::abs(height - static_cast<int>(TileHeight(TileXY(x, y + 1)))) <= 1, "terraform hill has invalid adjacent heights");
+        }
+    }
+    if (setup.value("snow", false)) Tile(TileXY(8, 8)).m3() |= 16;
+    if (setup.value("tunnel", false)) {
+        auto cost = Command<CMD_BUILD_TUNNEL>::Do({DoCommandFlag::Execute}, TileXY(3, 8), TRANSPORT_ROAD, 0);
+        Require(cost.Succeeded(), "native terraform tunnel fixture construction failed");
+    }
+}
 inline void PrepareFixture(const Json &setup)
 {
     const std::string profile = setup.at("profile");
@@ -123,6 +180,7 @@ inline void PrepareFixture(const Json &setup)
     if (setup.contains("tick")) TimerGameTick::counter = setup.at("tick").get<uint64_t>();
     _local_company = CompanyID(0);
     _current_company = CompanyID(0);
+    if (setup.contains("terraform")) PrepareTerraform(setup.at("terraform"));
 }
 }
 #endif

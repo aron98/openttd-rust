@@ -25,7 +25,7 @@ index ecbaba2..16f3731 100644
  		if (!network_command && GetCommandFlags<Tcmd>().Test(CommandFlag::ClientID)) SetClientIds(args, std::index_sequence_for<Targs...>{});
  
  		Tret res = Execute(err_message, reinterpret_cast<CommandCallback *>(reinterpret_cast<void(*)()>(callback)), my_cmd, estimate_only, network_command, tile, args);
-+		ReferenceReplay::Phase("result", ExtractCommandCost(res));
++		ReferenceReplay::CapturePhase("result", res);
  		InternalPostResult(ExtractCommandCost(res), tile, estimate_only, only_sending, err_message, my_cmd);
  
  		if (!estimate_only && !only_sending && callback != nullptr) {
@@ -33,7 +33,7 @@ index ecbaba2..16f3731 100644
  		DoCommandFlags flags = CommandFlagsToDCFlags(cmd_flags);
  		Tret res = std::apply(CommandTraits<Tcmd>::proc, std::tuple_cat(std::make_tuple(flags), args));
  
-+		ReferenceReplay::Phase("test", ExtractCommandCost(res));
++		ReferenceReplay::CapturePhase("test", res);
 +
  		auto [exit_test, desync_log, send_net] = InternalExecuteValidateTestAndPrepExec(ExtractCommandCost(res), cmd_flags, estimate_only, network_command, cur_company);
  		if (exit_test) {
@@ -42,7 +42,7 @@ index ecbaba2..16f3731 100644
  		/* Actually try and execute the command. */
  		Tret res2 = std::apply(CommandTraits<Tcmd>::proc, std::tuple_cat(std::make_tuple(flags | DoCommandFlag::Execute), args));
  
-+		ReferenceReplay::Phase("exec", ExtractCommandCost(res2));
++		ReferenceReplay::CapturePhase("exec", res2);
 +
  		/* Convention: If the second result element is of type Money,
  		 * this is the additional cash required for the command. */

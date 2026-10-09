@@ -4,6 +4,9 @@
 #include "reference_world.hpp"
 #include "reference_content.hpp"
 #include "reference_terrain.hpp"
+#include "reference_allocation.hpp"
+#include "reference_runtime_road.hpp"
+#include "reference_runtime_road_fixture.hpp"
 #include "../station_base.h"
 #include "../group.h"
 #include "../industry.h"
@@ -50,8 +53,11 @@ inline Json PacketGroup(const auto &packets, Json owner, Json cargo_type, Json n
 }
 inline void AfterLoad()
 {
+    ReferenceRuntimeRoadFixture::Prepare();
     ReferenceContent::Observe();
     ReferenceTerrain::Observe();
+    ReferenceAllocation::Observe();
+    ReferenceRuntimeRoad::Observe();
     const char *path = std::getenv("OTTD_WORLD_DERIVED_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (const char *control = std::getenv("OTTD_WORLD_CORRUPT_DERIVED")) {

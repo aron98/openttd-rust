@@ -33,6 +33,11 @@ jobs:
           uv run --with pytest python -m pytest scripts/tests/context_ci_evidence_test.py -q
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/context_ci_*.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/context_ci_support.py scripts/context_ci_evidence.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
+      - name: Check road slope CI admission
+        run: |
+          uv run --with pytest pytest -q scripts/tests/test_road_slope_ci.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/test_road_slope_ci.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/test_road_slope_ci.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked
@@ -83,6 +88,8 @@ jobs:
             .artifacts/depot-occupancy-*/
             .artifacts/occupancy-invocation-*/
             .artifacts/road-sale-*/
+            .artifacts/road-slope-*/
+            .artifacts/road-slope-invocation-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

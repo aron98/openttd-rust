@@ -3126,6 +3126,42 @@
       "provenance": "Exact ordered replay artifact requirements externalized without semantic changes.",
       "save_version": null,
       "profile": null
+    },
+    {
+      "id": "road-slope-ci-check-road-slope-ci",
+      "path": "scripts/check-road-slope-ci.py",
+      "sha256": "326342702759ef826f97fa369c47eddf22245b41370ef0808c58e783dcd47a34",
+      "kind": "recipe",
+      "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "road-slope-ci-road-slope-ci-evidence",
+      "path": "scripts/road_slope_ci_evidence.py",
+      "sha256": "52fe62b2af2db6bc0106f4a1be1f19f81a2271405485161563faf574315fec58",
+      "kind": "recipe",
+      "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "road-slope-ci-road-slope-ci-layout",
+      "path": "scripts/road-slope-ci-layout.json",
+      "sha256": "a7dfdfacff3e87a41dcfaa2c1aa7e69e3fe419ce83dba285ea7e10597f46ef58",
+      "kind": "recipe",
+      "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "road-slope-ci-test-road-slope-ci",
+      "path": "scripts/tests/test_road_slope_ci.py",
+      "sha256": "9a38469dc2a30eab7b43e65ec96d0a97071e5b8b1ba0784c3da256d31f499c7b",
+      "kind": "recipe",
+      "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
+      "save_version": null,
+      "profile": null
     }
   ],
   "profiles": [
@@ -9403,6 +9439,40 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "road-slope",
+      "argv": [
+        "python3",
+        "scripts/check-road-slope-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "inputs-before.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "bin/ottd_sim",
+        "bin/native_depot_build",
+        "bin/ottd",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "case/comparison.json",
+        "case/vectors/road-slope.json",
+        "case/canonical/save/autosave/exit.sav",
+        "case/vectors/save/autosave/exit.sav",
+        "case/reload/save/autosave/exit.sav"
+      ],
+      "success_text": "PASS pure slope CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -13729,6 +13799,54 @@
         "zero-test-rejected.json",
         "native-bindings.json",
         "bin/ottd_sim"
+      ]
+    },
+    {
+      "id": "commands.pure-native-road-slope",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Private CheckRoadSlope helper with19 natural slopes/four-bit requested,existing,other masks and explicit setting/foundation price. Arbitrary mask combinations are primitive inputs, not admitted map geometry. No full road build/removal/order/GRF or movement claim.",
+      "expected": "155648 actual original helper vectors and5 signed price probes; requested pieces mutate even on failure; exact result/expense/cost/error. Complete independent canonical/vector/reload saved and live equality and settings restoration;4 real corrupted-native rejection controls; exact actual test/binary/source/input/native bindings, zero/subset rejection, complete indexed raw archive/readback.",
+      "driver": "road-slope",
+      "assets": [
+        "road-slope-ci-check-road-slope-ci",
+        "road-slope-ci-road-slope-ci-evidence",
+        "road-slope-ci-road-slope-ci-layout",
+        "road-slope-ci-test-road-slope-ci",
+        "road-slope-reference-road-slope-hpp",
+        "road-slope-reference-road-slope-patch"
+      ],
+      "source_refs": [
+        "scripts/check-road-slope-ci.py",
+        "scripts/road_slope_ci_evidence.py",
+        "scripts/road-slope-ci-layout.json",
+        "scripts/tests/test_road_slope_ci.py",
+        "crates/ottd-sim/src/commands/road.rs",
+        "crates/ottd-sim/src/commands/road/slope.rs",
+        "crates/ottd-sim/src/commands/road/slope/tests.rs",
+        "crates/ottd-sim/src/commands/road/slope/native.rs",
+        "scripts/check-road-slope.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "inputs-before.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "bin/ottd_sim",
+        "bin/native_depot_build",
+        "bin/ottd",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "case/comparison.json",
+        "case/vectors/road-slope.json",
+        "case/canonical/save/autosave/exit.sav",
+        "case/vectors/save/autosave/exit.sav",
+        "case/reload/save/autosave/exit.sav"
       ]
     }
   ]

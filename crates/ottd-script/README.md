@@ -7,7 +7,7 @@ to game ticks.
 
 Supported source consists of one `return` statement (optional semicolon), with
 null, bool, i64 decimal/octal/hex literals, well-formed f32 decimal/scientific
-literals, parentheses, unary `- ! ~`, and binary `+ - * / %`. Spaces and newlines
+literals, parentheses, unary `- ! ~`, and binary `+ - * / %`. Space, tab, carriage return and line feed
 are accepted; comments, declarations, names, multiple statements, functions,
 objects, comparison and other operators are unsupported. A newline immediately
 after `return` ends that statement, as native does. Source is bounded to 64 KiB
@@ -31,7 +31,7 @@ at dispatch; unsupported opcodes fail explicitly.
 Signed overflow and MIN/-1 remain unfinished compatibility work: native C++ does
 not specify portable results. This increment returns `UnsupportedOverflow` rather
 than claiming wrapping arithmetic is faithful. Unsupported syntax, the remaining
-50 opcodes, locals/control flow, closures/functions, objects/reference lifetime/GC,
+51 opcodes, locals/control flow, closures/functions, objects/reference lifetime/GC,
 classes, generators, traps, standard library, packages, AI/GS APIs, scheduling and
 saved callbacks are open obligations. Float NaN raw-bit witnesses are specific to
 the tested native/Rust arm64 toolchain; no cross-platform payload guarantee is made.

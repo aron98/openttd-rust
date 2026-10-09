@@ -219,10 +219,10 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         ]:
             raise WorldCheckError("VM corruption was not compared")
     if read_json(directory / "summary.json") != {
-        "cases": 378,
-        "fixtures": 42,
+        "cases": 414,
+        "fixtures": 46,
         "credits": 9,
-        "tests": 12,
+        "tests": 16,
         "controls": 4,
         "passed": True,
     }:

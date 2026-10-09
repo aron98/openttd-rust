@@ -200,3 +200,59 @@ fn adjacent_null_loads_preserve_native_budget_when_operands_fail()
     );
     Ok(())
 }
+
+#[test]
+fn form_feed_is_rejected_when_between_tokens() {
+    // Given: a native-invalid form feed at the whitespace boundary.
+    let source = "return\u{000c}1;";
+    // When: lexing the byte after the return keyword.
+    let result = compile(source);
+    // Then: the exact original byte offset is reported instead of returning one.
+    assert_eq!(
+        result,
+        Err(ottd_script::CompileError {
+            offset: 6,
+            kind: ottd_script::CompileErrorKind::UnsupportedSyntax,
+        })
+    );
+}
+
+#[test]
+fn vertical_tab_is_rejected_when_between_tokens() {
+    // Given: the adjacent control character that native already rejects.
+    let source = "return\u{000b}1;";
+    // When: lexing the byte after the return keyword.
+    let result = compile(source);
+    // Then: rejection retains its exact byte offset.
+    assert_eq!(
+        result,
+        Err(ottd_script::CompileError {
+            offset: 6,
+            kind: ottd_script::CompileErrorKind::UnsupportedSyntax,
+        })
+    );
+}
+
+#[test]
+fn horizontal_whitespace_is_accepted_without_ending_return()
+-> Result<(), Box<dyn std::error::Error>> {
+    // Given: native space, tab and CR separators, with no LF before the value.
+    let program = compile("return \t\r1;")?;
+    // When: executing the resulting return expression.
+    let result = Vm::new(&program)?.resume(100)?;
+    // Then: CR is whitespace, not a statement-ending newline.
+    assert_eq!(result, Execution::Returned(Value::Integer(1)));
+    Ok(())
+}
+
+#[test]
+fn line_feed_ends_return_when_preceded_by_carriage_return() -> Result<(), Box<dyn std::error::Error>>
+{
+    // Given: a CRLF immediately after return.
+    let program = compile("return\r\n;")?;
+    // When: executing the statement ended by LF.
+    let result = Vm::new(&program)?.resume(100)?;
+    // Then: native's empty return semantics are preserved.
+    assert_eq!(result, Execution::Returned(Value::Null));
+    Ok(())
+}

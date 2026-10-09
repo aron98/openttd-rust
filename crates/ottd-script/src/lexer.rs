@@ -44,7 +44,7 @@ impl<'a> Lexer<'a> {
     pub(super) fn next(&mut self) -> Result<Token, CompileError> {
         let mut newline = false;
         while let Some(c) = self.peek() {
-            if c.is_ascii_whitespace() {
+            if matches!(c, b' ' | b'\t' | b'\r' | b'\n') {
                 newline |= c == b'\n';
                 self.advance();
             } else {

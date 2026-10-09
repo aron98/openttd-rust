@@ -19,11 +19,11 @@ shasum -a 256 Cargo.toml Cargo.lock crates/ottd-sim/Cargo.toml \
     "$oracle" > "$parent/source-sha256.txt"
 cargo test --locked -p ottd-sim --test native_grf_metadata native_metadata_matrix -- --ignored --exact \
     > "$parent/native-test.log" 2>&1
-rg -q '^test native_metadata_matrix \.\.\. ok$' "$parent/native-test.log"
-rg -q 'test result: ok\. 1 passed; 0 failed; 0 ignored;' "$parent/native-test.log"
+grep -E -q '^test native_metadata_matrix \.\.\. ok$' "$parent/native-test.log"
+grep -E -q 'test result: ok\. 1 passed; 0 failed; 0 ignored;' "$parent/native-test.log"
 cargo test --locked -p ottd-sim --test grf_metadata host_bounds_are_cumulative_and_distinct_from_native_disabling -- --exact \
     > "$parent/host-boundaries.log" 2>&1
-rg -q '^test host_bounds_are_cumulative_and_distinct_from_native_disabling \.\.\. ok$' "$parent/host-boundaries.log"
-rg -q 'test result: ok\. 1 passed; 0 failed; 0 ignored;' "$parent/host-boundaries.log"
+grep -E -q '^test host_bounds_are_cumulative_and_distinct_from_native_disabling \.\.\. ok$' "$parent/host-boundaries.log"
+grep -E -q 'test result: ok\. 1 passed; 0 failed; 0 ignored;' "$parent/host-boundaries.log"
 python3 scripts/grf_metadata_evidence.py "$parent"
 printf 'PASS fresh-config GRF metadata and host bounds\n' | tee "$parent/summary.txt"

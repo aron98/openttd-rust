@@ -1465,7 +1465,7 @@
     {
       "id": "foundation-scripts-check-terrain-sh",
       "path": "scripts/check-terrain.sh",
-      "sha256": "75684e67b6e50facb253ac217d650f7ee896b7b6343cfeafda16c41eff9b6d96",
+      "sha256": "f8937e218dd7ba931768e8448ad5b3c82969370c9d78d367f7e8ac508b21fe18",
       "kind": "recipe",
       "provenance": "Committed stage4 prerequisite test/observer/driver or input; pinned OpenTTD15.3 native callbacks retained; foundation source manifest records executed identity",
       "save_version": null,
@@ -1717,7 +1717,7 @@
     {
       "id": "metadata-scripts-check-grf-metadata-sh",
       "path": "scripts/check-grf-metadata.sh",
-      "sha256": "2c0ca39084f33b9cd5ec4dafae1f236f6afc351dcf08491d09be6e7f22e22bad",
+      "sha256": "13dca695fe69eb4b8e59c7c05228dc54240eddae18ad9063d1b55de3e69e926d",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,

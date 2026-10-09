@@ -4,6 +4,7 @@ mod cargo;
 mod cargo_data;
 mod engine_data;
 mod engines;
+pub mod grf;
 mod price;
 mod price_data;
 mod prices;

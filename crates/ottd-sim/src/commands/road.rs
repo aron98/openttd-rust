@@ -1,3 +1,6 @@
+#[cfg(test)]
+mod slope;
+
 use super::{Command, CommandCost, CommandError, Plan, landscape};
 use crate::world_access::unsigned;
 use ottd_save::{

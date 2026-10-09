@@ -425,11 +425,32 @@ approved both commits after another native 428-vector run and source audit.
 The observation hooks also preserve all 44 existing replay cases and metadata
 comparisons. Depot create/rotate/remove commands remain subsequent work.
 
-The next parallel increments are vehicle sales, depot create/rotate commands
-and NewGRF loading control. Loader control follows the original stage-major
-order, with explicit standalone-batch scope; baseline-dependent queries remain
-unsupported until their context is derived by the full Rust content loader.
-Neither increment closes a broad stage requirement.
+### Configured NewGRF loading control
+
+`261b4f7` implements the original stage-major LABELSCAN, INIT, RESERVE and
+ACTIVATION order for configured standalone Action6/7/8/9/D/10 control programs.
+The executor preserves ordered config and dynamic-file identities, filename
+aliases, labels, conditional jumps, parameters and persistent byte overrides.
+Source, record visits, labels, override work and emitted trace storage have
+explicit cumulative limits; host limits never become native disabled results.
+
+The original-engine matrix matches 247 case identities, 8,673 events, 6,697
+configured record decisions and 1,293 final configurations. Its actual
+comparator rejects 4,746 altered observations. The dedicated CI driver checks
+complete case membership, actual test-executable identities, source hashes,
+5,083 retained raw/archive files and real stale/reused/zero-test/subset guards.
+Integration passed 318 Rust tests, nine new Python validator tests, strict
+Clippy, formatting and typing. Independent review is pending.
+
+The native oracle executes its original baseline files. Rust independently
+scans their actual source identities and rejects queries that need their
+unexecuted runtime state; it does not fabricate baseline status or properties.
+This control profile cannot yet publish a gameplay content catalog. Actual
+baseline sprite/group/language handlers, properties and finalization, callback
+execution and content-dependent restoration remain required next work.
+
+The next parallel increments are vehicle sale CI, depot create/rotate commands
+and the remaining content load context. None closes a broad stage requirement.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

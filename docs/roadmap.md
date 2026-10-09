@@ -21,10 +21,11 @@ changes must not silently remove behavior.
 
 ## Current foundation
 
-The repository has lossless save-container rewriting, partial typed snapshots,
-deterministic primitives, clock/clear-landscape simulation, and selected object
-callback bodies. These are tested against the pinned original implementation.
-They do not establish complete world simulation, general mod support, playable
+The repository has lossless save-container rewriting, complete version-362 saved
+worlds and structural restoration, deterministic primitives, bounded command/tick
+replay, clock/clear-landscape simulation, and selected object callback bodies.
+These are tested against the pinned original implementation. They do not
+establish general gameplay simulation, content-dependent restoration, mod runtime, playable
 clients or multiplayer interoperability. See the [README](../README.md) and
 [verification record](verification.md) for the implemented boundaries.
 
@@ -40,6 +41,11 @@ maintainer merge of [PR #3](https://github.com/aron98/openttd-rust/pull/3), comm
 passing evidence. Stage 3 is in progress; its
 [plan](stages/03-commands-tick-execution.md) records the command, tick and native
 replay gates. Stage 4 has not started.
+
+The stage 3 branch has local native evidence for its supported command/tick
+domain, including public replay/resume and three native integer-overflow edge
+cases. Final integrated review, CI and the maintainer merge are still required;
+the stage remains **In progress**.
 
 ## Stages and acceptance gates
 
@@ -111,3 +117,5 @@ Across stages 2 and 3, reach: load a small populated world, execute a supported
 construction command in Rust, save it, and continue it in original OpenTTD.
 Stage 2 establishes the world/save prerequisites; stage 3 adds the command.
 This is a useful intermediate proof, not a replacement for either stage's gate.
+The stage 3 replay driver now exercises that milestone: a Rust-built road in a
+populated save survives reload and 16 ticks in the uninstrumented original.

@@ -26,6 +26,12 @@ defines the concrete supported domain and evidence for that stage, preserving
 the stage4 boundary. It does not replace general gameplay with fixture-only
 success claims.
 
+The bounded command/tick core and public replay CLI now have executable local
+native evidence. The 18-case `replays` driver is registered as
+`commands.world-ticks` in the versioned compatibility contract. This capability
+declaration does not mark the stage complete: the acceptance checklist below
+stays open until final integrated review and CI, followed by the maintainer merge.
+
 ## Commands and ordered replay
 
 Implement the native top-level test, affordability, execution and accounting
@@ -98,6 +104,34 @@ Replay load admission also requires an existing playable human company. Native
 loading creates one and consumes RNG when none exists; that company-creation
 lifecycle remains unsupported rather than being mistaken for a tick effect.
 
+Concrete unpaused admission requires calendar year 2100 or later, original
+industry economy, steady nonrecession state, and no active vehicles, industries,
+stations, objects, cargo packets/payments, subsidies, animated tiles or linkgraph
+jobs/queues. Inflation, infrastructure maintenance, disasters, competitors and
+tree spreading are disabled. Towns have CustomGrowth set, IsGrowing clear,
+growth rate 65535, no building funding, and saved town growth setting zero.
+Companies have explicit names, no headquarters or active bankruptcy/takeover,
+and nonnegative money and loan balances. Settings and all counters are read from
+the save. Industry attempts, competitor expiry/reset, disaster RNG reset,
+projected unsupported finance events and maximum-year clock cache behavior
+reject the entire requested horizon. Saved RNG is compared without filtering.
+
+Monthly/yearly tests retain native integer semantics: signed 64-bit saturated
+Money multiplication precedes interest division and loan addition saturates
+before validation/accounting; town history aggregation retains the original
+signed 32-bit accumulator and unsigned conversion. Independent review exposed
+these three large-value cases, which now have native corpus cases and Rust
+regressions. Ordinary low-value equality alone is insufficient.
+
+The host-independent replay kernel does no filesystem I/O. The CLI's approved
+`sha2` dependency verifies the sibling save against a versioned checkpoint
+envelope containing the complete pending action plan and cursor. Plans allow
+10,000 actions and 100,000 cumulative state-loop calls. Labels are unique
+ignoring ASCII case. Invalid/unsupported requests publish nothing; a final
+filesystem publication failure may leave partial validated artifacts in the
+newly reserved directory. `results.json` is published last, and that I/O failure
+is reported rather than claimed as an atomic directory publish.
+
 Preconditions will be recorded alongside the implementation and scenario
 inventory. No arbitrary loaded save is declared safe to tick merely because
 stage2 can decode it. Full vehicle/town/industry simulation remains stage4.
@@ -168,7 +202,22 @@ python3 -m unittest discover -s scripts/tests -p 'test_*.py' -v
 python3 scripts/check-contract.py --run baseline
 ```
 
-Add the stage replay driver and its exact evidence paths to the versioned
-contract before marking `commands.world-ticks` implemented. Extend PR-only CI
-with scoped evidence retention; preserve the native compiler cache. Scenario
-commands and artifact paths will be documented with the executable driver.
+After both reference setup scripts, the stage driver is:
+
+```sh
+python3 scripts/check-contract.py --run commands.world-ticks
+# Equivalent full driver, without the enclosing contract report:
+bash scripts/check-replays.sh
+```
+
+The [versioned corpus](../../fixtures/replay/README.md) and
+[`cases.json`](../../fixtures/replay/cases.json) pin all 18 cases, native recipes,
+actions and save hashes. The contract hashes those inputs plus the replay
+format, native instrumentation, driver and save schemas. It requires 2540
+concrete nonempty paths, including every named saved/structural/runtime
+checkpoint and re-decoded Rust save, prefix/resume pending-action evidence,
+uninstrumented original continuation, and eight failure controls. The wrapper
+announces `.artifacts/replays-*/`; all case evidence is under `results/`.
+PR-only CI retains that scoped directory alongside existing reports and keeps
+the native compiler cache unchanged. Final integrated review and remote CI
+remain distinct gates from these local observations.

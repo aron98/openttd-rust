@@ -1,5 +1,59 @@
 # Compatibility foundation verification
 
+## Saved-world commands and tick execution
+
+On 2026-10-09, the stage 3 working tree passed the 18-case public replay matrix
+against OpenTTD 15.3 at `14ec60f248547d4d062a1160f0fc26d742319888`.
+The local run is `.artifacts/replays-Bx3roU/results/`; `provenance.json` retains
+native, Rust and uninstrumented-original binary hashes, and each native
+`invocation.txt` retains input/action and instrumentation hashes. These are local
+observations before the final integrated stage review and CI, not a completed
+stage or a remote CI claim.
+
+Reproduce after both native reference builds:
+
+```sh
+bash scripts/check-replays.sh
+# Include the versioned capability and input/evidence checks:
+python3 scripts/check-contract.py --run commands.world-ticks
+```
+
+The matrix covers command phases and costs; populated road construction;
+ordinary ticks; month, quarter, year, leap day and tick-counter wrap; changing
+grass; nonempty dormant-town history; low cash, pause gates, clear-limit refill
+and nested naming. Three additional cases retain native large-integer behavior:
+monthly interest saturates signed 64-bit Money before division; explicit loan
+addition saturates before native validation/accounting; town history uses the
+native signed 32-bit accumulator and final unsigned conversion. Independent
+review found all three mismatches; dedicated Rust regressions and fresh original
+execution now cover them.
+
+Every case compares native and public-CLI receipts, complete saved descriptors
+and raw map data, defined structural state, and deterministic runtime at the
+same checkpoints. The Rust checkpoint saves are decoded again and compared to
+the native saved trees. Only native host observers `interactive_random`,
+`current_company` and supplemental numeric error metadata are outside the
+deterministic observation projection; the originals are retained for audit.
+No saved field is removed. Native `StateGameLoop` retains all timer registrations
+and callback bodies; earlier isolated callback probes are not this evidence.
+
+Fresh-process prefix/resume compares both engines with uninterrupted execution.
+The prefix envelope retains the original eight actions at cursor position four,
+including the four pending actions; its sibling save hash must match before
+resume. The populated construction witness loads the Rust save in the
+uninstrumented original, advances from tick 8780 to 8796 and preserves road tile
+3184. Rust does not execute those populated gameplay ticks.
+
+Eight controls reject wrong cost/order/clock/RNG/state, missing saves, missing
+receipts and stale artifact directories. The contract names 2540 exact nonempty
+paths across all cases, every checkpoint, resume and controls. PR-only CI retains
+`.artifacts/replays-*/` without changing the native compiler cache. General
+gameplay, content-dependent restoration, scripts, NewGRFs, UI and networking
+remain outside the admitted replay domain; unsupported state or a later
+unsupported event rolls back the request. See the
+[stage 3 plan](stages/03-commands-tick-execution.md) and
+[replay corpus](../fixtures/replay/README.md) for exact bounds.
+
 ## Typed snapshot milestone
 
 Verified locally on macOS ARM64 on 2026-10-08 against the same pinned upstream
@@ -210,6 +264,7 @@ IDs. Native fixture commands and script execution establish source behavior;
 Rust script execution is not claimed.
 
 The contract requires concrete per-case artifacts and refuses missing/empty
-evidence. PR CI executes the seven-driver baseline and retains the world trees
+evidence. Stage 2 introduced the seven-driver baseline; stage 3 adds the eighth
+replay driver. PR CI retains the world and replay trees
 alongside contract reports, including failures. A local passing run does not
 substitute for the final independent review, CI, or maintainer merge.

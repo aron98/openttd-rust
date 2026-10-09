@@ -15,6 +15,7 @@ python3 scripts/check-contract.py --run baseline
 # Or one driver/scenario, still exercising that driver's complete matrix:
 python3 scripts/check-contract.py --run callbacks
 python3 scripts/check-contract.py --run worlds
+python3 scripts/check-contract.py --run commands.world-ticks
 python3 scripts/check-contract.py --run reference.game-info
 ```
 
@@ -48,8 +49,8 @@ otherwise valid fixtures.
 
 A selected scenario runs its entire shared driver once. `baseline` executes
 workspace tests, container rewriting, typed snapshots/primitives, clock/terrain,
-selected callbacks, complete saved-world comparisons and the original-only
-content/protocol suite: seven drivers in total. External comparisons execute
+selected callbacks, complete saved-world comparisons, supported saved-world replay
+and the original-only content/protocol suite: eight drivers in total. External comparisons execute
 through these drivers; plain `cargo test` skips are never counted as passes.
 Setup builds are explicit prerequisites. No source checkout, comparison or test result
 is cached by this runner.
@@ -63,6 +64,35 @@ both directions of modified-state save/reload comparisons required by
 `world.complete-load-save`; it also loads the Rust outputs in an uninstrumented
 original binary. It does not implement command replay or content-dependent
 gameplay restoration.
+
+Stage 3 adds the separate `replays` driver for `commands.world-ticks`. Its 18
+public-CLI cases cover supported command phases, ordering and pause gates;
+admitted complete native state-loop calls; month/quarter/year/leap/tick-wrap;
+grass recovery, dormant-town history, company finance and native integer edge
+behavior. It uses actual saves and native `StateGameLoop` with every original
+timer registry active. General gameplay, content-dependent restoration,
+scripts/NewGRF execution and networking remain future requirements. Stage 3
+remains in progress until independent review, CI and the maintainer merge gates
+are satisfied; `implemented` here describes only this executable bounded claim.
+
+`bash scripts/check-replays.sh` announces a fresh `.artifacts/replays-*/`
+directory. Its `results/` tree includes receipts, all named native/Rust saves,
+saved/structural/runtime JSON, decoded Rust-save observations and comparisons,
+source/binary/input hashes, the prefix cursor with pending actions, fresh-process
+resume and continuous-run comparisons. The contract requires 2540 exact nonempty
+paths across the 18 cases and lifecycle/negative controls, including every named
+checkpoint; it does not use a wildcard that could hide a missing case. Missing
+saves/receipts and stale directories must fail, as must wrong cost, order, clock,
+RNG and saved-state controls. The uninstrumented-original continuation witness
+requires an increased tick counter and preservation of the road built by Rust.
+
+The replay kernel performs no filesystem I/O. The CLI uses `sha2` to bind the
+external checkpoint envelope to its native save and retains remaining action
+ordinals independently of simulation ticks. Names are portable across filesystems
+through case-insensitive label uniqueness. Unsupported requests fail before
+publication; an I/O failure while publishing can leave partial validated files
+in the newly reserved directory, with `results.json` written last. The
+[replay format and recipes](../fixtures/replay/README.md) document these bounds.
 
 ## Corpus and evidence
 

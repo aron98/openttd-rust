@@ -29,14 +29,18 @@ clients or multiplayer interoperability. See the [README](../README.md) and
 [verification record](verification.md) for the implemented boundaries.
 
 The stages below are the next roadmap, not retrospective claims that these
-foundations complete a stage. This document records direction; stage 1 still
-needs its concrete compatibility matrix, fixtures and executable checks.
+foundations complete a stage. The [stage 1 plan](stages/01-compatibility-contract.md) and
+[versioned contract](../compatibility/contract.json) record the active concrete
+matrix, fixtures and executable checks. Stage 1 is ready for maintainer review
+in [PR #2](https://github.com/aron98/openttd-rust/pull/2); the stage plan records
+the reviewed implementation, passing CI and retained evidence. Its maintainer
+merge remains pending.
 
 ## Stages and acceptance gates
 
 | Stage | Deliverables | Acceptance gate | Status |
 | --- | --- | --- | --- |
-| 1. Compatibility contract | Pin save, protocol, settings and content requirements; inventory missing behavior; define representative vanilla/modded fixtures, recorded commands, expected state and reproducible test procedures. | Every compatibility claim has a named scenario, observable result and verification procedure; baseline checks execute, unsupported contexts fail explicitly, and future scenarios are identified as unimplemented. | Planned |
+| 1. Compatibility contract | Pin save, protocol, settings and content requirements; inventory missing behavior; define representative vanilla/modded fixtures, recorded commands, expected state and reproducible test procedures. | Every compatibility claim has a named scenario, observable result and verification procedure; baseline checks execute, unsupported contexts fail explicitly, and future scenarios are identified as unimplemented. | Ready for review |
 | 2. Complete world loading and saving | Decode object pools, IDs, references and settings; restore derived state; serialize modified state for vehicles, companies, towns, industries, stations, orders, cargo and infrastructure. | Populated worlds load with matching modeled runtime state; supported state changes survive Rust save/original reload and original save/Rust reload. Container preservation alone does not pass this gate. | Planned |
 | 3. Commands and tick execution | Implement command validation, costs, execution and ordering; integrate callback dispatch, clocks and RNG into the world loop. | The engines replay supported command sequences with equal state at defined checkpoints, including pause, timing boundaries and save/reload. Unsupported gameplay remains explicit pending stage 4. | Planned |
 | 4. Gameplay parity | Complete construction, terrain/water, vehicles/pathfinding, orders/service/breakdowns, cargo/stations, towns, industries, economy and company lifecycle in vertical slices, with applicable content/script behavior. | The stage's baseline gameplay inventory is covered by original-versus-Rust scenarios, including vanilla/modded worlds and save/reload during execution; no required gameplay family is silently deferred. | Planned |

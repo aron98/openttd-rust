@@ -30,6 +30,7 @@ GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 cp reference/snapshot.hpp "$source_dir/src/saveload/reference_snapshot.hpp"
 cp reference/world.hpp "$source_dir/src/saveload/reference_world.hpp"
 cp reference/world_derived.hpp "$source_dir/src/saveload/reference_world_derived.hpp"
+cp reference/world_fixture.hpp "$source_dir/src/saveload/reference_world_fixture.hpp"
 cp reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
 cp reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"
 for header in callback_vehicle callback_timer callback_house callback_company callback_station callback_industry callback_industry_state; do

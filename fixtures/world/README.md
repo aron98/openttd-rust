@@ -10,6 +10,8 @@ is self-authored project test content. No third-party save was downloaded.
 | `populated-v362.sav` | Convert `../upstream-stationlist-v211.sav`, one null-driver tick | All four transport types, towns, industries, stations, orders, onboard/waiting cargo and sparse cargo IDs |
 | `populated-extended-v362.sav` | Load populated fixture, start WorldProbe, 2000 ticks | Existing transport world plus shared orders, parent/child groups, vehicle IDs 22/24 with removed ID 23, and nested AI saved state |
 | `modded-v362.sav` | Generate seed 12345, authored contract-speed GRF parameter 123, WorldProbe, 2000 ticks | Native engine-0 speed 123, road vehicles 2/4 with removed ID 3, shared orders, groups and nested AI saved state |
+| `storage-payment-v362.sav` | Native opt-in storage/payment setup on populated fixture; paused save | Two persistent-storage arrays owned by town 0/industry 0, payment 0 bound to vehicle 21, and buoy waypoint 8 built by the original command |
+| `game-v362.sav` | Generate seed 12345 with self-authored WorldGame, then save | GameScript nested save state, an exact integer above 2^53, and nonempty goal/story/league pools |
 
 The modded fixture's road vehicles do not themselves use the modified train
 engine. Native `WORLD_SPEED engine=0 speed=123` observes the loaded GRF effect;
@@ -22,6 +24,8 @@ SHA-256:
 73307d4e750b22684df94db659f0d40495ad5265a8711e24ef77f758328fb1be  populated-v362.sav
 78e6e396a78fdc6b88341fb64e124d7eda6334ee55f9ec076e472d98e112ac2d  populated-extended-v362.sav
 92a6b30530abdac1ee949edec87cf030d15dfe975eae14e86cfa1411b65326b6  modded-v362.sav
+df4df19d68bf84546cdd498c34e7a326ed3c820496067187b41ff8a4eb0b2661  storage-payment-v362.sav
+233bb3bbd4086e22a32dfb230f7f551f1fb94e89eacc49927cbcfd44596feee6  game-v362.sav
 ```
 
 Rebuild the reference with `bash scripts/setup-snapshot-reference.sh`. Generate
@@ -37,6 +41,16 @@ cmake -DORACLE="$PWD/.reference/snapshot-build/openttd" \
 cmake -DORACLE="$PWD/.reference/snapshot-build/openttd" \
   -DRUN_DIR="$PWD/.artifacts/world-modded" -DINPUT=GENERATE -DMODDED=ON \
   -P scripts/check-world-builder.cmake
+cmake -DORACLE="$PWD/.reference/snapshot-build/openttd" \
+  -DRUN_DIR="$PWD/.artifacts/world-game" -DINPUT=GENERATE \
+  -P scripts/check-world-game.cmake
+OTTD_WORLD_FIXTURE_MODE=storage-payment \
+OTTD_WORLD_FIXTURE_MANIFEST_PATH="$PWD/.artifacts/world-storage/fixture.json" \
+cmake -DORACLE="$PWD/.reference/snapshot-build/openttd" \
+  -DRUN_DIR="$PWD/.artifacts/world-storage" \
+  -DCONFIG="$PWD/.artifacts/world-base/fixture.cfg" \
+  -DINPUT="$PWD/fixtures/world/populated-v362.sav" -DTICKS=1 \
+  -P scripts/check-world-reference.cmake
 ```
 
 Each generated save is under `save/autosave/exit.sav` in its run directory.
@@ -67,6 +81,11 @@ The native instrumentation emits three different observations:
 - `derived.json` reads object links and content-independent caches immediately
   after successful loading, before gameplay ticks. It describes INPUT, not the
   exit save. It is absent for a newly generated game, where no input world loads.
+  Vehicle cargo aggregates, group children and reverse cargo-payment bindings
+  come from actual native runtime caches. Station per-destination cargo groups
+  have no native subgroup cache: their projection uses native packet objects,
+  uint32 count arithmetic and the native saturating Money type, and is checked
+  against the actual whole-station count and transit-period caches.
 - `schema.json` records native current descriptors for all 52 emitted table
   chunks, including empty pools. It records command kind, memory/file type,
   fixed-array length, reference kind and nested schemas. `SL_SAVEBYTE` has native
@@ -76,6 +95,20 @@ The driver also records native binary/input hashes, invocation, configuration,
 stdout and stderr. It rejects stale output, native save/load errors and fallback
 loads. Every process is bounded by the existing native driver's 60-second limit.
 
-The corpus does not yet populate persistent NewGRF storage, cargo-payment
-bindings, or every ancillary pool. Those require separately identified fixtures;
-empty schema coverage is not nonempty state coverage.
+The storage/payment fixture is explicitly synthetic serialization state, using
+an inert authored GRF identity. It does not claim active callback execution or
+Rust gameplay commands. Its manifest records all object IDs and values. The
+buoy is built using original `CMD_BUILD_BUOY`; the transport world is paused so
+the payment object survives to the save boundary. A normal reload without the
+fixture environment variables must preserve the storage and payment bindings.
+
+Run `bash scripts/check-worlds.sh` for native/Rust full saved-state and structural
+comparisons, no-op controls, changes across the eight required domain families,
+storage/payment/map changes and failure controls. Native cache controls opt into
+`OTTD_WORLD_CORRUPT_DERIVED` solely inside isolated test processes; they deliberately
+damage group children, vehicle cargo cache or the reverse payment binding and
+must be detected by full structural comparison. Content-dependent vehicle or
+NewGRF caches remain outside the stage 2 comparison.
+
+Not every ancillary pool is nonempty in this corpus; empty schema coverage is
+not nonempty state coverage.

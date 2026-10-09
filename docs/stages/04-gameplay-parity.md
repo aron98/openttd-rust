@@ -6,6 +6,8 @@ maintainer merge of [PR #4](https://github.com/aron98/openttd-rust/pull/4),
 stage. One stage PR collects verified atomic increments; only the maintainer's
 merge authorizes stage 5.
 
+Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
+
 For agentic workers: use the subagent-driven development workflow, with explicit
 ownership, native-source evidence, independent review and tests before integration.
 
@@ -275,6 +277,39 @@ oracle until the new boundary passes its equivalence checks.
       populated ticks. Preserve all compatibility checks when optimizing it.
 
 ## Shared integration rules
+
+### LevelLand execution extension
+
+The clear/void TerraformLand increment `ac73117` passed independent review,
+235 workspace tests and all 29 replay cases. Its propagation and surface helpers
+are separated before expansion. The next command uses the saved transaction
+overlay; it must preserve the original's distinct NoTest semantics.
+
+- [ ] Add a private terrain reader over either committed World or CandidateView,
+      with immutable map dimensions captured from the validated starting world.
+      Reuse borrowed records and typed prices; do not introduce a general World
+      trait or expose partially valid mutable state.
+- [ ] Preserve native rectangle and diagonal iterator order, target-height rules
+      and raw mode validation. Test the outer command even with NoTest enabled.
+- [ ] Estimates repeatedly query unchanged terrain and preserve the native
+      local-limit decrement/order, including limit-one zero-cost behavior.
+- [ ] Execution observes each successfully staged prefix. Failed native steps
+      add no edits; partial-money completion retains its prefix and reports the
+      next full step cost, not the cash deficit. Test, execution and final costs
+      and tuples may differ.
+- [ ] Stage prefix and final accounting in one transaction, with one terminal
+      prepare/commit. Never clone, encode or validate the complete world for
+      each nested Terraform call. Rust scope/invariant failures remain explicit
+      and roll back the candidate instead of impersonating native partial success.
+- [ ] Compare ordinary/diagonal selections, overlap, limits, cash, errors and
+      save/resume against actual native dispatch, with altered extra-money,
+      prefix and order controls. Initial tile scope matches current clear/void
+      Terraform; remaining tile procedures are subsequent required increments.
+
+Tree/water additions must account for nested test-only town ratings, nearest-town
+tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring
+water bits. Add those coupled effects separately after the LevelLand boundary;
+do not append them as unverified branches to the existing clear-only procedure.
 
 World operations must preserve native identity, iteration/allocation order and
 ownership. Changes spanning records and tiles validate as one transaction.

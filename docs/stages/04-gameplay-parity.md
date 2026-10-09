@@ -531,18 +531,59 @@ until a real road command consumes it; it does not implement BuildRoad or remova
 literal asset. The effective drivers and scenario declarations are unchanged;
 the root manifest's 1 MiB cap remains, with separate bounded external reads.
 `a69c7c1` adds the road-slope CI driver and complete 223-file archive admission.
-Independent review of these road-slope and manifest increments is pending.
+Independent review approved these road-slope and manifest increments, including
+fresh native comparisons and complete evidence admission.
 
 The Linux PR run for `9df6b13` passed both jobs, including loader, sale and depot
 milestones, with 1,046 of 1,050 native compiler calls served from cache (99.62%).
-The subsequent PR run for `733d5a9` is separate from local acceptance and remains
-pending here. CI continues to run on pull requests only.
+The subsequent PR run for `733d5a9` passed its Rust job and all 18 baseline
+drivers, but evidence upload failed because test-selector colons appeared in
+artifact paths. `e6f3f63` encodes evidence path components while preserving
+original process arguments, checks complete archive paths, and prints bounded
+failure diagnostics while retaining full stderr. `3765b4f` also fixes standalone
+Python test discovery; `b38418e` updates the exact context freshness evidence
+membership after adding road and safety observers. Independent review approved
+these corrections. Their remote interoperability result remains pending here;
+local checks are not a substitute for that result. CI runs on pull requests only.
 
-Current parallel work covers complete static-GRF safety admission, its original
-FillGRFDetails witness, and the shared-order/live-backup prerequisites for depot
-removal. Language maps, diagnostics/inhibition, GRM and actual baseline/spec
-execution remain required before content-dependent restoration can close.
-None of these increments closes a broad stage requirement.
+### Static NewGRF safety and continuing dependencies
+
+`acc6a5d`, `170bf4c`, `98bfaac` and `cbcf859` add original static-safety
+observations, native lazy FILESCAN behavior, Rust safety scanning and complete
+CI evidence. The original FillGRFDetails path supplies 893 cases and 1,867
+decisions; 13,794 deliberate comparison alterations and ten host-refusal controls
+are rejected. The final integrated proof also reruns context, occupancy and road
+slope against the same immutable native build. All 385 workspace tests and
+strict checks pass, and independent review approved exact `e6f3f63`.
+
+This scanner does not activate gameplay content or execute arbitrary callbacks.
+Current parallel work covers real language-pack inputs and ordered language
+maps, scalar Squirrel control flow, and shared-order/live-backup prerequisites
+for depot removal. Each remains subject to its own original-engine proof and
+independent review. Diagnostics/inhibition, GRM, actual baseline/spec execution,
+the remaining VM/object/host API behavior and gameplay consumers are still
+required. None of these increments closes a broad stage requirement.
+
+### Scalar locals and structured control flow
+
+`a26db01` and its review correction `5e2dcf4` add local declarations and
+assignment, comparisons, short-circuit expressions, blocks, if/else, while,
+break and continue. The compiler preserves native target-register aliasing,
+optimization barriers and expression-state lifetime; the VM preserves branch
+offsets, private register cleanup and operation debt across suspension. Review
+caught both incorrectly accepted parenthesized assignments and incorrectly
+rejected native-valid expression targets. The correction ports the original
+expression-state rules and keeps the destination register separate.
+
+Fresh debug and optimization-level-3 runs each pass 3,058 original/Rust
+comparisons, 30 public tests, four native-backed private-frame tests and eleven
+corruption controls. The full workspace passes 403 tests and strict checks.
+Fresh independent review approved `5e2dcf4` after another 1,332 differential
+comparisons and complete source, executable and archive verification. Each
+profile retains 26,827 evidence files. This is 21 of 62 opcode handlers;
+remaining operators, objects, GC, calls, host APIs and full AI/GameScript
+scheduling and persistence remain required. Remote CI for this increment is
+separate from these local acceptance results.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

@@ -42,6 +42,8 @@ done
 copy_header reference/snapshot.hpp "$source_dir/src/saveload/reference_snapshot.hpp"
 copy_header reference/world.hpp "$source_dir/src/saveload/reference_world.hpp"
 copy_header reference/world_derived.hpp "$source_dir/src/saveload/reference_world_derived.hpp"
+copy_header reference/content.hpp "$source_dir/src/saveload/reference_content.hpp"
+copy_header reference/terrain.hpp "$source_dir/src/saveload/reference_terrain.hpp"
 copy_header reference/world_fixture.hpp "$source_dir/src/saveload/reference_world_fixture.hpp"
 copy_header reference/gameplay.hpp "$source_dir/src/saveload/reference_gameplay.hpp"
 copy_header reference/callbacks.hpp "$source_dir/src/saveload/reference_callbacks.hpp"

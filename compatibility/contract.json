@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "e2b569d340a1e331782b1a5ed8af70ea16b14c3366257e0236c8d1203787e192",
+      "sha256": "05cf021f4aed922e4855caebb7c05a7065403e32b4b9ab23f0593bb3e89ee7a1",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,

@@ -2,6 +2,8 @@
 #ifndef OTTD_REFERENCE_WORLD_DERIVED_HPP
 #define OTTD_REFERENCE_WORLD_DERIVED_HPP
 #include "reference_world.hpp"
+#include "reference_content.hpp"
+#include "reference_terrain.hpp"
 #include "../station_base.h"
 #include "../group.h"
 #include "../industry.h"
@@ -48,6 +50,8 @@ inline Json PacketGroup(const auto &packets, Json owner, Json cargo_type, Json n
 }
 inline void AfterLoad()
 {
+    ReferenceContent::Observe();
+    ReferenceTerrain::Observe();
     const char *path = std::getenv("OTTD_WORLD_DERIVED_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (const char *control = std::getenv("OTTD_WORLD_CORRUPT_DERIVED")) {

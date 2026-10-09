@@ -7,8 +7,32 @@ against OpenTTD 15.3 at `14ec60f248547d4d062a1160f0fc26d742319888`.
 The local run is `.artifacts/replays-Bx3roU/results/`; `provenance.json` retains
 native, Rust and uninstrumented-original binary hashes, and each native
 `invocation.txt` retains input/action and instrumentation hashes. These are local
-observations before the final integrated stage review and CI, not a completed
-stage or a remote CI claim.
+observations from before the final integrated stage review and CI.
+
+The clean implementation commit `6c93057fdbf43e6653320b1187fd271ddc31221b`
+subsequently passed all eight baseline drivers and received independent
+**APPROVE** with no blockers. [PR #4](https://github.com/aron98/openttd-rust/pull/4)
+is ready for review. Both jobs in
+[CI run 37921879534](https://github.com/aron98/openttd-rust/actions/runs/37921879534)
+passed on the clean synthetic merge `24cdc5049b5b32df427c2d84d89e62b5cbf319cf`.
+The [retained compatibility artifact](https://github.com/aron98/openttd-rust/actions/runs/37921879534/artifacts/11612926938)
+(`compatibility-contract-37921879534-1`) contains the eight-driver report:
+66 passing scenarios (63 implemented and three reference-only), with 18 future
+scenarios explicitly not run, plus 201 passing Rust tests. The CI Rust job
+separately records 13 passing Python tests.
+Its replay evidence under `.artifacts/replays-LUhqTl/results/` covers all 18
+cases, lifecycle checks and negative controls; all 2540 required paths are
+nonempty. The original continuation again preserves road tile 3184 while
+advancing ticks 8780 to 8796.
+
+The native compiler cache recorded 617 hits out of 1050 cacheable calls
+(58.76%), with 433 misses while building the new instrumentation. Local review
+and baseline records are `.omo/evidence/stage03-final-gate.md` and
+`.omo/evidence/stage03-baseline/report.json`; the downloaded CI report is
+`.omo/evidence/stage03-ci-37921879534/.omo/evidence/contract-hz90jinf/report.json`.
+These recorded results describe the implementation commit above. The latest PR
+checks verify subsequent documentation-only commits. The maintainer merge is
+still required; stage 4 has not started.
 
 Reproduce after both native reference builds:
 

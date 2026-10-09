@@ -72,8 +72,10 @@ grass recovery, dormant-town history, company finance and native integer edge
 behavior. It uses actual saves and native `StateGameLoop` with every original
 timer registry active. General gameplay, content-dependent restoration,
 scripts/NewGRF execution and networking remain future requirements. Stage 3
-remains in progress until independent review, CI and the maintainer merge gates
-are satisfied; `implemented` here describes only this executable bounded claim.
+is ready for review in [PR #4](https://github.com/aron98/openttd-rust/pull/4)
+after independent approval and [passing CI](https://github.com/aron98/openttd-rust/actions/runs/37921879534).
+The maintainer merge remains required before stage 4; `implemented` here
+describes only this executable bounded claim.
 
 `bash scripts/check-replays.sh` announces a fresh `.artifacts/replays-*/`
 directory. Its `results/` tree includes receipts, all named native/Rust saves,

@@ -1,9 +1,11 @@
 # Stage 3: commands and tick execution
 
-Status: **In progress**. Branch: `stage/03-commands-tick-execution`, based on
+Status: **Ready for review** in [PR #4](https://github.com/aron98/openttd-rust/pull/4).
+Branch: `stage/03-commands-tick-execution`, based on
 the maintainer merge of [PR #3](https://github.com/aron98/openttd-rust/pull/3),
-`251da64b1b0c9eb8de897ecd3dba81f2872972ca`. One stage PR will collect atomic
-increments. The maintainer's merge remains the gate to stage 4.
+`251da64b1b0c9eb8de897ecd3dba81f2872972ca`. Independent review approved the
+implementation and [PR CI passed](https://github.com/aron98/openttd-rust/actions/runs/37921879534).
+The maintainer's merge remains the gate to stage 4, which has not started.
 
 ## Goal and architecture
 
@@ -29,8 +31,8 @@ success claims.
 The bounded command/tick core and public replay CLI now have executable local
 native evidence. The 18-case `replays` driver is registered as
 `commands.world-ticks` in the versioned compatibility contract. This capability
-declaration does not mark the stage complete: the acceptance checklist below
-stays open until final integrated review and CI, followed by the maintainer merge.
+declaration covers only the bounded domain below. The acceptance checks passed
+on the reviewed implementation; the stage awaits maintainer review and merge.
 
 ## Commands and ordered replay
 
@@ -159,25 +161,25 @@ contract/CI; full review, corrections and stage PR handoff.
 
 ## Acceptance checklist
 
-- [ ] Native command tests, costs, failures, execution accounting and estimates
+- [x] Native command tests, costs, failures, execution accounting and estimates
       agree on complete saved-state checkpoints, including failed commands.
-- [ ] Real road construction in a populated world changes map and company state;
+- [x] Real road construction in a populated world changes map and company state;
       its Rust save loads and continues in unmodified original OpenTTD.
-- [ ] FIFO ordering, acting company restoration, pause/unpause and independent
+- [x] FIFO ordering, acting company restoration, pause/unpause and independent
       replay scheduling agree; reordered-command negative controls fail.
-- [ ] Admitted saved worlds execute native-equivalent complete state-loop calls
+- [x] Admitted saved worlds execute native-equivalent complete state-loop calls
       at zero/one/multiple steps, day/month/year boundaries and counter wrap.
       Actual callback effects and RNG/counters agree, not only boundary labels.
-- [ ] Unsupported state/events and malformed/oversized requests reject
+- [x] Unsupported state/events and malformed/oversized requests reject
       deterministically without partial state or output publication.
-- [ ] Native/Rust checkpoints compare all saved fields/raw map data and the
+- [x] Native/Rust checkpoints compare all saved fields/raw map data and the
       defined structural projection at matching temporal boundaries; estimates,
       failures and pause effects retain their actual native semantics.
-- [ ] Save/reload and replay-envelope continuation preserve pending actions and
+- [x] Save/reload and replay-envelope continuation preserve pending actions and
       match uninterrupted replay at equivalent native lifecycle checkpoints.
-- [ ] Wrong cost, order, clock, RNG and saved-state controls fail through the
+- [x] Wrong cost, order, clock, RNG and saved-state controls fail through the
       real comparison path; missing/stale native evidence cannot pass CI.
-- [ ] Formatting, strict Clippy, Rust/Python tests, existing native drivers,
+- [x] Formatting, strict Clippy, Rust/Python tests, existing native drivers,
       independent review and required PR CI pass. One PR awaits maintainer review.
 
 ## Verification and evidence
@@ -219,5 +221,6 @@ checkpoint and re-decoded Rust save, prefix/resume pending-action evidence,
 uninstrumented original continuation, and eight failure controls. The wrapper
 announces `.artifacts/replays-*/`; all case evidence is under `results/`.
 PR-only CI retains that scoped directory alongside existing reports and keeps
-the native compiler cache unchanged. Final integrated review and remote CI
-remain distinct gates from these local observations.
+the native compiler cache unchanged. The [verification record](../verification.md)
+identifies the approved implementation, passing remote CI and retained evidence.
+Later documentation-only commits must also pass the latest PR checks.

@@ -1,4 +1,5 @@
 //! Deterministic, explicitly scoped landscape simulation for OpenTTD 15.3.
+pub mod content;
 mod landscape;
 mod replay;
 pub mod terrain;

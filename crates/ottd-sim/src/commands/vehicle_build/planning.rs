@@ -2,7 +2,7 @@ use super::{Args, state};
 use crate::{
     commands::{CargoCapacities, CommandCost, CommandError, CommandReturn},
     content::{EngineSpec, Price, RoadSpec, VehicleSpec},
-    runtime::PurchaseContext,
+    runtime::RoadVehicleContext,
     world_access::unsigned,
 };
 use ottd_save::world::World;
@@ -21,7 +21,7 @@ pub(super) fn validate(
     world: &World,
     company: u8,
     args: Args,
-    context: &PurchaseContext<'_>,
+    context: &RoadVehicleContext<'_>,
 ) -> Result<Result<Purchase, CommandCost>, CommandError> {
     let tile = world
         .map()

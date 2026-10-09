@@ -1,6 +1,6 @@
 mod admission;
 mod constructor;
-mod fixture;
+pub(super) mod fixture;
 mod publication;
 
 use super::*;

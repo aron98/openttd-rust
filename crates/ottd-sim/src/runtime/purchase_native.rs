@@ -75,6 +75,9 @@ fn depot_live(runtime: &SimulationRuntime) -> Result<Value> {
     }
 }
 
+fn sale_live(runtime: &SimulationRuntime) -> Result<Value> {
+    Ok(json!({"vehicle":live(runtime)?,"groups":runtime.road_group_counts()?}))
+}
 #[test]
 #[ignore = "owned-runtime native purchase harness: PURCHASE_INPUT, PURCHASE_PLAN, PURCHASE_OUTPUT"]
 fn run_native_purchase_sequence() -> Result {
@@ -91,13 +94,21 @@ fn run_native_purchase_sequence() -> Result {
     let mut actions = Vec::new();
     let mut checkpoints = vec![checkpoint(&runtime, "initial", &output)?];
     let mut caches = Vec::new();
+    let observe_sale = std::env::var_os("OTTD_ROAD_SALE_OBSERVE").is_some();
+    let mut sale_caches = Vec::new();
     for action in plan.actions {
         let before = observe(runtime.world())?;
         let ordinal = action.ordinal();
         let observation = match action {
             ReplayAction::Command { request, .. } => {
                 let pre = depot_live(&runtime)?;
+                let sale_before = observe_sale.then(|| sale_live(&runtime)).transpose()?;
                 let receipt = runtime.execute_command(&request)?;
+                if let Some(before) = sale_before {
+                    sale_caches.push(
+                        json!({"ordinal":ordinal,"before":before,"after":sale_live(&runtime)?}),
+                    );
+                }
                 caches.push(json!({"ordinal":ordinal,"before":pre,"after":depot_live(&runtime)?}));
                 json!({"ordinal":ordinal,"op":"command","before":before,"after":observe(runtime.world())?,"receipt":receipt})
             }
@@ -119,5 +130,11 @@ fn run_native_purchase_sequence() -> Result {
         )?,
     )?;
     std::fs::write(output.join("live.json"), serde_json::to_vec(&caches)?)?;
+    if observe_sale {
+        std::fs::write(
+            output.join("sale-live.json"),
+            serde_json::to_vec(&sale_caches)?,
+        )?;
+    }
     Ok(())
 }

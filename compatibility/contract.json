@@ -1969,7 +1969,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-rs",
       "path": "crates/ottd-sim/src/commands.rs",
-      "sha256": "b598342393bb50a72aeddf43684d68d5bfeccda4c1ca51eecbf00fa8104c8292",
+      "sha256": "229fab20c7e0a0008b93e7663adeba2f106f9b6d2f199800011ee25f7be074bc",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -1978,7 +1978,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-pipeline-rs",
       "path": "crates/ottd-sim/src/commands/pipeline.rs",
-      "sha256": "9f586b852a86f828f15f7b260a398a338a13eeff75a1dda3d6128903e34d2a46",
+      "sha256": "fe1f4ace40145dccad54a85089eb37251a4ade470d97d2d2e2f21742073b7153",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "7e86be66bbc6ba0797f9d6df647f3374a452b5a1b0a688076cb5db2388f35f34",
+      "sha256": "45d4b25781846a437c1247ce3477c3f73d43dd82ac125e653064976733c9a698",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2032,7 +2032,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-saved-vehicle-rs",
       "path": "crates/ottd-sim/src/runtime/saved_vehicle.rs",
-      "sha256": "e85ed550247943772a2eedfc5ade1dacfc963fd2c0188b79c47c6b51cf8d1534",
+      "sha256": "940cf1dd99ba6de1ddf2e9476bfde5e7f4268a5795e12ed3ab37113037bd3bca",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2050,7 +2050,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build.rs",
-      "sha256": "d506648d7d4670ddd73bb4c6fa51bfbafc24a18e2a36c361b1a729d57fa1e113",
+      "sha256": "0f1d7614fe82d813012a5ce7c60317c2e20e0e45a31c87e4757444a8ab3faaf2",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2086,7 +2086,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-native-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_native.rs",
-      "sha256": "024cdca00b97041ea77b37a47da65683b534f9a05ee07231abd0a8a653a520e0",
+      "sha256": "6a78c003d6816e22007c2f7cf757b5121b069492ef78a22d23024f9ed4afc987",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2095,7 +2095,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests.rs",
-      "sha256": "37af43535bccbb9220d44aa3c5b9d6b171491b7e6a08763ad96843eb519a29ef",
+      "sha256": "59f8f3deeddcd29f2617f3463f87894dc4915033077d10d4f2bc7a7a58e0cc9f",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2203,7 +2203,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-planning-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build/planning.rs",
-      "sha256": "4ec0e23d24baa2d0ef42689e60556e5d703c06480cd6cdc61f11689a98b6b002",
+      "sha256": "5c0b4a451ee27f7d024e356e489e2a7f148459e62e3c103688e29c8ee87cdd7d",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2212,7 +2212,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-fixture-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests/fixture.rs",
-      "sha256": "5aba91752d0bcbcccf30f1c10aaa331311f1f70d9c92d68580d736bd68078d4c",
+      "sha256": "ecfe4263f7b012dbcc4d66023a7d99a6265a92ba6138a0d428861bf0ac7d0631",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2239,7 +2239,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests/publication.rs",
-      "sha256": "bca54d3f3df52fb2d08a48d3628ad2abf2e79fca93a00a8e20e3769e49e7e49a",
+      "sha256": "5a3773c97339d83e5c4fa5063f274191224ea62d6d28a32d8d3b1d25ac09aa61",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2611,6 +2611,222 @@
       "sha256": "2b0b7aff3f6c499375bcf50d23c8b973357155adb825a45663c6730bf4cff4eb",
       "kind": "recipe",
       "provenance": "Configured control CI source/test/binary provenance verification; upstream.toml.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-commands-vehicle-sale-rs",
+      "path": "crates/ottd-sim/src/commands/vehicle_sale.rs",
+      "sha256": "70ea44cd6e4c2568ce1fc7672acdc8a9d893a5d8d9fc0518b5f5a32b8b8773de",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-runtime-group-counts-rs",
+      "path": "crates/ottd-sim/src/runtime/group_counts.rs",
+      "sha256": "356a3d9d24f1c7ac15db5987cba3a79cb92715975aa75584c6f71bcda16a7373",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-runtime-road-sale-rs",
+      "path": "crates/ottd-sim/src/runtime/road_sale.rs",
+      "sha256": "6f1f6a516f76f1d6444020f123f0400e38ac60de4f38c501f5d9a42db4b380a1",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-runtime-sale-tests-rs",
+      "path": "crates/ottd-sim/src/runtime/sale_tests.rs",
+      "sha256": "03df8150c6285433e7b82d55eb4e61a90676ba8741fe32c997b8378ef1fff665",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-runtime-sale-tests-admission-rs",
+      "path": "crates/ottd-sim/src/runtime/sale_tests/admission.rs",
+      "sha256": "70531a936cafed3625f0192b3fcf68c13408dd0f2e045218a2d437c209bc98ed",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-runtime-sale-tests-publication-rs",
+      "path": "crates/ottd-sim/src/runtime/sale_tests/publication.rs",
+      "sha256": "1ee47264cddcf0533b087408ba657b6ef7e8a36c5be6d78b3d5f19aea88bd50b",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-src-runtime-sale-tests-serialization-rs",
+      "path": "crates/ottd-sim/src/runtime/sale_tests/serialization.rs",
+      "sha256": "187b9113b5d865d3494ab0551cab2db79234788713aba3e1db3a6ed819e80db1",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-tests-native-sale-rs",
+      "path": "crates/ottd-sim/tests/native_sale.rs",
+      "sha256": "6a402e638108d677d5785acaed8a4f3e91be961bce30e4a94736f97bd07df12a",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-tests-native-sale-cleanup-rs",
+      "path": "crates/ottd-sim/tests/native_sale/cleanup.rs",
+      "sha256": "a5cdf5bdb56d959e61ebb5bdcf5757159ff942691d28b252547f2aa875e54fea",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-crates-ottd-sim-tests-native-sale-inputs-rs",
+      "path": "crates/ottd-sim/tests/native_sale/inputs.rs",
+      "sha256": "14cfe6f4dc1ddc09c11b09f1019cdb58cbe30c830ae6b3695167045c40e47ad6",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-check-road-sale-sh",
+      "path": "scripts/check-road-sale.sh",
+      "sha256": "deb986d849b98847f5c42a3c403d0397e9731caddf1e1031ab51fe4f88575e4c",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-evidence-layout-json",
+      "path": "scripts/sale-evidence-layout.json",
+      "sha256": "a950783176a44aac2ac9ff6f9b39cb4829e30817f8038b08359eacbbc6dc111e",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-cases-py",
+      "path": "scripts/sale_cases.py",
+      "sha256": "edb5100855f53ebc842b11df1ecd4266cc26b52dd041337781855d4299f5c352",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-controls-py",
+      "path": "scripts/sale_controls.py",
+      "sha256": "f782e75cd5c70f2fc488b04df670bf19dbf93653a26184d7a3c433f2607dae5e",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-driver-py",
+      "path": "scripts/sale_driver.py",
+      "sha256": "a556e59ae28168dff43b8cce876227ae131e9f7ab31441624211443b17eb6090",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-duration-controls-py",
+      "path": "scripts/sale_duration_controls.py",
+      "sha256": "b6df39434a5d01ab03ccc451076dbe7b00737920121175b5de21598c4a6f0617",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-evidence-py",
+      "path": "scripts/sale_evidence.py",
+      "sha256": "6543c4d67de7720d40ef3433b89e6c793cca6a33b7e90d6e867c8e11ee4e3c61",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-lifetime-py",
+      "path": "scripts/sale_lifetime.py",
+      "sha256": "80fb39e6c167ab8236af48bcbab5d8e182b88291290b7bb3b8eec88eb1672bea",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-matrix-py",
+      "path": "scripts/sale_matrix.py",
+      "sha256": "a4764fedf41c3dc436acdcab8daf14c45af006f5bd972e72002b78c7aa6885af",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-provenance-py",
+      "path": "scripts/sale_provenance.py",
+      "sha256": "f2d36469cc19a387706c1c60595131fed9d7b99159e849aab38dd6db7176d854",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-replay-py",
+      "path": "scripts/sale_replay.py",
+      "sha256": "a48903e2b22a4699278a75a6aebf69e843ff5175ea06dbc2ef87702f3303094d",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-sale-saved-state-py",
+      "path": "scripts/sale_saved_state.py",
+      "sha256": "8d917ba8e1d016329bc3dff0ddab08c73afb9447701f85e6b7b52d18fdbdaec1",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-tests-sale-evidence-test-py",
+      "path": "scripts/tests/sale_evidence_test.py",
+      "sha256": "db41cc2ffced49015355d36a9d06778946b1976631c3f489da7672e0e1b5d4aa",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "sale-scripts-tests-sale-lifetime-test-py",
+      "path": "scripts/tests/sale_lifetime_test.py",
+      "sha256": "1aba85640d04ecf7b7acc8f4b66b1d305b92bb036b4fcb4e8b2d1307bd63b60c",
+      "kind": "recipe",
+      "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
       "save_version": null,
       "profile": null
     }
@@ -14428,6 +14644,38 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1800
+    },
+    {
+      "id": "road-sales",
+      "argv": [
+        "bash",
+        "scripts/check-road-sale.sh"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "before.json",
+        "after.json",
+        "zero-test-rejected.json",
+        "test-binaries.json",
+        "source-provenance.json",
+        "executed-test-binaries.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "summary.txt",
+        "results/summary.json",
+        "results/provenance.json",
+        "logs/matrix/argv.json",
+        "logs/matrix/process.json",
+        "logs/zero-test/stdout.log",
+        "executables/ottd_sim",
+        "executables/native_sale",
+        "allocator-environment.json"
+      ],
+      "success_text": "PASS owned-runtime fresh road sales",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1800
     }
   ],
   "scenarios": [
@@ -18469,6 +18717,80 @@
         "native/replay-build.sha256",
         "baselines/0.grf",
         "baselines/1.grf"
+      ]
+    },
+    {
+      "id": "commands.owned-runtime-fresh-road-sale",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Fresh age-zero profit-zero vanilla single-part default-group road sales; no cargo/orders/backups/station/renewal context. Native error gates, refunds, cache deletion, allocator/unit reuse and group engine counts. No full sale destruction or whole-world tick admission.",
+      "expected": "22 scenarios, 571 commands, 370 successful executions, 88 engines, 26 corruption controls and 586 expected-exit receipts. Raw 4542-path layout is pinned externally and archived with SHA index. Saved state is strict except signed-int32 native uninitialized round_trip_time only for proven live fresh incarnations; Rust value must integer zero. Successful sale closes incarnation, matching build may reuse ID; loaded/split suffix values, self-decodes and reloads stay strict.",
+      "driver": "road-sales",
+      "assets": [
+        "purchase-crates-ottd-sim-src-commands-rs",
+        "purchase-crates-ottd-sim-src-commands-pipeline-rs",
+        "purchase-crates-ottd-sim-src-commands-vehicle-build-rs",
+        "purchase-crates-ottd-sim-src-commands-vehicle-build-planning-rs",
+        "sale-crates-ottd-sim-src-commands-vehicle-sale-rs",
+        "purchase-crates-ottd-sim-src-runtime-rs",
+        "sale-crates-ottd-sim-src-runtime-group-counts-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-native-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-fixture-rs",
+        "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs",
+        "sale-crates-ottd-sim-src-runtime-road-sale-rs",
+        "sale-crates-ottd-sim-src-runtime-sale-tests-rs",
+        "sale-crates-ottd-sim-src-runtime-sale-tests-admission-rs",
+        "sale-crates-ottd-sim-src-runtime-sale-tests-publication-rs",
+        "sale-crates-ottd-sim-src-runtime-sale-tests-serialization-rs",
+        "purchase-crates-ottd-sim-src-runtime-saved-vehicle-rs",
+        "sale-crates-ottd-sim-tests-native-sale-rs",
+        "sale-crates-ottd-sim-tests-native-sale-cleanup-rs",
+        "sale-crates-ottd-sim-tests-native-sale-inputs-rs",
+        "replay-source-reference-replay-commands-hpp",
+        "replay-source-reference-replay-cost-hpp",
+        "foundation-reference-runtime-road-hpp",
+        "sale-scripts-check-road-sale-sh",
+        "sale-scripts-sale-evidence-layout-json",
+        "sale-scripts-sale-cases-py",
+        "sale-scripts-sale-controls-py",
+        "sale-scripts-sale-driver-py",
+        "sale-scripts-sale-duration-controls-py",
+        "sale-scripts-sale-evidence-py",
+        "sale-scripts-sale-lifetime-py",
+        "sale-scripts-sale-matrix-py",
+        "sale-scripts-sale-provenance-py",
+        "sale-scripts-sale-replay-py",
+        "sale-scripts-sale-saved-state-py",
+        "sale-scripts-tests-sale-evidence-test-py",
+        "sale-scripts-tests-sale-lifetime-test-py"
+      ],
+      "source_refs": [
+        "scripts/check-road-sale.sh",
+        "scripts/sale_driver.py",
+        "scripts/sale_lifetime.py",
+        "scripts/sale_saved_state.py",
+        "scripts/sale_evidence.py",
+        "scripts/sale-evidence-layout.json"
+      ],
+      "evidence": [
+        "before.json",
+        "after.json",
+        "zero-test-rejected.json",
+        "test-binaries.json",
+        "source-provenance.json",
+        "executed-test-binaries.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "summary.txt",
+        "results/summary.json",
+        "results/provenance.json",
+        "logs/matrix/argv.json",
+        "logs/matrix/process.json",
+        "logs/zero-test/stdout.log",
+        "executables/ottd_sim",
+        "executables/native_sale",
+        "allocator-environment.json"
       ]
     }
   ]

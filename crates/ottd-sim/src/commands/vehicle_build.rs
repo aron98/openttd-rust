@@ -5,7 +5,7 @@ use super::{
     pipeline, terrain_read::TerrainRead,
 };
 use crate::{
-    runtime::{PurchaseContext, VehicleId},
+    runtime::{RoadVehicleContext, VehicleId},
     world_access::{field_edit, signed, unsigned},
 };
 use ottd_save::{
@@ -51,7 +51,7 @@ pub(super) fn run(
     company: u8,
     args: Args,
     estimate: bool,
-    context: PurchaseContext<'_>,
+    context: RoadVehicleContext<'_>,
 ) -> Result<CommandReceipt, CommandError> {
     let plan = match planning::validate(world, company, args, &context)? {
         Ok(plan) => plan,

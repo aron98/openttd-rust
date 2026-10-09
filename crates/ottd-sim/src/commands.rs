@@ -2,6 +2,7 @@
 mod cargo_capacities;
 mod finance;
 mod vehicle_build;
+mod vehicle_sale;
 pub use cargo_capacities::CargoCapacities;
 mod landscape;
 mod level_land;
@@ -41,6 +42,19 @@ pub enum Command {
         road_type: u8,
         /// Native entrance direction.
         direction: u8,
+    },
+    /// Sell an admitted single-part vanilla road vehicle.
+    SellVehicle {
+        /// Native Post feedback location.
+        location: u32,
+        /// Vehicle pool ID.
+        vehicle: u32,
+        /// Native flag; no effect for single-part road vehicles.
+        sell_chain: bool,
+        /// Preserve orders for a later purchase; currently unsupported.
+        backup_order: bool,
+        /// Native order-backup client identity.
+        client_id: u32,
     },
     /// Buy one admitted vanilla road vehicle in an existing depot.
     BuildVehicle {
@@ -162,7 +176,7 @@ pub struct CommandCost {
     pub error_params: Vec<i64>,
 }
 impl CommandCost {
-    const fn success(cost: i64, expenses: u8) -> Self {
+    pub(crate) const fn success(cost: i64, expenses: u8) -> Self {
         Self {
             success: true,
             cost,
@@ -171,7 +185,7 @@ impl CommandCost {
             error_params: Vec::new(),
         }
     }
-    fn failure(symbol: &str) -> Self {
+    pub(crate) fn failure(symbol: &str) -> Self {
         Self {
             success: false,
             cost: 0,
@@ -284,9 +298,11 @@ impl Plan {
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
-        Command::BuildRoadDepot { .. } | Command::BuildVehicle { .. } => Err(
-            CommandError::Unsupported("vehicle construction needs owned runtime"),
-        ),
+        Command::BuildRoadDepot { .. }
+        | Command::BuildVehicle { .. }
+        | Command::SellVehicle { .. } => Err(CommandError::Unsupported(
+            "vehicle construction needs owned runtime",
+        )),
         Command::ChangeServiceInterval {
             vehicle,
             interval,

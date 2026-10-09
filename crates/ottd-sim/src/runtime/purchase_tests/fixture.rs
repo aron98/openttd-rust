@@ -1,6 +1,6 @@
 use super::*;
 
-pub(super) fn fixture() -> Result<(SimulationRuntime, u32)> {
+pub(in crate::runtime) fn fixture() -> Result<(SimulationRuntime, u32)> {
     let mut world = World::decode(&Savegame::decode(
         include_bytes!("../../../../../fixtures/world/populated-v362.sav"),
         ottd_save::DEFAULT_MAX_BYTES,
@@ -51,7 +51,7 @@ pub(super) fn fixture() -> Result<(SimulationRuntime, u32)> {
     Ok((SimulationRuntime::restore_vanilla(world)?, index))
 }
 
-pub(super) fn request(tile: u32) -> CommandRequest {
+pub(in crate::runtime) fn request(tile: u32) -> CommandRequest {
     CommandRequest {
         company: 0,
         mode: CommandMode::Post,
@@ -65,7 +65,7 @@ pub(super) fn request(tile: u32) -> CommandRequest {
     }
 }
 
-pub(super) fn random(world: &World) -> Result<[u32; 2]> {
+pub(in crate::runtime) fn random(world: &World) -> Result<[u32; 2]> {
     Ok([
         u32::try_from(crate::world_access::unsigned(
             world,

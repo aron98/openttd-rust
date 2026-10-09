@@ -1,6 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
 mod depot;
+mod group_counts;
 pub mod pools;
 #[cfg(test)]
 mod purchase_native;
@@ -8,6 +9,10 @@ mod purchase_native;
 mod purchase_tests;
 mod road_cache;
 mod road_record;
+mod road_sale;
+pub use group_counts::{CompanyRoadCounts, RoadGroupCounts};
+#[cfg(test)]
+mod sale_tests;
 mod saved_engine;
 mod saved_vehicle;
 mod serialization;
@@ -174,13 +179,13 @@ impl DepotContext<'_> {
         Ok(())
     }
 }
-pub(crate) struct PurchaseContext<'a> {
+pub(crate) struct RoadVehicleContext<'a> {
     pub serializer_cargo_paid_for: u16,
     pub content: &'a ContentCatalog,
     pub allocation: &'a mut VehicleAllocation,
     pub road: &'a mut BTreeMap<VehicleId, RoadVehicleCache>,
 }
-impl PurchaseContext<'_> {
+impl RoadVehicleContext<'_> {
     pub(crate) fn publish(
         self,
         world: &mut World,
@@ -235,13 +240,15 @@ impl SimulationRuntime {
                 road: &mut self.depot.road,
             }
             .execute(&mut self.world, request),
-            crate::Command::BuildVehicle { .. } => PurchaseContext {
-                serializer_cargo_paid_for: self.serializer_cargo_paid_for,
-                content: &self.content,
-                allocation: &mut self.allocation,
-                road: &mut self.road,
+            crate::Command::BuildVehicle { .. } | crate::Command::SellVehicle { .. } => {
+                RoadVehicleContext {
+                    serializer_cargo_paid_for: self.serializer_cargo_paid_for,
+                    content: &self.content,
+                    allocation: &mut self.allocation,
+                    road: &mut self.road,
+                }
+                .execute(&mut self.world, request)
             }
-            .execute(&mut self.world, request),
             crate::Command::ChangeServiceInterval { .. } => {
                 crate::commands::execute_command(&mut self.world, request)
             }

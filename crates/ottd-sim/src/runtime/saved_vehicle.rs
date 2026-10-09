@@ -92,6 +92,24 @@ pub struct SavedVehicleView<'a> {
     common: Row<'a>,
 }
 impl<'a> SavedVehicleView<'a> {
+    pub(super) fn common_field(self, name: &'static str) -> Result<&'a WireValue, RuntimeError> {
+        self.common.field(name)
+    }
+    pub(super) fn common_number(self, name: &'static str) -> Result<u64, RuntimeError> {
+        self.common.number(name)
+    }
+    pub(super) fn common_signed(self, name: &'static str) -> Result<i64, RuntimeError> {
+        match self.common.field(name)? {
+            WireValue::Signed(value) => Ok(*value),
+            _ => Err(RuntimeError::Invalid(name)),
+        }
+    }
+    pub(super) fn road_state(self) -> Result<u64, RuntimeError> {
+        self.source
+            .row(*b"VEHS", self.id.raw())?
+            .single("roadveh")?
+            .number("state")
+    }
     pub(super) fn new(world: &'a World, id: VehicleId) -> Result<Self, RuntimeError> {
         Self::read(Source::Committed(world), id)
     }

@@ -18,17 +18,17 @@ pub fn execute_command(
 ) -> Result<CommandReceipt, CommandError> {
     execute(world, request, None)
 }
-impl crate::runtime::PurchaseContext<'_> {
+impl crate::runtime::RoadVehicleContext<'_> {
     pub(crate) fn execute(
         self,
         world: &mut World,
         request: &CommandRequest,
     ) -> Result<CommandReceipt, CommandError> {
-        execute(world, request, Some(OwnedContext::Purchase(self)))
+        execute(world, request, Some(OwnedContext::RoadVehicle(self)))
     }
 }
 enum OwnedContext<'a> {
-    Purchase(crate::runtime::PurchaseContext<'a>),
+    RoadVehicle(crate::runtime::RoadVehicleContext<'a>),
     Depot(crate::runtime::DepotContext<'a>),
 }
 impl crate::runtime::DepotContext<'_> {
@@ -64,6 +64,7 @@ fn execute(
 const fn tile(command: &Command) -> u32 {
     match command {
         Command::BuildRoadDepot { tile, .. }
+        | Command::SellVehicle { location: tile, .. }
         | Command::BuildRoad { tile, .. }
         | Command::BuildVehicle { tile, .. }
         | Command::LandscapeClear { tile }
@@ -196,10 +197,37 @@ fn execute_admitted(
             },
             estimate,
             match context {
-                Some(OwnedContext::Purchase(context)) => context,
+                Some(OwnedContext::RoadVehicle(context)) => context,
                 _ => {
                     return Err(CommandError::Unsupported(
                         "vehicle construction needs owned runtime",
+                    ));
+                }
+            },
+        );
+    }
+    if let Command::SellVehicle {
+        location,
+        vehicle,
+        sell_chain: _,
+        backup_order,
+        client_id: _,
+    } = request.command
+    {
+        return super::vehicle_sale::run(
+            world,
+            request.company,
+            super::vehicle_sale::Args {
+                location,
+                vehicle,
+                backup_order,
+            },
+            estimate,
+            match context {
+                Some(OwnedContext::RoadVehicle(context)) => context,
+                _ => {
+                    return Err(CommandError::Unsupported(
+                        "vehicle sale needs owned runtime",
                     ));
                 }
             },
@@ -332,7 +360,8 @@ const fn pause_level(command: &Command) -> u64 {
         | Command::LevelLand { .. } => 3,
         Command::IncreaseLoan { .. }
         | Command::DecreaseLoan { .. }
-        | Command::BuildVehicle { .. } => 2,
+        | Command::BuildVehicle { .. }
+        | Command::SellVehicle { .. } => 2,
         Command::RenameCompany { .. } | Command::RenamePresident { .. } | Command::Pause { .. } => {
             0
         }

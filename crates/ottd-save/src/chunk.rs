@@ -26,6 +26,27 @@ pub struct Chunk {
 }
 
 impl Chunk {
+    pub(crate) fn from_table(id: [u8; 4], kind: ChunkKind, body: Vec<u8>) -> Result<Self, Error> {
+        let mode = match kind {
+            ChunkKind::Table => 3,
+            ChunkKind::SparseTable => 4,
+            ChunkKind::Riff | ChunkKind::Array | ChunkKind::SparseArray => {
+                return Err(Error::Framing("requires table encoding"));
+            }
+        };
+        let mut input = Reader::new(&body);
+        let (_, records) = input.read_array(kind)?;
+        if !input.remaining.is_empty() {
+            return Err(Error::Framing("trailing table bytes"));
+        }
+        Ok(Self {
+            id,
+            mode,
+            kind,
+            body,
+            records,
+        })
+    }
     /// Four-byte upstream chunk identifier.
     pub const fn id(&self) -> [u8; 4] {
         self.id

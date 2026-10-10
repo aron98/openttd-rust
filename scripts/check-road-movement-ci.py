@@ -9,9 +9,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from movement_ci import admission, archive_controls, artifacts
-from movement_ci.runner import Mode, run
-from movement_ci.value import EvidenceError
+from scripts.movement_ci import admission, archive_controls, artifacts
+from scripts.movement_ci.runner import Mode, run
+from scripts.movement_ci.value import EvidenceError
 
 
 def main() -> None:

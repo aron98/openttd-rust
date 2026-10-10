@@ -3317,7 +3317,7 @@
     "scripts/check-replay-native.cmake": "a22d8b7ac8e066d829e5f6621d990140242d60b74ad648602f9fb4aeeeead366",
     "scripts/check-replay.py": "dac267f68fe106f2e3bbf131dda9a254fdfe6bea441a6926142200bf7902d410",
     "scripts/check-replays.sh": "09f7e14d4f5e72653be01ef0716a8b10fbd6c9285deeba3126d856ad8863e040",
-    "scripts/check-road-movement-ci.py": "003e1b71f660d2170ba0a1cb9072f4be07b3656b510359ba5a8d6257d472a743",
+    "scripts/check-road-movement-ci.py": "75f52a6164c6170bcea2798f24ab04110623add439c5345498d2e748b7edbbdd",
     "scripts/check-road-sale.sh": "deb986d849b98847f5c42a3c403d0397e9731caddf1e1031ab51fe4f88575e4c",
     "scripts/check-road-slope-ci.py": "326342702759ef826f97fa369c47eddf22245b41370ef0808c58e783dcd47a34",
     "scripts/check-road-slope.py": "837acec2073db94c1cfcfb6fba95d16867a6d6c19b92b6f112c12036ced70a12",

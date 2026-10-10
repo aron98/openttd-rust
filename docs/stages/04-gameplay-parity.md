@@ -9,11 +9,26 @@ merge authorizes stage 5.
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
 Latest reviewed content increment: `e032dd2` completes the bounded raw engine/spec
-loading added in `d256ad1`. Script increment `ff0d636` adds configured scalar roots
-and persistent execution runners. The latest admitted gameplay increment remains
+loading added in `d256ad1`. Script increment `1ad5dc5` adds shared scalar arrays
+to the configured roots and persistent runners from `ff0d636`. The latest admitted
+gameplay increment remains
 `3d952b0`, for empty-road tile callbacks. Populated movement and cargo identity and
 translation are in progress. All seven completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
+
+Scalar arrays preserve shared identity, fresh allocation per execution, indexing,
+mutation, root persistence and suspended-frame ownership through the existing VM.
+Both complete debug and optimized profiles pass 10,666 strict comparisons,
+153 separate lexer-policy checks, 114 selected Rust tests, 115 constant sessions,
+90 root sessions and 93 array sessions, with 94,756 indexed artifacts each.
+The array corpus distinguishes 78 stateful projections, 12 implementation-boundary
+sessions and three actual observer protocol refusals. Raw pointer-bearing output
+remains retained with a narrow portability check and no pointer-text parity claim.
+Root verification passes 645 workspace tests, strict Rust checks, 72 Python tests,
+93 admission tests and 13,833 subtests. Independent review approves the exact
+commit after rerunning 114 tests per profile, 25 admission tests, six native/Rust
+pairs and the complete debug validator. Nested arrays, cycles/GC, methods,
+general objects/functions and full AI/GS remain open.
 
 Private raw engine/spec loading preserves original construction/reset, scoped
 vehicle-ID mappings and Road Action0 properties 08/09/0F/11. Extended local IDs

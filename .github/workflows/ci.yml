@@ -19,6 +19,130 @@ jobs:
           components: rustfmt, clippy
       - run: python3 scripts/check-contract.py --validate
       - run: python3 -m unittest discover -s scripts/tests -p 'test_*.py' -v
+      - uses: astral-sh/setup-uv@v6
+      - name: Validate loader evidence checks
+        run: uv run --with pytest python -m pytest scripts/tests/grf_control_evidence_test.py -q
+      - name: Lint loader evidence checks
+        run: |
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/grf_control*.py scripts/check-grf-control.py scripts/tests/grf_control_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/grf_control_evidence.py scripts/grf_control_run.py scripts/grf_control_guards.py scripts/grf_control_archive.py scripts/grf_control_provenance.py scripts/check-grf-control.py scripts/tests/grf_control_evidence_test.py
+      - name: Validate fresh road sale evidence admission
+        run: uv run --with pytest python -m pytest scripts/tests/sale_evidence_test.py scripts/tests/sale_lifetime_test.py -q
+      - name: Validate context and occupancy evidence admission
+        run: |
+          uv run --with pytest python -m pytest scripts/tests/context_ci_evidence_test.py -q
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/context_ci_*.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/context_ci_support.py scripts/context_ci_evidence.py scripts/occupancy_ci_evidence.py scripts/check-grf-context-ci.py scripts/check-occupancy-ci.py scripts/tests/context_ci_evidence_test.py
+      - name: Check road slope CI admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/road_slope_ci_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/road_slope_ci_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/check-road-slope-ci.py scripts/road_slope_ci_evidence.py scripts/tests/road_slope_ci_test.py
+      - name: Check static safety CI admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/safety_ci_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/check-grf-safety-ci.py scripts/safety_ci_evidence.py scripts/safety_ci_bindings.py scripts/tests/safety_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/check-grf-safety-ci.py scripts/safety_ci_evidence.py scripts/safety_ci_bindings.py scripts/tests/safety_ci_evidence_test.py
+      - name: Check order-state evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/order_state_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/order_state*.py scripts/check-order-state.py scripts/tests/order_state_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/order_state*.py scripts/check-order-state.py scripts/tests/order_state_evidence_test.py
+      - name: Check ordered language evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/language_ci_evidence_test.py scripts/tests/empty_inputs_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/language_ci_*.py scripts/check-grf-language-ci.py scripts/grf_control_archive.py scripts/depot_build_archive.py scripts/tests/language_ci_evidence_test.py scripts/tests/empty_inputs_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/language_ci_*.py scripts/check-grf-language-ci.py scripts/grf_control_archive.py scripts/depot_build_archive.py scripts/tests/language_ci_evidence_test.py scripts/tests/empty_inputs_test.py
+      - name: Check depot removal evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/depot_removal_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/depot_removal*.py scripts/check-depot-removal.py scripts/tests/depot_removal_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/depot_removal*.py scripts/check-depot-removal.py scripts/tests/depot_removal_evidence_test.py
+      - name: Check ordered sale evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/ordered_sale_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/ordered_sale*.py scripts/check-ordered-sale.py scripts/tests/ordered_sale_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/ordered_sale*.py scripts/check-ordered-sale.py scripts/tests/ordered_sale_evidence_test.py
+      - name: Check live-backup sale evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/backup_sale_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/backup_sale*.py scripts/check-backup-sale.py scripts/tests/backup_sale_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/backup_sale*.py scripts/check-backup-sale.py scripts/tests/backup_sale_evidence_test.py
+      - name: Check session string evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/strings_ci_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/strings_ci_*.py scripts/check-grf-strings-ci.py scripts/tests/strings_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/strings_ci_*.py scripts/check-grf-strings-ci.py scripts/tests/strings_ci_evidence_test.py
+      - name: Check backup-enabled sale evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/backup_enabled_sale_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/backup_enabled_sale*.py scripts/check-backup-enabled-sale.py scripts/tests/backup_enabled_sale_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/backup_enabled_sale*.py scripts/check-backup-enabled-sale.py scripts/tests/backup_enabled_sale_evidence_test.py
+      - name: Check currency owner evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/currency_ci_evidence_test.py scripts/tests/currency_ci_baseline_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/currency_ci_*.py scripts/check-grf-currency-ci.py scripts/tests/currency_ci_evidence_test.py scripts/tests/currency_ci_baseline_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/currency_ci_*.py scripts/check-grf-currency-ci.py scripts/tests/currency_ci_evidence_test.py scripts/tests/currency_ci_baseline_test.py
+      - name: Check currency property evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/currency_properties_ci_evidence_test.py scripts/tests/currency_properties_ci_run_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/currency_properties_ci_*.py scripts/check-grf-currency-properties-ci.py scripts/capture-grf-currency-properties.py scripts/tests/currency_properties_ci_*test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/currency_properties_ci_*.py scripts/check-grf-currency-properties-ci.py scripts/capture-grf-currency-properties.py scripts/tests/currency_properties_ci_*test.py
+      - name: Check engine spec evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/engine_specs_ci_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/engine_specs_ci_*.py scripts/check-engine-specs-ci.py scripts/capture-engine-specs.py scripts/tests/engine_specs_ci_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/engine_specs_ci_*.py scripts/check-engine-specs-ci.py scripts/capture-engine-specs.py scripts/tests/engine_specs_ci_test.py
+      - name: Check cargo identity evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/cargo_identity_ci_test.py scripts/tests/cargo_identity_publication_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/cargo_identity_ci_*.py scripts/check-cargo-identity-ci.py scripts/capture-cargo-identity.py scripts/tests/cargo_identity_ci_test.py scripts/tests/cargo_identity_publication_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/cargo_identity_ci_*.py scripts/check-cargo-identity-ci.py scripts/capture-cargo-identity.py scripts/tests/cargo_identity_ci_test.py scripts/tests/cargo_identity_publication_test.py
+      - name: Check owned Restore evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/owned_restore_sources_test.py scripts/owned_restore_capacity_test.py scripts/owned_restore_admission_test.py scripts/owned_restore_suffix_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/owned_restore_*.py scripts/check-owned-restore.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/owned_restore_*.py scripts/check-owned-restore.py
+      - name: Check shared Restore evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/shared_restore_fixture_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/shared_restore_*.py scripts/check-shared-restore.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/shared_restore_*.py scripts/check-shared-restore.py
+      - name: Check empty-road evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/empty_road_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/empty_road_*.py scripts/check-empty-road.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/empty_road_*.py scripts/check-empty-road.py
+      - name: Validate road movement evidence helpers
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/movement_ci_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/movement_ci scripts/check-road-movement-ci.py scripts/tests/movement_ci_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/movement_ci scripts/check-road-movement-ci.py scripts/tests/movement_ci_test.py
+      - name: Check tree and terrain evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/tree_ci_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/tree_ci_*.py scripts/check-tree-terrain-ci.py scripts/tests/tree_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/tree_ci_*.py scripts/check-tree-terrain-ci.py scripts/tests/tree_ci_evidence_test.py
+      - name: Check evidence transport and failure diagnostics
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/tests/evidence_transport_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/tests/evidence_transport_test.py
+      - name: Check constant session evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/script_vm_constants_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/script_vm_constants.py scripts/tests/script_vm_constants_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_constants.py scripts/tests/script_vm_constants_test.py
+      - name: Check configured root session evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py scripts/tests/script_vm_foreach_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/script_vm_roots.py scripts/script_vm_arrays.py scripts/script_vm_foreach.py scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py scripts/tests/script_vm_foreach_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_roots.py scripts/script_vm_arrays.py scripts/script_vm_foreach.py scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py scripts/tests/script_vm_foreach_test.py
+      - name: Check PR movement capture orchestration
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/movement_pr_capture_test.py scripts/tests/movement_pr_process_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/movement_pr_capture.py scripts/movement_pr_process.py scripts/tests/movement_pr_capture_test.py scripts/tests/movement_pr_process_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/movement_pr_capture.py scripts/movement_pr_process.py scripts/tests/movement_pr_capture_test.py scripts/tests/movement_pr_process_test.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked
@@ -58,6 +182,97 @@ jobs:
             .artifacts/callbacks-*/
             .artifacts/worlds-*/
             .artifacts/replays-*/
+            .artifacts/gameplay-foundations-*/
+            .artifacts/service-*/
+            .artifacts/grf-metadata-*/
+            .artifacts/grf-control-*/
+            .artifacts/purchase-*/
+            .artifacts/depot-build-*/
+            .artifacts/script-vm-*/
+            .artifacts/grf-context-*/
+            .artifacts/grf-safety-*/
+            .artifacts/depot-occupancy-*/
+            .artifacts/occupancy-invocation-*/
+            .artifacts/road-sale-*/
+            .artifacts/road-slope-*/
+            .artifacts/road-slope-invocation-*/
+            .artifacts/order-state-*/
+            .artifacts/depot-removal-*/
+            .artifacts/backup-sale-*/
+            !.artifacts/backup-sale-target-*/**
+            .artifacts/empty-road-*/
+            !.artifacts/empty-road-target-*/**
+            .artifacts/shared-restore-*/
+            !.artifacts/shared-restore-target-*/**
+            .artifacts/owned-restore-*/
+            !.artifacts/owned-restore-target-*/**
+            .artifacts/backup-enabled-sale-*/
+            !.artifacts/backup-enabled-sale-target-*/**
+            .artifacts/ordered-sale-*/
+            !.artifacts/ordered-sale-target-*/**
+            .artifacts/grf-language-*/
+            .artifacts/grf-strings-*/
+            .artifacts/grf-currency-*/
+            .artifacts/engine-specs-*/
+            .artifacts/cargo-identity-*/
+            .artifacts/tree-terrain-*/
+            !.artifacts/tree-terrain-target-*/**
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
+        run: ccache --show-stats --verbose
+
+  movement-capture:
+    name: Full movement capture (normal admission remains closed)
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      MOVEMENT_PR_HEAD: ${{ github.event.pull_request.head.sha }}
+      PYTHONDONTWRITEBYTECODE: "1"
+      JOBS: "2"
+    steps:
+      - name: Set fresh external movement workspace
+        run: |
+          printf 'MOVEMENT_WORK=%s/movement-%s-%s\n' "$RUNNER_TEMP" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.96.0
+      - name: Bind the actual PR source and fresh external paths
+        id: capture-init
+        run: python3 -m scripts.movement_pr_capture init "$MOVEMENT_WORK"
+      - name: Configure native dependencies and compiler cache
+        id: capture-cache
+        timeout-minutes: 30
+        uses: ./.github/actions/reference-cache
+      - name: Build the actual native source and capture every movement case
+        id: capture-run
+        run: python3 -m scripts.movement_pr_capture run "$MOVEMENT_WORK"
+      - name: Preserve complete success or failure evidence
+        id: capture-pack
+        if: always()
+        env:
+          MOVEMENT_INIT_OUTCOME: ${{ steps.capture-init.outcome }}
+          MOVEMENT_CACHE_OUTCOME: ${{ steps.capture-cache.outcome }}
+          MOVEMENT_PRODUCER_OUTCOME: ${{ steps.capture-run.outcome }}
+        run: python3 -m scripts.movement_pr_capture finish "$MOVEMENT_WORK"
+      - name: Retain mode-preserving capture and diagnostics
+        timeout-minutes: 45
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: movement-capture-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 14
+          path: |
+            ${{ env.MOVEMENT_WORK }}/upload/
+            ${{ env.MOVEMENT_WORK }}/archive-monitor/
+            ${{ env.MOVEMENT_WORK }}/raw/capture/evidence.tar.gz
+            ${{ env.MOVEMENT_WORK }}/raw/capture/evidence-index.json
+      - name: Report native compiler-cache statistics
+        if: always() && steps.capture-cache.outcome == 'success'
         run: ccache --show-stats --verbose

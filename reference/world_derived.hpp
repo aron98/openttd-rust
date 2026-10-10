@@ -2,12 +2,25 @@
 #ifndef OTTD_REFERENCE_WORLD_DERIVED_HPP
 #define OTTD_REFERENCE_WORLD_DERIVED_HPP
 #include "reference_world.hpp"
+#include "reference_movement_forbidden.hpp"
+#include "reference_content.hpp"
+#include "reference_terrain.hpp"
+#include "reference_allocation.hpp"
+#include "reference_runtime_road.hpp"
+#include "reference_runtime_road_fixture.hpp"
+#include "reference_grf_scan.hpp"
+#include "reference_grf_metadata.hpp"
+#include "reference_depot_runtime.hpp"
+#include "reference_order_state.hpp"
 #include "../station_base.h"
 #include "../group.h"
 #include "../industry.h"
 #include "../town.h"
 #include "../economy_base.h"
 #include <cstdio>
+
+namespace ReferenceRoadSlope { nlohmann::json Probe(); }
+namespace ReferenceGrfSafety { void Observe(); }
 
 namespace ReferenceWorld {
 struct CargoAccess {
@@ -48,6 +61,29 @@ inline Json PacketGroup(const auto &packets, Json owner, Json cargo_type, Json n
 }
 inline void AfterLoad()
 {
+    ReferenceMovement::ValidateEnvironment();
+    ReferenceRuntimeRoadFixture::Prepare();
+    ReferenceContent::Observe();
+    ReferenceTerrain::Observe();
+    ReferenceAllocation::Observe();
+    ReferenceRuntimeRoad::Observe();
+    ReferenceGrfScan::Observe();
+    ReferenceGrfMetadata::Observe();
+    ReferenceGrfSafety::Observe();
+    ReferenceDepotRuntime::Observe();
+    ReferenceOrderState::Observe();
+    if (const char *road_slope_path = std::getenv("OTTD_ROAD_SLOPE_PATH"); road_slope_path != nullptr && _game_mode != GM_MENU) {
+        if (std::ifstream(road_slope_path).good()) throw std::runtime_error("Road slope observation already exists");
+        const Json before = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
+        Json result = ReferenceRoadSlope::Probe();
+        const Json after = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
+        if (before != after) throw std::runtime_error("Road slope live state leaked");
+        result["live_before"] = before;
+        result["live_after"] = after;
+        std::ofstream output(road_slope_path);
+        output << result.dump() << '\n';
+        if (!output) throw std::runtime_error("Road slope observation write failed");
+    }
     const char *path = std::getenv("OTTD_WORLD_DERIVED_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (const char *control = std::getenv("OTTD_WORLD_CORRUPT_DERIVED")) {

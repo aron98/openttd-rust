@@ -1,27 +1,19 @@
 use super::{
     WorldTickError,
-    access::{State, number, value_mut},
+    access::{number, value_mut},
     unsupported,
 };
-use crate::world_access::unsigned;
-use ottd_save::{WireValue, world::World};
+use crate::WorldTickState as State;
+use ottd_save::WireValue;
 
-pub(super) fn limits(state: &mut State, world: &World) -> Result<(), WorldTickError> {
+pub(super) fn limits(state: &mut State<'_>) -> Result<(), WorldTickError> {
     for id in state.company_ids() {
         for kind in ["terraform", "clear", "tree"] {
             let name = format!("{kind}_limit");
-            let rate = unsigned(
-                world,
-                b"PATS",
-                0,
-                &format!("construction.{kind}_per_64k_frames"),
-            )?;
-            let cap = unsigned(
-                world,
-                b"PATS",
-                0,
-                &format!("construction.{kind}_frame_burst"),
-            )? << 16;
+            let rate =
+                state.unsigned(b"PATS", 0, &format!("construction.{kind}_per_64k_frames"))?;
+            let cap =
+                state.unsigned(b"PATS", 0, &format!("construction.{kind}_frame_burst"))? << 16;
             let previous = u64::try_from(state.number(b"PLYR", id, &name)?)
                 .map_err(|_| unsupported("limits", &name))?;
             let value = previous.saturating_add(rate).min(cap);
@@ -35,16 +27,16 @@ pub(super) fn limits(state: &mut State, world: &World) -> Result<(), WorldTickEr
     }
     Ok(())
 }
-pub(super) fn monthly(state: &mut State, world: &World, month: u8) -> Result<(), WorldTickError> {
+pub(super) fn monthly(state: &mut State<'_>, month: u8) -> Result<(), WorldTickError> {
     for id in state.company_ids() {
-        solvent(state, world, id)?;
+        solvent(state, id)?;
         state.set_number(b"PLYR", id, "months_of_bankruptcy", 0)?;
         state.set_number(b"PLYR", id, "bankrupt_asked", 0)?;
         if month % 3 == 0 {
             super::company_history::quarter(state, id)?;
         }
     }
-    let inflation = unsigned(world, b"ECMY", 0, "inflation_prices")?;
+    let inflation = state.unsigned(b"ECMY", 0, "inflation_prices")?;
     let overhead = i64::try_from(
         (inflation
             .checked_mul(100)
@@ -60,28 +52,27 @@ pub(super) fn monthly(state: &mut State, world: &World, month: u8) -> Result<(),
         let annual = loan.saturating_mul(rate) / 100;
         let previous = annual.saturating_mul(i64::from(month)) / 12;
         let next = annual.saturating_mul(i64::from(month).saturating_add(1)) / 12;
-        debit(
-            state,
+        state.debit(
             id,
             11,
             next.checked_sub(previous)
                 .ok_or_else(|| unsupported("company_month", "interest overflow"))?,
         )?;
-        debit(state, id, 12, overhead)?;
+        state.debit(id, 12, overhead)?;
         if state.number(b"PLYR", id, "money")? < 0 {
             return Err(unsupported("company_month", "projected negative cash"));
         }
     }
     Ok(())
 }
-fn solvent(state: &State, world: &World, id: u32) -> Result<(), WorldTickError> {
-    if unsigned(world, b"PATS", 0, "difficulty.infinite_money")? != 0 {
+fn solvent(state: &State<'_>, id: u32) -> Result<(), WorldTickError> {
+    if state.unsigned(b"PATS", 0, "difficulty.infinite_money")? != 0 {
         return Ok(());
     }
     let personal = state.number(b"PLYR", id, "max_loan")?;
     let maximum = if personal == i64::MIN {
-        let base = unsigned(world, b"PATS", 0, "difficulty.max_loan")?;
-        let inflation = unsigned(world, b"ECMY", 0, "inflation_prices")?;
+        let base = state.unsigned(b"PATS", 0, "difficulty.max_loan")?;
+        let inflation = state.unsigned(b"ECMY", 0, "inflation_prices")?;
         i64::try_from(
             ((base
                 .checked_mul(inflation)
@@ -102,66 +93,72 @@ fn solvent(state: &State, world: &World, id: u32) -> Result<(), WorldTickError> 
     Ok(())
 }
 
-fn debit(state: &mut State, id: u32, expense: usize, cost: i64) -> Result<(), WorldTickError> {
-    if cost == 0 {
-        return Ok(());
-    }
-    state.set_number(
-        b"PLYR",
-        id,
-        "money",
-        state
-            .number(b"PLYR", id, "money")?
-            .checked_sub(cost)
-            .ok_or_else(|| unsupported("company_month", "cash overflow"))?,
-    )?;
-    let WireValue::Array(mut expenses) = state.value(b"PLYR", id, "yearly_expenses")?.clone()
-    else {
-        return Err(unsupported("company_month", "expense array"));
-    };
-    let slot = expenses
-        .get_mut(expense)
-        .ok_or_else(|| unsupported("company_month", "expense slot"))?;
-    *slot = WireValue::Signed(
-        number(slot)?
-            .checked_add(cost)
-            .ok_or_else(|| unsupported("company_month", "expense overflow"))?,
-    );
-    state.set(b"PLYR", id, "yearly_expenses", WireValue::Array(expenses))?;
-    if expense == 11 {
-        let table = state
-            .tables
-            .get(b"PLYR")
-            .ok_or_else(|| unsupported("company_month", "pool"))?;
-        let schema = table
-            .schema()
-            .fields()
-            .iter()
-            .find(|f| f.name() == "cur_economy")
-            .and_then(|f| f.child())
-            .ok_or_else(|| unsupported("company_month", "current schema"))?
-            .clone();
-        let WireValue::Structs(mut current) = state.value(b"PLYR", id, "cur_economy")?.clone()
-        else {
-            return Err(unsupported("company_month", "current economy"));
-        };
-        let slot = value_mut(
-            &schema,
-            current
-                .first_mut()
-                .ok_or_else(|| unsupported("company_month", "current economy"))?,
-            "expenses",
+impl State<'_> {
+    pub(crate) fn debit(
+        &mut self,
+        id: u32,
+        expense: usize,
+        cost: i64,
+    ) -> Result<(), WorldTickError> {
+        let state = self;
+        if cost == 0 {
+            return Ok(());
+        }
+        state.set_number(
+            b"PLYR",
+            id,
+            "money",
+            state
+                .number(b"PLYR", id, "money")?
+                .checked_sub(cost)
+                .ok_or_else(|| unsupported("company_month", "cash overflow"))?,
         )?;
+        let WireValue::Array(mut expenses) = state.value(b"PLYR", id, "yearly_expenses")?.clone()
+        else {
+            return Err(unsupported("company_month", "expense array"));
+        };
+        let slot = expenses
+            .get_mut(expense)
+            .ok_or_else(|| unsupported("company_month", "expense slot"))?;
         *slot = WireValue::Signed(
             number(slot)?
-                .checked_sub(cost)
-                .ok_or_else(|| unsupported("company_month", "current expense overflow"))?,
+                .checked_add(cost)
+                .ok_or_else(|| unsupported("company_month", "expense overflow"))?,
         );
-        state.set(b"PLYR", id, "cur_economy", WireValue::Structs(current))?;
+        state.set(b"PLYR", id, "yearly_expenses", WireValue::Array(expenses))?;
+        if matches!(expense, 2..=6 | 11) {
+            let table = state.table(b"PLYR")?;
+            let schema = table
+                .schema()
+                .fields()
+                .iter()
+                .find(|f| f.name() == "cur_economy")
+                .and_then(|f| f.child())
+                .ok_or_else(|| unsupported("company_month", "current schema"))?
+                .clone();
+            let WireValue::Structs(mut current) = state.value(b"PLYR", id, "cur_economy")?.clone()
+            else {
+                return Err(unsupported("company_month", "current economy"));
+            };
+            let slot = value_mut(
+                &schema,
+                current
+                    .first_mut()
+                    .ok_or_else(|| unsupported("company_month", "current economy"))?,
+                "expenses",
+            )?;
+            *slot = WireValue::Signed(
+                number(slot)?
+                    .checked_sub(cost)
+                    .ok_or_else(|| unsupported("company_month", "current expense overflow"))?,
+            );
+            state.set(b"PLYR", id, "cur_economy", WireValue::Structs(current))?;
+        }
+        Ok(())
     }
-    Ok(())
 }
-pub(super) fn yearly(state: &mut State) -> Result<(), WorldTickError> {
+
+pub(super) fn yearly(state: &mut State<'_>) -> Result<(), WorldTickError> {
     let mut companies = Vec::new();
     for id in state.company_ids() {
         let WireValue::Array(values) = state.value(b"PLYR", id, "yearly_expenses")? else {

@@ -1,11 +1,25 @@
 //! Native top-level command phases over the authoritative saved world.
+mod cargo_capacities;
 mod finance;
+mod vehicle_build;
+mod vehicle_sale;
+pub use cargo_capacities::CargoCapacities;
 mod landscape;
+mod level_land;
 mod naming;
 mod occupancy;
 mod pause;
 mod pipeline;
 mod road;
+mod road_depot;
+mod road_vehicle;
+mod terraform;
+mod terrain_context;
+mod terrain_read;
+mod terrain_run;
+mod terrain_state;
+mod town_rating;
+mod tree_clear;
 
 use crate::world_access::WorldAccessError;
 use ottd_save::world::{World, WorldEdit, WorldError};
@@ -25,6 +39,72 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Build or rotate a vanilla road depot.
+    BuildRoadDepot {
+        /// Map tile.
+        tile: u32,
+        /// Native road type.
+        road_type: u8,
+        /// Native entrance direction.
+        direction: u8,
+    },
+    /// Sell an admitted single-part vanilla road vehicle.
+    SellVehicle {
+        /// Native Post feedback location.
+        location: u32,
+        /// Vehicle pool ID.
+        vehicle: u32,
+        /// Native flag; no effect for single-part road vehicles.
+        sell_chain: bool,
+        /// Preserve orders for a later purchase; currently unsupported.
+        backup_order: bool,
+        /// Native order-backup client identity.
+        client_id: u32,
+    },
+    /// Buy one admitted vanilla road vehicle in an existing depot.
+    BuildVehicle {
+        /// Native depot tile.
+        tile: u32,
+        /// Native engine ID.
+        engine: u16,
+        /// Requested cargo or 255 for the default.
+        cargo: u8,
+        /// Native flag, with no effect for road vehicles.
+        use_free_vehicles: bool,
+        /// Native order-backup client identity; zero is the local server.
+        client_id: u32,
+    },
+    /// Change a primary road vehicle's automatic service interval.
+    ChangeServiceInterval {
+        /// Native vehicle pool index.
+        vehicle: u32,
+        /// Requested interval in days, minutes or percent.
+        interval: u16,
+        /// Use this interval instead of the company default.
+        custom: bool,
+        /// Interpret a custom interval as a reliability percentage.
+        percent: bool,
+    },
+    /// Level a native rectangular or diagonal selection with partial completion.
+    LevelLand {
+        /// End tile of the selection, including native void tiles.
+        tile: u32,
+        /// Start tile whose initial height determines the target.
+        start_tile: u32,
+        /// Use native diagonal iteration instead of a rectangle.
+        diagonal: bool,
+        /// Native raw mode: level zero, lower one, raise two.
+        level_mode: u8,
+    },
+    /// Change selected terrain corners by one height level.
+    TerraformLand {
+        /// Linear tile index, including native void tiles.
+        tile: u32,
+        /// Native raw slope byte; only its four corner bits select work.
+        slope: u8,
+        /// Raise if true, lower otherwise.
+        dir_up: bool,
+    },
     /// Build vanilla road pieces on supported terrain.
     BuildRoad {
         /// Linear tile index.
@@ -101,7 +181,7 @@ pub struct CommandCost {
     pub error_params: Vec<i64>,
 }
 impl CommandCost {
-    const fn success(cost: i64, expenses: u8) -> Self {
+    pub(crate) const fn success(cost: i64, expenses: u8) -> Self {
         Self {
             success: true,
             cost,
@@ -110,7 +190,7 @@ impl CommandCost {
             error_params: Vec::new(),
         }
     }
-    fn failure(symbol: &str) -> Self {
+    pub(crate) fn failure(symbol: &str) -> Self {
         Self {
             success: false,
             cost: 0,
@@ -148,10 +228,52 @@ pub struct CommandReceipt {
     pub exec: Option<CommandCost>,
     /// Final Execute result, including affordability errors.
     pub result: Option<CommandCost>,
+    /// Actual native tuple values, absent for cost-only commands.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub returns: Option<CommandReturnPhases>,
+}
+/// Native non-cost results, retaining successful tiles and invalid sentinels.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum CommandReturn {
+    /// Native vehicle construction return tuple.
+    Vehicle {
+        /// Allocated ID, or native invalid ID 0xFFFFF.
+        vehicle: u32,
+        /// Default/refitted cargo capacity.
+        capacity: u32,
+        /// Mail capacity, zero for road vehicles.
+        mail_capacity: u16,
+        /// Capacity by native cargo slot.
+        cargo_capacities: Box<CargoCapacities>,
+    },
+    /// Terraform/level-land native result tuple.
+    Landscape {
+        /// Additional cash required, distinct from the completed cost.
+        additional_money: i64,
+        /// Native returned tile, including zero and `INVALID_TILE`.
+        tile: u32,
+    },
+}
+/// Tuple values at exactly the command phases entered.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CommandReturnPhases {
+    /// Body test tuple before outer validation.
+    pub test: Option<CommandReturn>,
+    /// Body execution tuple before accounting.
+    pub exec: Option<CommandReturn>,
+    /// Final Execute tuple after outer validation/accounting.
+    pub result: Option<CommandReturn>,
 }
 /// Rust scope or saved-state failure; never impersonates a native command error.
 #[derive(Debug, thiserror::Error)]
 pub enum CommandError {
+    /// Runtime allocation or candidate-cache restoration failure.
+    #[error(transparent)]
+    Runtime(#[from] crate::runtime::RuntimeError),
+    /// Vanilla specification or price restoration failure.
+    #[error(transparent)]
+    Content(#[from] crate::content::ContentError),
     /// A native gameplay context not implemented by this stage.
     #[error("unsupported command context: {0}")]
     Unsupported(&'static str),
@@ -168,17 +290,40 @@ pub enum CommandError {
 struct Plan {
     cost: CommandCost,
     edits: Vec<WorldEdit>,
+    returns: Option<CommandReturn>,
 }
 impl Plan {
     const fn empty(cost: CommandCost) -> Self {
         Self {
             cost,
             edits: Vec::new(),
+            returns: None,
         }
     }
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
+        Command::BuildRoadDepot { .. }
+        | Command::BuildVehicle { .. }
+        | Command::SellVehicle { .. } => Err(CommandError::Unsupported(
+            "vehicle construction needs owned runtime",
+        )),
+        Command::ChangeServiceInterval {
+            vehicle,
+            interval,
+            custom,
+            percent,
+        } => road_vehicle::service_interval(
+            world,
+            request.company,
+            *vehicle,
+            *interval,
+            *custom,
+            *percent,
+        ),
+        Command::LevelLand { .. } | Command::TerraformLand { .. } => Err(
+            CommandError::Unsupported("terrain command requires phase context"),
+        ),
         Command::IncreaseLoan { method, amount } => {
             finance::loan(world, request.company, (*method, *amount), true)
         }

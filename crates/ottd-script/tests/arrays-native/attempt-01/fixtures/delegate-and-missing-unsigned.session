@@ -1,0 +1,6 @@
+compile 0 0 unsigned fixtures/delegate-and-missing-0.nut
+run 0 0 10000
+compile 0 1 unsigned fixtures/delegate-and-missing-1.nut
+run 0 1 10000
+compile 0 2 unsigned fixtures/delegate-and-missing-2.nut
+run 0 2 10000

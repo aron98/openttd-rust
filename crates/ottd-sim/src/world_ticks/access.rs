@@ -5,16 +5,33 @@
 use super::{WorldTickError, unsupported};
 use crate::world_access::{field_edit, row_field};
 use ottd_save::{
-    TableChunk, TableRecord, TableSchema, WireValue,
-    world::{PathElement, World, WorldEdit},
+    TableRecord, TableSchema, WireValue,
+    world::{
+        CandidateTable, CandidateView, PathElement, PreparedWorldTransaction, World, WorldEdit,
+    },
 };
-use std::collections::BTreeMap;
 
-pub(super) struct State {
-    pub tables: BTreeMap<[u8; 4], TableChunk>,
-}
-impl State {
-    pub(super) fn random_state(&self) -> Result<[u32; 2], WorldTickError> {
+use crate::WorldTickState as State;
+impl<'w> State<'w> {
+    pub(crate) fn number_value(value: &WireValue) -> Result<i64, WorldTickError> {
+        number(value)
+    }
+
+    pub(crate) const fn view(&self) -> CandidateView<'_> {
+        self.transaction.view()
+    }
+    pub(crate) fn apply(&mut self, edit: WorldEdit) -> Result<(), WorldTickError> {
+        Ok(self.transaction.apply(edit)?)
+    }
+    pub(crate) fn finish(self) -> Result<PreparedWorldTransaction<'w>, WorldTickError> {
+        Ok(self.transaction.prepare()?)
+    }
+    pub(crate) fn table(&self, id: &[u8; 4]) -> Result<CandidateTable<'_>, WorldTickError> {
+        self.view()
+            .table(*id)
+            .ok_or_else(|| unsupported("state", "missing table"))
+    }
+    pub(crate) fn random_state(&self) -> Result<[u32; 2], WorldTickError> {
         Ok([
             u32::try_from(self.number(b"DATE", 0, "random_state[0]")?)
                 .map_err(|_| unsupported("random", "state word"))?,
@@ -22,33 +39,28 @@ impl State {
                 .map_err(|_| unsupported("random", "state word"))?,
         ])
     }
-    pub(super) fn load(world: &World) -> Self {
+    pub(crate) const fn load(world: &'w mut World) -> Self {
+        let width = world.map().width();
+        let height = world.map().height();
         Self {
-            tables: world
-                .tables()
-                .iter()
-                .filter(|(id, _)| matches!(*id, b"DATE" | b"PLYR" | b"ECMY" | b"IBLD" | b"CITY"))
-                .map(|(id, t)| (*id, t.clone()))
-                .collect(),
+            transaction: world.transaction(),
+            width,
+            height,
         }
     }
-    pub(super) fn value(
+    pub(crate) fn value(
         &self,
         id: &[u8; 4],
         record: u32,
         name: &str,
     ) -> Result<&WireValue, WorldTickError> {
-        let table = self
-            .tables
-            .get(id)
-            .ok_or_else(|| unsupported("state", "missing table"))?;
+        let table = self.table(id)?;
         let row = table
-            .records()
-            .get(&record)
+            .record(record)
             .ok_or_else(|| unsupported("state", "missing row"))?;
         Ok(row_field(table.schema(), row, name)?)
     }
-    pub(super) fn number(
+    pub(crate) fn number(
         &self,
         id: &[u8; 4],
         record: u32,
@@ -56,26 +68,26 @@ impl State {
     ) -> Result<i64, WorldTickError> {
         number(self.value(id, record, name)?)
     }
-    pub(super) fn set(
+    pub(crate) fn set(
         &mut self,
         id: &[u8; 4],
         record: u32,
         name: &str,
         value: WireValue,
     ) -> Result<(), WorldTickError> {
-        let table = self
-            .tables
-            .get_mut(id)
-            .ok_or_else(|| unsupported("state", "missing table"))?;
-        let schema = table.schema().clone();
-        let row = table
-            .records_mut()
-            .get_mut(&record)
-            .ok_or_else(|| unsupported("state", "missing row"))?;
-        *value_mut(&schema, row, name)? = value;
-        Ok(())
+        let path = vec![PathElement::Field(name.into())];
+        let edit = match value {
+            WireValue::Structs(rows) => WorldEdit::StructList {
+                chunk: *id,
+                record,
+                path,
+                rows,
+            },
+            value => field_edit(*id, record, name, value),
+        };
+        self.apply(edit)
     }
-    pub(super) fn set_number(
+    pub(crate) fn set_number(
         &mut self,
         id: &[u8; 4],
         record: u32,
@@ -91,35 +103,22 @@ impl State {
         };
         self.set(id, record, name, next)
     }
-    pub(super) fn company_ids(&self) -> Vec<u32> {
-        self.tables
-            .get(b"PLYR")
-            .map(|t| t.records().keys().copied().collect())
+    pub(crate) fn company_ids(&self) -> Vec<u32> {
+        self.view()
+            .table(*b"PLYR")
+            .map(|t| t.records().map(|(id, _)| id).collect())
             .unwrap_or_default()
     }
-    pub(super) fn edits(self, world: &World) -> Result<Vec<WorldEdit>, WorldTickError> {
-        let mut edits = Vec::new();
-        for (id, table) in self.tables {
-            for (index, row) in table.records() {
-                for (descriptor, value) in table.schema().fields().iter().zip(row.values()) {
-                    if crate::world_access::field(world, &id, *index, descriptor.name())? == value {
-                        continue;
-                    }
-                    edits.push(match value {
-                        WireValue::Structs(rows) => WorldEdit::StructList {
-                            chunk: id,
-                            record: *index,
-                            path: vec![PathElement::Field(descriptor.name().into())],
-                            rows: rows.clone(),
-                        },
-                        _ => field_edit(id, *index, descriptor.name(), value.clone()),
-                    });
-                }
-            }
-        }
-        Ok(edits)
+    pub(crate) fn unsigned(
+        &self,
+        id: &[u8; 4],
+        record: u32,
+        name: &str,
+    ) -> Result<u64, WorldTickError> {
+        u64::try_from(self.number(id, record, name)?).map_err(|_| unsupported("state", name))
     }
 }
+
 pub(super) fn number(value: &WireValue) -> Result<i64, WorldTickError> {
     match value {
         WireValue::Signed(v) => Ok(*v),

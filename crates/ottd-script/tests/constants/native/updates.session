@@ -1,0 +1,8 @@
+compile 0 0 buffer fixtures/compound.nut
+run 0 0
+lookup 0 K -
+drop 0 0
+compile 0 1 buffer fixtures/prefix.nut
+run 0 1
+lookup 0 K -
+drop 0 1

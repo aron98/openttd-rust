@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "jobs": [
+    {
+      "kind": "edit",
+      "directory": "matrix/rate-edit",
+      "source": "matrix/prepared/save/autosave/exit.sav",
+      "output": "matrix/zero-rates.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.clear_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.terraform_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.tree_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_object_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/setup",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 1,
+            "order": {
+              "type": 5,
+              "flags": 0,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 7,
+              "travel_time": 11,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 3,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "share",
+            "vehicle": 2,
+            "source": 0
+          },
+          {
+            "op": "current_order",
+            "vehicle": 0,
+            "order": {
+              "type": 2,
+              "flags": 16,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 13,
+              "travel_time": 17,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "save",
+            "label": "fleet"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/timed-edit",
+      "source": "matrix/setup/original/native/fleet.sav",
+      "output": "matrix/timed.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 124
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 457
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 790
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 125
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 458
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 791
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 126
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 459
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 792
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 4,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 127
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 4,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 460
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 4,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 793
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/head",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "head",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/middle",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "middle",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/tail",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "tail",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/sole",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "sole",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 3,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/all-shared",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "all-shared",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "head"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "middle"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/estimate",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "estimate",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/wrong-owner",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "wrong-owner",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/invalid-id",
+      "source": "matrix/timed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "invalid-id",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 99999,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/crashed-edit",
+      "source": "matrix/timed.sav",
+      "output": "matrix/crashed.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "vehstatus"
+            ],
+            "value": {
+              "unsigned": 138
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/crashed",
+      "source": "matrix/crashed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "crashed",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/not-stopped-edit",
+      "source": "matrix/timed.sav",
+      "output": "matrix/not-stopped.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "vehstatus"
+            ],
+            "value": {
+              "unsigned": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/not-stopped",
+      "source": "matrix/not-stopped.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "not-stopped",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/nonzero-speed-edit",
+      "source": "matrix/timed.sav",
+      "output": "matrix/nonzero-speed.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "cur_speed"
+            ],
+            "value": {
+              "unsigned": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/nonzero-speed",
+      "source": "matrix/nonzero-speed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "nonzero-speed",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/charged-sale-edit",
+      "source": "matrix/timed.sav",
+      "output": "matrix/charged-sale.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "value"
+            ],
+            "value": {
+              "signed": -9
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/charged-sale",
+      "source": "matrix/charged-sale.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "charged-sale",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/order-allocation-probe",
+      "source": "matrix/all-shared/original/native/after.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "order-allocation-probe",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 4,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "save",
+            "label": "reuse"
+          }
+        ]
+      }
+    }
+  ],
+  "cases": [
+    "matrix/head",
+    "matrix/middle",
+    "matrix/tail",
+    "matrix/sole",
+    "matrix/all-shared",
+    "matrix/estimate",
+    "matrix/wrong-owner",
+    "matrix/invalid-id",
+    "matrix/crashed",
+    "matrix/not-stopped",
+    "matrix/nonzero-speed",
+    "matrix/charged-sale"
+  ]
+}

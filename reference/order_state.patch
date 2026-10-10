@@ -1,0 +1,20 @@
+--- a/src/order_base.h
++++ b/src/order_base.h
+@@ -32,6 +32,7 @@
+  */
+ struct Order {
+ private:
++	friend struct ReferenceOrderAccess;
+ 	friend struct VEHSChunkHandler;                             ///< Loading of ancient vehicles.
+ 	friend SaveLoadTable GetOrderDescription();                 ///< Saving and loading of orders.
+ 	/* So we can use private/protected variables in the saveload code */
+--- a/src/order_backup.h
++++ b/src/order_backup.h
+@@ -32,6 +32,7 @@
+  */
+ struct OrderBackup : OrderBackupPool::PoolItem<&_order_backup_pool>, BaseConsist {
+ private:
++	friend struct ReferenceOrderAccess;
+ 	friend SaveLoadTable GetOrderBackupDescription(); ///< Saving and loading of order backups.
+ 	friend struct BKORChunkHandler; ///< Creating empty orders upon savegame loading.
+ 	template <typename T>

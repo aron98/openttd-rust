@@ -1,0 +1,15 @@
+configured_empty_roots 0 0 1
+step 0 seed 0 6b0079 string 780079
+seeded
+step 1 raw 0 6b0079
+raw 6b0079 string 3 780079
+step 2 raw 0 6b
+raw 6b absent
+step 3 seed 0 - bool 1
+seeded
+step 4 raw 0 -
+raw - bool 1
+step 5 seed 0 66 float 2147483648
+seeded
+step 6 raw 0 66
+raw 66 float 2147483648

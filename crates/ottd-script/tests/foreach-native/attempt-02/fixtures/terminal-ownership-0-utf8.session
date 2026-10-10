@@ -1,0 +1,9 @@
+make-array 0 0 2 string 6f6c64 string 6e657874
+root-store-array 0 70656e64696e67 0
+compile 0 0 utf8 terminal-ownership-0.nut
+run 0 0 0
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 2

@@ -1,0 +1,2 @@
+# Native lexical fixtures include control bytes and CRLF: preserve their bytes.
+*.nut -text whitespace=cr-at-eol

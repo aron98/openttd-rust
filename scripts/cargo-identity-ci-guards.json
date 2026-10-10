@@ -1,0 +1,3376 @@
+[
+  {
+    "name": "host-signed-byte",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              -1
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host unsigned input",
+    "environment": {}
+  },
+  {
+    "name": "host-wide-byte",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              256
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host unsigned input",
+    "environment": {}
+  },
+  {
+    "name": "host-wide-first",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 65536,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host unsigned input",
+    "environment": {}
+  },
+  {
+    "name": "host-pilot-count-cap",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 3,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host unsigned input",
+    "environment": {}
+  },
+  {
+    "name": "host-unsupported-property",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 15,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host property scope",
+    "environment": {}
+  },
+  {
+    "name": "host-invalid-stage",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "init",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host stage",
+    "environment": {}
+  },
+  {
+    "name": "host-wrong-version",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 5,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host API file",
+    "environment": {}
+  },
+  {
+    "name": "host-duplicate-grfid",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host API file",
+    "environment": {}
+  },
+  {
+    "name": "host-late-registry-reset",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "reset-retained"
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host unknown operation or unsafe reset",
+    "environment": {}
+  },
+  {
+    "name": "host-missing-initial-reset",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "snapshot"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host initial reset",
+    "environment": {}
+  },
+  {
+    "name": "host-unregistered-grfid",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 0,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host missing file",
+    "environment": {}
+  },
+  {
+    "name": "host-raw-budget",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host raw budget",
+    "environment": {}
+  },
+  {
+    "name": "host-dynamic-type",
+    "kind": "host",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": 1,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "cargo-identity host boolean",
+    "environment": {}
+  },
+  {
+    "name": "wrapper-missing-required-argument",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "Missing INPUT",
+    "environment": {}
+  },
+  {
+    "name": "wrapper-existing-output-directory",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "run directory must be fresh",
+    "environment": {}
+  },
+  {
+    "name": "wrapper-manifest-byte-budget",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "host manifest byte budget",
+    "environment": {}
+  },
+  {
+    "name": "wrapper-wrong-save-hash",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "requires exact clear-v362 fixture",
+    "environment": {}
+  },
+  {
+    "name": "wrapper-mixed-OTTD_CARGO_IDENTITY_OUTPUT",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_CARGO_IDENTITY_OUTPUT",
+    "environment": {
+      "OTTD_CARGO_IDENTITY_OUTPUT": "1"
+    }
+  },
+  {
+    "name": "wrapper-mixed-OTTD_ENGINE_SPECS_OUTPUT",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_ENGINE_SPECS_OUTPUT",
+    "environment": {
+      "OTTD_ENGINE_SPECS_OUTPUT": "1"
+    }
+  },
+  {
+    "name": "wrapper-mixed-OTTD_REPLAY_PATH",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_REPLAY_PATH",
+    "environment": {
+      "OTTD_REPLAY_PATH": "1"
+    }
+  },
+  {
+    "name": "wrapper-mixed-OTTD_GRF_CURRENCY_OUTPUT",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_GRF_CURRENCY_OUTPUT",
+    "environment": {
+      "OTTD_GRF_CURRENCY_OUTPUT": "1"
+    }
+  },
+  {
+    "name": "wrapper-mixed-OTTD_GRF_STRINGS_OUTPUT",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_GRF_STRINGS_OUTPUT",
+    "environment": {
+      "OTTD_GRF_STRINGS_OUTPUT": "1"
+    }
+  },
+  {
+    "name": "wrapper-mixed-OTTD_MOVEMENT_OBSERVE",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_MOVEMENT_OBSERVE",
+    "environment": {
+      "OTTD_MOVEMENT_OBSERVE": "1"
+    }
+  },
+  {
+    "name": "wrapper-mixed-OTTD_MOVEMENT_PREPARE",
+    "kind": "wrapper",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "mode": "api",
+        "dynamic_engines": true,
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "version": 8,
+            "name": "cargo-a.grf"
+          },
+          {
+            "grfid": 1128354306,
+            "version": 8,
+            "name": "cargo-b.grf"
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 8,
+            "raw": [
+              12
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 11,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 12,
+            "count": 1,
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "property",
+            "feature": 8,
+            "stage": "reserve",
+            "grfid": 1128354305,
+            "first": 0,
+            "count": 2,
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "op": "translate",
+            "grfid": 1128354305,
+            "cargo": 1,
+            "usebit": false
+          },
+          {
+            "op": "property",
+            "feature": 1,
+            "stage": "activation",
+            "grfid": 1128354305,
+            "first": 88,
+            "count": 1,
+            "property": 16,
+            "raw": [
+              1
+            ]
+          },
+          {
+            "op": "snapshot"
+          }
+        ]
+      }
+    },
+    "diagnostic": "refuses mixed environment: OTTD_MOVEMENT_PREPARE",
+    "environment": {
+      "OTTD_MOVEMENT_PREPARE": "1"
+    }
+  }
+]

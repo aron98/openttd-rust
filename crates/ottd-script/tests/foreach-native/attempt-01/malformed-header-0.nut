@@ -1,0 +1,1 @@
+foreach(v [1]) { return v; }

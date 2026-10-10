@@ -1,6 +1,8 @@
+#[cfg(test)]
+use super::name;
 use super::{
     PathElement, TableRecord, TableSchema, TileState, WireValue, World, WorldEdit, WorldError,
-    invalid, name,
+    invalid,
 };
 
 impl World {
@@ -9,9 +11,50 @@ impl World {
     /// # Errors
     /// On failure all saved state and derived indexes remain unchanged.
     pub fn edit_batch(&mut self, edits: Vec<WorldEdit>) -> Result<(), WorldError> {
+        let mut transaction = self.transaction();
+        for edit in edits {
+            transaction.apply(edit)?;
+        }
+        transaction.prepare()?.commit();
+        Ok(())
+    }
+
+    #[cfg(test)]
+    pub(super) fn edit_batch_legacy(&mut self, edits: Vec<WorldEdit>) -> Result<(), WorldError> {
         let mut candidate = self.clone();
         for edit in edits {
             match edit {
+                WorldEdit::InsertRecord {
+                    chunk,
+                    record,
+                    value,
+                } => {
+                    let records = candidate.pool_records_mut(chunk)?;
+                    match records.entry(record) {
+                        std::collections::btree_map::Entry::Vacant(entry) => {
+                            entry.insert(value);
+                        }
+                        std::collections::btree_map::Entry::Occupied(_) => {
+                            return Err(invalid(&name(chunk), "record already exists"));
+                        }
+                    }
+                }
+                WorldEdit::RemoveRecord { chunk, record } => {
+                    if candidate.pool_records_mut(chunk)?.remove(&record).is_none() {
+                        return Err(invalid(&name(chunk), "missing record"));
+                    }
+                }
+                WorldEdit::ReplaceRecord {
+                    chunk,
+                    record,
+                    value,
+                } => {
+                    let target = candidate
+                        .pool_records_mut(chunk)?
+                        .get_mut(&record)
+                        .ok_or_else(|| invalid(&name(chunk), "missing record"))?;
+                    *target = value;
+                }
                 WorldEdit::StructList {
                     chunk,
                     record,
@@ -75,6 +118,7 @@ impl World {
         }])
     }
 
+    #[cfg(test)]
     fn stage_field(
         &mut self,
         chunk: [u8; 4],
@@ -111,6 +155,51 @@ impl World {
         Ok(())
     }
 
+    #[cfg(test)]
+    fn pool_records_mut(
+        &mut self,
+        chunk: [u8; 4],
+    ) -> Result<&mut std::collections::BTreeMap<u32, TableRecord>, WorldError> {
+        if !matches!(
+            &chunk,
+            b"VEHS"
+                | b"PLYR"
+                | b"CITY"
+                | b"INDY"
+                | b"STNN"
+                | b"ORDL"
+                | b"BKOR"
+                | b"CAPA"
+                | b"CAPY"
+                | b"DEPT"
+                | b"ROAD"
+                | b"OBJS"
+                | b"ERNW"
+                | b"ENGN"
+                | b"GRPS"
+                | b"PSAC"
+                | b"SIGN"
+                | b"SUBS"
+                | b"GOAL"
+                | b"STPA"
+                | b"STPE"
+                | b"LEAT"
+                | b"LEAE"
+                | b"LGRP"
+                | b"LGRJ"
+        ) {
+            return Err(invalid(
+                &name(chunk),
+                "record operation requires a native pool",
+            ));
+        }
+        self.tables
+            .get_mut(&chunk)
+            .map(super::TableChunk::records_mut)
+            .ok_or_else(|| invalid(&name(chunk), "missing table"))
+    }
+
+    #[cfg(test)]
     fn stage_tile(&mut self, index: u32, tile: &TileState) -> Result<(), WorldError> {
         let index = usize::try_from(index).map_err(|_| invalid("tile", "index out of range"))?;
         if index >= self.map().tiles().len() {
@@ -147,7 +236,7 @@ impl World {
     }
 }
 
-fn select_mut<'a>(
+pub(super) fn select_mut<'a>(
     schema: &TableSchema,
     row: &'a mut TableRecord,
     path: &[PathElement],

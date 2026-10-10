@@ -1,0 +1,4 @@
+compile 0 0 utf8 fixtures/ordering-conversion-0.nut
+run 0 0 10000
+compile 0 1 utf8 fixtures/ordering-conversion-1.nut
+run 0 1 10000

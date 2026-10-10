@@ -117,7 +117,10 @@ const SCHEMA: &[(&str, u8)] = &[
     ("competitors_interval_fired", 1),
 ];
 pub(super) fn decode(save: &Savegame) -> Result<DateState, SnapshotError> {
-    let mut fields = table::single(required(save, *b"DATE")?, SCHEMA)?;
+    from_chunk(required(save, *b"DATE")?)
+}
+pub(super) fn from_chunk(chunk: &crate::Chunk) -> Result<DateState, SnapshotError> {
+    let mut fields = table::single(chunk, SCHEMA)?;
     let state: [u32; 2] = [
         table::unsigned(&fields, "random_state[0]")?,
         table::unsigned(&fields, "random_state[1]")?,

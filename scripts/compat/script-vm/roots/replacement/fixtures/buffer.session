@@ -1,0 +1,11 @@
+seed 0 73636f7265 integer 1
+compile 0 0 buffer fixtures/explicit.nut
+compile 0 1 buffer fixtures/unresolved.nut
+compile 0 2 buffer fixtures/inline.nut
+empty 0
+seed 0 73636f7265 integer 2
+raw 1 73636f7265
+raw 0 73636f7265
+run 0 0 1000
+run 0 1 1000
+run 0 2 1000

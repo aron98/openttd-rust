@@ -1,0 +1,10 @@
+compile 0 0 buffer fixtures/seed-string.nut
+drop 0 0
+compile 0 1 buffer fixtures/const-next-decode.nut
+lookup 0 K -
+compile 0 2 buffer fixtures/failed-later.nut
+lookup 0 K -
+compile 0 3 buffer fixtures/seed-enum.nut
+drop 0 3
+compile 0 4 buffer fixtures/enum-next-decode.nut
+lookup 0 E A

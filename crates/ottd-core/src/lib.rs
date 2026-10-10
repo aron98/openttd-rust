@@ -1,5 +1,7 @@
 //! Deterministic primitives ported from OpenTTD 15.3.
 
+pub mod terrain;
+
 /// The two-word OpenTTD game randomizer; all state is explicitly restorable.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Randomizer {
@@ -214,7 +216,7 @@ pub struct TickCounter(pub u64);
 
 mod clock;
 mod clock_types;
-pub use clock::ClockState;
+pub use clock::{ClockPhase, ClockState};
 pub use clock_types::{
     ClockCache, ClockError, ClockEvent, ClockEvents, ClockSettings, ClockSnapshot, TimekeepingUnits,
 };

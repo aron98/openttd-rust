@@ -1,0 +1,45 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 buffer nested-arrays-0.nut
+compiled
+stack 11
+op 2 1 0 0 0
+op 31 2 2 0 0
+op 2 3 1 0 0
+op 32 2 3 0 0
+op 2 3 2 0 0
+op 32 2 3 0 0
+op 31 3 2 0 0
+op 2 4 3 0 0
+op 32 3 4 0 0
+op 2 4 4 0 0
+op 32 3 4 0 0
+op 20 4 3 0 0
+op 51 2 10 4 0
+op 52 2 10 4 0
+op 20 7 3 0 0
+op 51 3 5 7 0
+op 52 3 5 7 0
+op 17 10 8 5 42
+op 35 10 1 10 43
+op 61 10 10 0 0
+op 24 0 -6 0 0
+op 61 7 7 0 0
+op 24 0 -11 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 10000
+return 9956 integer 21
+temp integer 21
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1

@@ -1,3 +1,4 @@
+mod road;
 use crate::Map;
 use ottd_core::MapDimensions;
 
@@ -40,9 +41,7 @@ pub enum LandscapeError {
 #[derive(Debug, Clone)]
 pub struct Landscape {
     map: Map,
-    cursor: usize,
-    feedback: usize,
-    visits: usize,
+    scheduler: TileLoop,
 }
 
 impl Landscape {
@@ -50,6 +49,15 @@ impl Landscape {
     /// # Errors
     /// Rejects invalid dimensions, cursors, snowy tiles or unsupported tile kinds.
     pub fn new(map: Map, cursor: u32) -> Result<Self, LandscapeError> {
+        Self::validate(map, cursor, false)
+    }
+
+    /// Road callbacks require the caller's saved-world admission, unlike `new`.
+    pub(crate) fn for_world(map: Map, cursor: u32, roads: bool) -> Result<Self, LandscapeError> {
+        Self::validate(map, cursor, roads)
+    }
+
+    fn validate(map: Map, cursor: u32, roads: bool) -> Result<Self, LandscapeError> {
         let dimensions =
             MapDimensions::new(map.width, map.height).map_err(|_| LandscapeError::Map)?;
         let count = usize::try_from(dimensions.tile_count()).map_err(|_| LandscapeError::Map)?;
@@ -64,6 +72,7 @@ impl Landscape {
             match tile.tile_type >> 4 {
                 0 if tile.m3 & 16 == 0 && (tile.m5 >> 2) & 7 <= 2 => {}
                 7 => {}
+                2 if roads => road::validate(&map, index)?,
                 _ => return Err(LandscapeError::Tile(index)),
             }
         }
@@ -74,21 +83,62 @@ impl Landscape {
             .ok_or(LandscapeError::Map)?;
         Ok(Self {
             map,
-            cursor,
-            feedback,
-            visits: count >> 8,
+            scheduler: TileLoop {
+                cursor,
+                feedback,
+                visits: count >> 8,
+            },
         })
     }
 
     /// Runs the upstream tile scheduler using the already advanced game tick.
-    pub fn advance(&mut self, tick_counter: u64) {
+    /// # Errors
+    /// Reports a scheduler cursor outside the owned map instead of skipping its callback.
+    pub fn advance(&mut self, tick_counter: u64) -> Result<(), LandscapeError> {
+        let map = &mut self.map;
+        self.scheduler.advance(tick_counter, |index| {
+            let tile = map.tiles.get_mut(index).ok_or(LandscapeError::Cursor)?;
+            tile.visit_landscape();
+            Ok(())
+        })
+    }
+
+    pub(crate) fn into_scheduler(self) -> TileLoop {
+        self.scheduler
+    }
+
+    /// Current map, including all unchanged raw tile bits.
+    pub const fn map(&self) -> &Map {
+        &self.map
+    }
+    /// Returns the owned map after simulation without copying tile storage.
+    pub fn into_map(self) -> Map {
+        self.map
+    }
+    /// Next nonzero tile scheduled by the LFSR.
+    pub const fn cursor(&self) -> usize {
+        self.scheduler.cursor
+    }
+}
+
+use crate::TileLoop;
+
+impl TileLoop {
+    pub(crate) const fn cursor(&self) -> usize {
+        self.cursor
+    }
+    pub(crate) fn advance<E>(
+        &mut self,
+        tick: u64,
+        mut visit: impl FnMut(usize) -> Result<(), E>,
+    ) -> Result<(), E> {
         let mut count = self.visits;
-        if tick_counter % 256 == 0 {
-            self.visit(0);
+        if tick % 256 == 0 {
+            visit(0)?;
             count = count.saturating_sub(1);
         }
         for _ in 0..count {
-            self.visit(self.cursor);
+            visit(self.cursor)?;
             self.cursor = (self.cursor >> 1)
                 ^ if self.cursor & 1 == 1 {
                     self.feedback
@@ -96,14 +146,17 @@ impl Landscape {
                     0
                 };
         }
+        Ok(())
     }
+}
 
-    fn visit(&mut self, index: usize) {
-        #[expect(
-            clippy::indexing_slicing,
-            reason = "validated nonzero maximal LFSR stays inside its map"
-        )]
-        let tile = &mut self.map.tiles[index];
+impl crate::Tile {
+    pub(crate) const fn visit_landscape(&mut self) {
+        let tile = self;
+        if tile.tile_type >> 4 == 2 {
+            road::visit(tile);
+            return;
+        }
         if tile.tile_type >> 4 != 0 || (tile.m5 >> 2) & 7 != 0 || tile.m5 & 3 == 3 {
             return;
         }
@@ -112,21 +165,6 @@ impl Landscape {
         } else {
             (tile.m5 & 31).wrapping_add(1)
         };
-    }
-
-    /// Current map, including all unchanged raw tile bits.
-    pub const fn map(&self) -> &Map {
-        &self.map
-    }
-
-    /// Returns the owned map after simulation without copying tile storage.
-    pub fn into_map(self) -> Map {
-        self.map
-    }
-
-    /// Next nonzero tile scheduled by the LFSR.
-    pub const fn cursor(&self) -> usize {
-        self.cursor
     }
 }
 
@@ -171,3 +209,6 @@ fn validate_boundary(map: &Map) -> Result<(), LandscapeError> {
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests;

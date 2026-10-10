@@ -1,0 +1,15 @@
+make-array 0 0 1 string 68656c64
+root-store-array 0 70656e64696e67 0
+compile 0 0 utf8 fixtures/temporary-only-0.nut
+run 0 0 1000
+seed 0 70656e64696e67 null -
+drop-handle 0 0
+drop 0 0
+weak-state 0 1
+refs 0 68656c64
+compile 0 1 utf8 fixtures/temporary-only-1.nut
+weak-state 0 1
+run 0 1 1000
+drop 0 1
+weak-state 0 1
+refs 0 68656c64

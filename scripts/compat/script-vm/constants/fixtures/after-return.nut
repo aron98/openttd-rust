@@ -1,0 +1,1 @@
+return 1; const K=7;

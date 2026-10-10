@@ -1,0 +1,2 @@
+configured_empty_roots 0 0 1
+step 0 make-array 0 0 1 array 0

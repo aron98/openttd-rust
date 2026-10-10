@@ -1,0 +1,28 @@
+{
+  "requires": "independently reviewed complete capture and successor normal run",
+  "layout": {
+    "verified_native_corpus": true
+  },
+  "scenario_id": "world.bounded-road-movement",
+  "scenario_after_review": {
+    "status": "implemented",
+    "scope": "rust_behavior",
+    "driver": "road-movement",
+    "evidence": [
+      "summary.json",
+      "binaries.json",
+      "zero-test-rejected.json",
+      "evidence-index.json",
+      "evidence.tar.gz",
+      "sources/inputs.json",
+      "native-inputs/inputs.json",
+      "baseline-inputs/inputs.json",
+      "binding-corruption/summary.json",
+      "archive-controls/summary.json",
+      "bin/ottd",
+      "bin/road_movement_ci",
+      "bin/road_movement"
+    ]
+  },
+  "not_applied": true
+}

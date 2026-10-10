@@ -1,0 +1,16 @@
+compile 0 0 buffer fixtures/rolling-history-0.nut
+run 0 0 1000
+compile 0 1 buffer fixtures/rolling-history-1.nut
+hold-root 0 0 686973746f7279
+seed 0 73616d706c65 integer 3
+run 0 1 1000
+array-length 0 0
+seed 0 73616d706c65 integer 5
+run 0 1 1000
+array-length 0 0
+seed 0 73616d706c65 integer 7
+run 0 1 1000
+array-length 0 0
+seed 0 73616d706c65 integer 11
+run 0 1 1000
+array-length 0 0

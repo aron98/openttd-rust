@@ -56,12 +56,17 @@ inline Json Checkpoint(const std::filesystem::path &directory, const std::string
     Write(stem + ".runtime.json", {{"before_save", before}, {"after_save", after}});
     return {{"label", label}, {"runtime", after}};
 }
+}
+#include "reference_movement_replay.hpp"
+namespace ReferenceReplay {
 inline bool Run()
 {
+    if (std::getenv("OTTD_MOVEMENT_OBSERVE") != nullptr) return ReferenceMovement::Run();
     const char *path = std::getenv("OTTD_REPLAY_PATH");
     static bool active = false;
     static bool done = false;
     if (path == nullptr || active || done || _game_mode != GM_NORMAL) return false;
+    TreeRatingEnabled();
     active = true;
     std::ifstream input(path);
     Require(input.good(), "cannot open native replay input");

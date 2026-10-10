@@ -1,0 +1,7 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 buffer fixtures/compile-failure.nut
+compile_error string 21 657870656374656420274944454e54494649455227
+step 1 raw 0 73636f7265
+raw 73636f7265 absent
+step 2 temp 0
+temp null

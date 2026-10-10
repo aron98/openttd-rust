@@ -2,7 +2,13 @@
 mod cargo;
 mod derived;
 mod edit;
+mod journal;
+pub use journal::{
+    CandidateMap, CandidateTable, CandidateView, OrderDurationDelta, PreparedWorldTransaction,
+    WorldTransaction,
+};
 mod export;
+pub use export::WithoutOrderBackups;
 mod limits;
 mod orders;
 mod ownership;
@@ -37,6 +43,31 @@ pub enum PathElement {
 /// One mutation staged in a complete saved-world transaction.
 #[derive(Debug, Clone)]
 pub enum WorldEdit {
+    /// Insert a complete pool record at an explicitly supplied, unoccupied ID.
+    InsertRecord {
+        /// Native pool chunk, never a singleton or content mapping.
+        chunk: [u8; 4],
+        /// Caller-selected native pool ID; no allocation policy is implied.
+        record: u32,
+        /// Complete record in the pool's pinned wire schema.
+        value: TableRecord,
+    },
+    /// Remove an existing pool record; callers must repair all references.
+    RemoveRecord {
+        /// Native pool chunk.
+        chunk: [u8; 4],
+        /// Existing native pool ID.
+        record: u32,
+    },
+    /// Replace an existing pool record, including variable-length lists.
+    ReplaceRecord {
+        /// Native pool chunk.
+        chunk: [u8; 4],
+        /// Existing native pool ID, preserved by replacement.
+        record: u32,
+        /// Complete replacement, validated with the final world.
+        value: TableRecord,
+    },
     /// Replace a structure list, validating its wire schema and final world.
     StructList {
         /// Native chunk.

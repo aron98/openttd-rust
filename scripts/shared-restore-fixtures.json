@@ -1,0 +1,1436 @@
+{
+  "schema_version": 1,
+  "input": "fixtures/replay/clear-v362.sav",
+  "config": "scripts/reference.cfg",
+  "prepare_cmake": "scripts/run-depot-runtime-reference.cmake",
+  "cases": [
+    {
+      "name": "two-member",
+      "setup": "two",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "two-member",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/two/original/native/initial.sav"
+    },
+    {
+      "name": "three-member",
+      "setup": "three",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "three-member",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/three/original/native/initial.sav"
+    },
+    {
+      "name": "shared-empty",
+      "setup": "empty",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-empty",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/empty/original/native/initial.sav"
+    },
+    {
+      "name": "sold-middle",
+      "setup": "three",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "sold-middle",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 2,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/three/original/native/initial.sav"
+    },
+    {
+      "name": "sold-tail",
+      "setup": "three",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "sold-tail",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/three/original/native/initial.sav"
+    },
+    {
+      "name": "retarget-head",
+      "setup": "three",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "retarget-head",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/three/original/native/initial.sav"
+    },
+    {
+      "name": "retarget-middle",
+      "setup": "three",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "retarget-middle",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 2,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/three/original/native/initial.sav"
+    },
+    {
+      "name": "two-users",
+      "setup": "three",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "two-users",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 78
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 79
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 78
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/three/original/native/initial.sav"
+    },
+    {
+      "name": "consume-estimate",
+      "setup": "two",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "consume-estimate",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/two/original/native/initial.sav"
+    },
+    {
+      "name": "properties",
+      "setup": "properties",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "properties",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/properties/original/native/initial.sav"
+    },
+    {
+      "name": "implicit-index",
+      "setup": "implicit",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "implicit-index",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/implicit/original/native/initial.sav"
+    },
+    {
+      "name": "all-implicit",
+      "setup": "all-implicit",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "all-implicit",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/all-implicit/original/native/initial.sav"
+    },
+    {
+      "name": "estimated-before",
+      "setup": "two",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "estimated-before",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/two/original/native/initial.sav"
+    },
+    {
+      "name": "invalid-before",
+      "setup": "two",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "invalid-before",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 65535,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/two/original/native/initial.sav"
+    },
+    {
+      "name": "poor-company",
+      "setup": "poor",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "poor-company",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/poor.sav"
+    },
+    {
+      "name": "full-capacity",
+      "setup": "capacity",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "full-capacity",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 1
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      },
+      "source": "preparation/capacity.sav"
+    }
+  ],
+  "coverage": {
+    "cases": 16,
+    "actions": 71,
+    "snapshots": 174,
+    "saves": 16
+  },
+  "second_unmatched_native_creation": "not part of shared roster; existing integrated owned no-backup native coverage + Rust consumed-once regression",
+  "successful_shared_duration_exceptions": 0,
+  "jobs": [
+    {
+      "kind": "edit",
+      "directory": "matrix/rate-edit",
+      "source": "matrix/prepared/save/autosave/exit.sav",
+      "output": "matrix/zero-rates.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.clear_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.terraform_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.tree_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_object_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/two",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "prepare-two",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/three",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "prepare-three",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "share",
+            "vehicle": 2,
+            "source": 0
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/empty",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "prepare-empty",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/properties",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "prepare-properties",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "share",
+            "vehicle": 2,
+            "source": 0
+          },
+          {
+            "op": "consist_fields",
+            "vehicle": 0,
+            "fields": {
+              "name": "Shared snapshot",
+              "current_order_time": -2147483648,
+              "lateness_counter": -117,
+              "timetable_start": 123,
+              "service_interval": 75,
+              "cur_real_order_index": 0,
+              "cur_implicit_order_index": 250,
+              "vehicle_flags": 824
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/implicit",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "prepare-implicit",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 8,
+              "flags": 0,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 1,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "consist_fields",
+            "vehicle": 0,
+            "fields": {
+              "name": "",
+              "current_order_time": -2147483648,
+              "lateness_counter": -117,
+              "timetable_start": 123,
+              "service_interval": 75,
+              "cur_real_order_index": 0,
+              "cur_implicit_order_index": 250,
+              "vehicle_flags": 824
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/all-implicit",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "prepare-all-implicit",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 8,
+              "flags": 0,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "consist_fields",
+            "vehicle": 0,
+            "fields": {
+              "name": "",
+              "current_order_time": -2147483648,
+              "lateness_counter": -117,
+              "timetable_start": 123,
+              "service_interval": 75,
+              "cur_real_order_index": 0,
+              "cur_implicit_order_index": 250,
+              "vehicle_flags": 824
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "preparation/poor-edit",
+      "source": "preparation/two/original/native/initial.sav",
+      "output": "preparation/poor.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "money"
+            ],
+            "value": {
+              "signed": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "capacity_load": {
+    "schema_version": 1,
+    "case": "shared-capacity-loadability",
+    "role": "sp",
+    "exit": true,
+    "actions": [
+      {
+        "op": "save",
+        "label": "verified"
+      }
+    ]
+  }
+}

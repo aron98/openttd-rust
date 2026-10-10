@@ -1,0 +1,73 @@
+configured_empty_roots 0 0 1
+step 0 temp 0
+temp null
+step 1 compile 0 0 utf8 fixtures/a.nut
+compiled
+stack 3
+literal string 15 636f6d70696c652d6f776e65722d41
+literal string 6 616273656e74
+op 1 1 0 0 0
+op 9 2 1 0 0
+op 19 1 2 0 0
+op 19 255 0 0 0
+step 2 temp 0
+temp null
+step 3 refs 0 636f6d70696c652d6f776e65722d41
+refs 636f6d70696c652d6f776e65722d41 1
+step 4 compile 0 1 utf8 fixtures/b.nut
+compiled
+stack 2
+literal string 15 636f6d70696c652d6f776e65722d42
+op 1 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 5 temp 0
+temp null
+step 6 refs 0 636f6d70696c652d6f776e65722d42
+refs 636f6d70696c652d6f776e65722d42 1
+step 7 run 0 0 0
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+temp unsupported 134217984
+step 8 temp 0
+temp unsupported 134217984
+step 9 refs 0 636f6d70696c652d6f776e65722d41
+refs 636f6d70696c652d6f776e65722d41 1
+step 10 refs 0 636f6d70696c652d6f776e65722d42
+refs 636f6d70696c652d6f776e65722d42 1
+step 11 drop 0 1
+dropped
+step 12 temp 0
+temp unsupported 134217984
+step 13 refs 0 636f6d70696c652d6f776e65722d42
+refs 636f6d70696c652d6f776e65722d42 0
+step 14 advance 0 1000
+runtime_error 997 string 33 74686520696e6465782027616273656e742720646f6573206e6f74206578697374
+temp unsupported 134217984
+step 15 temp 0
+temp unsupported 134217984
+step 16 drop 0 0
+dropped
+step 17 refs 0 636f6d70696c652d6f776e65722d41
+refs 636f6d70696c652d6f776e65722d41 1
+step 18 compile 0 2 utf8 fixtures/c.nut
+compiled
+stack 2
+op 20 1 1 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 19 temp 0
+temp unsupported 134217984
+step 20 refs 0 636f6d70696c652d6f776e65722d41
+refs 636f6d70696c652d6f776e65722d41 1
+step 21 run 0 2 1000
+return 998 null
+temp null
+step 22 temp 0
+temp null
+step 23 refs 0 636f6d70696c652d6f776e65722d41
+refs 636f6d70696c652d6f776e65722d41 0
+step 24 drop 0 2
+dropped

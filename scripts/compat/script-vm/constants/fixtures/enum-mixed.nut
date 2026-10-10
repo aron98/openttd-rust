@@ -1,0 +1,1 @@
+enum E { A=-2 B=1.5 C="member-value", } return E.C;

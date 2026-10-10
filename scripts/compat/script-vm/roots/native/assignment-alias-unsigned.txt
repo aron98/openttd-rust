@@ -1,0 +1,47 @@
+configured_empty_roots 0 0 1
+step 0 seed 0 73636f7265 integer 7
+seeded
+step 1 compile 0 0 unsigned fixtures/assignment-alias.nut
+compiled
+stack 4
+literal string 5 73636f7265
+op 1 1 0 0 0
+op 2 2 1 0 0
+op 11 1 0 1 2
+op 9 1 0 0 0
+op 1 2 0 0 0
+op 2 3 2 0 0
+op 13 2 0 2 3
+op 17 1 2 1 43
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 2 run 0 0 0
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+temp unsupported 134217984
+step 3 advance 0 1
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+temp unsupported 134217984
+step 4 advance 0 1
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+temp unsupported 134217984
+step 5 advance 0 1000
+return 990 integer 3
+temp integer 3
+step 6 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 7 raw 0 616273656e74
+raw 616273656e74 absent
+step 8 temp 0
+temp integer 3

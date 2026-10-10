@@ -1,0 +1,103 @@
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -1255,6 +1255,7 @@
+  * better make this more robust in the future. */
+ #include "reference_grf_load_context.hpp"
+ #include "reference_grf_load_control.hpp"
++#include "reference_grf_language.hpp"
+ #include "reference_grf_safety.hpp"
+ 
+ static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
+@@ -1360,12 +1361,12 @@
+ 				if (num > 1024 * 1024) {
+ 					GrfMsg(0, "LoadNewGRFFile: Unexpectedly large sprite, disabling");
+ 					DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
+-					ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision();
++					ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision();
+ 					break;
+ 				}
+ 
+ 				DecodeSpecialSprite(allocator, num, stage);
+-				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision();
++				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision();
+ 
+ 				/* Stop all processing if we are to skip the remaining sprites */
+ 				if (_cur_gps.skip_sprites == -1) break;
+@@ -1378,7 +1379,7 @@
+ 			if (_cur_gps.skip_sprites == 0) {
+ 				GrfMsg(0, "LoadNewGRFFile: Unexpected sprite, disabling");
+ 				DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
+-				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision();
++				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision();
+ 				break;
+ 			}
+ 
+@@ -1392,7 +1393,7 @@
+ 		}
+ 
+ 		if (_cur_gps.skip_sprites > 0) _cur_gps.skip_sprites--;
+-		ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision();
++		ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision();
+ 	}
+ }
+ 
+@@ -1775,6 +1776,7 @@
+ {
+ 	ReferenceGrfControl::Begin(num_baseset);
+ 	if (ReferenceGrfControl::active) ReferenceGrfContext::Prepare(ReferenceGrfControl::manifest);
++	if (ReferenceGrfControl::active) ReferenceGrfLanguage::Begin(ReferenceGrfControl::manifest);
+ 	/* In case of networking we need to "sync" the start values
+ 	 * so all NewGRFs are loaded equally. For this we use the
+ 	 * start date of the game and we set the counters, etc. to
+@@ -1887,6 +1889,7 @@
+ 			}
+ 		}
+ 		ReferenceGrfControl::StageEnd(stage);
++		ReferenceGrfLanguage::StageEnd(stage);
+ 	}
+ 
+ 	/* We've finished reading files. */
+@@ -1911,5 +1914,6 @@
+ 	TimerGameTick::counter = tick_counter;
+ 	_display_opt  = display_opt;
+ 	ReferenceGrfContext::Finish();
++	ReferenceGrfLanguage::Finish();
+ 	ReferenceGrfControl::End();
+ }
+--- a/src/newgrf_text.cpp
++++ b/src/newgrf_text.cpp
+@@ -33,6 +33,8 @@
+ 
+ #include "table/strings.h"
+ #include "table/control_codes.h"
++
++#include "3rdparty/nlohmann/json.hpp"
+ 
+ #include "safeguards.h"
+ 
+@@ -1002,3 +1004,5 @@
+ 	auto params = GetGRFStringTextStackParameters(grffile, stringid, textstack);
+ 	return GetStringWithArgs(stringid, params);
+ }
++
++#include "reference_grf_language_text.hpp"
+--- a/src/strings.cpp
++++ b/src/strings.cpp
+@@ -46,6 +46,8 @@
+ #include "3rdparty/fmt/std.h"
+ 
+ #include "strings_internal.h"
++
++#include "3rdparty/nlohmann/json.hpp"
+ 
+ #include "safeguards.h"
+ 
+@@ -2246,6 +2248,8 @@
+  * Make a list of the available language packs. Put the data in
+  * #_languages list.
+  */
++#include "reference_grf_language_catalog.hpp"
++
+ void InitializeLanguagePacks()
+ {
+ 	for (Searchpath sp : _valid_searchpaths) {

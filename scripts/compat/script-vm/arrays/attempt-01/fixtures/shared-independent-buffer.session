@@ -1,0 +1,11 @@
+make-array 0 0 1 integer 4
+root-store-array 0 70656e64696e67 0
+compile 1 0 buffer fixtures/increment-pending.nut
+run 1 0 1000
+array-get 0 0 0
+compile 2 1 buffer fixtures/return-pending.nut
+run 2 1 1000
+drop 1 0
+clear-result 1
+release-child 1
+array-get 0 0 0

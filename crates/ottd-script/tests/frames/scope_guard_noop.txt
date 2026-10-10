@@ -1,0 +1,13 @@
+stack 3
+op 2 1 1 0 0
+op 2 2 2 0 0
+op 61 2 3 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+suspend 0 2
+frame 1 integer 1
+frame 2 integer 2
+suspend 0 3
+frame 1 integer 1
+frame 2 integer 2
+return 1 integer 1

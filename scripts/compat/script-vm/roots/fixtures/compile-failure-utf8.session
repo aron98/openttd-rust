@@ -1,0 +1,3 @@
+compile 0 0 utf8 fixtures/compile-failure.nut
+raw 0 73636f7265
+temp 0

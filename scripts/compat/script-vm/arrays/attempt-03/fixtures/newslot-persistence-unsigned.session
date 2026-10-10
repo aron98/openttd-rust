@@ -1,0 +1,7 @@
+make-array 0 0 1 integer 1
+root-store-array 0 70656e64696e67 0
+compile 0 0 unsigned fixtures/newslot-persistence.nut
+run 0 0 1000
+array-get 0 0 0
+array-length 0 0
+temp 0

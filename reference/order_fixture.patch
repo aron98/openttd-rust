@@ -1,0 +1,29 @@
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -94,6 +94,7 @@
+ #endif
+ 
+ #include "saveload/reference_replay.hpp"
++#include "saveload/reference_order_fixture.hpp"
+ #include "safeguards.h"
+ 
+ void CallLandscapeTick();
+@@ -1352,6 +1353,7 @@
+ 	}
+ 
+ 	ProcessAsyncSaveFinish();
++	ReferenceOrderFixture::Poll();
+ 
+ 	if (_game_mode == GM_NORMAL) {
+ 		static auto last_time = std::chrono::steady_clock::now();
+--- a/src/video/null_v.cpp
++++ b/src/video/null_v.cpp
+@@ -53,7 +53,7 @@
+ 
+ 	for (i = 0; i < this->ticks; i++) {
+ 		::GameLoop();
+-		if (std::getenv("OTTD_REPLAY_PATH") != nullptr && _exit_game) break;
++		if ((std::getenv("OTTD_REPLAY_PATH") != nullptr || std::getenv("OTTD_ORDER_FIXTURE_PATH") != nullptr) && _exit_game) break;
+ 		::InputLoop();
+ 		::UpdateWindows();
+ 	}

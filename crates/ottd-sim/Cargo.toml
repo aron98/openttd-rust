@@ -7,12 +7,12 @@ rust-version.workspace = true
 license.workspace = true
 
 [dependencies]
+md-5 = { version = "0.11", default-features = false }
 ottd-core = { path = "../ottd-core" }
 ottd-save = { path = "../ottd-save" }
 serde = { version = "1", features = ["derive"] }
 thiserror = "2"
 
-[dev-dependencies]
 serde_json = "1"
 
 [lints]

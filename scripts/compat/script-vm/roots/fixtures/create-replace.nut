@@ -1,0 +1,1 @@
+score <- 1; score <- 2; return score;

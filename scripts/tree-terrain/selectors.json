@@ -1,0 +1,28 @@
+{
+  "expected_red_admission": [
+    "commands::terrain_run::corpus::boundaries::raw_zero_authority_distance_requires_typed_admission",
+    "commands::terrain_run::corpus::boundaries::raw_two_authority_distance_requires_typed_admission"
+  ],
+  "normal_corpus": [
+    "commands::terrain_run::corpus::native_corpus_complete_receipts_worlds_derived_and_traces"
+  ],
+  "corruption_controls": [
+    "commands::terrain_run::corpus::controls::native_trace_corruptions_fail_actual_rust_comparisons"
+  ],
+  "explicit_boundaries": [
+    "commands::terrain_run::corpus::boundaries::native_corpus_explicit_admission_boundaries",
+    "commands::terrain_run::corpus::boundaries::native_corpus_company_gate_receipt_without_claiming_trace_parity",
+    "commands::terrain_run::corpus::boundaries::native_corpus_loader_and_observer_boundaries"
+  ],
+  "old_non_tree_control": [
+    "commands::terrain_run::corpus::boundaries::noncanonical_authority_distance_does_not_extend_old_non_tree_refusals"
+  ],
+  "previous_milestones": [
+    "commands::terrain_run::tests::native_clear_cases_match_world_receipt_and_actual_rating_events",
+    "commands::terrain_run::tests::native_terraform_cases_match_public_world_and_receipt",
+    "commands::level_land::tests::native_level_cases_match_world_receipt_and_scopes"
+  ],
+  "coupled_raw": [
+    "commands::terrain_run::corpus::coupled::raw_authority_coupled_preflight_refusal_cleans_scope"
+  ]
+}

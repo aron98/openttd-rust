@@ -1,0 +1,1 @@
+local a=3;a=a|4;return a;

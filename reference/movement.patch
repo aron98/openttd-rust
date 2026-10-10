@@ -1,0 +1,727 @@
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -8,6 +8,7 @@
+ /** @file openttd.cpp Functions related to starting OpenTTD. */
+ 
+ #include "stdafx.h"
++#include "reference_movement_hooks.hpp"
+ 
+ #include "blitter/factory.hpp"
+ #include "sound/sound_driver.hpp"
+@@ -1212,6 +1213,7 @@
+ void StateGameLoop()
+ {
+ 	if (ReferenceReplay::Run()) return;
++	ReferenceMovement::Scope movement_loop("state_loop");
+ 	if (!_networking || _network_server) {
+ 		StateGameLoop_LinkGraphPauseControl();
+ 	}
+@@ -1226,9 +1228,17 @@
+ 		PerformanceMeasurer::Paused(PFE_GL_AIRCRAFT);
+ 		PerformanceMeasurer::Paused(PFE_GL_LANDSCAPE);
+ 
+-		if (!HasModalProgress()) UpdateLandscapingLimits();
++		if (!HasModalProgress()) {
++			ReferenceMovement::Emit("landscaping_limits", "enter");
++			UpdateLandscapingLimits();
++			ReferenceMovement::Emit("landscaping_limits", "leave");
++		}
+ #ifndef DEBUG_DUMP_COMMANDS
+-		if (_game_mode == GM_NORMAL) Game::GameLoop();
++		if (_game_mode == GM_NORMAL) {
++			ReferenceMovement::Emit("game_loop", "enter");
++			Game::GameLoop();
++			ReferenceMovement::Emit("game_loop", "leave");
++		}
+ #endif
+ 		return;
+ 	}
+@@ -1240,9 +1250,13 @@
+ 		BasePersistentStorageArray::SwitchMode(PSM_ENTER_GAMELOOP);
+ 		RunTileLoop();
+ 		CallVehicleTicks();
++		ReferenceMovement::Emit("landscape_tick", "enter");
+ 		CallLandscapeTick();
++		ReferenceMovement::Emit("landscape_tick", "leave");
+ 		BasePersistentStorageArray::SwitchMode(PSM_LEAVE_GAMELOOP);
++		ReferenceMovement::Emit("landscaping_limits", "enter");
+ 		UpdateLandscapingLimits();
++		ReferenceMovement::Emit("landscaping_limits", "leave");
+ 
+ 		CallWindowGameTickEvent();
+ 		NewsLoop();
+@@ -1260,25 +1274,41 @@
+ 		Backup<CompanyID> cur_company(_current_company, OWNER_NONE);
+ 
+ 		BasePersistentStorageArray::SwitchMode(PSM_ENTER_GAMELOOP);
++		ReferenceMovement::Emit("animated_tiles", "enter");
+ 		AnimateAnimatedTiles();
++		ReferenceMovement::Emit("animated_tiles", "leave");
++		ReferenceMovement::Emit("calendar_timer", "enter");
+ 		if (TimerManager<TimerGameCalendar>::Elapsed(1)) {
+ 			RunVehicleCalendarDayProc();
+ 		}
++		ReferenceMovement::Emit("calendar_timer", "leave");
++		ReferenceMovement::Emit("economy_timer", "enter");
+ 		TimerManager<TimerGameEconomy>::Elapsed(1);
++		ReferenceMovement::Emit("economy_timer", "leave");
++		ReferenceMovement::Emit("tick_timer", "enter");
+ 		TimerManager<TimerGameTick>::Elapsed(1);
++		ReferenceMovement::Emit("tick_timer", "leave");
+ 		RunTileLoop();
+ 		CallVehicleTicks();
++		ReferenceMovement::Emit("landscape_tick", "enter");
+ 		CallLandscapeTick();
++		ReferenceMovement::Emit("landscape_tick", "leave");
+ 		BasePersistentStorageArray::SwitchMode(PSM_LEAVE_GAMELOOP);
+ 
+ #ifndef DEBUG_DUMP_COMMANDS
+ 		{
+ 			PerformanceMeasurer script_framerate(PFE_ALLSCRIPTS);
+-			AI::GameLoop();
+-			Game::GameLoop();
++			ReferenceMovement::Emit("ai_loop", "enter");
++		AI::GameLoop();
++		ReferenceMovement::Emit("ai_loop", "leave");
++			ReferenceMovement::Emit("game_loop", "enter");
++		Game::GameLoop();
++		ReferenceMovement::Emit("game_loop", "leave");
+ 		}
+ #endif
++		ReferenceMovement::Emit("landscaping_limits", "enter");
+ 		UpdateLandscapingLimits();
++		ReferenceMovement::Emit("landscaping_limits", "leave");
+ 
+ 		CallWindowGameTickEvent();
+ 		NewsLoop();
+--- a/src/vehicle.cpp
++++ b/src/vehicle.cpp
+@@ -8,6 +8,8 @@
+ /** @file vehicle.cpp Base implementations of all vehicles. */
+ 
+ #include "stdafx.h"
++#include "reference_movement_hooks.hpp"
++#include "3rdparty/nlohmann/json.hpp"
+ #include "error.h"
+ #include "roadveh.h"
+ #include "ship.h"
+@@ -664,6 +666,7 @@
+  */
+ using AutoreplaceMap = std::map<VehicleID, bool>;
+ static AutoreplaceMap _vehicles_to_autoreplace;
++#include "reference_movement_spatial.inc"
+ 
+ void InitializeVehicles()
+ {
+@@ -906,12 +909,14 @@
+  */
+ void RunVehicleCalendarDayProc()
+ {
++	ReferenceMovement::Scope movement_calendar("vehicle_calendar_selector");
+ 	if (_game_mode != GM_NORMAL) return;
+ 
+ 	/* Run the calendar day proc for every DAY_TICKS vehicle starting at TimerGameCalendar::date_fract. */
+ 	for (size_t i = TimerGameCalendar::date_fract; i < Vehicle::GetPoolSize(); i += Ticks::DAY_TICKS) {
+ 		Vehicle *v = Vehicle::Get(i);
+ 		if (v == nullptr) continue;
++		ReferenceMovement::Scope movement_selected("calendar_selected", v->index.base());
+ 		v->OnNewCalendarDay();
+ 	}
+ }
+@@ -923,6 +928,7 @@
+  */
+ static void RunEconomyVehicleDayProc()
+ {
++	ReferenceMovement::Scope movement_economy("vehicle_economy_selector");
+ 	if (_game_mode != GM_NORMAL) return;
+ 
+ 	/* Run the economy day proc for every DAY_TICKS vehicle starting at TimerGameEconomy::date_fract. */
+@@ -930,6 +936,7 @@
+ 		Vehicle *v = Vehicle::Get(i);
+ 		if (v == nullptr) continue;
+ 
++		ReferenceMovement::Scope movement_selected("economy_selected", v->index.base());
+ 		/* Call the 32-day callback if needed */
+ 		if ((v->day_counter & 0x1F) == 0 && v->HasEngineType()) {
+ 			uint16_t callback = GetVehicleCallback(CBID_VEHICLE_32DAY_CALLBACK, 0, 0, v->engine_type, v);
+@@ -953,13 +960,20 @@
+ 
+ void CallVehicleTicks()
+ {
++	ReferenceMovement::Scope movement_ticks("call_vehicle_ticks");
++	ReferenceMovement::Emit("autoreplace_queue", "before_clear");
+ 	_vehicles_to_autoreplace.clear();
++	ReferenceMovement::Emit("autoreplace_queue", "after_clear");
+ 
+ 	RunEconomyVehicleDayProc();
+ 
+ 	{
+ 		PerformanceMeasurer framerate(PFE_GL_ECONOMY);
+-		for (Station *st : Station::Iterate()) LoadUnloadStation(st);
++		ReferenceMovement::Scope movement_stations("load_unload_stations");
++		for (Station *st : Station::Iterate()) {
++			ReferenceMovement::Scope movement_station("load_unload_station", UINT32_MAX, UINT32_MAX, st->index.base());
++			LoadUnloadStation(st);
++		}
+ 	}
+ 	PerformanceAccumulator::Reset(PFE_GL_TRAINS);
+ 	PerformanceAccumulator::Reset(PFE_GL_ROADVEHS);
+@@ -968,14 +982,18 @@
+ 
+ 	for (Vehicle *v : Vehicle::Iterate()) {
+ 		[[maybe_unused]] VehicleID vehicle_index = v->index;
++		ReferenceMovement::Scope movement_vehicle("vehicle_iteration", vehicle_index.base());
+ 
+ 		/* Vehicle could be deleted in this tick */
+-		if (!v->Tick()) {
++		const bool movement_tick_result = v->Tick();
++		ReferenceMovement::Emit("vehicle_tick", "result", vehicle_index.base(), UINT32_MAX, movement_tick_result);
++		if (!movement_tick_result) {
+ 			assert(Vehicle::Get(vehicle_index) == nullptr);
+ 			continue;
+ 		}
+ 
+ 		assert(Vehicle::Get(vehicle_index) == v);
++		ReferenceMovement::Scope movement_post("vehicle_post_tick", vehicle_index.base());
+ 
+ 		switch (v->type) {
+ 			default: break;
+@@ -989,6 +1007,7 @@
+ 				if (v->vcache.cached_cargo_age_period != 0) {
+ 					v->cargo_age_counter = std::min(v->cargo_age_counter, v->vcache.cached_cargo_age_period);
+ 					if (--v->cargo_age_counter == 0) {
++						ReferenceMovement::Scope movement_cargo("age_cargo", v->index.base());
+ 						v->cargo.AgeCargo();
+ 						v->cargo_age_counter = v->vcache.cached_cargo_age_period;
+ 					}
+@@ -1039,8 +1058,10 @@
+ 		}
+ 	}
+ 
++	ReferenceMovement::Scope movement_queue("autoreplace_queue");
+ 	Backup<CompanyID> cur_company(_current_company);
+ 	for (auto &it : _vehicles_to_autoreplace) {
++		ReferenceMovement::Scope movement_replace("autoreplace_selected", it.first.base());
+ 		Vehicle *v = Vehicle::Get(it.first);
+ 		/* Autoreplace needs the current company set as the vehicle owner */
+ 		cur_company.Change(v->owner);
+@@ -1661,6 +1682,7 @@
+  */
+ void Vehicle::UpdatePosition()
+ {
++	ReferenceMovement::Scope movement_position("update_position", this->index.base());
+ 	UpdateVehicleTileHash(this, false);
+ }
+ 
+@@ -1818,7 +1840,10 @@
+  */
+ VehicleEnterTileStates VehicleEnterTile(Vehicle *v, TileIndex tile, int x, int y)
+ {
+-	return _tile_type_procs[GetTileType(tile)]->vehicle_enter_tile_proc(v, tile, x, y);
++	ReferenceMovement::Scope movement_entry("vehicle_enter_tile", v->index.base(), tile.base(), x, y);
++	const auto movement_result = _tile_type_procs[GetTileType(tile)]->vehicle_enter_tile_proc(v, tile, x, y);
++	ReferenceMovement::Emit("vehicle_enter_tile", "result", v->index.base(), tile.base(), movement_result.base());
++	return movement_result;
+ }
+ 
+ /**
+@@ -2406,6 +2431,7 @@
+  */
+ void Vehicle::HandleLoading(bool mode)
+ {
++	ReferenceMovement::Scope movement_scope("handle_loading", this->index.base());
+ 	switch (this->current_order.GetType()) {
+ 		case OT_LOADING: {
+ 			TimerGameTick::Ticks wait_time = std::max(this->current_order.GetTimetabledWait() - this->lateness_counter, 0);
+@@ -2776,6 +2802,7 @@
+  */
+ void Vehicle::ShowVisualEffect() const
+ {
++	ReferenceMovement::Scope movement_scope("visual_effect", this->index.base());
+ 	assert(this->IsPrimaryVehicle());
+ 	bool sound = false;
+ 
+--- a/src/landscape.cpp
++++ b/src/landscape.cpp
+@@ -10,6 +10,7 @@
+ /** @defgroup SnowLineGroup Snowline functions and data structures */
+ 
+ #include "stdafx.h"
++#include "reference_movement_hooks.hpp"
+ #include "heightmap.h"
+ #include "clear_map.h"
+ #include "spritecache.h"
+@@ -797,6 +798,7 @@
+  */
+ void RunTileLoop()
+ {
++	ReferenceMovement::Scope movement_tileloop("run_tile_loop");
+ 	PerformanceAccumulator framerate(PFE_GL_LANDSCAPE);
+ 
+ 	/* The pseudorandom sequence of tiles is generated using a Galois linear feedback
+@@ -821,12 +823,16 @@
+ 
+ 	/* Manually update tile 0 every TILE_UPDATE_FREQUENCY ticks - the LFSR never iterates over it itself.  */
+ 	if (TimerGameTick::counter % TILE_UPDATE_FREQUENCY == 0) {
++		ReferenceMovement::Emit("tile_loop", "enter", UINT32_MAX, 0);
+ 		_tile_type_procs[GetTileType(0)]->tile_loop_proc(TileIndex{});
++		ReferenceMovement::Emit("tile_loop", "leave", UINT32_MAX, 0);
+ 		count--;
+ 	}
+ 
+ 	while (count--) {
++		ReferenceMovement::Emit("tile_loop", "enter", UINT32_MAX, tile.base());
+ 		_tile_type_procs[GetTileType(tile)]->tile_loop_proc(tile);
++		ReferenceMovement::Emit("tile_loop", "leave", UINT32_MAX, tile.base());
+ 
+ 		/* Get the next tile in sequence using a Galois LFSR. */
+ 		tile = TileIndex{(tile.base() >> 1) ^ (-(int32_t)(tile.base() & 1) & feedback)};
+--- a/src/roadveh_cmd.cpp
++++ b/src/roadveh_cmd.cpp
+@@ -8,6 +8,7 @@
+ /** @file roadveh_cmd.cpp Handling of road vehicles. */
+ 
+ #include "stdafx.h"
++#include "reference_movement_hooks.hpp"
+ #include "roadveh.h"
+ #include "command_func.h"
+ #include "error_func.h"
+@@ -606,6 +607,7 @@
+ 
+ static void StartRoadVehSound(const RoadVehicle *v)
+ {
++	ReferenceMovement::Scope movement_sound("start_road_sound", v->index.base());
+ 	if (!PlayVehicleSound(v, VSE_START)) {
+ 		SoundID s = RoadVehInfo(v->engine_type)->sfx;
+ 		if (s == SND_19_DEPARTURE_OLD_RV_1 && (v->tick_counter & 3) == 0) {
+@@ -738,6 +740,7 @@
+  */
+ int RoadVehicle::UpdateSpeed()
+ {
++	ReferenceMovement::Scope movement_scope("road_update_speed", this->index.base());
+ 	switch (_settings_game.vehicle.roadveh_acceleration_model) {
+ 		default: NOT_REACHED();
+ 		case AM_ORIGINAL:
+@@ -871,7 +874,9 @@
+ static int PickRandomBit(uint bits)
+ {
+ 	uint i;
++	ReferenceMovement::Emit("pick_random_bit", "arguments", UINT32_MAX, UINT32_MAX, bits, CountBits(bits));
+ 	uint num = RandomRange(CountBits(bits));
++	ReferenceMovement::Emit("pick_random_bit", "random_result", UINT32_MAX, UINT32_MAX, bits, num);
+ 
+ 	for (i = 0; !(bits & 1) || (int)--num >= 0; bits >>= 1, i++) {}
+ 	return i;
+@@ -887,6 +892,7 @@
+  */
+ static Trackdir RoadFindPathToDest(RoadVehicle *v, TileIndex tile, DiagDirection enterdir)
+ {
++	ReferenceMovement::Scope movement_scope("road_find_path", v->index.base());
+ #define return_track(x) { best_track = (Trackdir)x; goto found_best_track; }
+ 
+ 	TileIndex desttile;
+@@ -995,10 +1001,11 @@
+ 	v->HandlePathfindingResult(path_found);
+ 
+ found_best_track:;
+-
+-	if (HasBit(red_signals, best_track)) return INVALID_TRACKDIR;
+-
+-	return best_track;
++	ReferenceMovement::Emit("road_find_path", "selected", v->index.base(), tile.base(), best_track, red_signals);
++
++	const Trackdir movement_result = HasBit(red_signals, best_track) ? INVALID_TRACKDIR : best_track;
++	ReferenceMovement::Emit("road_find_path", "result", v->index.base(), tile.base(), movement_result);
++	return movement_result;
+ }
+ 
+ struct RoadDriveEntry {
+@@ -1009,9 +1016,11 @@
+ 
+ bool RoadVehLeaveDepot(RoadVehicle *v, bool first)
+ {
++	const uint32_t movement_id = v->index.base();
++	ReferenceMovement::Scope movement_scope("road_leave_depot", v->index.base());
+ 	/* Don't leave unless v and following wagons are in the depot. */
+ 	for (const RoadVehicle *u = v; u != nullptr; u = u->Next()) {
+-		if (u->state != RVSB_IN_DEPOT || u->tile != v->tile) return false;
++		if (u->state != RVSB_IN_DEPOT || u->tile != v->tile) return ReferenceMovement::Result("road_leave_depot", movement_id, false);
+ 	}
+ 
+ 	DiagDirection dir = GetRoadDepotDirection(v->tile);
+@@ -1027,10 +1036,10 @@
+ 		/* We are leaving a depot, but have to go to the exact same one; re-enter */
+ 		if (v->current_order.IsType(OT_GOTO_DEPOT) && v->tile == v->dest_tile) {
+ 			VehicleEnterDepot(v);
+-			return true;
+-		}
+-
+-		if (RoadVehFindCloseTo(v, x, y, v->direction, false) != nullptr) return true;
++			return ReferenceMovement::Result("road_leave_depot", movement_id, true);
++		}
++
++		if (RoadVehFindCloseTo(v, x, y, v->direction, false) != nullptr) return ReferenceMovement::Result("road_leave_depot", movement_id, true);
+ 
+ 		VehicleServiceInDepot(v);
+ 		v->LeaveUnbunchingDepot();
+@@ -1052,7 +1061,7 @@
+ 
+ 	InvalidateWindowData(WC_VEHICLE_DEPOT, v->tile);
+ 
+-	return true;
++	return ReferenceMovement::Result("road_leave_depot", movement_id, true);
+ }
+ 
+ static Trackdir FollowPreviousRoadVehicle(const RoadVehicle *v, const RoadVehicle *prev, TileIndex tile, DiagDirection entry_dir, bool already_reversed)
+@@ -1148,6 +1157,8 @@
+ 
+ bool IndividualRoadVehicleController(RoadVehicle *v, const RoadVehicle *prev)
+ {
++	const uint32_t movement_id = v->index.base();
++	ReferenceMovement::Scope movement_scope("road_individual", v->index.base());
+ 	if (v->overtaking != 0)  {
+ 		if (IsTileType(v->tile, MP_STATION)) {
+ 			/* Force us to be not overtaking! */
+@@ -1165,7 +1176,7 @@
+ 	/* If this vehicle is in a depot and we've reached this point it must be
+ 	 * one of the articulated parts. It will stay in the depot until activated
+ 	 * by the previous vehicle in the chain when it gets to the right place. */
+-	if (v->IsInDepot()) return true;
++	if (v->IsInDepot()) return ReferenceMovement::Result("road_individual", movement_id, true);
+ 
+ 	if (v->state == RVSB_WORMHOLE) {
+ 		/* Vehicle is entering a depot or is on a bridge or in a tunnel */
+@@ -1175,7 +1186,7 @@
+ 			const Vehicle *u = RoadVehFindCloseTo(v, gp.x, gp.y, v->direction);
+ 			if (u != nullptr) {
+ 				v->cur_speed = u->First()->cur_speed;
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 		}
+ 
+@@ -1185,14 +1196,14 @@
+ 			v->y_pos = gp.y;
+ 			v->UpdatePosition();
+ 			v->UpdateInclination(true, true);
+-			return true;
++			return ReferenceMovement::Result("road_individual", movement_id, true);
+ 		}
+ 
+ 		v->x_pos = gp.x;
+ 		v->y_pos = gp.y;
+ 		v->UpdatePosition();
+ 		if (!v->vehstatus.Test(VehState::Hidden)) v->Vehicle::UpdateViewport(true);
+-		return true;
++		return ReferenceMovement::Result("road_individual", movement_id, true);
+ 	}
+ 
+ 	/* Get move position data for next frame.
+@@ -1220,7 +1231,7 @@
+ 		if (dir == INVALID_TRACKDIR) {
+ 			if (!v->IsFrontEngine()) FatalError("Disconnecting road vehicle.");
+ 			v->cur_speed = 0;
+-			return false;
++			return ReferenceMovement::Result("road_individual", movement_id, false);
+ 		}
+ 
+ again:
+@@ -1272,11 +1283,11 @@
+ 				} else {
+ 					/* The company can build on the next tile, so wait till they do. */
+ 					v->cur_speed = 0;
+-					return false;
++					return ReferenceMovement::Result("road_individual", movement_id, false);
+ 				}
+ 			} else if (IsNormalRoadTile(v->tile) && GetDisallowedRoadDirections(v->tile) != DRD_NONE) {
+ 				v->cur_speed = 0;
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			} else {
+ 				tile = v->tile;
+ 			}
+@@ -1295,7 +1306,7 @@
+ 				v->cur_speed = u->First()->cur_speed;
+ 				/* We might be blocked, prevent pathfinding rerun as we already know where we are heading to. */
+ 				v->path.emplace_back(dir, tile);
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 		}
+ 
+@@ -1303,7 +1314,7 @@
+ 		if (vets.Test(VehicleEnterTileState::CannotEnter)) {
+ 			if (!IsTileType(tile, MP_TUNNELBRIDGE)) {
+ 				v->cur_speed = 0;
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 			/* Try an about turn to re-enter the previous tile */
+ 			dir = _road_reverse_table[rd.x & 3];
+@@ -1315,7 +1326,7 @@
+ 				/* New direction is trying to turn vehicle around.
+ 				 * We can't turn at the exit of a road stop so wait.*/
+ 				v->cur_speed = 0;
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 
+ 			/* If we are a drive through road stop and the next tile is of
+@@ -1358,7 +1369,7 @@
+ 		v->y_pos = y;
+ 		v->UpdatePosition();
+ 		RoadZPosAffectSpeed(v, v->UpdateInclination(true, true));
+-		return true;
++		return ReferenceMovement::Result("road_individual", movement_id, true);
+ 	}
+ 
+ 	if (rd.x & RDE_TURNED) {
+@@ -1395,7 +1406,7 @@
+ 
+ 		if (dir == INVALID_TRACKDIR) {
+ 			v->cur_speed = 0;
+-			return false;
++			return ReferenceMovement::Result("road_individual", movement_id, false);
+ 		}
+ 
+ 		const RoadDriveEntry *rdp = _road_drive_data[GetRoadTramType(v->roadtype)][(_settings_game.vehicle.road_side << RVS_DRIVE_SIDE) + dir];
+@@ -1410,14 +1421,14 @@
+ 				v->cur_speed = u->First()->cur_speed;
+ 				/* We might be blocked, prevent pathfinding rerun as we already know where we are heading to. */
+ 				v->path.emplace_back(dir, v->tile);
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 		}
+ 
+ 		auto vets = VehicleEnterTile(v, v->tile, x, y);
+ 		if (vets.Test(VehicleEnterTileState::CannotEnter)) {
+ 			v->cur_speed = 0;
+-			return false;
++			return ReferenceMovement::Result("road_individual", movement_id, false);
+ 		}
+ 
+ 		v->state = dir;
+@@ -1432,7 +1443,7 @@
+ 		v->y_pos = y;
+ 		v->UpdatePosition();
+ 		RoadZPosAffectSpeed(v, v->UpdateInclination(true, true));
+-		return true;
++		return ReferenceMovement::Result("road_individual", movement_id, true);
+ 	}
+ 
+ 	/* This vehicle is not in a wormhole and it hasn't entered a new tile. If
+@@ -1473,7 +1484,7 @@
+ 				TriggerRoadStopRandomisation(st, v->tile, StationRandomTrigger::VehicleArrives);
+ 				TriggerRoadStopAnimation(st, v->tile, StationAnimationTrigger::VehicleArrives);
+ 			}
+-			return false;
++			return ReferenceMovement::Result("road_individual", movement_id, false);
+ 		}
+ 	}
+ 
+@@ -1487,7 +1498,7 @@
+ 		 * (The following part may only be one tile behind, and the front part is moved before the following ones.)
+ 		 * The short (inner) curve has 8 frames, this elongates it to 10. */
+ 		v->UpdateViewport(true, true);
+-		return true;
++		return ReferenceMovement::Result("road_individual", movement_id, true);
+ 	}
+ 
+ 	/* If the vehicle is in a normal road stop and the frame equals the stop frame OR
+@@ -1522,7 +1533,7 @@
+ 					v->y_pos = y;
+ 					v->UpdatePosition();
+ 					RoadZPosAffectSpeed(v, v->UpdateInclination(true, false));
+-					return true;
++					return ReferenceMovement::Result("road_individual", movement_id, true);
+ 				}
+ 			}
+ 
+@@ -1536,14 +1547,14 @@
+ 				v->BeginLoading();
+ 				TriggerRoadStopRandomisation(st, v->tile, StationRandomTrigger::VehicleArrives);
+ 				TriggerRoadStopAnimation(st, v->tile, StationAnimationTrigger::VehicleArrives);
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 		} else {
+ 			/* Vehicle is ready to leave a bay in a road stop */
+ 			if (rs->IsEntranceBusy()) {
+ 				/* Road stop entrance is busy, so wait as there is nowhere else to go */
+ 				v->cur_speed = 0;
+-				return false;
++				return ReferenceMovement::Result("road_individual", movement_id, false);
+ 			}
+ 			if (v->current_order.IsType(OT_LEAVESTATION)) v->current_order.Free();
+ 		}
+@@ -1559,7 +1570,7 @@
+ 	auto vets = VehicleEnterTile(v, v->tile, x, y);
+ 	if (vets.Test(VehicleEnterTileState::CannotEnter)) {
+ 		v->cur_speed = 0;
+-		return false;
++		return ReferenceMovement::Result("road_individual", movement_id, false);
+ 	}
+ 
+ 	if (v->current_order.IsType(OT_LEAVESTATION) && IsDriveThroughStopTile(v->tile)) {
+@@ -1573,36 +1584,38 @@
+ 	v->y_pos = y;
+ 	v->UpdatePosition();
+ 	RoadZPosAffectSpeed(v, v->UpdateInclination(false, true));
+-	return true;
++	return ReferenceMovement::Result("road_individual", movement_id, true);
+ }
+ 
+ static bool RoadVehController(RoadVehicle *v)
+ {
++	const uint32_t movement_id = v->index.base();
++	ReferenceMovement::Scope movement_scope("road_controller", v->index.base());
+ 	/* decrease counters */
+ 	v->current_order_time++;
+ 	if (v->reverse_ctr != 0) v->reverse_ctr--;
+ 
+ 	/* handle crashed */
+ 	if (v->vehstatus.Test(VehState::Crashed) || RoadVehCheckTrainCrash(v)) {
+-		return RoadVehIsCrashed(v);
++		return ReferenceMovement::Result("road_controller", movement_id, RoadVehIsCrashed(v));
+ 	}
+ 
+ 	/* road vehicle has broken down? */
+-	if (v->HandleBreakdown()) return true;
++	if (v->HandleBreakdown()) return ReferenceMovement::Result("road_controller", movement_id, true);
+ 	if (v->vehstatus.Test(VehState::Stopped)) {
+ 		v->SetLastSpeed();
+-		return true;
++		return ReferenceMovement::Result("road_controller", movement_id, true);
+ 	}
+ 
+ 	ProcessOrders(v);
+ 	v->HandleLoading();
+ 
+-	if (v->current_order.IsType(OT_LOADING)) return true;
++	if (v->current_order.IsType(OT_LOADING)) return ReferenceMovement::Result("road_controller", movement_id, true);
+ 
+ 	if (v->IsInDepot()) {
+ 		/* Check if we should wait here for unbunching. */
+-		if (v->IsWaitingForUnbunching()) return true;
+-		if (RoadVehLeaveDepot(v, true)) return true;
++		if (v->IsWaitingForUnbunching()) return ReferenceMovement::Result("road_controller", movement_id, true);
++		if (RoadVehLeaveDepot(v, true)) return ReferenceMovement::Result("road_controller", movement_id, true);
+ 	}
+ 
+ 	v->ShowVisualEffect();
+@@ -1644,7 +1657,7 @@
+ 	 * on next tick to discover whether it is still blocked. */
+ 	if (v->progress == 0) v->progress = blocked ? adv_spd - 1 : j;
+ 
+-	return true;
++	return ReferenceMovement::Result("road_controller", movement_id, true);
+ }
+ 
+ Money RoadVehicle::GetRunningCost() const
+@@ -1660,16 +1673,18 @@
+ 
+ bool RoadVehicle::Tick()
+ {
++	const uint32_t movement_id = this->index.base();
++	ReferenceMovement::Scope movement_scope("road_tick", this->index.base());
+ 	PerformanceAccumulator framerate(PFE_GL_ROADVEHS);
+ 
+ 	this->tick_counter++;
+ 
+ 	if (this->IsFrontEngine()) {
+ 		if (!this->vehstatus.Test(VehState::Stopped)) this->running_ticks++;
+-		return RoadVehController(this);
+-	}
+-
+-	return true;
++		return ReferenceMovement::Result("road_tick", movement_id, RoadVehController(this));
++	}
++
++	return ReferenceMovement::Result("road_tick", movement_id, true);
+ }
+ 
+ void RoadVehicle::SetDestTile(TileIndex tile)
+@@ -1720,6 +1735,7 @@
+ /** Calander day handler */
+ void RoadVehicle::OnNewCalendarDay()
+ {
++	ReferenceMovement::Scope movement_scope("road_calendar_day", this->index.base());
+ 	if (!this->IsFrontEngine()) return;
+ 	AgeVehicle(this);
+ }
+@@ -1727,6 +1743,7 @@
+ /** Economy day handler. */
+ void RoadVehicle::OnNewEconomyDay()
+ {
++	ReferenceMovement::Scope movement_scope("road_economy_day", this->index.base());
+ 	if (!this->IsFrontEngine()) return;
+ 	EconomyAgeVehicle(this);
+ 
+--- a/src/order_cmd.cpp
++++ b/src/order_cmd.cpp
+@@ -8,6 +8,7 @@
+ /** @file order_cmd.cpp Handling of orders. */
+ 
+ #include "stdafx.h"
++#include "reference_movement_hooks.hpp"
+ #include "debug.h"
+ #include "command_func.h"
+ #include "company_func.h"
+@@ -2077,6 +2078,7 @@
+  */
+ bool ProcessOrders(Vehicle *v)
+ {
++	ReferenceMovement::Scope movement_orders("process_orders", v->index.base());
+ 	switch (v->current_order.GetType()) {
+ 		case OT_GOTO_DEPOT:
+ 			/* Let a depot order in the orderlist interrupt. */
+--- a/src/newgrf_sound.cpp
++++ b/src/newgrf_sound.cpp
+@@ -8,6 +8,7 @@
+ /** @file newgrf_sound.cpp Handling NewGRF provided sounds. */
+ 
+ #include "stdafx.h"
++#include "reference_movement_hooks.hpp"
+ #include "engine_base.h"
+ #include "newgrf.h"
+ #include "newgrf_engine.h"
+@@ -142,29 +143,32 @@
+  */
+ bool PlayVehicleSound(const Vehicle *v, VehicleSoundEvent event, bool force)
+ {
+-	if (!_settings_client.sound.vehicle && !force) return true;
++	ReferenceMovement::Scope movement_scope("vehicle_sound", v->index.base());
++	const uint32_t movement_id = v->index.base();
++	ReferenceMovement::Emit("vehicle_sound", "arguments", movement_id, UINT32_MAX, event, force);
++	if (!_settings_client.sound.vehicle && !force) return ReferenceMovement::Result("vehicle_sound", movement_id, true);
+ 
+ 	const GRFFile *file = v->GetGRF();
+ 	uint16_t callback;
+ 
+ 	/* If the engine has no GRF ID associated it can't ever play any new sounds */
+-	if (file == nullptr) return false;
++	if (file == nullptr) return ReferenceMovement::Result("vehicle_sound", movement_id, false);
+ 
+ 	/* Check that the vehicle type uses the sound effect callback */
+-	if (!EngInfo(v->engine_type)->callback_mask.Test(VehicleCallbackMask::SoundEffect)) return false;
++	if (!EngInfo(v->engine_type)->callback_mask.Test(VehicleCallbackMask::SoundEffect)) return ReferenceMovement::Result("vehicle_sound", movement_id, false);
+ 
+ 	callback = GetVehicleCallback(CBID_VEHICLE_SOUND_EFFECT, event, 0, v->engine_type, v);
+ 	/* Play default sound if callback fails */
+-	if (callback == CALLBACK_FAILED) return false;
++	if (callback == CALLBACK_FAILED) return ReferenceMovement::Result("vehicle_sound", movement_id, false);
+ 
+ 	callback = GetNewGRFSoundID(file, callback);
+ 
+ 	/* Play no sound, if result is invalid */
+-	if (callback == INVALID_SOUND) return true;
++	if (callback == INVALID_SOUND) return ReferenceMovement::Result("vehicle_sound", movement_id, true);
+ 
+ 	assert(callback < GetNumSounds());
+ 	SndPlayVehicleFx(callback, v);
+-	return true;
++	return ReferenceMovement::Result("vehicle_sound", movement_id, true);
+ }
+ 
+ /**

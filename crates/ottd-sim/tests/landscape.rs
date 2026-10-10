@@ -26,12 +26,12 @@ fn one_full_sweep_visits_every_tile_once() -> Result<(), Box<dyn std::error::Err
     };
     let mut landscape = Landscape::new(map, 1)?;
     for tick in 1..=256 {
-        landscape.advance(tick);
+        landscape.advance(tick)?;
     }
     assert_eq!(landscape.cursor(), 1);
     assert!(landscape.map().tiles.iter().all(|tile| tile.m5 == 32));
     for tick in 257..=2048 {
-        landscape.advance(tick);
+        landscape.advance(tick)?;
     }
     assert!(landscape.map().tiles.iter().all(|tile| tile.m5 == 1));
     Ok(())
@@ -79,10 +79,10 @@ fn tile_zero_waits_for_tick_256() -> Result<(), Box<dyn std::error::Error>> {
     *map.tiles.first_mut().ok_or("missing tile zero")? = grass(7 << 5);
     let mut landscape = Landscape::new(map, 1)?;
     for tick in 1..256 {
-        landscape.advance(tick);
+        landscape.advance(tick)?;
     }
     assert_eq!(landscape.map().tiles.first().ok_or("tile zero")?.m5, 224);
-    landscape.advance(256);
+    landscape.advance(256)?;
     assert_eq!(landscape.map().tiles.first().ok_or("tile zero")?.m5, 1);
     Ok(())
 }
@@ -117,7 +117,7 @@ fn rectangular_sweeps_preserve_raw_fields_and_saturated_terrain()
         };
         let mut landscape = Landscape::new(map.clone(), 37)?;
         for tick in 1..=256 {
-            landscape.advance(tick);
+            landscape.advance(tick)?;
         }
         assert_eq!(landscape.cursor(), 37);
         assert_eq!(landscape.map(), &map);

@@ -1,0 +1,1152 @@
+{
+  "schema_version": 1,
+  "controls": [
+    {
+      "name": "equal-nonzero-rust",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "must be zero",
+      "mutations": [
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "before": 0,
+          "value": 123
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "before": 0,
+          "value": 123
+        }
+      ]
+    },
+    {
+      "name": "estimate-build",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Uncommitted",
+      "mutations": [
+        {
+          "document": "plan",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "request",
+            "mode"
+          ],
+          "before": "post",
+          "value": "estimate"
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "input",
+            "request",
+            "mode"
+          ],
+          "before": "post",
+          "value": "estimate"
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "input",
+            "request",
+            "mode"
+          ],
+          "before": "post",
+          "value": "estimate"
+        }
+      ]
+    },
+    {
+      "name": "estimate-sale-does-not-remove",
+      "case": "fresh-sale-reuse",
+      "label": "after",
+      "diagnostic": "Uncommitted",
+      "mutations": [
+        {
+          "document": "plan",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "request",
+            "mode"
+          ],
+          "before": "post",
+          "value": "estimate"
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "input",
+            "request",
+            "mode"
+          ],
+          "before": "post",
+          "value": "estimate"
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "input",
+            "request",
+            "mode"
+          ],
+          "before": "post",
+          "value": "estimate"
+        }
+      ]
+    },
+    {
+      "name": "extra-metadata",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Expected native order observation object",
+      "mutations": [
+        {
+          "document": "native",
+          "kind": "add",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "native_metadata",
+            "unknown"
+          ],
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "failed-build",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "complete identity set",
+      "mutations": [
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "exec",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "posted"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "result",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "exec",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "posted"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "result",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        }
+      ]
+    },
+    {
+      "name": "failed-sale-does-not-remove",
+      "case": "fresh-sale-reuse",
+      "label": "after",
+      "diagnostic": "complete identity set",
+      "mutations": [
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "result",
+            "receipt",
+            "exec",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "result",
+            "receipt",
+            "posted"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "result",
+            "receipt",
+            "result",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "result",
+            "receipt",
+            "exec",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "result",
+            "receipt",
+            "posted"
+          ],
+          "before": true,
+          "value": false
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "result",
+            "receipt",
+            "result",
+            "success"
+          ],
+          "before": true,
+          "value": false
+        }
+      ]
+    },
+    {
+      "name": "freed-id-no-new-incarnation",
+      "case": "fresh-sale-reuse",
+      "label": "freed",
+      "diagnostic": "complete vehicle IDs",
+      "mutations": [
+        {
+          "document": "actual",
+          "kind": "add",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3"
+          ],
+          "value": {
+            "aircraft": [],
+            "disaster": [],
+            "effect": [],
+            "roadveh": [
+              {
+                "blocked_ctr": 0,
+                "common": [
+                  {
+                    "acceleration": 0,
+                    "age": 0,
+                    "breakdown_chance": 0,
+                    "breakdown_ctr": 0,
+                    "breakdown_delay": 0,
+                    "breakdowns_since_last_service": 0,
+                    "build_year": 2100,
+                    "cargo.action_counts": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "cargo.packets": [],
+                    "cargo_age_counter": 1,
+                    "cargo_cap": 31,
+                    "cargo_paid_for": 0,
+                    "cargo_subtype": 0,
+                    "cargo_type": 0,
+                    "cur_implicit_order_index": 0,
+                    "cur_real_order_index": 0,
+                    "cur_speed": 0,
+                    "current_order.dest": 0,
+                    "current_order.flags": 0,
+                    "current_order.max_speed": 65535,
+                    "current_order.refit_cargo": 254,
+                    "current_order.travel_time": 0,
+                    "current_order.type": 0,
+                    "current_order.wait_time": 0,
+                    "current_order_time": -2147483648,
+                    "date_of_last_service": 767010,
+                    "date_of_last_service_newgrf": 767010,
+                    "day_counter": 0,
+                    "depot_unbunching_last_departure": 0,
+                    "depot_unbunching_next_departure": 0,
+                    "dest_tile": 4294967295,
+                    "direction": 1,
+                    "economy_age": 0,
+                    "engine_type": 116,
+                    "group_id": 65534,
+                    "last_loading_station": 65535,
+                    "last_loading_tick": 0,
+                    "last_station_visited": 65535,
+                    "lateness_counter": -117,
+                    "load_unload_ticks": 0,
+                    "max_age": 4392,
+                    "motion_counter": 0,
+                    "name": [],
+                    "next": 0,
+                    "next_shared": 0,
+                    "orders": 4,
+                    "owner": 0,
+                    "profit_last_year": 0,
+                    "profit_this_year": 0,
+                    "progress": 0,
+                    "random_bits": 30889,
+                    "refit_cap": 0,
+                    "reliability": 65272,
+                    "reliability_spd_dec": 80,
+                    "round_trip_time": 0,
+                    "running_ticks": 0,
+                    "service_interval": 150,
+                    "spritenum": 0,
+                    "subspeed": 0,
+                    "subtype": 1,
+                    "tick_counter": 0,
+                    "tile": 1560,
+                    "timetable_start": 0,
+                    "unitnumber": 4,
+                    "value": 4921,
+                    "vehicle_flags": 0,
+                    "vehstatus": 11,
+                    "waiting_triggers": 0,
+                    "x_pos": 392,
+                    "y_pos": 392,
+                    "z_pos": 32
+                  }
+                ],
+                "crashed_ctr": 0,
+                "frame": 0,
+                "gv_flags": 0,
+                "overtaking": 0,
+                "overtaking_ctr": 0,
+                "path": [],
+                "reverse_ctr": 0,
+                "state": 254
+              }
+            ],
+            "ship": [],
+            "train": [],
+            "type": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "initial-loaded-duration",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Saved value differs",
+      "mutations": [
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "before": 789,
+          "value": 123
+        }
+      ]
+    },
+    {
+      "name": "loaded-suffix-cannot-inherit-fresh",
+      "case": "loaded-suffix",
+      "label": "after",
+      "diagnostic": "Saved value differs",
+      "mutations": [
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "before": -123456789,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "missing-checkpoint-id",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "complete vehicle IDs",
+      "mutations": [
+        {
+          "document": "actual",
+          "kind": "remove",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "2"
+          ],
+          "before": {
+            "aircraft": [],
+            "disaster": [],
+            "effect": [],
+            "roadveh": [
+              {
+                "blocked_ctr": 0,
+                "common": [
+                  {
+                    "acceleration": 0,
+                    "age": 0,
+                    "breakdown_chance": 0,
+                    "breakdown_ctr": 0,
+                    "breakdown_delay": 0,
+                    "breakdowns_since_last_service": 0,
+                    "build_year": 2100,
+                    "cargo.action_counts": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "cargo.packets": [],
+                    "cargo_age_counter": 1,
+                    "cargo_cap": 31,
+                    "cargo_paid_for": 0,
+                    "cargo_subtype": 0,
+                    "cargo_type": 0,
+                    "cur_implicit_order_index": 0,
+                    "cur_real_order_index": 0,
+                    "cur_speed": 0,
+                    "current_order.dest": 0,
+                    "current_order.flags": 0,
+                    "current_order.max_speed": 65535,
+                    "current_order.refit_cargo": 254,
+                    "current_order.travel_time": 0,
+                    "current_order.type": 0,
+                    "current_order.wait_time": 0,
+                    "current_order_time": -2147483646,
+                    "date_of_last_service": 767010,
+                    "date_of_last_service_newgrf": 767010,
+                    "day_counter": 0,
+                    "depot_unbunching_last_departure": 123,
+                    "depot_unbunching_next_departure": 456,
+                    "dest_tile": 4294967295,
+                    "direction": 1,
+                    "economy_age": 0,
+                    "engine_type": 116,
+                    "group_id": 65534,
+                    "last_loading_station": 65535,
+                    "last_loading_tick": 0,
+                    "last_station_visited": 65535,
+                    "lateness_counter": -117,
+                    "load_unload_ticks": 0,
+                    "max_age": 4392,
+                    "motion_counter": 0,
+                    "name": [],
+                    "next": 0,
+                    "next_shared": 0,
+                    "orders": 3,
+                    "owner": 0,
+                    "profit_last_year": 0,
+                    "profit_this_year": 0,
+                    "progress": 0,
+                    "random_bits": 58782,
+                    "refit_cap": 0,
+                    "reliability": 65272,
+                    "reliability_spd_dec": 80,
+                    "round_trip_time": 789,
+                    "running_ticks": 0,
+                    "service_interval": 150,
+                    "spritenum": 0,
+                    "subspeed": 0,
+                    "subtype": 1,
+                    "tick_counter": 0,
+                    "tile": 1562,
+                    "timetable_start": 0,
+                    "unitnumber": 3,
+                    "value": 4921,
+                    "vehicle_flags": 0,
+                    "vehstatus": 11,
+                    "waiting_triggers": 0,
+                    "x_pos": 424,
+                    "y_pos": 392,
+                    "z_pos": 32
+                  }
+                ],
+                "crashed_ctr": 0,
+                "frame": 0,
+                "gv_flags": 4,
+                "overtaking": 0,
+                "overtaking_ctr": 0,
+                "path": [],
+                "reverse_ctr": 0,
+                "state": 254
+              }
+            ],
+            "ship": [],
+            "train": [],
+            "type": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "old-checkpoint-cannot-inherit-reused-incarnation",
+      "case": "fresh-sale-reuse",
+      "label": "first",
+      "diagnostic": "fresh domain changed",
+      "mutations": [
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "DATE",
+            "records",
+            "0",
+            "random_state[0]"
+          ],
+          "before": 2316566204,
+          "value": 925477146
+        },
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "DATE",
+            "records",
+            "0",
+            "random_state[1]"
+          ],
+          "before": 2564913321,
+          "value": 2437054422
+        },
+        {
+          "document": "expected",
+          "kind": "remove",
+          "path": [
+            "chunks",
+            "ORDL",
+            "records",
+            "3"
+          ],
+          "before": {
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ]
+          }
+        },
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "current_order_time"
+          ],
+          "before": -2147483648,
+          "value": 0
+        },
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "lateness_counter"
+          ],
+          "before": -117,
+          "value": 0
+        },
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "orders"
+          ],
+          "before": 4,
+          "value": 0
+        },
+        {
+          "document": "expected",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "random_bits"
+          ],
+          "before": 30889,
+          "value": 32726
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "DATE",
+            "records",
+            "0",
+            "random_state[0]"
+          ],
+          "before": 2316566204,
+          "value": 925477146
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "DATE",
+            "records",
+            "0",
+            "random_state[1]"
+          ],
+          "before": 2564913321,
+          "value": 2437054422
+        },
+        {
+          "document": "actual",
+          "kind": "remove",
+          "path": [
+            "chunks",
+            "ORDL",
+            "records",
+            "3"
+          ],
+          "before": {
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ]
+          }
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "current_order_time"
+          ],
+          "before": -2147483648,
+          "value": 0
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "lateness_counter"
+          ],
+          "before": -117,
+          "value": 0
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "orders"
+          ],
+          "before": 4,
+          "value": 0
+        },
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "random_bits"
+          ],
+          "before": 30889,
+          "value": 32726
+        }
+      ]
+    },
+    {
+      "name": "return-mismatch",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Unproven Restore creation",
+      "mutations": [
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "returns",
+            "exec",
+            "vehicle"
+          ],
+          "before": 3,
+          "value": 99
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "result",
+            "receipt",
+            "returns",
+            "exec",
+            "vehicle"
+          ],
+          "before": 3,
+          "value": 99
+        }
+      ]
+    },
+    {
+      "name": "sale-wrong-target",
+      "case": "fresh-sale-reuse",
+      "label": "after",
+      "diagnostic": "complete identity set",
+      "mutations": [
+        {
+          "document": "plan",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "request",
+            "command",
+            "vehicle"
+          ],
+          "before": 3,
+          "value": 0
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "input",
+            "request",
+            "command",
+            "vehicle"
+          ],
+          "before": 3,
+          "value": 0
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            3,
+            "input",
+            "request",
+            "command",
+            "vehicle"
+          ],
+          "before": 3,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "unrelated-field",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Saved value differs",
+      "mutations": [
+        {
+          "document": "actual",
+          "kind": "replace",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "3",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "lateness_counter"
+          ],
+          "before": -117,
+          "value": 123
+        }
+      ]
+    },
+    {
+      "name": "wrong-capacity-branch",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "pointer/index witness",
+      "mutations": [
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            0,
+            "after",
+            "orders",
+            "list_pool",
+            "items"
+          ],
+          "before": 3,
+          "value": 64000
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "before",
+            "orders",
+            "list_pool",
+            "items"
+          ],
+          "before": 3,
+          "value": 64000
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            0,
+            "after",
+            "orders",
+            "list_pool",
+            "items"
+          ],
+          "before": 3,
+          "value": 64000
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "before",
+            "orders",
+            "list_pool",
+            "items"
+          ],
+          "before": 3,
+          "value": 64000
+        }
+      ]
+    },
+    {
+      "name": "wrong-owned-copy",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "copied order allocation",
+      "mutations": [
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            0,
+            "after",
+            "orders",
+            "backups",
+            0,
+            "orders",
+            0,
+            "wait_time"
+          ],
+          "before": 31,
+          "value": 32
+        },
+        {
+          "document": "native",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "before",
+            "orders",
+            "backups",
+            0,
+            "orders",
+            0,
+            "wait_time"
+          ],
+          "before": 31,
+          "value": 32
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            0,
+            "after",
+            "orders",
+            "backups",
+            0,
+            "orders",
+            0,
+            "wait_time"
+          ],
+          "before": 31,
+          "value": 32
+        },
+        {
+          "document": "rust",
+          "kind": "replace",
+          "path": [
+            "actions",
+            1,
+            "before",
+            "orders",
+            "backups",
+            0,
+            "orders",
+            0,
+            "wait_time"
+          ],
+          "before": 31,
+          "value": 32
+        }
+      ]
+    },
+    {
+      "name": "missing-snapshot",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Saved object keys differ",
+      "mutations": [
+        {
+          "document": "rust",
+          "kind": "remove",
+          "path": [
+            "final"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "extra-snapshot",
+      "case": "owned-baseline",
+      "label": "after",
+      "diagnostic": "Saved object keys differ",
+      "mutations": [
+        {
+          "document": "rust",
+          "kind": "add",
+          "path": [
+            "extra_snapshot"
+          ],
+          "value": {}
+        }
+      ]
+    }
+  ]
+}

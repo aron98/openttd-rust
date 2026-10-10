@@ -1,0 +1,102 @@
+diff --git a/src/newgrf.cpp b/src/newgrf.cpp
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -51,1 +51,5 @@
++#include "3rdparty/nlohmann/json.hpp"
++#include "core/random_func.hpp"
++#include <fstream>
++
+ #include "safeguards.h"
+@@ -1251,3 +1255,5 @@
+  * better make this more robust in the future. */
+-static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
++#include "reference_grf_load_control.hpp"
++
++static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
+ {
+@@ -1273,3 +1279,4 @@
+ 	try {
+-		uint8_t action = br.ReadByte();
++		uint8_t action = br.ReadByte();
++		ReferenceGrfControl::Action(action);
+ 
+@@ -1342,3 +1349,4 @@
+ 		uint8_t type = file.ReadByte();
+-		_cur_gps.nfo_line++;
++		_cur_gps.nfo_line++;
++		ReferenceGrfControl::Record(num, type, grf_container_version);
+ 
+@@ -1349,3 +1357,4 @@
+ 					GrfMsg(0, "LoadNewGRFFile: Unexpectedly large sprite, disabling");
+-					DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
++					DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
++					ReferenceGrfControl::Decision();
+ 					break;
+@@ -1353,3 +1362,4 @@
+ 
+-				DecodeSpecialSprite(allocator, num, stage);
++				DecodeSpecialSprite(allocator, num, stage);
++				ReferenceGrfControl::Decision();
+ 
+@@ -1365,3 +1375,4 @@
+ 				GrfMsg(0, "LoadNewGRFFile: Unexpected sprite, disabling");
+-				DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
++				DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
++				ReferenceGrfControl::Decision();
+ 				break;
+@@ -1378,3 +1389,4 @@
+ 
+-		if (_cur_gps.skip_sprites > 0) _cur_gps.skip_sprites--;
++		if (_cur_gps.skip_sprites > 0) _cur_gps.skip_sprites--;
++		ReferenceGrfControl::Decision();
+ 	}
+@@ -1757,4 +1769,5 @@
+  */
+-void LoadNewGRF(SpriteID load_index, uint num_baseset)
+-{
++void LoadNewGRF(SpriteID load_index, uint num_baseset)
++{
++	ReferenceGrfControl::Begin(num_baseset);
+ 	/* In case of networking we need to "sync" the start values
+@@ -1828,3 +1841,4 @@
+ 
+-		_cur_gps.stage = stage;
++		_cur_gps.stage = stage;
++		ReferenceGrfControl::StageStart(stage);
+ 		for (const auto &c : _grfconfig) {
+@@ -1865,6 +1879,7 @@
+ 				/* We're not going to activate this, so free whatever data we allocated */
+-				ClearTemporaryNewGRFData(_cur_gps.grffile);
+-			}
+-		}
+-	}
++				ClearTemporaryNewGRFData(_cur_gps.grffile);
++			}
++		}
++		ReferenceGrfControl::StageEnd(stage);
++	}
+ 
+@@ -1890,3 +1905,4 @@
+ 	TimerGameTick::counter = tick_counter;
+-	_display_opt  = display_opt;
++	_display_opt  = display_opt;
++	ReferenceGrfControl::End();
+ }
+diff --git a/src/saveload/afterload.cpp b/src/saveload/afterload.cpp
+--- a/src/saveload/afterload.cpp
++++ b/src/saveload/afterload.cpp
+@@ -9,3 +9,5 @@
+ 
+-#include "../stdafx.h"
++#include "../stdafx.h"
++
++void ReferenceArmGrfControl();
+ #include "../void_map.h"
+@@ -799,4 +801,5 @@
+ 
+-	/* Load the sprites */
+-	GfxLoadSprites();
++	/* Load the sprites */
++	ReferenceArmGrfControl();
++	GfxLoadSprites();
+ 	LoadStringWidthTable();

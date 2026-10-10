@@ -50,6 +50,13 @@ pub struct WorldSnapshot {
     script_random: Vec<ScriptRandomState>,
 }
 
+#[derive(Debug)]
+pub(crate) struct SnapshotMetadata {
+    date: DateState,
+    settings: table::Fields,
+    script_random: Vec<ScriptRandomState>,
+}
+
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 struct WorldWire {
@@ -117,31 +124,29 @@ impl WorldSnapshot {
     pub(super) fn new(
         map: MapState,
         date: DateState,
-        mut settings: table::Fields,
+        settings: table::Fields,
         script_random: Vec<ScriptRandomState>,
     ) -> Result<Self, SnapshotError> {
-        table::validate_settings(&mut settings)?;
-        if script_random.len() != 19
-            || script_random
-                .iter()
-                .zip(0..19)
-                .any(|(record, owner)| record.owner != owner)
-        {
-            return Err(invalid(
-                "SRND must contain owners 0 through 18 exactly once in order",
-            ));
-        }
-        if !(0..=1).contains(&date.competitors_interval_fired()) {
-            return Err(invalid("DATE competitor fired flag must be 0 or 1"));
-        }
+        let metadata = SnapshotMetadata::new(date, settings, script_random)?;
         Ok(Self {
             schema_version: 1,
             savegame_version: crate::SAVEGAME_VERSION,
             map,
-            date,
-            settings,
-            script_random,
+            date: metadata.date,
+            settings: metadata.settings,
+            script_random: metadata.script_random,
         })
+    }
+    pub(crate) fn replace_metadata(&mut self, metadata: SnapshotMetadata) {
+        self.date = metadata.date;
+        self.settings = metadata.settings;
+        self.script_random = metadata.script_random;
+    }
+    pub(crate) fn replace_map(&mut self, map: MapState) {
+        self.map = map;
+    }
+    pub(crate) fn swap_tile(&mut self, index: usize, tile: &mut super::TileState) {
+        self.map.swap_tile(index, tile);
     }
     /// Canonical JSON schema version.
     pub const fn schema_version(&self) -> u32 {
@@ -166,5 +171,33 @@ impl WorldSnapshot {
     /// Script randomizers in saved owner order.
     pub fn script_random(&self) -> &[ScriptRandomState] {
         &self.script_random
+    }
+}
+
+impl SnapshotMetadata {
+    pub(super) fn new(
+        date: DateState,
+        mut settings: table::Fields,
+        script_random: Vec<ScriptRandomState>,
+    ) -> Result<Self, SnapshotError> {
+        table::validate_settings(&mut settings)?;
+        if script_random.len() != 19
+            || script_random
+                .iter()
+                .zip(0..19)
+                .any(|(record, owner)| record.owner != owner)
+        {
+            return Err(invalid(
+                "SRND must contain owners 0 through 18 exactly once in order",
+            ));
+        }
+        if !(0..=1).contains(&date.competitors_interval_fired()) {
+            return Err(invalid("DATE competitor fired flag must be 0 or 1"));
+        }
+        Ok(Self {
+            date,
+            settings,
+            script_random,
+        })
     }
 }

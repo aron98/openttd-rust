@@ -1,0 +1,39 @@
+configured_empty_roots 0 0 1
+step 0 seed 0 73636f7265 string 6f6c642d726f6f742d76616c7565
+seeded
+step 1 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 1
+step 2 compile 1 0 buffer fixtures/read.nut
+compiled
+stack 2
+literal string 5 73636f7265
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 3 run 1 0 1000
+return 998 string 14 6f6c642d726f6f742d76616c7565
+temp string 14 6f6c642d726f6f742d76616c7565
+step 4 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 3
+step 5 clear-result 1
+result_released
+step 6 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 2
+step 7 drop 1 0
+dropped
+step 8 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 2
+step 9 empty 0
+root 2
+step 10 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 2
+step 11 empty 1
+root 3
+step 12 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 1
+step 13 temp 1
+temp string 14 6f6c642d726f6f742d76616c7565
+step 14 release-child 1
+child_released
+step 15 refs 0 6f6c642d726f6f742d76616c7565
+refs 6f6c642d726f6f742d76616c7565 0

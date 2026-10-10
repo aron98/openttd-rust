@@ -1,0 +1,112 @@
+{
+  "native_sha256": "5496f110b1b12acbc99e31276ca36d9e72dea37573b3aab1f71de5fca0f68dea",
+  "upstream": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "origin": "original BuildRoad/BuildRoadDepot and actual StateGameLoop; no synthetic road fields",
+  "files": [
+    {
+      "path": "fixtures/road-tile/built.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/build/final.sav",
+      "sha256": "d3499d5e5128b6526a6b2ad9d9c2035deb4ca02182ee6cc889149bf7ddc3a1e5"
+    },
+    {
+      "path": "fixtures/road-tile/built.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/build/final.world.json",
+      "sha256": "23845f4942cb7ae641cd4ba29e2b29f9017bafa11aac6e111e9293c00e267d32"
+    },
+    {
+      "path": "fixtures/road-tile/built.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/build/final.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    },
+    {
+      "path": "fixtures/road-tile/before-road.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/before-road.sav",
+      "sha256": "b1c9695194ecc832de548c20f1c93dcc5c12e4395eb083934cc4248eed085d93"
+    },
+    {
+      "path": "fixtures/road-tile/before-road.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/before-road.world.json",
+      "sha256": "23e7416a30cf0d1fad4371f7dc5f294e2f94d3ac8378c3cd2eaf7d2295020373"
+    },
+    {
+      "path": "fixtures/road-tile/before-road.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/before-road.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    },
+    {
+      "path": "fixtures/road-tile/after-road.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/after-road.sav",
+      "sha256": "b086bb90c1890e1774aae03fde54efcc1dee24b63d087dbed97c43142aa8570b"
+    },
+    {
+      "path": "fixtures/road-tile/after-road.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/after-road.world.json",
+      "sha256": "7a5a675fce903c7b857a40b8440d94c088d5f7cbdf3bbe670b7d32e9d4351693"
+    },
+    {
+      "path": "fixtures/road-tile/after-road.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/after-road.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    },
+    {
+      "path": "fixtures/road-tile/before-depot.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/before-depot.sav",
+      "sha256": "4f9a03f7fe1915263b3429f26d17e532cd2c15a1134d94a4e308e0a48068b42c"
+    },
+    {
+      "path": "fixtures/road-tile/before-depot.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/before-depot.world.json",
+      "sha256": "6c4410824d2fe91c13cee4b037d0c819a97d43885581a9f9312959b4303810e8"
+    },
+    {
+      "path": "fixtures/road-tile/before-depot.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/before-depot.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    },
+    {
+      "path": "fixtures/road-tile/after-depot.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/after-depot.sav",
+      "sha256": "5f174b1ff2c3788c2bbcd53c760e1a882d900c070dd55b7baf936384520df163"
+    },
+    {
+      "path": "fixtures/road-tile/after-depot.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/after-depot.world.json",
+      "sha256": "56a3cc2a402f4b89b3050663f7d4f2190d0e0259fd523e74c174d51b3a2d521f"
+    },
+    {
+      "path": "fixtures/road-tile/after-depot.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/after-depot.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    },
+    {
+      "path": "fixtures/road-tile/cycle-one.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/final.sav",
+      "sha256": "dbaac9ef52c5c6dbc97060ee1d0425056e9293dec7d41ab2c19078fef76ea3aa"
+    },
+    {
+      "path": "fixtures/road-tile/cycle-one.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/final.world.json",
+      "sha256": "420eeca365dc77b41b3a0831bece62d94750e0ac990cce26583e4d183c40ee10"
+    },
+    {
+      "path": "fixtures/road-tile/cycle-one.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/ticks/final.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    },
+    {
+      "path": "fixtures/road-tile/cycle-two.sav",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/stable/final.sav",
+      "sha256": "afbf5f8fd6c880ec4e07b123d102d6c2b79746a2da04020f9343e7002edc4767"
+    },
+    {
+      "path": "fixtures/road-tile/cycle-two.world.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/stable/final.world.json",
+      "sha256": "f9c67c732ed82146488866aaa527bb54a78470206bcb7f52f11b9843ab781c97"
+    },
+    {
+      "path": "fixtures/road-tile/cycle-two.derived.json",
+      "native_input": ".omo/evidence/stage04-road-tile-witness/runs/stable/final.derived.json",
+      "sha256": "a0554f76c0a48fecf634eceac7585b7514e06bb119fbda52a008d680d2e4f769"
+    }
+  ]
+}

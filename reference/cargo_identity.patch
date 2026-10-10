@@ -1,0 +1,115 @@
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -1263,6 +1263,7 @@
+ #include "reference_grf_strings.hpp"
+ #include "reference_grf_currency.hpp"
+ #include "reference_engine_specs.hpp"
++#include "reference_cargo_identity.hpp"
+ #include "reference_grf_safety.hpp"
+ 
+ static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
+@@ -1661,6 +1662,7 @@
+ 
+ 	ReferenceGrfCurrency::Observe("before-finalize");
+ 	ReferenceEngineSpecs::Observe("before-finalize");
++	ReferenceCargoIdentity::Observe("before-finalize");
+ 	FinaliseStringMapping();
+ 	ReferenceGrfCurrency::Observe("after-finalize");
+ 
+@@ -1775,6 +1777,7 @@
+ 
+ 	/* Deallocate temporary loading data */
+ 	ReferenceEngineSpecs::Observe("before-temp-release");
++	ReferenceCargoIdentity::Observe("before-temp-release");
+ 	_gted.clear();
+ 	_grm_sprites.clear();
+ }
+@@ -1789,6 +1792,7 @@
+ 	ReferenceMovementBaseline::Consume(num_baseset);
+ 	ReferenceGrfControl::Begin(num_baseset);
+ 	ReferenceEngineSpecs::Begin(ReferenceGrfControl::manifest);
++	ReferenceCargoIdentity::Begin();
+ 	if (ReferenceGrfControl::active) ReferenceGrfContext::Prepare(ReferenceGrfControl::manifest);
+ 	if (ReferenceGrfControl::active) ReferenceGrfLanguage::Begin(ReferenceGrfControl::manifest);
+ 	ReferenceGrfStrings::TryRun(ReferenceGrfControl::manifest);
+@@ -1826,6 +1830,7 @@
+ 	ResetNewGRFData();
+ 	ReferenceGrfCurrency::Observe("after-reset");
+ 	ReferenceEngineSpecs::Observe("after-reset");
++	ReferenceCargoIdentity::Observe("after-reset");
+ 
+ 	/*
+ 	 * Reset the status of all files, so we can 'retry' to load them.
+@@ -1900,6 +1905,7 @@
+ 				assert(GetFileByGRFID(c->ident.grfid) == _cur_gps.grffile);
+ 				ClearTemporaryNewGRFData(_cur_gps.grffile);
+ 				BuildCargoTranslationMap();
++				ReferenceCargoIdentity::Observe("inverse-map-built");
+ 				Debug(sprite, 2, "LoadNewGRF: Currently {} sprites are loaded", _cur_gps.spriteid);
+ 			} else if (stage == GLS_INIT && c->flags.Test(GRFConfigFlag::InitOnly)) {
+ 				/* We're not going to activate this, so free whatever data we allocated */
+@@ -1911,6 +1917,7 @@
+ 		ReferenceGrfStrings::StageEnd(stage);
+ 		ReferenceGrfCurrency::StageEnd(stage);
+ 		ReferenceEngineSpecs::Observe("stage-end");
++		ReferenceCargoIdentity::Observe("stage-end");
+ 	}
+ 
+ 	/* We've finished reading files. */
+@@ -1940,4 +1947,5 @@
+ 	ReferenceGrfCurrency::Finish();
+ 	ReferenceGrfControl::End();
+ 	ReferenceEngineSpecs::Finish();
+-}
++	ReferenceCargoIdentity::Finish();
++}
+--- a/src/newgrf/newgrf_act0.cpp
++++ b/src/newgrf/newgrf_act0.cpp
+@@ -18,6 +18,7 @@
+ #include "../vehicle_base.h"
+ #include "newgrf_bytereader.h"
+ #include "newgrf_internal.h"
++#include "../reference_cargo_identity_hooks.hpp"
+ 
+ #include "table/strings.h"
+ 
+@@ -164,7 +165,10 @@
+ 	{
+ 		Invoker func = feature < std::size(funcs) ? funcs[feature] : nullptr;
+ 		if (func == nullptr) return CIR_UNKNOWN;
+-		return func(first, last, prop, buf, stage);
++		ReferenceCargoIdentityScope observation(feature, first, last, prop, buf);
++		auto result = func(first, last, prop, buf, stage);
++		observation.result = result;
++		return result;
+ 	}
+ };
+ 
+--- a/src/saveload/afterload.cpp
++++ b/src/saveload/afterload.cpp
+@@ -12,6 +12,7 @@
+ void ReferenceArmGrfControl();
+ void ReferenceRunGrfCurrencyReload();
+ void ReferenceEngineSpecsAfterSavedOverlay();
++void ReferenceCargoIdentityAfterSavedOverlay();
+ #include "../void_map.h"
+ #include "../signs_base.h"
+ #include "../depot_base.h"
+@@ -814,6 +815,7 @@
+ 	/* Copy temporary data to Engine pool */
+ 	CopyTempEngineData();
+ 	ReferenceEngineSpecsAfterSavedOverlay();
++	ReferenceCargoIdentityAfterSavedOverlay();
+ 
+ 	/* Connect front and rear engines of multiheaded trains and converts
+ 	 * subtype to the new format */
+--- a/src/cargotype.h
++++ b/src/cargotype.h
+@@ -200,6 +200,7 @@
+ 
+ 	friend void SetupCargoForClimate(LandscapeType l);
+ 	friend void BuildCargoLabelMap();
++	friend struct ReferenceCargoIdentityAccess;
+ 	friend inline CargoType GetCargoTypeByLabel(CargoLabel ct);
+ 	friend void FinaliseCargoArray();
+ };

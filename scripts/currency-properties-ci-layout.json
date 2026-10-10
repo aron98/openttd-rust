@@ -2713,7 +2713,7 @@
     "load/zero-items-all-values/native/invocation.txt"
   ],
   "sources": {
-    ".github/workflows/ci.yml": "98ab3304b84472ea891f1dfe29beed6e525a992d55cdaffca6656d7faaf54f09",
+    ".github/workflows/ci.yml": "f5cdc9b8c99b9936d609947871bf7f5454d1193f7e3522546eee1e9330f6d92e",
     "Cargo.lock": "3534df9bad58811d8a2cd6bd83cd08ca80c78dfbb82a09d1b486ce49fed63ea7",
     "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
     "crates/ottd-cli/Cargo.toml": "3c1b76f65a3594119b4b436fc78c495f9391ad74712b5c227f6cfd9424ef9370",

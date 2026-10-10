@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "cfe9af612907a241d4e62dc0623ee43bc4faa7023d3389e41392ed35c89036e8",
+   "sha256": "621dab53f856599200a17f78b0f8005f7f1afd52de27e33cdc88333e6ccb673b",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,

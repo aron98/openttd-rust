@@ -226,11 +226,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
-      MOVEMENT_WORK: ${{ runner.temp }}/movement-${{ github.run_id }}-${{ github.run_attempt }}
       MOVEMENT_PR_HEAD: ${{ github.event.pull_request.head.sha }}
       PYTHONDONTWRITEBYTECODE: "1"
       JOBS: "2"
     steps:
+      - name: Set fresh external movement workspace
+        run: |
+          printf 'MOVEMENT_WORK=%s/movement-%s-%s\n' "$RUNNER_TEMP" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "verified_native_corpus": false,
+  "capability": "single-road-gameplay-physical-no-viewport",
+  "proof_bytes": 6442450944,
+  "native_run_bytes": 805306368,
+  "free_floor": 1073741824
+}

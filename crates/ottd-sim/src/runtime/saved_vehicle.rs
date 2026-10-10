@@ -104,6 +104,12 @@ impl<'a> SavedVehicleView<'a> {
             _ => Err(RuntimeError::Invalid(name)),
         }
     }
+    pub(super) fn road_field(self, name: &'static str) -> Result<&'a WireValue, RuntimeError> {
+        self.source
+            .row(*b"VEHS", self.id.raw())?
+            .single("roadveh")?
+            .field(name)
+    }
     pub(super) fn road_state(self) -> Result<u64, RuntimeError> {
         self.source
             .row(*b"VEHS", self.id.raw())?

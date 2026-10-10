@@ -26,6 +26,9 @@ pub enum ReplayError {
     /// World-loop execution rejected its gameplay context.
     #[error(transparent)]
     Tick(#[from] WorldTickError),
+    /// Native runtime restoration rejected the loaded world.
+    #[error(transparent)]
+    Runtime(#[from] crate::runtime::RuntimeError),
     /// The caller could not retain an observation.
     #[error("replay observer failed: {0}")]
     Observer(String),
@@ -83,28 +86,26 @@ pub fn run_replay(
         return Err(ReplayError::Invalid("through ordinal is in the past"));
     }
     domain::validate(initial)?;
-    let mut world = initial.clone();
+    let mut owner = ReplayOwner::Saved(Box::new(initial.clone()));
     let mut cursor = cursor.clone();
-    checkpoint(&world, "initial", observer)?;
+    checkpoint(owner.world(), "initial", observer)?;
     while let Some(action) = cursor.next().cloned() {
         if through.is_some_and(|end| action.ordinal() > end) {
             break;
         }
-        let before = runtime::observe(&world)?;
+        let before = runtime::observe(owner.world())?;
         let (op, receipt) = match &action {
-            ReplayAction::Command { request, .. } => {
-                ("command", Some(execute_command(&mut world, request)?))
-            }
+            ReplayAction::Command { request, .. } => ("command", Some(owner.command(request)?)),
             ReplayAction::Tick { count, .. } => {
-                advance_world(&mut world, *count)?;
+                owner = owner.advance(*count)?;
                 ("tick", None)
             }
             ReplayAction::Checkpoint { label, .. } => {
-                checkpoint(&world, label, observer)?;
+                checkpoint(owner.world(), label, observer)?;
                 ("checkpoint", None)
             }
         };
-        let after = runtime::observe(&world)?;
+        let after = runtime::observe(owner.world())?;
         observer(
             &ReplayEvent::Action(&ReplayObservation {
                 ordinal: action.ordinal(),
@@ -113,12 +114,15 @@ pub fn run_replay(
                 after,
                 receipt,
             }),
-            &world,
+            owner.world(),
         )?;
         cursor.advance()?;
     }
-    checkpoint(&world, "final", observer)?;
-    Ok(ReplayOutcome { world, cursor })
+    checkpoint(owner.world(), "final", observer)?;
+    Ok(ReplayOutcome {
+        world: owner.into_world(),
+        cursor,
+    })
 }
 fn checkpoint(
     world: &World,
@@ -132,4 +136,53 @@ fn checkpoint(
         },
         world,
     )
+}
+
+enum ReplayOwner {
+    Saved(Box<World>),
+    Road(Box<crate::runtime::SimulationRuntime>),
+}
+impl ReplayOwner {
+    fn world(&self) -> &World {
+        match self {
+            Self::Saved(world) => world,
+            Self::Road(runtime) => runtime.world(),
+        }
+    }
+    fn into_world(self) -> World {
+        match self {
+            Self::Saved(world) => *world,
+            Self::Road(runtime) => runtime.into_world(),
+        }
+    }
+    fn command(&mut self, request: &crate::CommandRequest) -> Result<CommandReceipt, CommandError> {
+        match self {
+            Self::Saved(world) => execute_command(world, request),
+            Self::Road(runtime) => runtime.execute_command(request),
+        }
+    }
+    fn advance(self, count: u32) -> Result<Self, ReplayError> {
+        match self {
+            Self::Saved(mut world) => {
+                let needs_road = count > 0
+                    && crate::world_access::unsigned(&world, b"DATE", 0, "pause_mode")? == 0
+                    && world
+                        .tables()
+                        .get(b"VEHS")
+                        .is_some_and(|table| !table.records().is_empty());
+                if needs_road {
+                    let mut runtime = crate::runtime::SimulationRuntime::restore_vanilla(*world)?;
+                    runtime.advance_world(count)?;
+                    Ok(Self::Road(Box::new(runtime)))
+                } else {
+                    advance_world(&mut world, count)?;
+                    Ok(Self::Saved(world))
+                }
+            }
+            Self::Road(mut runtime) => {
+                runtime.advance_world(count)?;
+                Ok(Self::Road(runtime))
+            }
+        }
+    }
 }

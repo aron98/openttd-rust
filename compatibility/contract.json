@@ -1996,7 +1996,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-lib-rs",
    "path": "crates/ottd-sim/src/lib.rs",
-   "sha256": "ed041a20800c15bb1cd6ad77d86f04a03628c253a842608a78df9255456c7e9b",
+   "sha256": "58215ad411908534e05a58577946c3ac1e84b3db0c63b9d563634d434db7f276",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -2005,7 +2005,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-rs",
    "path": "crates/ottd-sim/src/runtime.rs",
-   "sha256": "eb34b491137f3c29b9672d7d74666a34c98ce07beab136fa6be344abcd47c248",
+   "sha256": "57416b78ce4eb5c7e6e16e580fc93fd09f51a6ab101af1662fd4e71adb64a118",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -2032,7 +2032,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-saved-vehicle-rs",
    "path": "crates/ottd-sim/src/runtime/saved_vehicle.rs",
-   "sha256": "940cf1dd99ba6de1ddf2e9476bfde5e7f4268a5795e12ed3ab37113037bd3bca",
+   "sha256": "e475486613f2557f2eaab8f0f40b0ba81ff3ef6fd106162bf9737443f05d7a45",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "44b129e436421354e271ec8a4c7dde213337f6ad140c9cea24761a802e6d04cc",
+   "sha256": "009cd18908acbbf5ff5c6ff38e821ff521bb9ab40300a5d9d396a6f2b1da264a",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "63418618ba3f274f2d41edde4e706cdb698db9c68d028c02ddc89880b7d1129c",
+   "sha256": "8146659f46b67560f85bc6ebaae9bff8a14bb90289cb6dfa9d1b218abf3292db",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "34700596d64910b8f1a74fe2fec384d7bf6d679d4bcb41d8c41c0bda6fe66f41",
+   "sha256": "bc5b7afbb7893472a74040865a6bb8a869bebf6027610a35a15f82ada5e457c8",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "8dc628d1bf8f87e959ce3658af4a23519ce4a661d5fdc0945992ff706c32eddd",
+   "sha256": "d1ec86482181df1ab54562448f4b383015157eef0e70d228bf918cc43e648b58",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "4e0e935457123a6be494ad845b32df28f773202434689c482d5084a871a1cd2d",
+   "sha256": "21eadd09f56cf4c53a1e32e487bdbe2b820ec637cbaf5f5dc14f5afcf34d538e",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "c3fe54372a6ee7a33042587b1c602013811dc2b6233eb906f6bf1b542ba2ec22",
+   "sha256": "4719b5363233bc2bfb4e89e585b06275bcc743b027c9ccd8da7179d2f78edd6c",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "8564fc34d6f00e17baea6592f888c6558fdd5bbbd4e8efd542db7bd494dba24c",
+   "sha256": "e7518a68448b8ae806e743ea3b40885d29ba7d03b72968b429ed7894875d8c51",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "c69c0e47715905310af31a2093345c65fbd5e8e6ea0e178d5c44a46390b7a94b",
+   "sha256": "8a67bbfbd138320987450eac0ce79a4f7e54d022d9118b68ad6b1aa7e085b33d",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "631d604816a5ca1a7e322ee9814dc93c58fb2eacd884d85c4982ea2bbc5c1175",
+   "sha256": "251a3a7ea94d4e9dbd6ae0f22defdf73cb4aa60e1e29085cd18c83d34ee1c581",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "91819f9c37d57ea5a023035c565b09118c8fdfbffa6f2807885d7ec69895e7d3",
+   "sha256": "c7fb1d11d579d9c3aa4435050eb7e1073dd6139d4b0906348ce3892022213b04",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "90659d03bfa1f77a28f2c5d0c325fff94170e7bc5c9a0f1fcd7dfb5dd4012f01",
+   "sha256": "11944c3fd49875eb6011929c39f572c937d0b7fe214cd734031497d3f9509e15",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "e54551c9d671a1d063f4e15710784590d58959978ee6ddf39569ba5afd6b4a8a",
+   "sha256": "4bcb4da658655b60ae831a62143ee17de5f94d07f2280b29598829483a2d3cca",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "bbc9cd50ce21be62b74ee615ff6484c56fabbc8f068734ac3e7aaf86486a4ee9",
+   "sha256": "c5ef86cd9ad6fb7734e7f4d2e752632cc1303d3694d03b993d519f4150d5c325",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "d7278521c17cacbfe9cdccaa1b70791b7f73badff1d82052d5d9f0cb854d826a",
+   "sha256": "ffd480c356ba44edbeeb2449c9c4725bb1a9ebfb8a3ecf67c75214182980388d",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "1790f035387c32a8fb745cfe550f357e6db746ee404d8f31d6b6ac07c171c3a0",
+   "sha256": "c06722bdc8ecad0037b679304cf10d3aba68cb80079b8280eb97528a3b03c9d8",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "4a5886b4f9cc7b7ecac3e901f0116de3a755ea7cedcc09c1703c479d95209fc9",
+   "sha256": "defe41aca0be618ed488709fa4b0a0dc6cc4d1cfde7046dfa1c56e924e256361",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8515,6 +8515,276 @@
    "sha256": "59d578f4e99321972b6c996353173c44cfb5ab1fe8dcc46a1fbd5b01253b92c9",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 array-only foreach;135 native sessions,129 strict stateful projections and6 explicit string-runtime boundaries. No general iterable/GC claim.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-docs-road-movement-md",
+   "path": "docs/road-movement.md",
+   "sha256": "eb1b9065b6f941f7ab62e20f637b101ba3b762005070f3411443a44e02bbe421",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-fixtures-road-movement-layout-json",
+   "path": "fixtures/road-movement/layout.json",
+   "sha256": "91b71ca89567cbe045686d65a6bbdd68b347aa32c9344db888dcfe30280b722e",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-check-road-movement-ci-py",
+   "path": "scripts/check-road-movement-ci.py",
+   "sha256": "003e1b71f660d2170ba0a1cb9072f4be07b3656b510359ba5a8d6257d472a743",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-crates-ottd-sim-src-world-ticks-shared-rs",
+   "path": "crates/ottd-sim/src/world_ticks/shared.rs",
+   "sha256": "b5e4e610d1a241230690bc2b51a31741b82f1d0e1464e1e7869a9046d84a94f4",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-crates-ottd-sim-src-runtime-movement-rs",
+   "path": "crates/ottd-sim/src/runtime/movement.rs",
+   "sha256": "b2a774bd3c5ac8414ba5b9b2361a0ab042ff43cddbabbd88719beb00d92c4186",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci---init---py",
+   "path": "scripts/movement_ci/__init__.py",
+   "sha256": "654a9197c274a0c078fa5bb5c8a27beb5aed794015238eb8e6001dd89449d03f",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-admission-py",
+   "path": "scripts/movement_ci/admission.py",
+   "sha256": "2d51d6b100810a5fa478f7b8fe1d85f14e41a16f30f1382ded128bff41932b5e",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-allocation-py",
+   "path": "scripts/movement_ci/allocation.py",
+   "sha256": "b4a3ec695b08a9ea72311cdfc60e02d466536ffe349f379d7a9eb75870b94ece",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-archive-controls-py",
+   "path": "scripts/movement_ci/archive_controls.py",
+   "sha256": "dfcf8369ba163f97d028649cacb9bc283aa05d61c335ee6bbaf7c85aef5f6461",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-artifacts-py",
+   "path": "scripts/movement_ci/artifacts.py",
+   "sha256": "4997d983ce83dd2d18d9f60f03177f9ae197f68d7526e30e1184f828d00fab35",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-baseline-py",
+   "path": "scripts/movement_ci/baseline.py",
+   "sha256": "91eee3a74fdb0db44b92530fc8bb54a53e912bafefd3e7a1b3e16af32c2da6de",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-binding-controls-py",
+   "path": "scripts/movement_ci/binding_controls.py",
+   "sha256": "ef239ed209f6db49510819cb86efd69eaf0721c52e1c10f8eb77563df0bbd61d",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-closure-py",
+   "path": "scripts/movement_ci/closure.py",
+   "sha256": "31075aa98a8d83759bb9d64f3205707d0e3720e325730fdd7a5a1823d7b40419",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-compare-py",
+   "path": "scripts/movement_ci/compare.py",
+   "sha256": "0d2b24069f70390c2c05ef18231053f73149ead6484207b064943c162d873df0",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-corruption-py",
+   "path": "scripts/movement_ci/corruption.py",
+   "sha256": "f1301e538a64a533211d548ead8797212381dfb18f6fdbd45885accecd6e487e",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-events-py",
+   "path": "scripts/movement_ci/events.py",
+   "sha256": "f9d804e1587eceea12c7bdc192b00a588fcf868b290bfadeeba79c44fc792b3c",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-host-py",
+   "path": "scripts/movement_ci/host.py",
+   "sha256": "4924d39f89a0d3b2699e52f14d70e2ba252fcb2cd02ea0f37638c449e664bbd3",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-matrix-py",
+   "path": "scripts/movement_ci/matrix.py",
+   "sha256": "5cf67a770fb58863dd5f8ae4bf317a7e5e09e289532077d109e9966bc4180976",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-matrix-receipts-py",
+   "path": "scripts/movement_ci/matrix_receipts.py",
+   "sha256": "a529e5b96b875c2fc0a60994d96e3a9ca47a133a2fa5d698ed0b78c34ae1b4c4",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-native-py",
+   "path": "scripts/movement_ci/native.py",
+   "sha256": "61f6cac3630e71056663a76adcc004d5d780fbb13b0b311ffcaaba146f2e1f08",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-native-receipts-py",
+   "path": "scripts/movement_ci/native_receipts.py",
+   "sha256": "0d3f6f2a1c59a053a5e4aa11e636337d023d67c2f38f7c605b68cec476b4f144",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-physical-py",
+   "path": "scripts/movement_ci/physical.py",
+   "sha256": "669330b2fb244995de74908b3ef259718c165e373d9ef34110fe4fc75402c2a7",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-preparation-py",
+   "path": "scripts/movement_ci/preparation.py",
+   "sha256": "84f3bf969fa857ba719abbca055f203d117114b25f9b6649ddd0ee7a44ad6906",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-protocol-py",
+   "path": "scripts/movement_ci/protocol.py",
+   "sha256": "c1802181b695c6e9fad0522357ea04b82b83e65b2838ac46fa816ebbd2aeda0a",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-qualify-py",
+   "path": "scripts/movement_ci/qualify.py",
+   "sha256": "bc5cc3b964ea89a6c1e0596e66bba1fa9e8f80bbf8e0174621dc0eeaa400e6b7",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-refusals-py",
+   "path": "scripts/movement_ci/refusals.py",
+   "sha256": "fe0398ccfb94633007dfc5f6a23448568dd3aea1293aa92d68e1e433e7efdcc0",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-runner-py",
+   "path": "scripts/movement_ci/runner.py",
+   "sha256": "238d9017902a41d471f550bfab7d2867870d5cc5c1df26d33874fff1a1064b76",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-rust-py",
+   "path": "scripts/movement_ci/rust.py",
+   "sha256": "8527dd8b50bd2d74ddfd36efb674614e5516dff578d136ddefed08bad5b654d0",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-ci-value-py",
+   "path": "scripts/movement_ci/value.py",
+   "sha256": "bf57b7c83e7a86f010992cfcc5958678e218df8ae678ade3f4fd1719f46b5088",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-tests-movement-ci-test-py",
+   "path": "scripts/tests/movement_ci_test.py",
+   "sha256": "5af9449722a27fc779e5f621815b1eaa9b7963610d17f4dab1650eb5373d5b10",
+   "kind": "recipe",
+   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
    "profile": null
   }
@@ -15300,6 +15570,34 @@
     "rust_behavior"
    ],
    "timeout_seconds": 1800
+  },
+  {
+   "id": "road-movement",
+   "argv": [
+    "python3",
+    "scripts/check-road-movement-ci.py"
+   ],
+   "artifact_root": ".artifacts",
+   "artifact_globs": [
+    "summary.json",
+    "binaries.json",
+    "zero-test-rejected.json",
+    "evidence-index.json",
+    "evidence.tar.gz",
+    "sources/inputs.json",
+    "native-inputs/inputs.json",
+    "baseline-inputs/inputs.json",
+    "binding-corruption/summary.json",
+    "archive-controls/summary.json",
+    "bin/ottd",
+    "bin/road_movement_ci",
+    "bin/road_movement"
+   ],
+   "success_text": "PASS bounded road movement corpus",
+   "scopes": [
+    "rust_behavior"
+   ],
+   "timeout_seconds": 3600
   }
  ],
  "scenarios": [
@@ -20936,6 +21234,79 @@
     "native-executable/openttd",
     "native-executable/replay-build.sha256"
    ]
+  },
+  {
+   "id": "world.bounded-road-movement",
+   "status": "unimplemented",
+   "scope": "future",
+   "domain": "One vanilla116/123 right-hand NE/state0 flat straight orderless cargo-empty road vehicle; IDs0/1/75 portfolio.",
+   "expected": "Fresh complete four-case capture, normal paired native/Rust continuation and exact archive/corruption admission; focused witnesses are prerequisites only.",
+   "driver": null,
+   "assets": [
+    "road-movement-docs-road-movement-md",
+    "road-movement-fixtures-road-movement-layout-json",
+    "road-movement-scripts-check-road-movement-ci-py",
+    "road-movement-crates-ottd-sim-src-world-ticks-shared-rs",
+    "road-movement-crates-ottd-sim-src-runtime-movement-rs",
+    "road-movement-scripts-movement-ci---init---py",
+    "road-movement-scripts-movement-ci-admission-py",
+    "road-movement-scripts-movement-ci-allocation-py",
+    "road-movement-scripts-movement-ci-archive-controls-py",
+    "road-movement-scripts-movement-ci-artifacts-py",
+    "road-movement-scripts-movement-ci-baseline-py",
+    "road-movement-scripts-movement-ci-binding-controls-py",
+    "road-movement-scripts-movement-ci-closure-py",
+    "road-movement-scripts-movement-ci-compare-py",
+    "road-movement-scripts-movement-ci-corruption-py",
+    "road-movement-scripts-movement-ci-events-py",
+    "road-movement-scripts-movement-ci-host-py",
+    "road-movement-scripts-movement-ci-matrix-py",
+    "road-movement-scripts-movement-ci-matrix-receipts-py",
+    "road-movement-scripts-movement-ci-native-py",
+    "road-movement-scripts-movement-ci-native-receipts-py",
+    "road-movement-scripts-movement-ci-physical-py",
+    "road-movement-scripts-movement-ci-preparation-py",
+    "road-movement-scripts-movement-ci-protocol-py",
+    "road-movement-scripts-movement-ci-qualify-py",
+    "road-movement-scripts-movement-ci-refusals-py",
+    "road-movement-scripts-movement-ci-runner-py",
+    "road-movement-scripts-movement-ci-rust-py",
+    "road-movement-scripts-movement-ci-value-py",
+    "road-movement-scripts-tests-movement-ci-test-py"
+   ],
+   "source_refs": [
+    "docs/road-movement.md",
+    "fixtures/road-movement/layout.json",
+    "scripts/check-road-movement-ci.py",
+    "crates/ottd-sim/src/world_ticks/shared.rs",
+    "crates/ottd-sim/src/runtime/movement.rs",
+    "scripts/movement_ci/__init__.py",
+    "scripts/movement_ci/admission.py",
+    "scripts/movement_ci/allocation.py",
+    "scripts/movement_ci/archive_controls.py",
+    "scripts/movement_ci/artifacts.py",
+    "scripts/movement_ci/baseline.py",
+    "scripts/movement_ci/binding_controls.py",
+    "scripts/movement_ci/closure.py",
+    "scripts/movement_ci/compare.py",
+    "scripts/movement_ci/corruption.py",
+    "scripts/movement_ci/events.py",
+    "scripts/movement_ci/host.py",
+    "scripts/movement_ci/matrix.py",
+    "scripts/movement_ci/matrix_receipts.py",
+    "scripts/movement_ci/native.py",
+    "scripts/movement_ci/native_receipts.py",
+    "scripts/movement_ci/physical.py",
+    "scripts/movement_ci/preparation.py",
+    "scripts/movement_ci/protocol.py",
+    "scripts/movement_ci/qualify.py",
+    "scripts/movement_ci/refusals.py",
+    "scripts/movement_ci/runner.py",
+    "scripts/movement_ci/rust.py",
+    "scripts/movement_ci/value.py",
+    "scripts/tests/movement_ci_test.py"
+   ],
+   "evidence": []
   }
  ]
 }

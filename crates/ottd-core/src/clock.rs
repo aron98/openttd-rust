@@ -3,6 +3,17 @@ use crate::clock_types::{
 };
 use crate::{CalendarDate, DateFraction, EconomyDate, MAX_YEAR, leap, year_start};
 
+/// Ordered native timer phases within one normal-game call.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ClockPhase {
+    /// Calendar callbacks and the calendar vehicle selector precede economy time.
+    Calendar,
+    /// Economy callbacks precede the tick counter.
+    Economy,
+    /// The tick timer has advanced; tile and vehicle loops may follow.
+    Tick,
+}
+
 /// Normal-game clock dispatch. Emits boundaries without executing game callbacks.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ClockState {
@@ -83,18 +94,37 @@ impl ClockState {
     /// Executes clock dispatch in normal-game order; a paused dispatch changes nothing.
     /// Does not execute vehicles, industries, companies, or any registered timer callbacks.
     pub fn advance(&mut self, paused: bool) -> ClockEvents {
+        match self.try_advance(paused, |_, _, _| Ok::<(), std::convert::Infallible>(())) {
+            Ok(events) => events,
+            Err(never) => match never {},
+        }
+    }
+    /// Dispatch the same clock arithmetic with callbacks at native phase boundaries.
+    ///
+    /// # Errors
+    /// Returns a callback error with this speculative clock left at that phase.
+    /// Callers requiring atomic publication must discard the candidate on error.
+    pub fn try_advance<E>(
+        &mut self,
+        paused: bool,
+        mut phase: impl FnMut(ClockPhase, &Self, &ClockEvents) -> Result<(), E>,
+    ) -> Result<ClockEvents, E> {
         if paused {
-            return ClockEvents::default();
+            return Ok(ClockEvents::default());
         }
         let (calendar_progressed, calendar) = self.advance_calendar();
-        let economy = self.advance_economy();
-        self.saved.tick_counter.0 = self.saved.tick_counter.0.wrapping_add(1);
         let [cd, cm, cy] = calendar;
-        let [ed, ew, em, eq, ey] = economy;
-        ClockEvents {
+        let mut events = ClockEvents {
             calendar_progressed,
-            boundaries: [cd, cm, cy, ed, ew, em, eq, ey],
-        }
+            boundaries: [cd, cm, cy, false, false, false, false, false],
+        };
+        phase(ClockPhase::Calendar, self, &events)?;
+        let [ed, ew, em, eq, ey] = self.advance_economy();
+        events.boundaries = [cd, cm, cy, ed, ew, em, eq, ey];
+        phase(ClockPhase::Economy, self, &events)?;
+        self.saved.tick_counter.0 = self.saved.tick_counter.0.wrapping_add(1);
+        phase(ClockPhase::Tick, self, &events)?;
+        Ok(events)
     }
     fn advance_calendar(&mut self) -> (bool, [bool; 3]) {
         if self.settings.minutes == 0 {

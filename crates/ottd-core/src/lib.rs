@@ -216,7 +216,7 @@ pub struct TickCounter(pub u64);
 
 mod clock;
 mod clock_types;
-pub use clock::ClockState;
+pub use clock::{ClockPhase, ClockState};
 pub use clock_types::{
     ClockCache, ClockError, ClockEvent, ClockEvents, ClockSettings, ClockSnapshot, TimekeepingUnits,
 };

@@ -113,6 +113,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/empty_road_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/empty_road_*.py scripts/check-empty-road.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/empty_road_*.py scripts/check-empty-road.py
+      - name: Validate road movement evidence helpers
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/movement_ci_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/movement_ci scripts/check-road-movement-ci.py scripts/tests/movement_ci_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/movement_ci scripts/check-road-movement-ci.py scripts/tests/movement_ci_test.py
       - name: Check tree and terrain evidence admission
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/tree_ci_evidence_test.py

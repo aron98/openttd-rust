@@ -1,18 +1,16 @@
 use super::{
     WorldTickError,
-    access::{State, number, value_mut},
+    access::{number, value_mut},
     unsupported,
 };
+use crate::WorldTickState as State;
 use crate::world_access::row_field;
 use ottd_save::{TableRecord, TableSchema, WireValue};
 fn checked(value: i128) -> Result<i64, WorldTickError> {
     i64::try_from(value).map_err(|_| unsupported("company_quarter", "accounting overflow"))
 }
-pub(super) fn quarter(state: &mut State, id: u32) -> Result<(), WorldTickError> {
-    let table = state
-        .tables
-        .get(b"PLYR")
-        .ok_or_else(|| unsupported("company_quarter", "pool"))?;
+pub(super) fn quarter(state: &mut State<'_>, id: u32) -> Result<(), WorldTickError> {
+    let table = state.table(b"PLYR")?;
     let schema = table
         .schema()
         .fields()

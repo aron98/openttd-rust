@@ -9,6 +9,7 @@ pub use replay::{
     ReplayPlan, ReplayRuntime, run_replay,
 };
 mod world_ticks;
+include!("world_ticks/shared.rs");
 pub use world_ticks::{WorldTickError, WorldTickReport, advance_world};
 mod commands;
 pub use commands::{

@@ -1,0 +1,98 @@
+[
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first/initial.world.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded01/trace/initial.world.json",
+    "sha256": "1b82b4c00b3f171480a06e1cca89065b11c7dae67520700ab653f37e5b7e85fc",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first/initial.movement.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded01/trace/initial.movement.json",
+    "sha256": "664e08a466ddb378d3460a927f4135c007fc1f3ac9996b4ccb41a854a01e3a03",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first/initial.runtime.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded01/trace/initial.runtime.json",
+    "sha256": "be75ac9137fa11138d0bfbc9f732bff3e61c376c08c167a9998710c61cd4ee5a",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first/initial.physical.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-road-movement-focused03/proofs/bus_first_runtime_full/initial.physical.json",
+    "sha256": "27e2cbd5e5c01edcfddec783fed6101006dd0ddb9dceb969243f4b617f12e59b",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first_stride/initial.world.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded02/trace/initial.world.json",
+    "sha256": "82dd5ad1f57e09d4d4a73449ed716b98d3307dea7062a4ebb2a7d9acc4421329",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first_stride/initial.movement.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded02/trace/initial.movement.json",
+    "sha256": "23c804efef613e645eb2c8d806dda33096abe977e9f02b709348e6654cd05848",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first_stride/initial.runtime.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded02/trace/initial.runtime.json",
+    "sha256": "d3d93eaf76f68fd553d5ac9d29533f0d48b271fef8c2afe86b8ac4c97ac7b84c",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/bus_first_stride/initial.physical.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-road-movement-focused03/proofs/bus_first_stride_runtime_full/initial.physical.json",
+    "sha256": "9472487c44645b05ca47840070ce839b02391db6dd9eb6baa26b5ec22a64c220",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_first/initial.world.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded03/trace/initial.world.json",
+    "sha256": "605bd40a9285118290252d78c12d44c7b8d891805c1360f66c37e41bbdef83fe",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_first/initial.movement.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded03/trace/initial.movement.json",
+    "sha256": "3231d5ff43e4b7bac3243077b6586f3ca73cb2774c4f80ea4790de0e4cc6775c",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_first/initial.runtime.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded03/trace/initial.runtime.json",
+    "sha256": "b77e8d7157e3c63fe7f9f59e24201fa50171ea56dfb8d3e23dbb3311cc126768",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_first/initial.physical.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-road-movement-trucks01/proofs/truck_first_runtime_full/initial.physical.json",
+    "sha256": "ef2e8d6f2efb6ce65dfc58b3c4535408e9544253386bcdd2c495ea4eb18d9931",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_second_stride/initial.world.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded04/trace/initial.world.json",
+    "sha256": "f64ec0110abb334ce94841665bd7e4f91bbb3829c8c329eedcc7312fd9281034",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_second_stride/initial.movement.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded04/trace/initial.movement.json",
+    "sha256": "5dbfc12c7604a3b25b9d9f1a81ca9019af5c6c09e57ff33dc3d8d7c3aa2f25be",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_second_stride/initial.runtime.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-movement29-loaded04/trace/initial.runtime.json",
+    "sha256": "39420d9ea09e242a789bae71326f0dc932cf4485d98c2027f93c00816097baa9",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  },
+  {
+    "path": "fixtures/road-movement/validator-inputs/truck_second_stride/initial.physical.json",
+    "source": "/Users/erdelyia/Projects/openttd-rust/.omo/evidence/stage04-road-movement-trucks01/proofs/truck_second_stride_runtime_full/initial.physical.json",
+    "sha256": "8df6af3047494fff3c974d8cee55ded65bd2bea2b5d04f8a0a0192066ce48da9",
+    "scope": "actual native29 or source07 Rust runtime validator input; no new gameplay observation"
+  }
+]

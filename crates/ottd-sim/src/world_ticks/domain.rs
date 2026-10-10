@@ -22,8 +22,7 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<bool, WorldTickErr
         return Ok(false);
     }
     for id in [
-        *b"NGRF", *b"VEHS", *b"INDY", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA",
-        *b"CAPY",
+        *b"NGRF", *b"INDY", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
     ] {
         if world
             .tables()

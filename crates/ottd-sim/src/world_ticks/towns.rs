@@ -1,19 +1,23 @@
 use super::{
     WorldTickError,
-    access::{State, number, value_mut},
+    access::{number, value_mut},
     unsupported,
 };
+use crate::WorldTickState as State;
 use crate::world_access::row_field;
 use ottd_save::{TableRecord, TableSchema, WireValue};
 
-pub(super) fn monthly(state: &mut State, month: u8) -> Result<(), WorldTickError> {
+pub(super) fn monthly(state: &mut State<'_>, month: u8) -> Result<(), WorldTickError> {
     let companies = state.company_ids();
-    let table = state
-        .tables
-        .get_mut(b"CITY")
-        .ok_or_else(|| unsupported("town_month", "town pool"))?;
-    let schema = table.schema().clone();
-    for row in table.records_mut().values_mut() {
+    let schema = state.table(b"CITY")?.schema().clone();
+    let ids: Vec<_> = state.table(b"CITY")?.records().map(|(id, _)| id).collect();
+    for id in ids {
+        let mut record = state
+            .table(b"CITY")?
+            .record(id)
+            .ok_or_else(|| unsupported("town_month", "town"))?
+            .clone();
+        let row = &mut record;
         let exclusive_was_active = number(row_field(&schema, row, "exclusive_counter")?)? > 0;
         for name in ["road_build_months", "exclusive_counter"] {
             let value = value_mut(&schema, row, name)?;
@@ -58,6 +62,11 @@ pub(super) fn monthly(state: &mut State, month: u8) -> Result<(), WorldTickError
         *value_mut(&schema, row, "valid_history")? = WireValue::Unsigned(mask);
         supplied(&schema, row, mask, month)?;
         received(&schema, row)?;
+        state.apply(ottd_save::world::WorldEdit::ReplaceRecord {
+            chunk: *b"CITY",
+            record: id,
+            value: record,
+        })?;
     }
     Ok(())
 }

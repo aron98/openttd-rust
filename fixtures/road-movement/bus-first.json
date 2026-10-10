@@ -1,0 +1,12 @@
+{
+  "scope": "authentic-native29-preparer-output-for-fast-negative-tests",
+  "save_sha256": "6426fcf323efadc83c3f4220ffea41f2fb74b65ced8304b86630ef2a37022492",
+  "producer_native_sha256": "cbe6c5cacac16c93c8551b5a379142419a7de29018833db4665779239e2ad256",
+  "actual_raw_save": ".omo/evidence/stage04-movement29-prepare01/raw/tick_153.sav",
+  "producer_manifest": ".omo/evidence/stage04-movement29-prepare01/artifact-manifest.json",
+  "producer_manifest_sha256": "730acd9879848220b2bfda09023aabaa5259bc7ee916cf57efb6c1aec5965a46",
+  "native_calls": 153,
+  "commands": 29,
+  "new_loaded_horizon_claim": false,
+  "fast_prefix_37_basis": "historical accepted native27 identical save-byte boundary and reviewed epoch02 rollback test; fresh normal CI measures own crossing"
+}

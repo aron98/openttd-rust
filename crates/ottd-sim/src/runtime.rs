@@ -1,5 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
+mod movement;
+pub use movement::SingleRoadTileOccupancy;
 mod order_state;
 pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 #[cfg(test)]

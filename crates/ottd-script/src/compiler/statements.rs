@@ -2,6 +2,7 @@
 use super::Compiler;
 use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
 mod branches;
+mod iteration;
 impl Compiler<'_> {
     pub(super) fn main(&mut self) -> Result<(), CompileError> {
         while self.token.kind != TokenKind::End {
@@ -53,13 +54,18 @@ impl Compiler<'_> {
             }
             TokenKind::If => self.conditional(depth)?,
             TokenKind::While => self.while_loop(depth)?,
+            TokenKind::For => self.for_loop(depth)?,
+            TokenKind::Do => self.do_loop(depth)?,
             TokenKind::Break => {
                 self.loop_exit(false)?;
             }
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::Identifier(_)
+            TokenKind::Compound(_)
+            | TokenKind::Increment(_)
+            | TokenKind::Shift(_)
+            | TokenKind::Identifier(_)
             | TokenKind::Scalar(_)
             | TokenKind::Symbol(_)
             | TokenKind::Equal
@@ -70,7 +76,7 @@ impl Compiler<'_> {
             | TokenKind::Or
             | TokenKind::Else
             | TokenKind::End => {
-                let _local = self.expression(0)?;
+                self.comma(0)?;
                 let _target = self.pop()?;
             }
         }
@@ -82,7 +88,7 @@ impl Compiler<'_> {
         let (arg0, arg1) = if self.end_statement() {
             (255, 0)
         } else {
-            let _local = self.expression(0)?;
+            self.comma(0)?;
             (1, i32::from(self.pop()?.0))
         };
         self.emit(Instruction {

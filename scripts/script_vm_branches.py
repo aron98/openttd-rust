@@ -5,6 +5,7 @@ import shutil
 from pathlib import Path
 
 from scripts.gameplay_foundations import FoundationRun
+from scripts.script_vm_iteration import ITERATION_BUDGETS, ITERATION_CONTROLS
 from scripts.script_vm_observation import compare_observation, require_tests
 from scripts.script_vm_provenance import digest, select_executable
 from scripts.world_check_support import (
@@ -21,10 +22,26 @@ FRAME_TESTS = (
     "vm::tests::scope_noop_matches_native_frames",
     "vm::tests::local_alias_matches_native_frames",
     "vm::tests::expression_assignment_matches_native_frames",
+    "vm::tests::iteration_update_frame_matches_native_frames",
+    "vm::tests::iteration_loop_frame_matches_native_frames",
+    "vm::tests::failed_update_matches_native_frames",
 )
-FRAMES = ("scope_guard_clear", "scope_guard_noop", "local_alias", "expstate_target")
+FRAMES = (
+    "scope_guard_clear",
+    "scope_guard_noop",
+    "local_alias",
+    "expstate_target",
+    "iteration_update_frame",
+    "iteration_loop_frame",
+    "iteration_failed_update",
+)
 FRAME_CREDITS = (3, 2, 2, 100)
-FRAME_SCHEDULES = {"expstate_target": (3, 2, 2, 2, 2, 100)}
+FRAME_SCHEDULES = {
+    "expstate_target": (3, 2, 2, 2, 2, 100),
+    "iteration_update_frame": (2,) * 20 + (100,),
+    "iteration_loop_frame": (2,) * 20 + (100,),
+    "iteration_failed_update": (2, 2, 100),
+}
 BUDGETS = (
     ("while_sum", (0,), "suspend"),
     ("while_sum", (1,), "suspend"),
@@ -42,7 +59,8 @@ BUDGETS = (
     ("short_and", (2,) * 8, "return"),
     ("loop_continue", (2,) * 65, "return"),
     ("infinite", (2,) * 20, "suspend"),
-)
+) + ITERATION_BUDGETS
+
 # Each target is actual retained native output, compared with a deliberately wrong record.
 BRANCH_CONTROLS = {
     "assignment": ("expstate_target", "op 10 3 4 0 0", "op 10 1 4 0 0"),
@@ -53,6 +71,9 @@ BRANCH_CONTROLS = {
     "scope-charge": ("while_sum", "return 9962 integer 6", "return 9963 integer 6"),
     "short-circuit": ("short_and", "return 9997 bool 0", "runtime_error 9995"),
 }
+
+BRANCH_CONTROLS.update(ITERATION_CONTROLS)
+
 LIB_BUILD = [
     "cargo",
     "test",
@@ -63,6 +84,10 @@ LIB_BUILD = [
     "--no-run",
     "--message-format=json",
 ]
+
+
+def fixture_name(name: str) -> str:
+    return name if name.endswith(".nut") else f"branch_{name}.nut"
 
 
 def run_branches(builder: FoundationRun, rust: Path) -> Path:
@@ -78,7 +103,7 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
     actual = run([str(tests), "--test-threads=1"], output / "lib-tests")
     require_tests(actual.stdout, FRAME_TESTS)
     for name in FRAMES:
-        source = output / "inputs" / f"branch_{name}.nut"
+        source = output / "inputs" / fixture_name(name)
         observed = run(
             [
                 str(builder.oracle),
@@ -94,7 +119,7 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
         ):
             raise WorldCheckError("Native private frame witness differs")
     for index, (name, credits, stage) in enumerate(BUDGETS):
-        source = output / "inputs" / f"branch_{name}.nut"
+        source = output / "inputs" / fixture_name(name)
         destination = output / "budgets" / str(index)
         native = run(
             [str(builder.oracle), str(source), *map(str, credits)],
@@ -103,7 +128,9 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
         actual = run([str(rust), str(source), *map(str, credits)], destination / "rust")
         compare_observation(native.stdout, actual.stdout, stage)
     for name, (fixture, old, new) in BRANCH_CONTROLS.items():
-        base = output / f"cases/branch_{fixture}/10000/native/stdout.log"
+        base = (
+            output / f"cases/{Path(fixture_name(fixture)).stem}/10000/native/stdout.log"
+        )
         directory = output / "controls" / f"branch-{name}"
         directory.mkdir(parents=True)
         if old not in base.read_text():
@@ -162,7 +189,7 @@ def validate_branches(directory: Path) -> None:
         destination = directory / "frames" / name
         argv = [
             native,
-            str(origin / "inputs" / f"branch_{name}.nut"),
+            str(origin / "inputs" / fixture_name(name)),
             "--frames",
             *map(str, FRAME_SCHEDULES.get(name, FRAME_CREDITS)),
         ]
@@ -177,7 +204,7 @@ def validate_branches(directory: Path) -> None:
         for side, binary in (("native", native), ("rust", rust)):
             if read_json(destination / side / "argv.json") != [
                 binary,
-                str(origin / "inputs" / f"branch_{name}.nut"),
+                str(origin / "inputs" / fixture_name(name)),
                 *map(str, credits),
             ]:
                 raise WorldCheckError("Branch budget selection differs")
@@ -187,7 +214,7 @@ def validate_branches(directory: Path) -> None:
             stage,
         )
     for name, (fixture, old, new) in BRANCH_CONTROLS.items():
-        relative = f"cases/branch_{fixture}/10000/native/stdout.log"
+        relative = f"cases/{Path(fixture_name(fixture)).stem}/10000/native/stdout.log"
         base = directory / relative
         changed = directory / "controls" / f"branch-{name}" / "changed.stdout"
         expected_argv = [

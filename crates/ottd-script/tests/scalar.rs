@@ -302,3 +302,5 @@ fn loop_resumes_when_credit_runs_out_between_branches() -> Result<(), Box<dyn st
 mod branches;
 
 mod expstate;
+
+mod iteration;

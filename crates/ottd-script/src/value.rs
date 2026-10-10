@@ -89,3 +89,5 @@ fn float_arithmetic(left: f32, right: f32, op: u8) -> Result<f32, VmError> {
         _ => Err(VmError::InvalidBytecode),
     }
 }
+
+mod bitwise;

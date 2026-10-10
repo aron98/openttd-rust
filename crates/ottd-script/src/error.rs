@@ -3,7 +3,7 @@ use std::fmt;
 /// Compiler failure category, separate from execution failures.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CompileErrorKind {
-    /// Syntax outside the currently supported scalar return grammar.
+    /// Syntax outside the currently supported scalar statement grammar.
     UnsupportedSyntax,
     /// Malformed numeric literal.
     InvalidNumber,
@@ -42,6 +42,8 @@ pub enum VmError {
     ModuloByZero,
     /// Signed overflow has no portable native C++ semantics; compatibility is pending.
     UnsupportedOverflow,
+    /// A shift count is outside the defined native C++20 range 0..64.
+    UnsupportedShiftCount,
     /// Budget credit would overflow the signed counter.
     BudgetOverflow,
     /// Execution has already returned or failed.

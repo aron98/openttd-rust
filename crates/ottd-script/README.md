@@ -1,4 +1,4 @@
-# Squirrel scalar locals and branching foundation
+# Squirrel scalar expressions and iteration foundation
 
 This crate independently compiles a bounded subset of OpenTTD 15.3's bundled
 Squirrel 2.2.5 and executes native register instructions. It has no C++ runtime
@@ -7,10 +7,12 @@ to game ticks.
 
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
-assignment, blocks, if/else, while, break and continue. Values remain null,
+assignment, blocks, if/else, while/for/do loops, break and continue. Values remain null,
 bool, i64 decimal/octal/hex integers, and well-formed f32 decimal/scientific
 literals. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
-comparisons `== != < <= > >=`, and value-preserving short circuit `&& ||`.
+comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
+bitwise `& | ^ << >> >>>`, comma and ternary expressions, scalar compound
+assignments and prefix/postfix updates.
 Identifiers are ASCII. Space, tab, CR and LF have exactly native's lexical meaning;
 semicolons and previous-token/newline boundaries follow the bundled compiler.
 Unsupported reserved words and compound tokens are rejected, including inside
@@ -44,8 +46,8 @@ bytecode returns typed errors. Runtime errors and returns terminate the frame.
 
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
-is portable native semantics. Forty-one opcode handlers remain unimplemented.
-Binary bitwise/shifts, compound assignment/increments, for/do/foreach/switch,
+is portable native semantics. Thirty-six opcode handlers remain unimplemented.
+Foreach/switch,
 comma expressions/ternary, comments, strings, globals/objects, functions/closures,
 reference lifetime/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
@@ -76,3 +78,13 @@ with actual binary identities, source snapshots and complete hashed archives.
 Diagnostic prose is retained separately, not advertised as byte-identical.
 The prior scalar/whitespace fixtures, test names and admission controls remain
 required alongside the expanded stateful program corpus.
+
+Shift operations follow the pinned C++20 build for all i64 patterns and counts
+0 through 63, including negative left operands and discarded high bits. Other
+counts return the distinct `UnsupportedShiftCount` error: native behavior there
+is undefined, and portable compatibility remains unresolved. Prefix updates follow
+native scalar expression targeting (`++2` is accepted); postfix local position is
+separate from expression state. Compound and postfix stores preserve alias order.
+For-loop increment instructions are extracted and re-emitted through the native
+optimizer; this preserves native branch-layout quirks, including bounded suspension
+of some ternary increments that might otherwise appear to terminate.

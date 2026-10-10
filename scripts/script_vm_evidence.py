@@ -209,14 +209,14 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
 
     validate_branches(directory)
     if read_json(directory / "summary.json") != {
-        "cases": 3058,
-        "fixtures": 338,
+        "cases": 5638,
+        "fixtures": 618,
         "credits": 9,
-        "tests": 30,
-        "controls": 11,
-        "frame_tests": 4,
-        "native_frames": 4,
-        "branch_budget_cases": 16,
+        "tests": 37,
+        "controls": 16,
+        "frame_tests": 7,
+        "native_frames": 7,
+        "branch_budget_cases": 76,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

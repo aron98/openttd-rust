@@ -8,13 +8,23 @@ from scripts.script_vm_evidence import compare_observation, require_paths, requi
 from scripts.script_vm_provenance import (
     blob_digest,
     check_blob,
+    digest,
+    load_spec,
     select_executable,
     verify_archive,
 )
-from scripts.world_check_support import WorldCheckError
+from scripts.world_check_support import ROOT, WorldCheckError
 
 
 class ScriptVmEvidenceTests(unittest.TestCase):
+    def test_live_workspace_manifest_source_bindings(self) -> None:
+        spec = load_spec(ROOT / "scripts/script-vm-manifest.json")
+        for name, expected in spec.sources:
+            with self.subTest(source=name):
+                self.assertEqual(
+                    digest(ROOT / name), expected, f"Stale VM source pin: {name}"
+                )
+
     def test_zero_and_subset_tests_are_rejected(self) -> None:
         for output in (
             "test result: ok. 0 passed; 0 failed; 0 ignored;",

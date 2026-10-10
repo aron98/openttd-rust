@@ -1,0 +1,98 @@
+stack 4
+op 2 1 0 0 0
+op 2 2 0 0 0
+op 2 3 3 0 0
+op 40 3 3 2 3
+op 26 3 9 0 0
+op 2 3 1 0 0
+op 15 3 3 2 0
+op 26 3 2 0 0
+op 61 3 3 0 0
+op 24 0 2 0 0
+op 35 3 1 2 43
+op 61 3 3 0 0
+op 39 3 2 0 1
+op 24 0 -12 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+suspend 0 1
+frame 1 integer 0
+frame 2 null
+frame 3 null
+suspend 0 2
+frame 1 integer 0
+frame 2 integer 0
+frame 3 null
+suspend 0 3
+frame 1 integer 0
+frame 2 integer 0
+frame 3 integer 3
+suspend 0 4
+frame 1 integer 0
+frame 2 integer 0
+frame 3 bool 1
+suspend 0 5
+frame 1 integer 0
+frame 2 integer 0
+frame 3 bool 1
+suspend 0 6
+frame 1 integer 0
+frame 2 integer 0
+frame 3 integer 1
+suspend 0 7
+frame 1 integer 0
+frame 2 integer 0
+frame 3 bool 0
+suspend 0 10
+frame 1 integer 0
+frame 2 integer 0
+frame 3 bool 0
+suspend 0 11
+frame 1 integer 0
+frame 2 integer 0
+frame 3 integer 0
+suspend 0 12
+frame 1 integer 0
+frame 2 integer 0
+frame 3 integer 0
+suspend 0 13
+frame 1 integer 0
+frame 2 integer 1
+frame 3 integer 0
+suspend 0 2
+frame 1 integer 0
+frame 2 integer 1
+frame 3 integer 0
+suspend 0 3
+frame 1 integer 0
+frame 2 integer 1
+frame 3 integer 3
+suspend 0 4
+frame 1 integer 0
+frame 2 integer 1
+frame 3 bool 1
+suspend 0 5
+frame 1 integer 0
+frame 2 integer 1
+frame 3 bool 1
+suspend 0 6
+frame 1 integer 0
+frame 2 integer 1
+frame 3 integer 1
+suspend 0 7
+frame 1 integer 0
+frame 2 integer 1
+frame 3 bool 1
+suspend 0 8
+frame 1 integer 0
+frame 2 integer 1
+frame 3 bool 1
+suspend 0 9
+frame 1 integer 0
+frame 2 integer 1
+frame 3 bool 1
+suspend 0 12
+frame 1 integer 0
+frame 2 integer 1
+frame 3 bool 1
+return 84 integer 2

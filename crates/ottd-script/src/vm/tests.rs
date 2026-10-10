@@ -21,8 +21,8 @@ fn check_frames(
     let mut actual = String::new();
     // When: the real VM resumes on the same credit sequence as native.
     for &credit in credits {
-        match vm.resume(credit)? {
-            Execution::Suspended => {
+        match vm.resume(credit) {
+            Ok(Execution::Suspended) => {
                 writeln!(
                     actual,
                     "suspend {} {}",
@@ -33,8 +33,12 @@ fn check_frames(
                     writeln!(actual, "frame {slot} {}", scalar(*value))?;
                 }
             }
-            Execution::Returned(value) => {
+            Ok(Execution::Returned(value)) => {
                 writeln!(actual, "return {} {}", vm.remaining_ops(), scalar(value))?;
+                break;
+            }
+            Err(_) => {
+                writeln!(actual, "runtime_error {}", vm.remaining_ops())?;
                 break;
             }
         }
@@ -42,7 +46,10 @@ fn check_frames(
     // Then: every private scalar register, IP, debt and returned value agrees.
     let mut expected = String::new();
     for line in native.lines().filter(|line| {
-        line.starts_with("frame ") || line.starts_with("suspend ") || line.starts_with("return ")
+        line.starts_with("frame ")
+            || line.starts_with("suspend ")
+            || line.starts_with("return ")
+            || line.starts_with("runtime_error ")
     }) {
         writeln!(expected, "{line}")?;
     }
@@ -81,4 +88,47 @@ fn expression_assignment_matches_native_frames() -> Result<(), Box<dyn std::erro
         include_str!("../../tests/frames/expstate_target.txt"),
         &[3, 2, 2, 2, 2, 100],
     )
+}
+
+#[test]
+fn iteration_update_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!(
+            "../../../../scripts/compat/script-vm/fixtures/branch_iteration_update_frame.nut"
+        ),
+        include_str!("../../tests/frames/iteration_update_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}
+
+#[test]
+fn iteration_loop_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!(
+            "../../../../scripts/compat/script-vm/fixtures/branch_iteration_loop_frame.nut"
+        ),
+        include_str!("../../tests/frames/iteration_loop_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}
+
+#[test]
+fn failed_update_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    let source = include_str!(
+        "../../../../scripts/compat/script-vm/fixtures/branch_iteration_failed_update.nut"
+    );
+    check_frames(
+        source,
+        include_str!("../../tests/frames/iteration_failed_update.txt"),
+        &[2, 2, 100],
+    )?;
+    let program = compile(source)?;
+    let mut vm = Vm::new(&program)?;
+    assert_eq!(vm.resume(100), Err(crate::VmError::DivisionByZero));
+    assert_eq!(vm.registers.get(1), Some(&Value::Integer(7)));
+    Ok(())
 }

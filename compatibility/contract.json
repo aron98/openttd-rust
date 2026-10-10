@@ -2995,7 +2995,7 @@
     {
       "id": "scalar-vm-driver",
       "path": "scripts/check-script-vm.py",
-      "sha256": "c2522010288817c6f9f26f30ffc4955857cfdbf14831086e9709b99a98064b8c",
+      "sha256": "4c4c9bed600b15284d0c8f731a75949229b6611af6e562453aeabf67c248e8ee",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3004,7 +3004,7 @@
     {
       "id": "scalar-vm-validator",
       "path": "scripts/script_vm_evidence.py",
-      "sha256": "13602219f0ca7a629c40d62593d294071f9f0bc477eff79735fd5cbe4a0e64b2",
+      "sha256": "5a24211e1f88066e245269d8f95e7432d141e35dc7fb3e967a5102d2ed4efbb1",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3013,7 +3013,7 @@
     {
       "id": "scalar-vm-provenance",
       "path": "scripts/script_vm_provenance.py",
-      "sha256": "c6eaf14fbef4d940047b5e6747ee56c521441b7041305a3fb8ee415356af2cef",
+      "sha256": "c0470a5ff0d28eddd7a3c61c457945404398bd74d672c88e8702ad8992794c83",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "ec62235adf075f4a39f5722bff2275e32c48fa3c360530177368dbe1ce196702",
+      "sha256": "2e517b5daaf9b12bf926ee61c07d1de9389ca0c111c93833c0ca5ccf66ef9067",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "66af50224bcb624a845ec14e0c58268eac4743facdd63cbd48c369a76b0bde35",
+      "sha256": "25b7a3b78dd39b94db42edd30c4c727f9e2cb78ca658b04abab81e66803b2841",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -9503,7 +9503,7 @@
         "zero-tests/stdout.log",
         "native/variant.txt"
       ],
-      "success_text": "PASS scalar VM 3058 comparisons",
+      "success_text": "PASS scalar VM 5638 comparisons",
       "scopes": [
         "rust_behavior"
       ],
@@ -13880,8 +13880,8 @@
       "id": "script.scalar-vm",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Scalar locals/assignment/if/while/break/continue/comparisons/short-circuit and21/62bundled Squirrel opcodes; i64/f32/GC-enabled variant. No binary bitwise/shifts/objects/functions/host APIs/AI/GS/saved-script integration. Signed arithmetic overflow remains unsupported.",
-      "expected": "Fresh pinned native compiler/VM versus actual Cargo example:338 fixtures x9 credit sequences plus16 targeted budget probes=3058 strict comparisons;30 exact integration tests,4 private register tests bound to4 fresh native frame captures,11 corruption controls. Previous222 fixtures/26 tests and2014 comparisons retained; expression-state assignment boundaries added. Manifest pins all source/native blobs and complete raw evidence; archives/executables verified.",
+      "domain": "Scalar locals/assignment/comma/ternary/bitwise/shifts/compound updates/if/while/for/do/break/continue and26/62 bundled Squirrel opcodes; i64/f32/GC-enabled variant. Shifts cover everyi64 value for counts0..63; undefined counts return UnsupportedShiftCount. Objects/functions/host APIs/AI/GS/saved-script integration and signed arithmetic overflow remain unfinished.",
+      "expected": "Fresh pinned native compiler/VM versus actual Cargo example:618 fixtures x9 credit sequences plus76 targeted budget probes=5638 strict comparisons;37 exact integration tests,7 private register tests bound to7 fresh native frame captures,16 corruption controls. Previous338 fixtures/3058 comparisons and expression-state safeguards retained; deduplicated scalar iteration corpus added. Undefined-count refusal tested separately from portable native parity. Manifest pins all source/native blobs and complete raw evidence; archives/executables verified.",
       "driver": "script-vm",
       "assets": [
         "scalar-vm-driver",

@@ -66,16 +66,17 @@ impl<'a> Lexer<'a> {
                     "if" => TokenKind::If,
                     "else" => TokenKind::Else,
                     "while" => TokenKind::While,
+                    "for" => TokenKind::For,
+                    "do" => TokenKind::Do,
                     "break" => TokenKind::Break,
                     "continue" => TokenKind::Continue,
                     "null" => TokenKind::Scalar(Value::Null),
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
-                    "do" | "function" | "for" | "foreach" | "in" | "typeof" | "delegate"
-                    | "delete" | "try" | "catch" | "throw" | "clone" | "yield" | "resume"
-                    | "switch" | "case" | "default" | "this" | "parent" | "class" | "extends"
-                    | "constructor" | "instanceof" | "vargc" | "vargv" | "static" | "enum"
-                    | "const" => {
+                    "function" | "foreach" | "in" | "typeof" | "delegate" | "delete" | "try"
+                    | "catch" | "throw" | "clone" | "yield" | "resume" | "switch" | "case"
+                    | "default" | "this" | "parent" | "class" | "extends" | "constructor"
+                    | "instanceof" | "vargc" | "vargv" | "static" | "enum" | "const" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,
@@ -85,7 +86,7 @@ impl<'a> Lexer<'a> {
                 }
             }
             b'+' | b'-' | b'*' | b'/' | b'%' | b'!' | b'~' | b'(' | b')' | b';' | b'{' | b'}'
-            | b',' | b'=' | b'<' | b'>' | b'&' | b'|' => self.symbol(c)?,
+            | b',' | b'?' | b':' | b'^' | b'=' | b'<' | b'>' | b'&' | b'|' => self.symbol(c)?,
             _ => return Err(self.error(CompileErrorKind::UnsupportedSyntax)),
         };
         Ok(Token {
@@ -105,13 +106,21 @@ impl<'a> Lexer<'a> {
             (b'>', Some(b'=')) => Some(TokenKind::GreaterEqual),
             (b'&', Some(b'&')) => Some(TokenKind::And),
             (b'|', Some(b'|')) => Some(TokenKind::Or),
-            (b'+', Some(b'+' | b'='))
-            | (b'-', Some(b'-' | b'='))
-            | (b'*' | b'%', Some(b'='))
-            | (b'/', Some(b'/' | b'*' | b'=' | b'>'))
-            | (b'<', Some(b'<' | b'-' | b'/'))
-            | (b'>', Some(b'>'))
-            | (b'&' | b'|', _) => {
+            (b'+', Some(b'+')) => Some(TokenKind::Increment(1)),
+            (b'-', Some(b'-')) => Some(TokenKind::Increment(-1)),
+            (operator @ (b'+' | b'-' | b'*' | b'/' | b'%'), Some(b'=')) => {
+                Some(TokenKind::Compound(operator))
+            }
+            (b'<', Some(b'<')) => Some(TokenKind::Shift(4)),
+            (b'>', Some(b'>')) => {
+                self.advance();
+                if self.peek() == Some(b'>') {
+                    self.advance();
+                    return Ok(TokenKind::Shift(6));
+                }
+                return Ok(TokenKind::Shift(5));
+            }
+            (b'/', Some(b'/' | b'*' | b'>')) | (b'<', Some(b'-' | b'/')) | (b':', Some(b':')) => {
                 return Err(CompileError {
                     offset,
                     kind: CompileErrorKind::UnsupportedSyntax,

@@ -19,7 +19,7 @@ impl Emitter {
         if self.enabled {
             if let Some(previous) = self.instructions.last_mut() {
                 match instruction.opcode {
-                    0x0a if previous.opcode == 0x11
+                    0x0a if matches!(previous.opcode, 0x11 | 0x12)
                         && i32::from(previous.arg0) == instruction.arg1 =>
                     {
                         previous.arg0 = instruction.arg0;

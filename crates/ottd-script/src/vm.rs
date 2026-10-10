@@ -1,4 +1,5 @@
 use crate::{Instruction, Program, Value, VmError};
+mod updates;
 
 /// Outcome of an operation-budget slice.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -183,10 +184,17 @@ impl<'a> Vm<'a> {
                 self.jump(i.arg1)?;
                 return Ok(None);
             }
-            0x1a => {
-                if self.register(i32::from(i.arg0))?.is_false() {
+            0x19 | 0x1a => {
+                if self.register(i32::from(i.arg0))?.is_false() == (i.opcode == 0x1a) {
                     self.jump(i.arg1)?;
                 }
+                return Ok(None);
+            }
+            0x12 => self
+                .register(i32::from(i.arg2))?
+                .bitwise(self.register(i.arg1)?, i.arg3)?,
+            0x23 | 0x25 | 0x27 => {
+                self.update(i)?;
                 return Ok(None);
             }
             0x28 => self

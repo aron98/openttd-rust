@@ -5,7 +5,7 @@ impl Compiler<'_> {
     pub(super) fn conditional(&mut self, depth: u8) -> Result<(), CompileError> {
         self.advance()?;
         self.expect(b'(')?;
-        let _local = self.expression(0)?;
+        self.comma(0)?;
         self.expect(b')')?;
         let condition = self.pop()?;
         self.emit(Instruction {
@@ -48,7 +48,7 @@ impl Compiler<'_> {
         let head = self.position()?;
         self.advance()?;
         self.expect(b'(')?;
-        let _local = self.expression(0)?;
+        self.comma(0)?;
         self.expect(b')')?;
         self.loops.push(LoopLabels {
             breaks: Vec::new(),

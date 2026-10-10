@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "e7518a68448b8ae806e743ea3b40885d29ba7d03b72968b429ed7894875d8c51",
+   "sha256": "ca25c2501cd3a487848abc1b9d50c21d6215c6b3cf7c7b1c918c3c2286160789",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "251a3a7ea94d4e9dbd6ae0f22defdf73cb4aa60e1e29085cd18c83d34ee1c581",
+   "sha256": "091d0352bfb9d73f1db59ba49beac4ff8a7200ad72d16e5b66c80f276bc22ebd",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "c5ef86cd9ad6fb7734e7f4d2e752632cc1303d3694d03b993d519f4150d5c325",
+   "sha256": "7ae1696b413847d844abddbd14e427ab9ac8e94e0d3677e583425ab1e86cf1fe",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "c06722bdc8ecad0037b679304cf10d3aba68cb80079b8280eb97528a3b03c9d8",
+   "sha256": "d5b7b661ded1fa9768dc6ace2e48debfd5d1e031c475184cab9f6903e1d4ff67",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "defe41aca0be618ed488709fa4b0a0dc6cc4d1cfde7046dfa1c56e924e256361",
+   "sha256": "c280815b8f3c5f09fba767339bceec9265c9784c1006056249d42e58359e881e",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8785,6 +8785,42 @@
    "sha256": "5af9449722a27fc779e5f621815b1eaa9b7963610d17f4dab1650eb5373d5b10",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-pr-capture-py",
+   "path": "scripts/movement_pr_capture.py",
+   "sha256": "f1a3105da98014fe86d1eb5c8aee71c6a1c7a76f6f9421a53c13e59bf3ebef12",
+   "kind": "recipe",
+   "provenance": "PR-only full capture orchestration; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-movement-pr-process-py",
+   "path": "scripts/movement_pr_process.py",
+   "sha256": "09a9af257e72badb702684c3715e3dbd0103c1b24727cb78d4d34c44a6efd95e",
+   "kind": "recipe",
+   "provenance": "PR-only full capture orchestration; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-tests-movement-pr-capture-test-py",
+   "path": "scripts/tests/movement_pr_capture_test.py",
+   "sha256": "d7bc738a8dc061cf06b04e6741566e94aba9facd1a763e79c66cc8ea8dd83ecc",
+   "kind": "recipe",
+   "provenance": "PR-only full capture orchestration; normal admission remains gated pending complete capture review.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-movement-scripts-tests-movement-pr-process-test-py",
+   "path": "scripts/tests/movement_pr_process_test.py",
+   "sha256": "9499b23f7f1286d569a097ff89373a318b03442dd5614ba304c63bdefd4809ac",
+   "kind": "recipe",
+   "provenance": "PR-only full capture orchestration; normal admission remains gated pending complete capture review.",
    "save_version": null,
    "profile": null
   }

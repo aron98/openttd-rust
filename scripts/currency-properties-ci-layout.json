@@ -2713,7 +2713,7 @@
     "load/zero-items-all-values/native/invocation.txt"
   ],
   "sources": {
-    ".github/workflows/ci.yml": "cda1f66f47935b0be67e8557f50f7ec7b429770d93a0cfd4a5493cc54566c7d4",
+    ".github/workflows/ci.yml": "98ab3304b84472ea891f1dfe29beed6e525a992d55cdaffca6656d7faaf54f09",
     "Cargo.lock": "3534df9bad58811d8a2cd6bd83cd08ca80c78dfbb82a09d1b486ce49fed63ea7",
     "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
     "crates/ottd-cli/Cargo.toml": "3c1b76f65a3594119b4b436fc78c495f9391ad74712b5c227f6cfd9424ef9370",
@@ -3423,6 +3423,8 @@
     "scripts/movement_ci/runner.py": "238d9017902a41d471f550bfab7d2867870d5cc5c1df26d33874fff1a1064b76",
     "scripts/movement_ci/rust.py": "8527dd8b50bd2d74ddfd36efb674614e5516dff578d136ddefed08bad5b654d0",
     "scripts/movement_ci/value.py": "bf57b7c83e7a86f010992cfcc5958678e218df8ae678ade3f4fd1719f46b5088",
+    "scripts/movement_pr_capture.py": "f1a3105da98014fe86d1eb5c8aee71c6a1c7a76f6f9421a53c13e59bf3ebef12",
+    "scripts/movement_pr_process.py": "09a9af257e72badb702684c3715e3dbd0103c1b24727cb78d4d34c44a6efd95e",
     "scripts/native_contract.py": "f0334442e784acf4f21909f47639b33a392e40bf89b18938d1f5e29c250c7851",
     "scripts/native_contract_content.py": "de649aef0263bc0cd2c14e436a7c296077fa8845e7ba3bd752fbcf57aa8a1a58",
     "scripts/native_contract_protocol.py": "6b7038a456f9e53504303392463dec1b3f4b316712e9eb857e02fa5716ed4380",
@@ -3549,6 +3551,8 @@
     "scripts/tests/grf_control_evidence_test.py": "dab5201e5cf09289b338e98c281790a97c420b4d628ed20babbf524ad5385baf",
     "scripts/tests/language_ci_evidence_test.py": "2bc0d0ff422a2adac80189fe469369a6f1968dfb725c04611935b7d80b5fec0d",
     "scripts/tests/movement_ci_test.py": "5af9449722a27fc779e5f621815b1eaa9b7963610d17f4dab1650eb5373d5b10",
+    "scripts/tests/movement_pr_capture_test.py": "d7bc738a8dc061cf06b04e6741566e94aba9facd1a763e79c66cc8ea8dd83ecc",
+    "scripts/tests/movement_pr_process_test.py": "9499b23f7f1286d569a097ff89373a318b03442dd5614ba304c63bdefd4809ac",
     "scripts/tests/order_state_evidence_test.py": "36cb4880aaec1f31f90d55dd905e03b7c3d739fdd681a54f80e066231221adfe",
     "scripts/tests/ordered_sale_evidence_test.py": "5a0fa071394abed01c3c9a3d925a5df73832bc656fff4f621dc0977c83d4cd59",
     "scripts/tests/road_slope_ci_test.py": "9a38469dc2a30eab7b43e65ec96d0a97071e5b8b1ba0784c3da256d31f499c7b",

@@ -5362,6 +5362,8 @@
         "stale-source/scripts/language_ci_evidence.py",
         "stale-source/scripts/language_ci_probes.py",
         "stale-source/scripts/level_replay.py",
+        "stale-source/scripts/movement_pr_capture.py",
+        "stale-source/scripts/movement_pr_process.py",
         "stale-source/scripts/native_contract.py",
         "stale-source/scripts/native_contract_content.py",
         "stale-source/scripts/native_contract_protocol.py",

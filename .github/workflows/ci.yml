@@ -138,6 +138,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py scripts/tests/script_vm_foreach_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/script_vm_roots.py scripts/script_vm_arrays.py scripts/script_vm_foreach.py scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py scripts/tests/script_vm_foreach_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_roots.py scripts/script_vm_arrays.py scripts/script_vm_foreach.py scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py scripts/tests/script_vm_foreach_test.py
+      - name: Check PR movement capture orchestration
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/movement_pr_capture_test.py scripts/tests/movement_pr_process_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/movement_pr_capture.py scripts/movement_pr_process.py scripts/tests/movement_pr_capture_test.py scripts/tests/movement_pr_process_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/movement_pr_capture.py scripts/movement_pr_process.py scripts/tests/movement_pr_capture_test.py scripts/tests/movement_pr_process_test.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked
@@ -214,4 +219,58 @@ jobs:
             !.artifacts/tree-terrain-target-*/**
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
+        run: ccache --show-stats --verbose
+
+  movement-capture:
+    name: Full movement capture (normal admission remains closed)
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      MOVEMENT_WORK: ${{ runner.temp }}/movement-${{ github.run_id }}-${{ github.run_attempt }}
+      MOVEMENT_PR_HEAD: ${{ github.event.pull_request.head.sha }}
+      PYTHONDONTWRITEBYTECODE: "1"
+      JOBS: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.96.0
+      - name: Bind the actual PR source and fresh external paths
+        id: capture-init
+        run: python3 -m scripts.movement_pr_capture init "$MOVEMENT_WORK"
+      - name: Configure native dependencies and compiler cache
+        id: capture-cache
+        timeout-minutes: 30
+        uses: ./.github/actions/reference-cache
+      - name: Build the actual native source and capture every movement case
+        id: capture-run
+        run: python3 -m scripts.movement_pr_capture run "$MOVEMENT_WORK"
+      - name: Preserve complete success or failure evidence
+        id: capture-pack
+        if: always()
+        env:
+          MOVEMENT_INIT_OUTCOME: ${{ steps.capture-init.outcome }}
+          MOVEMENT_CACHE_OUTCOME: ${{ steps.capture-cache.outcome }}
+          MOVEMENT_PRODUCER_OUTCOME: ${{ steps.capture-run.outcome }}
+        run: python3 -m scripts.movement_pr_capture finish "$MOVEMENT_WORK"
+      - name: Retain mode-preserving capture and diagnostics
+        timeout-minutes: 45
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: movement-capture-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+          include-hidden-files: true
+          compression-level: 0
+          retention-days: 14
+          path: |
+            ${{ env.MOVEMENT_WORK }}/upload/
+            ${{ env.MOVEMENT_WORK }}/archive-monitor/
+            ${{ env.MOVEMENT_WORK }}/raw/capture/evidence.tar.gz
+            ${{ env.MOVEMENT_WORK }}/raw/capture/evidence-index.json
+      - name: Report native compiler-cache statistics
+        if: always() && steps.capture-cache.outcome == 'success'
         run: ccache --show-stats --verbose

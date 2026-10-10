@@ -10,6 +10,7 @@
 #include "reference_grf_scan.hpp"
 #include "reference_grf_metadata.hpp"
 #include "reference_depot_runtime.hpp"
+#include "reference_order_state.hpp"
 #include "../station_base.h"
 #include "../group.h"
 #include "../industry.h"
@@ -68,6 +69,7 @@ inline void AfterLoad()
     ReferenceGrfMetadata::Observe();
     ReferenceGrfSafety::Observe();
     ReferenceDepotRuntime::Observe();
+    ReferenceOrderState::Observe();
     if (const char *road_slope_path = std::getenv("OTTD_ROAD_SLOPE_PATH"); road_slope_path != nullptr && _game_mode != GM_MENU) {
         if (std::ifstream(road_slope_path).good()) throw std::runtime_error("Road slope observation already exists");
         const Json before = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};

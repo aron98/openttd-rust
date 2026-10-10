@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "608d59ebea029000add98aca6b1c6521173d17dede1e0fda6953cbe4e57c6af5",
+      "sha256": "402c4462571d10d769cdd6a3864ac7dc9f7531ccf934883904bd436a433c3f79",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1933,7 +1933,7 @@
     {
       "id": "metadata-reference-world-derived-hpp",
       "path": "reference/world_derived.hpp",
-      "sha256": "5b50b4ddf6f630d319c616ff818b16aaf58ff8ee66c530162ccd08d18b7d525d",
+      "sha256": "8b5e9fa66c4431d58fbcdf23b6cdf33459c882fa7d135d0ae35dc1ba9bc79dae",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "043d7411992669795e80fce4b6554827dbfa5b75a31be37611c9e9c8f1d816c8",
+      "sha256": "cd13186b5f828910abbc7eccecc5a602c81ceb4b9e75a68a73f851c56c6634d1",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,

@@ -1641,7 +1641,13 @@
     "year/native/stderr.log",
     "year/native/stdout.log",
     "year/stderr.log",
-    "year/stdout.log"
+    "year/stdout.log",
+    "stale/stale-source/reference/order_fixture.hpp",
+    "stale/stale-source/reference/order_fixture.patch",
+    "stale/stale-source/reference/order_network.hpp",
+    "stale/stale-source/reference/order_network.patch",
+    "stale/stale-source/reference/order_state.hpp",
+    "stale/stale-source/reference/order_state.patch"
   ],
   "controls": [
     "/globals/misc",

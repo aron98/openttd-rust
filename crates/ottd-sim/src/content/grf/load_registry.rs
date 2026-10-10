@@ -3,6 +3,7 @@ use super::load_types::{
 };
 
 pub(super) struct File<'a> {
+    pub cargo: Option<super::load_cargo_translation::Table>,
     pub language_maps: std::collections::BTreeMap<u32, super::load_language::LanguageMap>,
     pub features: u32,
     pub globals: super::load_context::FileGlobals,
@@ -43,6 +44,7 @@ impl<'a> Registry<'a> {
     pub(super) fn initialize(&mut self, input: LoadInput<'a>) {
         if !self.files.iter().any(|file| file.name == input.name) {
             self.files.push(File {
+                cargo: None,
                 language_maps: std::collections::BTreeMap::new(),
                 features: 0,
                 globals: super::load_context::FileGlobals::default(),

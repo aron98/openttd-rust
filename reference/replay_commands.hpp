@@ -5,6 +5,7 @@
 #include "../landscape_cmd.h"
 #include "../misc_cmd.h"
 #include "../road_cmd.h"
+#include "../settings_cmd.h"
 #include "../terraform_cmd.h"
 #include "../vehicle_cmd.h"
 #include "../command_func.h"
@@ -13,6 +14,23 @@ namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "movement_prepare_original_acceleration") {
+        for (const char *name : {"OTTD_MOVEMENT_OBSERVE", "OTTD_MOVEMENT_PREPARE"}) {
+            const char *enabled = std::getenv(name);
+            Require(enabled != nullptr && std::string_view(enabled) == "1", "setting requires original movement preparer");
+        }
+        Require(!_networking && _game_mode == GM_NORMAL && Vehicle::GetNumItems() == 0, "setting requires offline empty movement seed");
+        Require(command.at("value").is_number_integer() && command.at("value") == 0, "movement setting value must be integer zero");
+        Require(command == Json{{"kind", "movement_prepare_original_acceleration"}, {"name", "vehicle.roadveh_acceleration_model"}, {"value", 0}}, "movement setting is not whitelisted");
+        return ::Command<CMD_CHANGE_SETTING>::Post(std::string{"vehicle.roadveh_acceleration_model"}, int32_t{0});
+    }
+    if (kind == "movement_prepare_start_stop") {
+        Require(std::getenv("OTTD_MOVEMENT_PREPARE") != nullptr, "StartStop requires original movement preparer");
+        const VehicleID id(command.at("vehicle").get<uint32_t>());
+        const Vehicle *vehicle = Vehicle::GetIfValid(id);
+        Require(vehicle != nullptr, "movement preparer vehicle disappeared");
+        return Command<CMD_START_STOP_VEHICLE>::Post(vehicle->tile, id, true);
+    }
     if (kind == "build_road_depot") return Command<CMD_BUILD_ROAD_DEPOT>::Post(TileIndex(command.at("tile").get<uint32_t>()), static_cast<RoadType>(command.at("road_type").get<uint8_t>()), static_cast<DiagDirection>(command.at("direction").get<uint8_t>()));
     if (kind == "sell_vehicle") return Command<CMD_SELL_VEHICLE>::Post(TileIndex(command.at("location").get<uint32_t>()), VehicleID(command.at("vehicle").get<uint32_t>()), command.at("sell_chain").get<bool>(), command.at("backup_order").get<bool>(), ClientID(command.at("client_id").get<uint32_t>()));
     if (kind == "build_vehicle") return Command<CMD_BUILD_VEHICLE>::Post(TileIndex(command.at("tile").get<uint32_t>()), EngineID(command.at("engine").get<uint16_t>()), command.at("use_free_vehicles").get<bool>(), command.at("cargo").get<CargoType>(), ClientID(command.at("client_id").get<uint32_t>()));

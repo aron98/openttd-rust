@@ -2,6 +2,7 @@
 #ifndef OTTD_REFERENCE_WORLD_DERIVED_HPP
 #define OTTD_REFERENCE_WORLD_DERIVED_HPP
 #include "reference_world.hpp"
+#include "reference_movement_forbidden.hpp"
 #include "reference_content.hpp"
 #include "reference_terrain.hpp"
 #include "reference_allocation.hpp"
@@ -60,6 +61,7 @@ inline Json PacketGroup(const auto &packets, Json owner, Json cargo_type, Json n
 }
 inline void AfterLoad()
 {
+    ReferenceMovement::ValidateEnvironment();
     ReferenceRuntimeRoadFixture::Prepare();
     ReferenceContent::Observe();
     ReferenceTerrain::Observe();

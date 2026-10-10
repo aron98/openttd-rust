@@ -8,6 +8,15 @@ use super::{
 
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
+#[path = "load_cargo_baseline_tests.rs"]
+mod cargo_baseline;
+
+#[path = "load_cargo_native_tests.rs"]
+mod cargo_native;
+
+#[path = "load_cargo_units.rs"]
+mod cargo_units;
+
 #[path = "load_engine_baseline_tests.rs"]
 mod engine_baseline;
 

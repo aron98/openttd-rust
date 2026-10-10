@@ -2,6 +2,7 @@
 #ifndef OTTD_REFERENCE_ENGINE_SPECS_HPP
 #define OTTD_REFERENCE_ENGINE_SPECS_HPP
 #include "reference_engine_specs_hooks.hpp"
+#include "reference_cargo_identity_hooks.hpp"
 #include "saveload/reference_content.hpp"
 #include <map>
 namespace ReferenceEngineSpecs {
@@ -22,7 +23,7 @@ inline void Keys(const Json &value, std::initializer_list<const char *> keys)
     for (const char *key : keys) if (!value.contains(key)) Refuse("engine-spec host missing field");
 }
 inline Json FileID(const GRFFile *file) { return file == nullptr ? Json(nullptr) : Json(file->grfid); }
-inline Json State()
+inline Json State(Json (*file_identity)(const GRFFile *) = FileID)
 {
     if (Engine::GetPoolSize() > 512 || _gted.size() > 1024) Refuse("engine-spec host owner capacity");
     Json owners = Json::array(), mapping = Json::array(), temporary = Json::array();
@@ -41,7 +42,7 @@ inline Json State()
         Json badges = Json::array();
         for (auto badge : engine->badges) badges.push_back(badge.base());
         owners.push_back({{"id", engine->index.base()}, {"type", engine->type}, {"local_id", engine->grf_prop.local_id},
-            {"grfid", FileID(engine->grf_prop.grffile)}, {"stored_grfid", engine->grf_prop.grfid}, {"info", info}, {"vehicle", vehicle},
+            {"grfid", file_identity(engine->grf_prop.grffile)}, {"stored_grfid", engine->grf_prop.grfid}, {"info", info}, {"vehicle", vehicle},
             {"list_position", engine->list_position}, {"original_image_index", engine->original_image_index}, {"badges", badges},
             {"spritegroups", Json::array()}, {"wagon_overrides", Json::array()},
             {"dynamic", {{"name_bytes", std::vector<uint8_t>(engine->name.begin(), engine->name.end())},
@@ -66,7 +67,7 @@ inline Json State()
         for (auto label : entry.railtypelabels) rail.push_back(label);
         temporary.push_back({{"index", index++}, {"cargo_allowed", entry.cargo_allowed.base()},
             {"cargo_allowed_required", entry.cargo_allowed_required.base()}, {"cargo_disallowed", entry.cargo_disallowed.base()},
-            {"railtypelabels", rail}, {"roadtramtype", entry.roadtramtype}, {"defaultcargo_grfid", FileID(entry.defaultcargo_grf)},
+            {"railtypelabels", rail}, {"roadtramtype", entry.roadtramtype}, {"defaultcargo_grfid", file_identity(entry.defaultcargo_grf)},
             {"refittability", entry.refittability}, {"rv_max_speed", entry.rv_max_speed},
             {"ctt_include_mask", entry.ctt_include_mask}, {"ctt_exclude_mask", entry.ctt_exclude_mask}});
     }
@@ -209,6 +210,7 @@ void ReferenceEngineSpecsRoad(const char *phase, uint first, uint last, int prop
 }
 void ReferenceEngineSpecsAllocated(uint local_id, const Engine *engine, size_t remaining)
 {
+    ReferenceCargoIdentityAllocated(local_id, engine, remaining);
     ReferenceEngineSpecs::Observe("road-owner-resolved", {{"local_id", local_id}, {"engine", engine == nullptr ? nlohmann::json(nullptr) : nlohmann::json(engine->index.base())}, {"remaining", remaining}});
 }
 ReferenceEngineSpecsRoadScope::ReferenceEngineSpecsRoadScope(uint first, uint last, int property, ByteReader &reader) : first(first), last(last), property(property), reader(reader)

@@ -9,6 +9,11 @@ mod language_pack;
 mod language_pack_tests;
 mod load;
 mod load_budget;
+mod load_cargo;
+mod load_cargo_data;
+mod load_cargo_road;
+mod load_cargo_session;
+mod load_cargo_translation;
 mod load_conditions;
 mod load_context;
 #[cfg(test)]

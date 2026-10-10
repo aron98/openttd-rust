@@ -41,6 +41,7 @@ pub(super) struct Session<'i, 'a> {
     pub strings: super::load_strings::StringTable,
     pub currency: Option<super::load_currency::CurrencyState>,
     pub specs: Option<super::load_specs::Specs>,
+    pub cargo: Option<super::load_cargo::CargoState>,
     pub string_budget: super::text::Budget,
     pub string_errors: Vec<super::load_string_actions::TranslationFailure>,
 }
@@ -75,6 +76,7 @@ impl Session<'_, '_> {
             self.language.map(|mut state| {
                 state.report.currency = self.currency;
                 state.report.specs = self.specs;
+                state.report.cargo = self.cargo;
                 state.report.strings = self.strings.entries;
                 state.report.translation_errors = self.string_errors;
                 state.report
@@ -348,6 +350,7 @@ impl Session<'_, '_> {
             {
                 if stage == LoadStage::Activation {
                     self.activation_identity(index, input.identity.grfid, location)?;
+                    self.finish_cargo_file(index);
                 }
                 if let Some(config) = self.registry.configs.get_mut(index) {
                     if stage == LoadStage::Activation {
@@ -580,6 +583,7 @@ pub(super) fn run_with_currency(
         strings: super::load_strings::StringTable::default(),
         currency: custom.map(super::load_currency::CurrencyState::with_custom),
         specs: None,
+        cargo: None,
         string_budget: super::text::Budget::new(super::ScanLimits::default()),
         string_errors: Vec::new(),
     };

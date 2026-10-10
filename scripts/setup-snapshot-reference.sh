@@ -11,6 +11,11 @@ if [ ! -d "$source_dir/.git" ]; then
     git -C "$source_dir" checkout --detach "$commit"
 fi
 test "$(git -C "$source_dir" rev-parse HEAD)" = "$commit"
+for patch in cargo_identity movement_baseline movement; do
+    if git -C "$source_dir" apply --reverse --check "$root/reference/$patch.patch" 2>/dev/null; then
+        git -C "$source_dir" apply --reverse "$root/reference/$patch.patch"
+    fi
+done
 if git -C "$source_dir" apply --reverse --check "$root/reference/engine_specs.patch" 2>/dev/null; then
     git -C "$source_dir" apply --reverse "$root/reference/engine_specs.patch"
 fi
@@ -91,11 +96,15 @@ else
 fi
 git -C "$source_dir" apply --check "$root/reference/engine_specs.patch"
 git -C "$source_dir" apply "$root/reference/engine_specs.patch"
+for patch in movement movement_baseline cargo_identity; do
+    git -C "$source_dir" apply --check "$root/reference/$patch.patch"
+    git -C "$source_dir" apply "$root/reference/$patch.patch"
+done
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch" "$root/reference/grf_strings.patch" "$root/reference/grf_currency.patch" "$root/reference/tree_rating.patch" "$root/reference/engine_specs.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch" "$root/reference/grf_strings.patch" "$root/reference/grf_currency.patch" "$root/reference/tree_rating.patch" "$root/reference/engine_specs.patch" "$root/reference/movement.patch" "$root/reference/movement_baseline.patch" "$root/reference/cargo_identity.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 copy_header() {
     if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
@@ -115,6 +124,17 @@ copy_header reference/grf_currency_api.hpp "$source_dir/src/reference_grf_curren
 copy_header reference/grf_currency_properties_api.hpp "$source_dir/src/reference_grf_currency_properties_api.hpp"
 copy_header reference/engine_specs.hpp "$source_dir/src/reference_engine_specs.hpp"
 copy_header reference/engine_specs_hooks.hpp "$source_dir/src/reference_engine_specs_hooks.hpp"
+copy_header reference/cargo_identity.hpp "$source_dir/src/reference_cargo_identity.hpp"
+copy_header reference/cargo_identity_hooks.hpp "$source_dir/src/reference_cargo_identity_hooks.hpp"
+copy_header reference/cargo_identity_state.hpp "$source_dir/src/reference_cargo_identity_state.hpp"
+copy_header reference/cargo_identity_admission.hpp "$source_dir/src/reference_cargo_identity_admission.hpp"
+
+copy_header reference/movement_hooks.hpp "$source_dir/src/reference_movement_hooks.hpp"
+copy_header reference/movement_baseline.hpp "$source_dir/src/reference_movement_baseline.hpp"
+copy_header reference/movement_spatial.hpp "$source_dir/src/reference_movement_spatial.inc"
+for header in movement_admission movement_forbidden movement_prepare movement_protocol movement_replay movement_sink movement_snapshot; do
+    copy_header "reference/$header.hpp" "$source_dir/src/saveload/reference_$header.hpp"
+done
 copy_header reference/tree_rating.hpp "$source_dir/src/reference_tree_rating.hpp"
 copy_header reference/tree_rating_replay.hpp "$source_dir/src/saveload/reference_tree_rating_replay.hpp"
 copy_header reference/tree_fixture.hpp "$source_dir/src/saveload/reference_tree_fixture.hpp"

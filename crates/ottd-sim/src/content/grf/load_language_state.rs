@@ -32,6 +32,8 @@ pub(super) struct LanguageInput<'a> {
 
 #[derive(Debug, Clone, serde::Serialize)]
 pub(super) struct FileLanguage {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cargo: Option<super::load_cargo_translation::Table>,
     pub name: String,
     pub grfid: u32,
     pub features: u32,
@@ -39,6 +41,8 @@ pub(super) struct FileLanguage {
 }
 #[derive(Debug, Clone, serde::Serialize)]
 pub(super) struct LanguageSnapshot {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cargo: Option<super::load_cargo::CargoState>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub specs: Option<super::load_specs::Specs>,
     pub stage: u8,
@@ -55,6 +59,8 @@ pub(super) struct LanguageSnapshot {
 }
 #[derive(Debug, serde::Serialize)]
 pub(super) struct LanguageReport {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cargo: Option<super::load_cargo::CargoState>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub specs: Option<super::load_specs::Specs>,
     pub catalog: Vec<Pack>,
@@ -86,6 +92,7 @@ impl<'a> LanguageState<'a> {
         }
         budget.payload(std::mem::size_of::<LanguageReport>(), location)?;
         let mut report = LanguageReport {
+            cargo: None,
             catalog: Vec::new(),
             selected: input.selected,
             admissions: Vec::new(),
@@ -181,6 +188,11 @@ impl Session<'_, '_> {
             .iter()
             .fold(0_usize, |size, file| {
                 size.saturating_add(std::mem::size_of::<FileLanguage>())
+                    .saturating_add(
+                        file.cargo
+                            .as_ref()
+                            .map_or(0, super::load_cargo_translation::Table::snapshot_bytes),
+                    )
                     .saturating_add(file.name.len())
                     .saturating_add(file.language_maps.values().fold(0_usize, |size, map| {
                         size.saturating_add(std::mem::size_of::<(u32, LanguageMap)>())
@@ -212,6 +224,11 @@ impl Session<'_, '_> {
                 .as_ref()
                 .map_or(0, super::load_specs::Specs::snapshot_bytes),
         );
+        let bytes = bytes.saturating_add(
+            self.cargo
+                .as_ref()
+                .map_or(0, super::load_cargo::CargoState::snapshot_bytes),
+        );
         self.budget.trace(bytes, location)?;
         let phase = match location.stage {
             LoadStage::FileScan => 0,
@@ -222,6 +239,7 @@ impl Session<'_, '_> {
             LoadStage::Activation => 5,
         };
         state.report.events.push(LanguageSnapshot {
+            cargo: self.cargo.clone(),
             specs: self.specs.clone(),
             stage: phase,
             file: location.file,
@@ -235,6 +253,7 @@ impl Session<'_, '_> {
                 .files
                 .iter()
                 .map(|file| FileLanguage {
+                    cargo: file.cargo.clone(),
                     name: file.name.to_owned(),
                     grfid: file.grfid,
                     features: file.features,

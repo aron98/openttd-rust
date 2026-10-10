@@ -93,6 +93,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/engine_specs_ci_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/engine_specs_ci_*.py scripts/check-engine-specs-ci.py scripts/capture-engine-specs.py scripts/tests/engine_specs_ci_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/engine_specs_ci_*.py scripts/check-engine-specs-ci.py scripts/capture-engine-specs.py scripts/tests/engine_specs_ci_test.py
+      - name: Check cargo identity evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/cargo_identity_ci_test.py scripts/tests/cargo_identity_publication_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/cargo_identity_ci_*.py scripts/check-cargo-identity-ci.py scripts/capture-cargo-identity.py scripts/tests/cargo_identity_ci_test.py scripts/tests/cargo_identity_publication_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/cargo_identity_ci_*.py scripts/check-cargo-identity-ci.py scripts/capture-cargo-identity.py scripts/tests/cargo_identity_ci_test.py scripts/tests/cargo_identity_publication_test.py
       - name: Check owned Restore evidence admission
         run: |
           uv run --with pytest python -m pytest -q scripts/owned_restore_sources_test.py scripts/owned_restore_capacity_test.py scripts/owned_restore_admission_test.py scripts/owned_restore_suffix_test.py
@@ -199,6 +204,7 @@ jobs:
             .artifacts/grf-strings-*/
             .artifacts/grf-currency-*/
             .artifacts/engine-specs-*/
+            .artifacts/cargo-identity-*/
             .artifacts/tree-terrain-*/
             !.artifacts/tree-terrain-target-*/**
       - name: Report native compiler-cache statistics

@@ -30,6 +30,9 @@ impl Session<'_, '_> {
         let count = reader.byte()?;
         let items = u32::from(reader.byte()?);
         let first = u32::from(reader.extended()?);
+        if feature == 11 {
+            return self.cargo_properties(reader, first, items, count, location);
+        }
         if feature == 1 && location.stage == LoadStage::Activation {
             return self.road_properties(reader, first, items, count, location);
         }
@@ -39,18 +42,18 @@ impl Session<'_, '_> {
         if feature != 8 {
             return Err(Self::unsupported(location, 0, "non-language Action0 feature").into());
         }
-        if location.stage == LoadStage::Activation {
-            let file = self
-                .registry
-                .file_mut(location.file)
-                .ok_or_else(|| Self::unsupported(location, 0, "missing language dynamic file"))?;
-            file.features |= 1 << 8;
-        }
+        self.activate_global_feature(location)?;
         for _ in 0..count {
             if reader.remaining() == 0 {
                 break;
             }
             let property = reader.byte()?;
+            if property == 9 {
+                if self.cargo_table_property(reader, first, items, location)? {
+                    return Ok(());
+                }
+                continue;
+            }
             if property == 0x0a {
                 self.currency_names(reader, first, items, location)?;
                 continue;
@@ -115,6 +118,17 @@ impl Session<'_, '_> {
         }
         Ok(())
     }
+    fn activate_global_feature(&mut self, location: LoadLocation) -> ActionResult {
+        if location.stage == LoadStage::Activation {
+            let file = self
+                .registry
+                .file_mut(location.file)
+                .ok_or_else(|| Self::unsupported(location, 0, "missing language dynamic file"))?;
+            file.features |= 1 << 8;
+        }
+        Ok(())
+    }
+
     fn reserve_road_properties(
         &mut self,
         reader: &mut Reader<'_>,

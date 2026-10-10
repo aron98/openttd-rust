@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 #ifndef OTTD_REFERENCE_GRF_LOAD_CONTROL_HPP
 #define OTTD_REFERENCE_GRF_LOAD_CONTROL_HPP
+void ReferenceCargoIdentityPreflight(const nlohmann::json &manifest);
 namespace ReferenceGrfControl {
 using Json = nlohmann::json;
 [[noreturn]] inline void HostError(std::string_view message)
@@ -44,7 +45,7 @@ inline const char *Failure(StringID id)
     if (id == STR_NEWGRF_ERROR_STATIC_GRF_CAUSES_DESYNC) return "StaticInfluence";
     if (id == STR_NEWGRF_ERROR_TOO_MANY_NEWGRFS_LOADED) return "TooManyFiles";
     if (id == STR_NEWGRF_ERROR_LOAD_AFTER) return "LoadAfter";
-    if (manifest.contains("engine_specs")) {
+    if (manifest.contains("engine_specs") || manifest.contains("cargo_identity")) {
         if (id == STR_NEWGRF_ERROR_UNKNOWN_PROPERTY) return "UnknownProperty";
         if (id == STR_NEWGRF_ERROR_INVALID_ID) return "InvalidID";
     }
@@ -92,13 +93,15 @@ inline void Begin(uint num_baseset)
     output = destination;
     if (std::ifstream(output).good()) HostError("control output already exists");
     std::ifstream source(path);
-    if (std::getenv("OTTD_ENGINE_SPECS_OUTPUT") != nullptr) {
+    if (std::getenv("OTTD_ENGINE_SPECS_OUTPUT") != nullptr || std::getenv("OTTD_CARGO_IDENTITY_OUTPUT") != nullptr) {
         source.seekg(0, std::ios::end);
         auto bytes = source.tellg();
         if (bytes < 0 || bytes > 64 * 1024) HostError("engine-spec host manifest byte budget");
         source.seekg(0);
     }
-    manifest = Json::parse(source);
+    manifest = Json::parse(source, nullptr, std::getenv("OTTD_CARGO_IDENTITY_OUTPUT") == nullptr);
+    if (manifest.is_discarded()) HostError("cargo-identity host invalid JSON");
+    ReferenceCargoIdentityPreflight(manifest);
     baseset_count = num_baseset;
     before = Context();
     for (const auto &config : _grfconfig) baseline_sources.push_back(FioFindFullPath(BASESET_DIR, config->filename));

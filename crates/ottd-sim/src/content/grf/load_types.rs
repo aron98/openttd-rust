@@ -127,6 +127,8 @@ pub enum LoadFailure {
     LoadAfter,
     /// Action0 property is unknown to the original feature handler.
     UnknownProperty,
+    /// Action0 references an ID outside the native feature domain.
+    InvalidId,
 }
 
 /// Original diagnostic retained separately from a host refusal.

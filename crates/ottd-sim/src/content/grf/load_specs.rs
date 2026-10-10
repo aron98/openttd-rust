@@ -114,6 +114,8 @@ impl Owner {
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
 pub(super) struct Temporary {
+    #[serde(skip)]
+    pub defaultcargo_file: Option<super::load_cargo::FileIdentity>,
     pub cargo_allowed: u16,
     pub cargo_allowed_required: u16,
     pub cargo_disallowed: u16,
@@ -175,7 +177,7 @@ impl Specs {
             .saturating_add(self.grfid_overrides.len().saturating_mul(8))
     }
 
-    fn install_reserve_defaults(&mut self) {
+    pub(super) fn install_reserve_defaults(&mut self) {
         for (source, target) in [
             (0x4444_2202_u32, 0x4444_0111_u32),
             (0x6d62_0402, 0x6d62_0401),
@@ -403,6 +405,10 @@ impl Session<'_, '_> {
                 break;
             }
             let property = reader.byte()?;
+            if property == 0x10 {
+                self.road_cargo_property(reader, first, count, location)?;
+                continue;
+            }
             let request = RoadRequest {
                 grfid,
                 first,

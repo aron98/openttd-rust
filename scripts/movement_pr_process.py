@@ -10,15 +10,20 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
 import signal
 import stat
 import subprocess
 import tarfile
 import time
+from collections.abc import Iterator
 from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
+
+from scripts.movement_ci.protocol import CASES
+from scripts.movement_ci.refusals import MUTATIONS
 
 
 class CaptureError(RuntimeError):
@@ -32,15 +37,30 @@ class Bounds:
     cap: int
     seconds: float
     measure: Path | None = None
+    replay_parents: tuple[Path, ...] = ()
 
 
-def size(path: Path, *, transient: Path | None = None) -> int:
+def size(
+    path: Path,
+    *,
+    transient: Path | None = None,
+    replay_parents: tuple[Path, ...] = (),
+) -> int:
+    """Count live bytes; only explicitly owned scratch directories may disappear."""
+    for parent in replay_parents:
+        if (
+            not parent.is_absolute()
+            or parent.resolve() != parent
+            or parent == path
+            or not parent.is_relative_to(path)
+        ):
+            raise CaptureError("replay parent must be canonical inside measured job")
     total = 0
-    for member in path.rglob("*"):
+    for member, removable in _members(path, transient, replay_parents):
         try:
             observed = member.lstat()
         except FileNotFoundError:
-            if transient is not None and member.is_relative_to(transient):
+            if removable:
                 continue
             raise
         if stat.S_ISLNK(observed.st_mode):
@@ -48,6 +68,37 @@ def size(path: Path, *, transient: Path | None = None) -> int:
         if stat.S_ISREG(observed.st_mode):
             total += observed.st_size
     return total
+
+
+def _members(
+    path: Path, transient: Path | None, replay_parents: tuple[Path, ...]
+) -> Iterator[tuple[Path, bool]]:
+    pending = [(path, False)] if path.exists() else []
+    while pending:
+        directory, disposable = pending.pop()
+        try:
+            entries = os.scandir(directory)
+        except FileNotFoundError:
+            if disposable:
+                continue
+            raise
+        with entries:
+            for entry in entries:
+                member = Path(entry.path)
+                is_directory = entry.is_dir(follow_symlinks=False)
+                removable = (
+                    disposable
+                    or (transient is not None and member.is_relative_to(transient))
+                    or (
+                        directory in replay_parents
+                        and re.fullmatch(r"\.ottd-replay-[A-Za-z0-9]{6}", entry.name)
+                        is not None
+                        and is_directory
+                    )
+                )
+                yield member, removable
+                if is_directory:
+                    pending.append((member, removable))
 
 
 def digest(path: Path) -> str:
@@ -89,6 +140,7 @@ def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) ->
                 "reserve": bounds.reserve,
                 "cap": bounds.cap,
                 "deadline_seconds": bounds.seconds,
+                "replay_parents": [str(parent) for parent in bounds.replay_parents],
             },
             indent=2,
         )
@@ -125,7 +177,9 @@ def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) ->
             elapsed = time.monotonic() - start
             free = shutil.disk_usage(work).free
             try:
-                used = size(measured, transient=transient)
+                used = size(
+                    measured, transient=transient, replay_parents=bounds.replay_parents
+                )
             except (CaptureError, OSError) as error:
                 used = -1
                 classification = "inspection_error"
@@ -146,7 +200,8 @@ def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) ->
         status = process.wait()
     try:
         if (
-            size(measured, transient=transient) >= bounds.cap
+            size(measured, transient=transient, replay_parents=bounds.replay_parents)
+            >= bounds.cap
             or shutil.disk_usage(work).free < bounds.floor
         ):
             classification = "storage_guard"
@@ -184,3 +239,44 @@ def archive_bound(source: Path) -> int:
     """Reserve uncompressed payload, conservative tar headers and gzip expansion."""
     raw = size(source) + 4096 * (1 + sum(1 for _ in source.rglob("*")))
     return raw + raw // 100 + 1024**2
+
+
+def existing_work(root: Path, work: Path) -> None:
+    if not work.is_absolute() or work.is_relative_to(root) or work.resolve() != work:
+        raise CaptureError("external job directory required")
+
+
+def replay_parents(output: Path) -> tuple[Path, ...]:
+    """Exact replay output parents used by matrix and refusal capture producers."""
+    return (
+        output,
+        *(
+            output / (case.name.replace("-", "_") + "_refuse_" + mutation)
+            for case in CASES
+            for mutation in MUTATIONS
+        ),
+    )
+
+
+def tool(name: str) -> str:
+    path = shutil.which(name)
+    if path is None:
+        raise CaptureError("missing tool: " + name)
+    return path
+
+
+def source_snapshot(root: Path) -> str:
+    names = (
+        subprocess.check_output([tool("git"), "ls-files", "-z"], cwd=root)
+        .decode()
+        .split("\0")
+    )
+    files = {
+        name: {
+            "sha256": digest(root / name),
+            "mode": oct((root / name).stat().st_mode & 0o777),
+        }
+        for name in names
+        if name
+    }
+    return json.dumps(files, indent=2) + "\n"

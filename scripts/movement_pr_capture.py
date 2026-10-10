@@ -20,9 +20,13 @@ from scripts.movement_pr_process import (
     CaptureError,
     archive_bound,
     digest,
+    existing_work,
     fresh_work,
     pack,
     phase,
+    replay_parents,
+    source_snapshot,
+    tool,
 )
 
 GIB: Final = 1024**3
@@ -31,35 +35,6 @@ PROOF: Final = 6 * GIB
 CARGO: Final = GIB
 UPLOAD: Final = PROOF + 256 * 1024**2
 LOGS: Final = 64 * 1024**2
-
-
-def tool(name: str) -> str:
-    path = shutil.which(name)
-    if path is None:
-        raise CaptureError("missing tool: " + name)
-    return path
-
-
-def source_snapshot(root: Path) -> str:
-    names = (
-        subprocess.check_output([tool("git"), "ls-files", "-z"], cwd=root)
-        .decode()
-        .split("\0")
-    )
-    files = {
-        name: {
-            "sha256": digest(root / name),
-            "mode": oct((root / name).stat().st_mode & 0o777),
-        }
-        for name in names
-        if name
-    }
-    return json.dumps(files, indent=2) + "\n"
-
-
-def existing_work(root: Path, work: Path) -> None:
-    if not work.is_absolute() or work.is_relative_to(root) or work.resolve() != work:
-        raise CaptureError("external job directory required")
 
 
 def initialize(root: Path, work: Path) -> None:
@@ -165,7 +140,14 @@ def produce(root: Path, work: Path) -> int:
                 "--capture",
                 str(work / "raw/capture"),
             ],
-            Bounds(FLOOR + UPLOAD, PROOF + CARGO, PROOF + CARGO + LOGS, 5400, work),
+            Bounds(
+                FLOOR + UPLOAD,
+                PROOF + CARGO,
+                PROOF + CARGO + LOGS,
+                5400,
+                work,
+                replay_parents=replay_parents(work / "raw/capture"),
+            ),
         ),
         (
             "verify",

@@ -199,7 +199,7 @@ def test_inspection_refusal_records_failure_and_stops_child(tmp_path: Path) -> N
 def test_real_source_and_checkout_identity_are_bound(tmp_path: Path) -> None:
     root = tmp_path / "checkout"
     root.mkdir()
-    git = capture.tool("git")
+    git = helper.tool("git")
     for command in ([git, "init", "-q"],):
         _ = subprocess.run(command, cwd=root, capture_output=True, check=True)
     member = root / "source.txt"
@@ -225,10 +225,10 @@ def test_real_source_and_checkout_identity_are_bound(tmp_path: Path) -> None:
     work = tmp_path / "job"
     capture.initialize(root, work)
     recorded = (work / "raw/receipts/source.json").read_text()
-    assert recorded == capture.source_snapshot(root)
+    assert recorded == helper.source_snapshot(root)
     identity = mapping(read_json(work / "raw/receipts/job.json"))
     assert len(text(identity["head"])) == 40
     assert len(text(identity["tree"])) == 40
     assert identity["required_after_setup"] == 14 * 1024**3 + 256 * 1024**2
     _ = member.write_text("source-after")
-    assert recorded != capture.source_snapshot(root)
+    assert recorded != helper.source_snapshot(root)

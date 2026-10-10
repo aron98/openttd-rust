@@ -13,6 +13,20 @@ mod load_conditions;
 mod load_context;
 #[cfg(test)]
 pub mod load_context_tests;
+mod load_currency;
+#[cfg(test)]
+mod load_currency_api_native;
+mod load_currency_data;
+#[cfg(test)]
+mod load_currency_guards;
+#[cfg(test)]
+mod load_currency_load_native;
+#[cfg(test)]
+mod load_currency_native;
+#[cfg(test)]
+mod load_currency_session_tests;
+#[cfg(test)]
+mod load_currency_tests;
 mod load_cursor;
 mod load_dispatch;
 mod load_execute;
@@ -25,6 +39,7 @@ mod load_registry;
 mod load_string_actions;
 #[cfg(test)]
 mod load_string_actions_tests;
+mod load_string_mapping;
 mod load_strings;
 #[cfg(test)]
 mod load_strings_guards;

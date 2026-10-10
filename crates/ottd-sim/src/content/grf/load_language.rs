@@ -45,6 +45,10 @@ impl Session<'_, '_> {
                 break;
             }
             let property = reader.byte()?;
+            if property == 0x0a {
+                self.currency_names(reader, first, items, location)?;
+                continue;
+            }
             if !(0x13..=0x15).contains(&property) {
                 return Err(Self::unsupported(location, 0, "unimplemented global property").into());
             }

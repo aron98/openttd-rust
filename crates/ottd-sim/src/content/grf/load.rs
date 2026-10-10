@@ -39,11 +39,16 @@ pub(super) struct Session<'i, 'a> {
     pub environment: Option<super::load_context::Environment>,
     pub language: Option<super::load_language_state::LanguageState<'a>>,
     pub strings: super::load_strings::StringTable,
+    pub currency: Option<super::load_currency::CurrencyState>,
     pub string_budget: super::text::Budget,
     pub string_errors: Vec<super::load_string_actions::TranslationFailure>,
 }
 impl Session<'_, '_> {
     fn finish(mut self, location: LoadLocation) -> Result<RuntimeReport, ControlLoadError> {
+        if let Some(currency) = self.currency.as_mut() {
+            self.budget.payload(currency.snapshot_bytes(), location)?;
+            currency.finalize(&self.strings);
+        }
         self.overrides.clear();
         let environment = self.finish_environment(location)?;
         self.budget
@@ -55,6 +60,7 @@ impl Session<'_, '_> {
             },
             environment,
             self.language.map(|mut state| {
+                state.report.currency = self.currency;
                 state.report.strings = self.strings.entries;
                 state.report.translation_errors = self.string_errors;
                 state.report
@@ -461,12 +467,29 @@ pub(super) fn run_with_context(
     options: ControlOptions,
     context: RuntimeInputs<'_>,
 ) -> Result<RuntimeReport, ControlLoadError> {
+    run_with_currency(inputs, preceding_ids, options, context, None)
+}
+
+pub(super) fn run_with_currency(
+    inputs: &[LoadInput<'_>],
+    preceding_ids: &[u32],
+    options: ControlOptions,
+    context: RuntimeInputs<'_>,
+    custom: Option<&super::load_currency::CurrencyOwner>,
+) -> Result<RuntimeReport, ControlLoadError> {
     let location = LoadLocation {
         stage: LoadStage::LabelScan,
         file: 0,
         line: 0,
         offset: 0,
     };
+    if custom.is_some() && context.language.is_none() {
+        return Err(Session::unsupported(
+            location,
+            0,
+            "currency requires language context",
+        ));
+    }
     let environment = context.environment(options.networking, location)?;
     if inputs.len().saturating_add(preceding_ids.len()) > options.max_files {
         return Err(ControlLoadError::ResourceLimit {
@@ -477,6 +500,7 @@ pub(super) fn run_with_context(
     let mut size = preceding_ids
         .len()
         .saturating_mul(4)
+        .saturating_add(custom.map_or(0, super::load_currency::CurrencyOwner::snapshot_bytes))
         .saturating_add(context.language.map_or(0, |input| {
             input
                 .packs
@@ -540,6 +564,7 @@ pub(super) fn run_with_context(
         environment,
         language,
         strings: super::load_strings::StringTable::default(),
+        currency: custom.map(super::load_currency::CurrencyState::with_custom),
         string_budget: super::text::Budget::new(super::ScanLimits::default()),
         string_errors: Vec::new(),
     };

@@ -1,7 +1,7 @@
 {
   "sources": {
-    "crates/ottd-sim/src/content/grf.rs": "f40ffee85374b602b0863211a908319824a6e2e4eb5d03c3c922a3402767eb15",
-    "crates/ottd-sim/src/content/grf/load.rs": "f6bcc5ca6f1f57e25842e57a6e8629791ee800250dafa46aba9587dc535a0fb8",
+    "crates/ottd-sim/src/content/grf.rs": "20ccc66388609a0668b8871c67774d38f32da411367519c327332aefe42b66e4",
+    "crates/ottd-sim/src/content/grf/load.rs": "4f2dc404961b1b9940a8d9a84eed558a690e4c001614e45b471290c953148516",
     "crates/ottd-sim/src/content/grf/load_conditions.rs": "9c25864aad18db948f3be70d7c0b17fc741d46b981961546578cad09f240fb77",
     "crates/ottd-sim/src/content/grf/load_parameters.rs": "130653eb2fe89aa10fb4a6244bd3cab412a554d589d66a0a98746d2c4dbe6696",
     "crates/ottd-sim/src/content/grf/load_registry.rs": "60d3e53130ebc8728e91916a61d3430292e0cd6ea826ee4d7985e0cd40320c25",
@@ -17,7 +17,7 @@
     "crates/ottd-sim/tests/grf_control_cases/project.rs": "4939a5071c0a2bf9df49aba761de1d2e5f34be1541a347bf7b7ce12c5d1b3873",
     "crates/ottd-sim/src/content/grf/language_pack.rs": "d511157e87bcc54d18f639f9f7438080d9b04a32d514f2b38f6116914ac50c63",
     "crates/ottd-sim/src/content/grf/load_dispatch.rs": "7c99fbb6ec8a59ac94303088ceba5225d773f9bda58bf721d271afe8781e636d",
-    "crates/ottd-sim/src/content/grf/load_language_state.rs": "7e2fd16037335b1be43bd7f947a6322ad530880e2c9d3ce210ee3cf59f4fd2a2",
+    "crates/ottd-sim/src/content/grf/load_language_state.rs": "0fd6478420b5e6648e20e4931707b9a9cb59acd9637e8047100ab6db971cf66b",
     "crates/ottd-sim/src/content/grf/load_types.rs": "a0c26809f1ce9f0005f962ca96d28f8d5a61aa4f07afa273c2baa22f2ccd30eb",
     "crates/ottd-sim/src/content/grf/load_string_actions.rs": "0636201f2ca431ea640ebc297a7153d86bf8bf0c20a5f3e9f7eea7077833b7ee",
     "crates/ottd-sim/src/content/grf/load_string_actions_tests.rs": "00116c556ec43ede50a93f871e89d31797833990ac1bf8fa60b35e081e809ecc",
@@ -1574,6 +1574,9 @@
     "stale/stale-source/reference/gameplay.hpp",
     "stale/stale-source/reference/gameplay.json",
     "stale/stale-source/reference/gameplay.patch",
+    "stale/stale-source/reference/grf_currency.hpp",
+    "stale/stale-source/reference/grf_currency.patch",
+    "stale/stale-source/reference/grf_currency_api.hpp",
     "stale/stale-source/reference/grf_language.hpp",
     "stale/stale-source/reference/grf_language.patch",
     "stale/stale-source/reference/grf_language_catalog.hpp",

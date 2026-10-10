@@ -1,0 +1,3004 @@
+{
+  "verified_native_corpus": true,
+  "api": {
+    "summary": [
+      {
+        "case": "all-owner-indices",
+        "controls": 118354,
+        "operations": 258
+      },
+      {
+        "case": "all-string-mappings",
+        "controls": 67140,
+        "operations": 4
+      },
+      {
+        "case": "ordered-writes",
+        "controls": 3110,
+        "operations": 8
+      },
+      {
+        "case": "reserve-bounds",
+        "controls": 2257,
+        "operations": 6
+      },
+      {
+        "case": "custom-reset",
+        "controls": 3419,
+        "operations": 9
+      }
+    ],
+    "cases": {
+      "all-owner-indices": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "45e4423af76c05278022b1ec15f1d9391e77d6608059688db82bb0634dfd345c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "4cba5fc8fab4285a2ad9fb48b303527cf992ed094531ff17b7497adbc38ef324",
+        "coverage": {
+          "operations": 258,
+          "controls": 118354
+        }
+      },
+      "all-string-mappings": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "36385a189169499859d287881a61c7f016e39b933ba18f6f72fcb1d8bf911c9e",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "936d5d0ccfedac1be7d1a6c1c79f30383333dbe59392347c9e999310196fa478",
+        "coverage": {
+          "operations": 4,
+          "controls": 67140
+        }
+      },
+      "ordered-writes": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "9d0a9c29d811ec9cbf9c07ba4fc4f0bb7f98ace2107998435444dfb4202664b4",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "a8e5d20b39927c58b20add62c374fbd065bdd077b2c508e792f8e2fda1580e24",
+        "coverage": {
+          "operations": 8,
+          "controls": 3110
+        }
+      },
+      "reserve-bounds": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "cea6e50f8442a1d4fd87a274c28c4a46cdbd3bd65b3f1132ae9d8a9add996972",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "9d987e17cdf368da0a7ae7bee9613c3318ae5857e171171015c2f7ddb351705a",
+        "coverage": {
+          "operations": 6,
+          "controls": 2257
+        }
+      },
+      "custom-reset": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "2b359d830cb7adcd74c45acb2971b8b31685ecc69951dd5bf48079e8b408acbd",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "4ba6ccfe0f8ccc6c20e4ed24b3c0f2422199fd0caeafc6f3a256501a05b05012",
+        "coverage": {
+          "operations": 9,
+          "controls": 3419
+        }
+      }
+    }
+  },
+  "load": {
+    "summary": [
+      {
+        "case": "deferred-and-overwrite",
+        "loads": [
+          {
+            "controls": 12128,
+            "events": 32,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "reload-empty-custom-retained",
+        "loads": [
+          {
+            "controls": 7553,
+            "events": 20,
+            "load": 0
+          },
+          {
+            "controls": 1505,
+            "events": 4,
+            "load": 1
+          }
+        ]
+      },
+      {
+        "case": "reload-reordered",
+        "loads": [
+          {
+            "controls": 12128,
+            "events": 32,
+            "load": 0
+          },
+          {
+            "controls": 12133,
+            "events": 32,
+            "load": 1
+          }
+        ]
+      },
+      {
+        "case": "disabled-retained",
+        "loads": [
+          {
+            "controls": 9071,
+            "events": 24,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "wrapped-and-invalid",
+        "loads": [
+          {
+            "controls": 7547,
+            "events": 20,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "overwrite-reverse",
+        "loads": [
+          {
+            "controls": 10610,
+            "events": 28,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "missing-custom",
+        "loads": [
+          {
+            "controls": 4521,
+            "events": 12,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "builtin-unknown-empty",
+        "loads": [
+          {
+            "controls": 4541,
+            "events": 12,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "custom-callback-aliases",
+        "loads": [
+          {
+            "controls": 9128,
+            "events": 24,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "init-only-no-owner-write",
+        "loads": [
+          {
+            "controls": 3761,
+            "events": 10,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "empty-configured-files",
+        "loads": [
+          {
+            "controls": 1505,
+            "events": 4,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "zero-item-property",
+        "loads": [
+          {
+            "controls": 4513,
+            "events": 12,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "maximum-count-wrap",
+        "loads": [
+          {
+            "controls": 6311,
+            "events": 16,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "malformed-invalid-owner",
+        "loads": [
+          {
+            "controls": 3761,
+            "events": 10,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "malformed-after-valid-record",
+        "loads": [
+          {
+            "controls": 4889,
+            "events": 13,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "repeated-custom-owner",
+        "loads": [
+          {
+            "controls": 13642,
+            "events": 36,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "same-local-distinct-grfid",
+        "loads": [
+          {
+            "controls": 10610,
+            "events": 28,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "reload-same-config",
+        "loads": [
+          {
+            "controls": 6041,
+            "events": 16,
+            "load": 0
+          },
+          {
+            "controls": 6041,
+            "events": 16,
+            "load": 1
+          }
+        ]
+      },
+      {
+        "case": "reload-remove-first",
+        "loads": [
+          {
+            "controls": 10610,
+            "events": 28,
+            "load": 0
+          },
+          {
+            "controls": 6041,
+            "events": 16,
+            "load": 1
+          }
+        ]
+      },
+      {
+        "case": "reload-remove-second",
+        "loads": [
+          {
+            "controls": 10610,
+            "events": 28,
+            "load": 0
+          },
+          {
+            "controls": 6041,
+            "events": 16,
+            "load": 1
+          }
+        ]
+      }
+    ],
+    "cases": {
+      "deferred-and-overwrite": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "66f2ee1304bf2a184c64c050198886dc7dcefb5a2cf50247fb0eb0a739a37b0c",
+        "inputs": {
+          "00000008.grf": "6101e19587792f4310ec1b72261f2f00bf24658ca63e015d3638506b3e20a1ef",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "7928475e8d0a9ffa5a8523bff53c831f2d5c910506033f19830111f5c84848de",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "cc6095b57fb244b2f0deb1c7d40258210ffe64e85dd6fec23a43bc384fb44eb8",
+        "coverage": {
+          "loads": [
+            {
+              "events": 32,
+              "controls": 12128,
+              "lifecycle_controls": 2744
+            }
+          ]
+        }
+      },
+      "reload-empty-custom-retained": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "load-1/controls.json",
+          "load-1/lifecycle/controls.json",
+          "load-1/lifecycle/rust.json",
+          "load-1/rust-control.json",
+          "load-1/rust-final.json",
+          "load-1/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "b659717bbc173a7e20901f1fdce6642804d08148bef781d42b1061b5d44f0414",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "7928475e8d0a9ffa5a8523bff53c831f2d5c910506033f19830111f5c84848de",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "b4e612126af3ef02476b8104cbdc175dfd679ede35691a0811a2a0e3bcb81396",
+        "coverage": {
+          "loads": [
+            {
+              "events": 20,
+              "controls": 7553,
+              "lifecycle_controls": 2296
+            },
+            {
+              "events": 4,
+              "controls": 1505,
+              "lifecycle_controls": 1493
+            }
+          ]
+        }
+      },
+      "reload-reordered": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "load-1/controls.json",
+          "load-1/lifecycle/controls.json",
+          "load-1/lifecycle/rust.json",
+          "load-1/rust-control.json",
+          "load-1/rust-final.json",
+          "load-1/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "1e827152cda9c37a36e4f2e65c8f4982c528437ceb1c1535ddee3c65edbdaef1",
+        "inputs": {
+          "00000008.grf": "6101e19587792f4310ec1b72261f2f00bf24658ca63e015d3638506b3e20a1ef",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "7928475e8d0a9ffa5a8523bff53c831f2d5c910506033f19830111f5c84848de",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "55d19208c7baa50d66ba49a0d6b1177661684878210102279cfa0640f094701c",
+        "coverage": {
+          "loads": [
+            {
+              "events": 32,
+              "controls": 12128,
+              "lifecycle_controls": 2744
+            },
+            {
+              "events": 32,
+              "controls": 12133,
+              "lifecycle_controls": 2744
+            }
+          ]
+        }
+      },
+      "disabled-retained": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "66f2ee1304bf2a184c64c050198886dc7dcefb5a2cf50247fb0eb0a739a37b0c",
+        "inputs": {
+          "00000008.grf": "2def79f143eb228cb010dfe3b0d6f3c7a0efdc8149ee42fbef1aabd8ee6e4345",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "b15e56152cfc1ec02c94f3d9d325c17c8f092acccc8a322810e43ecd20b61aa3",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "228479ba1c9ca1f0b1ad1036670b85d57da4d975b98284f9fed6358a1094063d",
+        "coverage": {
+          "loads": [
+            {
+              "events": 24,
+              "controls": 9071,
+              "lifecycle_controls": 1906
+            }
+          ]
+        }
+      },
+      "wrapped-and-invalid": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "80a711a92bb867ad34d0a596247c55bda89a1c65513b1689df7e2d117b650136",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "f35aabd97fd514ec30558c720797969c556be510eeada72a0bcf59486c1dcff8",
+        "coverage": {
+          "loads": [
+            {
+              "events": 20,
+              "controls": 7547,
+              "lifecycle_controls": 1906
+            }
+          ]
+        }
+      },
+      "overwrite-reverse": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "fb36a1287d915a1ff3d6f87c0c79a640a19fb94cb54f4efbe3cfc114027e4f8b",
+        "inputs": {
+          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "7ae1a7e2da67542dd945d8acd7fa2d3b96a922f51df172f6ec46be1bc03232d4",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 10610,
+              "lifecycle_controls": 2341
+            }
+          ]
+        }
+      },
+      "missing-custom": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "e75b7d3ead5632aba98267413c230dae1b9432aef5c5a43aa3d907ce9219004d",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "9258d6f16ec9ecc16a0c1411ac9e2e0f713a6fa0e46f11e45f2dd36d655fb4e6",
+        "coverage": {
+          "loads": [
+            {
+              "events": 12,
+              "controls": 4521,
+              "lifecycle_controls": 2251
+            }
+          ]
+        }
+      },
+      "builtin-unknown-empty": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "3392fcb51d587ecebee2f833378377b9069d6fd3ec5bcd8a4380efde1d5f91cc",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "13473f90d027cdda9fd991cb20e32475d9f207e698330c59ba477c26da7c8b91",
+        "coverage": {
+          "loads": [
+            {
+              "events": 12,
+              "controls": 4541,
+              "lifecycle_controls": 4216
+            }
+          ]
+        }
+      },
+      "custom-callback-aliases": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "a378417791082c1fd939e534c2398cef29cd541ad075a6853b57f4bc9d4bafbe",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "b2c516afd57a466baf5d2ab525f266b473c5441b1f655cb1c4493fb5c76e41da",
+        "coverage": {
+          "loads": [
+            {
+              "events": 24,
+              "controls": 9128,
+              "lifecycle_controls": 3151
+            }
+          ]
+        }
+      },
+      "init-only-no-owner-write": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "be3ff5e0630aab68232c7d40c8cd1cf341ce54be95e269ffb428146e28e67e7b",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "01fa907bcd1d0e27d12b651f626690d2329830cf01e41b0053288871660741c0",
+        "coverage": {
+          "loads": [
+            {
+              "events": 10,
+              "controls": 3761,
+              "lifecycle_controls": 1493
+            }
+          ]
+        }
+      },
+      "empty-configured-files": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "38303cdf650542ced44bdd2edb36c8f5b4ce9d90f019440eede23f868285c647",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "50e4fdc6a9362520278d7f67781b8976a0a7bbb9af323e7d31180286e0842941",
+        "coverage": {
+          "loads": [
+            {
+              "events": 4,
+              "controls": 1505,
+              "lifecycle_controls": 1493
+            }
+          ]
+        }
+      },
+      "zero-item-property": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "75724c6d94fa247960997751cbd163be65ece556efbcbc207f62ff4a544c1ab0",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "326c028af4ef2b474767b2c20cbfd587cdc4dcc293a0f8294e3b3f02117a2ba2",
+        "coverage": {
+          "loads": [
+            {
+              "events": 12,
+              "controls": 4513,
+              "lifecycle_controls": 1493
+            }
+          ]
+        }
+      },
+      "maximum-count-wrap": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "e6a4e3283f1baf737fb59c173b9d200c8da61ca23a65ff476df2e9c2b749cdb3",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "3db0e0f9223f00269e9952909f3bb37c727780e84e2bcffc0549e7abcb0f3b32",
+        "coverage": {
+          "loads": [
+            {
+              "events": 16,
+              "controls": 6311,
+              "lifecycle_controls": 23416
+            }
+          ]
+        }
+      },
+      "malformed-invalid-owner": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "5f1a552c8d0c01c13a183e762e345c3162c7595e92f57c6ec4639d3109883626",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "77f5868f2061af5c016532c7faa7fe32b0d20886a95d3248dff9cb8d6fa5961a",
+        "coverage": {
+          "loads": [
+            {
+              "events": 10,
+              "controls": 3761,
+              "lifecycle_controls": 1493
+            }
+          ]
+        }
+      },
+      "malformed-after-valid-record": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "1bcc8bdd9f86e83338fb1a8cc499b896d108036e2c450daada4d78dbfc0ab404",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "36323bcd82e54c2ba5bfe11a0a195ee5638c363873a5d867bfe7cdf4ed18028f",
+        "coverage": {
+          "loads": [
+            {
+              "events": 13,
+              "controls": 4889,
+              "lifecycle_controls": 1493
+            }
+          ]
+        }
+      },
+      "repeated-custom-owner": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "3e7b008b602d63ae1e6e530d6b9dd3bfba963d18ac2c0deba25d5b43a25a054f",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "e09a7c36647e416350902507aa3a57d33e2cac332f99c019729b1b43828f1aa9",
+        "coverage": {
+          "loads": [
+            {
+              "events": 36,
+              "controls": 13642,
+              "lifecycle_controls": 3562
+            }
+          ]
+        }
+      },
+      "same-local-distinct-grfid": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "66f2ee1304bf2a184c64c050198886dc7dcefb5a2cf50247fb0eb0a739a37b0c",
+        "inputs": {
+          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "12013adf0acda100003fb85ea8dbee36e81189217c23fd5d4473028a3f0b6d93",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 10610,
+              "lifecycle_controls": 2341
+            }
+          ]
+        }
+      },
+      "reload-same-config": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "load-1/controls.json",
+          "load-1/lifecycle/controls.json",
+          "load-1/lifecycle/rust.json",
+          "load-1/rust-control.json",
+          "load-1/rust-final.json",
+          "load-1/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "0b36af572dccd979acc3651df2565c70d1a399dbdacd482174c1eac4cb44ca4e",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "d6eefcf2134a64913f851a1362228c090a9669acb18959c48aad3b0e08ca5ef5",
+        "coverage": {
+          "loads": [
+            {
+              "events": 16,
+              "controls": 6041,
+              "lifecycle_controls": 1906
+            },
+            {
+              "events": 16,
+              "controls": 6041,
+              "lifecycle_controls": 1906
+            }
+          ]
+        }
+      },
+      "reload-remove-first": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "load-1/controls.json",
+          "load-1/lifecycle/controls.json",
+          "load-1/lifecycle/rust.json",
+          "load-1/rust-control.json",
+          "load-1/rust-final.json",
+          "load-1/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "c6a455f3e0c472e9954d6c741b16c5f40bb5cb5f78f6847199b1799733b4883d",
+        "inputs": {
+          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "01b1c155a12497a07b53aef90c62437b0d5cf3b7b08d50a81a713a23dec0712d",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 10610,
+              "lifecycle_controls": 2341
+            },
+            {
+              "events": 16,
+              "controls": 6041,
+              "lifecycle_controls": 1906
+            }
+          ]
+        }
+      },
+      "reload-remove-second": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "load-1/controls.json",
+          "load-1/lifecycle/controls.json",
+          "load-1/lifecycle/rust.json",
+          "load-1/rust-control.json",
+          "load-1/rust-final.json",
+          "load-1/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "829cde438279447626064a1c4be804963fe6e4a2e2b6585ae0685b9e7a129c68",
+        "inputs": {
+          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "2c7d5bbe33017e344b51daacb140d654449e8ef3b20c3ca341188db820d5fe4d",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 10610,
+              "lifecycle_controls": 2341
+            },
+            {
+              "events": 16,
+              "controls": 6041,
+              "lifecycle_controls": 1906
+            }
+          ]
+        }
+      }
+    }
+  },
+  "guards": {
+    "menu": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "menu.cmake",
+        "native/openttd.cfg",
+        "native/save/autosave/exit.sav",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$CASE/menu.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CONTROL_MANIFEST": "$CASE/manifest.json",
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "menu.cmake": "df4a2977ccb3ec671faeb7f34ce10d7a43e9c69a607b164727007f730f220643",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 0,
+      "diagnostic": ""
+    },
+    "replay": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json",
+          "OTTD_REPLAY_PATH": "$CASE/replay.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "refuses replay or case subset"
+    },
+    "subset": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_CASE": "subset",
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "refuses replay or case subset"
+    },
+    "reused": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "run directory already exists"
+    },
+    "non-save": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=GENERATE",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "requires an explicit saved-game load"
+    },
+    "stale": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "pack/input.lng",
+        "stale-source/reference/.gitattributes",
+        "stale-source/reference/README.md",
+        "stale-source/reference/allocation.hpp",
+        "stale-source/reference/callback_company.hpp",
+        "stale-source/reference/callback_house.hpp",
+        "stale-source/reference/callback_industry.hpp",
+        "stale-source/reference/callback_industry_state.hpp",
+        "stale-source/reference/callback_station.hpp",
+        "stale-source/reference/callback_timer.hpp",
+        "stale-source/reference/callback_vehicle.hpp",
+        "stale-source/reference/callbacks.hpp",
+        "stale-source/reference/callbacks.json",
+        "stale-source/reference/check-snapshot.cmake",
+        "stale-source/reference/content.hpp",
+        "stale-source/reference/depot_runtime.hpp",
+        "stale-source/reference/gameplay.hpp",
+        "stale-source/reference/gameplay.json",
+        "stale-source/reference/gameplay.patch",
+        "stale-source/reference/grf_currency.hpp",
+        "stale-source/reference/grf_currency.patch",
+        "stale-source/reference/grf_currency_api.hpp",
+        "stale-source/reference/grf_language.hpp",
+        "stale-source/reference/grf_language.patch",
+        "stale-source/reference/grf_language_catalog.hpp",
+        "stale-source/reference/grf_language_text.hpp",
+        "stale-source/reference/grf_load_context.hpp",
+        "stale-source/reference/grf_load_context.patch",
+        "stale-source/reference/grf_load_control.hpp",
+        "stale-source/reference/grf_load_control.patch",
+        "stale-source/reference/grf_metadata.hpp",
+        "stale-source/reference/grf_safety.hpp",
+        "stale-source/reference/grf_safety.patch",
+        "stale-source/reference/grf_scan.hpp",
+        "stale-source/reference/grf_strings.hpp",
+        "stale-source/reference/grf_strings.patch",
+        "stale-source/reference/grf_strings_api.hpp",
+        "stale-source/reference/order_fixture.hpp",
+        "stale-source/reference/order_fixture.patch",
+        "stale-source/reference/order_network.hpp",
+        "stale-source/reference/order_network.patch",
+        "stale-source/reference/order_state.hpp",
+        "stale-source/reference/order_state.patch",
+        "stale-source/reference/primitives.json",
+        "stale-source/reference/replay-format.json",
+        "stale-source/reference/replay.hpp",
+        "stale-source/reference/replay.patch",
+        "stale-source/reference/replay_commands.hpp",
+        "stale-source/reference/replay_cost.hpp",
+        "stale-source/reference/replay_fixture.hpp",
+        "stale-source/reference/replay_hooks.hpp",
+        "stale-source/reference/road_slope.hpp",
+        "stale-source/reference/road_slope.patch",
+        "stale-source/reference/runtime_road.hpp",
+        "stale-source/reference/runtime_road_fixture.hpp",
+        "stale-source/reference/runtime_road_fixture_tiles.hpp",
+        "stale-source/reference/snapshot.hpp",
+        "stale-source/reference/snapshot.patch",
+        "stale-source/reference/terrain.hpp",
+        "stale-source/reference/world.hpp",
+        "stale-source/reference/world.patch",
+        "stale-source/reference/world_derived.hpp",
+        "stale-source/reference/world_fixture.hpp",
+        "stale-source/scripts/backup-enabled-sale-fixtures.json",
+        "stale-source/scripts/backup-enabled-sale-layout.json",
+        "stale-source/scripts/backup-sale-fixtures.json",
+        "stale-source/scripts/backup-sale-layout.json",
+        "stale-source/scripts/backup_enabled_sale_controls.py",
+        "stale-source/scripts/backup_enabled_sale_evidence.py",
+        "stale-source/scripts/backup_enabled_sale_guards.py",
+        "stale-source/scripts/backup_enabled_sale_provenance.py",
+        "stale-source/scripts/backup_sale_bindings.py",
+        "stale-source/scripts/backup_sale_controls.py",
+        "stale-source/scripts/backup_sale_evidence.py",
+        "stale-source/scripts/backup_sale_guards.py",
+        "stale-source/scripts/backup_sale_pair.py",
+        "stale-source/scripts/backup_sale_provenance.py",
+        "stale-source/scripts/backup_sale_run.py",
+        "stale-source/scripts/check-backup-enabled-sale.py",
+        "stale-source/scripts/check-backup-sale.py",
+        "stale-source/scripts/check-callbacks.sh",
+        "stale-source/scripts/check-compatibility.sh",
+        "stale-source/scripts/check-content-reference.cmake",
+        "stale-source/scripts/check-contract.py",
+        "stale-source/scripts/check-depot-build.py",
+        "stale-source/scripts/check-depot-occupancy.py",
+        "stale-source/scripts/check-depot-removal.py",
+        "stale-source/scripts/check-gameplay-foundations.py",
+        "stale-source/scripts/check-grf-context-ci.py",
+        "stale-source/scripts/check-grf-control.py",
+        "stale-source/scripts/check-grf-currency-ci.py",
+        "stale-source/scripts/check-grf-currency-reference.cmake",
+        "stale-source/scripts/check-grf-language-ci.py",
+        "stale-source/scripts/check-grf-language-reference.cmake",
+        "stale-source/scripts/check-grf-load-control-reference.cmake",
+        "stale-source/scripts/check-grf-metadata-reference.cmake",
+        "stale-source/scripts/check-grf-metadata.sh",
+        "stale-source/scripts/check-grf-safety-ci.py",
+        "stale-source/scripts/check-grf-safety-reference.cmake",
+        "stale-source/scripts/check-grf-scan-reference.cmake",
+        "stale-source/scripts/check-grf-strings-ci.py",
+        "stale-source/scripts/check-grf-strings-reference.cmake",
+        "stale-source/scripts/check-occupancy-ci.py",
+        "stale-source/scripts/check-order-state.py",
+        "stale-source/scripts/check-ordered-sale.py",
+        "stale-source/scripts/check-purchase.sh",
+        "stale-source/scripts/check-replay-build.cmake",
+        "stale-source/scripts/check-replay-evidence.cmake",
+        "stale-source/scripts/check-replay-native.cmake",
+        "stale-source/scripts/check-replay.py",
+        "stale-source/scripts/check-replays.sh",
+        "stale-source/scripts/check-road-sale.sh",
+        "stale-source/scripts/check-road-slope-ci.py",
+        "stale-source/scripts/check-road-slope.py",
+        "stale-source/scripts/check-runtime-road-reference.cmake",
+        "stale-source/scripts/check-script-vm.py",
+        "stale-source/scripts/check-service.sh",
+        "stale-source/scripts/check-simulation.sh",
+        "stale-source/scripts/check-snapshots.sh",
+        "stale-source/scripts/check-terrain.sh",
+        "stale-source/scripts/check-world-builder.cmake",
+        "stale-source/scripts/check-world-fixture.cmake",
+        "stale-source/scripts/check-world-game.cmake",
+        "stale-source/scripts/check-world-reference.cmake",
+        "stale-source/scripts/check-world.py",
+        "stale-source/scripts/check-worlds.sh",
+        "stale-source/scripts/context-ci-layout.json",
+        "stale-source/scripts/context_ci_evidence.py",
+        "stale-source/scripts/context_ci_support.py",
+        "stale-source/scripts/contract_layouts.py",
+        "stale-source/scripts/contract_model.py",
+        "stale-source/scripts/contract_profiles.py",
+        "stale-source/scripts/contract_run.py",
+        "stale-source/scripts/contract_validate.py",
+        "stale-source/scripts/currency-ci-layout.json",
+        "stale-source/scripts/currency_ci_bindings.py",
+        "stale-source/scripts/currency_ci_capture.py",
+        "stale-source/scripts/currency_ci_compare.py",
+        "stale-source/scripts/currency_ci_evidence.py",
+        "stale-source/scripts/currency_ci_probes.py",
+        "stale-source/scripts/currency_ci_roster.py",
+        "stale-source/scripts/depot-build-evidence-layout.json",
+        "stale-source/scripts/depot-removal-fixtures.json",
+        "stale-source/scripts/depot-removal-layout.json",
+        "stale-source/scripts/depot_build_archive.py",
+        "stale-source/scripts/depot_build_evidence.py",
+        "stale-source/scripts/depot_build_provenance.py",
+        "stale-source/scripts/depot_controls.py",
+        "stale-source/scripts/depot_evidence.py",
+        "stale-source/scripts/depot_removal_controls.py",
+        "stale-source/scripts/depot_removal_evidence.py",
+        "stale-source/scripts/depot_removal_pair.py",
+        "stale-source/scripts/depot_removal_provenance.py",
+        "stale-source/scripts/depot_removal_run.py",
+        "stale-source/scripts/depot_replay.py",
+        "stale-source/scripts/gameplay_foundations.py",
+        "stale-source/scripts/grf-control-layout.json",
+        "stale-source/scripts/grf-control-ruff.toml",
+        "stale-source/scripts/grf_control_archive.py",
+        "stale-source/scripts/grf_control_evidence.py",
+        "stale-source/scripts/grf_control_guards.py",
+        "stale-source/scripts/grf_control_provenance.py",
+        "stale-source/scripts/grf_control_run.py",
+        "stale-source/scripts/grf_metadata_evidence.py",
+        "stale-source/scripts/language-ci-layout.json",
+        "stale-source/scripts/language_ci_bindings.py",
+        "stale-source/scripts/language_ci_compare.py",
+        "stale-source/scripts/language_ci_evidence.py",
+        "stale-source/scripts/language_ci_probes.py",
+        "stale-source/scripts/level_replay.py",
+        "stale-source/scripts/native_contract.py",
+        "stale-source/scripts/native_contract_content.py",
+        "stale-source/scripts/native_contract_protocol.py",
+        "stale-source/scripts/occupancy-ci-layout.json",
+        "stale-source/scripts/occupancy_ci_evidence.py",
+        "stale-source/scripts/order-state-fixtures.json",
+        "stale-source/scripts/order-state-layout.json",
+        "stale-source/scripts/order_state_admission.py",
+        "stale-source/scripts/order_state_capture.py",
+        "stale-source/scripts/order_state_controls.py",
+        "stale-source/scripts/order_state_evidence.py",
+        "stale-source/scripts/order_state_fixtures.py",
+        "stale-source/scripts/order_state_network.py",
+        "stale-source/scripts/order_state_pair.py",
+        "stale-source/scripts/order_state_processes.py",
+        "stale-source/scripts/order_state_provenance.py",
+        "stale-source/scripts/ordered-sale-fixtures.json",
+        "stale-source/scripts/ordered-sale-layout.json",
+        "stale-source/scripts/ordered_sale_bindings.py",
+        "stale-source/scripts/ordered_sale_controls.py",
+        "stale-source/scripts/ordered_sale_evidence.py",
+        "stale-source/scripts/ordered_sale_pair.py",
+        "stale-source/scripts/ordered_sale_provenance.py",
+        "stale-source/scripts/ordered_sale_run.py",
+        "stale-source/scripts/purchase-evidence-layout.json",
+        "stale-source/scripts/purchase_controls.py",
+        "stale-source/scripts/purchase_creation.py",
+        "stale-source/scripts/purchase_duration_controls.py",
+        "stale-source/scripts/purchase_evidence.py",
+        "stale-source/scripts/purchase_matrix.py",
+        "stale-source/scripts/purchase_provenance.py",
+        "stale-source/scripts/purchase_replay.py",
+        "stale-source/scripts/purchase_saved_state.py",
+        "stale-source/scripts/reference.cfg",
+        "stale-source/scripts/replay_controls.py",
+        "stale-source/scripts/replay_lifecycle.py",
+        "stale-source/scripts/replay_matrix.py",
+        "stale-source/scripts/road-slope-ci-layout.json",
+        "stale-source/scripts/road_slope_ci_evidence.py",
+        "stale-source/scripts/run-allocation-reference.cmake",
+        "stale-source/scripts/run-callback-reference.cmake",
+        "stale-source/scripts/run-depot-runtime-reference.cmake",
+        "stale-source/scripts/run-gameplay-reference.cmake",
+        "stale-source/scripts/run-reference.cmake",
+        "stale-source/scripts/run-snapshot-reference.cmake",
+        "stale-source/scripts/run-terrain-reference.cmake",
+        "stale-source/scripts/safety-ci-layout.json",
+        "stale-source/scripts/safety_ci_bindings.py",
+        "stale-source/scripts/safety_ci_evidence.py",
+        "stale-source/scripts/sale-evidence-layout.json",
+        "stale-source/scripts/sale_cases.py",
+        "stale-source/scripts/sale_controls.py",
+        "stale-source/scripts/sale_driver.py",
+        "stale-source/scripts/sale_duration_controls.py",
+        "stale-source/scripts/sale_evidence.py",
+        "stale-source/scripts/sale_lifetime.py",
+        "stale-source/scripts/sale_matrix.py",
+        "stale-source/scripts/sale_provenance.py",
+        "stale-source/scripts/sale_replay.py",
+        "stale-source/scripts/sale_saved_state.py",
+        "stale-source/scripts/script-vm-manifest.json",
+        "stale-source/scripts/script_vm_branches.py",
+        "stale-source/scripts/script_vm_evidence.py",
+        "stale-source/scripts/script_vm_iteration.py",
+        "stale-source/scripts/script_vm_observation.py",
+        "stale-source/scripts/script_vm_provenance.py",
+        "stale-source/scripts/script_vm_switch.py",
+        "stale-source/scripts/service_replay.py",
+        "stale-source/scripts/service_replay_cases.py",
+        "stale-source/scripts/setup-reference.sh",
+        "stale-source/scripts/setup-snapshot-reference.sh",
+        "stale-source/scripts/strings-ci-layout.json",
+        "stale-source/scripts/strings_ci_bindings.py",
+        "stale-source/scripts/strings_ci_compare.py",
+        "stale-source/scripts/strings_ci_evidence.py",
+        "stale-source/scripts/strings_ci_probes.py",
+        "stale-source/scripts/terraform_replay.py",
+        "stale-source/scripts/world_check_support.py",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$CASE/stale-source/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "Stale native replay binary/source"
+    },
+    "duplicate": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "currency.json",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-load-control-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json",
+          "OTTD_GRF_LANGUAGE_OUTPUT": "$CASE/language.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "currency output exists"
+    },
+    "unarmed": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "native/openttd.cfg",
+        "native/save/autosave/exit.sav",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=GENERATE",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/run-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CONTROL_MANIFEST": null,
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 0,
+      "diagnostic": ""
+    },
+    "pending": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "d136703a2dea7aefab7c0939eedd60ebb012a1f62740f14f7e0b6c5a1d320efb",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "currency API must finalize queued destinations"
+    },
+    "stale-read": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "e6c217020f581af6c3a802999439059884cf6f485af6041de1a096f12f769b03",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "stale custom currency string query"
+    },
+    "mixed": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "a635e3db6d6120ef22b1e1aed554057c5b1cda3a44d9613ec3c8d661074c37d4",
+      "inputs": {
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "invalid or duplicate currency fixture"
+    },
+    "reload-index": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "input-7.grf",
+        "input-8.grf",
+        "manifest.json",
+        "native/control.json",
+        "native/inputs.sha256",
+        "native/invocation.txt",
+        "native/language.json",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "f5053eb18becc523b925751550b03bd42a903bb87c28d18c75208c942e4ea47d",
+      "inputs": {
+        "input-8.grf": "2def79f143eb228cb010dfe3b0d6f3c7a0efdc8149ee42fbef1aabd8ee6e4345",
+        "input-7.grf": "c49a49876941278fc70d039ce69d3d1d4a49b839e54ce573ad27063b966e2f0f",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "currency reload duplicate or invalid config"
+    },
+    "reload-duplicate": {
+      "paths": [
+        "argv.json",
+        "comparison.txt",
+        "input-7.grf",
+        "input-8.grf",
+        "manifest.json",
+        "native/control.json",
+        "native/inputs.sha256",
+        "native/invocation.txt",
+        "native/language.json",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": {
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$ROOT/scripts/reference.cfg",
+          "-DTICKS=1",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "environment": {
+          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
+        }
+      },
+      "manifest_sha256": "ca756e022f2a1231beaea93caec81e996c55eb5ca8292c8c4494e0c4258bc7a8",
+      "inputs": {
+        "input-8.grf": "2def79f143eb228cb010dfe3b0d6f3c7a0efdc8149ee42fbef1aabd8ee6e4345",
+        "input-7.grf": "c49a49876941278fc70d039ce69d3d1d4a49b839e54ce573ad27063b966e2f0f",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "status": 1,
+      "diagnostic": "currency reload duplicate or invalid config"
+    }
+  },
+  "native_invocations": [
+    "api/all-owner-indices/native/invocation.txt",
+    "api/all-string-mappings/native/invocation.txt",
+    "api/custom-reset/native/invocation.txt",
+    "api/ordered-writes/native/invocation.txt",
+    "api/reserve-bounds/native/invocation.txt",
+    "guards/duplicate/native/invocation.txt",
+    "guards/mixed/native/invocation.txt",
+    "guards/pending/native/invocation.txt",
+    "guards/reload-duplicate/native/invocation.txt",
+    "guards/reload-index/native/invocation.txt",
+    "guards/stale-read/native/invocation.txt",
+    "load/builtin-unknown-empty/native/invocation.txt",
+    "load/custom-callback-aliases/native/invocation.txt",
+    "load/deferred-and-overwrite/native/invocation.txt",
+    "load/disabled-retained/native/invocation.txt",
+    "load/empty-configured-files/native/invocation.txt",
+    "load/init-only-no-owner-write/native/invocation.txt",
+    "load/malformed-after-valid-record/native/invocation.txt",
+    "load/malformed-invalid-owner/native/invocation.txt",
+    "load/maximum-count-wrap/native/invocation.txt",
+    "load/missing-custom/native/invocation.txt",
+    "load/overwrite-reverse/native/invocation.txt",
+    "load/reload-empty-custom-retained/native/invocation.txt",
+    "load/reload-remove-first/native/invocation.txt",
+    "load/reload-remove-second/native/invocation.txt",
+    "load/reload-reordered/native/invocation.txt",
+    "load/reload-same-config/native/invocation.txt",
+    "load/repeated-custom-owner/native/invocation.txt",
+    "load/same-local-distinct-grfid/native/invocation.txt",
+    "load/wrapped-and-invalid/native/invocation.txt",
+    "load/zero-item-property/native/invocation.txt"
+  ],
+  "focused": [
+    "content::grf::load_currency_session_tests::currency_repeated_assignments_obey_cumulative_trace_budget",
+    "content::grf::load_currency_session_tests::currency_adjacent_properties_remain_unsupported"
+  ],
+  "sources": {
+    "Cargo.lock": "db9025ab50903170a7adfd28039ce4338563671d2c8e06bfbbe55de1337fdc0c",
+    "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
+    "crates/ottd-cli/Cargo.toml": "3c1b76f65a3594119b4b436fc78c495f9391ad74712b5c227f6cfd9424ef9370",
+    "crates/ottd-cli/src/callbacks.rs": "d7d647bb109c4fdf2d5ced5dcdc81bdc8b1fd77d0b1a2f7296beb57819354f69",
+    "crates/ottd-cli/src/compare.rs": "587e443d12305304b31ba61b931bec19d1094c97087ea4d59da557f50a73bdfe",
+    "crates/ottd-cli/src/main.rs": "c33af69200fd3ec17eb0c1367213c166ced68bcb8ca013cc057d5edde30e0302",
+    "crates/ottd-cli/src/replay.rs": "c61171fa393cc74d2e880f155825a998f68055d19e24921168ceb4476300aa3a",
+    "crates/ottd-cli/src/replay/envelope.rs": "3ec73d3b2b94476fd6ba117a6dca3d472d8f63e7bd904b047d31b55ba05475e3",
+    "crates/ottd-cli/src/replay/observe.rs": "fc0b4e20d46d5a7cb580c4b69f93d1791359cd50fce4eabdc172117ad950127a",
+    "crates/ottd-cli/src/replay/publish.rs": "881234ab68fbde63218df3ebd59df32a166d31016a54875db32257ef9da1015e",
+    "crates/ottd-cli/src/simulation.rs": "453ffbaed9751019d9bcfa07643c7a40447a4b44044a1d26e3a1650d9311a503",
+    "crates/ottd-cli/src/world.rs": "514ecfac4247ec2feacbea634f8661b6c8b4f35fd582286864d18f644c8048f4",
+    "crates/ottd-cli/tests/callbacks.rs": "082f81bea1faeb4557aec89b89e44abb8e32bf6e056448fc12c7c562afe73829",
+    "crates/ottd-cli/tests/callbacks_compare.rs": "5ac093466fba67093c7d695034c9c1fbac8514a9438869b767032dc849b3780f",
+    "crates/ottd-cli/tests/cli.rs": "6316f20e4fd32f8fd417a7b40421771d51c5e38deaabf0a00852e3754223603a",
+    "crates/ottd-cli/tests/replay.rs": "7b6c805c0dbab9807bbecf921071b8293d4997e57e86b0cbf510c9baf646b6d0",
+    "crates/ottd-cli/tests/simulation.rs": "685c11a8025a33ae7cb46c75ce90661a9aa19f4148349644ecde9eb29daf89a7",
+    "crates/ottd-cli/tests/snapshot_controls.rs": "6d1ad29f94cd2b12267f7dd65b0f9ae62a6c2e90d44aaf2ad5380f086310d507",
+    "crates/ottd-cli/tests/world.rs": "0af07169bbdc4e50bfb839326895eacd360579e5125ca76f4a9a71a8a75ae62e",
+    "crates/ottd-core/Cargo.toml": "c3b26b48dc551777e401cc0e04ffb544f80b02bcb9ac5672b679d717d016b875",
+    "crates/ottd-core/src/clock.rs": "8d8dafd31d7be97fe6b567fdaa18754a1225ba68e255779985960c1f389c372e",
+    "crates/ottd-core/src/clock_types.rs": "1bf25b08bb665cbff18fd1fd6af1c31cbdef643e8b403a0fa559969b41f060d4",
+    "crates/ottd-core/src/lib.rs": "c6bc5ad48f5b13f86f8b26d33c580138bd5544acd44bb2cab23912afb62708ce",
+    "crates/ottd-core/src/terrain.rs": "04849da4df9963bf30a492487d82c58889756a5c91d9bad687e15f85b81acd20",
+    "crates/ottd-core/tests/clock.rs": "a5992570e428125b1feeb741dc3c8349f13df88386305f39aa417bde30044699",
+    "crates/ottd-core/tests/clock_oracle.rs": "08bae076292b75876f6f8f636ba54cd730acd33a3e139b48f5ef52192ea293a0",
+    "crates/ottd-core/tests/fixtures/primitives.json": "5668d263a1e6bd73237f29e36763faf2ba97fb47c8e7d3e0780267de8dba2fee",
+    "crates/ottd-core/tests/oracle.rs": "6defcb7d5e6bec27b704fbe85cdff388aa6be3aa2d6b991f8ad7d8e2074a649b",
+    "crates/ottd-core/tests/primitives.rs": "a0f55300c57ca1c5411b46e128f7652a254034f61587d19295970f7313e2fb0f",
+    "crates/ottd-core/tests/terrain_oracle.rs": "6d162cdbdcff88a1e2db419e06cf8023e708c17c7916b09a08f028ecec86d9f0",
+    "crates/ottd-save/Cargo.toml": "2c4fec6b8e9607448c227953cf6677c34e337476fd257eacdd2151bb9a5f3bc8",
+    "crates/ottd-save/src/chunk.rs": "8f6fc72168bcccc3e0db9f84822c869f6481dbfbadae3849f4784ee1321cdb6a",
+    "crates/ottd-save/src/compression.rs": "54941f0c4c8a900049269cbe23642451a5c8df871a2b3ebc9e8306b355580c4e",
+    "crates/ottd-save/src/lib.rs": "c1d66f73b20ceb32cab8a2c604e638ecbf622b85824e941885e1011f45d90a83",
+    "crates/ottd-save/src/snapshot.rs": "f739b83cfdf619086553e48b8cda73bbfef2fc01a9e086d45f8f46f6c740a669",
+    "crates/ottd-save/src/snapshot/date.rs": "bf32c2135b5792f5ecbb5140cd92cf6db6325d05229906d9db49c6f456339ea8",
+    "crates/ottd-save/src/snapshot/map.rs": "7c39178b13e7097235de3d12de4d35aec3054fbf42f73d011b45327bea8b5e1b",
+    "crates/ottd-save/src/snapshot/model.rs": "4b15cb83018a609a237bcc29acbbcc32f18aa7a495a040155313fa133b9051e6",
+    "crates/ottd-save/src/snapshot/schema.rs": "5a3532ee101f824971c5c34321af5cb52448d1aa6fdc1a0ecd2dc7cec349f46d",
+    "crates/ottd-save/src/snapshot/table.rs": "56a5875b3e1360a76d6a6f61ab32b362c4769311db2b74a5c2c5d72efe0ec015",
+    "crates/ottd-save/src/snapshot/world.rs": "3933ce3f951bb7e91d1e0c7a7ab87454554efb3629f22d6cc1e176a73f7d6601",
+    "crates/ottd-save/src/table.rs": "adc944b6ce71355e2b7dfa595bbf21ed99ac14e557984db3c5a48e0dad00b374",
+    "crates/ottd-save/src/table/read.rs": "89becb30bc962ae04bdfa7a6964f2dabf7dc74e5b649fe3e304223a8f0afe81f",
+    "crates/ottd-save/src/table/write.rs": "87d28f383b106fcbf470a1d045f1f86a3a9b8a0a42935f93ee799f234cd53000",
+    "crates/ottd-save/src/table/write/tests.rs": "005d2c80be2435511172459262ba09fd24097ae4e44fe3fba2cf241695b669a5",
+    "crates/ottd-save/src/world.rs": "3b9d1c3e454fe283f421e465491c628b82020447b9bfef7504df5436977194ac",
+    "crates/ottd-save/src/world/cargo.rs": "23b542043d3d31ca318178b345ef7399af482a391e8bc64fc66437d303a6c830",
+    "crates/ottd-save/src/world/derived.rs": "9d64b2566a5ba3982df60be8476b9df46a4139a703624d123058e4b9cdfe6e20",
+    "crates/ottd-save/src/world/edit.rs": "9136bd9621975ad0c7fd8c46dd6dbab2dcaf5a81b664d7a3f90cc8f990e7bc30",
+    "crates/ottd-save/src/world/export.rs": "9ae9e8b682bc2226813cfb967eee7e21103f28797e1943ab69c50ac10a0b0b00",
+    "crates/ottd-save/src/world/export/tests.rs": "07397c66af712dad130ae91ba0a086454ee308b8b57826364b359ef609446864",
+    "crates/ottd-save/src/world/handler-limits-v362.json": "bf15a83535eb97662d52b2f5ab811609821d1119438267d3974b5f508ee5c8df",
+    "crates/ottd-save/src/world/journal.rs": "6322bde0b60761f0f9c695ec6dcb98ab8898037a4d25943ceb599c25eb4b6972",
+    "crates/ottd-save/src/world/journal/order_delta.rs": "7fb6ff3aeb5b4eecb4ad9fce6ab5388c5eda5f308ac16f018f3bb6e1101791e7",
+    "crates/ottd-save/src/world/journal/stage.rs": "d913068f2ec4e1140572179f51fe99d3b8526bfa25796144860f43917d246940",
+    "crates/ottd-save/src/world/journal/tests.rs": "f17cff7c63b321412723b0ef7168adf2464a2b024e19f32f9f281758ce79f633",
+    "crates/ottd-save/src/world/journal/view.rs": "454d0aa69f6c0977907304e6255494c34a487d3753139e38b8ce1160aa23870d",
+    "crates/ottd-save/src/world/limits.rs": "f0fe6fb8ab2745891e656d5d4a41695787fc1f4bc17dff14216babd9004aaccf",
+    "crates/ottd-save/src/world/native-schema-v362.json": "e0795b6a6b734ab14a53df56411d3fc936d6f7ddc676ec172f6b32ed62fd767c",
+    "crates/ottd-save/src/world/orders.rs": "88e8a634afae37e406a01fe3e2f212734270ba3fc52d2cc193adbd00ed513d6f",
+    "crates/ottd-save/src/world/ownership.rs": "0061fea7061315096e26c6cad6799b7a920e3b22a22538424e635f2c168e9700",
+    "crates/ottd-save/src/world/references.rs": "5e918dbcf8387c21a4bf7fa9cfdb9886cf1edcb3227bf075b54c39bca41bf0d8",
+    "crates/ottd-save/src/world/schema-v362.json": "092d3a965cf6802756684120f591b51f9a2f79a33aeab772a2898a3f5f24ae35",
+    "crates/ottd-save/src/world/scripts.rs": "f07158184b0f68ec667a92f8cda0db913e4426202939293eba941c6354aa90e4",
+    "crates/ottd-save/src/world/semantics.rs": "48885bf99c4af60852317ed0e4c1700f21beddbab99f16832861717323fecf36",
+    "crates/ottd-save/tests/codec.rs": "e87d6673d0cfa2b230a31bbcdf1a2504da4de0c0879ebd752d082d28f7f542bc",
+    "crates/ottd-save/tests/oracle_parity.rs": "967b9100cbc16d3a7b54f33a6518b84fac278db038a7bae1b6674b9557e07f09",
+    "crates/ottd-save/tests/snapshot.rs": "e83e192863f9a8cac2af758f9691c22a07fea0a75022b158c84edc0300b5af7e",
+    "crates/ottd-save/tests/support/mod.rs": "fca71109b13444f3b9d2cdb52b20fbdbc77373ca90441ffa2319d3a88561a3cb",
+    "crates/ottd-save/tests/table.rs": "d592a27fcb46043d33e28cf731e254d1f91109d2e298e89bd0efa82125ed2687",
+    "crates/ottd-save/tests/table_oracle.rs": "f9fbaac2ef2a708d48df5862f89c90b46f202f5d85437ca10d8fd47a2e779bf7",
+    "crates/ottd-save/tests/world.rs": "b7b4810da2be7fd7a9af70ef1e513ba7ca3f12b714df3280dfb6212d80dd8415",
+    "crates/ottd-save/tests/world_corruption.rs": "dcdf07ff606c4dd32796e2d802edbbcaf42f529bd39ddb56bf3a45b54129eb74",
+    "crates/ottd-save/tests/world_engine_limits.rs": "a7a6e4daf603a69a2f8bdbaeec1d293e41b6d6961d42b86fd6bb739b2bf10de2",
+    "crates/ottd-save/tests/world_indices.rs": "58e5d967ca9e01adf23e3a8a077845b323ff8abbcefa4d9502ac6351fb52b48b",
+    "crates/ottd-save/tests/world_lifecycle.rs": "4b7c3f8154142a0dfc70aa9270ea92f28d894928c0cd08482b7764682367c272",
+    "crates/ottd-save/tests/world_limits.rs": "12df246f0c18ba155c179e15d80ee33a1c11f983697faf39ca378aa7fcf5f5a1",
+    "crates/ottd-save/tests/world_native.rs": "cbc93b502cad6b1110879ef46ac6a8f6224429d3708f0d018c8f13967b3b70ec",
+    "crates/ottd-save/tests/world_runtime.rs": "765d79e39150799745362a1637f2107919d10d15e92055b838c7e15783126aa9",
+    "crates/ottd-save/tests/world_schema.rs": "e4df119b692d3589a6df808a837eca60648a57428bed6b5347cde399a6d518a9",
+    "crates/ottd-save/tests/world_transactions.rs": "4096b4b48c8523203df6da8d383ba11f78d340454abefe3ca1287b343f2d309e",
+    "crates/ottd-save/tests/world_waypoint.rs": "231c8218224922abea40a35eadc2e4aee4d99fb3c89eda9dd0e5be7c08c189b8",
+    "crates/ottd-script/Cargo.toml": "e8804fcc8d549356f139020075304c3cf0a8146d3f8b4e22531606c0eb88d392",
+    "crates/ottd-script/examples/observe.rs": "e188bd0133e0d4106f0824bd84e9db13e0e1fd77eba1a535158800559d7326ac",
+    "crates/ottd-script/src/compiler.rs": "963ab2c4df94e8350772ed4f458d8238ff2e3af3b52abc333b48acf255626f4d",
+    "crates/ottd-script/src/compiler/emitter.rs": "9f539f797057e479dc9c71625298ee7239e67acbf2473b1198e153fdd6778ff0",
+    "crates/ottd-script/src/compiler/expressions.rs": "8d008e05052e422756e24e3d7ce6a8be8bc4b1d2185ca570fd7ea592e1d653b1",
+    "crates/ottd-script/src/compiler/expressions/factors.rs": "37b8a02706858fe1feeea37d7130ddcb00874821925655ebd4a361ab844056ed",
+    "crates/ottd-script/src/compiler/expressions/updates.rs": "f465012e3b129945882d73aa2318e511e4e2f0d731c3719f16dc901663b35915",
+    "crates/ottd-script/src/compiler/registers.rs": "033d992e381a0059a1df36a4f3dbe06afb0ff6a9aac1d76b6aaa3291d086e203",
+    "crates/ottd-script/src/compiler/statements.rs": "651f2c91773a0e1a98d3abc0e524a1217ff62d9c38c669c3184a40856567c281",
+    "crates/ottd-script/src/compiler/statements/branches.rs": "ac1b3410a7b0466c29ef7b8e0e0e18a35827c7d9fd96e67f21728636cb4eccd7",
+    "crates/ottd-script/src/compiler/statements/iteration.rs": "9c908ca405599229480b8061f4e656d13dcda81a1268372317417bd34bd1766e",
+    "crates/ottd-script/src/compiler/statements/switch.rs": "0db280a639a0a790c470f55686f68ac4e1a93f536093294d240bb10b809e0029",
+    "crates/ottd-script/src/error.rs": "8d60a57f9aafe5c9f3f33c680d3164aab01de5a4d50e5df374e0f04add914ada",
+    "crates/ottd-script/src/lexer.rs": "a2bb4aad242785220066e2453f5baf8c15abb4b5ec0734d99ca6fb43b17dea43",
+    "crates/ottd-script/src/lexer/comments.rs": "916ebfffab9f430553b329422d3de6c2b25706c090872a5b72d8d40515f8b923",
+    "crates/ottd-script/src/lexer/input.rs": "5ae69138e3eef02a36ebb149d0bbcccacbbc42be14081df52e2135c4a253a342",
+    "crates/ottd-script/src/lexer/numbers.rs": "612d8a160cb80211b49ab838b082141d6f75db1a3f405345900f676e9997de58",
+    "crates/ottd-script/src/lexer/token.rs": "3097c3e4453788bea3a71d1dafb3f72a76116be9b1c8caa1105860e44fe50a10",
+    "crates/ottd-script/src/lib.rs": "1986cc4d56e3c660bd9a7257a00ea8f88d58c436d714d0dcd99841ec47979593",
+    "crates/ottd-script/src/value.rs": "ab73d573ec6f163f99f3d5a6db5606bdf93b0ee42fb473b09adc7c8ee0c0caa8",
+    "crates/ottd-script/src/value/bitwise.rs": "9fa65da7f6eac04cfa7d92f9c3b88834cb1709331c81fcc2bb17eaf2f4c5b6dd",
+    "crates/ottd-script/src/value/comparison.rs": "64a9bfa1bf1916673da5e38dae86c24ae4d5897dd3d8c5a9728741b7dadc7c87",
+    "crates/ottd-script/src/vm.rs": "de13bff96d4e0dd1d55212e0bfc4f7a32caf2ce175086f6734ca6fbc6572e2fb",
+    "crates/ottd-script/src/vm/tests.rs": "9af8fc71a8b8ae1e086d501af5e2c2dfaa32151c4790d3efacf32914079b5180",
+    "crates/ottd-script/src/vm/updates.rs": "6fcdd1d026a5900176b3b9353a660b3513b3ddabd3010d2dbf75e3beffe0afcf",
+    "crates/ottd-script/tests/branches/mod.rs": "67f494a103975433c4dbe8eac67cfb9e0a699413c09a30cc8cbbd184861d2c7c",
+    "crates/ottd-script/tests/expstate/mod.rs": "52f1a817849dbeee65b3dd9ac64c1291d441fba6b5ceea6eb78ba2c5b61f57cb",
+    "crates/ottd-script/tests/iteration/mod.rs": "b24d9932a60515a8039dc38e0a0a48e6939735896f3a97497642b728b52b4e02",
+    "crates/ottd-script/tests/scalar.rs": "c9bb747254616fb099a2a4145abfa0f66c38c2af8aa3ad3298a8c0d0ca3d6e65",
+    "crates/ottd-script/tests/switch/mod.rs": "7db48150c408477cc94747c60bb453bb03ac18e8c4652122f7447b33f7714a46",
+    "crates/ottd-script/tests/unicode/mod.rs": "b5e53db0fcbb17b09460610f017f92735ea21497a53afbf310cd4563790f015d",
+    "crates/ottd-sim/Cargo.toml": "77a74d76c37661862fb0e7fdb533a9a72b5630649540a7ab76c5379b8751a9eb",
+    "crates/ottd-sim/src/callbacks.rs": "b76601f1a6d403ac152f49f6dd5749ae141a4d6d39d99e882ebb8dea247ab41e",
+    "crates/ottd-sim/src/clock.rs": "585c53f1e404bb232c8453371d817ff910a1fa71d62a3967aeb347d291e2b9b1",
+    "crates/ottd-sim/src/commands.rs": "229fab20c7e0a0008b93e7663adeba2f106f9b6d2f199800011ee25f7be074bc",
+    "crates/ottd-sim/src/commands/cargo_capacities.rs": "819bdd8bc6713e7c29d4dcfc792affb1616ffdffc2ce328f715e8ee8357380c5",
+    "crates/ottd-sim/src/commands/finance.rs": "6b62a383574a08bde162cb0bbb0482595f7c970da68cb8b45e35ebe4db53b895",
+    "crates/ottd-sim/src/commands/landscape.rs": "fe0e1f00ea04b73c4855a64425b8ea49290354bb383c9849cb418d357659a8ca",
+    "crates/ottd-sim/src/commands/level_land.rs": "69867e96661a3649005813ed6127f1fb980acc27197654d714b8df3ec7d26968",
+    "crates/ottd-sim/src/commands/level_land/phases.rs": "4d9f4736ea6fea24982b58803b1496685a13ad2d5c0572e15246aa66470cc9d0",
+    "crates/ottd-sim/src/commands/level_land/tiles.rs": "d823f466df115fcf1eda703aa368f487f2d405abb1caa1842cf2149d1e167949",
+    "crates/ottd-sim/src/commands/naming.rs": "c58cdf9ad82e49c941b048525c12d1ca256e7051e8d47cf2e0955a608ccec46d",
+    "crates/ottd-sim/src/commands/occupancy.rs": "00898149d70d4e2aaff8bff2d739cf12cd81c9809e8dec4ebcdb56ee863ede57",
+    "crates/ottd-sim/src/commands/pause.rs": "51875979161142181fcf172d11bac127e19b2bbb89287d09848696d0797d29e9",
+    "crates/ottd-sim/src/commands/pipeline.rs": "747857f729a3b5a4ae0786b29dab2ad4b7dfda71ae90136e134470c05d8b04cd",
+    "crates/ottd-sim/src/commands/pipeline/accounting.rs": "b4e8a41fab8f28aaeeec90fa32f5209508fc4c8ac9af7107f791d192e0463ef5",
+    "crates/ottd-sim/src/commands/road.rs": "98498935d445161b276484cf4dedc59575d3cb225522c555359775d509a2e15c",
+    "crates/ottd-sim/src/commands/road/slope.rs": "86f0bc744f07e2780629c04837ee91f6246d54600216a37eede0fe2d86d26c92",
+    "crates/ottd-sim/src/commands/road/slope/native.rs": "35643d553cb0abff0ba1bf63e2a99a3e81a197b1600dad138c534ece58d60b09",
+    "crates/ottd-sim/src/commands/road/slope/tests.rs": "7ae6afbf193a575c8e42764d764506f74902b58e9ef5bfa7f8c4913a7933dbd6",
+    "crates/ottd-sim/src/commands/road_depot.rs": "2801b045ca2f1529bf114b642043406b0bfbacf99a3f5eed4bfe663174c87df9",
+    "crates/ottd-sim/src/commands/road_depot/occupancy.rs": "e4b2bf4487a1c067d0606efcbd452adcbfd4b68a43f079d89018c7fa820f7e5e",
+    "crates/ottd-sim/src/commands/road_depot/occupancy/native.rs": "0d2950331c8d59e575d0e5ee800b3ab595d836f9e2a757da5b415fe355ad1c8a",
+    "crates/ottd-sim/src/commands/road_depot/planning.rs": "de5e560b5603eff760611b2c68f098a77bdce1a2d94a0fbeeaee83fd4f21be6b",
+    "crates/ottd-sim/src/commands/road_depot/record.rs": "582992b00fd0a1f2a3316621556ede7f26c6be2c5f744e20466ec5ab16dbea23",
+    "crates/ottd-sim/src/commands/road_depot/remove.rs": "e3651c2547ed99c8034fff8a569a28b0bc8a428087b1b33c41bb6b0ce25cd498",
+    "crates/ottd-sim/src/commands/road_vehicle.rs": "93d4497842cc58e69b6c9769e306c2f9dc501e7065fd3452438fc459d94e11a6",
+    "crates/ottd-sim/src/commands/terraform.rs": "0fa08bf6471e374781c2ee02b93ea0948d3bb601f17755ae5fd4e2808d8953c3",
+    "crates/ottd-sim/src/commands/terraform/candidate.rs": "a1d30e581826af64441cac9875d2b6c833d776ffe268e53ae248a0a354688d8c",
+    "crates/ottd-sim/src/commands/terraform/surfaces.rs": "0a07c5a98fc55c48f87c1bb0f7c0e252d82cc50d3f1e5649e41fbddb061b3cd8",
+    "crates/ottd-sim/src/commands/terrain_read.rs": "59b2426410b84a5449dd13f10730d52f35a1ba58d5bbfd01a4ee1cf306375852",
+    "crates/ottd-sim/src/commands/vehicle_build.rs": "0f1d7614fe82d813012a5ce7c60317c2e20e0e45a31c87e4757444a8ab3faaf2",
+    "crates/ottd-sim/src/commands/vehicle_build/planning.rs": "5c0b4a451ee27f7d024e356e489e2a7f148459e62e3c103688e29c8ee87cdd7d",
+    "crates/ottd-sim/src/commands/vehicle_build/state.rs": "a0e9c1c6894ed65d8aea126aaee26e9e16e4498dfd15a1ae1a615667a833fccb",
+    "crates/ottd-sim/src/commands/vehicle_sale.rs": "b9e991f14e9371eccc7e64e7ed8657295e517b797c88ef80d06ef1df3e49731b",
+    "crates/ottd-sim/src/content.rs": "ae19f6cb91cd7f2a6fb6eb4e9cbcbba1f9a56370a5a452f1cf3c93e3b9acb15a",
+    "crates/ottd-sim/src/content/aircraft_data.rs": "86b79a7d52b1bbcab122192bbd41ccf6039a35987ab2d32ecbef315ff0ca440b",
+    "crates/ottd-sim/src/content/cargo.rs": "4ccafea1a926db439201ade82e4c383e191a17242dfd924ccd1735e94eb4c8a7",
+    "crates/ottd-sim/src/content/cargo_data.rs": "89204d60f64683b701cf7b8a2847a5f1858d7dfdc616babf490df0d30a1b6514",
+    "crates/ottd-sim/src/content/engine_data.rs": "c697cc95bbc7763678d26df4bb832994a07e3acbcda185513199c8c5c87de8d9",
+    "crates/ottd-sim/src/content/engines.rs": "a8b1b3bb6bdd8260af3dd4e7c3cf49ec1b1f554e458bd4ed5da7916e7f8cc70d",
+    "crates/ottd-sim/src/content/grf.rs": "20ccc66388609a0668b8871c67774d38f32da411367519c327332aefe42b66e4",
+    "crates/ottd-sim/src/content/grf/action14.rs": "529400d31c7e8da57376166a96d8e95befa711ef579f0e1bbd32b202abf25212",
+    "crates/ottd-sim/src/content/grf/action14_parameters.rs": "8fac20be4a963771720454f33df17539fe3860955991dee52f86ea15c09d554f",
+    "crates/ottd-sim/src/content/grf/container.rs": "c8ac10d08d0b09200c9c152fe2ece6bc87ef282e6accc32f725b312e7385ac7e",
+    "crates/ottd-sim/src/content/grf/language_body_cases.rs": "fe6d1673689ec25928c915adf1cb6bbea02b9cef7d96b68d0abcb87028a7e4a0",
+    "crates/ottd-sim/src/content/grf/language_cases.rs": "2a81571ab6526660c023d4cbac7ed64d8b92472df341a2a4f1fc27b1a5903bed",
+    "crates/ottd-sim/src/content/grf/language_compare.rs": "d88dba5a378334b8de8e44be3b53a3e0014f944975e9d3f6017c0549d85f875c",
+    "crates/ottd-sim/src/content/grf/language_guard_invocation.rs": "73499055e0a7a98763e0502704b0b478334069c6dd8ec99338f97fe2525c3cc8",
+    "crates/ottd-sim/src/content/grf/language_guards.rs": "d790516dc6043bac2eac1da2ea28c5e4396538e51115fdc8d3fdef87902a399a",
+    "crates/ottd-sim/src/content/grf/language_limits_tests.rs": "a52ec0cbec48654c49f3bc7c7aea4bd4eef492f0120589b9ed516fd75b9102ff",
+    "crates/ottd-sim/src/content/grf/language_native.rs": "d9b2e9eb4d276cda1e663afe3e768aac1186128b790533140b39db64d62f87c2",
+    "crates/ottd-sim/src/content/grf/language_observations.rs": "6c33cfaa203c9464879071098316bc5a65c3bd1a4b0263eff1a104331feacd67",
+    "crates/ottd-sim/src/content/grf/language_ordered_cases.rs": "055b9c46d842ecad7d77609446fb9a34f27625aae03c79a0e72bd4c799ab03a1",
+    "crates/ottd-sim/src/content/grf/language_pack.rs": "d511157e87bcc54d18f639f9f7438080d9b04a32d514f2b38f6116914ac50c63",
+    "crates/ottd-sim/src/content/grf/language_pack_tests.rs": "160ad10c61de269a127fcbf220cf4662ad7a30db58d9940acdfde0c330b6e437",
+    "crates/ottd-sim/src/content/grf/language_text_cases.rs": "7e25212af363be976d8b0e09c7629039efc2b0e2b63f29d91b0f151518ea13e3",
+    "crates/ottd-sim/src/content/grf/load.rs": "4f2dc404961b1b9940a8d9a84eed558a690e4c001614e45b471290c953148516",
+    "crates/ottd-sim/src/content/grf/load_budget.rs": "0814bec04221c780fa5accf45c4ff2dec61ece0735d96770f8289880419720a8",
+    "crates/ottd-sim/src/content/grf/load_conditions.rs": "9c25864aad18db948f3be70d7c0b17fc741d46b981961546578cad09f240fb77",
+    "crates/ottd-sim/src/content/grf/load_context.rs": "0bfb651c82522af3194424f6d4e9adb19205ce9d378de0c6f0a2c733ae062b89",
+    "crates/ottd-sim/src/content/grf/load_context_guards.rs": "6493fca6b0ab2b8c3aa3124e32118fde0752b471d072860ef73f5d74ea255eaf",
+    "crates/ottd-sim/src/content/grf/load_context_matrix.rs": "1ee5a3a233b3c333cc676ab2b817cef78a33d0f3b7b9fe85063b3602736292f4",
+    "crates/ottd-sim/src/content/grf/load_context_native.rs": "e4202bd6e5642339be8d0aeab66aca8c42fda51d256b8b6f653ca399049cead5",
+    "crates/ottd-sim/src/content/grf/load_context_tests.rs": "09d312a85aa292d6246be2b187cb571c3ae36bb540c9767b26115998229c8ce1",
+    "crates/ottd-sim/src/content/grf/load_currency.rs": "ce838917f8f923a16616c9e2dc10b18699a05e20571e02cf67bcd6ec9e5d33b8",
+    "crates/ottd-sim/src/content/grf/load_currency_api_native.rs": "e07db10c21e910936fb1ca11f891cc31d970d5dc74ea356bfcbe019795506f23",
+    "crates/ottd-sim/src/content/grf/load_currency_data.rs": "7488790b6859000873bd6cfdf2ad0ddff18f969b8adb0d81bf712f97e276aee0",
+    "crates/ottd-sim/src/content/grf/load_currency_guards.rs": "dee126297a057f04e260782edccb64ecd0abe2734290bd660d6964832057ddd6",
+    "crates/ottd-sim/src/content/grf/load_currency_load_cases.rs": "c00a0c19b678c89d0807e039d921cb24ce28c1eb75a5fa4db2091fda945bb740",
+    "crates/ottd-sim/src/content/grf/load_currency_load_native.rs": "303093879a275d66f47e94b7c6d417e23eb783fb0241b6a83cc795a82119710d",
+    "crates/ottd-sim/src/content/grf/load_currency_native.rs": "e4be8524382e641b6e9b9cc06803fa5a2e7a2f61ac266d2357109d26162c4028",
+    "crates/ottd-sim/src/content/grf/load_currency_session_tests.rs": "7dc1c02e7cc8e473c55a71561d7971fb0db47de69d6474000f888ece9b020f1f",
+    "crates/ottd-sim/src/content/grf/load_currency_tests.rs": "27db9735955c85762b69af09cd3f8c5afaefc6b68dd6d1a6e392361126ea68e1",
+    "crates/ottd-sim/src/content/grf/load_cursor.rs": "fc7c71741b3e0bcb2455b7966ed79a198a1c590196b5f0d80a9b5b107f1a5fdc",
+    "crates/ottd-sim/src/content/grf/load_dispatch.rs": "7c99fbb6ec8a59ac94303088ceba5225d773f9bda58bf721d271afe8781e636d",
+    "crates/ottd-sim/src/content/grf/load_execute.rs": "b7d60bdb5200674774ebbcdf1c16ff92e4cea42bed808a4abeba2063695eb3b7",
+    "crates/ottd-sim/src/content/grf/load_globals.rs": "1d4a440d01e88ce904c670b133760c275cc8e72e65b3d82da2d64d3006695e32",
+    "crates/ottd-sim/src/content/grf/load_language.rs": "5daf9aca223b07e52a1377edb1718291be826f8e848f24e5f6d802074d42d681",
+    "crates/ottd-sim/src/content/grf/load_language_state.rs": "0fd6478420b5e6648e20e4931707b9a9cb59acd9637e8047100ab6db971cf66b",
+    "crates/ottd-sim/src/content/grf/load_parameters.rs": "130653eb2fe89aa10fb4a6244bd3cab412a554d589d66a0a98746d2c4dbe6696",
+    "crates/ottd-sim/src/content/grf/load_patch.rs": "20fed5bb93ed72a30fb85a1b1c2061a42832e8524a162db1aa19a0760b17797d",
+    "crates/ottd-sim/src/content/grf/load_registry.rs": "60d3e53130ebc8728e91916a61d3430292e0cd6ea826ee4d7985e0cd40320c25",
+    "crates/ottd-sim/src/content/grf/load_string_actions.rs": "0636201f2ca431ea640ebc297a7153d86bf8bf0c20a5f3e9f7eea7077833b7ee",
+    "crates/ottd-sim/src/content/grf/load_string_actions_tests.rs": "00116c556ec43ede50a93f871e89d31797833990ac1bf8fa60b35e081e809ecc",
+    "crates/ottd-sim/src/content/grf/load_string_mapping.rs": "5f203fa340d2af3a81e779831998f23b7342e620edccc88f5ecdd4ed6387cbc7",
+    "crates/ottd-sim/src/content/grf/load_strings.rs": "576b5f9e6478f101ff9d8b8ff3348f93f1c81a354bd279935718ca038702c911",
+    "crates/ottd-sim/src/content/grf/load_strings_cases.rs": "fa85406656af4294e6ef3e49aeb35f855b005daa0b1b1f96c6f2964202edf746",
+    "crates/ottd-sim/src/content/grf/load_strings_guards.rs": "1cf8fe2f27eb7d6170831ed95d8b637ff55a4f0a50e1b164f6cb2aeac2902bf2",
+    "crates/ottd-sim/src/content/grf/load_strings_load_cases.rs": "62bbf6babf449b08eab7e5bb00d7e6b1011649a8f8815e7645279b6053b6ed74",
+    "crates/ottd-sim/src/content/grf/load_strings_load_native.rs": "c889123eda2a029fa8433e7d7559a59ee4d13215ecd47a4cc76e671a698f3b21",
+    "crates/ottd-sim/src/content/grf/load_strings_native.rs": "5e5e29cf928716d461aa6ce761d6485fa45c8bc9cbc7a655b25091edd200b52a",
+    "crates/ottd-sim/src/content/grf/load_strings_registry_cases.rs": "f5bfa1a708532dc2aa05e6c9b2c3f489e3040620a1f7b159a5ba6d9c5474900a",
+    "crates/ottd-sim/src/content/grf/load_strings_tests.rs": "eb771c70fb62eba09ccb24b22f66a6fa2907de242f7e9734c64cbf07a9394db6",
+    "crates/ottd-sim/src/content/grf/load_substitution.rs": "ab5982dfe734ea5d59f416e9787bbd8cc61a8119793c04c48f165398ef560676",
+    "crates/ottd-sim/src/content/grf/load_types.rs": "a0c26809f1ce9f0005f962ca96d28f8d5a61aa4f07afa273c2baa22f2ccd30eb",
+    "crates/ottd-sim/src/content/grf/metadata_types.rs": "ecfe7f6fe6e6a879b02b5e30018db6ff622027e867c97baef538e44b1b80f88e",
+    "crates/ottd-sim/src/content/grf/records.rs": "6fc31af1cf0669fff24d9aa4e6f0a9aa95306547fe90baf63f90870a5a749a7c",
+    "crates/ottd-sim/src/content/grf/safety.rs": "b594941c346917b3da545497b988ba128eca3323c551275d381ef4d4b04a553f",
+    "crates/ottd-sim/src/content/grf/safety_cases.rs": "766d8c1149ff6257fcab19c82f37e20a951eb8c740a963ed04a12750e2c6772a",
+    "crates/ottd-sim/src/content/grf/safety_guards.rs": "10fc560beca9cd79446b7854c721aaf6593a1f06ab35524d0237f24b9077d29f",
+    "crates/ottd-sim/src/content/grf/safety_native.rs": "f5db72b04897b2cf9d8b9f84c69751f14cdf9045c38b7404738ee6ed6955cba8",
+    "crates/ottd-sim/src/content/grf/safety_tests.rs": "d952e341969869546c55ab2fc4552b896ca181c6e974aaf60ea4cd7242068bb2",
+    "crates/ottd-sim/src/content/grf/scan.rs": "6379c90002b189666022a6dfb463c472c1f72fd7871417d2c54d8503138ccbe0",
+    "crates/ottd-sim/src/content/grf/string_ids.rs": "11b21dd0319ad8d6f800bfb7fe654f425614f404f442dfe521ab974381b3692e",
+    "crates/ottd-sim/src/content/grf/text.rs": "ef49f088e605644917562769586bbe370c2bb53e10ff5c5da1bf3fd1c40594ba",
+    "crates/ottd-sim/src/content/grf/text_choices.rs": "f914936883779ab4bd31489e257811181e41602ff5e01603492033a5cf9b79d9",
+    "crates/ottd-sim/src/content/grf/text_codes.rs": "24cef705e5fda47d9a6322d3ac8fed2b3e8520edc3f296c704602c59909da475",
+    "crates/ottd-sim/src/content/grf/text_mapped.rs": "7f0adb385d7d3500354be34503b4716379b7462d27ec1d7b9ca393a52f98ad72",
+    "crates/ottd-sim/src/content/grf/text_reader.rs": "14edbbb6c9f9180c722974b03e79b10585ae7b701e7d535c18b63c0953e754e9",
+    "crates/ottd-sim/src/content/grf/text_translate.rs": "79fa71c407ba5e80bf8e14f3f31876af356467f2514dee285cca73481e890b81",
+    "crates/ottd-sim/src/content/grf/types.rs": "2342b5ef890a0bf2e6a6fcfe465732f13754c9aae55dc0ee508d9342abab99af",
+    "crates/ottd-sim/src/content/price.rs": "75dd26c5b7ff1e89f92ca8159779c61f496d203fe18132011ece2a43fd43b9a5",
+    "crates/ottd-sim/src/content/price_data.rs": "42a8ba29fd2dc6c8edd49b894c5c8963095fe675dbd10aeb0b8b2ce5ea738415",
+    "crates/ottd-sim/src/content/prices.rs": "94dd27feaf7733405f0efa3c9bacbc1df1e3eb3ff89909af00cb4c0279ec5384",
+    "crates/ottd-sim/src/content/rail_data.rs": "9c555660d11ec68aa7b524bb713531b928fbfca7ec3e680a993c6120a97ccbf4",
+    "crates/ottd-sim/src/content/road_data.rs": "ae155eb9b25d93a3102fbd894a6bafaa29d492322d74568fee324434ce0f69c0",
+    "crates/ottd-sim/src/content/ship_data.rs": "f66ff0b8e8ed1f45641491ec961634de418220f97b7038b1974ee783d8887a0a",
+    "crates/ottd-sim/src/content/types.rs": "d49846fb8f6ef109705fd1ff7dabf86cbbe7504506b18953311022e0f0eb4c3f",
+    "crates/ottd-sim/src/content/vehicle.rs": "50c6ae84d1cfac7a10285c9c8c69d49079d9fb03fc18b131abc3c72586c46c76",
+    "crates/ottd-sim/src/content/world.rs": "3c0eb7eebe39ae314965947a75b874ca473b9b2caab4a40f2dd6899eb4f08d73",
+    "crates/ottd-sim/src/industry_callbacks.rs": "1b0c48cdb9dc8f05cf7532dccf6f51661b895454a00fd7c134d8df59d797639b",
+    "crates/ottd-sim/src/industry_history.rs": "c457f65712b1877a8494ccd0f3b5e2ee4717c9a4c9ae0f7493958ff39b9a24cb",
+    "crates/ottd-sim/src/industry_types.rs": "e7a73e67760bce82412a99aa9139eed3c18b021b9699d829ab62771cd81496d9",
+    "crates/ottd-sim/src/landscape.rs": "0693e25f33b219d22d8dc50fa710d1cb24269d2e99b8cf1c3bf50c75a67320ac",
+    "crates/ottd-sim/src/lib.rs": "ed041a20800c15bb1cd6ad77d86f04a03628c253a842608a78df9255456c7e9b",
+    "crates/ottd-sim/src/map.rs": "3ce332c6d59ffbd1a3819a313fb811cdfcebeb01a4b4eef74925561174c887ef",
+    "crates/ottd-sim/src/periodic_callbacks.rs": "e0ab7cbf55ade6ee43b48c43529b9dc8e450209c6b723e3752d474e29d399bf6",
+    "crates/ottd-sim/src/periodic_types.rs": "71bfe0fe8378810cacc1e68a34c220976461dfc0420e2ea7859dde24ee13ceb4",
+    "crates/ottd-sim/src/replay.rs": "f51eb93824c89e09997a757db984e30975d925c690080af597a4d2165317f4e8",
+    "crates/ottd-sim/src/replay/domain.rs": "a9278d439641555a87d4b664a1ab19d4133ce20335c4afd16d8e8abc3401a450",
+    "crates/ottd-sim/src/replay/runtime.rs": "01b97fc573c8fadffc17dae45936cc2e6786dc9b100c9a23b3984dcf0287c994",
+    "crates/ottd-sim/src/replay/types.rs": "005bad23f466c55b3e9c3fb152c0f4ec3d48c9b2467e7bc53888c700995fe736",
+    "crates/ottd-sim/src/runtime.rs": "454e38e82da9810defc022f3b27f1868bc1e2db3e8b2a51f2086aeb6ebff3c0c",
+    "crates/ottd-sim/src/runtime/allocation.rs": "7656fa34231cad550bd5294168639f4c92f4451e8a24ad5fd2c09c3dc4b86b26",
+    "crates/ottd-sim/src/runtime/backup_enabled_sale_native.rs": "0db994a43bf4f73f2a21bd27902918a8d6f26b00beee28a1e424dd2e338f6f3f",
+    "crates/ottd-sim/src/runtime/backup_sale_native.rs": "80e80c05c25322ca3b3894fdab1dbf6c1bb15562e4418a2956099efaf076aaa8",
+    "crates/ottd-sim/src/runtime/depot.rs": "098077e4fe9abc27afcf26164771969fdd92ca1ffb25d5ed6f089feb80e936e0",
+    "crates/ottd-sim/src/runtime/depot_removal.rs": "bc31f98eadfbd9344d8a6394c45ab7d8d3774ab206287d1657da0f657585c912",
+    "crates/ottd-sim/src/runtime/depot_removal_native.rs": "df2c97a9f71792ac95120517e200b1c4a1a0803b52b7ae1a1b37bb6befc56490",
+    "crates/ottd-sim/src/runtime/group_counts.rs": "356a3d9d24f1c7ac15db5987cba3a79cb92715975aa75584c6f71bcda16a7373",
+    "crates/ottd-sim/src/runtime/order_state.rs": "89bf29a98f17965e44f283e03e226246522235b4d343f8c02ead70660466fbab",
+    "crates/ottd-sim/src/runtime/order_state/airport.rs": "1ca6e6b97ffe0ede3d06e4dd59e10368c735e400233a00ac7097363243661926",
+    "crates/ottd-sim/src/runtime/order_state/backup.rs": "e4d26e19f659e1debea59079fa890259e4b79d48006de80bd876c8bed87d4ba8",
+    "crates/ottd-sim/src/runtime/order_state/backup_enabled_tests.rs": "71c97484fba28f3ea9b60db6e9590a5e190e3d534c282586da41d7f5c4b80dc7",
+    "crates/ottd-sim/src/runtime/order_state/backup_sale_tests.rs": "53ad1c66e5d6bec4bd9d482f4d946198acb11ecfe8fe0ef7be6ef2e561935fad",
+    "crates/ottd-sim/src/runtime/order_state/depot.rs": "7ca97cd7541e6b259196226c983eb869f7efd75eaabdcf8b9a59bbda5bd80bed",
+    "crates/ottd-sim/src/runtime/order_state/detach.rs": "f751aeebf8e0a93d03dee2ca2e0e87a285bbf56c55457a62d6eb49165f3bd362",
+    "crates/ottd-sim/src/runtime/order_state/native.rs": "d3d27c705b25d9c4a76561fea0435d336aa6ec676b4940c3e6d74f34ebf19cb0",
+    "crates/ottd-sim/src/runtime/order_state/observation.rs": "3b5c92ed0a2e48143bdc79c9ab3d8ff8be742b4e7cca9a0b407f701389417234",
+    "crates/ottd-sim/src/runtime/order_state/sale.rs": "fb03c59699f4b15034063e44b136b4724683a217b3007a6b2d5140354e730fbe",
+    "crates/ottd-sim/src/runtime/order_state/sale_tests.rs": "a6eecda0b646225f9874075db647e456df48143a7e5e0865b55b819b4600ca1c",
+    "crates/ottd-sim/src/runtime/order_state/tests.rs": "26459a3be91e85ddbbcc90ad6c3205c69c72139bc8dcb8ab4200996daae8707d",
+    "crates/ottd-sim/src/runtime/order_state/view.rs": "38fcba866507f9e82d364f17674b48997f90952728ed9cdbec17862ab30a1abe",
+    "crates/ottd-sim/src/runtime/ordered_sale_native.rs": "8222c4c8b625621af3503c1d579a5fccc60f875f0b61d5669675ec541e18038e",
+    "crates/ottd-sim/src/runtime/pools.rs": "1d770332724a7c7dce955245c7f2abc54a2da8353952aa6f8a7434b5f88f06d4",
+    "crates/ottd-sim/src/runtime/purchase_native.rs": "0486a86ad45d7d990a9b22d3413a8d3daa94097e7ea36e57de7fd6d10b2e6eba",
+    "crates/ottd-sim/src/runtime/purchase_tests.rs": "59f8f3deeddcd29f2617f3463f87894dc4915033077d10d4f2bc7a7a58e0cc9f",
+    "crates/ottd-sim/src/runtime/purchase_tests/admission.rs": "e806345e4afbcfb723390853bb687595127bb2135511de5b4dfdedf1f7a9676c",
+    "crates/ottd-sim/src/runtime/purchase_tests/constructor.rs": "5b5dd03dc1521a2124fd00800f227b87a93473d2d02921887543cbcd9e78a020",
+    "crates/ottd-sim/src/runtime/purchase_tests/fixture.rs": "ecfe4263f7b012dbcc4d66023a7d99a6265a92ba6138a0d428861bf0ac7d0631",
+    "crates/ottd-sim/src/runtime/purchase_tests/publication.rs": "7341888c628d1568edb9cfea20a8de44a4ee357d04b6f4a3deca748c57098b19",
+    "crates/ottd-sim/src/runtime/road_cache.rs": "fbe4302c382598c8d2e71c2b55a39cce4997e52426ec3e15c3b483293d4276f4",
+    "crates/ottd-sim/src/runtime/road_record.rs": "94959fe23a3219daf66cb18277a7187d7b6df06e2e4db74c8d8fd153886b89bf",
+    "crates/ottd-sim/src/runtime/road_record/tests.rs": "96850faa8b950d9a91d7aa6171469e5870d2e7522471d1a095ebccca8fb32d01",
+    "crates/ottd-sim/src/runtime/road_sale.rs": "1fb8dfc97a91cf2fd8e5497c1c2e4f88e3386ca9fc1408159abc36aa5885560a",
+    "crates/ottd-sim/src/runtime/sale_tests.rs": "03df8150c6285433e7b82d55eb4e61a90676ba8741fe32c997b8378ef1fff665",
+    "crates/ottd-sim/src/runtime/sale_tests/admission.rs": "ec00c0dd51e4d5831833c2e28dc8ed4be230a1421df56180ef222c8b1314e0da",
+    "crates/ottd-sim/src/runtime/sale_tests/publication.rs": "5de5b59839aad1ff616c1a090de745522e5dc5e70a7b5f179c70150e05be384f",
+    "crates/ottd-sim/src/runtime/sale_tests/serialization.rs": "187b9113b5d865d3494ab0551cab2db79234788713aba3e1db3a6ed819e80db1",
+    "crates/ottd-sim/src/runtime/saved_engine.rs": "9752fb7bbaec1a21aba3589ccb0642eff74bd28086258ea69e7369d04cc6f623",
+    "crates/ottd-sim/src/runtime/saved_vehicle.rs": "940cf1dd99ba6de1ddf2e9476bfde5e7f4268a5795e12ed3ab37113037bd3bca",
+    "crates/ottd-sim/src/runtime/serialization.rs": "c2ed4dfffbf6495cd7a46aa9a88a2c351a77f579a0958ceb6cbdf67b246618a5",
+    "crates/ottd-sim/src/simulation.rs": "f5426229a259fed76f0354f060afcb67ba61d89a1de10776cc86049151c8c7c0",
+    "crates/ottd-sim/src/terrain.rs": "22c6e953c103730009c9711f70873cf7d49a450525482610e2a97784d65891b3",
+    "crates/ottd-sim/src/vehicle_callbacks.rs": "7a97555a1b6177db89e76cca279a544f4c3cf39260b8a29fc87130a99cffdad2",
+    "crates/ottd-sim/src/vehicle_types.rs": "46b530740033d890792448c755485ba1caf7fc0372d8e8e7c13076843a462a96",
+    "crates/ottd-sim/src/wire.rs": "ca63b5af5ebd775e1d50fd6aa72da1bef572774ff983ec23a52a45375b5ad9a7",
+    "crates/ottd-sim/src/world_access.rs": "e41f60b116f9ed1db3df2d9a355e8f379047bed8c917f90af16dc97fbea684af",
+    "crates/ottd-sim/src/world_ticks.rs": "dc31d3e3cab9ad808d6977b5e0f315068e28be840f9995ccfa427718caad2079",
+    "crates/ottd-sim/src/world_ticks/access.rs": "e9734fc5f2b2d2681e6e583684d8416ce1ddba7305df60d5877e084dd4e2585a",
+    "crates/ottd-sim/src/world_ticks/clocks.rs": "0ec8ff4a72e2f9737ae7681819363c249b0f251885d5cc1cc61ecc4f0073e11f",
+    "crates/ottd-sim/src/world_ticks/company_history.rs": "34bdc44f6ea96e26becb71eff4f065bbe9a1a5e2a016be7bd5e4c6b8f610d91f",
+    "crates/ottd-sim/src/world_ticks/domain.rs": "444f277de4559217549319a090542744168bdf852a207a2c4c1df8ef67d793f9",
+    "crates/ottd-sim/src/world_ticks/finance.rs": "4b117645039d9111d10a7241b1d50a1a6006f15c4cbcb676cfad90786ba68bb5",
+    "crates/ottd-sim/src/world_ticks/phases.rs": "c969bc6a5946781db65376cf7d678681df0e735964bd355cbb3e48c619935415",
+    "crates/ottd-sim/src/world_ticks/towns.rs": "2cc55f3d2ea077b289a9922daead5f96c2be8c7b14e54db75e6f369fd2f3d2ca",
+    "crates/ottd-sim/tests/boundary.rs": "43f7c8ea7c76fc5713d5c6617c8475e525a0a99855818bd7ad42287b06b4d033",
+    "crates/ottd-sim/tests/content.rs": "1e98c2fc818860718bea12f6975fec7aee4d498479ddcec239cd338a2480ceb8",
+    "crates/ottd-sim/tests/depot_cases/mod.rs": "f168d8d4e32067faf555778516f2170e30523292f73319165f199cc6b403ee2e",
+    "crates/ottd-sim/tests/depot_cases/occupancy.rs": "6a2d73239b7eff42024d418b0463dd8b4404ee525f3d8e817924d75fca152f73",
+    "crates/ottd-sim/tests/depot_removal.rs": "8a1311178ea844db1895b487fb13b2eef363c2780c8562b5d2ef6e838909efad",
+    "crates/ottd-sim/tests/grf_cases/mod.rs": "641eb9635b06d62096c8a891a0f8d4e5a21ba8ff7d4814312e9075d65ed40e0a",
+    "crates/ottd-sim/tests/grf_container.rs": "d67d99bbb256e134689ec5e097a1e05cc2c96cac742bfaa68256648042e715e1",
+    "crates/ottd-sim/tests/grf_control_cases/arithmetic.rs": "7fbe16480eeb454183d6c8ffb423b24a35ca2e37a2045bcb305b53aead5914fd",
+    "crates/ottd-sim/tests/grf_control_cases/boundaries.rs": "a8c8d07f12c38e466c6c819307f6bf124331e63bbed29b915f1906f9b83566ba",
+    "crates/ottd-sim/tests/grf_control_cases/branches.rs": "d65f2f7e404dca79c540b78cbddfb51e990fb8e32af8ad4e6f94ea418ef639c5",
+    "crates/ottd-sim/tests/grf_control_cases/mod.rs": "8f2618dc93415f5ca347a7745f06cf9ce0fc073f4c09744580edec50cbb3fac0",
+    "crates/ottd-sim/tests/grf_control_cases/mutations.rs": "f0ede6a943c7fd6dbd8f7406260f217a7597b496890ab02d867aa6a754ea61b0",
+    "crates/ottd-sim/tests/grf_control_cases/project.rs": "4939a5071c0a2bf9df49aba761de1d2e5f34be1541a347bf7b7ce12c5d1b3873",
+    "crates/ottd-sim/tests/grf_control_cases/reexecution.rs": "d4093a9b7455457df2c28656ef5be87d7479fc570fea7ae2b8304e962e0fac15",
+    "crates/ottd-sim/tests/grf_load_control.rs": "3cdf89b2c540bc6102cc8694037032932c87d2b9d4274880e14f695ad1fe20b5",
+    "crates/ottd-sim/tests/grf_metadata.rs": "8b437b011430384c4fa9f3d0053bb698191cdd7a37543dbc1fcf420bca950c14",
+    "crates/ottd-sim/tests/grf_metadata_cases/framing.rs": "b52c7bd0503245e3ae563fd4fdf650cecb8d0fbc5eb3a0ce089b1b66a7995030",
+    "crates/ottd-sim/tests/grf_metadata_cases/mod.rs": "7a7bd44b367034b8b0a2ab9e86db12e4e105b561fc770dc6ffff891661cdf3fb",
+    "crates/ottd-sim/tests/grf_metadata_cases/parameters.rs": "33c8b092b2683e043e3ee2f591f00679b279aeed02c8848ffe0a8b2274095b39",
+    "crates/ottd-sim/tests/grf_metadata_cases/project.rs": "3ac35869ff4989a81d4192f59b6186782f00353f8606a2cb364b5f8a5256cbde",
+    "crates/ottd-sim/tests/grf_metadata_cases/text.rs": "f39e5980023f5b228d1339aaa54bd19176b944e667c6d502ffb6cb9b51dec967",
+    "crates/ottd-sim/tests/grf_native_skip.rs": "c2877dafce37dcec44f937e04dedc5b152c0d4741681327ac05a6519df87fb84",
+    "crates/ottd-sim/tests/industry_callbacks.rs": "25a8f30af66cdcca7ece78e216c5e98f205cd2c710a9e5ecfd390fa7e206408a",
+    "crates/ottd-sim/tests/industry_oracle.rs": "006dcbb6034eae061514895f412ad2d9096044d2bb6f9f2d6ea936d8cb126e4e",
+    "crates/ottd-sim/tests/landscape.rs": "203fbfbd25d03a38292b2e863482cdc9203fd60cad0b336f9b21b95543af04eb",
+    "crates/ottd-sim/tests/level_land.rs": "03b0a9d57eb7e48bdf7ce2de8b24be9e711af5da1cfa06e363633dafba287cc6",
+    "crates/ottd-sim/tests/native_content.rs": "f8ae994c344ee022693b1917aca0da04eb831374d3e9b5e5891e21777bcb8889",
+    "crates/ottd-sim/tests/native_depot_build.rs": "7d91e1075e070cc9738160247f20adff2fc0662a7acd8a8c53bc23902646417d",
+    "crates/ottd-sim/tests/native_depot_runtime.rs": "9e32bdc7beba09559c6a73de4c24037e4d892bb2802a7c03ecca0e973686569b",
+    "crates/ottd-sim/tests/native_grf_control.rs": "2372d11bdb6ce07d5b41ff02b8dfbdf81bc4bed882a624b005e533d7f931077a",
+    "crates/ottd-sim/tests/native_grf_metadata.rs": "e17a4ea6d41ba38ee0bb73745b8a64ccadf332777af07158c34af8b2aecf6a47",
+    "crates/ottd-sim/tests/native_grf_scan.rs": "da1e71f9755eae9f764b431f6dfe63cbc0a966a2f0baa66435a4db650e195805",
+    "crates/ottd-sim/tests/native_purchase.rs": "295cbe55dd264990f8c182a186baaeb38077895a247c40b69f748cf3feaf89d8",
+    "crates/ottd-sim/tests/native_runtime_pools.rs": "de7ee2ed48919c9d34e0d338b5304ecfd0373e64aaec48f28a1da5a35025ef40",
+    "crates/ottd-sim/tests/native_runtime_road.rs": "76301cb1b5c4737be8f34443430d18faed54e657ea2301f18b48b8921b065d99",
+    "crates/ottd-sim/tests/native_sale.rs": "6a402e638108d677d5785acaed8a4f3e91be961bce30e4a94736f97bd07df12a",
+    "crates/ottd-sim/tests/native_sale/cleanup.rs": "a5cdf5bdb56d959e61ebb5bdcf5757159ff942691d28b252547f2aa875e54fea",
+    "crates/ottd-sim/tests/native_sale/inputs.rs": "14cfe6f4dc1ddc09c11b09f1019cdb58cbe30c830ae6b3695167045c40e47ad6",
+    "crates/ottd-sim/tests/native_service.rs": "2edaa65162425a46384b1a0588e0a0c85de73c3243cba75fad0827e4a15d464c",
+    "crates/ottd-sim/tests/native_world_commands.rs": "9398ec290c728371e51c41065464d606facefba692974f38c7c470b613ee78d2",
+    "crates/ottd-sim/tests/native_world_ticks.rs": "0c0ceabb4fdba0eef6d5d9cc5d92db81d634ed109e37b1dd8ebae960ba912e5e",
+    "crates/ottd-sim/tests/oracle.rs": "64a196214af8ca1fa6ab98bcdda6bd056afe0fa43928274786c64d30438813dd",
+    "crates/ottd-sim/tests/periodic_callbacks.rs": "87d7aace4e8c686450622091dc4fb86b5a6271b8ec4737e617248b310d839305",
+    "crates/ottd-sim/tests/periodic_oracle.rs": "34070510d9725809818fe2c2270c44f41e6a2969ab9cf9ec731dd6c3568c0e9f",
+    "crates/ottd-sim/tests/replay.rs": "a47b67878e15e403f8ad686160b571c30078b60a3d70887d607287567ecf6a5a",
+    "crates/ottd-sim/tests/road_coverage/mod.rs": "65f45265f3b73057f3cea685ada7955091cbd1cf4ba9b3c250cae06884fac7df",
+    "crates/ottd-sim/tests/road_depot.rs": "f6df8dce7e558d7d8894efa6408f639f80925c2a5a31697ee9c04773307e3ad4",
+    "crates/ottd-sim/tests/road_vehicle_commands.rs": "2ece94d6574e92fe4e21bbf9393bfd1f8dfd822b5d0b412bc2541189cf3ca151",
+    "crates/ottd-sim/tests/runtime_pools.rs": "10fb0a4caa234963b62a8c259a5e2abe189b0f8c45262aeb97803f99ee62c0a9",
+    "crates/ottd-sim/tests/runtime_road.rs": "8ba485e24b1f72e671581206f2d1b21362c523c7829f7e76fcfe16c364ab7b1b",
+    "crates/ottd-sim/tests/simulation.rs": "3694d93bfbc6486fa263c1570c3a344011e3e15df8ddc4dad2de75f5540a9d97",
+    "crates/ottd-sim/tests/terraform.rs": "4cb403695d997b7666154be5081f2fdbabd1c20d2ba6347b586d350a93d9d399",
+    "crates/ottd-sim/tests/terrain.rs": "cdd7aacfbc5cb49ea438ce6938a326d61ffc7026bf4a008c9431e0a55ed4fe4b",
+    "crates/ottd-sim/tests/vehicle_callbacks.rs": "6300f48d458acd58fe5418fddc27b908ebfbf3767e55fbea5d1bc9fdb1d5b4f0",
+    "crates/ottd-sim/tests/vehicle_oracle.rs": "80e5667354226ff1cba45aa755891105d196683a9aebe6763e000234791aa6f9",
+    "crates/ottd-sim/tests/world_commands.rs": "f3aed1fad0ffb5180a94b89cf05651688e43c091a58ef5bc8fbdc004de3fe0b3",
+    "crates/ottd-sim/tests/world_ticks.rs": "d47f43bdd23574cc6f2daa753524e952c53a60455ddb1ec7825835c5ff380713",
+    "crates/ottd-sim/tests/world_town_history.rs": "e0a04817a065146da3c5b348a2668a6d8e4361014830c17c02d9b05f0beedc58",
+    "fixtures/content/contract-speed.grf": "dd8325f1398ca34c44a7d9071597f108b8a67bf90883069a6357d19139ec5a69",
+    "fixtures/replay/clear-v362.sav": "26a604958172a84ddfd895836da5e55666baf28a085bc438236cbdc8931464d2",
+    "fixtures/world/populated-v362.sav": "73307d4e750b22684df94db659f0d40495ad5265a8711e24ef77f758328fb1be",
+    "reference/allocation.hpp": "a86ed5a6eda3cccafa03cbc79095ba9069dc6597cd811b85c894f88ae5120d33",
+    "reference/callback_company.hpp": "9c0fdb73ef542726fb5184cd6d7922492d8921150c0a40fc127346583129a0e8",
+    "reference/callback_house.hpp": "0986f80f212c7e971b033a04a2eb2d605fe354f9e7625e39ce09a9d25ad5e0a1",
+    "reference/callback_industry.hpp": "4ed060bf9e99e75b19113c6503d0b8aa93f5b9ad214090081ebbe51503a629e6",
+    "reference/callback_industry_state.hpp": "fca1c727239271e67a197caf015dbf959d3e1f05092bb5519f3f1d0950ef1b12",
+    "reference/callback_station.hpp": "21a555ce0a8b25661d011c43e23ea3aef1e36d9e009bd7d976a4d954b98a0b3c",
+    "reference/callback_timer.hpp": "7747114f4f63965ad11b9337dee37d28ea40252bbe94a0c1b6044b23db5e0eba",
+    "reference/callback_vehicle.hpp": "447c6cf743ad3ca4e214b8a9b97c1ff7f7eead3bb659d0b98e24f39666593d1b",
+    "reference/callbacks.hpp": "54deaa2da27a76f183f669ac8179aaed307da7d26137ddf5f8bc89a094840b66",
+    "reference/check-snapshot.cmake": "37177cbeea60caee47162fcf61790c24c5c1ae6fe5fb5c04cbc40006f2e8dd25",
+    "reference/content.hpp": "e0b12048fac759c673c2f486c7b0f2a40c1aa43893d663b373963b4ff3be9a1b",
+    "reference/depot_runtime.hpp": "d7e2b834a276780efb8fe0ead4bc66dd09aeb648672a01abf00bc09a83fb3740",
+    "reference/gameplay.hpp": "1964cc9c104f568765c93e1a3c233553525433134a83885288ef0b81bb92d2c7",
+    "reference/gameplay.patch": "ed3a2df02bab4feda159421bf442a9d16229e675d3f70fd015e24a78982c0c1d",
+    "reference/grf_currency.hpp": "1b80d59771a2c6dfb2c12c61642ddda55f5c9c86c104fbac9bf0e041f4638c05",
+    "reference/grf_currency.patch": "5da27132a71e38114d32715b57a9e8a6d10018b8754b864b43e0a68504ef0f74",
+    "reference/grf_currency_api.hpp": "9f5e67cbcfc2f10c445cfe211bc80974e5853e940141978aa7612e04f2d5f421",
+    "reference/grf_language.hpp": "4fcf0804c73161fb2a2a3f7cd142b471acf6cdb0095459122b34522dfa15a4ef",
+    "reference/grf_language.patch": "f55f2bbd7a9dd4d18a28fb9f9dd4d5d6052f77ceee9512b202591175a69c8a43",
+    "reference/grf_language_catalog.hpp": "52783310a9bd1691ebc39d92fc6965adc7050acf294f242a78d7974e67c69499",
+    "reference/grf_language_text.hpp": "2b76467d644cb974340979d2e163d50002837e7bd243de97336e94370bdea3e1",
+    "reference/grf_load_context.hpp": "ace85354882bb16a7adf4ba134f9f35e5a4cf9798280596224d263c204d42c1a",
+    "reference/grf_load_context.patch": "8c93d801129c32bb84aee8fafd698169c1560a69001616fec76b97108bdf5b17",
+    "reference/grf_load_control.hpp": "8b7a1a1c83cfaa1c50c351e59011f87f2b601524e519f21019dfb7bcbd0a4444",
+    "reference/grf_load_control.patch": "d69386405fc4e6d756316681158ba64da24ec09bc26bc9566d0326ffaf456f6a",
+    "reference/grf_metadata.hpp": "a07d66c79836f875430fb02c29620afe6e011d7864c613c15eb017af884e72eb",
+    "reference/grf_safety.hpp": "db50b029a6096627c77e28a43b848416982cedc7ef20898980d684538b82bd7d",
+    "reference/grf_safety.patch": "15886cdb915bf545a04f2783353378692af02f7feb5416099209b433049fe404",
+    "reference/grf_scan.hpp": "460060d4f0ad6f5740c53841cf1df80d6e81c66d97f0e74f4d7aec50c52947fb",
+    "reference/grf_strings.hpp": "6ad4901404faaa15de5811fadd2d9845781ad2455be9a1c481bca22828714e48",
+    "reference/grf_strings.patch": "b195d8431f971227a280d39d80b5ad9fd656dc35544c4176affd2c147da1897c",
+    "reference/grf_strings_api.hpp": "66c4bac4fb498fddf3b2117bdefdb05e6a2b2cad70d7be6c4b17fc90b553c185",
+    "reference/order_fixture.hpp": "c2e181c23ae9266a832c016dcf14196e7d58cd13d502631b7a635eb9426657d5",
+    "reference/order_fixture.patch": "91aa9cbb7e1fd71c0e65041fdec1663f47fcf7d6be3865f0b2a785a472106c64",
+    "reference/order_network.hpp": "1ce10ead5229b7f2cdce9fd271bd969d1de1e1cf567e5d7a668094f4e0c5efa1",
+    "reference/order_network.patch": "7c7267982f5eeb2ebebf6bca16587644e203ac8b3e62d4b908d908dd5c20f1b4",
+    "reference/order_state.hpp": "0fed2683ab5cf76c4b38abda67b2d2ed7ddf3be87d8d9c6b8ee1648dda4eb2bc",
+    "reference/order_state.patch": "2f97dbc079ba0347e3067376b796a7800af863c3553552574fb13104cc6f3c4f",
+    "reference/replay.hpp": "6ca81a87ca63c351600e22af024df3021c29c37d1645fea14ec220e01aa4b33f",
+    "reference/replay.patch": "2df9ff3e92cdc8852771cfd9b7769b7f8e9923aaebde40bdb0f13e1e25abcf73",
+    "reference/replay_commands.hpp": "8e21ee84114665d58151926284fc58731caecb0d98be086ec7db8a0225f024b0",
+    "reference/replay_cost.hpp": "82078562de1123b3a796e9470c7194781080d042345c8abcfe4d44ffdcf3b6b9",
+    "reference/replay_fixture.hpp": "37d0af7e4a3877027b88b6fc9b953657d01ba60cdc10a7190ba146ab6a09b94d",
+    "reference/replay_hooks.hpp": "99d336735d6cb0dbb2f4f18de1abb3b411a3192095909ca7b7bfb0aa5a14c1cb",
+    "reference/road_slope.hpp": "9764ba89184db509e753befb539384b1a3b8b8f45fdc681f514f01a89e84b7cb",
+    "reference/road_slope.patch": "5a96a40121c09e150c1cfa1369fb35725901930567b172d2e43cc03633ccc115",
+    "reference/runtime_road.hpp": "6a70175ee8ff525315fcac4e2b99acc53f5850449330619b25d18f1de2aaf365",
+    "reference/runtime_road_fixture.hpp": "17cf585202563d25b2a1710b1418e17b91c8b40cedd88b5cff265d0edb28ed89",
+    "reference/runtime_road_fixture_tiles.hpp": "969eb08b4fa4e3b6aeee13281a4fe36f53de533920bf83a05580179de3f5b0d2",
+    "reference/snapshot.hpp": "01c2c484bdbd1d7d17d84fb2c9fb78b518a9a13243c2c522324777dbe64b227f",
+    "reference/snapshot.patch": "b8803c5127257c6b7fb6d01101fcbd7572b0a44457f9f27ea61f18bb7996e6be",
+    "reference/terrain.hpp": "665ff4d7f3c6ae76fd3e2b01293a546aec606d846b237faed50d96dfec8c9f43",
+    "reference/world.hpp": "ae757fdf2ad207cc4680be27c00e925861af5666e66dfbeb4089b568dfc61bb6",
+    "reference/world.patch": "cee56c6743d16a42da293bf6c783cc40e3cb982d3d912772051e9143990c92aa",
+    "reference/world_derived.hpp": "8b5e9fa66c4431d58fbcdf23b6cdf33459c882fa7d135d0ae35dc1ba9bc79dae",
+    "reference/world_fixture.hpp": "fb250e47b136233b175f941e13b1388fcf4642cab3535becac3bf15ff9af55a4",
+    "rust-toolchain.toml": "47b9d6173449a742363513ab4a3bbad85a9cd8911d579e0ecfa9fa7aee679059",
+    "scripts/backup_enabled_sale_controls.py": "cd548dafdfb6b3fe82036f677438d136d55d3f2ca90fee662fe29b9133ac7ac9",
+    "scripts/backup_enabled_sale_evidence.py": "c75e8f1a73fb5d8764e102ee82585f07701561932e49659c5b9f7791d07eee2e",
+    "scripts/backup_enabled_sale_guards.py": "04c883c8c29976feea0041d9ab9ccd738b60b3e6a2c60530d5c35ad9f9b6acb7",
+    "scripts/backup_enabled_sale_provenance.py": "fc0df501a75b19619de2e6589d23b3fb23d68cf5970d091c15dc54601a7a13dc",
+    "scripts/backup_sale_bindings.py": "d429548fa23ed5664b847dac690dd84d4dc93c35a59a6333c66b2f042e1e07ab",
+    "scripts/backup_sale_controls.py": "2a104c7bb0d0b65f3662aa0b6cfceb83b8cc6ab55f62d697d1841883d85bb935",
+    "scripts/backup_sale_evidence.py": "eee60349ab7736ad6b01b580ad3a50cb03b211ab91ff8171d9ee533fc3e94475",
+    "scripts/backup_sale_guards.py": "e9ce99dae518829cbd60be2f4df02f260dbacd84a0b23e63914c01609726ecbc",
+    "scripts/backup_sale_pair.py": "9536ec96277a390d9bad778d5706426aca78481bdf6a8e5853caa3db66ab471c",
+    "scripts/backup_sale_provenance.py": "88f166a3946f0a04ad6fc08696b7696bd9bda54a517e2bbd835932b3351ef80b",
+    "scripts/backup_sale_run.py": "6658b315dff2012e1b9c550a604d0648be90d938136e83796052b9dbd79f0ca9",
+    "scripts/check-backup-enabled-sale.py": "0792f052eac90755bff4c0abe6a4cefc4f07dfd003146129da59b1947a9a5451",
+    "scripts/check-backup-sale.py": "dae45122b56f383cc6eb2d9c7ccc95c5f7b7d0b7942d0888608e34781a81e3ad",
+    "scripts/check-callbacks.sh": "dd49b9d8375356a01c4d5309267d649e22a98409ca1c34383302c1a94a923d37",
+    "scripts/check-compatibility.sh": "80ce32b2c0bc9c93e899f17ca350a279905b11ef25a154932a54191549fd7052",
+    "scripts/check-content-reference.cmake": "ec12b4f1a42dd3a42956aea8c483cb9ebe85a684bbccb4636447c10017e77c74",
+    "scripts/check-contract.py": "0de2af7508195a34dcec05056694edfe4d1d38f1da56f4608beca862a5e37e8d",
+    "scripts/check-depot-build.py": "59866c75b29d680df22dcf394234041aa240378ee9cffc1f9317fc5150890a7c",
+    "scripts/check-depot-occupancy.py": "a2bfd6f6036f65a88b266a4bfe4dd38fc96326c8db739dba16877b798a886ea4",
+    "scripts/check-depot-removal.py": "91e1b05d28eb5177ce9223e17650423ef5701c77918947797f1366cbb157bf84",
+    "scripts/check-gameplay-foundations.py": "0956fe6c6d11ff845cd0aaa53c4dc8cd817f82a4a303d2f56d5aeea2694c7442",
+    "scripts/check-grf-context-ci.py": "d4a423744c979bf8d39859ac7a23b97c216d191ab78c7cbb2a7bbe2e6c5f6fb7",
+    "scripts/check-grf-control.py": "0bed9ce5d88974c4dfce3d3b14c71d612450e364876e49afc12b26c1c0bfb6e9",
+    "scripts/check-grf-currency-ci.py": "6d9bfe86defb759a09b04a92a30635234a8e50e4e4732fd86c7107c6297aa185",
+    "scripts/check-grf-currency-reference.cmake": "acaf25118b0cd1a3812c90a0e732d56d8e4d5fec9241b69d8d555f428d177969",
+    "scripts/check-grf-language-ci.py": "83afe619d32a54c0db0d64617965f4765cbe6ccbef4aa9f1fc59b2ec5b652d2c",
+    "scripts/check-grf-language-reference.cmake": "d80436807808a0342aee6aba43126ac9c4b2f8f094c4357a4cdd07589f5c29ad",
+    "scripts/check-grf-load-control-reference.cmake": "49e451c7a7606963d83b3a2d0a9fa278ebf9e33f42971fe8ad100104bf60d87a",
+    "scripts/check-grf-metadata-reference.cmake": "9c998a74e32b1615869977faa5b62c2a7194307905e60e5cf73ecaf88a09f37f",
+    "scripts/check-grf-metadata.sh": "13dca695fe69eb4b8e59c7c05228dc54240eddae18ad9063d1b55de3e69e926d",
+    "scripts/check-grf-safety-ci.py": "1fcf783e8254aae916257f7c8f583029a68d7156c64070d828f080ba2bb67959",
+    "scripts/check-grf-safety-reference.cmake": "8f036423dec27290146fa3d61542e69d8a3f910351f604c1c17059ccbea38320",
+    "scripts/check-grf-scan-reference.cmake": "415e8173e0ceba596dbbdb894e9e7bd9561e9a22771d02213237d7e062697507",
+    "scripts/check-grf-strings-ci.py": "f9a56436c75e0e6b2c31ada7b6e139738ab69afdeb06d020af9a2fc6b16ef84b",
+    "scripts/check-grf-strings-reference.cmake": "363d2aa338f19cea33924fb403cff96e7d31f998bbc04c831d8567565017a485",
+    "scripts/check-occupancy-ci.py": "42d2968e01dd79d0c7730164cc513a1dab20a80b2ebdbf022ce2741d51c34cbf",
+    "scripts/check-order-state.py": "9c82eb495a82f1aacd681b0c20bd408e2a0b460ac3a85259c43be98d6e710f56",
+    "scripts/check-ordered-sale.py": "2c198b7ed77626ca5e599da2efa3a21d12e005b8ad9db54bd11bf3a8f997c73e",
+    "scripts/check-purchase.sh": "9d8410c1428dd27527f133d7aa075bfc820a1a0e4dc76776130aacc24096b3dc",
+    "scripts/check-replay-build.cmake": "664c524328c11215017174c98598ec2e49f78b2f38901cfafd4ce57ac888b03c",
+    "scripts/check-replay-evidence.cmake": "2b15fb6f5ffdbf2623f3807e8767667be8f7cf7776cdf113246aee1cef4b2ad7",
+    "scripts/check-replay-native.cmake": "a22d8b7ac8e066d829e5f6621d990140242d60b74ad648602f9fb4aeeeead366",
+    "scripts/check-replay.py": "dac267f68fe106f2e3bbf131dda9a254fdfe6bea441a6926142200bf7902d410",
+    "scripts/check-replays.sh": "09f7e14d4f5e72653be01ef0716a8b10fbd6c9285deeba3126d856ad8863e040",
+    "scripts/check-road-sale.sh": "deb986d849b98847f5c42a3c403d0397e9731caddf1e1031ab51fe4f88575e4c",
+    "scripts/check-road-slope-ci.py": "326342702759ef826f97fa369c47eddf22245b41370ef0808c58e783dcd47a34",
+    "scripts/check-road-slope.py": "837acec2073db94c1cfcfb6fba95d16867a6d6c19b92b6f112c12036ced70a12",
+    "scripts/check-runtime-road-reference.cmake": "45bace6f803cef57a70a2ce770b0c77682092aa8ea36fe0ed92f089ec4cd2cca",
+    "scripts/check-script-vm.py": "f2f808e427fac1c8a416a566293c6ef119a949e758d407dbbbf27e9d37f56d40",
+    "scripts/check-service.sh": "9ac851e154e8eec2f236161ff75ce4d88e96af374975d529ce1adbfb325d850c",
+    "scripts/check-simulation.sh": "67c7b9c512e2931c3be905a291b76743d384806544ff15ff0af78f94b779f693",
+    "scripts/check-snapshots.sh": "1e18a7dfe4fb05600b2e6c8a4b702cdc2c425e7b0a47e36209c5a0e4f60834db",
+    "scripts/check-terrain.sh": "f8937e218dd7ba931768e8448ad5b3c82969370c9d78d367f7e8ac508b21fe18",
+    "scripts/check-world-builder.cmake": "e50249e9a13b5d2161ac8b54eb31f3c09ec190b49d8810c7fedeb032073f75c4",
+    "scripts/check-world-fixture.cmake": "385b6bc54c2eb4e89da49cefd298a9784f4bd6395c058cf1f838fffc6744a5c3",
+    "scripts/check-world-game.cmake": "8a425afc46e4de26d558adf7b1349af74d73acd6fe17974624932b07ea26312c",
+    "scripts/check-world-reference.cmake": "84b537e4c2534fa6d6e75c4281a9d006f265a178165c26e44fa4840ffde12bb1",
+    "scripts/check-world.py": "1dacdf3e246802660e0c242bac806997bb75d656ad1840ffd7d44bfaa44dddee",
+    "scripts/check-worlds.sh": "4b6ec6f521f3d3f36e89623afc4bd44ccd71f3ed6047bf37a350a3095ef2a87e",
+    "scripts/compat/script-vm/build-native.sh": "cf3d84f448a51354d6001261d0a1fa727cab1789019edd42304128e5d8193ef2",
+    "scripts/compat/script-vm/controls.sh": "a87163074eecfc296203c7ace960bb4f9c75caff2c8d37d9957bdf036eb9754d",
+    "scripts/compat/script-vm/differential.sh": "eae8eddd8b383ce9a5a3d87d283c0e06912d9ab24f49d06962bbf12dc8c83628",
+    "scripts/context_ci_evidence.py": "6b78f39d8d26eb27e9e6cab841782a546afca1e39a6518d99c28896f7b654a31",
+    "scripts/context_ci_support.py": "19e15e8eddbb16e6bd41e75995820cc564f150ac7f085fafa7884c8ffc7b0827",
+    "scripts/contract_layouts.py": "9186fe64b2766118a31f1d879217f707055ae3dc6d6460d7a3ab7cdc2661266e",
+    "scripts/contract_model.py": "4e59836e0500eecb541fc8fc38fd47cd16348cd657f60d4eae2db08cdb98cc30",
+    "scripts/contract_profiles.py": "d8793d6b4b78a03ebc47b94a974757c10dbab2c37faaf0a92689e0e591e4072f",
+    "scripts/contract_run.py": "8a4fc131b30e7685f560d73e2131cf2cd6cff82cd8d188736d17a3b75c013cad",
+    "scripts/contract_validate.py": "4d86dbd5e1384be9b2a1b4fa3a5544adb2d1ed02f674622e4d8c7f1724219a6f",
+    "scripts/currency_ci_bindings.py": "e1e23d79dca5fb07e477d9eff350b59e2ecaef570040b8d5b71af86452781fe7",
+    "scripts/currency_ci_capture.py": "6b422c64de49317b259af5ba8f00b00e0f916fe6bc26adfcb6bcf6ff0b1699c3",
+    "scripts/currency_ci_compare.py": "1e08b1121a1696ff81077d6672ca6dd42141bdd7643cbc003a77ec0121ffeaee",
+    "scripts/currency_ci_evidence.py": "6b01fbf1e55747018ea119b09be7b3a412b523be7edf4b02d39eda80ea2128cb",
+    "scripts/currency_ci_probes.py": "c3396a12c919c25b9225efbeff654cb23b21ef2f0f5ff6257bc0e1ddcb865bff",
+    "scripts/currency_ci_roster.py": "58d5dce1dbf8a8985d301c320e484bc63c32b5b5f1327b7f9ddf7463e5eaabe7",
+    "scripts/depot_build_archive.py": "0fa6889934b3551e2beaffb3d8f6010aab1f7d309f1b8f2239319d7496a0fd4f",
+    "scripts/depot_build_evidence.py": "e9bda2693ad47a827be41529117754aed14947fef4206d6e0cbc607df7f73b29",
+    "scripts/depot_build_provenance.py": "60225331fd879f97b8bd760a81f650c1615b6178fef0bc724b064c831321d667",
+    "scripts/depot_controls.py": "d0a92aee8a802a5f34bc0310219803716135d1bd15a1b61f7b21d051c9df9bff",
+    "scripts/depot_evidence.py": "87b59a232cb557b6745ca19e4676d106de4ffad7c0382e1b5f3307e3dfdc0d57",
+    "scripts/depot_removal_controls.py": "3f285e70ff03485605b2a9319664117d7c5b9f72accf158960828044a0759f3a",
+    "scripts/depot_removal_evidence.py": "14635351119ad3d33c4baaea954513c61ea040c50777cad548a7d58221d75f3c",
+    "scripts/depot_removal_pair.py": "8cd2d25447c83b50bd4c6046b1c265ff584426fe456c33a036a0e78282c21df0",
+    "scripts/depot_removal_provenance.py": "58069770c0a8a052a549b530cad84ef43904c48eda0a0b5fdb8d0fce4aafd63d",
+    "scripts/depot_removal_run.py": "92f218bb3400cabed04a735d005bfdf9214c23bc20487ff813e586eda140bf8a",
+    "scripts/depot_replay.py": "6d7bc4c47e468a81097d9cf6ff7106f06173675f39c365bc9bb527a7915bbaaa",
+    "scripts/gameplay_foundations.py": "64e71e50a3b110c8c2e7b24c7825c9ccf8eea840d1fa16052225d577848cadec",
+    "scripts/grf-control-ruff.toml": "9a0cfe50ec309b7f2c9b518dfc9ba99eca2b95ca3043979deb4012e32b323737",
+    "scripts/grf_control_archive.py": "9ce41f0e05962f59265f9425a6f7e5d6d6fb0ab010215ecd1ba4eaf3ff390ca4",
+    "scripts/grf_control_evidence.py": "ced905de494306ee5773fb3badcca40d0f3c1ac3260fbfc5d9578f03a93e674b",
+    "scripts/grf_control_guards.py": "ab237b8fbcce3736c0187371b1b7b4ff275da1ca73e5bb039a4cc5deb71f214b",
+    "scripts/grf_control_provenance.py": "2b0b7aff3f6c499375bcf50d23c8b973357155adb825a45663c6730bf4cff4eb",
+    "scripts/grf_control_run.py": "35bbf64c751a3cfaeca04a847b2d256548c6a07d7081bab3c2996d17d1886333",
+    "scripts/grf_metadata_evidence.py": "628c421026f3c402f05350e87a7c1d1c147a87e6c7c678effdf561b1dd6b5f0e",
+    "scripts/language_ci_bindings.py": "14dddf296e6da7e59c7ba49eaaa0323c544283e8f125ce3df675b3511d3557f4",
+    "scripts/language_ci_compare.py": "ec4a0aa2f45a766ba8d70be040546af37d4d2708af8e855027e887f01cfadd40",
+    "scripts/language_ci_evidence.py": "8431ca0805a2f876454cdc2a554b07fc44cc4f6a627c72ac831f7b8230cc9ee9",
+    "scripts/language_ci_probes.py": "c8fa3c5102947d8aed2676652438bb98f7fb0c01685be4acbb963139b2f52e64",
+    "scripts/level_replay.py": "76d3f9f362b4afee1eec55b86a3242227a1fd35f43d0650b92d08e965c1185e2",
+    "scripts/native_contract.py": "f0334442e784acf4f21909f47639b33a392e40bf89b18938d1f5e29c250c7851",
+    "scripts/native_contract_content.py": "de649aef0263bc0cd2c14e436a7c296077fa8845e7ba3bd752fbcf57aa8a1a58",
+    "scripts/native_contract_protocol.py": "6b7038a456f9e53504303392463dec1b3f4b316712e9eb857e02fa5716ed4380",
+    "scripts/occupancy_ci_evidence.py": "5e6bc35c3fdc69d0db5800940eaa378ec4111c33033e80ee5b4418b752413634",
+    "scripts/order_state_admission.py": "262cac4aba79eabcd62ceddc1ddc2c122811a8f68739405b654a3039edfd3baf",
+    "scripts/order_state_capture.py": "911c8d5a056eea75873e580af6f53449cf5a5afd60d1211bc04969557b5a4c49",
+    "scripts/order_state_controls.py": "72df6d3d79e0cba13e72cb2b6e9f57403b83f096b9f5ec689242f0a3a6c6b45b",
+    "scripts/order_state_evidence.py": "ab70275b097b3cb601725434b29cfc1761e968aa43b7ee01b55c67a9779be7e6",
+    "scripts/order_state_fixtures.py": "95dd63879ac6bf2bc502010b8dea5264ea9601a504bc2f0264937c6f32995155",
+    "scripts/order_state_network.py": "a0ca5747b6b4c1ba3da2c11ffdedd8150934bbf89e634e21685ff84bbe4588a0",
+    "scripts/order_state_pair.py": "64defc88335c61825ffa85d9613f3431bd8971edb224b9b36c075f039f148ea4",
+    "scripts/order_state_processes.py": "412a986d5fdf015b015c1e033999ae7dcfc426939d6036219b84bf28c973ffff",
+    "scripts/order_state_provenance.py": "d853f861ecdb91452584fb8d13686e7e652a7c833165f4e3c63c0ec945011a5f",
+    "scripts/ordered_sale_bindings.py": "62850233602033faea3fb897c162adafdef8e07eb76a0a9fc08586138a58df4e",
+    "scripts/ordered_sale_controls.py": "f2c50c89087ed77478eaca1dc8188e7800d9c42aa18a8566acdae8eee44e9d0b",
+    "scripts/ordered_sale_evidence.py": "ca740761c570263a2f0d951e3521a6c1741d6df3a8ef14403268f37e2ab96f9c",
+    "scripts/ordered_sale_pair.py": "2925ee7c3618b2e57409c35492b5304d5887bf4c03499a254788638e176e3b2c",
+    "scripts/ordered_sale_provenance.py": "526d38cc97f027f71c9767be90c63d0baa65cbfbef41d5b41d50330649012bfa",
+    "scripts/ordered_sale_run.py": "528e4cde5bb7aef14b67198a40f5283e4aabe08de03295bbfecdbea4e9a39f03",
+    "scripts/purchase_controls.py": "61838cf930b1a4895ba16186e91e630b4901757d898af38bbc3fe639e3673ecc",
+    "scripts/purchase_creation.py": "263cef013d8d92f4da79c219f6384581106bde74c4f7e334acba1483726169b0",
+    "scripts/purchase_duration_controls.py": "14673cc6a3c046751e8939b1d662cf9798514cb89da5c67def2585215c8a70ee",
+    "scripts/purchase_evidence.py": "a80927f14d8b1aefdf8c1dc91eeeb2cc55b47a5c75703dbf14acafcfd2bb81b0",
+    "scripts/purchase_matrix.py": "13af5fa190b831de0e7ec30263d47dfe656c950c6bcc1ebaeb800634da907d82",
+    "scripts/purchase_provenance.py": "fa3518156480eb893c893b55d1993a5ef41d50ff33ba51c0397df70bcac431f9",
+    "scripts/purchase_replay.py": "81e98b8ebc518badbe7a23095ad0752c7431012b1ffbf3d36fd733672048b792",
+    "scripts/purchase_saved_state.py": "2e70dc36fc3ecba421803b2a3841ed5b5eca1adaa4e597eab4275d7cdf1bc54a",
+    "scripts/reference.cfg": "85131afe85a23b2653aa976ee0457c31f5ad3d2665a05f2868a7cb300ca26a4b",
+    "scripts/replay_controls.py": "8d921662ce9a15e8f6737495da15ef765b739b12a96ed917b7b6f6d0a88b2d41",
+    "scripts/replay_lifecycle.py": "c63b49a7007132d6e79e80da9b33920dc146dec74a561273ec771200a13e4f06",
+    "scripts/replay_matrix.py": "15675e3ce0a710d18ba985a73c5392b79c19050d9c500ea0fff3e2d5e44a3297",
+    "scripts/road_slope_ci_evidence.py": "0495a02d835a07989cdf4a2a085563b1cc04cee91b13eff5c8243ee249d51810",
+    "scripts/run-allocation-reference.cmake": "6bcc868fc6aad49184d823891a26100bc292c6d6a44f9ed74e75de812503462e",
+    "scripts/run-callback-reference.cmake": "e6c2b34f0afef1f2e8bb5291a78dd161a2472f58acb030aa3aa6f2959400b2f0",
+    "scripts/run-depot-runtime-reference.cmake": "9991c46522c46b8abdbea521ccea535e04f81ab2a644b1ca86417c6d245afa6e",
+    "scripts/run-gameplay-reference.cmake": "c7d87a77b7e07cf5c4db35feaadc73124c41b9c262bfdb4f84bdac343bd54724",
+    "scripts/run-reference.cmake": "ecd5bab498b9e4bed6e507ffe98d6acf7cde09a7348942f6933d3dc185663374",
+    "scripts/run-snapshot-reference.cmake": "1a27febb791fc3741c73315c0f859a3b439a80e5b5ad814ccdafd20d1c617db0",
+    "scripts/run-terrain-reference.cmake": "6b92dff6bca29ac46624fa4c551afa6df272be5539869407df7af991e83feb48",
+    "scripts/safety_ci_bindings.py": "baf0482265ef0ee22d95a34fd7f10e4610edbf0d8edfe82f51f64c657f95356f",
+    "scripts/safety_ci_evidence.py": "d6028ce4ced5e6fe75268147c0f5069b81c757a9c9eb00003e9783f5d5cf4fb3",
+    "scripts/sale_cases.py": "edb5100855f53ebc842b11df1ecd4266cc26b52dd041337781855d4299f5c352",
+    "scripts/sale_controls.py": "f782e75cd5c70f2fc488b04df670bf19dbf93653a26184d7a3c433f2607dae5e",
+    "scripts/sale_driver.py": "a556e59ae28168dff43b8cce876227ae131e9f7ab31441624211443b17eb6090",
+    "scripts/sale_duration_controls.py": "b6df39434a5d01ab03ccc451076dbe7b00737920121175b5de21598c4a6f0617",
+    "scripts/sale_evidence.py": "6543c4d67de7720d40ef3433b89e6c793cca6a33b7e90d6e867c8e11ee4e3c61",
+    "scripts/sale_lifetime.py": "80fb39e6c167ab8236af48bcbab5d8e182b88291290b7bb3b8eec88eb1672bea",
+    "scripts/sale_matrix.py": "a4764fedf41c3dc436acdcab8daf14c45af006f5bd972e72002b78c7aa6885af",
+    "scripts/sale_provenance.py": "f2d36469cc19a387706c1c60595131fed9d7b99159e849aab38dd6db7176d854",
+    "scripts/sale_replay.py": "a48903e2b22a4699278a75a6aebf69e843ff5175ea06dbc2ef87702f3303094d",
+    "scripts/sale_saved_state.py": "8d917ba8e1d016329bc3dff0ddab08c73afb9447701f85e6b7b52d18fdbdaec1",
+    "scripts/script_vm_branches.py": "0d31a1c5e8cfb6d7984bf8e4f1026022a46fc5e23a018c172824b9cc5626c49b",
+    "scripts/script_vm_evidence.py": "d49a5d1789cba792e720f7732e4d37064ca6b5a00bbc72bf9332aa85f5ccded8",
+    "scripts/script_vm_iteration.py": "4535e114b1049435a7da8c8e79fb318ee71ad25a2cd159178d88245bdb23ab1c",
+    "scripts/script_vm_observation.py": "04807840ca9965dc0cb2cd167b4222762d455bf4e967c5f21e1c94896721dabc",
+    "scripts/script_vm_provenance.py": "7ad900f684ee71dd7e4525fbf121311b81ab8b425604f090a0f23027f3479c75",
+    "scripts/script_vm_switch.py": "509bd4be7cf47e798dc65af1a6b29a79dd4e8a06dbced106acc801099b41dc69",
+    "scripts/service_replay.py": "926bafcc9fb2b6222a6b75abc51130ef62e65ffdaa2649724a2fd7fea7657d99",
+    "scripts/service_replay_cases.py": "d5efb6adb7688618f98a7a6eeb92001fe7f90db013e3c065143be81a5f6309c0",
+    "scripts/setup-reference.sh": "8c1af83b215f26801f51afeae56ed39be74cd1d9c71c1bed5c2fce5f44ea0af8",
+    "scripts/setup-snapshot-reference.sh": "2457ac19dfd99dbd08eff57798ce6981618bcd8116778aac4cbaf77fc751f433",
+    "scripts/strings_ci_bindings.py": "5ab39ca564000fb07f61a3a692307841101fa9dd50e74b8d33f10249771c0679",
+    "scripts/strings_ci_compare.py": "7b11ec81d6ce3f37ef0da20fdabf02e1c95c8653243e69c6efefd4c28f829dce",
+    "scripts/strings_ci_evidence.py": "1bae1448c23164e866c9ac67c281a9efe9443b329ff792e1448b5e802e95dd5e",
+    "scripts/strings_ci_probes.py": "5b3fd00abffc04e7f5a09751c1541d1628aee342ca549db91fd636e8c438dfe3",
+    "scripts/terraform_replay.py": "5fba861f8e7edfe6bafb37e4ea053fe7e7afa50c0d662c0171f30ee552ff9b9e",
+    "scripts/tests/backup_enabled_sale_evidence_test.py": "4caf63194fb797cd383b29889f41cb1867cacc87c7941a00b8af366769430a29",
+    "scripts/tests/backup_sale_evidence_test.py": "eadd1d82d1ae2f56c30f99b761268ee2a83cf80da9e9f2a18fc0c0244acb9c1c",
+    "scripts/tests/context_ci_evidence_test.py": "3611c02607162519cdb999068a1d46ed439c7de8298a995d1a6597c3382b3fc0",
+    "scripts/tests/currency_ci_evidence_test.py": "01dcc550499ceda3c67bf9495d23cb6923562d27e10144e3dbd680fb1c522ef4",
+    "scripts/tests/depot_removal_evidence_test.py": "07ad81932e54fcea00d8c3d21a2d9c5e70a44da909e689211654237f683d719e",
+    "scripts/tests/empty_inputs_test.py": "a803a7bd2c32c95ff79043fafb54aca73d884be5b3a50c16326b7f5b7e12ed05",
+    "scripts/tests/evidence_transport_test.py": "a3c3ef94c146a642dac62a1173313fc87e22c27bf246f2a9f0ed6a8129b5dee3",
+    "scripts/tests/grf_control_evidence_test.py": "dab5201e5cf09289b338e98c281790a97c420b4d628ed20babbf524ad5385baf",
+    "scripts/tests/language_ci_evidence_test.py": "2bc0d0ff422a2adac80189fe469369a6f1968dfb725c04611935b7d80b5fec0d",
+    "scripts/tests/order_state_evidence_test.py": "36cb4880aaec1f31f90d55dd905e03b7c3d739fdd681a54f80e066231221adfe",
+    "scripts/tests/ordered_sale_evidence_test.py": "5a0fa071394abed01c3c9a3d925a5df73832bc656fff4f621dc0977c83d4cd59",
+    "scripts/tests/road_slope_ci_test.py": "9a38469dc2a30eab7b43e65ec96d0a97071e5b8b1ba0784c3da256d31f499c7b",
+    "scripts/tests/safety_ci_evidence_test.py": "ebadf373fd9c57e49857d6caefb39d86c5975030824b32d575a5a8607874d66e",
+    "scripts/tests/sale_evidence_test.py": "db41cc2ffced49015355d36a9d06778946b1976631c3f489da7672e0e1b5d4aa",
+    "scripts/tests/sale_lifetime_test.py": "1aba85640d04ecf7b7acc8f4b66b1d305b92bb036b4fcb4e8b2d1307bd63b60c",
+    "scripts/tests/strings_ci_evidence_test.py": "893e6801713a96b2b67b972415759a7e7d65c8ea334894f05e3c72b6a9f9c7fe",
+    "scripts/tests/test_contract.py": "9f5dbaa6769ef2a68c8ae1cd7ed34ccd50110b3ebd79f19de965dcd5e3795005",
+    "scripts/tests/test_contract_layouts.py": "57704a013b94d40f4394aa5730b4f9fbd28ccfe5110d0494a753b919fea4fbb0",
+    "scripts/tests/test_depot_build_evidence.py": "fc6f87eca7dbb8357f13c774c9e7014154716638bab4ec1e9691770dd345ab6f",
+    "scripts/tests/test_gameplay_foundations.py": "1f1ae2613da95974a0ff46602d2b0ca36eb615b491a9d45dd77e5ead48422461",
+    "scripts/tests/test_grf_metadata_evidence.py": "10187288131d3cbec86d7c740b1891550f11eb9c16d906be7990f00b5f1796a4",
+    "scripts/tests/test_native_contract.py": "c55ac4bc3131aa00286ce6f49bc2eb451b906ed9611560ff8ae34104419f1be8",
+    "scripts/tests/test_purchase_evidence.py": "67e8b6f8e3d2cb0eee1aa0bafa07b5aa0e96db3773291052f96da7315fb93383",
+    "scripts/tests/test_purchase_saved_state.py": "fec658b457a6cede3c436bbd1315cfa42a1600c4e320d0504884b8ad814157c5",
+    "scripts/tests/test_script_vm_evidence.py": "e9633347b4113cbb695bfa2090f7ee0ee7d9368713c0b93838dd61e97ce1c76e",
+    "scripts/tests/test_stale_reference_layouts.py": "43530a5aafd3d7547a5daaaff89f5e004d65edb0da382dbf9ba822fe51d9af8c",
+    "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047",
+    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241"
+  },
+  "totals": {
+    "guards": 13,
+    "api": {
+      "cases": 5,
+      "operations": 285,
+      "controls": 194280
+    },
+    "load": {
+      "cases": 20,
+      "loads": 25,
+      "events": 489,
+      "controls": 185241,
+      "lifecycle_controls": 76882
+    }
+  }
+}

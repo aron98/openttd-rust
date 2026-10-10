@@ -48,6 +48,8 @@ pub(super) struct LanguageSnapshot {
     pub strings: Vec<super::load_strings::Entry>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub translation_errors: Vec<super::load_string_actions::TranslationFailure>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub currency: Option<super::load_currency::CurrencyState>,
 }
 #[derive(Debug, serde::Serialize)]
 pub(super) struct LanguageReport {
@@ -59,6 +61,8 @@ pub(super) struct LanguageReport {
     pub strings: Vec<super::load_strings::Entry>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub translation_errors: Vec<super::load_string_actions::TranslationFailure>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub currency: Option<super::load_currency::CurrencyState>,
 }
 pub(super) struct LanguageState<'a> {
     pub report: LanguageReport,
@@ -84,6 +88,7 @@ impl<'a> LanguageState<'a> {
             events: Vec::new(),
             strings: Vec::new(),
             translation_errors: Vec::new(),
+            currency: None,
         };
         let mut source_bytes = 0_usize;
         let mut selected = None;
@@ -192,6 +197,11 @@ impl Session<'_, '_> {
                     .saturating_add(error.data.len())
                     .saturating_add(error.custom_message.len())
             }));
+        let bytes = bytes.saturating_add(
+            self.currency
+                .as_ref()
+                .map_or(0, super::load_currency::CurrencyState::snapshot_bytes),
+        );
         self.budget.trace(bytes, location)?;
         let phase = match location.stage {
             LoadStage::FileScan => 0,
@@ -208,6 +218,7 @@ impl Session<'_, '_> {
             offset: location.offset,
             strings: self.strings.entries.clone(),
             translation_errors: self.string_errors.clone(),
+            currency: self.currency.clone(),
             files: self
                 .registry
                 .files

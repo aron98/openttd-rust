@@ -28,7 +28,8 @@ if ! git -C "$source_dir" apply --reverse --check "$root/reference/order_fixture
     fi
 fi
 # Compare tracked source with precisely HEAD plus our patch, without changing its index.
-if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch" 2>/dev/null &&
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_currency.patch" 2>/dev/null &&
+   ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch" 2>/dev/null &&
    ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_language.patch" 2>/dev/null &&
    ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch" 2>/dev/null &&
    ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_load_context.patch" 2>/dev/null; then
@@ -44,7 +45,8 @@ if git -C "$source_dir" apply --check "$root/reference/road_slope.patch" 2>/dev/
 else
     git -C "$source_dir" apply --reverse --check "$root/reference/road_slope.patch"
 fi
-if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch" 2>/dev/null &&
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_currency.patch" 2>/dev/null &&
+   ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch" 2>/dev/null &&
    ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_language.patch" 2>/dev/null; then
     if git -C "$source_dir" apply --check "$root/reference/grf_safety.patch" 2>/dev/null; then
         git -C "$source_dir" apply "$root/reference/grf_safety.patch"
@@ -59,23 +61,31 @@ for patch in order_state order_fixture order_network; do
         git -C "$source_dir" apply --reverse --check "$root/reference/$patch.patch"
     fi
 done
-if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch" 2>/dev/null; then
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_currency.patch" 2>/dev/null &&
+   ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch" 2>/dev/null; then
     if git -C "$source_dir" apply --check "$root/reference/grf_language.patch" 2>/dev/null; then
         git -C "$source_dir" apply "$root/reference/grf_language.patch"
     else
         git -C "$source_dir" apply --reverse --check "$root/reference/grf_language.patch"
     fi
 fi
-if git -C "$source_dir" apply --check "$root/reference/grf_strings.patch" 2>/dev/null; then
-    git -C "$source_dir" apply "$root/reference/grf_strings.patch"
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_currency.patch" 2>/dev/null; then
+    if git -C "$source_dir" apply --check "$root/reference/grf_strings.patch" 2>/dev/null; then
+        git -C "$source_dir" apply "$root/reference/grf_strings.patch"
+    else
+        git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch"
+    fi
+fi
+if git -C "$source_dir" apply --check "$root/reference/grf_currency.patch" 2>/dev/null; then
+    git -C "$source_dir" apply "$root/reference/grf_currency.patch"
 else
-    git -C "$source_dir" apply --reverse --check "$root/reference/grf_strings.patch"
+    git -C "$source_dir" apply --reverse --check "$root/reference/grf_currency.patch"
 fi
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch" "$root/reference/grf_strings.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch" "$root/reference/grf_strings.patch" "$root/reference/grf_currency.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 copy_header() {
     if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
@@ -90,6 +100,8 @@ copy_header reference/grf_language_catalog.hpp "$source_dir/src/reference_grf_la
 copy_header reference/grf_language_text.hpp "$source_dir/src/reference_grf_language_text.hpp"
 copy_header reference/grf_strings.hpp "$source_dir/src/reference_grf_strings.hpp"
 copy_header reference/grf_strings_api.hpp "$source_dir/src/reference_grf_strings_api.hpp"
+copy_header reference/grf_currency.hpp "$source_dir/src/reference_grf_currency.hpp"
+copy_header reference/grf_currency_api.hpp "$source_dir/src/reference_grf_currency_api.hpp"
 copy_header reference/order_state.hpp "$source_dir/src/saveload/reference_order_state.hpp"
 copy_header reference/order_fixture.hpp "$source_dir/src/saveload/reference_order_fixture.hpp"
 copy_header reference/order_network.hpp "$source_dir/src/saveload/reference_order_network.hpp"

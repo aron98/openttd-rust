@@ -78,6 +78,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/backup_enabled_sale_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/backup_enabled_sale*.py scripts/check-backup-enabled-sale.py scripts/tests/backup_enabled_sale_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/backup_enabled_sale*.py scripts/check-backup-enabled-sale.py scripts/tests/backup_enabled_sale_evidence_test.py
+      - name: Check currency owner evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/currency_ci_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/currency_ci_*.py scripts/check-grf-currency-ci.py scripts/tests/currency_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/currency_ci_*.py scripts/check-grf-currency-ci.py scripts/tests/currency_ci_evidence_test.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -146,6 +151,7 @@ jobs:
             !.artifacts/ordered-sale-target-*/**
             .artifacts/grf-language-*/
             .artifacts/grf-strings-*/
+            .artifacts/grf-currency-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

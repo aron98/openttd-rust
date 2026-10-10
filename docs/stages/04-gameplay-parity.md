@@ -8,6 +8,32 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
+Latest reviewed increments: `98e371d` adds ordered NewGRF language inputs;
+`1909ce7` adds transactional road/tram depot removal; `c867d6b` and its
+`12aa296` correction add scalar comments/switch and faithful byte-input
+decoding. `b392b92` repairs complete native-source membership in the safety CI
+archive and adds an early regression test. All seven completion gates below
+remain open.
+
+Depot removal matches 34 original-engine cases, 117 actions, 302 snapshots and
+69 save checkpoints. Shared orders, infrastructure, pool reuse, costs and
+rollback are checked together. Same-tile successful live-backup command traces
+and legal above-ground occupancy witnesses remain explicit gaps.
+
+Review caught supplementary Unicode being accepted inside script comments.
+The correction matches native lazy decoding, malformed-byte rejection,
+encoded-surrogate acceptance and NUL termination through `compile_bytes`.
+Both debug and optimized profiles pass 7,642 native comparisons, 59 tests and
+nine native frame witnesses. A fresh reviewer approved the correction and
+original supported comments/switch after another 1,132 comparisons. The
+integrated workspace passes 467 tests, strict Clippy and formatting; 58 Python
+tests and the complete order/depot comparison drivers also pass. Strings,
+globals, objects, host APIs and full AI/GameScript behavior remain required.
+
+Active work continues on NewGRF custom strings and Actions 4/13, ordered road
+vehicle sales, and Squirrel owned strings with persistent runtime state. These
+are separate increments awaiting their own integrated evidence and review.
+
 For agentic workers: use the subagent-driven development workflow, with explicit
 ownership, native-source evidence, independent review and tests before integration.
 

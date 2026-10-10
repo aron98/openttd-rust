@@ -543,8 +543,11 @@ original process arguments, checks complete archive paths, and prints bounded
 failure diagnostics while retaining full stderr. `3765b4f` also fixes standalone
 Python test discovery; `b38418e` updates the exact context freshness evidence
 membership after adding road and safety observers. Independent review approved
-these corrections. Their remote interoperability result remains pending here;
-local checks are not a substitute for that result. CI runs on pull requests only.
+these corrections. The `e6f3f63` run successfully uploaded evidence but exposed a
+stale VM source pin for the changed shared helper. The scalar integration
+refreshed that pin. The subsequent `4a556df` run passed both Rust and the complete
+interoperability baseline, including evidence upload, with 1,044 of 1,050 native
+compiler calls served from cache (99.43%). CI runs on pull requests only.
 
 ### Static NewGRF safety and continuing dependencies
 
@@ -558,9 +561,10 @@ strict checks pass, and independent review approved exact `e6f3f63`.
 
 This scanner does not activate gameplay content or execute arbitrary callbacks.
 Current parallel work covers real language-pack inputs and ordered language
-maps, scalar Squirrel control flow, and shared-order/live-backup prerequisites
-for depot removal. Each remains subject to its own original-engine proof and
-independent review. Diagnostics/inhibition, GRM, actual baseline/spec execution,
+maps, further Squirrel syntax and runtime dependencies, and command-level depot
+removal using the reviewed shared-order/live-backup primitives below. Each
+remains subject to original-engine proof and independent review.
+Diagnostics/inhibition, GRM, actual baseline/spec execution,
 the remaining VM/object/host API behavior and gameplay consumers are still
 required. None of these increments closes a broad stage requirement.
 
@@ -584,6 +588,52 @@ profile retains 26,827 evidence files. This is 21 of 62 opcode handlers;
 remaining operators, objects, GC, calls, host APIs and full AI/GameScript
 scheduling and persistence remain required. Remote CI for this increment is
 separate from these local acceptance results.
+
+### Canonical shared orders and live backups
+
+`16c3fa2`, `822d48a` and `d4403e9` add native order observations and actual
+network-received save capture, canonical ORDL/VEHS/BKOR runtime operations, and
+complete CI admission. Host role is explicit and immutable at load. Runtime
+single-player/client saves omit transient backups; offline World serialization
+remains lossless. Loaded client pool slots and original object indices remain
+distinct. Native assertions on deleting nonzero loaded slots are recorded as
+boundaries, with Rust rejecting before any state publication.
+
+The original/Rust driver passes 19 pairs, 89 actions, 216 snapshots, 39 save
+checkpoints and 40 vanilla airport geometry rows. Thirteen semantic corruptions,
+nine capture mutations, zero/subset execution and native freshness controls are
+rejected; three native assertion cases are excluded from successful parity.
+All 421 workspace tests, both prior scalar profiles, context comparisons and
+44 replay/control/resume cases pass. Independent review approved `d4403e9`
+after a fresh shared-order challenge and full source/archive verification.
+BackupRestore, ordered sale, command-level depot removal, movement and custom
+airports remain required. The native client fixture is not mixed multiplayer
+compatibility.
+
+### Scalar updates and iteration
+
+`0e9362b` adds bitwise operations and shifts, comma and ternary expressions,
+arithmetic compound assignment, prefix/postfix updates, and for/do loops.
+It preserves native expression-state and destination aliasing, update store
+order, increment re-emission quirks and suspension debt. Defined shifts accept
+all integer bit patterns with counts 0 through 63; undefined counts have a
+distinct typed boundary rather than a successful compatibility claim.
+
+Debug and optimization-level-3 native profiles each pass 5,638 comparisons:
+618 fixtures under nine schedules plus 76 targeted budgets. All previous
+fixtures remain; 280 distinct additions cover the new behavior. Each profile
+passes 37 public and seven private tests, seven native frame witnesses and
+16 corruption controls. Root's additional 408 comparisons and the reviewer's
+118 comparisons match. Ten actual implementation mutants and 19 admission
+attacks are rejected. The integrated workspace passes 431 tests, and the order
+driver passes after its shared source bindings are updated. Independent review
+approved exact `0e9362b`. An early dependency-free unittest now detects stale
+live VM source pins, with a real stale-helper red/green witness.
+
+This reaches 26 of 62 handlers. Comments/switch/foreach, strings and objects,
+call frames and closures, GC, host APIs, scheduling, persistence and documented
+native-undefined arithmetic domains remain open. None of these increments
+closes a broad stage 4 gate.
 
 Tree/water additions must account for nested test-only town ratings, nearest-town
 tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring

@@ -8,12 +8,39 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed increments: `98e371d` adds ordered NewGRF language inputs;
-`1909ce7` adds transactional road/tram depot removal; `c867d6b` and its
-`12aa296` correction add scalar comments/switch and faithful byte-input
-decoding. `b392b92` repairs complete native-source membership in the safety CI
-archive and adds an early regression test. All seven completion gates below
-remain open.
+Latest reviewed increments: `f5385a3` resolves NewGRF currency names and
+`ef0f6fd` restores owned order backups during road-vehicle purchases. All seven
+completion gates below remain open. Earlier milestones and their bounded
+verification results are recorded below.
+
+Currency property 0A includes owner defaults, deferred StringID mapping,
+ordered writes, and reload/reset. Five direct API cases and 20 loader cases
+cover 25 load passes; all six affected native drivers pass. Independent review
+verified their complete archives and reproduced 23 native API operations,
+14 Rust tests, 11 Python tests, and corruption rejection. Currency properties
+0B-0F, formatting, and annual euro conversion remain separate work.
+
+Owned/default-group order restoration composes purchase, backup consumption,
+copied properties, allocation, payment/RNG, and runtime caches in one
+transaction. The full driver matches 29 original/Rust pairs, 96 actions,
+250 snapshots, and 34 saves, including full order-list capacity, sparse ID
+reuse, implicit orders, signed timetable fields, client IDs, renewal rules,
+and strict loaded continuation. Root verification passes 537 Rust tests,
+strict workspace checks, 59 standard-library Python tests, 25 focused Python
+tests, and complete purchase, sale, and order-lifecycle regressions.
+Independent review verified all four archives and ran 27 Rust tests,
+25 Python tests, three fresh native/Rust pairs, and 18 corruption rejections.
+Shared and nondefault-group restoration, movement, and multiplayer dispatch
+remain required. The existing fresh native duration exception is restricted
+to proven new owned incarnations and requires Rust zero; loaded values stay
+strict.
+
+Branch-wide CI is not green. A preceding Linux run failed the script-VM
+comparison; investigation of an earlier failure found platform-dependent
+undefined byte-character classification in the original lexer. Its policy
+remains unresolved, and these gameplay/content increments do not fix it.
+Squirrel string/compiler-state integration is held at that boundary while
+independent gameplay and NewGRF work continues.
 
 Depot removal matches 34 original-engine cases, 117 actions, 302 snapshots and
 69 save checkpoints. Shared orders, infrastructure, pool reuse, costs and

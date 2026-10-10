@@ -30,8 +30,19 @@ integrated workspace passes 467 tests, strict Clippy and formatting; 58 Python
 tests and the complete order/depot comparison drivers also pass. Strings,
 globals, objects, host APIs and full AI/GameScript behavior remain required.
 
-Active work continues on NewGRF custom strings and Actions 4/13, ordered road
-vehicle sales, and Squirrel owned strings with persistent runtime state. These
+`de84670` adds sale of stopped vanilla single-part road vehicles with owned or
+shared orders, with backups disabled and an empty backup pool. Order detachment,
+last-owner list removal, refunds and runtime allocation publish through one
+validated transaction. Twelve original-engine pairs, 28 actions and 14 strict
+save checkpoints pass. The integrated workspace passes 472 tests; all six
+affected native drivers pass. Independent review approved the increment after
+six fresh native/Rust pairs and complete source/archive checks. `4a90c5d` adds
+its native observer prerequisites, and `5f8357d` corrects the language evidence
+result inventory. The observer also passed all 44 existing baseline replays
+using the preceding reviewed Rust executable.
+
+Active work continues on NewGRF custom strings and Actions 4/13, live order
+backups during road vehicle sales, and Squirrel owned strings with persistent runtime state. These
 are separate increments awaiting their own integrated evidence and review.
 
 For agentic workers: use the subagent-driven development workflow, with explicit

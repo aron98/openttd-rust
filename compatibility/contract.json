@@ -3234,6 +3234,51 @@
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
       "profile": null
+    },
+    {
+      "id": "order-state-check-order-state",
+      "path": "scripts/check-order-state.py",
+      "sha256": "9c82eb495a82f1aacd681b0c20bd408e2a0b460ac3a85259c43be98d6e710f56",
+      "kind": "recipe",
+      "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "order-state-order-state-evidence",
+      "path": "scripts/order_state_evidence.py",
+      "sha256": "ab70275b097b3cb601725434b29cfc1761e968aa43b7ee01b55c67a9779be7e6",
+      "kind": "recipe",
+      "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "order-state-order-state-admission",
+      "path": "scripts/order_state_admission.py",
+      "sha256": "262cac4aba79eabcd62ceddc1ddc2c122811a8f68739405b654a3039edfd3baf",
+      "kind": "recipe",
+      "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "order-state-order-state-layout",
+      "path": "scripts/order-state-layout.json",
+      "sha256": "66af50224bcb624a845ec14e0c58268eac4743facdd63cbd48c369a76b0bde35",
+      "kind": "recipe",
+      "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "order-state-order-state-evidence-test",
+      "path": "scripts/tests/order_state_evidence_test.py",
+      "sha256": "36cb4880aaec1f31f90d55dd905e03b7c3d739fdd681a54f80e066231221adfe",
+      "kind": "recipe",
+      "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
+      "save_version": null,
+      "profile": null
     }
   ],
   "profiles": [
@@ -9570,6 +9615,35 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "order-state",
+      "argv": [
+        "python3",
+        "scripts/check-order-state.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/execution.json"
+      ],
+      "success_text": "PASS order-state CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -13985,6 +14059,46 @@
         "native-bindings.json",
         "native-invocations.json",
         "bin/ottd_sim"
+      ]
+    },
+    {
+      "id": "runtime.shared-orders-live-backups",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Shared ORDL/current orders and canonical live BKOR primitive lifecycle; explicit SP/server/client save/load policy, vanilla hangar geometry and depot order invalidation. No backup Restore, ordered sale, map depot removal, mixed vehicle simulation or custom airport claim.",
+      "expected": "19 actual original/Rust pairs,89 actions,216 state checkpoints,39 native serializer saves,40 airport geometry rows;3 native assertion boundaries separately typed,2 genuine capture controls,13 semantic rejections and actual zero/subset rejection. Complete literal indexed raw archive, actual binaries and source/input hashes. Capture timing permits only validated monotonic native client-info arrival at named role.clients locations;9 actual unauthorized-field mutations reject. An actual one-byte native executable mutation fails freshness after the unmodified copy passes.",
+      "driver": "order-state",
+      "assets": [
+        "order-state-check-order-state",
+        "order-state-order-state-evidence",
+        "order-state-order-state-admission",
+        "order-state-order-state-layout",
+        "order-state-order-state-evidence-test"
+      ],
+      "source_refs": [
+        "scripts/check-order-state.py",
+        "scripts/order_state_evidence.py",
+        "scripts/order_state_admission.py",
+        "scripts/order-state-layout.json",
+        "scripts/tests/order_state_evidence_test.py",
+        "crates/ottd-sim/src/runtime/order_state.rs",
+        "crates/ottd-save/src/world/orders.rs"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/execution.json"
       ]
     }
   ]

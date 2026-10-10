@@ -43,6 +43,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/safety_ci_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/check-grf-safety-ci.py scripts/safety_ci_evidence.py scripts/safety_ci_bindings.py scripts/tests/safety_ci_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/check-grf-safety-ci.py scripts/safety_ci_evidence.py scripts/safety_ci_bindings.py scripts/tests/safety_ci_evidence_test.py
+      - name: Check order-state evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/order_state_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/order_state*.py scripts/check-order-state.py scripts/tests/order_state_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/order_state*.py scripts/check-order-state.py scripts/tests/order_state_evidence_test.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -101,6 +106,7 @@ jobs:
             .artifacts/road-sale-*/
             .artifacts/road-slope-*/
             .artifacts/road-slope-invocation-*/
+            .artifacts/order-state-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

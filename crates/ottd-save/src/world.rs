@@ -4,9 +4,11 @@ mod derived;
 mod edit;
 mod journal;
 pub use journal::{
-    CandidateMap, CandidateTable, CandidateView, PreparedWorldTransaction, WorldTransaction,
+    CandidateMap, CandidateTable, CandidateView, OrderDurationDelta, PreparedWorldTransaction,
+    WorldTransaction,
 };
 mod export;
+pub use export::WithoutOrderBackups;
 mod limits;
 mod orders;
 mod ownership;

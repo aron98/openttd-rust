@@ -1,4 +1,6 @@
+mod order_delta;
 mod stage;
+pub use order_delta::OrderDurationDelta;
 #[cfg(test)]
 mod tests;
 mod view;

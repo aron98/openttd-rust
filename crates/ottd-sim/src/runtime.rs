@@ -1,5 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
+mod order_state;
+pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 mod depot;
 mod group_counts;
 pub mod pools;
@@ -44,6 +46,20 @@ pub enum RuntimeError {
     /// Invalid native vehicle allocation metadata.
     #[error(transparent)]
     Pool(#[from] pools::PoolError),
+    /// Saved order backups require an explicit host load context.
+    #[error("loaded order backups require explicit runtime context")]
+    OrderContextRequired,
+    /// Pinned native deletion would assert because a loaded object lost its pool index.
+    #[error("native backup deletion invariant: physical slot {slot} has object index {index}")]
+    NativeBackupIndex {
+        /// Authoritative physical pool slot / saved row ID.
+        slot: u32,
+        /// Original runtime object's index after constructor/load.
+        index: u8,
+    },
+    /// Invalid saved transaction.
+    #[error(transparent)]
+    World(#[from] ottd_save::world::WorldError),
     /// Unsupported content configuration.
     #[error(transparent)]
     Content(#[from] ContentError),
@@ -99,6 +115,7 @@ pub struct RoadVehicleCache {
 #[derive(Debug)]
 pub struct SimulationRuntime {
     world: World,
+    orders: order_state::OrderState,
     content: ContentCatalog,
     road: BTreeMap<VehicleId, RoadVehicleCache>,
     allocation: VehicleAllocation,
@@ -270,6 +287,20 @@ impl SimulationRuntime {
     /// # Errors
     /// Rejects other vehicle families, articulated vehicles, invalid road tiles and mods.
     pub fn restore_vanilla(world: World) -> Result<Self, RuntimeError> {
+        if world
+            .tables()
+            .get(b"BKOR")
+            .is_none_or(|t| !t.records().is_empty())
+        {
+            return Err(RuntimeError::OrderContextRequired);
+        }
+        let orders = order_state::OrderState::restore(&world, RuntimeSaveContext::SinglePlayer)?;
+        Self::restore_with_orders(world, orders)
+    }
+    fn restore_with_orders(
+        world: World,
+        orders: order_state::OrderState,
+    ) -> Result<Self, RuntimeError> {
         let content = ContentCatalog::from_world(&world)?;
         let table = world
             .tables()
@@ -286,6 +317,7 @@ impl SimulationRuntime {
             })
             .collect::<Result<BTreeMap<_, _>, RuntimeError>>()?;
         Ok(Self {
+            orders,
             depot: depot::DepotRuntime::restore(&world)?,
             serializer_cargo_paid_for: serialization::restore(&world)?,
             allocation: VehicleAllocation::restore(&world)?,
@@ -294,7 +326,8 @@ impl SimulationRuntime {
             road,
         })
     }
-    /// Authoritative saved state; mutable access is intentionally absent.
+    /// Canonical live records; runtime save methods apply transient backup projection.
+    /// Mutable access is intentionally absent.
     pub const fn world(&self) -> &World {
         &self.world
     }
@@ -336,7 +369,8 @@ impl SimulationRuntime {
     pub fn engine(&self, id: u16) -> Result<SavedEngineView<'_>, RuntimeError> {
         SavedEngineView::new(&self.world, id)
     }
-    /// Release ownership of the current authoritative world.
+    /// Release canonical live records, including transient backups.
+    /// This is not a native save or runtime continuation: allocator history is not retained.
     pub fn into_world(self) -> World {
         self.world
     }

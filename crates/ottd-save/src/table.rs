@@ -172,6 +172,19 @@ impl TableChunk {
         write::encode(self)
     }
 
+    pub(crate) fn encode_empty(&self) -> Result<Chunk, TableError> {
+        Self {
+            id: self.id,
+            kind: self.kind,
+            schema: self.schema.clone(),
+            records: BTreeMap::new(),
+            slots: 0,
+            tail_policy: self.tail_policy,
+            limits: self.limits,
+        }
+        .encode()
+    }
+
     pub(crate) fn validated_wire_len(&self) -> Result<usize, TableError> {
         write::validate(self)
     }

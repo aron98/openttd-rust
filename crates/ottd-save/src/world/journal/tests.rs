@@ -283,3 +283,116 @@ fn export_journal_native_witness() -> Result {
     )?;
     Ok(())
 }
+
+#[test]
+fn order_duration_delta_rejects_wrong_live_transition_before_publication() -> Result {
+    // Given an authoritative order-list cache and unchanged candidate records.
+    let mut world = world()?;
+    let before = world.saved_json()?;
+    let list = world
+        .derived()
+        .order_lists
+        .first()
+        .ok_or("order list")?
+        .clone();
+    let tx = world.transaction();
+    let prepared = tx.prepare()?;
+    // When a claimed wait removal is absent from the candidate.
+    let result = prepared.with_order_duration_deltas(&[OrderDurationDelta {
+        before: list,
+        wait_removed: 1,
+        timetabled_wait_removed: 0,
+    }]);
+    // Then it cannot be published and dropping restores everything.
+    assert!(result.is_err());
+    drop(result);
+    assert_eq!(world.saved_json()?, before);
+    Ok(())
+}
+
+#[test]
+fn unreferenced_saved_order_list_keeps_native_afterload_caches_uninitialized() -> Result {
+    // Given a complete orphan saved list with nonzero raw timetable payload.
+    let mut world = world()?;
+    let schema = world
+        .tables
+        .get(b"ORDL")
+        .ok_or("ORDL")?
+        .schema()
+        .fields()
+        .first()
+        .and_then(crate::FieldSchema::child)
+        .ok_or("order schema")?;
+    let order = TableRecord::new(
+        schema
+            .fields()
+            .iter()
+            .map(|f| {
+                WireValue::Unsigned(match f.name() {
+                    "type" => 2,
+                    "flags" => 136,
+                    "refit_cargo" => 254,
+                    "wait_time" => 31,
+                    "travel_time" => 47,
+                    "max_speed" => 65535,
+                    _ => 0,
+                })
+            })
+            .collect(),
+    );
+    let record = TableRecord::new(vec![WireValue::Structs(vec![order])]);
+    world.edit_batch(vec![WorldEdit::InsertRecord {
+        chunk: *b"ORDL",
+        record: 60000,
+        value: record.clone(),
+    }])?;
+    // When native-style structural restoration sees no shared-chain head.
+    let restored = World::decode(&world.to_savegame()?)?;
+    let cache = restored
+        .derived()
+        .order_lists
+        .iter()
+        .find(|l| l.id == 60000)
+        .ok_or("cache")?;
+    // Then saved rows remain exact while untouched constructor caches stay zero.
+    assert_eq!(
+        (
+            cache.num_manual_orders,
+            cache.total_duration,
+            cache.timetable_duration
+        ),
+        (0, 0, 0)
+    );
+    assert_eq!(
+        restored
+            .tables
+            .get(b"ORDL")
+            .ok_or("ORDL")?
+            .records()
+            .get(&60000),
+        Some(&record)
+    );
+    let mut tx = world.transaction();
+    tx.apply(WorldEdit::Field {
+        chunk: *b"ORDL",
+        record: 60000,
+        path: vec![
+            PathElement::Field("orders".into()),
+            PathElement::Index(0),
+            PathElement::Field("wait_time".into()),
+        ],
+        value: WireValue::Unsigned(32),
+    })?;
+    tx.prepare()?.with_order_duration_deltas(&[])?.commit();
+    assert_eq!(
+        world
+            .derived()
+            .order_lists
+            .iter()
+            .find(|l| l.id == 60000)
+            .ok_or("cache")?
+            .total_duration,
+        0
+    );
+    Ok(())
+}

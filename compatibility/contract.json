@@ -1510,7 +1510,7 @@
     {
       "id": "foundation-crates-ottd-sim-tests-native-runtime-road-rs",
       "path": "crates/ottd-sim/tests/native_runtime_road.rs",
-      "sha256": "66c4a42502485c2d3a32b5551466891d58a7b3bec0a0329ea45461bfb8261971",
+      "sha256": "76301cb1b5c4737be8f34443430d18faed54e657ea2301f18b48b8921b065d99",
       "kind": "recipe",
       "provenance": "Committed stage4 prerequisite test/observer/driver or input; pinned OpenTTD15.3 native callbacks retained; foundation source manifest records executed identity",
       "save_version": null,
@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "45d4b25781846a437c1247ce3477c3f73d43dd82ac125e653064976733c9a698",
+      "sha256": "cebca0dd02b8b2eb31f5981008c43bbaddb3ce387379531e0361091dc56dad96",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2086,7 +2086,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-native-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_native.rs",
-      "sha256": "6a78c003d6816e22007c2f7cf757b5121b069492ef78a22d23024f9ed4afc987",
+      "sha256": "0486a86ad45d7d990a9b22d3413a8d3daa94097e7ea36e57de7fd6d10b2e6eba",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "7f5651fdc39213bee74842cbe1d6bf86808c94469c71b07079c6f42993d225b5",
+      "sha256": "ec62235adf075f4a39f5722bff2275e32c48fa3c360530177368dbe1ce196702",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,

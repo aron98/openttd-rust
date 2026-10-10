@@ -81,12 +81,12 @@ fn check_case(directory: &Path, world: World) -> Result<usize> {
     let runtime = SimulationRuntime::restore_vanilla(world)?;
     road_coverage::assert_admitted(&runtime, directory)?;
     assert_eq!(
-        runtime.world().saved_json()?,
+        runtime.saved_json()?,
         before,
         "restoration changed saved state/RNG"
     );
     assert_eq!(
-        runtime.world().to_savegame()?.encode(Compression::None)?,
+        runtime.to_savegame()?.encode(Compression::None)?,
         bytes,
         "restoration changed serialized bytes"
     );
@@ -103,7 +103,7 @@ fn check_case(directory: &Path, world: World) -> Result<usize> {
     )?;
     std::fs::write(
         directory.join("after.world.json"),
-        serde_json::to_vec(&runtime.world().saved_json()?)?,
+        serde_json::to_vec(&runtime.saved_json()?)?,
     )?;
     compare(&actual, &expected)?;
     for (name, pointer) in [

@@ -22,7 +22,7 @@ fn observe(world: &World) -> Result<ReplayRuntime> {
 fn checkpoint(runtime: &SimulationRuntime, label: &str, output: &Path) -> Result<Value> {
     let observed = observe(runtime.world())?;
     for (extension, value) in [
-        ("world.json", runtime.world().saved_json()?),
+        ("world.json", runtime.saved_json()?),
         (
             "derived.json",
             serde_json::to_value(runtime.world().derived())?,
@@ -39,7 +39,7 @@ fn checkpoint(runtime: &SimulationRuntime, label: &str, output: &Path) -> Result
     }
     std::fs::write(
         output.join(format!("{label}.sav")),
-        runtime.world().to_savegame()?.encode(Compression::None)?,
+        runtime.to_savegame()?.encode(Compression::None)?,
     )?;
     Ok(json!({"label":label,"runtime":observed}))
 }

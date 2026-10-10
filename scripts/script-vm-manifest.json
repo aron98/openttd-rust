@@ -443,7 +443,7 @@
     "crates/ottd-script/tests/frames/scope_guard_clear.txt": "8a074b3bb56e4adf81e630607ca81ce96ecad2b76abbf3230e7e166fae91f54e",
     "crates/ottd-script/tests/frames/scope_guard_noop.txt": "bbf564c86a42c1f6cc7f24701f2ac4c6ccd9dfeedd3297caff64d8c0dc53231e",
     "crates/ottd-script/tests/scalar.rs": "ddb4083e8fe0b6d8f9e5dd4f4109f8a1da827d1e4ce18c4a0bc9bc9e7333cab4",
-    "crates/ottd-sim/Cargo.toml": "e81c7604a2eb7d692d3545fa066a6855ac2f6fe37abda8754e9f9b0e700f7cc5",
+    "crates/ottd-sim/Cargo.toml": "77a74d76c37661862fb0e7fdb533a9a72b5630649540a7ab76c5379b8751a9eb",
     "scripts/check-script-vm.py": "c2522010288817c6f9f26f30ffc4955857cfdbf14831086e9709b99a98064b8c",
     "scripts/compat/script-vm/build-native.sh": "cf3d84f448a51354d6001261d0a1fa727cab1789019edd42304128e5d8193ef2",
     "scripts/compat/script-vm/controls.sh": "a87163074eecfc296203c7ace960bb4f9c75caff2c8d37d9957bdf036eb9754d",

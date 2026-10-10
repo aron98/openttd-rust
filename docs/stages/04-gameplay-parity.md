@@ -8,11 +8,49 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed increment: `d752a7b` adds tree clearing and coupled terrain
-command town ratings. Earlier `f5385a3` resolves NewGRF currency names and
-`ef0f6fd` restores owned order backups during road-vehicle purchases. All seven
+Latest reviewed gameplay increment: `3d952b0` advances empty-road tile callbacks.
+Content increment `fdb7b8f` adds currency properties 0B-0F, and `39eb3e8` restores
+shared order backups in the default group. Script increment `8bc145d` adds owned
+strings and compilation realms; independent review approves the increment. All seven
 completion gates below remain open. Earlier milestones and their bounded
 verification results are recorded below.
+
+Empty-world ticks now visit admitted flat temperate normal roads and depots
+through the existing landscape scheduler and saved-world transaction. Natural
+visits change Barren roadside to Grass; depot and stable Grass state are
+preserved. The registered driver checks eight original processes, six construction
+commands, seven Rust replays and 100 process receipts. Root verification passes
+568 workspace tests, strict checks, 66 Python tests and four fresh original/Rust
+continuation pairs. Independent review verifies the complete archive and fresh
+two-way save probes. Populated vehicle movement, roadworks, slopes, houses,
+custom road types and broader road domains remain open.
+
+Currency properties 0B-0F preserve rates, separator/position, exact symbol bytes
+and euro years through activation and reload. The complete normal driver passes
+14 API cases with 3,951 operations and 21 loader cases with 26 loads and 1,443
+events. Root passes 562 workspace tests, strict checks and the existing property
+0A driver. Independent review verifies both archives and reproduces 297 operations,
+163,404 semantic controls and focused tests. Formatting, annual euro switching
+and configured-content world restoration remain open.
+
+Shared-order restoration composes live backup consumption with same-owner road
+purchases in the default group. Native list insertion, full-capacity reuse,
+property copying and shared timing resets publish atomically. Sixteen original/Rust
+pairs cover 71 actions, 174 snapshots and 16 saves; the full 29-case owned-order
+regression also passes. Independent review approves the increment after archive,
+source and corruption checks. Nondefault groups remain outside this domain.
+
+Owned script strings preserve length-delimited bytes, native escapes, comparisons,
+concatenation, scalar formatting, instruction costs and suspended frame ownership.
+Compilation realms share a weak string interner across programs. Root verification
+passes 584 workspace tests, strict checks, 70 Python tests and 114 additional native
+comparisons. The final complete debug profile passes 10,666 strict comparisons and
+153 separately checked undefined-input rejections, with lifetime sessions, source
+feeds and 23,071 raw-f32 formatting patterns. The earlier optimized profile tests
+identical executed inputs; its actual source epoch remains explicit. Independent
+review verifies the complete final package and reproduces 66 native comparisons,
+1,030 float patterns, 18 private tests and four native lifetime sessions. Globals,
+objects, functions, compiler constants/enums, host APIs and full AI/GS remain open.
 
 Tree clearing now preserves costs, clear limits, nearest-town selection and
 rating changes through TerraformLand and LevelLand test/execute phases. Nested
@@ -32,8 +70,9 @@ Currency property 0A includes owner defaults, deferred StringID mapping,
 ordered writes, and reload/reset. Five direct API cases and 20 loader cases
 cover 25 load passes; all six affected native drivers pass. Independent review
 verified their complete archives and reproduced 23 native API operations,
-14 Rust tests, 11 Python tests, and corruption rejection. Currency properties
-0B-0F, formatting, and annual euro conversion remain separate work.
+14 Rust tests, 11 Python tests, and corruption rejection. Properties 0B-0F are
+covered by the later increment above; formatting and annual euro conversion
+remain separate work.
 
 Owned/default-group order restoration composes purchase, backup consumption,
 copied properties, allocation, payment/RNG, and runtime caches in one
@@ -45,18 +84,22 @@ strict workspace checks, 59 standard-library Python tests, 25 focused Python
 tests, and complete purchase, sale, and order-lifecycle regressions.
 Independent review verified all four archives and ran 27 Rust tests,
 25 Python tests, three fresh native/Rust pairs, and 18 corruption rejections.
-Shared and nondefault-group restoration, movement, and multiplayer dispatch
-remain required. The existing fresh native duration exception is restricted
+The later shared/default-group increment is described above. Nondefault-group
+restoration, movement, and multiplayer dispatch remain required. The existing
+fresh native duration exception is restricted
 to proven new owned incarnations and requires Rust zero; loaded values stay
 strict.
 
-Branch-wide CI is not green. A preceding Linux run failed the script-VM
+Latest branch-wide CI is pending. A preceding Linux run failed the script-VM
 comparison; investigation of an earlier failure found platform-dependent
 undefined byte-character classification in the original lexer. On 2026-10-10
 the maintainer approved explicit Rust rejection when lexing reaches that
 undefined input domain, while preserving defined behavior and Unicode in
-ordinary strings and comments. The typed rejection and separate CI accounting
-are in progress; these gameplay/content increments do not implement the fix.
+ordinary strings and comments. `2c74d24` implements typed rejection and separate
+CI accounting; its [Linux run](https://github.com/aron98/openttd-rust/actions/runs/38041414571)
+passes both jobs. `f55927b` preserves defined octal continuation through the
+original char-narrowed predicate. Later string support extends the policy to
+reached hexadecimal escape classifiers while retaining defined Unicode payloads.
 
 Depot removal matches 34 original-engine cases, 117 actions, 302 snapshots and
 69 save checkpoints. Shared orders, infrastructure, pool reuse, costs and
@@ -126,12 +169,13 @@ The same surrogate-encoded input compiles on the observed Linux build and fails
 on macOS. The historical strict comparison remains failed. The approved policy
 requires explicit rejection at the reached classifier, including identifier,
 number and string-escape lookahead, rather than whole-input Unicode rejection.
-Local macOS results do not establish portable behavior for that domain, and
-branch-wide CI is not green.
+Local macOS results do not establish portable behavior for that domain. The
+explicit policy now passes the Linux run linked above; historical divergent
+observations remain preserved.
 
-Active work continues on currency properties 0B-0F, shared-order restoration,
-the script rejection policy, and Squirrel owned strings and persistent compiler
-state. These increments await their own integrated evidence and review.
+Active work continues on native engine/specification observations, original-built
+road movement witnesses, and persistent compiler constants/enums. These are
+prerequisites to the unchanged broad stage gates below.
 
 For agentic workers: use the subagent-driven development workflow, with explicit
 ownership, native-source evidence, independent review and tests before integration.

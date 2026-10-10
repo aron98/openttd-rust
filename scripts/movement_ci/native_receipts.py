@@ -10,7 +10,8 @@ from .protocol import CASES, labels, validate_request
 from .value import DECODE, EvidenceError, array, field, integer, require, string
 
 
-def verify(output: Path) -> None:
+def native_results(output: Path, *, complete: bool = True) -> tuple[Path, ...]:
+    """Partition the exact native and CLI result namespaces; reject unknown results."""
     expected = {
         case.name.replace("-", "_") + "_" + suffix
         for case in CASES
@@ -23,12 +24,31 @@ def verify(output: Path) -> None:
             "original_from_rust",
         )
     }
-    require(
-        "complete native process roster",
-        condition={p.parent.name for p in output.glob("*/results.json")} == expected,
-    )
-    for name in sorted(expected):
-        directory = output / name
+    cli = {
+        case.name.replace("-", "_") + "_" + suffix
+        for case in CASES
+        for suffix in (
+            "cli",
+            "cli_zero",
+            "cli_crossing",
+            "cli_from_original",
+            "cli_from_rust",
+        )
+    }
+    observed = {p.parent.name for p in output.glob("*/results.json")}
+    require("unknown process results", condition=observed <= expected | cli)
+    if complete:
+        require(
+            "complete native process roster", condition=observed & expected == expected
+        )
+        require("complete CLI process roster", condition=observed & cli == cli)
+    return tuple(output / name / "results.json" for name in sorted(observed & expected))
+
+
+def verify(output: Path) -> None:
+    for result_path in native_results(output):
+        directory = result_path.parent
+        name = directory.name
         process = DECODE((directory / "process.json").read_text())
         require(
             "native host/process failure",

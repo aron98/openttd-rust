@@ -11,6 +11,7 @@ from scripts.depot_build_archive import package_raw, verify_archive
 from .archive_controls import stream
 from .baseline import FileInput
 from .native import write
+from .native_receipts import native_results
 from .value import DECODE, Json, array, field, integer, require, string
 
 
@@ -58,7 +59,7 @@ def verify_retained(directory: Path) -> None:
 
 def seal(output: Path) -> None:
     empties: set[tuple[str, str]] = set()
-    for result_path in output.glob("*/results.json"):
+    for result_path in native_results(output, complete=False):
         result = DECODE(result_path.read_text())
         protocol = DECODE((result_path.parent / "protocol.json").read_text())
         if field(protocol, "trace") is False:

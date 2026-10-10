@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "67640fff32ef4469bbb1fa112362700e8979fd8d1484990f735ee335a23fc756",
+   "sha256": "8672299bbf5191c0cc2f51bbcc7076134d147e1f265904a673bcc4a33ca774b6",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "285049d6a4b7c08141e583ad2eb4bcdc39b814cd8e60c2360082d4947724678b",
+   "sha256": "11f57b2e30a04600907cbb415bea6a18857e98316d0f15625daa1f7d8294f0ec",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "f81ad3bf5740057169d84d2bc5a61d7f8607baf501e13dc9b0147bcbcdc60977",
+   "sha256": "c6565d7778c7e37d9b76504ae42e30ee4f80b5a1eb31a87f489d5732cd98393a",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "2cf6af600e26077c152e2dc7f2cc7ba7f9b15d722ccb2d84b0366de15c129e2f",
+   "sha256": "3db6a9e7bba6ccfc3b6a0ede84c59fcf778bab5fc897ea28e416b9702bbd0911",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8602,7 +8602,7 @@
   {
    "id": "road-movement-scripts-movement-ci-artifacts-py",
    "path": "scripts/movement_ci/artifacts.py",
-   "sha256": "4997d983ce83dd2d18d9f60f03177f9ae197f68d7526e30e1184f828d00fab35",
+   "sha256": "e8c4945863a311b4b7cae4d821e125cc9a41d4e64c4b70dd05cceb775c36b6ef",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8701,7 +8701,7 @@
   {
    "id": "road-movement-scripts-movement-ci-native-receipts-py",
    "path": "scripts/movement_ci/native_receipts.py",
-   "sha256": "0d3f6f2a1c59a053a5e4aa11e636337d023d67c2f38f7c605b68cec476b4f144",
+   "sha256": "0b060e22f18f7a96b0f1d970ca20adfaef8acd72d9d3c69d4104a307cd632a2e",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8782,7 +8782,7 @@
   {
    "id": "road-movement-scripts-tests-movement-ci-test-py",
    "path": "scripts/tests/movement_ci_test.py",
-   "sha256": "a233561dee9a7e97c15da3083ec3d2e399f4e0e9852ec0b290311f9de41f4831",
+   "sha256": "7833a00dfdca989d808422ff2fddc02d3783d7f4c87abc74c931af2a75a8f3df",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,

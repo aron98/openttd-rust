@@ -11,6 +11,7 @@ from scripts.grf_control_run import ControlRun
 from scripts.movement_ci import archive_controls, artifacts, corruption, runner
 from scripts.movement_ci.baseline import FileInput
 from scripts.movement_ci.closure import verify
+from scripts.movement_ci.native_receipts import native_results
 from scripts.movement_ci.protocol import CASES, VehicleId
 from scripts.movement_ci.qualify import Qualified
 from scripts.movement_ci.runner import Mode, destination
@@ -104,6 +105,17 @@ def test_real_archive_member_and_byte_mutations_are_refused(tmp_path: Path) -> N
     output.mkdir()
     for name in ("sources", "native-inputs", "baseline-inputs"):
         artifacts.retain(output / name, (FileInput.capture(source),))
+    for case in CASES:
+        for suffix in (
+            "cli",
+            "cli_zero",
+            "cli_crossing",
+            "cli_from_original",
+            "cli_from_rust",
+        ):
+            directory = output / (case.name.replace("-", "_") + "_" + suffix)
+            directory.mkdir()
+            _ = (directory / "results.json").write_text("{}")
     artifacts.seal(output)
     archive_controls.run(output)
     artifacts.seal(output)
@@ -114,3 +126,51 @@ def test_real_archive_member_and_byte_mutations_are_refused(tmp_path: Path) -> N
 def test_capture_gate_does_not_admit_normal_before_review(tmp_path: Path) -> None:
     with pytest.raises(EvidenceError, match="reviewed"):
         _ = destination(tmp_path, Mode.ADMIT, None, {"verified_native_corpus": False})
+
+
+@pytest.mark.parametrize(
+    "change", ["none", "missing_native", "missing_cli", "extra_native", "extra_cli"]
+)
+def test_exact_result_inventory_partitions_cli_and_native(
+    tmp_path: Path, change: str
+) -> None:
+    # Given all actual producer result namespaces, independently enumerated.
+    native: set[Path] = set()
+    for case in CASES:
+        for suffix in (
+            "prepare",
+            "zero",
+            "discover",
+            "trace",
+            "off",
+            "original_from_rust",
+            "cli",
+            "cli_zero",
+            "cli_crossing",
+            "cli_from_original",
+            "cli_from_rust",
+        ):
+            result = (
+                tmp_path / (case.name.replace("-", "_") + "_" + suffix) / "results.json"
+            )
+            result.parent.mkdir()
+            _ = result.write_text("{}")
+            if not suffix.startswith("cli"):
+                native.add(result)
+    if change == "missing_native":
+        next(iter(native)).unlink()
+    if change == "missing_cli":
+        (tmp_path / "bus_first_cli/results.json").unlink()
+    if change.startswith("extra"):
+        extra = tmp_path / (
+            "unexpected_native" if change == "extra_native" else "bus_first_cli_unknown"
+        )
+        extra.mkdir()
+        _ = (extra / "results.json").write_text("{}")
+    # When parsing the roster, then only the complete, known set is accepted.
+    if change == "none":
+        assert set(native_results(tmp_path)) == native
+        assert len(native) == 24
+    else:
+        with pytest.raises(EvidenceError):
+            _ = native_results(tmp_path)

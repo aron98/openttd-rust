@@ -10,14 +10,36 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
-Script increment `786f85a` adds array foreach iteration to the shared scalar arrays
-from `1ad5dc5` and persistent runners from `ff0d636`. The latest admitted
+Script increment `e2b9181` adds byte-string foreach iteration to the shared scalar
+arrays and persistent runners. The latest admitted
 gameplay increment remains
 `3d952b0`, for empty-road tile callbacks. Populated movement and further content
 loading are in progress. All seven completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
 
-Array foreach preserves the retained iterable, index/value/cursor locals,
+The full four-case bounded road movement capture now passes locally at
+`e167929`, followed by separate live recorded-corpus verification. The final
+archive validates 27,839 members. Actual producer runs exposed duplicate source
+inputs, a native/CLI result-inventory mix-up and temporary/archive filesystem
+races; regression-backed corrections preserve strict missing-evidence and
+corruption rejection. Independent review approves those corrections; root owns
+the complete capture result. The normal movement gate remains false and the
+new PR-only Linux capture job still needs a successful run on this revision.
+
+Byte-string foreach preserves native byte offsets and target C-char values,
+including NUL, suspension, local/root rebinding and temporary ownership.
+Complete debug and optimized profiles each pass 255 strict foreach sessions,
+136 selected Rust tests and 15 foreach corruption controls, alongside the
+existing scalar comparisons and lexer-policy checks. Each archive contains
+98,067 verified members. Those full profiles belong to private `ac26e02`;
+integration preserves all 3,749 execution-bearing inputs and separately records
+the source-inventory and README differences. Integrated verification passes
+702 workspace tests, strict Clippy and formatting. Root adds 21 native/Rust
+comparisons; independent review checks both profiles and adds six comparisons
+and six original sessions. Full AI/GameScript, general iterables, functions,
+host APIs and GC remain open. Linux validation for this increment is pending.
+
+The preceding array foreach increment preserves the retained iterable, index/value/cursor locals,
 instruction costs, suspension, host mutation and shared ownership. Both complete
 debug and optimized profiles pass 10,666 strict comparisons, 153 separate
 lexer-policy checks, 124 selected Rust tests and 135 foreach sessions, with

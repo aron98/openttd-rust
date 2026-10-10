@@ -13,6 +13,7 @@ from scripts.script_vm_observation import (
     compare_observation,
     require_tests,
 )
+from scripts.script_vm_policy import POLICY_STAGE, compare_case
 from scripts.script_vm_provenance import (
     archive_files,
     digest,
@@ -147,8 +148,17 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         )
         if str(selected) != path:
             raise WorldCheckError("VM Cargo identity differs")
+    stages = dict(spec.stages)
     for path in directory.rglob("process.json"):
         relative = str(path.relative_to(directory))
+        parts = path.relative_to(directory).parts
+        if (
+            len(parts) == 5
+            and parts[0] == "cases"
+            and parts[3] == "native"
+            and stages.get("/".join(parts[1:3])) == POLICY_STAGE
+        ):
+            continue  # Exact policy receipt and source bytes are checked by compare_case below.
         status = int(relative.startswith("controls/"))
         expected_receipt = (
             {"returncode": 0}
@@ -184,11 +194,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
                 argv = [binary, str(Path(origin) / "inputs" / name), *map(str, credit)]
                 if read_json(case / side / "argv.json") != argv:
                     raise WorldCheckError("VM matrix invocation differs")
-            compare_observation(
-                (case / "native/stdout.log").read_text(),
-                (case / "rust/stdout.log").read_text(),
-                stages[key],
-            )
+            compare_case(source.read_bytes(), case, stages[key])
     base = directory / "cases/precedence/0-1-2-3-100/native/stdout.log"
     for name, (old, new) in CONTROLS.items():
         changed = directory / "controls" / name / "changed.stdout"
@@ -212,7 +218,9 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "cases": 7642,
         "fixtures": 835,
         "credits": 9,
-        "tests": 50,
+        "tests": 52,
+        "strict_comparisons": 7570,
+        "undefined_input_rejections": 72,
         "controls": 25,
         "frame_tests": 9,
         "native_frames": 9,

@@ -8,7 +8,7 @@ mod lexer;
 mod value;
 mod vm;
 pub use compiler::{compile, compile_bytes};
-pub use error::{CompileError, CompileErrorKind, VmError};
+pub use error::{CompileError, CompileErrorKind, NativeCharacterContext, VmError};
 pub use value::Value;
 pub use vm::{Execution, Vm};
 

@@ -19,10 +19,10 @@ from scripts.script_vm_branches import finish_branches, run_branches
 from scripts.script_vm_evidence import (
     CONTROLS,
     MANIFEST,
-    compare_observation,
     package,
     require_tests,
 )
+from scripts.script_vm_policy import compare_case, observe_native
 from scripts.script_vm_provenance import (
     digest,
     load_spec,
@@ -125,13 +125,14 @@ def main() -> None:
         for credit in spec.credits:
             key = f"{Path(name).stem}/{'-'.join(map(str, credit))}"
             case = output / "cases" / key
-            expected = run(
+            observe_native(
                 [str(native / "observe"), str(source), *map(str, credit)],
-                case / "native",
+                case,
+                source.read_bytes(),
             )
-            actual = run([str(rust), str(source), *map(str, credit)], case / "rust")
-            compare_observation(expected.stdout, actual.stdout, stages[key])
-        print(f"PASS scalar {name}: 9 credit sequences", flush=True)
+            _ = run([str(rust), str(source), *map(str, credit)], case / "rust")
+            compare_case(source.read_bytes(), case, stages[key])
+        print(f"PASS scalar {name}: 9 classified credit cases", flush=True)
     base = output / "cases/precedence/0-1-2-3-100/native/stdout.log"
     for name, (old, new) in CONTROLS.items():
         directory = output / "controls" / name
@@ -163,7 +164,9 @@ def main() -> None:
             "cases": 7642,
             "fixtures": 835,
             "credits": 9,
-            "tests": 50,
+            "tests": 52,
+            "strict_comparisons": 7570,
+            "undefined_input_rejections": 72,
             "controls": 25,
             "frame_tests": 9,
             "native_frames": 9,
@@ -172,7 +175,7 @@ def main() -> None:
         },
     )
     package(output)
-    print("PASS scalar VM 7642 comparisons", flush=True)
+    print("PASS scalar VM 7570 comparisons; 72 undefined-input rejections", flush=True)
 
 
 if __name__ == "__main__":

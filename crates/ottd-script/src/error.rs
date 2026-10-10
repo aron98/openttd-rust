@@ -1,10 +1,28 @@
 use std::fmt;
 
+/// Reached native byte-classification context.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum NativeCharacterContext {
+    /// Default token classification in `SQLexer::Lex`.
+    Token,
+    /// Identifier continuation including its terminating lookahead.
+    Identifier,
+    /// Numeric prefix, digit, exponent or terminating lookahead.
+    Number,
+}
+
 /// Compiler failure category, separate from execution failures.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CompileErrorKind {
     /// Consumed malformed UTF-8 or a codepoint above native `MAX_CHAR` (0xffff).
     InvalidCharacter,
+    /// Decoded codepoint outside the native byte ctype argument domain.
+    UndefinedNativeCharacter {
+        /// Decoded native codepoint (256..=65535).
+        codepoint: u32,
+        /// First reached classifier context.
+        context: NativeCharacterContext,
+    },
     /// Syntax outside the currently supported scalar statement grammar.
     UnsupportedSyntax,
     /// Malformed numeric literal.

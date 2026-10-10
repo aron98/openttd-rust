@@ -100,3 +100,35 @@ current lookahead, rejects malformed UTF-8 and codepoints above U+FFFF, accepts
 native encoded surrogates within comments, and stops at NUL without inspecting
 the suffix. `compile(&str)` delegates to this same path. Diagnostics retain
 original byte offsets. This is not OpenTTD's separate BOM/default file loader.
+
+
+## Defined lexer input policy
+
+OpenTTD 15.3 (`14ec60f248547d4d062a1160f0fc26d742319888`)
+passes decoded codepoints to byte ctype in `sqlexer.cpp`: Lex 251/255/261,
+ReadID 443, and ReadNumber 376/383/388/397/408. Arguments 0..255 are
+within the defined byte domain; U+00E9 is not an undefined argument merely
+because its source encoding uses multiple bytes. The standalone observer uses
+the initial C locale, where identifiers are ASCII.
+
+When a reached classifier would receive 256..65535, Rust rejects with
+`UndefinedNativeCharacter { codepoint, context }` at the original byte offset.
+This is the explicit input policy for undefined native behavior, not native
+compile-error parity. Identifier terminators, numeric prefixes and numeric
+terminating/exponent lookahead are included. Decoding remains lazy: comment
+payload, NUL suffixes and input beyond an earlier syntax error are not eagerly
+classified. Supplementary and malformed encodings retain native decoder failure.
+
+CI binds the eight affected existing fixtures to exact source bytes and an
+`undefined_native_input` stage: 72 credit cases independently require the typed
+Rust rejection while retaining raw original argv/status/stdout/stderr, including
+native success or abnormal termination. The other 7570 observations remain
+strict comparisons. An unclassified typed rejection fails admission. The actual
+Linux U+D800 success and macOS rejection remain divergent observations; neither
+is normalized, rewritten or claimed as portable semantics.
+
+Strings are not implemented in this baseline. Their later implementation must
+preserve ordinary BMP Unicode/surrogate payload and guard only reached ctype
+calls: ReadString 306/310 classifies hex-escape lookahead, even after four hex
+digits because `isxdigit` precedes the length check. Ordinary string contents
+and comments must never be rejected solely for containing codepoints above 255.

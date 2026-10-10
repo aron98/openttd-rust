@@ -19,7 +19,8 @@ pub fn compile(source: &str) -> Result<Program, CompileError> {
 /// Compile native compilebuffer bytes with lazy UTF-8/codepoint admission.
 ///
 /// # Errors
-/// Rejects consumed invalid characters, unsupported syntax and bounded resource excess.
+/// Rejects consumed invalid characters, reached undefined native ctype arguments,
+/// unsupported syntax and bounded resource excess.
 pub fn compile_bytes(source: &[u8]) -> Result<Program, CompileError> {
     if source.len() > 65_536 {
         return Err(CompileError {

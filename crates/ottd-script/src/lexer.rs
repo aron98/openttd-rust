@@ -2,7 +2,7 @@
     clippy::redundant_pub_crate,
     reason = "Crate-private lexer types must satisfy unreachable_pub"
 )]
-use crate::{CompileError, CompileErrorKind, Value};
+use crate::{CompileError, CompileErrorKind, NativeCharacterContext, Value};
 mod comments;
 mod input;
 mod numbers;
@@ -11,6 +11,7 @@ pub(crate) use token::{Token, TokenKind};
 pub(crate) struct Lexer<'a> {
     source: &'a [u8],
     width: usize,
+    character: u32,
     position: usize,
 }
 impl<'a> Lexer<'a> {
@@ -18,6 +19,7 @@ impl<'a> Lexer<'a> {
         let mut lexer = Self {
             source,
             width: 0,
+            character: 0,
             position: 0,
         };
         lexer.read()?;
@@ -53,11 +55,12 @@ impl<'a> Lexer<'a> {
                 newline,
             });
         };
+        self.classify(NativeCharacterContext::Token)?;
         let kind = match c {
             b'0'..=b'9' => TokenKind::Scalar(self.number()?),
             b'a'..=b'z' | b'A'..=b'Z' | b'_' => {
                 while self
-                    .peek()
+                    .classify(NativeCharacterContext::Identifier)?
                     .is_some_and(|b| b.is_ascii_alphanumeric() || b == b'_')
                 {
                     self.advance()?;

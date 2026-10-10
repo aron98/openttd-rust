@@ -5389,6 +5389,7 @@
         "stale-source/scripts/script_vm_evidence.py",
         "stale-source/scripts/script_vm_iteration.py",
         "stale-source/scripts/script_vm_observation.py",
+        "stale-source/scripts/script_vm_policy.py",
         "stale-source/scripts/script_vm_provenance.py",
         "stale-source/scripts/script_vm_switch.py",
         "stale-source/scripts/service_replay.py",

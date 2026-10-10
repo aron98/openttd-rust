@@ -1,12 +1,12 @@
 use super::Lexer;
-use crate::{CompileError, CompileErrorKind, Value};
+use crate::{CompileError, CompileErrorKind, NativeCharacterContext, Value};
 impl Lexer<'_> {
     pub(super) fn number(&mut self) -> Result<Value, CompileError> {
         let start = self.position;
         let first = self.peek();
         self.advance()?;
         let radix = if first == Some(b'0') {
-            match self.peek() {
+            match self.classify(NativeCharacterContext::Number)? {
                 Some(b'x' | b'X') => {
                     self.advance()?;
                     Some(16)
@@ -19,16 +19,22 @@ impl Lexer<'_> {
         };
         if let Some(radix) = radix {
             let digits = self.position;
-            while self.peek().is_some_and(|b| {
-                if radix == 16 {
-                    b.is_ascii_hexdigit()
-                } else {
-                    (b'0'..=b'7').contains(&b)
-                }
-            }) {
+            while self
+                .classify(NativeCharacterContext::Number)?
+                .is_some_and(|b| {
+                    if radix == 16 {
+                        b.is_ascii_hexdigit()
+                    } else {
+                        (b'0'..=b'7').contains(&b)
+                    }
+                })
+            {
                 self.advance()?;
             }
-            if (radix == 8 && self.peek().is_some_and(|b| b.is_ascii_digit()))
+            if (radix == 8
+                && self
+                    .classify(NativeCharacterContext::Number)?
+                    .is_some_and(|b| b.is_ascii_digit()))
                 || (radix == 16 && self.position.saturating_sub(digits) > 16)
             {
                 return Err(self.error(CompileErrorKind::InvalidNumber));
@@ -42,7 +48,7 @@ impl Lexer<'_> {
             return Ok(integer(text, radix));
         }
         let mut float = false;
-        while let Some(c) = self.peek() {
+        while let Some(c) = self.classify(NativeCharacterContext::Number)? {
             match c {
                 b'0'..=b'9' => self.advance()?,
                 b'.' => {
@@ -55,7 +61,10 @@ impl Lexer<'_> {
                     if matches!(self.peek(), Some(b'+' | b'-')) {
                         self.advance()?;
                     }
-                    if !self.peek().is_some_and(|b| b.is_ascii_digit()) {
+                    if !self
+                        .classify(NativeCharacterContext::Number)?
+                        .is_some_and(|b| b.is_ascii_digit())
+                    {
                         return Err(self.error(CompileErrorKind::InvalidNumber));
                     }
                 }

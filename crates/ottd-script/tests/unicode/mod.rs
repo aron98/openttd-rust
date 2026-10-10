@@ -86,3 +86,90 @@ fn earlier_syntax_error_wins_when_bad_encoding_is_not_looked_ahead() {
     assert_eq!(error.kind, ottd_script::CompileErrorKind::ExpectedToken);
     assert_eq!(error.offset, 9);
 }
+
+#[test]
+fn undefined_native_classification_is_rejected_at_the_reached_site() {
+    for (source, offset, context) in [
+        (
+            "return 1;/*x*/Ā",
+            14,
+            ottd_script::NativeCharacterContext::Token,
+        ),
+        (
+            "local aĀ=1;",
+            7,
+            ottd_script::NativeCharacterContext::Identifier,
+        ),
+        ("return 0Ā;", 8, ottd_script::NativeCharacterContext::Number),
+        (
+            "return 07Ā;",
+            9,
+            ottd_script::NativeCharacterContext::Number,
+        ),
+        (
+            "return 0x1Ā;",
+            10,
+            ottd_script::NativeCharacterContext::Number,
+        ),
+        ("return 1Ā;", 8, ottd_script::NativeCharacterContext::Number),
+        (
+            "return 1.Ā;",
+            9,
+            ottd_script::NativeCharacterContext::Number,
+        ),
+        (
+            "return 1eĀ;",
+            9,
+            ottd_script::NativeCharacterContext::Number,
+        ),
+        (
+            "return 1e+Ā;",
+            10,
+            ottd_script::NativeCharacterContext::Number,
+        ),
+    ] {
+        let error = compile(source).expect_err("undefined native classifier argument");
+        assert_eq!(
+            error.kind,
+            ottd_script::CompileErrorKind::UndefinedNativeCharacter {
+                codepoint: 256,
+                context
+            },
+            "{source}"
+        );
+        assert_eq!(error.offset, offset, "{source}");
+    }
+}
+
+#[test]
+fn defined_byte_domain_and_unread_unicode_keep_their_diagnostics() {
+    for (source, kind, offset) in [
+        (
+            "return ÿ;",
+            ottd_script::CompileErrorKind::UnsupportedSyntax,
+            7,
+        ),
+        (
+            "return é;",
+            ottd_script::CompileErrorKind::UnsupportedSyntax,
+            7,
+        ),
+        (
+            "return 1eé;",
+            ottd_script::CompileErrorKind::InvalidNumber,
+            9,
+        ),
+        (
+            "return 1 2;Ā",
+            ottd_script::CompileErrorKind::ExpectedToken,
+            9,
+        ),
+    ] {
+        let error = compile(source).expect_err("defined rejection");
+        assert_eq!(error.kind, kind, "{source}");
+        assert_eq!(error.offset, offset, "{source}");
+    }
+    for source in ["return/*Ā€*/1;", "return//Ā€\n1;", "return 1;\0Ā€"] {
+        assert!(compile(source).is_ok(), "{source}");
+    }
+}

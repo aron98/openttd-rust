@@ -14,13 +14,20 @@ use registers::{Register, Registers};
 /// # Errors
 /// Rejects unsupported syntax, malformed literals and bounded resource excess.
 pub fn compile(source: &str) -> Result<Program, CompileError> {
+    compile_bytes(source.as_bytes())
+}
+/// Compile native compilebuffer bytes with lazy UTF-8/codepoint admission.
+///
+/// # Errors
+/// Rejects consumed invalid characters, unsupported syntax and bounded resource excess.
+pub fn compile_bytes(source: &[u8]) -> Result<Program, CompileError> {
     if source.len() > 65_536 {
         return Err(CompileError {
             offset: 0,
             kind: CompileErrorKind::Limit,
         });
     }
-    let mut lexer = Lexer::new(source);
+    let mut lexer = Lexer::new(source)?;
     let token = lexer.next()?;
     let mut compiler = Compiler {
         lexer,

@@ -94,3 +94,9 @@ Switch selectors retain their original register reference; case EQ may overwrite
 a named case operand. Fallthrough skips later case expressions. Switch owns break
 targets, while continue targets the enclosing loop. Case scopes restore compiler
 metadata; explicit break/continue preserve native conditional register cleanup.
+
+`compile_bytes` follows the pinned compilebuffer callback: it decodes only the
+current lookahead, rejects malformed UTF-8 and codepoints above U+FFFF, accepts
+native encoded surrogates within comments, and stops at NUL without inspecting
+the suffix. `compile(&str)` delegates to this same path. Diagnostics retain
+original byte offsets. This is not OpenTTD's separate BOM/default file loader.

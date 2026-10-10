@@ -7,7 +7,7 @@ mod error;
 mod lexer;
 mod value;
 mod vm;
-pub use compiler::compile;
+pub use compiler::{compile, compile_bytes};
 pub use error::{CompileError, CompileErrorKind, VmError};
 pub use value::Value;
 pub use vm::{Execution, Vm};

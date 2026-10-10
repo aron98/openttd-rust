@@ -306,3 +306,5 @@ mod expstate;
 mod iteration;
 
 mod switch;
+
+mod unicode;

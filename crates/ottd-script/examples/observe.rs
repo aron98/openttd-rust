@@ -1,5 +1,5 @@
 //! Test-only native differential observer for scalar programs.
-use ottd_script::{Execution, Value, Vm, compile};
+use ottd_script::{Execution, Value, Vm, compile_bytes};
 use std::{env, error::Error, fs};
 fn value(value: Value) {
     match value {
@@ -12,8 +12,8 @@ fn value(value: Value) {
 fn main() -> Result<(), Box<dyn Error>> {
     let mut args = env::args().skip(1);
     let filename = args.next().ok_or("source path required")?;
-    let source = fs::read_to_string(filename)?;
-    let program = match compile(&source) {
+    let source = fs::read(filename)?;
+    let program = match compile_bytes(&source) {
         Ok(program) => program,
         Err(error) => {
             println!("compile_error");

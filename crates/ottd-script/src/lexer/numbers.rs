@@ -4,11 +4,11 @@ impl Lexer<'_> {
     pub(super) fn number(&mut self) -> Result<Value, CompileError> {
         let start = self.position;
         let first = self.peek();
-        self.advance();
+        self.advance()?;
         let radix = if first == Some(b'0') {
             match self.peek() {
                 Some(b'x' | b'X') => {
-                    self.advance();
+                    self.advance()?;
                     Some(16)
                 }
                 Some(b'0'..=b'7') => Some(8),
@@ -26,7 +26,7 @@ impl Lexer<'_> {
                     (b'0'..=b'7').contains(&b)
                 }
             }) {
-                self.advance();
+                self.advance()?;
             }
             if (radix == 8 && self.peek().is_some_and(|b| b.is_ascii_digit()))
                 || (radix == 16 && self.position.saturating_sub(digits) > 16)
@@ -37,21 +37,23 @@ impl Lexer<'_> {
                 .source
                 .get(digits..self.position)
                 .ok_or_else(|| self.error(CompileErrorKind::InvalidNumber))?;
+            let text = std::str::from_utf8(text)
+                .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
             return Ok(integer(text, radix));
         }
         let mut float = false;
         while let Some(c) = self.peek() {
             match c {
-                b'0'..=b'9' => self.advance(),
+                b'0'..=b'9' => self.advance()?,
                 b'.' => {
                     float = true;
-                    self.advance();
+                    self.advance()?;
                 }
                 b'e' | b'E' => {
                     float = true;
-                    self.advance();
+                    self.advance()?;
                     if matches!(self.peek(), Some(b'+' | b'-')) {
-                        self.advance();
+                        self.advance()?;
                     }
                     if !self.peek().is_some_and(|b| b.is_ascii_digit()) {
                         return Err(self.error(CompileErrorKind::InvalidNumber));
@@ -64,6 +66,8 @@ impl Lexer<'_> {
             .source
             .get(start..self.position)
             .ok_or_else(|| self.error(CompileErrorKind::InvalidNumber))?;
+        let text = std::str::from_utf8(text)
+            .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
         if float {
             parse_float(text)
                 .map(Value::Float)

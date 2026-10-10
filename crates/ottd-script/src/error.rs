@@ -3,6 +3,8 @@ use std::fmt;
 /// Compiler failure category, separate from execution failures.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CompileErrorKind {
+    /// Consumed malformed UTF-8 or a codepoint above native `MAX_CHAR` (0xffff).
+    InvalidCharacter,
     /// Syntax outside the currently supported scalar statement grammar.
     UnsupportedSyntax,
     /// Malformed numeric literal.

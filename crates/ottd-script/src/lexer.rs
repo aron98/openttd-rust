@@ -4,25 +4,38 @@
 )]
 use crate::{CompileError, CompileErrorKind, Value};
 mod comments;
+mod input;
 mod numbers;
 mod token;
 pub(crate) use token::{Token, TokenKind};
 pub(crate) struct Lexer<'a> {
-    source: &'a str,
+    source: &'a [u8],
+    width: usize,
     position: usize,
 }
 impl<'a> Lexer<'a> {
-    pub(super) const fn new(source: &'a str) -> Self {
-        Self {
+    pub(super) fn new(source: &'a [u8]) -> Result<Self, CompileError> {
+        let mut lexer = Self {
             source,
+            width: 0,
             position: 0,
-        }
+        };
+        lexer.read()?;
+        Ok(lexer)
     }
     fn peek(&self) -> Option<u8> {
-        self.source.as_bytes().get(self.position).copied()
+        if self.width == 0 {
+            None
+        } else {
+            self.source.get(self.position).copied()
+        }
     }
-    const fn advance(&mut self) {
-        self.position = self.position.saturating_add(1);
+    fn advance(&mut self) -> Result<(), CompileError> {
+        if self.width == 0 {
+            return Ok(());
+        }
+        self.position = self.position.saturating_add(self.width);
+        self.read()
     }
     const fn error(&self, kind: CompileErrorKind) -> CompileError {
         CompileError {
@@ -47,12 +60,14 @@ impl<'a> Lexer<'a> {
                     .peek()
                     .is_some_and(|b| b.is_ascii_alphanumeric() || b == b'_')
                 {
-                    self.advance();
+                    self.advance()?;
                 }
                 let name = self
                     .source
                     .get(offset..self.position)
                     .ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
+                let name = std::str::from_utf8(name)
+                    .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
                 match name {
                     "return" => TokenKind::Return,
                     "local" => TokenKind::Local,
@@ -93,7 +108,7 @@ impl<'a> Lexer<'a> {
     }
     fn symbol(&mut self, first: u8) -> Result<TokenKind<'a>, CompileError> {
         let offset = self.position;
-        self.advance();
+        self.advance()?;
         let pair = (first, self.peek());
         let combined = match pair {
             (b'=', Some(b'=')) => Some(TokenKind::Equal),
@@ -109,9 +124,9 @@ impl<'a> Lexer<'a> {
             }
             (b'<', Some(b'<')) => Some(TokenKind::Shift(4)),
             (b'>', Some(b'>')) => {
-                self.advance();
+                self.advance()?;
                 if self.peek() == Some(b'>') {
-                    self.advance();
+                    self.advance()?;
                     return Ok(TokenKind::Shift(6));
                 }
                 return Ok(TokenKind::Shift(5));
@@ -125,7 +140,7 @@ impl<'a> Lexer<'a> {
             _ => None,
         };
         combined.map_or(Ok(TokenKind::Symbol(first)), |token| {
-            self.advance();
+            self.advance()?;
             Ok(token)
         })
     }

@@ -85,6 +85,21 @@ BRANCH_CONTROLS = {
 
 BRANCH_CONTROLS.update(ITERATION_CONTROLS)
 BRANCH_CONTROLS.update(SWITCH_CONTROLS)
+BRANCH_CONTROLS.update(
+    {
+        "unicode-max-char": (
+            "unicode_040.nut",
+            "compile_error",
+            "return 9998 integer 1",
+        ),
+        "unicode-nul-eof": ("unicode_075.nut", "integer 1", "integer 9"),
+        "unicode-surrogate": (
+            "unicode_020.nut",
+            "return 9998 integer 1",
+            "compile_error",
+        ),
+    }
+)
 
 LIB_BUILD = [
     "cargo",

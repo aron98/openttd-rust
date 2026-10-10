@@ -2995,7 +2995,7 @@
     {
       "id": "scalar-vm-driver",
       "path": "scripts/check-script-vm.py",
-      "sha256": "367a1146a2841a8dfc002cb07c037f3abaa3a253c6db13ccc52cfa0f2d9e90ae",
+      "sha256": "f2f808e427fac1c8a416a566293c6ef119a949e758d407dbbbf27e9d37f56d40",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3004,7 +3004,7 @@
     {
       "id": "scalar-vm-validator",
       "path": "scripts/script_vm_evidence.py",
-      "sha256": "4ed82b37f23aef46c7bc83cf6247523d4ea9fb5ab6637ec728ca49d5ae3b9aea",
+      "sha256": "d49a5d1789cba792e720f7732e4d37064ca6b5a00bbc72bf9332aa85f5ccded8",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3013,7 +3013,7 @@
     {
       "id": "scalar-vm-provenance",
       "path": "scripts/script_vm_provenance.py",
-      "sha256": "eef40e57d27c4d89e5c99aaa45258279a5c47ae178082380b95a210f2a9e594c",
+      "sha256": "7ad900f684ee71dd7e4525fbf121311b81ab8b425604f090a0f23027f3479c75",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "76421ab9992242c25f9a54974e24637ff167eb8bec86a67ba1620a5d398c268b",
+      "sha256": "26fb338a219e1b29a49d4f5262342b453e718f5cab4839d4c88cce405aa0e3d7",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "8333a41f99b7320d99749969ec98b8da0cdb108e3669b8ff8c71fcbf2118b6c1",
+      "sha256": "efa417c5a891f32953e88bea83cc869b5f00108e15b8402739a8a2c5018a537a",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "99f2807927249bc5ac08cf3e9c8a6a822d9892494e498ad7c27543e7dce8259c",
+      "sha256": "12e5b2e269659be2b84a22e52158f44e4b4636d3249195cfa7887c3de93afe71",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -9656,7 +9656,7 @@
         "zero-tests/stdout.log",
         "native/variant.txt"
       ],
-      "success_text": "PASS scalar VM 6643 comparisons",
+      "success_text": "PASS scalar VM 7642 comparisons",
       "scopes": [
         "rust_behavior"
       ],
@@ -14087,8 +14087,8 @@
       "id": "script.scalar-vm",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Scalar locals/assignment/comma/ternary/bitwise/shifts/compound updates/if/while/for/do/break/continue /switch/comments and26/62 bundled Squirrel opcodes; i64/f32/GC-enabled variant. Shifts cover everyi64 value for counts0..63; undefined counts return UnsupportedShiftCount. Objects/functions/host APIs/AI/GS/saved-script integration and signed arithmetic overflow remain unfinished.",
-      "expected": "Fresh pinned native compiler/VM versus actual Cargo example:724 fixtures x9 credit sequences plus127 targeted budget probes=6643 strict comparisons;44 exact integration tests,9 private register tests bound to9 fresh native frame captures,22 corruption controls. Previous618 fixtures/5638 comparisons and all44 tests retained; deduplicated comment/switch corpus added. Undefined-count refusal tested separately from portable native parity. Manifest pins all source/native blobs and complete raw evidence; archives/executables verified.",
+      "domain": "Scalar locals/assignment/comma/ternary/bitwise/shifts/compound updates/if/while/for/do/break/continue /switch/comments/lazy compilebuffer byte decoding and26/62 bundled Squirrel opcodes; i64/f32/GC-enabled variant. Shifts cover everyi64 value for counts0..63; undefined counts return UnsupportedShiftCount. Objects/functions/host APIs/AI/GS/saved-script integration and signed arithmetic overflow remain unfinished.",
+      "expected": "Fresh pinned native compiler/VM versus actual Cargo example:835 fixtures x9 credit sequences plus127 targeted budget probes=7642 strict comparisons;50 exact integration tests,9 private register tests bound to9 fresh native frame captures,25 corruption controls. Previous724 fixtures/6643 comparisons and all53 tests retained; lazy native compilebuffer byte decoding regressions added. Undefined-count refusal tested separately from portable native parity. Manifest pins all source/native blobs and complete raw evidence; archives/executables verified.",
       "driver": "script-vm",
       "assets": [
         "scalar-vm-driver",

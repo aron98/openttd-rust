@@ -31,9 +31,12 @@ pub(crate) enum Binding {
 pub(super) type Table = BTreeMap<Vec<u8>, (ByteString, Binding)>;
 impl Realm {
     pub(crate) fn constant(&self, name: &str) -> Option<Binding> {
+        self.constant_bytes(name.as_bytes())
+    }
+    pub(crate) fn constant_bytes(&self, name: &[u8]) -> Option<Binding> {
         self.constants
             .borrow()
-            .get(name.as_bytes())
+            .get(name)
             .map(|(_, value)| value.clone())
     }
     pub(crate) fn publish(&self, name: ByteString, value: Binding) {

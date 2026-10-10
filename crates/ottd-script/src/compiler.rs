@@ -50,12 +50,12 @@ pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program,
         last_stack_size: 0,
     };
     compiler.main()?;
-    Ok(Program {
+    Ok(Program::freeze(crate::ProgramData {
         realm: realm.clone(),
         stack_size: compiler.registers.high_water,
         literals: compiler.literals,
         instructions: compiler.emitter.instructions,
-    })
+    }))
 }
 struct Compiler<'a> {
     realm: crate::Realm,

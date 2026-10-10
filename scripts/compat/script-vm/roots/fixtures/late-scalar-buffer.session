@@ -1,0 +1,4 @@
+compile 0 0 buffer fixtures/late-read.nut
+compile 0 1 buffer fixtures/late-scalar.nut
+run 0 0 1000
+raw 0 4c61746572

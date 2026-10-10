@@ -1,0 +1,853 @@
+{
+  "schema": 1,
+  "mode": "--root-slots-session",
+  "cases": [
+    {
+      "id": "assignment-alias-buffer",
+      "session": "fixtures/assignment-alias-buffer.session",
+      "cwd": ".",
+      "capture": "native/assignment-alias-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "assignment-alias-unsigned",
+      "session": "fixtures/assignment-alias-unsigned.session",
+      "cwd": ".",
+      "capture": "native/assignment-alias-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "assignment-alias-utf8",
+      "session": "fixtures/assignment-alias-utf8.session",
+      "cwd": ".",
+      "capture": "native/assignment-alias-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "assignment-result-buffer",
+      "session": "fixtures/assignment-result-buffer.session",
+      "cwd": ".",
+      "capture": "native/assignment-result-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "assignment-result-unsigned",
+      "session": "fixtures/assignment-result-unsigned.session",
+      "cwd": ".",
+      "capture": "native/assignment-result-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "assignment-result-utf8",
+      "session": "fixtures/assignment-result-utf8.session",
+      "cwd": ".",
+      "capture": "native/assignment-result-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "budget-every-step-buffer",
+      "session": "fixtures/budget-every-step-buffer.session",
+      "cwd": ".",
+      "capture": "native/budget-every-step-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "budget-every-step-unsigned",
+      "session": "fixtures/budget-every-step-unsigned.session",
+      "cwd": ".",
+      "capture": "native/budget-every-step-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "budget-every-step-utf8",
+      "session": "fixtures/budget-every-step-utf8.session",
+      "cwd": ".",
+      "capture": "native/budget-every-step-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "byte-key-buffer",
+      "session": "fixtures/byte-key-buffer.session",
+      "cwd": ".",
+      "capture": "native/byte-key-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "byte-key-unsigned",
+      "session": "fixtures/byte-key-unsigned.session",
+      "cwd": ".",
+      "capture": "native/byte-key-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "byte-key-utf8",
+      "session": "fixtures/byte-key-utf8.session",
+      "cwd": ".",
+      "capture": "native/byte-key-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "compile-failure-buffer",
+      "session": "fixtures/compile-failure-buffer.session",
+      "cwd": ".",
+      "capture": "native/compile-failure-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "compile-failure-unsigned",
+      "session": "fixtures/compile-failure-unsigned.session",
+      "cwd": ".",
+      "capture": "native/compile-failure-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "compile-failure-utf8",
+      "session": "fixtures/compile-failure-utf8.session",
+      "cwd": ".",
+      "capture": "native/compile-failure-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "create-replace-buffer",
+      "session": "fixtures/create-replace-buffer.session",
+      "cwd": ".",
+      "capture": "native/create-replace-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "create-replace-unsigned",
+      "session": "fixtures/create-replace-unsigned.session",
+      "cwd": ".",
+      "capture": "native/create-replace-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "create-replace-utf8",
+      "session": "fixtures/create-replace-utf8.session",
+      "cwd": ".",
+      "capture": "native/create-replace-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "delegate-precedence-buffer",
+      "session": "fixtures/delegate-precedence-buffer.session",
+      "cwd": ".",
+      "capture": "native/delegate-precedence-buffer.txt",
+      "domain": "explicit-runtime-boundary"
+    },
+    {
+      "id": "delegate-precedence-unsigned",
+      "session": "fixtures/delegate-precedence-unsigned.session",
+      "cwd": ".",
+      "capture": "native/delegate-precedence-unsigned.txt",
+      "domain": "explicit-runtime-boundary"
+    },
+    {
+      "id": "delegate-precedence-utf8",
+      "session": "fixtures/delegate-precedence-utf8.session",
+      "cwd": ".",
+      "capture": "native/delegate-precedence-utf8.txt",
+      "domain": "explicit-runtime-boundary"
+    },
+    {
+      "id": "explicit-buffer",
+      "session": "fixtures/explicit-buffer.session",
+      "cwd": ".",
+      "capture": "native/explicit-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "explicit-unsigned",
+      "session": "fixtures/explicit-unsigned.session",
+      "cwd": ".",
+      "capture": "native/explicit-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "explicit-utf8",
+      "session": "fixtures/explicit-utf8.session",
+      "cwd": ".",
+      "capture": "native/explicit-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "failure-persistence-buffer",
+      "session": "fixtures/failure-persistence-buffer.session",
+      "cwd": ".",
+      "capture": "native/failure-persistence-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "failure-persistence-unsigned",
+      "session": "fixtures/failure-persistence-unsigned.session",
+      "cwd": ".",
+      "capture": "native/failure-persistence-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "failure-persistence-utf8",
+      "session": "fixtures/failure-persistence-utf8.session",
+      "cwd": ".",
+      "capture": "native/failure-persistence-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "inline-explicit-buffer",
+      "session": "fixtures/inline-explicit-buffer.session",
+      "cwd": ".",
+      "capture": "native/inline-explicit-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "inline-explicit-unsigned",
+      "session": "fixtures/inline-explicit-unsigned.session",
+      "cwd": ".",
+      "capture": "native/inline-explicit-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "inline-explicit-utf8",
+      "session": "fixtures/inline-explicit-utf8.session",
+      "cwd": ".",
+      "capture": "native/inline-explicit-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "late-enum-buffer",
+      "session": "fixtures/late-enum-buffer.session",
+      "cwd": ".",
+      "capture": "native/late-enum-buffer.txt",
+      "domain": "explicit-runtime-boundary"
+    },
+    {
+      "id": "late-enum-unsigned",
+      "session": "fixtures/late-enum-unsigned.session",
+      "cwd": ".",
+      "capture": "native/late-enum-unsigned.txt",
+      "domain": "explicit-runtime-boundary"
+    },
+    {
+      "id": "late-enum-utf8",
+      "session": "fixtures/late-enum-utf8.session",
+      "cwd": ".",
+      "capture": "native/late-enum-utf8.txt",
+      "domain": "explicit-runtime-boundary"
+    },
+    {
+      "id": "late-scalar-buffer",
+      "session": "fixtures/late-scalar-buffer.session",
+      "cwd": ".",
+      "capture": "native/late-scalar-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "late-scalar-unsigned",
+      "session": "fixtures/late-scalar-unsigned.session",
+      "cwd": ".",
+      "capture": "native/late-scalar-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "late-scalar-utf8",
+      "session": "fixtures/late-scalar-utf8.session",
+      "cwd": ".",
+      "capture": "native/late-scalar-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "lifetime-buffer",
+      "session": "fixtures/lifetime-buffer.session",
+      "cwd": ".",
+      "capture": "native/lifetime-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "lifetime-unsigned",
+      "session": "fixtures/lifetime-unsigned.session",
+      "cwd": ".",
+      "capture": "native/lifetime-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "lifetime-utf8",
+      "session": "fixtures/lifetime-utf8.session",
+      "cwd": ".",
+      "capture": "native/lifetime-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "live-read-buffer",
+      "session": "fixtures/live-read-buffer.session",
+      "cwd": ".",
+      "capture": "native/live-read-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "live-read-unsigned",
+      "session": "fixtures/live-read-unsigned.session",
+      "cwd": ".",
+      "capture": "native/live-read-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "live-read-utf8",
+      "session": "fixtures/live-read-utf8.session",
+      "cwd": ".",
+      "capture": "native/live-read-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "missing-read-buffer",
+      "session": "fixtures/missing-read-buffer.session",
+      "cwd": ".",
+      "capture": "native/missing-read-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "missing-read-unsigned",
+      "session": "fixtures/missing-read-unsigned.session",
+      "cwd": ".",
+      "capture": "native/missing-read-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "missing-read-utf8",
+      "session": "fixtures/missing-read-utf8.session",
+      "cwd": ".",
+      "capture": "native/missing-read-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "missing-set-buffer",
+      "session": "fixtures/missing-set-buffer.session",
+      "cwd": ".",
+      "capture": "native/missing-set-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "missing-set-unsigned",
+      "session": "fixtures/missing-set-unsigned.session",
+      "cwd": ".",
+      "capture": "native/missing-set-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "missing-set-utf8",
+      "session": "fixtures/missing-set-utf8.session",
+      "cwd": ".",
+      "capture": "native/missing-set-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "null-set-buffer",
+      "session": "fixtures/null-set-buffer.session",
+      "cwd": ".",
+      "capture": "native/null-set-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "null-set-unsigned",
+      "session": "fixtures/null-set-unsigned.session",
+      "cwd": ".",
+      "capture": "native/null-set-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "null-set-utf8",
+      "session": "fixtures/null-set-utf8.session",
+      "cwd": ".",
+      "capture": "native/null-set-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "read-buffer",
+      "session": "fixtures/read-buffer.session",
+      "cwd": ".",
+      "capture": "native/read-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "read-unsigned",
+      "session": "fixtures/read-unsigned.session",
+      "cwd": ".",
+      "capture": "native/read-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "read-utf8",
+      "session": "fixtures/read-utf8.session",
+      "cwd": ".",
+      "capture": "native/read-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "set-buffer",
+      "session": "fixtures/set-buffer.session",
+      "cwd": ".",
+      "capture": "native/set-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "set-unsigned",
+      "session": "fixtures/set-unsigned.session",
+      "cwd": ".",
+      "capture": "native/set-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "set-utf8",
+      "session": "fixtures/set-utf8.session",
+      "cwd": ".",
+      "capture": "native/set-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "shared-independent-buffer",
+      "session": "fixtures/shared-independent-buffer.session",
+      "cwd": ".",
+      "capture": "native/shared-independent-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "shared-independent-unsigned",
+      "session": "fixtures/shared-independent-unsigned.session",
+      "cwd": ".",
+      "capture": "native/shared-independent-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "shared-independent-utf8",
+      "session": "fixtures/shared-independent-utf8.session",
+      "cwd": ".",
+      "capture": "native/shared-independent-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "surrogate-string-buffer",
+      "session": "fixtures/surrogate-string-buffer.session",
+      "cwd": ".",
+      "capture": "native/surrogate-string-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "surrogate-string-unsigned",
+      "session": "fixtures/surrogate-string-unsigned.session",
+      "cwd": ".",
+      "capture": "native/surrogate-string-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "surrogate-string-utf8",
+      "session": "fixtures/surrogate-string-utf8.session",
+      "cwd": ".",
+      "capture": "native/surrogate-string-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "suspended-host-writes-buffer",
+      "session": "fixtures/suspended-host-writes-buffer.session",
+      "cwd": ".",
+      "capture": "native/suspended-host-writes-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "suspended-host-writes-unsigned",
+      "session": "fixtures/suspended-host-writes-unsigned.session",
+      "cwd": ".",
+      "capture": "native/suspended-host-writes-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "suspended-host-writes-utf8",
+      "session": "fixtures/suspended-host-writes-utf8.session",
+      "cwd": ".",
+      "capture": "native/suspended-host-writes-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "unicode-string-buffer",
+      "session": "fixtures/unicode-string-buffer.session",
+      "cwd": ".",
+      "capture": "native/unicode-string-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "unicode-string-unsigned",
+      "session": "fixtures/unicode-string-unsigned.session",
+      "cwd": ".",
+      "capture": "native/unicode-string-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "unicode-string-utf8",
+      "session": "fixtures/unicode-string-utf8.session",
+      "cwd": ".",
+      "capture": "native/unicode-string-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "unsupported-array-buffer",
+      "session": "fixtures/unsupported-array-buffer.session",
+      "cwd": ".",
+      "capture": "native/unsupported-array-buffer.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-array-unsigned",
+      "session": "fixtures/unsupported-array-unsigned.session",
+      "cwd": ".",
+      "capture": "native/unsupported-array-unsigned.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-array-utf8",
+      "session": "fixtures/unsupported-array-utf8.session",
+      "cwd": ".",
+      "capture": "native/unsupported-array-utf8.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-field-buffer",
+      "session": "fixtures/unsupported-field-buffer.session",
+      "cwd": ".",
+      "capture": "native/unsupported-field-buffer.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-field-unsigned",
+      "session": "fixtures/unsupported-field-unsigned.session",
+      "cwd": ".",
+      "capture": "native/unsupported-field-unsigned.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-field-utf8",
+      "session": "fixtures/unsupported-field-utf8.session",
+      "cwd": ".",
+      "capture": "native/unsupported-field-utf8.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-root-buffer",
+      "session": "fixtures/unsupported-root-buffer.session",
+      "cwd": ".",
+      "capture": "native/unsupported-root-buffer.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-root-unsigned",
+      "session": "fixtures/unsupported-root-unsigned.session",
+      "cwd": ".",
+      "capture": "native/unsupported-root-unsigned.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-root-utf8",
+      "session": "fixtures/unsupported-root-utf8.session",
+      "cwd": ".",
+      "capture": "native/unsupported-root-utf8.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-update-buffer",
+      "session": "fixtures/unsupported-update-buffer.session",
+      "cwd": ".",
+      "capture": "native/unsupported-update-buffer.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-update-unsigned",
+      "session": "fixtures/unsupported-update-unsigned.session",
+      "cwd": ".",
+      "capture": "native/unsupported-update-unsigned.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "unsupported-update-utf8",
+      "session": "fixtures/unsupported-update-utf8.session",
+      "cwd": ".",
+      "capture": "native/unsupported-update-utf8.txt",
+      "domain": "explicit-syntax-boundary"
+    },
+    {
+      "id": "update-buffer",
+      "session": "fixtures/update-buffer.session",
+      "cwd": ".",
+      "capture": "native/update-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "update-unsigned",
+      "session": "fixtures/update-unsigned.session",
+      "cwd": ".",
+      "capture": "native/update-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "update-utf8",
+      "session": "fixtures/update-utf8.session",
+      "cwd": ".",
+      "capture": "native/update-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "ownership-compile-temp-buffer",
+      "session": "ownership/fixtures/compile-temp-buffer.session",
+      "cwd": "ownership",
+      "capture": "ownership/compile-temp-buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "ownership-compile-temp-unsigned",
+      "session": "ownership/fixtures/compile-temp-unsigned.session",
+      "cwd": "ownership",
+      "capture": "ownership/compile-temp-unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "ownership-compile-temp-utf8",
+      "session": "ownership/fixtures/compile-temp-utf8.session",
+      "cwd": "ownership",
+      "capture": "ownership/compile-temp-utf8.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "replacement-buffer",
+      "session": "replacement/fixtures/buffer.session",
+      "cwd": "replacement",
+      "capture": "replacement/buffer.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "replacement-unsigned",
+      "session": "replacement/fixtures/unsigned.session",
+      "cwd": "replacement",
+      "capture": "replacement/unsigned.txt",
+      "domain": "strict-stateful-projection"
+    },
+    {
+      "id": "replacement-utf8",
+      "session": "replacement/fixtures/utf8.session",
+      "cwd": "replacement",
+      "capture": "replacement/utf8.txt",
+      "domain": "strict-stateful-projection"
+    }
+  ],
+  "files": {
+    "fixtures/assignment-alias-buffer.session": "081c953169a8307fc014aea24c8fd058a7c796fb4f6f9fe1946063a64e7b48f3",
+    "fixtures/assignment-alias-unsigned.session": "e3fd77bc7538b66cf0399e00d1a58cd63854c46823c13b50130fd67a22ac96bb",
+    "fixtures/assignment-alias-utf8.session": "96a36decca144cb25a516bf7017197cf1cab02ed6e0d5b5675e5ed46533674c5",
+    "fixtures/assignment-alias.nut": "f663de0bb8234188551c4a568a91db29f10b97abe1ab3d7de14f99c0b07a41fc",
+    "fixtures/assignment-result-buffer.session": "c670926ba44442a54d44c067113bb0570c3372b9125f877ae1fc7b9554aabf27",
+    "fixtures/assignment-result-unsigned.session": "92f6640368bafefe4cab79486073278b571476b413abee9eab496ca31baf0bce",
+    "fixtures/assignment-result-utf8.session": "576383ec7f5f08bdb851a67f91df3de3540e0ec61a72af131aaf02e2c5b5ce3e",
+    "fixtures/assignment-result.nut": "e35c8b094f62a91a63af70b1ed7ab955931a8f0956f7b7f78886bd318684cc8e",
+    "fixtures/budget-every-step-buffer.session": "ab660f7585dd07b95a3ce881ca8f5177cdef098886ad5abf5d5d1110f86d52a8",
+    "fixtures/budget-every-step-unsigned.session": "3af1fccbdb784d41c2fb07c3ab6e230dce3351179aa12edd6dbbaaed98caa6ad",
+    "fixtures/budget-every-step-utf8.session": "2dea084ff882c5b25d609fd9edb1749d47404e4b63d1906e6054ee6755798b81",
+    "fixtures/byte-key-buffer.session": "8404e9f9d233ec57303307f63c41a1ab9754c8073d54f44d56043e1e741f914d",
+    "fixtures/byte-key-unsigned.session": "8404e9f9d233ec57303307f63c41a1ab9754c8073d54f44d56043e1e741f914d",
+    "fixtures/byte-key-utf8.session": "8404e9f9d233ec57303307f63c41a1ab9754c8073d54f44d56043e1e741f914d",
+    "fixtures/compile-failure-buffer.session": "3db47fcbee9e12ac1434c1300a9f57aeea2d161b799d81d7b9ed8a06f5be121c",
+    "fixtures/compile-failure-unsigned.session": "192e5b33e49910b5e00a454b9f3333368b738a78d822f5edc5e0d39705d83052",
+    "fixtures/compile-failure-utf8.session": "a9cefc8338e705708d7fa4dd59a157cfb840f8f1651e3c487fa3dda8c0bf0249",
+    "fixtures/compile-failure.nut": "dd2ef45ee44131d518824894ce8a9431516906d5f6ef4c46921e64fdd0aa355a",
+    "fixtures/create-replace-buffer.session": "28ebd513283f34ce84b11517b2899435d4834e580a8f862a970c5d48a43a0e57",
+    "fixtures/create-replace-unsigned.session": "4dc011ab47f4876dcae17361924e732af5d31decded5ec0ed4bf072a331aaa64",
+    "fixtures/create-replace-utf8.session": "a15f16a14462d6a196c1b818409a16f857160b2163c6000f541281bd546779d4",
+    "fixtures/create-replace.nut": "49c83747c15321414b19c5d7584621bde99cba5b7020c16e4d1c5aed22a9840e",
+    "fixtures/delegate-precedence-buffer.session": "0c4147a3383c1c6c13379adb3cd3eab1d67ba834e5d37c39ddc6604adc2b6a1d",
+    "fixtures/delegate-precedence-unsigned.session": "596aa29a3a02d11145ed2482343ffa70fae6eeaa805b56faf8b06b02fd55c6dc",
+    "fixtures/delegate-precedence-utf8.session": "02715d81f3db7717f9144506520c91bb93ac244d7c8a6e8350a5ede04d62a9ea",
+    "fixtures/explicit-buffer.session": "8ddfc4476bb163fc817e0c8a5e260e4d33df54104e99e9a9774bc2fbee6ac125",
+    "fixtures/explicit-read.nut": "120b0f81d7b4d301b51978bc0d94d4196027f459f1d98f60d71dccd427eb1e17",
+    "fixtures/explicit-unsigned.session": "713149e25913bddb8560240ab4988cbdf61e51123cdf4bc61d72b30ea8a6f973",
+    "fixtures/explicit-utf8.session": "0f9c9377e637cd089651e72bb2c821e5ec63f8675da741abd7a240776b57a18f",
+    "fixtures/explicit.nut": "9462af26dc5ad047ba411b05f84d4bf17826f5d4a6a9ab005c0346f1f877ad4b",
+    "fixtures/failure-persistence-buffer.session": "407c8ce3468be89fdfaf694797a4e794bbcfd12666aa1e030a92fbd5888c7bf5",
+    "fixtures/failure-persistence-unsigned.session": "fc2cb599bec372d1d9896e18f75cc42503a9f85f36f008defa6ae644556e70c6",
+    "fixtures/failure-persistence-utf8.session": "2307ae5fe03ec84d518ad11bdfb15436c4f036d48aaac45112759c34f9990534",
+    "fixtures/failure-persistence.nut": "d900fc52db9ae70644b0d9f8a1357d6cb805359a8f9c3c98647d1e3f8f4b7824",
+    "fixtures/inline-constant.nut": "e11b960656741f749ada9144411edd951f828c556c8bc327679dd63ad750bab8",
+    "fixtures/inline-explicit-buffer.session": "b2330889af40c625a0c0e8deb20b16b3e758a9b8f9d6d97f7328462652ee84e0",
+    "fixtures/inline-explicit-unsigned.session": "174fcb24be3080da667399d7d19333f30c9bc0d3e0608cb6d87d101237a2d418",
+    "fixtures/inline-explicit-utf8.session": "04df0d85e9320dee3625c97ca22170bccc2cad848cedbc9d2d81d36c3b7f0f42",
+    "fixtures/late-enum-buffer.session": "b3f9956bbfe4919fa1a91b102e7ef5c28ab5d8cdcb6a60f34c31ad85897c4325",
+    "fixtures/late-enum-unsigned.session": "a08e32e4f6065975cd667f7ae2299fe36dd436bc49e2ff3fa9c44daa7b6f2695",
+    "fixtures/late-enum-utf8.session": "3dd2c73b3d29439128fecb4a8e35e66caf54e076a9bbd78d856f2f633d7d343a",
+    "fixtures/late-enum.nut": "be66a64b687eabb6e47d2d2bc9bb7a897bad105358d2113ab5098bfa057092c5",
+    "fixtures/late-read.nut": "335e7c1cac7921137d9752d5f0da8a1d3d5fc6217dbf729c7b67431b684fdba9",
+    "fixtures/late-scalar-buffer.session": "6813fdf010ba8acf564033762551cbdbebac4a94733616698f24c23f815494b4",
+    "fixtures/late-scalar-unsigned.session": "adb39ffd259818ced4dc9f1a98e79f4464689c5fa0a593009e7c1cc7814441b0",
+    "fixtures/late-scalar-utf8.session": "dac3839f2f50ef46d6821f9fab0dbd9ae02d7d55af02be7788d51f86a787be75",
+    "fixtures/late-scalar.nut": "6662f2e366a6298462a4844e396f6da986b500e97e6ca7a168dcffaef0fe8b82",
+    "fixtures/len-constant.nut": "488b7932c3640078d33a4ac2d9c585145b9aa81129f363895746468a03d6aae3",
+    "fixtures/len-read.nut": "2ec1e8dd2a5fef5c51c9f489fffa2d29c927d2d19fa2995c7dda1c16d4f6831c",
+    "fixtures/lifetime-buffer.session": "6843ed690e306485f3a8cf0fea3041768cd3f8e5ebda5ca6b13e608aafae58fd",
+    "fixtures/lifetime-unsigned.session": "58acd9521ae4588c6082803360d65398219ffa4917a094b89ec78b202a274eaf",
+    "fixtures/lifetime-utf8.session": "2c3a790ffaa9431d9dd3a533a81ba4e0a3cbb0a91b96fcad7dfd4a81a6a2869d",
+    "fixtures/live-read-buffer.session": "81d8a9b747e1be9aabf5c9ab04880cc13f9e26dc29505a63b7b83efa62804326",
+    "fixtures/live-read-unsigned.session": "6c0cee4bfbf60a37c7d9c9991ba5f145c109f945caede44983cc0f26c9900927",
+    "fixtures/live-read-utf8.session": "bd501e7e49961330d5476a844dbe2be0826f06559940209133bbb2a36a5c5e04",
+    "fixtures/missing-read-buffer.session": "ab42da0bb3172ce098786a5d3fa955df3be0084098d67dacb0b4d31903a1fcde",
+    "fixtures/missing-read-unsigned.session": "a3513c5bfe8b3cde1895f9dc294f3193543070c34575a38452acee3082d548fe",
+    "fixtures/missing-read-utf8.session": "e0dde40d2d170f2265681bdc6207838d1a931da0111af69d15e79cfe2d32e8e8",
+    "fixtures/missing-read.nut": "39b20226fc48ec6e9acb364aaeb728877c4ea7565a429f35005d49112ce1cf9c",
+    "fixtures/missing-set-buffer.session": "b496e92c3369d7da8054cb087a9497605a0bf6561625757ad47dda4e17940162",
+    "fixtures/missing-set-unsigned.session": "ab49880c0addf495090b031b3a5b051ddf1f74be98effe1d5464c477923918b9",
+    "fixtures/missing-set-utf8.session": "6559911cdf0a4efc6a93ec1eb3471dd73ff484db3517ebdfb5f3e71f14a86dcd",
+    "fixtures/missing-set.nut": "d3b30049ee1ce9188f5aa28829a14c6aca4b108e999f0f6ef4c69fd3f43860b6",
+    "fixtures/null-set-buffer.session": "ee69170ccd66306085efc2635916fa939cde1883d0a77c4146e4e7b2e53ae45a",
+    "fixtures/null-set-unsigned.session": "c6f6c267f32120192b8c3e7450c208b1a2308c49b5ace84ca3c18f7b98bd9d7c",
+    "fixtures/null-set-utf8.session": "2b823d8cb89bbfae5a09025f4f0e244ea353501fc921f5742fa10075de7f1d09",
+    "fixtures/null-set.nut": "e3971d3959a0b97583342e65537fc9b071f554fdc4ec121d744760dba6931e7d",
+    "fixtures/read-buffer.session": "b190fd8ea0c0c148cae08a6a20afdc8ce29f171dfc0182d3004500e0ea34a34d",
+    "fixtures/read-unsigned.session": "4faabc4a86c2c11f546cbca1a09d56050414dfa322f86555b3f2898c09a55ca7",
+    "fixtures/read-utf8.session": "e81d59ade9326a9f5166cfd23134b07bbced5428066567ea867a6b881e17a4e9",
+    "fixtures/read.nut": "24761e108f2f2ceda339d51a96ee67f3711844f9770525b5a7728dfcaa5569ff",
+    "fixtures/return-null.nut": "3750eb1fea554f6c4d616b2bb160de0c4dbe1f53038b41458212f882368c9244",
+    "fixtures/set-buffer.session": "c3610c692f626d2d23ed23ad2f271cfc56aa61dd2bd07108bed5ed895c0f55a5",
+    "fixtures/set-unsigned.session": "1c7f8a1e57ee1d8e4b748fbc808696f7456858e05f34263fac560e8c13e3b7d9",
+    "fixtures/set-utf8.session": "a40a340a588eeb30f808b3d33c01009939fcb89041241bcaabbc48497d0dec24",
+    "fixtures/set.nut": "454c4b95d7c46417f6a458bdc2aaf556fca619497587f138408880c916adc941",
+    "fixtures/shared-independent-buffer.session": "19360d052f0cd84f3d8f9fc07ea88204ebc0d6659747132fb3dadf022b9a0425",
+    "fixtures/shared-independent-unsigned.session": "1b203edee1b1ae5d88891ecf2d3c874f1f6b84d28eeb4ebe865e0d08cb607e6d",
+    "fixtures/shared-independent-utf8.session": "0a8579dfaba3c25a05eb0bd3828614d41713ed261945e41518a6cf99b37c3ddf",
+    "fixtures/surrogate-string-buffer.session": "4bc4f95380590932edd67cbc9a930884c8aa5ce835f585d5d8aa4276313f2e09",
+    "fixtures/surrogate-string-unsigned.session": "474dd12cb4efd57ea502256a985639aad23209de196c7dfba9951b26892bca45",
+    "fixtures/surrogate-string-utf8.session": "9232c639bb42154ef64f041d86934e536f48a456403f335a9e579769108a40bc",
+    "fixtures/surrogate-string.nut": "edf12411b614bac2112e428cedf47ce9b2604f3af91a2b46e9eab318fd920ffa",
+    "fixtures/suspended-host-writes-buffer.session": "d6d665337ce4095fe32baee34d67d2d9d7cdccb0714311b205488718d317856b",
+    "fixtures/suspended-host-writes-unsigned.session": "c8540afe26580d9d664e36f766d85ec8318e7bbff798c2d230396d58f787ea73",
+    "fixtures/suspended-host-writes-utf8.session": "18beaaf80e0a55b670cca00421509b79acf61780ac8a6c1a2f079f29f8b0792c",
+    "fixtures/unicode-string-buffer.session": "d8df0c0d1ab6d2f01f2ce88ff737e4a3ebb61f479f0a7f14d9b963c32e323e13",
+    "fixtures/unicode-string-unsigned.session": "7541e968183ecf09dc00730465ce5bfe70d0becda901f9ae41e36816aa7b9b0e",
+    "fixtures/unicode-string-utf8.session": "55d67e330f50566f7c521a3773acc98a6ef9d254b723ff4c0e37d10030ba32df",
+    "fixtures/unicode-string.nut": "0fa22ed63c4a02b946e8146135529a1af89525bfae52f25faa8606ec2c568e75",
+    "fixtures/unsupported-array-buffer.session": "f42d7c360fa2c39b4c64f2e1a408fe1551c92758ca69a0bade54131a70f5dc82",
+    "fixtures/unsupported-array-unsigned.session": "9b34df75251a8500194a099fbd1b1a240ec2d3a45ae0924a7fd061534447d820",
+    "fixtures/unsupported-array-utf8.session": "719ecdf03c202727cc3178f105c7b1e7df5a1cb0e410a35bd90514c6d43402fc",
+    "fixtures/unsupported-array.nut": "4195fe8bced4d3fac8ee3542248b21df74fe378c7ee5d3c1c954d36523090be4",
+    "fixtures/unsupported-field-buffer.session": "83612fc4016845b44f100e73eeb17aa09308a6d13b18fa1ffe195c9520cfad84",
+    "fixtures/unsupported-field-unsigned.session": "c106cc236a50fc44b419bea1bff6bb29ee08e09d9e4254ba6f632d5739603f0d",
+    "fixtures/unsupported-field-utf8.session": "9991d7a0ca9c65750a77099649ccd030a3d7cff8567ec0f60fe5ae79246ec6b7",
+    "fixtures/unsupported-field.nut": "bc731138e9d4e13cd6513020117e8432cc6d41c17812baa0fc7dcdcf311e8bc3",
+    "fixtures/unsupported-root-buffer.session": "b909985e5bfae8d106b7a66adc44341492dc569d6b6884540abfda2fb05d5360",
+    "fixtures/unsupported-root-unsigned.session": "aeeabd845d0c1c479981eb7b699084465f7cd86c5bfceb2bc5aedf09686ceec2",
+    "fixtures/unsupported-root-utf8.session": "e80fcd3c66b667e8887ec0cc85876f1c317cbcca50195bd95ae841e2ae9b9fc9",
+    "fixtures/unsupported-root.nut": "8df361b37822375ea6be19e85269b02d6764161439bfee02fdd3d48b82dedf05",
+    "fixtures/unsupported-update-buffer.session": "671ccc72406b337a2bbc5f5e3e8c8bbfff237ecbe4632817f4d50fbc422f85c5",
+    "fixtures/unsupported-update-unsigned.session": "dabf13feb1c25da6e98ca41406be5e0bc7a749b55b55f92306741f7d3dc066eb",
+    "fixtures/unsupported-update-utf8.session": "8e267b49d9aad2c004bcf12e85ea07f07f9da230a4008d2279d47b6434f449a5",
+    "fixtures/unsupported-update.nut": "cbf19877b1fecf59f375a128192f07fca6f811af5b00007f876d56361b8a2276",
+    "fixtures/update-buffer.session": "a9689039aefb548ddea990e0abdccce0f7ba97472820032895368f065b8179d3",
+    "fixtures/update-unsigned.session": "1448d4053e93ca0934d7c6e153f6be8e09a85862b6190084cb93ce94010fca01",
+    "fixtures/update-utf8.session": "8f0904f7d8b517f7d8a110269b8d6ce83aa42d82d74d72ca236acd249c223902",
+    "fixtures/update.nut": "e0dd6eac9405698b9b964780107820d602a10de4338a445e13cba828b8175ac8",
+    "native/assignment-alias-buffer.txt": "8962efb0134240d4e2d39492fd197404a15dd315417e30a5506b03473a7c8e88",
+    "native/assignment-alias-unsigned.txt": "e657f8136d5536632327e2e7a7e553cc77bd40b724fd86d9d1ef6bce492978e9",
+    "native/assignment-alias-utf8.txt": "bbbded8f37c69c116d83a3f423bb820cc09c21ee1385af6ce986031026dde480",
+    "native/assignment-result-buffer.txt": "9598daec36a6ab5d842be9dcae97ddb9a807f36533f1f5292d59bbfbf1428991",
+    "native/assignment-result-unsigned.txt": "23843d983a70c59dad78a713edb78d7552427b1b43b0d41576293c07951b2d07",
+    "native/assignment-result-utf8.txt": "2faaea169cf6859179a18fbeb49d3be01a885f48b25507821e98c07de745e6ec",
+    "native/budget-every-step-buffer.txt": "fc3df5c3bc74495daf73099f93a2386bbec6770ce5a8a9d36cd4af6c68c5998c",
+    "native/budget-every-step-unsigned.txt": "11474068fa9aafa1dcfc646370ef2b71a7c14a7066b05e98161270f32fc5d53c",
+    "native/budget-every-step-utf8.txt": "7c435475621e727e7aba142a65bcf5bcc6d154477f398bd8d78d4f0e7324dcf4",
+    "native/byte-key-buffer.txt": "17e8bfa446e02d97230f3d42dc8aadda285289258eb3568b0a9a1951a14a6c8d",
+    "native/byte-key-unsigned.txt": "17e8bfa446e02d97230f3d42dc8aadda285289258eb3568b0a9a1951a14a6c8d",
+    "native/byte-key-utf8.txt": "17e8bfa446e02d97230f3d42dc8aadda285289258eb3568b0a9a1951a14a6c8d",
+    "native/compile-failure-buffer.txt": "968d14679c187f0a89779e501cd6b7e7607fc7871fe4e95bbf4b604d027894c8",
+    "native/compile-failure-unsigned.txt": "546492c8894f3b3fb155a56d76fb2ebce1f745eddbf4f87d92d5b9f80fc7dfdd",
+    "native/compile-failure-utf8.txt": "4f4a577c6e32bf288b917c8096f8be7dfde64bf51d604082bd77ff9a44a41b10",
+    "native/create-replace-buffer.txt": "28b287f04f41a9f8803715766067d839c1c4f62ec926834ab2d95a53441c71b7",
+    "native/create-replace-unsigned.txt": "61f8c2481403c7fcd522908bc9918d1bb51945fceac3b2ab8b5b91d51a03a31e",
+    "native/create-replace-utf8.txt": "6f0829cf70b7ab3d9f00508efdb87dac75cf3dc014140fd3beda3c66826f5dae",
+    "native/delegate-precedence-buffer.txt": "64dd9b449477a5436fc7288e6504e624759637a57ce715512e2e7c66670eb10c",
+    "native/delegate-precedence-unsigned.txt": "0d75b61fd413c0e0e14c835086a4a60872faa9716f0e2bbc02ab7318a743333f",
+    "native/delegate-precedence-utf8.txt": "318e233d3aef55601d9f558faddeec419bf5ad74b05df1f71aca4f3f79e44ba1",
+    "native/explicit-buffer.txt": "2a4ab784d995df201d1f1264d0453d0b63aa42f5a32df755be26c3703c5876d9",
+    "native/explicit-unsigned.txt": "316ae71c541973143ec6c844681613af642e668ae4c06e11d5732c18cdf8f3b1",
+    "native/explicit-utf8.txt": "8a27796144a0957b1e3e05894b8667528bd45761f316d46a99be7e10e7faa3fc",
+    "native/failure-persistence-buffer.txt": "9caf0a2f6fba465e93f92e952c4afb060b42a4c5eae61baf152de5f1668c158e",
+    "native/failure-persistence-unsigned.txt": "d758b160122f235a82565ff1b6a0b336a54f24f930fea614ee67f2973b39c9d8",
+    "native/failure-persistence-utf8.txt": "b4efeada6c2defd23482828473e439e57b4ad5e480d401dd9806063749e40964",
+    "native/inline-explicit-buffer.txt": "5c1b2d7f29e7331d19433b9d418d47a5344491dd29651945ee0596595713f511",
+    "native/inline-explicit-unsigned.txt": "a9805899cb9ea5cb1e9b7540e843b0618692585ccb2bd16e4bf450f233f39e56",
+    "native/inline-explicit-utf8.txt": "b5cc50b84af2869536951adf74a19367e4b7fdd9d81599ed55e33376e91b28e2",
+    "native/late-enum-buffer.txt": "0f8bd952dd930bc2e7a59066b04619ba90f4c72c0736d325c2f800b03bd83381",
+    "native/late-enum-unsigned.txt": "8b4bb34cd35b917e953efc56359bff504b1b1c998cbdeebefbba05f4b0b65ffb",
+    "native/late-enum-utf8.txt": "430fe7bf16708b3f576c5add1fa1b69c7ed421fe943630b91732107e04f89dac",
+    "native/late-scalar-buffer.txt": "4c8f3bc00f23a5bcfe851aebf34cb3a466a13fb4eebbd7515b2ca1bb3aba4ad2",
+    "native/late-scalar-unsigned.txt": "6245bf6161991820754490b0d942e12a41d73d90792de637e70b847aca32d6e1",
+    "native/late-scalar-utf8.txt": "8460febc0d0e5382e98cdae40713ce08ec90d372f2a8cd6b2da855abf6eff6e8",
+    "native/lifetime-buffer.txt": "5b4177aa8cd79206c9af225ee8e49d43949ae631213f8f362aa56872ca7f1d2b",
+    "native/lifetime-unsigned.txt": "9a4874fc172e671254acf2def6e1ba30d75dde9e0e82ffa0c20d0989eee9c4a2",
+    "native/lifetime-utf8.txt": "3df839b996f888eaa9d2c4d71de227440da254d449c70b743850d3b44c7fc0b6",
+    "native/live-read-buffer.txt": "e4eddc6991748b1f543a0b352e6901cc16713e19158b277ab12afe02e194305a",
+    "native/live-read-unsigned.txt": "dd82da565795dc038c7f1b565899b2818c0d1132babec29cecb1ba5d763be977",
+    "native/live-read-utf8.txt": "ee6afc7ba3da3ecd34b44179c40ca0a4d4ed57709d185496980ade815e6a5b4d",
+    "native/missing-read-buffer.txt": "c19382b3fc2bf20ac19f714bf3a887e500778af645ebcffd3a515662b07d1a5c",
+    "native/missing-read-unsigned.txt": "22c5b16557752340d4fde23b813f82f49561d096acb7178c500270050a014918",
+    "native/missing-read-utf8.txt": "ef662729f894b457b89acc8db30e69601241db198cec0deaceff929efdac2595",
+    "native/missing-set-buffer.txt": "3843bbed93b8f738224718d8ab38bd09893ec02aea40eeb283e531f813b33c5f",
+    "native/missing-set-unsigned.txt": "c5525f7ee1ff74c433cbddbcec74dab0ca2af656f23934cbeac2cb6fa20b2847",
+    "native/missing-set-utf8.txt": "67bc5932b81dbdf277704d772cea3feda3c163826a58e98ae93a5487623bb2ed",
+    "native/null-set-buffer.txt": "5ad3a08936b47da89366b74c2ad5fe910362f42ab2d02f959121e5d582d7fcf1",
+    "native/null-set-unsigned.txt": "5b5bd555fea8c4b564e70e1df3f09195683280bd4cd50e45e3a083280e8b1c96",
+    "native/null-set-utf8.txt": "44a6f72733d552ad4e023f8b9cd55bc6b9b92b7ddefe38b3a04cd5f63a07de61",
+    "native/read-buffer.txt": "02c8214a2f3f161c214a8e6543115b667b838b5398b856dd8518ec1d6b01eb20",
+    "native/read-unsigned.txt": "0d0a0c004b277942f30967788f028413a6969247328e2532740c18ebf29a605d",
+    "native/read-utf8.txt": "2b95037ba5436de7d6ebea990f62a583268d5a2943f1f56d3cc1886420f8e49c",
+    "native/set-buffer.txt": "f31698240825864dbb8a4d23879c50cbbe62a814073bdc0b682a14938672b349",
+    "native/set-unsigned.txt": "77bbc02b0d936046bd2936b7b26e5f3a596395036947b5041e3f576ebb297ce4",
+    "native/set-utf8.txt": "debc8a6d35a61f76be05e236069321e413ef5d88831c7f11b88df181c0081660",
+    "native/shared-independent-buffer.txt": "a6dd0acd2a0aae016bd8ec87ef48da2fe7d300a4f01898717bf4137d75c56e10",
+    "native/shared-independent-unsigned.txt": "b48dcc9a4f7eed04672122f0a7e750ad432e8647046028f08ca82b8a502e7641",
+    "native/shared-independent-utf8.txt": "8348401c05ca88193b11f725dd9746bb695dd9d27b74eb36e6a9a1129da7e52f",
+    "native/surrogate-string-buffer.txt": "9403c7de3f7322b62b693b7a50571b527b2360eb2874472242e8045b7cf9666e",
+    "native/surrogate-string-unsigned.txt": "c6840ea863669726566cfb5903868039d7c6757fb12bde3ee01801bba27e5832",
+    "native/surrogate-string-utf8.txt": "97a3ed095f20521263269d58a1153812b77f57419dd9a64850d15b395bbdfe6c",
+    "native/suspended-host-writes-buffer.txt": "d9ee0fb376dc1ea6d3aa127d9659a27452de7d8258bc5feacfd3ab108019d890",
+    "native/suspended-host-writes-unsigned.txt": "00846fd2b6f361977e0616e54b95fcf552ad97bc8e984446b96377e5e2ac0558",
+    "native/suspended-host-writes-utf8.txt": "35400031a5a06c1aa3bcc19489ba9799d6762bcd8c188ca17b230bb2a7ca6270",
+    "native/unicode-string-buffer.txt": "e4becd2fee842e2359d25b79202643057030607b7861db8a559f887b928b8379",
+    "native/unicode-string-unsigned.txt": "9188e4c2eabc61f403853dc0ef37f7b04f6e108b899a61d90b796475501ab169",
+    "native/unicode-string-utf8.txt": "cbdb114c288232a4db605690b47b8d7f58579b647456c6043806bf4c063b2522",
+    "native/unsupported-array-buffer.txt": "8481ab6dd12e4a360d9bc93d71b762dfc0c7739a0ce74e1a93a87b6471ad3d89",
+    "native/unsupported-array-unsigned.txt": "34d755799bbefde71404ec40e455c52b14b69c69efb8e918c996a9bd5cc64077",
+    "native/unsupported-array-utf8.txt": "189cc74c8854ba3e6241e0cffd0a453b263e1a68933d62aac0149630885626e6",
+    "native/unsupported-field-buffer.txt": "8ccfb2845d75d9425a606d9df07bdc9f7baf8f078fb6704eb31de2a302f17c6a",
+    "native/unsupported-field-unsigned.txt": "231c5b77ca9bcdb2d36734df13525fa6d40caf9cb19e55125f6427e12a002849",
+    "native/unsupported-field-utf8.txt": "0ce2edc45556a36a3fd59cbca2067cee83f7693c793d89a1781bb479e53e2d39",
+    "native/unsupported-root-buffer.txt": "4e3caee2e733e963ba702a7950ea68c2b563e999c336a7246f79dea5a550a8b1",
+    "native/unsupported-root-unsigned.txt": "5088f81cfcb72e81b3b4c8b8ab88139c6bafe12f2d24bce28672226088180f2d",
+    "native/unsupported-root-utf8.txt": "e3d5d3e5171cdd22b957f1af6860d9f5c8cdb984a77b8bf6babc3a3f603ff441",
+    "native/unsupported-update-buffer.txt": "58986ab28f3a1692453df68ec11836d4c61106116b5f0830ca07615de12fc5dc",
+    "native/unsupported-update-unsigned.txt": "cdb2dad31cd3bd85ae23f191aa180463224f4083f738aa88a801618abfdc50a3",
+    "native/unsupported-update-utf8.txt": "2be35afd27542e38efd3e74ff01bfeabc6b375c02906dbaf996318637d85aa3f",
+    "native/update-buffer.txt": "6854211700234c20c3547a5186c96199ab8fdb0434023b6f8b6425b6542710f6",
+    "native/update-unsigned.txt": "68e64f9faf29be86fc4a4f09f12c83c1d4ef6fa18c56ce861eb9e31e88cc6e3a",
+    "native/update-utf8.txt": "0ba9822be56fa9f1ad78a415e68731d38d4d6d1bf0e74f6f1a3b9192d69be36b",
+    "ownership/compile-temp-buffer.txt": "ef078e52af69481fa285db0e0376b78820e05b43eede00a2d8a2d78a68a89575",
+    "ownership/compile-temp-unsigned.txt": "8b939e15d1f25d9c4311fa0dc3bb8f513ec0a863b642068d827249769f4f53e6",
+    "ownership/compile-temp-utf8.txt": "a3f3f2a58214e40578cfbf4b5e0ed6c4fcb5b05c54d209bd3f07fc64baf29f88",
+    "ownership/fixtures/a.nut": "4a3541ae8817d6b1be8b600edad244367bed973282078377f00030092e54d130",
+    "ownership/fixtures/b.nut": "57009795bd3e13d1cadce50d42932bbedbac4553987d13511ae1f0581aa6066d",
+    "ownership/fixtures/c.nut": "3750eb1fea554f6c4d616b2bb160de0c4dbe1f53038b41458212f882368c9244",
+    "ownership/fixtures/compile-temp-buffer.session": "1e2baeb73e78baa55e6bebd06787504ba097c6c6f2f18a53ba8b18c73e3c2788",
+    "ownership/fixtures/compile-temp-unsigned.session": "cf53443c330857c2fa22d9494ea40e86445cb9472fee6bb25f543dbffa9c9268",
+    "ownership/fixtures/compile-temp-utf8.session": "528b010a1d117bfd89da3b906f51b8484201eb1f5c69c88d4e2edc71791bd9e7",
+    "replacement/buffer.txt": "86027e396d97074a99aa42ab9ead23e1a30fbe53fac26aeef8c0bc1b5448bda6",
+    "replacement/fixtures/buffer.session": "ad2314eb23627ff08477bf66bceb254066e7204baea061c435b46311bbcfb7c4",
+    "replacement/fixtures/explicit.nut": "120b0f81d7b4d301b51978bc0d94d4196027f459f1d98f60d71dccd427eb1e17",
+    "replacement/fixtures/inline.nut": "06cdaaf4a84d464d69b1acb61a53b0b374469554768325d5c0f174424d9aa361",
+    "replacement/fixtures/unresolved.nut": "24761e108f2f2ceda339d51a96ee67f3711844f9770525b5a7728dfcaa5569ff",
+    "replacement/fixtures/unsigned.session": "b86ca72320075cdb793c49e2694342cee355fef2fe0c4e4acaaac86a0295a6aa",
+    "replacement/fixtures/utf8.session": "eb9241fb229d82a3fe9d66939406f792237ff62342e86011cdb82c2b378cb7a2",
+    "replacement/unsigned.txt": "67dd0ad627e17432b3801d376564ac97159a673127e689e9863bddd169af9935",
+    "replacement/utf8.txt": "fbcaa30f42ef44b41e379902548c961fcafb9f893802fbfb5b4c53e897bcc964"
+  },
+  "strict_stateful_projections": 72,
+  "explicit_syntax_boundaries": 12,
+  "explicit_runtime_boundaries": 6
+}

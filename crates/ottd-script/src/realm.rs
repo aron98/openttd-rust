@@ -19,6 +19,17 @@ impl Realm {
     pub fn new() -> Self {
         Self::default()
     }
+    #[cfg(test)]
+    pub(crate) fn owners(&self, bytes: &[u8]) -> usize {
+        self.pool.borrow().get(bytes).map_or(0, Weak::strong_count)
+    }
+    pub(crate) fn same(&self, other: &Self) -> bool {
+        Rc::ptr_eq(&self.pool, &other.pool)
+    }
+    /// Create an independent empty scalar root in this realm.
+    pub fn empty_root(&self) -> crate::RootEnvironment {
+        crate::RootEnvironment::new(self.clone())
+    }
     /// Compile source using this realm's shared constants and live string interner.
     ///
     /// # Errors

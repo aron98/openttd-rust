@@ -19,6 +19,12 @@ from scripts.world_check_support import (
 )
 
 FRAME_TESTS = (
+    "runner::tests::program_clone_shares_one_literal_pool_and_failed_call_retains_real_program",
+    "runner::tests::terminal_frame_releases_program_before_wrapper_drop",
+    "runner::tests::compile_failure_keeps_previous_temporary_and_success_keeps_error_record",
+    "vm::root_sessions::supported_root_sessions_match_native_frames_and_owners",
+    "vm::root_sessions::compile_call_owner_and_root_replacement_match_native",
+    "vm::root_sessions::native_success_outside_scalar_root_domain_is_explicitly_rejected",
     "realm::constants::tests::native_buffer_corpus_matches_compilation_and_published_table",
     "realm::constants::tests::temporary_updates_match_native_suspension_results",
     "realm::constants::tests::declaration_timing_preserves_old_or_new_binding_at_native_byte_boundaries",
@@ -151,7 +157,15 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
     write_json(
         output / "branch-identities.json", {"path": str(tests), "sha256": digest(tests)}
     )
-    actual = run([str(tests), "--test-threads=1"], output / "lib-tests")
+    actual = run(
+        [
+            "env",
+            f"OTTD_SCRIPT_ROOT_CORPUS={output / 'roots/inputs'}",
+            str(tests),
+            "--test-threads=1",
+        ],
+        output / "lib-tests",
+    )
     require_tests(actual.stdout, FRAME_TESTS)
     for name in FRAMES:
         source = output / "inputs" / fixture_name(name)
@@ -232,7 +246,12 @@ def validate_branches(directory: Path) -> None:
         != tests
     ):
         raise WorldCheckError("Private frame test build selection differs")
-    if read_json(directory / "lib-tests/argv.json") != [tests, "--test-threads=1"]:
+    if read_json(directory / "lib-tests/argv.json") != [
+        "env",
+        f"OTTD_SCRIPT_ROOT_CORPUS={origin / 'roots/inputs'}",
+        tests,
+        "--test-threads=1",
+    ]:
         raise WorldCheckError("Private frame test selection differs")
     require_tests((directory / "lib-tests/stdout.log").read_text(), FRAME_TESTS)
     native = str(origin / "native/observe")

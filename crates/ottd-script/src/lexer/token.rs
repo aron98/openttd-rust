@@ -2,6 +2,8 @@
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) enum TokenKind<'a> {
     Const,
+    Root,
+    NewSlot,
     Enum,
     Return,
     TypeOf,
@@ -52,6 +54,8 @@ impl TokenKind<'_> {
             Self::Symbol(op @ (b'+' | b'-')) => Some((6, 0x11, *op)),
             Self::Symbol(op @ (b'*' | b'/' | b'%')) => Some((7, 0x11, *op)),
             Self::Const
+            | Self::Root
+            | Self::NewSlot
             | Self::Enum
             | Self::TypeOf
             | Self::Return

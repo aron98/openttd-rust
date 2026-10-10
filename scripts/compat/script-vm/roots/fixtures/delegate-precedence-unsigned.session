@@ -1,0 +1,5 @@
+compile 0 0 unsigned fixtures/len-read.nut
+compile 0 1 unsigned fixtures/len-constant.nut
+run 0 0 1000
+seed 0 6c656e integer 3
+run 0 0 1000

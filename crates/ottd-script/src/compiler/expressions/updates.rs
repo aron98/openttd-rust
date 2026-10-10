@@ -14,6 +14,29 @@ impl Compiler<'_> {
         self.advance()?;
         let _rhs = self.expression(self.depth(depth)?)?;
         let right = self.pop()?;
+        if state.field {
+            if matches!(operation, TokenKind::Compound(_)) {
+                return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            }
+            let key = self.pop()?;
+            let root = self.pop()?;
+            let target = self.push()?;
+            self.emit(Instruction {
+                opcode: if operation == TokenKind::NewSlot {
+                    0x0b
+                } else {
+                    0x0d
+                },
+                arg0: target.0,
+                arg1: i32::from(root.0),
+                arg2: key.0,
+                arg3: right.0,
+            });
+            return Ok(());
+        }
+        if operation == TokenKind::NewSlot {
+            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+        }
         if let TokenKind::Compound(operator) = operation {
             let left = self.pop()?;
             let target = self.push()?;

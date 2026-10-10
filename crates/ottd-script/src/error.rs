@@ -52,6 +52,14 @@ impl std::error::Error for CompileError {}
 /// Checked execution failure; undefined native arithmetic remains unsupported.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VmError {
+    /// Root belongs to a different string/constant realm.
+    RealmMismatch,
+    /// A required own or runtime-fallback slot is absent.
+    MissingIndex,
+    /// Lookup reached a native closure or aggregate outside the scalar domain.
+    UnsupportedRuntimeValue,
+    /// A root operation received a receiver outside the configured root domain.
+    UnsupportedReceiver,
     /// Opcode has not been implemented by this foundation.
     UnsupportedOpcode(u8),
     /// Instruction operands, literal index or instruction pointer are invalid.

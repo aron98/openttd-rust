@@ -1,5 +1,23 @@
-use crate::{Instruction, Program, Value, VmError};
+use crate::{
+    Instruction, Program, ProgramData, RootEnvironment, Runner, RunnerFailure, Storage, Temporary,
+    Value, VmError,
+};
+use std::rc::Rc;
+mod roots;
 mod updates;
+#[derive(Clone, Debug)]
+enum Slot {
+    Scalar(Value),
+    Root(RootEnvironment),
+}
+impl Slot {
+    const fn scalar(&self) -> Result<&Value, VmError> {
+        match self {
+            Self::Scalar(value) => Ok(value),
+            Self::Root(_) => Err(VmError::UnsupportedRuntimeValue),
+        }
+    }
+}
 
 /// Outcome of an operation-budget slice.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -12,9 +30,10 @@ pub enum Execution {
 /// Register VM retaining instruction pointer, registers and operation debt.
 #[derive(Debug)]
 pub struct Vm<'a> {
-    program: &'a Program,
-    registers: Vec<Value>,
-    temporary: Value,
+    program: Option<Rc<ProgramData>>,
+    registers: Vec<Slot>,
+    runner: Storage<'a>,
+    started: bool,
     ip: usize,
     remaining: i64,
     finished: bool,
@@ -25,17 +44,30 @@ impl<'a> Vm<'a> {
     /// # Errors
     /// Rejects stack sizes outside the native register range.
     pub fn new(program: &'a Program) -> Result<Self, VmError> {
-        if !(1..=255).contains(&program.stack_size) {
+        Self::with_runner(
+            program,
+            Storage::Owned(Runner::new(program.data.realm.empty_root())),
+        )
+    }
+    pub(crate) fn with_runner(program: &Program, runner: Storage<'a>) -> Result<Self, VmError> {
+        if !(1..=255).contains(&program.data.stack_size) {
             return Err(VmError::InvalidBytecode);
         }
+        let mut registers = vec![Slot::Scalar(Value::Null); usize::from(program.data.stack_size)];
+        *registers.first_mut().ok_or(VmError::InvalidBytecode)? =
+            Slot::Root(runner.get().root.clone());
         Ok(Self {
-            program,
-            temporary: Value::Null,
-            registers: vec![Value::Null; usize::from(program.stack_size)],
+            program: Some(Rc::clone(&program.data)),
+            registers,
+            runner,
+            started: false,
             ip: 0,
             remaining: 0,
             finished: false,
         })
+    }
+    fn program(&self) -> Result<&ProgramData, VmError> {
+        self.program.as_deref().ok_or(VmError::Finished)
     }
     /// Index of the next instruction; meaningful at suspension boundaries.
     pub const fn instruction_pointer(&self) -> usize {
@@ -60,12 +92,21 @@ impl<'a> Vm<'a> {
             .remaining
             .checked_add(i64::from(credit))
             .ok_or(VmError::BudgetOverflow)?;
+        if !self.started {
+            let program = Rc::clone(self.program.as_ref().ok_or(VmError::Finished)?);
+            self.runner.get_mut().temporary = Temporary::MainProgram { _program: program };
+            self.started = true;
+        }
         let result = self.run();
         match result {
             Ok(Execution::Suspended) => {}
             Ok(Execution::Returned(_)) | Err(_) => {
                 self.finished = true;
-                self.registers.fill(Value::Null);
+                self.registers.fill(Slot::Scalar(Value::Null));
+                self.program = None;
+                if let Err(error) = result {
+                    self.runner.get_mut().failure = Some(RunnerFailure::Runtime(error));
+                }
             }
         }
         result
@@ -80,7 +121,7 @@ impl<'a> Vm<'a> {
                 return Ok(Execution::Suspended);
             }
             let instruction = *self
-                .program
+                .program()?
                 .instructions
                 .get(self.ip)
                 .ok_or(VmError::InvalidBytecode)?;
@@ -97,12 +138,13 @@ impl<'a> Vm<'a> {
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
         self.registers
             .get(index)
+            .ok_or(VmError::InvalidBytecode)?
+            .scalar()
             .cloned()
-            .ok_or(VmError::InvalidBytecode)
     }
     fn literal(&self, index: i32) -> Result<Value, VmError> {
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
-        self.program
+        self.program()?
             .literals
             .get(index)
             .cloned()
@@ -115,7 +157,7 @@ impl<'a> Vm<'a> {
         *self
             .registers
             .get_mut(usize::from(index))
-            .ok_or(VmError::InvalidBytecode)? = value;
+            .ok_or(VmError::InvalidBytecode)? = Slot::Scalar(value);
         Ok(())
     }
     fn jump(&mut self, offset: i32) -> Result<(), VmError> {
@@ -124,7 +166,7 @@ impl<'a> Vm<'a> {
             .ip
             .checked_add_signed(offset)
             .ok_or(VmError::InvalidBytecode)?;
-        if target >= self.program.instructions.len() {
+        if target >= self.program()?.instructions.len() {
             return Err(VmError::InvalidBytecode);
         }
         self.ip = target;
@@ -154,20 +196,29 @@ impl<'a> Vm<'a> {
             self.registers
                 .get_mut(from..end)
                 .ok_or(VmError::InvalidBytecode)?
-                .fill(Value::Null);
+                .fill(Slot::Scalar(Value::Null));
         }
         Ok(())
     }
     fn return_value(&mut self, instruction: Instruction) -> Result<Value, VmError> {
-        self.temporary = if instruction.arg0 == 255 {
+        let value = if instruction.arg0 == 255 {
             Value::Null
         } else {
             self.register(instruction.arg1)?
         };
-        Ok(self.temporary.clone())
+        self.store_temporary(value)
     }
     fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
+            0x09 | 0x0e => self.root_get(i)?,
+            0x0b | 0x0d => {
+                self.root_store(i)?;
+                return Ok(None);
+            }
+            0x15 => {
+                self.write_root(i.arg0, self.runner.get().root.clone())?;
+                return Ok(None);
+            }
             0x01 => self.literal(i.arg1)?,
             0x02 => Value::Integer(i64::from(i.arg1)),
             0x03 => Value::Float(u32::from_ne_bytes(i.arg1.to_ne_bytes())),
@@ -226,29 +277,22 @@ impl<'a> Vm<'a> {
                 return Ok(None);
             }
             0x11 => {
-                self.temporary = self.register(i32::from(i.arg2))?.arithmetic(
+                let value = self.register(i32::from(i.arg2))?.arithmetic(
                     &self.register(i.arg1)?,
                     i.arg3,
-                    &self.program.realm,
+                    &self.runner.get().root.realm,
                 )?;
-                self.temporary.clone()
+                self.store_temporary(value)?
             }
             0x13 => return self.return_value(i).map(Some),
             0x14 => {
-                let length = usize::try_from(i.arg1).map_err(|_| VmError::InvalidBytecode)?;
-                let start = usize::from(i.arg0);
-                if start == 0 {
-                    return Err(VmError::InvalidBytecode);
-                }
-                let end = start.checked_add(length).ok_or(VmError::InvalidBytecode)?;
-                self.registers
-                    .get_mut(start..end)
-                    .ok_or(VmError::InvalidBytecode)?
-                    .fill(Value::Null);
+                self.load_nulls(i)?;
                 return Ok(None);
             }
             0x16 => Value::Bool(i.arg1 != 0),
-            0x37 => self.register(i.arg1)?.type_name(&self.program.realm),
+            0x37 => self
+                .register(i.arg1)?
+                .type_name(&self.runner.get().root.realm),
             0x2d => self.register(i.arg1)?.negate()?,
             0x2e => Value::Bool(self.register(i.arg1)?.is_false()),
             0x2f => match self.register(i.arg1)? {
@@ -266,3 +310,6 @@ impl<'a> Vm<'a> {
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod root_sessions;

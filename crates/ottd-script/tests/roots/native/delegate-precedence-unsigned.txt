@@ -1,0 +1,20 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 unsigned fixtures/len-read.nut
+compiled
+stack 2
+literal string 3 6c656e
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 1 compile 0 1 unsigned fixtures/len-constant.nut
+compiled
+stack 1
+op 19 255 0 0 0
+step 2 run 0 0 1000
+return 998 unsupported 134218240
+temp unsupported 134218240
+step 3 seed 0 6c656e integer 3
+seeded
+step 4 run 0 0 1000
+return 998 integer 3
+temp integer 3

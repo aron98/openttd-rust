@@ -13,7 +13,7 @@ impl Vm<'_> {
         } else {
             b'+'
         };
-        let result = source.arithmetic(&increment, operation, &self.program.realm)?;
+        let result = source.arithmetic(&increment, operation, &self.runner.get().root.realm)?;
         let register = u8::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
         self.write(
             instruction.arg0,

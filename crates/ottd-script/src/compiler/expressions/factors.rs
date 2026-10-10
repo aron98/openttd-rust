@@ -8,6 +8,9 @@ impl Compiler<'_> {
         state: &mut ExpressionState,
     ) -> Result<(), CompileError> {
         let position = self.factor(depth, state)?;
+        if state.field && matches!(self.token.kind, TokenKind::Increment(_)) {
+            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+        }
         if let TokenKind::Increment(amount) = self.token.kind {
             if state.dereference.is_some() && !self.token.newline {
                 if position.is_none() {
@@ -34,6 +37,7 @@ impl Compiler<'_> {
     ) -> Result<Option<Register>, CompileError> {
         let depth = self.depth(depth)?;
         state.dereference = None;
+        state.field = false;
         match self.token.kind.clone() {
             TokenKind::Scalar(value) => {
                 let target = self.push()?;
@@ -42,6 +46,7 @@ impl Compiler<'_> {
                 Ok(None)
             }
             TokenKind::Identifier(name) => self.identifier(name, state),
+            TokenKind::Root => self.explicit_root(state),
             TokenKind::Symbol(b'(') => {
                 self.advance()?;
                 self.comma(depth)?;
@@ -85,6 +90,9 @@ impl Compiler<'_> {
                 self.advance()?;
                 let mut nested = ExpressionState::default();
                 self.prefixed(depth, &mut nested)?;
+                if nested.field {
+                    return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+                }
                 let source = self.pop()?;
                 let target = self.push()?;
                 self.emit(Instruction {
@@ -96,7 +104,8 @@ impl Compiler<'_> {
                 });
                 Ok(None)
             }
-            TokenKind::Const
+            TokenKind::NewSlot
+            | TokenKind::Const
             | TokenKind::Enum
             | TokenKind::Switch
             | TokenKind::Case
@@ -134,10 +143,10 @@ impl Compiler<'_> {
             state.dereference = Some(register);
             return Ok(Some(register));
         }
-        let binding = self
-            .realm
-            .constant(name)
-            .ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
+        let Some(binding) = self.realm.constant(name) else {
+            self.registers.reference(Register(0));
+            return self.root_field(name, state);
+        };
         let scalar = match binding {
             crate::realm::constants::Binding::Scalar(value) => value,
             crate::realm::constants::Binding::Enum(members) => {

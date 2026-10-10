@@ -7,8 +7,10 @@ use crate::{CompileError, Instruction, lexer::TokenKind};
 pub(super) struct ExpressionState {
     dereference: Option<Register>,
     constant: bool,
+    field: bool,
 }
 mod factors;
+mod roots;
 mod updates;
 impl Compiler<'_> {
     pub(super) fn expression(&mut self, depth: u8) -> Result<ExpressionState, CompileError> {
@@ -16,7 +18,9 @@ impl Compiler<'_> {
         let mut state = ExpressionState::default();
         self.logical(0, depth, &mut state)?;
         match self.token.kind.clone() {
-            TokenKind::Symbol(b'=') | TokenKind::Compound(_) => self.assignment(depth, &state)?,
+            TokenKind::Symbol(b'=') | TokenKind::Compound(_) | TokenKind::NewSlot => {
+                self.assignment(depth, &state)?;
+            }
             TokenKind::Symbol(b'?') => self.ternary(depth)?,
             _ => {}
         }

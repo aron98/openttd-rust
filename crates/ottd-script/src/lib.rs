@@ -7,8 +7,10 @@ mod error;
 mod lexer;
 mod program;
 mod realm;
+mod runner;
 pub use program::Program;
 pub use realm::{ByteString, Realm};
+pub use runner::{RootEnvironment, Runner, RunnerFailure};
 mod value;
 mod vm;
 pub use compiler::{compile, compile_bytes};
@@ -29,4 +31,23 @@ pub struct Instruction {
     pub arg2: u8,
     /// Operation selector or second literal index.
     pub arg3: u8,
+}
+
+// Shared private owner types live at the crate boundary, without public re-exports.
+#[derive(Debug)]
+pub(crate) struct ProgramData {
+    pub(crate) stack_size: u16,
+    pub(crate) literals: Vec<Value>,
+    pub(crate) instructions: Vec<Instruction>,
+    pub(crate) realm: Realm,
+}
+#[derive(Debug)]
+pub(crate) enum Temporary {
+    Scalar(Value),
+    MainProgram { _program: std::rc::Rc<ProgramData> },
+}
+#[derive(Debug)]
+pub(crate) enum Storage<'a> {
+    Owned(Runner),
+    Borrowed(&'a mut Runner),
 }

@@ -68,15 +68,11 @@ fn native_buffer_corpus_matches_compilation_and_published_table()
         let realm = Realm::new();
         let compiled = realm.compile_bytes(source);
         if matches!(domain, Domain::RuntimeRootLookup) {
-            assert!(native.lines().any(|line| line == "compiled"));
+            let program = compiled.as_ref().map_err(|error| *error)?;
             assert_eq!(
-                compiled.map(|_| ()),
-                Err(crate::CompileError {
-                    offset: 8,
-                    kind: crate::CompileErrorKind::UnsupportedSyntax
-                })
+                crate::Vm::new(program)?.resume(100),
+                Err(crate::VmError::MissingIndex)
             );
-            continue;
         }
         assert_eq!(
             compiled.is_ok(),
@@ -205,7 +201,11 @@ fn names_values_and_partial_enum_scratch_have_distinct_owners()
     let program = realm.compile("return K;")?;
     realm.compile("const K=\"replacement-value\";")?;
     assert_eq!(owners(&realm, b"owned-value"), 1);
-    assert!(Realm::new().compile("return K;").is_err());
+    let missing = Realm::new().compile("return K;")?;
+    assert_eq!(
+        crate::Vm::new(&missing)?.resume(100),
+        Err(crate::VmError::MissingIndex)
+    );
     {
         let mut vm = crate::Vm::new(&program)?;
         assert_eq!(vm.resume(0)?, crate::Execution::Suspended);

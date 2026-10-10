@@ -9,6 +9,9 @@
 import sys
 from pathlib import Path
 
+from scripts.script_vm_roots import CONTROLS as ROOT_CONTROLS
+from scripts.script_vm_roots import validate_roots
+
 from scripts.script_vm_observation import (
     compare_observation,
     require_tests,
@@ -165,7 +168,11 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         if (
             len(parts) > 2
             and parts[0] == "controls"
-            and parts[1] in {f"constant-{name}" for name in CONSTANT_CONTROLS}
+            and parts[1]
+            in (
+                {f"constant-{name}" for name in CONSTANT_CONTROLS}
+                | {f"root-{name}" for name in ROOT_CONTROLS}
+            )
         ):
             status = int(parts[2] == "admit-mutant")
         expected_receipt = (
@@ -228,6 +235,8 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
     from scripts.script_vm_constants import validate_constants
 
     validate_constants(directory, Path(origin))
+
+    validate_roots(directory, Path(origin))
     if read_json(directory / "summary.json") != {
         "cases": 10819,
         "fixtures": 1188,
@@ -236,7 +245,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "strict_comparisons": 10666,
         "undefined_input_rejections": 153,
         "controls": 25,
-        "frame_tests": 23,
+        "frame_tests": 29,
         "native_frames": 12,
         "branch_budget_cases": 127,
         "string_sessions": 4,
@@ -244,11 +253,17 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "float_patterns": 23071,
         "string_controls": 4,
         "constant_native_sessions": 115,
-        "constant_buffer_comparisons": 36,
-        "constant_root_boundaries": 1,
+        "constant_buffer_comparisons": 37,
+        "constant_root_runtime_errors": 1,
         "constant_stateful_projections": 3,
         "constant_public_tests": 3,
         "constant_controls": 4,
+        "root_native_sessions": 90,
+        "root_stateful_projections": 72,
+        "root_syntax_boundaries": 12,
+        "root_runtime_boundaries": 6,
+        "root_public_tests": 7,
+        "root_controls": 4,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

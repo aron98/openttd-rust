@@ -1,0 +1,5 @@
+seed 0 73636f7265 integer 7
+compile 0 0 buffer fixtures/inline-constant.nut
+compile 0 1 buffer fixtures/explicit-read.nut
+run 0 0 1000
+run 0 1 1000

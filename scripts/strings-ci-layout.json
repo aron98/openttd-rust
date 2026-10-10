@@ -5427,6 +5427,7 @@
         "stale-source/scripts/script_vm_observation.py",
         "stale-source/scripts/script_vm_policy.py",
         "stale-source/scripts/script_vm_provenance.py",
+        "stale-source/scripts/script_vm_roots.py",
         "stale-source/scripts/script_vm_strings.py",
         "stale-source/scripts/script_vm_switch.py",
         "stale-source/scripts/service_replay.py",

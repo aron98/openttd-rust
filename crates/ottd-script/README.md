@@ -1,4 +1,4 @@
-# Squirrel scalar, string and realm foundation
+# Squirrel scalar, string, realm and configured-root foundation
 
 This crate independently compiles a bounded subset of OpenTTD 15.3's bundled
 Squirrel 2.2.5 and executes native register instructions. It has no C++ runtime
@@ -42,15 +42,15 @@ operand's type/value and skip the unevaluated operand's execution.
 instruction dispatch. Taken branches use offsets relative to the next instruction.
 Suspension preserves registers and IP. Every branch and scope cleanup costs one
 operation; SCOPE_END uses native's conditional range and signed count, including
-nested-loop nonpositive counts. Register zero remains the unimplemented root
-environment and cannot be read or written by supported scalar instructions.
+nested-loop nonpositive counts. Register zero holds the actual configured root
+identity; scalar instructions cannot treat it as a scalar operand.
 Public bytecode indices, taken branch targets and arithmetic are checked; invalid
 bytecode returns typed errors. Runtime errors and returns terminate the frame.
 
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
-is portable native semantics. Thirty-five opcode handlers remain unimplemented.
-Foreach, globals/objects, functions/closures,
+is portable native semantics. Thirty opcode handlers remain unimplemented.
+Foreach, general objects, functions/closures,
 cyclic graph ownership/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
 Float NaN payload witnesses are specific to the tested native/Rust toolchain.
@@ -113,8 +113,8 @@ release; this is string ownership, not a collector for future cyclic objects.
 
 `Program::from_parts` replaces public struct construction, checks stack size and
 reinterns supplied string literals into a fresh realm. Read-only accessors preserve
-literal identity after construction. VM operands remain execution-checked. The VM
-continues borrowing its Program; no new host or call-frame abstraction is provided.
+literal identity after construction. VM operands remain execution-checked. The convenience VM retains its Program borrow; persistent Runner frames instead
+share the immutable ProgramData owner described below.
 
 String concatenation converts supported scalars using native formatting; f32
 shortest digits use pinned ryu 1.0.23 under its BSL-1.0 option, with bundled fmt's
@@ -151,15 +151,15 @@ const semicolon can fail the outer terminator check after publication.
 Defined compound/prefix updates operate on loaded temporaries and leave table
 bindings unchanged. Direct `=` assignment rejects after parsing its RHS. Constant
 postfix operations and minimum-native-integer declaration negation are explicitly
-unsupported increment boundaries, separate from the lexer ctype policy. Runtime
-root lookup, arbitrary tables/objects, newslot syntax, native closures, classes,
-require and host API registration remain outside this slice. No public Value
-variant or root-object API was added. The Vm still borrows its Program; tests do
-not pretend a native independently retained closure is that Rust borrow.
+unsupported increment boundaries, separate from the lexer ctype policy. General
+tables/objects, native closures, classes, require and host API registration remain
+outside this slice. Value remains scalar; configured root slots have their own
+bounded host interface.
 
 Focused tests retain 37 original buffer observations: 36 closed-constant compiler
-outcomes/bytecode/table snapshots are strict comparisons, and the standalone
-unresolved-name read is an explicitly tested runtime-root boundary. Populated
+outcomes/bytecode/table snapshots are strict comparisons. The formerly unsupported
+standalone unresolved-name read now compiles to the captured native GETK tuple
+and fails at runtime with MissingIndex when the root and Realm are unpopulated. Populated
 Realm reads, publication failures, ownership and temporary-update suspension
 traces have separate tests. The full driver now declares 115 exact native constant
 sessions, fresh public constant tests and three private stateful compile/lookup/execution projections.
@@ -168,6 +168,67 @@ separate Rust ownership tests; they are not claimed as full raw Rust session
 parity. Four additional corruption controls exercise declaration publication,
 counters, shared-state isolation and final native release. Admission still
 requires newly executed complete debug and optimized profiles for these inputs.
+
+
+## Configured scalar roots and persistent runners
+
+`Realm::empty_root` creates an independent plain root with byte-string keys and
+scalar values. RootEnvironment clones share slots; another empty root shares
+only the Realm's interner/constants. `raw_get`, `new_slot` and `set_existing`
+provide explicit own-slot host access, including empty/NUL-containing keys.
+Newslot replaces existing entries; set requires an existing entry. Strings are
+reinterned into the root's Realm. This configured empty root matches explicit
+native table installation; it does not reproduce sq_open's base globals or the
+OpenTTD host's delegated root initialization.
+
+Unresolved identifiers and `::name` compile to native root GET/GETK and
+LOADROOTTABLE, with `<-` and `=` stores using NEWSLOT/SET. Locals and inlined
+constants keep compile-time precedence. Root reads see current runtime slots,
+then default table delegates, then shared constants only under native's
+receiver-equals-this fallback gate. SET never falls back to constants. A reached
+default-delegate closure or late enum table returns UnsupportedRuntimeValue;
+this is an explicit implementation boundary, not undefined lexer input.
+Root compound/prefix/postfix updates, arbitrary this/receiver objects, root value
+escape, member/index chains and generic table/array values remain unsupported.
+
+`Runner` is persistent execution state, separate from shared root identity.
+`compile`/`compile_bytes` use its Realm without clearing temporary state;
+`start` borrows the runner for one frame and shares immutable ProgramData.
+Replacing the root is idle-only and same-Realm-only. Two runners can share slots
+while retaining separate temporaries. A cloned root can perform host writes
+between frame resumes. The same existing Vm opcode loop serves borrowed runners
+and `Vm::new`'s fresh owned convenience runner; there is no second interpreter.
+
+Program clones share one literal pool. On first resume, the runner temporary owns
+the real main-program data even when zero credit suspends before IP0 executes.
+GET/ARITH/RETURN replace that owner in native order. A failed missing read may
+leave the program owner alive after external handles drop and through subsequent
+compilations. Terminal return/error releases active frame registers/program,
+while the runner temporary persists. Caller-owned Returned values are separate
+owners; the runner does not cache another result. Dropping an unfinished frame
+abandons that host frame; this does not claim native cancellation/wakeup parity.
+
+`last_failure` is typed Rust diagnostic history. Successful compile/run leaves
+an older failure intact; precondition failures do not overwrite it. It is not a
+native `_lasterror` string/value identity API. Diagnostic prose and its native
+string-object ownership are excluded from exact projections and retained in raw
+native captures. Unsupported runtime domains remain distinct from MissingIndex,
+invalid bytecode, and the unchanged lexer policy.
+
+The normal CI driver reruns all 90 declared native sessions on its fresh pinned
+observer. Its selected production unit-test binary reads those fresh captures,
+with seven additional public Runner tests. Four admission controls first accept
+the original session, then reject only the declared changed stdout observation.
+The pinned corpus manifest binds all 212 source/capture files and exact session
+membership. Tests replay 66 supported native root sessions, three compile/call owner
+sessions and three compile-root/run-root replacement sessions through production
+handlers. They compare tuples, frames, IP/debt, root values, temporaries and
+string-owner counts; only compile/runtime diagnostic prose is projected to typed
+error stage. Eighteen additional native observations cover explicit unsupported
+syntax/values and the supported shadowing of default delegates. These focused
+observations do not replace newly executed full CI profiles and source-map closure
+work required for admission of this increment. Full AI/GS execution, persistent
+host API state, general heap/GC and game-tick integration remain open.
 
 
 ## Defined lexer input policy
@@ -192,8 +253,8 @@ HexEscape-policy bodies (first digit, after one digit and after four digits, for
 U+0100, U+20AC and the native encoded U+D800 codepoint). These seventeen bodies
 have an `undefined_native_input` stage: 153 credit cases independently
 require the typed Rust rejection and retain raw original argv/status/stdout/stderr,
-including success or abnormal termination. The other 10666 observations are
-strict comparisons. An unclassified typed rejection fails admission. Original
+including success or abnormal termination. The previously admitted driver has 10666 other observations as
+strict comparisons; new root-session CI expansion remains pending. An unclassified typed rejection fails admission. Original
 Linux U+D800 success and macOS rejection remain divergent observations; neither
 is normalized, rewritten or claimed as portable semantics.
 

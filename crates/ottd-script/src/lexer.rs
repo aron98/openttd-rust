@@ -131,6 +131,8 @@ impl<'a> Lexer<'a> {
         let combined = match pair {
             (b'=', Some(b'=')) => Some(TokenKind::Equal),
             (b'!', Some(b'=')) => Some(TokenKind::NotEqual),
+            (b'<', Some(b'-')) => Some(TokenKind::NewSlot),
+            (b':', Some(b':')) => Some(TokenKind::Root),
             (b'<', Some(b'=')) => Some(TokenKind::LessEqual),
             (b'>', Some(b'=')) => Some(TokenKind::GreaterEqual),
             (b'&', Some(b'&')) => Some(TokenKind::And),
@@ -149,7 +151,7 @@ impl<'a> Lexer<'a> {
                 }
                 return Ok(TokenKind::Shift(5));
             }
-            (b'/', Some(b'/' | b'*' | b'>')) | (b'<', Some(b'-' | b'/')) | (b':', Some(b':')) => {
+            (b'/', Some(b'/' | b'*' | b'>')) | (b'<', Some(b'/')) => {
                 return Err(CompileError {
                     offset,
                     kind: CompileErrorKind::UnsupportedSyntax,

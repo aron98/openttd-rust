@@ -41,7 +41,7 @@ fn check_frames(
                     vm.instruction_pointer()
                 )?;
                 for (slot, value) in vm.registers.iter().enumerate().skip(1) {
-                    writeln!(actual, "frame {slot} {}", scalar(value))?;
+                    writeln!(actual, "frame {slot} {}", scalar(value.scalar()?))?;
                 }
             }
             Ok(Execution::Returned(value)) => {
@@ -148,14 +148,21 @@ fn failed_update_matches_native_frames() -> Result<(), Box<dyn std::error::Error
     for instruction in program.instructions().iter().take(update_position + 1) {
         if instruction.opcode == 0x23 {
             assert_eq!(vm.update(*instruction), Err(crate::VmError::DivisionByZero));
-            assert_eq!(vm.registers.get(1), Some(&Value::Integer(7)));
+            assert_eq!(
+                vm.registers.get(1).and_then(|slot| slot.scalar().ok()),
+                Some(&Value::Integer(7))
+            );
             break;
         }
         let _result = vm.step(*instruction)?;
     }
     let mut vm = Vm::new(&program)?;
     assert_eq!(vm.resume(100), Err(crate::VmError::DivisionByZero));
-    assert!(vm.registers.iter().all(|value| *value == Value::Null));
+    assert!(
+        vm.registers
+            .iter()
+            .all(|value| value.scalar() == Ok(&Value::Null))
+    );
     Ok(())
 }
 

@@ -67,7 +67,9 @@ impl Compiler<'_> {
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::TypeOf
+            TokenKind::Root
+            | TokenKind::NewSlot
+            | TokenKind::TypeOf
             | TokenKind::Case
             | TokenKind::Default
             | TokenKind::Compound(_)

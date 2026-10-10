@@ -19,12 +19,23 @@ impl Emitter {
         if self.enabled {
             if let Some(previous) = self.instructions.last_mut() {
                 match instruction.opcode {
-                    0x0a if matches!(previous.opcode, 0x11 | 0x12)
+                    0x0a if matches!(previous.opcode, 0x0e | 0x11 | 0x12)
                         && i32::from(previous.arg0) == instruction.arg1 =>
                     {
                         previous.arg0 = instruction.arg0;
                         self.enabled = false;
                         return;
+                    }
+                    0x0e if previous.opcode == 0x01
+                        && previous.arg0 == instruction.arg2
+                        && !registers.is_local(previous.arg0) =>
+                    {
+                        if let Ok(receiver) = u8::try_from(instruction.arg1) {
+                            previous.opcode = 0x09;
+                            previous.arg0 = instruction.arg0;
+                            previous.arg2 = receiver;
+                            return;
+                        }
                     }
                     0x0a if previous.opcode == 0x0a => {
                         if let Ok(source) = u8::try_from(instruction.arg1) {

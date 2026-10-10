@@ -30,6 +30,7 @@ from scripts.script_vm_provenance import (
     select_executable,
     verify_sources,
 )
+from scripts.script_vm_roots import run_roots
 from scripts.script_vm_strings import run_strings
 from scripts.world_check_support import ROOT, Json, WorldCheckError, run, write_json
 
@@ -144,6 +145,7 @@ def main() -> None:
         target = directory / "changed.stdout"
         _ = target.write_text(base.read_text().replace(old, new))
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
+    run_roots(builder)
     branch_tests = run_branches(builder, rust)
     run_strings(output, rust)
     run_constants(builder)
@@ -172,7 +174,7 @@ def main() -> None:
             "strict_comparisons": 10666,
             "undefined_input_rejections": 153,
             "controls": 25,
-            "frame_tests": 23,
+            "frame_tests": 29,
             "native_frames": 12,
             "branch_budget_cases": 127,
             "string_sessions": 4,
@@ -180,11 +182,17 @@ def main() -> None:
             "float_patterns": 23071,
             "string_controls": 4,
             "constant_native_sessions": 115,
-            "constant_buffer_comparisons": 36,
-            "constant_root_boundaries": 1,
+            "constant_buffer_comparisons": 37,
+            "constant_root_runtime_errors": 1,
             "constant_stateful_projections": 3,
             "constant_public_tests": 3,
             "constant_controls": 4,
+            "root_native_sessions": 90,
+            "root_stateful_projections": 72,
+            "root_syntax_boundaries": 12,
+            "root_runtime_boundaries": 6,
+            "root_public_tests": 7,
+            "root_controls": 4,
             "passed": True,
         },
     )

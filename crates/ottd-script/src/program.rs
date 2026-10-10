@@ -1,11 +1,9 @@
-use crate::{Instruction, Realm, Value, VmError};
+use crate::{Instruction, ProgramData, Realm, Value, VmError};
+use std::rc::Rc;
 /// Compiled main function retaining its shared string realm.
 #[derive(Clone, Debug)]
 pub struct Program {
-    pub(crate) stack_size: u16,
-    pub(crate) literals: Vec<Value>,
-    pub(crate) instructions: Vec<Instruction>,
-    pub(crate) realm: Realm,
+    pub(crate) data: Rc<ProgramData>,
 }
 impl Program {
     /// Construct bytecode in a fresh realm, reinterning all string literals.
@@ -28,31 +26,36 @@ impl Program {
                 Value::Null | Value::Integer(_) | Value::Float(_) | Value::Bool(_) => value,
             })
             .collect();
-        Ok(Self {
+        Ok(Self::freeze(ProgramData {
             stack_size,
             literals,
             instructions,
             realm,
-        })
+        }))
+    }
+    pub(crate) fn freeze(data: ProgramData) -> Self {
+        Self {
+            data: Rc::new(data),
+        }
     }
     /// Required register count including the reserved root slot.
-    pub const fn stack_size(&self) -> u16 {
-        self.stack_size
+    pub fn stack_size(&self) -> u16 {
+        self.data.stack_size
     }
     /// Literal values in native compiler encounter order.
     pub fn literals(&self) -> &[Value] {
-        &self.literals
+        &self.data.literals
     }
     /// Native instruction tuples.
     pub fn instructions(&self) -> &[Instruction] {
-        &self.instructions
+        &self.data.instructions
     }
 }
 impl PartialEq for Program {
     fn eq(&self, other: &Self) -> bool {
-        self.stack_size == other.stack_size
-            && self.literals == other.literals
-            && self.instructions == other.instructions
+        self.data.stack_size == other.data.stack_size
+            && self.data.literals == other.data.literals
+            && self.data.instructions == other.data.instructions
     }
 }
 impl Eq for Program {}

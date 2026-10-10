@@ -7899,10 +7899,12 @@
     "source/crates/ottd-sim/src/runtime/order_state/observation.rs",
     "source/crates/ottd-sim/src/runtime/order_state/restore.rs",
     "source/crates/ottd-sim/src/runtime/order_state/restore/properties.rs",
+    "source/crates/ottd-sim/src/runtime/order_state/restore/shared.rs",
     "source/crates/ottd-sim/src/runtime/order_state/restore_boundary_tests.rs",
     "source/crates/ottd-sim/src/runtime/order_state/restore_tests.rs",
     "source/crates/ottd-sim/src/runtime/order_state/sale.rs",
     "source/crates/ottd-sim/src/runtime/order_state/sale_tests.rs",
+    "source/crates/ottd-sim/src/runtime/order_state/shared_restore_tests.rs",
     "source/crates/ottd-sim/src/runtime/order_state/tests.rs",
     "source/crates/ottd-sim/src/runtime/order_state/view.rs",
     "source/crates/ottd-sim/src/runtime/ordered_sale_native.rs",
@@ -8242,8 +8244,6 @@
     "tests/previous_milestones-1/legacy-observations/terraform-one.json",
     "tests/previous_milestones-2/legacy-observations/level-money.json",
     "tests/previous_milestones-2/legacy-observations/level-one.json",
-    "zero-test-rejected.json",
-    "source/crates/ottd-sim/src/runtime/order_state/restore/shared.rs",
-    "source/crates/ottd-sim/src/runtime/order_state/shared_restore_tests.rs"
+    "zero-test-rejected.json"
   ]
 }

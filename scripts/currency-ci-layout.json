@@ -3088,7 +3088,7 @@
     "scripts/tests/sale_lifetime_test.py": "1aba85640d04ecf7b7acc8f4b66b1d305b92bb036b4fcb4e8b2d1307bd63b60c",
     "scripts/tests/strings_ci_evidence_test.py": "893e6801713a96b2b67b972415759a7e7d65c8ea334894f05e3c72b6a9f9c7fe",
     "scripts/tests/test_contract.py": "9f5dbaa6769ef2a68c8ae1cd7ed34ccd50110b3ebd79f19de965dcd5e3795005",
-    "scripts/tests/test_contract_layouts.py": "57704a013b94d40f4394aa5730b4f9fbd28ccfe5110d0494a753b919fea4fbb0",
+    "scripts/tests/test_contract_layouts.py": "1b05d52be379ffc829a854da798c2882f06c57a57c8f2b467cdba8f94b6eee89",
     "scripts/tests/test_depot_build_evidence.py": "fc6f87eca7dbb8357f13c774c9e7014154716638bab4ec1e9691770dd345ab6f",
     "scripts/tests/test_gameplay_foundations.py": "1f1ae2613da95974a0ff46602d2b0ca36eb615b491a9d45dd77e5ead48422461",
     "scripts/tests/test_grf_metadata_evidence.py": "10187288131d3cbec86d7c740b1891550f11eb9c16d906be7990f00b5f1796a4",

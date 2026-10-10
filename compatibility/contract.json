@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "cc3142d15fcbef9fc028a805c17db6ce8da2971741e02edce01a9ed82724c400",
+      "sha256": "8b54f0130c44c882adc321a2235f840c56391f4f9962d84208979e2a776dde0a",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "6927539517fe7e0bd9ff7875d4c9758e7d42cbea413264b958d5e4950780f6f1",
+      "sha256": "f9170b89fdf111f99aac074b6aabea2c97410e081936363fef83d046df3f86f2",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,

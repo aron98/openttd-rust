@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -17,8 +18,10 @@ from contract_model import (
     Driver,
     Json,
     array,
+    decode_json,
     read_json,
     record,
+    strings,
 )
 from contract_run import run_driver
 from contract_validate import load_contract
@@ -52,6 +55,58 @@ def declaration(data: bytes, path: str = "layout.json") -> dict[str, Json]:
 
 
 class ContractLayoutTests(unittest.TestCase):
+    def test_terrain_artifact_roster_is_sorted_and_unique(self) -> None:
+        layout = record(
+            decode_json((ROOT / "scripts/tree-terrain/layout.json").read_bytes()),
+            "fresh_complete_run_verified source_hashes native_membership "
+            "rust_membership artifact_paths",
+        )
+        paths = strings(layout["artifact_paths"])
+        self.assertEqual(paths, tuple(sorted(set(paths))))
+
+    def test_repository_json_source_pins_include_nested_layouts(self) -> None:
+        checked: set[tuple[str, str]] = set()
+        paths: list[Path] = []
+        for directory, children, files in os.walk(ROOT / "scripts"):
+            children[:] = [name for name in children if not name.startswith(".")]
+            paths.extend(
+                Path(directory) / name
+                for name in files
+                if name.endswith(".json") and not name.startswith(".")
+            )
+        for path in sorted(paths):
+            relative = path.relative_to(ROOT)
+            pending: list[tuple[str, Json]] = [("", decode_json(path.read_bytes()))]
+            while pending:
+                location, value = pending.pop()
+                if isinstance(value, dict):
+                    for field, child in value.items():
+                        label = f"{location}/{field}"
+                        if field in ("sources", "source_hashes") and isinstance(
+                            child, dict
+                        ):
+                            checked.add((relative.as_posix(), field))
+                            for name, expected in child.items():
+                                with self.subTest(
+                                    layout=str(relative), field=label, source=name
+                                ):
+                                    self.assertEqual(
+                                        hashlib.sha256(
+                                            (ROOT / name).read_bytes()
+                                        ).hexdigest(),
+                                        expected,
+                                    )
+                        pending.extend(
+                            [(label, child)] if isinstance(child, (dict, list)) else []
+                        )
+                elif isinstance(value, list):
+                    pending.extend(
+                        (f"{location}/{index}", child)
+                        for index, child in enumerate(value)
+                    )
+        self.assertIn(("scripts/script-vm-manifest.json", "sources"), checked)
+        self.assertIn(("scripts/tree-terrain/layout.json", "source_hashes"), checked)
+
     def test_external_array_preserves_order_and_multiplicity(self) -> None:
         # Given an ordered pinned literal array, including a repeated requirement.
         data = b'["second.txt", "first.txt", "second.txt"]'

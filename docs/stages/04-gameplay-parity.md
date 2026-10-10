@@ -10,8 +10,9 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 
 Latest reviewed gameplay increment: `3d952b0` advances empty-road tile callbacks.
 Content increment `fdb7b8f` adds currency properties 0B-0F, and `39eb3e8` restores
-shared order backups in the default group. Script increment `8bc145d` adds owned
-strings and compilation realms; independent review approves the increment. All seven
+shared order backups in the default group. Script increment `ee9672e` adds shared
+compiler constants and closed enums after `8bc145d` introduced owned strings and
+compilation realms. Independent review approves both increments. All seven
 completion gates below remain open. Earlier milestones and their bounded
 verification results are recorded below.
 
@@ -50,7 +51,21 @@ feeds and 23,071 raw-f32 formatting patterns. The earlier optimized profile test
 identical executed inputs; its actual source epoch remains explicit. Independent
 review verifies the complete final package and reproduces 66 native comparisons,
 1,030 float patterns, 18 private tests and four native lifetime sessions. Globals,
-objects, functions, compiler constants/enums, host APIs and full AI/GS remain open.
+objects, functions, host APIs and full AI/GS remain open.
+
+Compiler constants and closed enums now share a Realm-owned namespace. Declaration
+publication follows native parser timing, including changes retained after later
+compilation failures. Local shadowing, enum counters, replacement, interned names
+and values, and temporary updates have original-derived checks. Both complete
+debug and optimized profiles pass 10,666 strict comparisons and 153 separate
+policy rejections, plus 115 native constant sessions and four actual validator
+admission/rejection controls. Each profile runs 88 script tests and validates a
+92,076-file evidence archive. Verification includes 592 workspace tests; final
+strict workspace checks, 70 Python tests and 13 new admission tests pass.
+Independent review additionally runs 96 differential comparisons, 115 native
+sessions and both complete archive validators. Runtime root lookup, constant
+postfix updates, minimum-integer declaration negation, general objects/functions
+and full AI/GS remain outside this increment.
 
 Tree clearing now preserves costs, clear limits, nearest-town selection and
 rating changes through TerraformLand and LevelLand test/execute phases. Nested
@@ -173,9 +188,20 @@ Local macOS results do not establish portable behavior for that domain. The
 explicit policy now passes the Linux run linked above; historical divergent
 observations remain preserved.
 
-Active work continues on native engine/specification observations, original-built
-road movement witnesses, and persistent compiler constants/enums. These are
-prerequisites to the unchanged broad stage gates below.
+Private work continues on mutable engine specifications, scoped engine mappings
+and road properties 08/09/0F/11, with live CI integration still pending. Complete
+native snapshots cover constructor/reset state, allocation and partial failures;
+an additional unknown-property/following-record boundary is under investigation.
+Configured-world content restoration remains blocked until its full dependencies
+are implemented.
+
+Original-only movement observations now include a vehicle built and started by
+real commands, a loaded 37-tick road crossing, and 74 uninterrupted ticks compared
+with a 37-tick save/load split. Final original saves are byte-identical. Saved
+state and captured noninteractive runtime agree; each process retains its own
+observed, unsaved interactive RNG inputs, whose differences remain recorded.
+This evidence supports the first Rust movement implementation; it is not yet
+Rust/native movement parity. The broad stage gates below are unchanged.
 
 For agentic workers: use the subagent-driven development workflow, with explicit
 ownership, native-source evidence, independent review and tests before integration.

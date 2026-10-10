@@ -221,13 +221,17 @@ impl RoadVehicleContext<'_> {
         world: &World,
         tile: u32,
         user: u32,
+        company: u8,
+        cargo: u8,
     ) -> Result<(), crate::CommandError> {
         if !world.tables().contains_key(b"BKOR") {
             return Err(crate::CommandError::Unsupported(
                 "vehicle order-backup restore",
             ));
         }
-        self.orders.admit_restore(world, tile, user)?;
+        if let Some(slot) = self.orders.admit_restore(world, tile, user)? {
+            order_state::restore::shared::admit(world, slot, company, cargo, self.content)?;
+        }
         Ok(())
     }
     pub(crate) fn publish(
@@ -260,7 +264,7 @@ impl RoadVehicleContext<'_> {
         for edit in edits {
             transaction.apply(edit)?;
         }
-        let pending = restore.stage(&mut transaction, id)?;
+        let pending = restore.stage(&mut transaction, id, self.content)?;
         let prepared = transaction.prepare()?;
         let restored = pending.validate(&prepared)?;
         if allocation.pool.snapshot().occupied

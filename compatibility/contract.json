@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "b7c8259a18e55832d52c64f51d1e52e175b21f583371d8b7fa3021919387578f",
+      "sha256": "eb34b491137f3c29b9672d7d74666a34c98ce07beab136fa6be344abcd47c248",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2203,7 +2203,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-planning-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build/planning.rs",
-      "sha256": "392b70a55355fba94c89d35a04c9f7b934d7b6a6bb11e8262e0ca05461eb7614",
+      "sha256": "b3c29fc461a41351cdab87b8ac1a90c9204416725b59b886d5e6b5fa94e33e4e",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "11ed7c1524d2ea87229bdf0147940bb94500266427dd1d2561957d732b53022c",
+      "sha256": "7279bc2873ec5b73d7a7710c8a62ea3fb4b09def2b7bee79360a02d3d2d8616f",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "ee0d25316f4ba6891d3c59c831447794b88e8e9017f269054d32750f54e2382b",
+      "sha256": "03cd058b8369998f9005c11848a8bab66ed859d501a1f5ea6e1dc540d061725a",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "4d03950b89b9f1c0f3daac939a3826829716b1311a43dba2924ab336b66dce2a",
+      "sha256": "9713b6dee235fd5bb333d0745646c97a4cdd789253ac52e84fbbff69938523d7",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "0659a9c6824c338e9bfc13635bcd25b46fc9121fb3f99b28a90d2bcff2cbb3e6",
+      "sha256": "23c1454acab9c96674d83730dd1e08f7d81e7cdeffba0577c4976fce06083096",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "d302d485b23b315d1be42ccdb7481599eabc59a775c0049836e5e8f478f83608",
+      "sha256": "0436e4ef150f9caab382a31a7d8dbd557be9373538e1b1a6552664b1c66914ce",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "8b902977951c35b23fb40565352600d623eb568529a4316ffae40b54d5127e8e",
+      "sha256": "2d0e444eda50d3a7e71ee121941fa47d678f680f68fc89c2731023ce0ed9b46f",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "2336d0b00c38212febb4f5fdce9e20e7de392d1a4fed0585131aba651086447e",
+      "sha256": "cc3142d15fcbef9fc028a805c17db6ce8da2971741e02edce01a9ed82724c400",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "a6e9389a9bc850dc3b2d28af372905bc11beca6ca6a445e83e6e502ab6a1a8a1",
+      "sha256": "8b86d89918e41bede050523989883c4560b86f8995fc9af50ff2adf6ff02303b",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "8b4dd5448121e8e3acc0cf98629da2fd522895a234907a540fbb1ee4c88cd088",
+      "sha256": "6927539517fe7e0bd9ff7875d4c9758e7d42cbea413264b958d5e4950780f6f1",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
@@ -4159,6 +4159,42 @@
       "sha256": "d1d52176c868ea74f588e9e93006f4eb99d8d3c50ffd6edee2ca2e6ad6f6a378",
       "kind": "recipe",
       "provenance": "Explicit rejection policy for reached out-of-byte-domain native ctype arguments; upstream.toml",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "shared-restore-driver",
+      "path": "scripts/check-shared-restore.py",
+      "sha256": "a8b9d251a25f5c6fead7f4d73fd5484e2bb976fc10b052df0a4bd0fc65850833",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "shared-restore-evidence",
+      "path": "scripts/shared_restore_evidence.py",
+      "sha256": "1cb21f745125b0b470c2d022aa87028f6ae5a821e80011743ac81f9edfccd0b6",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "shared-restore-layout",
+      "path": "scripts/shared-restore-layout.json",
+      "sha256": "04674d9c913e5e5f098d1412712be5ece949d69222322f50a7bae155ee17d994",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "shared-restore-tests",
+      "path": "scripts/shared_restore_fixture_test.py",
+      "sha256": "6d17e6b68cdf8fd39d0b48f8f19d746775977a5f92c06af22b03e3d043c07fbc",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
       "save_version": null,
       "profile": null
     }
@@ -10788,6 +10824,38 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "shared-restore",
+      "argv": [
+        "python3",
+        "scripts/check-shared-restore.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/admission/results.json",
+        "controls/admission/wrong-source-mutation.json",
+        "controls/admission/wrong-executable.json",
+        "controls/archive/bindings.json"
+      ],
+      "success_text": "PASS shared/default Restore CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 900
     }
   ],
   "scenarios": [
@@ -15669,6 +15737,48 @@
         "observed-layout.json",
         "evidence-index.json",
         "evidence.tar.gz"
+      ]
+    },
+    {
+      "id": "runtime.shared-default-order-restore",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Ordinary-SP vanilla same-owner singlepart road purchase restoring matching shared/default live backup with an existing ORDL, same passenger-cargo class and no station-destination orders. One prepared World transaction shares after clone, consumes BKOR and publishes exact derived/cache/allocator state. Null-list, nondefault group, new host modes, general orders/movement remain explicit unsupported.",
+      "expected": "Requires fixed16 original23/Rust pairs,71actions,174snapshots,16saves plus6 exact focused selectors. Full64000 existing ORDL list must restore without allocation after original load/resave preserves every row. Head/middle/tail/retarget/users/implicit/properties and estimate/failure cases; strict new timing0 and strict all loaded values, zero fresh duration exceptions.22 actual semantic comparator refusals, zero/subset/wrong-source/wrong-Cargo-executable/missing-extra case/save checks,31 native mode refusals, actual native one-byte freshness failure and three independent raw/archive/index corruption rejections. Complete source including embedded fixtures, input/executable bindings and exact archive membership. Second unmatched native creation is not a shared-case action; consume-estimate has no second creation, existing owned no-backup native coverage and Rust consumed-once regression cover unchanged ordinary behavior.",
+      "driver": "shared-restore",
+      "assets": [
+        "shared-restore-driver",
+        "shared-restore-evidence",
+        "shared-restore-layout",
+        "shared-restore-tests"
+      ],
+      "source_refs": [
+        "crates/ottd-sim/src/runtime/order_state/restore.rs",
+        "crates/ottd-sim/src/runtime/order_state/restore/shared.rs",
+        "scripts/check-shared-restore.py",
+        "scripts/shared_restore_strict.py",
+        "scripts/shared_restore_evidence.py",
+        "scripts/shared-restore-fixtures.json",
+        "scripts/shared-restore-layout.json"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/admission/results.json",
+        "controls/admission/wrong-source-mutation.json",
+        "controls/admission/wrong-executable.json",
+        "controls/archive/bindings.json"
       ]
     }
   ]

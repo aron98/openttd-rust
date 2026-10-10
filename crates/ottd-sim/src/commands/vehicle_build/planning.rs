@@ -105,7 +105,13 @@ pub(super) fn validate(
         error.error = Some("STR_ERROR_DEPOT_WRONG_DEPOT_TYPE".into());
         return Ok(Err(error));
     }
-    context.admit_restore(world, args.tile, args.client_id)?;
+    context.admit_restore(
+        world,
+        args.tile,
+        args.client_id,
+        company,
+        engine.info.cargo_type,
+    )?;
     let state = state::new(world, company, args, engine, spec, unit, cost.cost)?;
     Ok(Ok(Purchase {
         state,

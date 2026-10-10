@@ -41,7 +41,7 @@ fn restore_poor_and_invalid_engine_leave_backups_rng_and_allocators_unchanged() 
 }
 #[test]
 fn restore_rejects_matching_clone_group_and_live_non_sp_before_mutation() -> Result {
-    for domain in 0..3 {
+    for domain in 1..3 {
         let (mut runtime, tile, _, first, _) = super::tests::shared_fixture()?;
         runtime.backup_orders(VehicleId::new(first), 77)?;
         if domain == 1 {

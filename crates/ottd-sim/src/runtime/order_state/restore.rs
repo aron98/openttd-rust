@@ -1,4 +1,5 @@
 mod properties;
+pub(in crate::runtime) mod shared;
 use super::{
     BackupAllocation, OrderState, PoolAllocator, RuntimeError, RuntimeSaveContext, VehicleId, view,
 };
@@ -44,9 +45,6 @@ impl OrderState {
             };
             if row.number("tile")? != u64::from(tile) || row.number("user")? != u64::from(user) {
                 continue;
-            }
-            if row.number("clone")? != 0 {
-                return Err(RuntimeError::Unsupported("purchase shared backup restore"));
             }
             if row.number("group")? != 65534 {
                 return Err(RuntimeError::Unsupported(
@@ -95,6 +93,7 @@ impl RestorePlan {
         mut self,
         tx: &mut WorldTransaction<'_>,
         vehicle: VehicleId,
+        content: &crate::content::ContentCatalog,
     ) -> Result<PendingRestore, RuntimeError> {
         let mut created = None;
         if let Some(slot) = self.slot {
@@ -126,7 +125,25 @@ impl RestorePlan {
             }
             let (schema, orders) = backup.children("orders")?;
             let mut edits = Vec::new();
-            if !orders.is_empty() && self.lists.can_allocate(1) {
+            let mut restored_orders = None;
+            if backup.number("clone")? != 0 {
+                let (shared, shared_edits) =
+                    shared::stage(candidate, backup, current, vehicle, content)?;
+                edits.extend(shared_edits);
+                shared.update_chain(&mut self.previous, vehicle)?;
+                let table = candidate
+                    .table(*b"ORDL")
+                    .ok_or(RuntimeError::Invalid("ORDL"))?;
+                restored_orders = Some(
+                    (view::Row {
+                        schema: table.schema(),
+                        record: table
+                            .record(shared.list)
+                            .ok_or(RuntimeError::Invalid("shared restore list"))?,
+                    })
+                    .children("orders")?,
+                );
+            } else if !orders.is_empty() && self.lists.can_allocate(1) {
                 let id = self.lists.allocate()?;
                 let list_schema = candidate
                     .table(*b"ORDL")
@@ -151,13 +168,14 @@ impl RestorePlan {
                     WireValue::Unsigned(u64::from(id) + 1),
                 ));
                 created = Some(id);
+                restored_orders = Some((schema, orders));
             }
             edits.extend(properties::copy(
                 backup,
                 current,
                 vehicles,
                 vehicle,
-                created.map(|_| (schema, orders)),
+                restored_orders,
             )?);
             self.backups.free(slot)?;
             edits.push(WorldEdit::RemoveRecord {

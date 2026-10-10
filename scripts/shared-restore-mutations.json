@@ -1,0 +1,634 @@
+{
+  "schema_version": 1,
+  "controls": [
+    {
+      "name": "equal-nonzero-new",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "expected",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        },
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "initialized zero"
+    },
+    {
+      "name": "nonzero-new",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "initialized zero"
+    },
+    {
+      "name": "loaded-clone",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "initial-rust",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "1",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "loaded-reused-id",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "initial-rust",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "clone-timing",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "1",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "round_trip_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "clone-next",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "1",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "next_shared"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "wrong-position",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "after",
+            "orders",
+            "lists",
+            0,
+            "members"
+          ],
+          "kind": "replace",
+          "value": [
+            0,
+            1
+          ]
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "wrong-head",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "after",
+            "orders",
+            "lists",
+            0,
+            "first_shared"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "wrong-count",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "after",
+            "orders",
+            "lists",
+            0,
+            "num_vehicles"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "raw-order-timing",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "ORDL",
+            "records",
+            "0",
+            "orders",
+            0,
+            "wait_time"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "real-index",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "cur_real_order_index"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "implicit-index",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "VEHS",
+            "records",
+            "0",
+            "roadveh",
+            0,
+            "common",
+            0,
+            "cur_implicit_order_index"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "missing-matching-backup",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "before",
+            "orders",
+            "backups"
+          ],
+          "kind": "replace",
+          "value": []
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "before",
+            "orders",
+            "backups"
+          ],
+          "kind": "replace",
+          "value": []
+        }
+      ],
+      "diagnostic": "proven shared backup domain"
+    },
+    {
+      "name": "wrong-user",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "before",
+            "orders",
+            "backups",
+            0,
+            "user"
+          ],
+          "kind": "xor",
+          "value": 1
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "before",
+            "orders",
+            "backups",
+            0,
+            "user"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "proven shared backup domain"
+    },
+    {
+      "name": "wrong-return",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "returns",
+            "exec",
+            "vehicle"
+          ],
+          "kind": "xor",
+          "value": 1
+        },
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "returns",
+            "result",
+            "vehicle"
+          ],
+          "kind": "xor",
+          "value": 1
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "returns",
+            "exec",
+            "vehicle"
+          ],
+          "kind": "xor",
+          "value": 1
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "returns",
+            "result",
+            "vehicle"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "new incarnation"
+    },
+    {
+      "name": "estimate-cannot-create",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "plan",
+          "path": [
+            "actions",
+            2,
+            "request",
+            "mode"
+          ],
+          "kind": "replace",
+          "value": "estimate"
+        },
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "input",
+            "request",
+            "mode"
+          ],
+          "kind": "replace",
+          "value": "estimate"
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "input",
+            "request",
+            "mode"
+          ],
+          "kind": "replace",
+          "value": "estimate"
+        }
+      ],
+      "diagnostic": "committed Post"
+    },
+    {
+      "name": "failed-cannot-create",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "exec",
+            "success"
+          ],
+          "kind": "replace",
+          "value": false
+        },
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "result",
+            "success"
+          ],
+          "kind": "replace",
+          "value": false
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "exec",
+            "success"
+          ],
+          "kind": "replace",
+          "value": false
+        },
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "receipt",
+            "result",
+            "success"
+          ],
+          "kind": "replace",
+          "value": false
+        }
+      ],
+      "diagnostic": "failed executed shared Build"
+    },
+    {
+      "name": "missing-snapshot",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            0,
+            "before"
+          ],
+          "kind": "remove",
+          "value": null
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "extra-snapshot",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "rust",
+          "path": [
+            "actions",
+            0,
+            "extra_snapshot"
+          ],
+          "kind": "add",
+          "value": {}
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "unexpected-native-metadata",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "native",
+          "path": [
+            "actions",
+            2,
+            "result",
+            "native_metadata",
+            "result",
+            "unexpected"
+          ],
+          "kind": "add",
+          "value": 1
+        }
+      ],
+      "diagnostic": "Unexpected native command metadata"
+    },
+    {
+      "name": "wrong-case",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "rust",
+          "path": [
+            "case"
+          ],
+          "kind": "replace",
+          "value": "unlisted"
+        }
+      ],
+      "diagnostic": "differ"
+    },
+    {
+      "name": "raw-order-type",
+      "case": "two-member",
+      "label": "after",
+      "mutations": [
+        {
+          "document": "actual",
+          "path": [
+            "chunks",
+            "ORDL",
+            "records",
+            "0",
+            "orders",
+            0,
+            "type"
+          ],
+          "kind": "xor",
+          "value": 1
+        }
+      ],
+      "diagnostic": "differ"
+    }
+  ]
+}

@@ -29,6 +29,45 @@ class StaleReferenceLayoutsTest(unittest.TestCase):
                 }
                 self.assertEqual(recorded, expected)
 
+    def assert_currency_copied_sources(self, paths: list[str]) -> None:
+        root = Path(__file__).resolve().parents[2]
+        expected = [
+            f"stale-source/{directory}/{path.name}"
+            for directory in ("scripts", "reference")
+            for path in (root / directory).iterdir()
+            if path.is_file()
+        ]
+        copied = [path for path in paths if path.startswith("stale-source/")]
+        self.assertCountEqual(copied, expected)
+
+    def test_currency_guard_retains_exact_copied_source_membership(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        layout = read_json(root / "scripts/currency-ci-layout.json")
+        paths = [
+            text(value)
+            for value in sequence(at(layout, ("guards", "stale", "paths")))
+        ]
+        self.assert_currency_copied_sources(paths)
+
+    def test_currency_copied_source_membership_rejects_corruption(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        complete = [
+            f"stale-source/{directory}/{path.name}"
+            for directory in ("scripts", "reference")
+            for path in (root / directory).iterdir()
+            if path.is_file()
+        ]
+        self.assert_currency_copied_sources(complete)
+        variants = {
+            "missing": complete[1:],
+            "extra": [*complete, "stale-source/scripts/not-a-real-source.py"],
+            "duplicate": [*complete, complete[0]],
+            "foreign-directory": [*complete, "stale-source/other/input.py"],
+        }
+        for name, paths in variants.items():
+            with self.subTest(corruption=name), self.assertRaises(AssertionError):
+                self.assert_currency_copied_sources(paths)
+
     def test_string_guard_retains_every_copied_source_file(self) -> None:
         root = Path(__file__).resolve().parents[2]
         layout = read_json(root / "scripts/strings-ci-layout.json")

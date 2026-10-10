@@ -157,3 +157,31 @@ fn restore_empty_owned_backup_consumes_row_without_allocating_order_list() -> Re
     );
     Ok(())
 }
+
+#[test]
+fn shared_restore_rejoins_existing_list_without_allocating_orders() -> Result {
+    let (mut runtime, tile, _, first, second) = super::tests::shared_fixture()?;
+    runtime.backup_orders(VehicleId::new(first), 77)?;
+    let before = runtime.order_list_pool();
+    let receipt = runtime.execute_command(&build(tile, 77))?;
+    assert!(receipt.posted);
+    let Some(CommandReturn::Vehicle { vehicle, .. }) = receipt.returns.ok_or("return")?.result
+    else {
+        return Err("vehicle return".into());
+    };
+    assert_eq!(runtime.order_list_pool(), before);
+    assert_eq!(runtime.order_backup_pool().items, 0);
+    let list = runtime
+        .world()
+        .derived()
+        .order_lists
+        .iter()
+        .find(|list| list.id == 60000)
+        .ok_or("list")?;
+    assert_eq!(list.vehicles, [first, second, vehicle]);
+    assert_eq!(
+        view::consist(runtime.world(), vehicle)?.signed("round_trip_time")?,
+        0
+    );
+    Ok(())
+}

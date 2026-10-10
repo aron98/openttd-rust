@@ -12,7 +12,7 @@ mod detach;
 #[cfg(test)]
 mod native;
 mod observation;
-mod restore;
+pub(super) mod restore;
 #[cfg(test)]
 mod restore_boundary_tests;
 #[cfg(test)]
@@ -20,6 +20,8 @@ mod restore_tests;
 mod sale;
 #[cfg(test)]
 mod sale_tests;
+#[cfg(test)]
+mod shared_restore_tests;
 #[cfg(test)]
 mod tests;
 mod view;

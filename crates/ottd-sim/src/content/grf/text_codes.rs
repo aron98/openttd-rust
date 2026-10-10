@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // OpenTTD 14ec60f248547d4d062a1160f0fc26d742319888, src/table/control_codes.h.
 pub(super) const SCC_BIGFONT: u32 = 0xe006;
+pub(super) const SCC_PLURAL_LIST: u32 = 0xe03c;
+pub(super) const SCC_GENDER_LIST: u32 = 0xe03d;
+pub(super) const SCC_GENDER_INDEX: u32 = 0xe03e;
+pub(super) const SCC_SET_CASE: u32 = 0xe040;
+pub(super) const SCC_SWITCH_CASE: u32 = 0xe041;
 pub(super) const SCC_BLACK: u32 = 0xe052;
 pub(super) const SCC_BLUE: u32 = 0xe042;
 pub(super) const SCC_BROWN: u32 = 0xe04d;

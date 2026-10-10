@@ -2,6 +2,11 @@
 mod action14;
 mod action14_parameters;
 mod container;
+#[cfg(test)]
+mod language_native;
+mod language_pack;
+#[cfg(test)]
+mod language_pack_tests;
 mod load;
 mod load_budget;
 mod load_conditions;
@@ -12,6 +17,8 @@ mod load_cursor;
 mod load_dispatch;
 mod load_execute;
 mod load_globals;
+mod load_language;
+mod load_language_state;
 mod load_parameters;
 mod load_patch;
 mod load_registry;
@@ -37,6 +44,7 @@ mod string_ids;
 mod text;
 mod text_choices;
 mod text_codes;
+mod text_mapped;
 mod text_reader;
 mod text_translate;
 mod types;

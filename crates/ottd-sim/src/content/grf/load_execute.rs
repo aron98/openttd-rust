@@ -11,6 +11,7 @@ impl Session<'_, '_> {
         cursor: &Cursor<'_>,
         location: LoadLocation,
     ) -> Result<(), ControlLoadError> {
+        self.language_snapshot(location)?;
         self.budget.trace(self.snapshot_bytes(), location)?;
         self.events.push(LoadEvent::Decision {
             location,

@@ -48,6 +48,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/order_state_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/order_state*.py scripts/check-order-state.py scripts/tests/order_state_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/order_state*.py scripts/check-order-state.py scripts/tests/order_state_evidence_test.py
+      - name: Check ordered language evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/language_ci_evidence_test.py scripts/tests/empty_inputs_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/language_ci_*.py scripts/check-grf-language-ci.py scripts/grf_control_archive.py scripts/depot_build_archive.py scripts/tests/language_ci_evidence_test.py scripts/tests/empty_inputs_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/language_ci_*.py scripts/check-grf-language-ci.py scripts/grf_control_archive.py scripts/depot_build_archive.py scripts/tests/language_ci_evidence_test.py scripts/tests/empty_inputs_test.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -107,6 +112,7 @@ jobs:
             .artifacts/road-slope-*/
             .artifacts/road-slope-invocation-*/
             .artifacts/order-state-*/
+            .artifacts/grf-language-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

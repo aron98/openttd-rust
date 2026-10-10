@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "402c4462571d10d769cdd6a3864ac7dc9f7531ccf934883904bd436a433c3f79",
+      "sha256": "73d15f18ead54d463eaaaf7dfa9c859620e6aaf9f0274574bf8b890f250269d3",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1726,7 +1726,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-rs",
       "path": "crates/ottd-sim/src/content/grf.rs",
-      "sha256": "b8a3e3424beb26628aa0dcaed3f4cbdebb6508452e9f87419cd9b9f60b3aa519",
+      "sha256": "a87e6f1643390759f0cffb6d23142b5bf7d3ee5108ace150227d09c51a5c3818",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -1789,7 +1789,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-string-ids-rs",
       "path": "crates/ottd-sim/src/content/grf/string_ids.rs",
-      "sha256": "ba8e85637fc54e5c910dc12cf2425eec13fdcbf7bf427006de788740cc651d7a",
+      "sha256": "11b21dd0319ad8d6f800bfb7fe654f425614f404f442dfe521ab974381b3692e",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -1807,7 +1807,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-text-choices-rs",
       "path": "crates/ottd-sim/src/content/grf/text_choices.rs",
-      "sha256": "8cc6c10eece63917d1c6948531ccb5a488d5a12c0c0b37d485237e1a406195dc",
+      "sha256": "f914936883779ab4bd31489e257811181e41602ff5e01603492033a5cf9b79d9",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -1816,7 +1816,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-text-codes-rs",
       "path": "crates/ottd-sim/src/content/grf/text_codes.rs",
-      "sha256": "a28d781caf9b916c14b87f8dbf6d705c9e2ce72861b7e36f6ed09658143fbab6",
+      "sha256": "24cef705e5fda47d9a6322d3ac8fed2b3e8520edc3f296c704602c59909da475",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -1834,7 +1834,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-text-translate-rs",
       "path": "crates/ottd-sim/src/content/grf/text_translate.rs",
-      "sha256": "faea53e915cf712ba9a40cdbba630ea6d21332a0b1403c9bb526ef6d0fc557a1",
+      "sha256": "79fa71c407ba5e80bf8e14f3f31876af356467f2514dee285cca73481e890b81",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -1843,7 +1843,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-types-rs",
       "path": "crates/ottd-sim/src/content/grf/types.rs",
-      "sha256": "02504d9367a14944be90e3577a3cf12e572eb2e0c7fd822c2b2bd2a8cab167c9",
+      "sha256": "2342b5ef890a0bf2e6a6fcfe465732f13754c9aae55dc0ee508d9342abab99af",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -2338,7 +2338,7 @@
     {
       "id": "grf-control-scripts-grf-control-archive-py",
       "path": "scripts/grf_control_archive.py",
-      "sha256": "dde0f7beaadc01fcb506a531035eb1eefc68558564ff155849e3eeb76cc29e67",
+      "sha256": "9ce41f0e05962f59265f9425a6f7e5d6d6fb0ab010215ecd1ba4eaf3ff390ca4",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2410,7 +2410,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-rs",
       "path": "crates/ottd-sim/src/content/grf/load.rs",
-      "sha256": "95949078a3e287d01d3f7980478fb31ee555be18ed01b1794187ff87c1fad83a",
+      "sha256": "2eecd3bcd9df4e84e7d8bd10abae4fc424ff897d35648b0ebb83794781eef024",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2446,7 +2446,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-dispatch-rs",
       "path": "crates/ottd-sim/src/content/grf/load_dispatch.rs",
-      "sha256": "3559baac6c082b850fe8fd3ede6b10205f4ff06e4e89746aff5ca80534596a87",
+      "sha256": "7dafe01e3100d1977a8aa6b0ec896b081121e89c6efdbbeea1882e4c14dca6da",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2455,7 +2455,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-execute-rs",
       "path": "crates/ottd-sim/src/content/grf/load_execute.rs",
-      "sha256": "bf2087f90563180f5bc5b8536b8dbbaf4f382e6ae2d2d95db959d7d582ff9bf8",
+      "sha256": "b7d60bdb5200674774ebbcdf1c16ff92e4cea42bed808a4abeba2063695eb3b7",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2473,7 +2473,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-registry-rs",
       "path": "crates/ottd-sim/src/content/grf/load_registry.rs",
-      "sha256": "d06c435623c5b20026779869990a53df8b415f78e3e620f5f12c18f3f832b944",
+      "sha256": "60d3e53130ebc8728e91916a61d3430292e0cd6ea826ee4d7985e0cd40320c25",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2851,7 +2851,7 @@
     {
       "id": "depot-build-scripts-depot-build-archive-py",
       "path": "scripts/depot_build_archive.py",
-      "sha256": "7da225ce3ddd88cb55544f3fca01387397e66c4d394dd23a68a9db39d3c74a5c",
+      "sha256": "0fa6889934b3551e2beaffb3d8f6010aab1f7d309f1b8f2239319d7496a0fd4f",
       "kind": "recipe",
       "provenance": "Vanilla depot create/rotate only: exact original command phases, authoritative sparse pool and 63-slot company infrastructure; frozen native 178-case matrix. Removal and other construction remain pending.",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "cd13186b5f828910abbc7eccecc5a602c81ceb4b9e75a68a73f851c56c6634d1",
+      "sha256": "83b90169e0d4a6151e5a5e5c7e02511e23598092c1ba38f194479f157c7caadf",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "bc65968890f6d954662d931fdb4f285af9514b0dac3c3326c340b321d6b48006",
+      "sha256": "fbc17dfa84bad6cd6315773ba6bb5417d32469810060c5bc6921325d420a7bb2",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "25b7a3b78dd39b94db42edd30c4c727f9e2cb78ca658b04abab81e66803b2841",
+      "sha256": "52b3d9a2dddc8a8ad8135a1b647f6d6d095c9e6ea06db7eca261e282f0f1767a",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3277,6 +3277,123 @@
       "sha256": "36cb4880aaec1f31f90d55dd905e03b7c3d739fdd681a54f80e066231221adfe",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-check-grf-language-ci-py",
+      "path": "scripts/check-grf-language-ci.py",
+      "sha256": "83afe619d32a54c0db0d64617965f4765cbe6ccbef4aa9f1fc59b2ec5b652d2c",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-language-ci-compare-py",
+      "path": "scripts/language_ci_compare.py",
+      "sha256": "ec4a0aa2f45a766ba8d70be040546af37d4d2708af8e855027e887f01cfadd40",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-language-ci-evidence-py",
+      "path": "scripts/language_ci_evidence.py",
+      "sha256": "8431ca0805a2f876454cdc2a554b07fc44cc4f6a627c72ac831f7b8230cc9ee9",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-language-ci-bindings-py",
+      "path": "scripts/language_ci_bindings.py",
+      "sha256": "14dddf296e6da7e59c7ba49eaaa0323c544283e8f125ce3df675b3511d3557f4",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-language-ci-probes-py",
+      "path": "scripts/language_ci_probes.py",
+      "sha256": "c8fa3c5102947d8aed2676652438bb98f7fb0c01685be4acbb963139b2f52e64",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-language-ci-evidence-test-py",
+      "path": "scripts/tests/language_ci_evidence_test.py",
+      "sha256": "2bc0d0ff422a2adac80189fe469369a6f1968dfb725c04611935b7d80b5fec0d",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-language-ci-layout-json",
+      "path": "scripts/language-ci-layout.json",
+      "sha256": "f86f167f565f19c3652f912bb121074ede7f03a0444af1ef0ffb4a94ae62b76f",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-check-grf-language-reference-cmake",
+      "path": "scripts/check-grf-language-reference.cmake",
+      "sha256": "d80436807808a0342aee6aba43126ac9c4b2f8f094c4357a4cdd07589f5c29ad",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-grf-language-hpp",
+      "path": "reference/grf_language.hpp",
+      "sha256": "4fcf0804c73161fb2a2a3f7cd142b471acf6cdb0095459122b34522dfa15a4ef",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-grf-language-catalog-hpp",
+      "path": "reference/grf_language_catalog.hpp",
+      "sha256": "52783310a9bd1691ebc39d92fc6965adc7050acf294f242a78d7974e67c69499",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-grf-language-text-hpp",
+      "path": "reference/grf_language_text.hpp",
+      "sha256": "2b76467d644cb974340979d2e163d50002837e7bd243de97336e94370bdea3e1",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-grf-language-patch",
+      "path": "reference/grf_language.patch",
+      "sha256": "f55f2bbd7a9dd4d18a28fb9f9dd4d5d6052f77ceee9512b202591175a69c8a43",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "language-ci-empty-inputs-test-py",
+      "path": "scripts/tests/empty_inputs_test.py",
+      "sha256": "a803a7bd2c32c95ff79043fafb54aca73d884be5b3a50c16326b7f5b7e12ed05",
+      "kind": "recipe",
+      "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
       "profile": null
     }
@@ -9644,6 +9761,31 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "grf-language",
+      "argv": [
+        "python3",
+        "scripts/check-grf-language-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "native-invocations.json",
+        "bin/ottd_sim"
+      ],
+      "success_text": "PASS ordered language CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -14099,6 +14241,50 @@
         "native-executable/openttd",
         "native-executable/replay-build.sha256",
         "controls/execution.json"
+      ]
+    },
+    {
+      "id": "content.original-ordered-language",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Private A-C ordered packs/maps/contextual text. No custom-table Action4/13, baseline activation or configured-save reload admission.",
+      "expected": "110 cases;1593 events;2560 exact texts;73604 comparator rejections;13 guards; source/input/executable binding and complete archive.",
+      "driver": "grf-language",
+      "assets": [
+        "language-ci-check-grf-language-ci-py",
+        "language-ci-language-ci-compare-py",
+        "language-ci-language-ci-evidence-py",
+        "language-ci-language-ci-bindings-py",
+        "language-ci-language-ci-probes-py",
+        "language-ci-language-ci-evidence-test-py",
+        "language-ci-empty-inputs-test-py",
+        "language-ci-language-ci-layout-json",
+        "language-ci-check-grf-language-reference-cmake",
+        "language-ci-grf-language-hpp",
+        "language-ci-grf-language-catalog-hpp",
+        "language-ci-grf-language-text-hpp",
+        "language-ci-grf-language-patch"
+      ],
+      "source_refs": [
+        "scripts/check-grf-language-ci.py",
+        "scripts/language_ci_compare.py",
+        "scripts/language_ci_evidence.py",
+        "scripts/language_ci_bindings.py",
+        "scripts/language_ci_probes.py",
+        "scripts/tests/language_ci_evidence_test.py",
+        "scripts/tests/empty_inputs_test.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence.tar.gz",
+        "evidence-index.json",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "native-invocations.json",
+        "bin/ottd_sim"
       ]
     }
   ]

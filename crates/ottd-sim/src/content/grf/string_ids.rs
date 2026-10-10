@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // OpenTTD 14ec60f248547d4d062a1160f0fc26d742319888, newgrf_stringmapping.cpp and generated strings.h.
 pub(super) fn map(id: u16) -> u32 {
-    match id {
+    original(id).unwrap_or(2)
+}
+pub(super) fn original(id: u16) -> Option<u32> {
+    Some(match id {
         0x000E..=0x002D => u32::from(id).saturating_sub(0x000E).saturating_add(4),
         0x002E..=0x004D => u32::from(id).saturating_sub(0x002E).saturating_add(36),
         0x006E..=0x008D => u32::from(id).saturating_sub(0x006E).saturating_add(68),
@@ -25,7 +28,7 @@ pub(super) fn map(id: u16) -> u32 {
         0x4830 => 3983,
         0x4831 => 3995,
         0x483B => 3994,
-        0xd000..=0xffff => 2,
+        0xd000..=0xffff => return None,
         _ => 1,
-    }
+    })
 }

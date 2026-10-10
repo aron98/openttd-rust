@@ -47,6 +47,7 @@ impl Session<'_, '_> {
             return Ok(());
         }
         match action {
+            0 if self.language.is_some() => self.language_properties(reader, location)?,
             6 => self.substitute(reader, cursor, location)?,
             7 | 9 => self.condition(action, reader, cursor, location)?,
             8 => self.info(reader, cursor, location)?,

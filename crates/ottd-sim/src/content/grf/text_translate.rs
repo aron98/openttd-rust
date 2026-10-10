@@ -4,21 +4,41 @@ use super::{
     text_choices::Choices,
     text_codes::{
         SCC_BIGFONT, SCC_BLACK, SCC_BLUE, SCC_BROWN, SCC_BUS, SCC_CHECKMARK, SCC_CITY, SCC_CREAM,
-        SCC_CROSS, SCC_DKBLUE, SCC_DKGREEN, SCC_DOWN_ARROW, SCC_GOLD, SCC_GRAY, SCC_GREEN,
-        SCC_LORRY, SCC_LTBLUE, SCC_LTBROWN, SCC_NEWGRF_DISCARD_WORD, SCC_NEWGRF_PRINT_BYTE_HEX,
-        SCC_NEWGRF_PRINT_DWORD_DATE_LONG, SCC_NEWGRF_PRINT_DWORD_FORCE, SCC_NEWGRF_PRINT_DWORD_HEX,
-        SCC_NEWGRF_PRINT_DWORD_SIGNED, SCC_NEWGRF_PRINT_QWORD_CURRENCY, SCC_NEWGRF_PRINT_QWORD_HEX,
-        SCC_NEWGRF_PRINT_WORD_DATE_LONG, SCC_NEWGRF_PRINT_WORD_HEX,
+        SCC_CROSS, SCC_DKBLUE, SCC_DKGREEN, SCC_DOWN_ARROW, SCC_GENDER_INDEX, SCC_GOLD, SCC_GRAY,
+        SCC_GREEN, SCC_LORRY, SCC_LTBLUE, SCC_LTBROWN, SCC_NEWGRF_DISCARD_WORD,
+        SCC_NEWGRF_PRINT_BYTE_HEX, SCC_NEWGRF_PRINT_DWORD_DATE_LONG, SCC_NEWGRF_PRINT_DWORD_FORCE,
+        SCC_NEWGRF_PRINT_DWORD_HEX, SCC_NEWGRF_PRINT_DWORD_SIGNED, SCC_NEWGRF_PRINT_QWORD_CURRENCY,
+        SCC_NEWGRF_PRINT_QWORD_HEX, SCC_NEWGRF_PRINT_WORD_DATE_LONG, SCC_NEWGRF_PRINT_WORD_HEX,
         SCC_NEWGRF_PRINT_WORD_STATION_NAME, SCC_NEWGRF_PRINT_WORD_STRING_ID,
         SCC_NEWGRF_PRINT_WORD_VOLUME_LONG, SCC_NEWGRF_PRINT_WORD_WEIGHT_LONG, SCC_NEWGRF_PUSH_WORD,
         SCC_NEWGRF_ROTATE_TOP_4_WORDS, SCC_NEWGRF_STRINL, SCC_ORANGE, SCC_PLANE, SCC_POP_COLOUR,
-        SCC_PURPLE, SCC_PUSH_COLOUR, SCC_RED, SCC_RIGHT_ARROW, SCC_SHIP, SCC_SILVER,
+        SCC_PURPLE, SCC_PUSH_COLOUR, SCC_RED, SCC_RIGHT_ARROW, SCC_SET_CASE, SCC_SHIP, SCC_SILVER,
         SCC_SMALL_DOWN_ARROW, SCC_SMALL_UP_ARROW, SCC_SUPERSCRIPT_M1, SCC_TINYFONT, SCC_TOWN,
         SCC_TRAIN, SCC_UP_ARROW, SCC_WHITE, SCC_YELLOW,
     },
+    text_mapped::{ChoiceKind, TextContext},
     text_reader::{Consumer, encode},
     types::ScanError,
 };
+
+#[derive(Clone, Copy)]
+pub(super) struct Input<'a> {
+    pub raw: &'a [u8],
+    pub newlines: bool,
+    pub offset: usize,
+    pub context: TextContext<'a>,
+}
+impl<'a> Input<'a> {
+    fn reader(self) -> (bool, Consumer<'a>) {
+        let unicode = self.raw.starts_with(&[0xc3, 0x9e]);
+        let bytes = if unicode {
+            self.raw.get(2..).unwrap_or_default()
+        } else {
+            self.raw
+        };
+        (unicode, Consumer { bytes })
+    }
+}
 
 fn emit(
     output: &mut Choices,
@@ -41,8 +61,9 @@ fn extended(
     reader: &mut Consumer<'_>,
     output: &mut Choices,
     budget: &mut Budget,
-    offset: usize,
+    input: Input<'_>,
 ) -> Result<bool, ScanError> {
+    let offset = input.offset;
     let code = reader.byte();
     let value = match code {
         0 => return Ok(false),
@@ -59,7 +80,29 @@ fn extended(
         0x0c => SCC_NEWGRF_PRINT_WORD_STATION_NAME,
         0x0d => SCC_NEWGRF_PRINT_WORD_WEIGHT_LONG,
         0x0e | 0x0f => {
-            reader.byte();
+            let index = reader.byte();
+            if let Some(mapped) = input
+                .context
+                .map
+                .and_then(|map| map.forward(index, code == 0x0e))
+            {
+                emit(
+                    output,
+                    if code == 0x0e {
+                        SCC_GENDER_INDEX
+                    } else {
+                        SCC_SET_CASE
+                    },
+                    budget,
+                    offset,
+                )?;
+                emit(
+                    output,
+                    u32::from(mapped).saturating_add(u32::from(code == 0x0f)),
+                    budget,
+                    offset,
+                )?;
+            }
             return Ok(true);
         }
         0x10 | 0x11 => {
@@ -68,14 +111,17 @@ fn extended(
             return Ok(true);
         }
         0x12 => {
-            output.finish(budget, offset)?;
+            output.finish(input.context, budget, offset)?;
             return Ok(true);
         }
         0x13..=0x15 => {
-            if code != 0x14 {
-                reader.byte();
-            }
-            output.start(code == 0x14);
+            let list_offset = if code == 0x14 { 0 } else { reader.byte() };
+            let kind = match code {
+                0x13 => ChoiceKind::Gender,
+                0x14 => ChoiceKind::Case,
+                _ => ChoiceKind::Plural,
+            };
+            output.start(kind, list_offset);
             return Ok(true);
         }
         0x16..=0x1e => {
@@ -96,14 +142,27 @@ pub(super) fn translate(
     budget: &mut Budget,
     offset: usize,
 ) -> Result<Vec<u8>, ScanError> {
-    let unicode = raw.starts_with(&[0xc3, 0x9e]);
-    let mut reader = Consumer {
-        bytes: if unicode {
-            raw.get(2..).unwrap_or_default()
-        } else {
-            raw
+    translate_in(
+        Input {
+            raw,
+            newlines,
+            offset,
+            context: TextContext::default(),
         },
-    };
+        budget,
+        |id| Some(string_ids::map(id)),
+    )
+}
+
+pub(super) fn translate_in(
+    input: Input<'_>,
+    budget: &mut Budget,
+    mut resolve: impl FnMut(u16) -> Option<u32>,
+) -> Result<Vec<u8>, ScanError> {
+    let Input {
+        newlines, offset, ..
+    } = input;
+    let (unicode, mut reader) = input.reader();
     let mut output = Choices::default();
     while !reader.bytes.is_empty() {
         let value = if let Some(value) = if unicode { reader.unicode() } else { None } {
@@ -142,7 +201,7 @@ pub(super) fn translate(
             0x81 => {
                 let id = reader.word();
                 emit(&mut output, SCC_NEWGRF_STRINL, budget, offset)?;
-                string_ids::map(id)
+                resolve(id).ok_or(ScanError::UnsupportedInline { id })?
             }
             0x82..=0x84 => {
                 SCC_NEWGRF_PRINT_WORD_DATE_LONG.saturating_add(value.saturating_sub(0x82))
@@ -168,7 +227,7 @@ pub(super) fn translate(
             0x97 => SCC_DKBLUE,
             0x98 => SCC_BLACK,
             0x9a => {
-                if !extended(&mut reader, &mut output, budget, offset)? {
+                if !extended(&mut reader, &mut output, budget, input)? {
                     break;
                 }
                 continue;

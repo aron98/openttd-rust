@@ -168,6 +168,12 @@ impl<'a> ScanOutcome<'a> {
 /// Host scanner errors are distinct from original native disabling.
 #[derive(Debug, thiserror::Error)]
 pub enum ScanError {
+    /// The contextual translator requires an unimplemented custom-string registry.
+    #[error("custom inline GRF string {id:#06x} requires registry loading")]
+    UnsupportedInline {
+        /// Original GRF-local string reference.
+        id: u16,
+    },
     /// Caller-selected cumulative host bound was exceeded.
     #[error("GRF {resource} limit exceeded at byte {offset}")]
     ResourceLimit {

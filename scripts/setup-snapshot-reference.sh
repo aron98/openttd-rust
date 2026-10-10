@@ -28,7 +28,8 @@ if ! git -C "$source_dir" apply --reverse --check "$root/reference/order_fixture
     fi
 fi
 # Compare tracked source with precisely HEAD plus our patch, without changing its index.
-if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch" 2>/dev/null &&
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_language.patch" 2>/dev/null &&
+   ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch" 2>/dev/null &&
    ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_load_context.patch" 2>/dev/null; then
     if git -C "$source_dir" apply --check "$root/reference/grf_load_control.patch" 2>/dev/null; then
         git -C "$source_dir" apply "$root/reference/grf_load_control.patch"
@@ -42,10 +43,12 @@ if git -C "$source_dir" apply --check "$root/reference/road_slope.patch" 2>/dev/
 else
     git -C "$source_dir" apply --reverse --check "$root/reference/road_slope.patch"
 fi
-if git -C "$source_dir" apply --check "$root/reference/grf_safety.patch" 2>/dev/null; then
-    git -C "$source_dir" apply "$root/reference/grf_safety.patch"
-else
-    git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch"
+if ! git -C "$source_dir" apply --reverse --check "$root/reference/grf_language.patch" 2>/dev/null; then
+    if git -C "$source_dir" apply --check "$root/reference/grf_safety.patch" 2>/dev/null; then
+        git -C "$source_dir" apply "$root/reference/grf_safety.patch"
+    else
+        git -C "$source_dir" apply --reverse --check "$root/reference/grf_safety.patch"
+    fi
 fi
 for patch in order_state order_fixture order_network; do
     if git -C "$source_dir" apply --check "$root/reference/$patch.patch" 2>/dev/null; then
@@ -54,11 +57,16 @@ for patch in order_state order_fixture order_network; do
         git -C "$source_dir" apply --reverse --check "$root/reference/$patch.patch"
     fi
 done
+if git -C "$source_dir" apply --check "$root/reference/grf_language.patch" 2>/dev/null; then
+    git -C "$source_dir" apply "$root/reference/grf_language.patch"
+else
+    git -C "$source_dir" apply --reverse --check "$root/reference/grf_language.patch"
+fi
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 copy_header() {
     if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
@@ -68,6 +76,9 @@ copy_header reference/grf_load_control.hpp "$source_dir/src/reference_grf_load_c
 copy_header reference/grf_load_context.hpp "$source_dir/src/reference_grf_load_context.hpp"
 copy_header reference/road_slope.hpp "$source_dir/src/reference_road_slope.hpp"
 copy_header reference/grf_safety.hpp "$source_dir/src/reference_grf_safety.hpp"
+copy_header reference/grf_language.hpp "$source_dir/src/reference_grf_language.hpp"
+copy_header reference/grf_language_catalog.hpp "$source_dir/src/reference_grf_language_catalog.hpp"
+copy_header reference/grf_language_text.hpp "$source_dir/src/reference_grf_language_text.hpp"
 copy_header reference/order_state.hpp "$source_dir/src/saveload/reference_order_state.hpp"
 copy_header reference/order_fixture.hpp "$source_dir/src/saveload/reference_order_fixture.hpp"
 copy_header reference/order_network.hpp "$source_dir/src/saveload/reference_order_network.hpp"

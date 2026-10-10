@@ -5,11 +5,20 @@ import tarfile
 from pathlib import Path
 
 from scripts.gameplay_foundations import digest
-from scripts.grf_control_archive import archive_files
-from scripts.world_check_support import WorldCheckError, at, read_json
+from scripts.grf_control_archive import (
+    NO_EMPTY_INPUTS,
+    archive_files,
+    validate_empty_inputs,
+)
+from scripts.world_check_support import Json, WorldCheckError, at, read_json
 
 
-def bounded_paths(root: Path, expected: set[str]) -> list[Path]:
+def bounded_paths(
+    root: Path,
+    expected: set[str],
+    *,
+    empty_inputs: frozenset[tuple[str, str]] = NO_EMPTY_INPUTS,
+) -> list[Path]:
     actual: set[str] = set()
     for path in root.rglob("*"):
         if path.is_symlink():
@@ -19,15 +28,20 @@ def bounded_paths(root: Path, expected: set[str]) -> list[Path]:
     if actual != expected:
         raise WorldCheckError("Depot evidence membership differs from pinned layout")
     paths = [root / name for name in sorted(expected)]
+    allowed = validate_empty_inputs(root, paths, empty_inputs)
     for path in paths:
         if not path.resolve().is_relative_to(root.resolve()) or not path.is_file():
             raise WorldCheckError("Depot evidence escaped its directory")
-        if path.stat().st_size == 0 and path.name not in {"stdout.log", "stderr.log"}:
+        if (
+            path.stat().st_size == 0
+            and path.name not in {"stdout.log", "stderr.log"}
+            and str(path.relative_to(root)) not in allowed
+        ):
             raise WorldCheckError(f"Empty substantive depot evidence: {path}")
     return paths
 
 
-def verify_archive(output: Path) -> None:
+def archive_hashes(output: Path) -> dict[str, Json]:
     index = read_json(output / "evidence-index.json")
     hashes = at(index, ("files",))
     match hashes:
@@ -46,6 +60,12 @@ def verify_archive(output: Path) -> None:
     destination = output / "evidence.tar.gz"
     if digest(destination) != at(index, ("archive_sha256",)):
         raise WorldCheckError("Depot archive digest changed")
+    return hashes
+
+
+def verify_archive(output: Path) -> None:
+    hashes = archive_hashes(output)
+    destination = output / "evidence.tar.gz"
     observed: set[str] = set()
     with tarfile.open(destination, "r:gz") as archive:
         for member in archive:
@@ -69,8 +89,14 @@ def verify_archive(output: Path) -> None:
         raise WorldCheckError("Depot archive member set incomplete")
 
 
-def package_raw(output: Path) -> None:
+def package_raw(
+    output: Path, *, empty_inputs: frozenset[tuple[str, str]] = NO_EMPTY_INPUTS
+) -> None:
     paths = [path for path in output.rglob("*") if path.is_file()]
-    _ = bounded_paths(output, {str(path.relative_to(output)) for path in paths})
-    archive_files(output, sorted(paths))
+    _ = bounded_paths(
+        output,
+        {str(path.relative_to(output)) for path in paths},
+        empty_inputs=empty_inputs,
+    )
+    archive_files(output, sorted(paths), empty_inputs=empty_inputs)
     verify_archive(output)

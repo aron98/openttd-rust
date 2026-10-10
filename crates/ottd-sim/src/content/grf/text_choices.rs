@@ -1,4 +1,8 @@
-use super::{text::Budget, types::ScanError};
+use super::{
+    text::Budget,
+    text_mapped::{ChoiceKind, ChoiceList, TextContext},
+    types::ScanError,
+};
 use std::collections::{BTreeMap, btree_map::Entry};
 
 #[derive(Default, Clone, Copy)]
@@ -12,8 +16,8 @@ enum Destination {
 #[derive(Default)]
 pub(super) struct Choices {
     pub output: Vec<u8>,
-    case: Option<BTreeMap<u8, Vec<u8>>>,
-    plural_gender: Option<BTreeMap<u8, Vec<u8>>>,
+    case: Option<ChoiceList>,
+    plural_gender: Option<ChoiceList>,
     case_destination: Option<u8>,
     destination: Destination,
 }
@@ -27,25 +31,37 @@ impl Choices {
         budget.emit(bytes.len(), offset)?;
         let target = match self.destination {
             Destination::Outer => Some(&mut self.output),
-            Destination::Case(index) => self.case.as_mut().and_then(|map| map.get_mut(&index)),
+            Destination::Case(index) => self
+                .case
+                .as_mut()
+                .and_then(|map| map.strings.get_mut(&index)),
             Destination::PluralGender(index) => self
                 .plural_gender
                 .as_mut()
-                .and_then(|map| map.get_mut(&index)),
+                .and_then(|map| map.strings.get_mut(&index)),
         };
         if let Some(target) = target {
             target.extend_from_slice(bytes);
         }
         Ok(())
     }
-    pub(super) fn start(&mut self, case: bool) {
+    pub(super) fn start(&mut self, kind: ChoiceKind, offset: u8) {
+        let case = matches!(kind, ChoiceKind::Case);
         if self.plural_gender.is_some() || (case && self.case.is_some()) {
             return;
         }
         if case {
-            self.case = Some(BTreeMap::new());
+            self.case = Some(ChoiceList {
+                kind,
+                offset,
+                strings: BTreeMap::new(),
+            });
         } else {
-            self.plural_gender = Some(BTreeMap::new());
+            self.plural_gender = Some(ChoiceList {
+                kind,
+                offset,
+                strings: BTreeMap::new(),
+            });
         }
     }
     pub(super) fn next(&mut self, index: u8) {
@@ -56,7 +72,7 @@ impl Choices {
             &mut self.case
         };
         if let Some(map) = target {
-            if let Entry::Vacant(entry) = map.entry(index) {
+            if let Entry::Vacant(entry) = map.strings.entry(index) {
                 entry.insert(Vec::new());
                 self.destination = if is_plural {
                     Destination::PluralGender(index)
@@ -67,7 +83,12 @@ impl Choices {
             }
         }
     }
-    pub(super) fn finish(&mut self, budget: &mut Budget, offset: usize) -> Result<(), ScanError> {
+    pub(super) fn finish(
+        &mut self,
+        context: TextContext<'_>,
+        budget: &mut Budget,
+        offset: usize,
+    ) -> Result<(), ScanError> {
         let map = if let Some(map) = self.plural_gender.take() {
             self.destination = self
                 .case_destination
@@ -80,7 +101,10 @@ impl Choices {
         } else {
             return Ok(());
         };
-        if let Some(bytes) = map.get(&0) {
+        if context.map.is_some() {
+            let bytes = map.mapped(context, budget, offset)?;
+            self.append(&bytes, budget, offset)?;
+        } else if let Some(bytes) = map.strings.get(&0) {
             self.append(bytes, budget, offset)?;
         }
         Ok(())

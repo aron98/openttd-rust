@@ -3,7 +3,7 @@
     "crates/ottd-sim/src/content/grf/records.rs": "6fc31af1cf0669fff24d9aa4e6f0a9aa95306547fe90baf63f90870a5a749a7c",
     "crates/ottd-sim/src/content/grf/scan.rs": "6379c90002b189666022a6dfb463c472c1f72fd7871417d2c54d8503138ccbe0",
     "crates/ottd-sim/tests/grf_native_skip.rs": "c2877dafce37dcec44f937e04dedc5b152c0d4741681327ac05a6519df87fb84",
-    "crates/ottd-sim/src/content/grf.rs": "b8a3e3424beb26628aa0dcaed3f4cbdebb6508452e9f87419cd9b9f60b3aa519",
+    "crates/ottd-sim/src/content/grf.rs": "a87e6f1643390759f0cffb6d23142b5bf7d3ee5108ace150227d09c51a5c3818",
     "crates/ottd-sim/src/content/grf/safety.rs": "b594941c346917b3da545497b988ba128eca3323c551275d381ef4d4b04a553f",
     "crates/ottd-sim/src/content/grf/safety_tests.rs": "d952e341969869546c55ab2fc4552b896ca181c6e974aaf60ea4cd7242068bb2",
     "crates/ottd-sim/src/content/grf/safety_cases.rs": "766d8c1149ff6257fcab19c82f37e20a951eb8c740a963ed04a12750e2c6772a",

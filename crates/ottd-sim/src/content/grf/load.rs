@@ -37,6 +37,7 @@ pub(super) struct Session<'i, 'a> {
     pub overrides: BTreeMap<(u32, u32), Arc<[u8]>>,
     pub events: Vec<LoadEvent>,
     pub environment: Option<super::load_context::Environment>,
+    pub language: Option<super::load_language_state::LanguageState>,
 }
 impl Session<'_, '_> {
     fn finish_environment(
@@ -340,6 +341,7 @@ impl Session<'_, '_> {
             .collect()
     }
     fn snapshot(&mut self, stage: LoadStage, base: LoadLocation) -> Result<(), ControlLoadError> {
+        self.language_snapshot(base)?;
         self.budget.trace(self.snapshot_bytes(), base)?;
         self.events.push(LoadEvent::StageEnd {
             stage,
@@ -391,32 +393,79 @@ pub(super) fn run_with_environment(
     ),
     ControlLoadError,
 > {
+    run_with_context(
+        inputs,
+        preceding_ids,
+        options,
+        RuntimeInputs {
+            environment: input_environment,
+            language: None,
+        },
+    )
+    .map(|(report, environment, _)| (report, environment))
+}
+
+#[derive(Clone, Copy)]
+pub(super) struct RuntimeInputs<'a> {
+    pub environment: Option<super::load_context::EnvironmentInput>,
+    pub language: Option<super::load_language_state::LanguageInput<'a>>,
+}
+impl RuntimeInputs<'_> {
+    fn environment(
+        self,
+        networking: bool,
+        location: LoadLocation,
+    ) -> Result<Option<super::load_context::Environment>, ControlLoadError> {
+        self.environment
+            .map(|input| {
+                super::load_context::Environment::new(input.saved, input.settings, networking)
+            })
+            .transpose()
+            .map_err(|_| ControlLoadError::InvalidNativeDomain {
+                location,
+                detail: "invalid load environment",
+            })
+    }
+}
+
+pub(super) fn run_with_context(
+    inputs: &[LoadInput<'_>],
+    preceding_ids: &[u32],
+    options: ControlOptions,
+    context: RuntimeInputs<'_>,
+) -> Result<
+    (
+        ControlLoadReport,
+        Option<super::load_context::EnvironmentReport>,
+        Option<super::load_language_state::LanguageReport>,
+    ),
+    ControlLoadError,
+> {
     let location = LoadLocation {
         stage: LoadStage::LabelScan,
         file: 0,
         line: 0,
         offset: 0,
     };
-    let environment = input_environment
-        .map(|input| {
-            super::load_context::Environment::new(input.saved, input.settings, options.networking)
-        })
-        .transpose()
-        .map_err(|_| ControlLoadError::InvalidNativeDomain {
-            location,
-            detail: "invalid load environment",
-        })?;
+    let environment = context.environment(options.networking, location)?;
     if inputs.len().saturating_add(preceding_ids.len()) > options.max_files {
         return Err(ControlLoadError::ResourceLimit {
             location,
             resource: "configured files",
         });
     }
-    let mut size = preceding_ids.len().saturating_mul(4).saturating_add(
-        environment.as_ref().map_or(0, |_| {
+    let mut size = preceding_ids
+        .len()
+        .saturating_mul(4)
+        .saturating_add(context.language.map_or(0, |input| {
+            input
+                .packs
+                .iter()
+                .fold(0_usize, |size, bytes| size.saturating_add(bytes.len()))
+        }))
+        .saturating_add(environment.as_ref().map_or(0, |_| {
             std::mem::size_of::<super::load_context::EnvironmentInput>()
-        }),
-    );
+        }));
     if size > options.max_source_bytes {
         return Err(ControlLoadError::ResourceLimit {
             location,
@@ -455,15 +504,21 @@ pub(super) fn run_with_environment(
                 .map_err(|source| ControlLoadError::Structural { file, source })?;
         }
     }
+    let mut budget = Budget::new(options);
+    let language = context
+        .language
+        .map(|input| super::load_language_state::LanguageState::new(input, location, &mut budget))
+        .transpose()?;
     let mut session = Session {
         inputs,
         preceding_ids,
         options,
         registry: Registry::new(inputs),
-        budget: Budget::new(options),
+        budget,
         overrides: BTreeMap::new(),
         events: Vec::new(),
         environment,
+        language,
     };
     for stage in [
         LoadStage::LabelScan,
@@ -484,5 +539,6 @@ pub(super) fn run_with_environment(
             events: session.events,
         },
         environment,
+        session.language.map(|state| state.report),
     ))
 }

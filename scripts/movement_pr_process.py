@@ -16,6 +16,7 @@ import stat
 import subprocess
 import tarfile
 import time
+from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -67,13 +68,13 @@ def stop_owned(process: subprocess.Popen[bytes]) -> None:
         os.killpg(process.pid, signal.SIGTERM)
     except ProcessLookupError:
         return
-    try:
+    with suppress(subprocess.TimeoutExpired):
         _ = process.wait(timeout=2)
-    except subprocess.TimeoutExpired:
-        try:
-            os.killpg(process.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            return
+    # The session leader may exit while a descendant still ignores SIGTERM.
+    try:
+        os.killpg(process.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        return
 
 
 def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) -> int:

@@ -1,4 +1,6 @@
 import os
+import select
+import signal
 import sys
 from pathlib import Path
 
@@ -68,3 +70,50 @@ def test_configured_target_symlink_is_still_refused(
     result = mapping(read_json(work / "probe/result.json"))
     assert result["classification"] == "inspection_error"
     assert "symlink" in text(result["monitor_error"])
+
+
+def test_deadline_stops_term_resistant_child_after_leader_exits(tmp_path: Path) -> None:
+    work = tmp_path / "job"
+    work.mkdir()
+    fifo = tmp_path / "child-output"
+    os.mkfifo(fifo)
+    ready = tmp_path / "child-ready.json"
+    marker = tmp_path / "child-wrote-after-return"
+    child = (
+        "import os,signal,time,json;"
+        "signal.signal(signal.SIGTERM,signal.SIG_IGN);"
+        f"fd=os.open({str(fifo)!r},os.O_WRONLY);"
+        f"open({str(ready)!r},'w').write(json.dumps({{'pid':os.getpid()}}));"
+        "print('ready',flush=True);time.sleep(10);"
+        f"open({str(marker)!r},'w').write('survived')"
+    )
+    parent = (
+        "import subprocess,sys,time;"
+        f"p=subprocess.Popen([sys.executable,'-c',{child!r}],stdout=subprocess.PIPE);"
+        "p.stdout.readline();time.sleep(10)"
+    )
+    reader = os.open(fifo, os.O_RDONLY | os.O_NONBLOCK)
+    stopped = False
+    try:
+        result = helper.phase(
+            tmp_path,
+            work,
+            "deadline",
+            [sys.executable, "-c", parent],
+            helper.Bounds(0, 0, 10**7, 1, work),
+        )
+        assert result == 124
+        assert ready.is_file()
+        readable, _, _ = select.select([reader], [], [], 2)
+        stopped = bool(readable) and os.read(reader, 1) == b""
+        assert stopped, "descendant retains its pipe after the leader exits"
+        assert not marker.exists()
+    finally:
+        os.close(reader)
+        if not stopped and ready.is_file():
+            pid = mapping(read_json(ready))["pid"]
+            assert isinstance(pid, int)
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except ProcessLookupError:
+                assert marker.exists(), "child exited before test cleanup"

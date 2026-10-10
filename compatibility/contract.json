@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "2689fc690f975e2e821d00986661bbbbc6f5d7a887d0a04a9d4c290f7df6efdb",
+   "sha256": "36e447c9933db1707844fca3d2b00a512bc38c8b751884ee287a9da5bae7cf84",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "3e85965a245bdf44a79f42272c490ac7a31b658618f727904358068be45de333",
+   "sha256": "58a4c4ffa67e1c8977a2d1f98805dbab6905ffdba301125924b4b123614a6758",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "6be25115b47ebbb5f8c24f040dc44bc6585704a3ad19f4096419723f5d664f5d",
+   "sha256": "956013d7603da959380bff80d0d6f7be271b42fd1603a505becff7c9024a1593",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "ac4442eb1eaaff83a535973f21e50788b4873a581c4dbf932ea130b009a1b000",
+   "sha256": "50f45e16365191e423ae955bdf6aa528b86b792368210ac6bcd9adf1623ca8c4",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8800,7 +8800,7 @@
   {
    "id": "road-movement-scripts-movement-pr-process-py",
    "path": "scripts/movement_pr_process.py",
-   "sha256": "09a9af257e72badb702684c3715e3dbd0103c1b24727cb78d4d34c44a6efd95e",
+   "sha256": "ab09411b572361ea81d1947449fa16393d5d29a0c754fcd50fcb94e8242924a5",
    "kind": "recipe",
    "provenance": "PR-only full capture orchestration; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8818,7 +8818,7 @@
   {
    "id": "road-movement-scripts-tests-movement-pr-process-test-py",
    "path": "scripts/tests/movement_pr_process_test.py",
-   "sha256": "9499b23f7f1286d569a097ff89373a318b03442dd5614ba304c63bdefd4809ac",
+   "sha256": "6035f96c08b398ed0f68046bf552aa46d5005897c285e4ab6092b3a0ac7a69ba",
    "kind": "recipe",
    "provenance": "PR-only full capture orchestration; normal admission remains gated pending complete capture review.",
    "save_version": null,

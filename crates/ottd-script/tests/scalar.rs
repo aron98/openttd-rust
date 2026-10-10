@@ -110,17 +110,17 @@ fn nesting_limit_is_checked_when_source_is_deep() {
 #[test]
 fn invalid_register_is_checked_when_loading_bytecode() -> Result<(), Box<dyn std::error::Error>> {
     // Given: a public program with a corrupt destination register.
-    let program = ottd_script::Program {
-        stack_size: 1,
-        literals: vec![],
-        instructions: vec![ottd_script::Instruction {
+    let program = ottd_script::Program::from_parts(
+        1,
+        vec![],
+        vec![ottd_script::Instruction {
             opcode: 2,
             arg0: 9,
             arg1: 7,
             arg2: 0,
             arg3: 0,
         }],
-    };
+    )?;
     // When: executing it.
     let result = Vm::new(&program)?.resume(10);
     // Then: checked indexing rejects the program.
@@ -132,17 +132,17 @@ fn invalid_register_is_checked_when_loading_bytecode() -> Result<(), Box<dyn std
 fn unsupported_opcode_is_explicit_when_executing_bytecode() -> Result<(), Box<dyn std::error::Error>>
 {
     // Given: CLASS, whose semantics are not implemented yet.
-    let program = ottd_script::Program {
-        stack_size: 1,
-        literals: vec![],
-        instructions: vec![ottd_script::Instruction {
+    let program = ottd_script::Program::from_parts(
+        1,
+        vec![],
+        vec![ottd_script::Instruction {
             opcode: 0x3b,
             arg0: 0,
             arg1: 0,
             arg2: 0,
             arg3: 0,
         }],
-    };
+    )?;
     // When: dispatching it.
     let result = Vm::new(&program)?.resume(10);
     // Then: no fake class value is produced.
@@ -167,17 +167,17 @@ fn terminal_frame_is_rejected_when_resumed_again() -> Result<(), Box<dyn std::er
 fn root_environment_read_is_rejected_when_scalar_bytecode_mentions_it()
 -> Result<(), Box<dyn std::error::Error>> {
     // Given: register zero is the unimplemented root environment, not null.
-    let program = ottd_script::Program {
-        stack_size: 1,
-        literals: vec![],
-        instructions: vec![ottd_script::Instruction {
+    let program = ottd_script::Program::from_parts(
+        1,
+        vec![],
+        vec![ottd_script::Instruction {
             opcode: 0x13,
             arg0: 1,
             arg1: 0,
             arg2: 0,
             arg3: 0,
         }],
-    };
+    )?;
     // When: hostile bytecode tries to return the environment as a scalar.
     let result = Vm::new(&program)?.resume(10);
     // Then: the VM cannot invent a null root table.
@@ -307,6 +307,7 @@ mod iteration;
 
 mod switch;
 
+mod strings;
 mod unicode;
 
 mod octal;

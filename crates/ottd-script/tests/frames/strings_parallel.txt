@@ -1,0 +1,13 @@
+separate_identity 1
+refs program 1
+suspend 0 1
+refs loaded 2
+suspend 0 1
+refs loaded 3
+refs drop_first_runner 2
+return 99 string 11 706f6f6c2d736861726564
+refs returned 3
+refs drop_second_runner 2
+refs drop_program 1
+retained string 11 706f6f6c2d736861726564
+refs drop_result 0

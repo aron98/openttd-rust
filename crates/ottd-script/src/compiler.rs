@@ -16,19 +16,26 @@ use registers::{Register, Registers};
 pub fn compile(source: &str) -> Result<Program, CompileError> {
     compile_bytes(source.as_bytes())
 }
-/// Compile native compilebuffer bytes with lazy UTF-8/codepoint admission.
+/// Compile bytes with the native compilebuffer decoder and lazy NUL termination.
 ///
 /// # Errors
 /// Rejects consumed invalid characters, reached undefined native ctype arguments,
 /// unsupported syntax and bounded resource excess.
 pub fn compile_bytes(source: &[u8]) -> Result<Program, CompileError> {
+    crate::Realm::new().compile_bytes(source)
+}
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Realm compilation must remain crate-private while public wrappers are reexported"
+)]
+pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program, CompileError> {
     if source.len() > 65_536 {
         return Err(CompileError {
             offset: 0,
             kind: CompileErrorKind::Limit,
         });
     }
-    let mut lexer = Lexer::new(source)?;
+    let mut lexer = Lexer::new(source, realm.clone())?;
     let token = lexer.next()?;
     let mut compiler = Compiler {
         lexer,
@@ -43,6 +50,7 @@ pub fn compile_bytes(source: &[u8]) -> Result<Program, CompileError> {
     };
     compiler.main()?;
     Ok(Program {
+        realm: realm.clone(),
         stack_size: compiler.registers.high_water,
         literals: compiler.literals,
         instructions: compiler.emitter.instructions,
@@ -71,7 +79,7 @@ impl Compiler<'_> {
         self.previous = if next.newline {
             TokenKind::Symbol(b'\n')
         } else {
-            self.token.kind
+            self.token.kind.clone()
         };
         self.token = next;
         Ok(())
@@ -125,7 +133,7 @@ impl Compiler<'_> {
                 0x02,
                 i32::try_from(n).map_err(|_| self.error(CompileErrorKind::Limit))?,
             ),
-            Value::Integer(_) => {
+            Value::Integer(_) | Value::String(_) => {
                 let index = self
                     .literals
                     .iter()

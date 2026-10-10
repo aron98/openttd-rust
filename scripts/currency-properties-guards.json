@@ -1,21 +1,112 @@
 {
   "mutations": [
-    {"case":"encoding-false","pointer":"/currency_owner_encoding","value":false,"expect":"invalid currency owner encoding"},
-    {"case":"encoding-unknown","pointer":"/currency_owner_encoding","value":"text-v1","expect":"invalid currency owner encoding"},
-    {"case":"encoding-missing","remove":"/currency_owner_encoding","expect":"currency property requires byte mode"},
-    {"case":"encoding-without-fixture","remove":"/currency_api","expect":"currency encoding requires currency fixture"},
-    {"case":"mixed-load-api","pointer":"/currency_load","value":true,"expect":"invalid or duplicate currency fixture"},
-    {"case":"mixed-api-reload","pointer":"/currency_reload","value":[],"expect":"API reload modes mixed"},
-    {"case":"wrong-property","pointer":"/currency_api/0/property","value":10,"expect":"unsupported currency property API"},
-    {"case":"wide-property","pointer":"/currency_api/0/property","value":256,"expect":"currency property unsigned field"},
-    {"case":"negative-first","pointer":"/currency_api/0/first","value":-1,"expect":"currency property unsigned field"},
-    {"case":"wide-first","pointer":"/currency_api/0/first","value":65536,"expect":"currency property unsigned field"},
-    {"case":"wide-count","pointer":"/currency_api/0/count","value":256,"expect":"currency property unsigned field"},
-    {"case":"wrong-stage","pointer":"/currency_api/0/reserve","value":1,"expect":"currency property stage"},
-    {"case":"negative-byte","pointer":"/currency_api/0/raw/0","value":-1,"expect":"currency property byte value"},
-    {"case":"wide-byte","pointer":"/currency_api/0/raw/0","value":256,"expect":"currency property byte value"},
-    {"case":"raw-too-long","pointer":"/currency_api/0/raw","repeat":{"value":0,"count":1021},"expect":"currency property byte input budget"},
-    {"case":"text-custom-in-byte-mode","pointer":"/currency_api/0","value":{"operation":"custom_fixture"},"expect":"text custom fixture in byte mode"},
-    {"case":"byte-custom-in-text-mode","remove":"/currency_owner_encoding","pointer":"/currency_api/0","value":{"operation":"custom_bytes"},"expect":"byte custom fixture requires byte mode"}
+    {
+      "case": "encoding-false",
+      "pointer": "/currency_owner_encoding",
+      "value": false,
+      "expect": "invalid currency owner encoding"
+    },
+    {
+      "case": "encoding-unknown",
+      "pointer": "/currency_owner_encoding",
+      "value": "text-v1",
+      "expect": "invalid currency owner encoding"
+    },
+    {
+      "case": "encoding-missing",
+      "remove": "/currency_owner_encoding",
+      "expect": "currency property requires byte mode"
+    },
+    {
+      "case": "encoding-without-fixture",
+      "remove": "/currency_api",
+      "expect": "currency encoding requires currency fixture"
+    },
+    {
+      "case": "mixed-load-api",
+      "pointer": "/currency_load",
+      "value": true,
+      "expect": "invalid or duplicate currency fixture"
+    },
+    {
+      "case": "mixed-api-reload",
+      "pointer": "/currency_reload",
+      "value": [],
+      "expect": "API reload modes mixed"
+    },
+    {
+      "case": "wrong-property",
+      "pointer": "/currency_api/0/property",
+      "value": 10,
+      "expect": "unsupported currency property API"
+    },
+    {
+      "case": "wide-property",
+      "pointer": "/currency_api/0/property",
+      "value": 256,
+      "expect": "currency property unsigned field"
+    },
+    {
+      "case": "negative-first",
+      "pointer": "/currency_api/0/first",
+      "value": -1,
+      "expect": "currency property unsigned field"
+    },
+    {
+      "case": "wide-first",
+      "pointer": "/currency_api/0/first",
+      "value": 65536,
+      "expect": "currency property unsigned field"
+    },
+    {
+      "case": "wide-count",
+      "pointer": "/currency_api/0/count",
+      "value": 256,
+      "expect": "currency property unsigned field"
+    },
+    {
+      "case": "wrong-stage",
+      "pointer": "/currency_api/0/reserve",
+      "value": 1,
+      "expect": "currency property stage"
+    },
+    {
+      "case": "negative-byte",
+      "pointer": "/currency_api/0/raw/0",
+      "value": -1,
+      "expect": "currency property byte value"
+    },
+    {
+      "case": "wide-byte",
+      "pointer": "/currency_api/0/raw/0",
+      "value": 256,
+      "expect": "currency property byte value"
+    },
+    {
+      "case": "raw-too-long",
+      "pointer": "/currency_api/0/raw",
+      "repeat": {
+        "value": 0,
+        "count": 1021
+      },
+      "expect": "currency property byte input budget"
+    },
+    {
+      "case": "text-custom-in-byte-mode",
+      "pointer": "/currency_api/0",
+      "value": {
+        "operation": "custom_fixture"
+      },
+      "expect": "text custom fixture in byte mode"
+    },
+    {
+      "case": "byte-custom-in-text-mode",
+      "remove": "/currency_owner_encoding",
+      "pointer": "/currency_api/0",
+      "value": {
+        "operation": "custom_bytes"
+      },
+      "expect": "byte custom fixture requires byte mode"
+    }
   ]
 }

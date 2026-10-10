@@ -5,6 +5,10 @@
 mod compiler;
 mod error;
 mod lexer;
+mod program;
+mod realm;
+pub use program::Program;
+pub use realm::{ByteString, Realm};
 mod value;
 mod vm;
 pub use compiler::{compile, compile_bytes};
@@ -25,15 +29,4 @@ pub struct Instruction {
     pub arg2: u8,
     /// Operation selector or second literal index.
     pub arg3: u8,
-}
-
-/// Compiled main function. Register zero is reserved for the root environment.
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub struct Program {
-    /// Number of registers required by the function.
-    pub stack_size: u16,
-    /// Constant pool in compiler encounter order.
-    pub literals: Vec<Value>,
-    /// Native instruction stream, including the implicit trailing return.
-    pub instructions: Vec<Instruction>,
 }

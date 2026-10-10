@@ -29,6 +29,7 @@ from scripts.script_vm_provenance import (
     select_executable,
     verify_sources,
 )
+from scripts.script_vm_strings import run_strings
 from scripts.world_check_support import ROOT, Json, WorldCheckError, run, write_json
 
 
@@ -143,6 +144,7 @@ def main() -> None:
         _ = target.write_text(base.read_text().replace(old, new))
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
     branch_tests = run_branches(builder, rust)
+    run_strings(output, rust)
     verify_sources(ROOT, native, spec)
     finish_branches(output, branch_tests)
     write_json(
@@ -161,21 +163,27 @@ def main() -> None:
     write_json(
         output / "summary.json",
         {
-            "cases": 7777,
-            "fixtures": 850,
+            "cases": 10819,
+            "fixtures": 1188,
             "credits": 9,
-            "tests": 55,
-            "strict_comparisons": 7705,
-            "undefined_input_rejections": 72,
+            "tests": 62,
+            "strict_comparisons": 10666,
+            "undefined_input_rejections": 153,
             "controls": 25,
-            "frame_tests": 9,
-            "native_frames": 9,
+            "frame_tests": 18,
+            "native_frames": 12,
             "branch_budget_cases": 127,
+            "string_sessions": 4,
+            "source_feed_cases": 18,
+            "float_patterns": 23071,
+            "string_controls": 4,
             "passed": True,
         },
     )
     package(output)
-    print("PASS scalar VM 7705 comparisons; 72 undefined-input rejections", flush=True)
+    print(
+        "PASS scalar VM 10666 comparisons; 153 undefined-input rejections", flush=True
+    )
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ impl Compiler<'_> {
     }
     fn statement(&mut self, depth: u8) -> Result<(), CompileError> {
         let depth = self.depth(depth)?;
-        match self.token.kind {
+        match self.token.kind.clone() {
             TokenKind::Symbol(b';') => {
                 self.advance()?;
             }
@@ -64,7 +64,8 @@ impl Compiler<'_> {
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::Case
+            TokenKind::TypeOf
+            | TokenKind::Case
             | TokenKind::Default
             | TokenKind::Compound(_)
             | TokenKind::Increment(_)
@@ -128,7 +129,7 @@ impl Compiler<'_> {
     fn local(&mut self) -> Result<(), CompileError> {
         loop {
             self.advance()?;
-            let TokenKind::Identifier(name) = self.token.kind else {
+            let TokenKind::Identifier(name) = self.token.kind.clone() else {
                 return Err(self.error(CompileErrorKind::ExpectedToken));
             };
             self.advance()?;

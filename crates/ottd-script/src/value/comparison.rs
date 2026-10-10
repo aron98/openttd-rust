@@ -2,8 +2,9 @@
 use crate::{Value, VmError};
 use std::cmp::Ordering;
 impl Value {
-    pub(crate) fn equal(self, other: Self) -> Result<bool, VmError> {
+    pub(crate) fn equal(&self, other: &Self) -> Result<bool, VmError> {
         match (self, other) {
+            (Self::String(left), Self::String(right)) => Ok(left.same_identity(right)),
             (Self::Null, Self::Null) => Ok(true),
             (Self::Bool(left), Self::Bool(right)) => Ok(left == right),
             (Self::Integer(left), Self::Integer(right)) => Ok(left == right),
@@ -11,21 +12,23 @@ impl Value {
             (Self::Integer(_), Self::Float(_)) | (Self::Float(_), Self::Integer(_)) => {
                 Ok(self.order(other)? == Ordering::Equal)
             }
-            (Self::Null | Self::Bool(_), _) | (_, Self::Null | Self::Bool(_)) => Ok(false),
+            (Self::Null | Self::Bool(_) | Self::String(_), _)
+            | (_, Self::Null | Self::Bool(_) | Self::String(_)) => Ok(false),
         }
     }
     #[expect(
         clippy::float_cmp,
         reason = "Native mixed numeric ObjCmp uses exact float equality; same-type floats compare raw bits first"
     )]
-    fn order(self, other: Self) -> Result<Ordering, VmError> {
+    fn order(&self, other: &Self) -> Result<Ordering, VmError> {
         match (self, other) {
+            (Self::String(left), Self::String(right)) => Ok(left.as_bytes().cmp(right.as_bytes())),
             (Self::Null, Self::Null) => Ok(Ordering::Equal),
-            (Self::Integer(left), Self::Integer(right)) => Ok(left.cmp(&right)),
-            (Self::Bool(left), Self::Bool(right)) => Ok(left.cmp(&right)),
+            (Self::Integer(left), Self::Integer(right)) => Ok(left.cmp(right)),
+            (Self::Bool(left), Self::Bool(right)) => Ok(left.cmp(right)),
             (Self::Float(left), Self::Float(right)) => Ok(if left == right {
                 Ordering::Equal
-            } else if f32::from_bits(left) < f32::from_bits(right) {
+            } else if f32::from_bits(*left) < f32::from_bits(*right) {
                 Ordering::Less
             } else {
                 Ordering::Greater
@@ -43,11 +46,13 @@ impl Value {
             }
             (Self::Null, _) => Ok(Ordering::Less),
             (_, Self::Null) => Ok(Ordering::Greater),
-            (Self::Bool(_), Self::Integer(_) | Self::Float(_))
+            (Self::String(_), _)
+            | (_, Self::String(_))
+            | (Self::Bool(_), Self::Integer(_) | Self::Float(_))
             | (Self::Integer(_) | Self::Float(_), Self::Bool(_)) => Err(VmError::OperandType),
         }
     }
-    pub(crate) fn compare(self, other: Self, selector: u8) -> Result<Self, VmError> {
+    pub(crate) fn compare(&self, other: &Self, selector: u8) -> Result<Self, VmError> {
         let order = self.order(other)?;
         let result = match selector {
             0 => order.is_gt(),

@@ -214,17 +214,24 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
     from scripts.script_vm_branches import validate_branches
 
     validate_branches(directory)
+    from scripts.script_vm_strings import validate_strings
+
+    validate_strings(directory, Path(origin), rust_path)
     if read_json(directory / "summary.json") != {
-        "cases": 7777,
-        "fixtures": 850,
+        "cases": 10819,
+        "fixtures": 1188,
         "credits": 9,
-        "tests": 55,
-        "strict_comparisons": 7705,
-        "undefined_input_rejections": 72,
+        "tests": 62,
+        "strict_comparisons": 10666,
+        "undefined_input_rejections": 153,
         "controls": 25,
-        "frame_tests": 9,
-        "native_frames": 9,
+        "frame_tests": 18,
+        "native_frames": 12,
         "branch_budget_cases": 127,
+        "string_sessions": 4,
+        "source_feed_cases": 18,
+        "float_patterns": 23071,
+        "string_controls": 4,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

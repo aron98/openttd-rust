@@ -1,0 +1,55 @@
+stack 6
+literal string 4 6c656674
+literal string 5 7269676874
+op 4 1 0 2 1
+op 23 3 1 4 2
+op 17 5 2 1 43
+op 10 1 5 0 0
+op 61 5 6 0 0
+op 17 5 3 1 43
+op 17 5 4 5 43
+op 19 1 5 0 0
+op 19 255 0 0 0
+suspend 0 1
+frame 1 string 4 6c656674
+frame 2 string 5 7269676874
+frame 3 null
+frame 4 null
+frame 5 null
+suspend 0 2
+frame 1 string 4 6c656674
+frame 2 string 5 7269676874
+frame 3 string 4 6c656674
+frame 4 string 5 7269676874
+frame 5 null
+suspend 0 3
+frame 1 string 4 6c656674
+frame 2 string 5 7269676874
+frame 3 string 4 6c656674
+frame 4 string 5 7269676874
+frame 5 string 9 6c6566747269676874
+suspend 0 4
+frame 1 string 9 6c6566747269676874
+frame 2 string 5 7269676874
+frame 3 string 4 6c656674
+frame 4 string 5 7269676874
+frame 5 string 9 6c6566747269676874
+suspend 0 5
+frame 1 string 9 6c6566747269676874
+frame 2 string 5 7269676874
+frame 3 string 4 6c656674
+frame 4 string 5 7269676874
+frame 5 string 9 6c6566747269676874
+suspend 0 6
+frame 1 string 9 6c6566747269676874
+frame 2 string 5 7269676874
+frame 3 string 4 6c656674
+frame 4 string 5 7269676874
+frame 5 string 13 6c65667472696768746c656674
+suspend 0 7
+frame 1 string 9 6c6566747269676874
+frame 2 string 5 7269676874
+frame 3 string 4 6c656674
+frame 4 string 5 7269676874
+frame 5 string 18 6c65667472696768746c6566747269676874
+return 1 string 18 6c65667472696768746c6566747269676874

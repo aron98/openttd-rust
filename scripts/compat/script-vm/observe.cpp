@@ -1,6 +1,7 @@
 // Test-only host plumbing; bundled compiler/VM sources remain pristine.
 #include "src/stdafx.h"
 #include <fstream>
+#include "src/core/string_consumer.hpp"
 #include <iostream>
 #include "src/3rdparty/squirrel/squirrel/sqpcheader.h"
 #include "src/3rdparty/squirrel/squirrel/sqvm.h"
@@ -19,12 +20,25 @@ void value(const SQObjectPtr &v) {
  case OT_INTEGER: std::cout<<"integer "<<_integer(v); break;
  case OT_FLOAT: std::cout<<"float "<<std::bit_cast<uint32_t>(_float(v)); break;
  case OT_BOOL: std::cout<<"bool "<<_integer(v); break;
+ case OT_STRING: {
+  const auto bytes=_stringval(v); std::cout<<"string "<<bytes.size()<<' ';
+  static constexpr char hex[]="0123456789abcdef";
+  for(unsigned char byte : bytes) std::cout<<hex[byte >> 4]<<hex[byte & 15];
+  break;
+ }
  default: std::cout<<"unsupported "<<type(v); break;
  }
  std::cout<<'\n';
 }
+#include "strings.hpp"
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--parallel") return parallel_session(argc,argv);
+ if(std::string_view(argv[1])=="--feed") return feed_session(argc,argv);
+ if(std::string_view(argv[1])=="--terminal") return terminal_session(argc,argv);
+ if(std::string_view(argv[1])=="--compile-failure") return failed_compile_session(argc,argv);
+ if(std::string_view(argv[1])=="--realm") return realm_session(argc,argv);
+ if(std::string_view(argv[1])=="--format") return float_session(argc,argv);
  std::ifstream input(argv[1],std::ios::binary); if(!input) return 66;
  std::string source((std::istreambuf_iterator<char>(input)),{});
  const bool frames=argc>2 && std::string_view(argv[2])=="--frames";

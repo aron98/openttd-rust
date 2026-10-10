@@ -9,6 +9,8 @@ pub enum NativeCharacterContext {
     Identifier,
     /// Numeric prefix, digit, exponent or terminating lookahead.
     Number,
+    /// Hexadecimal string escape digits including terminating lookahead.
+    HexEscape,
 }
 
 /// Compiler failure category, separate from execution failures.

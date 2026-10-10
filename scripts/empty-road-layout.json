@@ -1,7 +1,7 @@
 {
   "fresh_complete_run_verified": true,
   "sources": {
-    "Cargo.lock": "db9025ab50903170a7adfd28039ce4338563671d2c8e06bfbbe55de1337fdc0c",
+    "Cargo.lock": "3534df9bad58811d8a2cd6bd83cd08ca80c78dfbb82a09d1b486ce49fed63ea7",
     "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
     "crates/ottd-cli/Cargo.toml": "3c1b76f65a3594119b4b436fc78c495f9391ad74712b5c227f6cfd9424ef9370",
     "crates/ottd-cli/src/callbacks.rs": "d7d647bb109c4fdf2d5ced5dcdc81bdc8b1fd77d0b1a2f7296beb57819354f69",
@@ -53,7 +53,7 @@
     "crates/ottd-save/src/world/schema-v362.json": "092d3a965cf6802756684120f591b51f9a2f79a33aeab772a2898a3f5f24ae35",
     "crates/ottd-save/src/world/scripts.rs": "f07158184b0f68ec667a92f8cda0db913e4426202939293eba941c6354aa90e4",
     "crates/ottd-save/src/world/semantics.rs": "48885bf99c4af60852317ed0e4c1700f21beddbab99f16832861717323fecf36",
-    "crates/ottd-script/Cargo.toml": "e8804fcc8d549356f139020075304c3cf0a8146d3f8b4e22531606c0eb88d392",
+    "crates/ottd-script/Cargo.toml": "40ca2bba0f14e815be7aef3c316462f689e8bbbde8018bf64b4b109682f80c52",
     "crates/ottd-sim/Cargo.toml": "77a74d76c37661862fb0e7fdb533a9a72b5630649540a7ab76c5379b8751a9eb",
     "crates/ottd-sim/src/callbacks.rs": "b76601f1a6d403ac152f49f6dd5749ae141a4d6d39d99e882ebb8dea247ab41e",
     "crates/ottd-sim/src/clock.rs": "585c53f1e404bb232c8453371d817ff910a1fa71d62a3967aeb347d291e2b9b1",
@@ -428,7 +428,7 @@
     "scripts/run-terrain-reference.cmake": "6b92dff6bca29ac46624fa4c551afa6df272be5539869407df7af991e83feb48",
     "scripts/sale_lifetime.py": "80fb39e6c167ab8236af48bcbab5d8e182b88291290b7bb3b8eec88eb1672bea",
     "scripts/sale_saved_state.py": "8d917ba8e1d016329bc3dff0ddab08c73afb9447701f85e6b7b52d18fdbdaec1",
-    "scripts/script_vm_provenance.py": "e4a45b9a28e602e2615d9d3a2586562e079c3cf2d3dfb3f1d1352707bab477fd",
+    "scripts/script_vm_provenance.py": "8e692c445c98ae748b540a9341126521133cc49fd21f13bb95cc148eba142569",
     "scripts/setup-snapshot-reference.sh": "a65ccb254b013acb1fafe0235628cf3486660f4f8b80b94c47b8c4f5e5ba1b3a",
     "scripts/shared_restore_admission.py": "54af558a6978d841e277c05776e02353aee9944d1e31c9d67e648b6b3b002f3b",
     "scripts/shared_restore_capacity.py": "c9ff2d1d91a8e9a63556d2f6c7dbf40c85dd2cd3b0e8bb811fb8cd41e5e10ce4",

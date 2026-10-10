@@ -34,7 +34,7 @@ impl Compiler<'_> {
     ) -> Result<Option<Register>, CompileError> {
         let depth = self.depth(depth)?;
         state.dereference = None;
-        match self.token.kind {
+        match self.token.kind.clone() {
             TokenKind::Scalar(value) => {
                 let target = self.push()?;
                 self.load(target, value)?;
@@ -69,6 +69,20 @@ impl Compiler<'_> {
                 };
                 self.emit(Instruction {
                     opcode,
+                    arg0: target.0,
+                    arg1: i32::from(source.0),
+                    arg2: 0,
+                    arg3: 0,
+                });
+                Ok(None)
+            }
+            TokenKind::TypeOf => {
+                self.advance()?;
+                self.prefixed(depth, state)?;
+                let source = self.pop()?;
+                let target = self.push()?;
+                self.emit(Instruction {
+                    opcode: 0x37,
                     arg0: target.0,
                     arg1: i32::from(source.0),
                     arg2: 0,

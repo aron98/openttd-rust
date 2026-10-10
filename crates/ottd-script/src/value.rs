@@ -1,10 +1,13 @@
 mod comparison;
+mod strings;
 
 use crate::VmError;
 
 /// Scalar value; float bits preserve negative zero and nonfinite payloads.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Value {
+    /// Immutable interned byte string.
+    String(crate::ByteString),
     /// The null singleton.
     Null,
     /// Signed 64-bit Squirrel integer.
@@ -15,53 +18,62 @@ pub enum Value {
     Bool(bool),
 }
 impl Value {
-    pub(crate) const fn is_false(self) -> bool {
+    pub(crate) const fn is_false(&self) -> bool {
         match self {
             Self::Null => true,
-            Self::Integer(n) => n == 0,
+            Self::Integer(n) => *n == 0,
             Self::Float(bits) => bits.trailing_zeros() >= 31,
-            Self::Bool(b) => !b,
+            Self::Bool(b) => !*b,
+            Self::String(_) => false,
         }
     }
-    pub(crate) fn negate(self) -> Result<Self, VmError> {
+    pub(crate) fn negate(&self) -> Result<Self, VmError> {
         match self {
             Self::Integer(n) => n
                 .checked_neg()
                 .map(Self::Integer)
                 .ok_or(VmError::UnsupportedOverflow),
             Self::Float(bits) => Ok(Self::Float(bits ^ 0x8000_0000)),
-            Self::Null | Self::Bool(_) => Err(VmError::OperandType),
+            Self::Null | Self::Bool(_) | Self::String(_) => Err(VmError::OperandType),
         }
     }
     #[expect(
         clippy::cast_precision_loss,
         reason = "Pinned Squirrel explicitly converts i64 operands to SQFloat (f32)"
     )]
-    const fn numeric(self) -> Result<f32, VmError> {
+    const fn numeric(&self) -> Result<f32, VmError> {
         match self {
-            Self::Integer(n) => Ok(n as f32),
-            Self::Float(bits) => Ok(f32::from_bits(bits)),
-            Self::Null | Self::Bool(_) => Err(VmError::OperandType),
+            Self::Integer(n) => Ok(*n as f32),
+            Self::Float(bits) => Ok(f32::from_bits(*bits)),
+            Self::Null | Self::Bool(_) | Self::String(_) => Err(VmError::OperandType),
         }
     }
-    pub(crate) fn arithmetic(self, other: Self, op: u8) -> Result<Self, VmError> {
+    pub(crate) fn arithmetic(
+        &self,
+        other: &Self,
+        op: u8,
+        realm: &crate::Realm,
+    ) -> Result<Self, VmError> {
+        if op == b'+' && (matches!(self, Self::String(_)) || matches!(other, Self::String(_))) {
+            return Ok(self.concatenate(other, realm));
+        }
         match (self, other) {
             (Self::Integer(left), Self::Integer(right)) => {
                 let result = match op {
-                    b'+' => left.checked_add(right),
-                    b'-' => left.checked_sub(right),
-                    b'*' => left.checked_mul(right),
+                    b'+' => left.checked_add(*right),
+                    b'-' => left.checked_sub(*right),
+                    b'*' => left.checked_mul(*right),
                     b'/' => {
-                        if right == 0 {
+                        if *right == 0 {
                             return Err(VmError::DivisionByZero);
                         }
-                        left.checked_div(right)
+                        left.checked_div(*right)
                     }
                     b'%' => {
-                        if right == 0 {
+                        if *right == 0 {
                             return Err(VmError::ModuloByZero);
                         }
-                        left.checked_rem(right)
+                        left.checked_rem(*right)
                     }
                     _ => return Err(VmError::InvalidBytecode),
                 };
@@ -73,9 +85,8 @@ impl Value {
                 float_arithmetic(self.numeric()?, other.numeric()?, op)
                     .map(|n| Self::Float(n.to_bits()))
             }
-            (Self::Null | Self::Bool(_), _) | (_, Self::Null | Self::Bool(_)) => {
-                Err(VmError::OperandType)
-            }
+            (Self::Null | Self::Bool(_) | Self::String(_), _)
+            | (_, Self::Null | Self::Bool(_) | Self::String(_)) => Err(VmError::OperandType),
         }
     }
 }

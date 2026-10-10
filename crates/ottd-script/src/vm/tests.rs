@@ -2,12 +2,23 @@
 use super::{Execution, Value, Vm};
 use crate::compile;
 use std::fmt::Write;
-fn scalar(value: Value) -> String {
+fn scalar(value: &Value) -> String {
     match value {
+        Value::String(bytes) => format!(
+            "string {} {}",
+            bytes.as_bytes().len(),
+            bytes
+                .as_bytes()
+                .iter()
+                .fold(String::new(), |mut output, byte| {
+                    write!(output, "{byte:02x}").expect("String formatting is infallible");
+                    output
+                })
+        ),
         Value::Null => "null".to_owned(),
         Value::Integer(n) => format!("integer {n}"),
         Value::Float(bits) => format!("float {bits}"),
-        Value::Bool(b) => format!("bool {}", u8::from(b)),
+        Value::Bool(b) => format!("bool {}", u8::from(*b)),
     }
 }
 fn check_frames(
@@ -30,11 +41,11 @@ fn check_frames(
                     vm.instruction_pointer()
                 )?;
                 for (slot, value) in vm.registers.iter().enumerate().skip(1) {
-                    writeln!(actual, "frame {slot} {}", scalar(*value))?;
+                    writeln!(actual, "frame {slot} {}", scalar(value))?;
                 }
             }
             Ok(Execution::Returned(value)) => {
-                writeln!(actual, "return {} {}", vm.remaining_ops(), scalar(value))?;
+                writeln!(actual, "return {} {}", vm.remaining_ops(), scalar(&value))?;
                 break;
             }
             Err(_) => {
@@ -128,8 +139,23 @@ fn failed_update_matches_native_frames() -> Result<(), Box<dyn std::error::Error
     )?;
     let program = compile(source)?;
     let mut vm = Vm::new(&program)?;
+    // Observe the failed store before native-style terminal frame unwinding.
+    let update_position = program
+        .instructions()
+        .iter()
+        .position(|instruction| instruction.opcode == 0x23)
+        .ok_or("missing failed update instruction")?;
+    for instruction in program.instructions().iter().take(update_position + 1) {
+        if instruction.opcode == 0x23 {
+            assert_eq!(vm.update(*instruction), Err(crate::VmError::DivisionByZero));
+            assert_eq!(vm.registers.get(1), Some(&Value::Integer(7)));
+            break;
+        }
+        let _result = vm.step(*instruction)?;
+    }
+    let mut vm = Vm::new(&program)?;
     assert_eq!(vm.resume(100), Err(crate::VmError::DivisionByZero));
-    assert_eq!(vm.registers.get(1), Some(&Value::Integer(7)));
+    assert!(vm.registers.iter().all(|value| *value == Value::Null));
     Ok(())
 }
 
@@ -153,6 +179,39 @@ fn switch_continue_frame_matches_native_frames() -> Result<(), Box<dyn std::erro
         include_str!("../../tests/frames/switch_continue_frame.txt"),
         &[
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}
+
+#[test]
+fn strings_load_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!("../../../../scripts/compat/script-vm/fixtures/strings_load_frame.nut"),
+        include_str!("../../tests/frames/strings_load_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}
+
+#[test]
+fn strings_update_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!("../../../../scripts/compat/script-vm/fixtures/strings_update_frame.nut"),
+        include_str!("../../tests/frames/strings_update_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}
+
+#[test]
+fn strings_failure_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!("../../../../scripts/compat/script-vm/fixtures/strings_failure_frame.nut"),
+        include_str!("../../tests/frames/strings_failure_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
         ],
     )
 }

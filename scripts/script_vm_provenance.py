@@ -79,7 +79,7 @@ def load_spec(path: Path) -> Spec:
         len(set(spec.credits)),
         len(set(spec.tests)),
         len(spec.stages),
-    ) != (850, 9, 55, 7650) or len(set(spec.paths)) != len(spec.paths):
+    ) != (1188, 9, 62, 10692) or len(set(spec.paths)) != len(spec.paths):
         raise WorldCheckError("Incomplete VM manifest membership")
     return spec
 
@@ -112,10 +112,9 @@ def verify_sources(root: Path, native: Path, spec: Spec) -> None:
     expected = f"pin={PIN}\ninteger_bits=64\nfloat_bits=32\ngc=enabled\n"
     if (native / "variant.txt").read_text() != expected:
         raise WorldCheckError("Native variant differs")
-    if digest(native / "observe.cpp") != digest(
-        root / "scripts/compat/script-vm/observe.cpp"
-    ):
-        raise WorldCheckError("Native observer source differs")
+    for name in ("observe.cpp", "strings.hpp"):
+        if digest(native / name) != digest(root / "scripts/compat/script-vm" / name):
+            raise WorldCheckError("Native observer source differs")
 
 
 def select_executable(output: str, name: str, kind: str, test: bool) -> Path:

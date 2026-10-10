@@ -1,11 +1,18 @@
 import unittest
 from pathlib import Path
 
+from scripts.currency_ci_capture import source_names
 from scripts.grf_control_evidence import sequence, text
+from scripts.language_ci_compare import mapping
 from scripts.world_check_support import at, read_json
 
 
 class StaleReferenceLayoutsTest(unittest.TestCase):
+    def test_currency_sources_match_actual_capture_selector(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        layout = read_json(root / "scripts/currency-ci-layout.json")
+        self.assertCountEqual(mapping(at(layout, ("sources",))), source_names(root))
+
     def test_guard_layouts_retain_every_copied_reference_file(self) -> None:
         root = Path(__file__).resolve().parents[2]
         expected = {
@@ -44,8 +51,7 @@ class StaleReferenceLayoutsTest(unittest.TestCase):
         root = Path(__file__).resolve().parents[2]
         layout = read_json(root / "scripts/currency-ci-layout.json")
         paths = [
-            text(value)
-            for value in sequence(at(layout, ("guards", "stale", "paths")))
+            text(value) for value in sequence(at(layout, ("guards", "stale", "paths")))
         ]
         self.assert_currency_copied_sources(paths)
 
@@ -72,8 +78,7 @@ class StaleReferenceLayoutsTest(unittest.TestCase):
         root = Path(__file__).resolve().parents[2]
         layout = read_json(root / "scripts/strings-ci-layout.json")
         paths = [
-            text(value)
-            for value in sequence(at(layout, ("guards", "stale", "paths")))
+            text(value) for value in sequence(at(layout, ("guards", "stale", "paths")))
         ]
         for directory in ("scripts", "reference"):
             with self.subTest(directory=directory):
@@ -84,9 +89,7 @@ class StaleReferenceLayoutsTest(unittest.TestCase):
                     if path.startswith(prefix)
                 }
                 expected = {
-                    path.name
-                    for path in (root / directory).iterdir()
-                    if path.is_file()
+                    path.name for path in (root / directory).iterdir() if path.is_file()
                 }
                 self.assertEqual(recorded, expected)
 

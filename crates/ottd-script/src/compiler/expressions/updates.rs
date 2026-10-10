@@ -10,7 +10,7 @@ impl Compiler<'_> {
         if state.dereference.is_none() {
             return Err(self.error(CompileErrorKind::UnsupportedSyntax));
         }
-        let operation = self.token.kind;
+        let operation = self.token.kind.clone();
         self.advance()?;
         let _rhs = self.expression(self.depth(depth)?)?;
         let right = self.pop()?;

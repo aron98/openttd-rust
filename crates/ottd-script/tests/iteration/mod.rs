@@ -74,12 +74,18 @@ fn update_overflow_remains_explicit() -> Result<(), Box<dyn std::error::Error>> 
 
 #[test]
 fn bitwise_selector_hole_is_invalid_bytecode() -> Result<(), Box<dyn std::error::Error>> {
-    let mut program = compile("return 1&2;")?;
-    for instruction in &mut program.instructions {
+    let program = compile("return 1&2;")?;
+    let mut instructions = program.instructions().to_vec();
+    for instruction in &mut instructions {
         if instruction.opcode == 0x12 {
             instruction.arg3 = 1;
         }
     }
+    let program = ottd_script::Program::from_parts(
+        program.stack_size(),
+        program.literals().to_vec(),
+        instructions,
+    )?;
     assert_eq!(
         Vm::new(&program)?.resume(100),
         Err(ottd_script::VmError::InvalidBytecode)
@@ -100,8 +106,9 @@ fn native_for_increment_reemission_can_preserve_nontermination()
 #[test]
 fn aliased_postfix_destination_observes_native_store_order()
 -> Result<(), Box<dyn std::error::Error>> {
-    let mut program = compile("local a=2; return a;")?;
-    program.instructions.insert(
+    let program = compile("local a=2; return a;")?;
+    let mut instructions = program.instructions().to_vec();
+    instructions.insert(
         1,
         ottd_script::Instruction {
             opcode: 0x27,
@@ -111,6 +118,11 @@ fn aliased_postfix_destination_observes_native_store_order()
             arg3: 255,
         },
     );
+    let program = ottd_script::Program::from_parts(
+        program.stack_size(),
+        program.literals().to_vec(),
+        instructions,
+    )?;
     assert_eq!(
         Vm::new(&program)?.resume(100)?,
         Execution::Returned(Value::Integer(1))

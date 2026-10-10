@@ -5413,6 +5413,7 @@
         "stale-source/scripts/script_vm_observation.py",
         "stale-source/scripts/script_vm_policy.py",
         "stale-source/scripts/script_vm_provenance.py",
+        "stale-source/scripts/script_vm_strings.py",
         "stale-source/scripts/script_vm_switch.py",
         "stale-source/scripts/service_replay.py",
         "stale-source/scripts/service_replay_cases.py",
@@ -5660,7 +5661,7 @@
     "content::grf::load_strings_native::comparator_rejects_changed_string_identity"
   ],
   "sources": {
-    "Cargo.lock": "db9025ab50903170a7adfd28039ce4338563671d2c8e06bfbbe55de1337fdc0c",
+    "Cargo.lock": "3534df9bad58811d8a2cd6bd83cd08ca80c78dfbb82a09d1b486ce49fed63ea7",
     "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
     "crates/ottd-sim/src/content/grf.rs": "be2bbe740271eebcd532eca280e399713cc7ab82943480fd33145a4cc8caf966",
     "crates/ottd-sim/src/content/grf/language_pack.rs": "d511157e87bcc54d18f639f9f7438080d9b04a32d514f2b38f6116914ac50c63",

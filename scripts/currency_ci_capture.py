@@ -87,6 +87,34 @@ def guard_diagnostic(name: str) -> str:
     return diagnostics[name]
 
 
+def source_names(root: Path) -> tuple[str, ...]:
+    paths = [
+        root / name
+        for name in (
+            "Cargo.toml",
+            "Cargo.lock",
+            "upstream.toml",
+            "rust-toolchain.toml",
+            "scripts/reference.cfg",
+            "fixtures/replay/clear-v362.sav",
+            *COMPILER_INPUTS,
+        )
+    ]
+    paths.extend(
+        path
+        for folder in ("crates", "reference", "scripts")
+        for path in (root / folder).rglob("*")
+        if path.is_file()
+        and (
+            path.suffix in {".rs", ".toml", ".py", ".sh", ".cmake", ".hpp", ".patch"}
+            or (folder == "crates" and path.suffix == ".json")
+        )
+    )
+    if not paths:
+        raise WorldCheckError("Missing currency source inventory")
+    return tuple(sorted({str(path.relative_to(root)) for path in paths}))
+
+
 def capture(root: Path, api: Path, load: Path, guards: Path, oracle: Path) -> Json:
     result: dict[str, Json] = {"verified_native_corpus": True}
     invocations: list[Json] = []
@@ -138,33 +166,7 @@ def capture(root: Path, api: Path, load: Path, guards: Path, oracle: Path) -> Js
         "content::grf::load_currency_session_tests::currency_repeated_assignments_obey_cumulative_trace_budget",
         "content::grf::load_currency_session_tests::currency_adjacent_properties_remain_unsupported",
     ]
-    paths = [
-        root / name
-        for name in (
-            "Cargo.toml",
-            "Cargo.lock",
-            "upstream.toml",
-            "rust-toolchain.toml",
-            "scripts/reference.cfg",
-            "fixtures/replay/clear-v362.sav",
-            *COMPILER_INPUTS,
-        )
-    ]
-    paths.extend(
-        path
-        for folder in ("crates", "reference", "scripts")
-        for path in (root / folder).rglob("*")
-        if path.is_file()
-        and (
-            path.suffix in {".rs", ".toml", ".py", ".sh", ".cmake", ".hpp", ".patch"}
-            or (folder == "crates" and path.suffix == ".json")
-        )
-    )
-    if not paths:
-        raise WorldCheckError("Missing currency source inventory")
-    result["sources"] = {
-        str(path.relative_to(root)): digest(path) for path in sorted(paths)
-    }
+    result["sources"] = {name: digest(root / name) for name in source_names(root)}
     result["totals"] = {
         "guards": 13,
         **{

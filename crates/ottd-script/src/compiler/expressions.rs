@@ -14,7 +14,7 @@ impl Compiler<'_> {
         self.depth(depth)?;
         let mut state = ExpressionState::default();
         self.logical(0, depth, &mut state)?;
-        match self.token.kind {
+        match self.token.kind.clone() {
             TokenKind::Symbol(b'=') | TokenKind::Compound(_) => self.assignment(depth, &state)?,
             TokenKind::Symbol(b'?') => self.ternary(depth)?,
             _ => {}

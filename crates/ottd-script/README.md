@@ -1,4 +1,4 @@
-# Squirrel scalar expressions and iteration foundation
+# Squirrel scalar, string and realm foundation
 
 This crate independently compiles a bounded subset of OpenTTD 15.3's bundled
 Squirrel 2.2.5 and executes native register instructions. It has no C++ runtime
@@ -8,8 +8,9 @@ to game ticks.
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
 assignment, blocks, if/else, while/for/do loops, scalar switch/case/default, break and continue. Values remain null,
-bool, i64 decimal/octal/hex integers, and well-formed f32 decimal/scientific
-literals. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
+bool, i64 decimal/octal/hex integers, raw f32 values and immutable byte strings.
+Normal, verbatim and character literals follow native escapes and encoded-byte
+length. `typeof` returns interned type-name strings. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
 comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
 bitwise `& | ^ << >> >>>`, comma and ternary expressions, scalar compound
 assignments and prefix/postfix updates.
@@ -48,9 +49,9 @@ bytecode returns typed errors. Runtime errors and returns terminate the frame.
 
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
-is portable native semantics. Thirty-six opcode handlers remain unimplemented.
-Foreach, strings, globals/objects, functions/closures,
-reference lifetime/GC/classes/generators/traps, standard library/imports, host APIs,
+is portable native semantics. Thirty-five opcode handlers remain unimplemented.
+Foreach, globals/objects, functions/closures,
+cyclic graph ownership/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
 Float NaN payload witnesses are specific to the tested native/Rust toolchain.
 
@@ -69,8 +70,8 @@ The native builder exports exact pinned sources into a private directory. Test
 host glue only supplies allocation and fatal/log diagnostics; it makes no host API
 or memory-limit compatibility claim. Default observer output includes instructions,
 literals, stack size, return/error stage and suspension debt/IP. A separate
-`--frames` native mode captures every scalar slot on suspension. Nine private
-Rust VM tests compare these real captures without adding a production inspection
+`--frames` native mode captures every scalar slot on suspension. Twelve private
+Rust VM frame tests compare these real captures without adding a production inspection
 API, and CI reruns native captures against their pinned bytes. Additional budget
 probes and branch-specific corruption controls are independently admitted.
 
@@ -97,9 +98,43 @@ metadata; explicit break/continue preserve native conditional register cleanup.
 
 `compile_bytes` follows the pinned compilebuffer callback: it decodes only the
 current lookahead, rejects malformed UTF-8 and codepoints above U+FFFF, accepts
-native encoded surrogates within comments, and stops at NUL without inspecting
+native encoded surrogates, and stops at NUL without inspecting
 the suffix. `compile(&str)` delegates to this same path. Diagnostics retain
 original byte offsets. This is not OpenTTD's separate BOM/default file loader.
+
+
+`Realm` shares a weak string interner across compilations and runtime operations.
+Cloning a `ByteString` retains immutable length-delimited bytes, including embedded
+NUL; it does not promise UTF-8. `Realm::compile` / `compile_bytes` retain that
+realm in the compiled Program. Standalone compile functions use a fresh realm.
+`Value` and `Execution` are owned, non-Copy types. A returned string remains valid
+when its VM, Program and Realm wrappers drop. Weak intern keys disappear on final
+release; this is string ownership, not a collector for future cyclic objects.
+
+`Program::from_parts` replaces public struct construction, checks stack size and
+reinterns supplied string literals into a fresh realm. Read-only accessors preserve
+literal identity after construction. VM operands remain execution-checked. The VM
+continues borrowing its Program; no new host or call-frame abstraction is provided.
+
+String concatenation converts supported scalars using native formatting; f32
+shortest digits use pinned ryu 1.0.23 under its BSL-1.0 option, with bundled fmt's
+notation thresholds, exponent spelling, NaN/infinity signs and negative zero.
+String ordering compares unsigned bytes, equality uses live intern identity, and
+empty strings remain truthy. Local ++/-- use native addition/concatenation, including
+aliasing and temporary targets. These operations add no extra opcode charges.
+
+Return/error releases active registers. Native `temp_reg` retains the last ARITH
+result and is overwritten by RETURN; the Rust VM now preserves that owner until
+replacement/drop. The old scalar observer could not expose this lifetime: its
+failed-update assertion now also observes the exact failed store before terminal
+unwind, retaining the previous store-order guarantee.
+
+Native --realm/--parallel/--terminal sessions bind lifetime counts and suspended
+owner interactions to private Rust tests. The --format batch compares 23,071 raw
+f32 patterns. Separate --feed unsigned/UTF-8 observations demonstrate original
+LoadFile callback differences without claiming a file/BOM loader implementation.
+Compiler constant tables/enums remain the next separate realm extension; no root
+namespace, arbitrary objects, native closures or host API placeholders are added.
 
 
 ## Defined lexer input policy
@@ -119,19 +154,24 @@ terminating/exponent lookahead are included. Decoding remains lazy: comment
 payload, NUL suffixes and input beyond an earlier syntax error are not eagerly
 classified. Supplementary and malformed encodings retain native decoder failure.
 
-CI binds the eight affected existing fixtures to exact source bytes and an
-`undefined_native_input` stage: 72 credit cases independently require the typed
-Rust rejection while retaining raw original argv/status/stdout/stderr, including
-native success or abnormal termination. The other 7705 observations remain
-strict comparisons. An unclassified typed rejection fails admission. The actual
+CI retains the eight original exact Token-policy bodies and adds nine exact
+HexEscape-policy bodies (first digit, after one digit and after four digits, for
+U+0100, U+20AC and the native encoded U+D800 codepoint). These seventeen bodies
+have an `undefined_native_input` stage: 153 credit cases independently
+require the typed Rust rejection and retain raw original argv/status/stdout/stderr,
+including success or abnormal termination. The other 10666 observations are
+strict comparisons. An unclassified typed rejection fails admission. Original
 Linux U+D800 success and macOS rejection remain divergent observations; neither
 is normalized, rewritten or claimed as portable semantics.
 
-Strings are not implemented in this baseline. Their later implementation must
-preserve ordinary BMP Unicode/surrogate payload and guard only reached ctype
-calls: ReadString 306/310 classifies hex-escape lookahead, even after four hex
-digits because `isxdigit` precedes the length check. Ordinary string contents
-and comments must never be rejected solely for containing codepoints above 255.
+ReadString 306/310 guards only reached hex-escape classification, including the
+lookahead after four digits because `isxdigit` precedes the length bound. Ordinary
+BMP Unicode and native encoded-codepoint string/comment payload remain supported.
+A byte-domain U+00E9/U+00FF terminator and a fifth ASCII hex digit followed by
+Unicode remain defined comparisons. Malformed/supplementary decoder failures,
+NUL EOF and invalid-escape errors keep their lazy ordering. Fixtures/categories
+make these boundaries explicit. Admission requires complete debug and optimized
+evidence bound to the candidate’s consumed script inputs.
 
 
 Octal continuation is a distinct defined path: `scisodigit(char)` narrows to an

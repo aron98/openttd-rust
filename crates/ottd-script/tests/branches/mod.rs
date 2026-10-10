@@ -5,17 +5,17 @@ use ottd_script::{Execution, Instruction, Program, Value, Vm, VmError, compile};
 fn taken_jump_rejects_invalid_signed_targets() -> Result<(), Box<dyn std::error::Error>> {
     for offset in [i32::MIN, i32::MAX] {
         // Given: a public program with an unrepresentable/out-of-frame jump.
-        let program = Program {
-            stack_size: 1,
-            literals: vec![],
-            instructions: vec![Instruction {
+        let program = Program::from_parts(
+            1,
+            vec![],
+            vec![Instruction {
                 opcode: 0x18,
                 arg0: 0,
                 arg1: offset,
                 arg2: 0,
                 arg3: 0,
             }],
-        };
+        )?;
         // When: the branch executes.
         let result = Vm::new(&program)?.resume(2);
         // Then: invalid targets do not wrap or escape checked bytecode.
@@ -27,17 +27,17 @@ fn taken_jump_rejects_invalid_signed_targets() -> Result<(), Box<dyn std::error:
 #[test]
 fn comparison_rejects_invalid_selector() -> Result<(), Box<dyn std::error::Error>> {
     // Given: a syntactically representable comparison with an unknown selector.
-    let program = Program {
-        stack_size: 2,
-        literals: vec![],
-        instructions: vec![Instruction {
+    let program = Program::from_parts(
+        2,
+        vec![],
+        vec![Instruction {
             opcode: 0x28,
             arg0: 1,
             arg1: 1,
             arg2: 1,
             arg3: 255,
         }],
-    };
+    )?;
     // When: dispatching it.
     let result = Vm::new(&program)?.resume(2);
     // Then: it cannot silently choose another comparison.
@@ -48,17 +48,17 @@ fn comparison_rejects_invalid_selector() -> Result<(), Box<dyn std::error::Error
 #[test]
 fn literal_comparison_rejects_missing_pool_entry() -> Result<(), Box<dyn std::error::Error>> {
     // Given: EQ's native literal flag with an empty constant pool.
-    let program = Program {
-        stack_size: 2,
-        literals: vec![],
-        instructions: vec![Instruction {
+    let program = Program::from_parts(
+        2,
+        vec![],
+        vec![Instruction {
             opcode: 0x0f,
             arg0: 1,
             arg1: 0,
             arg2: 1,
             arg3: 255,
         }],
-    };
+    )?;
     // When: resolving the operand.
     let result = Vm::new(&program)?.resume(2);
     // Then: constant indices are checked independently of register indices.
@@ -70,17 +70,17 @@ fn literal_comparison_rejects_missing_pool_entry() -> Result<(), Box<dyn std::er
 fn scope_cleanup_rejects_reserved_and_absent_start() -> Result<(), Box<dyn std::error::Error>> {
     for start in [0, 3] {
         // Given: cleanup beginning at the root slot or outside a two-slot frame.
-        let program = Program {
-            stack_size: 2,
-            literals: vec![],
-            instructions: vec![Instruction {
+        let program = Program::from_parts(
+            2,
+            vec![],
+            vec![Instruction {
                 opcode: 0x3d,
                 arg0: start,
                 arg1: i32::from(start),
                 arg2: 0,
                 arg3: 0,
             }],
-        };
+        )?;
         // When: cleanup dispatches.
         let result = Vm::new(&program)?.resume(2);
         // Then: the invalid range is refused before mutation.
@@ -92,17 +92,17 @@ fn scope_cleanup_rejects_reserved_and_absent_start() -> Result<(), Box<dyn std::
 #[test]
 fn scope_cleanup_rejects_counter_overflow() -> Result<(), Box<dyn std::error::Error>> {
     // Given: the signed native cleanup count cannot be represented.
-    let program = Program {
-        stack_size: 2,
-        literals: vec![],
-        instructions: vec![Instruction {
+    let program = Program::from_parts(
+        2,
+        vec![],
+        vec![Instruction {
             opcode: 0x3d,
             arg0: 1,
             arg1: i32::MAX,
             arg2: 0,
             arg3: 0,
         }],
-    };
+    )?;
     // When: computing the count.
     let result = Vm::new(&program)?.resume(2);
     // Then: checked arithmetic reports the corrupt program.

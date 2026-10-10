@@ -2,7 +2,7 @@ use crate::{Instruction, Program, Value, VmError};
 mod updates;
 
 /// Outcome of an operation-budget slice.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Execution {
     /// Budget exhausted before fetching the next instruction.
     Suspended,
@@ -14,6 +14,7 @@ pub enum Execution {
 pub struct Vm<'a> {
     program: &'a Program,
     registers: Vec<Value>,
+    temporary: Value,
     ip: usize,
     remaining: i64,
     finished: bool,
@@ -29,6 +30,7 @@ impl<'a> Vm<'a> {
         }
         Ok(Self {
             program,
+            temporary: Value::Null,
             registers: vec![Value::Null; usize::from(program.stack_size)],
             ip: 0,
             remaining: 0,
@@ -61,7 +63,10 @@ impl<'a> Vm<'a> {
         let result = self.run();
         match result {
             Ok(Execution::Suspended) => {}
-            Ok(Execution::Returned(_)) | Err(_) => self.finished = true,
+            Ok(Execution::Returned(_)) | Err(_) => {
+                self.finished = true;
+                self.registers.fill(Value::Null);
+            }
         }
         result
     }
@@ -92,7 +97,7 @@ impl<'a> Vm<'a> {
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
         self.registers
             .get(index)
-            .copied()
+            .cloned()
             .ok_or(VmError::InvalidBytecode)
     }
     fn literal(&self, index: i32) -> Result<Value, VmError> {
@@ -100,7 +105,7 @@ impl<'a> Vm<'a> {
         self.program
             .literals
             .get(index)
-            .copied()
+            .cloned()
             .ok_or(VmError::InvalidBytecode)
     }
     fn write(&mut self, index: u8, value: Value) -> Result<(), VmError> {
@@ -153,6 +158,14 @@ impl<'a> Vm<'a> {
         }
         Ok(())
     }
+    fn return_value(&mut self, instruction: Instruction) -> Result<Value, VmError> {
+        self.temporary = if instruction.arg0 == 255 {
+            Value::Null
+        } else {
+            self.register(instruction.arg1)?
+        };
+        Ok(self.temporary.clone())
+    }
     fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
             0x01 => self.literal(i.arg1)?,
@@ -172,7 +185,7 @@ impl<'a> Vm<'a> {
                 } else {
                     self.literal(i.arg1)?
                 };
-                let equal = self.register(i32::from(i.arg2))?.equal(right)?;
+                let equal = self.register(i32::from(i.arg2))?.equal(&right)?;
                 Value::Bool(if i.opcode == 0x0f { equal } else { !equal })
             }
             0x17 => {
@@ -199,7 +212,7 @@ impl<'a> Vm<'a> {
             }
             0x28 => self
                 .register(i32::from(i.arg2))?
-                .compare(self.register(i.arg1)?, i.arg3)?,
+                .compare(&self.register(i.arg1)?, i.arg3)?,
             0x2b | 0x2c => {
                 let source = self.register(i32::from(i.arg2))?;
                 if source.is_false() == (i.opcode == 0x2b) {
@@ -212,16 +225,15 @@ impl<'a> Vm<'a> {
                 self.scope_end(i)?;
                 return Ok(None);
             }
-            0x11 => self
-                .register(i32::from(i.arg2))?
-                .arithmetic(self.register(i.arg1)?, i.arg3)?,
-            0x13 => {
-                return Ok(Some(if i.arg0 == 255 {
-                    Value::Null
-                } else {
-                    self.register(i.arg1)?
-                }));
+            0x11 => {
+                self.temporary = self.register(i32::from(i.arg2))?.arithmetic(
+                    &self.register(i.arg1)?,
+                    i.arg3,
+                    &self.program.realm,
+                )?;
+                self.temporary.clone()
             }
+            0x13 => return self.return_value(i).map(Some),
             0x14 => {
                 let length = usize::try_from(i.arg1).map_err(|_| VmError::InvalidBytecode)?;
                 let start = usize::from(i.arg0);
@@ -236,11 +248,14 @@ impl<'a> Vm<'a> {
                 return Ok(None);
             }
             0x16 => Value::Bool(i.arg1 != 0),
+            0x37 => self.register(i.arg1)?.type_name(&self.program.realm),
             0x2d => self.register(i.arg1)?.negate()?,
             0x2e => Value::Bool(self.register(i.arg1)?.is_false()),
             0x2f => match self.register(i.arg1)? {
                 Value::Integer(n) => Value::Integer(!n),
-                Value::Null | Value::Float(_) | Value::Bool(_) => return Err(VmError::OperandType),
+                Value::Null | Value::Float(_) | Value::Bool(_) | Value::String(_) => {
+                    return Err(VmError::OperandType);
+                }
             },
             opcode => return Err(VmError::UnsupportedOpcode(opcode)),
         };

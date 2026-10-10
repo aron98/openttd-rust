@@ -19,6 +19,15 @@ from scripts.world_check_support import (
 )
 
 FRAME_TESTS = (
+    "realm::tests::failed_compilation_releases_literals_before_recompiling_in_same_realm",
+    "realm::tests::realm_lifetimes_match_native_when_programs_and_runner_are_released",
+    "realm::tests::independent_suspended_owners_match_native_when_one_runner_is_dropped",
+    "realm::tests::intern_keys_are_released_when_the_last_value_drops",
+    "realm::tests::parts_constructor_reinterns_foreign_strings_before_native_identity_equality",
+    "realm::tests::failed_arithmetic_keeps_native_temporary_until_vm_drop",
+    "vm::tests::strings_load_frame_matches_native_frames",
+    "vm::tests::strings_update_frame_matches_native_frames",
+    "vm::tests::strings_failure_frame_matches_native_frames",
     "vm::tests::scope_clear_matches_native_frames",
     "vm::tests::scope_noop_matches_native_frames",
     "vm::tests::local_alias_matches_native_frames",
@@ -30,6 +39,9 @@ FRAME_TESTS = (
     "vm::tests::switch_continue_frame_matches_native_frames",
 )
 FRAMES = (
+    "strings_load_frame",
+    "strings_update_frame",
+    "strings_failure_frame",
     "scope_guard_clear",
     "scope_guard_noop",
     "local_alias",
@@ -42,6 +54,9 @@ FRAMES = (
 )
 FRAME_CREDITS = (3, 2, 2, 100)
 FRAME_SCHEDULES = {
+    "strings_load_frame": (2,) * 25 + (100,),
+    "strings_update_frame": (2,) * 25 + (100,),
+    "strings_failure_frame": (2,) * 25 + (100,),
     "expstate_target": (3, 2, 2, 2, 2, 100),
     "iteration_update_frame": (2,) * 20 + (100,),
     "iteration_loop_frame": (2,) * 20 + (100,),
@@ -114,7 +129,11 @@ LIB_BUILD = [
 
 
 def fixture_name(name: str) -> str:
-    return name if name.endswith(".nut") else f"branch_{name}.nut"
+    return (
+        name
+        if name.endswith(".nut")
+        else (f"{name}.nut" if name.startswith("strings_") else f"branch_{name}.nut")
+    )
 
 
 def run_branches(builder: FoundationRun, rust: Path) -> Path:

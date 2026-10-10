@@ -6,18 +6,21 @@ use crate::{CompileError, CompileErrorKind, NativeCharacterContext, Value};
 mod comments;
 mod input;
 mod numbers;
+mod strings;
 mod token;
 pub(crate) use token::{Token, TokenKind};
 pub(crate) struct Lexer<'a> {
     source: &'a [u8],
+    realm: crate::Realm,
     width: usize,
     character: u32,
     position: usize,
 }
 impl<'a> Lexer<'a> {
-    pub(super) fn new(source: &'a [u8]) -> Result<Self, CompileError> {
+    pub(super) fn new(source: &'a [u8], realm: crate::Realm) -> Result<Self, CompileError> {
         let mut lexer = Self {
             source,
+            realm,
             width: 0,
             character: 0,
             position: 0,
@@ -57,6 +60,14 @@ impl<'a> Lexer<'a> {
         };
         self.classify(NativeCharacterContext::Token)?;
         let kind = match c {
+            b'"' | b'\'' => TokenKind::Scalar(self.string(false)?),
+            b'@' => {
+                self.advance()?;
+                if self.peek() != Some(b'"') {
+                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                }
+                TokenKind::Scalar(self.string(true)?)
+            }
             b'0'..=b'9' => TokenKind::Scalar(self.number()?),
             b'a'..=b'z' | b'A'..=b'Z' | b'_' => {
                 while self
@@ -72,6 +83,7 @@ impl<'a> Lexer<'a> {
                 let name = std::str::from_utf8(name)
                     .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
                 match name {
+                    "typeof" => TokenKind::TypeOf,
                     "return" => TokenKind::Return,
                     "local" => TokenKind::Local,
                     "if" => TokenKind::If,
@@ -87,10 +99,10 @@ impl<'a> Lexer<'a> {
                     "null" => TokenKind::Scalar(Value::Null),
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
-                    "function" | "foreach" | "in" | "typeof" | "delegate" | "delete" | "try"
-                    | "catch" | "throw" | "clone" | "yield" | "resume" | "this" | "parent"
-                    | "class" | "extends" | "constructor" | "instanceof" | "vargc" | "vargv"
-                    | "static" | "enum" | "const" => {
+                    "function" | "foreach" | "in" | "delegate" | "delete" | "try" | "catch"
+                    | "throw" | "clone" | "yield" | "resume" | "this" | "parent" | "class"
+                    | "extends" | "constructor" | "instanceof" | "vargc" | "vargv" | "static"
+                    | "enum" | "const" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,

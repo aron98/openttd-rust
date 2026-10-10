@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "sources": {
-    "Cargo.lock": "db9025ab50903170a7adfd28039ce4338563671d2c8e06bfbbe55de1337fdc0c",
+    "Cargo.lock": "3534df9bad58811d8a2cd6bd83cd08ca80c78dfbb82a09d1b486ce49fed63ea7",
     "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
     "crates/ottd-sim/src/content/grf.rs": "be2bbe740271eebcd532eca280e399713cc7ab82943480fd33145a4cc8caf966",
     "crates/ottd-sim/src/content/grf/language_body_cases.rs": "fe6d1673689ec25928c915adf1cb6bbea02b9cef7d96b68d0abcb87028a7e4a0",

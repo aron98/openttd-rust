@@ -8,10 +8,25 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed increments: `f5385a3` resolves NewGRF currency names and
+Latest reviewed increment: `d752a7b` adds tree clearing and coupled terrain
+command town ratings. Earlier `f5385a3` resolves NewGRF currency names and
 `ef0f6fd` restores owned order backups during road-vehicle purchases. All seven
 completion gates below remain open. Earlier milestones and their bounded
 verification results are recorded below.
+
+Tree clearing now preserves costs, clear limits, nearest-town selection and
+rating changes through TerraformLand and LevelLand test/execute phases. Nested
+test scopes share temporary ratings; successful execution publishes terrain,
+town fields and company accounting through the saved-world transaction. The
+new driver executes 117 original invocations, compares ordered events and
+saved/runtime state, and checks observer independence, reload and split/resume.
+Nine trace corruptions and eight unsupported-setting vectors are rejected.
+Root verification passes 540 Rust tests, strict workspace checks, all 44 replay
+scenarios, the context driver and the full 29-case owned-restoration regression.
+Independent review reproduced 13 Rust selectors and nine Python tests and
+verified both complete tree and restoration archives. Tree growth, water and
+bridge construction, no-town and ground-vehicle/tree witnesses, and arbitrary
+helper flags remain open; company 15 has state/result evidence only.
 
 Currency property 0A includes owner defaults, deferred StringID mapping,
 ordered writes, and reload/reset. Five direct API cases and 20 loader cases
@@ -37,10 +52,11 @@ strict.
 
 Branch-wide CI is not green. A preceding Linux run failed the script-VM
 comparison; investigation of an earlier failure found platform-dependent
-undefined byte-character classification in the original lexer. Its policy
-remains unresolved, and these gameplay/content increments do not fix it.
-Squirrel string/compiler-state integration is held at that boundary while
-independent gameplay and NewGRF work continues.
+undefined byte-character classification in the original lexer. On 2026-10-10
+the maintainer approved explicit Rust rejection when lexing reaches that
+undefined input domain, while preserving defined behavior and Unicode in
+ordinary strings and comments. The typed rejection and separate CI accounting
+are in progress; these gameplay/content increments do not implement the fix.
 
 Depot removal matches 34 original-engine cases, 117 actions, 302 snapshots and
 69 save checkpoints. Shared orders, infrastructure, pool reuse, costs and
@@ -107,14 +123,15 @@ dispatch remain separate requirements.
 Linux CI exposed a separate script compatibility boundary: the original lexer
 passes decoded characters above 255 to byte character-classification functions.
 The same surrogate-encoded input compiles on the observed Linux build and fails
-on macOS. The existing comparison remains failed while the compatibility policy
-for upstream undefined behavior is decided. Local macOS results do not establish
-portable behavior for that domain, and branch-wide CI is not green.
+on macOS. The historical strict comparison remains failed. The approved policy
+requires explicit rejection at the reached classifier, including identifier,
+number and string-escape lookahead, rather than whole-input Unicode rejection.
+Local macOS results do not establish portable behavior for that domain, and
+branch-wide CI is not green.
 
-Active work continues on currency owners and deferred string mapping,
-order-backup restoration, and Squirrel owned strings and persistent compiler
-state. These are separate increments awaiting their own integrated evidence and
-review.
+Active work continues on currency properties 0B-0F, shared-order restoration,
+the script rejection policy, and Squirrel owned strings and persistent compiler
+state. These increments await their own integrated evidence and review.
 
 For agentic workers: use the subagent-driven development workflow, with explicit
 ownership, native-source evidence, independent review and tests before integration.

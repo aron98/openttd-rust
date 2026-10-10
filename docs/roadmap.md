@@ -19,6 +19,15 @@ original releases or source-modifying patchpacks. Expanding the baseline is an
 explicit scope decision. Preserve original gameplay and workflows; presentation
 changes must not silently remove behavior.
 
+The maintainer approved one explicit compatibility policy on 2026-10-10:
+Rust rejects script input when the pinned original lexer would pass a decoded
+character outside the byte domain to a character-classification function.
+That original behavior is undefined and differs across observed platforms.
+Defined behavior remains subject to strict comparison, including Unicode in
+ordinary strings and comments. Apply rejection only at a reached classification
+site, preserving lazy decoding and error order. Report these policy cases
+separately from native parity; retain the historical divergent observations.
+
 ## Current foundation
 
 The repository has lossless save-container rewriting, complete version-362 saved

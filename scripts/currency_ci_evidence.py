@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
+from scripts.currency_ci_baseline import bind_baseline, canonical_transport
 from scripts.currency_ci_compare import controls, lifecycle, project_rows, state
 from scripts.currency_ci_roster import API, LOAD
 from scripts.depot_build_archive import bounded_paths
@@ -77,7 +78,10 @@ def fingerprint(value: Json, roots: tuple[Path, Path, Path]) -> str:
                 return value
 
     encoded = json.dumps(
-        paths(value), sort_keys=True, separators=(",", ":"), allow_nan=False
+        paths(canonical_transport(value, roots[2])),
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
     ).encode()
     return hashlib.sha256(encoded).hexdigest()
 
@@ -85,6 +89,7 @@ def fingerprint(value: Json, roots: tuple[Path, Path, Path]) -> str:
 def case(root: Path, directory: Path, oracle: Path, layout: Json, *, api: bool) -> Json:
     _ = bounded_paths(directory, {text(v) for v in sequence(at(layout, ("paths",)))})
     native = read_json(directory / "native/currency.json")
+    bind_baseline(directory, oracle, native)
     compare(
         fingerprint(stable_context(native), (root, directory, oracle.parent)),
         at(layout, ("native_observables_sha256",)),

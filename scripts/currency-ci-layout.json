@@ -1929,6 +1929,7 @@
         "stale-source/scripts/contract_run.py",
         "stale-source/scripts/contract_validate.py",
         "stale-source/scripts/currency-ci-layout.json",
+        "stale-source/scripts/currency_ci_baseline.py",
         "stale-source/scripts/currency_ci_bindings.py",
         "stale-source/scripts/currency_ci_capture.py",
         "stale-source/scripts/currency_ci_compare.py",
@@ -2897,7 +2898,7 @@
     "scripts/currency_ci_bindings.py": "e1e23d79dca5fb07e477d9eff350b59e2ecaef570040b8d5b71af86452781fe7",
     "scripts/currency_ci_capture.py": "6b422c64de49317b259af5ba8f00b00e0f916fe6bc26adfcb6bcf6ff0b1699c3",
     "scripts/currency_ci_compare.py": "1e08b1121a1696ff81077d6672ca6dd42141bdd7643cbc003a77ec0121ffeaee",
-    "scripts/currency_ci_evidence.py": "6b01fbf1e55747018ea119b09be7b3a412b523be7edf4b02d39eda80ea2128cb",
+    "scripts/currency_ci_evidence.py": "5e6b11e61ca465f8de02f5ebb45cc78d0548dc1b61c80fdb3c72a83f2ee8697d",
     "scripts/currency_ci_probes.py": "c3396a12c919c25b9225efbeff654cb23b21ef2f0f5ff6257bc0e1ddcb865bff",
     "scripts/currency_ci_roster.py": "58d5dce1dbf8a8985d301c320e484bc63c32b5b5f1327b7f9ddf7463e5eaabe7",
     "scripts/depot_build_archive.py": "0fa6889934b3551e2beaffb3d8f6010aab1f7d309f1b8f2239319d7496a0fd4f",
@@ -3016,7 +3017,7 @@
     "scripts/tests/backup_enabled_sale_evidence_test.py": "4caf63194fb797cd383b29889f41cb1867cacc87c7941a00b8af366769430a29",
     "scripts/tests/backup_sale_evidence_test.py": "eadd1d82d1ae2f56c30f99b761268ee2a83cf80da9e9f2a18fc0c0244acb9c1c",
     "scripts/tests/context_ci_evidence_test.py": "3611c02607162519cdb999068a1d46ed439c7de8298a995d1a6597c3382b3fc0",
-    "scripts/tests/currency_ci_evidence_test.py": "01dcc550499ceda3c67bf9495d23cb6923562d27e10144e3dbd680fb1c522ef4",
+    "scripts/tests/currency_ci_evidence_test.py": "d3438c4f0673a63089396d292744b45a5cdee19d78f9b4513d677ec959fbf264",
     "scripts/tests/depot_removal_evidence_test.py": "07ad81932e54fcea00d8c3d21a2d9c5e70a44da909e689211654237f683d719e",
     "scripts/tests/empty_inputs_test.py": "a803a7bd2c32c95ff79043fafb54aca73d884be5b3a50c16326b7f5b7e12ed05",
     "scripts/tests/evidence_transport_test.py": "a3c3ef94c146a642dac62a1173313fc87e22c27bf246f2a9f0ed6a8129b5dee3",
@@ -3040,7 +3041,9 @@
     "scripts/tests/test_script_vm_evidence.py": "e9633347b4113cbb695bfa2090f7ee0ee7d9368713c0b93838dd61e97ce1c76e",
     "scripts/tests/test_stale_reference_layouts.py": "43530a5aafd3d7547a5daaaff89f5e004d65edb0da382dbf9ba822fe51d9af8c",
     "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047",
-    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241"
+    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241",
+    "scripts/currency_ci_baseline.py": "1409fc1506aacda4515b1bbf52df56e1b46ae4532768e007a7ca76059127e19c",
+    "scripts/tests/currency_ci_baseline_test.py": "9d0e1c86865a5d7e74ec88997fd24fefd26b0a004cd9eb749d0ada105642fd16"
   },
   "totals": {
     "guards": 13,

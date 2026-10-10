@@ -85,13 +85,35 @@ def fixture(directory: Path) -> tuple[Json, Json, Json]:
         "results": rust,
     }
     (directory / "native").mkdir()
+    baseset = directory / "bundle/baseset"
+    baseset.mkdir(parents=True)
+    baseline = [baseset / "OPENTTD.GRF", baseset / "extra.grf"]
+    for path in baseline:
+        _ = path.write_bytes(path.name.encode())
+    native["baseline_sources"] = [str(path) for path in baseline]
+    write_json(
+        directory / "native/control.json",
+        {"baseline_sources": native["baseline_sources"]},
+    )
+    _ = (directory / "native/baseline-inputs.sha256").write_text(
+        "".join(f"{digest(path)}  {path}\n" for path in baseline)
+    )
     write_json(directory / "native/currency.json", native)
     write_json(directory / "rust.json", rust)
     rows = expected_controls(rust)
     write_json(directory / "controls.json", rows)
     write_json(directory / "status.json", 0)
     layout: Json = {
-        "paths": ["native/currency.json", "rust.json", "controls.json", "status.json"],
+        "paths": [
+            "native/currency.json",
+            "rust.json",
+            "controls.json",
+            "status.json",
+            "native/control.json",
+            "native/baseline-inputs.sha256",
+            "bundle/baseset/OPENTTD.GRF",
+            "bundle/baseset/extra.grf",
+        ],
         "native_observables_sha256": fingerprint(
             stable_context(native), (directory, directory, directory / "bundle")
         ),

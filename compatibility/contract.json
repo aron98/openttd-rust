@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "dba6195805eea7b5d156759be5550241a12116792472000f911cba944a6ae551",
+      "sha256": "daab35c9b70704cd90c3ccd210b6136970d8f3dd30e19fa110c1b6f7990dd75d",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3643,7 +3643,7 @@
     {
       "id": "currency-ci-currency-ci-evidence-py",
       "path": "scripts/currency_ci_evidence.py",
-      "sha256": "6b01fbf1e55747018ea119b09be7b3a412b523be7edf4b02d39eda80ea2128cb",
+      "sha256": "5e6b11e61ca465f8de02f5ebb45cc78d0548dc1b61c80fdb3c72a83f2ee8697d",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3670,7 +3670,7 @@
     {
       "id": "currency-ci-currency-ci-evidence-test-py",
       "path": "scripts/tests/currency_ci_evidence_test.py",
-      "sha256": "01dcc550499ceda3c67bf9495d23cb6923562d27e10144e3dbd680fb1c522ef4",
+      "sha256": "d3438c4f0673a63089396d292744b45a5cdee19d78f9b4513d677ec959fbf264",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "d628d7bf154f823994a2d6a560064347abb5658d5e5221c64ba3f2988a436c6c",
+      "sha256": "044fbe751763b1d0b126aef5622f17fb8c4a68f1d13c8dd6bc0931f411a4bcc7",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3745,6 +3745,24 @@
       "sha256": "50aa7ef82e05787e69fad70b6ebe251138f61764e76ff9f316f050421bec6638",
       "kind": "recipe",
       "provenance": "Declared nonzero loaded-suffix fixture admission, separate from host-specific allocator poison audit; no runtime or comparator normalization.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-ci-currency-ci-baseline-py",
+      "path": "scripts/currency_ci_baseline.py",
+      "sha256": "1409fc1506aacda4515b1bbf52df56e1b46ae4532768e007a7ca76059127e19c",
+      "kind": "recipe",
+      "provenance": "Currency baseline transport spelling with ordered contained native input hash binding.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-ci-currency-ci-baseline-test-py",
+      "path": "scripts/tests/currency_ci_baseline_test.py",
+      "sha256": "9d0e1c86865a5d7e74ec88997fd24fefd26b0a004cd9eb749d0ada105642fd16",
+      "kind": "recipe",
+      "provenance": "Currency baseline transport spelling with ordered contained native input hash binding.",
       "save_version": null,
       "profile": null
     }
@@ -15053,7 +15071,9 @@
         "currency-ci-currency-ci-probes-py",
         "currency-ci-currency-ci-roster-py",
         "currency-ci-currency-ci-evidence-test-py",
-        "currency-ci-currency-ci-layout-json"
+        "currency-ci-currency-ci-layout-json",
+        "currency-ci-currency-ci-baseline-py",
+        "currency-ci-currency-ci-baseline-test-py"
       ],
       "source_refs": [
         "scripts/check-grf-currency-ci.py",
@@ -15064,7 +15084,9 @@
         "scripts/currency_ci_probes.py",
         "scripts/currency_ci_roster.py",
         "scripts/tests/currency_ci_evidence_test.py",
-        "scripts/currency-ci-layout.json"
+        "scripts/currency-ci-layout.json",
+        "scripts/currency_ci_baseline.py",
+        "scripts/tests/currency_ci_baseline_test.py"
       ],
       "evidence": [
         "summary.txt",

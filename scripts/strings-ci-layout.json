@@ -5257,6 +5257,7 @@
         "stale-source/scripts/contract_run.py",
         "stale-source/scripts/contract_validate.py",
         "stale-source/scripts/currency-ci-layout.json",
+        "stale-source/scripts/currency_ci_baseline.py",
         "stale-source/scripts/currency_ci_bindings.py",
         "stale-source/scripts/currency_ci_capture.py",
         "stale-source/scripts/currency_ci_compare.py",

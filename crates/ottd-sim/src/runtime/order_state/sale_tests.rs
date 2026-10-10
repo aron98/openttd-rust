@@ -190,6 +190,10 @@ fn ordered_sale_loading_and_live_backup_stay_explicit_boundaries() -> Result {
         let mut runtime = SimulationRuntime::restore_vanilla(world)?;
         if !loading {
             runtime.backup_orders(VehicleId::new(first), 77)?;
+            (runtime, _) = SimulationRuntime::from_loaded_vanilla(
+                runtime.into_world(),
+                RuntimeSaveContext::NetworkClient,
+            )?;
         }
         let before = runtime.world.saved_json()?;
         let orders = runtime.orders.clone();

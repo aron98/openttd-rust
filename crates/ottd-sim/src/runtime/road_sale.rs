@@ -7,6 +7,7 @@ use ottd_save::{
 
 impl RoadVehicleContext<'_> {
     pub(crate) fn sale_cost(
+        &self,
         world: &World,
         company: u8,
         id: VehicleId,
@@ -44,6 +45,16 @@ impl RoadVehicleContext<'_> {
             ));
         }
         admit_destructor(world, vehicle, backup_order)?;
+        if !world
+            .tables()
+            .get(b"BKOR")
+            .ok_or(RuntimeError::Invalid("BKOR"))?
+            .records()
+            .is_empty()
+            && self.orders.context() != super::RuntimeSaveContext::SinglePlayer
+        {
+            return Err(CommandError::Unsupported("sale live backup host context"));
+        }
         Ok(CommandCost::success(
             vehicle.common_signed("value")?.saturating_neg(),
             1,
@@ -67,8 +78,10 @@ impl RoadVehicleContext<'_> {
         if !self.road.contains_key(&id) {
             return Err(RuntimeError::Invalid("missing sale cache").into());
         }
+        let backups = self.orders.plan_sale_backups(world, id)?;
         let detach = self.orders.plan_detach(world, id)?;
         let mut transaction = world.transaction();
+        let pending_backups = backups.stage(&mut transaction)?;
         let pending_orders = detach.stage(&mut transaction)?;
         for edit in edits {
             transaction.apply(edit)?;
@@ -82,9 +95,11 @@ impl RoadVehicleContext<'_> {
         {
             return Err(RuntimeError::Invalid("sale candidate still contains vehicle").into());
         }
+        let backups = pending_backups.validate(&prepared)?;
         let orders = pending_orders.validate(&prepared)?;
         prepared.commit();
         orders.publish(self.orders);
+        backups.publish(self.orders);
         self.road.remove(&id);
         *self.allocation = allocation;
         Ok(())
@@ -95,12 +110,7 @@ fn admit_destructor(
     vehicle: SavedVehicleView<'_>,
     backup_order: bool,
 ) -> Result<(), CommandError> {
-    if backup_order
-        || world
-            .tables()
-            .get(b"BKOR")
-            .is_none_or(|t| !t.records().is_empty())
-    {
+    if backup_order || world.tables().get(b"BKOR").is_none() {
         return Err(CommandError::Unsupported("sale order backups"));
     }
     if world

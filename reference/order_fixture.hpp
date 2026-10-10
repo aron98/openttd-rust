@@ -53,15 +53,17 @@ inline Json Observation()
 {
     const char *depot_mode = std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE");
     const char *sale_mode = std::getenv("OTTD_ORDERED_SALE_OBSERVE");
-    Require(depot_mode == nullptr || sale_mode == nullptr, "lifecycle observer modes are mutually exclusive");
-    if (depot_mode == nullptr && sale_mode == nullptr) return Snapshot();
+    const char *bridge_mode = std::getenv("OTTD_BACKUP_SALE_OBSERVE");
+    Require(int(depot_mode != nullptr) + int(sale_mode != nullptr) + int(bridge_mode != nullptr) <= 1, "lifecycle observer modes are mutually exclusive");
+    if (depot_mode == nullptr && sale_mode == nullptr && bridge_mode == nullptr) return Snapshot();
     Require(depot_mode == nullptr || std::string(depot_mode) == "1", "invalid depot removal observer mode");
     Require(sale_mode == nullptr || std::string(sale_mode) == "1", "invalid ordered sale observer mode");
+    Require(bridge_mode == nullptr || std::string(bridge_mode) == "1", "invalid backup sale observer mode");
     Json tiles = Json::array();
     for (uint32_t index = 0; index < Map::Size(); ++index) tiles.push_back(ReferenceDepotRuntime::Parts(TileIndex(index)));
     Json result = {{"orders", Snapshot()}, {"depot", ReferenceDepotRuntime::Snapshot()},
         {"vehicles", ReferenceRuntimeRoad::Live()}, {"tiles", std::move(tiles)}};
-    if (sale_mode != nullptr) result["sale"] = ReferenceRuntimeRoad::SaleSnapshot();
+    if (sale_mode != nullptr || bridge_mode != nullptr) result["sale"] = ReferenceRuntimeRoad::SaleSnapshot();
     return result;
 }
 inline Json Save(const Json &a)
@@ -79,11 +81,13 @@ inline Json Action(const Json &a)
     const std::string op = a.at("op").get<std::string>();
     if (op == "command") {
         const bool ordered_sale = std::getenv("OTTD_ORDERED_SALE_OBSERVE") != nullptr;
-        Require(ordered_sale || std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE") != nullptr, "command fixture requires lifecycle observer");
+        const bool backup_sale = std::getenv("OTTD_BACKUP_SALE_OBSERVE") != nullptr;
+        Require(backup_sale || ordered_sale || std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE") != nullptr, "command fixture requires lifecycle observer");
         Require(!_networking, "depot command fixture requires actual single player startup");
         const auto &request = a.at("request");
         const std::string kind = request.at("command").at("kind").get<std::string>();
-        Require(ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot"), "unsupported lifecycle fixture command");
+        Require(backup_sale ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
+        if (backup_sale && kind == "sell_vehicle") Require(!request.at("command").at("backup_order").get<bool>(), "backup-enabled sale is outside bridge mode");
         Json receipt = ReferenceReplay::Execute(request);
         return {{"receipt", std::move(receipt)}, {"native_metadata", ReferenceReplay::metadata}};
     } else if (op == "backup") {

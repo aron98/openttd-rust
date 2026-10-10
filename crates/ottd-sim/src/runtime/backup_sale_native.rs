@@ -19,18 +19,11 @@ struct Plan {
 #[serde(tag = "op", rename_all = "snake_case", deny_unknown_fields)]
 enum Action {
     Command { request: CommandRequest },
+    Backup { vehicle: u32, user: u32 },
     Save { label: String },
     Snapshot { label: String },
 }
-pub(super) fn observe(runtime: &SimulationRuntime) -> Result<Value> {
-    let mut result = super::depot_removal_native::observe(runtime)?;
-    let vehicles = result.get("vehicles").ok_or("vehicle observation")?.clone();
-    result.as_object_mut().ok_or("observation")?.insert(
-        "sale".into(),
-        json!({"vehicle":vehicles,"groups":runtime.road_group_counts()?}),
-    );
-    Ok(result)
-}
+use super::ordered_sale_native::observe;
 fn valid_label(label: &str) -> bool {
     !label.is_empty()
         && label
@@ -38,11 +31,11 @@ fn valid_label(label: &str) -> bool {
             .all(|v| v.is_ascii_alphanumeric() || matches!(v, b'-' | b'_'))
 }
 #[test]
-#[ignore = "ORDERED_SALE_INPUT/ACTIONS/OUTPUT; actual original command differential"]
-fn original_ordered_sale_case() -> Result {
-    let input = PathBuf::from(std::env::var("ORDERED_SALE_INPUT")?);
-    let descriptor = PathBuf::from(std::env::var("ORDERED_SALE_ACTIONS")?);
-    let output = PathBuf::from(std::env::var("ORDERED_SALE_OUTPUT")?);
+#[ignore = "BACKUP_SALE_INPUT/ACTIONS/OUTPUT; actual original command differential"]
+fn original_backup_sale_case() -> Result {
+    let input = PathBuf::from(std::env::var("BACKUP_SALE_INPUT")?);
+    let descriptor = PathBuf::from(std::env::var("BACKUP_SALE_ACTIONS")?);
+    let output = PathBuf::from(std::env::var("BACKUP_SALE_OUTPUT")?);
     let bytes = std::fs::read(descriptor)?;
     if bytes.len() > 262_144 {
         return Err("descriptor too large".into());
@@ -75,11 +68,15 @@ fn original_ordered_sale_case() -> Result {
                     Command::SellVehicle {
                         backup_order: false,
                         ..
-                    }
+                    } | Command::LandscapeClear { .. }
                 ) {
                     return Err("ordered-sale dispatcher command boundary".into());
                 }
                 json!({"receipt":runtime.execute_command(request)?})
+            }
+            Action::Backup { vehicle, user } => {
+                runtime.backup_orders(VehicleId::new(*vehicle), *user)?;
+                Value::Null
             }
             Action::Snapshot { label } => {
                 if !valid_label(label) {
@@ -111,6 +108,6 @@ fn original_ordered_sale_case() -> Result {
             &json!({"schema_version":1,"case":plan.case,"initial":initial,"actions":actions,"final":observe(&runtime)?}),
         )?,
     )?;
-    println!("PASS ordered sale: {} actions", plan.actions.len());
+    println!("PASS backup sale: {} actions", plan.actions.len());
     Ok(())
 }

@@ -3,11 +3,14 @@ mod airport;
 mod backup;
 use backup::BackupAllocation;
 pub use backup::BackupReset;
+#[cfg(test)]
+mod backup_sale_tests;
 mod depot;
 mod detach;
 #[cfg(test)]
 mod native;
 mod observation;
+mod sale;
 #[cfg(test)]
 mod sale_tests;
 #[cfg(test)]

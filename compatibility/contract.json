@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "52f7deec13ebc44ba8bd0c7a368f1cfbc9aaa957ba78fb14a1270782689f4f6a",
+      "sha256": "52829791744a198d8fac2bec6d44e45f7540077fb4406a2337f29dd1600cf2aa",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2617,7 +2617,7 @@
     {
       "id": "sale-crates-ottd-sim-src-commands-vehicle-sale-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_sale.rs",
-      "sha256": "ea98222f53f02faa36e909e87c48b90aab53bc87565115bf8167c1b946f1feed",
+      "sha256": "a1f5c4833a5236e0359370ecb6402d31efd4e900650e03c97700ea747c4c7b11",
       "kind": "recipe",
       "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
       "save_version": null,
@@ -2635,7 +2635,7 @@
     {
       "id": "sale-crates-ottd-sim-src-runtime-road-sale-rs",
       "path": "crates/ottd-sim/src/runtime/road_sale.rs",
-      "sha256": "999ae9591e610f135059647b4b0981137ec4f663b49bf9af6bdc7626350ac38a",
+      "sha256": "f220bec59ed0f7d213650760e67176c146e399bb85610a76ef5778b7487924da",
       "kind": "recipe",
       "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "e41c161421be48273fea46db7c6f758fb6559700d95a89f72aaba4635060f758",
+      "sha256": "eabc6b3e9f7b11d812e950300ccab41aa18baaed13aa840bb712796b7c7b23ad",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "186971adb87c419d8ff1cbae13df071c44151a0d66a4014dee065214a51a8201",
+      "sha256": "d6fb12ea035d84577de4ba5214d43b7b2b8488a9298c2c17970176dbd83c9f6f",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "e8af6c8249d0c624a385ba8afb86536e09e58e43712d224035e87e4b0e39ac02",
+      "sha256": "d725db8c72e573c099c6dcc2b259f9dca56cc33ffeb7a02047dd737fca254f9b",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "1e25b075aca22b49419da7c5758f56cee8a23770df94817e20c86bf55dbabdaf",
+      "sha256": "5ddda274cda94d86fde6a977ef6143802a27f3331a6a4a2011e669b04d43ef48",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3466,6 +3466,42 @@
       "sha256": "5a0fa071394abed01c3c9a3d925a5df73832bc656fff4f621dc0977c83d4cd59",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "backup-sale-driver",
+      "path": "scripts/check-backup-sale.py",
+      "sha256": "dae45122b56f383cc6eb2d9c7ccc95c5f7b7d0b7942d0888608e34781a81e3ad",
+      "kind": "recipe",
+      "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "backup-sale-evidence",
+      "path": "scripts/backup_sale_evidence.py",
+      "sha256": "bcb2d3f52d6c59340e9f74a5f0c9e81b3e24247a8352e1d50fc9e24decb8d05e",
+      "kind": "recipe",
+      "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "backup-sale-layout",
+      "path": "scripts/backup-sale-layout.json",
+      "sha256": "73fdcce385285f61ff66c751eea3069faa3157e55e374be18aee8e9e02075b2e",
+      "kind": "recipe",
+      "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "backup-sale-tests",
+      "path": "scripts/tests/backup_sale_evidence_test.py",
+      "sha256": "eadd1d82d1ae2f56c30f99b761268ee2a83cf80da9e9f2a18fc0c0244acb9c1c",
+      "kind": "recipe",
+      "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
       "profile": null
     }
@@ -9916,6 +9952,35 @@
         "rust_behavior"
       ],
       "timeout_seconds": 600
+    },
+    {
+      "id": "backup-sale",
+      "argv": [
+        "python3",
+        "scripts/check-backup-sale.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/zero-rejected.json"
+      ],
+      "success_text": "PASS backup-sale CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 600
     }
   ],
   "scenarios": [
@@ -14474,6 +14539,44 @@
         "scripts/ordered-sale-layout.json",
         "scripts/tests/ordered_sale_evidence_test.py",
         "crates/ottd-sim/src/runtime/order_state/detach.rs",
+        "crates/ottd-sim/src/runtime/road_sale.rs"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/zero-rejected.json"
+      ]
+    },
+    {
+      "id": "runtime.live-backup-road-sale",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Stopped vanilla single-part ordered road sale with live backups and backup_order=false, ordinary SP new public path. ClearVehicle uses pre-unlink topology; canonical BKOR/ORDL/VEHS/refund and allocation publish in one transaction. All unrelated destructor guards retained; non-SP live-backup command context remains unsupported.",
+      "expected": "10 actual original/Rust loaded-input live sequences. Mandatory no-reload backup primitive -> sale(false) -> depot clear: copied timed orders survive sale, every same-tile user and different-tile scheduled reference removed, unrelated copy retained. Shared clone redirects, last-alternative deletion, sparse backup reuse and SP save projection remain strict. Eight transaction/host/boundary units including linked nonempty-ERNW Post/Estimate rejection with empty/live BKOR,5 semantic corruptions,zero/subset/altered-native controls,all3 mixed-mode pairs+triple and backup=true refusal. No backup-enabled sale,client0 Post normalization,Restore,purchase with live BKOR,movement or above-ground claim.",
+      "driver": "backup-sale",
+      "assets": [
+        "backup-sale-driver",
+        "backup-sale-evidence",
+        "backup-sale-layout",
+        "backup-sale-tests"
+      ],
+      "source_refs": [
+        "scripts/check-backup-sale.py",
+        "scripts/backup_sale_evidence.py",
+        "scripts/backup-sale-layout.json",
+        "scripts/tests/backup_sale_evidence_test.py",
+        "crates/ottd-sim/src/runtime/order_state/sale.rs",
         "crates/ottd-sim/src/runtime/road_sale.rs"
       ],
       "evidence": [

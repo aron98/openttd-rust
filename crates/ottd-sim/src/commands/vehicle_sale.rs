@@ -29,7 +29,7 @@ pub(super) fn run(
     estimate: bool,
     context: RoadVehicleContext<'_>,
 ) -> Result<CommandReceipt, CommandError> {
-    let test = RoadVehicleContext::sale_cost(
+    let test = context.sale_cost(
         world,
         company,
         VehicleId::new(args.vehicle),

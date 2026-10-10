@@ -44,6 +44,10 @@ inline const char *Failure(StringID id)
     if (id == STR_NEWGRF_ERROR_STATIC_GRF_CAUSES_DESYNC) return "StaticInfluence";
     if (id == STR_NEWGRF_ERROR_TOO_MANY_NEWGRFS_LOADED) return "TooManyFiles";
     if (id == STR_NEWGRF_ERROR_LOAD_AFTER) return "LoadAfter";
+    if (manifest.contains("engine_specs")) {
+        if (id == STR_NEWGRF_ERROR_UNKNOWN_PROPERTY) return "UnknownProperty";
+        if (id == STR_NEWGRF_ERROR_INVALID_ID) return "InvalidID";
+    }
     HostError("unclassified native GRF diagnostic");
 }
 inline Json Files()
@@ -88,6 +92,12 @@ inline void Begin(uint num_baseset)
     output = destination;
     if (std::ifstream(output).good()) HostError("control output already exists");
     std::ifstream source(path);
+    if (std::getenv("OTTD_ENGINE_SPECS_OUTPUT") != nullptr) {
+        source.seekg(0, std::ios::end);
+        auto bytes = source.tellg();
+        if (bytes < 0 || bytes > 64 * 1024) HostError("engine-spec host manifest byte budget");
+        source.seekg(0);
+    }
     manifest = Json::parse(source);
     baseset_count = num_baseset;
     before = Context();

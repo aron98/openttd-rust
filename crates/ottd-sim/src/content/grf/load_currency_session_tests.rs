@@ -8,6 +8,15 @@ use super::{
 
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
+#[path = "load_engine_baseline_tests.rs"]
+mod engine_baseline;
+
+#[path = "load_engine_units.rs"]
+mod engine_units;
+
+#[path = "load_engine_ci_native.rs"]
+mod engine_ci;
+
 #[path = "load_currency_properties_tests.rs"]
 mod properties;
 

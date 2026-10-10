@@ -47,7 +47,12 @@ impl Session<'_, '_> {
             return Ok(());
         }
         match action {
-            0 if self.language.is_some() => self.language_properties(reader, location)?,
+            0 if self.language.is_some() => {
+                self.language_properties(reader, location)?;
+                if self.registry.status(location.file) == LoadStatus::Disabled {
+                    cursor.skip = Skip::Stop;
+                }
+            }
             4 if self.language.is_some() => self.generic_names(reader, location)?,
             0x13 if self.language.is_some() => self.translate_strings(reader, cursor, location)?,
             6 => self.substitute(reader, cursor, location)?,

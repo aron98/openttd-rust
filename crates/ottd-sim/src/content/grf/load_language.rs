@@ -21,12 +21,18 @@ impl Session<'_, '_> {
         location: LoadLocation,
     ) -> ActionResult {
         let feature = reader.byte()?;
+        if feature == 1 && location.stage == LoadStage::Reserve {
+            return self.reserve_road_properties(reader, location);
+        }
         if location.stage == LoadStage::Reserve && (feature >= 22 || feature == 14) {
             return Ok(());
         }
         let count = reader.byte()?;
         let items = u32::from(reader.byte()?);
         let first = u32::from(reader.extended()?);
+        if feature == 1 && location.stage == LoadStage::Activation {
+            return self.road_properties(reader, first, items, count, location);
+        }
         if feature >= 22 || feature == 14 {
             return Ok(());
         }
@@ -108,6 +114,26 @@ impl Session<'_, '_> {
             }
         }
         Ok(())
+    }
+    fn reserve_road_properties(
+        &mut self,
+        reader: &mut Reader<'_>,
+        location: LoadLocation,
+    ) -> ActionResult {
+        let probe = super::load_specs::RoadRequest {
+            grfid: 0,
+            first: 0,
+            count: 0,
+            property: 0,
+        };
+        super::load_specs::dispatch_road(
+            self.specs.as_mut(),
+            probe,
+            reader,
+            &mut self.budget,
+            location,
+        )
+        .map(|_| ())
     }
     fn language_map(
         &mut self,

@@ -38,6 +38,7 @@ mod load_currency_session_tests;
 mod load_currency_tests;
 mod load_cursor;
 mod load_dispatch;
+mod load_engine_mapping;
 mod load_execute;
 mod load_globals;
 mod load_language;
@@ -45,6 +46,7 @@ mod load_language_state;
 mod load_parameters;
 mod load_patch;
 mod load_registry;
+mod load_specs;
 mod load_string_actions;
 #[cfg(test)]
 mod load_string_actions_tests;

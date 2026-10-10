@@ -39,6 +39,8 @@ pub(super) struct FileLanguage {
 }
 #[derive(Debug, Clone, serde::Serialize)]
 pub(super) struct LanguageSnapshot {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub specs: Option<super::load_specs::Specs>,
     pub stage: u8,
     pub file: usize,
     pub line: u32,
@@ -53,6 +55,8 @@ pub(super) struct LanguageSnapshot {
 }
 #[derive(Debug, serde::Serialize)]
 pub(super) struct LanguageReport {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub specs: Option<super::load_specs::Specs>,
     pub catalog: Vec<Pack>,
     pub selected: u8,
     pub admissions: Vec<&'static str>,
@@ -89,6 +93,7 @@ impl<'a> LanguageState<'a> {
             strings: Vec::new(),
             translation_errors: Vec::new(),
             currency: None,
+            specs: None,
         };
         let mut source_bytes = 0_usize;
         let mut selected = None;
@@ -202,6 +207,11 @@ impl Session<'_, '_> {
                 .as_ref()
                 .map_or(0, super::load_currency::CurrencyState::snapshot_bytes),
         );
+        let bytes = bytes.saturating_add(
+            self.specs
+                .as_ref()
+                .map_or(0, super::load_specs::Specs::snapshot_bytes),
+        );
         self.budget.trace(bytes, location)?;
         let phase = match location.stage {
             LoadStage::FileScan => 0,
@@ -212,6 +222,7 @@ impl Session<'_, '_> {
             LoadStage::Activation => 5,
         };
         state.report.events.push(LanguageSnapshot {
+            specs: self.specs.clone(),
             stage: phase,
             file: location.file,
             line: location.line,

@@ -40,10 +40,23 @@ pub(super) struct Session<'i, 'a> {
     pub language: Option<super::load_language_state::LanguageState<'a>>,
     pub strings: super::load_strings::StringTable,
     pub currency: Option<super::load_currency::CurrencyState>,
+    pub specs: Option<super::load_specs::Specs>,
     pub string_budget: super::text::Budget,
     pub string_errors: Vec<super::load_string_actions::TranslationFailure>,
 }
 impl Session<'_, '_> {
+    fn run_phases(&mut self) -> Result<(), ControlLoadError> {
+        for stage in [
+            LoadStage::LabelScan,
+            LoadStage::Init,
+            LoadStage::Reserve,
+            LoadStage::Activation,
+        ] {
+            self.phase(stage)?;
+        }
+        Ok(())
+    }
+
     fn finish(mut self, location: LoadLocation) -> Result<RuntimeReport, ControlLoadError> {
         if let Some(currency) = self.currency.as_mut() {
             self.budget.payload(currency.snapshot_bytes(), location)?;
@@ -61,6 +74,7 @@ impl Session<'_, '_> {
             environment,
             self.language.map(|mut state| {
                 state.report.currency = self.currency;
+                state.report.specs = self.specs;
                 state.report.strings = self.strings.entries;
                 state.report.translation_errors = self.string_errors;
                 state.report
@@ -565,16 +579,10 @@ pub(super) fn run_with_currency(
         language,
         strings: super::load_strings::StringTable::default(),
         currency: custom.map(super::load_currency::CurrencyState::with_custom),
+        specs: None,
         string_budget: super::text::Budget::new(super::ScanLimits::default()),
         string_errors: Vec::new(),
     };
-    for stage in [
-        LoadStage::LabelScan,
-        LoadStage::Init,
-        LoadStage::Reserve,
-        LoadStage::Activation,
-    ] {
-        session.phase(stage)?;
-    }
+    session.run_phases()?;
     session.finish(location)
 }

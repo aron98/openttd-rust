@@ -14,6 +14,97 @@ pub(super) struct EngineSeed {
     pub load: u8,
 }
 
+pub(super) fn raw_original(kind: usize, local: u16, id: u16) -> Option<EngineSpec> {
+    let index = usize::from(local);
+    let (offset, count, vehicle): (usize, usize, VehicleSpec) = match kind {
+        0 => (
+            0,
+            116,
+            VehicleSpec::Rail(
+                rail_data::VEHICLES
+                    .get(index)
+                    .copied()
+                    .unwrap_or(super::RailSpec::DEFAULT),
+            ),
+        ),
+        1 => (
+            116,
+            88,
+            VehicleSpec::Road(
+                road_data::VEHICLES
+                    .get(index)
+                    .copied()
+                    .unwrap_or(super::RoadSpec::DEFAULT),
+            ),
+        ),
+        2 => (
+            204,
+            11,
+            VehicleSpec::Ship(
+                ship_data::VEHICLES
+                    .get(index)
+                    .copied()
+                    .unwrap_or(super::ShipSpec::DEFAULT),
+            ),
+        ),
+        3 => (
+            215,
+            41,
+            VehicleSpec::Aircraft(
+                aircraft_data::VEHICLES
+                    .get(index)
+                    .copied()
+                    .unwrap_or(super::AircraftSpec::DEFAULT),
+            ),
+        ),
+        _ => return None,
+    };
+    let mut info = EngineInfo {
+        base_intro: 0,
+        lifelength: 0,
+        base_life: 255,
+        decay_speed: 0,
+        load_amount: 0,
+        climates: 0,
+        cargo_type: 255,
+        cargo_label: CargoLabelSource::Fixed(if kind == 3 {
+            u32::MAX
+        } else {
+            u32::from_be_bytes(*b"PASS")
+        }),
+        refit_mask: 0,
+        refit_cost: 0,
+        misc_flags: 0,
+        callback_mask: 0,
+        retire_early: 0,
+        extra_flags: 0,
+        cargo_age_period: 185,
+        variant_id: u16::MAX,
+    };
+    if index < count {
+        let seed = ENGINES.get(offset.checked_add(index)?)?;
+        info.base_intro = 701_265_i32.checked_add(seed.intro)?;
+        info.lifelength = seed.life;
+        info.base_life = if matches!(vehicle, VehicleSpec::Rail(rail) if rail.railveh_type == 2) {
+            255
+        } else {
+            seed.base_life
+        };
+        info.decay_speed = seed.decay;
+        info.load_amount = seed.load;
+        info.climates = seed.climates;
+        info.cargo_label = seed.cargo;
+        info.refit_cost = 8;
+        info.misc_flags = seed.misc;
+    }
+    Some(EngineSpec {
+        id,
+        local_id: local,
+        info,
+        vehicle,
+    })
+}
+
 pub(super) fn initialize(
     climate: Climate,
     cargo: &[CargoSpec],

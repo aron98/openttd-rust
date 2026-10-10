@@ -125,6 +125,8 @@ pub enum LoadFailure {
     TooManyFiles,
     /// Action13 translator precedes its not-yet-activated target.
     LoadAfter,
+    /// Action0 property is unknown to the original feature handler.
+    UnknownProperty,
 }
 
 /// Original diagnostic retained separately from a host refusal.

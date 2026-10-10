@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "a65ccb254b013acb1fafe0235628cf3486660f4f8b80b94c47b8c4f5e5ba1b3a",
+      "sha256": "5800faf8d72398a4344d7e291074c4c7e1d2e614d5a6f4f2c22227489e00a8f8",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1726,7 +1726,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-rs",
       "path": "crates/ottd-sim/src/content/grf.rs",
-      "sha256": "be2bbe740271eebcd532eca280e399713cc7ab82943480fd33145a4cc8caf966",
+      "sha256": "3d00390a5ba213182c40ae280f7888ebf400ff129bd1543a13aba7e075239e98",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -2410,7 +2410,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-rs",
       "path": "crates/ottd-sim/src/content/grf/load.rs",
-      "sha256": "4f2dc404961b1b9940a8d9a84eed558a690e4c001614e45b471290c953148516",
+      "sha256": "776f344ce5e2a064738eec0b0569e03af3e3fa6e57073a23cb467e21d0566e2e",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2446,7 +2446,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-dispatch-rs",
       "path": "crates/ottd-sim/src/content/grf/load_dispatch.rs",
-      "sha256": "7c99fbb6ec8a59ac94303088ceba5225d773f9bda58bf721d271afe8781e636d",
+      "sha256": "71bfa888baedb74172c6db319ebec4bdedcf60f108065b09962d5597a21f31e8",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2491,7 +2491,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-types-rs",
       "path": "crates/ottd-sim/src/content/grf/load_types.rs",
-      "sha256": "a0c26809f1ce9f0005f962ca96d28f8d5a61aa4f07afa273c2baa22f2ccd30eb",
+      "sha256": "1fa0b1bf95bd32e248cc6dfdc6e7388fc19df4946d42319384aa547e1367be3c",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2581,7 +2581,7 @@
     {
       "id": "grf-control-reference-grf-load-control-hpp",
       "path": "reference/grf_load_control.hpp",
-      "sha256": "8b7a1a1c83cfaa1c50c351e59011f87f2b601524e519f21019dfb7bcbd0a4444",
+      "sha256": "6b632829c7e5ef080d52e5927f412a97aa4fba731c00488322add23b182955e7",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "d73130beeddeb845d1af6677807dec282324edc3776535f25eb19018e9d5aa11",
+      "sha256": "378cfcb10b6c670cbf4f37ab737cf44a5f2b2c4bd51f4f0e716992c045543e32",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "12d4284dafe2cc8da0a7a717aa12f469492ca101caf5f2249888f37bc67b2fdc",
+      "sha256": "22181f02ad4dbc7ded97d3a9af5d54df02097f2d1772c3f9ce4707ba43e4955d",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "d6062571949c6c8b51479dcc4da41d088198ebf872cbfb6d52d9e3bac0adc574",
+      "sha256": "062c1fecc19fcd5c50dcbed08c758a76a45ff7718452c5ee6b7e9e645bdae70e",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "98105d062f7bb0e70d42c5e6fed2dd552069e5dba89c09cecf62635dad81b1f7",
+      "sha256": "d81f440276f12fe929aa432649cf5d4d7fbf5c68f76902abb0929f434b3b3f6d",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "3e487a69f130a880752b243136549c8a0575dd40b81d7761b9d7a12b94f87e99",
+      "sha256": "e7f89823ef3e8e8d3460e2ac5a148e872034b24c79a0f3f8c396694248e91575",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "573f7eae2b8a465823cc40f347b847ea05c24fe56c0a9954de859ec8617bc9ea",
+      "sha256": "8fd4ebc6c9e70bf21ba058fb934c5d6fce8600e8d52f302328e02d1d88ea1657",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "3913ca8923e2bf26220f8e3ab366bce8fc409bebe5142f9026eddc580e25958a",
+      "sha256": "7877c6ec9790fee65d70cdf01474d417273d0c888f8730528df81ecea93f6dbd",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "da18acb2cb2b29dfda3b3d3093ac4dc8846b8181e7c261ce391b0001558994cb",
+      "sha256": "c8dc9d3aac1e073b64c9f23ae2c9834eaaedef6293de0453f410f5aee6551e0e",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "fef10825bfea28c76e07a1deb0d90894d598fb2d3c7f71722c4ba624c78169c9",
+      "sha256": "0306f44760bde93eb9da5186e8563f8837baa59397eac6e14ca279d75db66b64",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "e2de5542234ecd33ef2829457fde66dd14f0f1f447e7b82e116b661b60c67230",
+      "sha256": "9778671d540ac6b7f1d6273c4e5b75a6a03c7f846e3d47ee7ffd1e82bd8dcdf1",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "d2d88f0b16f8ee8a45de700d34e0cad33f8d4b63cae41ac82dfced2d720f34a0",
+      "sha256": "bc8f1c44c6650a53853463f5071ab07aafbe45b7843e1955f5ab7ecfa4c3651f",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "6da9da8868bfc505038cb25881f7378fcb50b34f27cbdc66bcd54a068aa75c12",
+      "sha256": "4a0a9829627ccd990a75bc7f5f50cd1011406f684d277af482ad99c181d9ceec",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "243936476601a5b4422b6f9642b102276f417a08d89c56c268a979c1ff89d702",
+      "sha256": "1aa2b47ce044adbf308dab1a4f74ab250b38de65b8beaabdd1d3bc384a5d880a",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
@@ -4183,7 +4183,7 @@
     {
       "id": "shared-restore-layout",
       "path": "scripts/shared-restore-layout.json",
-      "sha256": "e7a1df2952dd40b68040b23bb39693e86e491fdb6568c223b841aa25a16b0041",
+      "sha256": "aefc709b8703fc40eece66721386fc3514d840a51a5942acb0ceb31e2610ee90",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
       "save_version": null,
@@ -4219,7 +4219,7 @@
     {
       "id": "currency-properties-currency-properties-ci-layout-json",
       "path": "scripts/currency-properties-ci-layout.json",
-      "sha256": "84565ef2e4ec51badf498923f7e8f39ac2c45f2d718511a3674a2d84aeb89e30",
+      "sha256": "121176020b35a74e3d918e8dff501acf5e841874780c147cfcb013d0de6eceaa",
       "kind": "recipe",
       "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
       "save_version": null,
@@ -4336,7 +4336,7 @@
     {
       "id": "empty-road-layout",
       "path": "scripts/empty-road-layout.json",
-      "sha256": "56f4f32387292f72bcb2c4011c64ac9fce39c1b1de15b75effcdddd7a2b5befb",
+      "sha256": "0438744d80b03818191808def9b8c00d4dd0cdc5cc0d42d09a74f07e12403944",
       "kind": "recipe",
       "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
       "save_version": null,
@@ -7606,6 +7606,141 @@
       "sha256": "ac307597fc5d917dbe0796c2028ee56c24e146cfc9d7d8aafa78de0ad8e151d2",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 closed compiler constants; native115 sessions and explicit bounded Rust projections.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-docs-engine-specs-md",
+      "path": "docs/engine-specs.md",
+      "sha256": "f7e647423b0404bc2947e8821cb7be136ca4ca5048d13f0f2666f22d4d052d85",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-reference-engine-specs-hpp",
+      "path": "reference/engine_specs.hpp",
+      "sha256": "1246fb3b44306a036a0f18e47f71dbac6402dcbc9ded76bb30c5b330136575cc",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-reference-engine-specs-hooks-hpp",
+      "path": "reference/engine_specs_hooks.hpp",
+      "sha256": "1faaf2f370272636074437fee980f8de79ce6092c16545a6e054cb4766b3a344",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-reference-engine-specs-patch",
+      "path": "reference/engine_specs.patch",
+      "sha256": "99c6ab1e3a2fd758456dc29f60ceb85aa4a8c59657fe97e8034fea60cd941149",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-check-engine-specs-reference-cmake",
+      "path": "scripts/check-engine-specs-reference.cmake",
+      "sha256": "e349df59cabcbcd134baa637407972eb49dd637eda7af46ee7db54f5a96a7b0b",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-check-engine-specs-ci-py",
+      "path": "scripts/check-engine-specs-ci.py",
+      "sha256": "ee04a1f36bc306aacc7c86db2a347bca43fec21e6486973b8473c740a309baea",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-capture-engine-specs-py",
+      "path": "scripts/capture-engine-specs.py",
+      "sha256": "f5953e1bddaa704c013b0999cb9017ef8a5ec9e7713f91682f0f847c57cf95eb",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-layout-json",
+      "path": "scripts/engine-specs-ci-layout.json",
+      "sha256": "37eeb0c2e0c1adf31780ec26c403f3e1568c56d3bffefee4903c2a62489a668b",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-guards-json",
+      "path": "scripts/engine-specs-ci-guards.json",
+      "sha256": "88eb17bc00d5f95f57909f2bc19b4fd499b528ae894676703b8ff459458d39aa",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-tests-engine-specs-ci-test-py",
+      "path": "scripts/tests/engine_specs_ci_test.py",
+      "sha256": "7b316207bf06ada4d4002912578ef41cb944b9fc6d3d5d23d644483faf71dce3",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-run-py",
+      "path": "scripts/engine_specs_ci_run.py",
+      "sha256": "618f2bebcf6900d580af02c478c022884b48f6f503133b2fc1b6043181f7defb",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-evidence-py",
+      "path": "scripts/engine_specs_ci_evidence.py",
+      "sha256": "17d303b1e0e2b383d7c414d10627b3ab846e97d41f82921e83cffdb077808f0b",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-probes-py",
+      "path": "scripts/engine_specs_ci_probes.py",
+      "sha256": "cabd663111d209f75b2f9bb902c32a29343af3fc3d6e2c652d7be77071bf13cf",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-roster-py",
+      "path": "scripts/engine_specs_ci_roster.py",
+      "sha256": "fbc92010d2f239a90f33e1bcbcd5cef219aab4160bcfea954796a6ed839b3ac1",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "engine-specs-scripts-engine-specs-ci-guards-py",
+      "path": "scripts/engine_specs_ci_guards.py",
+      "sha256": "7b183eda44c8d841981d2ad631e548f20a8a126bae25fc57be26576e2ebd7b16",
+      "kind": "recipe",
+      "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
       "save_version": null,
       "profile": null
     }
@@ -14328,6 +14463,33 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "engine-specs",
+      "argv": [
+        "python3",
+        "scripts/check-engine-specs-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "corruption/summary.json",
+        "bin/ottd_sim",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256"
+      ],
+      "success_text": "PASS private raw engine/spec paired corpus",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1800
     }
   ],
   "scenarios": [
@@ -19718,6 +19880,62 @@
         "controls/admission.json",
         "controls/archive-controls.json",
         "controls/saved-mutations.json"
+      ]
+    },
+    {
+      "id": "content.raw-engine-specs",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Private raw engine owners/mappings and road08/09/0F/11; excludes finalization and configured-world restoration.",
+      "expected": "Eight paired cases compare24 direct API commands,6 loader checkpoints and230 retained native events;21 host/wrapper guards,4 exact focused tests,11 actual admission corruptions, zero-selector refusal and complete archive verification. Requires a fresh locked Cargo normal driver with exact source/native/executable bindings.",
+      "driver": "engine-specs",
+      "assets": [
+        "engine-specs-docs-engine-specs-md",
+        "engine-specs-reference-engine-specs-hpp",
+        "engine-specs-reference-engine-specs-hooks-hpp",
+        "engine-specs-reference-engine-specs-patch",
+        "engine-specs-scripts-check-engine-specs-reference-cmake",
+        "engine-specs-scripts-check-engine-specs-ci-py",
+        "engine-specs-scripts-capture-engine-specs-py",
+        "engine-specs-scripts-engine-specs-ci-layout-json",
+        "engine-specs-scripts-engine-specs-ci-guards-json",
+        "engine-specs-scripts-tests-engine-specs-ci-test-py",
+        "engine-specs-scripts-engine-specs-ci-run-py",
+        "engine-specs-scripts-engine-specs-ci-evidence-py",
+        "engine-specs-scripts-engine-specs-ci-probes-py",
+        "engine-specs-scripts-engine-specs-ci-roster-py",
+        "engine-specs-scripts-engine-specs-ci-guards-py"
+      ],
+      "source_refs": [
+        "docs/engine-specs.md",
+        "reference/engine_specs.hpp",
+        "reference/engine_specs_hooks.hpp",
+        "reference/engine_specs.patch",
+        "scripts/check-engine-specs-reference.cmake",
+        "scripts/check-engine-specs-ci.py",
+        "scripts/capture-engine-specs.py",
+        "scripts/engine-specs-ci-layout.json",
+        "scripts/engine-specs-ci-guards.json",
+        "scripts/tests/engine_specs_ci_test.py",
+        "scripts/engine_specs_ci_run.py",
+        "scripts/engine_specs_ci_evidence.py",
+        "scripts/engine_specs_ci_probes.py",
+        "scripts/engine_specs_ci_roster.py",
+        "scripts/engine_specs_ci_guards.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "corruption/summary.json",
+        "bin/ottd_sim",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256"
       ]
     }
   ]

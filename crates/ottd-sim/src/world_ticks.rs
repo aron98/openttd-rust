@@ -7,9 +7,10 @@ mod finance;
 mod phases;
 use clocks::{restore_clock, save_clock};
 use phases::{competitor, daily, industry_month};
+mod tiles;
 mod towns;
 use crate::{
-    Landscape, MAX_TICKS, Map, TickEvents, Tile,
+    Landscape, MAX_TICKS, TickEvents,
     world_access::{WorldAccessError, unsigned},
 };
 use crate::{
@@ -21,6 +22,7 @@ use ottd_save::{
     world::{PreparedWorldTransaction, World, WorldEdit},
 };
 use serde::{Deserialize, Serialize};
+use tiles::{map, tile};
 
 /// Rejected unsupported phase or invalid saved-world operation.
 #[derive(Debug, thiserror::Error)]
@@ -245,43 +247,4 @@ fn advance(
         calendar_progressed: events.calendar_progressed,
         events: events.iter().map(|event| event.name().into()).collect(),
     })
-}
-
-const fn tile(t: &ottd_save::TileState) -> Tile {
-    Tile {
-        tile_type: t.tile_type(),
-        height: t.height(),
-        m1: t.m1(),
-        m2: t.m2(),
-        m3: t.m3(),
-        m4: t.m4(),
-        m5: t.m5(),
-        m6: t.m6(),
-        m7: t.m7(),
-        m8: t.m8(),
-    }
-}
-
-fn map(world: &World) -> Map {
-    Map {
-        width: world.map().width(),
-        height: world.map().height(),
-        tiles: world
-            .map()
-            .tiles()
-            .iter()
-            .map(|t| Tile {
-                tile_type: t.tile_type(),
-                height: t.height(),
-                m1: t.m1(),
-                m2: t.m2(),
-                m3: t.m3(),
-                m4: t.m4(),
-                m5: t.m5(),
-                m6: t.m6(),
-                m7: t.m7(),
-                m8: t.m8(),
-            })
-            .collect(),
-    }
 }

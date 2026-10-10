@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "009cd18908acbbf5ff5c6ff38e821ff521bb9ab40300a5d9d396a6f2b1da264a",
+   "sha256": "6f74dab9317eae05fa3acf198c9375187381b83e6fe6de301a7d3318659c35df",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "8146659f46b67560f85bc6ebaae9bff8a14bb90289cb6dfa9d1b218abf3292db",
+   "sha256": "03308a414d7aa39a30e638885b9a629ba139f57fb7af8f9a16abfcd11d3e9fe9",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "bc5b7afbb7893472a74040865a6bb8a869bebf6027610a35a15f82ada5e457c8",
+   "sha256": "c4e1de86765f0563226881dcb74b08237dde93841808e9edb1d914be7b93a4a3",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "d1ec86482181df1ab54562448f4b383015157eef0e70d228bf918cc43e648b58",
+   "sha256": "dc448bdbb5835a8b15f25716cffe5efa81e3bfa7ad67f7584b25decb0bc8c877",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "21eadd09f56cf4c53a1e32e487bdbe2b820ec637cbaf5f5dc14f5afcf34d538e",
+   "sha256": "bf101ef8e715560813262b129df511453a9508f94fb668fd04f3f2367f55944f",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "4719b5363233bc2bfb4e89e585b06275bcc743b027c9ccd8da7179d2f78edd6c",
+   "sha256": "6ad5541355128b81063bb237d07eddf1cb496100af2325bc4fd2082321c5a7b4",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "ca25c2501cd3a487848abc1b9d50c21d6215c6b3cf7c7b1c918c3c2286160789",
+   "sha256": "88c8487a7c7880525e1d472c08531c28b90854880793712ad2244497da25116f",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "8a67bbfbd138320987450eac0ce79a4f7e54d022d9118b68ad6b1aa7e085b33d",
+   "sha256": "1da6f672bd6e2ac6bcc35559b959b0198931b4fbdb58ccb727cf2d5d3d0ec28d",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "8b64874a1a719c7f52124038df7d11fc1011cec871203945a3e4389e4f50ed20",
+   "sha256": "e7b9256760f8b18011ae65336b9269a5b26798ca0b66ba176f8378dcdaf4e187",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "c7fb1d11d579d9c3aa4435050eb7e1073dd6139d4b0906348ce3892022213b04",
+   "sha256": "dc13406ab2d700aaa29c227ff01e7e658447dc63bbb8c9d918b3ccc1e1c1bece",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "11944c3fd49875eb6011929c39f572c937d0b7fe214cd734031497d3f9509e15",
+   "sha256": "85cf6871230d59683aa3585ceec5296e4f230bbdd4fd96ffc2294d427a40c2fa",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "4bcb4da658655b60ae831a62143ee17de5f94d07f2280b29598829483a2d3cca",
+   "sha256": "41b275c4f9eee1dd9b4946abc1da412fea47296c455ff0e1d94e7f796d9b7a3c",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "621dab53f856599200a17f78b0f8005f7f1afd52de27e33cdc88333e6ccb673b",
+   "sha256": "a2dee54aa983e483af90f623fb2859b105b1a9eaadc3517ae08a3a493d31601e",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "ffd480c356ba44edbeeb2449c9c4725bb1a9ebfb8a3ecf67c75214182980388d",
+   "sha256": "4385a6a7c065f5ccefb69b5220d9e1f010902d0f262237fec6c29e51ed33fb09",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "498971e1dff64daedac8f75f79c9f1711cc6ff204013b2b50db6f5413933380d",
+   "sha256": "d6750997f7736b11be717ac9d55aa8273c33a8d63b544c097cd855da43cc2ca3",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "c9b4646572268bdcd599665b0a781812b95aa2bda7b258b6505518bb09ca6ef6",
+   "sha256": "8da50a320c65f6caba2fe5168649ae615033cad61ba5eec4da41deabe6f83d26",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8557,7 +8557,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-runtime-movement-rs",
    "path": "crates/ottd-sim/src/runtime/movement.rs",
-   "sha256": "b2a774bd3c5ac8414ba5b9b2361a0ab042ff43cddbabbd88719beb00d92c4186",
+   "sha256": "f0cd25eefb092521ae90723c69dafb1ace65bae29f05e00a54ec24fbaac8d4b9",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,

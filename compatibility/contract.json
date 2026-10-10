@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "73d15f18ead54d463eaaaf7dfa9c859620e6aaf9f0274574bf8b890f250269d3",
+      "sha256": "a2533cccb7a7b4aeea5775cd10bc562b38b61170d1be1e1d468b9e3c1aee6817",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -2581,7 +2581,7 @@
     {
       "id": "grf-control-reference-grf-load-control-hpp",
       "path": "reference/grf_load_control.hpp",
-      "sha256": "ed8cf0a6733c2b5377b0624791091786ffd65b98d47ec8d874fe6c3de110672e",
+      "sha256": "8b7a1a1c83cfaa1c50c351e59011f87f2b601524e519f21019dfb7bcbd0a4444",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "83b90169e0d4a6151e5a5e5c7e02511e23598092c1ba38f194479f157c7caadf",
+      "sha256": "0d1422a289df7d54af40864fd76eeeea58f4612f41aa07fce0cd8624b25af3c3",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "3fa15ddd3bae7df888c7a7b284528319f38a7dae20a71bf7b00c5c00db6decff",
+      "sha256": "49c41646cc457bc8b592df39fa7fe1762b0daf1966f1ce3875d91bdad48ab2a5",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "efa417c5a891f32953e88bea83cc869b5f00108e15b8402739a8a2c5018a537a",
+      "sha256": "a59eaabbd3c639a893e10fbdb28b940019c6a40528c41b0dc6e0e63d745f3fc8",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "69c26c0c3afd1e4998b6d8f3c4a914dcbdb774cce53186296b15fcbe8ded8187",
+      "sha256": "b022ab14fb74b99c215a0edda48279bcdda2716305e3b3b1b44cb7aeb067b401",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "12e5b2e269659be2b84a22e52158f44e4b4636d3249195cfa7887c3de93afe71",
+      "sha256": "62152353a5e0607c8f3143dceeda04dfc91a0b0f48d06b473ac313d3d5cac69f",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,

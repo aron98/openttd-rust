@@ -43,6 +43,7 @@ inline const char *Failure(StringID id)
     if (id == STR_NEWGRF_ERROR_MULTIPLE_ACTION_8) return "MultipleAction8";
     if (id == STR_NEWGRF_ERROR_STATIC_GRF_CAUSES_DESYNC) return "StaticInfluence";
     if (id == STR_NEWGRF_ERROR_TOO_MANY_NEWGRFS_LOADED) return "TooManyFiles";
+    if (id == STR_NEWGRF_ERROR_LOAD_AFTER) return "LoadAfter";
     HostError("unclassified native GRF diagnostic");
 }
 inline Json Files()

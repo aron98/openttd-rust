@@ -8,13 +8,39 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed gameplay increment: `3d952b0` advances empty-road tile callbacks.
-Content increment `fdb7b8f` adds currency properties 0B-0F, and `39eb3e8` restores
-shared order backups in the default group. Script increment `ee9672e` adds shared
-compiler constants and closed enums after `8bc145d` introduced owned strings and
-compilation realms. Independent review approves both increments. All seven
-completion gates below remain open. Earlier milestones and their bounded
-verification results are recorded below.
+Latest reviewed content increment: `e032dd2` completes the bounded raw engine/spec
+loading added in `d256ad1`. Script increment `ff0d636` adds configured scalar roots
+and persistent execution runners. The latest admitted gameplay increment remains
+`3d952b0`, for empty-road tile callbacks. Populated movement and cargo identity and
+translation are in progress. All seven completion gates below remain open.
+Earlier milestones and their bounded verification results are recorded below.
+
+Private raw engine/spec loading preserves original construction/reset, scoped
+vehicle-ID mappings and Road Action0 properties 08/09/0F/11. Extended local IDs
+retain their u16 identity; substitute selection performs the native uint8
+conversion before the table-count minimum. New non-original Road owners use the
+native value-initialized running-cost class. Ten whole-state native/Rust cases
+cover 48 API commands, six loader checkpoints and 280 native events, with eight
+focused tests, 21 guards and 13 actual admission-corruption refusals. Verification
+passes 614 workspace tests, strict Rust checks and 72 Python tests. Independent
+review reproduces the original constructor failures, all 24 final engine tests,
+and complete source/archive validation. Four adjacent copied-source rosters now
+include the constructor inputs. Configured-world restoration, non-original Rail,
+cargo/refit finalization and saved dynamic engine/EIDS restoration remain open.
+
+Configured scalar roots retain shared slot identity while persistent runners keep
+independent temporary ownership and failure history. Root reads and stores,
+idle root replacement, compile-time constants and suspended execution follow the
+pinned native semantics through the existing VM loop. Both complete debug and
+optimized profiles pass 10,666 strict comparisons and 153 separately classified
+lexer-policy rejections, 101 selected Rust tests, 90 root sessions and 115 constant
+sessions. The root sessions distinguish 72 supported stateful projections from
+18 typed implementation boundaries. Each profile validates all 93,531 indexed
+artifacts and feeds fresh native captures into the selected Rust unit executable.
+Root verification passes 629 workspace tests, strict Rust checks and 72 Python
+tests. Independent review validates both complete packages, reruns 101 tests per
+profile and 19 admission tests, and adds 48 native/Rust comparisons. General
+objects, functions, host APIs, scheduling and full AI/GS remain open.
 
 Empty-world ticks now visit admitted flat temperate normal roads and depots
 through the existing landscape scheduler and saved-world transaction. Natural

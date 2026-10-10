@@ -49,6 +49,10 @@ impl Session<'_, '_> {
                 self.currency_names(reader, first, items, location)?;
                 continue;
             }
+            if let Some(property) = super::load_currency_properties::Property::from_id(property) {
+                self.currency_properties(reader, property, first, items, location)?;
+                continue;
+            }
             if !(0x13..=0x15).contains(&property) {
                 return Err(Self::unsupported(location, 0, "unimplemented global property").into());
             }

@@ -1,7 +1,7 @@
 use super::{
     language_pack::{BuiltinPack, Pack},
     load_currency::{CurrencyOwner, CurrencyState},
-    load_currency_native::{Result, compare, invoke, setup},
+    load_currency_native::{Result, compare, invoke, legacy_owner, legacy_owners, setup},
     load_string_mapping::map_string,
     load_strings::{Definition, StringKey, StringTable},
     text::Budget,
@@ -43,6 +43,17 @@ enum Operation {
     },
 }
 
+fn legacy_operation(operation: &Operation) -> Result<Value> {
+    let mut value = serde_json::to_value(operation)?;
+    if let Operation::CustomFixture { owner } = operation {
+        value
+            .as_object_mut()
+            .ok_or("operation object")?
+            .insert("owner".into(), legacy_owner(owner)?);
+    }
+    Ok(value)
+}
+
 fn expected(operations: &[Operation], bytes: &[u8]) -> Result<Value> {
     let pack = Pack::header(bytes)?;
     let builtins = BuiltinPack::new(bytes)?;
@@ -51,7 +62,7 @@ fn expected(operations: &[Operation], bytes: &[u8]) -> Result<Value> {
     let mut budget = Budget::new(super::ScanLimits::default());
     let mut rows = Vec::new();
     for operation in operations {
-        let serialized = serde_json::to_value(operation)?;
+        let serialized = legacy_operation(operation)?;
         let mut row = serde_json::Map::new();
         row.insert(
             "operation".into(),
@@ -68,7 +79,7 @@ fn expected(operations: &[Operation], bytes: &[u8]) -> Result<Value> {
             }
             Operation::CustomFixture { owner } => {
                 *currency.owners.entries.get_mut(31).ok_or("custom owner")? = owner.clone();
-                row.insert("declared_custom_owner".into(), json!(owner));
+                row.insert("declared_custom_owner".into(), legacy_owner(owner)?);
             }
             Operation::ResetStrings => strings = StringTable::default(),
             Operation::Define {
@@ -124,7 +135,7 @@ fn expected(operations: &[Operation], bytes: &[u8]) -> Result<Value> {
                 );
             }
         }
-        row.insert("owners".into(), json!(currency.owners.entries));
+        row.insert("owners".into(), legacy_owners(&currency.owners.entries)?);
         row.insert(
             "pending".into(),
             json!(
@@ -211,8 +222,8 @@ fn cases() -> Vec<(&'static str, Vec<Operation>)> {
         rate: 91,
         separator: "|".into(),
         to_euro: 2040,
-        prefix: "before".into(),
-        suffix: "after".into(),
+        prefix: b"before".to_vec(),
+        suffix: b"after".to_vec(),
         code: "ZZZ".into(),
         symbol_pos: 2,
         name: 1,
@@ -300,7 +311,11 @@ fn original_currency_api_matrix() -> Result {
         let packs = case.join("pack");
         std::fs::create_dir(&packs)?;
         std::fs::write(packs.join("input.lng"), &pack)?;
-        let manifest = json!({"files":[],"networking":false,"language":{"pack_directories":[packs],"selected":selected,"queries":[]},"currency_api":operations});
+        let commands = operations
+            .iter()
+            .map(legacy_operation)
+            .collect::<Result<Vec<_>>>()?;
+        let manifest = json!({"files":[],"networking":false,"language":{"pack_directories":[packs],"selected":selected,"queries":[]},"currency_api":commands});
         let native = invoke(&root, &case, &manifest, &oracle)?;
         let rust = expected(&operations, &pack)?;
         let controls = compare(

@@ -23,6 +23,15 @@ mod load_currency_guards;
 mod load_currency_load_native;
 #[cfg(test)]
 mod load_currency_native;
+mod load_currency_properties;
+#[cfg(test)]
+mod load_currency_properties_api_cases;
+#[cfg(test)]
+mod load_currency_properties_first_case;
+#[cfg(test)]
+mod load_currency_properties_load_cases;
+#[cfg(test)]
+mod load_currency_properties_native;
 #[cfg(test)]
 mod load_currency_session_tests;
 #[cfg(test)]

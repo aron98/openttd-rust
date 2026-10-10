@@ -4,13 +4,19 @@ use super::{
     load::{RuntimeInputs, run_with_currency},
     load_context_tests::{grf_control_cases as programs, native::project},
     load_currency::{CurrencyOwner, CurrencyState},
-    load_currency_native::{Result, compare, invoke, setup},
+    load_currency_native::{Result, compare, invoke, legacy_owners, setup},
     load_language_state::{LanguageInput, LanguageLimits, LanguageReport},
 };
 use serde_json::{Value, json};
 use std::path::Path;
 #[path = "load_currency_load_cases.rs"]
 mod expanded;
+
+#[derive(Clone, Copy)]
+pub(super) enum OwnerEncoding {
+    Text,
+    Bytes,
+}
 
 fn property(first: u16, ids: &[u16]) -> Result<Vec<u8>> {
     let mut bytes = vec![0, 8, 1, u8::try_from(ids.len())?, 255];
@@ -25,7 +31,7 @@ fn define(local: u16, byte: u8) -> Vec<u8> {
     bytes.extend([byte, 0]);
     bytes
 }
-type Case = (&'static str, Vec<programs::Source>, Option<Vec<usize>>);
+pub(super) type Case = (&'static str, Vec<programs::Source>, Option<Vec<usize>>);
 fn cases() -> Result<Vec<Case>> {
     let first = || {
         programs::source(
@@ -84,8 +90,14 @@ fn cases() -> Result<Vec<Case>> {
 fn table(entries: &[super::load_strings::Entry], selected: u8) -> Value {
     json!({"selected":selected,"entries":entries.iter().map(|entry|json!([entry.key.grfid,entry.key.local_id,entry.default_id,entry.translations])).collect::<Vec<_>>()})
 }
-fn state(currency: &CurrencyState, strings: &Value) -> Value {
-    json!({"owners":currency.owners.entries,"pending":currency.pending.iter().map(|p|json!({"grfid":p.grfid,"source":p.source})).collect::<Vec<_>>(),"strings":strings})
+fn state(currency: &CurrencyState, strings: &Value, encoding: OwnerEncoding) -> Result<Value> {
+    let owners = match encoding {
+        OwnerEncoding::Text => legacy_owners(&currency.owners.entries)?,
+        OwnerEncoding::Bytes => json!(currency.owners.entries),
+    };
+    Ok(
+        json!({"owners":owners,"pending":currency.pending.iter().map(|p|json!({"grfid":p.grfid,"source":p.source})).collect::<Vec<_>>(),"strings":strings}),
+    )
 }
 fn native_rows(load: &Value, prefix: usize) -> Result<Value> {
     let mut rows = Vec::new();
@@ -117,10 +129,14 @@ fn native_rows(load: &Value, prefix: usize) -> Result<Value> {
     }
     Ok(json!(rows))
 }
-fn rust_rows(report: &LanguageReport, custom: Option<&CurrencyOwner>) -> Value {
+fn rust_rows(
+    report: &LanguageReport,
+    custom: Option<&CurrencyOwner>,
+    encoding: OwnerEncoding,
+) -> Result<Value> {
     let initial = custom.map_or_else(CurrencyState::default, CurrencyState::with_custom);
-    json!(report.events.iter().map(|event|json!({"coordinates":{"stage":event.stage,"file":event.file,"line":event.line,"offset":event.offset},
-        "state":state(event.currency.as_ref().unwrap_or(&initial),&table(&event.strings,report.selected))})).collect::<Vec<_>>())
+    Ok(json!(report.events.iter().map(|event| Ok(json!({"coordinates":{"stage":event.stage,"file":event.file,"line":event.line,"offset":event.offset},
+        "state":state(event.currency.as_ref().unwrap_or(&initial),&table(&event.strings,report.selected),encoding)?}))).collect::<Result<Vec<_>>>()?))
 }
 
 fn configured_custom() -> Result<CurrencyOwner> {
@@ -133,7 +149,7 @@ fn configured_custom() -> Result<CurrencyOwner> {
         .ok_or("custom default")?
         .clone();
     custom.separator = ".".into();
-    custom.suffix = " credits".into();
+    custom.suffix = b" credits".to_vec();
     Ok(custom)
 }
 
@@ -144,6 +160,7 @@ fn compare_lifecycle(
     prefix: &[u32],
     control: &super::ControlLoadReport,
     directory: &Path,
+    encoding: OwnerEncoding,
 ) -> Result {
     let initial = custom.map_or_else(CurrencyState::default, CurrencyState::with_custom);
     let before = language
@@ -176,19 +193,21 @@ fn compare_lifecycle(
     {
         let phase = event.get("phase").and_then(Value::as_str).ok_or("phase")?;
         let expected = match phase {
-            "after-reset" => state(&initial, &table(&[], language.selected)),
-            "before-finalize" => state(before, &strings),
+            "after-reset" => state(&initial, &table(&[], language.selected), encoding)?,
+            "before-finalize" => state(before, &strings, encoding)?,
             "mapping-applied" => {
                 applied = applied.saturating_add(1);
                 let mut partial = before.clone();
                 partial.pending.truncate(applied);
                 partial.finalize(&string_table);
                 partial.pending = before.pending.clone();
-                state(&partial, &strings)
+                state(&partial, &strings, encoding)?
             }
-            "after-finalize" | "finish" => {
-                state(language.currency.as_ref().unwrap_or(&initial), &strings)
-            }
+            "after-finalize" | "finish" => state(
+                language.currency.as_ref().unwrap_or(&initial),
+                &strings,
+                encoding,
+            )?,
             "before-reset" | "decision" | "mapping-added" | "stage-end" => continue,
             _ => return Err("unknown lifecycle phase".into()),
         };
@@ -230,14 +249,11 @@ fn baseline_ids(native: &Value) -> Result<Vec<u32>> {
         .collect()
 }
 
-fn run_case(
-    root: &Path,
+fn write_sources(
     directory: &Path,
-    oracle: &str,
-    pack: &[u8],
     sources: &[programs::Source],
-    reload: Option<&[usize]>,
-) -> Result<Value> {
+    pack: &[u8],
+) -> Result<(Vec<String>, Value)> {
     std::fs::create_dir(directory)?;
     let packs_dir = directory.join("pack");
     std::fs::create_dir(&packs_dir)?;
@@ -253,7 +269,27 @@ fn run_case(
         names.push(path.display().to_string());
         files.push(json!({"path":path,"grfid":source.id,"metadata_version":source.metadata_version,"parameters":source.parameters,"static":source.flags.is_static,"init_only":source.flags.init_only,"system":source.flags.system,"palette":1}));
     }
-    let mut manifest = json!({"files":files,"networking":false,"currency_load":true,"language":{"pack_directories":[packs_dir],"selected":selected,"queries":[]}});
+    let manifest = json!({"files":files,"networking":false,"currency_load":true,"language":{"pack_directories":[packs_dir],"selected":selected,"queries":[]}});
+    Ok((names, manifest))
+}
+
+fn run_case(
+    root: &Path,
+    directory: &Path,
+    oracle: &str,
+    pack: &[u8],
+    sources: &[programs::Source],
+    reload: Option<&[usize]>,
+    encoding: OwnerEncoding,
+) -> Result<Value> {
+    let selected = Pack::header(pack)?.language;
+    let (names, mut manifest) = write_sources(directory, sources, pack)?;
+    if matches!(encoding, OwnerEncoding::Bytes) {
+        manifest
+            .as_object_mut()
+            .ok_or("manifest object")?
+            .insert("currency_owner_encoding".into(), json!("bytes-v1"));
+    }
     if let Some(order) = reload {
         manifest
             .as_object_mut()
@@ -261,6 +297,14 @@ fn run_case(
             .insert("currency_reload".into(), json!(order));
     }
     let native = invoke(root, directory, &manifest, oracle)?;
+    if matches!(encoding, OwnerEncoding::Bytes) {
+        project::compare(
+            native
+                .get("currency_owner_encoding")
+                .ok_or("byte encoding")?,
+            &json!("bytes-v1"),
+        )?;
+    }
     let prefix = baseline_ids(&native)?;
     let mut orders = vec![(0..sources.len()).collect::<Vec<_>>()];
     if let Some(order) = reload {
@@ -302,7 +346,7 @@ fn run_case(
         std::fs::create_dir(&output)?;
         let controls = compare(
             &native_rows(load, prefix.len())?,
-            &rust_rows(&language, previous_custom.as_ref()),
+            &rust_rows(&language, previous_custom.as_ref(), encoding)?,
             &output,
         )?;
         compare_lifecycle(
@@ -312,12 +356,13 @@ fn run_case(
             &prefix,
             &control,
             &output,
+            encoding,
         )?;
         let fallback = previous_custom
             .as_ref()
             .map_or_else(CurrencyState::default, CurrencyState::with_custom);
         let currency = language.currency.as_ref().unwrap_or(&fallback);
-        let rust_final = state(currency, &table(&language.strings, selected));
+        let rust_final = state(currency, &table(&language.strings, selected), encoding)?;
         project::compare(
             &json!({"owners":load.get("owners"),"pending":load.get("pending"),"strings":load.get("strings")}),
             &rust_final,
@@ -339,26 +384,29 @@ fn run_case(
 #[test]
 #[ignore = "requires actual original currency scheduler and fresh absolute artifacts"]
 fn original_currency_load_matrix() -> Result {
-    run_cases(&expanded::cases()?)
+    run_cases(&expanded::cases()?, OwnerEncoding::Text)
 }
 
 #[test]
 #[ignore = "bounded pilot: one original load then one two-load process, not full matrix"]
 fn original_currency_load_pilot() -> Result {
-    run_cases(cases()?.get(..2).ok_or("pilot cases")?)
+    run_cases(cases()?.get(..2).ok_or("pilot cases")?, OwnerEncoding::Text)
 }
 
 #[test]
 #[ignore = "remaining three pilot cases, not expanded currency admission"]
 fn original_currency_remaining_pilot() -> Result {
-    run_cases(cases()?.get(2..).ok_or("remaining pilot cases")?)
+    run_cases(
+        cases()?.get(2..).ok_or("remaining pilot cases")?,
+        OwnerEncoding::Text,
+    )
 }
 
-fn run_cases(cases: &[Case]) -> Result {
+pub(super) fn run_cases(cases: &[Case], encoding: OwnerEncoding) -> Result {
     let (root, directory, oracle, pack) = setup()?;
     let mut summary = Vec::new();
     for (name, sources, reload) in cases {
-        summary.push(json!({"case":name,"loads":run_case(&root,&directory.join(name),&oracle,&pack,sources,reload.as_deref())?}));
+        summary.push(json!({"case":name,"loads":run_case(&root,&directory.join(name),&oracle,&pack,sources,reload.as_deref(),encoding)?}));
     }
     std::fs::write(
         directory.join("summary.json"),

@@ -6,6 +6,23 @@ use std::{
 };
 pub(super) type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
+pub(super) fn legacy_owner(owner: &super::load_currency::CurrencyOwner) -> Result<Value> {
+    Ok(
+        json!({"rate":owner.rate,"separator":owner.separator,"to_euro":owner.to_euro,
+        "prefix":std::str::from_utf8(&owner.prefix)?,"suffix":std::str::from_utf8(&owner.suffix)?,
+        "code":owner.code,"symbol_pos":owner.symbol_pos,"name":owner.name}),
+    )
+}
+
+pub(super) fn legacy_owners(owners: &[super::load_currency::CurrencyOwner]) -> Result<Value> {
+    Ok(json!(
+        owners
+            .iter()
+            .map(legacy_owner)
+            .collect::<Result<Vec<_>>>()?
+    ))
+}
+
 pub(super) fn setup() -> Result<(PathBuf, PathBuf, String, Vec<u8>)> {
     for name in [
         "OTTD_REPLAY_PATH",

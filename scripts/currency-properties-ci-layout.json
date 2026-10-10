@@ -1,35 +1,79 @@
 {
-  "verified_native_corpus": true,
   "api": {
     "summary": [
       {
-        "case": "all-owner-indices",
-        "controls": 118354,
-        "operations": 258
+        "case": "indices-rate",
+        "controls": 281089,
+        "operations": 512
       },
       {
-        "case": "all-string-mappings",
-        "controls": 67140,
-        "operations": 4
+        "case": "indices-options",
+        "controls": 281089,
+        "operations": 512
       },
       {
-        "case": "ordered-writes",
-        "controls": 3110,
+        "case": "indices-prefix",
+        "controls": 310104,
+        "operations": 512
+      },
+      {
+        "case": "indices-suffix",
+        "controls": 277665,
+        "operations": 512
+      },
+      {
+        "case": "indices-euro",
+        "controls": 281089,
+        "operations": 512
+      },
+      {
+        "case": "extended-indices",
+        "controls": 23082,
+        "operations": 40
+      },
+      {
+        "case": "rate-boundaries",
+        "controls": 7138,
+        "operations": 13
+      },
+      {
+        "case": "euro-boundaries",
+        "controls": 7687,
+        "operations": 14
+      },
+      {
+        "case": "options-bytes",
+        "controls": 281089,
+        "operations": 512
+      },
+      {
+        "case": "options-ignored-bits",
+        "controls": 8785,
+        "operations": 16
+      },
+      {
+        "case": "symbols-single-byte",
+        "controls": 280573,
+        "operations": 512
+      },
+      {
+        "case": "symbols-utf8",
+        "controls": 29756,
+        "operations": 54
+      },
+      {
+        "case": "reader-bounds",
+        "controls": 122101,
+        "operations": 222
+      },
+      {
+        "case": "custom-reset-values",
+        "controls": 4409,
         "operations": 8
-      },
-      {
-        "case": "reserve-bounds",
-        "controls": 2257,
-        "operations": 6
-      },
-      {
-        "case": "custom-reset",
-        "controls": 3419,
-        "operations": 9
       }
     ],
     "cases": {
-      "all-owner-indices": {
+      "indices-rate": {
         "paths": [
           "argv.json",
           "config.cfg",
@@ -60,18 +104,18 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "45e4423af76c05278022b1ec15f1d9391e77d6608059688db82bb0634dfd345c",
+        "manifest_sha256": "aa9c8d500a3704713e9d61c220d46b4f352def400a8ab0d067a40196679af73f",
         "inputs": {
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "4cba5fc8fab4285a2ad9fb48b303527cf992ed094531ff17b7497adbc38ef324",
+        "native_observables_sha256": "9038e19e73cd635259faa3c049938ed0b76007ee30cb38f001089b836f4157ee",
         "coverage": {
-          "operations": 258,
-          "controls": 118354
+          "operations": 512,
+          "controls": 281089
         }
       },
-      "all-string-mappings": {
+      "indices-options": {
         "paths": [
           "argv.json",
           "config.cfg",
@@ -102,18 +146,18 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "36385a189169499859d287881a61c7f016e39b933ba18f6f72fcb1d8bf911c9e",
+        "manifest_sha256": "16a3e5ed04244ca6b39f359e11e21f5fe369e19168bffea6878e7f8bb8f6c67d",
         "inputs": {
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "936d5d0ccfedac1be7d1a6c1c79f30383333dbe59392347c9e999310196fa478",
+        "native_observables_sha256": "9d8eaca074a8e5037a4846056b8b34e4087ed5ba746e80ac5f1c21cfe84effd3",
         "coverage": {
-          "operations": 4,
-          "controls": 67140
+          "operations": 512,
+          "controls": 281089
         }
       },
-      "ordered-writes": {
+      "indices-prefix": {
         "paths": [
           "argv.json",
           "config.cfg",
@@ -144,99 +188,477 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "9d0a9c29d811ec9cbf9c07ba4fc4f0bb7f98ace2107998435444dfb4202664b4",
+        "manifest_sha256": "9225674c1054eee2ebbc1a6362e3608ea69f2a5ad937361c36cdf37dd5b9952e",
         "inputs": {
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "a8e5d20b39927c58b20add62c374fbd065bdd077b2c508e792f8e2fda1580e24",
+        "native_observables_sha256": "16baa0bd7af15e5facdfa4a3250592879bebe746caab92fd60aa27c1ef9b8341",
+        "coverage": {
+          "operations": 512,
+          "controls": 310104
+        }
+      },
+      "indices-suffix": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "83f31f2d30620028de8e8c01bce3ae9964985cf471457264b009a87f1c030952",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "a5df9fc986be93285b5cfb5e1bd71b760a35b00a51e03ee82950ea9f630c0879",
+        "coverage": {
+          "operations": 512,
+          "controls": 277665
+        }
+      },
+      "indices-euro": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "256d229bffb09f773d3133f47233b5856360c997d839c2dc3f1d7f4ad3ef4db1",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "34ca9c22bde9a65cd827b15b9b67308fd481a187c6865fe5c530898d30a14614",
+        "coverage": {
+          "operations": 512,
+          "controls": 281089
+        }
+      },
+      "extended-indices": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "f453c4d7a83dcbdeeeccf52cc7febb86a100d5d2fe61c20d1d762236af35b473",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "6554610ec0364a64a66aa01bb98baf1b99f7cd85240ae864d66797c5277f3bd4",
+        "coverage": {
+          "operations": 40,
+          "controls": 23082
+        }
+      },
+      "rate-boundaries": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "b21f3d05f410bf4c00adc9874992d92ac46fa4565cdd1e18f5dd88fe18f8d4ad",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "6c8a006ae06fda7b82243f191e919a2560e87703972912e918a323b8f1bac128",
+        "coverage": {
+          "operations": 13,
+          "controls": 7138
+        }
+      },
+      "euro-boundaries": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "2fa251f4421391ea0f6faaf6b6ca3dba14840a76ba0fa36af3346d8a9e721beb",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "79c91cd90759c8505dc43bb3b6a66cbbb9a3181d9556f9bf86c572719cd884e9",
+        "coverage": {
+          "operations": 14,
+          "controls": 7687
+        }
+      },
+      "options-bytes": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "3fedef265ba54d9a2affdd29faa47e1b00bf5454a5a158b0d6458ef32a45023d",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "9e86d8afd4dbfff29ff19c0c6fbce690c033cdef26335190f655c646d451a17d",
+        "coverage": {
+          "operations": 512,
+          "controls": 281089
+        }
+      },
+      "options-ignored-bits": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "0484ebd28824b413fb0e2aaabb384ead7386a86b9848dc75c4dc96b20444af8f",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "545c48f5c53b5c93f2e39c110882649facb6e011fa5135c910a0bb99e545a50d",
+        "coverage": {
+          "operations": 16,
+          "controls": 8785
+        }
+      },
+      "symbols-single-byte": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "167ef2a371c96375c7c5785d28d38bc7795483d615ce810e7b8c1507ae4f93c7",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "834cc7f840dd8b1eb0d713292982b766695808440763411bd7203aafde303b8c",
+        "coverage": {
+          "operations": 512,
+          "controls": 280573
+        }
+      },
+      "symbols-utf8": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "f16fbf6213a734410f1966a659966d5287455e62b3d336cb896c86f8f87a80d4",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "b87f3e06a6c1736659b238fd5bfd8488fd1f04366421a350699494f9e96d067f",
+        "coverage": {
+          "operations": 54,
+          "controls": 29756
+        }
+      },
+      "reader-bounds": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "2d1d36226774ad95b97382e0317c3c2e5b79fa99f38bd681d4f8e5bf8cf0b184",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "721ccb0aa186d6449a4693a0320cbd74364a282e21da1ebb5190b43037b95e4d",
+        "coverage": {
+          "operations": 222,
+          "controls": 122101
+        }
+      },
+      "custom-reset-values": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "controls.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "rust.json",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "ef49a832df9175b9a9b3ee4f6f34eab2a90491961a735b1f93bb1e02ea7dddee",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "2398ad07f2cc16b76bd4296fa9d965e7cab2544d3a8cb7f1983dc213203b24c4",
         "coverage": {
           "operations": 8,
-          "controls": 3110
-        }
-      },
-      "reserve-bounds": {
-        "paths": [
-          "argv.json",
-          "config.cfg",
-          "controls.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "rust.json",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "cea6e50f8442a1d4fd87a274c28c4a46cdbd3bd65b3f1132ae9d8a9add996972",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "9d987e17cdf368da0a7ae7bee9613c3318ae5857e171171015c2f7ddb351705a",
-        "coverage": {
-          "operations": 6,
-          "controls": 2257
-        }
-      },
-      "custom-reset": {
-        "paths": [
-          "argv.json",
-          "config.cfg",
-          "controls.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "rust.json",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "2b359d830cb7adcd74c45acb2971b8b31685ecc69951dd5bf48079e8b408acbd",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "4ba6ccfe0f8ccc6c20e4ed24b3c0f2422199fd0caeafc6f3a256501a05b05012",
-        "coverage": {
-          "operations": 9,
-          "controls": 3419
+          "controls": 4409
         }
       }
     }
@@ -244,61 +666,41 @@
   "load": {
     "summary": [
       {
+        "case": "single-v1",
+        "loads": [
+          {
+            "controls": 15602,
+            "events": 28,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "single-v2",
+        "loads": [
+          {
+            "controls": 15602,
+            "events": 28,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "packed-properties",
+        "loads": [
+          {
+            "controls": 6689,
+            "events": 12,
+            "load": 0
+          }
+        ]
+      },
+      {
         "case": "deferred-and-overwrite",
         "loads": [
           {
-            "controls": 12128,
-            "events": 32,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "reload-empty-custom-retained",
-        "loads": [
-          {
-            "controls": 7553,
-            "events": 20,
-            "load": 0
-          },
-          {
-            "controls": 1505,
-            "events": 4,
-            "load": 1
-          }
-        ]
-      },
-      {
-        "case": "reload-reordered",
-        "loads": [
-          {
-            "controls": 12128,
-            "events": 32,
-            "load": 0
-          },
-          {
-            "controls": 12133,
-            "events": 32,
-            "load": 1
-          }
-        ]
-      },
-      {
-        "case": "disabled-retained",
-        "loads": [
-          {
-            "controls": 9071,
-            "events": 24,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "wrapped-and-invalid",
-        "loads": [
-          {
-            "controls": 7547,
-            "events": 20,
+            "controls": 64913,
+            "events": 116,
             "load": 0
           }
         ]
@@ -307,68 +709,28 @@
         "case": "overwrite-reverse",
         "loads": [
           {
-            "controls": 10610,
+            "controls": 64913,
+            "events": 116,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "custom-bytes",
+        "loads": [
+          {
+            "controls": 15586,
             "events": 28,
             "load": 0
           }
         ]
       },
       {
-        "case": "missing-custom",
+        "case": "wrapped-and-invalid",
         "loads": [
           {
-            "controls": 4521,
-            "events": 12,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "builtin-unknown-empty",
-        "loads": [
-          {
-            "controls": 4541,
-            "events": 12,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "custom-callback-aliases",
-        "loads": [
-          {
-            "controls": 9128,
-            "events": 24,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "init-only-no-owner-write",
-        "loads": [
-          {
-            "controls": 3761,
-            "events": 10,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "empty-configured-files",
-        "loads": [
-          {
-            "controls": 1505,
-            "events": 4,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "zero-item-property",
-        "loads": [
-          {
-            "controls": 4513,
-            "events": 12,
+            "controls": 8910,
+            "events": 16,
             "load": 0
           }
         ]
@@ -377,63 +739,118 @@
         "case": "maximum-count-wrap",
         "loads": [
           {
-            "controls": 6311,
-            "events": 16,
+            "controls": 6685,
+            "events": 12,
             "load": 0
           }
         ]
       },
       {
-        "case": "malformed-invalid-owner",
+        "case": "zero-items-all-values",
         "loads": [
           {
-            "controls": 3761,
-            "events": 10,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "malformed-after-valid-record",
-        "loads": [
-          {
-            "controls": 4889,
-            "events": 13,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "repeated-custom-owner",
-        "loads": [
-          {
-            "controls": 13642,
-            "events": 36,
-            "load": 0
-          }
-        ]
-      },
-      {
-        "case": "same-local-distinct-grfid",
-        "loads": [
-          {
-            "controls": 10610,
+            "controls": 15597,
             "events": 28,
             "load": 0
           }
         ]
       },
       {
-        "case": "reload-same-config",
+        "case": "init-only-no-owner-write",
         "loads": [
           {
-            "controls": 6041,
-            "events": 16,
+            "controls": 17825,
+            "events": 32,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "malformed-reserve-valid-first",
+        "loads": [
+          {
+            "controls": 7242,
+            "events": 13,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "malformed-reserve-invalid-owner",
+        "loads": [
+          {
+            "controls": 5571,
+            "events": 10,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "disabled-retained",
+        "loads": [
+          {
+            "controls": 13381,
+            "events": 24,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "empty-configured-files",
+        "loads": [
+          {
+            "controls": 2229,
+            "events": 4,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "activation-truncated-prefix",
+        "loads": [
+          {
+            "controls": 11139,
+            "events": 20,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "activation-truncated-suffix",
+        "loads": [
+          {
+            "controls": 11141,
+            "events": 20,
+            "load": 0
+          }
+        ]
+      },
+      {
+        "case": "reload-same",
+        "loads": [
+          {
+            "controls": 64913,
+            "events": 116,
             "load": 0
           },
           {
-            "controls": 6041,
-            "events": 16,
+            "controls": 64520,
+            "events": 116,
+            "load": 1
+          }
+        ]
+      },
+      {
+        "case": "reload-reordered",
+        "loads": [
+          {
+            "controls": 64913,
+            "events": 116,
+            "load": 0
+          },
+          {
+            "controls": 64520,
+            "events": 116,
             "load": 1
           }
         ]
@@ -442,13 +859,13 @@
         "case": "reload-remove-first",
         "loads": [
           {
-            "controls": 10610,
-            "events": 28,
+            "controls": 64913,
+            "events": 116,
             "load": 0
           },
           {
-            "controls": 6041,
-            "events": 16,
+            "controls": 33270,
+            "events": 60,
             "load": 1
           }
         ]
@@ -457,19 +874,196 @@
         "case": "reload-remove-second",
         "loads": [
           {
-            "controls": 10610,
-            "events": 28,
+            "controls": 64913,
+            "events": 116,
             "load": 0
           },
           {
-            "controls": 6041,
-            "events": 16,
+            "controls": 33270,
+            "events": 60,
+            "load": 1
+          }
+        ]
+      },
+      {
+        "case": "reload-empty",
+        "loads": [
+          {
+            "controls": 64913,
+            "events": 116,
+            "load": 0
+          },
+          {
+            "controls": 2213,
+            "events": 4,
             "load": 1
           }
         ]
       }
     ],
     "cases": {
+      "single-v1": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "63498d5a8e94d3e04226aff89f830cd5da9ced9809cd30f06d0b5221d82d8748",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "327e15ba0fd8be8d0105fc57dd14837f18c705d11c7095ed2da2028cd6a33f73",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 15602,
+              "lifecycle_controls": 2223
+            }
+          ]
+        }
+      },
+      "single-v2": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "9316fd5c22c56365bbca87a4786c1528a46bb306672da55b24295c284455b602",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "778deab70a1237b7c51d4afad57225fcfad87639c5d38c38c5f8cbf70c1ddf4c",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 15602,
+              "lifecycle_controls": 2223
+            }
+          ]
+        }
+      },
+      "packed-properties": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "fdf7db6c04352e3b2bec38ce7c04783db2928e4a1691b8718f1f9270f7513392",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "0539c58571b574062938e70016de116b1a1f0d80e3529b4b01da26322b0d81fe",
+        "coverage": {
+          "loads": [
+            {
+              "events": 12,
+              "controls": 6689,
+              "lifecycle_controls": 2223
+            }
+          ]
+        }
+      },
       "deferred-and-overwrite": {
         "paths": [
           "00000007.grf",
@@ -508,27 +1102,677 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "66f2ee1304bf2a184c64c050198886dc7dcefb5a2cf50247fb0eb0a739a37b0c",
+        "manifest_sha256": "41a830be47709a0c4a70d8c8d51a7ed4c6dadbc4e05569e30a953b1ae9cc9106",
         "inputs": {
-          "00000008.grf": "6101e19587792f4310ec1b72261f2f00bf24658ca63e015d3638506b3e20a1ef",
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "7928475e8d0a9ffa5a8523bff53c831f2d5c910506033f19830111f5c84848de",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "cc6095b57fb244b2f0deb1c7d40258210ffe64e85dd6fec23a43bc384fb44eb8",
+        "native_observables_sha256": "9ca51de70b83d8afd0f119f548a8abccac8383524916b0b3ca962cfa2bd26698",
         "coverage": {
           "loads": [
             {
-              "events": 32,
-              "controls": 12128,
-              "lifecycle_controls": 2744
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
             }
           ]
         }
       },
-      "reload-empty-custom-retained": {
+      "overwrite-reverse": {
         "paths": [
           "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "8b41817241ccbc9491715b9b4d908e427ae1b68b9f5c2ab194efdb08fa002145",
+        "inputs": {
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "9afd7d51440f8575cbc605dc71a5ad03a569ecfc27d5dc439be4035113023524",
+        "coverage": {
+          "loads": [
+            {
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
+            }
+          ]
+        }
+      },
+      "custom-bytes": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "1cf66b677721d5b0ff7285d14cc269af1c388df46e37167d7872bfd677c7a391",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "8b5da9f6efbe31e14468d024d8c0a13acb2353d50a24c2a97be88cd782562557",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 15586,
+              "lifecycle_controls": 2205
+            }
+          ]
+        }
+      },
+      "wrapped-and-invalid": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "2ffcf88249f8f22c6d9858e00f23c86a3f02f47d93f9f7c1a6210f2ea318dfb7",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "e740d5a4fd0c2d522f9e4301a1dd433ba56e1bcd3741bce26909d8978339fdc6",
+        "coverage": {
+          "loads": [
+            {
+              "events": 16,
+              "controls": 8910,
+              "lifecycle_controls": 2214
+            }
+          ]
+        }
+      },
+      "maximum-count-wrap": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "cc1a47be68faa4b8068ca477706b34afb481cd960588cdff5d6a6c565937560a",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "8ba567afd8c587eccbecb0d60977b472e5ae560d93955448fcbeaf3ed62c4ac2",
+        "coverage": {
+          "loads": [
+            {
+              "events": 12,
+              "controls": 6685,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "zero-items-all-values": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "79de52b0d90a1c8673df100859d818fd6e3060b6d37d123cc4fd7855bda94196",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "79d59b9090f8c78e42515689d908139a2bfe02a627a985341214b62ff93a705a",
+        "coverage": {
+          "loads": [
+            {
+              "events": 28,
+              "controls": 15597,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "init-only-no-owner-write": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "b73aafba5631ed6cc1323d4df84b19e90795ee0191614f0a5b8b3246822e8b91",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "8aad7609dc3d7bc9d6728b414c0ae97f0898888c994e79c8f470d499c06adbb7",
+        "coverage": {
+          "loads": [
+            {
+              "events": 32,
+              "controls": 17825,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "malformed-reserve-valid-first": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "757b3787997d34656c98c28b72cffecaf172510cc7dc6c8661af4a4cda1a2c42",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "777d826fcf46779d68ab71c67aebe55d6ce8a034bc5a033ec29dc22f2feb28fd",
+        "coverage": {
+          "loads": [
+            {
+              "events": 13,
+              "controls": 7242,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "malformed-reserve-invalid-owner": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "8ca79017e265a44beac3084e5e066840de4e0ef0efb85885e1c62a39881a8bdc",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "122caf1c01e2133f62194feecd5287667f43b784e973e84072bdda532efa2649",
+        "coverage": {
+          "loads": [
+            {
+              "events": 10,
+              "controls": 5571,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "disabled-retained": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "41a830be47709a0c4a70d8c8d51a7ed4c6dadbc4e05569e30a953b1ae9cc9106",
+        "inputs": {
+          "00000008.grf": "9c0c7dcd7e1aad07a81a8be80e09ee340d6205e96ce7749a9427215492d7745c",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "3b3f7582d79d5a2c385e2145d3c5736ea7319d82be743ed58e5c0489661948c9",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "7e09da856dc683338aa85185457c77a23e75b2d17a507a70663867a8f8108759",
+        "coverage": {
+          "loads": [
+            {
+              "events": 24,
+              "controls": 13381,
+              "lifecycle_controls": 2226
+            }
+          ]
+        }
+      },
+      "empty-configured-files": {
+        "paths": [
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "0319982bfff5263051a8d83e8bf243bcc5474958dd32fb269eee3a8362a1dca4",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "80ab5e49016469cb653b6a51097711f6447a86c998449d4651fb102b52b5fc57",
+        "coverage": {
+          "loads": [
+            {
+              "events": 4,
+              "controls": 2229,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "activation-truncated-prefix": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "f0998ebe8be908e2394438e06d7a4e6d53693bac64aa2ff4250a6a115b6cb3a7",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "19ce4818f153060d23743d02df8658fc204798d00ee29de0fb544d9047225e17",
+        "coverage": {
+          "loads": [
+            {
+              "events": 20,
+              "controls": 11139,
+              "lifecycle_controls": 2214
+            }
+          ]
+        }
+      },
+      "activation-truncated-suffix": {
+        "paths": [
+          "00000007.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "926ccccce5db08e9c4d9d43902ccc3983eb613865ae64ee0fa01affb4bdaefd9",
+        "inputs": {
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "b7291cb4312a68df3982ce0fe7c3c05052da13f091b6357da94d57195241463e",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "923f6c01a56940b340deb4ea24d4d49d61d1bbd289d290963834815e251033fb",
+        "coverage": {
+          "loads": [
+            {
+              "events": 20,
+              "controls": 11141,
+              "lifecycle_controls": 2217
+            }
+          ]
+        }
+      },
+      "reload-same": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
           "argv.json",
           "config.cfg",
           "load-0/controls.json",
@@ -569,24 +1813,25 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "b659717bbc173a7e20901f1fdce6642804d08148bef781d42b1061b5d44f0414",
+        "manifest_sha256": "6ae8eb24b637f7b4438f877e1fafb70e0158bd68ebdcb8e0a1dee6fa48e3d944",
         "inputs": {
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "7928475e8d0a9ffa5a8523bff53c831f2d5c910506033f19830111f5c84848de",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "b4e612126af3ef02476b8104cbdc175dfd679ede35691a0811a2a0e3bcb81396",
+        "native_observables_sha256": "2ffdc12d4a3ab4ca67264abfb6d26aa93f3e7d2d9cb66217916a4e188484ab6a",
         "coverage": {
           "loads": [
             {
-              "events": 20,
-              "controls": 7553,
-              "lifecycle_controls": 2296
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
             },
             {
-              "events": 4,
-              "controls": 1505,
-              "lifecycle_controls": 1493
+              "events": 116,
+              "controls": 64520,
+              "lifecycle_controls": 4581
             }
           ]
         }
@@ -635,849 +1880,25 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "1e827152cda9c37a36e4f2e65c8f4982c528437ceb1c1535ddee3c65edbdaef1",
+        "manifest_sha256": "85afb6d5abba53d8a7eca47f44d3e92a3a3a86c33b2922c0df2c1cef3153d022",
         "inputs": {
-          "00000008.grf": "6101e19587792f4310ec1b72261f2f00bf24658ca63e015d3638506b3e20a1ef",
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "7928475e8d0a9ffa5a8523bff53c831f2d5c910506033f19830111f5c84848de",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "55d19208c7baa50d66ba49a0d6b1177661684878210102279cfa0640f094701c",
+        "native_observables_sha256": "f3323fe8a275873dacf6c37f277a36aee9296472bf7c171bffbb521d2569040d",
         "coverage": {
           "loads": [
             {
-              "events": 32,
-              "controls": 12128,
-              "lifecycle_controls": 2744
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
             },
             {
-              "events": 32,
-              "controls": 12133,
-              "lifecycle_controls": 2744
-            }
-          ]
-        }
-      },
-      "disabled-retained": {
-        "paths": [
-          "00000007.grf",
-          "00000008.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "66f2ee1304bf2a184c64c050198886dc7dcefb5a2cf50247fb0eb0a739a37b0c",
-        "inputs": {
-          "00000008.grf": "2def79f143eb228cb010dfe3b0d6f3c7a0efdc8149ee42fbef1aabd8ee6e4345",
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "b15e56152cfc1ec02c94f3d9d325c17c8f092acccc8a322810e43ecd20b61aa3",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "228479ba1c9ca1f0b1ad1036670b85d57da4d975b98284f9fed6358a1094063d",
-        "coverage": {
-          "loads": [
-            {
-              "events": 24,
-              "controls": 9071,
-              "lifecycle_controls": 1906
-            }
-          ]
-        }
-      },
-      "wrapped-and-invalid": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "80a711a92bb867ad34d0a596247c55bda89a1c65513b1689df7e2d117b650136",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "f35aabd97fd514ec30558c720797969c556be510eeada72a0bcf59486c1dcff8",
-        "coverage": {
-          "loads": [
-            {
-              "events": 20,
-              "controls": 7547,
-              "lifecycle_controls": 1906
-            }
-          ]
-        }
-      },
-      "overwrite-reverse": {
-        "paths": [
-          "00000007.grf",
-          "00000008.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "fb36a1287d915a1ff3d6f87c0c79a640a19fb94cb54f4efbe3cfc114027e4f8b",
-        "inputs": {
-          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "7ae1a7e2da67542dd945d8acd7fa2d3b96a922f51df172f6ec46be1bc03232d4",
-        "coverage": {
-          "loads": [
-            {
-              "events": 28,
-              "controls": 10610,
-              "lifecycle_controls": 2341
-            }
-          ]
-        }
-      },
-      "missing-custom": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "e75b7d3ead5632aba98267413c230dae1b9432aef5c5a43aa3d907ce9219004d",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "9258d6f16ec9ecc16a0c1411ac9e2e0f713a6fa0e46f11e45f2dd36d655fb4e6",
-        "coverage": {
-          "loads": [
-            {
-              "events": 12,
-              "controls": 4521,
-              "lifecycle_controls": 2251
-            }
-          ]
-        }
-      },
-      "builtin-unknown-empty": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "3392fcb51d587ecebee2f833378377b9069d6fd3ec5bcd8a4380efde1d5f91cc",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "13473f90d027cdda9fd991cb20e32475d9f207e698330c59ba477c26da7c8b91",
-        "coverage": {
-          "loads": [
-            {
-              "events": 12,
-              "controls": 4541,
-              "lifecycle_controls": 4216
-            }
-          ]
-        }
-      },
-      "custom-callback-aliases": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "a378417791082c1fd939e534c2398cef29cd541ad075a6853b57f4bc9d4bafbe",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "b2c516afd57a466baf5d2ab525f266b473c5441b1f655cb1c4493fb5c76e41da",
-        "coverage": {
-          "loads": [
-            {
-              "events": 24,
-              "controls": 9128,
-              "lifecycle_controls": 3151
-            }
-          ]
-        }
-      },
-      "init-only-no-owner-write": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "be3ff5e0630aab68232c7d40c8cd1cf341ce54be95e269ffb428146e28e67e7b",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "01fa907bcd1d0e27d12b651f626690d2329830cf01e41b0053288871660741c0",
-        "coverage": {
-          "loads": [
-            {
-              "events": 10,
-              "controls": 3761,
-              "lifecycle_controls": 1493
-            }
-          ]
-        }
-      },
-      "empty-configured-files": {
-        "paths": [
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "38303cdf650542ced44bdd2edb36c8f5b4ce9d90f019440eede23f868285c647",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "50e4fdc6a9362520278d7f67781b8976a0a7bbb9af323e7d31180286e0842941",
-        "coverage": {
-          "loads": [
-            {
-              "events": 4,
-              "controls": 1505,
-              "lifecycle_controls": 1493
-            }
-          ]
-        }
-      },
-      "zero-item-property": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "75724c6d94fa247960997751cbd163be65ece556efbcbc207f62ff4a544c1ab0",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "326c028af4ef2b474767b2c20cbfd587cdc4dcc293a0f8294e3b3f02117a2ba2",
-        "coverage": {
-          "loads": [
-            {
-              "events": 12,
-              "controls": 4513,
-              "lifecycle_controls": 1493
-            }
-          ]
-        }
-      },
-      "maximum-count-wrap": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "e6a4e3283f1baf737fb59c173b9d200c8da61ca23a65ff476df2e9c2b749cdb3",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "3db0e0f9223f00269e9952909f3bb37c727780e84e2bcffc0549e7abcb0f3b32",
-        "coverage": {
-          "loads": [
-            {
-              "events": 16,
-              "controls": 6311,
-              "lifecycle_controls": 23416
-            }
-          ]
-        }
-      },
-      "malformed-invalid-owner": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "5f1a552c8d0c01c13a183e762e345c3162c7595e92f57c6ec4639d3109883626",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "77f5868f2061af5c016532c7faa7fe32b0d20886a95d3248dff9cb8d6fa5961a",
-        "coverage": {
-          "loads": [
-            {
-              "events": 10,
-              "controls": 3761,
-              "lifecycle_controls": 1493
-            }
-          ]
-        }
-      },
-      "malformed-after-valid-record": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "1bcc8bdd9f86e83338fb1a8cc499b896d108036e2c450daada4d78dbfc0ab404",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "36323bcd82e54c2ba5bfe11a0a195ee5638c363873a5d867bfe7cdf4ed18028f",
-        "coverage": {
-          "loads": [
-            {
-              "events": 13,
-              "controls": 4889,
-              "lifecycle_controls": 1493
-            }
-          ]
-        }
-      },
-      "repeated-custom-owner": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "6359b656d61df573a16f0a8bc17288020bd0cdbef21cfbfcde32bf14888a5f6c",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "3e7b008b602d63ae1e6e530d6b9dd3bfba963d18ac2c0deba25d5b43a25a054f",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "e09a7c36647e416350902507aa3a57d33e2cac332f99c019729b1b43828f1aa9",
-        "coverage": {
-          "loads": [
-            {
-              "events": 36,
-              "controls": 13642,
-              "lifecycle_controls": 3562
-            }
-          ]
-        }
-      },
-      "same-local-distinct-grfid": {
-        "paths": [
-          "00000007.grf",
-          "00000008.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "66f2ee1304bf2a184c64c050198886dc7dcefb5a2cf50247fb0eb0a739a37b0c",
-        "inputs": {
-          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "12013adf0acda100003fb85ea8dbee36e81189217c23fd5d4473028a3f0b6d93",
-        "coverage": {
-          "loads": [
-            {
-              "events": 28,
-              "controls": 10610,
-              "lifecycle_controls": 2341
-            }
-          ]
-        }
-      },
-      "reload-same-config": {
-        "paths": [
-          "00000007.grf",
-          "argv.json",
-          "config.cfg",
-          "load-0/controls.json",
-          "load-0/lifecycle/controls.json",
-          "load-0/lifecycle/rust.json",
-          "load-0/rust-control.json",
-          "load-0/rust-final.json",
-          "load-0/rust.json",
-          "load-1/controls.json",
-          "load-1/lifecycle/controls.json",
-          "load-1/lifecycle/rust.json",
-          "load-1/rust-control.json",
-          "load-1/rust-final.json",
-          "load-1/rust.json",
-          "manifest.json",
-          "native/baseline-inputs.sha256",
-          "native/control.json",
-          "native/currency.json",
-          "native/inputs.sha256",
-          "native/invocation.txt",
-          "native/language-inputs.sha256",
-          "native/language.json",
-          "native/openttd.cfg",
-          "native/save/autosave/exit.sav",
-          "native/stderr.log",
-          "native/stdout.log",
-          "pack/input.lng",
-          "status.json",
-          "stderr.log",
-          "stdout.log"
-        ],
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$CASE/config.cfg",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "manifest_sha256": "0b36af572dccd979acc3651df2565c70d1a399dbdacd482174c1eac4cb44ca4e",
-        "inputs": {
-          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
-          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-        },
-        "native_observables_sha256": "d6eefcf2134a64913f851a1362228c090a9669acb18959c48aad3b0e08ca5ef5",
-        "coverage": {
-          "loads": [
-            {
-              "events": 16,
-              "controls": 6041,
-              "lifecycle_controls": 1906
-            },
-            {
-              "events": 16,
-              "controls": 6041,
-              "lifecycle_controls": 1906
+              "events": 116,
+              "controls": 64520,
+              "lifecycle_controls": 4581
             }
           ]
         }
@@ -1526,25 +1947,25 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "c6a455f3e0c472e9954d6c741b16c5f40bb5cb5f78f6847199b1799733b4883d",
+        "manifest_sha256": "ea0334e00c43bbf8be3b4313affdb7d43e67174bf13a59e5f007e41f19a1d0f9",
         "inputs": {
-          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "01b1c155a12497a07b53aef90c62437b0d5cf3b7b08d50a81a713a23dec0712d",
+        "native_observables_sha256": "aa96f77d8bcbcbdb86f59421ff7b2e6b3ff39dca22e48c10a60e3f8b73a62f56",
         "coverage": {
           "loads": [
             {
-              "events": 28,
-              "controls": 10610,
-              "lifecycle_controls": 2341
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
             },
             {
-              "events": 16,
-              "controls": 6041,
-              "lifecycle_controls": 1906
+              "events": 60,
+              "controls": 33270,
+              "lifecycle_controls": 3368
             }
           ]
         }
@@ -1593,25 +2014,92 @@
           "-P",
           "$ROOT/scripts/check-grf-currency-reference.cmake"
         ],
-        "manifest_sha256": "829cde438279447626064a1c4be804963fe6e4a2e2b6585ae0685b9e7a129c68",
+        "manifest_sha256": "a682baaf0d637af69f5acd8e47e19f23a74c1b7656949952f45168c9a9a57ffe",
         "inputs": {
-          "00000008.grf": "5e08e2bbce1f254e82f26b0870a64701fd2d16919437c92a6602ec54e86b9ec9",
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
           "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
-          "00000007.grf": "f45b1e6e4d05720ff8755597a0687d90ca1e74754c506a9b614c323bbcdd1238",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
           "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
         },
-        "native_observables_sha256": "2c7d5bbe33017e344b51daacb140d654449e8ef3b20c3ca341188db820d5fe4d",
+        "native_observables_sha256": "11f33c994183bf8e19cbeee565253c493ed22c64eb9fbca3526074f20d929d6c",
         "coverage": {
           "loads": [
             {
-              "events": 28,
-              "controls": 10610,
-              "lifecycle_controls": 2341
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
             },
             {
-              "events": 16,
-              "controls": 6041,
-              "lifecycle_controls": 1906
+              "events": 60,
+              "controls": 33270,
+              "lifecycle_controls": 3368
+            }
+          ]
+        }
+      },
+      "reload-empty": {
+        "paths": [
+          "00000007.grf",
+          "00000008.grf",
+          "argv.json",
+          "config.cfg",
+          "load-0/controls.json",
+          "load-0/lifecycle/controls.json",
+          "load-0/lifecycle/rust.json",
+          "load-0/rust-control.json",
+          "load-0/rust-final.json",
+          "load-0/rust.json",
+          "load-1/controls.json",
+          "load-1/lifecycle/controls.json",
+          "load-1/lifecycle/rust.json",
+          "load-1/rust-control.json",
+          "load-1/rust-final.json",
+          "load-1/rust.json",
+          "manifest.json",
+          "native/baseline-inputs.sha256",
+          "native/control.json",
+          "native/currency.json",
+          "native/inputs.sha256",
+          "native/invocation.txt",
+          "native/language-inputs.sha256",
+          "native/language.json",
+          "native/openttd.cfg",
+          "native/save/autosave/exit.sav",
+          "native/stderr.log",
+          "native/stdout.log",
+          "pack/input.lng",
+          "status.json",
+          "stderr.log",
+          "stdout.log"
+        ],
+        "argv": [
+          "-DORACLE=$ORACLE",
+          "-DRUN_DIR=$CASE/native",
+          "-DMANIFEST=$CASE/manifest.json",
+          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+          "-DCONFIG=$CASE/config.cfg",
+          "-P",
+          "$ROOT/scripts/check-grf-currency-reference.cmake"
+        ],
+        "manifest_sha256": "889ee81a5891a9b5c726596c0744f6ccb553cef514ddeab692134e79b833e307",
+        "inputs": {
+          "00000008.grf": "e16e164c628e51e49a2b6b8fae9010baff242018a0675442b92078048bc08e9e",
+          "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+          "00000007.grf": "a7dcc40e0c1e1f817316e670a431b8c64824a747480c6057a37f673d4165fe19",
+          "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+        },
+        "native_observables_sha256": "3121c950d423bdd15ce8773f8a33927ec37d28ddb02aa791cd313aba15679a79",
+        "coverage": {
+          "loads": [
+            {
+              "events": 116,
+              "controls": 64913,
+              "lifecycle_controls": 4585
+            },
+            {
+              "events": 4,
+              "controls": 2213,
+              "lifecycle_controls": 2201
             }
           ]
         }
@@ -1619,531 +2107,10 @@
     }
   },
   "guards": {
-    "menu": {
+    "encoding-false": {
       "paths": [
         "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "menu.cmake",
-        "native/openttd.cfg",
-        "native/save/autosave/exit.sav",
-        "native/stderr.log",
-        "native/stdout.log",
-        "pack/input.lng",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
-      ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$CASE/menu.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CONTROL_MANIFEST": "$CASE/manifest.json",
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "menu.cmake": "df4a2977ccb3ec671faeb7f34ce10d7a43e9c69a607b164727007f730f220643",
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 0,
-      "diagnostic": ""
-    },
-    "replay": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "pack/input.lng",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
-      ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json",
-          "OTTD_REPLAY_PATH": "$CASE/replay.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 1,
-      "diagnostic": "refuses replay or case subset"
-    },
-    "subset": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "pack/input.lng",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
-      ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_CASE": "subset",
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 1,
-      "diagnostic": "refuses replay or case subset"
-    },
-    "reused": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "pack/input.lng",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
-      ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 1,
-      "diagnostic": "run directory already exists"
-    },
-    "non-save": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "pack/input.lng",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
-      ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=GENERATE",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 1,
-      "diagnostic": "requires an explicit saved-game load"
-    },
-    "stale": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "pack/input.lng",
-        "stale-source/reference/.gitattributes",
-        "stale-source/reference/README.md",
-        "stale-source/reference/allocation.hpp",
-        "stale-source/reference/callback_company.hpp",
-        "stale-source/reference/callback_house.hpp",
-        "stale-source/reference/callback_industry.hpp",
-        "stale-source/reference/callback_industry_state.hpp",
-        "stale-source/reference/callback_station.hpp",
-        "stale-source/reference/callback_timer.hpp",
-        "stale-source/reference/callback_vehicle.hpp",
-        "stale-source/reference/callbacks.hpp",
-        "stale-source/reference/callbacks.json",
-        "stale-source/reference/check-snapshot.cmake",
-        "stale-source/reference/content.hpp",
-        "stale-source/reference/depot_runtime.hpp",
-        "stale-source/reference/gameplay.hpp",
-        "stale-source/reference/gameplay.json",
-        "stale-source/reference/gameplay.patch",
-        "stale-source/reference/grf_currency.hpp",
-        "stale-source/reference/grf_currency.patch",
-        "stale-source/reference/grf_currency_api.hpp",
-        "stale-source/reference/grf_currency_properties_api.hpp",
-        "stale-source/reference/grf_language.hpp",
-        "stale-source/reference/grf_language.patch",
-        "stale-source/reference/grf_language_catalog.hpp",
-        "stale-source/reference/grf_language_text.hpp",
-        "stale-source/reference/grf_load_context.hpp",
-        "stale-source/reference/grf_load_context.patch",
-        "stale-source/reference/grf_load_control.hpp",
-        "stale-source/reference/grf_load_control.patch",
-        "stale-source/reference/grf_metadata.hpp",
-        "stale-source/reference/grf_safety.hpp",
-        "stale-source/reference/grf_safety.patch",
-        "stale-source/reference/grf_scan.hpp",
-        "stale-source/reference/grf_strings.hpp",
-        "stale-source/reference/grf_strings.patch",
-        "stale-source/reference/grf_strings_api.hpp",
-        "stale-source/reference/order_fixture.hpp",
-        "stale-source/reference/order_fixture.patch",
-        "stale-source/reference/order_network.hpp",
-        "stale-source/reference/order_network.patch",
-        "stale-source/reference/order_state.hpp",
-        "stale-source/reference/order_state.patch",
-        "stale-source/reference/primitives.json",
-        "stale-source/reference/replay-format.json",
-        "stale-source/reference/replay.hpp",
-        "stale-source/reference/replay.patch",
-        "stale-source/reference/replay_commands.hpp",
-        "stale-source/reference/replay_cost.hpp",
-        "stale-source/reference/replay_fixture.hpp",
-        "stale-source/reference/replay_hooks.hpp",
-        "stale-source/reference/road_slope.hpp",
-        "stale-source/reference/road_slope.patch",
-        "stale-source/reference/runtime_road.hpp",
-        "stale-source/reference/runtime_road_fixture.hpp",
-        "stale-source/reference/runtime_road_fixture_tiles.hpp",
-        "stale-source/reference/snapshot.hpp",
-        "stale-source/reference/snapshot.patch",
-        "stale-source/reference/terrain.hpp",
-        "stale-source/reference/tree_fixture.hpp",
-        "stale-source/reference/tree_rating.hpp",
-        "stale-source/reference/tree_rating.patch",
-        "stale-source/reference/tree_rating_replay.hpp",
-        "stale-source/reference/world.hpp",
-        "stale-source/reference/world.patch",
-        "stale-source/reference/world_derived.hpp",
-        "stale-source/reference/world_fixture.hpp",
-        "stale-source/scripts/backup-enabled-sale-fixtures.json",
-        "stale-source/scripts/backup-enabled-sale-layout.json",
-        "stale-source/scripts/backup-sale-fixtures.json",
-        "stale-source/scripts/backup-sale-layout.json",
-        "stale-source/scripts/backup_enabled_sale_controls.py",
-        "stale-source/scripts/backup_enabled_sale_evidence.py",
-        "stale-source/scripts/backup_enabled_sale_guards.py",
-        "stale-source/scripts/backup_enabled_sale_provenance.py",
-        "stale-source/scripts/backup_sale_bindings.py",
-        "stale-source/scripts/backup_sale_controls.py",
-        "stale-source/scripts/backup_sale_evidence.py",
-        "stale-source/scripts/backup_sale_guards.py",
-        "stale-source/scripts/backup_sale_pair.py",
-        "stale-source/scripts/backup_sale_provenance.py",
-        "stale-source/scripts/backup_sale_run.py",
-        "stale-source/scripts/capture-grf-currency-properties.py",
-        "stale-source/scripts/check-backup-enabled-sale.py",
-        "stale-source/scripts/check-backup-sale.py",
-        "stale-source/scripts/check-callbacks.sh",
-        "stale-source/scripts/check-compatibility.sh",
-        "stale-source/scripts/check-content-reference.cmake",
-        "stale-source/scripts/check-contract.py",
-        "stale-source/scripts/check-depot-build.py",
-        "stale-source/scripts/check-depot-occupancy.py",
-        "stale-source/scripts/check-depot-removal.py",
-        "stale-source/scripts/check-gameplay-foundations.py",
-        "stale-source/scripts/check-grf-context-ci.py",
-        "stale-source/scripts/check-grf-control.py",
-        "stale-source/scripts/check-grf-currency-ci.py",
-        "stale-source/scripts/check-grf-currency-properties-ci.py",
-        "stale-source/scripts/check-grf-currency-reference.cmake",
-        "stale-source/scripts/check-grf-language-ci.py",
-        "stale-source/scripts/check-grf-language-reference.cmake",
-        "stale-source/scripts/check-grf-load-control-reference.cmake",
-        "stale-source/scripts/check-grf-metadata-reference.cmake",
-        "stale-source/scripts/check-grf-metadata.sh",
-        "stale-source/scripts/check-grf-safety-ci.py",
-        "stale-source/scripts/check-grf-safety-reference.cmake",
-        "stale-source/scripts/check-grf-scan-reference.cmake",
-        "stale-source/scripts/check-grf-strings-ci.py",
-        "stale-source/scripts/check-grf-strings-reference.cmake",
-        "stale-source/scripts/check-occupancy-ci.py",
-        "stale-source/scripts/check-order-state.py",
-        "stale-source/scripts/check-ordered-sale.py",
-        "stale-source/scripts/check-owned-restore.py",
-        "stale-source/scripts/check-purchase.sh",
-        "stale-source/scripts/check-replay-build.cmake",
-        "stale-source/scripts/check-replay-evidence.cmake",
-        "stale-source/scripts/check-replay-native.cmake",
-        "stale-source/scripts/check-replay.py",
-        "stale-source/scripts/check-replays.sh",
-        "stale-source/scripts/check-road-sale.sh",
-        "stale-source/scripts/check-road-slope-ci.py",
-        "stale-source/scripts/check-road-slope.py",
-        "stale-source/scripts/check-runtime-road-reference.cmake",
-        "stale-source/scripts/check-script-vm.py",
-        "stale-source/scripts/check-service.sh",
-        "stale-source/scripts/check-shared-restore.py",
-        "stale-source/scripts/check-simulation.sh",
-        "stale-source/scripts/check-snapshots.sh",
-        "stale-source/scripts/check-terrain.sh",
-        "stale-source/scripts/check-tree-terrain-ci.py",
-        "stale-source/scripts/check-world-builder.cmake",
-        "stale-source/scripts/check-world-fixture.cmake",
-        "stale-source/scripts/check-world-game.cmake",
-        "stale-source/scripts/check-world-reference.cmake",
-        "stale-source/scripts/check-world.py",
-        "stale-source/scripts/check-worlds.sh",
-        "stale-source/scripts/context-ci-layout.json",
-        "stale-source/scripts/context_ci_evidence.py",
-        "stale-source/scripts/context_ci_support.py",
-        "stale-source/scripts/contract_layouts.py",
-        "stale-source/scripts/contract_model.py",
-        "stale-source/scripts/contract_profiles.py",
-        "stale-source/scripts/contract_run.py",
-        "stale-source/scripts/contract_validate.py",
-        "stale-source/scripts/currency-ci-layout.json",
-        "stale-source/scripts/currency-properties-ci-layout.json",
-        "stale-source/scripts/currency-properties-guards.json",
-        "stale-source/scripts/currency_ci_baseline.py",
-        "stale-source/scripts/currency_ci_bindings.py",
-        "stale-source/scripts/currency_ci_capture.py",
-        "stale-source/scripts/currency_ci_compare.py",
-        "stale-source/scripts/currency_ci_evidence.py",
-        "stale-source/scripts/currency_ci_probes.py",
-        "stale-source/scripts/currency_ci_roster.py",
-        "stale-source/scripts/currency_properties_ci_archive.py",
-        "stale-source/scripts/currency_properties_ci_capture.py",
-        "stale-source/scripts/currency_properties_ci_evidence.py",
-        "stale-source/scripts/currency_properties_ci_guards.py",
-        "stale-source/scripts/currency_properties_ci_probes.py",
-        "stale-source/scripts/currency_properties_ci_roster.py",
-        "stale-source/scripts/currency_properties_ci_run.py",
-        "stale-source/scripts/depot-build-evidence-layout.json",
-        "stale-source/scripts/depot-removal-fixtures.json",
-        "stale-source/scripts/depot-removal-layout.json",
-        "stale-source/scripts/depot_build_archive.py",
-        "stale-source/scripts/depot_build_evidence.py",
-        "stale-source/scripts/depot_build_provenance.py",
-        "stale-source/scripts/depot_controls.py",
-        "stale-source/scripts/depot_evidence.py",
-        "stale-source/scripts/depot_removal_controls.py",
-        "stale-source/scripts/depot_removal_evidence.py",
-        "stale-source/scripts/depot_removal_pair.py",
-        "stale-source/scripts/depot_removal_provenance.py",
-        "stale-source/scripts/depot_removal_run.py",
-        "stale-source/scripts/depot_replay.py",
-        "stale-source/scripts/gameplay_foundations.py",
-        "stale-source/scripts/grf-control-layout.json",
-        "stale-source/scripts/grf-control-ruff.toml",
-        "stale-source/scripts/grf_control_archive.py",
-        "stale-source/scripts/grf_control_evidence.py",
-        "stale-source/scripts/grf_control_guards.py",
-        "stale-source/scripts/grf_control_provenance.py",
-        "stale-source/scripts/grf_control_run.py",
-        "stale-source/scripts/grf_metadata_evidence.py",
-        "stale-source/scripts/language-ci-layout.json",
-        "stale-source/scripts/language_ci_bindings.py",
-        "stale-source/scripts/language_ci_compare.py",
-        "stale-source/scripts/language_ci_evidence.py",
-        "stale-source/scripts/language_ci_probes.py",
-        "stale-source/scripts/level_replay.py",
-        "stale-source/scripts/native_contract.py",
-        "stale-source/scripts/native_contract_content.py",
-        "stale-source/scripts/native_contract_protocol.py",
-        "stale-source/scripts/occupancy-ci-layout.json",
-        "stale-source/scripts/occupancy_ci_evidence.py",
-        "stale-source/scripts/order-state-fixtures.json",
-        "stale-source/scripts/order-state-layout.json",
-        "stale-source/scripts/order_state_admission.py",
-        "stale-source/scripts/order_state_capture.py",
-        "stale-source/scripts/order_state_controls.py",
-        "stale-source/scripts/order_state_evidence.py",
-        "stale-source/scripts/order_state_fixtures.py",
-        "stale-source/scripts/order_state_network.py",
-        "stale-source/scripts/order_state_pair.py",
-        "stale-source/scripts/order_state_processes.py",
-        "stale-source/scripts/order_state_provenance.py",
-        "stale-source/scripts/ordered-sale-fixtures.json",
-        "stale-source/scripts/ordered-sale-layout.json",
-        "stale-source/scripts/ordered_sale_bindings.py",
-        "stale-source/scripts/ordered_sale_controls.py",
-        "stale-source/scripts/ordered_sale_evidence.py",
-        "stale-source/scripts/ordered_sale_pair.py",
-        "stale-source/scripts/ordered_sale_provenance.py",
-        "stale-source/scripts/ordered_sale_run.py",
-        "stale-source/scripts/owned-restore-fixtures.json",
-        "stale-source/scripts/owned-restore-layout.json",
-        "stale-source/scripts/owned-restore-mutations.json",
-        "stale-source/scripts/owned_restore_admission.py",
-        "stale-source/scripts/owned_restore_admission_test.py",
-        "stale-source/scripts/owned_restore_capacity.py",
-        "stale-source/scripts/owned_restore_capacity_test.py",
-        "stale-source/scripts/owned_restore_controls.py",
-        "stale-source/scripts/owned_restore_evidence.py",
-        "stale-source/scripts/owned_restore_exports.py",
-        "stale-source/scripts/owned_restore_freshness.py",
-        "stale-source/scripts/owned_restore_guards.py",
-        "stale-source/scripts/owned_restore_lifetime.py",
-        "stale-source/scripts/owned_restore_native_evidence.py",
-        "stale-source/scripts/owned_restore_pair.py",
-        "stale-source/scripts/owned_restore_prepare.py",
-        "stale-source/scripts/owned_restore_projection.py",
-        "stale-source/scripts/owned_restore_provenance.py",
-        "stale-source/scripts/owned_restore_run.py",
-        "stale-source/scripts/owned_restore_saved_state.py",
-        "stale-source/scripts/owned_restore_setup_evidence.py",
-        "stale-source/scripts/owned_restore_sources.py",
-        "stale-source/scripts/owned_restore_sources_test.py",
-        "stale-source/scripts/owned_restore_suffix.py",
-        "stale-source/scripts/owned_restore_suffix_test.py",
-        "stale-source/scripts/owned_restore_units.py",
-        "stale-source/scripts/purchase-evidence-layout.json",
-        "stale-source/scripts/purchase_controls.py",
-        "stale-source/scripts/purchase_creation.py",
-        "stale-source/scripts/purchase_duration_controls.py",
-        "stale-source/scripts/purchase_evidence.py",
-        "stale-source/scripts/purchase_matrix.py",
-        "stale-source/scripts/purchase_provenance.py",
-        "stale-source/scripts/purchase_replay.py",
-        "stale-source/scripts/purchase_saved_state.py",
-        "stale-source/scripts/reference.cfg",
-        "stale-source/scripts/replay_controls.py",
-        "stale-source/scripts/replay_lifecycle.py",
-        "stale-source/scripts/replay_matrix.py",
-        "stale-source/scripts/road-slope-ci-layout.json",
-        "stale-source/scripts/road_slope_ci_evidence.py",
-        "stale-source/scripts/run-allocation-reference.cmake",
-        "stale-source/scripts/run-callback-reference.cmake",
-        "stale-source/scripts/run-depot-runtime-reference.cmake",
-        "stale-source/scripts/run-gameplay-reference.cmake",
-        "stale-source/scripts/run-reference.cmake",
-        "stale-source/scripts/run-snapshot-reference.cmake",
-        "stale-source/scripts/run-terrain-reference.cmake",
-        "stale-source/scripts/safety-ci-layout.json",
-        "stale-source/scripts/safety_ci_bindings.py",
-        "stale-source/scripts/safety_ci_evidence.py",
-        "stale-source/scripts/sale-evidence-layout.json",
-        "stale-source/scripts/sale_cases.py",
-        "stale-source/scripts/sale_controls.py",
-        "stale-source/scripts/sale_driver.py",
-        "stale-source/scripts/sale_duration_controls.py",
-        "stale-source/scripts/sale_evidence.py",
-        "stale-source/scripts/sale_lifetime.py",
-        "stale-source/scripts/sale_matrix.py",
-        "stale-source/scripts/sale_provenance.py",
-        "stale-source/scripts/sale_replay.py",
-        "stale-source/scripts/sale_saved_state.py",
-        "stale-source/scripts/script-vm-manifest.json",
-        "stale-source/scripts/script_vm_branches.py",
-        "stale-source/scripts/script_vm_evidence.py",
-        "stale-source/scripts/script_vm_iteration.py",
-        "stale-source/scripts/script_vm_observation.py",
-        "stale-source/scripts/script_vm_policy.py",
-        "stale-source/scripts/script_vm_provenance.py",
-        "stale-source/scripts/script_vm_switch.py",
-        "stale-source/scripts/service_replay.py",
-        "stale-source/scripts/service_replay_cases.py",
-        "stale-source/scripts/setup-reference.sh",
-        "stale-source/scripts/setup-snapshot-reference.sh",
-        "stale-source/scripts/shared-restore-fixtures.json",
-        "stale-source/scripts/shared-restore-layout.json",
-        "stale-source/scripts/shared-restore-mutations.json",
-        "stale-source/scripts/shared_restore_admission.py",
-        "stale-source/scripts/shared_restore_archive.py",
-        "stale-source/scripts/shared_restore_capacity.py",
-        "stale-source/scripts/shared_restore_compare.py",
-        "stale-source/scripts/shared_restore_controls.py",
-        "stale-source/scripts/shared_restore_evidence.py",
-        "stale-source/scripts/shared_restore_fixture_test.py",
-        "stale-source/scripts/shared_restore_guards.py",
-        "stale-source/scripts/shared_restore_layout.py",
-        "stale-source/scripts/shared_restore_pair.py",
-        "stale-source/scripts/shared_restore_prepare.py",
-        "stale-source/scripts/shared_restore_provenance.py",
-        "stale-source/scripts/shared_restore_setup_evidence.py",
-        "stale-source/scripts/shared_restore_strict.py",
-        "stale-source/scripts/shared_restore_units.py",
-        "stale-source/scripts/strings-ci-layout.json",
-        "stale-source/scripts/strings_ci_bindings.py",
-        "stale-source/scripts/strings_ci_compare.py",
-        "stale-source/scripts/strings_ci_evidence.py",
-        "stale-source/scripts/strings_ci_probes.py",
-        "stale-source/scripts/terraform_replay.py",
-        "stale-source/scripts/tree_ci_bindings.py",
-        "stale-source/scripts/tree_ci_controls.py",
-        "stale-source/scripts/tree_ci_evidence.py",
-        "stale-source/scripts/tree_ci_prepare.py",
-        "stale-source/scripts/tree_ci_probes.py",
-        "stale-source/scripts/tree_ci_run.py",
-        "stale-source/scripts/tree_ci_tests.py",
-        "stale-source/scripts/world_check_support.py",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
-      ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$CASE/stale-source/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 1,
-      "diagnostic": "Stale native replay binary/source"
-    },
-    "duplicate": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "currency.json",
+        "config.cfg",
         "manifest.json",
         "native/invocation.txt",
         "native/openttd.cfg",
@@ -2154,70 +2121,28 @@
         "stderr.log",
         "stdout.log"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-load-control-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json",
-          "OTTD_GRF_LANGUAGE_OUTPUT": "$CASE/language.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
-      "inputs": {
-        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
-      },
-      "status": 1,
-      "diagnostic": "currency output exists"
-    },
-    "unarmed": {
-      "paths": [
-        "argv.json",
-        "comparison.txt",
-        "manifest.json",
-        "native/openttd.cfg",
-        "native/save/autosave/exit.sav",
-        "native/stderr.log",
-        "native/stdout.log",
-        "pack/input.lng",
-        "status.json",
-        "stderr.log",
-        "stdout.log"
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=GENERATE",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/run-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CONTROL_MANIFEST": null,
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "4e99187b08afc96da13d309ada0aa131766921a080c9ffb04bcd98400ab5b524",
+      "manifest_sha256": "15f25aaa6f5bf7c551d9c33db95823a55d9db791414dfdc2510c7a2851f65a46",
       "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
         "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
       },
-      "status": 0,
-      "diagnostic": ""
+      "diagnostic": "invalid currency owner encoding",
+      "status": 1
     },
-    "pending": {
+    "encoding-unknown": {
       "paths": [
         "argv.json",
-        "comparison.txt",
+        "config.cfg",
         "manifest.json",
         "native/invocation.txt",
         "native/openttd.cfg",
@@ -2228,32 +2153,28 @@
         "stderr.log",
         "stdout.log"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "d136703a2dea7aefab7c0939eedd60ebb012a1f62740f14f7e0b6c5a1d320efb",
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "f2357faf4b17e6aa37aacd03568431df955c0dda31f12ea74c9be08c96ef6d13",
       "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
         "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
       },
-      "status": 1,
-      "diagnostic": "currency API must finalize queued destinations"
+      "diagnostic": "invalid currency owner encoding",
+      "status": 1
     },
-    "stale-read": {
+    "encoding-missing": {
       "paths": [
         "argv.json",
-        "comparison.txt",
+        "config.cfg",
         "manifest.json",
         "native/invocation.txt",
         "native/openttd.cfg",
@@ -2264,32 +2185,28 @@
         "stderr.log",
         "stdout.log"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "e6c217020f581af6c3a802999439059884cf6f485af6041de1a096f12f769b03",
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "a4dbc11ed4b94f3b8fdfd0ac1032511a84b60f1d8d74862e5ebbb5b6cdc97b55",
       "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
         "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
       },
-      "status": 1,
-      "diagnostic": "stale custom currency string query"
+      "diagnostic": "currency property requires byte mode",
+      "status": 1
     },
-    "mixed": {
+    "encoding-without-fixture": {
       "paths": [
         "argv.json",
-        "comparison.txt",
+        "config.cfg",
         "manifest.json",
         "native/invocation.txt",
         "native/openttd.cfg",
@@ -2300,39 +2217,30 @@
         "stderr.log",
         "stdout.log"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "a635e3db6d6120ef22b1e1aed554057c5b1cda3a44d9613ec3c8d661074c37d4",
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "a3132e0d2d32756bf66086144624fadf80d96aa0bd2e159372209f502b46ccf6",
       "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
         "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
       },
-      "status": 1,
-      "diagnostic": "invalid or duplicate currency fixture"
+      "diagnostic": "currency encoding requires currency fixture",
+      "status": 1
     },
-    "reload-index": {
+    "mixed-load-api": {
       "paths": [
         "argv.json",
-        "comparison.txt",
-        "input-7.grf",
-        "input-8.grf",
+        "config.cfg",
         "manifest.json",
-        "native/control.json",
-        "native/inputs.sha256",
         "native/invocation.txt",
-        "native/language.json",
         "native/openttd.cfg",
         "native/stderr.log",
         "native/stdout.log",
@@ -2341,41 +2249,30 @@
         "stderr.log",
         "stdout.log"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "f5053eb18becc523b925751550b03bd42a903bb87c28d18c75208c942e4ea47d",
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "a501e3e0543f09fe995fee3314c95b6e0b8969edd8451caff532a0f60936c474",
       "inputs": {
-        "input-8.grf": "2def79f143eb228cb010dfe3b0d6f3c7a0efdc8149ee42fbef1aabd8ee6e4345",
-        "input-7.grf": "c49a49876941278fc70d039ce69d3d1d4a49b839e54ce573ad27063b966e2f0f",
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
         "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
       },
-      "status": 1,
-      "diagnostic": "currency reload duplicate or invalid config"
+      "diagnostic": "invalid or duplicate currency fixture",
+      "status": 1
     },
-    "reload-duplicate": {
+    "mixed-api-reload": {
       "paths": [
         "argv.json",
-        "comparison.txt",
-        "input-7.grf",
-        "input-8.grf",
+        "config.cfg",
         "manifest.json",
-        "native/control.json",
-        "native/inputs.sha256",
         "native/invocation.txt",
-        "native/language.json",
         "native/openttd.cfg",
         "native/stderr.log",
         "native/stdout.log",
@@ -2384,69 +2281,439 @@
         "stderr.log",
         "stdout.log"
       ],
-      "argv": {
-        "argv": [
-          "-DORACLE=$ORACLE",
-          "-DRUN_DIR=$CASE/native",
-          "-DMANIFEST=$CASE/manifest.json",
-          "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
-          "-DCONFIG=$ROOT/scripts/reference.cfg",
-          "-DTICKS=1",
-          "-P",
-          "$ROOT/scripts/check-grf-currency-reference.cmake"
-        ],
-        "environment": {
-          "OTTD_GRF_CURRENCY_OUTPUT": "$CASE/currency.json"
-        }
-      },
-      "manifest_sha256": "ca756e022f2a1231beaea93caec81e996c55eb5ca8292c8c4494e0c4258bc7a8",
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "3fe6f0a0e01d515f8e649b35455d3231119397abaf7d5ffd0ec35f7fc02e77b3",
       "inputs": {
-        "input-8.grf": "2def79f143eb228cb010dfe3b0d6f3c7a0efdc8149ee42fbef1aabd8ee6e4345",
-        "input-7.grf": "c49a49876941278fc70d039ce69d3d1d4a49b839e54ce573ad27063b966e2f0f",
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
         "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
       },
-      "status": 1,
-      "diagnostic": "currency reload duplicate or invalid config"
+      "diagnostic": "API reload modes mixed",
+      "status": 1
+    },
+    "wrong-property": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "fa083ade7c6eea0203f0e2b171caabd7dfb7fb89e0a87cb17dd798a9307134a2",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "unsupported currency property API",
+      "status": 1
+    },
+    "wide-property": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "6f2b43316e660e3499b61c3cadd5dcde151ddf7687bc92bacfaf19f22f4b4dd2",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property unsigned field",
+      "status": 1
+    },
+    "negative-first": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "b242b7fc2f7fcb0caa049539b971852fc977dea04dad5f8bd7acd384427d9ed2",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property unsigned field",
+      "status": 1
+    },
+    "wide-first": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "6a64e3d64167b43bfd36c1b37831e37f76ef805c6af02e9376ef2a6f66e610d7",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property unsigned field",
+      "status": 1
+    },
+    "wide-count": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "08803673d20957a49572a405f20fb25dfada420b550d0fa107f63f7dd9fa1978",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property unsigned field",
+      "status": 1
+    },
+    "wrong-stage": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "985e4334a113c72c0294463c6aaf5d9059817c0e0d69bbb0f04070a050ba5cbf",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property stage",
+      "status": 1
+    },
+    "negative-byte": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "52772dc7a727c0a16274fa39bc9af2bb94c4faedaa7245793965bce4eb7056a5",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property byte value",
+      "status": 1
+    },
+    "wide-byte": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "31d9e0f95cc01a8eb9ee29089c5efc0d7b574b60a7e4ddb0f14b2ab5f0ea6db0",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property byte value",
+      "status": 1
+    },
+    "raw-too-long": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "6759d063c5f5f536f41e3cbbd830bac0b72ff188f420f43b34c298a754cfc0cb",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "currency property byte input budget",
+      "status": 1
+    },
+    "text-custom-in-byte-mode": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "903af78fddbeda51c69818148df9c83cea73fbafd44404828633a9360f561848",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "text custom fixture in byte mode",
+      "status": 1
+    },
+    "byte-custom-in-text-mode": {
+      "paths": [
+        "argv.json",
+        "config.cfg",
+        "manifest.json",
+        "native/invocation.txt",
+        "native/openttd.cfg",
+        "native/stderr.log",
+        "native/stdout.log",
+        "pack/input.lng",
+        "status.json",
+        "stderr.log",
+        "stdout.log"
+      ],
+      "argv": [
+        "cmake",
+        "-DORACLE=$ORACLE",
+        "-DRUN_DIR=$CASE/native",
+        "-DMANIFEST=$CASE/manifest.json",
+        "-DINPUT=$ROOT/fixtures/replay/clear-v362.sav",
+        "-DCONFIG=$CASE/config.cfg",
+        "-P",
+        "$ROOT/scripts/check-grf-currency-reference.cmake"
+      ],
+      "manifest_sha256": "d629eca348ff2941b71e0b809b49d12d990a2ed25bca35dc0639f8e658663f5b",
+      "inputs": {
+        "config.cfg": "c8fb0c02beda908b7c2c5de83ea47ccdb8f5dc1c73435e6abab4ca8232e4fe91",
+        "pack/input.lng": "789cef0b049d584d568b345f6f7ec88efeb1e7f2c45cd884b0b5d0bb8e01d14a"
+      },
+      "diagnostic": "byte custom fixture requires byte mode",
+      "status": 1
     }
   },
+  "focused": [
+    "content::grf::load_currency_session_tests::properties::prefix_keeps_surrogate_bytes_when_native_decoder_accepts_them",
+    "content::grf::load_currency_session_tests::property_units::legacy_projection_refuses_surrogate_bytes_without_replacement",
+    "content::grf::load_currency_session_tests::property_units::repeated_value_writes_obey_cumulative_trace_budget",
+    "content::grf::load_currency_session_tests::currency_adjacent_properties_remain_unsupported"
+  ],
   "native_invocations": [
-    "api/all-owner-indices/native/invocation.txt",
-    "api/all-string-mappings/native/invocation.txt",
-    "api/custom-reset/native/invocation.txt",
-    "api/ordered-writes/native/invocation.txt",
-    "api/reserve-bounds/native/invocation.txt",
-    "guards/duplicate/native/invocation.txt",
-    "guards/mixed/native/invocation.txt",
-    "guards/pending/native/invocation.txt",
-    "guards/reload-duplicate/native/invocation.txt",
-    "guards/reload-index/native/invocation.txt",
-    "guards/stale-read/native/invocation.txt",
-    "load/builtin-unknown-empty/native/invocation.txt",
-    "load/custom-callback-aliases/native/invocation.txt",
+    "api/custom-reset-values/native/invocation.txt",
+    "api/euro-boundaries/native/invocation.txt",
+    "api/extended-indices/native/invocation.txt",
+    "api/indices-euro/native/invocation.txt",
+    "api/indices-options/native/invocation.txt",
+    "api/indices-prefix/native/invocation.txt",
+    "api/indices-rate/native/invocation.txt",
+    "api/indices-suffix/native/invocation.txt",
+    "api/options-bytes/native/invocation.txt",
+    "api/options-ignored-bits/native/invocation.txt",
+    "api/rate-boundaries/native/invocation.txt",
+    "api/reader-bounds/native/invocation.txt",
+    "api/symbols-single-byte/native/invocation.txt",
+    "api/symbols-utf8/native/invocation.txt",
+    "guards/byte-custom-in-text-mode/native/invocation.txt",
+    "guards/encoding-false/native/invocation.txt",
+    "guards/encoding-missing/native/invocation.txt",
+    "guards/encoding-unknown/native/invocation.txt",
+    "guards/encoding-without-fixture/native/invocation.txt",
+    "guards/mixed-api-reload/native/invocation.txt",
+    "guards/mixed-load-api/native/invocation.txt",
+    "guards/negative-byte/native/invocation.txt",
+    "guards/negative-first/native/invocation.txt",
+    "guards/raw-too-long/native/invocation.txt",
+    "guards/text-custom-in-byte-mode/native/invocation.txt",
+    "guards/wide-byte/native/invocation.txt",
+    "guards/wide-count/native/invocation.txt",
+    "guards/wide-first/native/invocation.txt",
+    "guards/wide-property/native/invocation.txt",
+    "guards/wrong-property/native/invocation.txt",
+    "guards/wrong-stage/native/invocation.txt",
+    "load/activation-truncated-prefix/native/invocation.txt",
+    "load/activation-truncated-suffix/native/invocation.txt",
+    "load/custom-bytes/native/invocation.txt",
     "load/deferred-and-overwrite/native/invocation.txt",
     "load/disabled-retained/native/invocation.txt",
     "load/empty-configured-files/native/invocation.txt",
     "load/init-only-no-owner-write/native/invocation.txt",
-    "load/malformed-after-valid-record/native/invocation.txt",
-    "load/malformed-invalid-owner/native/invocation.txt",
+    "load/malformed-reserve-invalid-owner/native/invocation.txt",
+    "load/malformed-reserve-valid-first/native/invocation.txt",
     "load/maximum-count-wrap/native/invocation.txt",
-    "load/missing-custom/native/invocation.txt",
     "load/overwrite-reverse/native/invocation.txt",
-    "load/reload-empty-custom-retained/native/invocation.txt",
+    "load/packed-properties/native/invocation.txt",
+    "load/reload-empty/native/invocation.txt",
     "load/reload-remove-first/native/invocation.txt",
     "load/reload-remove-second/native/invocation.txt",
     "load/reload-reordered/native/invocation.txt",
-    "load/reload-same-config/native/invocation.txt",
-    "load/repeated-custom-owner/native/invocation.txt",
-    "load/same-local-distinct-grfid/native/invocation.txt",
+    "load/reload-same/native/invocation.txt",
+    "load/single-v1/native/invocation.txt",
+    "load/single-v2/native/invocation.txt",
     "load/wrapped-and-invalid/native/invocation.txt",
-    "load/zero-item-property/native/invocation.txt"
-  ],
-  "focused": [
-    "content::grf::load_currency_session_tests::currency_repeated_assignments_obey_cumulative_trace_budget",
-    "content::grf::load_currency_session_tests::currency_adjacent_properties_remain_unsupported"
+    "load/zero-items-all-values/native/invocation.txt"
   ],
   "sources": {
+    ".github/workflows/ci.yml": "7f199a2ee8427a8284b7ba5a71cce16e28684dd45341368d8b34b24ae0efe0c4",
     "Cargo.lock": "db9025ab50903170a7adfd28039ce4338563671d2c8e06bfbbe55de1337fdc0c",
     "Cargo.toml": "c1b4f281ef2edcedf161af69a126b1c47f786b93f79c86f2df1d3ad337d0d0a1",
     "crates/ottd-cli/Cargo.toml": "3c1b76f65a3594119b4b436fc78c495f9391ad74712b5c227f6cfd9424ef9370",
@@ -2850,10 +3117,12 @@
     "reference/callback_timer.hpp": "7747114f4f63965ad11b9337dee37d28ea40252bbe94a0c1b6044b23db5e0eba",
     "reference/callback_vehicle.hpp": "447c6cf743ad3ca4e214b8a9b97c1ff7f7eead3bb659d0b98e24f39666593d1b",
     "reference/callbacks.hpp": "54deaa2da27a76f183f669ac8179aaed307da7d26137ddf5f8bc89a094840b66",
+    "reference/callbacks.json": "5548ff353b30f5654cb6a5163db8d7f165eae20f68762c7547e35f6265a9a7ad",
     "reference/check-snapshot.cmake": "37177cbeea60caee47162fcf61790c24c5c1ae6fe5fb5c04cbc40006f2e8dd25",
     "reference/content.hpp": "e0b12048fac759c673c2f486c7b0f2a40c1aa43893d663b373963b4ff3be9a1b",
     "reference/depot_runtime.hpp": "d7e2b834a276780efb8fe0ead4bc66dd09aeb648672a01abf00bc09a83fb3740",
     "reference/gameplay.hpp": "1964cc9c104f568765c93e1a3c233553525433134a83885288ef0b81bb92d2c7",
+    "reference/gameplay.json": "ad063672c8614eec2f1ab5ea8f7c68dc8973140965dfbcceeed837c765b50b3e",
     "reference/gameplay.patch": "ed3a2df02bab4feda159421bf442a9d16229e675d3f70fd015e24a78982c0c1d",
     "reference/grf_currency.hpp": "7440f0477db8ec2dad355a6f0015b73a940fdd97ede2db896b99a8c1aaed39fb",
     "reference/grf_currency.patch": "5da27132a71e38114d32715b57a9e8a6d10018b8754b864b43e0a68504ef0f74",
@@ -2880,6 +3149,8 @@
     "reference/order_network.patch": "7c7267982f5eeb2ebebf6bca16587644e203ac8b3e62d4b908d908dd5c20f1b4",
     "reference/order_state.hpp": "0fed2683ab5cf76c4b38abda67b2d2ed7ddf3be87d8d9c6b8ee1648dda4eb2bc",
     "reference/order_state.patch": "2f97dbc079ba0347e3067376b796a7800af863c3553552574fb13104cc6f3c4f",
+    "reference/primitives.json": "33f728d71cd92a72e1a4bc4eaa394970dd90bfc784211ac8ff4cfcb7af55c388",
+    "reference/replay-format.json": "0b8d4004c62f114e70750faf7a04b844842f4e5277e0bc507e244665678a2256",
     "reference/replay.hpp": "e007a97e5b47a8219633844552c595bf4ff953a34db4a5014116c17ea179ae13",
     "reference/replay.patch": "2df9ff3e92cdc8852771cfd9b7769b7f8e9923aaebde40bdb0f13e1e25abcf73",
     "reference/replay_commands.hpp": "d167b7471ee6a9cee31ed86933e28072e799f56c5c4b06ae40cf6e25bf0818ec",
@@ -2977,6 +3248,7 @@
     "scripts/contract_profiles.py": "d8793d6b4b78a03ebc47b94a974757c10dbab2c37faaf0a92689e0e591e4072f",
     "scripts/contract_run.py": "8a4fc131b30e7685f560d73e2131cf2cd6cff82cd8d188736d17a3b75c013cad",
     "scripts/contract_validate.py": "4d86dbd5e1384be9b2a1b4fa3a5544adb2d1ed02f674622e4d8c7f1724219a6f",
+    "scripts/currency-properties-guards.json": "2459f85b74ce353ce6ee62540b25f620657c1f9c22fbc1280355d9dba3788796",
     "scripts/currency_ci_baseline.py": "1409fc1506aacda4515b1bbf52df56e1b46ae4532768e007a7ca76059127e19c",
     "scripts/currency_ci_bindings.py": "e1e23d79dca5fb07e477d9eff350b59e2ecaef570040b8d5b71af86452781fe7",
     "scripts/currency_ci_capture.py": "6b422c64de49317b259af5ba8f00b00e0f916fe6bc26adfcb6bcf6ff0b1699c3",
@@ -3162,18 +3434,19 @@
     "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241"
   },
   "totals": {
-    "guards": 13,
+    "guards": 17,
     "api": {
-      "cases": 5,
-      "operations": 285,
-      "controls": 194280
+      "cases": 14,
+      "operations": 3951,
+      "controls": 2195656
     },
     "load": {
-      "cases": 20,
-      "loads": 25,
-      "events": 489,
-      "controls": 185241,
-      "lifecycle_controls": 76882
+      "cases": 21,
+      "loads": 26,
+      "events": 1443,
+      "controls": 805383,
+      "lifecycle_controls": 81241
     }
-  }
+  },
+  "verified_native_corpus": true
 }

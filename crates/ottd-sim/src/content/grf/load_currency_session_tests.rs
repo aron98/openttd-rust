@@ -8,6 +8,12 @@ use super::{
 
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
+#[path = "load_currency_properties_tests.rs"]
+mod properties;
+
+#[path = "load_currency_property_units.rs"]
+mod property_units;
+
 fn run(
     sources: &[programs::Source],
     custom: Option<&CurrencyOwner>,
@@ -155,9 +161,9 @@ fn currency_repeated_assignments_obey_cumulative_trace_budget() -> Result {
 
 #[test]
 fn currency_adjacent_properties_remain_unsupported() -> Result {
-    let source = programs::source(7, &[vec![0, 8, 1, 1, 0, 0x0b, 0, 0, 0, 0]], &[], 1)?;
-    let error =
-        run(&[source], None, ControlOptions::default()).expect_err("rate property not implemented");
+    let source = programs::source(7, &[vec![0, 8, 1, 1, 0, 0x10, 0, 0, 0, 0]], &[], 1)?;
+    let error = run(&[source], None, ControlOptions::default())
+        .expect_err("snowline property not implemented");
     assert!(matches!(
         error.downcast_ref::<ControlLoadError>(),
         Some(ControlLoadError::Unsupported { action: 0, .. })

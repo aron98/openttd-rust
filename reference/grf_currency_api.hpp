@@ -1,5 +1,6 @@
 #ifndef OTTD_REFERENCE_GRF_CURRENCY_API_HPP
 #define OTTD_REFERENCE_GRF_CURRENCY_API_HPP
+#include "reference_grf_currency_properties_api.hpp"
 namespace ReferenceGrfCurrency {
 nlohmann::json RunApi(const nlohmann::json &commands)
 {
@@ -15,12 +16,17 @@ nlohmann::json RunApi(const nlohmann::json &commands)
         if (operation == "reset_currencies") {
             ResetCurrencies(command.at("preserve_custom").get<bool>());
         } else if (operation == "custom_fixture") {
+            if (byte_owners) ReferenceGrfControl::HostError("text custom fixture in byte mode");
             const auto &input = command.at("owner");
             GetCustomCurrency() = CurrencySpec(input.at("rate").get<uint16_t>(), input.at("separator").get<std::string>(),
                 TimerGameCalendar::Year{input.at("to_euro").get<int32_t>()}, input.at("prefix").get<std::string>(),
                 input.at("suffix").get<std::string>(), input.at("code").get<std::string>(),
                 input.at("symbol_pos").get<uint8_t>(), input.at("name").get<StringID>());
             result["declared_custom_owner"] = input;
+        } else if (operation == "custom_bytes") {
+            SetCustomBytes(command, result);
+        } else if (operation == "property") {
+            ApplyProperty(command, result);
         } else if (operation == "reset_strings") {
             CleanUpStrings();
         } else if (operation == "define") {

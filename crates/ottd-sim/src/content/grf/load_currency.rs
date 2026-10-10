@@ -20,8 +20,8 @@ pub(super) struct CurrencyOwner {
     pub rate: u16,
     pub separator: String,
     pub to_euro: i32,
-    pub prefix: String,
-    pub suffix: String,
+    pub prefix: Vec<u8>,
+    pub suffix: Vec<u8>,
     pub code: String,
     pub symbol_pos: u8,
     pub name: u32,
@@ -47,6 +47,16 @@ impl Default for CurrencyOwners {
     }
 }
 impl CurrencyOwners {
+    pub(super) fn initial_bytes() -> usize {
+        DEFAULTS.iter().fold(0_usize, |size, spec| {
+            size.saturating_add(std::mem::size_of::<CurrencyOwner>())
+                .saturating_add(spec.separator.len())
+                .saturating_add(spec.prefix.len())
+                .saturating_add(spec.suffix.len())
+                .saturating_add(spec.code.len())
+        })
+    }
+
     pub(super) fn reset(custom: Option<&CurrencyOwner>) -> Self {
         Self {
             entries: DEFAULTS
@@ -62,8 +72,8 @@ impl CurrencyOwners {
                         rate: spec.rate,
                         separator: spec.separator.to_owned(),
                         to_euro: spec.to_euro,
-                        prefix: spec.prefix.to_owned(),
-                        suffix: spec.suffix.to_owned(),
+                        prefix: spec.prefix.as_bytes().to_vec(),
+                        suffix: spec.suffix.as_bytes().to_vec(),
                         code: spec.code.to_owned(),
                         symbol_pos: spec.symbol_pos,
                         name: spec.name,
@@ -77,6 +87,25 @@ impl CurrencyOwners {
 #[derive(Debug, Clone, Copy, serde::Serialize)]
 #[serde(transparent)]
 pub(super) struct CurrencyIndex(u8);
+
+impl CurrencyIndex {
+    pub(super) fn from_grf(index: u32) -> Self {
+        const CONVERSION: [u8; 19] = [
+            0, 1, 12, 8, 3, 10, 14, 19, 4, 5, 9, 11, 13, 6, 17, 16, 23, 21, 2,
+        ];
+        let narrowed = index.to_le_bytes()[0];
+        Self(
+            CONVERSION
+                .get(usize::from(narrowed))
+                .copied()
+                .unwrap_or(narrowed),
+        )
+    }
+
+    pub(super) fn offset(self) -> usize {
+        usize::from(self.0)
+    }
+}
 
 #[derive(Debug, Clone, Copy, serde::Serialize)]
 pub(super) struct PendingCurrencyName {
@@ -99,21 +128,14 @@ impl CurrencyState {
     }
 
     pub(super) fn queue(&mut self, grfid: u32, index: u32, source: u16) {
-        const CONVERSION: [u8; 19] = [
-            0, 1, 12, 8, 3, 10, 14, 19, 4, 5, 9, 11, 13, 6, 17, 16, 23, 21, 2,
-        ];
-        let narrowed = index.to_le_bytes()[0];
-        let currency = CONVERSION
-            .get(usize::from(narrowed))
-            .copied()
-            .unwrap_or(narrowed);
-        if let Some(owner) = self.owners.entries.get_mut(usize::from(currency)) {
+        let currency = CurrencyIndex::from_grf(index);
+        if let Some(owner) = self.owners.entries.get_mut(currency.offset()) {
             owner.name = 2;
             owner.code.clear();
             self.pending.push(PendingCurrencyName {
                 grfid,
                 source,
-                currency: CurrencyIndex(currency),
+                currency,
             });
         }
     }

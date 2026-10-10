@@ -107,6 +107,7 @@ copy_header reference/grf_strings.hpp "$source_dir/src/reference_grf_strings.hpp
 copy_header reference/grf_strings_api.hpp "$source_dir/src/reference_grf_strings_api.hpp"
 copy_header reference/grf_currency.hpp "$source_dir/src/reference_grf_currency.hpp"
 copy_header reference/grf_currency_api.hpp "$source_dir/src/reference_grf_currency_api.hpp"
+copy_header reference/grf_currency_properties_api.hpp "$source_dir/src/reference_grf_currency_properties_api.hpp"
 copy_header reference/tree_rating.hpp "$source_dir/src/reference_tree_rating.hpp"
 copy_header reference/tree_rating_replay.hpp "$source_dir/src/saveload/reference_tree_rating_replay.hpp"
 copy_header reference/tree_fixture.hpp "$source_dir/src/saveload/reference_tree_fixture.hpp"

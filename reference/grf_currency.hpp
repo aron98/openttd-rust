@@ -4,6 +4,7 @@ namespace ReferenceGrfCurrency {
 nlohmann::json Pending();
 nlohmann::json RunApi(const nlohmann::json &commands);
 inline bool active = false, used = false, reload_armed = false, reload_done = false;
+inline bool byte_owners = false;
 inline size_t loads_completed = 0;
 inline uint8_t current_stage = 0;
 inline nlohmann::json specification, loads = nlohmann::json::array(), current_record, reload_context;
@@ -15,9 +16,16 @@ inline nlohmann::json Owners()
 {
     nlohmann::json rows = nlohmann::json::array();
     for (const auto &owner : _currency_specs) {
-        rows.push_back({{"rate", owner.rate}, {"separator", owner.separator}, {"to_euro", owner.to_euro.base()},
-            {"prefix", owner.prefix}, {"suffix", owner.suffix}, {"code", owner.code},
-            {"symbol_pos", owner.symbol_pos}, {"name", owner.name}});
+        nlohmann::json row = {{"rate", owner.rate}, {"separator", owner.separator}, {"to_euro", owner.to_euro.base()},
+            {"code", owner.code}, {"symbol_pos", owner.symbol_pos}, {"name", owner.name}};
+        if (byte_owners) {
+            row["prefix"] = std::vector<uint8_t>(owner.prefix.begin(), owner.prefix.end());
+            row["suffix"] = std::vector<uint8_t>(owner.suffix.begin(), owner.suffix.end());
+        } else {
+            row["prefix"] = owner.prefix;
+            row["suffix"] = owner.suffix;
+        }
+        rows.push_back(std::move(row));
     }
     return rows;
 }
@@ -45,6 +53,7 @@ inline void Write()
     nlohmann::json result = {{"mode", "actual-loader-currency-owners"}, {"loads", loads},
         {"reload_context", reload_context}, {"arms", ReferenceGrfControl::arms},
         {"consumptions", loads_completed}, {"baseline_sources", ReferenceGrfControl::baseline_sources}};
+    if (byte_owners) result["currency_owner_encoding"] = "bytes-v1";
     std::ofstream stream(destination);
     stream << result.dump() << '\n';
     stream.flush();
@@ -63,6 +72,11 @@ inline void Begin(const nlohmann::json &manifest)
         Observe("before-reset");
         return;
     }
+    if (manifest.contains("currency_owner_encoding")) {
+        if (!ReferenceGrfControl::active || (!manifest.contains("currency_load") && !manifest.contains("currency_api"))) ReferenceGrfControl::HostError("currency encoding requires currency fixture");
+        if (!manifest.at("currency_owner_encoding").is_string() || manifest.at("currency_owner_encoding") != "bytes-v1") ReferenceGrfControl::HostError("invalid currency owner encoding");
+        byte_owners = true;
+    }
     if (!ReferenceGrfControl::active || (!manifest.contains("currency_load") && !manifest.contains("currency_api"))) return;
     if (used || manifest.contains("currency_load") == manifest.contains("currency_api")) ReferenceGrfControl::HostError("invalid or duplicate currency fixture");
     if (manifest.contains("strings_api") || !ReferenceGrfLanguage::active) ReferenceGrfControl::HostError("currency fixture context");
@@ -77,6 +91,7 @@ inline void Begin(const nlohmann::json &manifest)
         auto before = ReferenceGrfControl::Context();
         auto result = RunApi(manifest.at("currency_api"));
         result["mode"] = "separate-process-original-currency-api";
+        if (byte_owners) result["currency_owner_encoding"] = "bytes-v1";
         result["arms"] = ReferenceGrfControl::arms;
         result["consumptions"] = 1;
         result["baseline_sources"] = ReferenceGrfControl::baseline_sources;

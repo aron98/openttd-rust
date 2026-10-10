@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "14d63d9e1279bd03362d92bc1109198d7db2b0d9a90eb43b162b38483f5d06d1",
+      "sha256": "a65ccb254b013acb1fafe0235628cf3486660f4f8b80b94c47b8c4f5e5ba1b3a",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1726,7 +1726,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-rs",
       "path": "crates/ottd-sim/src/content/grf.rs",
-      "sha256": "20ccc66388609a0668b8871c67774d38f32da411367519c327332aefe42b66e4",
+      "sha256": "be2bbe740271eebcd532eca280e399713cc7ab82943480fd33145a4cc8caf966",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "d646c8be99cc4a2bbc8f9d64ba0b152c2fee64cb2f07f4c92012926d506eeab4",
+      "sha256": "f9360c7825be1f6c67df25d9d1bebc083ab74ebe96873233d37ae873a94c6dc4",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3148,7 +3148,7 @@
     {
       "id": "road-slope-ci-road-slope-ci-layout",
       "path": "scripts/road-slope-ci-layout.json",
-      "sha256": "2aca359b37558bca9eae1ff906ceb41f419cb4ba9793fc9afae8d3dddf0fb167",
+      "sha256": "08d111fe1a0a0f3218abdd1ff8b04d2dd54b84f908347c8b17ba8deec611c787",
       "kind": "recipe",
       "provenance": "Exact private CheckRoadSlope native primitive and strict complete evidence admission; no world-road command expansion.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "52f3f05f6609c144e6941fefd47b15bc1aa93f6716e14ce68bab0554b15ba885",
+      "sha256": "ef9574f046e615024cc4bb59f398c0750dcf8f182f1549a8961e1809caea3527",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "03ca13e4e75d4682af1a5d56f699cb75c7b77a807cc9c235d371c7d496d0cf2c",
+      "sha256": "d3faeabf09bc61a2276bb9b7a03ed75bfd38ccb4fafde1861cad9cfafed0f8ae",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "4b46f4f5dfbf905579aa901a95fcc25e042370d509929d9791a1aab813cf49e3",
+      "sha256": "2dc7c778e98b04db9da5e2490cdd6340a8682a2489917e6648d4db7d9b95aba0",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "de40afdaee71d2bc0617d4324de9484f069ea07e971d440453d2e9d05b1da5a1",
+      "sha256": "82aca6e452238feba1d822f54b486ec48ba7a3716b7a2e90d3ee4ebd373f1c8f",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "aa378bf4d349c6abb1e683723414dc24b06336d09f5b377e416d410089217dec",
+      "sha256": "fe8b2dc9d9e67c0ef0493fb8018c1ea4b9973e6691b4cc27e08e2ab9d03481ce",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "fbb3862b25dec5671072853f3a0739426ea7e0e27d7beabcccb6ef14b81be23d",
+      "sha256": "53bd491014a9a453a00fc0525f96bffdc9f8761e35bd24ae4e076a7a92b1578a",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "0436e4ef150f9caab382a31a7d8dbd557be9373538e1b1a6552664b1c66914ce",
+      "sha256": "c63a5667d76268439530cc474a5dd5f3fd6fd5de1981b7c78b2c2d3671fa0f54",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "5ded6c1611e4f6764e766b8c9b5950692e2d9b60e30f262c5bc704286870ca8a",
+      "sha256": "0311f0b862b3decfc5c2f0f51adb657f85a7e3df6074032ea3ff3d07ab4c8c04",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "0447b72340d9f2a14d64d9e254d6a1a0b25237ee8dc2e4b94553890057024e99",
+      "sha256": "bc474feaa22abdefcea84f63ac3cefa8fbf56dfc0848271382a0d71d82d3068d",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "ade4609d3c569e517468fd86e7dc5403fc7fb64e0a6e332b73f44208fc737f68",
+      "sha256": "4a77cdfa019d44be7ba71b08a74243c4ab3f1c7c924c0217b797a86d70a33a45",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "ddc7873c2b722d15b00f89ae50e0e4629be2cf87c7a0c78b48ec4dc24be302a8",
+      "sha256": "66807643a88ab4b771f26896f7bba6a34eae6d45795e8e7770c51fe5a30dadb8",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
@@ -4183,7 +4183,7 @@
     {
       "id": "shared-restore-layout",
       "path": "scripts/shared-restore-layout.json",
-      "sha256": "a08a6894bc88f299d6dd6759481a560b38cf05d730cc0b988b8c6e7412a3eb33",
+      "sha256": "474a29ec4e73d6006b0c6add1a8a69edef47b83e5e345708e79ed52e9b6d7784",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
       "save_version": null,
@@ -4195,6 +4195,123 @@
       "sha256": "6d17e6b68cdf8fd39d0b48f8f19d746775977a5f92c06af22b03e3d043c07fbc",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-capture-grf-currency-properties-py",
+      "path": "scripts/capture-grf-currency-properties.py",
+      "sha256": "6e9b549269300f83cfdadc4073331ce8b236ddbfd70e9d8916baec45039705b2",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-check-grf-currency-properties-ci-py",
+      "path": "scripts/check-grf-currency-properties-ci.py",
+      "sha256": "54b5c06ada5800272707675831e5dadc825afecaa3f5cb83bdc347b0508d06c8",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-layout-json",
+      "path": "scripts/currency-properties-ci-layout.json",
+      "sha256": "ae8b36d6285136a391ab3a0e2d33bdae9df2683bc9a8425b924d48a7d9db25f4",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-guards-json",
+      "path": "scripts/currency-properties-guards.json",
+      "sha256": "2459f85b74ce353ce6ee62540b25f620657c1f9c22fbc1280355d9dba3788796",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-archive-py",
+      "path": "scripts/currency_properties_ci_archive.py",
+      "sha256": "dc2dc71fbb6b15ea37376f59427074a6c8e7c1bac910717055fefe85d4628117",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-capture-py",
+      "path": "scripts/currency_properties_ci_capture.py",
+      "sha256": "95e3f23391cc9bec1e34441128946cff07857812563fd671370ca9cd5855f956",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-evidence-py",
+      "path": "scripts/currency_properties_ci_evidence.py",
+      "sha256": "9b5065b2e8bef0de847727368845a0d5ef43c2a27643d57414c3f4186c437202",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-guards-py",
+      "path": "scripts/currency_properties_ci_guards.py",
+      "sha256": "44d711ad97a8eb94c3bded192dc07c6d10cbd5ed1b4f14e87d2a9085d3aab875",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-probes-py",
+      "path": "scripts/currency_properties_ci_probes.py",
+      "sha256": "b838014e8a6b5263b6b07270da40935716e19c41760b9e4796dec2e1f6490f32",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-roster-py",
+      "path": "scripts/currency_properties_ci_roster.py",
+      "sha256": "87127123a94e972a8c05cb2e31bb2cee1d4ef94f1b51e6d6f7e904ea324714bb",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-currency-properties-ci-run-py",
+      "path": "scripts/currency_properties_ci_run.py",
+      "sha256": "4366d75e405c19057cd4b933cb47f6b22b507ff28c1579803b878e25fda5aadd",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-tests-currency-properties-ci-evidence-test-py",
+      "path": "scripts/tests/currency_properties_ci_evidence_test.py",
+      "sha256": "d8e73de240e48483473efcfc1c44bb732db3c996e60453c559f8600bfe808a43",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "currency-properties-tests-currency-properties-ci-run-test-py",
+      "path": "scripts/tests/currency_properties_ci_run_test.py",
+      "sha256": "317b385369dcd37031607c6319cc2de27a0995a0dde0b1a2edb475d2f835172b",
+      "kind": "recipe",
+      "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
       "save_version": null,
       "profile": null
     }
@@ -10856,6 +10973,33 @@
         "rust_behavior"
       ],
       "timeout_seconds": 900
+    },
+    {
+      "id": "grf-currency-properties",
+      "argv": [
+        "python3",
+        "scripts/check-grf-currency-properties-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "corruption/rejections.json",
+        "bin/ottd_sim",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256"
+      ],
+      "success_text": "PASS currency 0B-0F complete fixed corpus",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 2400
     }
   ],
   "scenarios": [
@@ -15561,7 +15705,7 @@
       "id": "content.currency-owner-names",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Private currency property0A owner names and deferred mapping. Properties0B-0F, baseline execution, other spec owners and catalog admission remain unsupported.",
+      "domain": "Private currency property0A owner names and deferred mapping. Properties0B-0F are covered by content.currency-owner-properties; baseline execution, other spec owners and catalog admission remain unsupported.",
       "expected": "Actual API5/285/194280; loader20/25loads/489rows/185241 state and76882 lifecycle controls;13 host guards. Complete source/input/Cargo executor/native traces and readback archive.",
       "driver": "grf-currency",
       "assets": [
@@ -15779,6 +15923,58 @@
         "controls/admission/wrong-source-mutation.json",
         "controls/admission/wrong-executable.json",
         "controls/archive/bindings.json"
+      ]
+    },
+    {
+      "id": "content.currency-owner-properties",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Private Global Variables currency properties0B-0F with native byte-preserving symbols, ordered activation and reload. No formatter, annual euro timer, baseline execution or broad catalog admission.",
+      "expected": "Actual fixed API14/3951 operations/2195656 controls; loader21/26 loads/1443 events/805383 state and81241 lifecycle controls;17 guards,12 admission corruptions and zero-selector refusal. Requires separately verified strict fresh locked Cargo run.",
+      "driver": "grf-currency-properties",
+      "assets": [
+        "currency-properties-capture-grf-currency-properties-py",
+        "currency-properties-check-grf-currency-properties-ci-py",
+        "currency-properties-currency-properties-ci-layout-json",
+        "currency-properties-currency-properties-guards-json",
+        "currency-properties-currency-properties-ci-archive-py",
+        "currency-properties-currency-properties-ci-capture-py",
+        "currency-properties-currency-properties-ci-evidence-py",
+        "currency-properties-currency-properties-ci-guards-py",
+        "currency-properties-currency-properties-ci-probes-py",
+        "currency-properties-currency-properties-ci-roster-py",
+        "currency-properties-currency-properties-ci-run-py",
+        "currency-properties-tests-currency-properties-ci-evidence-test-py",
+        "currency-properties-tests-currency-properties-ci-run-test-py"
+      ],
+      "source_refs": [
+        "scripts/capture-grf-currency-properties.py",
+        "scripts/check-grf-currency-properties-ci.py",
+        "scripts/currency-properties-ci-layout.json",
+        "scripts/currency-properties-guards.json",
+        "scripts/currency_properties_ci_archive.py",
+        "scripts/currency_properties_ci_capture.py",
+        "scripts/currency_properties_ci_evidence.py",
+        "scripts/currency_properties_ci_guards.py",
+        "scripts/currency_properties_ci_probes.py",
+        "scripts/currency_properties_ci_roster.py",
+        "scripts/currency_properties_ci_run.py",
+        "scripts/tests/currency_properties_ci_evidence_test.py",
+        "scripts/tests/currency_properties_ci_run_test.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "corruption/rejections.json",
+        "bin/ottd_sim",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256"
       ]
     }
   ]

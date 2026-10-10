@@ -162,7 +162,11 @@ fn clearing_error(mut error: CommandCost, accumulated: i64) -> Result<Build, Com
     Ok(Build::rejected(error))
 }
 
-fn ownership_error(world: &World, tile: u32, owner: u8) -> Result<CommandCost, CommandError> {
+pub(super) fn ownership_error(
+    world: &World,
+    tile: u32,
+    owner: u8,
+) -> Result<CommandCost, CommandError> {
     let mut error = CommandCost::failure("STR_ERROR_OWNED_BY");
     error.error_params = match owner {
         0..=14

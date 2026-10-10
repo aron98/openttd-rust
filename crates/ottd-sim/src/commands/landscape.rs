@@ -87,23 +87,7 @@ pub(super) fn clear_with_prices(
             )
             .ok_or(CommandError::Overflow("snow clearing"))?;
     }
-    let clear = TileRawParts {
-        tile_type: source.tile_type() & 15,
-        height: source.height(),
-        m1: 16,
-        m2: 0,
-        m3: 0,
-        m4: 0,
-        m5: 0,
-        m6: 0,
-        m7: 0,
-        m8: 0,
-    };
-    let mut edits = vec![WorldEdit::Tile {
-        index: tile,
-        value: clear.into(),
-    }];
-    edits.extend(clear_neighbor_water(world, tile)?);
+    let mut edits = clear_square(world, tile)?;
     if !automatic {
         edits.push(field_edit(
             *b"PLYR",
@@ -122,6 +106,31 @@ pub(super) fn clear_with_prices(
         edits,
     })
 }
+pub(super) fn clear_square(
+    world: TerrainRead<'_>,
+    tile: u32,
+) -> Result<Vec<WorldEdit>, CommandError> {
+    let source = world.tile(tile)?;
+    let clear = TileRawParts {
+        tile_type: source.tile_type() & 15,
+        height: source.height(),
+        m1: 16,
+        m2: 0,
+        m3: 0,
+        m4: 0,
+        m5: 0,
+        m6: 0,
+        m7: 0,
+        m8: 0,
+    };
+    let mut edits = vec![WorldEdit::Tile {
+        index: tile,
+        value: clear.into(),
+    }];
+    edits.extend(clear_neighbor_water(world, tile)?);
+    Ok(edits)
+}
+
 fn clear_neighbor_water(world: TerrainRead<'_>, tile: u32) -> Result<Vec<WorldEdit>, CommandError> {
     let mut edits = Vec::new();
     let width = i64::from(world.size().width());

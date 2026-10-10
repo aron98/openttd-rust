@@ -1,6 +1,7 @@
 #ifndef OTTD_REFERENCE_ORDER_FIXTURE_HPP
 #define OTTD_REFERENCE_ORDER_FIXTURE_HPP
 #include "reference_order_state.hpp"
+#include "reference_replay.hpp"
 #include "../command_func.h"
 #include "../order_cmd.h"
 #include "../order_func.h"
@@ -48,20 +49,37 @@ inline std::string Label(const Json &a)
     Require(!label.empty() && label.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_") == std::string::npos, "invalid fixture label");
     return label;
 }
+inline Json Observation()
+{
+    if (std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE") == nullptr) return Snapshot();
+    Require(std::string(std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE")) == "1", "invalid depot removal observer mode");
+    Json tiles = Json::array();
+    for (uint32_t index = 0; index < Map::Size(); ++index) tiles.push_back(ReferenceDepotRuntime::Parts(TileIndex(index)));
+    return {{"orders", Snapshot()}, {"depot", ReferenceDepotRuntime::Snapshot()},
+        {"vehicles", ReferenceRuntimeRoad::Live()}, {"tiles", std::move(tiles)}};
+}
 inline Json Save(const Json &a)
 {
     const auto path = directory / (Label(a) + ".sav");
     Require(!std::filesystem::exists(path), "fixture save already exists");
-    const Json before = Snapshot();
+    const Json before = Observation();
     Require(SaveOrLoad(path.string(), SLO_SAVE, DFT_GAME_FILE, NO_DIRECTORY, false) == SL_OK, "fixture native save failed");
-    const Json after = Snapshot();
+    const Json after = Observation();
     Require(before == after, "saving changed initialized live order state");
     return {{"path", path.filename().string()}, {"before", before}, {"after", after}, {"role", ReferenceOrderState::Role()}};
 }
 inline Json Action(const Json &a)
 {
     const std::string op = a.at("op").get<std::string>();
-    if (op == "backup") {
+    if (op == "command") {
+        Require(std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE") != nullptr, "command fixture requires depot removal observer");
+        Require(!_networking, "depot command fixture requires actual single player startup");
+        const auto &request = a.at("request");
+        const std::string kind = request.at("command").at("kind").get<std::string>();
+        Require(kind == "landscape_clear" || kind == "build_road_depot", "unsupported depot lifecycle fixture command");
+        Json receipt = ReferenceReplay::Execute(request);
+        return {{"receipt", std::move(receipt)}, {"native_metadata", ReferenceReplay::metadata}};
+    } else if (op == "backup") {
         OrderBackup::Backup(VehicleFor(a), a.at("user").get<uint32_t>());
     } else if (op == "backup_users") {
         const auto &users = a.at("users");
@@ -184,20 +202,20 @@ inline void Poll()
         directory = destination;
         Require(!std::filesystem::exists(directory), "fixture output already exists");
         std::filesystem::create_directories(directory);
-        results = {{"schema_version", 1}, {"case", plan.at("case")}, {"role", ReferenceOrderState::Role()}, {"initial", Snapshot()}, {"actions", Json::array()}};
+        results = {{"schema_version", 1}, {"case", plan.at("case")}, {"role", ReferenceOrderState::Role()}, {"initial", Observation()}, {"actions", Json::array()}};
         started = true;
     }
     Require(_pause_mode.Test(PauseMode::Normal), "order fixture requires actual paused source");
     if (cursor < plan.at("actions").size()) {
         const auto &action = plan.at("actions").at(cursor);
         if (action.at("op") == "await_file" && !std::filesystem::exists(directory / (Label(action) + ".ready"))) return;
-        const Json before = Snapshot();
+        const Json before = Observation();
         const Json result = Action(action);
-        results["actions"].push_back({{"index", cursor}, {"input", action}, {"before", before}, {"result", result}, {"after", Snapshot()}, {"role", ReferenceOrderState::Role()}});
+        results["actions"].push_back({{"index", cursor}, {"input", action}, {"before", before}, {"result", result}, {"after", Observation()}, {"role", ReferenceOrderState::Role()}});
         ++cursor;
         return;
     }
-    results["final"] = Snapshot();
+    results["final"] = Observation();
     results["final_role"] = ReferenceOrderState::Role();
     Write(directory / "results.json", results);
     finished = true;

@@ -156,28 +156,11 @@ fn execute_admitted(
     returns: Option<CommandReturnPhases>,
     company_exists: bool,
 ) -> Result<CommandReceipt, CommandError> {
-    if let Command::BuildRoadDepot {
-        tile,
-        road_type,
-        direction,
-    } = request.command
+    if matches!(request.command, Command::BuildRoadDepot { .. })
+        || (matches!(request.command, Command::LandscapeClear { .. })
+            && matches!(context, Some(OwnedContext::Depot(_))))
     {
-        let Some(OwnedContext::Depot(context)) = context else {
-            return Err(CommandError::Unsupported(
-                "depot construction needs owned runtime",
-            ));
-        };
-        return super::road_depot::run(
-            world,
-            request.company,
-            super::road_depot::Args {
-                tile,
-                road_type,
-                direction,
-            },
-            estimate,
-            context,
-        );
+        return execute_depot(world, request, estimate, context);
     }
     if let Command::BuildVehicle {
         tile,
@@ -253,6 +236,39 @@ fn execute_admitted(
         );
     }
     execute_planned(world, request, tile, estimate, returns, company_exists)
+}
+fn execute_depot(
+    world: &mut World,
+    request: &CommandRequest,
+    estimate: bool,
+    context: Option<OwnedContext<'_>>,
+) -> Result<CommandReceipt, CommandError> {
+    let Some(OwnedContext::Depot(context)) = context else {
+        return Err(CommandError::Unsupported(
+            "depot construction needs owned runtime",
+        ));
+    };
+    match request.command {
+        Command::LandscapeClear { tile } => {
+            super::road_depot::remove::run(world, request.company, tile, estimate, context)
+        }
+        Command::BuildRoadDepot {
+            tile,
+            road_type,
+            direction,
+        } => super::road_depot::run(
+            world,
+            request.company,
+            super::road_depot::Args {
+                tile,
+                road_type,
+                direction,
+            },
+            estimate,
+            context,
+        ),
+        _ => Err(CommandError::Unsupported("depot command context")),
+    }
 }
 fn execute_planned(
     world: &mut World,

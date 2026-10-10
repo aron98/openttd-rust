@@ -3,6 +3,9 @@ mod allocation;
 mod order_state;
 pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 mod depot;
+mod depot_removal;
+#[cfg(test)]
+mod depot_removal_native;
 mod group_counts;
 pub mod pools;
 #[cfg(test)]
@@ -160,6 +163,7 @@ pub(crate) fn new_road_record(
     road_record::build(schema, state, cargo_paid_for)
 }
 pub(crate) struct DepotContext<'a> {
+    orders: &'a mut order_state::OrderState,
     pub content: &'a ContentCatalog,
     pub pool: &'a mut pools::PoolAllocator,
     pub road: &'a mut BTreeMap<u8, [u32; 63]>,
@@ -250,13 +254,23 @@ impl SimulationRuntime {
         &mut self,
         request: &crate::CommandRequest,
     ) -> Result<crate::CommandReceipt, crate::CommandError> {
+        if matches!(request.command, crate::Command::LandscapeClear { .. })
+            && self.save_context() != RuntimeSaveContext::SinglePlayer
+        {
+            return Err(crate::CommandError::Unsupported(
+                "depot removal host context",
+            ));
+        }
         match request.command {
-            crate::Command::BuildRoadDepot { .. } => DepotContext {
-                content: &self.content,
-                pool: &mut self.depot.pool,
-                road: &mut self.depot.road,
+            crate::Command::BuildRoadDepot { .. } | crate::Command::LandscapeClear { .. } => {
+                DepotContext {
+                    orders: &mut self.orders,
+                    content: &self.content,
+                    pool: &mut self.depot.pool,
+                    road: &mut self.depot.road,
+                }
+                .execute(&mut self.world, request)
             }
-            .execute(&mut self.world, request),
             crate::Command::BuildVehicle { .. } | crate::Command::SellVehicle { .. } => {
                 RoadVehicleContext {
                     serializer_cargo_paid_for: self.serializer_cargo_paid_for,
@@ -272,7 +286,6 @@ impl SimulationRuntime {
             crate::Command::LevelLand { .. }
             | crate::Command::TerraformLand { .. }
             | crate::Command::BuildRoad { .. }
-            | crate::Command::LandscapeClear { .. }
             | crate::Command::IncreaseLoan { .. }
             | crate::Command::DecreaseLoan { .. }
             | crate::Command::RenameCompany { .. }

@@ -1978,7 +1978,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-pipeline-rs",
       "path": "crates/ottd-sim/src/commands/pipeline.rs",
-      "sha256": "fe1f4ace40145dccad54a85089eb37251a4ade470d97d2d2e2f21742073b7153",
+      "sha256": "fb9e28d67abf193d412787298e014794772e12bdfa4cca065afe55f7a8a86f1a",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "cebca0dd02b8b2eb31f5981008c43bbaddb3ce387379531e0361091dc56dad96",
+      "sha256": "2d24d938d8f763bd00e83f30e5efdfc2e36f596f8bf96440e2e4e512110cd96a",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2887,7 +2887,7 @@
     {
       "id": "depot-build-crates-ottd-sim-src-commands-road-depot-rs",
       "path": "crates/ottd-sim/src/commands/road_depot.rs",
-      "sha256": "310bca3ef59457b41e6068f3edd1eee4f405a11a058b683c5a51f79a5eca90af",
+      "sha256": "2801b045ca2f1529bf114b642043406b0bfbacf99a3f5eed4bfe663174c87df9",
       "kind": "recipe",
       "provenance": "Vanilla depot create/rotate only: exact original command phases, authoritative sparse pool and 63-slot company infrastructure; frozen native 178-case matrix. Removal and other construction remain pending.",
       "save_version": null,
@@ -2896,7 +2896,7 @@
     {
       "id": "depot-build-crates-ottd-sim-src-commands-road-depot-planning-rs",
       "path": "crates/ottd-sim/src/commands/road_depot/planning.rs",
-      "sha256": "0cbd213a2d7a0290b846dfe6671d2780add7980e255ba72b7c51a7997480dd6d",
+      "sha256": "de5e560b5603eff760611b2c68f098a77bdce1a2d94a0fbeeaee83fd4f21be6b",
       "kind": "recipe",
       "provenance": "Vanilla depot create/rotate only: exact original command phases, authoritative sparse pool and 63-slot company infrastructure; frozen native 178-case matrix. Removal and other construction remain pending.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "7b3e2ccea5dac46f5f00f7cb5848c2cd2a093cfea11490655d045b273b12eec0",
+      "sha256": "8333a41f99b7320d99749969ec98b8da0cdb108e3669b8ff8c71fcbf2118b6c1",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "f86f167f565f19c3652f912bb121074ede7f03a0444af1ef0ffb4a94ae62b76f",
+      "sha256": "69c26c0c3afd1e4998b6d8f3c4a914dcbdb774cce53186296b15fcbe8ded8187",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3394,6 +3394,42 @@
       "sha256": "a803a7bd2c32c95ff79043fafb54aca73d884be5b3a50c16326b7f5b7e12ed05",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "depot-removal-driver",
+      "path": "scripts/check-depot-removal.py",
+      "sha256": "91e1b05d28eb5177ce9223e17650423ef5701c77918947797f1366cbb157bf84",
+      "kind": "recipe",
+      "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "depot-removal-evidence",
+      "path": "scripts/depot_removal_evidence.py",
+      "sha256": "14635351119ad3d33c4baaea954513c61ea040c50777cad548a7d58221d75f3c",
+      "kind": "recipe",
+      "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "depot-removal-layout",
+      "path": "scripts/depot-removal-layout.json",
+      "sha256": "99f2807927249bc5ac08cf3e9c8a6a822d9892494e498ad7c27543e7dce8259c",
+      "kind": "recipe",
+      "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "depot-removal-tests",
+      "path": "scripts/tests/depot_removal_evidence_test.py",
+      "sha256": "07ad81932e54fcea00d8c3d21a2d9c5e70a44da909e689211654237f683d719e",
+      "kind": "recipe",
+      "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
       "profile": null
     }
@@ -9786,6 +9822,35 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "depot-removal",
+      "argv": [
+        "python3",
+        "scripts/check-depot-removal.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/zero-rejected.json"
+      ],
+      "success_text": "PASS depot-removal CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -14285,6 +14350,44 @@
         "native-bindings.json",
         "native-invocations.json",
         "bin/ottd_sim"
+      ]
+    },
+    {
+      "id": "runtime.single-road-depot-removal",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Single-tile LandscapeClear of vanilla road/tram depots, ordinary company single-player road-only runtime. Atomic canonical map/DEPT/PLYR/orders/backups and live pool/infrastructure publication. No ClearArea, host modes, mixed vehicles, ordered sale, Restore or movement.",
+      "expected": "34 actual original/Rust pairs,117 actions,302 state snapshots,69 full serializer saves; actual rollback units,5 semantic mutations,zero/subset and altered-native rejection. Complete pinned source/executable/input/raw archive membership. Configured landscaping replenishment rates are zero to isolate command boundaries. Same-tile live-backup successful command and genuine above-ground bridge/wormhole witness remain unproven; primitive and transaction tests are dependency evidence only.",
+      "driver": "depot-removal",
+      "assets": [
+        "depot-removal-driver",
+        "depot-removal-evidence",
+        "depot-removal-layout",
+        "depot-removal-tests"
+      ],
+      "source_refs": [
+        "scripts/check-depot-removal.py",
+        "scripts/depot_removal_evidence.py",
+        "scripts/depot-removal-layout.json",
+        "scripts/tests/depot_removal_evidence_test.py",
+        "crates/ottd-sim/src/runtime/depot_removal.rs",
+        "crates/ottd-sim/src/commands/road_depot/remove.rs"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/zero-rejected.json"
       ]
     }
   ]

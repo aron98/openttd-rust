@@ -7,14 +7,16 @@ to game ticks.
 
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
-assignment, blocks, if/else, while/for/do loops, break and continue. Values remain null,
+assignment, blocks, if/else, while/for/do loops, scalar switch/case/default, break and continue. Values remain null,
 bool, i64 decimal/octal/hex integers, and well-formed f32 decimal/scientific
 literals. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
 comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
 bitwise `& | ^ << >> >>>`, comma and ternary expressions, scalar compound
 assignments and prefix/postfix updates.
 Identifiers are ASCII. Space, tab, CR and LF have exactly native's lexical meaning;
-semicolons and previous-token/newline boundaries follow the bundled compiler.
+Line and block comments preserve the native distinction between newline tokens
+and block-comment line bookkeeping. Semicolons and previous-token/newline
+boundaries follow the bundled compiler.
 Unsupported reserved words and compound tokens are rejected, including inside
 unreachable source. Source size and recursive compilation are bounded.
 
@@ -47,8 +49,7 @@ bytecode returns typed errors. Runtime errors and returns terminate the frame.
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
 is portable native semantics. Thirty-six opcode handlers remain unimplemented.
-Foreach/switch,
-comma expressions/ternary, comments, strings, globals/objects, functions/closures,
+Foreach, strings, globals/objects, functions/closures,
 reference lifetime/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
 Float NaN payload witnesses are specific to the tested native/Rust toolchain.
@@ -68,7 +69,7 @@ The native builder exports exact pinned sources into a private directory. Test
 host glue only supplies allocation and fatal/log diagnostics; it makes no host API
 or memory-limit compatibility claim. Default observer output includes instructions,
 literals, stack size, return/error stage and suspension debt/IP. A separate
-`--frames` native mode captures every scalar slot on suspension. Three private
+`--frames` native mode captures every scalar slot on suspension. Nine private
 Rust VM tests compare these real captures without adding a production inspection
 API, and CI reruns native captures against their pinned bytes. Additional budget
 probes and branch-specific corruption controls are independently admitted.
@@ -88,3 +89,8 @@ separate from expression state. Compound and postfix stores preserve alias order
 For-loop increment instructions are extracted and re-emitted through the native
 optimizer; this preserves native branch-layout quirks, including bounded suspension
 of some ternary increments that might otherwise appear to terminate.
+
+Switch selectors retain their original register reference; case EQ may overwrite
+a named case operand. Fallthrough skips later case expressions. Switch owns break
+targets, while continue targets the enclosing loop. Case scopes restore compiler
+metadata; explicit break/continue preserve native conditional register cleanup.

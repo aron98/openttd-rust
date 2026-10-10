@@ -8,6 +8,7 @@ from scripts.gameplay_foundations import FoundationRun
 from scripts.script_vm_iteration import ITERATION_BUDGETS, ITERATION_CONTROLS
 from scripts.script_vm_observation import compare_observation, require_tests
 from scripts.script_vm_provenance import digest, select_executable
+from scripts.script_vm_switch import SWITCH_BUDGETS, SWITCH_CONTROLS
 from scripts.world_check_support import (
     ROOT,
     Json,
@@ -25,6 +26,8 @@ FRAME_TESTS = (
     "vm::tests::iteration_update_frame_matches_native_frames",
     "vm::tests::iteration_loop_frame_matches_native_frames",
     "vm::tests::failed_update_matches_native_frames",
+    "vm::tests::switch_case_frame_matches_native_frames",
+    "vm::tests::switch_continue_frame_matches_native_frames",
 )
 FRAMES = (
     "scope_guard_clear",
@@ -34,6 +37,8 @@ FRAMES = (
     "iteration_update_frame",
     "iteration_loop_frame",
     "iteration_failed_update",
+    "switch_case_frame",
+    "switch_continue_frame",
 )
 FRAME_CREDITS = (3, 2, 2, 100)
 FRAME_SCHEDULES = {
@@ -41,25 +46,31 @@ FRAME_SCHEDULES = {
     "iteration_update_frame": (2,) * 20 + (100,),
     "iteration_loop_frame": (2,) * 20 + (100,),
     "iteration_failed_update": (2, 2, 100),
+    "switch_case_frame": (2,) * 20 + (100,),
+    "switch_continue_frame": (2,) * 20 + (100,),
 }
 BUDGETS = (
-    ("while_sum", (0,), "suspend"),
-    ("while_sum", (1,), "suspend"),
-    ("while_sum", (37,), "suspend"),
-    ("while_sum", (38,), "suspend"),
-    ("while_sum", (39,), "return"),
-    ("while_sum", (2,) * 45, "return"),
-    ("local_alias", (0,), "suspend"),
-    ("local_alias", (1,), "suspend"),
-    ("local_alias", (4,), "suspend"),
-    ("local_alias", (5,), "suspend"),
-    ("local_alias", (6,), "return"),
-    ("short_and", (0,), "suspend"),
-    ("short_and", (1,), "suspend"),
-    ("short_and", (2,) * 8, "return"),
-    ("loop_continue", (2,) * 65, "return"),
-    ("infinite", (2,) * 20, "suspend"),
-) + ITERATION_BUDGETS
+    (
+        ("while_sum", (0,), "suspend"),
+        ("while_sum", (1,), "suspend"),
+        ("while_sum", (37,), "suspend"),
+        ("while_sum", (38,), "suspend"),
+        ("while_sum", (39,), "return"),
+        ("while_sum", (2,) * 45, "return"),
+        ("local_alias", (0,), "suspend"),
+        ("local_alias", (1,), "suspend"),
+        ("local_alias", (4,), "suspend"),
+        ("local_alias", (5,), "suspend"),
+        ("local_alias", (6,), "return"),
+        ("short_and", (0,), "suspend"),
+        ("short_and", (1,), "suspend"),
+        ("short_and", (2,) * 8, "return"),
+        ("loop_continue", (2,) * 65, "return"),
+        ("infinite", (2,) * 20, "suspend"),
+    )
+    + ITERATION_BUDGETS
+    + SWITCH_BUDGETS
+)
 
 # Each target is actual retained native output, compared with a deliberately wrong record.
 BRANCH_CONTROLS = {
@@ -73,6 +84,7 @@ BRANCH_CONTROLS = {
 }
 
 BRANCH_CONTROLS.update(ITERATION_CONTROLS)
+BRANCH_CONTROLS.update(SWITCH_CONTROLS)
 
 LIB_BUILD = [
     "cargo",

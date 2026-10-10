@@ -117,7 +117,7 @@ fn unsupported_language_is_rejected_even_when_unreachable() {
         "local x=1; {local y=2;} return y;",
         "local x=1; x<-2;",
         "foreach(x in [1]){}",
-        "switch(1){case 1: break;}",
+        "try{}catch(e){}",
     ] {
         // Given: source explicitly outside the approved local/branch subset.
         // When: compiling, including unreachable branches.

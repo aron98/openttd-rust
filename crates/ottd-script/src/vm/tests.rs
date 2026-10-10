@@ -132,3 +132,27 @@ fn failed_update_matches_native_frames() -> Result<(), Box<dyn std::error::Error
     assert_eq!(vm.registers.get(1), Some(&Value::Integer(7)));
     Ok(())
 }
+
+#[test]
+fn switch_case_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!("../../../../scripts/compat/script-vm/fixtures/branch_switch_case_frame.nut"),
+        include_str!("../../tests/frames/switch_case_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}
+
+#[test]
+fn switch_continue_frame_matches_native_frames() -> Result<(), Box<dyn std::error::Error>> {
+    check_frames(
+        include_str!(
+            "../../../../scripts/compat/script-vm/fixtures/branch_switch_continue_frame.nut"
+        ),
+        include_str!("../../tests/frames/switch_continue_frame.txt"),
+        &[
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 100,
+        ],
+    )
+}

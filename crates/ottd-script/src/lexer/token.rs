@@ -6,6 +6,9 @@ pub(crate) enum TokenKind<'a> {
     If,
     Else,
     While,
+    Switch,
+    Case,
+    Default,
     For,
     Do,
     Compound(u8),
@@ -50,6 +53,9 @@ impl TokenKind<'_> {
             | Self::If
             | Self::Else
             | Self::While
+            | Self::Switch
+            | Self::Case
+            | Self::Default
             | Self::For
             | Self::Do
             | Self::Compound(_)

@@ -79,7 +79,7 @@ def load_spec(path: Path) -> Spec:
         len(set(spec.credits)),
         len(set(spec.tests)),
         len(spec.stages),
-    ) != (618, 9, 37, 5562) or len(set(spec.paths)) != len(spec.paths):
+    ) != (724, 9, 44, 6516) or len(set(spec.paths)) != len(spec.paths):
         raise WorldCheckError("Incomplete VM manifest membership")
     return spec
 

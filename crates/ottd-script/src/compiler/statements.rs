@@ -3,6 +3,7 @@ use super::Compiler;
 use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
 mod branches;
 mod iteration;
+mod switch;
 impl Compiler<'_> {
     pub(super) fn main(&mut self) -> Result<(), CompileError> {
         while self.token.kind != TokenKind::End {
@@ -53,6 +54,7 @@ impl Compiler<'_> {
                 self.local()?;
             }
             TokenKind::If => self.conditional(depth)?,
+            TokenKind::Switch => self.switch_statement(depth)?,
             TokenKind::While => self.while_loop(depth)?,
             TokenKind::For => self.for_loop(depth)?,
             TokenKind::Do => self.do_loop(depth)?,
@@ -62,7 +64,9 @@ impl Compiler<'_> {
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::Compound(_)
+            TokenKind::Case
+            | TokenKind::Default
+            | TokenKind::Compound(_)
             | TokenKind::Increment(_)
             | TokenKind::Shift(_)
             | TokenKind::Identifier(_)
@@ -103,15 +107,22 @@ impl Compiler<'_> {
     fn block(&mut self, depth: u8) -> Result<(), CompileError> {
         let start = self.size()?;
         self.advance()?;
-        while self.token.kind != TokenKind::Symbol(b'}') {
+        self.statements(depth)?;
+        self.expect(b'}')?;
+        self.scope_end(start)?;
+        self.registers.truncate(start);
+        Ok(())
+    }
+    fn statements(&mut self, depth: u8) -> Result<(), CompileError> {
+        while !matches!(
+            self.token.kind,
+            TokenKind::Symbol(b'}') | TokenKind::Case | TokenKind::Default
+        ) {
             self.statement(depth)?;
             if !matches!(self.previous, TokenKind::Symbol(b'}' | b';')) {
                 self.semicolon()?;
             }
         }
-        self.expect(b'}')?;
-        self.scope_end(start)?;
-        self.registers.truncate(start);
         Ok(())
     }
     fn local(&mut self) -> Result<(), CompileError> {

@@ -160,19 +160,19 @@ def main() -> None:
     write_json(
         output / "summary.json",
         {
-            "cases": 5638,
-            "fixtures": 618,
+            "cases": 6643,
+            "fixtures": 724,
             "credits": 9,
-            "tests": 37,
-            "controls": 16,
-            "frame_tests": 7,
-            "native_frames": 7,
-            "branch_budget_cases": 76,
+            "tests": 44,
+            "controls": 22,
+            "frame_tests": 9,
+            "native_frames": 9,
+            "branch_budget_cases": 127,
             "passed": True,
         },
     )
     package(output)
-    print("PASS scalar VM 5638 comparisons", flush=True)
+    print("PASS scalar VM 6643 comparisons", flush=True)
 
 
 if __name__ == "__main__":

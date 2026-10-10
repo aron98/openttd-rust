@@ -3,6 +3,7 @@
     reason = "Crate-private lexer types must satisfy unreachable_pub"
 )]
 use crate::{CompileError, CompileErrorKind, Value};
+mod comments;
 mod numbers;
 mod token;
 pub(crate) use token::{Token, TokenKind};
@@ -30,15 +31,7 @@ impl<'a> Lexer<'a> {
         }
     }
     pub(super) fn next(&mut self) -> Result<Token<'a>, CompileError> {
-        let mut newline = false;
-        while let Some(c) = self.peek() {
-            if matches!(c, b' ' | b'\t' | b'\r' | b'\n') {
-                newline |= c == b'\n';
-                self.advance();
-            } else {
-                break;
-            }
-        }
+        let newline = self.trivia()?;
         let offset = self.position;
         let Some(c) = self.peek() else {
             return Ok(Token {
@@ -66,6 +59,9 @@ impl<'a> Lexer<'a> {
                     "if" => TokenKind::If,
                     "else" => TokenKind::Else,
                     "while" => TokenKind::While,
+                    "switch" => TokenKind::Switch,
+                    "case" => TokenKind::Case,
+                    "default" => TokenKind::Default,
                     "for" => TokenKind::For,
                     "do" => TokenKind::Do,
                     "break" => TokenKind::Break,
@@ -74,9 +70,9 @@ impl<'a> Lexer<'a> {
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
                     "function" | "foreach" | "in" | "typeof" | "delegate" | "delete" | "try"
-                    | "catch" | "throw" | "clone" | "yield" | "resume" | "switch" | "case"
-                    | "default" | "this" | "parent" | "class" | "extends" | "constructor"
-                    | "instanceof" | "vargc" | "vargv" | "static" | "enum" | "const" => {
+                    | "catch" | "throw" | "clone" | "yield" | "resume" | "this" | "parent"
+                    | "class" | "extends" | "constructor" | "instanceof" | "vargc" | "vargv"
+                    | "static" | "enum" | "const" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,

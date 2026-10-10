@@ -1,5 +1,5 @@
 //! Branch patching and loop exit ownership.
-use super::super::{Compiler, LoopLabels};
+use super::super::Compiler;
 use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
     pub(super) fn conditional(&mut self, depth: u8) -> Result<(), CompileError> {
@@ -50,10 +50,6 @@ impl Compiler<'_> {
         self.expect(b'(')?;
         self.comma(0)?;
         self.expect(b')')?;
-        self.loops.push(LoopLabels {
-            breaks: Vec::new(),
-            continues: Vec::new(),
-        });
         let condition = self.pop()?;
         self.emit(Instruction {
             opcode: 0x1a,
@@ -64,7 +60,7 @@ impl Compiler<'_> {
         });
         let branch = self.position()?;
         let size = self.size()?;
-        self.last_stack_size = size;
+        self.begin_loop()?;
         self.statement(depth)?;
         self.registers.truncate(size);
         self.emit(Instruction {
@@ -77,20 +73,15 @@ impl Compiler<'_> {
         self.patch(self.position()?, head)?;
         let end = self.position()?;
         self.patch(branch, end)?;
-        let labels = self
-            .loops
-            .pop()
-            .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
-        for position in labels.breaks {
-            self.patch(position, end)?;
-        }
-        for position in labels.continues {
-            self.patch(position, head)?;
-        }
-        Ok(())
+        self.finish_loop(head)
     }
     pub(super) fn loop_exit(&mut self, continuing: bool) -> Result<(), CompileError> {
-        if self.loops.is_empty() {
+        let missing = if continuing {
+            self.continue_targets.is_empty()
+        } else {
+            self.break_targets.is_empty()
+        };
+        if missing {
             return Err(self.error(CompileErrorKind::ExpectedToken));
         }
         self.scope_end(self.last_stack_size)?;
@@ -103,12 +94,12 @@ impl Compiler<'_> {
         });
         let position = self.position()?;
         let error = self.error(CompileErrorKind::ExpectedToken);
-        let labels = self.loops.last_mut().ok_or(error)?;
-        if continuing {
-            labels.continues.push(position);
+        let targets = if continuing {
+            self.continue_targets.last_mut()
         } else {
-            labels.breaks.push(position);
-        }
+            self.break_targets.last_mut()
+        };
+        targets.ok_or(error)?.push(position);
         self.advance()
     }
 }

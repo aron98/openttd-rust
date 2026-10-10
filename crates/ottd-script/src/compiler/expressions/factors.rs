@@ -91,7 +91,10 @@ impl Compiler<'_> {
                 });
                 Ok(None)
             }
-            TokenKind::For
+            TokenKind::Switch
+            | TokenKind::Case
+            | TokenKind::Default
+            | TokenKind::For
             | TokenKind::Do
             | TokenKind::Compound(_)
             | TokenKind::Shift(_)

@@ -29,7 +29,8 @@ pub fn compile(source: &str) -> Result<Program, CompileError> {
         registers: Registers::new(),
         emitter: Emitter::new(),
         literals: Vec::new(),
-        loops: Vec::new(),
+        break_targets: Vec::new(),
+        continue_targets: Vec::new(),
         last_stack_size: 0,
     };
     compiler.main()?;
@@ -39,10 +40,6 @@ pub fn compile(source: &str) -> Result<Program, CompileError> {
         instructions: compiler.emitter.instructions,
     })
 }
-struct LoopLabels {
-    breaks: Vec<i32>,
-    continues: Vec<i32>,
-}
 struct Compiler<'a> {
     lexer: Lexer<'a>,
     token: Token<'a>,
@@ -50,7 +47,8 @@ struct Compiler<'a> {
     registers: Registers<'a>,
     emitter: Emitter,
     literals: Vec<Value>,
-    loops: Vec<LoopLabels>,
+    break_targets: Vec<Vec<i32>>,
+    continue_targets: Vec<Vec<i32>>,
     last_stack_size: u8,
 }
 impl Compiler<'_> {

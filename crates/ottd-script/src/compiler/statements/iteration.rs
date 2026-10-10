@@ -1,25 +1,31 @@
 //! Native post-test loops and for-increment extraction/re-emission.
-use super::super::{Compiler, LoopLabels};
+use super::super::Compiler;
 use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
-    fn begin_loop(&mut self) -> Result<(), CompileError> {
-        self.loops.push(LoopLabels {
-            breaks: Vec::new(),
-            continues: Vec::new(),
-        });
+    pub(super) fn begin_loop(&mut self) -> Result<(), CompileError> {
+        self.break_targets.push(Vec::new());
+        self.continue_targets.push(Vec::new());
         self.last_stack_size = self.size()?;
         Ok(())
     }
-    fn finish_loop(&mut self, continue_target: i32) -> Result<(), CompileError> {
-        let labels = self
-            .loops
+    pub(super) fn finish_breaks(&mut self) -> Result<(), CompileError> {
+        let targets = self
+            .break_targets
             .pop()
             .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
         let end = self.position()?;
-        for position in labels.breaks {
+        for position in targets {
             self.patch(position, end)?;
         }
-        for position in labels.continues {
+        Ok(())
+    }
+    pub(super) fn finish_loop(&mut self, continue_target: i32) -> Result<(), CompileError> {
+        self.finish_breaks()?;
+        let targets = self
+            .continue_targets
+            .pop()
+            .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
+        for position in targets {
             self.patch(position, continue_target)?;
         }
         Ok(())

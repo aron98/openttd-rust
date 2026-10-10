@@ -41,16 +41,7 @@ impl Compiler<'_> {
                 self.advance()?;
                 Ok(None)
             }
-            TokenKind::Identifier(name) => {
-                let register = self
-                    .registers
-                    .local(name)
-                    .ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
-                self.advance()?;
-                self.registers.reference(register);
-                state.dereference = Some(register);
-                Ok(Some(register))
-            }
+            TokenKind::Identifier(name) => self.identifier(name, state),
             TokenKind::Symbol(b'(') => {
                 self.advance()?;
                 self.comma(depth)?;
@@ -105,7 +96,9 @@ impl Compiler<'_> {
                 });
                 Ok(None)
             }
-            TokenKind::Switch
+            TokenKind::Const
+            | TokenKind::Enum
+            | TokenKind::Switch
             | TokenKind::Case
             | TokenKind::Default
             | TokenKind::For
@@ -128,5 +121,38 @@ impl Compiler<'_> {
             | TokenKind::Or
             | TokenKind::End => Err(self.error(CompileErrorKind::ExpectedToken)),
         }
+    }
+    fn identifier(
+        &mut self,
+        name: &str,
+        state: &mut ExpressionState,
+    ) -> Result<Option<Register>, CompileError> {
+        state.constant = false;
+        self.advance()?;
+        if let Some(register) = self.registers.local(name) {
+            self.registers.reference(register);
+            state.dereference = Some(register);
+            return Ok(Some(register));
+        }
+        let binding = self
+            .realm
+            .constant(name)
+            .ok_or_else(|| self.error(CompileErrorKind::UnsupportedSyntax))?;
+        let scalar = match binding {
+            crate::realm::constants::Binding::Scalar(value) => value,
+            crate::realm::constants::Binding::Enum(members) => {
+                self.expect(b'.')?;
+                let member = self.constant_name()?;
+                members
+                    .get(member.as_bytes())
+                    .map(|(_, value)| value.clone())
+                    .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?
+            }
+        };
+        let register = self.push()?;
+        self.load(register, scalar.value())?;
+        state.dereference = Some(register);
+        state.constant = true;
+        Ok(None)
     }
 }

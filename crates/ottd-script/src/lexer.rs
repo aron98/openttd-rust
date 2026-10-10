@@ -83,6 +83,8 @@ impl<'a> Lexer<'a> {
                 let name = std::str::from_utf8(name)
                     .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
                 match name {
+                    "const" => TokenKind::Const,
+                    "enum" => TokenKind::Enum,
                     "typeof" => TokenKind::TypeOf,
                     "return" => TokenKind::Return,
                     "local" => TokenKind::Local,
@@ -101,8 +103,7 @@ impl<'a> Lexer<'a> {
                     "false" => TokenKind::Scalar(Value::Bool(false)),
                     "function" | "foreach" | "in" | "delegate" | "delete" | "try" | "catch"
                     | "throw" | "clone" | "yield" | "resume" | "this" | "parent" | "class"
-                    | "extends" | "constructor" | "instanceof" | "vargc" | "vargv" | "static"
-                    | "enum" | "const" => {
+                    | "extends" | "instanceof" | "vargc" | "vargv" | "static" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,
@@ -112,7 +113,9 @@ impl<'a> Lexer<'a> {
                 }
             }
             b'+' | b'-' | b'*' | b'/' | b'%' | b'!' | b'~' | b'(' | b')' | b';' | b'{' | b'}'
-            | b',' | b'?' | b':' | b'^' | b'=' | b'<' | b'>' | b'&' | b'|' => self.symbol(c)?,
+            | b',' | b'?' | b':' | b'^' | b'=' | b'<' | b'>' | b'&' | b'|' | b'.' => {
+                self.symbol(c)?
+            }
             _ => return Err(self.error(CompileErrorKind::UnsupportedSyntax)),
         };
         Ok(Token {

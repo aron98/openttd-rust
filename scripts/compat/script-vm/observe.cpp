@@ -31,8 +31,10 @@ void value(const SQObjectPtr &v) {
  std::cout<<'\n';
 }
 #include "strings.hpp"
+#include "constants.hpp"
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--constants-session") return constants_session(argc,argv);
  if(std::string_view(argv[1])=="--parallel") return parallel_session(argc,argv);
  if(std::string_view(argv[1])=="--feed") return feed_session(argc,argv);
  if(std::string_view(argv[1])=="--terminal") return terminal_session(argc,argv);

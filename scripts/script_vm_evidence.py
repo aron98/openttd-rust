@@ -160,6 +160,14 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         ):
             continue  # Exact policy receipt and source bytes are checked by compare_case below.
         status = int(relative.startswith("controls/"))
+        from scripts.script_vm_constants import CONTROLS as CONSTANT_CONTROLS
+
+        if (
+            len(parts) > 2
+            and parts[0] == "controls"
+            and parts[1] in {f"constant-{name}" for name in CONSTANT_CONTROLS}
+        ):
+            status = int(parts[2] == "admit-mutant")
         expected_receipt = (
             {"returncode": 0}
             if relative.startswith("logs/")
@@ -217,6 +225,9 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
     from scripts.script_vm_strings import validate_strings
 
     validate_strings(directory, Path(origin), rust_path)
+    from scripts.script_vm_constants import validate_constants
+
+    validate_constants(directory, Path(origin))
     if read_json(directory / "summary.json") != {
         "cases": 10819,
         "fixtures": 1188,
@@ -225,13 +236,19 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "strict_comparisons": 10666,
         "undefined_input_rejections": 153,
         "controls": 25,
-        "frame_tests": 18,
+        "frame_tests": 23,
         "native_frames": 12,
         "branch_budget_cases": 127,
         "string_sessions": 4,
         "source_feed_cases": 18,
         "float_patterns": 23071,
         "string_controls": 4,
+        "constant_native_sessions": 115,
+        "constant_buffer_comparisons": 36,
+        "constant_root_boundaries": 1,
+        "constant_stateful_projections": 3,
+        "constant_public_tests": 3,
+        "constant_controls": 4,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

@@ -1,0 +1,14 @@
+refs 0 owned-value
+compile 0 0 buffer fixtures/seed-string.nut
+drop 0 0
+compile 1 1 buffer fixtures/read.nut
+compile 0 2 buffer fixtures/replace.nut
+drop 0 2
+run 1 1
+temp 1
+drop 1 1
+refs 0 owned-value
+temp 1
+release-child 1
+refs 0 owned-value
+lookup 0 K -

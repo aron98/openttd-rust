@@ -6,6 +6,7 @@ use crate::{CompileError, Instruction, lexer::TokenKind};
 #[derive(Default)]
 pub(super) struct ExpressionState {
     dereference: Option<Register>,
+    constant: bool,
 }
 mod factors;
 mod updates;

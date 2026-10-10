@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.gameplay_foundations import FoundationRun
 from scripts.script_vm_branches import finish_branches, run_branches
+from scripts.script_vm_constants import run_constants
 from scripts.script_vm_evidence import (
     CONTROLS,
     MANIFEST,
@@ -145,6 +146,7 @@ def main() -> None:
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
     branch_tests = run_branches(builder, rust)
     run_strings(output, rust)
+    run_constants(builder)
     verify_sources(ROOT, native, spec)
     finish_branches(output, branch_tests)
     write_json(
@@ -170,13 +172,19 @@ def main() -> None:
             "strict_comparisons": 10666,
             "undefined_input_rejections": 153,
             "controls": 25,
-            "frame_tests": 18,
+            "frame_tests": 23,
             "native_frames": 12,
             "branch_budget_cases": 127,
             "string_sessions": 4,
             "source_feed_cases": 18,
             "float_patterns": 23071,
             "string_controls": 4,
+            "constant_native_sessions": 115,
+            "constant_buffer_comparisons": 36,
+            "constant_root_boundaries": 1,
+            "constant_stateful_projections": 3,
+            "constant_public_tests": 3,
+            "constant_controls": 4,
             "passed": True,
         },
     )

@@ -19,6 +19,11 @@ from scripts.world_check_support import (
 )
 
 FRAME_TESTS = (
+    "realm::constants::tests::native_buffer_corpus_matches_compilation_and_published_table",
+    "realm::constants::tests::temporary_updates_match_native_suspension_results",
+    "realm::constants::tests::declaration_timing_preserves_old_or_new_binding_at_native_byte_boundaries",
+    "realm::constants::tests::names_values_and_partial_enum_scratch_have_distinct_owners",
+    "realm::constants::sessions::shared_session_effects_match_native_compile_lookup_and_execution",
     "realm::tests::failed_compilation_releases_literals_before_recompiling_in_same_realm",
     "realm::tests::realm_lifetimes_match_native_when_programs_and_runner_are_released",
     "realm::tests::independent_suspended_owners_match_native_when_one_runner_is_dropped",

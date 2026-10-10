@@ -2,6 +2,7 @@
 use super::Compiler;
 use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
 mod branches;
+mod constants;
 mod iteration;
 mod switch;
 impl Compiler<'_> {
@@ -50,6 +51,8 @@ impl Compiler<'_> {
             TokenKind::Return => {
                 self.return_statement()?;
             }
+            TokenKind::Const => self.constant_declaration()?,
+            TokenKind::Enum => self.enum_declaration()?,
             TokenKind::Local => {
                 self.local()?;
             }

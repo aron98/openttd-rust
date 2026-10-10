@@ -5408,6 +5408,7 @@
         "stale-source/scripts/sale_saved_state.py",
         "stale-source/scripts/script-vm-manifest.json",
         "stale-source/scripts/script_vm_branches.py",
+        "stale-source/scripts/script_vm_constants.py",
         "stale-source/scripts/script_vm_evidence.py",
         "stale-source/scripts/script_vm_iteration.py",
         "stale-source/scripts/script_vm_observation.py",

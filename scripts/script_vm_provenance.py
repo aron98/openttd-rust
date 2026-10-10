@@ -112,7 +112,7 @@ def verify_sources(root: Path, native: Path, spec: Spec) -> None:
     expected = f"pin={PIN}\ninteger_bits=64\nfloat_bits=32\ngc=enabled\n"
     if (native / "variant.txt").read_text() != expected:
         raise WorldCheckError("Native variant differs")
-    for name in ("observe.cpp", "strings.hpp"):
+    for name in ("observe.cpp", "strings.hpp", "constants.hpp"):
         if digest(native / name) != digest(root / "scripts/compat/script-vm" / name):
             raise WorldCheckError("Native observer source differs")
 

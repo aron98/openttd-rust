@@ -113,6 +113,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/tests/evidence_transport_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/tests/evidence_transport_test.py
+      - name: Check constant session evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/script_vm_constants_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/script_vm_constants.py scripts/tests/script_vm_constants_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_constants.py scripts/tests/script_vm_constants_test.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked

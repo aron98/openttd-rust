@@ -25,6 +25,9 @@ impl Compiler<'_> {
                 arg3: operator,
             });
         } else {
+            if state.constant {
+                return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            }
             let target = self
                 .registers
                 .top()

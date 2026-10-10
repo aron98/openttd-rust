@@ -133,8 +133,41 @@ Native --realm/--parallel/--terminal sessions bind lifetime counts and suspended
 owner interactions to private Rust tests. The --format batch compares 23,071 raw
 f32 patterns. Separate --feed unsigned/UTF-8 observations demonstrate original
 LoadFile callback differences without claiming a file/BOM loader implementation.
-Compiler constant tables/enums remain the next separate realm extension; no root
-namespace, arbitrary objects, native closures or host API placeholders are added.
+`Realm` also shares a private compiler constant table. `const` accepts integer,
+float and byte-string literals (or numeric unary minus); closed `enum` members
+use those values or an independent implicit counter starting at zero. Explicit
+member values do not advance that counter. Declarations own interned names and
+values; local variables shadow them, and programs inline the value observed at
+compilation. Replacement cannot rewrite an older program's literal.
+
+Publication is not a transaction around successful compilation. Const publishes
+after scalar lookahead and its internal terminator check; enum publishes after
+the closing-brace token is obtained but before its following Lex call. A malformed
+byte adjacent to that brace can fail while the token itself is being decoded;
+separating whitespace can let publication happen before the later error. Prior
+publications survive later compilation failures. Same-line continuation after a
+const semicolon can fail the outer terminator check after publication.
+
+Defined compound/prefix updates operate on loaded temporaries and leave table
+bindings unchanged. Direct `=` assignment rejects after parsing its RHS. Constant
+postfix operations and minimum-native-integer declaration negation are explicitly
+unsupported increment boundaries, separate from the lexer ctype policy. Runtime
+root lookup, arbitrary tables/objects, newslot syntax, native closures, classes,
+require and host API registration remain outside this slice. No public Value
+variant or root-object API was added. The Vm still borrows its Program; tests do
+not pretend a native independently retained closure is that Rust borrow.
+
+Focused tests retain 37 original buffer observations: 36 closed-constant compiler
+outcomes/bytecode/table snapshots are strict comparisons, and the standalone
+unresolved-name read is an explicitly tested runtime-root boundary. Populated
+Realm reads, publication failures, ownership and temporary-update suspension
+traces have separate tests. The full driver now declares 115 exact native constant
+sessions, fresh public constant tests and three private stateful compile/lookup/execution projections.
+Native refcounts and child release remain original observations paired with
+separate Rust ownership tests; they are not claimed as full raw Rust session
+parity. Four additional corruption controls exercise declaration publication,
+counters, shared-state isolation and final native release. Admission still
+requires newly executed complete debug and optimized profiles for these inputs.
 
 
 ## Defined lexer input policy

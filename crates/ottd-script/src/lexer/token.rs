@@ -1,6 +1,8 @@
 //! Compiler tokens; unsupported reserved words are rejected during lexing.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) enum TokenKind<'a> {
+    Const,
+    Enum,
     Return,
     TypeOf,
     Local,
@@ -49,7 +51,9 @@ impl TokenKind<'_> {
             Self::Symbol(b'>') => Some((4, 0x28, 0)),
             Self::Symbol(op @ (b'+' | b'-')) => Some((6, 0x11, *op)),
             Self::Symbol(op @ (b'*' | b'/' | b'%')) => Some((7, 0x11, *op)),
-            Self::TypeOf
+            Self::Const
+            | Self::Enum
+            | Self::TypeOf
             | Self::Return
             | Self::Local
             | Self::If

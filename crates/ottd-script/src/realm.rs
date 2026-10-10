@@ -1,23 +1,25 @@
-//! Persistent string interning; the pool never strongly owns its strings.
+//! Shared compiler declarations and weak string interning.
 use crate::{CompileError, Program};
 use std::{
     cell::RefCell,
     collections::BTreeMap,
     rc::{Rc, Weak},
 };
+pub(crate) mod constants;
 type Pool = RefCell<BTreeMap<Vec<u8>, Weak<StringData>>>;
 
-/// Shared compilation and runtime string identity domain.
+/// Shared compiler constants and runtime string identity domain.
 #[derive(Clone, Debug, Default)]
 pub struct Realm {
     pool: Rc<Pool>,
+    constants: Rc<RefCell<constants::Table>>,
 }
 impl Realm {
     /// Create an independent realm.
     pub fn new() -> Self {
         Self::default()
     }
-    /// Compile source using this realm's live string interner.
+    /// Compile source using this realm's shared constants and live string interner.
     ///
     /// # Errors
     /// Returns the compiler's source diagnostic for rejected input.

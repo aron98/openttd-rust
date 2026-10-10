@@ -38,6 +38,7 @@ pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program,
     let mut lexer = Lexer::new(source, realm.clone())?;
     let token = lexer.next()?;
     let mut compiler = Compiler {
+        realm: realm.clone(),
         lexer,
         token,
         previous: TokenKind::End,
@@ -57,6 +58,7 @@ pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program,
     })
 }
 struct Compiler<'a> {
+    realm: crate::Realm,
     lexer: Lexer<'a>,
     token: Token<'a>,
     previous: TokenKind<'a>,

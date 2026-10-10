@@ -74,6 +74,9 @@ def run(root: Path, mode: Mode, requested: Path | None) -> None:
     )
     job = ControlRun(root, output, oracle)
     print(f"Artifacts: {output}", flush=True)
+    closure = sources(root)
+    verify(closure)
+    artifacts.retain(output / "sources", closure)
     job.provenance()
     _ = job.run(
         "native-freshness",
@@ -84,12 +87,6 @@ def run(root: Path, mode: Mode, requested: Path | None) -> None:
             str(root / "scripts/check-replay-build.cmake"),
         ],
     )
-    closure = (
-        *sources(root),
-        FileInput.capture(root / "fixtures/road-movement/layout.json"),
-        FileInput.capture(root / "fixtures/replay/clear-v362.sav"),
-    )
-    artifacts.retain(output / "sources", closure)
     native_inputs = tuple(
         FileInput.capture(path)
         for path in sorted((root / ".reference/snapshot-source").rglob("*"))

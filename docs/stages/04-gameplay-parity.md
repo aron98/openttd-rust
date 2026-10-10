@@ -8,13 +8,31 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed content increment: `e032dd2` completes the bounded raw engine/spec
-loading added in `d256ad1`. Script increment `1ad5dc5` adds shared scalar arrays
+Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
+and translation tables after the engine/spec loading completed in `e032dd2`.
+Script increment `1ad5dc5` adds shared scalar arrays
 to the configured roots and persistent runners from `ff0d636`. The latest admitted
 gameplay increment remains
-`3d952b0`, for empty-road tile callbacks. Populated movement and cargo identity and
-translation are in progress. All seven completion gates below remain open.
+`3d952b0`, for empty-road tile callbacks. Populated movement and array iteration
+are in progress. All seven completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
+
+Private raw cargo loading preserves owners, labels/masks, defining-file identity,
+version-dependent fallback/explicit translation, override copying and road
+default-cargo allocation/read ordering. Fresh normal admission compares 151 raw
+snapshots across nine original/Rust cases, 66 API commands and 250 retained events.
+It passes 24 guards, ten focused tests, thirteen actual admission-corruption
+controls and complete validation of 1,340 archive members. The 99 lifecycle
+snapshots and ambient engine context remain explicitly excluded. Root verification
+passes 655 workspace tests, strict Rust checks, 72 Python tests, 66 adjacent
+admission tests and a publication regression; the existing engine suite also
+passes on identical compiled inputs. The first normal run failed because its
+driver omitted the dispatcher's required success message. The failure is retained,
+a regression reproduces it, and a fresh corrected normal run passes. Independent
+review verifies all committed source/native bindings and archive members, reruns
+the corpus/guard validators, ten original-binary tests and thirteen admission tests.
+Finalized catalogs, configured-world restoration, EIDS and broader cargo gameplay
+remain open; see [cargo identity scope](../cargo-identity.md).
 
 Scalar arrays preserve shared identity, fresh allocation per execution, indexing,
 mutation, root persistence and suspended-frame ownership through the existing VM.

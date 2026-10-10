@@ -3,6 +3,7 @@ use super::root_sessions::{bytes, dump, number, render};
 use super::{Execution, Slot, Storage, Temporary, Vm};
 use crate::{Array, CompileErrorKind, Program, Realm, RootEnvironment, Runner, Value, VmError};
 use std::{error::Error, fmt::Write, fs, path::Path};
+mod foreach;
 type Result<T = ()> = std::result::Result<T, Box<dyn Error>>;
 struct Session {
     runners: Vec<Option<Runner>>,
@@ -156,7 +157,10 @@ impl Session {
             }
             Err(error) => {
                 assert!(
-                    matches!(error, VmError::MissingIndex | VmError::OperandType),
+                    matches!(
+                        error,
+                        VmError::MissingIndex | VmError::OperandType | VmError::DivisionByZero
+                    ),
                     "unexpected boundary: {error:?}"
                 );
                 writeln!(out, "runtime_error {remaining} {error:?}")?;
@@ -428,7 +432,10 @@ fn native_projection(text: &str) -> Result<String> {
             let message = bytes(f.last().ok_or("error bytes")?)?;
             let error = if message.starts_with(b"the index ") {
                 VmError::MissingIndex
-            } else if message == b"indexing array with integer" {
+            } else if message == b"division by zero" {
+                VmError::DivisionByZero
+            } else if message == b"indexing array with integer" || message == b"cannot iterate null"
+            {
                 VmError::OperandType
             } else {
                 return Err(format!("unclassified native error {message:?}").into());

@@ -1,0 +1,21 @@
+make-array 0 0 2 string 6f6c64 string 6e657874
+root-store-array 0 70656e64696e67 0
+compile 1 0 utf8 child-owner-0.nut
+run 1 0 0
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+seed 0 70656e64696e67 null -
+drop 1 0
+clear-result 1
+drop-handle 0 0
+weak-state 0 1
+refs 0 6f6c64
+release-child 1
+weak-state 0 1
+refs 0 6f6c64

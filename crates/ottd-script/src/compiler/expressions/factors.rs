@@ -115,6 +115,8 @@ impl Compiler<'_> {
             | TokenKind::Case
             | TokenKind::Default
             | TokenKind::For
+            | TokenKind::Foreach
+            | TokenKind::In
             | TokenKind::Do
             | TokenKind::Compound(_)
             | TokenKind::Shift(_)

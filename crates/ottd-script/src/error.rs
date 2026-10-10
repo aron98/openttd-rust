@@ -66,7 +66,7 @@ pub enum VmError {
     MissingIndex,
     /// Lookup reached a native closure or aggregate outside the scalar domain.
     UnsupportedRuntimeValue,
-    /// A root operation received a receiver outside the configured root domain.
+    /// A native-valid receiver is outside the admitted operation domain.
     UnsupportedReceiver,
     /// Opcode has not been implemented by this foundation.
     UnsupportedOpcode(u8),

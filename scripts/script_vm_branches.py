@@ -19,6 +19,8 @@ from scripts.world_check_support import (
 )
 
 FRAME_TESTS = (
+    "vm::array_sessions::foreach::native_foreach_sessions",
+    "vm::array_sessions::foreach::native_string_iterable_compiles_exactly_but_stops_at_typed_boundary",
     "vm::array_sessions::actual_native_owned_array_sessions",
     "vm::array_sessions::native_valid_object_boundaries_keep_exact_compilation",
     "runner::tests::program_clone_shares_one_literal_pool_and_failed_call_retains_real_program",
@@ -164,6 +166,7 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
             "env",
             f"OTTD_SCRIPT_ROOT_CORPUS={output / 'roots/inputs'}",
             f"OTTD_SCRIPT_ARRAY_CORPUS={output / 'arrays/inputs'}",
+            f"OTTD_SCRIPT_FOREACH_CORPUS={output / 'foreach/inputs'}",
             str(tests),
             "--test-threads=1",
         ],
@@ -253,6 +256,7 @@ def validate_branches(directory: Path) -> None:
         "env",
         f"OTTD_SCRIPT_ROOT_CORPUS={origin / 'roots/inputs'}",
         f"OTTD_SCRIPT_ARRAY_CORPUS={origin / 'arrays/inputs'}",
+        f"OTTD_SCRIPT_FOREACH_CORPUS={origin / 'foreach/inputs'}",
         tests,
         "--test-threads=1",
     ]:

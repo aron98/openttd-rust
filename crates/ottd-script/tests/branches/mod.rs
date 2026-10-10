@@ -115,7 +115,6 @@ fn unsupported_language_is_rejected_even_when_unreachable() {
     for source in [
         "if(false){return missing;} return 1;",
         "local x=1; x<-2;",
-        "foreach(x in [1]){}",
         "try{}catch(e){}",
     ] {
         // Given: source explicitly outside the approved local/branch subset.

@@ -95,15 +95,17 @@ impl<'a> Lexer<'a> {
                     "case" => TokenKind::Case,
                     "default" => TokenKind::Default,
                     "for" => TokenKind::For,
+                    "foreach" => TokenKind::Foreach,
+                    "in" => TokenKind::In,
                     "do" => TokenKind::Do,
                     "break" => TokenKind::Break,
                     "continue" => TokenKind::Continue,
                     "null" => TokenKind::Scalar(Value::Null),
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
-                    "function" | "foreach" | "in" | "delegate" | "delete" | "try" | "catch"
-                    | "throw" | "clone" | "yield" | "resume" | "this" | "parent" | "class"
-                    | "extends" | "instanceof" | "vargc" | "vargv" | "static" => {
+                    "function" | "delegate" | "delete" | "try" | "catch" | "throw" | "clone"
+                    | "yield" | "resume" | "this" | "parent" | "class" | "extends"
+                    | "instanceof" | "vargc" | "vargv" | "static" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,

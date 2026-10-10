@@ -1,0 +1,8 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 buffer malformed-header-0.nut
+compile_error string 13 65787065637465642027696e27
+stack_top 0 0
+external_child 1
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1

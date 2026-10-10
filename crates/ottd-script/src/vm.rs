@@ -4,6 +4,7 @@ use crate::{
 };
 use std::rc::Rc;
 mod arrays;
+mod foreach;
 mod roots;
 mod updates;
 #[derive(Clone, Debug)]
@@ -219,6 +220,10 @@ impl<'a> Vm<'a> {
     }
     fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
+            0x33 => {
+                self.foreach(i)?;
+                return Ok(None);
+            }
             0x1f => self.new_array(i)?,
             0x20 => {
                 self.append_array(i)?;

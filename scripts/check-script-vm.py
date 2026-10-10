@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.gameplay_foundations import FoundationRun
 from scripts.script_vm_arrays import run_arrays
+from scripts.script_vm_foreach import run_foreach
 from scripts.script_vm_branches import finish_branches, run_branches
 from scripts.script_vm_constants import run_constants
 from scripts.script_vm_evidence import (
@@ -148,6 +149,7 @@ def main() -> None:
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
     run_roots(builder)
     run_arrays(builder)
+    run_foreach(builder)
     branch_tests = run_branches(builder, rust)
     run_strings(output, rust)
     run_constants(builder)
@@ -176,7 +178,7 @@ def main() -> None:
             "strict_comparisons": 10666,
             "undefined_input_rejections": 153,
             "controls": 25,
-            "frame_tests": 31,
+            "frame_tests": 33,
             "native_frames": 12,
             "branch_budget_cases": 127,
             "string_sessions": 4,
@@ -201,6 +203,11 @@ def main() -> None:
             "array_protocol_refusals": 3,
             "array_public_tests": 11,
             "array_controls": 4,
+            "foreach_native_sessions": 135,
+            "foreach_stateful_projections": 129,
+            "foreach_runtime_boundaries": 6,
+            "foreach_public_tests": 8,
+            "foreach_controls": 6,
             "passed": True,
         },
     )

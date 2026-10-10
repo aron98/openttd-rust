@@ -15,6 +15,8 @@ pub(crate) enum TokenKind<'a> {
     Case,
     Default,
     For,
+    Foreach,
+    In,
     Do,
     Compound(u8),
     Increment(i8),
@@ -67,6 +69,8 @@ impl TokenKind<'_> {
             | Self::Case
             | Self::Default
             | Self::For
+            | Self::Foreach
+            | Self::In
             | Self::Do
             | Self::Compound(_)
             | Self::Increment(_)

@@ -12,6 +12,8 @@ from pathlib import Path
 from scripts.script_vm_arrays import CONTROLS as ARRAY_CONTROLS
 from scripts.script_vm_arrays import declarations as array_declarations
 from scripts.script_vm_arrays import validate_arrays
+from scripts.script_vm_foreach import CONTROLS as FOREACH_CONTROLS
+from scripts.script_vm_foreach import validate_foreach
 from scripts.script_vm_observation import (
     compare_observation,
     require_tests,
@@ -175,6 +177,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
                 {f"constant-{name}" for name in CONSTANT_CONTROLS}
                 | {f"root-{name}" for name in ROOT_CONTROLS}
                 | {f"array-{name}" for name in ARRAY_CONTROLS}
+                | {f"foreach-{name}" for name in FOREACH_CONTROLS}
             )
         ):
             status = int(parts[2] == "admit-mutant")
@@ -243,6 +246,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
 
     validate_roots(directory, Path(origin))
     validate_arrays(directory, Path(origin))
+    validate_foreach(directory, Path(origin))
     if read_json(directory / "summary.json") != {
         "cases": 10819,
         "fixtures": 1188,
@@ -251,7 +255,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "strict_comparisons": 10666,
         "undefined_input_rejections": 153,
         "controls": 25,
-        "frame_tests": 31,
+        "frame_tests": 33,
         "native_frames": 12,
         "branch_budget_cases": 127,
         "string_sessions": 4,
@@ -276,6 +280,11 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "array_protocol_refusals": 3,
         "array_public_tests": 11,
         "array_controls": 4,
+        "foreach_native_sessions": 135,
+        "foreach_stateful_projections": 129,
+        "foreach_runtime_boundaries": 6,
+        "foreach_public_tests": 8,
+        "foreach_controls": 6,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

@@ -3,6 +3,7 @@ use super::Compiler;
 use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
 mod branches;
 mod constants;
+mod foreach;
 mod iteration;
 mod switch;
 impl Compiler<'_> {
@@ -60,6 +61,7 @@ impl Compiler<'_> {
             TokenKind::Switch => self.switch_statement(depth)?,
             TokenKind::While => self.while_loop(depth)?,
             TokenKind::For => self.for_loop(depth)?,
+            TokenKind::Foreach => self.foreach_loop(depth)?,
             TokenKind::Do => self.do_loop(depth)?,
             TokenKind::Break => {
                 self.loop_exit(false)?;
@@ -67,7 +69,8 @@ impl Compiler<'_> {
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::Root
+            TokenKind::In
+            | TokenKind::Root
             | TokenKind::NewSlot
             | TokenKind::TypeOf
             | TokenKind::Case

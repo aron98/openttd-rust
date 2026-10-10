@@ -7,7 +7,7 @@ to game ticks.
 
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
-assignment, blocks, if/else, while/for/do loops, scalar switch/case/default, break and continue. Values include null,
+assignment, blocks, if/else, while/for/do loops, array-only foreach, scalar switch/case/default, break and continue. Values include null,
 bool, i64 decimal/octal/hex integers, raw f32 values, immutable byte strings and
 identity-bearing arrays whose elements are structurally restricted to scalars.
 Normal, verbatim and character literals follow native escapes and encoded-byte
@@ -339,3 +339,33 @@ this path, including later malformed-byte errors, invalid ASCII octal digits and
 NUL termination. The subsequent `isdigit` lookahead remains guarded. The initial
 zero-prefix `toupper` is still an undefined argument for decoded values above255;
 an observed native acceptance there does not make it a defined octal input.
+
+
+## Array-only foreach
+
+`foreach(value in array)` and `foreach(index, value in array)` traverse the existing
+scalar-element Array graph. The compiler retains the iterable register and emits
+native FOREACH/POSTFOREACH tuples with adjacent index, value and hidden-cursor
+locals. Each successful array step skips POSTFOREACH, preserving its zero dispatch
+cost; actually reaching POSTFOREACH remains `UnsupportedOpcode(0x34)`. Iteration
+preserves the runner temporary and native guarded scope cleanup. It does not eagerly
+release the final loop value merely because lexical scope ended.
+
+Reassigning a local iterable changes the array read by the next iteration while
+retaining the hidden cursor. Replacing a root slot does not replace the already
+captured iterable temporary. Host changes to future elements are observed; the
+already-read current value remains independently owned. Existing Runner and Array
+APIs suffice; no public graph or iterator API is added.
+
+Strings compile through foreach but stop with `UnsupportedReceiver`; their valid
+native iteration is a distinct unimplemented boundary. Scalar non-iterables return
+`OperandType`. Tables, generators, host `_nexti`/`_get`, ScriptList iteration, cyclic
+container storage/GC, functions and indexed compound updates remain outside this
+slice. Malformed public bytecode uses `InvalidBytecode`, not new native UB policy.
+
+Focused evidence covers 129 exact native session projections (including promoted
+legacy foreach syntax) and six exact compiled string-boundary captures. Raw native
+refcounts/external owner bookkeeping retain the established observer projection
+boundary; weak lifecycle, string owners, values, instructions, frame slots, IP,
+debt and temporary state compare strictly. New complete CI profiles are a later
+admission requirement; focused proof does not close the broad Stage 4 gates.

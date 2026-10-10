@@ -31,6 +31,7 @@
     "crates/ottd-sim/src/content/grf/safety_native.rs": "f5db72b04897b2cf9d8b9f84c69751f14cdf9045c38b7404738ee6ed6955cba8",
     "crates/ottd-sim/src/content/grf/safety_tests.rs": "d952e341969869546c55ab2fc4552b896ca181c6e974aaf60ea4cd7242068bb2",
     "crates/ottd-sim/src/content/grf/scan.rs": "6379c90002b189666022a6dfb463c472c1f72fd7871417d2c54d8503138ccbe0",
+    "crates/ottd-sim/src/landscape/road.rs": "c1e6d994b6bbfedd7cbfe40cf229b114f73c11479e7d2a2458dfdbfd7b900a8d",
     "crates/ottd-sim/tests/grf_native_skip.rs": "c2877dafce37dcec44f937e04dedc5b152c0d4741681327ac05a6519df87fb84",
     "scripts/check-grf-safety-reference.cmake": "8f036423dec27290146fa3d61542e69d8a3f910351f604c1c17059ccbea38320"
   },

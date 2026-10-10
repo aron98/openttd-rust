@@ -2,7 +2,8 @@ use super::{WorldTickError, unsupported};
 use crate::world_access::{field, signed, unsigned};
 use ottd_save::{WireValue, world::World};
 
-pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError> {
+/// Returns whether this saved-world context admits empty-road callbacks.
+pub(super) fn validate(world: &World, paused: bool) -> Result<bool, WorldTickError> {
     if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 {
         return Err(unsupported("pause", "linkgraph pause control"));
     }
@@ -18,7 +19,7 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError
         return Err(unsupported("scripts", "GameScript state"));
     }
     if paused {
-        return Ok(());
+        return Ok(false);
     }
     for id in [
         *b"NGRF", *b"VEHS", *b"INDY", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA",
@@ -79,7 +80,8 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError
         ));
     }
     validate_towns(world)?;
-    validate_companies(world)
+    validate_companies(world)?;
+    validate_roads(world)
 }
 fn validate_companies(world: &World) -> Result<(), WorldTickError> {
     let companies = world
@@ -123,4 +125,39 @@ fn validate_towns(world: &World) -> Result<(), WorldTickError> {
         }
     }
     Ok(())
+}
+
+fn validate_roads(world: &World) -> Result<bool, WorldTickError> {
+    if !world
+        .map()
+        .tiles()
+        .iter()
+        .any(|tile| tile.tile_type() >> 4 == 2)
+    {
+        return Ok(false);
+    }
+    let towns = world
+        .tables()
+        .get(b"CITY")
+        .ok_or_else(|| unsupported("road_tile_loop", "missing town pool"))?;
+    for id in towns.records().keys() {
+        if unsigned(world, b"CITY", *id, "road_build_months")? != 0 {
+            return Err(unsupported("road_tile_loop", "town roadworks program"));
+        }
+    }
+    for tile in world.map().tiles() {
+        if !matches!(tile.tile_type() >> 4, 0 | 2 | 7) {
+            return Err(unsupported(
+                "road_tile_loop",
+                "requires house-free clear/road/void map",
+            ));
+        }
+        if tile.tile_type() >> 4 == 2
+            && tile.m5() >> 6 == 0
+            && !towns.records().contains_key(&u32::from(tile.m2()))
+        {
+            return Err(unsupported("road_tile_loop", "missing cached road town"));
+        }
+    }
+    Ok(true)
 }

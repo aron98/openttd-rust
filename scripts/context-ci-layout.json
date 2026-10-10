@@ -34,6 +34,7 @@
     "crates/ottd-sim/src/content/grf/load_strings_registry_cases.rs": "f5bfa1a708532dc2aa05e6c9b2c3f489e3040620a1f7b159a5ba6d9c5474900a",
     "crates/ottd-sim/src/content/grf/load_strings_tests.rs": "eb771c70fb62eba09ccb24b22f66a6fa2907de242f7e9734c64cbf07a9394db6",
     "crates/ottd-sim/src/content/grf/load_types.rs": "a0c26809f1ce9f0005f962ca96d28f8d5a61aa4f07afa273c2baa22f2ccd30eb",
+    "crates/ottd-sim/src/landscape/road.rs": "c1e6d994b6bbfedd7cbfe40cf229b114f73c11479e7d2a2458dfdbfd7b900a8d",
     "crates/ottd-sim/tests/grf_control_cases/mod.rs": "8f2618dc93415f5ca347a7745f06cf9ce0fc073f4c09744580edec50cbb3fac0",
     "crates/ottd-sim/tests/grf_control_cases/project.rs": "4939a5071c0a2bf9df49aba761de1d2e5f34be1541a347bf7b7ce12c5d1b3873",
     "crates/ottd-sim/tests/native_grf_control.rs": "2372d11bdb6ce07d5b41ff02b8dfbdf81bc4bed882a624b005e533d7f931077a"

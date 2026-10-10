@@ -47,6 +47,7 @@
     "crates/ottd-sim/src/content/grf/text_mapped.rs": "7f0adb385d7d3500354be34503b4716379b7462d27ec1d7b9ca393a52f98ad72",
     "crates/ottd-sim/src/content/grf/text_translate.rs": "79fa71c407ba5e80bf8e14f3f31876af356467f2514dee285cca73481e890b81",
     "crates/ottd-sim/src/content/grf/types.rs": "2342b5ef890a0bf2e6a6fcfe465732f13754c9aae55dc0ee508d9342abab99af",
+    "crates/ottd-sim/src/landscape/road.rs": "c1e6d994b6bbfedd7cbfe40cf229b114f73c11479e7d2a2458dfdbfd7b900a8d",
     "crates/ottd-sim/tests/grf_control_cases/project.rs": "4939a5071c0a2bf9df49aba761de1d2e5f34be1541a347bf7b7ce12c5d1b3873",
     "reference/.gitattributes": "fb25a78a6381f5646d71aacea4486f6aeeeb03c4d71740227011024be0d20a8f",
     "reference/README.md": "d51f77d527143024efde4543996802e27254b3ee9be0a74899e023e32c615fd9",

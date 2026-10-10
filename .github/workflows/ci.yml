@@ -98,6 +98,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/shared_restore_fixture_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/shared_restore_*.py scripts/check-shared-restore.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/shared_restore_*.py scripts/check-shared-restore.py
+      - name: Check empty-road evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/empty_road_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/empty_road_*.py scripts/check-empty-road.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/empty_road_*.py scripts/check-empty-road.py
       - name: Check tree and terrain evidence admission
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/tree_ci_evidence_test.py
@@ -165,6 +170,8 @@ jobs:
             .artifacts/depot-removal-*/
             .artifacts/backup-sale-*/
             !.artifacts/backup-sale-target-*/**
+            .artifacts/empty-road-*/
+            !.artifacts/empty-road-target-*/**
             .artifacts/shared-restore-*/
             !.artifacts/shared-restore-target-*/**
             .artifacts/owned-restore-*/

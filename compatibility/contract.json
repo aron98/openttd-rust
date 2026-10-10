@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "f9360c7825be1f6c67df25d9d1bebc083ab74ebe96873233d37ae873a94c6dc4",
+      "sha256": "12d4284dafe2cc8da0a7a717aa12f469492ca101caf5f2249888f37bc67b2fdc",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "ef9574f046e615024cc4bb59f398c0750dcf8f182f1549a8961e1809caea3527",
+      "sha256": "d6062571949c6c8b51479dcc4da41d088198ebf872cbfb6d52d9e3bac0adc574",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "d3faeabf09bc61a2276bb9b7a03ed75bfd38ccb4fafde1861cad9cfafed0f8ae",
+      "sha256": "08f5eae5012c175f487fab55564eebc597b50d3f6efa1f82a595bf99ecf81103",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "2dc7c778e98b04db9da5e2490cdd6340a8682a2489917e6648d4db7d9b95aba0",
+      "sha256": "fa44a4637343dc867363a3afd6f2b0e6d1b0acdbee3dd5a0b93ce9ce4beb8452",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "82aca6e452238feba1d822f54b486ec48ba7a3716b7a2e90d3ee4ebd373f1c8f",
+      "sha256": "374dad14e529f0fe7da23fa12d3bbdcb98f77acc14d96b989bcd345ad8d8c27b",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "fe8b2dc9d9e67c0ef0493fb8018c1ea4b9973e6691b4cc27e08e2ab9d03481ce",
+      "sha256": "9f4a02645f8e05c43c473534094aace8811d3a532f4d7cf1975d4e5205d4621c",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "53bd491014a9a453a00fc0525f96bffdc9f8761e35bd24ae4e076a7a92b1578a",
+      "sha256": "7e1f4e6c16cb2f06dcdc733b1bba5bbdece9d137c2256cc733b806603b587ebf",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "c63a5667d76268439530cc474a5dd5f3fd6fd5de1981b7c78b2c2d3671fa0f54",
+      "sha256": "75749c25c3b86ea70c2820c5da124eaa9f3736da60ba1350e51588c7875ba233",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "0311f0b862b3decfc5c2f0f51adb657f85a7e3df6074032ea3ff3d07ab4c8c04",
+      "sha256": "561052188948e9fdb1db2353bed193b7d81b0e501e7e8079e1a6176088558ad8",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "bc474feaa22abdefcea84f63ac3cefa8fbf56dfc0848271382a0d71d82d3068d",
+      "sha256": "ac0b4bcf4558453f64db93136a2aa83843289838e46a518bb5e7f596e386085f",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "4a77cdfa019d44be7ba71b08a74243c4ab3f1c7c924c0217b797a86d70a33a45",
+      "sha256": "719bf77f263d55c28d9eff29aecb7cb038e2fdf387e6468f30286fdb8fdbfe9a",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "66807643a88ab4b771f26896f7bba6a34eae6d45795e8e7770c51fe5a30dadb8",
+      "sha256": "c86229db1b8bb10aa1264eb0907ba764a8c2ae5b7b0392736ed17d2d80134581",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
@@ -4183,7 +4183,7 @@
     {
       "id": "shared-restore-layout",
       "path": "scripts/shared-restore-layout.json",
-      "sha256": "474a29ec4e73d6006b0c6add1a8a69edef47b83e5e345708e79ed52e9b6d7784",
+      "sha256": "58327488039171758d485b93b06e6bb41ddefad07a7e4a2e73ddf2148294b383",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
       "save_version": null,
@@ -4219,7 +4219,7 @@
     {
       "id": "currency-properties-currency-properties-ci-layout-json",
       "path": "scripts/currency-properties-ci-layout.json",
-      "sha256": "ae8b36d6285136a391ab3a0e2d33bdae9df2683bc9a8425b924d48a7d9db25f4",
+      "sha256": "fc312b58e55f9bddfd4b3cc8b20ceb868c5ff14771c6dbd33acbc02b5c456206",
       "kind": "recipe",
       "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
       "save_version": null,
@@ -4312,6 +4312,51 @@
       "sha256": "317b385369dcd37031607c6319cc2de27a0995a0dde0b1a2edb475d2f835172b",
       "kind": "recipe",
       "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "empty-road-driver",
+      "path": "scripts/check-empty-road.py",
+      "sha256": "02ff8f9aff429a08be027e8e9a572ca658ffa44eb7d3a2fe8cff1b3ebf1b8337",
+      "kind": "recipe",
+      "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "empty-road-evidence",
+      "path": "scripts/empty_road_evidence.py",
+      "sha256": "3370875a4a0b2c9a10af0a53a1241bd517c189f8e5a27d99b2fffed197bb3048",
+      "kind": "recipe",
+      "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "empty-road-layout",
+      "path": "scripts/empty-road-layout.json",
+      "sha256": "6c82794fc0e2f4ed2e65192720172d1a709a139826629d96072697c1e9ad981e",
+      "kind": "recipe",
+      "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "empty-road-fixtures",
+      "path": "scripts/empty-road-fixtures.json",
+      "sha256": "2079ed9e7aaaebc1f48d215aeb7996d5b7bfe0b00228769fb1e261f109e737d9",
+      "kind": "recipe",
+      "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "empty-road-tests",
+      "path": "scripts/empty_road_evidence_test.py",
+      "sha256": "3e132e3ab905909eb64027c10b2cfaa3c990f81e3ab62919eb3127513d84bb57",
+      "kind": "recipe",
+      "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
       "save_version": null,
       "profile": null
     }
@@ -11000,6 +11045,37 @@
         "rust_behavior"
       ],
       "timeout_seconds": 2400
+    },
+    {
+      "id": "empty-road",
+      "argv": [
+        "python3",
+        "scripts/check-empty-road.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "source-hashes.json",
+        "layout.json",
+        "candidate-layout.json",
+        "binaries.json",
+        "native-identity.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "bin/cli",
+        "bin/runner",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/admission.json",
+        "controls/archive-controls.json",
+        "controls/saved-mutations.json"
+      ],
+      "success_text": "PASS empty-road CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -15975,6 +16051,48 @@
         "bin/ottd_sim",
         "native-executable/openttd",
         "native-executable/replay-build.sha256"
+      ]
+    },
+    {
+      "id": "world.empty-road-tile-loop",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Empty-VEHS temperate flat vanilla normal roads and road depot, Barren/Grass roadside, eligible cached town without houses/funding/roadworks. Natural landscape visits only; movement and populated-vehicle ticks remain unsupported.",
+      "expected": "Exactly8 fresh original processes:6 successful construction commands,772 ticks,21 saved checkpoints;7 Rust replays,772 ticks,19 checkpoints;6 exact integration tests. Full saved/derived/runtime equality and strict gameplay RNG/cursor, repeated steady cycle, road/depot boundaries, and original loads of3 Rust-produced saves. Exact source/Cargo-selected executable/native/input binding, strict roster and portable raw archive. Actual roadside/cursor/RNG CLI corruption failures, zero/subset/stale-source/wrong-executable/native-mutant and missing/extra/raw/archive/index admission rejections.",
+      "driver": "empty-road",
+      "assets": [
+        "empty-road-driver",
+        "empty-road-evidence",
+        "empty-road-layout",
+        "empty-road-fixtures",
+        "empty-road-tests"
+      ],
+      "source_refs": [
+        "crates/ottd-sim/src/landscape/road.rs",
+        "crates/ottd-sim/tests/road_tile_loop.rs",
+        "scripts/check-empty-road.py",
+        "scripts/empty_road_evidence.py",
+        "scripts/empty-road-layout.json",
+        "scripts/empty-road-fixtures.json",
+        "scripts/empty_road_evidence_test.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "source-hashes.json",
+        "layout.json",
+        "candidate-layout.json",
+        "binaries.json",
+        "native-identity.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "bin/cli",
+        "bin/runner",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/admission.json",
+        "controls/archive-controls.json",
+        "controls/saved-mutations.json"
       ]
     }
   ]

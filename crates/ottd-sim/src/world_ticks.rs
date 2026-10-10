@@ -75,16 +75,17 @@ pub fn advance_world(world: &mut World, ticks: u32) -> Result<WorldTickReport, W
         return Ok(WorldTickReport { ticks: Vec::new() });
     }
     let paused = unsigned(world, b"DATE", 0, "pause_mode")? != 0;
-    domain::validate(world, paused)?;
+    let roads_admitted = domain::validate(world, paused)?;
     let mut state = State::load(world);
     let mut clock = restore_clock(world)?;
     let mut landscape = if paused {
         None
     } else {
-        Some(Landscape::new(
+        Some(Landscape::for_world(
             map(world),
             u32::try_from(unsigned(world, b"DATE", 0, "cur_tileloop_tile")?)
                 .map_err(|_| unsupported("landscape", "cursor"))?,
+            roads_admitted,
         )?)
     };
     let mut report = WorldTickReport { ticks: Vec::new() };

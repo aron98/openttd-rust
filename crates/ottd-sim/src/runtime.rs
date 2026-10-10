@@ -13,6 +13,8 @@ mod depot_removal_native;
 mod group_counts;
 #[cfg(test)]
 mod ordered_sale_native;
+#[cfg(test)]
+mod owned_restore_native;
 pub mod pools;
 #[cfg(test)]
 mod purchase_native;
@@ -214,20 +216,67 @@ pub(crate) struct RoadVehicleContext<'a> {
     pub road: &'a mut BTreeMap<VehicleId, RoadVehicleCache>,
 }
 impl RoadVehicleContext<'_> {
+    pub(crate) fn admit_restore(
+        &self,
+        world: &World,
+        tile: u32,
+        user: u32,
+    ) -> Result<(), crate::CommandError> {
+        if !world.tables().contains_key(b"BKOR") {
+            return Err(crate::CommandError::Unsupported(
+                "vehicle order-backup restore",
+            ));
+        }
+        self.orders.admit_restore(world, tile, user)?;
+        Ok(())
+    }
     pub(crate) fn publish(
         self,
         world: &mut World,
         edits: Vec<ottd_save::world::WorldEdit>,
         allocation: VehicleAllocation,
         id: VehicleId,
+        user: u32,
     ) -> Result<(), crate::CommandError> {
+        let tile = edits
+            .iter()
+            .find_map(|edit| match edit {
+                ottd_save::world::WorldEdit::InsertRecord {
+                    chunk,
+                    record,
+                    value,
+                } if *chunk == *b"VEHS" && *record == id.raw() => Some(value),
+                _ => None,
+            })
+            .ok_or(RuntimeError::Invalid("purchase constructor record"))?;
+        let schema = world
+            .tables()
+            .get(b"VEHS")
+            .ok_or(RuntimeError::Invalid("VEHS"))?
+            .schema();
+        let tile = order_state::purchase_tile(schema, tile)?;
+        let restore = self.orders.plan_restore(world, tile, user)?;
         let mut transaction = world.transaction();
         for edit in edits {
             transaction.apply(edit)?;
         }
+        let pending = restore.stage(&mut transaction, id)?;
         let prepared = transaction.prepare()?;
+        let restored = pending.validate(&prepared)?;
+        if allocation.pool.snapshot().occupied
+            != prepared
+                .view()
+                .table(*b"VEHS")
+                .ok_or(RuntimeError::Invalid("VEHS"))?
+                .records()
+                .map(|(id, _)| id)
+                .collect::<Vec<_>>()
+        {
+            return Err(RuntimeError::Invalid("purchase candidate vehicle membership").into());
+        }
         let cache = creation_cache(prepared.view(), id, self.content)?;
         prepared.commit();
+        restored.publish(self.orders);
         self.road.insert(id, cache);
         *self.allocation = allocation;
         Ok(())

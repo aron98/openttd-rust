@@ -80,7 +80,7 @@ fn actual_candidate_cache_failure_rolls_back_world_rng_units_and_pool() -> Resul
         allocation: &mut runtime.allocation,
         road: &mut runtime.road,
     }
-    .publish(&mut runtime.world, edits, candidate, VehicleId::new(id));
+    .publish(&mut runtime.world, edits, candidate, VehicleId::new(id), 1);
     assert!(matches!(
         result,
         Err(crate::CommandError::Runtime(RuntimeError::Invalid(

@@ -11,6 +11,8 @@
 #include "../station_cmd.h"
 #include "../road_cmd.h"
 #include "../group_cmd.h"
+#include "../autoreplace_cmd.h"
+#include "../group.h"
 #include "../core/backup_type.hpp"
 #include "../company_base.h"
 #include "saveload.h"
@@ -55,17 +57,19 @@ inline Json Observation()
     const char *sale_mode = std::getenv("OTTD_ORDERED_SALE_OBSERVE");
     const char *bridge_mode = std::getenv("OTTD_BACKUP_SALE_OBSERVE");
     const char *enabled_mode = std::getenv("OTTD_BACKUP_ENABLED_SALE_OBSERVE");
-    Require(int(depot_mode != nullptr) + int(sale_mode != nullptr) + int(bridge_mode != nullptr) + int(enabled_mode != nullptr) <= 1, "lifecycle observer modes are mutually exclusive");
-    if (depot_mode == nullptr && sale_mode == nullptr && bridge_mode == nullptr && enabled_mode == nullptr) return Snapshot();
+    const char *restore_mode = std::getenv("OTTD_OWNED_RESTORE_OBSERVE");
+    Require(int(depot_mode != nullptr) + int(sale_mode != nullptr) + int(bridge_mode != nullptr) + int(enabled_mode != nullptr) + int(restore_mode != nullptr) <= 1, "lifecycle observer modes are mutually exclusive");
+    if (depot_mode == nullptr && sale_mode == nullptr && bridge_mode == nullptr && enabled_mode == nullptr && restore_mode == nullptr) return Snapshot();
     Require(depot_mode == nullptr || std::string(depot_mode) == "1", "invalid depot removal observer mode");
     Require(sale_mode == nullptr || std::string(sale_mode) == "1", "invalid ordered sale observer mode");
     Require(bridge_mode == nullptr || std::string(bridge_mode) == "1", "invalid backup sale observer mode");
     Require(enabled_mode == nullptr || std::string(enabled_mode) == "1", "invalid backup enabled sale observer mode");
+    Require(restore_mode == nullptr || std::string(restore_mode) == "1", "invalid owned restore observer mode");
     Json tiles = Json::array();
     for (uint32_t index = 0; index < Map::Size(); ++index) tiles.push_back(ReferenceDepotRuntime::Parts(TileIndex(index)));
     Json result = {{"orders", Snapshot()}, {"depot", ReferenceDepotRuntime::Snapshot()},
         {"vehicles", ReferenceRuntimeRoad::Live()}, {"tiles", std::move(tiles)}};
-    if (sale_mode != nullptr || bridge_mode != nullptr || enabled_mode != nullptr) result["sale"] = ReferenceRuntimeRoad::SaleSnapshot();
+    if (sale_mode != nullptr || bridge_mode != nullptr || enabled_mode != nullptr || restore_mode != nullptr) result["sale"] = ReferenceRuntimeRoad::SaleSnapshot();
     return result;
 }
 inline Json Save(const Json &a)
@@ -85,14 +89,39 @@ inline Json Action(const Json &a)
         const bool ordered_sale = std::getenv("OTTD_ORDERED_SALE_OBSERVE") != nullptr;
         const bool backup_sale = std::getenv("OTTD_BACKUP_SALE_OBSERVE") != nullptr;
         const bool backup_enabled_sale = std::getenv("OTTD_BACKUP_ENABLED_SALE_OBSERVE") != nullptr;
-        Require(backup_enabled_sale || backup_sale || ordered_sale || std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE") != nullptr, "command fixture requires lifecycle observer");
+        const bool owned_restore = std::getenv("OTTD_OWNED_RESTORE_OBSERVE") != nullptr;
+        Require(owned_restore || backup_enabled_sale || backup_sale || ordered_sale || std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE") != nullptr, "command fixture requires lifecycle observer");
         Require(!_networking, "depot command fixture requires actual single player startup");
         const auto &request = a.at("request");
         const std::string kind = request.at("command").at("kind").get<std::string>();
-        Require((backup_enabled_sale || backup_sale) ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
+        Require(owned_restore ? (kind == "build_vehicle" || kind == "sell_vehicle" || kind == "landscape_clear") : (backup_enabled_sale || backup_sale) ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
         if (backup_sale && kind == "sell_vehicle") Require(!request.at("command").at("backup_order").get<bool>(), "backup-enabled sale is outside bridge mode");
         Json receipt = ReferenceReplay::Execute(request);
         return {{"receipt", std::move(receipt)}, {"native_metadata", ReferenceReplay::metadata}};
+    } else if (op == "restore_audit") {
+        Require(std::getenv("OTTD_OWNED_RESTORE_OBSERVE") != nullptr, "restore audit requires owned restore mode");
+        Json companies = Json::array(), vehicles = Json::array();
+        for (const Company *c : Company::Iterate()) {
+            const auto describe = [](const GroupStatistics &stats) -> Json {
+                return {{"vehicles", stats.num_vehicle}, {"minimum_age_vehicles", stats.num_vehicle_min_age},
+                    {"profit", static_cast<int64_t>(stats.profit_last_year)}, {"minimum_age_profit", static_cast<int64_t>(stats.profit_last_year_min_age)},
+                    {"autoreplace_defined", stats.autoreplace_defined}, {"autoreplace_finished", stats.autoreplace_finished}};
+            };
+            companies.push_back({{"company", c->index.base()}, {"all", describe(c->group_all[VEH_ROAD])}, {"default_group", describe(c->group_default[VEH_ROAD])}});
+        }
+        for (const Vehicle *v : Vehicle::Iterate()) {
+            if (v->type != VEH_ROAD) continue;
+            vehicles.push_back({{"vehicle", v->index.base()}, {"colourmap", v->colourmap}, {"grf_cache_valid", v->grf_cache.cache_valid}});
+        }
+        return {{"companies", companies}, {"vehicles", vehicles}};
+    } else if (op == "set_autoreplace") {
+        Require(std::getenv("OTTD_OWNED_RESTORE_OBSERVE") != nullptr, "renewal setup requires owned restore mode");
+        AutoRestoreBackup company(_current_company, CompanyID(a.at("company").get<uint8_t>()));
+        const auto cost = Command<CMD_SET_AUTOREPLACE>::Do(DoCommandFlag::Execute,
+            GroupID(a.at("group").get<uint16_t>()), EngineID(a.at("from").get<uint16_t>()),
+            EngineID(a.at("to").get<uint16_t>()), a.at("when_old").get<bool>());
+        Require(cost.Succeeded(), "original renewal setup failed");
+        return Cost(cost);
     } else if (op == "backup") {
         OrderBackup::Backup(VehicleFor(a), a.at("user").get<uint32_t>());
     } else if (op == "backup_users") {

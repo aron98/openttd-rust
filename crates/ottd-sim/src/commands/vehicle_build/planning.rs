@@ -105,13 +105,7 @@ pub(super) fn validate(
         error.error = Some("STR_ERROR_DEPOT_WRONG_DEPOT_TYPE".into());
         return Ok(Err(error));
     }
-    if world
-        .tables()
-        .get(b"BKOR")
-        .is_none_or(|t| !t.records().is_empty())
-    {
-        return Err(CommandError::Unsupported("vehicle order-backup restore"));
-    }
+    context.admit_restore(world, args.tile, args.client_id)?;
     let state = state::new(world, company, args, engine, spec, unit, cost.cost)?;
     Ok(Ok(Purchase {
         state,

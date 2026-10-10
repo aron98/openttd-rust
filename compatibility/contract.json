@@ -1978,7 +1978,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-pipeline-rs",
       "path": "crates/ottd-sim/src/commands/pipeline.rs",
-      "sha256": "747857f729a3b5a4ae0786b29dab2ad4b7dfda71ae90136e134470c05d8b04cd",
+      "sha256": "0c9ef4ac2dd56434888ce0f9ec8d4e75340dab06d0397609ccf7af28f2ce2f8d",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "454e38e82da9810defc022f3b27f1868bc1e2db3e8b2a51f2086aeb6ebff3c0c",
+      "sha256": "b7c8259a18e55832d52c64f51d1e52e175b21f583371d8b7fa3021919387578f",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2050,7 +2050,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build.rs",
-      "sha256": "0f1d7614fe82d813012a5ce7c60317c2e20e0e45a31c87e4757444a8ab3faaf2",
+      "sha256": "f0e526680736b9afd5468dd8168b1033ffb29daf81e575a0218b4844f21cd46f",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2203,7 +2203,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-vehicle-build-planning-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_build/planning.rs",
-      "sha256": "5c0b4a451ee27f7d024e356e489e2a7f148459e62e3c103688e29c8ee87cdd7d",
+      "sha256": "392b70a55355fba94c89d35a04c9f7b934d7b6a6bb11e8262e0ca05461eb7614",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2239,7 +2239,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests/publication.rs",
-      "sha256": "7341888c628d1568edb9cfea20a8de44a4ee357d04b6f4a3deca748c57098b19",
+      "sha256": "a01586fae33ba70a93f2704e9c70aeaf65bb84c04194d1aa720bb20dd77fadb1",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "e303dd44f284f22d1036ea8a2550ebb3b1f0b608da1cafa75a8aa3d7b19fa6ac",
+      "sha256": "641c1f0d677c628429fb463cfcd3965b086214f427bf670c0b48c670413d66ad",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "a4f286b00c421e1a88495b02a47935e57ad6dd00cbc97a176abf5a11d391e817",
+      "sha256": "31a81a6f0e2593ee551b7a2172ddc6d1f047956c7d5cb2c8052c82a9c0fe5d46",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "1f0d8b27f46a754d55154f9cd422a3ee1a742075b7e3db6f44c05632f28ecd89",
+      "sha256": "4ed5f21bb24644d6cb47742ba1edf70e1e25898c032049d1ab35061ea404ded0",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "c9aca917a32e2f05b4e76cd5deb0be8d64e1fe9770e84257bf0055a01f749653",
+      "sha256": "0431012c50968e1f295e971c75d2e0da3dfd1bf67b367f01b4a6ea61e30bdf36",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "c7c01cdff644bb141003902b01b743f893240a7acd560b71c87061f5b0e1f91f",
+      "sha256": "8408f1a438ed2ed4e5ecb27a22a799c0f49d0dfa7f25e1c2ec31408f80d07bf9",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "5bccb094e81b5c2a1c4d487c3a40c60562279db0584ce0eb4d04fcfd00c6679e",
+      "sha256": "dba6195805eea7b5d156759be5550241a12116792472000f911cba944a6ae551",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "75194eb094af873151b07546735acce9a4e810f952f0a0de94dd85e46e00c672",
+      "sha256": "263d30da84fb18edded4d990e018053aa5cdffd20e6d4b7d10e31bca615ac220",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,9 +3679,72 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "042a5528f2abf8fca36b528eef9ecf556b7baa600c43e1435c7080f870d140ab",
+      "sha256": "d628d7bf154f823994a2d6a560064347abb5658d5e5221c64ba3f2988a436c6c",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-driver",
+      "path": "scripts/check-owned-restore.py",
+      "sha256": "0aa8670da7a30e7daf95c07136b20767fd075bffaca84b6d91a247d620c8b8b6",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-evidence",
+      "path": "scripts/owned_restore_evidence.py",
+      "sha256": "d42d6463d6b168baf94f6f64d4e2699e9813a6d13b41c8834d37c52841f87ad5",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-layout",
+      "path": "scripts/owned-restore-layout.json",
+      "sha256": "e5d4800c0675da8389ec0c7ce95e7312d6ded570faf4ef29b4ee0bcb1cd97ce7",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-admission-tests",
+      "path": "scripts/owned_restore_admission_test.py",
+      "sha256": "70705204b82c32541c61fd4967bd61dce6d029b61078aa31f5fcbcaab7d4f647",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-source-tests",
+      "path": "scripts/owned_restore_sources_test.py",
+      "sha256": "c18f9d979acb7d2a333e348f517988d332fe68a4fe4ee146e291d508806c7f85",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-capacity-tests",
+      "path": "scripts/owned_restore_capacity_test.py",
+      "sha256": "00db7c7d394c3a079532acf0eaa40a2c1e76062a07fe215c6c38021c5517e491",
+      "kind": "recipe",
+      "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "owned-restore-suffix-tests",
+      "path": "scripts/owned_restore_suffix_test.py",
+      "sha256": "50aa7ef82e05787e69fad70b6ebe251138f61764e76ff9f316f050421bec6638",
+      "kind": "recipe",
+      "provenance": "Declared nonzero loaded-suffix fixture admission, separate from host-specific allocator poison audit; no runtime or comparator normalization.",
       "save_version": null,
       "profile": null
     }
@@ -10247,6 +10310,37 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "owned-restore",
+      "argv": [
+        "python3",
+        "scripts/check-owned-restore.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/admission/results.json",
+        "controls/admission/wrong-source-mutation.json",
+        "controls/admission/wrong-executable.json"
+      ],
+      "success_text": "PASS owned/default Restore CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 900
     }
   ],
   "scenarios": [
@@ -14986,6 +15080,53 @@
         "bin/ottd_sim",
         "native-executable/openttd",
         "native-executable/replay-build.sha256"
+      ]
+    },
+    {
+      "id": "runtime.owned-default-order-restore",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Ordinary-SP vanilla single-part road purchase with matching owned/default-group live backup. Original Post client normalization, availability/affordability gates, RNG, creation cache, copied order allocation and BKOR consumption publish in one prepared World transaction. Unrelated backups survive. Existing empty-BKOR purchase behavior and sale ERNW guard unchanged.",
+      "expected": "29 actual native23/Rust pairs,96 actions,250 snapshots,34 saves; full64000 ORDL capacity branch, eight linked ERNW cases, copied flags/timing/order indices/name and allocator reuse.11 executed focused rollback/boundary tests. Strict initial/reloaded saves and Rust fresh duration zero; source-backed native fresh-incarnation duration exception only.18 actual semantic comparator failures, real zero/subset, one-byte native alteration and source/executable/case/save admission controls,31 original observer refusals (26 mixed mode sets plus four old Build refusals and false-bridge backup=true). Full source/input/executable/raw archive identity. Shared-order/nondefault-group Restore, new network command modes, movement and general transport remain open. Three historically named allocation cases are portable repetitions, not poisoning coverage. Loaded-suffix uses an explicit one-field saved fixture on the prior returned vehicle3, round_trip_time=-123456789; original/Rust load/re-save must retain it with no fresh ledger. The 29 descriptors/counts are unchanged; genuine Darwin poison/revert evidence is a separate host audit.",
+      "driver": "owned-restore",
+      "assets": [
+        "owned-restore-driver",
+        "owned-restore-evidence",
+        "owned-restore-layout",
+        "owned-restore-admission-tests",
+        "owned-restore-source-tests",
+        "owned-restore-capacity-tests",
+        "owned-restore-suffix-tests"
+      ],
+      "source_refs": [
+        "scripts/check-owned-restore.py",
+        "scripts/owned_restore_evidence.py",
+        "scripts/owned-restore-layout.json",
+        "scripts/owned_restore_admission_test.py",
+        "scripts/owned_restore_sources_test.py",
+        "scripts/owned_restore_capacity_test.py",
+        "crates/ottd-sim/src/runtime/order_state/restore.rs",
+        "crates/ottd-sim/src/commands/vehicle_build/planning.rs",
+        "scripts/owned_restore_suffix.py",
+        "scripts/owned_restore_suffix_test.py"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/admission/results.json",
+        "controls/admission/wrong-source-mutation.json",
+        "controls/admission/wrong-executable.json"
       ]
     }
   ]

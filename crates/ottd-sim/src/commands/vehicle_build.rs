@@ -18,6 +18,7 @@ pub(super) struct Args {
     pub tile: u32,
     pub engine: u16,
     pub cargo: u8,
+    pub client_id: u32,
 }
 pub(super) fn empty_return() -> CommandReturn {
     CommandReturn::Vehicle {
@@ -127,7 +128,7 @@ pub(super) fn run(
             WireValue::Unsigned(u64::from(value)),
         ));
     }
-    context.publish(world, edits, allocation, VehicleId::new(id))?;
+    context.publish(world, edits, allocation, VehicleId::new(id), args.client_id)?;
     let mut result_returns = plan.capacities.clone();
     if let CommandReturn::Vehicle { vehicle, .. } = &mut result_returns {
         *vehicle = id;

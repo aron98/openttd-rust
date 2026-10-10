@@ -62,7 +62,7 @@
     "reference/grf_strings.hpp": "6ad4901404faaa15de5811fadd2d9845781ad2455be9a1c481bca22828714e48",
     "reference/grf_strings.patch": "b195d8431f971227a280d39d80b5ad9fd656dc35544c4176affd2c147da1897c",
     "reference/grf_strings_api.hpp": "66c4bac4fb498fddf3b2117bdefdb05e6a2b2cad70d7be6c4b17fc90b553c185",
-    "reference/order_fixture.hpp": "c2e181c23ae9266a832c016dcf14196e7d58cd13d502631b7a635eb9426657d5",
+    "reference/order_fixture.hpp": "4fd57f15d84c4333ccae90ce1c5f349cd48b728545341dafe845bb86db0068aa",
     "reference/order_fixture.patch": "91aa9cbb7e1fd71c0e65041fdec1663f47fcf7d6be3865f0b2a785a472106c64",
     "reference/order_network.hpp": "1ce10ead5229b7f2cdce9fd271bd969d1de1e1cf567e5d7a668094f4e0c5efa1",
     "reference/order_network.patch": "7c7267982f5eeb2ebebf6bca16587644e203ac8b3e62d4b908d908dd5c20f1b4",

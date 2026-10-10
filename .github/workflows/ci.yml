@@ -83,6 +83,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/currency_ci_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/currency_ci_*.py scripts/check-grf-currency-ci.py scripts/tests/currency_ci_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/currency_ci_*.py scripts/check-grf-currency-ci.py scripts/tests/currency_ci_evidence_test.py
+      - name: Check owned Restore evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/owned_restore_sources_test.py scripts/owned_restore_capacity_test.py scripts/owned_restore_admission_test.py scripts/owned_restore_suffix_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/owned_restore_*.py scripts/check-owned-restore.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/owned_restore_*.py scripts/check-owned-restore.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -145,6 +150,8 @@ jobs:
             .artifacts/depot-removal-*/
             .artifacts/backup-sale-*/
             !.artifacts/backup-sale-target-*/**
+            .artifacts/owned-restore-*/
+            !.artifacts/owned-restore-target-*/**
             .artifacts/backup-enabled-sale-*/
             !.artifacts/backup-enabled-sale-target-*/**
             .artifacts/ordered-sale-*/

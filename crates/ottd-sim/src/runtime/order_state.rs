@@ -12,6 +12,11 @@ mod detach;
 #[cfg(test)]
 mod native;
 mod observation;
+mod restore;
+#[cfg(test)]
+mod restore_boundary_tests;
+#[cfg(test)]
+mod restore_tests;
 mod sale;
 #[cfg(test)]
 mod sale_tests;
@@ -252,4 +257,14 @@ impl OrderState {
         };
         Ok((orders, receipt))
     }
+}
+
+pub(super) fn purchase_tile(
+    schema: &ottd_save::TableSchema,
+    record: &ottd_save::TableRecord,
+) -> Result<u32, RuntimeError> {
+    let row = view::vehicle(view::Row { schema, record })?
+        .ok_or(RuntimeError::Invalid("purchase vehicle family"))?
+        .1;
+    u32::try_from(row.number("tile")?).map_err(|_| RuntimeError::Invalid("purchase tile"))
 }

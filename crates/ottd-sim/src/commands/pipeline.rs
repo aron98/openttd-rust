@@ -167,7 +167,7 @@ fn execute_admitted(
         engine,
         cargo,
         use_free_vehicles: _,
-        client_id: _,
+        client_id,
     } = request.command
     {
         return super::vehicle_build::run(
@@ -177,6 +177,7 @@ fn execute_admitted(
                 tile,
                 engine,
                 cargo,
+                client_id: if client_id == 0 { 1 } else { client_id },
             },
             estimate,
             match context {

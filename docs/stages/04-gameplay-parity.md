@@ -10,12 +10,26 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
-Script increment `1ad5dc5` adds shared scalar arrays
-to the configured roots and persistent runners from `ff0d636`. The latest admitted
+Script increment `786f85a` adds array foreach iteration to the shared scalar arrays
+from `1ad5dc5` and persistent runners from `ff0d636`. The latest admitted
 gameplay increment remains
-`3d952b0`, for empty-road tile callbacks. Populated movement and array iteration
-are in progress. All seven completion gates below remain open.
+`3d952b0`, for empty-road tile callbacks. Populated movement and further content
+loading are in progress. All seven completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
+
+Array foreach preserves the retained iterable, index/value/cursor locals,
+instruction costs, suspension, host mutation and shared ownership. Both complete
+debug and optimized profiles pass 10,666 strict comparisons, 153 separate
+lexer-policy checks, 124 selected Rust tests and 135 foreach sessions, with
+96,528 validated archive members each. The sessions distinguish 129 stateful
+projections from six native-valid string iteration cases that compile exactly
+but stop at an explicit unsupported runtime boundary. An initial packaging run
+failed on 30 incorrect manifest paths; an actual producer regression and fresh
+complete profiles verify the correction. Root checks pass 667 workspace tests,
+strict Rust checks, 73 metadata tests and 21 foreach admission tests. Independent
+review verifies both archives, reproduces the original production failures,
+executes the public API and adds seven original/Rust differential cases.
+General iterables, functions, host APIs, cycles/GC and full AI/GS remain open.
 
 Private raw cargo loading preserves owners, labels/masks, defining-file identity,
 version-dependent fallback/explicit translation, override copying and road

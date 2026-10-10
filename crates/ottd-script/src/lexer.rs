@@ -113,7 +113,7 @@ impl<'a> Lexer<'a> {
                 }
             }
             b'+' | b'-' | b'*' | b'/' | b'%' | b'!' | b'~' | b'(' | b')' | b';' | b'{' | b'}'
-            | b',' | b'?' | b':' | b'^' | b'=' | b'<' | b'>' | b'&' | b'|' | b'.' => {
+            | b',' | b'?' | b':' | b'^' | b'=' | b'<' | b'>' | b'&' | b'|' | b'.' | b'[' | b']' => {
                 self.symbol(c)?
             }
             _ => return Err(self.error(CompileErrorKind::UnsupportedSyntax)),

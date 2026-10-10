@@ -152,6 +152,7 @@ impl Compiler<'_> {
             Value::Float(bits) => (0x03, i32::from_ne_bytes(bits.to_ne_bytes())),
             Value::Null => (0x14, 1),
             Value::Bool(b) => (0x16, i32::from(b)),
+            Value::Array(_) => return Err(self.error(CompileErrorKind::UnsupportedSyntax)),
         };
         self.emit(Instruction {
             opcode,

@@ -1,7 +1,9 @@
-//! Scalar Squirrel source compilation and resumable register execution.
+//! Bounded Squirrel source compilation and resumable register execution.
 //!
 //! This foundation deliberately rejects the unimplemented language and VM surface.
 //! It does not yet execute AI/GS packages or connect to the game tick runtime.
+mod array;
+pub use array::Array;
 mod compiler;
 mod error;
 mod lexer;
@@ -43,7 +45,7 @@ pub(crate) struct ProgramData {
 }
 #[derive(Debug)]
 pub(crate) enum Temporary {
-    Scalar(Value),
+    Value(Value),
     MainProgram { _program: std::rc::Rc<ProgramData> },
 }
 #[derive(Debug)]

@@ -1,0 +1,1 @@
+history[cursor]=sample; cursor=(cursor+1)%3; return history[0]+history[1]+history[2];

@@ -3,17 +3,18 @@ use crate::{
     Value, VmError,
 };
 use std::rc::Rc;
+mod arrays;
 mod roots;
 mod updates;
 #[derive(Clone, Debug)]
 enum Slot {
-    Scalar(Value),
+    Value(Value),
     Root(RootEnvironment),
 }
 impl Slot {
-    const fn scalar(&self) -> Result<&Value, VmError> {
+    const fn value(&self) -> Result<&Value, VmError> {
         match self {
-            Self::Scalar(value) => Ok(value),
+            Self::Value(value) => Ok(value),
             Self::Root(_) => Err(VmError::UnsupportedRuntimeValue),
         }
     }
@@ -24,7 +25,7 @@ impl Slot {
 pub enum Execution {
     /// Budget exhausted before fetching the next instruction.
     Suspended,
-    /// Main function returned a scalar.
+    /// Main function returned an independently owned value.
     Returned(Value),
 }
 /// Register VM retaining instruction pointer, registers and operation debt.
@@ -53,7 +54,7 @@ impl<'a> Vm<'a> {
         if !(1..=255).contains(&program.data.stack_size) {
             return Err(VmError::InvalidBytecode);
         }
-        let mut registers = vec![Slot::Scalar(Value::Null); usize::from(program.data.stack_size)];
+        let mut registers = vec![Slot::Value(Value::Null); usize::from(program.data.stack_size)];
         *registers.first_mut().ok_or(VmError::InvalidBytecode)? =
             Slot::Root(runner.get().root.clone());
         Ok(Self {
@@ -102,7 +103,7 @@ impl<'a> Vm<'a> {
             Ok(Execution::Suspended) => {}
             Ok(Execution::Returned(_)) | Err(_) => {
                 self.finished = true;
-                self.registers.fill(Slot::Scalar(Value::Null));
+                self.registers.fill(Slot::Value(Value::Null));
                 self.program = None;
                 if let Err(error) = result {
                     self.runner.get_mut().failure = Some(RunnerFailure::Runtime(error));
@@ -139,7 +140,7 @@ impl<'a> Vm<'a> {
         self.registers
             .get(index)
             .ok_or(VmError::InvalidBytecode)?
-            .scalar()
+            .value()
             .cloned()
     }
     fn literal(&self, index: i32) -> Result<Value, VmError> {
@@ -157,7 +158,7 @@ impl<'a> Vm<'a> {
         *self
             .registers
             .get_mut(usize::from(index))
-            .ok_or(VmError::InvalidBytecode)? = Slot::Scalar(value);
+            .ok_or(VmError::InvalidBytecode)? = Slot::Value(value);
         Ok(())
     }
     fn jump(&mut self, offset: i32) -> Result<(), VmError> {
@@ -196,7 +197,7 @@ impl<'a> Vm<'a> {
             self.registers
                 .get_mut(from..end)
                 .ok_or(VmError::InvalidBytecode)?
-                .fill(Slot::Scalar(Value::Null));
+                .fill(Slot::Value(Value::Null));
         }
         Ok(())
     }
@@ -208,8 +209,21 @@ impl<'a> Vm<'a> {
         };
         self.store_temporary(value)
     }
+    fn bit_not(&self, source: i32) -> Result<Value, VmError> {
+        match self.register(source)? {
+            Value::Integer(value) => Ok(Value::Integer(!value)),
+            Value::Null | Value::Float(_) | Value::Bool(_) | Value::String(_) | Value::Array(_) => {
+                Err(VmError::OperandType)
+            }
+        }
+    }
     fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
+            0x1f => self.new_array(i)?,
+            0x20 => {
+                self.append_array(i)?;
+                return Ok(None);
+            }
             0x09 | 0x0e => self.root_get(i)?,
             0x0b | 0x0d => {
                 self.root_store(i)?;
@@ -295,12 +309,7 @@ impl<'a> Vm<'a> {
                 .type_name(&self.runner.get().root.realm),
             0x2d => self.register(i.arg1)?.negate()?,
             0x2e => Value::Bool(self.register(i.arg1)?.is_false()),
-            0x2f => match self.register(i.arg1)? {
-                Value::Integer(n) => Value::Integer(!n),
-                Value::Null | Value::Float(_) | Value::Bool(_) | Value::String(_) => {
-                    return Err(VmError::OperandType);
-                }
-            },
+            0x2f => self.bit_not(i.arg1)?,
             opcode => return Err(VmError::UnsupportedOpcode(opcode)),
         };
         self.write(i.arg0, value)?;
@@ -313,3 +322,6 @@ mod tests;
 
 #[cfg(test)]
 mod root_sessions;
+
+#[cfg(test)]
+mod array_sessions;

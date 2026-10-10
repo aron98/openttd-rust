@@ -1,0 +1,1 @@
+pending <- [1]; pending[0]=7; return pending[2];

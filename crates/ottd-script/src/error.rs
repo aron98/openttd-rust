@@ -52,6 +52,14 @@ impl std::error::Error for CompileError {}
 /// Checked execution failure; undefined native arithmetic remains unsupported.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VmError {
+    /// Native-valid aggregate elements are outside the scalar-array domain.
+    UnsupportedArrayElement,
+    /// Array ordering is outside the admitted identity-only comparison domain.
+    UnsupportedArrayOrdering,
+    /// A nonfinite or out-of-range f32 cannot be converted to a native integer index.
+    UnsupportedIndexConversion,
+    /// Host element storage allocation failed; not a native semantic comparison.
+    Allocation,
     /// Root belongs to a different string/constant realm.
     RealmMismatch,
     /// A required own or runtime-fallback slot is absent.

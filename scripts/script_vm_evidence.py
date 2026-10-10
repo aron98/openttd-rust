@@ -9,9 +9,9 @@
 import sys
 from pathlib import Path
 
-from scripts.script_vm_roots import CONTROLS as ROOT_CONTROLS
-from scripts.script_vm_roots import validate_roots
-
+from scripts.script_vm_arrays import CONTROLS as ARRAY_CONTROLS
+from scripts.script_vm_arrays import declarations as array_declarations
+from scripts.script_vm_arrays import validate_arrays
 from scripts.script_vm_observation import (
     compare_observation,
     require_tests,
@@ -25,6 +25,8 @@ from scripts.script_vm_provenance import (
     verify_archive,
     verify_sources,
 )
+from scripts.script_vm_roots import CONTROLS as ROOT_CONTROLS
+from scripts.script_vm_roots import validate_roots
 from scripts.world_check_support import ROOT, WorldCheckError, at, read_json
 
 __all__ = (
@@ -172,9 +174,12 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
             in (
                 {f"constant-{name}" for name in CONSTANT_CONTROLS}
                 | {f"root-{name}" for name in ROOT_CONTROLS}
+                | {f"array-{name}" for name in ARRAY_CONTROLS}
             )
         ):
             status = int(parts[2] == "admit-mutant")
+        if len(parts) == 4 and parts[:2] == ("arrays", "sessions"):
+            status = array_declarations()[parts[2]].status
         expected_receipt = (
             {"returncode": 0}
             if relative.startswith("logs/")
@@ -237,6 +242,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
     validate_constants(directory, Path(origin))
 
     validate_roots(directory, Path(origin))
+    validate_arrays(directory, Path(origin))
     if read_json(directory / "summary.json") != {
         "cases": 10819,
         "fixtures": 1188,
@@ -245,7 +251,7 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "strict_comparisons": 10666,
         "undefined_input_rejections": 153,
         "controls": 25,
-        "frame_tests": 29,
+        "frame_tests": 31,
         "native_frames": 12,
         "branch_budget_cases": 127,
         "string_sessions": 4,
@@ -259,11 +265,17 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
         "constant_public_tests": 3,
         "constant_controls": 4,
         "root_native_sessions": 90,
-        "root_stateful_projections": 72,
-        "root_syntax_boundaries": 12,
+        "root_stateful_projections": 75,
+        "root_syntax_boundaries": 9,
         "root_runtime_boundaries": 6,
         "root_public_tests": 7,
         "root_controls": 4,
+        "array_native_sessions": 93,
+        "array_stateful_projections": 78,
+        "array_boundary_sessions": 12,
+        "array_protocol_refusals": 3,
+        "array_public_tests": 11,
+        "array_controls": 4,
         "passed": True,
     }:
         raise WorldCheckError("VM summary differs")

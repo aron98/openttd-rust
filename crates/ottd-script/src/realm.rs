@@ -26,7 +26,7 @@ impl Realm {
     pub(crate) fn same(&self, other: &Self) -> bool {
         Rc::ptr_eq(&self.pool, &other.pool)
     }
-    /// Create an independent empty scalar root in this realm.
+    /// Create an independent empty configured root in this realm.
     pub fn empty_root(&self) -> crate::RootEnvironment {
         crate::RootEnvironment::new(self.clone())
     }

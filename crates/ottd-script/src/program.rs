@@ -22,10 +22,11 @@ impl Program {
         let literals = literals
             .into_iter()
             .map(|value| match value {
-                Value::String(bytes) => Value::String(realm.string(bytes.as_bytes())),
-                Value::Null | Value::Integer(_) | Value::Float(_) | Value::Bool(_) => value,
+                Value::String(bytes) => Ok(Value::String(realm.string(bytes.as_bytes()))),
+                Value::Array(_) => Err(VmError::InvalidBytecode),
+                Value::Null | Value::Integer(_) | Value::Float(_) | Value::Bool(_) => Ok(value),
             })
-            .collect();
+            .collect::<Result<Vec<_>, VmError>>()?;
         Ok(Self::freeze(ProgramData {
             stack_size,
             literals,

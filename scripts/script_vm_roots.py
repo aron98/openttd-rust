@@ -114,7 +114,7 @@ def declarations() -> dict[str, dict[str, str]]:
         domains.count("strict-stateful-projection"),
         domains.count("explicit-syntax-boundary"),
         domains.count("explicit-runtime-boundary"),
-    ) != (90, 72, 12, 6):
+    ) != (90, 75, 9, 6):
         raise WorldCheckError("Incomplete root session domains")
     return result
 

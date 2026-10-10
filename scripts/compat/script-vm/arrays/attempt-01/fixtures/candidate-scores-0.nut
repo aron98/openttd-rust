@@ -1,0 +1,1 @@
+local score=[12,4,9]; local best=0; for(local i=1;i<3;i++){ if(score[i]<score[best]) best=i; } return best;

@@ -35,13 +35,13 @@ fn shared_root_and_independent_runner_state_survive_errors() -> Result<()> {
 fn root_replacement_is_run_time_but_constants_are_compile_time() -> Result<()> {
     let realm = Realm::new();
     let original = realm.empty_root();
-    original.new_slot(b"score", Value::Integer(1));
+    original.new_slot(b"score", Value::Integer(1))?;
     let mut runner = Runner::new(original.clone());
     let explicit = runner.compile("return ::score;")?;
     let unresolved = runner.compile("return score;")?;
     let constant = runner.compile("const score=9;\nreturn score;")?;
     let replacement = realm.empty_root();
-    replacement.new_slot(b"score", Value::Integer(2));
+    replacement.new_slot(b"score", Value::Integer(2))?;
     runner.replace_root(replacement)?;
     for (program, answer) in [(&explicit, 2), (&unresolved, 2), (&constant, 9)] {
         assert_eq!(
@@ -63,7 +63,7 @@ fn supported_lookup_errors_do_not_conflate_native_unsupported_values() -> Result
         runner.start(&delegate)?.resume(100),
         Err(VmError::UnsupportedRuntimeValue)
     );
-    root.new_slot(b"len", Value::Integer(3));
+    root.new_slot(b"len", Value::Integer(3))?;
     assert_eq!(
         runner.start(&delegate)?.resume(100)?,
         Execution::Returned(Value::Integer(3))
@@ -103,7 +103,7 @@ fn host_preconditions_and_scalar_results_have_separate_ownership() -> Result<()>
     );
     assert_eq!(runner.last_failure(), None);
     let result = runner.start(&program)?.resume(100)?;
-    root.new_slot(b"score", Value::Null);
+    root.new_slot(b"score", Value::Null)?;
     drop(program);
     drop(runner);
     drop(root);
@@ -121,7 +121,6 @@ fn unsupported_root_source_remains_distinct_from_lexer_policy() {
         "score += 1;",
         "++score;",
         "score++;",
-        "score <- [1,2];",
     ] {
         let error = Realm::new()
             .compile(source)

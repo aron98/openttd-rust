@@ -19,6 +19,16 @@ impl Emitter {
         if self.enabled {
             if let Some(previous) = self.instructions.last_mut() {
                 match instruction.opcode {
+                    0x20 if previous.opcode == 0x01
+                        && i32::from(previous.arg0) == instruction.arg1
+                        && !registers.is_local(previous.arg0) =>
+                    {
+                        previous.opcode = 0x20;
+                        previous.arg0 = instruction.arg0;
+                        previous.arg2 = 255;
+                        previous.arg3 = 255;
+                        return;
+                    }
                     0x0a if matches!(previous.opcode, 0x0e | 0x11 | 0x12)
                         && i32::from(previous.arg0) == instruction.arg1 =>
                     {

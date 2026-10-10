@@ -4,6 +4,7 @@ use std::cmp::Ordering;
 impl Value {
     pub(crate) fn equal(&self, other: &Self) -> Result<bool, VmError> {
         match (self, other) {
+            (Self::Array(left), Self::Array(right)) => Ok(left.same_identity(right)),
             (Self::String(left), Self::String(right)) => Ok(left.same_identity(right)),
             (Self::Null, Self::Null) => Ok(true),
             (Self::Bool(left), Self::Bool(right)) => Ok(left == right),
@@ -12,8 +13,8 @@ impl Value {
             (Self::Integer(_), Self::Float(_)) | (Self::Float(_), Self::Integer(_)) => {
                 Ok(self.order(other)? == Ordering::Equal)
             }
-            (Self::Null | Self::Bool(_) | Self::String(_), _)
-            | (_, Self::Null | Self::Bool(_) | Self::String(_)) => Ok(false),
+            (Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_), _)
+            | (_, Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_)) => Ok(false),
         }
     }
     #[expect(
@@ -22,6 +23,7 @@ impl Value {
     )]
     fn order(&self, other: &Self) -> Result<Ordering, VmError> {
         match (self, other) {
+            (Self::Array(_), _) | (_, Self::Array(_)) => Err(VmError::UnsupportedArrayOrdering),
             (Self::String(left), Self::String(right)) => Ok(left.as_bytes().cmp(right.as_bytes())),
             (Self::Null, Self::Null) => Ok(Ordering::Equal),
             (Self::Integer(left), Self::Integer(right)) => Ok(left.cmp(right)),

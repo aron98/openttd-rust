@@ -3,7 +3,7 @@ use crate::{ByteString, CompileError, Program, Realm, Storage, Temporary, Value,
 use std::{cell::RefCell, collections::BTreeMap, rc::Rc};
 
 type Slots = BTreeMap<Vec<u8>, (ByteString, Value)>;
-/// Shared plain root containing only byte keys and scalar values.
+/// Shared plain root with byte keys, scalar values and same-realm scalar arrays.
 #[derive(Clone, Debug)]
 pub struct RootEnvironment {
     pub(crate) realm: Realm,
@@ -23,24 +23,35 @@ impl RootEnvironment {
     pub fn raw_get(&self, key: &[u8]) -> Option<Value> {
         self.slots.borrow().get(key).map(|(_, value)| value.clone())
     }
-    fn intern(&self, value: Value) -> Value {
+    fn intern(&self, value: Value) -> Result<Value, VmError> {
         match value {
-            Value::String(bytes) => Value::String(self.realm.string(bytes.as_bytes())),
-            Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => value,
+            Value::String(bytes) => Ok(Value::String(self.realm.string(bytes.as_bytes()))),
+            Value::Array(array) => {
+                if !array.same_realm(&self.realm) {
+                    return Err(VmError::RealmMismatch);
+                }
+                Ok(Value::Array(array))
+            }
+            Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => Ok(value),
         }
     }
-    /// Insert or replace a scalar own slot, retaining interned key and value bytes.
-    pub fn new_slot(&self, key: &[u8], value: Value) {
-        let value = self.intern(value);
+    /// Insert or replace an own slot, retaining scalar bytes or array identity.
+    ///
+    /// # Errors
+    /// Rejects an array from another realm before changing the root.
+    pub fn new_slot(&self, key: &[u8], value: Value) -> Result<(), VmError> {
+        let value = self.intern(value)?;
         let name = self.realm.string(key);
         self.slots.borrow_mut().insert(key.to_vec(), (name, value));
+        Ok(())
     }
     /// Replace an existing own slot.
     ///
     /// # Errors
-    /// Returns `MissingIndex` without inserting when the key is absent.
+    /// Returns `RealmMismatch` for a foreign array before looking up the key.
+    /// Otherwise returns `MissingIndex` without inserting when the key is absent.
     pub fn set_existing(&self, key: &[u8], value: Value) -> Result<(), VmError> {
-        let value = self.intern(value);
+        let value = self.intern(value)?;
         let mut slots = self.slots.borrow_mut();
         let (_, target) = slots.get_mut(key).ok_or(VmError::MissingIndex)?;
         *target = value;
@@ -99,7 +110,7 @@ impl Runner {
     pub const fn new(root: RootEnvironment) -> Self {
         Self {
             root,
-            temporary: Temporary::Scalar(Value::Null),
+            temporary: Temporary::Value(Value::Null),
             failure: None,
         }
     }

@@ -1,0 +1,187 @@
+configured_empty_roots 0 0 1
+step 0 make-array 0 0 5 null - bool 1 integer 4 float 1065353216 string 780079
+handle 0 array 1 length 5
+stack_top 0 0
+external_child 1
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 bool 1
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 1
+step 1 array-length 0 0
+length 5
+stack_top 0 0
+external_child 1
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 bool 1
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 1
+step 2 array-get 0 0 4
+get string 3 780079
+stack_top 0 0
+external_child 1
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 bool 1
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 1
+step 3 array-set 0 0 1 string c3a9
+set
+stack_top 0 0
+external_child 1
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 1
+step 4 root-store-array 0 70656e64696e67 0
+seeded
+stack_top 0 0
+external_child 1
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 2
+step 5 compile 0 0 utf8 fixtures/return-pending.nut
+compiled
+stack 2
+literal string 7 70656e64696e67
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 2
+step 6 run 0 0 1000
+return 998 array 1 length 5
+temp array 1 length 5
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 3
+step 7 hold-result 0 1
+handle 1 array 1 length 5
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+external_handle 0 realm 0
+external_handle 1 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 3
+step 8 same-object 0 0 1
+same 1
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+external_handle 0 realm 0
+external_handle 1 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 3
+step 9 array-get 0 0 -1
+host_error string 23 74686520696e64657820646f65736e2774206578697374
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+external_handle 0 realm 0
+external_handle 1 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 3
+step 10 array-set 0 0 8 integer 9
+host_error string 28 74686520696e6465782027382720646f6573206e6f74206578697374
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+external_handle 0 realm 0
+external_handle 1 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 5
+element 1 0 null
+element 1 1 string 2 c3a9
+element 1 2 integer 4
+element 1 3 float 1065353216
+element 1 4 string 3 780079
+array_refs 1 3

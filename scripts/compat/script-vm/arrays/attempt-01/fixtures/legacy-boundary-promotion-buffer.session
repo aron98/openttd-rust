@@ -1,0 +1,11 @@
+seed 0 73636f7265 integer 7
+compile 0 0 buffer fixtures/legacy-boundary-promotion-0.nut
+run 0 0 0
+advance 0 1
+advance 0 1
+advance 0 1000
+raw 0 73636f7265
+temp 0
+hold-result 0 0
+hold-root 0 1 73636f7265
+same-object 0 0 1

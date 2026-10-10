@@ -1,0 +1,11 @@
+make-array 0 0 5 null - bool 1 integer 4 float 1065353216 string 780079
+array-length 0 0
+array-get 0 0 4
+array-set 0 0 1 string c3a9
+root-store-array 0 70656e64696e67 0
+compile 0 0 utf8 fixtures/return-pending.nut
+run 0 0 1000
+hold-result 0 1
+same-object 0 0 1
+array-get 0 0 -1
+array-set 0 0 8 integer 9

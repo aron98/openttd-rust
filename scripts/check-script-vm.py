@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.gameplay_foundations import FoundationRun
+from scripts.script_vm_arrays import run_arrays
 from scripts.script_vm_branches import finish_branches, run_branches
 from scripts.script_vm_constants import run_constants
 from scripts.script_vm_evidence import (
@@ -146,6 +147,7 @@ def main() -> None:
         _ = target.write_text(base.read_text().replace(old, new))
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
     run_roots(builder)
+    run_arrays(builder)
     branch_tests = run_branches(builder, rust)
     run_strings(output, rust)
     run_constants(builder)
@@ -174,7 +176,7 @@ def main() -> None:
             "strict_comparisons": 10666,
             "undefined_input_rejections": 153,
             "controls": 25,
-            "frame_tests": 29,
+            "frame_tests": 31,
             "native_frames": 12,
             "branch_budget_cases": 127,
             "string_sessions": 4,
@@ -188,11 +190,17 @@ def main() -> None:
             "constant_public_tests": 3,
             "constant_controls": 4,
             "root_native_sessions": 90,
-            "root_stateful_projections": 72,
-            "root_syntax_boundaries": 12,
+            "root_stateful_projections": 75,
+            "root_syntax_boundaries": 9,
             "root_runtime_boundaries": 6,
             "root_public_tests": 7,
             "root_controls": 4,
+            "array_native_sessions": 93,
+            "array_stateful_projections": 78,
+            "array_boundary_sessions": 12,
+            "array_protocol_refusals": 3,
+            "array_public_tests": 11,
+            "array_controls": 4,
             "passed": True,
         },
     )

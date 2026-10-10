@@ -7,6 +7,7 @@ use crate::{Program, Value};
 use std::fmt::Write;
 pub(super) fn value(value: &Value) -> Result<String, std::fmt::Error> {
     Ok(match value {
+        Value::Array(_) => return Err(std::fmt::Error),
         Value::Null => "null".to_owned(),
         Value::Bool(value) => format!("bool {}", u8::from(*value)),
         Value::Integer(value) => format!("integer {value}"),

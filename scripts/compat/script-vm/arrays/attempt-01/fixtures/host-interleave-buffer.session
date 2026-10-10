@@ -1,0 +1,10 @@
+make-array 0 0 1 integer 1
+root-store-array 0 70656e64696e67 0
+compile 0 0 buffer fixtures/host-interleave-0.nut
+run 0 0 0
+array-set 0 0 0 integer 10
+advance 0 5
+array-set 0 0 0 integer 11
+advance 0 2
+array-set 0 0 0 integer 12
+advance 0 1000

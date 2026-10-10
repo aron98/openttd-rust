@@ -1,0 +1,2 @@
+make-array 0 0 1 integer 1
+root-store-array 2 78 0

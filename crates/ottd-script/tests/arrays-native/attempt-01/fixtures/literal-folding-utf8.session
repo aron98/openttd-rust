@@ -1,0 +1,2 @@
+compile 0 0 utf8 fixtures/literal-folding-0.nut
+run 0 0 10000

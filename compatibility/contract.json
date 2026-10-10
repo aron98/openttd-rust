@@ -2995,7 +2995,7 @@
     {
       "id": "scalar-vm-driver",
       "path": "scripts/check-script-vm.py",
-      "sha256": "14e6d4219d68cdd3166808a61f798ef6fca6be61422837e55f2e8a9fcaa8cd63",
+      "sha256": "f7607197ae1d9fd7371bda2aed33920e1a94f8156bc10a7d472e017fdd7600ea",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3004,7 +3004,7 @@
     {
       "id": "scalar-vm-validator",
       "path": "scripts/script_vm_evidence.py",
-      "sha256": "0a1d32c921dd3487c6aab1faedc4c401b8b2c883d6ea34da2e119f88ef0897a4",
+      "sha256": "4e24166e07c6cbd65697fd9d77486142f6084a8467b8223bbeebfd7eac2a84cf",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3013,7 +3013,7 @@
     {
       "id": "scalar-vm-provenance",
       "path": "scripts/script_vm_provenance.py",
-      "sha256": "53d4a4dfcff7dd49527d16836f03a38e9ef75cf1822c9249fe93dc924996032a",
+      "sha256": "0092610ea1d7e2d7a0eda3618df3411bf94c4c31ab8d2e38c6efc1a99bb88946",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "0c434a93770d96381a3367d25daa608aa4adf204c3e4e496f33fe0b1530c6f8e",
+      "sha256": "fc78fdda4a6ca9ce623b6b48cf9fd477339f248b92e4389393b1507d8c96145e",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "3f01a86c983f56650d075dcdd850507437d616521016e5f7eba4846d0e9968e9",
+      "sha256": "ca5c1b5f87feb991d9728b56a935a7b220522e8e4825c0a469232dbc9bf66b1b",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "8b5f12dbbe10cc7edf7d992a2973cc6012b82acce2a92a2590b05bcb1f8a41c3",
+      "sha256": "ed9f6eaf5fcebe893c974fcdce8365044eda2f6953850e1bb0662fc670008aea",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "ec1bc48fec02d599fb7dae37792ad18c2b064b04121872b0dd9e268674ec4b82",
+      "sha256": "857498ed9efb971f790b114d7bd0a881a5d5f3258c71b4ccb1afea906efc9e00",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "ce16ad475de0b57eb14bba345630b41ef5156e85cd2b67b50955bedf6df5fa59",
+      "sha256": "beed95a761f4ed36aa5c770f4599c432e2a92f94f6263aa4f531d3c26a4e91c5",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "069a7acafe8687c0cf15729f78418f4402d2b350128b5512e2ade04e824e2fa4",
+      "sha256": "cafdb92b7402bacd34ea6931d46f0378f4e658c653038dd58acc827e1b6c7c5a",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "51aada6abe9671c9b812363bfb18712eb0aeed45ce0706ad2f35499e67acd1d3",
+      "sha256": "0f629116cb25920cf5e130f2332b60410c8b01d962621cbb6c793ef0cd147a71",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "d364c0936e597c5557f993e374703fddb02cb2ab3ac4d911245425c4f43970bd",
+      "sha256": "7b76e981cfdc63a0e686e6eb286e8aab7224242d162256499c060cab0e670c1d",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "7d296086f682d046103586e4d952e75871cec01f2215ddd8773c595502c57d6b",
+      "sha256": "c240d6f52f52eab778c7ffad2d5ad77d5cacfa65caa052f67cb7c7c309de40d6",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "6ed96163c1b124beb7be59e04c565a5347af10d85b9fbcefb04ad0cd5cfd224b",
+      "sha256": "245d485008395858189903db4812fd843bf94d4a41de58b3b72281811b666964",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
@@ -4183,7 +4183,7 @@
     {
       "id": "shared-restore-layout",
       "path": "scripts/shared-restore-layout.json",
-      "sha256": "722d0214c9d015c2dfd096104eec035fde5d3c20a295427819cdc6ad89844092",
+      "sha256": "c6f2ce4eb6491d25a98c61083fdbe07758cbac6fb89a64de7b7fcdbd7b34f704",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
       "save_version": null,
@@ -4219,7 +4219,7 @@
     {
       "id": "currency-properties-currency-properties-ci-layout-json",
       "path": "scripts/currency-properties-ci-layout.json",
-      "sha256": "1aef9a620d81f821ec718d3a639a8b5e758df1f60c5d23a55100f031689abec4",
+      "sha256": "7cd7a76bc8610879e3d80569ebecc9644a454b15c4cafc1d89fe8d83852c89a5",
       "kind": "recipe",
       "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
       "save_version": null,
@@ -4336,7 +4336,7 @@
     {
       "id": "empty-road-layout",
       "path": "scripts/empty-road-layout.json",
-      "sha256": "59c05047a225e4d693d7ed3dcfc45b3feb0c79450a4570c4804199a831790c10",
+      "sha256": "6b83c6479d256a47c681d0ffa62f0db3602d85a03536a80f13de8e813a40a3b1",
       "kind": "recipe",
       "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
       "save_version": null,
@@ -4399,7 +4399,7 @@
     {
       "id": "scalar-constant-crates-ottd-script-src-realm-constants-tests-rs",
       "path": "crates/ottd-script/src/realm/constants/tests.rs",
-      "sha256": "792c6d42fdabc6f0fc770df3762e044b5a9495c9f0bd001472c7e1ae75a0f215",
+      "sha256": "ac70e40465c821cb9e887b3311b5820c9fb5aaaba95b9daa00c3820f5817308d",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 closed compiler constants; native115 sessions and explicit bounded Rust projections.",
       "save_version": null,
@@ -7675,7 +7675,7 @@
     {
       "id": "engine-specs-scripts-engine-specs-ci-layout-json",
       "path": "scripts/engine-specs-ci-layout.json",
-      "sha256": "bdbc87c6e820443e54b2853fcac71331928141b89855644866a6991cc7f52955",
+      "sha256": "dbd231e4aadefaf60f8224f906caf9e077a708f641bfa91d9f2f4f2fe36d8d55",
       "kind": "recipe",
       "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
       "save_version": null,
@@ -7756,7 +7756,7 @@
     {
       "id": "scalar-root-crates-ottd-script-src-runner-rs",
       "path": "crates/ottd-script/src/runner.rs",
-      "sha256": "e2db050d56967b83c762fa6fe1febec4e48746399340f0491525912ae2fb1ba0",
+      "sha256": "4406b20145b04ffd957b6d7653fec4b8c5fba7d90bbb35f7f590b3b76ad9a6f2",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7765,7 +7765,7 @@
     {
       "id": "scalar-root-crates-ottd-script-src-runner-tests-rs",
       "path": "crates/ottd-script/src/runner/tests.rs",
-      "sha256": "2986a3ce8e338949123a71840d686c931714e1fdada4fd2ca8d2bca190d0b1d9",
+      "sha256": "b3b5d81e74801ed6427958c927dd1a0e295b4a137492d35793e6d30f0536752e",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7774,7 +7774,7 @@
     {
       "id": "scalar-root-crates-ottd-script-src-vm-root-sessions-rs",
       "path": "crates/ottd-script/src/vm/root_sessions.rs",
-      "sha256": "de5722cf769a6d62d9c400336c9f822c227e2f0960ac73d83cf71d82430da40d",
+      "sha256": "ab98cbf2f1748505d37a47fbfbad53b86f5aa5f7e4d79131ada49a002a7745ac",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7783,7 +7783,7 @@
     {
       "id": "scalar-root-crates-ottd-script-src-vm-roots-rs",
       "path": "crates/ottd-script/src/vm/roots.rs",
-      "sha256": "00101fa91b8de1ba7e96a53b48e828f2a1ea3804369d4db0d41e6419381a906d",
+      "sha256": "453d0b9139fcf9415c61d6a135cca39c7ed994f51a8ef91d3312b6b49915a41b",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7801,7 +7801,7 @@
     {
       "id": "scalar-root-crates-ottd-script-tests-root-runner-rs",
       "path": "crates/ottd-script/tests/root_runner.rs",
-      "sha256": "8129147ba27f65e738e433133038c138250748d52ac77df724a9e84dac994f5f",
+      "sha256": "652b7ba8cab0159d721a0a8b8afd09fe7af4f823251b8064ca394b5b4d1614cc",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7819,7 +7819,7 @@
     {
       "id": "scalar-root-scripts-compat-script-vm-roots-witnesses-json",
       "path": "scripts/compat/script-vm/roots/witnesses.json",
-      "sha256": "86191935fc7dde21338d184b87c99fc1de8c402bc2d05a8c5e09d85a4b455e48",
+      "sha256": "b983f0df81db080ef91b790794047345a539336063020e400c1c634020f32fbb",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7828,7 +7828,7 @@
     {
       "id": "scalar-root-scripts-script-vm-roots-py",
       "path": "scripts/script_vm_roots.py",
-      "sha256": "0ea38c9ad2c12710cd4059f37040a1e78923fc3f40a19be5262c82239c496d2a",
+      "sha256": "22628457cf8f39054b2ac7c7f74d31d6c4574b2c274a6929a467784248b43aac",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
       "save_version": null,
@@ -7840,6 +7840,96 @@
       "sha256": "76f3cca76ead6a8c0b20cbf20b07ed580b47228fcaaec50650b513ba9a92ca7c",
       "kind": "recipe",
       "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-crates-ottd-script-src-array-rs",
+      "path": "crates/ottd-script/src/array.rs",
+      "sha256": "5edfabc43694ea99d8806f4054533971f69857aae0a86086dd084fcce46feb1c",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-crates-ottd-script-src-compiler-expressions-arrays-rs",
+      "path": "crates/ottd-script/src/compiler/expressions/arrays.rs",
+      "sha256": "6d05ba218f46e4c4c5406346a643b83165626266d55e40d2dbc8006043d4301d",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-crates-ottd-script-src-vm-array-sessions-rs",
+      "path": "crates/ottd-script/src/vm/array_sessions.rs",
+      "sha256": "409213704ce770a2a1357f62aa3fef5e56ad963b7d601f5d4384c379263e127a",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-crates-ottd-script-src-vm-arrays-rs",
+      "path": "crates/ottd-script/src/vm/arrays.rs",
+      "sha256": "9b554a4f7e1c36f905329c5141ca5ca60e27e8457d4e2398ac01a9bc3d1c814f",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-crates-ottd-script-tests-arrays-rs",
+      "path": "crates/ottd-script/tests/arrays.rs",
+      "sha256": "5e3d46762828107bb0b35b1d0e4c273e18647c36b9fd86a19a118e6f67375605",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-crates-ottd-script-tests-arrays-production-red-rs",
+      "path": "crates/ottd-script/tests/arrays_production_red.rs",
+      "sha256": "5c74633c6239c3b36eb40dca1c889ff76191397734ec33b1f58e77fcd9216017",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-scripts-compat-script-vm-arrays-hpp",
+      "path": "scripts/compat/script-vm/arrays.hpp",
+      "sha256": "03341b956949d9b2c10b63b220c4dfad980b00374ec50446c3ae7f1a1d414eaa",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-scripts-compat-script-vm-arrays-witnesses-json",
+      "path": "scripts/compat/script-vm/arrays/witnesses.json",
+      "sha256": "0c1bec8eab3dac07d0bb891fa1c687cf58221d00109f659fa45720d9deacf8e4",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-scripts-script-vm-arrays-py",
+      "path": "scripts/script_vm_arrays.py",
+      "sha256": "7ea98fdfde35c58a3f784989c88ac971137a01fb2ce2609bade5e25e3a6e162c",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "script-arrays-scripts-tests-script-vm-arrays-test-py",
+      "path": "scripts/tests/script_vm_arrays_test.py",
+      "sha256": "8423f1e2fd3680439e1c9d9135a74bd08c69b477cd6f263761da0d8e0ea7f67b",
+      "kind": "recipe",
+      "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
       "save_version": null,
       "profile": null
     }
@@ -14070,7 +14160,10 @@
         "constant-tests/stdout.log",
         "root-identities.json",
         "root-identity-after.json",
-        "root-tests/stdout.log"
+        "root-tests/stdout.log",
+        "array-identities.json",
+        "array-identity-after.json",
+        "array-tests/stdout.log"
       ],
       "success_text": "PASS scalar VM 10666 comparisons; 153 undefined-input rejections",
       "scopes": [
@@ -18828,8 +18921,8 @@
       "id": "script.scalar-vm",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Scalar locals/expressions/iteration/switch/comments and native compilebuffer bytes; immutable byte strings, persistent string Realm, TYPEOF and 32/62 bundled Squirrel handlers. i64/f32/GC-enabled native variant. Defined shifts 0..63; undefined counts return UnsupportedShiftCount. Closed Realm constants/enums with parser-time publication, local precedence and scalar inlining are supported. Constant postfix and minimum-integer declaration negation remain UnsupportedSyntax; Configured empty scalar root slots, GET/GETK/SET/NEWSLOT/LOADROOTTABLE, shared root identity and separate persistent Runner temporary ownership are supported. General objects/GC/calls, arbitrary receivers and host APIs, unchanged AI/GS and saved-script integration remain unfinished; signed arithmetic overflow remains an explicit boundary. Reached native byte-classifier arguments 256..65535 are rejected with typed codepoint/context/offset diagnostics, including HexEscape lookahead; defined byte0..255 and plain string/comment Unicode remain strict.",
-      "expected": "Fresh pinned native compiler/VM versus Cargo observer: 1188 fixtures x9 schedules +127 targeted budgets =10819 cases: 10666 strict comparisons and153 explicit policy rejections. All850 final-octal baseline and317 frozen string fixtures retained; 21 additional unique policy/control bodies added. All15 defined low-byte octal continuation fixtures remain strict. Seventeen exact policy bodies retain native raw argv/status/stdout/stderr and independently require Rust rejection: eight original Token bodies plus nine HexEscape bodies. 62 scalar public,3 constant public and29 private Rust tests,12 native frame captures,four native lifetime sessions,23071 raw-f32 renderings,18 separate native source-feed observations,25 prior corruption controls and4 string controls. No undefined-domain observation is counted as native parity. Ordinary Unicode/native encoded-codepoint strings, byte-domain hex terminators, NUL/decoder and earlier-error ordering remain defined comparisons. This candidate requires fresh complete debug and optimized profiles; old candidate passes do not establish its admission. Constants add115 exact native session observations,37 strict buffer compiler/table comparisons,one of which additionally requires typed MissingIndex at runtime and3 stateful compile/lookup/execution projections. Native refcount/temp/drop-child records remain exact native observations alongside separate representable Rust ownership tests, not full raw Rust session parity. Four additional corruption controls require actual session admission PASS for the original and a specific typed stdout-mismatch REJECT for copied publication/counter/shared-state/lifetime mutations; argv/cwd/status/stderr and original bytes remain bound. Both full profiles must be newly executed for this source epoch. Configured roots add90 fresh native sessions:72 supported stateful projections compare instructions/literals/frames/IP/debt/roots/temporary/string-owner counts through the existing VM loop;12 syntax and6 unsupported runtime-value observations remain separately typed boundaries, never lexer-policy exemptions. Seven public Runner tests and four real admission corruption controls are required. The selected unit test binary reads the exact fresh native captures. Both complete profiles must run on the newly frozen source; prior focused/native proofs are not relabeled.",
+      "domain": "Scalar locals/expressions/iteration/switch/comments and native compilebuffer bytes; immutable byte strings, persistent string Realm, TYPEOF and 34/62 bundled Squirrel handlers. i64/f32/GC-enabled native variant. Defined shifts 0..63; undefined counts return UnsupportedShiftCount. Closed Realm constants/enums with parser-time publication, local precedence and scalar inlining are supported. Constant postfix and minimum-integer declaration negation remain UnsupportedSyntax; Configured empty scalar root slots, GET/GETK/SET/NEWSLOT/LOADROOTTABLE, shared root identity and separate persistent Runner temporary ownership are supported. General objects/GC/calls, arbitrary receivers and host APIs, unchanged AI/GS and saved-script integration remain unfinished; signed arithmetic overflow remains an explicit boundary. Reached native byte-classifier arguments 256..65535 are rejected with typed codepoint/context/offset diagnostics, including HexEscape lookahead; defined byte0..255 and plain string/comment Unicode remain strict. Scalar-element arrays add per-execution NEWARRAY/APPENDARRAY, bracket GET/plain SET, shared identity and same-Realm root/host values. Nested/self-array insertion, ordering, pointer stringification, reached delegates and unsafe numeric-index conversion remain separately typed implementation boundaries, not lexer policy.",
+      "expected": "Fresh pinned native compiler/VM versus Cargo observer: 1188 fixtures x9 schedules +127 targeted budgets =10819 cases: 10666 strict comparisons and153 explicit policy rejections. All850 final-octal baseline and317 frozen string fixtures retained; 21 additional unique policy/control bodies added. All15 defined low-byte octal continuation fixtures remain strict. Seventeen exact policy bodies retain native raw argv/status/stdout/stderr and independently require Rust rejection: eight original Token bodies plus nine HexEscape bodies. 62 scalar public,3 constant public and31 private Rust tests,12 native frame captures,four native lifetime sessions,23071 raw-f32 renderings,18 separate native source-feed observations,25 prior corruption controls and4 string controls. No undefined-domain observation is counted as native parity. Ordinary Unicode/native encoded-codepoint strings, byte-domain hex terminators, NUL/decoder and earlier-error ordering remain defined comparisons. This candidate requires fresh complete debug and optimized profiles; old candidate passes do not establish its admission. Constants add115 exact native session observations,37 strict buffer compiler/table comparisons,one of which additionally requires typed MissingIndex at runtime and3 stateful compile/lookup/execution projections. Native refcount/temp/drop-child records remain exact native observations alongside separate representable Rust ownership tests, not full raw Rust session parity. Four additional corruption controls require actual session admission PASS for the original and a specific typed stdout-mismatch REJECT for copied publication/counter/shared-state/lifetime mutations; argv/cwd/status/stderr and original bytes remain bound. Both full profiles must be newly executed for this source epoch. Configured roots add90 fresh native sessions:75 supported stateful projections compare instructions/literals/frames/IP/debt/roots/temporary/string-owner counts through the existing VM loop;9 syntax and6 unsupported runtime-value observations remain separately typed boundaries, never lexer-policy exemptions. Seven public Runner tests and four real admission corruption controls are required. The selected unit test binary reads the exact fresh native captures. Both complete profiles must run on the newly frozen source; prior focused/native proofs are not relabeled. Arrays require93 fresh native sessions:78 full-state projections (including6 compile-only),12 explicit boundary sessions (27 exact compiler blocks with18 typed implementation boundaries,6 MissingIndex and3 cleanup returns),and3 actual protocol refusals. Eleven public tests and four real copied-stdout admission controls are required. Three pointer-bearing boundary outputs retain raw bytes; only exact native pointer formatting/length and same return/temp identity are portable, never pointer-text parity. All other fields stay exact. Selected production tests consume fresh native array captures; both full profiles must execute after this source freeze.",
       "driver": "script-vm",
       "assets": [
         "scalar-vm-driver",
@@ -19209,7 +19302,17 @@
         "scalar-root-scripts-compat-script-vm-root-slots-hpp",
         "scalar-root-scripts-compat-script-vm-roots-witnesses-json",
         "scalar-root-scripts-script-vm-roots-py",
-        "scalar-root-scripts-tests-script-vm-roots-test-py"
+        "scalar-root-scripts-tests-script-vm-roots-test-py",
+        "script-arrays-crates-ottd-script-src-array-rs",
+        "script-arrays-crates-ottd-script-src-compiler-expressions-arrays-rs",
+        "script-arrays-crates-ottd-script-src-vm-array-sessions-rs",
+        "script-arrays-crates-ottd-script-src-vm-arrays-rs",
+        "script-arrays-crates-ottd-script-tests-arrays-rs",
+        "script-arrays-crates-ottd-script-tests-arrays-production-red-rs",
+        "script-arrays-scripts-compat-script-vm-arrays-hpp",
+        "script-arrays-scripts-compat-script-vm-arrays-witnesses-json",
+        "script-arrays-scripts-script-vm-arrays-py",
+        "script-arrays-scripts-tests-script-vm-arrays-test-py"
       ],
       "source_refs": [
         "scripts/check-script-vm.py",
@@ -19230,7 +19333,11 @@
         "scripts/script_vm_roots.py",
         "scripts/compat/script-vm/root_slots.hpp",
         "crates/ottd-script/src/runner.rs",
-        "crates/ottd-script/src/vm/roots.rs"
+        "crates/ottd-script/src/vm/roots.rs",
+        "scripts/script_vm_arrays.py",
+        "scripts/compat/script-vm/arrays.hpp",
+        "crates/ottd-script/src/array.rs",
+        "crates/ottd-script/src/vm/arrays.rs"
       ],
       "evidence": [
         "summary.json",
@@ -19247,7 +19354,10 @@
         "constant-tests/stdout.log",
         "root-identities.json",
         "root-identity-after.json",
-        "root-tests/stdout.log"
+        "root-tests/stdout.log",
+        "array-identities.json",
+        "array-identity-after.json",
+        "array-tests/stdout.log"
       ]
     },
     {

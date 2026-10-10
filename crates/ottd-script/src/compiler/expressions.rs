@@ -9,6 +9,7 @@ pub(super) struct ExpressionState {
     constant: bool,
     field: bool,
 }
+mod arrays;
 mod factors;
 mod roots;
 mod updates;

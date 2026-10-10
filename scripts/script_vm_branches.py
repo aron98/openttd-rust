@@ -19,6 +19,8 @@ from scripts.world_check_support import (
 )
 
 FRAME_TESTS = (
+    "vm::array_sessions::actual_native_owned_array_sessions",
+    "vm::array_sessions::native_valid_object_boundaries_keep_exact_compilation",
     "runner::tests::program_clone_shares_one_literal_pool_and_failed_call_retains_real_program",
     "runner::tests::terminal_frame_releases_program_before_wrapper_drop",
     "runner::tests::compile_failure_keeps_previous_temporary_and_success_keeps_error_record",
@@ -161,6 +163,7 @@ def run_branches(builder: FoundationRun, rust: Path) -> Path:
         [
             "env",
             f"OTTD_SCRIPT_ROOT_CORPUS={output / 'roots/inputs'}",
+            f"OTTD_SCRIPT_ARRAY_CORPUS={output / 'arrays/inputs'}",
             str(tests),
             "--test-threads=1",
         ],
@@ -249,6 +252,7 @@ def validate_branches(directory: Path) -> None:
     if read_json(directory / "lib-tests/argv.json") != [
         "env",
         f"OTTD_SCRIPT_ROOT_CORPUS={origin / 'roots/inputs'}",
+        f"OTTD_SCRIPT_ARRAY_CORPUS={origin / 'arrays/inputs'}",
         tests,
         "--test-threads=1",
     ]:

@@ -12,7 +12,7 @@ fn program_clone_shares_one_literal_pool_and_failed_call_retains_real_program() 
     assert!(Rc::ptr_eq(&a.data, &clone.data));
     assert_eq!(realm.owners(b"compile-owner-A"), 1);
     let b = runner.compile("return \"compile-owner-B\";")?;
-    assert!(matches!(runner.temporary, Temporary::Scalar(Value::Null)));
+    assert!(matches!(runner.temporary, Temporary::Value(Value::Null)));
     drop(clone);
     {
         let mut frame = runner.start(&a)?;

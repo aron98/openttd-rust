@@ -490,21 +490,21 @@
       "session": "fixtures/unsupported-array-buffer.session",
       "cwd": ".",
       "capture": "native/unsupported-array-buffer.txt",
-      "domain": "explicit-syntax-boundary"
+      "domain": "strict-stateful-projection"
     },
     {
       "id": "unsupported-array-unsigned",
       "session": "fixtures/unsupported-array-unsigned.session",
       "cwd": ".",
       "capture": "native/unsupported-array-unsigned.txt",
-      "domain": "explicit-syntax-boundary"
+      "domain": "strict-stateful-projection"
     },
     {
       "id": "unsupported-array-utf8",
       "session": "fixtures/unsupported-array-utf8.session",
       "cwd": ".",
       "capture": "native/unsupported-array-utf8.txt",
-      "domain": "explicit-syntax-boundary"
+      "domain": "strict-stateful-projection"
     },
     {
       "id": "unsupported-field-buffer",
@@ -847,7 +847,7 @@
     "replacement/unsigned.txt": "67dd0ad627e17432b3801d376564ac97159a673127e689e9863bddd169af9935",
     "replacement/utf8.txt": "fbcaa30f42ef44b41e379902548c961fcafb9f893802fbfb5b4c53e897bcc964"
   },
-  "strict_stateful_projections": 72,
-  "explicit_syntax_boundaries": 12,
+  "strict_stateful_projections": 75,
+  "explicit_syntax_boundaries": 9,
   "explicit_runtime_boundaries": 6
 }

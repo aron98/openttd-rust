@@ -11,8 +11,9 @@ struct Session {
     ids: Vec<usize>,
     next_id: usize,
 }
-fn render(value: &Value) -> Result<String> {
+pub(super) fn render(value: &Value) -> Result<String> {
     Ok(match value {
+        Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
         Value::Bool(value) => format!("bool {}", u8::from(*value)),
         Value::Integer(value) => format!("integer {value}"),
@@ -26,7 +27,7 @@ fn render(value: &Value) -> Result<String> {
         }
     })
 }
-fn bytes(hex: &str) -> Result<Vec<u8>> {
+pub(super) fn bytes(hex: &str) -> Result<Vec<u8>> {
     if hex == "-" {
         return Ok(Vec::new());
     }
@@ -35,10 +36,10 @@ fn bytes(hex: &str) -> Result<Vec<u8>> {
         .map(|pair| Ok(u8::from_str_radix(std::str::from_utf8(pair)?, 16)?))
         .collect()
 }
-fn number(fields: &[&str], index: usize) -> Result<usize> {
+pub(super) fn number(fields: &[&str], index: usize) -> Result<usize> {
     Ok(fields.get(index).ok_or("missing index")?.parse()?)
 }
-fn dump(program: &Program, out: &mut String) -> Result<()> {
+pub(super) fn dump(program: &Program, out: &mut String) -> Result<()> {
     writeln!(out, "stack {}", program.stack_size())?;
     for value in program.literals() {
         writeln!(out, "literal {}", render(value)?)?;
@@ -88,7 +89,7 @@ impl Session {
     }
     fn temp(&self, id: usize, out: &mut String) -> Result<()> {
         match &self.runner(id)?.temporary {
-            Temporary::Scalar(value) => writeln!(out, "temp {}", render(value)?)?,
+            Temporary::Value(value) => writeln!(out, "temp {}", render(value)?)?,
             Temporary::MainProgram { .. } => writeln!(out, "temp unsupported 134217984")?,
         }
         Ok(())
@@ -109,7 +110,7 @@ impl Session {
                 )?;
                 for (slot, value) in frame.registers.iter().enumerate() {
                     match value {
-                        Slot::Scalar(value) => writeln!(out, "frame {slot} {}", render(value)?)?,
+                        Slot::Value(value) => writeln!(out, "frame {slot} {}", render(value)?)?,
                         Slot::Root(root) => {
                             assert!(root.same(&frame.runner.get().root));
                             writeln!(
@@ -197,7 +198,7 @@ impl Session {
                     "string" => Value::String(self.root(id)?.realm.string(&bytes(text)?)),
                     _ => return Err("invalid scalar type".into()),
                 };
-                self.root(id)?.new_slot(&key, value);
+                self.root(id)?.new_slot(&key, value)?;
                 writeln!(out, "seeded")?;
             }
             "raw" => {
@@ -321,6 +322,7 @@ fn supported_root_sessions_match_native_frames_and_owners() -> Result<()> {
         std::path::PathBuf::from,
     );
     let families = [
+        "unsupported-array",
         "read",
         "create-replace",
         "set",
@@ -386,7 +388,6 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
             "unsupported-root",
             "unsupported-field",
             "unsupported-update",
-            "unsupported-array",
         ] {
             let native = fs::read_to_string(base.join(format!("native/{name}-{feed}.txt")))?;
             assert!(native.lines().any(|line| line == "compiled"));
@@ -420,7 +421,7 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
             fs::read_to_string(base.join(format!("native/delegate-precedence-{feed}.txt")))?
                 .contains("return 998 unsupported 134218240")
         );
-        runner.root.new_slot(b"len", Value::Integer(3));
+        runner.root.new_slot(b"len", Value::Integer(3))?;
         assert_eq!(
             runner.start(&delegate)?.resume(1000)?,
             Execution::Returned(Value::Integer(3))

@@ -125,9 +125,9 @@ jobs:
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_constants.py scripts/tests/script_vm_constants_test.py
       - name: Check configured root session evidence admission
         run: |
-          uv run --with pytest python -m pytest -q scripts/tests/script_vm_roots_test.py
-          uvx ruff check --config scripts/grf-control-ruff.toml scripts/script_vm_roots.py scripts/tests/script_vm_roots_test.py
-          uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_roots.py scripts/tests/script_vm_roots_test.py
+          uv run --with pytest python -m pytest -q scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/script_vm_roots.py scripts/script_vm_arrays.py scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/script_vm_roots.py scripts/script_vm_arrays.py scripts/tests/script_vm_roots_test.py scripts/tests/script_vm_arrays_test.py
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
       - run: cargo test --workspace --locked

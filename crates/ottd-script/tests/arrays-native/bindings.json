@@ -1,0 +1,656 @@
+{
+  "native_sha256": "39681c6d1fd4f4453bd5fa4557376e5d9daf1fee87f1120ff9b98bdd0d8226e1",
+  "sessions": [
+    {
+      "epoch": "attempt-01",
+      "name": "after-write-failure-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/after-write-failure-buffer",
+      "stdout_sha256": "48b65be855e3494e9c149319fbf535ffa89085d53d9132f5488f6657ed484f06",
+      "session_sha256": "13880df1c4ef34d8ec73b01e0abdf971ec86b724a5c0e61ec85e56189db92770"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "after-write-failure-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/after-write-failure-unsigned",
+      "stdout_sha256": "4bdce12e825066933f5bb46873cfcafdf37899a5d2154450301c09a3956f932a",
+      "session_sha256": "0e06c9165cade890c6c6537569057ac6f4216f1ad3de381484bc470285b0180e"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "after-write-failure-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/after-write-failure-utf8",
+      "stdout_sha256": "c0201b013812f685f7bdee32b7502e70a562f2919fcbff205f6973ee994f6a42",
+      "session_sha256": "efc44b874b8f72db4cc337422b5f3dbf5a60ae7e738b35a8a4dca150f5a16c66"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "candidate-scores-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/candidate-scores-buffer",
+      "stdout_sha256": "b8a3f2e59e025844b2c05e5b18413665b67f60b095c24362d4838250a902a16e",
+      "session_sha256": "183aefb8fe3aab9d573001a4982834b30a400fbd38ab38bb677b0e1fa557a1fc"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "candidate-scores-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/candidate-scores-unsigned",
+      "stdout_sha256": "04dac4c419654a4abe53db35be8896bd795800c572246156eae8ca2bbc272b2a",
+      "session_sha256": "18d179253378643c6e07dee62dbfdc7a3b58380a9ec9fa9737a41a0939b614a9"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "candidate-scores-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/candidate-scores-utf8",
+      "stdout_sha256": "d110213d7cbc73b092003a965ff40e7b9315017727ccd40fbc072672aff989b3",
+      "session_sha256": "d936a88eb9c8f0f1c78e1f16e318e1548a530567eeba3cbb7fc9053c264a4ea9"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "child-temporary-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/child-temporary-buffer",
+      "stdout_sha256": "85a82e584c6a16b30d7e3d178998d0ec2fabec360e613afef30c381e8e83dd18",
+      "session_sha256": "2d378dd705de911d712916d1de7fd566ca74e54035f800fdc165e4cbde068dc5"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "child-temporary-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/child-temporary-unsigned",
+      "stdout_sha256": "49c4f88fcd1a267fa3da7410c23d96be0046d2c395756c532382a373c1856bd8",
+      "session_sha256": "49c4a5159d43227dc415d2e3cff9b7433ff81de457e665da73bdb1cd6241a53f"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "child-temporary-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/child-temporary-utf8",
+      "stdout_sha256": "8971c01e9200a7b06065d3c38c6f1007a34d928000a3965c4cd3cd7cfdea8ee0",
+      "session_sha256": "03e29e16d3d1a14d7542a0820a0af44dfe1a202706f96c54a4413797fe507d8b"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "cycle-collection-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/cycle-collection-buffer",
+      "stdout_sha256": "6cefb9fdc7aadbfae07e0ee91918e7d1be021523240fff9b81f6c4fc1c90150f",
+      "session_sha256": "0be36a7049aa2c8866a2115a54f4eaa5be0cc11def65462d930f4c19144b52c6"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "cycle-collection-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/cycle-collection-unsigned",
+      "stdout_sha256": "32a11b19de95f5ccf2960502bce0bb04acf2a3805763fd8bce53ab9ace9a2b3a",
+      "session_sha256": "6fea27bfdd888a9060d9108555b933951a7e1ef0cbff3be13201f51a9ca3e1a8"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "cycle-collection-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/cycle-collection-utf8",
+      "stdout_sha256": "f7b69bd729ececb7dddd151977128ce393e6377237849ac2d458d143e8efc8a1",
+      "session_sha256": "f07d83ace198cc19e5911a26376f563f476b8e7c783f9e52fd768599e4cabe85"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "defined-float-index-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/defined-float-index-buffer",
+      "stdout_sha256": "68dd813f403a8f8362228b1f706da32e3fb97796a2bfd25054e1977d25804a47",
+      "session_sha256": "281598fa04602f18c11ad2949c93084835ad213d53d120938503ba132ffc3d4e"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "defined-float-index-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/defined-float-index-unsigned",
+      "stdout_sha256": "58c8dbc6030deb0b232d729cab78d3354f43fa5faf83ab3a6b2b9035510dbdeb",
+      "session_sha256": "7cba7ff9189c6baf9402ae6ac5cfcacfb6eb04b47b544c5f3e7c8f6db959c90e"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "defined-float-index-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/defined-float-index-utf8",
+      "stdout_sha256": "681e9324714303243dba5594820a85b3b7e99703ef707b98671fb8b7f85ca183",
+      "session_sha256": "d03123925d73a477afea789ee3e317d2a8f79b3968b4d37b13c7d023c4cc698d"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "delegate-and-missing-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/delegate-and-missing-buffer",
+      "stdout_sha256": "deaec779454f48903ff25f0fcbec42eecf0b7cf3a5324c5c3df8ce2cc56d920a",
+      "session_sha256": "74c6a4a736cc308caadcf45f2f43632104b69c64885af70b672b753053bc3b37"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "delegate-and-missing-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/delegate-and-missing-unsigned",
+      "stdout_sha256": "43e1bd1a0e1be2c36a415688268c27290bac9534eef980a2c45d2d9b6f284118",
+      "session_sha256": "608aa88f1ca04f3c87632c92e4c6ba45da82c5e29eca78f39494c846eddca73f"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "delegate-and-missing-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/delegate-and-missing-utf8",
+      "stdout_sha256": "1abff67beba6f961d05f42d825a4608e02d6edb27a1a553d32fc5f5ef1dc5d8e",
+      "session_sha256": "77f81026b9c5cc97161111ac11c299f580a4f8bb287566dbb9ff8d9318924ff3"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "empty-truth-type-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/empty-truth-type-buffer",
+      "stdout_sha256": "ba41d645b59c9cbe174f0faae4ac75144a6d8f4efcc651169f808a8153fae43b",
+      "session_sha256": "0af18be56abdf1e8ee96b2bf2fbd1b07497cc932296689c3b208fd8eb761b5e1"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "empty-truth-type-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/empty-truth-type-unsigned",
+      "stdout_sha256": "5b30975a58c73ed0ba23c034770d4a43eaebdfc37ee79b5bec533d6d6a63e43a",
+      "session_sha256": "a3212ef5578f09dae59f9cf7905ce8d45c1acee76fa252c2e87c8ee70aed378b"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "empty-truth-type-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/empty-truth-type-utf8",
+      "stdout_sha256": "3056c1cfeddb7700a5f9550090975a82143c57e80c3cd6bd042419d4e5298c40",
+      "session_sha256": "a2269389b500b31a4dc8ec529285dadbfcb681264c62b429af783ab5b4beba93"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "extra-fields",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/extra-fields",
+      "stdout_sha256": "428a057f566c2de70c8c24a920ca7dbaff017b4de220e64511724a623a5bfbcc",
+      "session_sha256": "5cab326814fd2e45212410be91ec24ca3cac8b8a41025bd2e96224062e382732"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "float-cast-boundary-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/float-cast-boundary-buffer",
+      "stdout_sha256": "07e580a9ced30e9d795dad2c1dd98c393734d16d25df2809e33d116348de3e4b",
+      "session_sha256": "f00f8f797df55a433dec800bf989834cf167565d7cd71581e7294f80f6456518"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "float-cast-boundary-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/float-cast-boundary-unsigned",
+      "stdout_sha256": "b3215c50fae29906b8f1a875df5edc4b08b2a304a549b4bdea332df6c04d1cd9",
+      "session_sha256": "7cd24843b7babf8aa6cfbb95990bf48330229cf71309cfb14fdf0d4ffca312e2"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "float-cast-boundary-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/float-cast-boundary-utf8",
+      "stdout_sha256": "d22eab04c607f8dd715b0e3a56eae115899d23feda86ed9ad71da974c67ab443",
+      "session_sha256": "68e22e42551730782360f1ae0cecddbbebbd476e773a3d7b226093d77422e678"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "foreign-handle",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/foreign-handle",
+      "stdout_sha256": "730a84a216750b1408d7f6bf467f75a5506e08e0a6f76a7a21fde69b5b63c2b9",
+      "session_sha256": "0adff88bd4ae324c3eec3787b4959c55f5a738a451ca8caadffc3175d57d4b60"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "fresh-allocation-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/fresh-allocation-buffer",
+      "stdout_sha256": "c5063b9da3133d699f15abcd9ab8158866c8507c6ecf6650d8fa9fc7eeaa90ab",
+      "session_sha256": "9ac8d2a06eff0b703a0adf576726ac173b42f733240c465eb0a6afc868bee2dc"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "fresh-allocation-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/fresh-allocation-unsigned",
+      "stdout_sha256": "828dabe73445c40bf3ea87700e9028f172b2ef73fc8609c24f45ac1b45cc7243",
+      "session_sha256": "2a92843469c0a1a2e8d3eafbc3e932d8ec1c11e727fa95dfb30171f639e44635"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "fresh-allocation-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/fresh-allocation-utf8",
+      "stdout_sha256": "ed3c8d63952da2c4a73fe6c53552d40cf136f9b10ac4ebd1fa4fc1168408f8eb",
+      "session_sha256": "7649d6d0b0c6a56c4f1b3d02306aad2b37794604317997e0808d890da240b0ee"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "host-construction-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/host-construction-buffer",
+      "stdout_sha256": "9e45c7d7dff5c51d674e43c9479a96036716d28dcc74b7781d5c02bad2c50554",
+      "session_sha256": "7cb26d92ff89ab02d7968bc376c503396bdd2559c8932371fe33159609ea58eb"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "host-construction-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/host-construction-unsigned",
+      "stdout_sha256": "56bdbb4ed3dd3dc7eca171d0d2146d5cda65e2585c55c096628ed1c22b6a92b7",
+      "session_sha256": "d06cc6894c3b08ff00af1c7a758eada2c2c84866d2db54639570d2639094f611"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "host-construction-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/host-construction-utf8",
+      "stdout_sha256": "7dc781580832db4c30cf213733a9df3b6c7c7d876c617adf05db75baa2fa6114",
+      "session_sha256": "483bace15c06ca023a8ec425e3d605ab088700c474f2809db690428a93064d79"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "host-interleave-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/host-interleave-buffer",
+      "stdout_sha256": "e5e991700675dbc2535b2790a6f1e8671f7fa3f79ff4432c2ee85a03cc46aaec",
+      "session_sha256": "9e0da62270a8a3c4d514ecd9be166389da2681c78f20d07b24af535e57d0fc8c"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "host-interleave-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/host-interleave-unsigned",
+      "stdout_sha256": "64d1d9899847b78451d57f1aeea530b9f30dc12c42f32e637b7ce12d88f08558",
+      "session_sha256": "1dd17e7d992d8cec9692eec6231cb1171821c6c7d2ab545258303281e03722ce"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "host-interleave-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/host-interleave-utf8",
+      "stdout_sha256": "809baeebaafdcddad1900f97061d3af26049d55670bcb129d4dafc421f5af1f5",
+      "session_sha256": "7eaa3e4f8ee139c953668e33b6e1c8bbe0b56529d9828334a205b24db2e2ac92"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "identity-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/identity-buffer",
+      "stdout_sha256": "779da63015c2c12083539d0ea2cc37a25defebd74ca077a1bf40adb959377f6d",
+      "session_sha256": "da3bce66e966f2fecca5a5dc61f4f63db6ce556f32eb0b611cf13c5be11bd6b2"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "identity-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/identity-unsigned",
+      "stdout_sha256": "3b590f0fb973849057727cbc1c712518dbfa29beda2512f53d99b6767684906c",
+      "session_sha256": "0200975b22e328fdd2a4435f32e18a80227d7eb9de7905bb7f30f86224e05617"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "identity-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/identity-utf8",
+      "stdout_sha256": "cb0a88dad3f03895ff50bbc745b389c4c1c8192cece28c7e5d911dba963117db",
+      "session_sha256": "ca1053fbc773e26fc43b069e550cffbfaf304661f9d42506730b471950ef0f6c"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "index-error-order-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/index-error-order-buffer",
+      "stdout_sha256": "589d857d9c7443c5c29af1dbb04a7c72161a2bbb649012b0de58c8b8826c466a",
+      "session_sha256": "49dd6244623bda38da514c4a263de377983f35e0db5d7000de74cdee61e1cc48"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "index-error-order-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/index-error-order-unsigned",
+      "stdout_sha256": "32f82e5659e80f12f25d2b79c719bdd9abffffdacdb7466693ef03adcf60d6c0",
+      "session_sha256": "dc06837ce62745a754a222f710bc007bbde4f89401ba62331721ced64991fcf7"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "index-error-order-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/index-error-order-utf8",
+      "stdout_sha256": "1dd74d9268b2bed51c835d1719c9cd3d28e030273770bc25b2ee0938de2af421",
+      "session_sha256": "3b32c0a46e648289828938bee1eb2a827a80bc0240408a3cd5f88bfafdfabaed"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "indexed-alias-order-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/indexed-alias-order-buffer",
+      "stdout_sha256": "33d2f5a51f4ee9fff4d0511abbc45159c9358d0a897a279e0f39f22c64d32829",
+      "session_sha256": "813d28cf3a081b4a69fa1fd6507094efb2b2f8eb1d84652ffabd22d4d758b3b9"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "indexed-alias-order-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/indexed-alias-order-unsigned",
+      "stdout_sha256": "b6f3009349e868aa0a511da0e71b87c48ee943d04d134cd3242beba6c5e30740",
+      "session_sha256": "c415b9c2e461d6f953f69969481232c7c8d8fea7c005e1608de6434013c17b8a"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "indexed-alias-order-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/indexed-alias-order-utf8",
+      "stdout_sha256": "7895ad3fa750acbba4463d21337e9f6d7ae5df9278dce9e65260fd5550f502f8",
+      "session_sha256": "593146fc13e2b97a9bdad4646b6d7b43484776f342c5ef8ef0c065d177dd0c86"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "lazy-array-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/lazy-array-buffer",
+      "stdout_sha256": "682d3ad6e1adc3b5c63a7c000ec4f580c79c0a81be20bae205cdc4bf51959974",
+      "session_sha256": "acc19a2562663b10080434f8f1d4f2b5331fee89125c75d4ba2493430e52230a"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "lazy-array-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/lazy-array-unsigned",
+      "stdout_sha256": "24cbcf295ecf0860e8c36718c2190aa1deb63b0f4519c5226d3db054bfe7f648",
+      "session_sha256": "cb2dec86b475f4fa1571cb2fcb45386515a62e03d833c61f5592f54d4379fee9"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "lazy-array-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/lazy-array-utf8",
+      "stdout_sha256": "16037db1c6a0449394c130d5e6a1f4ad84b4315f84775c7a32524af5189cfbe5",
+      "session_sha256": "d4dc7e839b10d4f15644be92ee9ceb69fd1640dbbed89261336b74f0d61c7600"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "legacy-boundary-promotion-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/legacy-boundary-promotion-buffer",
+      "stdout_sha256": "5b73c3539df42a8f77eac2946104faf5369397963782001da16be056d3b4261d",
+      "session_sha256": "2df68a3a120e2f69dcc13ae13c21eb493d4453df198cacc9c3c9894723eda8be"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "legacy-boundary-promotion-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/legacy-boundary-promotion-unsigned",
+      "stdout_sha256": "7fba8e2d60cee24ce2e82a3ed5598665975fca0769a978aac2549d43a541a3cc",
+      "session_sha256": "93eb2e7c18d44fc4f6021df1ced4770718debb42b2e237077c23b42f3527722e"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "legacy-boundary-promotion-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/legacy-boundary-promotion-utf8",
+      "stdout_sha256": "53682bc5d14144e37f4343def7506f257b9f0f0990c4d985cd6ef81bcc607e06",
+      "session_sha256": "7223c8f2a0341aa5040a70c2783cce87d641d5a913ef2e9ed363b3e73bca84a0"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "literal-folding-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/literal-folding-buffer",
+      "stdout_sha256": "3289903d44d44262faeec75fb59d74222257381561b5334e4eeca751f610c9dc",
+      "session_sha256": "5407342d4f5b8b2c7d06f1eb6cb39f969bd9ec0c87bd8de27dae38eab25e3bef"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "literal-folding-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/literal-folding-unsigned",
+      "stdout_sha256": "67a7914b0b3554ec78ce01c4584e08b3d13d0f9b9ffaa88f91cee0e69cae9f41",
+      "session_sha256": "8281e8c48b206ef2a6d9d7ce333276a828c19bec7055750b614ab63225b31cdd"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "literal-folding-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/literal-folding-utf8",
+      "stdout_sha256": "6a584a9c3f05126e9e37e7a6b810181923f9b1c9aa41c8640d3eef36b69b8a42",
+      "session_sha256": "148ebf827408ac8b794e078ae64edd54121d158dea472346d8e6420aa8dd4c13"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "malformed-array-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/malformed-array-buffer",
+      "stdout_sha256": "09fc50f91c5d49008c065aafd0c436ed3c1d28a1cb5c61e3a3aaa2d04e5c0490",
+      "session_sha256": "6938608dfe3a5179002acdf9902469a3030d161da697053c82689dbb9c1ce8e2"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "malformed-array-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/malformed-array-unsigned",
+      "stdout_sha256": "a105c1406b4b6bfa12b60b02ca2edf62d98e044764ef2769e7b51b7c5aab9c51",
+      "session_sha256": "90078b13dba99ef7d6442890d28e5337ee3fa2f78515fdceab220472c4812f48"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "malformed-array-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/malformed-array-utf8",
+      "stdout_sha256": "56c4513caeaceb861799f0f5b38af50402756628aba425a72f0c7e6bff303cc6",
+      "session_sha256": "f842e408e3b711c2d1af9319ed56090e97f9177dbb811d62bd398ac79764a92f"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "nested-and-cycle-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/nested-and-cycle-buffer",
+      "stdout_sha256": "85a78b6c91c04f68f6693ab3f8b5eefe7ee5fd2105f79b7b433204fb2288222e",
+      "session_sha256": "1a88616164adf43781a3668f1fa98df56f472f940f970872a0b7b8fef7ee0a24"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "nested-and-cycle-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/nested-and-cycle-unsigned",
+      "stdout_sha256": "413171a3a0613c22c67f3d3e28d22a7250be5483ca5dd521fe47d2adb8e53cda",
+      "session_sha256": "053f9823a5ba8688ca77334373233e1d4a95974fa92fef436db1817fc602d5ac"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "nested-and-cycle-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/nested-and-cycle-utf8",
+      "stdout_sha256": "87adab06de173cfb02f4e6c1626335a11078fde22f15f15c01daec61461b1cb5",
+      "session_sha256": "32b94c5270bbb6c11c3941bb5e1e898c77343175bfdaf9c9cf195c3896afc791"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "newslot-array-error-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/newslot-array-error-buffer",
+      "stdout_sha256": "83a4cfb079ee1ea93c4d8d40fbd470491835492465f7a135b53a8b9f29ff9ca2",
+      "session_sha256": "58f552b6739901cc8811ffdf0e10554ef3f2c482e8e811ee76a9d52b20590bf4"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "newslot-array-error-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/newslot-array-error-unsigned",
+      "stdout_sha256": "b7475c4dbd96d229a861c231e7a0c91e461c6dddbdc43fb8418431e13cd51c5d",
+      "session_sha256": "d9dd07dce90559a9aae8c79f6b384acb2ca9625b56e764e04ae4a4f061c05f2c"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "newslot-array-error-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/newslot-array-error-utf8",
+      "stdout_sha256": "ec67789f616141f497f007cfa2d8d6fd1df3edaa62c3b4de72f08275cc048e0f",
+      "session_sha256": "b2426bf7c0ad538bb20abcc80be2841c8b8b8775d287bfe2cd6c68203b02500e"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "non-scalar-host-element",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/non-scalar-host-element",
+      "stdout_sha256": "640189fafb61a64fa296daaa81e8b595b9a3e4dea5a9ef36881a18db4d00e7a3",
+      "session_sha256": "eb4c394aa57d93adb1cfe96c614b63b77afcb5d3349d71aa97187e53087e94e6"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "ordering-conversion-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/ordering-conversion-buffer",
+      "stdout_sha256": "c0d7a5d0b26a038281b0feddba23859bb3bd93d376473ae2d30143c33faf1f4b",
+      "session_sha256": "4564a0f0d4e7502417e740eb003f4f8a493fe24d11e8a9dbd1a5e24f73415fa6"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "ordering-conversion-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/ordering-conversion-unsigned",
+      "stdout_sha256": "7b2bcad27777bd0a664e1307b86f219e4bd36f25c3d4cd4e647bb0135ebd2edd",
+      "session_sha256": "c0d38be2a67b4bfac87b786b51b1cc612e8f3609bd8341f66646f3830e8fe186"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "ordering-conversion-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/ordering-conversion-utf8",
+      "stdout_sha256": "108f97a1f3e4f6772ceca94e35138a125cedb3148e55a182fc07b29720bd5b2d",
+      "session_sha256": "c8727519f24fcf361da928e0f5eb80ce2346d373378ce6cf4647fe0084003235"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "partial-initialization-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/partial-initialization-buffer",
+      "stdout_sha256": "30c0e2b206517878e2020c8e278237415c036b5694ef29b55b299f18902b7495",
+      "session_sha256": "dd5d706e5737fb316f98eb780db478819796a428c05730415bc368d940a57af8"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "partial-initialization-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/partial-initialization-unsigned",
+      "stdout_sha256": "fdd67b19fbb920dc20ae9ed8dfd90c254b25f7593ad012b920a4b0e9b8772bac",
+      "session_sha256": "8619e6ec96b42f007c0b5b56a1d3cab93eb9d516dd198d03afde304a3b63a7b0"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "partial-initialization-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/partial-initialization-utf8",
+      "stdout_sha256": "e8f9ad8e60b5f44aeaf06029c06edee8d564e68c01f44264ac36e4b17835c445",
+      "session_sha256": "5f9328c562e269a5fbe17634e6f07b5c5cd90261e273fae831a4d090048ad10a"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "persistent-alias-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/persistent-alias-buffer",
+      "stdout_sha256": "9205b264463c386acf56cf584ec35ae9fefafdb741f71cbd83ecd2e058d079e2",
+      "session_sha256": "73db8040fbe56f5999071ae38bd4ffe750fda4e32a0c23c50313d107f42bf09a"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "persistent-alias-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/persistent-alias-unsigned",
+      "stdout_sha256": "06c93bec3973c2ccbd468ebabd62fc8025bf1f9020157fe4568ac0259a51c41c",
+      "session_sha256": "913d4fa45b6358e1511f7ebfd47523998af84f9c5b838a1320d5bc5ecf001b99"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "persistent-alias-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/persistent-alias-utf8",
+      "stdout_sha256": "553e4beee6b4a9a4b294ae0fa5efbc4d160008430323c9d372d457dc0eee7539",
+      "session_sha256": "021de1ee26fc1d219fc3d09c7b2c998d3f20a93c1a45bf34ca661576ad033371"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "rolling-history-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/rolling-history-buffer",
+      "stdout_sha256": "d94652c29ff1a0fa9a81e9231f8998a7bd198c8f0de0ef7cb6179ef0c0d513a3",
+      "session_sha256": "9863e34b7526f91d0455e8e8c59c14384c9a02ed7853ef618769179178c6c0a5"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "rolling-history-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/rolling-history-unsigned",
+      "stdout_sha256": "c025b2abefc04b48e318a258cebfaaa43562c68c5a0a56814e934e90760c3d58",
+      "session_sha256": "2b2cb6ffa9adee485325fc32e298ae285daa6288adf2499e48ccfe3a20c3dc90"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "rolling-history-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/rolling-history-utf8",
+      "stdout_sha256": "0aded00daa76f39fac0bb1f680e7f668119ac50ab7a046ee4772e8008da539fc",
+      "session_sha256": "8d056dd12190b7686c705e852d160aa82d3626b9b4926de5f5f8d9af9b35c7ed"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "shared-independent-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/shared-independent-buffer",
+      "stdout_sha256": "02d46ea17a0091e8c19164eec7394d4ebd5700851913b0cea2ec79b4c3212d3c",
+      "session_sha256": "323e00af9642f17d64952272e3538b8c1cf83ef626e60db71a8fc98fec43f4a8"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "shared-independent-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/shared-independent-unsigned",
+      "stdout_sha256": "d4d08899a299baca72a8f337306613c82e926605c2470bde16c1cd0c01aec56b",
+      "session_sha256": "c62efb97b85c99e6c060a5ea248f603a62fc25c76a66d19d61e9496a5e48d23b"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "shared-independent-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/shared-independent-utf8",
+      "stdout_sha256": "cda6cd7e9419568f5f47217f8201a5b7be27d5e8de2a067bed35c4e434813aed",
+      "session_sha256": "e444f39abebae206c27edef05f72bceaaf0ef0fb9b2f8e4076d060d928cd073f"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "string-bytes-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/string-bytes-buffer",
+      "stdout_sha256": "559886c77d4344970591343ae16d8f14ab0116cd4fc8a7e4066e758ebc9f32a6",
+      "session_sha256": "5c141388dc9c7eee033a15d0a5e1c82fcb758a78c477b232d856de452abef313"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "string-bytes-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/string-bytes-unsigned",
+      "stdout_sha256": "b991223a56bd266aa8293681ddc736ddc809caac3af569c22ada4f8ea31f1e67",
+      "session_sha256": "d9f2e9beb500a60c8b582bf15f76c08321cdd400d191a9cc4347995afbeecca1"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "string-bytes-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/string-bytes-utf8",
+      "stdout_sha256": "3f11930193cd33f1105b123e1617980160fae7bfb6622e8785712c7ed73e7c0b",
+      "session_sha256": "debcfa7bbb7d289555518d512c75aaa60166c453a9c7fac5c5af88e6cec175e2"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "temporary-only-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/temporary-only-buffer",
+      "stdout_sha256": "5ee6c158a95f93ae354e0b895177d5dd0a8a14f760a1456b33022e9887a9d4ee",
+      "session_sha256": "bcea6dc3575bf1123d3d42839d0e34107428252ca47636e9d89dc43a85479bad"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "temporary-only-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/temporary-only-unsigned",
+      "stdout_sha256": "9eb36ec0b980e53568f6c5b5d6587c256f0d85f7c3cd5c9c5974a45c69cadc89",
+      "session_sha256": "fba7bcca4f5637540346b2966210827b61a53fc1840d684f492dbb1aefe26d68"
+    },
+    {
+      "epoch": "attempt-01",
+      "name": "temporary-only-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-01/processes/arrays/temporary-only-utf8",
+      "stdout_sha256": "0e8133b2ea4b505631ad7d232eaab2f18c30d6aed935ee1b53266f175619d7a7",
+      "session_sha256": "0aea9bacc4be797edaa7276498c1f9a650c5ab3b6d3ce98aa6d3945b9b4ea947"
+    },
+    {
+      "epoch": "attempt-02",
+      "name": "all-construction-boundaries-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-02/processes/all-construction-boundaries-buffer",
+      "stdout_sha256": "7440589e4a584c2bf0024f6f3499d5d79dc161d6cb1c82b0d812b2cb1281a0a7",
+      "session_sha256": "a1eb6a757831b77f2293ae68b57227d3befe985bd10d90d78672d4290f6da895"
+    },
+    {
+      "epoch": "attempt-02",
+      "name": "all-construction-boundaries-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-02/processes/all-construction-boundaries-unsigned",
+      "stdout_sha256": "f793877552626db7f1ecf35c16c94b8336b39f7c52cb85b99568e235986781cd",
+      "session_sha256": "6a770f093a50dd023ce436ac29ee86acfcc30b264b0f03985f9d52d5a68935aa"
+    },
+    {
+      "epoch": "attempt-02",
+      "name": "all-construction-boundaries-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-02/processes/all-construction-boundaries-utf8",
+      "stdout_sha256": "b4c726db2e6ea4b4e1fee3cc60d1a4255d28e9481a61c8e9dd82457705ab89a1",
+      "session_sha256": "ecbd08b03bc82a8838108fc1960b0ee66bb0758fec0a4e427aae7e4d6d74e648"
+    },
+    {
+      "epoch": "attempt-02",
+      "name": "set-before-after-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-02/processes/set-before-after-buffer",
+      "stdout_sha256": "036f43ed64acddb7e4d794ca4d87234069f1361cfd309003bb8e13d8ead7ec18",
+      "session_sha256": "d73470905fd6d82500401b60c7c5278037d75c7842afedbb2c78e0849469e0e9"
+    },
+    {
+      "epoch": "attempt-02",
+      "name": "set-before-after-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-02/processes/set-before-after-unsigned",
+      "stdout_sha256": "887fb343d142f7f50d12c02bbba8db2172d8dbb7cfe0bced8bae86662089ccd8",
+      "session_sha256": "1f27aaa196b7f74b231909caf8b5c011a4f76db29f3d5145f56d50002d79be07"
+    },
+    {
+      "epoch": "attempt-02",
+      "name": "set-before-after-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-02/processes/set-before-after-utf8",
+      "stdout_sha256": "a91472d4ebf641737b6c2aeead9f088814fa039ce77ddd7920c3a047b85f6709",
+      "session_sha256": "214cb57371ab445d5ed3daf76005ad1f58ec90c91caf932a95dbfba2fc137f3d"
+    },
+    {
+      "epoch": "attempt-03",
+      "name": "newslot-persistence-buffer",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-03/processes/newslot-persistence-buffer",
+      "stdout_sha256": "3625a9b8bcdecb0624a5bf5c9fd4fe28f77c7ecd4736c5c3715381f3fd39cce0",
+      "session_sha256": "978197a956f2ab7c7f427eec785cfc11695e3ae9af11d3d70af1f8107b30166f"
+    },
+    {
+      "epoch": "attempt-03",
+      "name": "newslot-persistence-unsigned",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-03/processes/newslot-persistence-unsigned",
+      "stdout_sha256": "996f41c583f210cfbf07e38f42cb967dccdc961dd271617f54f623bd49fa597c",
+      "session_sha256": "01f38182c66179c8e2d84d06ee9c64d2ed24aac732b6ed7fe0ff448bff477b3b"
+    },
+    {
+      "epoch": "attempt-03",
+      "name": "newslot-persistence-utf8",
+      "source_process": ".omo/evidence/stage04-script-arrays-native-proof/attempt-03/processes/newslot-persistence-utf8",
+      "stdout_sha256": "dcdb77a56c4f50ec5bd3a9efb0dbbeb500136376a730c83e53cb6c5f31b76bc2",
+      "session_sha256": "38bdcf50ead3cf0e7a10f5ef1e597a4b8ac5e42baf627df2eca1a39e1694be60"
+    }
+  ]
+}

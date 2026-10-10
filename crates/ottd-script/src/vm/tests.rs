@@ -15,6 +15,7 @@ fn scalar(value: &Value) -> String {
                     output
                 })
         ),
+        Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
         Value::Integer(n) => format!("integer {n}"),
         Value::Float(bits) => format!("float {bits}"),
@@ -41,7 +42,7 @@ fn check_frames(
                     vm.instruction_pointer()
                 )?;
                 for (slot, value) in vm.registers.iter().enumerate().skip(1) {
-                    writeln!(actual, "frame {slot} {}", scalar(value.scalar()?))?;
+                    writeln!(actual, "frame {slot} {}", scalar(value.value()?))?;
                 }
             }
             Ok(Execution::Returned(value)) => {
@@ -149,7 +150,7 @@ fn failed_update_matches_native_frames() -> Result<(), Box<dyn std::error::Error
         if instruction.opcode == 0x23 {
             assert_eq!(vm.update(*instruction), Err(crate::VmError::DivisionByZero));
             assert_eq!(
-                vm.registers.get(1).and_then(|slot| slot.scalar().ok()),
+                vm.registers.get(1).and_then(|slot| slot.value().ok()),
                 Some(&Value::Integer(7))
             );
             break;
@@ -161,7 +162,7 @@ fn failed_update_matches_native_frames() -> Result<(), Box<dyn std::error::Error
     assert!(
         vm.registers
             .iter()
-            .all(|value| value.scalar() == Ok(&Value::Null))
+            .all(|value| value.value() == Ok(&Value::Null))
     );
     Ok(())
 }

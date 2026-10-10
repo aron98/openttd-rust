@@ -1,4 +1,4 @@
-# Squirrel scalar, string, realm and configured-root foundation
+# Squirrel scalar, string, root and scalar-array foundation
 
 This crate independently compiles a bounded subset of OpenTTD 15.3's bundled
 Squirrel 2.2.5 and executes native register instructions. It has no C++ runtime
@@ -7,8 +7,9 @@ to game ticks.
 
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
-assignment, blocks, if/else, while/for/do loops, scalar switch/case/default, break and continue. Values remain null,
-bool, i64 decimal/octal/hex integers, raw f32 values and immutable byte strings.
+assignment, blocks, if/else, while/for/do loops, scalar switch/case/default, break and continue. Values include null,
+bool, i64 decimal/octal/hex integers, raw f32 values, immutable byte strings and
+identity-bearing arrays whose elements are structurally restricted to scalars.
 Normal, verbatim and character literals follow native escapes and encoded-byte
 length. `typeof` returns interned type-name strings. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
 comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
@@ -49,7 +50,7 @@ bytecode returns typed errors. Runtime errors and returns terminate the frame.
 
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
-is portable native semantics. Thirty opcode handlers remain unimplemented.
+is portable native semantics. Twenty-eight opcode handlers remain unimplemented.
 Foreach, general objects, functions/closures,
 cyclic graph ownership/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
@@ -153,8 +154,8 @@ bindings unchanged. Direct `=` assignment rejects after parsing its RHS. Constan
 postfix operations and minimum-native-integer declaration negation are explicitly
 unsupported increment boundaries, separate from the lexer ctype policy. General
 tables/objects, native closures, classes, require and host API registration remain
-outside this slice. Value remains scalar; configured root slots have their own
-bounded host interface.
+outside this slice. Compiler constants remain scalar; configured root slots
+retain scalar values and same-realm scalar arrays through a bounded host interface.
 
 Focused tests retain 37 original buffer observations: 36 closed-constant compiler
 outcomes/bytecode/table snapshots are strict comparisons. The formerly unsupported
@@ -170,10 +171,10 @@ counters, shared-state isolation and final native release. Admission still
 requires newly executed complete debug and optimized profiles for these inputs.
 
 
-## Configured scalar roots and persistent runners
+## Configured roots and persistent runners
 
 `Realm::empty_root` creates an independent plain root with byte-string keys and
-scalar values. RootEnvironment clones share slots; another empty root shares
+scalar values or same-realm scalar arrays. RootEnvironment clones share slots; another empty root shares
 only the Realm's interner/constants. `raw_get`, `new_slot` and `set_existing`
 provide explicit own-slot host access, including empty/NUL-containing keys.
 Newslot replaces existing entries; set requires an existing entry. Strings are
@@ -189,7 +190,9 @@ receiver-equals-this fallback gate. SET never falls back to constants. A reached
 default-delegate closure or late enum table returns UnsupportedRuntimeValue;
 this is an explicit implementation boundary, not undefined lexer input.
 Root compound/prefix/postfix updates, arbitrary this/receiver objects, root value
-escape, member/index chains and generic table/array values remain unsupported.
+escape, dot members and generic table values remain unsupported. Array bracket
+reads and plain assignments are supported; indexed compound/prefix/postfix updates
+remain unsupported syntax.
 
 `Runner` is persistent execution state, separate from shared root identity.
 `compile`/`compile_bytes` use its Realm without clearing temporary state;
@@ -220,16 +223,74 @@ observer. Its selected production unit-test binary reads those fresh captures,
 with seven additional public Runner tests. Four admission controls first accept
 the original session, then reject only the declared changed stdout observation.
 The pinned corpus manifest binds all 212 source/capture files and exact session
-membership. Tests replay 66 supported native root sessions, three compile/call owner
+membership. Tests replay 69 supported native root sessions, three compile/call owner
 sessions and three compile-root/run-root replacement sessions through production
 handlers. They compare tuples, frames, IP/debt, root values, temporaries and
 string-owner counts; only compile/runtime diagnostic prose is projected to typed
-error stage. Eighteen additional native observations cover explicit unsupported
+error stage. Fifteen additional native observations cover explicit unsupported
 syntax/values and the supported shadowing of default delegates. These focused
 observations do not replace newly executed full CI profiles and source-map closure
 work required for admission of this increment. Full AI/GS execution, persistent
 host API state, general heap/GC and game-tick integration remain open.
 
+
+## Scalar arrays and host API migration
+
+Array literals allocate on every execution, including repeated runs of one Program.
+NEWARRAY reserves capacity with zero initialized elements; APPENDARRAY initializes
+one element at a time, retaining the pinned literal-append fusion and opcode budget.
+Bracket GET and plain SET preserve native evaluation, aliasing and temporary-owner
+order. Empty arrays are truthy; `typeof` returns `array`; equality compares identity.
+Arrays can be returned, stored in roots and held across programs, errors and suspension.
+For example, fixed candidate scores can be scanned with `score[i]`, persistent
+`pending <- [id, cost]` state can be updated by a later program, and shared local
+aliases can update the same array without copying its contents.
+
+The public `Value::Array(Array)` variant requires exhaustive callers to handle an
+additional value type. `Realm::array(Vec<Value>)` constructs an opaque array;
+`len`, `is_empty`, `get`, `set` and `same_identity` expose bounded host operations.
+`RootEnvironment::new_slot` now returns `Result<(), VmError>`; callers must handle
+foreign-array `RealmMismatch`. `set_existing` checks that affinity before lookup.
+Both root stores preserve the old slot on rejection. Array strings are reinterned
+into their owning Realm; arrays retain identity and cannot cross Realm boundaries.
+`Program::from_parts` rejects array literals, so mutable data never enters the shared
+compiler literal pool. No array storage or owner internals are publicly exported.
+
+Private element storage has no container variant. Host construction, host SET,
+VM APPENDARRAY and VM SET all reject a reached nested/self-array element with
+`UnsupportedArrayElement`. An absent SET index returns MissingIndex first. This
+structural restriction prevents cycles in the admitted ownership graph; it is not
+an implementation of native GC. Native-valid nested arrays and self-cycles remain
+explicit runtime boundaries, separate from the unchanged lexer policy. Relational
+array ordering, pointer-bearing array stringification and reached default-delegate
+closures are also explicit boundaries. Nonfinite or out-of-i64 f32 indices return
+`UnsupportedIndexConversion`; defined finite indices truncate toward zero. Ordinary
+missing indices and invalid operand types retain their distinct runtime errors.
+Array methods/calls, foreach, resize/append host APIs, general tables and serialization
+remain later dependencies.
+
+Focused tests replay 78 retained native sessions through the production opcode loop.
+They compare native tuples, literal pools, active registers, exact IP/debt, root
+stores, array labels/contents, temporary ownership, weak-label death and string
+owners. Native array reference counts, external handle-table bookkeeping, VM-root
+bookkeeping and stack-top counts remain raw native observations; they are not
+normalized to Rust counts. Only a witnessed no-op `collected 0` is omitted, and its
+Rust replay asserts all watched arrays are already dead. Separate tests preserve
+native-valid cycle/ordering/delegate observations while asserting typed Rust
+boundaries. The old array-rejection body now has supported comparisons under all three feeds.
+The normal driver declares 93 fresh native array sessions, retains their actual
+argv/cwd/status/streams, and passes fresh captures to the production unit-test binary.
+It requires 11 public array tests, 31 private crate tests, and four controls which
+first admit an original session then reject a copied stdout mutation. The old root
+array body is promoted across all three feeds: roots now have 75 supported sessions,
+9 syntax boundaries and 6 runtime-value boundaries. Array accounting stays separate:
+78 projections (six compile-only), 12 explicit boundary sessions and three protocol
+refusals. Only the three declared array-stringification boundary captures have a
+nonportable pointer spelling; admission checks native prefix/length and consistent
+return/temp pointer identity, retaining raw text and comparing all surrounding state.
+Malformed formats, missing records and changed surrounding state are rejected.
+Both complete profiles remain required for this new CI source; prior focused proof
+is not relabeled as fresh normal CI execution. Full AI/GS execution and all broad Stage 4 gates remain open.
 
 ## Defined lexer input policy
 
@@ -254,7 +315,7 @@ U+0100, U+20AC and the native encoded U+D800 codepoint). These seventeen bodies
 have an `undefined_native_input` stage: 153 credit cases independently
 require the typed Rust rejection and retain raw original argv/status/stdout/stderr,
 including success or abnormal termination. The previously admitted driver has 10666 other observations as
-strict comparisons; new root-session CI expansion remains pending. An unclassified typed rejection fails admission. Original
+strict comparisons; the array driver additionally requires the separately accounted session projections below. An unclassified typed rejection fails admission. Original
 Linux U+D800 success and macOS rejection remain divergent observations; neither
 is normalized, rewritten or claimed as portable semantics.
 

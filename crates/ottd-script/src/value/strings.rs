@@ -1,23 +1,25 @@
 //! Bundled fmt's shortest f32 digits with its general-format exponent thresholds.
-use crate::{Realm, Value};
+use crate::{Realm, Value, VmError};
 impl Value {
-    pub(crate) fn concatenate(&self, other: &Self, realm: &Realm) -> Self {
-        let mut bytes = self.text();
-        bytes.extend(other.text());
-        Self::String(realm.string(&bytes))
+    pub(crate) fn concatenate(&self, other: &Self, realm: &Realm) -> Result<Self, VmError> {
+        let mut bytes = self.text()?;
+        bytes.extend(other.text()?);
+        Ok(Self::String(realm.string(&bytes)))
     }
-    fn text(&self) -> Vec<u8> {
-        match self {
+    fn text(&self) -> Result<Vec<u8>, VmError> {
+        Ok(match self {
+            Self::Array(_) => return Err(VmError::UnsupportedRuntimeValue),
             Self::String(value) => value.as_bytes().to_vec(),
             Self::Integer(value) => value.to_string().into_bytes(),
             Self::Bool(value) => value.to_string().into_bytes(),
             Self::Null => b"(null : 0x00000000)".to_vec(),
             Self::Float(bits) => float_text(*bits).into_bytes(),
-        }
+        })
     }
     pub(crate) fn type_name(&self, realm: &Realm) -> Self {
         let name: &[u8] = match self {
             Self::String(_) => b"string",
+            Self::Array(_) => b"array",
             Self::Integer(_) => b"integer",
             Self::Bool(_) => b"bool",
             Self::Null => b"null",

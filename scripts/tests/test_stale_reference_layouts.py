@@ -2,6 +2,7 @@ import unittest
 from pathlib import Path
 
 from scripts.currency_ci_capture import source_names
+from scripts.empty_road_provenance import source_names as empty_road_source_names
 from scripts.grf_control_evidence import sequence, text
 from scripts.language_ci_compare import mapping
 from scripts.owned_restore_sources import compiled_inputs
@@ -79,6 +80,13 @@ class StaleReferenceLayoutsTest(unittest.TestCase):
         root = Path(__file__).resolve().parents[2]
         layout = read_json(root / "scripts/currency-ci-layout.json")
         self.assertCountEqual(mapping(at(layout, ("sources",))), source_names(root))
+
+    def test_empty_road_sources_match_actual_capture_selector(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        layout = read_json(root / "scripts/empty-road-layout.json")
+        self.assertCountEqual(
+            mapping(at(layout, ("sources",))), empty_road_source_names(root)
+        )
 
     def test_guard_layouts_retain_every_copied_reference_file(self) -> None:
         root = Path(__file__).resolve().parents[2]

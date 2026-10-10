@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "342fa822c0f5e37f0209f145c418d50ecb4be72dc6f0a8abc44040888d03b3aa",
+      "sha256": "49f541b5c780fe881c3487374e9a77e1e1deedb0bdc1b381c2f332d1c1aee902",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -4219,7 +4219,7 @@
     {
       "id": "currency-properties-currency-properties-ci-layout-json",
       "path": "scripts/currency-properties-ci-layout.json",
-      "sha256": "fb2f72f8f28e40e8233ab48da937ef3dc9a8fb994088acffaf1b63881db31a69",
+      "sha256": "eb624bfdb3404ba5f9ea812aa97142680015ef6663984485660ef910a4926f0f",
       "kind": "recipe",
       "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
       "save_version": null,
@@ -4336,7 +4336,7 @@
     {
       "id": "empty-road-layout",
       "path": "scripts/empty-road-layout.json",
-      "sha256": "d05f8e3d3ad1ded9d8377100a1a958e57a433272663ea77230938796f215f87b",
+      "sha256": "d7278521c17cacbfe9cdccaa1b70791b7f73badff1d82052d5d9f0cb854d826a",
       "kind": "recipe",
       "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
       "save_version": null,
@@ -7675,7 +7675,7 @@
     {
       "id": "engine-specs-scripts-engine-specs-ci-layout-json",
       "path": "scripts/engine-specs-ci-layout.json",
-      "sha256": "f1735e108666655392ad7d97ae040b1a8c04f990657b69e46f4c38c669d9bc96",
+      "sha256": "3b6f34a761dc9310364ee0ab0626c6f3758598d08d2f08fce91bc39a1bfcb696",
       "kind": "recipe",
       "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
       "save_version": null,
@@ -8332,7 +8332,7 @@
     {
       "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
       "path": "scripts/cargo-identity-ci-layout.json",
-      "sha256": "bd94cef1fe801c5ede128307011d6e58d0b4bac6ec5257b01addc6cd335de49e",
+      "sha256": "51427b9d7d130bcd12d2b90e815647d731d049d91a592fca385861de09722853",
       "kind": "recipe",
       "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
       "save_version": null,

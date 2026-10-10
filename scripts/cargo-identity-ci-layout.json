@@ -810,7 +810,7 @@
     "scripts/tests/test_purchase_saved_state.py": "fec658b457a6cede3c436bbd1315cfa42a1600c4e320d0504884b8ad814157c5",
     "scripts/tests/test_script_vm_evidence.py": "e9633347b4113cbb695bfa2090f7ee0ee7d9368713c0b93838dd61e97ce1c76e",
     "scripts/tests/test_script_vm_policy.py": "4a6fff39a8a19697e555402f1a47d7c84036ecc120bcf4ed76abd5a7ec5ab1c5",
-    "scripts/tests/test_stale_reference_layouts.py": "b758db0ea883d79055a7fdfb5b6637db7350aba7cf57cb41e0b1d5863a6e9bd5",
+    "scripts/tests/test_stale_reference_layouts.py": "77e7b6f8bce410e02aa0b8f1579b823fec54db8391b3afe9a0f80ae21b5328c5",
     "scripts/tests/tree_ci_evidence_test.py": "7d88c084d624d122462b1541ffce846f5641a2994bd8bdb9509cb1d7b7c0f3d7",
     "scripts/tree_ci_bindings.py": "1c8e5f03421882f9369e7aa2e9eb879ceb029a8d58df8cc5c344daeaaaa25b10",
     "scripts/tree_ci_controls.py": "4de3a2fc9b50cc3bc6ced3b07bd91090707e24f87caab64bf7c2acb88c96bc05",

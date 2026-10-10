@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .baseline import FileInput
 from .native import write
+from .storage import archive_lock
 from .value import DECODE, EvidenceError, Json, field, integer, require
 
 
@@ -62,8 +63,9 @@ def run(output: Path) -> None:
     directory.mkdir()
     archive = directory / "original.tar.gz"
     index_path = directory / "original-index.json"
-    _ = (output / "evidence.tar.gz").rename(archive)
-    _ = (output / "evidence-index.json").rename(index_path)
+    with archive_lock(output, exclusive=True):
+        _ = (output / "evidence.tar.gz").rename(archive)
+        _ = (output / "evidence-index.json").rename(index_path)
     index = DECODE(index_path.read_text())
     stream(archive, index)
     require("archive index object", condition=isinstance(index, dict))

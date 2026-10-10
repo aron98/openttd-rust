@@ -10,24 +10,34 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-import re
 import shutil
 import signal
-import stat
 import subprocess
 import tarfile
 import time
-from collections.abc import Iterator
 from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
 
 from scripts.movement_ci.protocol import CASES
 from scripts.movement_ci.refusals import MUTATIONS
+from scripts.movement_ci.storage import CaptureError, size
 
-
-class CaptureError(RuntimeError):
-    """A capture orchestration boundary was refused."""
+__all__ = [
+    "Bounds",
+    "CaptureError",
+    "archive_bound",
+    "digest",
+    "existing_work",
+    "fresh_work",
+    "pack",
+    "phase",
+    "replay_parents",
+    "size",
+    "source_snapshot",
+    "stop_owned",
+    "tool",
+]
 
 
 @dataclass(frozen=True, slots=True)
@@ -38,67 +48,7 @@ class Bounds:
     seconds: float
     measure: Path | None = None
     replay_parents: tuple[Path, ...] = ()
-
-
-def size(
-    path: Path,
-    *,
-    transient: Path | None = None,
-    replay_parents: tuple[Path, ...] = (),
-) -> int:
-    """Count live bytes; only explicitly owned scratch directories may disappear."""
-    for parent in replay_parents:
-        if (
-            not parent.is_absolute()
-            or parent.resolve() != parent
-            or parent == path
-            or not parent.is_relative_to(path)
-        ):
-            raise CaptureError("replay parent must be canonical inside measured job")
-    total = 0
-    for member, removable in _members(path, transient, replay_parents):
-        try:
-            observed = member.lstat()
-        except FileNotFoundError:
-            if removable:
-                continue
-            raise
-        if stat.S_ISLNK(observed.st_mode):
-            raise CaptureError("symlink in job evidence")
-        if stat.S_ISREG(observed.st_mode):
-            total += observed.st_size
-    return total
-
-
-def _members(
-    path: Path, transient: Path | None, replay_parents: tuple[Path, ...]
-) -> Iterator[tuple[Path, bool]]:
-    pending = [(path, False)] if path.exists() else []
-    while pending:
-        directory, disposable = pending.pop()
-        try:
-            entries = os.scandir(directory)
-        except FileNotFoundError:
-            if disposable:
-                continue
-            raise
-        with entries:
-            for entry in entries:
-                member = Path(entry.path)
-                is_directory = entry.is_dir(follow_symlinks=False)
-                removable = (
-                    disposable
-                    or (transient is not None and member.is_relative_to(transient))
-                    or (
-                        directory in replay_parents
-                        and re.fullmatch(r"\.ottd-replay-[A-Za-z0-9]{6}", entry.name)
-                        is not None
-                        and is_directory
-                    )
-                )
-                yield member, removable
-                if is_directory:
-                    pending.append((member, removable))
+    archive_parent: Path | None = None
 
 
 def digest(path: Path) -> str:
@@ -141,6 +91,9 @@ def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) ->
                 "cap": bounds.cap,
                 "deadline_seconds": bounds.seconds,
                 "replay_parents": [str(parent) for parent in bounds.replay_parents],
+                "archive_parent": str(bounds.archive_parent)
+                if bounds.archive_parent
+                else None,
             },
             indent=2,
         )
@@ -178,7 +131,10 @@ def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) ->
             free = shutil.disk_usage(work).free
             try:
                 used = size(
-                    measured, transient=transient, replay_parents=bounds.replay_parents
+                    measured,
+                    transient=transient,
+                    replay_parents=bounds.replay_parents,
+                    archive_parent=bounds.archive_parent,
                 )
             except (CaptureError, OSError) as error:
                 used = -1
@@ -200,7 +156,12 @@ def phase(root: Path, work: Path, name: str, argv: list[str], bounds: Bounds) ->
         status = process.wait()
     try:
         if (
-            size(measured, transient=transient, replay_parents=bounds.replay_parents)
+            size(
+                measured,
+                transient=transient,
+                replay_parents=bounds.replay_parents,
+                archive_parent=bounds.archive_parent,
+            )
             >= bounds.cap
             or shutil.disk_usage(work).free < bounds.floor
         ):

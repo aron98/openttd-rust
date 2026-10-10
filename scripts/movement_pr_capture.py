@@ -147,6 +147,7 @@ def produce(root: Path, work: Path) -> int:
                 5400,
                 work,
                 replay_parents=replay_parents(work / "raw/capture"),
+                archive_parent=work / "raw/capture",
             ),
         ),
         (

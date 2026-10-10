@@ -42,6 +42,23 @@ class BackupSaleRun:
     oracle: Path
     binaries: Json
     fixtures: Json
+    backup_enabled: bool = False
+
+    @property
+    def selector(self) -> str:
+        if self.backup_enabled:
+            return (
+                "runtime::backup_enabled_sale_native::original_backup_enabled_sale_case"
+            )
+        return SELECTOR
+
+    @property
+    def input_prefix(self) -> str:
+        return "BACKUP_ENABLED_SALE" if self.backup_enabled else "BACKUP_SALE"
+
+    @property
+    def observer_mode(self) -> str:
+        return f"OTTD_{self.input_prefix}_OBSERVE"
 
     def executable(self, name: str) -> str:
         value = text(at(self.binaries, (name, "executable")))
@@ -58,7 +75,7 @@ class BackupSaleRun:
         config = native / "openttd.cfg"
         _ = config.write_text(CONFIG)
         variables = {
-            "OTTD_BACKUP_SALE_OBSERVE": "1",
+            self.observer_mode: "1",
             "OTTD_ORDER_STATE_PATH": str(native / "loaded.json"),
             "OTTD_WORLD_PATH": str(native / "saved-world.json"),
             "OTTD_WORLD_SCHEMA_PATH": str(native / "saved-schema.json"),

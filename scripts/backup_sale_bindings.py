@@ -50,7 +50,7 @@ def native_job(job: BackupSaleRun, entry: Json) -> None:
     if not exact(read_json(native / "argv.json"), list(argv)):
         raise WorldCheckError("Original depot process arguments changed")
     variables: Json = {
-        "OTTD_BACKUP_SALE_OBSERVE": "1",
+        job.observer_mode: "1",
         "OTTD_ORDER_STATE_PATH": str(native / "loaded.json"),
         "OTTD_WORLD_PATH": str(native / "saved-world.json"),
         "OTTD_WORLD_SCHEMA_PATH": str(native / "saved-schema.json"),

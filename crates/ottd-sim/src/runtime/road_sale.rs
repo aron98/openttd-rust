@@ -44,13 +44,14 @@ impl RoadVehicleContext<'_> {
                 "STR_ERROR_ROAD_VEHICLE_MUST_BE_STOPPED_INSIDE_DEPOT",
             ));
         }
-        admit_destructor(world, vehicle, backup_order)?;
-        if !world
-            .tables()
-            .get(b"BKOR")
-            .ok_or(RuntimeError::Invalid("BKOR"))?
-            .records()
-            .is_empty()
+        admit_destructor(world, vehicle)?;
+        if (backup_order
+            || !world
+                .tables()
+                .get(b"BKOR")
+                .ok_or(RuntimeError::Invalid("BKOR"))?
+                .records()
+                .is_empty())
             && self.orders.context() != super::RuntimeSaveContext::SinglePlayer
         {
             return Err(CommandError::Unsupported("sale live backup host context"));
@@ -65,6 +66,7 @@ impl RoadVehicleContext<'_> {
         world: &mut World,
         edits: Vec<WorldEdit>,
         id: VehicleId,
+        backup_user: Option<u32>,
     ) -> Result<(), CommandError> {
         let vehicle = SavedVehicleView::new(world, id)?;
         let mut allocation = self.allocation.clone();
@@ -78,7 +80,7 @@ impl RoadVehicleContext<'_> {
         if !self.road.contains_key(&id) {
             return Err(RuntimeError::Invalid("missing sale cache").into());
         }
-        let backups = self.orders.plan_sale_backups(world, id)?;
+        let backups = self.orders.plan_sale_backups(world, id, backup_user)?;
         let detach = self.orders.plan_detach(world, id)?;
         let mut transaction = world.transaction();
         let pending_backups = backups.stage(&mut transaction)?;
@@ -105,12 +107,8 @@ impl RoadVehicleContext<'_> {
         Ok(())
     }
 }
-fn admit_destructor(
-    world: &World,
-    vehicle: SavedVehicleView<'_>,
-    backup_order: bool,
-) -> Result<(), CommandError> {
-    if backup_order || world.tables().get(b"BKOR").is_none() {
+fn admit_destructor(world: &World, vehicle: SavedVehicleView<'_>) -> Result<(), CommandError> {
+    if world.tables().get(b"BKOR").is_none() {
         return Err(CommandError::Unsupported("sale order backups"));
     }
     if world

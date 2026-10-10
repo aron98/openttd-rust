@@ -73,6 +73,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/strings_ci_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/strings_ci_*.py scripts/check-grf-strings-ci.py scripts/tests/strings_ci_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/strings_ci_*.py scripts/check-grf-strings-ci.py scripts/tests/strings_ci_evidence_test.py
+      - name: Check backup-enabled sale evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/backup_enabled_sale_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/backup_enabled_sale*.py scripts/check-backup-enabled-sale.py scripts/tests/backup_enabled_sale_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/backup_enabled_sale*.py scripts/check-backup-enabled-sale.py scripts/tests/backup_enabled_sale_evidence_test.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -135,6 +140,8 @@ jobs:
             .artifacts/depot-removal-*/
             .artifacts/backup-sale-*/
             !.artifacts/backup-sale-target-*/**
+            .artifacts/backup-enabled-sale-*/
+            !.artifacts/backup-enabled-sale-target-*/**
             .artifacts/ordered-sale-*/
             !.artifacts/ordered-sale-target-*/**
             .artifacts/grf-language-*/

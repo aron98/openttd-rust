@@ -29,7 +29,7 @@ fn invalid_sale_candidate_rolls_back_refund_and_freed_identity() -> Result {
         allocation: &mut runtime.allocation,
         road: &mut runtime.road,
     }
-    .publish_sale(&mut runtime.world, edits, VehicleId::new(first));
+    .publish_sale(&mut runtime.world, edits, VehicleId::new(first), None);
     assert!(
         matches!(result, Err(crate::CommandError::World(_))),
         "{result:?}"

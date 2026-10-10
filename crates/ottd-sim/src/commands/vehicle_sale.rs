@@ -59,6 +59,11 @@ pub(super) fn run(
         chunk: *b"VEHS",
         record: args.vehicle,
     });
-    context.publish_sale(world, edits, VehicleId::new(args.vehicle))?;
+    context.publish_sale(
+        world,
+        edits,
+        VehicleId::new(args.vehicle),
+        args.backup_order.then_some(args.client_id),
+    )?;
     Ok(receipt(test.clone(), test, true))
 }

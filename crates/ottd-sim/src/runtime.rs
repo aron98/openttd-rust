@@ -3,6 +3,8 @@ mod allocation;
 mod order_state;
 pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 #[cfg(test)]
+mod backup_enabled_sale_native;
+#[cfg(test)]
 mod backup_sale_native;
 mod depot;
 mod depot_removal;

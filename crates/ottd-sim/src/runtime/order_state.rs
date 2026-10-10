@@ -4,6 +4,8 @@ mod backup;
 use backup::BackupAllocation;
 pub use backup::BackupReset;
 #[cfg(test)]
+mod backup_enabled_tests;
+#[cfg(test)]
 mod backup_sale_tests;
 mod depot;
 mod detach;

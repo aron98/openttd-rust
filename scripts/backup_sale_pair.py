@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from scripts.backup_sale_run import SELECTOR, BackupSaleRun, member
+from scripts.backup_sale_run import BackupSaleRun, member
 from scripts.depot_removal_pair import projection
 from scripts.gameplay_foundations import digest, require_test
 from scripts.grf_control_evidence import sequence, text
@@ -24,18 +24,18 @@ def pair(job: BackupSaleRun, name: str) -> None:
     result = run(
         [
             "env",
-            f"BACKUP_SALE_INPUT={source}",
-            f"BACKUP_SALE_ACTIONS={case}/actions.json",
-            f"BACKUP_SALE_OUTPUT={case}/rust",
+            f"{job.input_prefix}_INPUT={source}",
+            f"{job.input_prefix}_ACTIONS={case}/actions.json",
+            f"{job.input_prefix}_OUTPUT={case}/rust",
             job.executable("runner"),
             "--exact",
-            SELECTOR,
+            job.selector,
             "--ignored",
             "--nocapture",
         ],
         case / "rust-command",
     )
-    require_test(result.stdout, SELECTOR)
+    require_test(result.stdout, job.selector)
     native = read_json(case / "original/native/results.json")
     projected = projection(native, descriptor)
     write_json(case / "native-state.json", projected)

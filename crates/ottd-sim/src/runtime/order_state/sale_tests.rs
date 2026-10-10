@@ -166,6 +166,7 @@ fn ordered_estimate_and_failed_prepare_leave_all_order_lifetimes_unchanged() -> 
             ),
         ],
         VehicleId::new(first),
+        None,
     );
     assert!(result.is_err());
     assert_eq!(runtime.world.saved_json()?, saved);

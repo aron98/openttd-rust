@@ -26,19 +26,19 @@ fn crashed_precedes_nonzero_speed_and_failure_preserves_runtime() -> Result {
 }
 
 #[test]
-fn unsupported_order_backup_is_not_silently_discarded() -> Result {
+fn backup_enabled_empty_orders_are_not_silently_discarded() -> Result {
     let (mut runtime, tile) = fixture()?;
     let id = bought(runtime.execute_command(&request(tile))?)?;
-    let before = runtime.world.saved_json()?;
     let mut command = sale(tile, id);
     if let Command::SellVehicle { backup_order, .. } = &mut command.command {
         *backup_order = true;
     }
-    assert!(matches!(
-        runtime.execute_command(&command),
-        Err(crate::CommandError::Unsupported("sale order backups"))
-    ));
-    assert_eq!(runtime.world.saved_json()?, before);
+    assert!(runtime.execute_command(&command)?.posted);
+    assert_eq!(runtime.order_backup_pool().occupied, vec![0]);
+    assert_eq!(
+        crate::world_access::unsigned(runtime.world(), b"BKOR", 0, "user")?,
+        1
+    );
     Ok(())
 }
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from scripts.backup_sale_bindings import edit_job, native_job, prepare_evidence
-from scripts.backup_sale_run import SELECTOR, BackupSaleRun, member
+from scripts.backup_sale_run import BackupSaleRun, member
 from scripts.context_ci_support import exact
 from scripts.depot_build_archive import bounded_paths
 from scripts.depot_removal_pair import projection
@@ -35,17 +35,17 @@ def pair_evidence(job: BackupSaleRun, name: str) -> tuple[int, int]:
         case / "rust-command",
         [
             "env",
-            f"BACKUP_SALE_INPUT={source}",
-            f"BACKUP_SALE_ACTIONS={case}/actions.json",
-            f"BACKUP_SALE_OUTPUT={case}/rust",
+            f"{job.input_prefix}_INPUT={source}",
+            f"{job.input_prefix}_ACTIONS={case}/actions.json",
+            f"{job.input_prefix}_OUTPUT={case}/rust",
             runner,
             "--exact",
-            SELECTOR,
+            job.selector,
             "--ignored",
             "--nocapture",
         ],
     )
-    require_test((case / "rust-command/stdout.log").read_text(), SELECTOR)
+    require_test((case / "rust-command/stdout.log").read_text(), job.selector)
     expected = projection(read_json(case / "original/native/results.json"), descriptor)
     actual = read_json(case / "rust/results.json")
     if not exact(expected, actual) or not exact(

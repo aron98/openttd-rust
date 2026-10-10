@@ -50,7 +50,7 @@ renewal-state regressions caught and corrected an accidental guard relaxation
 before integration. Independent review approved the corrected commit after
 seven fresh pairs, eight controls and five observer refusal tests.
 
-NewGRF session strings now implement generic Action 4 names and the admitted
+`851b504` adds NewGRF session strings with generic Action 4 names and the admitted
 Action 13 translation domain. One private table preserves allocation order,
 first-definition defaults, language selection and exact fallback bytes. Original
 comparisons cover ten API cases and 90 loader cases, with 102,315 comparator
@@ -60,6 +60,23 @@ sale regressions also pass. Baseline/specification owners, arbitrary formatted
 errors, broader finalization, and content-dependent world restoration remain
 open; this does not admit arbitrary modded worlds.
 
+Backup-enabled sale now composes backup creation, candidate-state cleanup and
+order detachment before one validated publication. The admitted domain remains
+stopped vanilla single-part road vehicles in ordinary single player. Local
+command client zero becomes server client one; the backup primitive keeps a
+literal user zero. Same-slot replacement and the full 255-slot pool are checked
+against the original operation order. Existing backup-disabled behavior and
+renewal-state guards remain enforced.
+
+Sixteen original/Rust pairs cover 73 actions, 178 snapshots and 21 saves. These
+include 25 command receipts, 20 executed commands and 21 successful results;
+refused commands are distinct from successful differential comparisons. Fourteen
+native invocation refusals, eleven focused Rust tests, five semantic mutations
+and executable/source admission controls pass. The integrated workspace passes
+512 tests, with 59 standard-library Python tests and 42 sale-evidence tests.
+Restore, purchases with live backups, vehicle movement and multiplayer command
+dispatch remain separate requirements.
+
 Linux CI exposed a separate script compatibility boundary: the original lexer
 passes decoded characters above 255 to byte character-classification functions.
 The same surrogate-encoded input compiles on the observed Linux build and fails
@@ -68,8 +85,9 @@ for upstream undefined behavior is decided. Local macOS results do not establish
 portable behavior for that domain, and branch-wide CI is not green.
 
 Active work continues on currency owners and deferred string mapping,
-backup-enabled road vehicle sales, and Squirrel owned strings with persistent runtime state. These
-are separate increments awaiting their own integrated evidence and review.
+order-backup restoration, and Squirrel owned strings and persistent compiler
+state. These are separate increments awaiting their own integrated evidence and
+review.
 
 For agentic workers: use the subagent-driven development workflow, with explicit
 ownership, native-source evidence, independent review and tests before integration.

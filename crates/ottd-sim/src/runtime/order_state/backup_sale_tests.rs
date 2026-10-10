@@ -144,6 +144,7 @@ fn failed_sale_candidate_rolls_back_backup_retarget_and_all_allocators() -> Resu
             ),
         ],
         VehicleId::new(second),
+        None,
     );
     assert!(result.is_err());
     assert_eq!(runtime.world.saved_json()?, saved);
@@ -186,6 +187,7 @@ fn composed_sale_preflights_native_slot_index_deletion_boundary() -> Result {
             record: second,
         }],
         VehicleId::new(second),
+        None,
     );
     assert!(matches!(
         result,
@@ -201,7 +203,7 @@ fn composed_sale_preflights_native_slot_index_deletion_boundary() -> Result {
     Ok(())
 }
 
-fn renewal_guard(with_backup: bool, mode: CommandMode) -> Result {
+pub(super) fn renewal_guard(with_backup: bool, mode: CommandMode, backup: bool) -> Result {
     use ottd_save::{TableRecord, WireValue, world::PathElement};
     let (runtime, tile, _, first, second) = super::tests::shared_fixture()?;
     let mut world = runtime.into_world();
@@ -270,6 +272,9 @@ fn renewal_guard(with_backup: bool, mode: CommandMode) -> Result {
     let groups = runtime.road_group_counts()?;
     let mut command = sale(tile, second);
     command.mode = mode;
+    if let Command::SellVehicle { backup_order, .. } = &mut command.command {
+        *backup_order = backup;
+    }
     let result = runtime.execute_command(&command);
     assert!(
         matches!(
@@ -292,17 +297,17 @@ fn renewal_guard(with_backup: bool, mode: CommandMode) -> Result {
 }
 #[test]
 fn renewal_guard_post_empty_backups() -> Result {
-    renewal_guard(false, CommandMode::Post)
+    renewal_guard(false, CommandMode::Post, false)
 }
 #[test]
 fn renewal_guard_estimate_empty_backups() -> Result {
-    renewal_guard(false, CommandMode::Estimate)
+    renewal_guard(false, CommandMode::Estimate, false)
 }
 #[test]
 fn renewal_guard_post_live_backups() -> Result {
-    renewal_guard(true, CommandMode::Post)
+    renewal_guard(true, CommandMode::Post, false)
 }
 #[test]
 fn renewal_guard_estimate_live_backups() -> Result {
-    renewal_guard(true, CommandMode::Estimate)
+    renewal_guard(true, CommandMode::Estimate, false)
 }

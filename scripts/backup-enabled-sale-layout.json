@@ -540,7 +540,12 @@
     "reference/world_derived.hpp": "8b5e9fa66c4431d58fbcdf23b6cdf33459c882fa7d135d0ae35dc1ba9bc79dae",
     "reference/world_fixture.hpp": "fb250e47b136233b175f941e13b1388fcf4642cab3535becac3bf15ff9af55a4",
     "rust-toolchain.toml": "47b9d6173449a742363513ab4a3bbad85a9cd8911d579e0ecfa9fa7aee679059",
+    "scripts/backup-enabled-sale-fixtures.json": "018132723d7a4216075e3456dff5e552fd4b6468fd69f387484e0f453875083b",
     "scripts/backup-sale-fixtures.json": "1c3fe5f1d3711c32bec63c9aafc7ba629e401a7c47a1a06a37c73c7471d5c238",
+    "scripts/backup_enabled_sale_controls.py": "cd548dafdfb6b3fe82036f677438d136d55d3f2ca90fee662fe29b9133ac7ac9",
+    "scripts/backup_enabled_sale_evidence.py": "c75e8f1a73fb5d8764e102ee82585f07701561932e49659c5b9f7791d07eee2e",
+    "scripts/backup_enabled_sale_guards.py": "04c883c8c29976feea0041d9ab9ccd738b60b3e6a2c60530d5c35ad9f9b6acb7",
+    "scripts/backup_enabled_sale_provenance.py": "fc0df501a75b19619de2e6589d23b3fb23d68cf5970d091c15dc54601a7a13dc",
     "scripts/backup_sale_bindings.py": "d429548fa23ed5664b847dac690dd84d4dc93c35a59a6333c66b2f042e1e07ab",
     "scripts/backup_sale_controls.py": "2a104c7bb0d0b65f3662aa0b6cfceb83b8cc6ab55f62d697d1841883d85bb935",
     "scripts/backup_sale_evidence.py": "eee60349ab7736ad6b01b580ad3a50cb03b211ab91ff8171d9ee533fc3e94475",
@@ -548,6 +553,7 @@
     "scripts/backup_sale_pair.py": "9536ec96277a390d9bad778d5706426aca78481bdf6a8e5853caa3db66ab471c",
     "scripts/backup_sale_provenance.py": "88f166a3946f0a04ad6fc08696b7696bd9bda54a517e2bbd835932b3351ef80b",
     "scripts/backup_sale_run.py": "6658b315dff2012e1b9c550a604d0648be90d938136e83796052b9dbd79f0ca9",
+    "scripts/check-backup-enabled-sale.py": "0792f052eac90755bff4c0abe6a4cefc4f07dfd003146129da59b1947a9a5451",
     "scripts/check-backup-sale.py": "dae45122b56f383cc6eb2d9c7ccc95c5f7b7d0b7942d0888608e34781a81e3ad",
     "scripts/check-depot-removal.py": "91e1b05d28eb5177ce9223e17650423ef5701c77918947797f1366cbb157bf84",
     "scripts/check-order-state.py": "9c82eb495a82f1aacd681b0c20bd408e2a0b460ac3a85259c43be98d6e710f56",
@@ -586,6 +592,7 @@
     "scripts/run-depot-runtime-reference.cmake": "9991c46522c46b8abdbea521ccea535e04f81ab2a644b1ca86417c6d245afa6e",
     "scripts/script_vm_provenance.py": "7ad900f684ee71dd7e4525fbf121311b81ab8b425604f090a0f23027f3479c75",
     "scripts/setup-snapshot-reference.sh": "a2533cccb7a7b4aeea5775cd10bc562b38b61170d1be1e1d468b9e3c1aee6817",
+    "scripts/tests/backup_enabled_sale_evidence_test.py": "4caf63194fb797cd383b29889f41cb1867cacc87c7941a00b8af366769430a29",
     "scripts/tests/backup_sale_evidence_test.py": "eadd1d82d1ae2f56c30f99b761268ee2a83cf80da9e9f2a18fc0c0244acb9c1c",
     "scripts/tests/depot_removal_evidence_test.py": "07ad81932e54fcea00d8c3d21a2d9c5e70a44da909e689211654237f683d719e",
     "scripts/tests/order_state_evidence_test.py": "36cb4880aaec1f31f90d55dd905e03b7c3d739fdd681a54f80e066231221adfe",
@@ -603,7 +610,13 @@
     "matrix/wrong-owner",
     "matrix/crashed",
     "matrix/not-stopped",
-    "matrix/poor"
+    "matrix/poor",
+    "matrix/post-zero",
+    "matrix/explicit-max",
+    "matrix/same-slot",
+    "matrix/capacity-new",
+    "matrix/capacity-existing",
+    "matrix/empty-orders"
   ],
   "jobs": [
     "matrix/rate-edit",
@@ -623,7 +636,14 @@
     "matrix/not-stopped-edit",
     "matrix/not-stopped",
     "matrix/poor-edit",
-    "matrix/poor"
+    "matrix/poor",
+    "matrix/post-zero",
+    "matrix/explicit-max",
+    "matrix/same-slot",
+    "matrix/capacity-new",
+    "matrix/capacity-existing",
+    "matrix/empty-setup",
+    "matrix/empty-orders"
   ],
   "command_witnesses": {
     "matrix/copy-sale-clear": [
@@ -987,13 +1007,2251 @@
           }
         }
       }
+    ],
+    "matrix/post-zero": [
+      {
+        "index": 2,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      }
+    ],
+    "matrix/explicit-max": [
+      {
+        "index": 1,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      }
+    ],
+    "matrix/same-slot": [
+      {
+        "index": 1,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      },
+      {
+        "index": 2,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      },
+      {
+        "index": 3,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      }
+    ],
+    "matrix/capacity-new": [
+      {
+        "index": 1,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      },
+      {
+        "index": 2,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      },
+      {
+        "index": 3,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      }
+    ],
+    "matrix/capacity-existing": [
+      {
+        "index": 1,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      },
+      {
+        "index": 2,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      },
+      {
+        "index": 3,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      }
+    ],
+    "matrix/empty-orders": [
+      {
+        "index": 0,
+        "receipt": {
+          "exec": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "gate": null,
+          "posted": true,
+          "result": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          },
+          "test": {
+            "cost": -4921,
+            "error": null,
+            "error_params": [],
+            "expenses": 1,
+            "success": true
+          }
+        }
+      }
+    ]
+  },
+  "critical_witnesses": {
+    "matrix/copy-sale-clear": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 0,
+          "first_unused": 4,
+          "items": 1,
+          "occupied": [
+            2
+          ],
+          "slots": 4
+        }
+      },
+      {
+        "path": [
+          "actions",
+          4,
+          "after",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 1,
+            "tile": 1560,
+            "user": 11
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483646,
+              "current_order_time_bits": 2147483650,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 3,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 3,
+            "tile": 1562,
+            "user": 30
+          }
+        ]
+      },
+      {
+        "path": [
+          "actions",
+          5,
+          "after",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 1,
+            "tile": 1560,
+            "user": 11
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483646,
+              "current_order_time_bits": 2147483650,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 3,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 3,
+            "tile": 1562,
+            "user": 30
+          }
+        ]
+      },
+      {
+        "path": [
+          "actions",
+          7,
+          "after",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          }
+        ]
+      }
+    ],
+    "matrix/shared-head": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          },
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [],
+            "pool_slot": 1,
+            "tile": 1560,
+            "user": 11
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483645,
+              "current_order_time_bits": 2147483651,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 3,
+          "items": 3,
+          "occupied": [
+            0,
+            1,
+            2
+          ],
+          "slots": 3
+        }
+      }
+    ],
+    "matrix/shared-middle": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 0,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483646,
+              "current_order_time_bits": 2147483650,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          },
+          {
+            "clone": 0,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [],
+            "pool_slot": 1,
+            "tile": 1560,
+            "user": 11
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483645,
+              "current_order_time_bits": 2147483651,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 3,
+          "items": 3,
+          "occupied": [
+            0,
+            1,
+            2
+          ],
+          "slots": 3
+        }
+      }
+    ],
+    "matrix/shared-tail": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 0,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          },
+          {
+            "clone": 0,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [],
+            "pool_slot": 1,
+            "tile": 1560,
+            "user": 11
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483645,
+              "current_order_time_bits": 2147483651,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 2,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 2,
+            "tile": 1562,
+            "user": 20
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 3,
+          "items": 3,
+          "occupied": [
+            0,
+            1,
+            2
+          ],
+          "slots": 3
+        }
+      }
+    ],
+    "matrix/chain-reuse": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483645,
+              "current_order_time_bits": 2147483651,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [
+              {
+                "dest": 0,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 1,
+            "tile": 1562,
+            "user": 30
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 2,
+          "first_unused": 2,
+          "items": 2,
+          "occupied": [
+            0,
+            1
+          ],
+          "slots": 2
+        }
+      }
+    ],
+    "matrix/estimate": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
+    ],
+    "matrix/wrong-owner": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
+    ],
+    "matrix/crashed": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
+    ],
+    "matrix/not-stopped": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
+    ],
+    "matrix/poor": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 2,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
+    ],
+    "matrix/post-zero": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 0
+          },
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 1,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 1,
+            "tile": 1560,
+            "user": 1
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 2,
+          "first_unused": 2,
+          "items": 2,
+          "occupied": [
+            0,
+            1
+          ],
+          "slots": 2
+        }
+      }
+    ],
+    "matrix/explicit-max": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 4294967295
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
+    ],
+    "matrix/same-slot": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      },
+      {
+        "path": [
+          "actions",
+          2,
+          "after",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": 1,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      }
+    ],
+    "matrix/capacity-new": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": []
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 0,
+          "first_unused": 255,
+          "items": 0,
+          "occupied": [],
+          "slots": 255
+        }
+      },
+      {
+        "path": [
+          "actions",
+          0,
+          "after",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 255,
+          "first_unused": 255,
+          "items": 255,
+          "occupied": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209,
+            210,
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218,
+            219,
+            220,
+            221,
+            222,
+            223,
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254
+          ],
+          "slots": 255
+        }
+      }
+    ],
+    "matrix/capacity-existing": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483647,
+              "current_order_time_bits": 2147483649,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 127,
+            "orders": [
+              {
+                "dest": 1,
+                "flags": 136,
+                "max_speed": 65535,
+                "refit_cargo": 254,
+                "travel_time": 47,
+                "type": 2,
+                "wait_time": 31
+              }
+            ],
+            "pool_slot": 127,
+            "tile": 1560,
+            "user": 128
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 0,
+          "first_unused": 255,
+          "items": 1,
+          "occupied": [
+            127
+          ],
+          "slots": 255
+        }
+      },
+      {
+        "path": [
+          "actions",
+          0,
+          "after",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 255,
+          "first_unused": 255,
+          "items": 255,
+          "occupied": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209,
+            210,
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218,
+            219,
+            220,
+            221,
+            222,
+            223,
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233,
+            234,
+            235,
+            236,
+            237,
+            238,
+            239,
+            240,
+            241,
+            242,
+            243,
+            244,
+            245,
+            246,
+            247,
+            248,
+            249,
+            250,
+            251,
+            252,
+            253,
+            254
+          ],
+          "slots": 255
+        }
+      }
+    ],
+    "matrix/empty-orders": [
+      {
+        "path": [
+          "final",
+          "orders",
+          "backups"
+        ],
+        "value": [
+          {
+            "clone": null,
+            "consist": {
+              "cur_implicit_order_index": 0,
+              "cur_real_order_index": 0,
+              "current_order_time": -2147483648,
+              "current_order_time_bits": 2147483648,
+              "lateness_counter": -117,
+              "name": "",
+              "service_interval": 150,
+              "timetable_start": 0,
+              "vehicle_flags": 0
+            },
+            "group": 65534,
+            "id": 0,
+            "orders": [],
+            "pool_slot": 0,
+            "tile": 1560,
+            "user": 77
+          }
+        ]
+      },
+      {
+        "path": [
+          "final",
+          "orders",
+          "backup_pool"
+        ],
+        "value": {
+          "first_free": 1,
+          "first_unused": 1,
+          "items": 1,
+          "occupied": [
+            0
+          ],
+          "slots": 1
+        }
+      }
     ]
   },
   "coverage": {
-    "cases": 10,
-    "actions": 49,
-    "snapshots": 118,
-    "saves": 15
+    "cases": 16,
+    "actions": 73,
+    "snapshots": 178,
+    "saves": 21,
+    "command_receipts": 25,
+    "executed_commands": 20,
+    "successful_results": 21
   },
   "base_paths": [
     "layout.json",
@@ -1011,11 +3269,11 @@
     "logs/freshness/process.json",
     "logs/freshness/stdout.log",
     "logs/freshness/stderr.log",
-    "logs/cargo-test/argv.json",
-    "logs/cargo-test/environment.json",
-    "logs/cargo-test/process.json",
-    "logs/cargo-test/stdout.log",
-    "logs/cargo-test/stderr.log",
+    "logs/cargo-runner/argv.json",
+    "logs/cargo-runner/environment.json",
+    "logs/cargo-runner/process.json",
+    "logs/cargo-runner/stdout.log",
+    "logs/cargo-runner/stderr.log",
     "logs/cargo-cli/argv.json",
     "logs/cargo-cli/environment.json",
     "logs/cargo-cli/process.json",
@@ -1023,6 +3281,94 @@
     "logs/cargo-cli/stderr.log"
   ],
   "result_paths": [
+    "matrix/capacity-existing/actions.json",
+    "matrix/capacity-existing/after-compare/argv.json",
+    "matrix/capacity-existing/after-compare/process.json",
+    "matrix/capacity-existing/after-compare/stderr.log",
+    "matrix/capacity-existing/after-compare/stdout.log",
+    "matrix/capacity-existing/after-native-export/argv.json",
+    "matrix/capacity-existing/after-native-export/process.json",
+    "matrix/capacity-existing/after-native-export/stderr.log",
+    "matrix/capacity-existing/after-native-export/stdout.log",
+    "matrix/capacity-existing/after-native.json",
+    "matrix/capacity-existing/after-rust-export/argv.json",
+    "matrix/capacity-existing/after-rust-export/process.json",
+    "matrix/capacity-existing/after-rust-export/stderr.log",
+    "matrix/capacity-existing/after-rust-export/stdout.log",
+    "matrix/capacity-existing/after-rust.json",
+    "matrix/capacity-existing/inputs.json",
+    "matrix/capacity-existing/live-compare/argv.json",
+    "matrix/capacity-existing/live-compare/process.json",
+    "matrix/capacity-existing/live-compare/stderr.log",
+    "matrix/capacity-existing/live-compare/stdout.log",
+    "matrix/capacity-existing/native-state.json",
+    "matrix/capacity-existing/original/argv.json",
+    "matrix/capacity-existing/original/bindings-after.json",
+    "matrix/capacity-existing/original/bindings-before.json",
+    "matrix/capacity-existing/original/environment.json",
+    "matrix/capacity-existing/original/loaded.json",
+    "matrix/capacity-existing/original/native/after.sav",
+    "matrix/capacity-existing/original/native/results.json",
+    "matrix/capacity-existing/original/openttd.cfg",
+    "matrix/capacity-existing/original/process.json",
+    "matrix/capacity-existing/original/saved-schema.json",
+    "matrix/capacity-existing/original/saved-world.json",
+    "matrix/capacity-existing/original/stderr.log",
+    "matrix/capacity-existing/original/stdout.log",
+    "matrix/capacity-existing/rust-command/argv.json",
+    "matrix/capacity-existing/rust-command/process.json",
+    "matrix/capacity-existing/rust-command/stderr.log",
+    "matrix/capacity-existing/rust-command/stdout.log",
+    "matrix/capacity-existing/rust/after.sav",
+    "matrix/capacity-existing/rust/results.json",
+    "matrix/capacity-existing/serializer-compare/argv.json",
+    "matrix/capacity-existing/serializer-compare/process.json",
+    "matrix/capacity-existing/serializer-compare/stderr.log",
+    "matrix/capacity-existing/serializer-compare/stdout.log",
+    "matrix/capacity-new/actions.json",
+    "matrix/capacity-new/after-compare/argv.json",
+    "matrix/capacity-new/after-compare/process.json",
+    "matrix/capacity-new/after-compare/stderr.log",
+    "matrix/capacity-new/after-compare/stdout.log",
+    "matrix/capacity-new/after-native-export/argv.json",
+    "matrix/capacity-new/after-native-export/process.json",
+    "matrix/capacity-new/after-native-export/stderr.log",
+    "matrix/capacity-new/after-native-export/stdout.log",
+    "matrix/capacity-new/after-native.json",
+    "matrix/capacity-new/after-rust-export/argv.json",
+    "matrix/capacity-new/after-rust-export/process.json",
+    "matrix/capacity-new/after-rust-export/stderr.log",
+    "matrix/capacity-new/after-rust-export/stdout.log",
+    "matrix/capacity-new/after-rust.json",
+    "matrix/capacity-new/inputs.json",
+    "matrix/capacity-new/live-compare/argv.json",
+    "matrix/capacity-new/live-compare/process.json",
+    "matrix/capacity-new/live-compare/stderr.log",
+    "matrix/capacity-new/live-compare/stdout.log",
+    "matrix/capacity-new/native-state.json",
+    "matrix/capacity-new/original/argv.json",
+    "matrix/capacity-new/original/bindings-after.json",
+    "matrix/capacity-new/original/bindings-before.json",
+    "matrix/capacity-new/original/environment.json",
+    "matrix/capacity-new/original/loaded.json",
+    "matrix/capacity-new/original/native/after.sav",
+    "matrix/capacity-new/original/native/results.json",
+    "matrix/capacity-new/original/openttd.cfg",
+    "matrix/capacity-new/original/process.json",
+    "matrix/capacity-new/original/saved-schema.json",
+    "matrix/capacity-new/original/saved-world.json",
+    "matrix/capacity-new/original/stderr.log",
+    "matrix/capacity-new/original/stdout.log",
+    "matrix/capacity-new/rust-command/argv.json",
+    "matrix/capacity-new/rust-command/process.json",
+    "matrix/capacity-new/rust-command/stderr.log",
+    "matrix/capacity-new/rust-command/stdout.log",
+    "matrix/capacity-new/rust/after.sav",
+    "matrix/capacity-new/rust/results.json",
+    "matrix/capacity-new/serializer-compare/argv.json",
+    "matrix/capacity-new/serializer-compare/process.json",
+    "matrix/capacity-new/serializer-compare/stderr.log",
+    "matrix/capacity-new/serializer-compare/stdout.log",
     "matrix/chain-reuse/actions.json",
     "matrix/chain-reuse/after-compare/argv.json",
     "matrix/chain-reuse/after-compare/process.json",
@@ -1264,6 +3610,65 @@
     "matrix/crashed/serializer-compare/process.json",
     "matrix/crashed/serializer-compare/stderr.log",
     "matrix/crashed/serializer-compare/stdout.log",
+    "matrix/empty-orders/actions.json",
+    "matrix/empty-orders/after-compare/argv.json",
+    "matrix/empty-orders/after-compare/process.json",
+    "matrix/empty-orders/after-compare/stderr.log",
+    "matrix/empty-orders/after-compare/stdout.log",
+    "matrix/empty-orders/after-native-export/argv.json",
+    "matrix/empty-orders/after-native-export/process.json",
+    "matrix/empty-orders/after-native-export/stderr.log",
+    "matrix/empty-orders/after-native-export/stdout.log",
+    "matrix/empty-orders/after-native.json",
+    "matrix/empty-orders/after-rust-export/argv.json",
+    "matrix/empty-orders/after-rust-export/process.json",
+    "matrix/empty-orders/after-rust-export/stderr.log",
+    "matrix/empty-orders/after-rust-export/stdout.log",
+    "matrix/empty-orders/after-rust.json",
+    "matrix/empty-orders/inputs.json",
+    "matrix/empty-orders/live-compare/argv.json",
+    "matrix/empty-orders/live-compare/process.json",
+    "matrix/empty-orders/live-compare/stderr.log",
+    "matrix/empty-orders/live-compare/stdout.log",
+    "matrix/empty-orders/native-state.json",
+    "matrix/empty-orders/original/argv.json",
+    "matrix/empty-orders/original/bindings-after.json",
+    "matrix/empty-orders/original/bindings-before.json",
+    "matrix/empty-orders/original/environment.json",
+    "matrix/empty-orders/original/loaded.json",
+    "matrix/empty-orders/original/native/after.sav",
+    "matrix/empty-orders/original/native/results.json",
+    "matrix/empty-orders/original/openttd.cfg",
+    "matrix/empty-orders/original/process.json",
+    "matrix/empty-orders/original/saved-schema.json",
+    "matrix/empty-orders/original/saved-world.json",
+    "matrix/empty-orders/original/stderr.log",
+    "matrix/empty-orders/original/stdout.log",
+    "matrix/empty-orders/rust-command/argv.json",
+    "matrix/empty-orders/rust-command/process.json",
+    "matrix/empty-orders/rust-command/stderr.log",
+    "matrix/empty-orders/rust-command/stdout.log",
+    "matrix/empty-orders/rust/after.sav",
+    "matrix/empty-orders/rust/results.json",
+    "matrix/empty-orders/serializer-compare/argv.json",
+    "matrix/empty-orders/serializer-compare/process.json",
+    "matrix/empty-orders/serializer-compare/stderr.log",
+    "matrix/empty-orders/serializer-compare/stdout.log",
+    "matrix/empty-setup/actions.json",
+    "matrix/empty-setup/inputs.json",
+    "matrix/empty-setup/original/argv.json",
+    "matrix/empty-setup/original/bindings-after.json",
+    "matrix/empty-setup/original/bindings-before.json",
+    "matrix/empty-setup/original/environment.json",
+    "matrix/empty-setup/original/loaded.json",
+    "matrix/empty-setup/original/native/empty.sav",
+    "matrix/empty-setup/original/native/results.json",
+    "matrix/empty-setup/original/openttd.cfg",
+    "matrix/empty-setup/original/process.json",
+    "matrix/empty-setup/original/saved-schema.json",
+    "matrix/empty-setup/original/saved-world.json",
+    "matrix/empty-setup/original/stderr.log",
+    "matrix/empty-setup/original/stdout.log",
     "matrix/estimate/actions.json",
     "matrix/estimate/after-compare/argv.json",
     "matrix/estimate/after-compare/process.json",
@@ -1308,6 +3713,50 @@
     "matrix/estimate/serializer-compare/process.json",
     "matrix/estimate/serializer-compare/stderr.log",
     "matrix/estimate/serializer-compare/stdout.log",
+    "matrix/explicit-max/actions.json",
+    "matrix/explicit-max/after-compare/argv.json",
+    "matrix/explicit-max/after-compare/process.json",
+    "matrix/explicit-max/after-compare/stderr.log",
+    "matrix/explicit-max/after-compare/stdout.log",
+    "matrix/explicit-max/after-native-export/argv.json",
+    "matrix/explicit-max/after-native-export/process.json",
+    "matrix/explicit-max/after-native-export/stderr.log",
+    "matrix/explicit-max/after-native-export/stdout.log",
+    "matrix/explicit-max/after-native.json",
+    "matrix/explicit-max/after-rust-export/argv.json",
+    "matrix/explicit-max/after-rust-export/process.json",
+    "matrix/explicit-max/after-rust-export/stderr.log",
+    "matrix/explicit-max/after-rust-export/stdout.log",
+    "matrix/explicit-max/after-rust.json",
+    "matrix/explicit-max/inputs.json",
+    "matrix/explicit-max/live-compare/argv.json",
+    "matrix/explicit-max/live-compare/process.json",
+    "matrix/explicit-max/live-compare/stderr.log",
+    "matrix/explicit-max/live-compare/stdout.log",
+    "matrix/explicit-max/native-state.json",
+    "matrix/explicit-max/original/argv.json",
+    "matrix/explicit-max/original/bindings-after.json",
+    "matrix/explicit-max/original/bindings-before.json",
+    "matrix/explicit-max/original/environment.json",
+    "matrix/explicit-max/original/loaded.json",
+    "matrix/explicit-max/original/native/after.sav",
+    "matrix/explicit-max/original/native/results.json",
+    "matrix/explicit-max/original/openttd.cfg",
+    "matrix/explicit-max/original/process.json",
+    "matrix/explicit-max/original/saved-schema.json",
+    "matrix/explicit-max/original/saved-world.json",
+    "matrix/explicit-max/original/stderr.log",
+    "matrix/explicit-max/original/stdout.log",
+    "matrix/explicit-max/rust-command/argv.json",
+    "matrix/explicit-max/rust-command/process.json",
+    "matrix/explicit-max/rust-command/stderr.log",
+    "matrix/explicit-max/rust-command/stdout.log",
+    "matrix/explicit-max/rust/after.sav",
+    "matrix/explicit-max/rust/results.json",
+    "matrix/explicit-max/serializer-compare/argv.json",
+    "matrix/explicit-max/serializer-compare/process.json",
+    "matrix/explicit-max/serializer-compare/stderr.log",
+    "matrix/explicit-max/serializer-compare/stdout.log",
     "matrix/not-stopped-edit/argv.json",
     "matrix/not-stopped-edit/bindings.json",
     "matrix/not-stopped-edit/process.json",
@@ -1410,6 +3859,50 @@
     "matrix/poor/serializer-compare/process.json",
     "matrix/poor/serializer-compare/stderr.log",
     "matrix/poor/serializer-compare/stdout.log",
+    "matrix/post-zero/actions.json",
+    "matrix/post-zero/after-compare/argv.json",
+    "matrix/post-zero/after-compare/process.json",
+    "matrix/post-zero/after-compare/stderr.log",
+    "matrix/post-zero/after-compare/stdout.log",
+    "matrix/post-zero/after-native-export/argv.json",
+    "matrix/post-zero/after-native-export/process.json",
+    "matrix/post-zero/after-native-export/stderr.log",
+    "matrix/post-zero/after-native-export/stdout.log",
+    "matrix/post-zero/after-native.json",
+    "matrix/post-zero/after-rust-export/argv.json",
+    "matrix/post-zero/after-rust-export/process.json",
+    "matrix/post-zero/after-rust-export/stderr.log",
+    "matrix/post-zero/after-rust-export/stdout.log",
+    "matrix/post-zero/after-rust.json",
+    "matrix/post-zero/inputs.json",
+    "matrix/post-zero/live-compare/argv.json",
+    "matrix/post-zero/live-compare/process.json",
+    "matrix/post-zero/live-compare/stderr.log",
+    "matrix/post-zero/live-compare/stdout.log",
+    "matrix/post-zero/native-state.json",
+    "matrix/post-zero/original/argv.json",
+    "matrix/post-zero/original/bindings-after.json",
+    "matrix/post-zero/original/bindings-before.json",
+    "matrix/post-zero/original/environment.json",
+    "matrix/post-zero/original/loaded.json",
+    "matrix/post-zero/original/native/after.sav",
+    "matrix/post-zero/original/native/results.json",
+    "matrix/post-zero/original/openttd.cfg",
+    "matrix/post-zero/original/process.json",
+    "matrix/post-zero/original/saved-schema.json",
+    "matrix/post-zero/original/saved-world.json",
+    "matrix/post-zero/original/stderr.log",
+    "matrix/post-zero/original/stdout.log",
+    "matrix/post-zero/rust-command/argv.json",
+    "matrix/post-zero/rust-command/process.json",
+    "matrix/post-zero/rust-command/stderr.log",
+    "matrix/post-zero/rust-command/stdout.log",
+    "matrix/post-zero/rust/after.sav",
+    "matrix/post-zero/rust/results.json",
+    "matrix/post-zero/serializer-compare/argv.json",
+    "matrix/post-zero/serializer-compare/process.json",
+    "matrix/post-zero/serializer-compare/stderr.log",
+    "matrix/post-zero/serializer-compare/stdout.log",
     "matrix/prepared/depot-runtime.json",
     "matrix/prepared/invocation.txt",
     "matrix/prepared/openttd.cfg",
@@ -1421,6 +3914,50 @@
     "matrix/rate-edit/process.json",
     "matrix/rate-edit/stderr.log",
     "matrix/rate-edit/stdout.log",
+    "matrix/same-slot/actions.json",
+    "matrix/same-slot/after-compare/argv.json",
+    "matrix/same-slot/after-compare/process.json",
+    "matrix/same-slot/after-compare/stderr.log",
+    "matrix/same-slot/after-compare/stdout.log",
+    "matrix/same-slot/after-native-export/argv.json",
+    "matrix/same-slot/after-native-export/process.json",
+    "matrix/same-slot/after-native-export/stderr.log",
+    "matrix/same-slot/after-native-export/stdout.log",
+    "matrix/same-slot/after-native.json",
+    "matrix/same-slot/after-rust-export/argv.json",
+    "matrix/same-slot/after-rust-export/process.json",
+    "matrix/same-slot/after-rust-export/stderr.log",
+    "matrix/same-slot/after-rust-export/stdout.log",
+    "matrix/same-slot/after-rust.json",
+    "matrix/same-slot/inputs.json",
+    "matrix/same-slot/live-compare/argv.json",
+    "matrix/same-slot/live-compare/process.json",
+    "matrix/same-slot/live-compare/stderr.log",
+    "matrix/same-slot/live-compare/stdout.log",
+    "matrix/same-slot/native-state.json",
+    "matrix/same-slot/original/argv.json",
+    "matrix/same-slot/original/bindings-after.json",
+    "matrix/same-slot/original/bindings-before.json",
+    "matrix/same-slot/original/environment.json",
+    "matrix/same-slot/original/loaded.json",
+    "matrix/same-slot/original/native/after.sav",
+    "matrix/same-slot/original/native/results.json",
+    "matrix/same-slot/original/openttd.cfg",
+    "matrix/same-slot/original/process.json",
+    "matrix/same-slot/original/saved-schema.json",
+    "matrix/same-slot/original/saved-world.json",
+    "matrix/same-slot/original/stderr.log",
+    "matrix/same-slot/original/stdout.log",
+    "matrix/same-slot/rust-command/argv.json",
+    "matrix/same-slot/rust-command/process.json",
+    "matrix/same-slot/rust-command/stderr.log",
+    "matrix/same-slot/rust-command/stdout.log",
+    "matrix/same-slot/rust/after.sav",
+    "matrix/same-slot/rust/results.json",
+    "matrix/same-slot/serializer-compare/argv.json",
+    "matrix/same-slot/serializer-compare/process.json",
+    "matrix/same-slot/serializer-compare/stderr.log",
+    "matrix/same-slot/serializer-compare/stdout.log",
     "matrix/shared-edit/argv.json",
     "matrix/shared-edit/bindings.json",
     "matrix/shared-edit/process.json",
@@ -1637,11 +4174,89 @@
     "cost/process.json",
     "cost/stderr.log",
     "cost/stdout.log",
+    "forbidden-build/actions.json",
+    "forbidden-build/command/argv.json",
+    "forbidden-build/command/process.json",
+    "forbidden-build/command/stderr.log",
+    "forbidden-build/command/stdout.log",
+    "forbidden-build/loaded.json",
     "group-engines.json",
     "group-engines/argv.json",
     "group-engines/process.json",
     "group-engines/stderr.log",
     "group-engines/stdout.log",
+    "invalid-enabled-mode/actions.json",
+    "invalid-enabled-mode/command/argv.json",
+    "invalid-enabled-mode/command/process.json",
+    "invalid-enabled-mode/command/stderr.log",
+    "invalid-enabled-mode/command/stdout.log",
+    "invalid-enabled-mode/loaded.json",
+    "mixed-0/actions.json",
+    "mixed-0/command/argv.json",
+    "mixed-0/command/process.json",
+    "mixed-0/command/stderr.log",
+    "mixed-0/command/stdout.log",
+    "mixed-0/loaded.json",
+    "mixed-1/actions.json",
+    "mixed-1/command/argv.json",
+    "mixed-1/command/process.json",
+    "mixed-1/command/stderr.log",
+    "mixed-1/command/stdout.log",
+    "mixed-1/loaded.json",
+    "mixed-10/actions.json",
+    "mixed-10/command/argv.json",
+    "mixed-10/command/process.json",
+    "mixed-10/command/stderr.log",
+    "mixed-10/command/stdout.log",
+    "mixed-10/loaded.json",
+    "mixed-2/actions.json",
+    "mixed-2/command/argv.json",
+    "mixed-2/command/process.json",
+    "mixed-2/command/stderr.log",
+    "mixed-2/command/stdout.log",
+    "mixed-2/loaded.json",
+    "mixed-3/actions.json",
+    "mixed-3/command/argv.json",
+    "mixed-3/command/process.json",
+    "mixed-3/command/stderr.log",
+    "mixed-3/command/stdout.log",
+    "mixed-3/loaded.json",
+    "mixed-4/actions.json",
+    "mixed-4/command/argv.json",
+    "mixed-4/command/process.json",
+    "mixed-4/command/stderr.log",
+    "mixed-4/command/stdout.log",
+    "mixed-4/loaded.json",
+    "mixed-5/actions.json",
+    "mixed-5/command/argv.json",
+    "mixed-5/command/process.json",
+    "mixed-5/command/stderr.log",
+    "mixed-5/command/stdout.log",
+    "mixed-5/loaded.json",
+    "mixed-6/actions.json",
+    "mixed-6/command/argv.json",
+    "mixed-6/command/process.json",
+    "mixed-6/command/stderr.log",
+    "mixed-6/command/stdout.log",
+    "mixed-6/loaded.json",
+    "mixed-7/actions.json",
+    "mixed-7/command/argv.json",
+    "mixed-7/command/process.json",
+    "mixed-7/command/stderr.log",
+    "mixed-7/command/stdout.log",
+    "mixed-7/loaded.json",
+    "mixed-8/actions.json",
+    "mixed-8/command/argv.json",
+    "mixed-8/command/process.json",
+    "mixed-8/command/stderr.log",
+    "mixed-8/command/stdout.log",
+    "mixed-8/loaded.json",
+    "mixed-9/actions.json",
+    "mixed-9/command/argv.json",
+    "mixed-9/command/process.json",
+    "mixed-9/command/stderr.log",
+    "mixed-9/command/stdout.log",
+    "mixed-9/loaded.json",
     "native/before/argv.json",
     "native/before/process.json",
     "native/before/stderr.log",
@@ -1653,32 +4268,12 @@
     "native/rejected/stderr.log",
     "native/rejected/stdout.log",
     "native/replay-build.sha256",
-    "observer-0/command/argv.json",
-    "observer-0/command/process.json",
-    "observer-0/command/stderr.log",
-    "observer-0/command/stdout.log",
-    "observer-0/loaded.json",
-    "observer-1/command/argv.json",
-    "observer-1/command/process.json",
-    "observer-1/command/stderr.log",
-    "observer-1/command/stdout.log",
-    "observer-1/loaded.json",
-    "observer-2/command/argv.json",
-    "observer-2/command/process.json",
-    "observer-2/command/stderr.log",
-    "observer-2/command/stdout.log",
-    "observer-2/loaded.json",
-    "observer-3/command/argv.json",
-    "observer-3/command/process.json",
-    "observer-3/command/stderr.log",
-    "observer-3/command/stdout.log",
-    "observer-3/loaded.json",
-    "observer-4/actions.json",
-    "observer-4/command/argv.json",
-    "observer-4/command/process.json",
-    "observer-4/command/stderr.log",
-    "observer-4/command/stdout.log",
-    "observer-4/loaded.json",
+    "old-bridge-true/actions.json",
+    "old-bridge-true/command/argv.json",
+    "old-bridge-true/command/process.json",
+    "old-bridge-true/command/stderr.log",
+    "old-bridge-true/command/stdout.log",
+    "old-bridge-true/loaded.json",
     "physical-slot.json",
     "physical-slot/argv.json",
     "physical-slot/process.json",
@@ -1701,6 +4296,10 @@
     "unit-1/process.json",
     "unit-1/stderr.log",
     "unit-1/stdout.log",
+    "unit-10/argv.json",
+    "unit-10/process.json",
+    "unit-10/stderr.log",
+    "unit-10/stdout.log",
     "unit-2/argv.json",
     "unit-2/process.json",
     "unit-2/stderr.log",
@@ -1725,6 +4324,15 @@
     "unit-7/process.json",
     "unit-7/stderr.log",
     "unit-7/stdout.log",
+    "unit-8/argv.json",
+    "unit-8/process.json",
+    "unit-8/stderr.log",
+    "unit-8/stdout.log",
+    "unit-9/argv.json",
+    "unit-9/process.json",
+    "unit-9/stderr.log",
+    "unit-9/stdout.log",
+    "wrong-executable.json",
     "zero-rejected.json",
     "zero/argv.json",
     "zero/process.json",

@@ -167,49 +167,56 @@ pub(super) fn clear_vehicle(
     world: &World,
     id: VehicleId,
 ) -> Result<(Vec<WorldEdit>, BackupAllocation), RuntimeError> {
+    clear_vehicle_from(
+        &state.backups,
+        view::OrderReader::Committed(world),
+        id,
+        clone_replacement(world, id)?,
+    )
+}
+pub(super) fn clone_replacement(world: &World, id: VehicleId) -> Result<Option<u32>, RuntimeError> {
     let source = view::consist(world, id.raw())?;
     let list = source.number("orders")?;
-    let next = if list == 0 {
-        None
-    } else {
-        let list_id = u32::try_from(list.saturating_sub(1))
-            .map_err(|_| RuntimeError::Invalid("backup clone list"))?;
-        world
-            .derived()
-            .order_lists
-            .iter()
-            .find(|v| v.id == list_id)
-            .ok_or(RuntimeError::Invalid("backup clone membership"))?
-            .vehicles
-            .iter()
-            .find(|v| **v != id.raw())
-            .copied()
-    };
-    let mut pool = state.backups.clone();
+    if list == 0 {
+        return Ok(None);
+    }
+    let list_id = u32::try_from(list.saturating_sub(1))
+        .map_err(|_| RuntimeError::Invalid("backup clone list"))?;
+    Ok(world
+        .derived()
+        .order_lists
+        .iter()
+        .find(|v| v.id == list_id)
+        .ok_or(RuntimeError::Invalid("backup clone membership"))?
+        .vehicles
+        .iter()
+        .find(|v| **v != id.raw())
+        .copied())
+}
+pub(super) fn clear_vehicle_from(
+    allocation: &BackupAllocation,
+    reader: view::OrderReader<'_>,
+    id: VehicleId,
+    replacement: Option<u32>,
+) -> Result<(Vec<WorldEdit>, BackupAllocation), RuntimeError> {
+    let mut pool = allocation.clone();
     let mut edits = Vec::new();
-    let table = view::table(world, *b"BKOR")?;
-    for (key, record) in table.records() {
-        if (view::Row {
-            schema: table.schema(),
-            record,
-        })
-        .number("clone")?
-            != u64::from(id.raw()) + 1
-        {
+    for (key, row) in reader.rows(*b"BKOR")? {
+        if row.number("clone")? != u64::from(id.raw()) + 1 {
             continue;
         }
-        let edit = if let Some(next) = next {
+        let edit = if let Some(next) = replacement {
             WorldEdit::Field {
                 chunk: *b"BKOR",
-                record: *key,
+                record: key,
                 path: vec![ottd_save::world::PathElement::Field("clone".into())],
                 value: WireValue::Unsigned(u64::from(next) + 1),
             }
         } else {
-            pool.free(*key)?;
+            pool.free(key)?;
             WorldEdit::RemoveRecord {
                 chunk: *b"BKOR",
-                record: *key,
+                record: key,
             }
         };
         edits.push(edit);

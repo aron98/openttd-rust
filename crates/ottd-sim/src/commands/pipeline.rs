@@ -204,7 +204,7 @@ fn execute_admitted(
                 location,
                 vehicle,
                 backup_order,
-                client_id,
+                client_id: if client_id == 0 { 1 } else { client_id },
             },
             estimate,
             match context {

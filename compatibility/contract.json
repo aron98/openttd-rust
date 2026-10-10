@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "b022ab14fb74b99c215a0edda48279bcdda2716305e3b3b1b44cb7aeb067b401",
+      "sha256": "186971adb87c419d8ff1cbae13df071c44151a0d66a4014dee065214a51a8201",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,

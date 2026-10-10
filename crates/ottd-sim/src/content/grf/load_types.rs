@@ -123,6 +123,8 @@ pub enum LoadFailure {
     StaticInfluence,
     /// More than255 non-static/non-system files.
     TooManyFiles,
+    /// Action13 translator precedes its not-yet-activated target.
+    LoadAfter,
 }
 
 /// Original diagnostic retained separately from a host refusal.

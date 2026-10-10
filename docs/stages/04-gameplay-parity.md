@@ -17,8 +17,8 @@ remain open.
 
 Depot removal matches 34 original-engine cases, 117 actions, 302 snapshots and
 69 save checkpoints. Shared orders, infrastructure, pool reuse, costs and
-rollback are checked together. Same-tile successful live-backup command traces
-and legal above-ground occupancy witnesses remain explicit gaps.
+rollback are checked together. Legal above-ground occupancy witnesses remain
+an explicit gap; the live-backup sale sequence below covers same-tile removal.
 
 Review caught supplementary Unicode being accepted inside script comments.
 The correction matches native lazy decoding, malformed-byte rejection,
@@ -41,8 +41,34 @@ its native observer prerequisites, and `5f8357d` corrects the language evidence
 result inventory. The observer also passed all 44 existing baseline replays
 using the preceding reviewed Rust executable.
 
-Active work continues on NewGRF custom strings and Actions 4/13, live order
-backups during road vehicle sales, and Squirrel owned strings with persistent runtime state. These
+`3c28479` admits sale with live order backups in ordinary single player while
+keeping backup creation disabled. Backup cleanup observes the original shared
+chain and publishes with order detachment, vehicle removal and refunds in one
+transaction. Ten original/Rust pairs cover 49 actions, 118 snapshots and 15
+saves, including backup, sale and depot removal without reloading. Four
+renewal-state regressions caught and corrected an accidental guard relaxation
+before integration. Independent review approved the corrected commit after
+seven fresh pairs, eight controls and five observer refusal tests.
+
+NewGRF session strings now implement generic Action 4 names and the admitted
+Action 13 translation domain. One private table preserves allocation order,
+first-definition defaults, language selection and exact fallback bytes. Original
+comparisons cover ten API cases and 90 loader cases, with 102,315 comparator
+rejections and seven invocation guards. The integrated workspace passes 502
+tests. Language, context, 248-case loader control, order-state and live-backup
+sale regressions also pass. Baseline/specification owners, arbitrary formatted
+errors, broader finalization, and content-dependent world restoration remain
+open; this does not admit arbitrary modded worlds.
+
+Linux CI exposed a separate script compatibility boundary: the original lexer
+passes decoded characters above 255 to byte character-classification functions.
+The same surrogate-encoded input compiles on the observed Linux build and fails
+on macOS. The existing comparison remains failed while the compatibility policy
+for upstream undefined behavior is decided. Local macOS results do not establish
+portable behavior for that domain, and branch-wide CI is not green.
+
+Active work continues on currency owners and deferred string mapping,
+backup-enabled road vehicle sales, and Squirrel owned strings with persistent runtime state. These
 are separate increments awaiting their own integrated evidence and review.
 
 For agentic workers: use the subagent-driven development workflow, with explicit

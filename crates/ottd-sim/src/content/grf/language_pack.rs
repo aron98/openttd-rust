@@ -117,6 +117,14 @@ impl Pack {
     }
 
     pub(super) fn body(&self, bytes: &[u8]) -> Result<(), PackError> {
+        self.visit_body(bytes, |_| {})
+    }
+
+    fn visit_body(
+        &self,
+        bytes: &[u8],
+        mut string: impl FnMut(std::ops::Range<usize>),
+    ) -> Result<(), PackError> {
         if bytes.len() > 1 << 20 || self.tables.iter().any(|&count| count > 2048) {
             return Err(PackError::Body);
         }
@@ -136,7 +144,9 @@ impl Pack {
                     return Err(PackError::Body);
                 }
             }
-            position = position.checked_add(length).ok_or(PackError::Body)?;
+            let end = position.checked_add(length).ok_or(PackError::Body)?;
+            string(position..end);
+            position = end;
         }
         Ok(())
     }
@@ -149,5 +159,52 @@ impl Pack {
                 slot.get(..slot.iter().position(|&v| v == 0).unwrap_or(slot.len())) == Some(name)
             })
             .and_then(|index| u8::try_from(index).ok())
+    }
+}
+
+#[derive(Debug)]
+pub(super) struct BuiltinPack<'a> {
+    bytes: &'a [u8],
+    starts: [usize; 32],
+    strings: Vec<std::ops::Range<usize>>,
+}
+
+#[derive(Debug, thiserror::Error, PartialEq, Eq)]
+#[error("builtin lookup cannot resolve string domain {0:#x}")]
+pub(super) struct LookupDomain(pub u32);
+
+impl<'a> BuiltinPack<'a> {
+    pub(super) fn new(bytes: &'a [u8]) -> Result<Self, PackError> {
+        let pack = Pack::header(bytes)?;
+        pack.body(bytes)?;
+        let mut strings = Vec::new();
+        pack.visit_body(bytes, |range| strings.push(range))?;
+        let mut starts = [0; 32];
+        let mut total = 0_usize;
+        for (start, &count) in starts.iter_mut().zip(&pack.tables) {
+            *start = total;
+            total = total.saturating_add(usize::from(count));
+        }
+        Ok(Self {
+            bytes,
+            starts,
+            strings,
+        })
+    }
+
+    pub(super) fn lookup(&self, id: u32) -> Result<&'a [u8], LookupDomain> {
+        let tab = id >> 11;
+        if tab == 26 || tab >= 32 {
+            return Err(LookupDomain(id));
+        }
+        let table = usize::try_from(tab).map_err(|_| LookupDomain(id))?;
+        let index = usize::try_from(id & 2047).map_err(|_| LookupDomain(id))?;
+        let start = self.starts.get(table).ok_or(LookupDomain(id))?;
+        let offset = start.saturating_add(index);
+        self.strings
+            .get(offset)
+            .map_or(Ok(b"(undefined string)"), |range| {
+                self.bytes.get(range.clone()).ok_or(LookupDomain(id))
+            })
     }
 }

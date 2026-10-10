@@ -22,6 +22,18 @@ mod load_language_state;
 mod load_parameters;
 mod load_patch;
 mod load_registry;
+mod load_string_actions;
+#[cfg(test)]
+mod load_string_actions_tests;
+mod load_strings;
+#[cfg(test)]
+mod load_strings_guards;
+#[cfg(test)]
+mod load_strings_load_native;
+#[cfg(test)]
+mod load_strings_native;
+#[cfg(test)]
+mod load_strings_tests;
 mod load_substitution;
 mod load_types;
 mod metadata_types;

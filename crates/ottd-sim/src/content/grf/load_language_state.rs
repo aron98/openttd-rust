@@ -1,5 +1,5 @@
 use super::{
-    language_pack::{Pack, PackError},
+    language_pack::{BuiltinPack, Pack, PackError},
     load::Session,
     load_budget::Budget,
     load_language::LanguageMap,
@@ -44,6 +44,10 @@ pub(super) struct LanguageSnapshot {
     pub line: u32,
     pub offset: usize,
     pub files: Vec<FileLanguage>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub strings: Vec<super::load_strings::Entry>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub translation_errors: Vec<super::load_string_actions::TranslationFailure>,
 }
 #[derive(Debug, serde::Serialize)]
 pub(super) struct LanguageReport {
@@ -51,15 +55,20 @@ pub(super) struct LanguageReport {
     pub selected: u8,
     pub admissions: Vec<&'static str>,
     pub events: Vec<LanguageSnapshot>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub strings: Vec<super::load_strings::Entry>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub translation_errors: Vec<super::load_string_actions::TranslationFailure>,
 }
-pub(super) struct LanguageState {
+pub(super) struct LanguageState<'a> {
     pub report: LanguageReport,
+    pub builtins: BuiltinPack<'a>,
     pairs: usize,
     limits: LanguageLimits,
 }
-impl LanguageState {
+impl<'a> LanguageState<'a> {
     pub(super) fn new(
-        input: LanguageInput<'_>,
+        input: LanguageInput<'a>,
         location: LoadLocation,
         budget: &mut Budget,
     ) -> Result<Self, ControlLoadError> {
@@ -73,9 +82,11 @@ impl LanguageState {
             selected: input.selected,
             admissions: Vec::new(),
             events: Vec::new(),
+            strings: Vec::new(),
+            translation_errors: Vec::new(),
         };
         let mut source_bytes = 0_usize;
-        let mut selected = false;
+        let mut selected = None;
         for bytes in input.packs {
             source_bytes = source_bytes
                 .checked_add(bytes.len())
@@ -112,26 +123,24 @@ impl LanguageState {
                     detail: "unterminated language name slot",
                 })?;
             if header.language == input.selected {
-                header
-                    .body(bytes)
-                    .map_err(|_| ControlLoadError::InvalidNativeDomain {
+                selected = Some(BuiltinPack::new(bytes).map_err(|_| {
+                    ControlLoadError::InvalidNativeDomain {
                         location,
                         detail: "invalid selected language body",
-                    })?;
-                selected = true;
+                    }
+                })?);
             }
             report.admissions.push("accepted");
             budget.payload(std::mem::size_of::<Pack>(), location)?;
             report.catalog.push(header);
         }
-        if !selected {
-            return Err(ControlLoadError::InvalidNativeDomain {
-                location,
-                detail: "selected language unavailable",
-            });
-        }
+        let builtins = selected.ok_or(ControlLoadError::InvalidNativeDomain {
+            location,
+            detail: "selected language unavailable",
+        })?;
         Ok(Self {
             report,
+            builtins,
             pairs: 0,
             limits: input.limits,
         })
@@ -173,7 +182,16 @@ impl Session<'_, '_> {
                             )
                     }))
             })
-            .saturating_add(std::mem::size_of::<LanguageSnapshot>());
+            .saturating_add(std::mem::size_of::<LanguageSnapshot>())
+            .saturating_add(self.strings.snapshot_bytes())
+            .saturating_add(self.string_errors.iter().fold(0_usize, |bytes, error| {
+                bytes
+                    .saturating_add(std::mem::size_of::<
+                        super::load_string_actions::TranslationFailure,
+                    >())
+                    .saturating_add(error.data.len())
+                    .saturating_add(error.custom_message.len())
+            }));
         self.budget.trace(bytes, location)?;
         let phase = match location.stage {
             LoadStage::FileScan => 0,
@@ -188,6 +206,8 @@ impl Session<'_, '_> {
             file: location.file,
             line: location.line,
             offset: location.offset,
+            strings: self.strings.entries.clone(),
+            translation_errors: self.string_errors.clone(),
             files: self
                 .registry
                 .files

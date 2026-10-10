@@ -37,9 +37,30 @@ pub(super) struct Session<'i, 'a> {
     pub overrides: BTreeMap<(u32, u32), Arc<[u8]>>,
     pub events: Vec<LoadEvent>,
     pub environment: Option<super::load_context::Environment>,
-    pub language: Option<super::load_language_state::LanguageState>,
+    pub language: Option<super::load_language_state::LanguageState<'a>>,
+    pub strings: super::load_strings::StringTable,
+    pub string_budget: super::text::Budget,
+    pub string_errors: Vec<super::load_string_actions::TranslationFailure>,
 }
 impl Session<'_, '_> {
+    fn finish(mut self, location: LoadLocation) -> Result<RuntimeReport, ControlLoadError> {
+        self.overrides.clear();
+        let environment = self.finish_environment(location)?;
+        self.budget
+            .payload(self.registry.snapshot_bytes(), location)?;
+        Ok((
+            ControlLoadReport {
+                files: self.registry.snapshots(),
+                events: self.events,
+            },
+            environment,
+            self.language.map(|mut state| {
+                state.report.strings = self.strings.entries;
+                state.report.translation_errors = self.string_errors;
+                state.report
+            }),
+        ))
+    }
     fn finish_environment(
         &mut self,
         location: LoadLocation,
@@ -428,19 +449,18 @@ impl RuntimeInputs<'_> {
     }
 }
 
+pub(super) type RuntimeReport = (
+    ControlLoadReport,
+    Option<super::load_context::EnvironmentReport>,
+    Option<super::load_language_state::LanguageReport>,
+);
+
 pub(super) fn run_with_context(
     inputs: &[LoadInput<'_>],
     preceding_ids: &[u32],
     options: ControlOptions,
     context: RuntimeInputs<'_>,
-) -> Result<
-    (
-        ControlLoadReport,
-        Option<super::load_context::EnvironmentReport>,
-        Option<super::load_language_state::LanguageReport>,
-    ),
-    ControlLoadError,
-> {
+) -> Result<RuntimeReport, ControlLoadError> {
     let location = LoadLocation {
         stage: LoadStage::LabelScan,
         file: 0,
@@ -519,6 +539,9 @@ pub(super) fn run_with_context(
         events: Vec::new(),
         environment,
         language,
+        strings: super::load_strings::StringTable::default(),
+        string_budget: super::text::Budget::new(super::ScanLimits::default()),
+        string_errors: Vec::new(),
     };
     for stage in [
         LoadStage::LabelScan,
@@ -528,17 +551,5 @@ pub(super) fn run_with_context(
     ] {
         session.phase(stage)?;
     }
-    session.overrides.clear();
-    let environment = session.finish_environment(location)?;
-    session
-        .budget
-        .payload(session.registry.snapshot_bytes(), location)?;
-    Ok((
-        ControlLoadReport {
-            files: session.registry.snapshots(),
-            events: session.events,
-        },
-        environment,
-        session.language.map(|state| state.report),
-    ))
+    session.finish(location)
 }

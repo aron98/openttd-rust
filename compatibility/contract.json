@@ -1726,7 +1726,7 @@
     {
       "id": "metadata-crates-ottd-sim-src-content-grf-rs",
       "path": "crates/ottd-sim/src/content/grf.rs",
-      "sha256": "a87e6f1643390759f0cffb6d23142b5bf7d3ee5108ace150227d09c51a5c3818",
+      "sha256": "f40ffee85374b602b0863211a908319824a6e2e4eb5d03c3c922a3402767eb15",
       "kind": "recipe",
       "provenance": "Frozen fresh-config Action14 metadata/translation implementation, original native observer or generated input matrix; upstream.toml; no activation claim",
       "save_version": null,
@@ -2410,7 +2410,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-rs",
       "path": "crates/ottd-sim/src/content/grf/load.rs",
-      "sha256": "2eecd3bcd9df4e84e7d8bd10abae4fc424ff897d35648b0ebb83794781eef024",
+      "sha256": "f6bcc5ca6f1f57e25842e57a6e8629791ee800250dafa46aba9587dc535a0fb8",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2446,7 +2446,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-dispatch-rs",
       "path": "crates/ottd-sim/src/content/grf/load_dispatch.rs",
-      "sha256": "7dafe01e3100d1977a8aa6b0ec896b081121e89c6efdbbeea1882e4c14dca6da",
+      "sha256": "7c99fbb6ec8a59ac94303088ceba5225d773f9bda58bf721d271afe8781e636d",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -2491,7 +2491,7 @@
     {
       "id": "grf-control-crates-ottd-sim-src-content-grf-load-types-rs",
       "path": "crates/ottd-sim/src/content/grf/load_types.rs",
-      "sha256": "5b72478c2f0a0ca9a75937fd4a61079560d498cdedd2d82b429fa62bfa26c81b",
+      "sha256": "a0c26809f1ce9f0005f962ca96d28f8d5a61aa4f07afa273c2baa22f2ccd30eb",
       "kind": "recipe",
       "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "0d1422a289df7d54af40864fd76eeeea58f4612f41aa07fce0cd8624b25af3c3",
+      "sha256": "488dfe13f6fbaad34ec4d9891e913b05fa1d66441ca0dfca50f9047ee93779a3",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "49c41646cc457bc8b592df39fa7fe1762b0daf1966f1ce3875d91bdad48ab2a5",
+      "sha256": "1e528ccf3386868a6bbe5dace7202a0d9d1bf09a9cfb64158e56c436e738de82",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "eabc6b3e9f7b11d812e950300ccab41aa18baaed13aa840bb712796b7c7b23ad",
+      "sha256": "b8eb27de781290943a061fd95c43b69a19689ec3f19f93c9bd9d78fdbcffcda1",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "d6fb12ea035d84577de4ba5214d43b7b2b8488a9298c2c17970176dbd83c9f6f",
+      "sha256": "55cc7cabc6383d80a1403dc3626fb8e014b60bf49e5e4915c0943e5ce15708d3",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "d725db8c72e573c099c6dcc2b259f9dca56cc33ffeb7a02047dd737fca254f9b",
+      "sha256": "7ac2b3aa5ce2d7930f8a2efed7e5eb60e6af833247e9e0540cacddbc9c7b5920",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "5ddda274cda94d86fde6a977ef6143802a27f3331a6a4a2011e669b04d43ef48",
+      "sha256": "6a2ff51e0de2ffe5844a6a1acf2e33e034e5023132536cfa06eb2a158ecc42b5",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "73fdcce385285f61ff66c751eea3069faa3157e55e374be18aee8e9e02075b2e",
+      "sha256": "353ba947c3ca4dcd4de5717d61f716df564ecd4c5a9b34711486d934e10360e7",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3502,6 +3502,69 @@
       "sha256": "eadd1d82d1ae2f56c30f99b761268ee2a83cf80da9e9f2a18fc0c0244acb9c1c",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-check-grf-strings-ci-py",
+      "path": "scripts/check-grf-strings-ci.py",
+      "sha256": "f9a56436c75e0e6b2c31ada7b6e139738ab69afdeb06d020af9a2fc6b16ef84b",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-strings-ci-compare-py",
+      "path": "scripts/strings_ci_compare.py",
+      "sha256": "7b11ec81d6ce3f37ef0da20fdabf02e1c95c8653243e69c6efefd4c28f829dce",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-strings-ci-evidence-py",
+      "path": "scripts/strings_ci_evidence.py",
+      "sha256": "1bae1448c23164e866c9ac67c281a9efe9443b329ff792e1448b5e802e95dd5e",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-strings-ci-bindings-py",
+      "path": "scripts/strings_ci_bindings.py",
+      "sha256": "5ab39ca564000fb07f61a3a692307841101fa9dd50e74b8d33f10249771c0679",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-strings-ci-probes-py",
+      "path": "scripts/strings_ci_probes.py",
+      "sha256": "5b3fd00abffc04e7f5a09751c1541d1628aee342ca549db91fd636e8c438dfe3",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-strings-ci-evidence-test-py",
+      "path": "scripts/tests/strings_ci_evidence_test.py",
+      "sha256": "893e6801713a96b2b67b972415759a7e7d65c8ea334894f05e3c72b6a9f9c7fe",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "strings-ci-strings-ci-layout-json",
+      "path": "scripts/strings-ci-layout.json",
+      "sha256": "15627fbbe99662653c7619af8bd61bbf58219c778fa020993024147d32065303",
+      "kind": "recipe",
+      "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
       "profile": null
     }
@@ -9981,6 +10044,34 @@
         "rust_behavior"
       ],
       "timeout_seconds": 600
+    },
+    {
+      "id": "grf-strings",
+      "argv": [
+        "python3",
+        "scripts/check-grf-strings-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "native-invocations.json",
+        "corruption/rejections.json",
+        "bin/ottd_sim",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256"
+      ],
+      "success_text": "PASS session string CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -14594,6 +14685,47 @@
         "native-executable/openttd",
         "native-executable/replay-build.sha256",
         "controls/zero-rejected.json"
+      ]
+    },
+    {
+      "id": "content.session-custom-strings",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Private configured D1/D2 strings. Baseline/spec owners, formatted error domain and full reload remain unsupported.",
+      "expected": "Actual API10/1691/11198 and loader90/14659/91117, guards7; complete source/input/executor/raw archive; original cap fixture distinct from sequential calls.",
+      "driver": "grf-strings",
+      "assets": [
+        "strings-ci-check-grf-strings-ci-py",
+        "strings-ci-strings-ci-compare-py",
+        "strings-ci-strings-ci-evidence-py",
+        "strings-ci-strings-ci-bindings-py",
+        "strings-ci-strings-ci-probes-py",
+        "strings-ci-strings-ci-evidence-test-py",
+        "strings-ci-strings-ci-layout-json"
+      ],
+      "source_refs": [
+        "scripts/check-grf-strings-ci.py",
+        "scripts/strings_ci_compare.py",
+        "scripts/strings_ci_evidence.py",
+        "scripts/strings_ci_bindings.py",
+        "scripts/strings_ci_probes.py",
+        "scripts/tests/strings_ci_evidence_test.py",
+        "scripts/strings-ci-layout.json"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "zero-test-rejected.json",
+        "native-bindings.json",
+        "native-invocations.json",
+        "corruption/rejections.json",
+        "bin/ottd_sim",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256"
       ]
     }
   ]

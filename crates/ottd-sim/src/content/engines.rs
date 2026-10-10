@@ -16,49 +16,50 @@ pub(super) struct EngineSeed {
 
 pub(super) fn raw_original(kind: usize, local: u16, id: u16) -> Option<EngineSpec> {
     let index = usize::from(local);
-    let (offset, count, vehicle): (usize, usize, VehicleSpec) = match kind {
-        0 => (
-            0,
-            116,
-            VehicleSpec::Rail(
-                rail_data::VEHICLES
-                    .get(index)
-                    .copied()
-                    .unwrap_or(super::RailSpec::DEFAULT),
+    let (offset, count, vehicle): (usize, usize, VehicleSpec) =
+        match kind {
+            0 => (
+                0,
+                116,
+                VehicleSpec::Rail(
+                    rail_data::VEHICLES
+                        .get(index)
+                        .copied()
+                        .unwrap_or(super::RailSpec::DEFAULT),
+                ),
             ),
-        ),
-        1 => (
-            116,
-            88,
-            VehicleSpec::Road(
-                road_data::VEHICLES
-                    .get(index)
-                    .copied()
-                    .unwrap_or(super::RoadSpec::DEFAULT),
+            1 => (
+                116,
+                88,
+                VehicleSpec::Road(road_data::VEHICLES.get(index).copied().unwrap_or(
+                    super::RoadSpec {
+                        running_cost_class: Some(super::Price::StationValue),
+                        ..super::RoadSpec::DEFAULT
+                    },
+                )),
             ),
-        ),
-        2 => (
-            204,
-            11,
-            VehicleSpec::Ship(
-                ship_data::VEHICLES
-                    .get(index)
-                    .copied()
-                    .unwrap_or(super::ShipSpec::DEFAULT),
+            2 => (
+                204,
+                11,
+                VehicleSpec::Ship(
+                    ship_data::VEHICLES
+                        .get(index)
+                        .copied()
+                        .unwrap_or(super::ShipSpec::DEFAULT),
+                ),
             ),
-        ),
-        3 => (
-            215,
-            41,
-            VehicleSpec::Aircraft(
-                aircraft_data::VEHICLES
-                    .get(index)
-                    .copied()
-                    .unwrap_or(super::AircraftSpec::DEFAULT),
+            3 => (
+                215,
+                41,
+                VehicleSpec::Aircraft(
+                    aircraft_data::VEHICLES
+                        .get(index)
+                        .copied()
+                        .unwrap_or(super::AircraftSpec::DEFAULT),
+                ),
             ),
-        ),
-        _ => return None,
-    };
+            _ => return None,
+        };
     let mut info = EngineInfo {
         base_intro: 0,
         lifelength: 0,

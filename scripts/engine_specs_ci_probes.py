@@ -111,6 +111,7 @@ def live_probes(job: ControlRun, layout: Json) -> None:
             ),
         ),
     )
+    paired_allocated_probes(job, check, execute)
     invocation = target / "native/invocation.txt"
     raw = invocation.read_text()
     corrupted = (
@@ -160,3 +161,56 @@ def live_probes(job: ControlRun, layout: Json) -> None:
         sorted(text(at(row, ("name",))) for row in rows) == sorted(PROBES), rust=True
     )
     write_json(directory / "summary.json", rows)
+
+
+def paired_allocated_probes(
+    job: ControlRun,
+    check: Callable[[], None],
+    execute: Callable[[str, Callable[[], None]], None],
+) -> None:
+    target = job.output / "cases/api-high-ids-reset-on"
+    native = read_json(target / "native/specs.json")
+    rust = read_json(target / "rust.json")
+    events = sequence(at(native, ("events",)))
+    indices = [
+        i for i, row in enumerate(events) if at(row, ("phase",)) == "api-command"
+    ]
+    if len(indices) != 12 or len(sequence(at(rust, ("results",)))) != 12:
+        raise WorldCheckError("Allocated-owner probe requires all twelve commands")
+    last = indices[-1]
+    mappings = sequence(at(native, ("events", last, "state", "mappings")))
+    index = next(
+        i
+        for i, row in enumerate(mappings)
+        if at(row, ("type",)) == 1 and at(row, ("internal_id",)) == 256
+    )
+    mutations: list[tuple[str, tuple[str | int, ...], Json]] = [
+        (
+            "paired-new-owner",
+            ("owners", 256, "vehicle", "Road", "running_cost_class"),
+            None,
+        ),
+        ("paired-substitute", ("mappings", index, "substitute_id"), 88),
+    ]
+    for name, pointer, value in mutations:
+        changed_native, changed_rust = deepcopy(native), deepcopy(rust)
+        native_pointer = ("events", last, "state", *pointer)
+        rust_pointer = ("results", 11, "state", *pointer)
+        if at(changed_native, native_pointer) == value:
+            raise WorldCheckError("Allocated-owner corruption is ineffective")
+        replace(changed_native, native_pointer, value)
+        replace(changed_rust, rust_pointer, value)
+        native_path = job.output / "corruption" / (name + "-native.json")
+        rust_path = job.output / "corruption" / (name + "-rust.json")
+        write_json(native_path, changed_native)
+        write_json(rust_path, changed_rust)
+        execute(
+            name,
+            lambda native_path=native_path, rust_path=rust_path: modified_file(
+                target / "native/specs.json",
+                native_path.read_bytes(),
+                lambda: modified_file(
+                    target / "rust.json", rust_path.read_bytes(), check
+                ),
+            ),
+        )

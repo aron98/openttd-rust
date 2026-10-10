@@ -6,7 +6,7 @@ from scripts.currency_ci_capture import source_names
 from scripts.engine_specs_ci_evidence import invocation_paths, projection
 from scripts.engine_specs_ci_guards import native_argv, validate_guards
 from scripts.engine_specs_ci_roster import CASES, COMPILER_INPUT, LAYOUT
-from scripts.engine_specs_ci_run import Mode, prepare
+from scripts.engine_specs_ci_run import Mode, prepare, run
 from scripts.gameplay_foundations import log_name
 from scripts.grf_control_evidence import sequence, text
 from scripts.grf_control_run import ControlRun
@@ -17,6 +17,15 @@ from scripts.world_check_support import Json, WorldCheckError, at, read_json, wr
 def test_normal_admission_refuses_unverified_layout(tmp_path: Path) -> None:
     with pytest.raises(WorldCheckError, match="awaits complete paired"):
         _ = prepare(tmp_path, Mode.ADMIT, None, {"verified_native_corpus": False})
+
+
+def test_driver_refuses_inherited_constructor_output(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("OTTD_ENGINE_CONSTRUCTOR_PROOF", str(tmp_path))
+    with pytest.raises(WorldCheckError, match="refuses subset, replay or observer"):
+        run(Mode.CAPTURE, tmp_path / "capture")
+    assert not (tmp_path / "capture").exists()
 
 
 def test_capture_does_not_reuse_or_enter_source(tmp_path: Path) -> None:

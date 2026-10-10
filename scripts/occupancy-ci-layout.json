@@ -2,6 +2,8 @@
   "sources": {
     "crates/ottd-sim/src/commands/road_depot/occupancy.rs": "e4b2bf4487a1c067d0606efcbd452adcbfd4b68a43f079d89018c7fa820f7e5e",
     "crates/ottd-sim/src/commands/road_depot/occupancy/native.rs": "0d2950331c8d59e575d0e5ee800b3ab595d836f9e2a757da5b415fe355ad1c8a",
+    "crates/ottd-sim/src/content/grf/load_engine_constructor_cases.json": "53fbed4b7932eb80f4e8f75085d255caf4d0d8a1b3e34180627421f945548127",
+    "crates/ottd-sim/src/content/grf/load_engine_constructor_expected.json": "6341ebc1c10003deea836c4a1212ef5694e6673c62a4c952fed9a887aefd5aa7",
     "scripts/check-depot-occupancy.py": "a2bfd6f6036f65a88b266a4bfe4dd38fc96326c8db739dba16877b798a886ea4"
   },
   "paths": [

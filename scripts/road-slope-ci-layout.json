@@ -4,6 +4,8 @@
     "crates/ottd-sim/src/commands/road/slope.rs": "86f0bc744f07e2780629c04837ee91f6246d54600216a37eede0fe2d86d26c92",
     "crates/ottd-sim/src/commands/road/slope/native.rs": "35643d553cb0abff0ba1bf63e2a99a3e81a197b1600dad138c534ece58d60b09",
     "crates/ottd-sim/src/commands/road/slope/tests.rs": "7ae6afbf193a575c8e42764d764506f74902b58e9ef5bfa7f8c4913a7933dbd6",
+    "crates/ottd-sim/src/content/grf/load_engine_constructor_cases.json": "53fbed4b7932eb80f4e8f75085d255caf4d0d8a1b3e34180627421f945548127",
+    "crates/ottd-sim/src/content/grf/load_engine_constructor_expected.json": "6341ebc1c10003deea836c4a1212ef5694e6673c62a4c952fed9a887aefd5aa7",
     "scripts/check-road-slope.py": "837acec2073db94c1cfcfb6fba95d16867a6d6c19b92b6f112c12036ced70a12"
   },
   "paths": [

@@ -156,6 +156,35 @@ fn api(case: &Case) -> Result<Value> {
     Ok(json!({"mode":"api","results":rows,"files":[]}))
 }
 
+fn constructor_witness(name: &str) -> Result {
+    let cases: Value = serde_json::from_str(include_str!("load_engine_constructor_cases.json"))?;
+    let expected: Value =
+        serde_json::from_str(include_str!("load_engine_constructor_expected.json"))?;
+    let case: Case = serde_json::from_value(cases.get(name).ok_or("constructor case")?.clone())?;
+    let actual = api(&case)?;
+    if let Some(directory) = std::env::var_os("OTTD_ENGINE_CONSTRUCTOR_PROOF") {
+        std::fs::write(
+            Path::new(&directory).join(format!("{name}.json")),
+            serde_json::to_vec(&actual)?,
+        )?;
+    }
+    assert!(
+        actual == *expected.get(name).ok_or("native constructor state")?,
+        "whole native owner/mapping/temporary state differs for {name}"
+    );
+    Ok(())
+}
+
+#[test]
+fn engine_constructor_high_ids_match_native_whole_state() -> Result {
+    constructor_witness("extended-ids")
+}
+
+#[test]
+fn engine_constructor_new_owner_property_reset_matches_native_whole_state() -> Result {
+    constructor_witness("new-owner")
+}
+
 fn load(case: &Case) -> Result<Value> {
     let sources = case
         .files
@@ -234,7 +263,9 @@ fn original_engine_spec_corpus() -> Result {
             "loader-truncated",
             "loader-unknown",
             "loader-unknown-followup",
-            "loader-recognized-prefix"
+            "loader-recognized-prefix",
+            "api-high-ids-reset-on",
+            "api-high-ids-reset-off"
         ]
     );
     std::fs::create_dir(destination)?;
@@ -246,4 +277,14 @@ fn original_engine_spec_corpus() -> Result {
         serde_json::to_vec(&names)?,
     )?;
     Ok(())
+}
+
+#[test]
+fn engine_constructor_high_ids_retained_reset_dynamic_on_matches_native() -> Result {
+    constructor_witness("high-ids-reset-on")
+}
+
+#[test]
+fn engine_constructor_high_ids_retained_reset_dynamic_off_matches_native() -> Result {
+    constructor_witness("high-ids-reset-off")
 }

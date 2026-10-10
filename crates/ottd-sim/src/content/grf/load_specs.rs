@@ -255,11 +255,12 @@ impl Specs {
                 return Err(Self::limit(location));
             }
             let engine = u16::try_from(self.owners.len()).map_err(|_| Self::limit(location))?;
+            let [native_local, _] = local.to_le_bytes();
             let mapping = Mapping {
                 kind,
                 grfid: scope,
                 internal_id: local,
-                substitute_id: local.min(kind.count()),
+                substitute_id: u16::from(native_local).min(kind.count()),
                 engine,
             };
             self.owners.push(Owner::new(&mapping, location)?);

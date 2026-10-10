@@ -66,6 +66,7 @@ def prepare(root: Path, mode: Mode, requested: Path | None, layout: Json) -> Pat
 def run(mode: Mode, requested: Path | None = None) -> None:
     forbidden = {
         "OTTD_ENGINE_SPECS_CASES",
+        "OTTD_ENGINE_CONSTRUCTOR_PROOF",
         "OTTD_ENGINE_CASE",
         "OTTD_REPLAY_PATH",
         "OTTD_REPLAY_OUTPUT",
@@ -190,12 +191,12 @@ def publish(job: ControlRun, layout: Json, mode: Mode) -> None:
         output / "coverage.json",
         {
             "cases": list(CASES),
-            "api_commands": 24,
+            "api_commands": 48,
             "loader_checkpoints": 6,
-            "native_events": 230,
+            "native_events": 280,
             "native_host_guards": 12,
             "wrapper_invocations": 9,
-            "admission_probes": 11,
+            "admission_probes": 13,
             "focused": list(FOCUSED),
         },
     )

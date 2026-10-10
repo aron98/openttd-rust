@@ -161,11 +161,11 @@ def main() -> None:
     write_json(
         output / "summary.json",
         {
-            "cases": 7642,
-            "fixtures": 835,
+            "cases": 7777,
+            "fixtures": 850,
             "credits": 9,
-            "tests": 52,
-            "strict_comparisons": 7570,
+            "tests": 55,
+            "strict_comparisons": 7705,
             "undefined_input_rejections": 72,
             "controls": 25,
             "frame_tests": 9,
@@ -175,7 +175,7 @@ def main() -> None:
         },
     )
     package(output)
-    print("PASS scalar VM 7570 comparisons; 72 undefined-input rejections", flush=True)
+    print("PASS scalar VM 7705 comparisons; 72 undefined-input rejections", flush=True)
 
 
 if __name__ == "__main__":

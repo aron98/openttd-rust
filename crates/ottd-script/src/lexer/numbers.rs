@@ -19,16 +19,13 @@ impl Lexer<'_> {
         };
         if let Some(radix) = radix {
             let digits = self.position;
-            while self
-                .classify(NativeCharacterContext::Number)?
-                .is_some_and(|b| {
-                    if radix == 16 {
-                        b.is_ascii_hexdigit()
-                    } else {
-                        (b'0'..=b'7').contains(&b)
-                    }
-                })
-            {
+            while if radix == 16 {
+                self.classify(NativeCharacterContext::Number)?
+                    .is_some_and(|byte| byte.is_ascii_hexdigit())
+            } else {
+                // Native scisodigit takes an eight-bit char, not a ctype argument.
+                self.peek().is_some() && (b'0'..=b'7').contains(&self.character.to_le_bytes()[0])
+            } {
                 self.advance()?;
             }
             if (radix == 8
@@ -43,9 +40,11 @@ impl Lexer<'_> {
                 .source
                 .get(digits..self.position)
                 .ok_or_else(|| self.error(CompileErrorKind::InvalidNumber))?;
-            let text = std::str::from_utf8(text)
-                .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
-            return Ok(integer(text, radix));
+            // Consumed native encoded-surrogate lookalikes are not Rust UTF-8.
+            // Native ParseInteger rejects their remaining encoded bytes and yields zero.
+            return Ok(
+                std::str::from_utf8(text).map_or(Value::Integer(0), |text| integer(text, radix))
+            );
         }
         let mut float = false;
         while let Some(c) = self.classify(NativeCharacterContext::Number)? {

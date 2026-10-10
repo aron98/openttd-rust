@@ -343,7 +343,7 @@
     "scripts/language_ci_compare.py": "ec4a0aa2f45a766ba8d70be040546af37d4d2708af8e855027e887f01cfadd40",
     "scripts/owned_restore_sources.py": "ded81ed9795f492b5edff54232fc57b440ede676f9c8f2f24c26917f70e1b142",
     "scripts/reference.cfg": "85131afe85a23b2653aa976ee0457c31f5ad3d2665a05f2868a7cb300ca26a4b",
-    "scripts/script_vm_provenance.py": "9f954a29ccd8bb0adf01c047be2bf4095faee6fee433692a9367bff1fab7b776",
+    "scripts/script_vm_provenance.py": "e4a45b9a28e602e2615d9d3a2586562e079c3cf2d3dfb3f1d1352707bab477fd",
     "scripts/setup-snapshot-reference.sh": "14d63d9e1279bd03362d92bc1109198d7db2b0d9a90eb43b162b38483f5d06d1",
     "scripts/tree-terrain/control-vectors.json": "1a62b08927de7645bd51fb3ebb7022ddf596c7eca9ae3fecf2903aaf738ed625",
     "scripts/tree-terrain/recipes.json": "e2e52037478f36f3373ba16aaf5c216e3556117b9b2fbfb8d56599c8ad823802",

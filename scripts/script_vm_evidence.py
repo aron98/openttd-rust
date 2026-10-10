@@ -215,11 +215,11 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
 
     validate_branches(directory)
     if read_json(directory / "summary.json") != {
-        "cases": 7642,
-        "fixtures": 835,
+        "cases": 7777,
+        "fixtures": 850,
         "credits": 9,
-        "tests": 52,
-        "strict_comparisons": 7570,
+        "tests": 55,
+        "strict_comparisons": 7705,
         "undefined_input_rejections": 72,
         "controls": 25,
         "frame_tests": 9,

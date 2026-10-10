@@ -122,7 +122,7 @@ classified. Supplementary and malformed encodings retain native decoder failure.
 CI binds the eight affected existing fixtures to exact source bytes and an
 `undefined_native_input` stage: 72 credit cases independently require the typed
 Rust rejection while retaining raw original argv/status/stdout/stderr, including
-native success or abnormal termination. The other 7570 observations remain
+native success or abnormal termination. The other 7705 observations remain
 strict comparisons. An unclassified typed rejection fails admission. The actual
 Linux U+D800 success and macOS rejection remain divergent observations; neither
 is normalized, rewritten or claimed as portable semantics.
@@ -132,3 +132,15 @@ preserve ordinary BMP Unicode/surrogate payload and guard only reached ctype
 calls: ReadString 306/310 classifies hex-escape lookahead, even after four hex
 digits because `isxdigit` precedes the length check. Ordinary string contents
 and comments must never be rejected solely for containing codepoints above 255.
+
+
+Octal continuation is a distinct defined path: `scisodigit(char)` narrows to an
+eight-bit character and compares `0`..`7`; it is not a byte ctype call. Once an
+ASCII second digit has selected octal, a decoded BMP value whose low byte is
+0x30..0x37 continues that loop. Native APPEND_CHAR retains the full UTF-8 encoding;
+ParseInteger then refuses trailing nonnumeric bytes and its value_or(0) yields
+integer zero. Encoded native surrogate values behave the same way. Rust preserves
+this path, including later malformed-byte errors, invalid ASCII octal digits and
+NUL termination. The subsequent `isdigit` lookahead remains guarded. The initial
+zero-prefix `toupper` is still an undefined argument for decoded values above255;
+an observed native acceptance there does not make it a defined octal input.

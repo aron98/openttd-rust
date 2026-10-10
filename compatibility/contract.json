@@ -2995,7 +2995,7 @@
     {
       "id": "scalar-vm-driver",
       "path": "scripts/check-script-vm.py",
-      "sha256": "7574eaee12488ca157f426c9af2e9f40d33fbbcab6ffe03c4ac083eed24df445",
+      "sha256": "79f1c66d64b127b52edabaee61fadf1049df79fcf1078f408f78b2ac9b77f3a2",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3004,7 +3004,7 @@
     {
       "id": "scalar-vm-validator",
       "path": "scripts/script_vm_evidence.py",
-      "sha256": "e579a68275c4866f4f1e9a17d0a0c69abf85804e5b0b33571960cf412edff606",
+      "sha256": "18058e0b389b539b582a3b86e1c90792c94b3d37b19b74ccfac4edbaf11fd933",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3013,7 +3013,7 @@
     {
       "id": "scalar-vm-provenance",
       "path": "scripts/script_vm_provenance.py",
-      "sha256": "9f954a29ccd8bb0adf01c047be2bf4095faee6fee433692a9367bff1fab7b776",
+      "sha256": "e4a45b9a28e602e2615d9d3a2586562e079c3cf2d3dfb3f1d1352707bab477fd",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3022,7 +3022,7 @@
     {
       "id": "scalar-vm-manifest",
       "path": "scripts/script-vm-manifest.json",
-      "sha256": "10a048511f604a25c433ddbb0fd2c4d6897b98f7c492df75ceeb65118abaf2c1",
+      "sha256": "7cb6b1e4251f875abcd56c56db069e84b2a6e6094df6dea804e3ff465ab12d81",
       "kind": "recipe",
       "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "7279bc2873ec5b73d7a7710c8a62ea3fb4b09def2b7bee79360a02d3d2d8616f",
+      "sha256": "03ca13e4e75d4682af1a5d56f699cb75c7b77a807cc9c235d371c7d496d0cf2c",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "03cd058b8369998f9005c11848a8bab66ed859d501a1f5ea6e1dc540d061725a",
+      "sha256": "de40afdaee71d2bc0617d4324de9484f069ea07e971d440453d2e9d05b1da5a1",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "9713b6dee235fd5bb333d0745646c97a4cdd789253ac52e84fbbff69938523d7",
+      "sha256": "aa378bf4d349c6abb1e683723414dc24b06336d09f5b377e416d410089217dec",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "23c1454acab9c96674d83730dd1e08f7d81e7cdeffba0577c4976fce06083096",
+      "sha256": "fbb3862b25dec5671072853f3a0739426ea7e0e27d7beabcccb6ef14b81be23d",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "2d0e444eda50d3a7e71ee121941fa47d678f680f68fc89c2731023ce0ed9b46f",
+      "sha256": "5ded6c1611e4f6764e766b8c9b5950692e2d9b60e30f262c5bc704286870ca8a",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "8b54f0130c44c882adc321a2235f840c56391f4f9962d84208979e2a776dde0a",
+      "sha256": "0447b72340d9f2a14d64d9e254d6a1a0b25237ee8dc2e4b94553890057024e99",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "8b86d89918e41bede050523989883c4560b86f8995fc9af50ff2adf6ff02303b",
+      "sha256": "ade4609d3c569e517468fd86e7dc5403fc7fb64e0a6e332b73f44208fc737f68",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -4039,7 +4039,7 @@
     {
       "id": "tree-terrain-scripts-tree-terrain-layout-json",
       "path": "scripts/tree-terrain/layout.json",
-      "sha256": "f9170b89fdf111f99aac074b6aabea2c97410e081936363fef83d046df3f86f2",
+      "sha256": "ddc7873c2b722d15b00f89ae50e0e4629be2cf87c7a0c78b48ec4dc24be302a8",
       "kind": "recipe",
       "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
@@ -4183,7 +4183,7 @@
     {
       "id": "shared-restore-layout",
       "path": "scripts/shared-restore-layout.json",
-      "sha256": "04674d9c913e5e5f098d1412712be5ece949d69222322f50a7bae155ee17d994",
+      "sha256": "a08a6894bc88f299d6dd6759481a560b38cf05d730cc0b988b8c6e7412a3eb33",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
       "save_version": null,
@@ -10421,7 +10421,7 @@
         "zero-tests/stdout.log",
         "native/variant.txt"
       ],
-      "success_text": "PASS scalar VM 7570 comparisons; 72 undefined-input rejections",
+      "success_text": "PASS scalar VM 7705 comparisons; 72 undefined-input rejections",
       "scopes": [
         "rust_behavior"
       ],
@@ -15092,8 +15092,8 @@
       "id": "script.scalar-vm",
       "status": "implemented",
       "scope": "rust_behavior",
-      "domain": "Scalar locals/assignment/comma/ternary/bitwise/shifts/compound updates/if/while/for/do/break/continue /switch/comments/lazy compilebuffer byte decoding and26/62 bundled Squirrel opcodes; i64/f32/GC-enabled variant. Shifts cover everyi64 value for counts0..63; undefined counts return UnsupportedShiftCount. Objects/functions/host APIs/AI/GS/saved-script integration and signed arithmetic overflow remain unfinished. Reached decoded ctype arguments 256..65535 are explicitly rejected with UndefinedNativeCharacter (codepoint/context/byte offset); this is undefined-native-domain policy, not compile-error parity.",
-      "expected": "Fresh pinned native compiler/VM versus actual Cargo example: 835 fixtures x 9 credits plus 127 targeted budget probes = 7642 cases, consisting of 7570 strict comparisons and 72 independently asserted undefined-native-input rejections. The latter bind eight exact source bodies to reached decoded ctype arguments above 255; native argv/status/stdout/stderr remain raw, and no native success, failure or signal is claimed as parity. 52 exact integration tests, 9 private register tests bound to 9 fresh native captures, and 25 corruption controls. Defined byte-domain input, Unicode comments, lazy NUL/decoder and earlier-error behavior remain strict. Manifest pins all source/native blobs and complete raw evidence; archives/executables verified. Strings are a separate pending candidate.",
+      "domain": "Scalar locals/assignment/comma/ternary/bitwise/shifts/compound updates/if/while/for/do/break/continue /switch/comments/lazy compilebuffer byte decoding and26/62 bundled Squirrel opcodes; i64/f32/GC-enabled variant. Shifts cover everyi64 value for counts0..63; undefined counts return UnsupportedShiftCount. Objects/functions/host APIs/AI/GS/saved-script integration and signed arithmetic overflow remain unfinished. Reached decoded ctype arguments 256..65535 are explicitly rejected with UndefinedNativeCharacter (codepoint/context/byte offset); this is undefined-native-domain policy, not compile-error parity. Octal continuation narrows through scisodigit(char), preserving defined low-byte0x30..0x37 continuations; only reached byte ctype calls trigger the explicit rejection policy.",
+      "expected": "850 fixtures x9 credits plus127 targeted budgets =7777 cases:7705 strict comparisons and72 independently asserted undefined-native-input rejections. The original eight exact Token-policy bodies and raw native observations remain unchanged. Fifteen new defined octal fixtures cover U+0130..0137,0230,D830,FF30,FF37, later invalid octal digit, malformed bytes and NUL suffix.55 integration tests plus9 private/native frame tests,25 corruption controls. The initial-zero toupper and post-octal isdigit boundaries remain guarded; narrowed octal continuation itself is not ctype. Source/input/executable/archive memberships remain strict. Full fresh profiles are required after root source/metadata integration.",
       "driver": "script-vm",
       "assets": [
         "scalar-vm-driver",

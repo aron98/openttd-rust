@@ -23,6 +23,7 @@ fn invalid_sale_candidate_rolls_back_refund_and_freed_identity() -> Result {
         ),
     ];
     let result = RoadVehicleContext {
+        orders: &mut runtime.orders,
         serializer_cargo_paid_for: serializer,
         content: &runtime.content,
         allocation: &mut runtime.allocation,

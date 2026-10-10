@@ -206,7 +206,7 @@ fn backup_preserves_signed_time_bits_and_selective_flags() -> Result {
     Ok(())
 }
 
-fn shared_fixture() -> Result<(SimulationRuntime, u32, u16, u32, u32)> {
+pub(super) fn shared_fixture() -> Result<(SimulationRuntime, u32, u16, u32, u32)> {
     // Given two fresh vehicles sharing a timed and nearest-depot scheduled list.
     let (mut runtime, tile) = fixture()?;
     let mut ids = Vec::new();
@@ -552,6 +552,69 @@ fn loaded_nonzero_slot_retains_native_zero_index_and_preflights_deletion() -> Re
     assert_eq!(
         runtime.order_state_json()?.pointer("/backups/1/id"),
         Some(&serde_json::json!(0))
+    );
+    Ok(())
+}
+
+#[test]
+fn ordered_sale_detaches_head_then_frees_last_list_without_resetting_pool() -> Result {
+    let (mut runtime, tile, _, first, second) = shared_fixture()?;
+    let before = runtime.order_list_pool();
+    let list = runtime
+        .world()
+        .tables()
+        .get(b"ORDL")
+        .ok_or("ORDL")?
+        .records()
+        .get(&60000)
+        .ok_or("list")?
+        .clone();
+    let sell = |vehicle| crate::CommandRequest {
+        company: 0,
+        mode: crate::CommandMode::Post,
+        command: crate::Command::SellVehicle {
+            location: tile,
+            vehicle,
+            sell_chain: false,
+            backup_order: false,
+            client_id: 0,
+        },
+    };
+    assert!(runtime.execute_command(&sell(first))?.posted);
+    assert_eq!(runtime.order_list_pool(), before);
+    assert_eq!(
+        runtime
+            .world()
+            .derived()
+            .order_lists
+            .iter()
+            .find(|list| list.id == 60000)
+            .ok_or("list cache")?
+            .vehicles,
+        vec![second]
+    );
+    assert_eq!(
+        runtime
+            .world()
+            .tables()
+            .get(b"ORDL")
+            .ok_or("ORDL")?
+            .records()
+            .get(&60000),
+        Some(&list)
+    );
+    assert!(runtime.execute_command(&sell(second))?.posted);
+    let after = runtime.order_list_pool();
+    assert_eq!(after.items, before.items - 1);
+    assert_eq!(after.first_unused, before.first_unused);
+    assert_eq!(after.slots, before.slots);
+    assert!(
+        !runtime
+            .world()
+            .derived()
+            .order_lists
+            .iter()
+            .any(|list| list.id == 60000)
     );
     Ok(())
 }

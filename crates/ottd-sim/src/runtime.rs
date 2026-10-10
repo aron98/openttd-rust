@@ -7,6 +7,8 @@ mod depot_removal;
 #[cfg(test)]
 mod depot_removal_native;
 mod group_counts;
+#[cfg(test)]
+mod ordered_sale_native;
 pub mod pools;
 #[cfg(test)]
 mod purchase_native;
@@ -201,6 +203,7 @@ impl DepotContext<'_> {
     }
 }
 pub(crate) struct RoadVehicleContext<'a> {
+    orders: &'a mut order_state::OrderState,
     pub serializer_cargo_paid_for: u16,
     pub content: &'a ContentCatalog,
     pub allocation: &'a mut VehicleAllocation,
@@ -273,6 +276,7 @@ impl SimulationRuntime {
             }
             crate::Command::BuildVehicle { .. } | crate::Command::SellVehicle { .. } => {
                 RoadVehicleContext {
+                    orders: &mut self.orders,
                     serializer_cargo_paid_for: self.serializer_cargo_paid_for,
                     content: &self.content,
                     allocation: &mut self.allocation,

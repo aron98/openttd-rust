@@ -74,6 +74,7 @@ fn actual_candidate_cache_failure_rolls_back_world_rng_units_and_pool() -> Resul
         crate::world_access::field_edit(*b"DATE", 0, "random_state[0]", WireValue::Unsigned(987)),
     ];
     let result = RoadVehicleContext {
+        orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,
         allocation: &mut runtime.allocation,

@@ -1,6 +1,6 @@
-//! Private native command proof dispatcher, with setup performed by original APIs.
+//! Strict loaded-input ordered-sale differential dispatcher.
 use super::*;
-use crate::CommandRequest;
+use crate::{Command, CommandRequest};
 use ottd_save::{Compression, Savegame};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -19,52 +19,17 @@ struct Plan {
 #[serde(tag = "op", rename_all = "snake_case", deny_unknown_fields)]
 enum Action {
     Command { request: CommandRequest },
-    Backup { vehicle: u32, user: u32 },
     Save { label: String },
     Snapshot { label: String },
 }
-pub(super) fn observe(runtime: &SimulationRuntime) -> Result<Value> {
-    let mut units = Vec::new();
-    for owner in runtime
-        .world
-        .tables()
-        .get(b"PLYR")
-        .ok_or("PLYR")?
-        .records()
-        .keys()
-    {
-        let owner = u8::try_from(*owner)?;
-        units.push(json!({"company":owner,"next":runtime.allocation.road_units.get(&owner).map_or(1,pools::UnitNumberAllocator::next_id),"count":road_company_count(&runtime.world,owner)?}));
-    }
-    let road: BTreeMap<_, _> = runtime
-        .depot
-        .road
-        .iter()
-        .map(|(id, counts)| (id.to_string(), counts.as_slice()))
-        .collect();
-    let tiles: Vec<_> = runtime
-        .world
-        .map()
-        .tiles()
-        .iter()
-        .map(|t| {
-            json!([
-                t.tile_type(),
-                t.height(),
-                t.m1(),
-                t.m2(),
-                t.m3(),
-                t.m4(),
-                t.m5(),
-                t.m6(),
-                t.m7(),
-                t.m8()
-            ])
-        })
-        .collect();
-    Ok(
-        json!({"orders":runtime.order_state_json()?,"depot":{"pool":runtime.depot.pool.snapshot(),"road":road},"vehicles":{"road":runtime.road.values().collect::<Vec<_>>(),"pool":runtime.allocation.pool.snapshot(),"units":units},"tiles":tiles}),
-    )
+fn observe(runtime: &SimulationRuntime) -> Result<Value> {
+    let mut result = super::depot_removal_native::observe(runtime)?;
+    let vehicles = result.get("vehicles").ok_or("vehicle observation")?.clone();
+    result.as_object_mut().ok_or("observation")?.insert(
+        "sale".into(),
+        json!({"vehicle":vehicles,"groups":runtime.road_group_counts()?}),
+    );
+    Ok(result)
 }
 fn valid_label(label: &str) -> bool {
     !label.is_empty()
@@ -73,11 +38,11 @@ fn valid_label(label: &str) -> bool {
             .all(|v| v.is_ascii_alphanumeric() || matches!(v, b'-' | b'_'))
 }
 #[test]
-#[ignore = "DEPOT_REMOVAL_INPUT/ACTIONS/OUTPUT; actual original command differential"]
-fn original_depot_removal_case() -> Result {
-    let input = PathBuf::from(std::env::var("DEPOT_REMOVAL_INPUT")?);
-    let descriptor = PathBuf::from(std::env::var("DEPOT_REMOVAL_ACTIONS")?);
-    let output = PathBuf::from(std::env::var("DEPOT_REMOVAL_OUTPUT")?);
+#[ignore = "ORDERED_SALE_INPUT/ACTIONS/OUTPUT; actual original command differential"]
+fn original_ordered_sale_case() -> Result {
+    let input = PathBuf::from(std::env::var("ORDERED_SALE_INPUT")?);
+    let descriptor = PathBuf::from(std::env::var("ORDERED_SALE_ACTIONS")?);
+    let output = PathBuf::from(std::env::var("ORDERED_SALE_OUTPUT")?);
     let bytes = std::fs::read(descriptor)?;
     if bytes.len() > 262_144 {
         return Err("descriptor too large".into());
@@ -104,10 +69,17 @@ fn original_depot_removal_case() -> Result {
     for (index, action) in plan.actions.iter().enumerate() {
         let before = observe(&runtime)?;
         let result = match action {
-            Action::Command { request } => json!({"receipt":runtime.execute_command(request)?}),
-            Action::Backup { vehicle, user } => {
-                runtime.backup_orders(VehicleId::new(*vehicle), *user)?;
-                Value::Null
+            Action::Command { request } => {
+                if !matches!(
+                    request.command,
+                    Command::SellVehicle {
+                        backup_order: false,
+                        ..
+                    }
+                ) {
+                    return Err("ordered-sale dispatcher command boundary".into());
+                }
+                json!({"receipt":runtime.execute_command(request)?})
             }
             Action::Snapshot { label } => {
                 if !valid_label(label) {
@@ -139,6 +111,6 @@ fn original_depot_removal_case() -> Result {
             &json!({"schema_version":1,"case":plan.case,"initial":initial,"actions":actions,"final":observe(&runtime)?}),
         )?,
     )?;
-    println!("PASS depot removal: {} actions", plan.actions.len());
+    println!("PASS ordered sale: {} actions", plan.actions.len());
     Ok(())
 }

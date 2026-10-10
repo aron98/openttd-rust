@@ -10,6 +10,7 @@ pub(super) struct Args {
     pub location: u32,
     pub vehicle: u32,
     pub backup_order: bool,
+    pub client_id: u32,
 }
 fn receipt(test: CommandCost, result: CommandCost, executed: bool) -> CommandReceipt {
     CommandReceipt {
@@ -33,6 +34,7 @@ pub(super) fn run(
         company,
         VehicleId::new(args.vehicle),
         args.backup_order,
+        args.client_id,
     )?;
     if !test.success || estimate {
         return Ok(receipt(test.clone(), test, false));

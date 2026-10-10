@@ -11,6 +11,7 @@ impl RoadVehicleContext<'_> {
         company: u8,
         id: VehicleId,
         backup_order: bool,
+        _client_id: u32,
     ) -> Result<CommandCost, CommandError> {
         if !world
             .tables()
@@ -66,7 +67,9 @@ impl RoadVehicleContext<'_> {
         if !self.road.contains_key(&id) {
             return Err(RuntimeError::Invalid("missing sale cache").into());
         }
+        let detach = self.orders.plan_detach(world, id)?;
         let mut transaction = world.transaction();
+        let pending_orders = detach.stage(&mut transaction)?;
         for edit in edits {
             transaction.apply(edit)?;
         }
@@ -79,7 +82,9 @@ impl RoadVehicleContext<'_> {
         {
             return Err(RuntimeError::Invalid("sale candidate still contains vehicle").into());
         }
+        let orders = pending_orders.validate(&prepared)?;
         prepared.commit();
+        orders.publish(self.orders);
         self.road.remove(&id);
         *self.allocation = allocation;
         Ok(())
@@ -111,11 +116,16 @@ fn admit_destructor(
             "sale group profit or renewal lifecycle",
         ));
     }
-    if vehicle.common_number("orders")? != 0
-        || vehicle.common_number("next_shared")? != 0
-        || vehicle.common_number("current_order.type")? != 0
+    if vehicle.common_number("current_order.type")? & 15 == 3 {
+        return Err(CommandError::Unsupported("sale loading lifecycle"));
+    }
+    if world
+        .derived()
+        .cargo_payments
+        .iter()
+        .any(|payment| payment.vehicle == vehicle.id().raw())
     {
-        return Err(CommandError::Unsupported("sale order lifecycle"));
+        return Err(CommandError::Unsupported("sale cargo payment lifecycle"));
     }
     if vehicle.common_number("last_station_visited")? != 65535 {
         return Err(CommandError::Unsupported("sale station lifecycle"));

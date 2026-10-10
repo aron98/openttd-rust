@@ -1978,7 +1978,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-pipeline-rs",
       "path": "crates/ottd-sim/src/commands/pipeline.rs",
-      "sha256": "fb9e28d67abf193d412787298e014794772e12bdfa4cca065afe55f7a8a86f1a",
+      "sha256": "42b97a7f2a8b7dd80e10cdfb91cddbbd4a5966dde056a422f910e5f83a146639",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2005,7 +2005,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-rs",
       "path": "crates/ottd-sim/src/runtime.rs",
-      "sha256": "2d24d938d8f763bd00e83f30e5efdfc2e36f596f8bf96440e2e4e512110cd96a",
+      "sha256": "52f7deec13ebc44ba8bd0c7a368f1cfbc9aaa957ba78fb14a1270782689f4f6a",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2239,7 +2239,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs",
       "path": "crates/ottd-sim/src/runtime/purchase_tests/publication.rs",
-      "sha256": "5a3773c97339d83e5c4fa5063f274191224ea62d6d28a32d8d3b1d25ac09aa61",
+      "sha256": "7341888c628d1568edb9cfea20a8de44a4ee357d04b6f4a3deca748c57098b19",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -2617,7 +2617,7 @@
     {
       "id": "sale-crates-ottd-sim-src-commands-vehicle-sale-rs",
       "path": "crates/ottd-sim/src/commands/vehicle_sale.rs",
-      "sha256": "70ea44cd6e4c2568ce1fc7672acdc8a9d893a5d8d9fc0518b5f5a32b8b8773de",
+      "sha256": "ea98222f53f02faa36e909e87c48b90aab53bc87565115bf8167c1b946f1feed",
       "kind": "recipe",
       "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
       "save_version": null,
@@ -2635,7 +2635,7 @@
     {
       "id": "sale-crates-ottd-sim-src-runtime-road-sale-rs",
       "path": "crates/ottd-sim/src/runtime/road_sale.rs",
-      "sha256": "6f1f6a516f76f1d6444020f123f0400e38ac60de4f38c501f5d9a42db4b380a1",
+      "sha256": "999ae9591e610f135059647b4b0981137ec4f663b49bf9af6bdc7626350ac38a",
       "kind": "recipe",
       "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
       "save_version": null,
@@ -2662,7 +2662,7 @@
     {
       "id": "sale-crates-ottd-sim-src-runtime-sale-tests-publication-rs",
       "path": "crates/ottd-sim/src/runtime/sale_tests/publication.rs",
-      "sha256": "1ee47264cddcf0533b087408ba657b6ef7e8a36c5be6d78b3d5f19aea88bd50b",
+      "sha256": "1524034d00264f6478e673c0f48f482edc06207a081d9dba60591bd859810c04",
       "kind": "recipe",
       "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "a59eaabbd3c639a893e10fbdb28b940019c6a40528c41b0dc6e0e63d745f3fc8",
+      "sha256": "e41c161421be48273fea46db7c6f758fb6559700d95a89f72aaba4635060f758",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "62152353a5e0607c8f3143dceeda04dfc91a0b0f48d06b473ac313d3d5cac69f",
+      "sha256": "e8af6c8249d0c624a385ba8afb86536e09e58e43712d224035e87e4b0e39ac02",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3430,6 +3430,42 @@
       "sha256": "07ad81932e54fcea00d8c3d21a2d9c5e70a44da909e689211654237f683d719e",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "ordered-sale-driver",
+      "path": "scripts/check-ordered-sale.py",
+      "sha256": "2c198b7ed77626ca5e599da2efa3a21d12e005b8ad9db54bd11bf3a8f997c73e",
+      "kind": "recipe",
+      "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "ordered-sale-evidence",
+      "path": "scripts/ordered_sale_evidence.py",
+      "sha256": "ca740761c570263a2f0d951e3521a6c1741d6df3a8ef14403268f37e2ab96f9c",
+      "kind": "recipe",
+      "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "ordered-sale-layout",
+      "path": "scripts/ordered-sale-layout.json",
+      "sha256": "1e25b075aca22b49419da7c5758f56cee8a23770df94817e20c86bf55dbabdaf",
+      "kind": "recipe",
+      "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "ordered-sale-tests",
+      "path": "scripts/tests/ordered_sale_evidence_test.py",
+      "sha256": "5a0fa071394abed01c3c9a3d925a5df73832bc656fff4f621dc0977c83d4cd59",
+      "kind": "recipe",
+      "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
       "profile": null
     }
@@ -9851,6 +9887,35 @@
         "rust_behavior"
       ],
       "timeout_seconds": 1200
+    },
+    {
+      "id": "ordered-sale",
+      "argv": [
+        "python3",
+        "scripts/check-ordered-sale.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/zero-rejected.json"
+      ],
+      "success_text": "PASS ordered-sale CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 600
     }
   ],
   "scenarios": [
@@ -14372,6 +14437,44 @@
         "scripts/tests/depot_removal_evidence_test.py",
         "crates/ottd-sim/src/runtime/depot_removal.rs",
         "crates/ottd-sim/src/commands/road_depot/remove.rs"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "layout.json",
+        "binaries.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "bin/runner",
+        "bin/cli",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "controls/zero-rejected.json"
+      ]
+    },
+    {
+      "id": "runtime.ordered-road-sale",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Stopped vanilla single-part road sale with owned/shared orders, backup_order=false and empty BKOR. Canonical shared head/middle/tail unlink, sole-list free and atomic allocator/refund publication. Existing age/profit/group/station/cargo guards retained; loading/cargo-payment lifecycle explicitly unsupported.",
+      "expected": "12 actual original/Rust loaded-input pairs,28 actions,80 before/after snapshots,14 strict full saved checkpoints. Shared survivor payload/timing and engine groups retained. Separate original-API ORDL reuse probe; no InsertOrder command claim. Actual rollback/boundary tests,5 semantic mutations,zero/subset/altered-native/mixed-observer rejection. No BackupRestore, backup-enabled sale, movement or fresh-duration comparison exception. Same-tile live-backup removal and above-ground bridge/wormhole witness remain unproven.",
+      "driver": "ordered-sale",
+      "assets": [
+        "ordered-sale-driver",
+        "ordered-sale-evidence",
+        "ordered-sale-layout",
+        "ordered-sale-tests"
+      ],
+      "source_refs": [
+        "scripts/check-ordered-sale.py",
+        "scripts/ordered_sale_evidence.py",
+        "scripts/ordered-sale-layout.json",
+        "scripts/tests/ordered_sale_evidence_test.py",
+        "crates/ottd-sim/src/runtime/order_state/detach.rs",
+        "crates/ottd-sim/src/runtime/road_sale.rs"
       ],
       "evidence": [
         "summary.txt",

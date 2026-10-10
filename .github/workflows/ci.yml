@@ -58,6 +58,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/tests/depot_removal_evidence_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/depot_removal*.py scripts/check-depot-removal.py scripts/tests/depot_removal_evidence_test.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/depot_removal*.py scripts/check-depot-removal.py scripts/tests/depot_removal_evidence_test.py
+      - name: Check ordered sale evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/ordered_sale_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/ordered_sale*.py scripts/check-ordered-sale.py scripts/tests/ordered_sale_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/ordered_sale*.py scripts/check-ordered-sale.py scripts/tests/ordered_sale_evidence_test.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -118,6 +123,8 @@ jobs:
             .artifacts/road-slope-invocation-*/
             .artifacts/order-state-*/
             .artifacts/depot-removal-*/
+            .artifacts/ordered-sale-*/
+            !.artifacts/ordered-sale-target-*/**
             .artifacts/grf-language-*/
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'

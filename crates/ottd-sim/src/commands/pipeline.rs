@@ -194,7 +194,7 @@ fn execute_admitted(
         vehicle,
         sell_chain: _,
         backup_order,
-        client_id: _,
+        client_id,
     } = request.command
     {
         return super::vehicle_sale::run(
@@ -204,6 +204,7 @@ fn execute_admitted(
                 location,
                 vehicle,
                 backup_order,
+                client_id,
             },
             estimate,
             match context {

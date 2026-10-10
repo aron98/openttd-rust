@@ -4,9 +4,12 @@ mod backup;
 use backup::BackupAllocation;
 pub use backup::BackupReset;
 mod depot;
+mod detach;
 #[cfg(test)]
 mod native;
 mod observation;
+#[cfg(test)]
+mod sale_tests;
 #[cfg(test)]
 mod tests;
 mod view;

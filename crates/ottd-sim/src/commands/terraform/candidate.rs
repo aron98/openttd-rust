@@ -2,6 +2,42 @@ use super::super::terrain_read::TerrainRead;
 use super::{CommandError, Failure, native};
 use std::collections::{BTreeMap, BTreeSet};
 
+pub(super) fn prepare<'a>(
+    world: TerrainRead<'a>,
+    args: super::Args,
+    prices: &crate::content::Prices,
+) -> Result<(Candidate<'a>, i64), Failure> {
+    let width = world.size().width();
+    let count = world.size().count()?;
+    let mut state = Candidate {
+        world,
+        heights: BTreeMap::new(),
+        dirty: BTreeSet::new(),
+        freeform: world.unsigned(*b"PATS", 0, "construction.freeform_edges")? != 0,
+        maximum: world.unsigned(*b"PATS", 0, "construction.map_height_limit")?,
+        price: prices.get(crate::content::Price::Terraform),
+    };
+    let mut cost = 0_i64;
+    for (bit, offset) in [(1, 1), (2, width.saturating_add(1)), (4, width), (8, 0)] {
+        if args.mask & bit == 0 {
+            continue;
+        }
+        let Some(corner) = args.tile.checked_add(offset).filter(|n| *n < count) else {
+            continue;
+        };
+        let height = i16::from(world.tile(corner)?.height());
+        cost = cost.saturating_add(state.change(
+            corner,
+            if args.up {
+                height.saturating_add(1)
+            } else {
+                height.saturating_sub(1)
+            },
+        )?);
+    }
+    Ok((state, cost))
+}
+
 pub(super) struct Candidate<'a> {
     pub(super) world: TerrainRead<'a>,
     pub(super) heights: BTreeMap<u32, u8>,

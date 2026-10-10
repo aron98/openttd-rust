@@ -34,6 +34,12 @@ inline Json Execute(const Json &request)
 {
     const std::string mode = request.at("mode");
     Require(mode == "post" || mode == "estimate", "invalid command request mode");
+    const bool observe_trees = TreeRatingEnabled();
+    if (observe_trees) {
+        const std::string kind = request.at("command").at("kind");
+        Require(kind == "landscape_clear" || kind == "terraform_land" || kind == "level_land", "unsupported tree rating observer command");
+        Require(!_networking, "tree rating observer requires offline replay");
+    }
     Json result = {{"posted", false}, {"gate", nullptr}, {"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
     if (request.at("command").at("kind") == "terraform_land" || request.at("command").at("kind") == "level_land" || request.at("command").at("kind") == "build_vehicle") result["returns"] = {{"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
     const CompanyID company(request.at("company").get<uint8_t>());
@@ -44,9 +50,12 @@ inline Json Execute(const Json &request)
     if (std::getenv("OTTD_ROAD_SALE_OBSERVE") != nullptr && (request.at("command").at("kind") == "build_vehicle" || request.at("command").at("kind") == "sell_vehicle")) metadata["sale_before"] = ReferenceRuntimeRoad::SaleSnapshot();
     if (request.at("command").at("kind") == "build_vehicle") metadata["purchase_before"] = ReferenceRuntimeRoad::Live();
     if (std::getenv("OTTD_DEPOT_LIVE") != nullptr) metadata["depot_before"] = {{"depot", ReferenceDepotRuntime::Snapshot()}, {"vehicles", ReferenceRuntimeRoad::Live()}};
-    receipt = &result;
-    result["posted"] = Post(request.at("command"));
-    receipt = nullptr;
+    {
+        AutoRestoreBackup restore_receipt(receipt, &result);
+        TreeRatingCapture tree_capture(observe_trees);
+        result["posted"] = Post(request.at("command"));
+        if (observe_trees) metadata["tree_rating"] = tree_capture.Finish();
+    }
     return result;
 }
 }

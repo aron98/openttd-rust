@@ -14,6 +14,7 @@
 #include "../linkgraph/linkgraphjob.h"
 #include "../tunnelbridge_cmd.h"
 #include "../bridge_map.h"
+#include "reference_tree_fixture.hpp"
 
 extern TimeoutTimer<TimerGameTick> _new_competitor_timeout;
 extern uint16_t _disaster_delay;
@@ -78,6 +79,7 @@ inline void PrepareTerraform(const Json &setup)
 }
 inline void PrepareFixture(const Json &setup)
 {
+    TreeRatingEnabled();
     const std::string profile = setup.at("profile");
     Require(profile == "clear" || profile == "populated", "unknown native fixture profile");
     if (profile == "populated") {
@@ -181,6 +183,7 @@ inline void PrepareFixture(const Json &setup)
     _local_company = CompanyID(0);
     _current_company = CompanyID(0);
     if (setup.contains("terraform")) PrepareTerraform(setup.at("terraform"));
+    if (setup.contains("trees")) PrepareTrees(setup.at("trees"));
 }
 }
 #endif

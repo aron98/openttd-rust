@@ -2,8 +2,10 @@ from pathlib import Path
 
 import pytest
 
+from scripts.grf_control_evidence import sequence, text
+from scripts.language_ci_compare import mapping
 from scripts.owned_restore_sources import compiled_inputs, verify_compiled
-from scripts.world_check_support import WorldCheckError
+from scripts.world_check_support import WorldCheckError, at, read_json
 
 
 def fixture(root: Path) -> None:
@@ -68,3 +70,16 @@ def test_uncompiled_workspace_manifest_still_pinned(tmp_path: Path) -> None:
     other.mkdir()
     _ = (other / "Cargo.toml").write_text("[package]\n")
     assert "crates/ottd-script/Cargo.toml" in compiled_inputs(tmp_path)
+
+
+def test_repository_wrong_source_copy_roster_matches_snapshot() -> None:
+    root = Path(__file__).resolve().parents[1]
+    layout = read_json(root / "scripts/owned-restore-layout.json")
+    prefix = "admission/wrong-source/"
+    expected = sorted(prefix + name for name in mapping(at(layout, ("sources",))))
+    copied = sorted(
+        text(path)
+        for path in sequence(at(layout, ("control_paths",)))
+        if text(path).startswith(prefix)
+    )
+    assert copied == expected

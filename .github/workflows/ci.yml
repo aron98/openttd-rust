@@ -88,6 +88,11 @@ jobs:
           uv run --with pytest python -m pytest -q scripts/owned_restore_sources_test.py scripts/owned_restore_capacity_test.py scripts/owned_restore_admission_test.py scripts/owned_restore_suffix_test.py
           uvx ruff check --config scripts/grf-control-ruff.toml scripts/owned_restore_*.py scripts/check-owned-restore.py
           uv run --with basedpyright --with pytest basedpyright --warnings scripts/owned_restore_*.py scripts/check-owned-restore.py
+      - name: Check tree and terrain evidence admission
+        run: |
+          uv run --with pytest python -m pytest -q scripts/tests/tree_ci_evidence_test.py
+          uvx ruff check --config scripts/grf-control-ruff.toml scripts/tree_ci_*.py scripts/check-tree-terrain-ci.py scripts/tests/tree_ci_evidence_test.py
+          uv run --with basedpyright --with pytest basedpyright --warnings scripts/tree_ci_*.py scripts/check-tree-terrain-ci.py scripts/tests/tree_ci_evidence_test.py
       - name: Check evidence transport and failure diagnostics
         run: |
           uv run --with pytest python -m pytest -q scripts/tests/evidence_transport_test.py
@@ -159,6 +164,8 @@ jobs:
             .artifacts/grf-language-*/
             .artifacts/grf-strings-*/
             .artifacts/grf-currency-*/
+            .artifacts/tree-terrain-*/
+            !.artifacts/tree-terrain-target-*/**
       - name: Report native compiler-cache statistics
         if: always() && steps.reference-cache.outcome == 'success'
         run: ccache --show-stats --verbose

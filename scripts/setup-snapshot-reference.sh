@@ -81,11 +81,16 @@ if git -C "$source_dir" apply --check "$root/reference/grf_currency.patch" 2>/de
 else
     git -C "$source_dir" apply --reverse --check "$root/reference/grf_currency.patch"
 fi
+if git -C "$source_dir" apply --check "$root/reference/tree_rating.patch" 2>/dev/null; then
+    git -C "$source_dir" apply "$root/reference/tree_rating.patch"
+else
+    git -C "$source_dir" apply --reverse --check "$root/reference/tree_rating.patch"
+fi
 verification_index="$(mktemp "$root/.reference/snapshot-index.XXXXXX")"
 rm "$verification_index"
 trap 'rm -f "$verification_index"' EXIT
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" read-tree HEAD
-GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch" "$root/reference/grf_strings.patch" "$root/reference/grf_currency.patch"
+GIT_INDEX_FILE="$verification_index" git -C "$source_dir" apply --cached "$root/reference/snapshot.patch" "$root/reference/gameplay.patch" "$root/reference/world.patch" "$root/reference/replay.patch" "$root/reference/grf_load_control.patch" "$root/reference/grf_load_context.patch" "$root/reference/road_slope.patch" "$root/reference/grf_safety.patch" "$root/reference/order_state.patch" "$root/reference/order_fixture.patch" "$root/reference/order_network.patch" "$root/reference/grf_language.patch" "$root/reference/grf_strings.patch" "$root/reference/grf_currency.patch" "$root/reference/tree_rating.patch"
 GIT_INDEX_FILE="$verification_index" git -C "$source_dir" diff --exit-code
 copy_header() {
     if ! cmp -s "$1" "$2"; then cp "$1" "$2"; fi
@@ -102,6 +107,9 @@ copy_header reference/grf_strings.hpp "$source_dir/src/reference_grf_strings.hpp
 copy_header reference/grf_strings_api.hpp "$source_dir/src/reference_grf_strings_api.hpp"
 copy_header reference/grf_currency.hpp "$source_dir/src/reference_grf_currency.hpp"
 copy_header reference/grf_currency_api.hpp "$source_dir/src/reference_grf_currency_api.hpp"
+copy_header reference/tree_rating.hpp "$source_dir/src/reference_tree_rating.hpp"
+copy_header reference/tree_rating_replay.hpp "$source_dir/src/saveload/reference_tree_rating_replay.hpp"
+copy_header reference/tree_fixture.hpp "$source_dir/src/saveload/reference_tree_fixture.hpp"
 copy_header reference/order_state.hpp "$source_dir/src/saveload/reference_order_state.hpp"
 copy_header reference/order_fixture.hpp "$source_dir/src/saveload/reference_order_fixture.hpp"
 copy_header reference/order_network.hpp "$source_dir/src/saveload/reference_order_network.hpp"

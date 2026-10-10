@@ -772,7 +772,7 @@
     {
       "id": "replay-source-reference-replay-hpp",
       "path": "reference/replay.hpp",
-      "sha256": "6ca81a87ca63c351600e22af024df3021c29c37d1645fea14ec220e01aa4b33f",
+      "sha256": "e007a97e5b47a8219633844552c595bf4ff953a34db4a5014116c17ea179ae13",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -790,7 +790,7 @@
     {
       "id": "replay-source-reference-replay-commands-hpp",
       "path": "reference/replay_commands.hpp",
-      "sha256": "8e21ee84114665d58151926284fc58731caecb0d98be086ec7db8a0225f024b0",
+      "sha256": "d167b7471ee6a9cee31ed86933e28072e799f56c5c4b06ae40cf6e25bf0818ec",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -799,7 +799,7 @@
     {
       "id": "replay-source-reference-replay-cost-hpp",
       "path": "reference/replay_cost.hpp",
-      "sha256": "82078562de1123b3a796e9470c7194781080d042345c8abcfe4d44ffdcf3b6b9",
+      "sha256": "9fc6169e2dd894bad1454c3dab9dc771e4e6ff023b0d409db05d6050c432dee3",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -808,7 +808,7 @@
     {
       "id": "replay-source-reference-replay-fixture-hpp",
       "path": "reference/replay_fixture.hpp",
-      "sha256": "37d0af7e4a3877027b88b6fc9b953657d01ba60cdc10a7190ba146ab6a09b94d",
+      "sha256": "f9fe7e431431748eecfb86ff96451e18028c9d3fc39fd3ca1f55e0c9e70c9148",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -898,7 +898,7 @@
     {
       "id": "replay-source-scripts-setup-snapshot-reference-sh",
       "path": "scripts/setup-snapshot-reference.sh",
-      "sha256": "2457ac19dfd99dbd08eff57798ce6981618bcd8116778aac4cbaf77fc751f433",
+      "sha256": "14d63d9e1279bd03362d92bc1109198d7db2b0d9a90eb43b162b38483f5d06d1",
       "kind": "recipe",
       "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
       "save_version": null,
@@ -1969,7 +1969,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-rs",
       "path": "crates/ottd-sim/src/commands.rs",
-      "sha256": "229fab20c7e0a0008b93e7663adeba2f106f9b6d2f199800011ee25f7be074bc",
+      "sha256": "cd74544d1df66821d792ab91928ce96942a0b5a8bee2733e493729e3c9e0faaa",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -1978,7 +1978,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-pipeline-rs",
       "path": "crates/ottd-sim/src/commands/pipeline.rs",
-      "sha256": "0c9ef4ac2dd56434888ce0f9ec8d4e75340dab06d0397609ccf7af28f2ce2f8d",
+      "sha256": "645641bbd827d72f278ec27aac4caa2882f55e93fea27ed635e978eacb478959",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -1987,7 +1987,7 @@
     {
       "id": "purchase-crates-ottd-sim-src-commands-level-land-phases-rs",
       "path": "crates/ottd-sim/src/commands/level_land/phases.rs",
-      "sha256": "4d9f4736ea6fea24982b58803b1496685a13ad2d5c0572e15246aa66470cc9d0",
+      "sha256": "dbce01d9312e315e7289b38bfc7c5761c43062fde1235fc8923040ebefa00c71",
       "kind": "recipe",
       "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
       "save_version": null,
@@ -3085,7 +3085,7 @@
     {
       "id": "context-ci-layout",
       "path": "scripts/context-ci-layout.json",
-      "sha256": "21b7179b1354d6e4d727172da24c6ab138bdedd3ae3c2ffc9103c885f0fad690",
+      "sha256": "d646c8be99cc4a2bbc8f9d64ba0b152c2fee64cb2f07f4c92012926d506eeab4",
       "kind": "recipe",
       "provenance": "Pinned driver or complete layout/source manifest.",
       "save_version": null,
@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "87a712bf0f467c6ba2236901259e908aa2f8d01ab6359e3ec4a2df27ce4825fb",
+      "sha256": "52f3f05f6609c144e6941fefd47b15bc1aa93f6716e14ce68bab0554b15ba885",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,
@@ -3265,7 +3265,7 @@
     {
       "id": "order-state-order-state-layout",
       "path": "scripts/order-state-layout.json",
-      "sha256": "641c1f0d677c628429fb463cfcd3965b086214f427bf670c0b48c670413d66ad",
+      "sha256": "6461b2594579ef99211c2dd9bf022e70112c44f84a925b1a54691d7cb0ef9050",
       "kind": "recipe",
       "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
       "save_version": null,
@@ -3337,7 +3337,7 @@
     {
       "id": "language-ci-language-ci-layout-json",
       "path": "scripts/language-ci-layout.json",
-      "sha256": "31a81a6f0e2593ee551b7a2172ddc6d1f047956c7d5cb2c8052c82a9c0fe5d46",
+      "sha256": "4b46f4f5dfbf905579aa901a95fcc25e042370d509929d9791a1aab813cf49e3",
       "kind": "recipe",
       "provenance": "Original ordered language A-C; strict complete evidence.",
       "save_version": null,
@@ -3418,7 +3418,7 @@
     {
       "id": "depot-removal-layout",
       "path": "scripts/depot-removal-layout.json",
-      "sha256": "4ed5f21bb24644d6cb47742ba1edf70e1e25898c032049d1ab35061ea404ded0",
+      "sha256": "bb0327a53a8e0246f74640a8300ba6a630db40dd609e452f404969b3ae2ce818",
       "kind": "recipe",
       "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
       "save_version": null,
@@ -3454,7 +3454,7 @@
     {
       "id": "ordered-sale-layout",
       "path": "scripts/ordered-sale-layout.json",
-      "sha256": "0431012c50968e1f295e971c75d2e0da3dfd1bf67b367f01b4a6ea61e30bdf36",
+      "sha256": "68b80b340cfb4bb69e8c9f925f3bb782aaff86cfa3da0956b6a621c63930da84",
       "kind": "recipe",
       "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
       "save_version": null,
@@ -3490,7 +3490,7 @@
     {
       "id": "backup-sale-layout",
       "path": "scripts/backup-sale-layout.json",
-      "sha256": "8408f1a438ed2ed4e5ecb27a22a799c0f49d0dfa7f25e1c2ec31408f80d07bf9",
+      "sha256": "64b62a8687ad91ca0a8cd38a51d0e63c50409764acc2ed7748c2c7e2d8a4794e",
       "kind": "recipe",
       "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
       "save_version": null,
@@ -3562,7 +3562,7 @@
     {
       "id": "strings-ci-strings-ci-layout-json",
       "path": "scripts/strings-ci-layout.json",
-      "sha256": "daab35c9b70704cd90c3ccd210b6136970d8f3dd30e19fa110c1b6f7990dd75d",
+      "sha256": "6dad809b416cb59547075c84d3a3842c51bb351c85aa6f51761d2d3d3c201980",
       "kind": "recipe",
       "provenance": "Private original string D1/D2 complete evidence.",
       "save_version": null,
@@ -3589,7 +3589,7 @@
     {
       "id": "backup-enabled-sale-layout",
       "path": "scripts/backup-enabled-sale-layout.json",
-      "sha256": "263d30da84fb18edded4d990e018053aa5cdffd20e6d4b7d10e31bca615ac220",
+      "sha256": "2c86a40e6ae531f762d43c4fe9b8dd1a81e4a59b0f7b572d4614f966a79926d9",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
       "save_version": null,
@@ -3679,7 +3679,7 @@
     {
       "id": "currency-ci-currency-ci-layout-json",
       "path": "scripts/currency-ci-layout.json",
-      "sha256": "044fbe751763b1d0b126aef5622f17fb8c4a68f1d13c8dd6bc0931f411a4bcc7",
+      "sha256": "36ed33f6da849e7b9e9dacbd8aeba7b150586790befb81274cbeacf0b1f30cc4",
       "kind": "recipe",
       "provenance": "Private currency 0A owner and deferred mapping native admission.",
       "save_version": null,
@@ -3706,7 +3706,7 @@
     {
       "id": "owned-restore-layout",
       "path": "scripts/owned-restore-layout.json",
-      "sha256": "e5d4800c0675da8389ec0c7ce95e7312d6ded570faf4ef29b4ee0bcb1cd97ce7",
+      "sha256": "f2051f7e5933eb0e553c54bc78e4971fdf08787aa867d61e2f17ceb163a4f463",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -3724,7 +3724,7 @@
     {
       "id": "owned-restore-source-tests",
       "path": "scripts/owned_restore_sources_test.py",
-      "sha256": "c18f9d979acb7d2a333e348f517988d332fe68a4fe4ee146e291d508806c7f85",
+      "sha256": "a0f6b211c4ba86af28afc7a7dcd099a4665d313c9b219eaa4938e7d9bf91312b",
       "kind": "recipe",
       "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
       "save_version": null,
@@ -3763,6 +3763,384 @@
       "sha256": "9d0e1c86865a5d7e74ec88997fd24fefd26b0a004cd9eb749d0ada105642fd16",
       "kind": "recipe",
       "provenance": "Currency baseline transport spelling with ordered contained native input hash binding.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-level-land-rs",
+      "path": "crates/ottd-sim/src/commands/level_land.rs",
+      "sha256": "5cd95e7edf6867d40f742f5b22a56f394bc3d06451711f982fef0d8523d63ddc",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-level-land-tests-rs",
+      "path": "crates/ottd-sim/src/commands/level_land/tests.rs",
+      "sha256": "3c1ea735bf6638c8e537602d5b96d89aa1200fa3f4477ee4abfb1fe154eda172",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terraform-rs",
+      "path": "crates/ottd-sim/src/commands/terraform.rs",
+      "sha256": "1223b9897f01c49c1a1bf439fcf9e499126a428fcafd4817b1714cf41421a528",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terraform-candidate-rs",
+      "path": "crates/ottd-sim/src/commands/terraform/candidate.rs",
+      "sha256": "844e3abb6245c9073223e674df13e679ef9f2ca592412f6cbfb41ccefa31eec7",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terraform-live-rs",
+      "path": "crates/ottd-sim/src/commands/terraform/live.rs",
+      "sha256": "bfcd87079b061645b474e34a0dbf4911c814775d7f81cccb0923c3753058b924",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terraform-surfaces-rs",
+      "path": "crates/ottd-sim/src/commands/terraform/surfaces.rs",
+      "sha256": "05d7052afd66ae023c7144742acd3fd979605bc56c5d68ac8f759ed3fe8eb770",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-context-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_context.rs",
+      "sha256": "26165b03df81e64fb7907b3bd575a782240daa024fd6fed2a1d1b19ed25bcf71",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-context-tests-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_context/tests.rs",
+      "sha256": "4f49288252df16eef23ac2c80681f3b55c6f528d0dbd2d284ec88f60135efdc8",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-context-trace-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_context/trace.rs",
+      "sha256": "18bb284b4c6f2552978fa38e9c045a26ca7400d9ec87db128743612b7f2a0d0b",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-read-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_read.rs",
+      "sha256": "037c2dc19461df1dbcdfa5e5960ec5e0946ae31a536d26a46c4b6b7c23132e76",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run.rs",
+      "sha256": "36580e585cd3366a9a01b2c4cc95dd17387fd2a7c12376ac253e6f469f4054d5",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus.rs",
+      "sha256": "fbbb37faca26fc485e90215039cd21073799abb6701cfc655ab70fe9a883622e",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-boundaries-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/boundaries.rs",
+      "sha256": "fd7d56ed4d7721b8da20859247cc47c2434c79ee5b87c4f8cbea1fa9f3d09832",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-controls-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/controls.rs",
+      "sha256": "12dae1e4106da86b719c8c9ee11b14c21ef059d2c0b2f803767997a28bdc4860",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-coupled-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/coupled.rs",
+      "sha256": "bf730c6ff96b61d35110518ea4f9dc317f5b534d6f1c7de7bb8b7b211c12120d",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-io-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/io.rs",
+      "sha256": "da793e15094d3268bcd32da1ba049649b277b62fb950db8e3e10ebc7dd328afc",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-model-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/model.rs",
+      "sha256": "ed18c1d4370a67d2096fc80694153fe33b70aacc5d899b1e54e1f9166c90d366",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-preparation-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/preparation.rs",
+      "sha256": "95615fb853eaae053907b416cdd89cd9b2ca20ec2252c5c306d3665f5f9f9a6b",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-replay-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/corpus/replay.rs",
+      "sha256": "adfa33bd4c54bf26999d1f2bd39b82575e49c5a5c8e7cd203e690bbb96ac0500",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-run-tests-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_run/tests.rs",
+      "sha256": "2fe8abd9ee4aab18efe84d0f13d36bd5d8707440770f1060c5a8494b5b91882b",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-terrain-state-rs",
+      "path": "crates/ottd-sim/src/commands/terrain_state.rs",
+      "sha256": "765122224cc8883c5ec1d15a3f509cc91029a04aaff01a299f3fa67c1ee21606",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-town-rating-rs",
+      "path": "crates/ottd-sim/src/commands/town_rating.rs",
+      "sha256": "916ab7f52bf3a4bbb67147592e276825c97d584662cb20c80c94d0da0b692cfe",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-crates-ottd-sim-src-commands-tree-clear-rs",
+      "path": "crates/ottd-sim/src/commands/tree_clear.rs",
+      "sha256": "4db362e188fea9e1537decf5e22b07f7f6b9ee5875fe1d5d820b1453ae784a96",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-reference-tree-fixture-hpp",
+      "path": "reference/tree_fixture.hpp",
+      "sha256": "503acdf97d50ba0839f57aca0469f819f016685f937e0865c37b586d79f93857",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-reference-tree-rating-hpp",
+      "path": "reference/tree_rating.hpp",
+      "sha256": "68c4d056f835c2ab26087414a9857eabff104fa10fd28907295bb8498033dad4",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-reference-tree-rating-patch",
+      "path": "reference/tree_rating.patch",
+      "sha256": "491ddbb40b54f558b005e3ea1ffd5cb2b4e51cd10cd67477eceb855373f6a880",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-reference-tree-rating-replay-hpp",
+      "path": "reference/tree_rating_replay.hpp",
+      "sha256": "3d955d2d1e3bc628d4bc74ab1c2c639574a002c60e08ab7e607240b81ab98f30",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-check-tree-terrain-ci-py",
+      "path": "scripts/check-tree-terrain-ci.py",
+      "sha256": "e8effd7d66170b257ae13eb00965bcf3a5ab7dbe9a962b922e3dcd7b4728c042",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tests-tree-ci-evidence-test-py",
+      "path": "scripts/tests/tree_ci_evidence_test.py",
+      "sha256": "7d88c084d624d122462b1541ffce846f5641a2994bd8bdb9509cb1d7b7c0f3d7",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-terrain-control-vectors-json",
+      "path": "scripts/tree-terrain/control-vectors.json",
+      "sha256": "1a62b08927de7645bd51fb3ebb7022ddf596c7eca9ae3fecf2903aaf738ed625",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-terrain-layout-json",
+      "path": "scripts/tree-terrain/layout.json",
+      "sha256": "e12f9215a257b1ed825baf202960c34a9b90f7e0be834e3cd5edbee13a1039c9",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-terrain-recipes-json",
+      "path": "scripts/tree-terrain/recipes.json",
+      "sha256": "e2e52037478f36f3373ba16aaf5c216e3556117b9b2fbfb8d56599c8ad823802",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-terrain-selectors-json",
+      "path": "scripts/tree-terrain/selectors.json",
+      "sha256": "dfc2a7181e0f8f32381a938336bc0cd705fac61c0e74d94bca7e2a2ce157dea2",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-terrain-shore-edits-jq",
+      "path": "scripts/tree-terrain/shore-edits.jq",
+      "sha256": "5af61c98ae1a061eef8fc93d969b527953507b7af28353de481c45d63fed4ff5",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-terrain-tile-jq",
+      "path": "scripts/tree-terrain/tile.jq",
+      "sha256": "239558b601be93cf68434535cb6b33280a99385364375b5fff3bb8651580cf23",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-bindings-py",
+      "path": "scripts/tree_ci_bindings.py",
+      "sha256": "1c8e5f03421882f9369e7aa2e9eb879ceb029a8d58df8cc5c344daeaaaa25b10",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-controls-py",
+      "path": "scripts/tree_ci_controls.py",
+      "sha256": "4de3a2fc9b50cc3bc6ced3b07bd91090707e24f87caab64bf7c2acb88c96bc05",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-evidence-py",
+      "path": "scripts/tree_ci_evidence.py",
+      "sha256": "e2340b0e017d9a76c208651e87b128fd0a23376214ebfed3a7d2e82283792afa",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-prepare-py",
+      "path": "scripts/tree_ci_prepare.py",
+      "sha256": "dc7b4153fdf1e622d4efee67fd0508182c89d62f9eb1400402d0a7179f9fc6a2",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-probes-py",
+      "path": "scripts/tree_ci_probes.py",
+      "sha256": "8cb4507819bc8824e7e3357eb158e8a894e984786af0c97aca52786a005e2154",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-run-py",
+      "path": "scripts/tree_ci_run.py",
+      "sha256": "95552875fc6d7c6083e3564cf7cf355da179f53673692fd7be02db540caded2c",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
+      "save_version": null,
+      "profile": null
+    },
+    {
+      "id": "tree-terrain-scripts-tree-ci-tests-py",
+      "path": "scripts/tree_ci_tests.py",
+      "sha256": "ffb7fa94a08713ff435fc35cebc1777b4958a41a7b3413c0b278b8e6d965d89b",
+      "kind": "recipe",
+      "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
       "save_version": null,
       "profile": null
     }
@@ -10359,6 +10737,39 @@
         "rust_behavior"
       ],
       "timeout_seconds": 900
+    },
+    {
+      "id": "tree-terrain",
+      "argv": [
+        "python3",
+        "scripts/check-tree-terrain-ci.py"
+      ],
+      "artifact_root": ".artifacts",
+      "artifact_globs": [
+        "summary.txt",
+        "coverage.json",
+        "evidence-index.json",
+        "evidence.tar.gz",
+        "provenance.json",
+        "test-binaries.json",
+        "cli-binary.json",
+        "build-environment.json",
+        "native-bindings.json",
+        "rust-membership.json",
+        "observed-layout.json",
+        "bin/ottd_sim",
+        "bin/ottd",
+        "native-executable/openttd",
+        "native-executable/replay-build.sha256",
+        "zero-test-rejected.json",
+        "controls/wrong-source/rejected.json",
+        "controls/subset/rejected.json"
+      ],
+      "success_text": "PASS tree/terrain complete fresh CI admission",
+      "scopes": [
+        "rust_behavior"
+      ],
+      "timeout_seconds": 1200
     }
   ],
   "scenarios": [
@@ -15149,6 +15560,92 @@
         "controls/admission/results.json",
         "controls/admission/wrong-source-mutation.json",
         "controls/admission/wrong-executable.json"
+      ]
+    },
+    {
+      "id": "commands.tree-clearing-coupled-town-ratings",
+      "status": "implemented",
+      "scope": "rust_behavior",
+      "domain": "Canonical vanilla tree clearing coupled with TerraformLand and LevelLand over admitted clear/tree surfaces. Source-declared finite fixtures, strict Manhattan nearest-town/ties/rating scopes, candidate CITY/map edits, phase order, partial Level publication. Authority distance outside5..60 is typed Unsupported only when the new town-rating path is reached; broader save-load normalization remains open. Legacy depot tree refusal, unsupported bridge/water/deity surfaces remain explicit. Company15 public result-only trace parity is not claimed. No water clearing, tree growth, whole-world tick or general company lifecycle claim.",
+      "expected": "117 freshly executed native24-compatible processes,108 actions,235 checkpoints,3514 actual ordered events. Canonical45 cases/78 commands/2713 events and prior19 comparisons/715 events; eight raw0/raw2 coupled preflight refusal/cleanup vectors. Nine actual Rust trace-corruption rejections, real zero/subset processes and physical wrong-source control. Complete receipts/saved/derived/traces, source/selected executable/input/checkpoint/file closure and reload/on-off/dry-shore/split-resume comparisons. Public company15 trace parity, no-town/legitimate ground vehicle/arbitrary helper flags and full settings restoration remain open.",
+      "driver": "tree-terrain",
+      "assets": [
+        "purchase-crates-ottd-sim-src-commands-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-level-land-rs",
+        "purchase-crates-ottd-sim-src-commands-level-land-phases-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-level-land-tests-rs",
+        "purchase-crates-ottd-sim-src-commands-pipeline-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terraform-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terraform-candidate-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terraform-live-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terraform-surfaces-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-context-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-context-tests-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-context-trace-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-read-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-boundaries-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-controls-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-coupled-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-io-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-model-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-preparation-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-corpus-replay-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-run-tests-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-terrain-state-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-town-rating-rs",
+        "tree-terrain-crates-ottd-sim-src-commands-tree-clear-rs",
+        "replay-clear-v362-sav",
+        "replay-populated-v362-sav",
+        "world-game",
+        "replay-source-reference-replay-hpp",
+        "replay-source-reference-replay-commands-hpp",
+        "replay-source-reference-replay-cost-hpp",
+        "replay-source-reference-replay-fixture-hpp",
+        "tree-terrain-reference-tree-fixture-hpp",
+        "tree-terrain-reference-tree-rating-hpp",
+        "tree-terrain-reference-tree-rating-patch",
+        "tree-terrain-reference-tree-rating-replay-hpp",
+        "tree-terrain-scripts-check-tree-terrain-ci-py",
+        "replay-source-scripts-setup-snapshot-reference-sh",
+        "tree-terrain-scripts-tests-tree-ci-evidence-test-py",
+        "tree-terrain-scripts-tree-terrain-control-vectors-json",
+        "tree-terrain-scripts-tree-terrain-layout-json",
+        "tree-terrain-scripts-tree-terrain-recipes-json",
+        "tree-terrain-scripts-tree-terrain-selectors-json",
+        "tree-terrain-scripts-tree-terrain-shore-edits-jq",
+        "tree-terrain-scripts-tree-terrain-tile-jq",
+        "tree-terrain-scripts-tree-ci-bindings-py",
+        "tree-terrain-scripts-tree-ci-controls-py",
+        "tree-terrain-scripts-tree-ci-evidence-py",
+        "tree-terrain-scripts-tree-ci-prepare-py",
+        "tree-terrain-scripts-tree-ci-probes-py",
+        "tree-terrain-scripts-tree-ci-run-py",
+        "tree-terrain-scripts-tree-ci-tests-py"
+      ],
+      "source_refs": [
+        "scripts/check-tree-terrain-ci.py",
+        "scripts/tree_ci_run.py",
+        "scripts/tree_ci_prepare.py",
+        "scripts/tree_ci_bindings.py",
+        "scripts/tree_ci_evidence.py",
+        "scripts/tree_ci_controls.py",
+        "scripts/tree_ci_probes.py",
+        "scripts/tree_ci_tests.py",
+        "scripts/tree-terrain/recipes.json",
+        "scripts/tree-terrain/selectors.json",
+        "scripts/tree-terrain/layout.json"
+      ],
+      "evidence": [
+        "summary.txt",
+        "coverage.json",
+        "provenance.json",
+        "native-bindings.json",
+        "rust-membership.json",
+        "observed-layout.json",
+        "evidence-index.json",
+        "evidence.tar.gz"
       ]
     }
   ]

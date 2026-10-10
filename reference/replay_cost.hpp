@@ -5,6 +5,7 @@
 #include "../table/control_codes.h"
 #include "../core/utf8.hpp"
 #include "reference_runtime_road.hpp"
+#include "reference_tree_rating_replay.hpp"
 #include <charconv>
 
 namespace ReferenceReplay {
@@ -76,6 +77,7 @@ inline Json Cost(const CommandCost &cost)
 void Phase(const char *phase, const CommandCost &cost)
 {
     if (receipt == nullptr) return;
+    TreeRatingPhase(phase);
     (*receipt)[phase] = Cost(cost);
     metadata[phase] = {{"error_id", cost.GetErrorMessage()}, {"extra_error_id", cost.GetExtraErrorMessage()},
         {"owner", cost.GetErrorOwner().base()}};

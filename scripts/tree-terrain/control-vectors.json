@@ -1,0 +1,6170 @@
+{
+  "provenance": "Actual pinned native24 events plus deliberately modified controls retained by the accepted audit; unit vectors only, not fresh CI evidence.",
+  "native_sha256": "5496f110b1b12acbc99e31276ca36d9e72dea37573b3aab1f71de5fca0f68dea",
+  "baselines": {
+    "terraform-four": {
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ],
+      "results_sha256": "cde18939c303949637846605f524465d64bd3c107b384942c8d9b1ab403a5502"
+    },
+    "terraform-limit": {
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 3,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 4,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 6,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 7,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 8,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 9,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 10,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 11,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 12,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 13,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 14,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 15,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 16,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 18,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 19,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 23,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 24,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 26,
+          "tile": 650
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 27,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 28,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 29,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": false
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 31,
+          "phase": "result"
+        }
+      ],
+      "results_sha256": "9d88969af9b0169920a6053097f5485c50939ffdffa7050ab6360d2683da99d9"
+    }
+  },
+  "controls": {
+    "change-flags": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1795,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ]
+    },
+    "change-test-rating": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 464,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ]
+    },
+    "drop-scope": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 5,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 6,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 7,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 8,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 9,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 10,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 11,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 12,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 13,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 14,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 15,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 16,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 17,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 18,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 19,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 20,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 21,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 22,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 23,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 24,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 25,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 26,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 27,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 28,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 29,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 30,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 31,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 32,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 33,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 34,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 35,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 36,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 37,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 38,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 39,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 40,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 41,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 42,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 43,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 44,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 45,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 46,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 47,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 48,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 49,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 50,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 51,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 52,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 53,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 54,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 55,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 56,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 57,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 58,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 59,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 60,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 61,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 62,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 63,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 64,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 65,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 66,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 67,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 68,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 69,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 70,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 71,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 72,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 73,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 74,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "result"
+        }
+      ]
+    },
+    "duplicate-exec-penalty": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 66,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 67,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 68,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 69,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 70,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 71,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 72,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 73,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 74,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 75,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 77,
+          "phase": "result"
+        }
+      ]
+    },
+    "missing-failed-step": {
+      "baseline": "terraform-limit",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 3,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 4,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 6,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 7,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 8,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 9,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 10,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 11,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 12,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 13,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 14,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 15,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 16,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 18,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 19,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 23,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 24,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 26,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 28,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 29,
+          "test_mode": false
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 30,
+          "phase": "result"
+        }
+      ]
+    },
+    "modify-pass0": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "applied",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0,
+          "before_rating": 500,
+          "after_rating": 465,
+          "saved_rating": 500,
+          "have_ratings": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ]
+    },
+    "reset-nested-map": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ]
+    },
+    "set-test-have-rating": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ]
+    },
+    "swap-tree-order": {
+      "baseline": "terraform-four",
+      "events": [
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 0,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 1,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 2,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 3,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 4,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 5,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 6,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 7,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 8,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 9,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 10,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 11,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 12,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 13,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 14,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 15,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 16,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 17,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 18,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 19,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 20,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 21,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 22,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 23,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 24,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 25,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 26,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 27,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 28,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 29,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 30,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 31,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 32,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 33,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 34,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 35,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "surface",
+          "ordinal": 36,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 2,
+          "kind": "scope_enter",
+          "map_entries": 1,
+          "ordinal": 37,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1282,
+          "kind": "tree",
+          "ordinal": 38,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1282,
+          "have_ratings": 0,
+          "kind": "applied",
+          "ordinal": 39,
+          "saved_rating": 500,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 40,
+          "test_mode": true
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 41,
+          "phase": "test"
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 1,
+          "ordinal": 42,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 43,
+          "pass": 0,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 44,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 45,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 46,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 47,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 48,
+          "pass": 0,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 49,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 50,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 51,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 52,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 53,
+          "pass": 0,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 54,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 55,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 56,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 57,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "surface",
+          "ordinal": 58,
+          "pass": 0,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "depth": 1,
+          "kind": "scope_enter",
+          "map_entries": 0,
+          "ordinal": 59,
+          "test_mode": true
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "tree",
+          "ordinal": 60,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1794,
+          "kind": "suppressed",
+          "ordinal": 61,
+          "test_mode": true,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "depth": 0,
+          "kind": "scope_leave",
+          "map_entries": 0,
+          "ordinal": 62,
+          "test_mode": false
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 63,
+          "pass": 1,
+          "tile": 585
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 64,
+          "tile": 585
+        },
+        {
+          "after_rating": 465,
+          "before_rating": 500,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 65,
+          "saved_rating": 465,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 66,
+          "pass": 1,
+          "tile": 586
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 67,
+          "tile": 586
+        },
+        {
+          "after_rating": 430,
+          "before_rating": 465,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 68,
+          "saved_rating": 430,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 69,
+          "pass": 1,
+          "tile": 649
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 70,
+          "tile": 649
+        },
+        {
+          "after_rating": 395,
+          "before_rating": 430,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 71,
+          "saved_rating": 395,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "surface",
+          "ordinal": 72,
+          "pass": 1,
+          "tile": 650
+        },
+        {
+          "company": 0,
+          "flags": 1283,
+          "kind": "tree",
+          "ordinal": 73,
+          "tile": 650
+        },
+        {
+          "after_rating": 360,
+          "before_rating": 395,
+          "company": 0,
+          "flags": 1283,
+          "have_ratings": 1,
+          "kind": "applied",
+          "ordinal": 74,
+          "saved_rating": 360,
+          "test_mode": false,
+          "town": 0
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 75,
+          "phase": "exec"
+        },
+        {
+          "kind": "phase_complete",
+          "ordinal": 76,
+          "phase": "result"
+        }
+      ]
+    }
+  }
+}

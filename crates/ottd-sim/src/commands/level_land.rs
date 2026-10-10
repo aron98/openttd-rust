@@ -1,12 +1,16 @@
 mod phases;
+#[cfg(test)]
+mod tests;
 mod tiles;
 use super::{
-    CommandCost, CommandError, CommandReturn, Plan, terraform,
-    terrain_read::{MapSize, TerrainRead},
+    CommandCost, CommandError, CommandReturn, terraform,
+    terrain_context::{TerrainContext, TerrainFlags},
+    terrain_read::TerrainRead,
+    terrain_state::TerrainState,
 };
-use crate::content::Prices;
-use ottd_save::world::WorldTransaction;
-pub(super) use phases::{estimate, run};
+pub(super) use phases::run;
+#[cfg(test)]
+pub(super) use phases::run_context;
 use tiles::Tiles;
 
 #[derive(Clone, Copy)]
@@ -32,30 +36,19 @@ impl TryFrom<u8> for LevelMode {
         }
     }
 }
-enum Phase<'a, 'world> {
-    Estimate(TerrainRead<'a>),
-    Execute {
-        transaction: &'a mut WorldTransaction<'world>,
-        size: MapSize,
-    },
-}
-impl Phase<'_, '_> {
-    const fn read(&self) -> TerrainRead<'_> {
-        match self {
-            Self::Estimate(view) => *view,
-            Self::Execute { transaction, size } => TerrainRead::Candidate {
-                view: transaction.view(),
-                size: *size,
-            },
-        }
-    }
-}
 struct Outcome {
     cost: CommandCost,
     additional_money: i64,
     tile: u32,
 }
 impl Outcome {
+    const fn new(cost: CommandCost, tile: u32) -> Self {
+        Self {
+            cost,
+            additional_money: 0,
+            tile,
+        }
+    }
     const fn result(&self) -> CommandReturn {
         CommandReturn::Landscape {
             additional_money: self.additional_money,
@@ -63,20 +56,17 @@ impl Outcome {
         }
     }
     fn failure(symbol: &str) -> Self {
-        Self {
-            cost: CommandCost::failure(symbol),
-            additional_money: 0,
-            tile: u32::MAX,
-        }
+        Self::new(CommandCost::failure(symbol), u32::MAX)
     }
 }
 fn land(
-    phase: &mut Phase<'_, '_>,
-    company: u8,
+    state: &mut TerrainState<'_, '_>,
+    context: &mut TerrainContext,
     args: Args,
-    prices: &Prices,
+    flags: TerrainFlags,
 ) -> Result<Outcome, CommandError> {
-    let view = phase.read();
+    let view = state.read();
+    let company = context.company;
     let size = view.size();
     if args.start >= size.count()? {
         return Ok(Outcome::failure("CMD_ERROR"));
@@ -98,7 +88,10 @@ fn land(
         }));
     }
     let mut money = available_money(view, company)?;
-    let mut limit = (view.unsigned(*b"PLYR", u32::from(company), "terraform_limit")? >> 16) & 65535;
+    let mut limit =
+        u32::try_from(view.unsigned(*b"PLYR", u32::from(company), "terraform_limit")?)
+            .map_err(|_| CommandError::Overflow("terraform limit"))?
+            >> 16;
     if limit == 0 {
         return Ok(Outcome::failure("STR_ERROR_TERRAFORM_LIMIT_REACHED"));
     }
@@ -110,9 +103,16 @@ fn land(
     let mut had_success = false;
     let mut error_tile = u32::MAX;
     for tile in Tiles::new(size, args.tile, args.start, args.diagonal)? {
-        let mut current = u64::from(phase.read().tile(tile)?.height());
+        let mut current = u64::from(state.read().tile(tile)?.height());
         while current != target {
-            let plan = terraform::step(phase.read(), company, tile, 8, current <= target, prices)?;
+            let terraform_args = terraform::Args {
+                tile,
+                mask: 8,
+                up: current <= target,
+            };
+            let plan = context.test(|context| {
+                terraform::body(state, context, terraform_args, TerrainFlags(flags.0 & !1))
+            })?;
             let Some(CommandReturn::Landscape { tile: returned, .. }) = plan.returns else {
                 return Err(CommandError::Unsupported("terraform tuple missing"));
             };
@@ -124,26 +124,21 @@ fn land(
                 last_error = plan.cost;
                 break;
             }
-            match phase {
-                Phase::Execute { transaction, .. } => {
-                    money = money.saturating_sub(plan.cost.cost);
-                    if money < 0 {
-                        return Ok(Outcome {
-                            cost: CommandCost::success(cost, 0),
-                            additional_money: plan.cost.cost,
-                            tile: error_tile,
-                        });
-                    }
-                    for edit in plan.edits {
-                        transaction.apply(edit)?;
-                    }
+            if flags.executing() {
+                money = money.saturating_sub(plan.cost.cost);
+                if money < 0 {
+                    return Ok(Outcome {
+                        cost: CommandCost::success(cost, 0),
+                        additional_money: plan.cost.cost,
+                        tile: error_tile,
+                    });
                 }
-                Phase::Estimate(_) => {
-                    limit = limit.saturating_sub(1);
-                    if limit == 0 {
-                        had_success = true;
-                        break;
-                    }
+                terraform::body(state, context, terraform_args, flags)?;
+            } else {
+                limit = limit.saturating_sub(1);
+                if limit == 0 {
+                    had_success = true;
+                    break;
                 }
             }
             cost = cost.saturating_add(plan.cost.cost);
@@ -168,11 +163,7 @@ fn land(
     } else {
         error_tile
     };
-    Ok(Outcome {
-        cost: result,
-        additional_money: 0,
-        tile,
-    })
+    Ok(Outcome::new(result, tile))
 }
 
 fn available_money(view: TerrainRead<'_>, company: u8) -> Result<i64, CommandError> {

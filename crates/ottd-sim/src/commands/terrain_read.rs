@@ -1,7 +1,7 @@
 use super::CommandError;
 use crate::world_access::{WorldAccessError, row_field};
 use ottd_save::{
-    TileState, WireValue,
+    TableRecord, TableSchema, TileState, WireValue,
     world::{CandidateView, World},
 };
 
@@ -38,6 +38,42 @@ pub(super) enum TerrainRead<'a> {
     },
 }
 impl<'a> TerrainRead<'a> {
+    pub(super) fn has_record(self, chunk: [u8; 4], id: u32) -> bool {
+        match self {
+            Self::Committed(world) => world
+                .tables()
+                .get(&chunk)
+                .is_some_and(|t| t.records().contains_key(&id)),
+            Self::Candidate { view, .. } => {
+                view.table(chunk).is_some_and(|t| t.record(id).is_some())
+            }
+        }
+    }
+    pub(super) fn visit_towns(
+        self,
+        mut visit: impl FnMut(u32, &TableSchema, &TableRecord) -> Result<(), CommandError>,
+    ) -> Result<(), CommandError> {
+        match self {
+            Self::Committed(world) => {
+                let table = world
+                    .tables()
+                    .get(b"CITY")
+                    .ok_or_else(|| WorldAccessError("CITY".into()))?;
+                for (id, row) in table.records() {
+                    visit(*id, table.schema(), row)?;
+                }
+            }
+            Self::Candidate { view, .. } => {
+                let table = view
+                    .table(*b"CITY")
+                    .ok_or_else(|| WorldAccessError("CITY".into()))?;
+                for (id, row) in table.records() {
+                    visit(id, table.schema(), row)?;
+                }
+            }
+        }
+        Ok(())
+    }
     pub(super) const fn size(self) -> MapSize {
         match self {
             Self::Committed(world) => MapSize::from_world(world),

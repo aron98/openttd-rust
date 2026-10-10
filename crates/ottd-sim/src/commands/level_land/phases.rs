@@ -1,32 +1,14 @@
-use super::{Args, CommandCost, CommandError, Outcome, Phase, Plan, land};
+use super::{
+    Args, CommandCost, CommandError, Outcome, TerrainContext, TerrainFlags, TerrainState, land,
+};
+#[cfg(test)]
+use crate::commands::terrain_context::Phase;
 use crate::{
-    commands::{
-        CommandReceipt, CommandReturnPhases, pipeline,
-        terrain_read::{MapSize, TerrainRead},
-    },
+    commands::{CommandReceipt, CommandReturnPhases, pipeline},
     content::ContentCatalog,
 };
 use ottd_save::world::World;
 
-pub(in crate::commands) fn estimate(
-    world: &World,
-    company: u8,
-    args: Args,
-) -> Result<Plan, CommandError> {
-    let catalog = ContentCatalog::from_world(world)?;
-    let outcome = land(
-        &mut Phase::Estimate(TerrainRead::Committed(world)),
-        company,
-        args,
-        catalog.prices(),
-    )?;
-    let returns = Some(outcome.result());
-    Ok(Plan {
-        cost: outcome.cost,
-        edits: Vec::new(),
-        returns,
-    })
-}
 pub(in crate::commands) fn run(
     world: &mut World,
     company: u8,
@@ -34,13 +16,29 @@ pub(in crate::commands) fn run(
     estimate_only: bool,
 ) -> Result<CommandReceipt, CommandError> {
     let catalog = ContentCatalog::from_world(world)?;
-    let test = land(
-        &mut Phase::Estimate(TerrainRead::Committed(world)),
-        company,
+    let mut context = TerrainContext::new(company);
+    run_context(
+        TerrainState::new(world, catalog.prices()),
+        &mut context,
         args,
-        catalog.prices(),
-    )?;
+        estimate_only,
+    )
+}
+pub(in crate::commands) fn run_context(
+    mut state: TerrainState<'_, '_>,
+    context: &mut TerrainContext,
+    args: Args,
+    estimate_only: bool,
+) -> Result<CommandReceipt, CommandError> {
+    let test = context.test(|context| {
+        let result = land(&mut state, context, args, TerrainFlags(0x0102))?;
+        #[cfg(test)]
+        context.phase(Phase::Test);
+        Ok(result)
+    })?;
     if estimate_only || !test.cost.success {
+        #[cfg(test)]
+        context.phase(Phase::Result);
         let returns = test.result();
         return Ok(CommandReceipt {
             posted: test.cost.success,
@@ -55,33 +53,27 @@ pub(in crate::commands) fn run(
             }),
         });
     }
-    let size = MapSize::from_world(world);
-    let mut transaction = world.transaction();
-    let exec = land(
-        &mut Phase::Execute {
-            transaction: &mut transaction,
-            size,
-        },
-        company,
-        args,
-        catalog.prices(),
-    )?;
+    let exec = land(&mut state, context, args, TerrainFlags(0x0103))?;
+    #[cfg(test)]
+    context.phase(Phase::Exec);
     let result = final_cost(&exec);
     if result.success {
-        let view = TerrainRead::Candidate {
-            view: transaction.view(),
-            size,
-        };
-        for edit in pipeline::completion_edits(view, u32::from(company), args.tile, &result)? {
-            transaction.apply(edit)?;
-        }
+        let edits = pipeline::completion_edits(
+            state.read(),
+            u32::from(context.company),
+            args.tile,
+            &result,
+        )?;
+        state.apply(edits)?;
     }
     let returns = CommandReturnPhases {
         test: Some(test.result()),
         exec: Some(exec.result()),
         result: Some(exec.result()),
     };
-    transaction.prepare()?.commit();
+    state.commit()?;
+    #[cfg(test)]
+    context.phase(Phase::Result);
     Ok(CommandReceipt {
         posted: result.success,
         gate: None,

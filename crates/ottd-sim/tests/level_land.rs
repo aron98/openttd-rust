@@ -126,9 +126,10 @@ fn execution_scope_failure_discards_successful_staged_steps() -> Result {
     let mut high = ottd_save::TileRawParts::from(world.map().tiles().get(652).ok_or("tile")?);
     high.height = 5;
     world.edit_tile(652, &high.into())?;
-    let mut tree = ottd_save::TileRawParts::from(world.map().tiles().get(648).ok_or("tile")?);
-    tree.tile_type = 0x40;
-    world.edit_tile(648, &tree.into())?;
+    let mut water = ottd_save::TileRawParts::from(world.map().tiles().get(648).ok_or("tile")?);
+    water.tile_type = 0x60;
+    water.m5 = 0;
+    world.edit_tile(648, &water.into())?;
     let before = world.saved_json()?;
     let mut command = request(650, 652, 2);
     command.mode = CommandMode::Estimate;

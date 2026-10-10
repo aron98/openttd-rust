@@ -1,0 +1,83 @@
+--- a/src/town_cmd.cpp
++++ b/src/town_cmd.cpp
+@@ -8,6 +8,7 @@
+ /** @file town_cmd.cpp Handling of town tiles. */
+ 
+ #include "stdafx.h"
++#include "reference_tree_rating.hpp"
+ #include "misc/history_type.hpp"
+ #include "misc/history_func.hpp"
+ #include "road.h"
+@@ -4012,6 +4013,8 @@
+ 		ref_count--;
+ 	}
+ 	_town_rating_test = !(ref_count == 0);
++	ReferenceTreeRating::Record({.kind = mode ? ReferenceTreeRating::Kind::ScopeEnter : ReferenceTreeRating::Kind::ScopeLeave,
++		.company = _current_company.base(), .scope_depth = ref_count, .test_mode = _town_rating_test, .map_entries = _town_test_ratings.size()});
+ }
+ 
+ /**
+@@ -4043,10 +4046,14 @@
+ 	if (t == nullptr || flags.Test(DoCommandFlag::NoModifyTownRating) ||
+ 			!Company::IsValidID(_current_company) ||
+ 			(_cheats.magic_bulldozer.value && add < 0)) {
++		ReferenceTreeRating::Record({.kind = ReferenceTreeRating::Kind::Suppressed,
++			.town = t == nullptr ? UINT32_MAX : t->index.base(), .flags = flags.base(),
++			.company = _current_company.base(), .test_mode = _town_rating_test});
+ 		return;
+ 	}
+ 
+ 	int rating = GetRating(t);
++	const int observed_before_rating = rating;
+ 	if (add < 0) {
+ 		if (rating > max) {
+ 			rating += add;
+@@ -4065,6 +4072,10 @@
+ 		t->ratings[_current_company] = rating;
+ 		SetWindowDirty(WC_TOWN_AUTHORITY, t->index);
+ 	}
++	ReferenceTreeRating::Record({.kind = ReferenceTreeRating::Kind::Applied,
++		.town = t->index.base(), .flags = flags.base(), .company = _current_company.base(),
++		.test_mode = _town_rating_test, .before_rating = observed_before_rating, .after_rating = rating,
++		.saved_rating = t->ratings[_current_company], .have_ratings = t->have_ratings.base()});
+ }
+ 
+ /**
+--- a/src/tree_cmd.cpp
++++ b/src/tree_cmd.cpp
+@@ -8,6 +8,7 @@
+ /** @file tree_cmd.cpp Handling of tree tiles. */
+ 
+ #include "stdafx.h"
++#include "reference_tree_rating.hpp"
+ #include "clear_map.h"
+ #include "landscape.h"
+ #include "tree_map.h"
+@@ -718,6 +719,8 @@
+ static CommandCost ClearTile_Trees(TileIndex tile, DoCommandFlags flags)
+ {
+ 	uint num;
++	ReferenceTreeRating::Record({.kind = ReferenceTreeRating::Kind::Tree, .tile = tile.base(),
++		.flags = flags.base(), .company = _current_company.base()});
+ 
+ 	if (Company::IsValidID(_current_company)) {
+ 		Town *t = ClosestTownFromTile(tile, _settings_game.economy.dist_local_authority);
+--- a/src/terraform_cmd.cpp
++++ b/src/terraform_cmd.cpp
+@@ -8,6 +8,7 @@
+ /** @file terraform_cmd.cpp Commands related to terraforming. */
+ 
+ #include "stdafx.h"
++#include "reference_tree_rating.hpp"
+ #include "command_func.h"
+ #include "tunnel_map.h"
+ #include "bridge_map.h"
+@@ -262,6 +263,8 @@
+ 				tile_flags.Set(DoCommandFlag::NoModifyTownRating);
+ 			}
+ 			CommandCost cost;
++			ReferenceTreeRating::Record({.kind = ReferenceTreeRating::Kind::Surface, .tile = t.base(),
++				.flags = tile_flags.base(), .company = _current_company.base(), .pass = pass});
+ 			if (indirectly_cleared) {
+ 				cost = Command<CMD_LANDSCAPE_CLEAR>::Do(tile_flags, t);
+ 			} else {

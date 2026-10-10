@@ -14,7 +14,12 @@ mod road;
 mod road_depot;
 mod road_vehicle;
 mod terraform;
+mod terrain_context;
 mod terrain_read;
+mod terrain_run;
+mod terrain_state;
+mod town_rating;
+mod tree_clear;
 
 use crate::world_access::WorldAccessError;
 use ottd_save::world::{World, WorldEdit, WorldError};
@@ -316,26 +321,9 @@ fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
             *custom,
             *percent,
         ),
-        Command::LevelLand {
-            tile,
-            start_tile,
-            diagonal,
-            level_mode,
-        } => level_land::estimate(
-            world,
-            request.company,
-            level_land::Args {
-                tile: *tile,
-                start: *start_tile,
-                diagonal: *diagonal,
-                mode: *level_mode,
-            },
+        Command::LevelLand { .. } | Command::TerraformLand { .. } => Err(
+            CommandError::Unsupported("terrain command requires phase context"),
         ),
-        Command::TerraformLand {
-            tile,
-            slope,
-            dir_up,
-        } => terraform::plan(world, request.company, *tile, *slope, *dir_up),
         Command::IncreaseLoan { method, amount } => {
             finance::loan(world, request.company, (*method, *amount), true)
         }

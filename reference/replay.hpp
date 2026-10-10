@@ -62,6 +62,7 @@ inline bool Run()
     static bool active = false;
     static bool done = false;
     if (path == nullptr || active || done || _game_mode != GM_NORMAL) return false;
+    TreeRatingEnabled();
     active = true;
     std::ifstream input(path);
     Require(input.good(), "cannot open native replay input");

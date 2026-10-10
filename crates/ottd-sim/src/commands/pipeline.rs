@@ -156,6 +156,9 @@ fn execute_admitted(
     returns: Option<CommandReturnPhases>,
     company_exists: bool,
 ) -> Result<CommandReceipt, CommandError> {
+    if let Some(args) = super::terrain_run::Args::from_command(world, &request.command)? {
+        return super::terrain_run::execute(world, request.company, args, estimate);
+    }
     if matches!(request.command, Command::BuildRoadDepot { .. })
         || (matches!(request.command, Command::LandscapeClear { .. })
             && matches!(context, Some(OwnedContext::Depot(_))))

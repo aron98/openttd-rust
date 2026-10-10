@@ -1,0 +1,8124 @@
+{
+  "schema_version": 1,
+  "upstream": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "historical_native24_sha256": "5496f110b1b12acbc99e31276ca36d9e72dea37573b3aab1f71de5fca0f68dea",
+  "native_runs": [
+    {
+      "id": "corpus/auto-clear-limit",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-auto-clear-limit",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/bridge-boundary",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/populated-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 4548,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 4,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-auto-clear-limit",
+      "input": {
+        "kind": "edit",
+        "name": "auto-clear-limit"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-climate-1",
+      "input": {
+        "kind": "edit",
+        "name": "climate-1"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-climate-desert",
+      "input": {
+        "kind": "edit",
+        "name": "climate-desert"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-coastal-dry-twin",
+      "input": {
+        "kind": "edit",
+        "name": "coastal-dry-twin"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-coastal-geometry",
+      "input": {
+        "kind": "edit",
+        "name": "coastal-geometry"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-foreign-owner",
+      "input": {
+        "kind": "edit",
+        "name": "foreign-owner"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/canonical-water-neighbors",
+      "input": {
+        "kind": "edit",
+        "name": "water-neighbors"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/clear-limit-65535",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-clear-limit-65535",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 8,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/clear-limit-65536",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-clear-limit-65536",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/climate-1-clear",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/reload-climate-1",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/climate-desert-clear",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/reload-climate-desert",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-clear",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-geometry",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-clear-off",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-geometry",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": false,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-clear-repeat",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-geometry",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-dry-clear",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-dry-twin",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-dry-terraform",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-dry-twin",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 1,
+                "dir_up": false
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 113,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-terraform-lower",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-geometry",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 1,
+                "dir_up": false
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 113,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/coastal-water-boundary",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-geometry",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/company-15",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 15,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 15,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 2,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/company-18",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 18,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 18,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 12,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/contiguous-tie",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-contiguous-tie-v2",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/count-2",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-count-2",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/count-3",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-count-3",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/count-4",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-count-4",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/count-one",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/field-shore-pair",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-shore",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/field-shore-terraform-estimate",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-shore",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 32,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-clear-limit-65535",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "company_limit": 65535
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-clear-limit-65536",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "company_limit": 65536
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-contiguous-tie-v2",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/world/game-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "populated",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 649,
+                "rating": 500,
+                "have_rating": false
+              },
+              {
+                "id": 1,
+                "tile": 651,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 2,
+            "magic_bulldozer": false
+          },
+          "paused": false
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-count-2",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 2,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-count-3",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 3,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-count-4",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 4,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-ground-1",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 1
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-ground-2",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 2
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-ground-4",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 4
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-have-rating",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": true
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-level-limit-one",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "company_limit": 65536
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-level-partial-money",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "company_money": 247
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-manhattan",
+      "input": {
+        "kind": "sparse_town"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "populated",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 657,
+                "rating": 500,
+                "have_rating": false
+              },
+              {
+                "id": 2,
+                "tile": 910,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "paused": false
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-rating--1000",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -1000,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-rating--964",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -964,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-rating--965",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -965,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-rating--966",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -966,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-rating--999",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -999,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-sequence",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              },
+              {
+                "tile": 651,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              },
+              {
+                "tile": 652,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-threshold-zero",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 0,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-type-19",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 19,
+                "count": 4,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-type-20",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 20,
+                "count": 4,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-type-26",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 26,
+                "count": 4,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/fixture-type-27",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 27,
+                "count": 4,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/foreign-owner",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-foreign-owner",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/ground-1",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-1",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/ground-1-terraform",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-1",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/ground-2",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-2",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/ground-2-terraform",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-2",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/ground-4",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-4",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/ground-4-terraform",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-4",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/have-rating",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-have-rating",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/level-diagonal",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 716,
+                "start_tile": 650,
+                "diagonal": true,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 297,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/level-diagonal-lower",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 715,
+                "start_tile": 650,
+                "diagonal": true,
+                "level_mode": 1
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 157,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/level-limit-one",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-level-limit-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 650,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 111,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/level-limit-one-estimate",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-level-limit-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 650,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 34,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/level-partial-money",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-level-partial-money",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 650,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 167,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/manhattan",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-manhattan",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/multicorner-all",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-four",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 15,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 127,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/multicorner-failure",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 1,
+                "dir_up": true
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 9,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 57,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/rating--1000",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-rating--1000",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/rating--964",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-rating--964",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/rating--965",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-rating--965",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/rating--966",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-rating--966",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/rating--999",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-rating--999",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/reload-climate-1",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-climate-1",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/reload-climate-desert",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-climate-desert",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/reload-sequence",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/sequence",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/resume",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/sequence",
+        "label": "mid"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 3,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 651,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          },
+          {
+            "ordinal": 4,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 651,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 428,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/sequence",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-sequence",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "checkpoint",
+            "label": "mid"
+          },
+          {
+            "ordinal": 3,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 651,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          },
+          {
+            "ordinal": 4,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 651,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 4,
+        "commands": 3,
+        "events": 437,
+        "checkpoints": [
+          "initial",
+          "mid",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/threshold-zero",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-threshold-zero",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/type-19",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-type-19",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/type-20",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-type-20",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/type-26",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-type-26",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/type-27",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-type-27",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "corpus/water-neighbors",
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-water-neighbors",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 1,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          },
+          {
+            "ordinal": 2,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 2,
+        "commands": 2,
+        "events": 15,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/clear-on",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/threshold-inside",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-inside",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/threshold-boundary",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-boundary",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 7,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/threshold-outside",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-outside",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 7,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/clamp",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-clamp",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/below",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-below",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/magic",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-magic",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/shore-clear",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-shore",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/rainforest",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-rainforest",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/tie",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-tie",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 9,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/clear-limit",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-limit",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 650
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 4,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/terraform-one",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/terraform-four",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-four",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 77,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/terraform-estimate",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 32,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/terraform-limit",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-limit",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 32,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/terraform-money",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-money",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 32,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/shore-terraform",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-shore",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 7,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "terraform_land",
+                "tile": 650,
+                "slope": 8,
+                "dir_up": true
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 53,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/level-one",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 650,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 225,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/level-money",
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-money",
+        "label": "final"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "actions": [
+          {
+            "ordinal": 101,
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "level_land",
+                "tile": 652,
+                "start_tile": 650,
+                "diagonal": false,
+                "level_mode": 2
+              }
+            }
+          }
+        ]
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 1,
+        "commands": 1,
+        "events": 121,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-one",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-shore",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 3
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-four",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 585,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              },
+              {
+                "tile": 586,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              },
+              {
+                "tile": 649,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              },
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-inside",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 669,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-boundary",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 670,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-outside",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 671,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-clamp",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -990,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-below",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": -1001,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-magic",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": true
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-rainforest",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 20,
+                "count": 4,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          }
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-tie",
+      "input": {
+        "kind": "sparse_town"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "populated",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 649,
+                "rating": 500,
+                "have_rating": false
+              },
+              {
+                "id": 2,
+                "tile": 651,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "paused": false
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-limit",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "company_limit": 0
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    },
+    {
+      "id": "prior/fixture-money",
+      "input": {
+        "kind": "tracked",
+        "path": "fixtures/replay/clear-v362.sav"
+      },
+      "protocol": {
+        "schema_version": 1,
+        "fixture": {
+          "profile": "clear",
+          "trees": {
+            "tiles": [
+              {
+                "tile": 650,
+                "type": 0,
+                "count": 1,
+                "ground": 0
+              }
+            ],
+            "towns": [
+              {
+                "id": 0,
+                "tile": 650,
+                "rating": 500,
+                "have_rating": false
+              }
+            ],
+            "threshold": 20,
+            "magic_bulldozer": false
+          },
+          "company_money": 0
+        },
+        "actions": []
+      },
+      "observe": true,
+      "historical_membership": {
+        "actions": 0,
+        "commands": 0,
+        "events": 0,
+        "checkpoints": [
+          "initial",
+          "final"
+        ]
+      }
+    }
+  ],
+  "edits": {
+    "auto-clear-limit": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "clear_limit"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "identity"
+      }
+    },
+    "foreign-owner": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 650,
+            "value": {
+              "type": 64,
+              "height": 4,
+              "m1": 113,
+              "m2": 48,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "identity"
+      }
+    },
+    "water-neighbors": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 585,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 73,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 586,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 74,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 587,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 75,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 649,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 137,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 651,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 139,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 713,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 201,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 714,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 202,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 715,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 203,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "identity"
+      }
+    },
+    "coastal-geometry": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "prior/fixture-one",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 258,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 259,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 260,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 261,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 262,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 263,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 264,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 265,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 266,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 267,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 268,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 269,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 270,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 322,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 323,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 324,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 325,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 326,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 327,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 328,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 329,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 330,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 331,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 332,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 333,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 334,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 386,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 387,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 388,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 389,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 390,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 391,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 392,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 393,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 394,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 395,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 396,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 397,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 398,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 450,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 451,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 452,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 453,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 454,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 455,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 456,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 457,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 458,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 459,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 460,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 461,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 462,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 514,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 515,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 516,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 517,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 518,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 519,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 520,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 521,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 522,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 523,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 524,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 525,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 526,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 578,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 579,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 580,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 581,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 582,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 583,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 584,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 585,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 586,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 587,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 588,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 589,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 590,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 642,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 643,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 644,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 645,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 646,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 647,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 648,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 649,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 650,
+            "value": {
+              "type": 64,
+              "height": 0,
+              "m1": 16,
+              "m2": 240,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 651,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 652,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 653,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 654,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 706,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 707,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 708,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 709,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 710,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 711,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 712,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 713,
+            "value": {
+              "type": 96,
+              "height": 0,
+              "m1": 17,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 714,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 715,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 716,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 717,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 718,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 770,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 771,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 772,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 773,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 774,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 775,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 776,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 777,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 778,
+            "value": {
+              "type": 0,
+              "height": 0,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 779,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 780,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 781,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 782,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 834,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 835,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 836,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 837,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 838,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 839,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 840,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 841,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 842,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 843,
+            "value": {
+              "type": 0,
+              "height": 1,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 844,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 845,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 846,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 898,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 899,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 900,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 901,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 902,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 903,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 904,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 905,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 906,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 907,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 908,
+            "value": {
+              "type": 0,
+              "height": 2,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 909,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 910,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 962,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 963,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 964,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 965,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 966,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 967,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 968,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 969,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 970,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 971,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 972,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 973,
+            "value": {
+              "type": 0,
+              "height": 3,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 974,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1026,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1027,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1028,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1029,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1030,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1031,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1032,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1033,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1034,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1035,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1036,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1037,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1038,
+            "value": {
+              "type": 0,
+              "height": 4,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "identity"
+      }
+    },
+    "climate-1": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-ground-4",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "game_creation.landscape"
+            ],
+            "value": {
+              "unsigned": 1
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "climate_log",
+        "climate": 1
+      }
+    },
+    "climate-desert": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/fixture-type-27",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "game_creation.landscape"
+            ],
+            "value": {
+              "unsigned": 2
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 650,
+            "value": {
+              "type": 65,
+              "height": 4,
+              "m1": 112,
+              "m2": 176,
+              "m3": 27,
+              "m4": 0,
+              "m5": 195,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "climate_log",
+        "climate": 2
+      }
+    },
+    "coastal-dry-twin": {
+      "input": {
+        "kind": "checkpoint",
+        "case": "corpus/canonical-coastal-geometry",
+        "label": "final"
+      },
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 650,
+            "value": {
+              "type": 64,
+              "height": 0,
+              "m1": 112,
+              "m2": 48,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      },
+      "canonical_delta": {
+        "kind": "identity"
+      }
+    }
+  },
+  "domains": [
+    {
+      "id": "auto-clear-limit",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "bridge-boundary",
+      "domain": "unsupported_bridge"
+    },
+    {
+      "id": "clear-limit-65535",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "clear-limit-65536",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "climate-1-clear",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "climate-desert-clear",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "coastal-clear-off",
+      "domain": "observer_off_control"
+    },
+    {
+      "id": "coastal-clear-repeat",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "coastal-clear",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "coastal-dry-clear",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "coastal-dry-terraform",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "coastal-terraform-lower",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "coastal-water-boundary",
+      "domain": "unsupported_water"
+    },
+    {
+      "id": "company-15",
+      "domain": "early_company_gate"
+    },
+    {
+      "id": "company-18",
+      "domain": "unsupported_deity"
+    },
+    {
+      "id": "contiguous-tie",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "count-2",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "count-3",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "count-4",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "count-one",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "field-shore-pair",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "field-shore-terraform-estimate",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "foreign-owner",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "ground-1-terraform",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "ground-1",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "ground-2-terraform",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "ground-2",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "ground-4-terraform",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "ground-4",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "have-rating",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "level-diagonal-lower",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "level-diagonal",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "level-limit-one-estimate",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "level-limit-one",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "level-partial-money",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "manhattan",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "multicorner-all",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "multicorner-failure",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "rating--1000",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "rating--964",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "rating--965",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "rating--966",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "rating--999",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "resume",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "sequence",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "threshold-zero",
+      "domain": "loader_clamp_boundary"
+    },
+    {
+      "id": "type-19",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "type-20",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "type-26",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "type-27",
+      "domain": "terrain_parity"
+    },
+    {
+      "id": "water-neighbors",
+      "domain": "terrain_parity"
+    }
+  ],
+  "prior_commands": [
+    "clear-on",
+    "threshold-inside",
+    "threshold-boundary",
+    "threshold-outside",
+    "clamp",
+    "below",
+    "magic",
+    "shore-clear",
+    "rainforest",
+    "tie",
+    "clear-limit",
+    "terraform-one",
+    "terraform-four",
+    "terraform-estimate",
+    "terraform-limit",
+    "terraform-money",
+    "shore-terraform",
+    "level-one",
+    "level-money"
+  ],
+  "tracked_inputs": {
+    "fixtures/replay/populated-v362.sav": "4b12b7d5860526387b156da2e3c8fcf96673f0685cc1032d2a5be6e645128dcf",
+    "fixtures/replay/clear-v362.sav": "26a604958172a84ddfd895836da5e55666baf28a085bc438236cbdc8931464d2",
+    "fixtures/world/game-v362.sav": "233bb3bbd4086e22a32dfb230f7f551f1fb94e89eacc49927cbcfd44596feee6"
+  },
+  "membership_basis": "historical native24 observations; fresh complete execution still required"
+}

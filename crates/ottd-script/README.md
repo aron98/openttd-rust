@@ -7,7 +7,7 @@ to game ticks.
 
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
-assignment, blocks, if/else, while/for/do loops, array-only foreach, scalar switch/case/default, break and continue. Values include null,
+assignment, blocks, if/else, while/for/do loops, array/string foreach, scalar switch/case/default, break and continue. Values include null,
 bool, i64 decimal/octal/hex integers, raw f32 values, immutable byte strings and
 identity-bearing arrays whose elements are structurally restricted to scalars.
 Normal, verbatim and character literals follow native escapes and encoded-byte
@@ -51,7 +51,7 @@ bytecode returns typed errors. Runtime errors and returns terminate the frame.
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
 is portable native semantics. Twenty-eight opcode handlers remain unimplemented.
-Foreach, general objects, functions/closures,
+Other general iterables, general objects, functions/closures,
 cyclic graph ownership/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
 Float NaN payload witnesses are specific to the tested native/Rust toolchain.
@@ -341,31 +341,36 @@ zero-prefix `toupper` is still an undefined argument for decoded values above255
 an observed native acceptance there does not make it a defined octal input.
 
 
-## Array-only foreach
+## Array and byte-string foreach
 
 `foreach(value in array)` and `foreach(index, value in array)` traverse the existing
 scalar-element Array graph. The compiler retains the iterable register and emits
 native FOREACH/POSTFOREACH tuples with adjacent index, value and hidden-cursor
-locals. Each successful array step skips POSTFOREACH, preserving its zero dispatch
+locals. Each successful iteration step skips POSTFOREACH, preserving its zero dispatch
 cost; actually reaching POSTFOREACH remains `UnsupportedOpcode(0x34)`. Iteration
 preserves the runner temporary and native guarded scope cleanup. It does not eagerly
 release the final loop value merely because lexical scope ended.
 
-Reassigning a local iterable changes the array read by the next iteration while
+Reassigning a local iterable changes the receiver read by the next iteration while
 retaining the hidden cursor. Replacing a root slot does not replace the already
 captured iterable temporary. Host changes to future elements are observed; the
 already-read current value remains independently owned. Existing Runner and Array
 APIs suffice; no public graph or iterator API is added.
 
-Strings compile through foreach but stop with `UnsupportedReceiver`; their valid
-native iteration is a distinct unimplemented boundary. Scalar non-iterables return
-`OperandType`. Tables, generators, host `_nexti`/`_get`, ScriptList iteration, cyclic
+Byte strings iterate stored bytes, including embedded NUL, as integer values with
+byte-offset keys. Values widen the target C `char` ABI: the verified macOS host
+produces -128 through -1 for high bytes. Local string rebinding preserves the
+cursor; replacing a root slot preserves the previously evaluated receiver.
+Negative forged string cursors are rejected before indexing because native string
+Next would access before its buffer; negative array cursors still exhaust. Scalar
+non-iterables return `OperandType`. Tables, generators, host `_nexti`/`_get`, ScriptList iteration, cyclic
 container storage/GC, functions and indexed compound updates remain outside this
 slice. Malformed public bytecode uses `InvalidBytecode`, not new native UB policy.
 
-Focused evidence covers 129 exact native session projections (including promoted
-legacy foreach syntax) and six exact compiled string-boundary captures. Raw native
-refcounts/external owner bookkeeping retain the established observer projection
+The foreach corpus contains 255 strict native session projections, including the
+six promoted historical string sessions and 120 byte-string sessions. All 256 host
+bytes, loop control, rebinding, errors, suspension and owner release are covered.
+Raw native refcounts/external owner bookkeeping retain the established observer projection
 boundary; weak lifecycle, string owners, values, instructions, frame slots, IP,
-debt and temporary state compare strictly. New complete CI profiles are a later
-admission requirement; focused proof does not close the broad Stage 4 gates.
+debt and temporary state compare strictly. Complete CI profiles must independently
+replay the corpus; focused proof does not close the broad Stage 4 gates.

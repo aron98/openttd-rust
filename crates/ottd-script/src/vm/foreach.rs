@@ -1,4 +1,4 @@
-//! Array iteration updates frame locals without replacing the runner temporary.
+//! Array and byte-string iteration updates frame locals without replacing the runner temporary.
 use super::{Instruction, Value, Vm, VmError};
 
 impl Vm<'_> {
@@ -14,13 +14,13 @@ impl Vm<'_> {
         {
             return Err(VmError::InvalidBytecode);
         }
-        let array = match self.register(i32::from(instruction.arg0))? {
-            Value::Array(array) => array,
-            Value::String(_) => return Err(VmError::UnsupportedReceiver),
+        let receiver = self.register(i32::from(instruction.arg0))?;
+        match &receiver {
+            Value::Array(_) | Value::String(_) => {}
             Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => {
                 return Err(VmError::OperandType);
             }
-        };
+        }
         let cursor = match self.register(i32::from(cursor_register))? {
             Value::Null => 0,
             Value::Integer(cursor) => cursor,
@@ -28,7 +28,21 @@ impl Vm<'_> {
                 return Err(VmError::InvalidBytecode);
             }
         };
-        if let Some(value) = array.get(cursor) {
+        let value = match receiver {
+            Value::Array(array) => array.get(cursor),
+            Value::String(string) => {
+                // Native string Next widens target C char; negative cursors are native UB.
+                let index = usize::try_from(cursor).map_err(|_| VmError::InvalidBytecode)?;
+                string
+                    .as_bytes()
+                    .get(index)
+                    .map(|byte| Value::Integer(i64::from(std::ffi::c_char::from_ne_bytes([*byte]))))
+            }
+            Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => {
+                return Err(VmError::OperandType);
+            }
+        };
+        if let Some(value) = value {
             let next = cursor.checked_add(1).ok_or(VmError::InvalidBytecode)?;
             self.jump(1)?;
             self.write(index, Value::Integer(cursor))?;
@@ -39,3 +53,6 @@ impl Vm<'_> {
         }
     }
 }
+
+#[cfg(test)]
+mod tests;

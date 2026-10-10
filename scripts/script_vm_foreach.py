@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-"""Native array foreach sessions, explicit boundaries and production admission."""
+"""Native array and byte-string foreach sessions and production admission."""
 
 import shutil
 import subprocess
@@ -30,6 +30,17 @@ TESTS: Final = (
     "successful_skip_is_checked_and_receiver_precedes_cursor_type",
     "production_regressions::allocation_iteration_and_index_mutation",
     "production_regressions::shared_root_mutation_at_foreach_boundary",
+    "string_regressions::ascii_count",
+    "string_regressions::byte_offsets_and_values",
+    "string_regressions::empty_string_exhausts",
+    "string_regressions::foreign_realm_host_bytes_include_nul_and_high_bytes",
+    "string_regressions::suspended_local_rebinding_preserves_cursor",
+    "string_regressions::suspended_root_rebinding_keeps_evaluated_receiver",
+    "string_safety::malformed_string_cursor_is_rejected_before_indexing",
+    "string_safety::exhausted_string_cursor_preserves_unwritten_value",
+    "string_safety::malformed_string_registers_and_reserved_operand_are_rejected",
+    "string_safety::string_checks_only_taken_branch_and_skips_invalid_post",
+    "string_safety::string_successful_skip_must_land_in_program",
 )
 
 BUILD: Final = [
@@ -75,6 +86,55 @@ CONTROLS: Final = {
         "return 9991 string 7 6e65776e657874",
     ),
 }
+CONTROLS.update(
+    {
+        "string-sign": (
+            "attempt-05-all-bytes-stepped-buffer",
+            "frame 4 integer -128",
+            "frame 4 integer 128",
+        ),
+        "string-nul": (
+            "attempt-05-all-bytes-stepped-buffer",
+            "frame 4 integer 0",
+            "frame 4 integer 1",
+        ),
+        "string-key": (
+            "attempt-05-all-bytes-stepped-buffer",
+            "frame 3 integer 128",
+            "frame 3 integer 127",
+        ),
+        "string-cursor": (
+            "attempt-05-all-bytes-stepped-buffer",
+            "frame 5 integer 256",
+            "frame 5 integer 255",
+        ),
+        "string-skip": (
+            "attempt-05-all-bytes-stepped-buffer",
+            "suspend 0 5",
+            "suspend 0 4",
+        ),
+        "string-debt": (
+            "attempt-05-all-bytes-stepped-buffer",
+            "suspend -1 0",
+            "suspend 0 0",
+        ),
+        "string-temp": (
+            "attempt-05-prior-temp-readpoints-buffer",
+            "temp string 7 6f6c6474656d70",
+            "temp null",
+        ),
+        "string-local-rebind": (
+            "attempt-05-local-shorter-readpoints-buffer",
+            "frame 1 string 2 7879",
+            "frame 1 string 4 61626364",
+        ),
+        "string-root-capture": (
+            "attempt-05-root-after-readpoints-buffer",
+            "frame 4 integer 100",
+            "frame 4 integer 122",
+        ),
+    }
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -117,7 +177,14 @@ def declarations() -> dict[str, Session]:
             session.is_absolute()
             or ".." in session.parts
             or len(session.parts) != 3
-            or row.cwd not in {"attempt-01", "attempt-02", "attempt-03", "attempt-04"}
+            or row.cwd
+            not in {
+                "attempt-01",
+                "attempt-02",
+                "attempt-03",
+                "attempt-04",
+                "attempt-05",
+            }
             or session.parent != Path(row.cwd) / "fixtures"
             or session.suffix != ".session"
             or name != row.cwd + "-" + session.stem
@@ -136,7 +203,7 @@ def declarations() -> dict[str, Session]:
         len(result),
         domains.count("strict-stateful-projection"),
         domains.count("explicit-runtime-boundary"),
-    ) != (135, 129, 6):
+    ) != (255, 255, 0):
         raise WorldCheckError("Incomplete foreach session domains")
     return result
 
@@ -319,7 +386,7 @@ def validate_corpus() -> None:
         for p in (ROOT / SOURCE).rglob("*")
         if p.is_file() and p.name != "witnesses.json"
     }
-    if actual != set(files) or len(actual) != 317:
+    if actual != set(files) or len(actual) != 587:
         raise WorldCheckError("Foreach corpus membership differs")
     for name, sha in files.items():
         if (

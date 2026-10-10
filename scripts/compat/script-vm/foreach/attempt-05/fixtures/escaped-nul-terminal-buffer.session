@@ -1,0 +1,2 @@
+compile 0 0 buffer escaped-nul.nut
+run 0 0 10000

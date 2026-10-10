@@ -1,5 +1,6 @@
 """Exact native session identity, retained cwd and corruption boundaries."""
 
+import ast
 import json
 import shutil
 from pathlib import Path
@@ -31,8 +32,8 @@ def prepare(directory: Path, name: str) -> Path:
 
 
 def test_real_source_corpus_has_exact_membership_and_shared_captures() -> None:
-    assert len(foreach.cases()) == 135
-    assert len(foreach.input_names()) == 181
+    assert len(foreach.cases()) == 255
+    assert len(foreach.input_names()) == 325
     foreach.validate_corpus()
 
 
@@ -174,3 +175,47 @@ def test_actual_control_artifacts_match_declared_manifest(tmp_path: Path) -> Non
         if name.startswith("controls/foreach-")
     }
     assert actual == declared
+
+
+def test_actual_input_emission_matches_declared_manifest() -> None:
+    actual = {"foreach/inputs/" + name for name in foreach.input_names()}
+    actual.update(
+        "foreach/inputs/" + str(foreach.capture(name)) for name in foreach.cases()
+    )
+    declared = {
+        name
+        for name in load_spec(ROOT / "scripts/script-vm-manifest.json").paths
+        if name.startswith("foreach/inputs/")
+    }
+    assert actual == declared
+
+
+@pytest.mark.parametrize(
+    "filename", ["scripts/check-script-vm.py", "scripts/script_vm_evidence.py"]
+)
+def test_summary_counts_keep_control_domains_separate(filename: str) -> None:
+    paths = load_spec(ROOT / "scripts/script-vm-manifest.json").paths
+    controls = {Path(name).parts[1] for name in paths if name.startswith("controls/")}
+    scalar = {
+        name
+        for name in controls
+        if not name.startswith(("string-", "constant-", "root-", "array-", "foreach-"))
+    }
+    summaries: list[tuple[int, int]] = []
+    for node in ast.walk(ast.parse((ROOT / filename).read_text())):
+        if not isinstance(node, ast.Dict):
+            continue
+        fields: dict[str, int] = {}
+        for key, value in zip(node.keys, node.values, strict=True):
+            if (
+                isinstance(key, ast.Constant)
+                and isinstance(key.value, str)
+                and isinstance(value, ast.Constant)
+                and isinstance(value.value, int)
+            ):
+                fields[key.value] = value.value
+        if "foreach_controls" in fields:
+            summaries.append((fields["controls"], fields["foreach_controls"]))
+    assert summaries == [
+        (len(scalar), len({name for name in controls if name.startswith("foreach-")}))
+    ]

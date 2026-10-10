@@ -1,4 +1,4 @@
-//! Public bytecode validation around the array-only foreach dispatch.
+//! Public bytecode validation around the array and byte-string foreach dispatch.
 use ottd_script::{Execution, Instruction, Program, Realm, Value, Vm, VmError};
 use std::error::Error;
 type Result<T = ()> = std::result::Result<T, Box<dyn Error>>;
@@ -125,7 +125,6 @@ fn cursor_type_is_bytecode_error_not_a_new_native_policy() -> Result {
 #[test]
 fn unsupported_iterable_and_non_iterable_have_distinct_boundaries() -> Result {
     for (source, expected) in [
-        ("foreach(v in \"abc\") ;", VmError::UnsupportedReceiver),
         ("foreach(v in null) ;", VmError::OperandType),
         ("foreach(v in 7) ;", VmError::OperandType),
         ("foreach(v in true) ;", VmError::OperandType),
@@ -160,10 +159,7 @@ fn successful_skip_is_checked_and_receiver_precedes_cursor_type() -> Result {
     );
     let realm = Realm::new();
     for (receiver, error) in [
-        (
-            Value::String(realm.string(b"x")),
-            VmError::UnsupportedReceiver,
-        ),
+        (Value::String(realm.string(b"x")), VmError::InvalidBytecode),
         (Value::Null, VmError::OperandType),
     ] {
         let program = Program::from_parts(
@@ -184,3 +180,8 @@ fn successful_skip_is_checked_and_receiver_precedes_cursor_type() -> Result {
 
 #[path = "foreach_public.rs"]
 mod production_regressions;
+
+#[path = "string_foreach_public.rs"]
+mod string_regressions;
+#[path = "string_foreach_bytecode.rs"]
+mod string_safety;

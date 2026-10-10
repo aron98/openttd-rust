@@ -1,0 +1,22 @@
+seed 0 74657874 string 61626364
+seed 0 656666656374 integer 0
+share 1 0
+compile 1 0 utf8 child-release.nut
+run 1 0 0
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 2
+advance 1 10000
+temp 1
+raw 0 74657874
+raw 0 656666656374
+refs 0 61626364
+drop 1 0
+clear-result 1
+refs 0 61626364
+release-child 1
+refs 0 61626364
+seed 0 74657874 null -
+refs 0 61626364

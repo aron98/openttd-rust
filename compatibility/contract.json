@@ -3220,7 +3220,7 @@
     {
       "id": "safety-ci-safety-ci-layout",
       "path": "scripts/safety-ci-layout.json",
-      "sha256": "fbc17dfa84bad6cd6315773ba6bb5417d32469810060c5bc6921325d420a7bb2",
+      "sha256": "3fa15ddd3bae7df888c7a7b284528319f38a7dae20a71bf7b00c5c00db6decff",
       "kind": "recipe",
       "provenance": "Pinned safety source, native observations and complete raw proof.",
       "save_version": null,

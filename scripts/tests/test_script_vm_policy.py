@@ -15,7 +15,13 @@ from scripts.script_vm_policy import (
     observe_native,
 )
 from scripts.script_vm_provenance import load_spec
-from scripts.world_check_support import ROOT, WorldCheckError, read_json, write_json
+from scripts.world_check_support import (
+    ROOT,
+    Json,
+    WorldCheckError,
+    read_json,
+    write_json,
+)
 
 
 class ScriptVmPolicyTests(unittest.TestCase):
@@ -172,13 +178,14 @@ class ScriptVmPolicyTests(unittest.TestCase):
             _ = (case / "rust/stdout.log").write_text("compile_error\n")
             _ = (case / "rust/stderr.log").write_text(policy.diagnostic())
             write_json(case / "rust/process.json", {"returncode": 0, "expected": 0})
-            for receipt in (
+            receipts: tuple[Json, ...] = (
                 {},
                 {"native_executed": True, "reason": POLICY_STAGE},
                 {"native_executed": 0, "reason": POLICY_STAGE},
                 {"native_executed": False, "reason": "return"},
                 {"native_executed": False, "reason": POLICY_STAGE, "extra": 1},
-            ):
+            )
+            for receipt in receipts:
                 with self.subTest(receipt=receipt):
                     write_json(case / "policy.json", receipt)
                     with self.assertRaises(WorldCheckError):
@@ -213,7 +220,7 @@ class ScriptVmPolicyTests(unittest.TestCase):
             rust = root / "rust"
             _ = rust.write_text(
                 "#!/bin/sh\nprintf 'compile_error\\n'\n"
-                f"printf '%s' '{policy.diagnostic()}' >&2\n"
+                + f"printf '%s' '{policy.diagnostic()}' >&2\n"
             )
             rust.chmod(0o755)
             result = subprocess.run(

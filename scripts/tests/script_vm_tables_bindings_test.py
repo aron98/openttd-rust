@@ -1,8 +1,8 @@
 """Table producer inputs must be admitted, not just present on disk."""
 
+import shutil
 from dataclasses import replace
 from pathlib import Path
-import shutil
 
 import pytest
 

@@ -18,7 +18,7 @@ pub(super) fn split(
     }
     let feeder = state.number(b"CAPA", packet, "feeder_share")?;
     let share = feeder
-        .wrapping_mul(i64::from(count))
+        .saturating_mul(i64::from(count))
         .checked_div(old_count)
         .ok_or_else(|| unsupported("cargo_split", "feeder divisor"))?;
     let id = cargo.pool.allocate().map_err(RuntimeError::from)?;
@@ -45,7 +45,12 @@ pub(super) fn split(
         "count",
         old_count.wrapping_sub(i64::from(count)),
     )?;
-    state.set_number(b"CAPA", packet, "feeder_share", feeder.wrapping_sub(share))?;
+    state.set_number(
+        b"CAPA",
+        packet,
+        "feeder_share",
+        feeder.saturating_sub(share),
+    )?;
     Ok(Some(id))
 }
 
@@ -96,7 +101,7 @@ pub(super) fn merge(
     }
     let feeder = state
         .number(b"CAPA", into, "feeder_share")?
-        .wrapping_add(state.number(b"CAPA", from, "feeder_share")?);
+        .saturating_add(state.number(b"CAPA", from, "feeder_share")?);
     state.set_number(b"CAPA", into, "count", count)?;
     state.set_number(b"CAPA", into, "feeder_share", feeder)?;
     state.apply(WorldEdit::RemoveRecord {
@@ -120,9 +125,9 @@ pub(super) fn reduce(state: &mut State<'_>, id: u32, removed: u32) -> Result<(),
     let count = state.number(b"CAPA", id, "count")?;
     let feeder = state.number(b"CAPA", id, "feeder_share")?;
     let share = feeder
-        .wrapping_mul(i64::from(removed))
+        .saturating_mul(i64::from(removed))
         .checked_div(count)
         .ok_or_else(|| unsupported("cargo_packet", "count divisor"))?;
     state.set_number(b"CAPA", id, "count", count.wrapping_sub(i64::from(removed)))?;
-    state.set_number(b"CAPA", id, "feeder_share", feeder.wrapping_sub(share))
+    state.set_number(b"CAPA", id, "feeder_share", feeder.saturating_sub(share))
 }

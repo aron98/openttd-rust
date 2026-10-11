@@ -61,3 +61,47 @@ fn original_packet_load_and_split_effects() -> Result {
     std::fs::write(output.join("result.json"), b"{\"loaded\":5,\"full_cargo_cache_equal\":true,\"saved_packet_pool_equal\":true,\"full_tick_parity\":false}")?;
     Ok(())
 }
+
+#[test]
+#[ignore = "requires CARGO_INPUT genuine loaded save and FEEDER_EXPECTED/FEEDER_OUTPUT synthetic original arithmetic"]
+fn original_feeder_share_partial_packet_arithmetic() -> Result {
+    let bytes = std::fs::read(std::env::var("CARGO_INPUT")?)?;
+    let expected = std::fs::read_to_string(std::env::var("FEEDER_EXPECTED")?)?;
+    let mut rows = 0;
+    for line in expected.lines() {
+        let [feeder, count, removed, _share, remaining]: [i64; 5] = serde_json::from_str(line)?;
+        let mut world = World::decode(&Savegame::decode(&bytes, ottd_save::DEFAULT_MAX_BYTES)?)?;
+        let cargo = CargoRuntime::restore(&world)?;
+        let id = *cargo
+            .vehicles
+            .get(&0)
+            .ok_or("vehicle cargo")?
+            .packets
+            .first()
+            .ok_or("loaded packet")?;
+        let mut state = WorldTickState::load(&mut world, None);
+        // Deliberately synthetic arithmetic inputs, separate from native world parity.
+        state.set_number(b"CAPA", id, "count", count)?;
+        state.set_number(b"CAPA", id, "feeder_share", feeder)?;
+        super::packet::reduce(&mut state, id, u32::try_from(removed)?)?;
+        assert_eq!(
+            state.number(b"CAPA", id, "count")?,
+            count - removed,
+            "{line}"
+        );
+        assert_eq!(
+            state.number(b"CAPA", id, "feeder_share")?,
+            remaining,
+            "{line}"
+        );
+        rows += 1;
+    }
+    assert_eq!(rows, 36);
+    std::fs::write(
+        std::env::var("FEEDER_OUTPUT")?,
+        serde_json::to_vec_pretty(
+            &serde_json::json!({"synthetic_original_partial_packet_arithmetic_cases":rows}),
+        )?,
+    )?;
+    Ok(())
+}

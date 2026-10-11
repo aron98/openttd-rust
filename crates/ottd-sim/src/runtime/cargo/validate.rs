@@ -57,7 +57,7 @@ fn totals(
         let WireValue::Signed(share) = value(row, "feeder_share")? else {
             return Err(RuntimeError::Invalid("packet feeder share"));
         };
-        feeder = feeder.wrapping_add(*share);
+        feeder = feeder.saturating_add(*share);
     }
     Ok((count, periods, feeder))
 }

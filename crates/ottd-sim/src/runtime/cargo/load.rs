@@ -120,7 +120,7 @@ fn append(
     let feeder = state.number(b"CAPA", packet, "feeder_share")?;
     vehicle.count = vehicle.count.wrapping_add(moved);
     vehicle.periods = vehicle.periods.wrapping_add(periods);
-    vehicle.feeder_share = vehicle.feeder_share.wrapping_add(feeder);
+    vehicle.feeder_share = vehicle.feeder_share.saturating_add(feeder);
     let kept = vehicle
         .actions
         .get_mut(2)

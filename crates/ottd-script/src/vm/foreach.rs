@@ -22,7 +22,8 @@ impl Vm<'_> {
             | Value::Float(_)
             | Value::NativeClosure(_)
             | Value::ScriptClosure(_) => {
-                return Err(VmError::OperandType);
+                let message = format!("cannot iterate {}", receiver.type_label());
+                return Err(self.native_failure(message.as_bytes(), VmError::OperandType));
             }
         }
         let cursor = match self.register(i32::from(cursor_register))? {
@@ -68,7 +69,8 @@ impl Vm<'_> {
             | Value::Float(_)
             | Value::NativeClosure(_)
             | Value::ScriptClosure(_) => {
-                return Err(VmError::OperandType);
+                let message = format!("cannot iterate {}", receiver.type_label());
+                return Err(self.native_failure(message.as_bytes(), VmError::OperandType));
             }
         };
         if let Some(value) = value {

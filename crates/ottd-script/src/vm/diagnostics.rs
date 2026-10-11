@@ -3,41 +3,49 @@ use super::{Value, Vm, VmError};
 
 impl Vm<'_> {
     pub(super) fn index_failure(&mut self, key: &Value, error: VmError) -> VmError {
-        let rendered = match key {
-            Value::String(value) => value.as_bytes().to_vec(),
-            Value::Integer(value) => value.to_string().into_bytes(),
-            Value::Float(bits) => match float_diagnostic(*bits) {
-                Ok(value) => value.into_bytes(),
-                Err(failure) => return failure,
-            },
-            Value::Null
-            | Value::Bool(_)
-            | Value::Array(_)
-            | Value::Table(_)
-            | Value::NativeClosure(_)
-            | Value::ScriptClosure(_) => key.type_label().as_bytes().to_vec(),
-        };
-        // Bundled fmt counts valid UTF-8 codepoints and treats each invalid byte
-        // as one codepoint; SQString::View preserves embedded NUL bytes.
-        let length = rendered
-            .utf8_chunks()
-            .flat_map(|chunk| {
-                chunk
-                    .valid()
-                    .chars()
-                    .map(char::len_utf8)
-                    .chain(chunk.invalid().iter().map(|_| 1))
-            })
-            .take(50)
-            .sum();
-        let Some(prefix) = rendered.get(..length) else {
-            return VmError::InvalidBytecode;
+        let prefix = match diagnostic_prefix(key) {
+            Ok(prefix) => prefix,
+            Err(error) => return error,
         };
         let mut message = b"the index '".to_vec();
-        message.extend_from_slice(prefix);
+        message.extend_from_slice(&prefix);
         message.extend_from_slice(b"' does not exist");
         self.native_failure(&message, error)
     }
+}
+
+pub(super) fn diagnostic_prefix(value: &Value) -> Result<Vec<u8>, VmError> {
+    let rendered = match value {
+        Value::String(value) => value.as_bytes().to_vec(),
+        Value::Integer(value) => value.to_string().into_bytes(),
+        Value::Float(bits) => match float_diagnostic(*bits) {
+            Ok(value) => value.into_bytes(),
+            Err(failure) => return Err(failure),
+        },
+        Value::Null
+        | Value::Bool(_)
+        | Value::Array(_)
+        | Value::Table(_)
+        | Value::NativeClosure(_)
+        | Value::ScriptClosure(_) => value.type_label().as_bytes().to_vec(),
+    };
+    // Bundled fmt counts valid UTF-8 codepoints and treats each invalid byte
+    // as one codepoint; SQString::View preserves embedded NUL bytes.
+    let length = rendered
+        .utf8_chunks()
+        .flat_map(|chunk| {
+            chunk
+                .valid()
+                .chars()
+                .map(char::len_utf8)
+                .chain(chunk.invalid().iter().map(|_| 1))
+        })
+        .take(50)
+        .sum();
+    let Some(prefix) = rendered.get(..length) else {
+        return Err(VmError::InvalidBytecode);
+    };
+    Ok(prefix.to_vec())
 }
 
 fn float_diagnostic(bits: u32) -> Result<String, VmError> {

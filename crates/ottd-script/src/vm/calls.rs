@@ -27,7 +27,8 @@ impl Vm<'_> {
         self.write(i.arg0, closure)
     }
     pub(super) fn native_failure(&mut self, message: &[u8], error: VmError) -> VmError {
-        self.runner.get_mut().native_error = Some(self.runner.get().root.realm.string(message));
+        self.runner.get_mut().native_error =
+            Value::String(self.runner.get().root.realm.string(message));
         error
     }
     pub(super) fn call(

@@ -11,6 +11,7 @@ mod dispatch;
 mod foreach;
 mod frames;
 mod objects;
+mod operations;
 mod registers;
 mod roots;
 mod tables;
@@ -102,6 +103,10 @@ impl<'a> Vm<'a> {
     /// Last native-call error bytes, including a failure in this active frame.
     pub const fn native_error(&self) -> Option<&crate::ByteString> {
         self.runner.get().native_error()
+    }
+    /// Borrow the retained native error object without changing VM state.
+    pub const fn native_error_value(&self) -> &Value {
+        self.runner.get().native_error_value()
     }
     fn program(&self) -> Result<crate::Prototype, VmError> {
         self.program

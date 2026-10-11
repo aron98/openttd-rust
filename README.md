@@ -26,8 +26,10 @@ Separate after-load APIs restore stopped vanilla single locomotives and one
 straight consist on flat normal rail. Train movement remains required.
 Vanilla houses also advance construction and passenger/mail production with
 restored town caches, monthly histories, and both-origin save continuations.
-Town growth and broader industry behavior remain required. Forest production
-with active road cargo recipients is currently being implemented and verified.
+Vanilla temperate forest production now hands cargo to active road recipients,
+with native-backed stock/history, graphics/RNG, recipient distribution and
+both-origin simulated save continuations. Town growth, processing industries
+and broader industry behavior remain required.
 The independent Squirrel library supports
 graph-backed arrays/tables, first-class roots, native closure identity and
 metadata, mutable `this`, bounded ownership/cycle collection, and bare-root

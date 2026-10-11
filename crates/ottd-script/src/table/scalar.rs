@@ -16,7 +16,9 @@ impl Scalar {
             Value::Integer(value) => Ok(Self::Integer(value)),
             Value::Float(value) => Ok(Self::Float(value)),
             Value::String(value) => Ok(Self::String(realm.string(value.as_bytes()))),
-            Value::Array(_) | Value::Table(_) => Err(VmError::UnsupportedTableElement),
+            Value::Array(_) | Value::Table(_) | Value::NativeClosure(_) => {
+                Err(VmError::UnsupportedTableElement)
+            }
         }
     }
     pub(crate) fn value(&self) -> Value {

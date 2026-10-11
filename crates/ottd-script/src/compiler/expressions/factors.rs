@@ -58,6 +58,7 @@ impl Compiler<'_> {
                 Ok(None)
             }
             TokenKind::Identifier(name) => self.identifier(name, state),
+            TokenKind::This => self.identifier("this", state),
             TokenKind::Root => self.explicit_root(state),
             TokenKind::Symbol(b'[') => self.array_literal(depth),
             TokenKind::Symbol(b'{') => self.table_literal(depth),

@@ -1,5 +1,5 @@
 //! Replay the captured passive host protocol through the single production VM loop.
-use super::{Execution, Slot, Storage, Temporary, Vm};
+use super::{Execution, Storage, Temporary, Vm};
 use crate::{Program, Realm, RootEnvironment, Runner, Value, VmError};
 use std::{error::Error, fmt::Write, fs, path::Path};
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
@@ -13,6 +13,7 @@ struct Session {
 }
 pub(super) fn render(value: &Value) -> Result<String> {
     Ok(match value {
+        Value::NativeClosure(_) => "unsupported 134218240".to_owned(),
         Value::Table(_) => "unsupported 167772192".to_owned(),
         Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
@@ -111,15 +112,16 @@ impl Session {
                 )?;
                 for (slot, value) in frame.registers.iter().enumerate() {
                     match value {
-                        Slot::Value(value) => writeln!(out, "frame {slot} {}", render(value)?)?,
-                        Slot::Root(root) => {
-                            assert!(root.same(&frame.runner.get().root));
+                        Value::Table(root)
+                            if root.same_identity(&frame.runner.get().root.table) =>
+                        {
                             writeln!(
                                 out,
                                 "frame {slot} root {}",
                                 self.ids.get(id).ok_or("missing root id")?
                             )?;
                         }
+                        value => writeln!(out, "frame {slot} {}", render(value)?)?,
                     }
                 }
                 false
@@ -385,7 +387,8 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
         std::path::PathBuf::from,
     );
     for feed in ["buffer", "unsigned", "utf8"] {
-        for name in ["unsupported-root", "unsupported-update"] {
+        {
+            let name = "unsupported-update";
             let native = fs::read_to_string(base.join(format!("native/{name}-{feed}.txt")))?;
             assert!(native.lines().any(|line| line == "compiled"));
             let source = fs::read(base.join(format!("fixtures/{name}.nut")))?;
@@ -399,6 +402,13 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
         }
         let realm = Realm::new();
         let root = realm.empty_root();
+        let program =
+            realm.compile_bytes(&fs::read(base.join("fixtures/unsupported-root.nut"))?)?;
+        let mut root_runner = Runner::new(root.clone());
+        assert_eq!(
+            root_runner.start(&program)?.resume(100),
+            Ok(Execution::Returned(Value::Table(root.table())))
+        );
         root.new_slot(b"score", Value::Integer(7))?;
         let mut field_runner = Runner::new(root);
         let field_source = fs::read(base.join("fixtures/unsupported-field.nut"))?;

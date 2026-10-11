@@ -26,7 +26,10 @@ impl<'a> Registers<'a> {
     pub(super) fn local(&self, name: &str) -> Option<Register> {
         self.slots
             .iter()
-            .rposition(|slot| matches!(slot, Slot::Local(found) if *found == name))
+            .rposition(|slot| {
+                matches!(slot, Slot::Local(found) if *found == name)
+                    || matches!(slot, Slot::Root) && name == "this"
+            })
             .and_then(|index| u8::try_from(index).ok())
             .map(Register)
     }

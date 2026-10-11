@@ -25,7 +25,7 @@ impl Table {
     fn read<T>(&self, read: impl FnOnce(&Nodes) -> T) -> T {
         self.0.read(|object| match object {
             Object::Table(nodes) => read(nodes),
-            Object::Array(_) => unreachable!(),
+            Object::Array(_) | Object::NativeClosure(_) => unreachable!(),
         })
     }
     #[expect(
@@ -35,7 +35,7 @@ impl Table {
     fn mutate<T>(&self, mutate: impl FnOnce(&mut Nodes) -> T) -> T {
         self.0.mutate(|object| match object {
             Object::Table(nodes) => mutate(nodes),
-            Object::Array(_) => unreachable!(),
+            Object::Array(_) | Object::NativeClosure(_) => unreachable!(),
         })
     }
     pub(crate) fn same_realm(&self, realm: &Realm) -> bool {

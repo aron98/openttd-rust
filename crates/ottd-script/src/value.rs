@@ -6,6 +6,8 @@ use crate::VmError;
 /// Runtime value; float bits preserve negative zero and nonfinite payloads.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Value {
+    /// Native closure object identity; callable execution remains unsupported.
+    NativeClosure(crate::NativeClosure),
     /// Shared mutable native table with scalar keys and graph values.
     Table(crate::Table),
     /// Shared mutable identity with same-realm graph elements.
@@ -28,7 +30,7 @@ impl Value {
             Self::Integer(n) => *n == 0,
             Self::Float(bits) => bits.trailing_zeros() >= 31,
             Self::Bool(b) => !*b,
-            Self::String(_) | Self::Array(_) | Self::Table(_) => false,
+            Self::String(_) | Self::Array(_) | Self::Table(_) | Self::NativeClosure(_) => false,
         }
     }
     pub(crate) fn negate(&self) -> Result<Self, VmError> {
@@ -38,9 +40,12 @@ impl Value {
                 .map(Self::Integer)
                 .ok_or(VmError::UnsupportedOverflow),
             Self::Float(bits) => Ok(Self::Float(bits ^ 0x8000_0000)),
-            Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_) | Self::Table(_) => {
-                Err(VmError::OperandType)
-            }
+            Self::Null
+            | Self::Bool(_)
+            | Self::String(_)
+            | Self::Array(_)
+            | Self::Table(_)
+            | Self::NativeClosure(_) => Err(VmError::OperandType),
         }
     }
     #[expect(
@@ -51,9 +56,12 @@ impl Value {
         match self {
             Self::Integer(n) => Ok(*n as f32),
             Self::Float(bits) => Ok(f32::from_bits(*bits)),
-            Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_) | Self::Table(_) => {
-                Err(VmError::OperandType)
-            }
+            Self::Null
+            | Self::Bool(_)
+            | Self::String(_)
+            | Self::Array(_)
+            | Self::Table(_)
+            | Self::NativeClosure(_) => Err(VmError::OperandType),
         }
     }
     pub(crate) fn arithmetic(
@@ -93,10 +101,24 @@ impl Value {
                 float_arithmetic(self.numeric()?, other.numeric()?, op)
                     .map(|n| Self::Float(n.to_bits()))
             }
-            (Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_) | Self::Table(_), _)
-            | (_, Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_) | Self::Table(_)) => {
-                Err(VmError::OperandType)
-            }
+            (
+                Self::Null
+                | Self::Bool(_)
+                | Self::String(_)
+                | Self::Array(_)
+                | Self::Table(_)
+                | Self::NativeClosure(_),
+                _,
+            )
+            | (
+                _,
+                Self::Null
+                | Self::Bool(_)
+                | Self::String(_)
+                | Self::Array(_)
+                | Self::Table(_)
+                | Self::NativeClosure(_),
+            ) => Err(VmError::OperandType),
         }
     }
 }

@@ -9,9 +9,15 @@
 mod heap;
 #[expect(
     clippy::redundant_pub_crate,
+    reason = "Native closure storage metadata is shared with the crate-private heap"
+)]
+mod native_closure;
+#[expect(
+    clippy::redundant_pub_crate,
     reason = "Physical table storage is shared with the crate-private graph heap"
 )]
 mod table;
+pub use native_closure::{NativeClosure, NativeFunction};
 pub use table::Table;
 mod array;
 pub use array::Array;

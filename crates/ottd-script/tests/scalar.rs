@@ -164,9 +164,8 @@ fn terminal_frame_is_rejected_when_resumed_again() -> Result<(), Box<dyn std::er
 }
 
 #[test]
-fn root_environment_read_is_rejected_when_scalar_bytecode_mentions_it()
--> Result<(), Box<dyn std::error::Error>> {
-    // Given: register zero is the unimplemented root environment, not null.
+fn register_zero_returns_the_native_populated_table() -> Result<(), Box<dyn std::error::Error>> {
+    // Register zero retains the native default root as a first-class table.
     let program = ottd_script::Program::from_parts(
         1,
         vec![],
@@ -178,10 +177,12 @@ fn root_environment_read_is_rejected_when_scalar_bytecode_mentions_it()
             arg3: 0,
         }],
     )?;
-    // When: hostile bytecode tries to return the environment as a scalar.
+    // The native RETURN instruction can read register zero.
     let result = Vm::new(&program)?.resume(10);
-    // Then: the VM cannot invent a null root table.
-    assert_eq!(result, Err(ottd_script::VmError::InvalidBytecode));
+    let Ok(Execution::Returned(Value::Table(table))) = result else {
+        panic!("native root table")
+    };
+    assert_eq!(table.len(), 8);
     Ok(())
 }
 

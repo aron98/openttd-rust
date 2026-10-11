@@ -115,7 +115,7 @@ fn host_preconditions_and_scalar_results_have_separate_ownership() -> Result<()>
 }
 #[test]
 fn unsupported_root_source_remains_distinct_from_lexer_policy() {
-    for source in ["return this;", "score += 1;", "++score;", "score++;"] {
+    for source in ["score += 1;", "++score;", "score++;"] {
         let error = Realm::new()
             .compile(source)
             .expect_err("outside the scalar root domain");
@@ -132,7 +132,7 @@ fn missing_out_of_scope_local_is_a_runtime_lookup() -> Result<()> {
     Ok(())
 }
 #[test]
-fn checked_bytecode_keeps_root_identity_separate_from_scalar_operands() -> Result<()> {
+fn checked_root_bytecode_preserves_index_and_receiver_errors() -> Result<()> {
     use ottd_script::{Instruction, Program, Vm};
     let realm = Realm::new();
     for (instruction, literals, expected) in [
@@ -156,7 +156,7 @@ fn checked_bytecode_keeps_root_identity_separate_from_scalar_operands() -> Resul
                 arg3: 0,
             },
             vec![Value::Integer(1)],
-            VmError::UnsupportedRuntimeValue,
+            VmError::MissingIndex,
         ),
         (
             Instruction {

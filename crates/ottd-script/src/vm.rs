@@ -1,6 +1,5 @@
 use crate::{
-    Instruction, Program, ProgramData, RootEnvironment, Runner, RunnerFailure, Storage, Temporary,
-    Value, VmError,
+    Instruction, Program, ProgramData, Runner, RunnerFailure, Storage, Temporary, Value, VmError,
 };
 use std::rc::Rc;
 #[expect(
@@ -14,20 +13,6 @@ mod objects;
 mod roots;
 mod tables;
 mod updates;
-#[derive(Clone, Debug)]
-enum Slot {
-    Value(Value),
-    Root(RootEnvironment),
-}
-impl Slot {
-    const fn value(&self) -> Result<&Value, VmError> {
-        match self {
-            Self::Value(value) => Ok(value),
-            Self::Root(_) => Err(VmError::UnsupportedRuntimeValue),
-        }
-    }
-}
-
 /// Outcome of an operation-budget slice.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Execution {
@@ -40,7 +25,7 @@ pub enum Execution {
 #[derive(Debug)]
 pub struct Vm<'a> {
     program: Option<Rc<ProgramData>>,
-    registers: Vec<Slot>,
+    registers: Vec<Value>,
     runner: Storage<'a>,
     started: bool,
     ip: usize,
@@ -55,16 +40,16 @@ impl<'a> Vm<'a> {
     pub fn new(program: &'a Program) -> Result<Self, VmError> {
         Self::with_runner(
             program,
-            Storage::Owned(Runner::new(program.data.realm.empty_root())),
+            Storage::Owned(Runner::new(program.data.realm.default_root()?)),
         )
     }
     pub(crate) fn with_runner(program: &Program, runner: Storage<'a>) -> Result<Self, VmError> {
         if !(1..=255).contains(&program.data.stack_size) {
             return Err(VmError::InvalidBytecode);
         }
-        let mut registers = vec![Slot::Value(Value::Null); usize::from(program.data.stack_size)];
+        let mut registers = vec![Value::Null; usize::from(program.data.stack_size)];
         *registers.first_mut().ok_or(VmError::InvalidBytecode)? =
-            Slot::Root(runner.get().root.clone());
+            Value::Table(runner.get().root.table());
         Ok(Self {
             program: Some(Rc::clone(&program.data)),
             registers,
@@ -111,7 +96,7 @@ impl<'a> Vm<'a> {
             Ok(Execution::Suspended) => {}
             Ok(Execution::Returned(_)) | Err(_) => {
                 self.finished = true;
-                self.registers.fill(Slot::Value(Value::Null));
+                self.registers.fill(Value::Null);
                 self.program = None;
                 if let Err(error) = result {
                     self.runner.get_mut().failure = Some(RunnerFailure::Runtime(error));
@@ -141,15 +126,11 @@ impl<'a> Vm<'a> {
         }
     }
     fn register(&self, index: i32) -> Result<Value, VmError> {
-        if index == 0 {
-            return Err(VmError::InvalidBytecode);
-        }
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
         self.registers
             .get(index)
-            .ok_or(VmError::InvalidBytecode)?
-            .value()
             .cloned()
+            .ok_or(VmError::InvalidBytecode)
     }
     fn literal(&self, index: i32) -> Result<Value, VmError> {
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
@@ -160,13 +141,10 @@ impl<'a> Vm<'a> {
             .ok_or(VmError::InvalidBytecode)
     }
     fn write(&mut self, index: u8, value: Value) -> Result<(), VmError> {
-        if index == 0 {
-            return Err(VmError::InvalidBytecode);
-        }
         *self
             .registers
             .get_mut(usize::from(index))
-            .ok_or(VmError::InvalidBytecode)? = Slot::Value(value);
+            .ok_or(VmError::InvalidBytecode)? = value;
         Ok(())
     }
     fn jump(&mut self, offset: i32) -> Result<(), VmError> {
@@ -205,7 +183,7 @@ impl<'a> Vm<'a> {
             self.registers
                 .get_mut(from..end)
                 .ok_or(VmError::InvalidBytecode)?
-                .fill(Slot::Value(Value::Null));
+                .fill(Value::Null);
         }
         Ok(())
     }
@@ -227,3 +205,6 @@ mod root_sessions;
 
 #[cfg(test)]
 mod array_sessions;
+
+#[cfg(test)]
+mod native_roots;

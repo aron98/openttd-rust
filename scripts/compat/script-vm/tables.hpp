@@ -277,3 +277,87 @@ static int graph_teardown_session() {
  std::cout<<"teardown after "<<(type(_weakref(table_watch)->_obj)==OT_TABLE)<<' '<<(type(_weakref(array_watch)->_obj)==OT_ARRAY)<<'\n';
  return 0;
 }
+// Passive registration/identity observations from the unmodified original VM.
+static int root_registration_session() {
+ auto owner=std::unique_ptr<SQVM,decltype(&sq_close)>(sq_open(256),sq_close);
+ auto vm=owner.get(); SQObjectPtr root=vm->_roottable;
+ SQObjectPtr cursor,key,slot;
+ while(true) {
+  SQInteger next=_table(root)->Next(false,cursor,key,slot); if(next==-1)break; cursor=next;
+  std::cout<<"slot "<<next<<' '<<_stringval(key)<<' ';value(slot);
+  if(type(slot)==OT_NATIVECLOSURE) {
+   auto closure=_nativeclosure(slot);
+   std::cout<<"metadata "<<_stringval(closure->_name)<<' '<<closure->_nparamscheck<<' '<<closure->_outervalues.size()<<' '<<type(closure->_env);
+   for(SQUnsignedInteger i=0;i<closure->_typecheck.size();++i)std::cout<<' '<<closure->_typecheck[i];
+   std::cout<<'\n';
+  }
+ }
+ slot.Null();key.Null();
+ SQObjectPtr name=SQString::Create(_ss(vm),"print"),old;
+ _table(root)->Get(name,old);SQObjectPtr watch=_nativeclosure(old)->GetWeakRef(OT_NATIVECLOSURE);
+ SQObjectPtr copy=_table(root)->Clone(),copied;_table(copy)->Get(name,copied);
+ std::cout<<"clone alias "<<(_nativeclosure(old)==_nativeclosure(copied))<<'\n';copied.Null();
+ auto friendvm=sq_newthread(vm,256);if(!friendvm)return 74;
+ SQObjectPtr current;_table(root)->Get(name,current);
+ std::cout<<"friend root "<<(_table(root)==_table(friendvm->_roottable))<<'\n';
+ std::cout<<"friend replaced "<<(_nativeclosure(old)!=_nativeclosure(current))<<'\n';
+ old.Null();std::cout<<"old clone-held "<<(type(_weakref(watch)->_obj)==OT_NATIVECLOSURE)<<'\n';
+ copy.Null();std::cout<<"old released "<<(type(_weakref(watch)->_obj)==OT_NATIVECLOSURE)<<'\n';
+ SQObjectPtr current_watch=_nativeclosure(current)->GetWeakRef(OT_NATIVECLOSURE);
+ current.Null();sq_pop(vm,1);std::cout<<"current root-held "<<(type(_weakref(current_watch)->_obj)==OT_NATIVECLOSURE)<<'\n';
+ _table(root)->Remove(name);std::cout<<"current deleted "<<(type(_weakref(current_watch)->_obj)==OT_NATIVECLOSURE)<<'\n';
+ return 0;
+}
+
+static int root_ownership_session(int argc,char **argv) {
+ if(argc!=3&&argc!=4)return 64;
+ bool reverse=argc==4&&std::string_view(argv[3])=="reverse";
+ std::ifstream input(argv[2],std::ios::binary);if(!input)return 66;
+ const std::string source((std::istreambuf_iterator<char>(input)),{});
+ std::unique_ptr<SQVM,decltype(&sq_close)> owner(sq_open(256),sq_close);auto vm=owner.get();
+ auto alive=[](const SQObjectPtr &watch){return type(_weakref(watch)->_obj)!=OT_NULL;};
+ SQObjectPtr root_watch=_table(vm->_roottable)->GetWeakRef(OT_TABLE),print;
+ _table(vm->_roottable)->Get(SQObjectPtr(SQString::Create(_ss(vm),"print")),print);
+ SQObjectPtr print_watch=_nativeclosure(print)->GetWeakRef(OT_NATIVECLOSURE);print.Null();
+ if(SQ_FAILED(sq_compilebuffer(vm,source,"roots",SQFalse)))return 65;
+ SQObjectPtr fn=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);
+ SQObjectPtr result;vm->_can_suspend=true;vm->_ops_till_suspend=2;
+ if(!vm->Call(fn,1,vm->_top-1,result,SQFalse,SQTrue)||!vm->_suspended)return 65;
+ std::cout<<"suspended "<<vm->_ops_till_suspend<<' '<<(vm->ci->_ip-_funcproto(_closure(fn)->_function)->_instructions)<<'\n';
+ vm->_roottable=SQTable::Create(_ss(vm),0);
+ std::cout<<"frame collect "<<sq_collectgarbage(vm)<<' '<<alive(root_watch)<<' '<<alive(print_watch)<<'\n';
+ vm->_ops_till_suspend+=100;
+ if(!vm->Execute(_null_,vm->_top,-1,-1,result,SQFalse,SQVM::ET_RESUME_OPENTTD)||vm->_suspended||type(result)!=OT_ARRAY)return 65;
+ sq_addref(vm,&result);sq_settop(vm,0);fn.Null();
+ std::cout<<"returned "<<vm->_ops_till_suspend<<'\n';
+ SQObjectPtr original,copy,self,left,right;
+ _array(result)->Get(reverse?1:0,original);_array(result)->Get(reverse?0:1,copy);
+ _table(copy)->Get(SQObjectPtr(SQString::Create(_ss(vm),"self")),self);
+ _table(original)->Get(SQObjectPtr(SQString::Create(_ss(vm),"print")),left);
+ _table(copy)->Get(SQObjectPtr(SQString::Create(_ss(vm),"print")),right);
+ std::cout<<"escaped aliases "<<(_table(original)!=_table(copy))<<' '<<(_table(self)==_table(original))<<' '<<(_nativeclosure(left)==_nativeclosure(right))<<'\n';
+ original.Null();copy.Null();self.Null();left.Null();right.Null();
+ if(SQ_FAILED(sq_compilebuffer(vm,"return 1;","roots",SQFalse)))return 65;
+ fn=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);SQObjectPtr scalar;vm->_ops_till_suspend=10000;
+ if(!vm->Call(fn,1,vm->_top-1,scalar,SQFalse,SQTrue))return 65;sq_settop(vm,0);fn.Null();
+ std::cout<<"host collect "<<sq_collectgarbage(vm)<<' '<<alive(root_watch)<<' '<<alive(print_watch)<<'\n';
+ sq_release(vm,&result);result.Null();
+ std::cout<<"unrooted before "<<alive(root_watch)<<' '<<alive(print_watch)<<'\n';
+ std::cout<<"unrooted collect "<<sq_collectgarbage(vm)<<' '<<alive(root_watch)<<' '<<alive(print_watch)<<'\n';
+ return 0;
+}
+
+static int root_teardown_session() {
+ SQObjectPtr root_watch,closure_watch;
+ auto owner=std::unique_ptr<SQVM,decltype(&sq_close)>(sq_open(256),sq_close);auto vm=owner.get();
+ {
+  SQObjectPtr root=vm->_roottable,print;
+  _table(root)->Get(SQObjectPtr(SQString::Create(_ss(vm),"print")),print);
+  root_watch=_table(root)->GetWeakRef(OT_TABLE);closure_watch=_nativeclosure(print)->GetWeakRef(OT_NATIVECLOSURE);
+  _table(root)->NewSlot(SQObjectPtr(SQString::Create(_ss(vm),"self")),root);
+ }
+ std::cout<<"root teardown before "<<(type(_weakref(root_watch)->_obj)==OT_TABLE)<<' '<<(type(_weakref(closure_watch)->_obj)==OT_NATIVECLOSURE)<<'\n';
+ owner.reset();
+ std::cout<<"root teardown after "<<(type(_weakref(root_watch)->_obj)==OT_TABLE)<<' '<<(type(_weakref(closure_watch)->_obj)==OT_NATIVECLOSURE)<<'\n';
+ return 0;
+}

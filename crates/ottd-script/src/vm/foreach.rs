@@ -7,7 +7,6 @@ impl Vm<'_> {
         let value_register = index.checked_add(1).ok_or(VmError::InvalidBytecode)?;
         let cursor_register = index.checked_add(2).ok_or(VmError::InvalidBytecode)?;
         if instruction.arg3 != 0
-            || instruction.arg0 == 0
             || index == 0
             || (index..=cursor_register).contains(&instruction.arg0)
             || usize::from(cursor_register) >= self.registers.len()
@@ -17,7 +16,11 @@ impl Vm<'_> {
         let receiver = self.register(i32::from(instruction.arg0))?;
         match &receiver {
             Value::Array(_) | Value::Table(_) | Value::String(_) => {}
-            Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => {
+            Value::Null
+            | Value::Bool(_)
+            | Value::Integer(_)
+            | Value::Float(_)
+            | Value::NativeClosure(_) => {
                 return Err(VmError::OperandType);
             }
         }
@@ -28,7 +31,8 @@ impl Vm<'_> {
             | Value::Float(_)
             | Value::String(_)
             | Value::Array(_)
-            | Value::Table(_) => {
+            | Value::Table(_)
+            | Value::NativeClosure(_) => {
                 return Err(VmError::InvalidBytecode);
             }
         };
@@ -56,7 +60,11 @@ impl Vm<'_> {
                     .get(index)
                     .map(|byte| Value::Integer(i64::from(std::ffi::c_char::from_ne_bytes([*byte]))))
             }
-            Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => {
+            Value::Null
+            | Value::Bool(_)
+            | Value::Integer(_)
+            | Value::Float(_)
+            | Value::NativeClosure(_) => {
                 return Err(VmError::OperandType);
             }
         };

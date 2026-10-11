@@ -4,6 +4,7 @@
 # ruff: noqa: ISC003
 from .case import Case, literal
 from .objects import object_cases
+from .root_cases import root_cases
 
 
 def cases() -> list[Case]:
@@ -123,6 +124,7 @@ def cases() -> list[Case]:
         result.append(Case(f"byte-keys-{length}", source))
     result.extend(object_cases())
     result.extend(graph_cases())
+    result.extend(root_cases())
     return result
 
 

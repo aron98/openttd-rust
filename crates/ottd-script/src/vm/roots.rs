@@ -1,5 +1,5 @@
 //! Root identity is checked independently of scalar operand access.
-use super::{Instruction, RootEnvironment, Slot, Temporary, Value, Vm, VmError};
+use super::{Instruction, Temporary, Value, Vm, VmError};
 impl Vm<'_> {
     pub(super) fn load_nulls(&mut self, i: Instruction) -> Result<(), VmError> {
         let length = usize::try_from(i.arg1).map_err(|_| VmError::InvalidBytecode)?;
@@ -11,7 +11,7 @@ impl Vm<'_> {
         self.registers
             .get_mut(start..end)
             .ok_or(VmError::InvalidBytecode)?
-            .fill(Slot::Value(Value::Null));
+            .fill(Value::Null);
         Ok(())
     }
     pub(super) fn store_temporary(&mut self, value: Value) -> Result<Value, VmError> {
@@ -20,27 +20,6 @@ impl Vm<'_> {
             Temporary::Value(value) => Ok(value.clone()),
             Temporary::MainProgram { .. } => Err(VmError::UnsupportedRuntimeValue),
         }
-    }
-    fn root_receiver(&self, register: i32) -> Result<&RootEnvironment, VmError> {
-        let index = usize::try_from(register).map_err(|_| VmError::InvalidBytecode)?;
-        match self.registers.get(index).ok_or(VmError::InvalidBytecode)? {
-            Slot::Root(root) => Ok(root),
-            Slot::Value(_) => Err(VmError::UnsupportedReceiver),
-        }
-    }
-    pub(super) fn write_root(
-        &mut self,
-        register: u8,
-        root: RootEnvironment,
-    ) -> Result<(), VmError> {
-        if register == 0 {
-            return Err(VmError::InvalidBytecode);
-        }
-        *self
-            .registers
-            .get_mut(usize::from(register))
-            .ok_or(VmError::InvalidBytecode)? = Slot::Root(root);
-        Ok(())
     }
     pub(super) fn root_get(&mut self, instruction: Instruction) -> Result<Value, VmError> {
         let (receiver, key) = if instruction.opcode == 0x09 {
@@ -51,29 +30,50 @@ impl Vm<'_> {
                 self.register(i32::from(instruction.arg2))?,
             )
         };
-        let index = usize::try_from(receiver).map_err(|_| VmError::InvalidBytecode)?;
-        let value = match self.registers.get(index).ok_or(VmError::InvalidBytecode)? {
-            Slot::Root(root) => {
-                let Value::String(key) = key else {
-                    return Err(VmError::UnsupportedRuntimeValue);
-                };
-                root.lookup(
-                    key.as_bytes(),
-                    self.root_receiver(0)?,
-                    &self.runner.get().root,
-                )?
+        let receiver = self.register(receiver)?;
+        let current_this = receiver == self.register(0)?;
+        let own = match &receiver {
+            Value::Table(table) => table.lookup(key.clone()),
+            Value::Array(array) => {
+                let found = array.lookup(&key);
+                if matches!(key, Value::Integer(_) | Value::Float(_)) {
+                    return self.store_temporary(found?);
+                }
+                found
             }
-            Slot::Value(Value::Array(array)) => array.lookup(&key)?,
-            Slot::Value(Value::Table(table)) => table.lookup(key)?,
-            Slot::Value(
-                Value::Null
-                | Value::Bool(_)
-                | Value::Integer(_)
-                | Value::Float(_)
-                | Value::String(_),
-            ) => return Err(VmError::UnsupportedReceiver),
+            Value::Null
+            | Value::Bool(_)
+            | Value::Integer(_)
+            | Value::Float(_)
+            | Value::String(_)
+            | Value::NativeClosure(_) => {
+                if !current_this {
+                    return Err(VmError::UnsupportedReceiver);
+                }
+                this_scalar_lookup(&receiver, &key)
+            }
+        };
+        let value = match own {
+            Ok(value) => value,
+            Err(VmError::MissingIndex) if current_this => self.configured_get(key)?,
+            Err(error) => return Err(error),
         };
         self.store_temporary(value)
+    }
+    fn configured_get(&self, key: Value) -> Result<Value, VmError> {
+        if let Some(value) = self.runner.get().root.table.raw_get(key.clone())? {
+            return Ok(value);
+        }
+        if let Value::String(key) = key {
+            match self.runner.get().root.realm.constant_bytes(key.as_bytes()) {
+                Some(crate::realm::constants::Binding::Scalar(value)) => return Ok(value.value()),
+                Some(crate::realm::constants::Binding::Enum(_)) => {
+                    return Err(VmError::UnsupportedRuntimeValue);
+                }
+                None => {}
+            }
+        }
+        Err(VmError::MissingIndex)
     }
     pub(super) fn root_store(&mut self, instruction: Instruction) -> Result<(), VmError> {
         if instruction.opcode == 0x3c && instruction.arg0 != 0 {
@@ -81,52 +81,89 @@ impl Vm<'_> {
         }
         let key = self.register(i32::from(instruction.arg2))?;
         let value = self.register(i32::from(instruction.arg3))?;
-        if matches!(instruction.opcode, 0x0b | 0x3c) && key == Value::Null {
+        let newslot = matches!(instruction.opcode, 0x0b | 0x3c);
+        if newslot && key == Value::Null {
             return Err(VmError::NullIndex);
         }
-        let index = usize::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
-        match self.registers.get(index).ok_or(VmError::InvalidBytecode)? {
-            Slot::Root(root) => {
-                let Value::String(key) = key else {
-                    return Err(VmError::UnsupportedRuntimeValue);
-                };
-                if matches!(instruction.opcode, 0x0b | 0x3c) {
-                    root.new_slot(key.as_bytes(), value.clone())?;
-                } else if let Err(error) = root.set_existing(key.as_bytes(), value.clone()) {
-                    if root.same(self.root_receiver(0)?) {
+        let receiver = self.register(instruction.arg1)?;
+        match &receiver {
+            Value::Table(table) => {
+                if newslot {
+                    table.new_slot(key, value.clone())?;
+                } else if let Err(error) = table.set_existing(key.clone(), value.clone()) {
+                    if error == VmError::MissingIndex && receiver == self.register(0)? {
                         self.runner
                             .get()
                             .root
-                            .set_existing(key.as_bytes(), value.clone())?;
+                            .table
+                            .set_existing(key, value.clone())?;
                     } else {
                         return Err(error);
                     }
                 }
             }
-            Slot::Value(Value::Table(table)) => {
-                if matches!(instruction.opcode, 0x0b | 0x3c) {
-                    table.new_slot(key, value.clone())?;
-                } else {
-                    table.set_existing(key, value.clone())?;
-                }
-            }
-            Slot::Value(Value::Array(array)) => {
-                if matches!(instruction.opcode, 0x0b | 0x3c) {
+            Value::Array(array) => {
+                if newslot {
                     return Err(VmError::OperandType);
                 }
                 array.store(&key, value.clone())?;
             }
-            Slot::Value(
-                Value::Null
-                | Value::Bool(_)
-                | Value::Integer(_)
-                | Value::Float(_)
-                | Value::String(_),
-            ) => return Err(VmError::UnsupportedReceiver),
+            Value::Null
+            | Value::Bool(_)
+            | Value::Integer(_)
+            | Value::Float(_)
+            | Value::String(_)
+            | Value::NativeClosure(_) => return Err(VmError::UnsupportedReceiver),
         }
         if instruction.opcode != 0x3c && instruction.arg0 != instruction.arg3 {
             self.write(instruction.arg0, value)?;
         }
         Ok(())
     }
+}
+
+// SQVM::FallBackGet must reach a default delegate before the this/root fallback.
+fn this_scalar_lookup(receiver: &Value, key: &Value) -> Result<Value, VmError> {
+    if matches!(receiver, Value::String(_)) && matches!(key, Value::Integer(_) | Value::Float(_)) {
+        return Err(VmError::UnsupportedReceiver);
+    }
+    let Value::String(key) = key else {
+        return Err(VmError::MissingIndex);
+    };
+    let key = key.as_bytes();
+    let method = match receiver {
+        Value::String(_) => matches!(
+            key,
+            b"len"
+                | b"tointeger"
+                | b"tofloat"
+                | b"tostring"
+                | b"slice"
+                | b"find"
+                | b"tolower"
+                | b"toupper"
+                | b"weakref"
+        ),
+        Value::Integer(_) | Value::Float(_) | Value::Bool(_) => matches!(
+            key,
+            b"tointeger" | b"tofloat" | b"tostring" | b"tochar" | b"weakref"
+        ),
+        Value::NativeClosure(_) => matches!(
+            key,
+            b"call"
+                | b"pcall"
+                | b"acall"
+                | b"pacall"
+                | b"weakref"
+                | b"tostring"
+                | b"bindenv"
+                | b"getinfos"
+        ),
+        Value::Null | Value::Array(_) | Value::Table(_) => false,
+    };
+    Err(if method {
+        VmError::UnsupportedRuntimeValue
+    } else {
+        VmError::MissingIndex
+    })
 }

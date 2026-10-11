@@ -10,6 +10,7 @@ fn value(value: &Value) {
             }
             println!();
         }
+        Value::NativeClosure(_) => println!("unsupported 134218240"),
         Value::Table(_) => println!("unsupported 167772192"),
         Value::Array(_) => println!("unsupported 134217792"),
         Value::Null => println!("null"),

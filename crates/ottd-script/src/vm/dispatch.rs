@@ -18,7 +18,8 @@ impl Vm<'_> {
             | Value::Bool(_)
             | Value::String(_)
             | Value::Array(_)
-            | Value::Table(_) => Err(VmError::OperandType),
+            | Value::Table(_)
+            | Value::NativeClosure(_) => Err(VmError::OperandType),
         }
     }
     pub(super) fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
@@ -40,10 +41,7 @@ impl Vm<'_> {
                 self.root_store(i)?;
                 return Ok(None);
             }
-            0x15 => {
-                self.write_root(i.arg0, self.runner.get().root.clone())?;
-                return Ok(None);
-            }
+            0x15 => Value::Table(self.runner.get().root.table()),
             0x01 => self.literal(i.arg1)?,
             0x02 => Value::Integer(i64::from(i.arg1)),
             0x03 => Value::Float(u32::from_ne_bytes(i.arg1.to_ne_bytes())),

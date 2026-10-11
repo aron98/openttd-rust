@@ -1,6 +1,6 @@
 //! Direct dispatch preserves owning slots on exhaustion and validation failure.
 use super::*;
-use crate::{Program, Realm, Temporary, vm::Slot};
+use crate::{Program, Realm, Temporary};
 
 #[test]
 fn string_exhaustion_and_errors_preserve_frame_and_temporary() -> Result<(), VmError> {
@@ -31,7 +31,7 @@ fn string_exhaustion_and_errors_preserve_frame_and_temporary() -> Result<(), VmE
         assert!(
             matches!(&vm.runner.get().temporary, Temporary::Value(Value::String(s)) if s.as_bytes()==b"temporary")
         );
-        assert!(matches!(vm.registers.first(), Some(Slot::Root(_))));
+        assert!(matches!(vm.registers.first(), Some(Value::Table(_))));
     }
     Ok(())
 }

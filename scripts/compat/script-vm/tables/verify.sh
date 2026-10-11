@@ -18,6 +18,10 @@ export OTTD_SCRIPT_DELETE_OWNER="$out/delete-owner.stdout"
 export OTTD_SCRIPT_DELETE_MUTATION="$out/delete-mutation.stdout"
 export OTTD_SCRIPT_TABLE_STORAGE="$out/table-storage.stdout"
 export OTTD_SCRIPT_DELETE_EFFECTS="$out/delete-effects.stdout"
+export OTTD_SCRIPT_ROOT_OWNERSHIP_REVERSE="$out/root-ownership-reverse.stdout"
+export OTTD_SCRIPT_ROOT_OWNERSHIP="$out/root-ownership.stdout"
+export OTTD_SCRIPT_ROOT_TEARDOWN="$out/root-teardown.stdout"
+export OTTD_SCRIPT_ROOT_REGISTRATION="$out/root-registration.stdout"
 export OTTD_SCRIPT_GRAPH_STORAGE="$out/graph-storage.stdout"
 export OTTD_SCRIPT_GRAPH_VM="$out/graph-vm.stdout"
 export OTTD_SCRIPT_GRAPH_TEARDOWN="$out/graph-teardown.stdout"
@@ -34,6 +38,10 @@ done
 "$out/native/observe" --table-removal scripts/compat/script-vm/tables/fixtures/delete-mutation.nut > "$out/delete-mutation.stdout" 2> "$out/delete-mutation.stderr"
 "$out/native/observe" --table-storage > "$out/table-storage.stdout" 2> "$out/table-storage.stderr"
 "$out/native/observe" --table-effects scripts/compat/script-vm/tables/fixtures/delete-effects.nut > "$out/delete-effects.stdout" 2> "$out/delete-effects.stderr"
+"$out/native/observe" --root-ownership scripts/compat/script-vm/tables/fixtures/roots/escaped.nut > "$out/root-ownership.stdout" 2> "$out/root-ownership.stderr"
+"$out/native/observe" --root-ownership scripts/compat/script-vm/tables/fixtures/roots/escaped-reverse.nut reverse > "$out/root-ownership-reverse.stdout" 2> "$out/root-ownership-reverse.stderr"
+"$out/native/observe" --root-teardown > "$out/root-teardown.stdout" 2> "$out/root-teardown.stderr"
+"$out/native/observe" --root-registration > "$out/root-registration.stdout" 2> "$out/root-registration.stderr"
 "$out/native/observe" --graph-storage > "$out/graph-storage.stdout" 2> "$out/graph-storage.stderr"
 "$out/native/observe" --graph-vm scripts/compat/script-vm/tables/fixtures/graph/suspended.nut scripts/compat/script-vm/tables/fixtures/graph/late-error.nut > "$out/graph-vm.stdout" 2> "$out/graph-vm.stderr"
 "$out/native/observe" --graph-teardown > "$out/graph-teardown.stdout" 2> "$out/graph-teardown.stderr"
@@ -43,10 +51,13 @@ done
 for profile in debug release; do
  flag=
  if [ "$profile" = release ]; then flag=--release; fi
- cargo build -p ottd-script --example observe $flag > "$out/$profile-build.log" 2>&1
+ cargo clean -p ottd-script $flag > "$out/$profile-clean.log" 2>&1
+ printf "0\n" > "$out/$profile-clean.status"
+ cargo build -vv -p ottd-script --example observe $flag > "$out/$profile-build.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.compare "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile" > "$out/$profile-compare.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.controls "$out/$profile" > "$out/$profile-controls.log" 2>&1
  cargo test -p ottd-script $flag > "$out/$profile-tests.log" 2>&1
+ cargo test -p ottd-script $flag native_root_registration -- --ignored > "$out/$profile-root-registration.log" 2>&1
  cargo test -p ottd-script $flag native_string_hashes -- --ignored > "$out/$profile-hashes.log" 2>&1
  # Freeze all executable test artifacts, which otherwise drift in the shared cache.
  mkdir "$out/$profile-tests"

@@ -55,7 +55,7 @@ fn exhausted_string_cursor_preserves_unwritten_value() -> Result {
 #[test]
 fn malformed_string_registers_and_reserved_operand_are_rejected() -> Result {
     for instruction in [
-        op(0x33, 0, 1, 2, 0),
+        op(0x33, 255, 1, 2, 0),
         op(0x33, 5, 1, 2, 0),
         op(0x33, 1, 1, 0, 0),
         op(0x33, 1, 1, 1, 0),

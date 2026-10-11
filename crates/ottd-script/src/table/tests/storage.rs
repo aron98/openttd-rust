@@ -137,7 +137,7 @@ fn delete_effects_fixture() -> &'static str {
 
 #[test]
 fn bad_delete_destination_preserves_completed_slot_removal() {
-    for destination in [0, 255] {
+    for destination in [254, 255] {
         let realm = Realm::new();
         let root = realm.empty_root();
         let mut runner = crate::Runner::new(root.clone());

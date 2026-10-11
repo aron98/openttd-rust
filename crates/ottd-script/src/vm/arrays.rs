@@ -1,5 +1,5 @@
 //! Collection operations share the existing instruction loop and temporary owner.
-use super::{Instruction, Slot, Value, Vm, VmError};
+use super::{Instruction, Value, Vm, VmError};
 use crate::Array;
 impl Vm<'_> {
     pub(super) fn new_array(&self, instruction: Instruction) -> Result<Value, VmError> {
@@ -13,7 +13,7 @@ impl Vm<'_> {
         Array::reserved(&self.runner.get().root.realm, capacity).map(Value::Array)
     }
     pub(super) fn append_array(&self, instruction: Instruction) -> Result<(), VmError> {
-        let Slot::Value(Value::Array(array)) = self
+        let Value::Array(array) = self
             .registers
             .get(usize::from(instruction.arg0))
             .ok_or(VmError::InvalidBytecode)?
@@ -55,16 +55,24 @@ impl Array {
             {
                 Err(VmError::UnsupportedRuntimeValue)
             }
-            Value::String(_) | Value::Null | Value::Bool(_) | Value::Array(_) | Value::Table(_) => {
-                Err(VmError::MissingIndex)
-            }
+            Value::String(_)
+            | Value::Null
+            | Value::Bool(_)
+            | Value::Array(_)
+            | Value::Table(_)
+            | Value::NativeClosure(_) => Err(VmError::MissingIndex),
         }
     }
     pub(crate) fn store(&self, key: &Value, value: Value) -> Result<(), VmError> {
         let index = match key {
             Value::Integer(index) => *index,
             Value::Float(bits) => float_index(*bits)?,
-            Value::Null | Value::Bool(_) | Value::String(_) | Value::Array(_) | Value::Table(_) => {
+            Value::Null
+            | Value::Bool(_)
+            | Value::String(_)
+            | Value::Array(_)
+            | Value::Table(_)
+            | Value::NativeClosure(_) => {
                 return Err(VmError::OperandType);
             }
         };

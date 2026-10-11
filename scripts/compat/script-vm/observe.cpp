@@ -37,6 +37,9 @@ void value(const SQObjectPtr &v) {
 #include "tables.hpp"
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--root-teardown") return root_teardown_session();
+ if(std::string_view(argv[1])=="--root-ownership") return root_ownership_session(argc,argv);
+ if(std::string_view(argv[1])=="--root-registration") return root_registration_session();
  if(std::string_view(argv[1])=="--graph-teardown") return graph_teardown_session();
  if(std::string_view(argv[1])=="--graph-vm") return graph_vm_session(argc,argv);
  if(std::string_view(argv[1])=="--graph-storage") return graph_storage_session();

@@ -15,7 +15,6 @@ struct ObjectId {
 #[derive(Debug)]
 struct Life {
     id: ObjectId,
-    created: u64,
     heap: Weak<Heap>,
     references: Cell<usize>,
     external: Cell<usize>,
@@ -76,19 +75,26 @@ impl Drop for Edge {
 }
 #[derive(Debug)]
 pub(crate) enum Object {
+    NativeClosure(crate::native_closure::Data),
     Table(Nodes),
     Array(Vec<Stored>),
 }
 impl Object {
     fn edges(&self) -> impl Iterator<Item = &Edge> {
-        let (table, array) = match self {
-            Self::Table(nodes) => (Some(nodes), None),
-            Self::Array(values) => (None, Some(values)),
+        let (table, array, closure) = match self {
+            Self::Table(nodes) => (Some(nodes), None, None),
+            Self::Array(values) => (None, Some(values), None),
+            Self::NativeClosure(data) => (None, None, Some(data)),
         };
         table
             .into_iter()
             .flat_map(Nodes::values)
             .chain(array.into_iter().flatten())
+            .chain(
+                closure
+                    .into_iter()
+                    .flat_map(crate::native_closure::Data::values),
+            )
             .filter_map(Stored::edge)
     }
 }
@@ -103,7 +109,7 @@ pub(crate) struct Heap {
     entries: RefCell<Vec<Entry>>,
     pending: RefCell<Vec<ObjectId>>,
     releasing: Cell<bool>,
-    next_creation: Cell<u64>,
+    chain: RefCell<Vec<ObjectId>>,
 }
 impl Heap {
     pub(crate) fn allocate(
@@ -111,11 +117,10 @@ impl Heap {
         realm: &Realm,
         object: Object,
     ) -> Result<Handle, VmError> {
-        let created = self
-            .next_creation
-            .get()
-            .checked_add(1)
-            .ok_or(VmError::Allocation)?;
+        self.chain
+            .borrow_mut()
+            .try_reserve(1)
+            .map_err(|_| VmError::Allocation)?;
         let mut entries = self.entries.borrow_mut();
         let vacant = entries
             .iter()
@@ -138,7 +143,6 @@ impl Heap {
                 index,
                 generation: entry.generation,
             },
-            created,
             heap: Rc::downgrade(self),
             references: Cell::new(0),
             external: Cell::new(0),
@@ -146,7 +150,7 @@ impl Heap {
         let edge = Edge::retain(&life, true);
         entry.life = Some(life);
         entry.object = Some(object);
-        self.next_creation.set(created);
+        self.chain.borrow_mut().insert(0, edge.life.id);
         Ok(Handle {
             edge,
             realm: realm.clone(),
@@ -176,6 +180,9 @@ impl Heap {
                         entry.object.take()
                     })
             };
+            if object.is_some() {
+                self.chain.borrow_mut().retain(|entry| *entry != id);
+            }
             // Child-edge drops append to the queue; the arena borrow has ended.
             drop(object);
         }
@@ -187,51 +194,42 @@ impl Heap {
     )]
     pub(crate) fn collect(&self) -> usize {
         self.release_pending();
-        let mut unmarked = {
+        let (unmarked, mut reachable) = {
             let entries = self.entries.borrow();
             let mut marked = vec![false; entries.len()];
-            let mut todo: Vec<ObjectId> = entries
-                .iter()
-                .filter_map(|entry| {
-                    entry
-                        .life
-                        .as_ref()
-                        .filter(|life| life.external.get() > 0)
-                        .map(|life| life.id)
-                })
-                .collect();
-            while let Some(id) = todo.pop() {
-                let Some(entry) = entries
-                    .get(id.index)
-                    .filter(|entry| entry.generation == id.generation)
-                else {
-                    continue;
-                };
-                let Some(mark) = marked.get_mut(id.index) else {
-                    continue;
-                };
-                if std::mem::replace(mark, true) {
-                    continue;
-                }
-                if let Some(object) = &entry.object {
-                    todo.extend(object.edges().map(|edge| edge.life.id));
+            let mut todo = Vec::new();
+            // External owner enumeration is an internal host seam, not a claim
+            // about native pointer-hashed RefTable or full VM root ordering.
+            for entry in &*entries {
+                if let Some(life) = &entry.life {
+                    if life.external.get() > 0 {
+                        Self::enqueue(&entries, &mut marked, &mut todo, life.id);
+                    }
                 }
             }
-            entries
-                .iter()
-                .zip(marked)
-                .filter_map(|(entry, marked)| {
-                    if marked {
-                        None
-                    } else {
-                        entry.life.as_ref().map(|life| (life.created, life.id))
+            let mut reachable = Vec::new();
+            while let Some(id) = todo.pop() {
+                if let Some(object) = entries
+                    .get(id.index)
+                    .and_then(|entry| entry.object.as_ref())
+                {
+                    for edge in object.edges() {
+                        Self::enqueue(&entries, &mut marked, &mut todo, edge.life.id);
                     }
-                })
-                .collect::<Vec<_>>()
+                }
+                reachable.push(id);
+            }
+            let unmarked = self
+                .chain
+                .borrow()
+                .iter()
+                .copied()
+                .filter(|id| !marked.get(id.index).copied().unwrap_or(false))
+                .collect::<Vec<_>>();
+            (unmarked, reachable)
         };
-        unmarked.sort_unstable_by_key(|(created, _)| std::cmp::Reverse(*created));
         let mut count = 0;
-        for (_, id) in unmarked {
+        for id in unmarked {
             let object = {
                 let mut entries = self.entries.borrow_mut();
                 entries
@@ -252,7 +250,22 @@ impl Heap {
                 count += 1;
             }
         }
+        // Native AddToChain prepends each popped object to the next live chain.
+        reachable.reverse();
+        *self.chain.borrow_mut() = reachable;
         count
+    }
+    fn enqueue(entries: &[Entry], marked: &mut [bool], todo: &mut Vec<ObjectId>, id: ObjectId) {
+        if entries
+            .get(id.index)
+            .is_some_and(|entry| entry.generation == id.generation && entry.object.is_some())
+        {
+            if let Some(mark) = marked.get_mut(id.index) {
+                if !std::mem::replace(mark, true) {
+                    todo.push(id);
+                }
+            }
+        }
     }
 }
 /// Public owners retain the realm; storage edges never do.

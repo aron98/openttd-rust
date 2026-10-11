@@ -70,6 +70,7 @@ impl Compiler<'_> {
                 self.loop_exit(true)?;
             }
             TokenKind::In
+            | TokenKind::This
             | TokenKind::Root
             | TokenKind::NewSlot
             | TokenKind::Clone

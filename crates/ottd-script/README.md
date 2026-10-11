@@ -9,7 +9,8 @@ Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
 assignment, blocks, if/else, while/for/do loops, array/string/table foreach, scalar switch/case/default, break and continue. Values include null,
 bool, i64 decimal/octal/hex integers, raw f32 values, immutable byte strings and
-identity-bearing arrays and tables with same-realm aggregate values and scalar table keys.
+identity-bearing arrays and tables with same-realm graph values and scalar table keys,
+and real native closure objects for bare-VM registration (calls remain unsupported).
 Normal, verbatim and character literals follow native escapes and encoded-byte
 length. `typeof` returns interned type-name strings. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
 comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
@@ -173,8 +174,9 @@ requires newly executed complete debug and optimized profiles for these inputs.
 
 ## Configured roots and persistent runners
 
-`Realm::empty_root` creates an independent plain root with byte-string keys and
-scalar values or same-realm arrays/tables. RootEnvironment clones share slots; another empty root shares
+`Realm::empty_root` creates an independent empty physical table. RootEnvironment
+provides byte-key convenience methods over the same graph-backed table identity;
+ordinary table access also admits the existing scalar-key domain. Clones share slots; another empty root shares
 only the Realm's interner/constants. `raw_get`, `new_slot` and `set_existing`
 provide explicit own-slot host access, including empty/NUL-containing keys.
 Newslot replaces existing entries; set requires an existing entry. Strings are
@@ -189,8 +191,8 @@ then default table delegates, then shared constants only under native's
 receiver-equals-this fallback gate. SET never falls back to constants. A reached
 default-delegate closure or late enum table returns UnsupportedRuntimeValue;
 this is an explicit implementation boundary, not undefined lexer input.
-Root compound/prefix/postfix updates, arbitrary this/receiver objects, root value
-escape remain unsupported. Dot members now use the same GET/SET path as bracket members. Array bracket
+Root compound/prefix/postfix updates remain unsupported. `this` is a first-class
+register-zero local and may be reassigned, returned, cloned, iterated or stored. Dot members now use the same GET/SET path as bracket members. Array bracket
 reads and plain assignments are supported; indexed compound/prefix/postfix updates
 remain unsupported syntax.
 
@@ -408,7 +410,7 @@ retention and omission during clone/rehash. Ordinary missing slots and invalid
 types remain runtime errors, separate from unimplemented aggregate keys and native-invalid
 float-to-integer hash conversions.
 
-The current table/graph corpus runs 810 strict byte comparisons per profile, including original
+The current table/graph corpus runs 930 strict byte comparisons per profile, including original
 stack/literals/instructions, returned/error stage, IP and debt, collision growth,
 all hash length branches, embedded NUL/high bytes and active iteration mutation.
 Additional genuine native sessions prove returned/root identity, temporary-only
@@ -420,7 +422,7 @@ identity dependency; they do not claim Rust pointer-key parity.
 Run `scripts/compat/script-vm/tables/verify.sh PINNED_OPENTTD NEW_OUTPUT` for fresh
 debug/release tables, hash, lifetime and full crate tests plus Clippy/fmt. The
 output freezes the real native/Rust executables and test binaries. Delegates,
-closures, callable native GC, full root-table storage unification, existing AI/GS
+closures, callable native GC, OpenTTD-specific root/delegate registration, existing AI/GS
 mods and gameplay integration remain later Stage 4 obligations.
 
 
@@ -435,8 +437,8 @@ copy physical holes or invisible null-key values. Arrays clone element storage
 into an independent identity. Rust's `Clone` trait still clones shared handles;
 `shallow_clone` performs the language operation.
 
-String-root deletion removes own slots without fallback. Full root cloning and
-iteration await physical root/table unification. Default delegate methods,
+Root deletion removes own slots without fallback. Root cloning and iteration
+use the common native physical table implementation, including all bare-VM defaults. Default delegate methods,
 explicit delegates and `_delslot`/`_cloned` hooks require later function support;
 this atom does not introduce standalone delegate APIs.
 
@@ -462,7 +464,7 @@ bundled delayed-free mechanism without recursive graph destruction.
 `Realm::collect_cycles()` separately traces external owners and internal edges,
 including invisible table-node values, and finalizes unreachable cycles. It is a
 host memory-management operation with no native callable-GC count contract.
-Native GC-chain ordering, pointer-hashed host-ref bookkeeping, finalizers, weakref
+Full VM/shared-root ordering, pointer-hashed host-ref bookkeeping, finalizers, weakref
 script APIs and callable `collectgarbage` remain required future dependencies.
 Exact original counts are retained and compared for the admitted passive host
 sequence; they are not normalized into a generic collected-object count.
@@ -479,7 +481,27 @@ temporary replacement. The graph tests also verify stale-generation rejection
 and realm teardown. New source cases run through the same strict comparator and
 receipt-membership postcondition as all prior table/delete/clone cases.
 
-Configured roots still use their earlier byte-keyed representation. Native
-default root population, first-class `this`, root iteration/clone and opaque
-native closure identities are the next required storage consumers. This graph
-foundation does not claim those six pre-change root RED cases now pass.
+Configured roots now share ordinary table storage. `Vm::new` creates the native
+eight-slot bare root; explicit `Runner::new(realm.empty_root())` stays empty.
+`Realm::default_root` exposes default creation, `RootEnvironment::from_table`
+configures an existing table without copying, and `Runner::friend` shares the
+current root while repeating native registration with fresh closure identities.
+The four represented closures retain exact function/name/arity/type-mask metadata,
+empty outer values and null environments. They support identity, storage, truth
+and native `typeof` without claiming callable implementations. Default delegate
+closure lookup and function dispatch remain explicit unsupported dependencies.
+
+GET and SET compare the receiver with the current register-zero value before
+configured-root fallback; LOADROOTTABLE still reads the separately configured
+root. Root clones keep all defaults and shared closure/self-reference identities.
+The six original root RED witnesses now have strict native comparisons.
+
+Collection preserves the native persistent chain: allocations prepend, marking
+occurs on enqueue, children follow physical source order, and the LIFO pop order
+is reversed into the next reachable chain. Exact root ownership witnesses retain
+native finalization counts 1 and 5 for opposite returned-array alias orders.
+This closes those admitted sequences, not general native GC/host-root ordering.
+Full native root registration (including target-dependent physical cursors) is
+an external test requiring fresh target-native output; ordinary tests do not use
+an Apple traversal fixture as a GNU expectation. Native callable functions,
+delegates, host registrations and full AI/GS execution remain required.

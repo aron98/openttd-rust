@@ -1,6 +1,6 @@
 //! Array-aware native host sessions replayed through the production VM.
 use super::root_sessions::{bytes, dump, number, render};
-use super::{Execution, Slot, Storage, Temporary, Vm};
+use super::{Execution, Storage, Temporary, Vm};
 use crate::{Array, CompileErrorKind, Program, Realm, RootEnvironment, Runner, Value, VmError};
 use std::{error::Error, fmt::Write, fs, path::Path};
 mod foreach;
@@ -75,7 +75,8 @@ impl Session {
                 self.label(array),
                 array.len()
             )),
-            Value::Table(_)
+            Value::NativeClosure(_)
+            | Value::Table(_)
             | Value::Null
             | Value::Bool(_)
             | Value::Integer(_)
@@ -136,17 +137,14 @@ impl Session {
                 writeln!(out, "suspend {remaining} {ip}")?;
                 for (index, slot) in registers.iter().enumerate() {
                     match slot {
-                        Slot::Value(value) => {
-                            writeln!(out, "frame {index} {}", self.value(value)?)?;
-                        }
-                        Slot::Root(root) => {
-                            assert!(root.same(self.root(id)?));
+                        Value::Table(root) if root.same_identity(&self.root(id)?.table) => {
                             writeln!(
                                 out,
                                 "frame {index} root {}",
                                 self.ids.get(id).ok_or("root id")?
                             )?;
                         }
+                        value => writeln!(out, "frame {index} {}", self.value(value)?)?,
                     }
                 }
                 false

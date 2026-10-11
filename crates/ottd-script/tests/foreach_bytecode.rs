@@ -56,7 +56,7 @@ fn valid_cursor_success_and_exhaustion() -> Result {
 #[test]
 fn malformed_registers_reserved_operand_and_overlap_fail() -> Result {
     for instruction in [
-        op(0x33, 0, 1, 2, 0),
+        op(0x33, 255, 1, 2, 0),
         op(0x33, 6, 1, 2, 0),
         op(0x33, 1, 1, 0, 0),
         op(0x33, 1, 1, 1, 0),

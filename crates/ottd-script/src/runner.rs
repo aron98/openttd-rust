@@ -1,109 +1,115 @@
 //! Persistent execution owners, separate from shared root slots and compiler state.
-use crate::{ByteString, CompileError, Program, Realm, Storage, Temporary, Value, Vm, VmError};
-use std::{cell::RefCell, collections::BTreeMap, rc::Rc};
-
-type Slots = BTreeMap<Vec<u8>, (ByteString, Value)>;
-/// Shared plain root with byte keys, scalar values and same-realm arrays/tables.
+use crate::{CompileError, Program, Realm, Storage, Table, Temporary, Value, Vm, VmError};
+/// A configured root retaining the ordinary graph-backed physical table identity.
 #[derive(Clone, Debug)]
 pub struct RootEnvironment {
     pub(crate) realm: Realm,
-    slots: Rc<RefCell<Slots>>,
+    pub(crate) table: Table,
 }
 impl RootEnvironment {
+    #[expect(
+        clippy::expect_used,
+        reason = "The existing empty_root API is infallible; native table creation likewise requires allocation"
+    )]
     pub(crate) fn new(realm: Realm) -> Self {
+        let table = realm.table().expect("empty root allocation");
+        Self { realm, table }
+    }
+    /// Configure an existing first-class table as a root without copying slots.
+    pub fn from_table(table: Table) -> Self {
         Self {
-            realm,
-            slots: Rc::new(RefCell::new(BTreeMap::new())),
+            realm: table.0.realm.clone(),
+            table,
         }
     }
-    pub(crate) fn same(&self, other: &Self) -> bool {
-        Rc::ptr_eq(&self.slots, &other.slots)
+    /// Retain this root as an ordinary table value, without copying its slots.
+    pub fn table(&self) -> Table {
+        self.table.clone()
     }
-    /// Read an own slot without delegates or compiler-constant fallback.
+    /// Read an own byte-key slot without delegates or compiler-constant fallback.
     pub fn raw_get(&self, key: &[u8]) -> Option<Value> {
-        self.slots.borrow().get(key).map(|(_, value)| value.clone())
+        self.table
+            .raw_get(Value::String(self.realm.string(key)))
+            .ok()
+            .flatten()
     }
-    fn intern(&self, value: Value) -> Result<Value, VmError> {
-        match value {
-            Value::String(bytes) => Ok(Value::String(self.realm.string(bytes.as_bytes()))),
-            Value::Table(table) => {
-                if !table.same_realm(&self.realm) {
-                    return Err(VmError::RealmMismatch);
-                }
-                Ok(Value::Table(table))
-            }
-            Value::Array(array) => {
-                if !array.same_realm(&self.realm) {
-                    return Err(VmError::RealmMismatch);
-                }
-                Ok(Value::Array(array))
-            }
-            Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => Ok(value),
+    fn check_realm(&self, value: &Value) -> Result<(), VmError> {
+        let same = match value {
+            Value::Table(table) => table.same_realm(&self.realm),
+            Value::Array(array) => array.same_realm(&self.realm),
+            Value::NativeClosure(closure) => closure.same_realm(&self.realm),
+            Value::Null
+            | Value::Bool(_)
+            | Value::Integer(_)
+            | Value::Float(_)
+            | Value::String(_) => true,
+        };
+        if same {
+            Ok(())
+        } else {
+            Err(VmError::RealmMismatch)
         }
     }
-    /// Insert or replace an own slot, retaining scalar bytes or array/table identity.
-    ///
+    /// Insert or replace an own byte-key slot.
     /// # Errors
-    /// Rejects an array or table from another realm before changing the root.
+    /// Rejects foreign graph values before changing the root; allocation can fail.
     pub fn new_slot(&self, key: &[u8], value: Value) -> Result<(), VmError> {
-        let value = self.intern(value)?;
-        let name = self.realm.string(key);
-        self.slots.borrow_mut().insert(key.to_vec(), (name, value));
-        Ok(())
+        self.check_realm(&value)?;
+        self.table
+            .new_slot(Value::String(self.realm.string(key)), value)
     }
-    /// Replace an existing own slot.
-    ///
+    /// Replace an existing own byte-key slot.
     /// # Errors
-    /// Returns `RealmMismatch` for a foreign array/table before looking up the key.
-    /// Otherwise returns `MissingIndex` without inserting when the key is absent.
+    /// Preserves host API foreign-value rejection before missing-key lookup.
     pub fn set_existing(&self, key: &[u8], value: Value) -> Result<(), VmError> {
-        let value = self.intern(value)?;
-        let mut slots = self.slots.borrow_mut();
-        let (_, target) = slots.get_mut(key).ok_or(VmError::MissingIndex)?;
-        *target = value;
-        Ok(())
+        self.check_realm(&value)?;
+        self.table
+            .set_existing(Value::String(self.realm.string(key)), value)
     }
-    /// Remove an own byte-keyed slot without fallback lookup.
+    /// Remove an own byte-key slot without fallback lookup.
     /// # Errors
     /// Returns `MissingIndex` if the own slot does not exist.
     pub fn delete_slot(&self, key: &[u8]) -> Result<Value, VmError> {
-        self.slots
-            .borrow_mut()
-            .remove(key)
-            .map(|(_, value)| value)
-            .ok_or(VmError::MissingIndex)
+        self.table
+            .delete_slot(Value::String(self.realm.string(key)))
     }
-    pub(crate) fn lookup(&self, key: &[u8], this: &Self, current: &Self) -> Result<Value, VmError> {
-        if let Some(value) = self.raw_get(key) {
-            return Ok(value);
+    pub(crate) fn register_defaults(&self) -> Result<(), VmError> {
+        use crate::{NativeClosure, NativeFunction};
+        for function in [
+            NativeFunction::Assert,
+            NativeFunction::Print,
+            NativeFunction::Array,
+            NativeFunction::Type,
+        ] {
+            let closure = NativeClosure::new(&self.realm, function)?;
+            self.new_slot(
+                closure.name().as_bytes(),
+                Value::NativeClosure(closure.clone()),
+            )?;
         }
-        if matches!(
-            key,
-            b"len"
-                | b"rawget"
-                | b"rawset"
-                | b"rawdelete"
-                | b"rawin"
-                | b"weakref"
-                | b"tostring"
-                | b"clear"
-        ) {
-            return Err(VmError::UnsupportedRuntimeValue);
-        }
-        if self.same(this) {
-            if let Some(value) = current.raw_get(key) {
-                return Ok(value);
-            }
-            if let Some(binding) = current.realm.constant_bytes(key) {
-                return match binding {
-                    crate::realm::constants::Binding::Scalar(value) => Ok(value.value()),
-                    crate::realm::constants::Binding::Enum(_) => {
-                        Err(VmError::UnsupportedRuntimeValue)
-                    }
-                };
-            }
-        }
-        Err(VmError::MissingIndex)
+        self.new_slot(
+            b"_version_",
+            Value::String(
+                self.realm
+                    .string(b"Squirrel 2.2.5 stable - With custom OpenTTD modifications"),
+            ),
+        )?;
+        self.new_slot(b"_charsize_", Value::Integer(1))?;
+        self.new_slot(b"_intsize_", Value::Integer(8))?;
+        self.new_slot(b"_floatsize_", Value::Integer(4))
+    }
+}
+impl Realm {
+    /// Allocate and populate the pinned bare VM's original root table.
+    /// # Errors
+    /// Returns Allocation if table or closure storage cannot be allocated.
+    pub fn default_root(&self) -> Result<RootEnvironment, VmError> {
+        let root = RootEnvironment {
+            realm: self.clone(),
+            table: self.table()?,
+        };
+        root.register_defaults()?;
+        Ok(root)
     }
 }
 /// Rust diagnostic history, not the native error object's string identity.
@@ -129,6 +135,13 @@ impl Runner {
             temporary: Temporary::Value(Value::Null),
             failure: None,
         }
+    }
+    /// Create a friend context sharing the current root and re-registering defaults.
+    /// # Errors
+    /// Allocation failure may leave the same partial registration as the native host.
+    pub fn friend(&self) -> Result<Self, VmError> {
+        self.root.register_defaults()?;
+        Ok(Self::new(self.root.clone()))
     }
     /// Compile in this runner's realm without replacing its runtime temporary.
     ///
@@ -189,3 +202,6 @@ impl Storage<'_> {
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod native_roots;

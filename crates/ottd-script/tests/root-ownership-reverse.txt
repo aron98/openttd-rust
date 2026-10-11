@@ -1,0 +1,7 @@
+suspended 0 1
+frame collect 0 1 1
+returned 94
+escaped aliases 1 1 1
+host collect 0 1 1
+unrooted before 1 1
+unrooted collect 5 0 0

@@ -4,6 +4,9 @@ use std::cmp::Ordering;
 impl Value {
     pub(crate) fn equal(&self, other: &Self) -> Result<bool, VmError> {
         match (self, other) {
+            (Self::NativeClosure(left), Self::NativeClosure(right)) => {
+                Ok(left.same_identity(right))
+            }
             (Self::Table(left), Self::Table(right)) => Ok(left.same_identity(right)),
             (Self::Array(left), Self::Array(right)) => Ok(left.same_identity(right)),
             (Self::String(left), Self::String(right)) => Ok(left.same_identity(right)),
@@ -14,10 +17,24 @@ impl Value {
             (Self::Integer(_), Self::Float(_)) | (Self::Float(_), Self::Integer(_)) => {
                 Ok(self.order(other)? == Ordering::Equal)
             }
-            (Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_) | Self::Table(_), _)
-            | (_, Self::Null | Self::Bool(_) | Self::String(_) | Self::Array(_) | Self::Table(_)) => {
-                Ok(false)
-            }
+            (
+                Self::Null
+                | Self::Bool(_)
+                | Self::String(_)
+                | Self::Array(_)
+                | Self::Table(_)
+                | Self::NativeClosure(_),
+                _,
+            )
+            | (
+                _,
+                Self::Null
+                | Self::Bool(_)
+                | Self::String(_)
+                | Self::Array(_)
+                | Self::Table(_)
+                | Self::NativeClosure(_),
+            ) => Ok(false),
         }
     }
     #[expect(
@@ -26,6 +43,9 @@ impl Value {
     )]
     fn order(&self, other: &Self) -> Result<Ordering, VmError> {
         match (self, other) {
+            (Self::NativeClosure(_), _) | (_, Self::NativeClosure(_)) => {
+                Err(VmError::UnsupportedRuntimeValue)
+            }
             (Self::Table(_), _) | (_, Self::Table(_)) => Err(VmError::UnsupportedTableOrdering),
             (Self::Array(_), _) | (_, Self::Array(_)) => Err(VmError::UnsupportedArrayOrdering),
             (Self::String(left), Self::String(right)) => Ok(left.as_bytes().cmp(right.as_bytes())),

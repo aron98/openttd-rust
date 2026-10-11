@@ -8,6 +8,12 @@ mod cargo_rollback_tests;
 mod company;
 mod daily;
 mod directed;
+#[cfg(test)]
+mod industry_capacity;
+#[cfg(test)]
+mod industry_controls;
+#[cfg(test)]
+mod industry_rollback;
 mod loading;
 mod service;
 #[cfg(test)]

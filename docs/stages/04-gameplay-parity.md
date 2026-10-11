@@ -10,12 +10,55 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
-Script increment `e2b9181` adds byte-string foreach iteration to the shared scalar
-arrays and persistent runners. The latest admitted gameplay increment is
-`59fe7f6`, enabling normal CI for the reviewed bounded single-vehicle road
-movement corpus. Complete transport cycles and further content loading are in
-progress. All seven completion gates below remain open.
+Script increment `8b4fa02` adds scalar table storage and execution to the shared
+arrays and persistent runners. Gameplay increment `55e422f` adds station/depot
+order insertion for supported road vehicles. Increment `59fe7f6` enables normal
+CI for the reviewed bounded single-vehicle road movement corpus. Complete
+transport cycles and further content loading are in progress. All seven
+completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
+
+Road order insertion preserves validation and nested error precedence, shared
+list allocation and indices, existing conditional-order retargeting, timetable
+and unbunching resets, and command cost/location receipts. Native no-refit value
+254 is accepted; 255 is rejected. Saved records and live order caches publish
+as one transaction. The frozen product proof compares 16 CLI commands and 18
+checkpoints, 32 public-runtime actions and 16 save checkpoints, with continued
+original/Rust saves in both directions. All 3,458 archive members are verified.
+Root adds twelve complete World/derived/runtime comparisons; independent review
+adds 31 native/CLI edge commands, shared-order actions and malformed-input checks.
+Integration `bb77aa7` preserves the product bytes and separately updates current
+source inventories. Broader order commands, complete station construction,
+station entry, loading, payment and complete transport cycles remain required.
+
+Scalar tables preserve native capacity, collision chains, free-node selection,
+rehash order and traversal, typed scalar keys, shared identity and temporary
+ownership. Actual compiler/VM operations cover literals, own-slot reads/writes
+and suspended foreach mutation. Invisible null-key storage follows the original
+behavior. Both frozen debug and optimized profiles pass 267 focused comparisons
+and 32,776 native string-hash vectors, alongside 10,539 strict legacy comparisons
+and 153 unchanged lexer-policy checks. Five archives contain 138,757 verified
+members. Root adds 36 native/Rust comparisons; independent review adds 54, runs
+162 selected tests plus the external hash test per profile, and checks the full
+archives and current source closure. Integrated product bytes match the frozen
+private implementation. Current binding changes at `db417c2` are a separate
+metadata epoch, not a new native execution claim. The Apple hash ABI has actual
+native proof; the focused GNU CI job added in `ebfd3a6` awaits execution. Other
+ABIs, aggregate edges, delegates, delete/clone, root storage unification,
+functions, closures, cycle collection, host APIs and full AI/GameScript remain
+required.
+
+The combined order/table integration passes 716 executed workspace tests,
+strict locked workspace/all-target/all-feature Clippy, formatting and all 143
+offline contract declarations. The 77 ignored external tests are not credited
+by the workspace run; their native proofs are recorded separately above.
+
+The next private increments address road station construction, real script
+delete/clone operations, and temperate tree growth without spreading. Tree
+proofs include actual lifecycle ticks and saves continued in both directions;
+mixed tree/vehicle RNG ordering and integration review are still in progress.
+These private results do not yet establish a published tree capability or close
+any broad stage requirement.
 
 The full four-case bounded road movement capture now passes locally at
 `e167929`, followed by separate live recorded-corpus verification. The final

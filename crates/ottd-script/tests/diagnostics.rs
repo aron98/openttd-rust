@@ -106,3 +106,33 @@ fn index_float_diagnostic_uses_fourteen_significant_digits() {
         b"the index '1.2345670461655' does not exist"
     );
 }
+
+#[test]
+fn missing_capture_precision_preserves_typed_error_effects_and_reuse() {
+    let realm = Realm::new();
+    let root = realm.default_root().expect("root");
+    let mut runner = Runner::new(root.clone());
+    let source = format!(
+        "held<-7;\nlocal prior=\"retained\";\nlocal f=function():(prior,{}) {{return 1;}};",
+        "a".repeat(60)
+    );
+    let program = runner.compile(&source).expect("compile");
+    let mut vm = runner.start(&program).expect("start");
+    assert_eq!(vm.resume(0), Ok(Execution::Suspended));
+    assert_eq!(vm.resume(10000), Err(VmError::MissingIndex));
+    assert_eq!(
+        vm.native_error().expect("native diagnostic").as_bytes(),
+        format!("the index '{}' does not exist", "a".repeat(50)).as_bytes()
+    );
+    assert_eq!(vm.resume(1), Err(VmError::Finished));
+    drop(vm);
+    assert_eq!(root.raw_get(b"held"), Some(ottd_script::Value::Integer(7)));
+    realm.collect_cycles();
+    let next = runner
+        .compile("return held;")
+        .expect("compile after failure");
+    assert_eq!(
+        runner.start(&next).expect("reuse runner").resume(10000),
+        Ok(Execution::Returned(ottd_script::Value::Integer(7)))
+    );
+}

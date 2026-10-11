@@ -32,6 +32,14 @@ def diagnostic_cases() -> list[Case]:
         )
     ]
     result.extend(
+        Case(
+            f"diagnostic-capture-ascii{length}",
+            f"local f=function():({'a' * length}) {{return 1;}};\nreturn 0;",
+            "runtime_error",
+        )
+        for length in (49, 50, 51, 60)
+    )
+    result.extend(
         (
             Case("diagnostic-null-concat", 'return ""+null;'),
             Case(

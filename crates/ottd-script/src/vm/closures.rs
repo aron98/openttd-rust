@@ -57,10 +57,7 @@ impl Vm<'_> {
                     match self.lookup_value(&self.register(0)?, Value::String(key.clone())) {
                         Ok(value) => value,
                         Err(error) => {
-                            let mut message = b"the index '".to_vec();
-                            message.extend_from_slice(key.as_bytes());
-                            message.extend_from_slice(b"' does not exist");
-                            return Err(self.native_failure(&message, error));
+                            return Err(self.index_failure(&Value::String(key.clone()), error));
                         }
                     }
                 }

@@ -59,6 +59,7 @@ inline Json PacketGroup(const auto &packets, Json owner, Json cargo_type, Json n
     result["feeder_share"] = static_cast<int64_t>(feeder);
     return result;
 }
+inline void Derived();
 inline void AfterLoad()
 {
     ReferenceMovement::ValidateEnvironment();
@@ -84,6 +85,10 @@ inline void AfterLoad()
         output << result.dump() << '\n';
         if (!output) throw std::runtime_error("Road slope observation write failed");
     }
+    Derived();
+}
+inline void Derived()
+{
     const char *path = std::getenv("OTTD_WORLD_DERIVED_PATH");
     if (path == nullptr || _game_mode == GM_MENU) return;
     if (const char *control = std::getenv("OTTD_WORLD_CORRUPT_DERIVED")) {

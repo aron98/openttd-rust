@@ -5,7 +5,10 @@ use crate::{
 use ottd_save::{TableRecord, WireValue, world::World};
 use std::collections::BTreeSet;
 
-pub(super) fn nearest_town(world: &World, tile: u32) -> Result<Option<u32>, CommandError> {
+pub(in crate::commands) fn nearest_town(
+    world: &World,
+    tile: u32,
+) -> Result<Option<u32>, CommandError> {
     let towns = world
         .tables()
         .get(b"CITY")

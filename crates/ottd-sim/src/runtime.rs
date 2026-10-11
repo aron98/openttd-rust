@@ -8,6 +8,9 @@ pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 mod backup_enabled_sale_native;
 #[cfg(test)]
 mod backup_sale_native;
+pub(crate) mod stations;
+pub(crate) use stations::StationContext;
+pub use stations::{RoadStationGeometry, StationArea};
 mod depot;
 mod depot_removal;
 #[cfg(test)]
@@ -133,6 +136,7 @@ pub struct SimulationRuntime {
     road: BTreeMap<VehicleId, RoadVehicleCache>,
     allocation: VehicleAllocation,
     depot: depot::DepotRuntime,
+    stations: stations::StationRuntime,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -329,6 +333,12 @@ impl SimulationRuntime {
             ));
         }
         match request.command {
+            crate::Command::BuildRoadStop { .. } => StationContext {
+                content: &self.content,
+                stations: &mut self.stations,
+                road: &mut self.depot.road,
+            }
+            .execute(&mut self.world, request),
             crate::Command::InsertOrder { .. } => {
                 OrderContext::new(&mut self.orders, &self.content, &self.road)
                     .execute(&mut self.world, request)
@@ -404,6 +414,7 @@ impl SimulationRuntime {
         Ok(Self {
             orders,
             depot: depot::DepotRuntime::restore(&world)?,
+            stations: stations::StationRuntime::restore(&world)?,
             serializer_cargo_paid_for: serialization::restore(&world)?,
             allocation: VehicleAllocation::restore(&world)?,
             world,
@@ -415,6 +426,23 @@ impl SimulationRuntime {
     /// Mutable access is intentionally absent.
     pub const fn world(&self) -> &World {
         &self.world
+    }
+
+    /// Station pool allocation metadata.
+    pub fn station_pool(&self) -> pools::PoolSnapshot {
+        self.stations.stations.snapshot()
+    }
+    /// Road-stop pool allocation metadata.
+    pub fn road_stop_pool(&self) -> pools::PoolSnapshot {
+        self.stations.stops.snapshot()
+    }
+    /// Admitted road-only geometry restored from saved chains; native X=0 sentinel stations are excluded.
+    pub const fn road_station_geometry(&self) -> &BTreeMap<u32, RoadStationGeometry> {
+        &self.stations.geometry
+    }
+    /// Company station tile infrastructure, excluding airports and buoys.
+    pub const fn station_infrastructure(&self) -> &BTreeMap<u8, u32> {
+        &self.stations.infrastructure
     }
 
     /// Native depot pool identity metadata restored from the authoritative world.

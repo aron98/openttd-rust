@@ -46,7 +46,11 @@ pub(super) fn nearest(view: TerrainRead<'_>, tile: u32) -> Result<Option<u16>, C
         .filter(|(distance, _)| *distance < u32::from(threshold))
         .map(|(_, id)| id))
 }
-fn saved_rating(view: TerrainRead<'_>, town: u16, company: u8) -> Result<i32, CommandError> {
+pub(super) fn saved_rating(
+    view: TerrainRead<'_>,
+    town: u16,
+    company: u8,
+) -> Result<i32, CommandError> {
     let WireValue::Array(ratings) = view.field(*b"CITY", u32::from(town), "ratings")? else {
         return Err(WorldAccessError("CITY/ratings".into()).into());
     };

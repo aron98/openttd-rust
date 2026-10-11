@@ -156,7 +156,10 @@ impl ReplayOwner {
         }
     }
     fn command(&mut self, request: &crate::CommandRequest) -> Result<CommandReceipt, CommandError> {
-        if matches!(request.command, crate::Command::InsertOrder { .. }) {
+        if matches!(
+            request.command,
+            crate::Command::InsertOrder { .. } | crate::Command::BuildRoadStop { .. }
+        ) {
             if let Self::Saved(world) = self {
                 let runtime =
                     crate::runtime::SimulationRuntime::restore_vanilla((**world).clone())?;

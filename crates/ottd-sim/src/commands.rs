@@ -14,6 +14,8 @@ mod pause;
 mod pipeline;
 mod road;
 mod road_depot;
+mod road_stop;
+pub use road_stop::BuildRoadStop;
 mod road_vehicle;
 mod terraform;
 mod terrain_context;
@@ -41,6 +43,13 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Construct a native road stop and create or join a station.
+    BuildRoadStop {
+        /// First map tile of the construction area.
+        tile: u32,
+        /// Native construction arguments.
+        stop: BuildRoadStop,
+    },
     /// Insert a native order into a primary road vehicle's shared list.
     InsertOrder {
         /// Native posting feedback location.
@@ -321,7 +330,8 @@ impl Plan {
 }
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
-        Command::BuildRoadDepot { .. }
+        Command::BuildRoadStop { .. }
+        | Command::BuildRoadDepot { .. }
         | Command::InsertOrder { .. }
         | Command::BuildVehicle { .. }
         | Command::SellVehicle { .. } => Err(CommandError::Unsupported(

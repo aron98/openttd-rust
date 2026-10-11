@@ -1,6 +1,6 @@
-mod occupancy;
-mod planning;
-mod record;
+pub(super) mod occupancy;
+pub(super) mod planning;
+pub(super) mod record;
 pub(super) mod remove;
 use super::{CommandCost, CommandError, CommandReceipt, pipeline, terrain_read::TerrainRead};
 use crate::{

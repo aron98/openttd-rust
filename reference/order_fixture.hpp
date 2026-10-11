@@ -2,6 +2,7 @@
 #define OTTD_REFERENCE_ORDER_FIXTURE_HPP
 #include "reference_order_state.hpp"
 #include "reference_replay.hpp"
+#include "reference_road_station_runtime.hpp"
 #include "../command_func.h"
 #include "../order_cmd.h"
 #include "../order_func.h"
@@ -53,6 +54,7 @@ inline std::string Label(const Json &a)
 }
 inline Json Observation()
 {
+    if (std::getenv("OTTD_ROAD_STATION_OBSERVE") != nullptr) return ReferenceRoadStationRuntime::Snapshot();
     const char *depot_mode = std::getenv("OTTD_DEPOT_REMOVAL_OBSERVE");
     const char *sale_mode = std::getenv("OTTD_ORDERED_SALE_OBSERVE");
     const char *bridge_mode = std::getenv("OTTD_BACKUP_SALE_OBSERVE");
@@ -78,6 +80,14 @@ inline Json Save(const Json &a)
     Require(!std::filesystem::exists(path), "fixture save already exists");
     const Json before = Observation();
     Require(SaveOrLoad(path.string(), SLO_SAVE, DFT_GAME_FILE, NO_DIRECTORY, false) == SL_OK, "fixture native save failed");
+    if (std::getenv("OTTD_ROAD_STATION_OBSERVE") != nullptr) {
+        const auto derived = directory / (Label(a) + ".derived.json");
+        Require(std::getenv("OTTD_WORLD_DERIVED_PATH") == nullptr, "station derived destination already configured");
+        setenv("OTTD_WORLD_DERIVED_PATH", derived.string().c_str(), 1);
+        Require(std::getenv("OTTD_WORLD_CORRUPT_DERIVED") == nullptr, "station observation cannot use corruption controls");
+        ReferenceWorld::Derived();
+        unsetenv("OTTD_WORLD_DERIVED_PATH");
+    }
     const Json after = Observation();
     Require(before == after, "saving changed initialized live order state");
     return {{"path", path.filename().string()}, {"before", before}, {"after", after}, {"role", ReferenceOrderState::Role()}};
@@ -95,7 +105,7 @@ inline Json Action(const Json &a)
         const auto &request = a.at("request");
         const std::string kind = request.at("command").at("kind").get<std::string>();
         const bool road_cycle = std::getenv("OTTD_ROAD_CYCLE_PREPARE") != nullptr;
-        Require(road_cycle ? (kind == "insert_order" || kind == "road_cycle_prepare_stop" || kind == "build_road_depot" || kind == "build_vehicle") : owned_restore ? (kind == "build_vehicle" || kind == "sell_vehicle" || kind == "landscape_clear") : (backup_enabled_sale || backup_sale) ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
+        Require(road_cycle ? (kind == "build_road_stop" || kind == "insert_order" || kind == "road_cycle_prepare_stop" || kind == "build_road_depot" || kind == "build_vehicle") : owned_restore ? (kind == "build_vehicle" || kind == "sell_vehicle" || kind == "landscape_clear") : (backup_enabled_sale || backup_sale) ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
         if (backup_sale && kind == "sell_vehicle") Require(!request.at("command").at("backup_order").get<bool>(), "backup-enabled sale is outside bridge mode");
         Json receipt = ReferenceReplay::Execute(request);
         return {{"receipt", std::move(receipt)}, {"native_metadata", ReferenceReplay::metadata}};

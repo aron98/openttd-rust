@@ -28,6 +28,7 @@ impl crate::runtime::RoadVehicleContext<'_> {
     }
 }
 enum OwnedContext<'a> {
+    Station(crate::runtime::StationContext<'a>),
     Orders(crate::runtime::OrderContext<'a>),
     RoadVehicle(crate::runtime::RoadVehicleContext<'a>),
     Depot(crate::runtime::DepotContext<'a>),
@@ -39,6 +40,15 @@ impl crate::runtime::OrderContext<'_> {
         request: &CommandRequest,
     ) -> Result<CommandReceipt, CommandError> {
         execute(world, request, Some(OwnedContext::Orders(self)))
+    }
+}
+impl crate::runtime::StationContext<'_> {
+    pub(crate) fn execute(
+        self,
+        world: &mut World,
+        request: &CommandRequest,
+    ) -> Result<CommandReceipt, CommandError> {
+        execute(world, request, Some(OwnedContext::Station(self)))
     }
 }
 impl crate::runtime::DepotContext<'_> {
@@ -73,7 +83,8 @@ fn execute(
 }
 const fn tile(command: &Command) -> u32 {
     match command {
-        Command::BuildRoadDepot { tile, .. }
+        Command::BuildRoadStop { tile, .. }
+        | Command::BuildRoadDepot { tile, .. }
         | Command::InsertOrder { location: tile, .. }
         | Command::SellVehicle { location: tile, .. }
         | Command::BuildRoad { tile, .. }
@@ -169,6 +180,9 @@ fn execute_admitted(
 ) -> Result<CommandReceipt, CommandError> {
     if let Some(args) = super::terrain_run::Args::from_command(world, &request.command)? {
         return super::terrain_run::execute(world, request.company, args, estimate);
+    }
+    if let Command::BuildRoadStop { tile, stop } = request.command {
+        return execute_station(world, request.company, tile, stop, estimate, context);
     }
     if let Command::InsertOrder { .. } = request.command {
         return match context {
@@ -393,7 +407,8 @@ fn gated(gate: CommandGate, request: &CommandRequest) -> CommandReceipt {
 const fn pause_level(command: &Command) -> u64 {
     match command {
         Command::ChangeServiceInterval { .. } | Command::InsertOrder { .. } => 1,
-        Command::BuildRoadDepot { .. }
+        Command::BuildRoadStop { .. }
+        | Command::BuildRoadDepot { .. }
         | Command::BuildRoad { .. }
         | Command::LandscapeClear { .. }
         | Command::TerraformLand { .. }
@@ -405,5 +420,23 @@ const fn pause_level(command: &Command) -> u64 {
         Command::RenameCompany { .. } | Command::RenamePresident { .. } | Command::Pause { .. } => {
             0
         }
+    }
+}
+
+fn execute_station(
+    world: &mut World,
+    company: u8,
+    tile: u32,
+    stop: super::BuildRoadStop,
+    estimate: bool,
+    context: Option<OwnedContext<'_>>,
+) -> Result<CommandReceipt, CommandError> {
+    match context {
+        Some(OwnedContext::Station(context)) => {
+            super::road_stop::run(world, company, tile, stop, estimate, context)
+        }
+        _ => Err(CommandError::Unsupported(
+            "road station construction needs owned runtime",
+        )),
     }
 }

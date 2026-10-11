@@ -24,11 +24,11 @@ impl Build {
         }
     }
 }
-fn available(
+pub(in crate::commands) fn available(
     world: &World,
     company: u8,
     road_type: u8,
-    context: &DepotContext<'_>,
+    content: &crate::content::ContentCatalog,
 ) -> Result<bool, CommandError> {
     if road_type >= 63 {
         return Ok(false);
@@ -41,7 +41,7 @@ fn available(
     let mask = 1_u64
         .checked_shl(u32::try_from(climate).map_err(|_| CommandError::Overflow("climate"))?)
         .unwrap_or(0);
-    for (index, engine) in context.content.engines().iter().enumerate() {
+    for (index, engine) in content.engines().iter().enumerate() {
         let VehicleSpec::Road(spec) = engine.vehicle else {
             continue;
         };
@@ -63,7 +63,7 @@ pub(super) fn validate(
     args: Args,
     context: &DepotContext<'_>,
 ) -> Result<Build, CommandError> {
-    if !available(world, company, args.road_type, context)? || args.direction >= 4 {
+    if !available(world, company, args.road_type, context.content)? || args.direction >= 4 {
         return Ok(Build::rejected(CommandCost::failure("CMD_ERROR")));
     }
     let source = landscape::tile_at(world, args.tile)?;

@@ -139,6 +139,8 @@ copy_header reference/tree_rating.hpp "$source_dir/src/reference_tree_rating.hpp
 copy_header reference/tree_rating_replay.hpp "$source_dir/src/saveload/reference_tree_rating_replay.hpp"
 copy_header reference/tree_fixture.hpp "$source_dir/src/saveload/reference_tree_fixture.hpp"
 copy_header reference/order_state.hpp "$source_dir/src/saveload/reference_order_state.hpp"
+copy_header reference/road_station_runtime.hpp "$source_dir/src/saveload/reference_road_station_runtime.hpp"
+copy_header reference/road_station_prepare.hpp "$source_dir/src/saveload/reference_road_station_prepare.hpp"
 copy_header reference/order_fixture.hpp "$source_dir/src/saveload/reference_order_fixture.hpp"
 copy_header reference/order_network.hpp "$source_dir/src/saveload/reference_order_network.hpp"
 for header in replay replay_cost replay_commands replay_fixture; do

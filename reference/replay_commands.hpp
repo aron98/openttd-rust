@@ -13,10 +13,13 @@
 #include "../station_cmd.h"
 #include "../newgrf_roadstop.h"
 
+#include "reference_road_station_prepare.hpp"
+
 namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind.starts_with("road_station_prepare_")) return PrepareRoadStation(command);
     if (kind == "insert_order") {
         const auto &raw = command.at("order");
         Order order(raw.at("type").get<uint8_t>(), raw.at("flags").get<uint8_t>(), DestinationID(raw.at("dest").get<uint16_t>()));
@@ -25,6 +28,15 @@ inline bool Post(const Json &command)
         order.SetTravelTime(raw.at("travel_time").get<uint16_t>());
         order.SetMaxSpeed(raw.at("max_speed").get<uint16_t>());
         return Command<CMD_INSERT_ORDER>::Post(TileIndex(command.at("location").get<uint32_t>()), VehicleID(command.at("vehicle").get<uint32_t>()), command.at("index").get<uint8_t>(), order);
+    }
+    if (kind == "build_road_stop") {
+        const auto &stop = command.at("stop");
+        return Command<CMD_BUILD_ROAD_STOP>::Post(TileIndex(command.at("tile").get<uint32_t>()),
+            stop.at("width").get<uint8_t>(), stop.at("length").get<uint8_t>(),
+            static_cast<RoadStopType>(stop.at("stop_type").get<uint8_t>()), stop.at("drive_through").get<bool>(),
+            static_cast<DiagDirection>(stop.at("direction").get<uint8_t>()), static_cast<RoadType>(stop.at("road_type").get<uint8_t>()),
+            static_cast<RoadStopClassID>(stop.at("spec_class").get<uint16_t>()), stop.at("spec_index").get<uint16_t>(),
+            StationID(stop.at("station_to_join").get<uint16_t>()), stop.at("adjacent").get<bool>());
     }
     if (kind == "road_cycle_prepare_stop") {
         Require(std::getenv("OTTD_ROAD_CYCLE_PREPARE") != nullptr, "road stop preparation requires explicit protocol");

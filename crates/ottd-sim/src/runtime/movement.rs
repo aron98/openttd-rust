@@ -3,6 +3,8 @@ mod advance;
 mod cargo_age;
 #[cfg(test)]
 mod cargo_age_tests;
+#[cfg(test)]
+mod cargo_rollback_tests;
 mod company;
 mod daily;
 mod directed;

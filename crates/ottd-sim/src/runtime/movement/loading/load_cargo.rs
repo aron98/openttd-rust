@@ -91,6 +91,11 @@ pub(super) fn load(
         },
     )?;
     if moved != 0 {
+        crate::runtime::road_cache::cargo_changed(
+            &mut runner.cache,
+            super::SavedVehicleView::candidate(state.view(), runner.id)?,
+            runner.content,
+        )?;
         records::station_field(state, station, ("time_since_load", WireValue::Unsigned(0)))?;
         records::station_field(
             state,

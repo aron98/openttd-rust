@@ -24,6 +24,24 @@ pub(in crate::runtime::movement) fn admit(
     let vehicle = SavedVehicleView::new(world, runner.id)?;
     let loading = vehicle.common_number("current_order.type")? & 15 == 3;
     let visited = vehicle.common_number("last_station_visited")?;
+    let list = runner
+        .transport
+        .cargo
+        .vehicles
+        .get(&runner.id.raw())
+        .ok_or_else(|| unsupported("transport", "vehicle cargo list"))?;
+    if list.actions[0] != 0 || list.actions[3] != 0 {
+        return Err(unsupported(
+            "transport",
+            "transfer or reserved vehicle cargo",
+        ));
+    }
+    if list.actions[1] != 0 && (!loading || vehicle.common_number("vehicle_flags")? & 2 == 0) {
+        return Err(unsupported(
+            "transport",
+            "delivery cargo loading association",
+        ));
+    }
     let mut queued = 0_usize;
     for id in world
         .tables()
@@ -65,10 +83,8 @@ pub(in crate::runtime::movement) fn admit(
                 "payment front/station association",
             ));
         }
-        for name in ["route_profit", "visual_profit", "visual_transfer"] {
-            if crate::world_access::signed(world, b"CAPY", *payment, name)? != 0 {
-                return Err(unsupported("transport", "nonzero cargo payment"));
-            }
+        if crate::world_access::signed(world, b"CAPY", *payment, "visual_transfer")? != 0 {
+            return Err(unsupported("transport", "transfer cargo payment"));
         }
     }
     if runner.transport.payment_stations.len() > 1 {

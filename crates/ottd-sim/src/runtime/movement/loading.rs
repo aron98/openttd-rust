@@ -1,12 +1,16 @@
 //! Ordinary empty loading, preserving queue/payment/order phase boundaries.
 mod admission;
+mod cash;
 #[cfg(test)]
 mod failure_tests;
 mod job_publication;
 mod jobs;
 pub(super) use admission::admit;
+mod delivery;
+mod income;
 mod links;
 mod load_cargo;
+mod unload;
 pub(super) use links::station_links;
 mod orders;
 pub(super) use jobs::tick as link_tick;
@@ -61,6 +65,26 @@ pub(super) fn begin(
         runner,
         u16::try_from(station).map_err(|_| unsupported("road_loading", "station ID"))?,
     )?;
+    let cargo = SavedVehicleView::candidate(state.view(), id)?.cargo_type()?;
+    if number(state, id, false, "cargo_cap")? > 0
+        && SavedVehicleView::candidate(state.view(), id)?.stored_count()? > 0
+        && runner.transport.cargo.stage(
+            state,
+            crate::runtime::transport::cargo::stage::Arrival {
+                vehicle: id,
+                station,
+                cargo,
+            },
+        )?
+    {
+        set(
+            state,
+            id,
+            false,
+            "vehicle_flags",
+            number(state, id, false, "vehicle_flags")? | 2,
+        )?;
+    }
     set(state, id, false, "cur_speed", 0)
 }
 fn queue(
@@ -110,6 +134,9 @@ pub(super) fn station_tick(
     }
     let station = u32::try_from(number(state, id, false, "last_station_visited")?)
         .map_err(|_| unsupported("road_loading", "station ID"))?;
+    if unload::tick(state, runner, station)? {
+        return Ok(());
+    }
     if number(state, id, false, "vehicle_flags")? & 64 != 0 {
         payment::delete(state, runner)?;
         set(state, id, false, "load_unload_ticks", 20)?;

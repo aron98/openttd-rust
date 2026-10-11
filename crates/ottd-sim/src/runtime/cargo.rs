@@ -26,8 +26,12 @@ pub(in crate::runtime) mod read;
 mod recipients;
 #[path = "cargo/restore.rs"]
 mod restore;
+#[path = "cargo/stage.rs"]
+pub(in crate::runtime) mod stage;
 #[path = "cargo/truncate.rs"]
 mod truncate;
+#[path = "cargo/unload.rs"]
+pub(in crate::runtime) mod unload;
 #[path = "cargo/validate.rs"]
 mod validate;
 #[path = "cargo/write.rs"]

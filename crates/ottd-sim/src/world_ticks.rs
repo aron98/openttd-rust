@@ -11,13 +11,14 @@ mod finance;
 pub(crate) mod house_cargo;
 mod houses;
 mod phases;
-use clocks::{restore_clock, save_clock};
+mod plan;
+use clocks::save_clock;
 use phases::{competitor, daily, industry_month};
 mod tiles;
 mod towns;
 mod trees;
 use crate::{
-    Landscape, MAX_TICKS, TickEvents,
+    TickEvents,
     world_access::{WorldAccessError, unsigned},
 };
 use crate::{
@@ -26,10 +27,10 @@ use crate::{
 use ottd_core::{ClockEvent, ClockEvents, ClockPhase, ClockState};
 use ottd_save::{
     WireValue,
-    world::{PreparedWorldTransaction, World, WorldEdit},
+    world::{World, WorldEdit},
 };
 use serde::{Deserialize, Serialize};
-use tiles::{map, tile};
+use tiles::tile;
 
 /// Rejected unsupported phase or invalid saved-world operation.
 #[derive(Debug, thiserror::Error)]
@@ -113,73 +114,6 @@ impl VehiclePhases for EmptyVehicles {
     }
     fn ticks(&mut self, _: &mut State<'_>, _: &ClockState) -> Result<(), WorldTickError> {
         Ok(())
-    }
-}
-
-impl State<'_> {
-    pub(crate) fn plan<'w>(
-        world: &'w mut World,
-        ticks: u32,
-        vehicles: &mut impl VehiclePhases,
-    ) -> Result<
-        (
-            PreparedWorldTransaction<'w>,
-            WorldTickReport,
-            Option<crate::runtime::TownHouseCaches>,
-        ),
-        WorldTickError,
-    > {
-        if ticks > MAX_TICKS {
-            return Err(unsupported("budget", "tick limit"));
-        }
-        let paused = unsigned(world, b"DATE", 0, "pause_mode")? != 0;
-        let initial_roads = domain::validate(world, paused, vehicles)?;
-        let mut clock = restore_clock(world)?;
-        // A pending link job may release pause during this horizon. Defer any active-domain
-        // error until that actually happens; an unrelated pause still admits only paused work.
-        let mut active_domain = Some((|| {
-            let roads_admitted = if paused {
-                domain::validate(world, false, vehicles)?
-            } else {
-                initial_roads
-            };
-            vehicles.admit(world)?;
-            Ok::<_, WorldTickError>((
-                Landscape::for_world(
-                    map(world),
-                    u32::try_from(unsigned(world, b"DATE", 0, "cur_tileloop_tile")?)
-                        .map_err(|_| unsupported("landscape", "cursor"))?,
-                    roads_admitted,
-                    vehicles.station_tiles(),
-                )?
-                .into_scheduler(),
-                crate::runtime::TownHouseCaches::restore(world)?,
-            ))
-        })());
-        let mut landscape = None;
-        let mut state = State::load(world, None);
-        let mut report = WorldTickReport { ticks: Vec::new() };
-        for step in 0..ticks {
-            vehicles.before_state_loop(&mut state)?;
-            let paused = state.number(b"DATE", 0, "pause_mode")? != 0;
-            if !paused && landscape.is_none() {
-                let (scheduler, towns) = active_domain
-                    .take()
-                    .ok_or_else(|| unsupported("landscape", "missing active admission"))??;
-                landscape = Some(scheduler);
-                state.towns = Some(towns);
-            }
-            let events = advance(&mut state, &mut clock, &mut landscape, vehicles, paused)
-                .map_err(|error| match error {
-                    WorldTickError::Unsupported { phase, reason } => {
-                        unsupported(phase, &format!("call {step}: {reason}"))
-                    }
-                    other => other,
-                })?;
-            report.ticks.push(events);
-        }
-        let (candidate, towns) = state.finish()?;
-        Ok((candidate, report, towns))
     }
 }
 

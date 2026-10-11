@@ -3,6 +3,8 @@ use ottd_save::{Compression, Savegame, world::World};
 use ottd_sim::runtime::SimulationRuntime;
 use serde_json::{Value, json};
 use std::{fs, path::PathBuf};
+#[path = "industry_recipient_support/native_views.rs"]
+mod native_views;
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn snapshot(runtime: &SimulationRuntime) -> Result<Value> {
@@ -46,6 +48,7 @@ fn original_industry_recipients_advance_matches_complete_world() -> Result {
     let mut runtime = restoration?;
     let before = snapshot(&runtime)?;
     fs::write(output.join("before.json"), serde_json::to_vec(&before)?)?;
+    native_views::compare(&runtime, &output, "initial")?;
     let result = runtime.advance_world(calls);
     let after = snapshot(&runtime)?;
     fs::write(output.join("after.json"), serde_json::to_vec(&after)?)?;
@@ -57,6 +60,7 @@ fn original_industry_recipients_advance_matches_complete_world() -> Result {
         }))?,
     )?;
     let _advanced = result?;
+    native_views::compare(&runtime, &output, "final")?;
     let native = World::decode(&Savegame::decode(
         &fs::read(expected)?,
         ottd_save::DEFAULT_MAX_BYTES,

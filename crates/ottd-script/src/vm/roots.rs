@@ -135,11 +135,7 @@ impl Vm<'_> {
                     table.new_slot(key, value)?;
                 } else if let Err(error) = table.set_existing(key.clone(), value.clone()) {
                     if error == VmError::MissingIndex && *receiver == self.register(0)? {
-                        self.runner
-                            .get()
-                            .root
-                            .table
-                            .set_existing(key, value)?;
+                        self.runner.get().root.table.set_existing(key, value)?;
                     } else {
                         return Err(error);
                     }

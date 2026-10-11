@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "46d0428d68e80a144e3a5e6a68cfa030c4bb533646602cfc587f66a3f3b5ab48",
+   "sha256": "bb56e448bf96a8f0c9360c19eaca70b03901a91b1ed62ea8ef87570ab396d1e8",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "fe92514aeb898af2d86852e34ec20fc076e9968bd997dc6efb7cbaefa62804db",
+   "sha256": "57cd6f26c19dcc4e51656ea39dd9c5cd722b0e08d9f40f450dd6d7bfa9d27310",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "0685ac09cb8fcf3bc42c51c7e3863946ef70973b2a9fecd3df6346609ceb4fb2",
+   "sha256": "c808be6f8d567f2dec50532be8b63228a2f22d0e33c7069d7c6b2079df2677f4",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "d19a9c9df2d8c878b205f052a008093a6a9c5876aaf89689d5f9ea88da4624e6",
+   "sha256": "d18eebbcd96e5d09992fd5f140bde1b69f38703939f3aac37fa1ffb92e74fa55",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -11869,7 +11869,7 @@
   {
    "id": "cargo-scripts-tests-test-cargo-observer-inputs-py",
    "path": "scripts/tests/test_cargo_observer_inputs.py",
-   "sha256": "f4b1e1decec2aa35c9a82c4c2b1dad9902b10f911fe3671b478e0112d37b846c",
+   "sha256": "9be52e6b70011dce1d695f54c90e7833578435a710dd47e4f975162f515aeafa",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,

@@ -1166,7 +1166,7 @@
     "scripts/tests/script_vm_roots_test.py": "1a622138c60eceb9c8d879cf18405487f1ebe1c1622399adbc8e22056b70827c",
     "scripts/tests/script_vm_tables_bindings_test.py": "3cd98027499f6e72a0b35a2cf80b354849bf3ecbbe7c7a7c7aee9a1747c35fed",
     "scripts/tests/strings_ci_evidence_test.py": "893e6801713a96b2b67b972415759a7e7d65c8ea334894f05e3c72b6a9f9c7fe",
-    "scripts/tests/test_cargo_observer_inputs.py": "f4b1e1decec2aa35c9a82c4c2b1dad9902b10f911fe3671b478e0112d37b846c",
+    "scripts/tests/test_cargo_observer_inputs.py": "9be52e6b70011dce1d695f54c90e7833578435a710dd47e4f975162f515aeafa",
     "scripts/tests/test_contract.py": "9f5dbaa6769ef2a68c8ae1cd7ed34ccd50110b3ebd79f19de965dcd5e3795005",
     "scripts/tests/test_contract_layouts.py": "1b05d52be379ffc829a854da798c2882f06c57a57c8f2b467cdba8f94b6eee89",
     "scripts/tests/test_depot_build_evidence.py": "fc6f87eca7dbb8357f13c774c9e7014154716638bab4ec1e9691770dd345ab6f",

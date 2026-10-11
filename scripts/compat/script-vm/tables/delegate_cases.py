@@ -34,6 +34,7 @@ DELEGATION: Final = (
     "receiver-error-before-delegate-type",
     "delegate-type-atomic",
     "parent-bare-root",
+    "qualified-parent",
     "parent-nontable-error",
     "root-delegate-read-write",
     "closure-retained-delegate",

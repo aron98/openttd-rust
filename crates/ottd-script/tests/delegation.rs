@@ -117,6 +117,11 @@ fn parent_bare_root() {
 }
 
 #[test]
+fn qualified_parent() {
+    execute(include_str!("delegation/qualified-parent.nut")).expect("defined native delegation");
+}
+
+#[test]
 fn parent_nontable_error() {
     execute(include_str!("delegation/parent-nontable-error.nut"))
         .expect("defined native delegation");

@@ -29,6 +29,9 @@ pub(super) fn validate(
     for id in [
         *b"NGRF", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
     ] {
+        if id == *b"CAPA" && phases.cargo_activity() {
+            continue;
+        }
         if id == *b"STNN" && stations {
             continue;
         }
@@ -182,3 +185,7 @@ fn validate_roads(world: &World, stations: bool) -> Result<bool, WorldTickError>
     }
     Ok(true)
 }
+
+#[cfg(test)]
+#[path = "domain_cargo_tests.rs"]
+mod cargo_tests;

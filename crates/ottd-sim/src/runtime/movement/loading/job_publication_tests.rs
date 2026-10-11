@@ -51,7 +51,8 @@ fn synthetic_goods_publication_predicates() -> Result<(), Box<dyn std::error::Er
         if mode == "station-gone" {
             input.nodes.last_mut().ok_or("node")?.station = 64000;
         }
-        let mut state = WorldTickState::load(&mut runtime.world, None);
+        let industries = crate::runtime::IndustryCaches::restore(&runtime.world)?;
+        let mut state = WorldTickState::load(&mut runtime.world, None, industries);
         if mode == "identity" {
             super::records::goods_field(&mut state, (0, 0), ("node", WireValue::Unsigned(19)))?;
         }

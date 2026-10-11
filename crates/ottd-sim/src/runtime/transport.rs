@@ -1,5 +1,4 @@
 //! Native payment/link pool history and non-saved payment/job restoration state.
-use super::job_executor::Worker;
 #[path = "cargo.rs"]
 pub(super) mod cargo;
 use super::{

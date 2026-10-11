@@ -33,7 +33,8 @@ fn original_distribution_and_rating_edge_matrix() -> Result {
             .pointer("/actions/0/control")
             .ok_or("native control")?;
         let original = json(&native.join("results.json"))?;
-        let mut state = WorldTickState::load(&mut world, None);
+        let industries = crate::runtime::IndustryCaches::restore(&world)?;
+        let mut state = WorldTickState::load(&mut world, None, industries);
         let outcome = invoke(
             &mut state,
             &mut transport,

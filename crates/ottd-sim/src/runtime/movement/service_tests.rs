@@ -29,7 +29,8 @@ fn service_interval_and_replacement_list_predicates() -> Result {
         let mut runtime = load(&input)?;
         let before = format!("{runtime:?}");
         {
-            let mut state = State::load(&mut runtime.world, None);
+            let industries = crate::runtime::IndustryCaches::restore(&runtime.world)?;
+            let mut state = State::load(&mut runtime.world, None, industries);
             let date = number(&state, VehicleId::new(0), false, "date_of_last_service")?
                 + number(&state, VehicleId::new(0), false, "service_interval")?
                 + offset;

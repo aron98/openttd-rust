@@ -27,7 +27,8 @@ fn service_facility_owner_boundaries_and_omitted_vehicle_guard() -> Result {
         let mut world = World::decode(&Savegame::decode(&bytes, ottd_save::DEFAULT_MAX_BYTES)?)?;
         let before = world.saved_json()?;
         {
-            let mut state = State::load(&mut world, None);
+            let industries = crate::runtime::IndustryCaches::restore(&world)?;
+            let mut state = State::load(&mut world, None, industries);
             for station in [0, 1] {
                 state.apply(station_field(station, "time_since_load", 21))?;
                 state.apply(station_field(station, "time_since_unload", 21))?;
@@ -94,7 +95,8 @@ fn vehicle_guards(bytes: &[u8], results: &mut Vec<serde_json::Value>) -> Result 
         (0, 1, 1, false),
     ] {
         let mut world = World::decode(&Savegame::decode(bytes, ottd_save::DEFAULT_MAX_BYTES)?)?;
-        let mut state = State::load(&mut world, None);
+        let industries = crate::runtime::IndustryCaches::restore(&world)?;
+        let mut state = State::load(&mut world, None, industries);
         for (field, value) in [
             ("economy_age", WireValue::Unsigned(age)),
             ("profit_last_year", WireValue::Signed(profit)),

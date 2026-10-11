@@ -18,7 +18,8 @@ fn original_packet_load_and_split_effects() -> Result {
         ottd_save::DEFAULT_MAX_BYTES,
     )?)?;
     let mut cargo = CargoRuntime::restore(&world)?;
-    let mut state = WorldTickState::load(&mut world, None);
+    let industries = crate::runtime::IndustryCaches::restore(&world)?;
+    let mut state = WorldTickState::load(&mut world, None, industries);
     let loaded = cargo.load(
         &mut state,
         Load {
@@ -79,7 +80,8 @@ fn original_feeder_share_partial_packet_arithmetic() -> Result {
             .packets
             .first()
             .ok_or("loaded packet")?;
-        let mut state = WorldTickState::load(&mut world, None);
+        let industries = crate::runtime::IndustryCaches::restore(&world)?;
+        let mut state = WorldTickState::load(&mut world, None, industries);
         // Deliberately synthetic arithmetic inputs, separate from native world parity.
         state.set_number(b"CAPA", id, "count", count)?;
         state.set_number(b"CAPA", id, "feeder_share", feeder)?;

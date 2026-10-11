@@ -36,7 +36,8 @@ fn packet_age_saturation_countdown_and_candidate_rollback() -> Result {
         };
         runner.cache.cargo_age_period = period;
         {
-            let mut state = State::load(&mut runtime.world, None);
+            let industries = crate::runtime::IndustryCaches::restore(&runtime.world)?;
+            let mut state = State::load(&mut runtime.world, None, industries);
             set(&mut state, id, false, "cargo_age_counter", counter)?;
             let list = runner
                 .transport

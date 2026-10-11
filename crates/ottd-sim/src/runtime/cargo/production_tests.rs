@@ -20,7 +20,8 @@ fn original_town_packet_distribution_effects() -> Result {
     let stations = StationRuntime::restore(&world)?;
     let mut transport =
         TransportRuntime::restore(&world, &crate::content::ContentCatalog::from_world(&world)?)?;
-    let mut state = WorldTickState::load(&mut world, None);
+    let industries = crate::runtime::IndustryCaches::restore(&world)?;
+    let mut state = WorldTickState::load(&mut world, None, industries);
     let moved = transport.town_production(
         &mut state,
         Production {

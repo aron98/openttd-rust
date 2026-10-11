@@ -66,7 +66,15 @@ impl Heap {
             if let Some((guard, object)) = object {
                 // Like SQSharedState's temporary reference, retain the current
                 // object while Finalize immediately releases outgoing edges.
-                drop(object);
+                match object {
+                    Object::Table(nodes) => nodes.finalize(|value| {
+                        drop(value);
+                        self.release_pending();
+                    }),
+                    Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
+                        drop(object);
+                    }
+                }
                 self.release_pending();
                 drop(guard);
                 self.release_pending();

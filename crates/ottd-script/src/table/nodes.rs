@@ -138,6 +138,11 @@ impl Nodes {
     pub(crate) fn values(&self) -> impl Iterator<Item = &Stored> {
         self.slots.iter().map(|node| &node.value)
     }
+    pub(crate) fn finalize(self, mut release: impl FnMut(Stored)) {
+        for node in self.slots {
+            release(node.value);
+        }
+    }
     pub(crate) fn duplicate(&self) -> Result<Self, VmError> {
         self.reinsert(self.slots.len())
     }

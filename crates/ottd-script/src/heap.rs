@@ -55,6 +55,8 @@ pub(crate) struct Heap {
     pending: RefCell<Vec<ObjectId>>,
     releasing: Cell<bool>,
     chain: RefCell<Vec<ObjectId>>,
+    #[cfg(test)]
+    retired: RefCell<Option<Vec<ObjectId>>>,
 }
 impl Heap {
     pub(crate) fn allocate(
@@ -115,7 +117,7 @@ impl Heap {
             let Some(id) = self.pending.borrow_mut().pop() else {
                 break;
             };
-            let object = {
+            let retired = {
                 let mut entries = self.entries.borrow_mut();
                 entries
                     .get_mut(id.index)
@@ -126,20 +128,33 @@ impl Heap {
                                 .as_ref()
                                 .is_some_and(|life| life.references.get() == 0)
                     })
-                    .and_then(|entry| {
+                    .map(|entry| {
                         entry.life = None;
                         entry.object.take()
                     })
+            };
+            let Some(object) = retired else {
+                continue;
             };
             if object.is_some() {
                 self.chain.borrow_mut().retain(|entry| *entry != id);
             }
             // Child-edge drops append to the queue; the arena borrow has ended.
             drop(object);
+            #[cfg(test)]
+            if let Some(trace) = self.retired.borrow_mut().as_mut() {
+                assert!(
+                    trace.len() < trace.capacity(),
+                    "pre-reserved retirement trace overflow"
+                );
+                trace.push(id);
+            }
         }
         self.releasing.set(false);
     }
 }
 
+#[cfg(test)]
+mod release_tests;
 #[cfg(test)]
 mod tests;

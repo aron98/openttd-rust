@@ -1278,7 +1278,7 @@
     "crates/ottd-script/src/table/nodes.rs": "0872ee3ba64b350ba4b98cc8aeeb8e846361cd161201f4552792d26744a2ef75",
     "crates/ottd-script/src/table/scalar.rs": "9c2cddd215609e3738f525b6524345a00480c894670a7cff60788acacb385eb1",
     "crates/ottd-script/src/table/tests.rs": "fe87287bd8df32d81967ddadaf91f80440d4d93ac2193f84f805f152d4213b66",
-    "crates/ottd-script/src/table/tests/storage.rs": "5ad174f54234a10b64ccbd3c601883f70d155ba982a4f1e3515e4aca35d09158",
+    "crates/ottd-script/src/table/tests/storage.rs": "ef7644d652c865c9774800d79aaa96a654b03e3f7b51b0829135cdbcccb6b1c0",
     "crates/ottd-script/src/value.rs": "e1c9f42b8009e955c9dc44bf2c6be1e4e2a5d40f415b9b034b3518ec97715412",
     "crates/ottd-script/src/value/bitwise.rs": "9fa65da7f6eac04cfa7d92f9c3b88834cb1709331c81fcc2bb17eaf2f4c5b6dd",
     "crates/ottd-script/src/value/comparison.rs": "87a4ffece2a7b33d44cfb5589c7b9ed0014aee519c3712979fb2877e655f38a3",

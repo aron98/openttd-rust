@@ -112,11 +112,27 @@ fn late_failure_retains_native_delete_and_clone_effects() {
     }
     assert_eq!(
         output,
-        super::native(
-            "OTTD_SCRIPT_DELETE_EFFECTS",
-            include_str!("../../../tests/delete-effects.txt")
-        )
+        super::native("OTTD_SCRIPT_DELETE_EFFECTS", delete_effects_fixture())
     );
+}
+
+fn delete_effects_fixture() -> &'static str {
+    if cfg!(all(
+        target_pointer_width = "64",
+        target_endian = "little",
+        target_vendor = "apple"
+    )) {
+        include_str!("../../../tests/delete-effects.txt")
+    } else if cfg!(all(
+        target_pointer_width = "64",
+        target_endian = "little",
+        target_os = "linux",
+        target_env = "gnu"
+    )) {
+        include_str!("../../../tests/delete-effects-gnu.txt")
+    } else {
+        panic!("delete-effects fixture requires an admitted native hash ABI")
+    }
 }
 
 #[test]

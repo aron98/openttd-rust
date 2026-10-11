@@ -14,7 +14,7 @@ from scripts.script_vm_provenance import (
     verify_observer_sources,
     verify_sources,
 )
-from scripts.world_check_support import WorldCheckError
+from scripts.world_check_support import WorldCheckError, read_json
 
 
 @pytest.mark.parametrize(
@@ -69,6 +69,7 @@ def test_script_targets_include_embedded_owner_and_mutation_data() -> None:
         "crates/ottd-script/tests/delete-owner.txt",
         "crates/ottd-script/tests/delete-mutation.txt",
         "crates/ottd-script/tests/delete-effects.txt",
+        "crates/ottd-script/tests/delete-effects-gnu.txt",
         "crates/ottd-script/tests/table-storage.txt",
         "scripts/compat/script-vm/tables/fixtures/clone-owner.nut",
         "scripts/compat/script-vm/tables/fixtures/delete-owner.nut",
@@ -99,6 +100,7 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
         "crates/ottd-script/tests/tables-owner.txt",
         "crates/ottd-script/tests/clone-owner.txt",
         "crates/ottd-script/tests/delete-effects.txt",
+        "crates/ottd-script/tests/delete-effects-gnu.txt",
         "crates/ottd-script/tests/delete-mutation.txt",
         "crates/ottd-script/tests/delete-owner.txt",
         "crates/ottd-script/tests/table-storage.txt",
@@ -118,3 +120,27 @@ def test_missing_embedded_input_rejected_before_native_validation(
     )
     with pytest.raises(WorldCheckError, match="VM source closure omits inputs"):
         verify_sources(root, tmp_path, altered)
+
+
+def test_effects_fixtures_match_both_native_abi_provenance_records() -> None:
+    root = Path(__file__).resolve().parents[2]
+    provenance = read_json(
+        root / "scripts/compat/script-vm/tables/fixtures/delete-effects-provenance.json"
+    )
+    assert isinstance(provenance, dict)
+    source = provenance["source_fixture"]
+    assert isinstance(source, str)
+    assert digest(root / source) == provenance["source_sha256"]
+    observations = provenance["observations"]
+    assert isinstance(observations, list)
+    observed: set[str] = set()
+    for record in observations:
+        assert isinstance(record, dict)
+        fixture = record["fixture"]
+        abi = record["abi"]
+        assert isinstance(fixture, str)
+        assert isinstance(abi, str)
+        assert digest(root / fixture) == record["stdout_sha256"]
+        assert record["native_pin"] == PIN
+        observed.add(abi)
+    assert observed == {"linux-gnu-64-little", "apple-libcxx-abi1-64-little"}

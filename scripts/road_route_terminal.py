@@ -40,6 +40,7 @@ class Producer:
             )
         for left, right in (
             (("movement", "transport"), ("transport",)),
+            (("movement", "house_caches"), ("house_caches",)),
             (("movement", "stations", "orders"), ("orders",)),
             (("movement", "stations", "geometry"), ("station_geometry",)),
             (("movement", "stations", "infrastructure"), ("station_infrastructure",)),
@@ -57,6 +58,7 @@ class Producer:
                 "full_saved_world": True,
                 "full_derived_world": True,
                 "road_caches": True,
+                "house_caches": True,
                 "transport_pools_payment_job_results": True,
                 "station_geometry_infrastructure": True,
                 "order_runtime": True,

@@ -1,86 +1,38 @@
-//! Parsed zero-demand inputs and the bounded native handler pipeline.
+//! Owned immutable link-job inputs and real native handler execution.
+mod dijkstra;
+mod input;
+mod model;
+mod paths;
+mod pipeline;
 use super::{
     RuntimeError,
     job_executor::{Worker, WorkerError},
-    stations::saved::StationRow,
-    transport::EmptyJob,
 };
-use std::sync::{
-    Arc,
-    atomic::{AtomicBool, Ordering},
-};
-
-pub(super) struct EmptyInput {
-    edges_per_node: Vec<usize>,
-}
-impl EmptyInput {
-    pub(super) fn parse(graph: StationRow<'_>) -> Result<Option<Self>, RuntimeError> {
-        let (schema, rows) = graph.rows("nodes")?;
-        let mut edges_per_node = Vec::with_capacity(rows.len());
-        for record in rows {
-            let node = StationRow { schema, record };
-            if node.number("supply")? != 0 || node.number("demand")? != 0 {
-                return Ok(None);
-            }
-            let (edge_schema, edges) = node.rows("edges")?;
-            for record in edges {
-                let edge = StationRow {
-                    schema: edge_schema,
-                    record,
-                };
-                if edge.number("usage")? != 0 || edge.number("capacity")? == 0 {
-                    return Ok(None);
-                }
-            }
-            edges_per_node.push(edges.len());
-        }
-        Ok(Some(Self { edges_per_node }))
-    }
-    pub(super) fn spawn(self) -> Arc<Worker<EmptyJob>> {
-        Arc::new(Worker::spawn(move |cancel| self.run(cancel)))
-    }
-    fn run(&self, cancel: &AtomicBool) -> Result<EmptyJob, WorkerError> {
-        // Init allocates node/edge annotations; the zero-demand pipeline has no paths or flows.
-        let mut edges = 0_usize;
-        for count in &self.edges_per_node {
-            if cancel.load(Ordering::Acquire) {
-                return Err(WorkerError::Cancelled);
-            }
-            edges = edges.saturating_add(*count);
-        }
-        // Run checks cancellation before each remaining native handler.
-        for _ in 0..5 {
-            if cancel.load(Ordering::Acquire) {
-                return Err(WorkerError::Cancelled);
-            }
-        }
-        Ok(EmptyJob {
-            nodes: self.edges_per_node.len(),
-            edges,
-        })
-    }
-}
+pub(super) use input::{JobEnvironment, graph_supported};
+pub(super) use model::{JobInput, JobResult};
+use std::sync::Arc;
 impl From<WorkerError> for RuntimeError {
     fn from(error: WorkerError) -> Self {
         Self::Invalid(match error {
+            WorkerError::InvalidInput => "link graph worker input/annotation invariant",
             WorkerError::Panicked => "link graph worker panicked",
             WorkerError::Synchronization => "link graph worker synchronization",
             WorkerError::Cancelled => "link graph worker cancelled",
         })
     }
 }
-
 /// Native `SpawnAll` follows LGRS running order, not pool identifier order.
 pub(super) fn restore_workers(
     world: &ottd_save::world::World,
-) -> Result<std::collections::BTreeMap<u32, Arc<Worker<EmptyJob>>>, RuntimeError> {
+    inputs: &std::collections::BTreeMap<u32, Option<JobInput>>,
+) -> Result<std::collections::BTreeMap<u32, Arc<Worker<JobResult>>>, RuntimeError> {
     let ottd_save::WireValue::Array(running) =
         crate::world_access::field(world, b"LGRS", 0, "running")
             .map_err(|_| RuntimeError::Invalid("saved running jobs"))?
     else {
         return Err(RuntimeError::Invalid("saved running job list"));
     };
-    let mut inputs = Vec::with_capacity(running.len());
+    let mut ordered = Vec::with_capacity(running.len());
     let mut seen = std::collections::BTreeSet::new();
     for pointer in running {
         let ottd_save::WireValue::Unsigned(pointer) = pointer else {
@@ -95,17 +47,26 @@ pub(super) fn restore_workers(
         if !seen.insert(id) {
             return Err(RuntimeError::Invalid("duplicate running job"));
         }
-        let row = super::stations::saved::row(world, *b"LGRJ", id)?;
-        inputs.push((id, EmptyInput::parse(row.child("linkgraph")?)?));
+        ordered.push((
+            id,
+            inputs
+                .get(&id)
+                .ok_or(RuntimeError::Invalid("missing job input"))?
+                .clone(),
+        ));
     }
     // Validate every input before starting any host execution.
     let mut workers = std::collections::BTreeMap::new();
-    for (id, input) in inputs {
+    for (id, input) in ordered {
         if let Some(input) = input {
             workers.insert(id, input.spawn());
         }
     }
     Ok(workers)
 }
+#[cfg(test)]
+mod native_tests;
+#[cfg(test)]
+mod path_tests;
 #[cfg(test)]
 mod tests;

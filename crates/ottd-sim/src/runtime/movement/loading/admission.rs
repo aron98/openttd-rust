@@ -1,7 +1,7 @@
 //! Empty-transport capability checks before any world or runtime publication.
 use super::{RoadPhases, SavedVehicleView, WorldTickError, unsupported};
 use crate::{
-    runtime::{stations::saved, transport::empty_job},
+    runtime::{stations::saved, transport_jobs::graph_supported},
     world_access::field,
 };
 use ottd_save::{WireValue, world::World};
@@ -24,6 +24,24 @@ pub(in crate::runtime::movement) fn admit(
     let vehicle = SavedVehicleView::new(world, runner.id)?;
     let loading = vehicle.common_number("current_order.type")? & 15 == 3;
     let visited = vehicle.common_number("last_station_visited")?;
+    let list = runner
+        .transport
+        .cargo
+        .vehicles
+        .get(&runner.id.raw())
+        .ok_or_else(|| unsupported("transport", "vehicle cargo list"))?;
+    if list.actions[0] != 0 || list.actions[3] != 0 {
+        return Err(unsupported(
+            "transport",
+            "transfer or reserved vehicle cargo",
+        ));
+    }
+    if list.actions[1] != 0 && (!loading || vehicle.common_number("vehicle_flags")? & 2 == 0) {
+        return Err(unsupported(
+            "transport",
+            "delivery cargo loading association",
+        ));
+    }
     let mut queued = 0_usize;
     for id in world
         .tables()
@@ -65,10 +83,8 @@ pub(in crate::runtime::movement) fn admit(
                 "payment front/station association",
             ));
         }
-        for name in ["route_profit", "visual_profit", "visual_transfer"] {
-            if crate::world_access::signed(world, b"CAPY", *payment, name)? != 0 {
-                return Err(unsupported("transport", "nonzero cargo payment"));
-            }
+        if crate::world_access::signed(world, b"CAPY", *payment, "visual_transfer")? != 0 {
+            return Err(unsupported("transport", "transfer cargo payment"));
         }
     }
     if runner.transport.payment_stations.len() > 1 {
@@ -81,16 +97,11 @@ pub(in crate::runtime::movement) fn admit(
         .records()
         .keys()
     {
-        if empty_job(saved::row(world, *b"LGRP", *id)?)?.is_none() {
+        if !graph_supported(saved::row(world, *b"LGRP", *id)?)? {
             return Err(unsupported("transport", "populated link graph"));
         }
     }
-    if runner
-        .transport
-        .job_expectations
-        .values()
-        .any(Option::is_none)
-    {
+    if runner.transport.job_inputs.values().any(Option::is_none) {
         return Err(unsupported("transport", "populated link graph job"));
     }
     schedule(world, runner)

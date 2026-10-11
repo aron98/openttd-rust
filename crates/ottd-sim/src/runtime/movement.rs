@@ -1,12 +1,21 @@
 mod access;
+mod advance;
+mod cargo_age;
+#[cfg(test)]
+mod cargo_age_tests;
+#[cfg(test)]
+mod cargo_rollback_tests;
 mod company;
 mod daily;
 mod directed;
 mod loading;
+mod service;
+#[cfg(test)]
+mod service_tests;
 mod spatial;
 mod stations;
 mod step;
-use super::{RoadVehicleCache, SavedVehicleView, SimulationRuntime, VehicleId};
+use super::{RoadVehicleCache, RuntimeSaveContext, SavedVehicleView, SimulationRuntime, VehicleId};
 use crate::{
     WorldTickError, WorldTickPhases as VehiclePhases, WorldTickReport, WorldTickState as State,
     content::{ContentCatalog, VehicleSpec},
@@ -16,75 +25,33 @@ use access::{number, random, set};
 use ottd_core::ClockState;
 use ottd_save::{WireValue, world::World};
 pub use spatial::SingleRoadTileOccupancy;
-use spatial::Spatial;
 
-impl SimulationRuntime {
-    /// Advances the bounded single-road-vehicle gameplay domain atomically.
-    /// Viewport sprite geometry is not part of this capability.
-    /// # Errors
-    /// Rejects unsupported initial or reached branches without changing saved state or caches.
-    pub fn advance_world(&mut self, ticks: u32) -> Result<WorldTickReport, WorldTickError> {
-        if ticks == 0 {
-            return Ok(WorldTickReport { ticks: Vec::new() });
-        }
-        if self.save_context() != super::RuntimeSaveContext::SinglePlayer {
-            return Err(unsupported("host", "network world-loop context"));
-        }
-        if self.road.is_empty() {
-            let (candidate, report, towns) = State::plan(
-                &mut self.world,
-                ticks,
-                &mut crate::world_ticks::EmptyVehicles,
-            )?;
-            candidate.commit();
-            if let Some(towns) = towns {
-                self.towns = towns;
-            }
-            return Ok(report);
-        }
-        if self.road.len() != 1 {
-            return Err(unsupported("road", "exactly one vehicle required"));
-        }
-        let (id, cache) = self
-            .road
-            .first_key_value()
-            .ok_or_else(|| unsupported("road", "missing cache"))?;
-        let id = *id;
-        let mut runner = RoadPhases {
-            id,
-            cache: cache.clone(),
-            content: &self.content,
-            spatial: Spatial::restore(&self.world, id)?,
-            stations: stations::IdleStations::restore(&self.world, &self.stations)?,
-            transport: self.transport.clone(),
-        };
-        let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
-        let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
-        runner.spatial.validate(vehicle, candidate.map().width())?;
-        runner.transport.validate(candidate.view())?;
-        candidate.commit();
-        self.road.insert(id, runner.cache);
-        self.transport = runner.transport;
-        if let Some(towns) = towns {
-            self.towns = towns;
-        }
-        Ok(report)
-    }
-}
 struct RoadPhases<'a> {
     id: VehicleId,
     cache: RoadVehicleCache,
     content: &'a ContentCatalog,
-    spatial: Spatial,
+    spatial: spatial::Spatial,
     stations: stations::IdleStations,
+    station_context: &'a super::stations::StationRuntime,
     transport: super::transport::TransportRuntime,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn town_cargo(
+        &mut self,
+        state: &mut State<'_>,
+        production: crate::cargo::Production,
+    ) -> Result<u32, WorldTickError> {
+        self.transport
+            .town_production(state, production, self.station_context)
+    }
     fn before_state_loop(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
         super::job_pause::before_tick(state, &self.transport)
     }
     fn company_assets(&self, state: &State<'_>, owner: u32) -> Result<i64, WorldTickError> {
         company::assets(state, self.content, owner)
+    }
+    fn cargo_activity(&self) -> bool {
+        true
     }
     fn transport_activity(&self) -> bool {
         !self.stations.is_empty() || !self.transport.workers.is_empty()
@@ -99,7 +66,12 @@ impl VehiclePhases for RoadPhases<'_> {
         !self.stations.is_empty()
     }
     fn stations(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
-        self.stations.tick(state)
+        self.stations.tick(
+            state,
+            &mut self.transport,
+            self.station_context,
+            self.content,
+        )
     }
     fn admit(&self, world: &World) -> Result<(), WorldTickError> {
         if world
@@ -235,7 +207,8 @@ impl VehiclePhases for RoadPhases<'_> {
         } else if number(state, self.id, false, "vehstatus")? & 2 == 0 {
             directed::tick(self, state)
         } else {
-            stations::vehicle_tick(state, self.id, &mut self.cache)
+            stations::vehicle_tick(state, self.id, &mut self.cache)?;
+            self.age_cargo(state)
         }
     }
 }

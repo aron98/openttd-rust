@@ -29,6 +29,9 @@ pub(super) fn validate(
     for id in [
         *b"NGRF", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
     ] {
+        if id == *b"CAPA" && phases.cargo_activity() {
+            continue;
+        }
         if id == *b"STNN" && stations {
             continue;
         }
@@ -112,13 +115,7 @@ fn validate_companies(world: &World) -> Result<(), WorldTickError> {
                 return Err(unsupported("company", name));
             }
         }
-        // GenerateCompanyName returns immediately for any already-generated name.
-        // OpenTTD 15.3 company_cmd.cpp:413-416; STR_SV_UNNAMED is 0x6001.
-        if unsigned(world, b"PLYR", *id, "name_1")? == 0x6001
-            && unsigned(world, b"PLYR", *id, "last_build_coordinate")? != 0
-        {
-            return Err(unsupported("company", "automatic name generation"));
-        }
+        super::company_name::validate(world, *id)?;
         if unsigned(world, b"PLYR", *id, "location_of_HQ")? != u64::from(u32::MAX) {
             return Err(unsupported("company", "headquarters"));
         }
@@ -188,3 +185,7 @@ fn validate_roads(world: &World, stations: bool) -> Result<bool, WorldTickError>
     }
     Ok(true)
 }
+
+#[cfg(test)]
+#[path = "domain_cargo_tests.rs"]
+mod cargo_tests;

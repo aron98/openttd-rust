@@ -1,4 +1,4 @@
-//! Native empty `CargoPayment` construction/destruction with tentative pool history.
+//! Native `CargoPayment` construction/destruction with tentative pool history.
 use super::{RoadPhases, State, WorldTickError, number, records, unsupported};
 use crate::runtime::RuntimeError;
 use ottd_save::{WireValue, world::WorldEdit};
@@ -47,14 +47,10 @@ pub(super) fn delete(
     {
         return Err(unsupported("road_loading", "payment station cache"));
     }
-    for name in ["route_profit", "visual_profit", "visual_transfer"] {
-        if state.number(b"CAPY", id, name)? != 0 {
-            return Err(unsupported("road_loading", "nonzero cargo payment"));
-        }
-    }
     if state.number(b"CAPY", id, "front")? != i64::from(runner.id.raw()).wrapping_add(1) {
         return Err(unsupported("road_loading", "payment front"));
     }
+    super::cash::publish(state, runner.id, id)?;
     state.apply(WorldEdit::RemoveRecord {
         chunk: *b"CAPY",
         record: id,

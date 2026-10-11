@@ -21,6 +21,7 @@ struct Traversal {
     destination: u32,
     cargo: u8,
     capacity: u32,
+    usage: u32,
     time: u32,
     mode: Update,
 }
@@ -68,6 +69,7 @@ pub(super) fn refresh(
                 destination,
                 cargo,
                 capacity,
+                usage: 0,
                 time: distance.wrapping_mul(4096) / speed,
                 mode: Update::Refresh,
             },
@@ -106,6 +108,8 @@ pub(super) fn arrival(
             destination,
             cargo,
             capacity,
+            usage: capacity
+                .min(SavedVehicleView::candidate(state.view(), runner.id)?.stored_count()?),
             time,
             mode: Update::Increase,
         },

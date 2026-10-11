@@ -80,6 +80,8 @@ fn run_horizon() -> Result {
             "station_infrastructure": runtime.station_infrastructure(),
             "station_pool": runtime.station_pool(), "road_stop_pool": runtime.road_stop_pool(),
             "transport": runtime.transport_state_json(),
+            "house_caches": runtime.town_house_caches(),
+            "industry_caches": runtime.industry_caches(),
             "spatial": runtime.single_road_tile_occupancy()?, "orders": runtime.order_state_json()?
         }))?,
     )?;

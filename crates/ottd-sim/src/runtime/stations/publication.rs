@@ -13,6 +13,7 @@ pub(crate) struct StationPublication {
     pub station: u32,
 }
 pub(crate) struct StationContext<'a> {
+    pub(in crate::runtime) cargo: &'a mut crate::runtime::transport::cargo::CargoRuntime,
     pub content: &'a ContentCatalog,
     pub stations: &'a mut StationRuntime,
     pub road: &'a mut BTreeMap<u8, [u32; 63]>,
@@ -65,7 +66,9 @@ impl StationContext<'_> {
         if next.geometry.get(&station) != Some(&geometry) {
             return Err(RuntimeError::Invalid("station candidate geometry"));
         }
+        let cargo = self.cargo.station_change(prepared.view(), &next)?;
         prepared.commit();
+        *self.cargo = cargo;
         *self.stations = next;
         *road = pieces;
         Ok(())

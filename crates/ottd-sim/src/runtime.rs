@@ -2,6 +2,9 @@
 mod allocation;
 mod industries;
 pub use industries::IndustryCaches;
+mod command_context;
+pub(crate) use command_context::{RoadBuildState, new_road_record};
+mod dispatch;
 pub(crate) mod towns;
 pub use towns::{TownHouseCache, TownHouseCaches};
 mod movement;
@@ -155,38 +158,6 @@ pub(crate) struct VehicleAllocation {
     pub pool: pools::PoolAllocator,
     pub road_units: BTreeMap<u8, pools::UnitNumberAllocator>,
 }
-#[derive(Debug, Clone, Copy)]
-pub(crate) struct RoadBuildState {
-    pub owner: u8,
-    pub unit: u16,
-    pub tile: u32,
-    pub x: u32,
-    pub y: u32,
-    pub z: i32,
-    pub direction: u8,
-    pub engine: u16,
-    pub image: u8,
-    pub cargo: u8,
-    pub capacity: u16,
-    pub reliability: u16,
-    pub reliability_decay: u16,
-    pub max_age: i32,
-    pub economy_date: i32,
-    pub calendar_date: i32,
-    pub build_year: i32,
-    pub service_interval: u16,
-    pub service_percent: bool,
-    pub preview: bool,
-    pub value: i64,
-    pub random_bits: u16,
-}
-pub(crate) fn new_road_record(
-    schema: &ottd_save::TableSchema,
-    state: RoadBuildState,
-    cargo_paid_for: u16,
-) -> Result<ottd_save::TableRecord, RuntimeError> {
-    road_record::build(schema, state, cargo_paid_for)
-}
 pub(crate) struct DepotContext<'a> {
     orders: &'a mut order_state::OrderState,
     pub content: &'a ContentCatalog,
@@ -198,116 +169,16 @@ pub(crate) struct OrderContext<'a> {
     content: &'a ContentCatalog,
     road: &'a BTreeMap<VehicleId, RoadVehicleCache>,
 }
-impl DepotContext<'_> {
-    pub(crate) fn publish(
-        self,
-        world: &mut World,
-        edits: Vec<ottd_save::world::WorldEdit>,
-        pool: Option<pools::PoolAllocator>,
-        infrastructure: Option<(u8, u8, u32)>,
-    ) -> Result<(), crate::CommandError> {
-        let counter = match infrastructure {
-            Some((company, road_type, count)) => Some((
-                self.road
-                    .get_mut(&company)
-                    .and_then(|v| v.get_mut(usize::from(road_type)))
-                    .ok_or(RuntimeError::Invalid("depot infrastructure"))?,
-                count,
-            )),
-            None => None,
-        };
-        let mut transaction = world.transaction();
-        for edit in edits {
-            transaction.apply(edit)?;
-        }
-        transaction.prepare()?.commit();
-        if let Some(pool) = pool {
-            *self.pool = pool;
-        }
-        if let Some((target, value)) = counter {
-            *target = value;
-        }
-        Ok(())
-    }
-}
+
 pub(crate) struct RoadVehicleContext<'a> {
+    pub(in crate::runtime) cargo: &'a mut transport::cargo::CargoRuntime,
     orders: &'a mut order_state::OrderState,
     pub serializer_cargo_paid_for: u16,
     pub content: &'a ContentCatalog,
     pub allocation: &'a mut VehicleAllocation,
     pub road: &'a mut BTreeMap<VehicleId, RoadVehicleCache>,
 }
-impl RoadVehicleContext<'_> {
-    pub(crate) fn admit_restore(
-        &self,
-        world: &World,
-        tile: u32,
-        user: u32,
-        company: u8,
-        cargo: u8,
-    ) -> Result<(), crate::CommandError> {
-        if !world.tables().contains_key(b"BKOR") {
-            return Err(crate::CommandError::Unsupported(
-                "vehicle order-backup restore",
-            ));
-        }
-        if let Some(slot) = self.orders.admit_restore(world, tile, user)? {
-            order_state::restore::shared::admit(world, slot, company, cargo, self.content)?;
-        }
-        Ok(())
-    }
-    pub(crate) fn publish(
-        self,
-        world: &mut World,
-        edits: Vec<ottd_save::world::WorldEdit>,
-        allocation: VehicleAllocation,
-        id: VehicleId,
-        user: u32,
-    ) -> Result<(), crate::CommandError> {
-        let tile = edits
-            .iter()
-            .find_map(|edit| match edit {
-                ottd_save::world::WorldEdit::InsertRecord {
-                    chunk,
-                    record,
-                    value,
-                } if *chunk == *b"VEHS" && *record == id.raw() => Some(value),
-                _ => None,
-            })
-            .ok_or(RuntimeError::Invalid("purchase constructor record"))?;
-        let schema = world
-            .tables()
-            .get(b"VEHS")
-            .ok_or(RuntimeError::Invalid("VEHS"))?
-            .schema();
-        let tile = order_state::purchase_tile(schema, tile)?;
-        let restore = self.orders.plan_restore(world, tile, user)?;
-        let mut transaction = world.transaction();
-        for edit in edits {
-            transaction.apply(edit)?;
-        }
-        let pending = restore.stage(&mut transaction, id, self.content)?;
-        let prepared = transaction.prepare()?;
-        let restored = pending.validate(&prepared)?;
-        if allocation.pool.snapshot().occupied
-            != prepared
-                .view()
-                .table(*b"VEHS")
-                .ok_or(RuntimeError::Invalid("VEHS"))?
-                .records()
-                .map(|(id, _)| id)
-                .collect::<Vec<_>>()
-        {
-            return Err(RuntimeError::Invalid("purchase candidate vehicle membership").into());
-        }
-        let cache = creation_cache(prepared.view(), id, self.content)?;
-        prepared.commit();
-        restored.publish(self.orders);
-        self.road.insert(id, cache);
-        *self.allocation = allocation;
-        Ok(())
-    }
-}
+
 pub(crate) fn creation_cache(
     view: ottd_save::world::CandidateView<'_>,
     id: VehicleId,
@@ -329,65 +200,6 @@ pub(crate) fn road_company_count(world: &World, company: u8) -> Result<u64, Runt
         })
 }
 impl SimulationRuntime {
-    /// Execute admitted service and road-purchase commands over the owned world.
-    /// # Errors
-    /// Rejects unsupported contexts and commands without live cache publication.
-    pub fn execute_command(
-        &mut self,
-        request: &crate::CommandRequest,
-    ) -> Result<crate::CommandReceipt, crate::CommandError> {
-        if matches!(request.command, crate::Command::LandscapeClear { .. })
-            && self.save_context() != RuntimeSaveContext::SinglePlayer
-        {
-            return Err(crate::CommandError::Unsupported(
-                "depot removal host context",
-            ));
-        }
-        match request.command {
-            crate::Command::BuildRoadStop { .. } => StationContext {
-                content: &self.content,
-                stations: &mut self.stations,
-                road: &mut self.depot.road,
-            }
-            .execute(&mut self.world, request),
-            crate::Command::InsertOrder { .. } => {
-                OrderContext::new(&mut self.orders, &self.content, &self.road)
-                    .execute(&mut self.world, request)
-            }
-            crate::Command::BuildRoadDepot { .. } | crate::Command::LandscapeClear { .. } => {
-                DepotContext {
-                    orders: &mut self.orders,
-                    content: &self.content,
-                    pool: &mut self.depot.pool,
-                    road: &mut self.depot.road,
-                }
-                .execute(&mut self.world, request)
-            }
-            crate::Command::BuildVehicle { .. } | crate::Command::SellVehicle { .. } => {
-                RoadVehicleContext {
-                    orders: &mut self.orders,
-                    serializer_cargo_paid_for: self.serializer_cargo_paid_for,
-                    content: &self.content,
-                    allocation: &mut self.allocation,
-                    road: &mut self.road,
-                }
-                .execute(&mut self.world, request)
-            }
-            crate::Command::ChangeServiceInterval { .. } => {
-                crate::commands::execute_command(&mut self.world, request)
-            }
-            crate::Command::LevelLand { .. }
-            | crate::Command::TerraformLand { .. }
-            | crate::Command::BuildRoad { .. }
-            | crate::Command::IncreaseLoan { .. }
-            | crate::Command::DecreaseLoan { .. }
-            | crate::Command::RenameCompany { .. }
-            | crate::Command::RenamePresident { .. }
-            | crate::Command::Pause { .. } => Err(crate::CommandError::Unsupported(
-                "runtime command cache publication",
-            )),
-        }
-    }
     /// Restore vanilla single-part road vehicles without modifying saved fields or RNG.
     ///
     /// # Errors
@@ -428,7 +240,7 @@ impl SimulationRuntime {
             industries: IndustryCaches::restore(&world)?,
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
-            transport: transport::TransportRuntime::restore(&world)?,
+            transport: transport::TransportRuntime::restore(&world, &content)?,
             serializer_cargo_paid_for: serialization::restore(&world)?,
             allocation: VehicleAllocation::restore(&world)?,
             world,
@@ -442,13 +254,6 @@ impl SimulationRuntime {
     /// Mutable access is intentionally absent.
     pub const fn world(&self) -> &World {
         &self.world
-    }
-
-    /// Live transport pool history and payment/job observations.
-    /// Worker completion is timing-dependent and may change without advancing the World.
-    /// Unsupported populated jobs are identified explicitly, never reported as pending workers.
-    pub fn transport_state_json(&self) -> serde_json::Value {
-        self.transport.snapshot()
     }
 
     /// Population, building counts and radii used by vanilla house/town gameplay.

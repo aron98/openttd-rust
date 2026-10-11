@@ -12,6 +12,7 @@ import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 
+from scripts.cargo_observer_inputs import current
 from scripts.road_route_departure import pair
 from scripts.world_check_support import (
     Json,
@@ -29,6 +30,7 @@ class Producer:
     runner: Path
 
     def compare(self, source: Path, destination: Path, ticks: int) -> None:
+        current()
         pair(self.oracle, self.runner, source, destination, ticks)
         native = read_json(destination / "native-last-tick.json")
         rust = read_json(destination / "rust" / "final.runtime.json")
@@ -40,6 +42,8 @@ class Producer:
             )
         for left, right in (
             (("movement", "transport"), ("transport",)),
+            (("movement", "house_caches"), ("house_caches",)),
+            (("movement", "industry_caches"), ("industry_caches",)),
             (("movement", "stations", "orders"), ("orders",)),
             (("movement", "stations", "geometry"), ("station_geometry",)),
             (("movement", "stations", "infrastructure"), ("station_infrastructure",)),
@@ -57,6 +61,8 @@ class Producer:
                 "full_saved_world": True,
                 "full_derived_world": True,
                 "road_caches": True,
+                "house_caches": True,
+                "industry_caches": True,
                 "transport_pools_payment_job_results": True,
                 "station_geometry_infrastructure": True,
                 "order_runtime": True,

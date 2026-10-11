@@ -140,3 +140,20 @@ fn occupancy(stored: u32, capacity: u16) -> Result<i8, RuntimeError> {
     .map_err(|_| RuntimeError::Invalid("cargo occupancy"))?;
     Ok(i8::from_ne_bytes([percentage]))
 }
+
+/// `GroundVehicle::CargoChanged` followed by `PowerChanged` for the vanilla single road unit.
+pub(super) fn cargo_changed(
+    cache: &mut RoadVehicleCache,
+    vehicle: SavedVehicleView<'_>,
+    content: &ContentCatalog,
+) -> Result<(), RuntimeError> {
+    let updated = calculate(vehicle, content, true, false)?;
+    cache.weight = updated.weight;
+    cache.slope_resistance = updated.slope_resistance;
+    cache.axle_resistance = updated.axle_resistance;
+    cache.power = updated.power;
+    cache.max_tractive_effort = updated.max_tractive_effort;
+    cache.max_track_speed = updated.max_track_speed;
+    cache.air_drag = updated.air_drag;
+    Ok(())
+}

@@ -2,6 +2,8 @@
     clippy::redundant_pub_crate,
     reason = "station transaction adapters are shared internally with commands"
 )]
+pub(crate) mod acceptance;
+mod acceptance_data;
 mod geometry;
 #[cfg(test)]
 mod native;

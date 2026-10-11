@@ -1996,7 +1996,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-lib-rs",
    "path": "crates/ottd-sim/src/lib.rs",
-   "sha256": "95f1e90be2e9aba5d09c4eb98dedaa77125ba5dcbc2681ddbe575bdc8f47a7a6",
+   "sha256": "9ab4fbea7b7b559c7acbbec216abe43bc008e1ed4141eff4dd67f3640e3d3a15",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -2005,7 +2005,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-rs",
    "path": "crates/ottd-sim/src/runtime.rs",
-   "sha256": "4c7a031da4a13972b1b7551d5c9cabc6511c38351187eb66c59a822e7b5bb261",
+   "sha256": "9af92fb18de16022249944b445e331368b323c40eeee91ef2146ca5887f250b5",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -2014,7 +2014,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-road-cache-rs",
    "path": "crates/ottd-sim/src/runtime/road_cache.rs",
-   "sha256": "fbe4302c382598c8d2e71c2b55a39cce4997e52426ec3e15c3b483293d4276f4",
+   "sha256": "b90d5f80deaa986916c4f8faa112b73953d8ded6921ac41475996dddae37d842",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -2239,7 +2239,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-purchase-tests-publication-rs",
    "path": "crates/ottd-sim/src/runtime/purchase_tests/publication.rs",
-   "sha256": "a01586fae33ba70a93f2704e9c70aeaf65bb84c04194d1aa720bb20dd77fadb1",
+   "sha256": "b6b587650b44e018a5053ecd0d60d0c09906f06a2bfb394a0c10e3545308de3a",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -2635,7 +2635,7 @@
   {
    "id": "sale-crates-ottd-sim-src-runtime-road-sale-rs",
    "path": "crates/ottd-sim/src/runtime/road_sale.rs",
-   "sha256": "1fb8dfc97a91cf2fd8e5497c1c2e4f88e3386ca9fc1408159abc36aa5885560a",
+   "sha256": "8ba971b4257b6961310b067bb7aafacce16e0b4fcb11b8cb3f47749b5e82556f",
    "kind": "recipe",
    "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
    "save_version": null,
@@ -2662,7 +2662,7 @@
   {
    "id": "sale-crates-ottd-sim-src-runtime-sale-tests-publication-rs",
    "path": "crates/ottd-sim/src/runtime/sale_tests/publication.rs",
-   "sha256": "5de5b59839aad1ff616c1a090de745522e5dc5e70a7b5f179c70150e05be384f",
+   "sha256": "bb1c86e0a3f6e6a0a13780f563029253e54f19a736b865367bc9ce8e296deab1",
    "kind": "recipe",
    "provenance": "Bounded fresh vanilla road sale/reuse original-native matrix; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "f30e60734452c3a443ca906a719614dbb70d74585f09687ebedfaa575a1b58fe",
+   "sha256": "1f38420913a4098ef0b7ff96428972d3a234adc7169aa5f00a1c4fb21c0407aa",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "1dfc9297f20d267c2480c3b40a038aa6046f0856280b6ff562f10d3676c44b03",
+   "sha256": "2542398b6dff57fe85a77d57524477f1bcc27ffd718f75bc0733e7e9f0720625",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "ba21f79ce15b5457d709b0cae03f249ba9c570939c704e5688a48cd9d6cb88f9",
+   "sha256": "83fa262e106c71e1c03af33a6885d1fdb239ebbbaed84524f426a444d64338fb",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "cd82c4d6de12fd7309ffdca5403a24d2beb447d4135e19aa36f90da1ff696cfd",
+   "sha256": "7f126f3bd616307bef49974ace982862418738938fce7b45c83add30afc335d9",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "e31caca675ebaa118b4764714598873a1c20752d5d3565daca8999a2328d8694",
+   "sha256": "7fd1cc393936c885779684c14e3304f3a42bb7b6249f1039d6571619ccdb7d08",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "b954609b58ac75544c72f8275accebd028324315160569feae0e9f5691fe8529",
+   "sha256": "abae18c86ea871597074b7397aba65ec5635ef50a7674e03c9e5d70ef0359605",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "debdb5810499b835897280554763b84ed96fbc9574c9a46f70f0215cc76aa276",
+   "sha256": "940ce43cb95e274f4023107274bd5a5d9eb247ec873edec7fc8ef50a3120d8b4",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "0cf49b2173b048f311d8b4f440c8e38ee2d9b4c98eb56f806aaaf938ef1c8ecd",
+   "sha256": "78e48086cb951f9d8c88105e5952c80b5780db9d7e0e214590584cc1a86702ae",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "791554d16f1b89cf2f40fc7434697ec11c552a9132ae6d7c7266e44caa071472",
+   "sha256": "7209002a0fc4388975904db0fd31c1c817ec1ba1ca12d9060462ee2dc2c9fba9",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "4fac716b3c8d853218b23b5641587fae4e18a5f5a4f1d61ce52e29ec4740f6ff",
+   "sha256": "b84d2931cb20b90729df97f4583714999b7602e06660ec29659e3b2bf2857706",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3625,7 +3625,7 @@
   {
    "id": "currency-ci-currency-ci-capture-py",
    "path": "scripts/currency_ci_capture.py",
-   "sha256": "a2bd296427a81beab0967eaccad6e7786971671d40a7478e6686cfd3591a7852",
+   "sha256": "d1814e62271e4074d806f5691685d4bf1b4d6583cd920375abf29d1b838cf855",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "9b70bdf2696749142ae76d3477fdcf8c3616698c6be5c02243e474302577f79e",
+   "sha256": "3abe30d79292e2f4d850bb22849cc6bb825fdb1a8fbbd7a09be98f7f674c3c0e",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "65e47228268907da0f5394d438b89eb02db79de13febf75a5177d30456645e54",
+   "sha256": "9e20514dc057312d550a5ce4e4f05b0c644a883f28e2bc93a7d95c797545e733",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "8333662d0e2229a4966fe8650ca6de21816ad84868b488c7aac8f6ed87bb15e0",
+   "sha256": "23e531f9c3e9cd28f1f33c15050718763b05ee08f0279d0605dd48de1a5e269c",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "941bb438eb5870fcbf662807ff2c50c3bfc893a8eaa9737a9d3c23570204555b",
+   "sha256": "41e601c21433a5130ba7767b8d76a84e6b97d57634dc21ee080b4daae71314a2",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "8f02426e84a7b47b52a29940668204adff3180d8ea428bb34de9853db077c595",
+   "sha256": "45b5f8dda80af1bc6e5d83ab0e85231806d74f04d5d92f829d000c509bc2b6e7",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "1bb18418908c36b9ac47174f0fd765132121ae994a3b5a4567828bf502ce6487",
+   "sha256": "89ff0749c4b1e88d76ac9e0c31979861521c86b87756bb74d8b42525e85a47ab",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "68d2a82b7dbfe395afc93fb66f9b68c5a09060b953d973681445741aa9e33890",
+   "sha256": "24e2099843c19b53a41919f783cfc9e066c275dd992e039371f01cab4fd83aaa",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "261c58033d95164162c417b9097978c5a1de6115ed183cb1befbec8b432713f2",
+   "sha256": "53a68df67c3885c6bbf1b65cb5fce22b893cfe3e75509dab7f865d9d414cbb70",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8548,7 +8548,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-world-ticks-shared-rs",
    "path": "crates/ottd-sim/src/world_ticks/shared.rs",
-   "sha256": "4480460afb674226f818fca31555271e3eeffb40c6193da0c45871c081730321",
+   "sha256": "d1c17e82aa881d41514328eb85b3ba597a0931338d47d4d5ba9c8af7ffe7ad67",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8557,7 +8557,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-runtime-movement-rs",
    "path": "crates/ottd-sim/src/runtime/movement.rs",
-   "sha256": "b61abc02aebff4eecf69dddc27eee8f608c634f8a92900c5f6f0cbc02becf9fc",
+   "sha256": "ec5bff66b40b19850c97447a2f0eb792740b7f97102bb06774184202de495c5b",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8998,7 +8998,7 @@
   {
    "id": "tree-growth-scripts-tree-growth-source-json",
    "path": "scripts/tree-growth-source.json",
-   "sha256": "5340b7613bb3fc60ec014434ebf753b866cccd8e5c2e5965ddd6d88d9f49a769",
+   "sha256": "f9112f7265103db8763f14bc4228cb7ea36346b68c1ef4d18b7a951ff400a5da",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "80f00685c0cb068d365baec459bb7c0eddaaec133322e5f8657d4f1992090add",
+   "sha256": "b8a9f2326b93d81260320c7d8bbec627d7dfee8e395b2eb04b8836ed9d9d5010",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -9367,7 +9367,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-rs",
    "path": "crates/ottd-sim/src/runtime/movement/directed.rs",
-   "sha256": "5e2ebc4674b4fcef1d649555e2bc7920e0040ad1900ee744627f772facde8cb4",
+   "sha256": "3689de296bcb1767053af974d2d6dd583473f0fffa83b251b37ea11fd696fc0f",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9493,7 +9493,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading.rs",
-   "sha256": "75b6298aba720834311224db1c9ec31021853054c08d84e7652c2ced300ce229",
+   "sha256": "b2e31caa7a906f591275b8216a9c8be4378b39cecda8d3192411e3cb85f32947",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9502,7 +9502,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-admission-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading/admission.rs",
-   "sha256": "28eed183b86956641b6146ac1808e9a294dd048429616c9d8a93850963ebcaf4",
+   "sha256": "dc1c82bff8817a425afd09c88a4beebabd4796dcc528150564eb40caf1c95631",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9511,7 +9511,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-failure-tests-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading/failure_tests.rs",
-   "sha256": "c95fe3d1f116505c2ec716754f8eb7434b4b104e230b22ee7212bc60080f63f0",
+   "sha256": "82314e63ed82f39da8cf6f59dd3c062dbad97dffad417bce5d26837617c32d07",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9520,7 +9520,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-jobs-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading/jobs.rs",
-   "sha256": "1938c33432609e3d0ca1ce495afbb5718f1d7e7b6c09394d18227aa716fb74d0",
+   "sha256": "1e9c4d2604f53dbd6e45860e8c6fa226e392119404cbd9c65abe3ce93a496761",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9529,7 +9529,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-links-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading/links.rs",
-   "sha256": "a141fc8a6b573288c1064bbbbc138ff562c9332e518450589d0259ec9862a51e",
+   "sha256": "5348edc35875084f45aad40ebcfecab79490f4b210722256dd19fba394671ff4",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9538,7 +9538,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-links-edge-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading/links/edge.rs",
-   "sha256": "23487a0ff89ea1e02d13e01480d7df18076327eee1e00821ecff827b98ab15ff",
+   "sha256": "41b847b4fbe325827f3b1aaf4d542195d7df7382974a2320e079d938b80a1595",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9574,7 +9574,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-payment-rs",
    "path": "crates/ottd-sim/src/runtime/movement/loading/payment.rs",
-   "sha256": "54d9a278f86a9085c470425b69cb47a1a032231549aa1cee6a48633b69549c13",
+   "sha256": "e378e7e6fb9279fb98e7b777bb271082707ca10fd329a8320718d4b59c962fc9",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9592,7 +9592,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-stations-rs",
    "path": "crates/ottd-sim/src/runtime/movement/stations.rs",
-   "sha256": "45979afe76d56a690c879da34017c87796bf150a01eb34386ffb99a109aff344",
+   "sha256": "f900d96a900c9307cc986b66a2a58684c421fb4b5e2531cb339e51c0916d22f8",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9601,7 +9601,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-transport-rs",
    "path": "crates/ottd-sim/src/runtime/transport.rs",
-   "sha256": "73d0b653a5d96cbbaf1ce7633b05f8f52cf5c6fc0c747dcd39af38743a225e5a",
+   "sha256": "7bc4e5d1ca0d20a6cc8c548628bd79db557bac84d0b860f67fd0ac4147becf78",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9610,7 +9610,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-world-ticks-rs",
    "path": "crates/ottd-sim/src/world_ticks.rs",
-   "sha256": "44b9c20b13e4d9600cce5de164dd82e7915bdf1b0540da575b668fd91c25bf6b",
+   "sha256": "ad417e4accbfa3a212fe9d8c78207fbbc87865ee6396f02be0d4767b6cb5de34",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9619,7 +9619,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-world-ticks-company-history-rs",
    "path": "crates/ottd-sim/src/world_ticks/company_history.rs",
-   "sha256": "f2d0b3777471e371e71b14b44b349b842895b518c039fa28339403e65d15a35a",
+   "sha256": "f030dbe914e91078c172d7922f5f4a802638154c8f78f91e1f2fb1af3cbc3660",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9628,7 +9628,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-world-ticks-domain-rs",
    "path": "crates/ottd-sim/src/world_ticks/domain.rs",
-   "sha256": "36db53f1fee5f4656a1ee499df9dc217c0873190284497feed278e37ea1a93fe",
+   "sha256": "94c4175ead28b56b89780b22a5e45d377071d6c0820c74cfb395a0cf51463b08",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9646,7 +9646,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-tests-road-routes-rs",
    "path": "crates/ottd-sim/tests/road_routes.rs",
-   "sha256": "a7a43e5fb683266edb545341b2357896d82eb7e212b3f56ee213e38bf5843c24",
+   "sha256": "1d75d3eabbc25cee8a6311d2c4d7efac8993e111ce1578a5474f5ee7282d42a4",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -9709,7 +9709,7 @@
   {
    "id": "road-round-trips-scripts-road-route-terminal-py",
    "path": "scripts/road_route_terminal.py",
-   "sha256": "17240f8d7b5e8f03643c81a9c54c07f235e32aeb30a001e464a143fffc714b9c",
+   "sha256": "868ab9a0cb3f94bf6c9fe504a5ef13cc741b5345b0fad72163e06cc216408042",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -10123,7 +10123,7 @@
   {
    "id": "vanilla-house-runtime-crates-ottd-sim-src-world-ticks-house-cargo-rs",
    "path": "crates/ottd-sim/src/world_ticks/house_cargo.rs",
-   "sha256": "1bb318914dfdd7d8af01ae84919e06e63f0215ab2f58b41315b7a4420e13e6c1",
+   "sha256": "13b15a60d713ce79a462879cfe851097db7249eb80fedb01a2901e2756c49988",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 temperate nonanimated house construction, production and transactional town caches; receiving cargo, expansion, animation, industries, mods and GNU runtime proof remain required.",
    "save_version": null,
@@ -10141,7 +10141,7 @@
   {
    "id": "vanilla-house-runtime-crates-ottd-sim-src-world-ticks-phases-rs",
    "path": "crates/ottd-sim/src/world_ticks/phases.rs",
-   "sha256": "22c16ac2655eb9c0b38115b743f6f4ecde1bed359e114a5350b59189723b416e",
+   "sha256": "bdf2defc172080e6894c471984b73f3b503d9b67bd14f61c3de0872c4c8dced8",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 temperate nonanimated house construction, production and transactional town caches; receiving cargo, expansion, animation, industries, mods and GNU runtime proof remain required.",
    "save_version": null,
@@ -10150,7 +10150,7 @@
   {
    "id": "vanilla-house-runtime-crates-ottd-sim-tests-native-company-name-admission-rs",
    "path": "crates/ottd-sim/tests/native_company_name_admission.rs",
-   "sha256": "7625b17de56d4413f8299a4cde85a2ddab719987acbee316cf4b17984647ea45",
+   "sha256": "653c19d17d37b6c8200061bfa19f407d9d0aaaa0f19383da4fc1822012ce9073",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 temperate nonanimated house construction, production and transactional town caches; receiving cargo, expansion, animation, industries, mods and GNU runtime proof remain required.",
    "save_version": null,
@@ -10402,7 +10402,7 @@
   {
    "id": "async-empty-link-jobs-crates-ottd-sim-src-runtime-job-executor-rs",
    "path": "crates/ottd-sim/src/runtime/job_executor.rs",
-   "sha256": "841e0d67ff7aa4246de1a8da28d153e3721f6b2d8e6b0dc8b822adedb9dbb815",
+   "sha256": "1f1a49deda4d3d367de07dd6577e0f1214e1c4e5f5f6591964d6831b866ff74b",
    "kind": "recipe",
    "provenance": "Bounded zero-demand asynchronous link jobs: owned workers, ordered restoration, source-defined pause/join and transactional leases. Populated solver/flows and native slow-worker observation remain required; private current integration proof only.",
    "save_version": null,
@@ -10420,7 +10420,7 @@
   {
    "id": "async-empty-link-jobs-crates-ottd-sim-src-runtime-job-pause-rs",
    "path": "crates/ottd-sim/src/runtime/job_pause.rs",
-   "sha256": "b1dfd599e7d073440cdcade792d722e7b0dfd6fb948ba3a40499604299eb639c",
+   "sha256": "5dd3d0595ebccaff3eb033aa6196bab0ed606adeef1142bbde595daf2a52c151",
    "kind": "recipe",
    "provenance": "Bounded zero-demand asynchronous link jobs: owned workers, ordered restoration, source-defined pause/join and transactional leases. Populated solver/flows and native slow-worker observation remain required; private current integration proof only.",
    "save_version": null,
@@ -10429,7 +10429,7 @@
   {
    "id": "async-empty-link-jobs-crates-ottd-sim-src-runtime-job-pause-prejoin-tests-rs",
    "path": "crates/ottd-sim/src/runtime/job_pause/prejoin_tests.rs",
-   "sha256": "65745c07eee5bfa455f2863d681ec183b0f1e3ec3efb518c125a740d96768ec7",
+   "sha256": "90caca5963864d34723c257a4f8f1d411c243ec9e892e786d22f26d6b36ab99b",
    "kind": "recipe",
    "provenance": "Bounded zero-demand asynchronous link jobs: owned workers, ordered restoration, source-defined pause/join and transactional leases. Populated solver/flows and native slow-worker observation remain required; private current integration proof only.",
    "save_version": null,
@@ -10438,7 +10438,7 @@
   {
    "id": "async-empty-link-jobs-crates-ottd-sim-src-runtime-job-pause-tests-rs",
    "path": "crates/ottd-sim/src/runtime/job_pause/tests.rs",
-   "sha256": "a5c30572d1b4f2c6d1b27ddfdf1fdd5079a889600ed085e9653429e041faefed",
+   "sha256": "17ebd44d77e115b1331090566dcfb9fe47c78c3b75ed7f9257c53f8e94fb46d7",
    "kind": "recipe",
    "provenance": "Bounded zero-demand asynchronous link jobs: owned workers, ordered restoration, source-defined pause/join and transactional leases. Populated solver/flows and native slow-worker observation remain required; private current integration proof only.",
    "save_version": null,
@@ -10447,7 +10447,7 @@
   {
    "id": "async-empty-link-jobs-crates-ottd-sim-src-runtime-transport-jobs-rs",
    "path": "crates/ottd-sim/src/runtime/transport_jobs.rs",
-   "sha256": "f9452492b69629e5398785118c386ea24805d6105acf395dbb92c211535ba621",
+   "sha256": "71fcc865b802cc263c0a7ed2d75b1606514de83de285f8401ebdbff17cedf908",
    "kind": "recipe",
    "provenance": "Bounded zero-demand asynchronous link jobs: owned workers, ordered restoration, source-defined pause/join and transactional leases. Populated solver/flows and native slow-worker observation remain required; private current integration proof only.",
    "save_version": null,
@@ -10456,7 +10456,7 @@
   {
    "id": "async-empty-link-jobs-crates-ottd-sim-src-runtime-transport-jobs-tests-rs",
    "path": "crates/ottd-sim/src/runtime/transport_jobs/tests.rs",
-   "sha256": "3b9d08b982bcfa078c436b286b38f588079d206439648897d19be2144fe23ee9",
+   "sha256": "f121d147c621d3aaa8ad7cd08fe3a774ff2ff7f05581c6e410397c8ff59472d0",
    "kind": "recipe",
    "provenance": "Bounded zero-demand asynchronous link jobs: owned workers, ordered restoration, source-defined pause/join and transactional leases. Populated solver/flows and native slow-worker observation remain required; private current integration proof only.",
    "save_version": null,
@@ -11269,6 +11269,618 @@
    "sha256": "628ef29091ea527b88b34de563c2a28cc509a18e26d4bbbe6e65fc31d8744894",
    "kind": "evidence-layout",
    "provenance": "Exact ordered NewGRF metadata artifact requirements externalized without semantic changes.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-cargo-rs",
+   "path": "crates/ottd-sim/src/cargo.rs",
+   "sha256": "5bd2751ade8e4009a475ba5ef671592fc0b8d924acc283ddc5f312a0e9d96891",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo.rs",
+   "sha256": "b2e8317f523080506dabc52016ea58eb82ca9fd2971b29834e17f63105931887",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-command-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/command_tests.rs",
+   "sha256": "51024680a4b542156448120d6ff1cf7f8a62a52486b526174b4de3101b18f966",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-control-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/control_tests.rs",
+   "sha256": "4b61cf52c36c6660a24775b6fecf2a11a24c1d459ac5b4bc0450b966ee93ad5d",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-distribution-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/distribution.rs",
+   "sha256": "c063dcfa6c177dd4d5de013ffceb525c2005f5c064b56fb72855263b17982ee8",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-graph-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/graph.rs",
+   "sha256": "c84b40f78c295f385d6506bfeda993ec404a5cbf827131d8b050cc7eafa83d8e",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-load-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/load.rs",
+   "sha256": "064e5a6c77f3a2ea20cfb900a37548b4a9f548536de37bdfbc4950192b7ef410",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-load-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/load_tests.rs",
+   "sha256": "029232c4f3a2a939af6e604b58a723f87b9cdfa82f54eb62b87c77cc84b9e111",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-packet-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/packet.rs",
+   "sha256": "4300e23444d723518b458b6bb43903f82068f7f5149c6835bb6c1304d9360bb1",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-production-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/production.rs",
+   "sha256": "b19b550025a4f0d632ed78101bde6f638d90ebcc6b40c411050e9264770124be",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-production-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/production_tests.rs",
+   "sha256": "29bbe626364727d4a5ed236a9bb2bf0ba9f0eadc9d09bb87c10c1e14c9fcc7bb",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-ratings-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/ratings.rs",
+   "sha256": "e4dae092a5a7719de15aecb2ff072092fb0517a6cd9aeb2c6f88d030126e71e8",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-read-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/read.rs",
+   "sha256": "47eb64db2eccf18dccb7430f39d028163b43b297409866bcd02e392cc1fe18e1",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-recipients-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/recipients.rs",
+   "sha256": "f4dd330638bdb7e4f7eea6cf058c3cebc1bdf6358b12001872769370b2d672e6",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-restore-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/restore.rs",
+   "sha256": "54f21b7667260a4b6baae2299c06ecb8b073fd930fc4b08b632989ffd3f16900",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-stage-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/stage.rs",
+   "sha256": "bfa2d027555b1e35252e1503ba2edc91283e7d929e08cf23a09182c2084b1c37",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-truncate-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/truncate.rs",
+   "sha256": "4505826b778a9e9f9b811c40455614702c55011ad59e10cb5d14d07fb17c842e",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-unload-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/unload.rs",
+   "sha256": "807ef1224de5a2a6f0b0737f43fc562bdcd2ed47744e411cbae3a9a055250696",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-validate-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/validate.rs",
+   "sha256": "36c741a3316309d7b034ba188098755e61ce32651c12d607b1f2bcece5673738",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-cargo-write-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/write.rs",
+   "sha256": "02074d8f5471347a155499409225de09b27b40b3b58d16b8223ba5ba484f661f",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-command-context-rs",
+   "path": "crates/ottd-sim/src/runtime/command_context.rs",
+   "sha256": "70e285f41894b44cf97ba87eea79b81716182c17fec86fec8ebb60517bc98137",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-dispatch-rs",
+   "path": "crates/ottd-sim/src/runtime/dispatch.rs",
+   "sha256": "938d276b725942d86f0af641e0a137f5d38b491a121bb85611039dbb3d89946f",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-advance-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/advance.rs",
+   "sha256": "a46e6f86832ff6b40e780e9e282670fd12e4691ae42d27692dc26aefb96b68df",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-cargo-age-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/cargo_age.rs",
+   "sha256": "2e9b3ea039731611235f2e5376f3d2e6f04b9db6b28fec14be32bc8d84f4657d",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-cargo-age-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/cargo_age_tests.rs",
+   "sha256": "78748b879e26d57c01ae62196f2381bcfeac52b86d424f59c006ad9504a4690f",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-cargo-rollback-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/cargo_rollback_tests.rs",
+   "sha256": "aa42a51395c5efa82a6066b46843846d4a6f56b9a7a52408a018f293b42dba95",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-cash-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/cash.rs",
+   "sha256": "360b25df4490ff8820df7e12adf20707e5fd58f3d8910be63552e99c1e71a3dc",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-delivery-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/delivery.rs",
+   "sha256": "7695087e3618a7b3ab0e1d72519b32c39289d9d0dee1f35c1d7c33ac0988fe66",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-income-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/income.rs",
+   "sha256": "8a38b0d311a10c2bf85749022707864ff2a01e63acc9122970b7ee163f87fc8c",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-income-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/income_tests.rs",
+   "sha256": "f1bb217845beaba50789ae81895d10b949d9763d93bf838ff2feee23280968b5",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-job-publication-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/job_publication.rs",
+   "sha256": "d8e5c564a9bd344162ee7cc0dfbeb0f59503e00364b27b3dd995aeeff921cf69",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-job-publication-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/job_publication_tests.rs",
+   "sha256": "9038163b3a040b70b9e3587390395d0d597f0367a1937a6b380c598da45511d4",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-load-cargo-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/load_cargo.rs",
+   "sha256": "be1a14f5ec03e2d150b80ee39b9d055c9cb956adfd506d62734db0a5d5b9fd14",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-loading-unload-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/unload.rs",
+   "sha256": "be458c9436f48950889d3c18590d277a7e4ce35bff962639571d1efab1582710",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-service-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/service.rs",
+   "sha256": "9b7875ab7ed851cfe75121cad35aa3e643582d8fc4885fc186cb7f1dc09e92f6",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-movement-service-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/service_tests.rs",
+   "sha256": "37197eb201cbbb86e2a0c9a111c1f036af1971a21c3f1d885c94fa26a73f934b",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-order-state-backup-enabled-tests-support-rs",
+   "path": "crates/ottd-sim/src/runtime/order_state/backup_enabled_tests_support.rs",
+   "sha256": "4ba93b02b66e7098ed9aa5654f539295714129e75ad7cbbdbe556e839e1bcbcb",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-order-state-backup-sale-tests-support-rs",
+   "path": "crates/ottd-sim/src/runtime/order_state/backup_sale_tests_support.rs",
+   "sha256": "af3185eb50ef913eed6a580609f3f0bc2f67c27590dd553ee56d7716969a08b2",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-order-state-restore-boundary-tests-support-rs",
+   "path": "crates/ottd-sim/src/runtime/order_state/restore_boundary_tests_support.rs",
+   "sha256": "d043151cd244b71aea3679e0834dce984173f0e207b115162250d62f2b1900fe",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-stations-acceptance-rs",
+   "path": "crates/ottd-sim/src/runtime/stations/acceptance.rs",
+   "sha256": "f240f7ff0bb66c5bea7a524b17bef687d7df1f31baba8852d8e61f9571a41f34",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-stations-acceptance-data-rs",
+   "path": "crates/ottd-sim/src/runtime/stations/acceptance_data.rs",
+   "sha256": "5a168fa2f31165c874875766ca5d00314a2917bc5dd35dbe9ff72968c8b4e43a",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-dijkstra-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/dijkstra.rs",
+   "sha256": "db7d78fad39afbc51089d3c6cc8b6545b31ccdc454e27f694358f385460fb7f6",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-input-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/input.rs",
+   "sha256": "d120cba2ab83257d415ffae21d90441fe8e8b5428a3f62a30d0216b6b0d2ada4",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-model-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/model.rs",
+   "sha256": "e3e995b39ba4787767b980006424309a468bafa3f3ac647e098d07d7f9b9bfe4",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-native-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/native_tests.rs",
+   "sha256": "52b49343731afe74f4944adcdf986ae83e4376d6b89a2f6a9e4c7098a8c8feb7",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-path-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/path_tests.rs",
+   "sha256": "687cfd84be3aa7ede003d4ecec68172e50ab00305766c27db3f016743f3c0392",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-paths-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/paths.rs",
+   "sha256": "7b877112a8be81e4b4a44425377192ba2ede6393f78cecfb3778f6389acf26cd",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-runtime-transport-jobs-pipeline-rs",
+   "path": "crates/ottd-sim/src/runtime/transport_jobs/pipeline.rs",
+   "sha256": "13e05c14d2b369ea05b762b1b76a32dd97a3a86a2223f325fae026b188becf6e",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-world-ticks-company-name-rs",
+   "path": "crates/ottd-sim/src/world_ticks/company_name.rs",
+   "sha256": "b6ecd13a3e602b595521f80818897d3ec4fb959882c3fa188eba418377364773",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-world-ticks-company-service-rs",
+   "path": "crates/ottd-sim/src/world_ticks/company_service.rs",
+   "sha256": "8d6f2eb1311308715d74647e5811682452e354f9ef20ea6761af7cb26087a293",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-world-ticks-company-service-tests-rs",
+   "path": "crates/ottd-sim/src/world_ticks/company_service_tests.rs",
+   "sha256": "b828455424159a70d90b3ec4ac5ff99af6a00c28d61aec683480fc3511a32dbf",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-world-ticks-domain-cargo-tests-rs",
+   "path": "crates/ottd-sim/src/world_ticks/domain_cargo_tests.rs",
+   "sha256": "37f020d29e784f4e1a1233d54841d0fbff86c9c492349c966fdddef065e369ce",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-src-world-ticks-town-ratings-rs",
+   "path": "crates/ottd-sim/src/world_ticks/town_ratings.rs",
+   "sha256": "b752c20ebc1ba4fd577c2bea100b3c16a7fadda8baaed81a6e1f527d5a9c3a2c",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-tests-native-cargo-cache-rs",
+   "path": "crates/ottd-sim/tests/native_cargo_cache.rs",
+   "sha256": "65cc4841ef1980bdd93ea4b79d07b5045ecb85ad89878bbd010e9d4718aecb82",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-tests-native-cargo-commands-rs",
+   "path": "crates/ottd-sim/tests/native_cargo_commands.rs",
+   "sha256": "3133d09b0222e9523fdefb0115ec7c0cee7c3cdb368bc11add60f3ab65047a99",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-tests-native-road-cargo-design-rs",
+   "path": "crates/ottd-sim/tests/native_road_cargo_design.rs",
+   "sha256": "287d0ad73522f8f148947c4c9e6b5b704dbef7071d900503b67fe4173e650133",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-cargo-movement-snapshot-hpp",
+   "path": "reference/cargo_movement_snapshot.hpp",
+   "sha256": "abf80a08cec96107ae623efb3863706840711b4b93dc0ebbcc7111092cd892e0",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-cargo-observer-patch",
+   "path": "reference/cargo_observer.patch",
+   "sha256": "62add9975bc60ea0f9b67a3a117cea432e1d8511dcb379c3a986a46c80ca8ba7",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-cargo-replay-hpp",
+   "path": "reference/cargo_replay.hpp",
+   "sha256": "8c9f8773e44e1a5cdb4d1ec9601e66b35e78d7c439223960531fc30f4ee3691d",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-cargo-runtime-hpp",
+   "path": "reference/cargo_runtime.hpp",
+   "sha256": "5b5f28bd8bafa05da76b744df29188d5dbf3d823b272e692a0dc8ce7731cf76e",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-house-cache-hpp",
+   "path": "reference/house_cache.hpp",
+   "sha256": "c3e978d857e212346b3d0f32aec671aa3e838c98d6d16af15167601b4c84445f",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-industry-cache-snapshot-hpp",
+   "path": "reference/industry_cache_snapshot.hpp",
+   "sha256": "dd97b3c9962af0280d210d2d9814b2f9e54ddcf6c4e10e5f29114c1de6050978",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-reference-job-annotations-hpp",
+   "path": "reference/job_annotations.hpp",
+   "sha256": "34e4350865fccea29d43b56786821ece95d8557b2ea0f20c01ab00f5c54c4547",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-scripts-cargo-observer-sources-json",
+   "path": "scripts/cargo-observer-sources.json",
+   "sha256": "58c60f18dca74baeb7b5ae7176179a4ca7a72f1c8509bf1870768a6d7b436693",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-scripts-cargo-observer-inputs-py",
+   "path": "scripts/cargo_observer_inputs.py",
+   "sha256": "54aa19873205d2491f9054e4a638862ab8709466adf0e69e120448914930bb78",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-scripts-setup-cargo-observer-sh",
+   "path": "scripts/setup-cargo-observer.sh",
+   "sha256": "ba8cc2a21c5c390cb57c9436801ef6e8bb456b985b9241d02798f5876dc10a51",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-scripts-tests-test-cargo-observer-inputs-py",
+   "path": "scripts/tests/test_cargo_observer_inputs.py",
+   "sha256": "f4b1e1decec2aa35c9a82c4c2b1dad9902b10f911fe3671b478e0112d37b846c",
+   "kind": "recipe",
+   "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-tests-native-whole-runtime-rs",
+   "path": "crates/ottd-sim/tests/native_whole_runtime.rs",
+   "sha256": "5aaeb7f6fa4522df2c352905a147dcb71d613338da6d3e0f883328b10066170f",
+   "kind": "recipe",
+   "provenance": "Complete saved, derived and actual runtime cache comparison against the pinned original on unchanged whole-interval inputs.",
    "save_version": null,
    "profile": null
   }
@@ -16237,7 +16849,76 @@
    "domain": "Stage 4: Cargo generation/destinations/routing/transfers/payment, packets/station facilities/ratings/catchment and all tick/monthly behaviors.",
    "expected": "Required future original-versus-Rust observable scenarios and checkpoint evidence; not implemented in this stage.",
    "driver": null,
-   "assets": [],
+   "assets": [
+    "cargo-crates-ottd-sim-src-cargo-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-command-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-control-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-distribution-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-graph-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-load-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-load-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-packet-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-production-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-production-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-ratings-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-read-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-recipients-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-restore-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-stage-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-truncate-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-unload-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-validate-rs",
+    "cargo-crates-ottd-sim-src-runtime-cargo-write-rs",
+    "cargo-crates-ottd-sim-src-runtime-command-context-rs",
+    "cargo-crates-ottd-sim-src-runtime-dispatch-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-advance-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-cargo-age-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-cargo-age-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-cargo-rollback-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-cash-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-delivery-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-income-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-income-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-job-publication-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-job-publication-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-load-cargo-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-loading-unload-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-service-rs",
+    "cargo-crates-ottd-sim-src-runtime-movement-service-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-order-state-backup-enabled-tests-support-rs",
+    "cargo-crates-ottd-sim-src-runtime-order-state-backup-sale-tests-support-rs",
+    "cargo-crates-ottd-sim-src-runtime-order-state-restore-boundary-tests-support-rs",
+    "cargo-crates-ottd-sim-src-runtime-stations-acceptance-rs",
+    "cargo-crates-ottd-sim-src-runtime-stations-acceptance-data-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-dijkstra-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-input-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-model-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-native-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-path-tests-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-paths-rs",
+    "cargo-crates-ottd-sim-src-runtime-transport-jobs-pipeline-rs",
+    "cargo-crates-ottd-sim-src-world-ticks-company-name-rs",
+    "cargo-crates-ottd-sim-src-world-ticks-company-service-rs",
+    "cargo-crates-ottd-sim-src-world-ticks-company-service-tests-rs",
+    "cargo-crates-ottd-sim-src-world-ticks-domain-cargo-tests-rs",
+    "cargo-crates-ottd-sim-src-world-ticks-town-ratings-rs",
+    "cargo-crates-ottd-sim-tests-native-cargo-cache-rs",
+    "cargo-crates-ottd-sim-tests-native-cargo-commands-rs",
+    "cargo-crates-ottd-sim-tests-native-road-cargo-design-rs",
+    "cargo-reference-cargo-movement-snapshot-hpp",
+    "cargo-reference-cargo-observer-patch",
+    "cargo-reference-cargo-replay-hpp",
+    "cargo-reference-cargo-runtime-hpp",
+    "cargo-reference-house-cache-hpp",
+    "cargo-reference-industry-cache-snapshot-hpp",
+    "cargo-reference-job-annotations-hpp",
+    "cargo-scripts-cargo-observer-sources-json",
+    "cargo-scripts-cargo-observer-inputs-py",
+    "cargo-scripts-setup-cargo-observer-sh",
+    "cargo-scripts-tests-test-cargo-observer-inputs-py",
+    "cargo-crates-ottd-sim-tests-native-whole-runtime-rs"
+   ],
    "source_refs": [
     "docs/roadmap.md"
    ],

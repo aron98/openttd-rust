@@ -78,23 +78,7 @@ impl RoadPhases<'_> {
         }
         set(state, id, false, "progress", progress)?;
         self.cache.last_speed = u16::try_from(speed).map_err(|_| unsupported("road", "speed"))?;
-        if self.cache.cargo_age_period != 0 {
-            let counter = (number(state, id, false, "cargo_age_counter")?
-                .min(i64::from(self.cache.cargo_age_period))
-                .wrapping_sub(1))
-                & 65535;
-            set(
-                state,
-                id,
-                false,
-                "cargo_age_counter",
-                if counter == 0 {
-                    i64::from(self.cache.cargo_age_period)
-                } else {
-                    counter
-                },
-            )?;
-        }
+        self.age_cargo(state)?;
         set(
             state,
             id,

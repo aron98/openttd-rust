@@ -211,6 +211,7 @@ fn shared_restore_candidate_failure_rolls_back_links_and_consumption() -> Result
         crate::world_access::field_edit(*b"PLYR", 0, "money", WireValue::Signed(123)),
     ];
     let result = super::super::RoadVehicleContext {
+        cargo: &mut runtime.transport.cargo,
         orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,

@@ -1,4 +1,4 @@
-//! Native idle terminal-station phases; moving/loading stations remain a route dependency.
+//! Native terminal station rating, acceptance and monthly cargo history phases.
 use super::{
     RoadVehicleCache, SavedVehicleView, State, VehicleId, WorldTickError, number, set, unsupported,
 };
@@ -37,16 +37,11 @@ impl IdleStations {
             if base.number("delete_ctr")? >= 185 || base.number("waiting_triggers")? != 0 {
                 return Err(unsupported("station", "idle counter or trigger"));
             }
-            for name in ["time_since_load", "time_since_unload", "last_vehicle_type"] {
-                if normal.number(name)? != 255 {
-                    return Err(unsupported("station", "previous loading activity"));
-                }
-            }
-            if normal.number("always_accepted")? != 0
+            if !matches!(normal.number("last_vehicle_type")?, 1 | 255)
                 || normal.number("had_vehicle_of_type")? & !0x0c != 0
                 || !matches!(row_field(normal.schema, normal.record, "loading_vehicles")?, WireValue::Array(values) if values.len() <= 1)
             {
-                return Err(unsupported("station", "acceptance or loading activity"));
+                return Err(unsupported("station", "non-road loading activity"));
             }
             let (schema, goods) = normal.rows("goods")?;
             if goods.len() != 64 {
@@ -54,20 +49,8 @@ impl IdleStations {
             }
             for record in goods {
                 let cargo = saved::StationRow { schema, record };
-                for (name, value) in [
-                    ("status", 0),
-                    ("rating", 175),
-                    ("cargo.reserved_count", 0),
-                    ("max_waiting_cargo", 0),
-                ] {
-                    if cargo.number(name)? != value {
-                        return Err(unsupported("station", "active goods or rating"));
-                    }
-                }
-                for name in ["cargo", "flow"] {
-                    if !cargo.rows(name)?.1.is_empty() {
-                        return Err(unsupported("station", "cargo or flow data"));
-                    }
+                if !cargo.rows("flow")?.1.is_empty() {
+                    return Err(unsupported("station", "automatic cargo flow data"));
                 }
             }
             ids.push(*id);
@@ -84,27 +67,23 @@ impl IdleStations {
     pub(super) fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
-    pub(super) fn month(&self, state: &State<'_>) -> Result<(), WorldTickError> {
-        // The admitted goods have no acceptance/current-month flags. Native monthly
-        // CurrentMonth -> LastMonth publication consequently preserves zero status.
+    pub(super) fn month(&self, state: &mut State<'_>) -> Result<(), WorldTickError> {
         for id in &self.0 {
-            let table = state.table(b"STNN")?;
-            let row = saved::StationRow {
-                schema: table.schema(),
-                record: table
-                    .record(*id)
-                    .ok_or_else(|| unsupported("station_month", "station"))?,
-            };
-            let (schema, goods) = row.child("normal")?.rows("goods")?;
-            for record in goods {
-                if (saved::StationRow { schema, record }).number("status")? != 0 {
-                    return Err(unsupported("station_month", "active acceptance history"));
-                }
+            for cargo in 0..64 {
+                let status = goods_status(state, *id, cargo)?;
+                goods_status_set(state, *id, cargo, (status & !0x18) | ((status & 0x10) >> 1))?;
             }
         }
         Ok(())
     }
-    pub(super) fn tick(&self, state: &mut State<'_>) -> Result<(), WorldTickError> {
+    pub(super) fn tick(
+        &self,
+        state: &mut State<'_>,
+        transport: &mut crate::runtime::transport::TransportRuntime,
+        stations: &StationRuntime,
+        content: &crate::content::ContentCatalog,
+    ) -> Result<(), WorldTickError> {
+        transport.cargo.refresh_recipients(state, stations)?;
         for id in &self.0 {
             let table = state.table(b"STNN")?;
             let row = saved::StationRow {
@@ -114,8 +93,6 @@ impl IdleStations {
                     .ok_or_else(|| unsupported("station", "missing row"))?,
             };
             let counter = row.child("normal")?.child("base")?.number("delete_ctr")?;
-            // StationHandleSmallTick, with the admitted saturated/unrated goods state.
-            // Zero acceptance, no NewGRF callbacks and no links make big ticks inert.
             state.apply(WorldEdit::Field {
                 chunk: *b"STNN",
                 record: *id,
@@ -128,10 +105,67 @@ impl IdleStations {
                 ],
                 value: WireValue::Unsigned(counter.wrapping_add(1) % 185),
             })?;
+            if counter == 184 {
+                transport.cargo.rate_station(state, *id, content)?;
+            }
             super::loading::station_links(state, *id)?;
+            if state
+                .number(b"DATE", 0, "tick_counter")?
+                .wrapping_add(i64::from(*id))
+                % 250
+                == 0
+            {
+                for cargo in 0..64 {
+                    let status = goods_status(state, *id, cargo)?;
+                    goods_status_set(state, *id, cargo, status & !32)?;
+                }
+                let geometry = stations
+                    .geometry
+                    .get(id)
+                    .ok_or_else(|| unsupported("station_acceptance", "geometry"))?;
+                let view = crate::runtime::transport::cargo::read::Read::Candidate(state.view());
+                for edit in crate::runtime::stations::acceptance::calculate(view, geometry)?
+                    .edits(view, *id, true)?
+                {
+                    state.apply(edit)?;
+                }
+            }
         }
         Ok(())
     }
+}
+
+fn goods_status(state: &State<'_>, station: u32, cargo: usize) -> Result<u64, WorldTickError> {
+    let row = crate::runtime::transport::cargo::read::Read::Candidate(state.view())
+        .row(*b"STNN", station)?
+        .child("normal")?;
+    let (schema, rows) = row.rows("goods")?;
+    Ok(saved::StationRow {
+        schema,
+        record: rows
+            .get(cargo)
+            .ok_or_else(|| unsupported("station", "goods"))?,
+    }
+    .number("status")?)
+}
+fn goods_status_set(
+    state: &mut State<'_>,
+    station: u32,
+    cargo: usize,
+    value: u64,
+) -> Result<(), WorldTickError> {
+    state.apply(WorldEdit::Field {
+        chunk: *b"STNN",
+        record: station,
+        path: vec![
+            PathElement::Field("normal".into()),
+            PathElement::Index(0),
+            PathElement::Field("goods".into()),
+            PathElement::Index(cargo),
+            PathElement::Field("status".into()),
+        ],
+        value: WireValue::Unsigned(value),
+    })
 }
 
 pub(super) fn admit_vehicle(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
@@ -186,26 +220,5 @@ pub(super) fn vehicle_tick(
         set(state, id, true, "reverse_ctr", reverse.wrapping_sub(1))?;
     }
     cache.last_speed = 0;
-    age_cargo(state, id, cache)
-}
-pub(super) fn age_cargo(
-    state: &mut State<'_>,
-    id: VehicleId,
-    cache: &RoadVehicleCache,
-) -> Result<(), WorldTickError> {
-    if cache.cargo_age_period != 0 {
-        let period = i64::from(cache.cargo_age_period);
-        let next = number(state, id, false, "cargo_age_counter")?
-            .min(period)
-            .wrapping_sub(1)
-            & 65535;
-        set(
-            state,
-            id,
-            false,
-            "cargo_age_counter",
-            if next == 0 { period } else { next },
-        )?;
-    }
     Ok(())
 }

@@ -13,8 +13,8 @@ use super::{
 use ottd_save::WireValue;
 
 pub(super) fn admit(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
-    if !matches!(v.engine_id()?, 116 | 123)
-        || v.stored_count()? != 0
+    if !matches!(v.engine_id()?, 116 | 119 | 123)
+        || v.stored_count()? > u32::from(v.capacity()?)
         || !matches!(v.common_number("vehstatus")?, 8 | 9)
         || v.setting("vehicle.roadveh_acceleration_model")? != 0
         || v.setting("vehicle.road_side")? != 1
@@ -22,7 +22,7 @@ pub(super) fn admit(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
     {
         return Err(unsupported("road_route", "vanilla directed road profile"));
     }
-    for name in ["next", "next_shared", "breakdown_ctr", "waiting_triggers"] {
+    for name in ["next", "next_shared", "breakdown_ctr"] {
         if v.common_number(name)? != 0 {
             return Err(unsupported("road_route", name));
         }
@@ -39,8 +39,8 @@ pub(super) fn admit(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
         }
     }
     if !matches!(v.common_number("current_order.type")?, 0 | 33 | 195 | 4)
-        || v.common_number("vehicle_flags")? & !0x0109 != 0
-        || !matches!(v.common_number("load_unload_ticks")?, 0 | 1 | 20)
+        || v.common_number("vehicle_flags")? & !0x014b != 0
+        || v.common_number("waiting_triggers")? & !0x0d != 0
     {
         return Err(unsupported("road_route", "loading/order lifecycle"));
     }
@@ -77,7 +77,7 @@ pub(super) fn tick(
     } else {
         motion::advance(runner, state)?;
     }
-    super::stations::age_cargo(state, id, &runner.cache)?;
+    runner.age_cargo(state)?;
     set(
         state,
         id,

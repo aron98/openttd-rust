@@ -1,10 +1,16 @@
 //! Ordinary empty loading, preserving queue/payment/order phase boundaries.
 mod admission;
+mod cash;
 #[cfg(test)]
 mod failure_tests;
+mod job_publication;
 mod jobs;
 pub(super) use admission::admit;
+mod delivery;
+mod income;
 mod links;
+mod load_cargo;
+mod unload;
 pub(super) use links::station_links;
 mod orders;
 pub(super) use jobs::tick as link_tick;
@@ -59,6 +65,26 @@ pub(super) fn begin(
         runner,
         u16::try_from(station).map_err(|_| unsupported("road_loading", "station ID"))?,
     )?;
+    let cargo = SavedVehicleView::candidate(state.view(), id)?.cargo_type()?;
+    if number(state, id, false, "cargo_cap")? > 0
+        && SavedVehicleView::candidate(state.view(), id)?.stored_count()? > 0
+        && runner.transport.cargo.stage(
+            state,
+            crate::runtime::transport::cargo::stage::Arrival {
+                vehicle: id,
+                station,
+                cargo,
+            },
+        )?
+    {
+        set(
+            state,
+            id,
+            false,
+            "vehicle_flags",
+            number(state, id, false, "vehicle_flags")? | 2,
+        )?;
+    }
     set(state, id, false, "cur_speed", 0)
 }
 fn queue(
@@ -108,6 +134,20 @@ pub(super) fn station_tick(
     }
     let station = u32::try_from(number(state, id, false, "last_station_visited")?)
         .map_err(|_| unsupported("road_loading", "station ID"))?;
+    if unload::tick(state, runner, station)? {
+        return Ok(());
+    }
+    if number(state, id, false, "vehicle_flags")? & 64 != 0 {
+        payment::delete(state, runner)?;
+        set(state, id, false, "load_unload_ticks", 20)?;
+        return set(
+            state,
+            id,
+            false,
+            "vehicle_flags",
+            (number(state, id, false, "vehicle_flags")? & !64) | 1,
+        );
+    }
     let cargo = SavedVehicleView::candidate(state.view(), id)?.cargo_type()?;
     let capacity = number(state, id, false, "cargo_cap")?;
     set(state, id, false, "refit_cap", capacity)?;
@@ -128,22 +168,28 @@ pub(super) fn station_tick(
     ] {
         records::goods_field(state, (station, cargo), (name, WireValue::Unsigned(value)))?;
     }
-    if capacity > 0 {
-        records::goods_field(
-            state,
-            (station, cargo),
-            ("time_since_pickup", WireValue::Unsigned(0)),
-        )?;
-    }
+    let capacity = u32::try_from(capacity).map_err(|_| unsupported("cargo_load", "capacity"))?;
+    let (loaded, possible) = load_cargo::load(state, runner, station, cargo, capacity)?;
     payment::delete(state, runner)?;
-    set(state, id, false, "load_unload_ticks", 20)?;
-    set(
-        state,
-        id,
-        false,
-        "vehicle_flags",
-        number(state, id, false, "vehicle_flags")? | 1,
-    )
+    let flags = number(state, id, false, "vehicle_flags")? & !64;
+    if loaded != 0 {
+        let wait = if state.number(b"PATS", 0, "order.gradual_loading")? != 0 {
+            20
+        } else {
+            i64::from(loaded)
+        };
+        set(state, id, false, "load_unload_ticks", wait.max(1))?;
+        set(
+            state,
+            id,
+            false,
+            "vehicle_flags",
+            flags | if loaded < possible { 64 } else { 0 },
+        )
+    } else {
+        set(state, id, false, "load_unload_ticks", 20)?;
+        set(state, id, false, "vehicle_flags", flags | 1)
+    }
 }
 pub(super) fn handle(
     state: &mut State<'_>,
@@ -182,6 +228,20 @@ pub(super) fn handle(
         false,
         id,
     )?;
-    runner.cache.trip_occupancy = 0;
+    let count = SavedVehicleView::candidate(state.view(), id)?.stored_count()?;
+    let capacity = u32::try_from(number(state, id, false, "cargo_cap")?)
+        .map_err(|_| unsupported("road_loading", "cargo capacity"))?;
+    runner.cache.trip_occupancy = if let Some(divisor) = std::num::NonZeroU32::new(capacity) {
+        let percent = if count.wrapping_mul(2) < capacity {
+            count.wrapping_mul(100).div_ceil(capacity)
+        } else {
+            count.wrapping_mul(100) / divisor
+        };
+        i8::try_from(percent).map_err(|_| unsupported("road_loading", "cargo occupancy"))?
+    } else {
+        100
+    };
     orders::advance(state, id)
 }
+#[cfg(test)]
+mod job_publication_tests;

@@ -20,12 +20,15 @@ fn unfinished_due_worker_requests_pause_before_the_clock() -> Result {
     // Given an authentic ordinary prejoin world and a deliberately slow Rust worker.
     let bytes = std::fs::read(std::env::var("ASYNC_PREJOIN_INPUT")?)?;
     let mut world = World::decode(&Savegame::decode(&bytes, ottd_save::DEFAULT_MAX_BYTES)?)?;
-    let mut transport = TransportRuntime::restore(&world)?;
+    let mut transport =
+        TransportRuntime::restore(&world, &crate::content::ContentCatalog::from_world(&world)?)?;
     let expected = transport
-        .job_expectations
+        .workers
         .get(&0)
-        .and_then(Clone::clone)
-        .ok_or("expected job")?;
+        .ok_or("missing job0")?
+        .wait()?
+        .as_ref()
+        .clone();
     let gate = Arc::new(AtomicBool::new(false));
     let input_gate = Arc::clone(&gate);
     let worker = Arc::new(Worker::spawn(move |cancel| {

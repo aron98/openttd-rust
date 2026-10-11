@@ -23,6 +23,7 @@ pub(crate) trait WorldTickPhases {
     }
     fn station_tiles(&self) -> bool { false }
     fn transport_activity(&self) -> bool { false }
+    fn cargo_activity(&self) -> bool { false }
     fn link_graphs(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn station_month(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn stations(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }

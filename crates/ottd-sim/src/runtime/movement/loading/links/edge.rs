@@ -55,7 +55,7 @@ fn new_edge(
         &[
             ("dest_node", WireValue::Unsigned(destination)),
             ("capacity", WireValue::Unsigned(u64::from(link.capacity))),
-            ("usage", WireValue::Unsigned(0)),
+            ("usage", WireValue::Unsigned(u64::from(link.usage))),
             (
                 "travel_time_sum",
                 WireValue::Unsigned(u64::from(link.capacity).wrapping_mul(u64::from(link.time))),
@@ -83,6 +83,12 @@ fn update_existing(
     let divisor = std::num::NonZeroU64::new(u64::from(old))
         .ok_or_else(|| unsupported("links", "zero edge capacity"))?;
     let sum = row.number("travel_time_sum")?;
+    let old_usage =
+        u32::try_from(row.number("usage")?).map_err(|_| unsupported("links", "edge usage"))?;
+    let usage = match link.mode {
+        Update::Increase => old_usage.wrapping_add(link.usage),
+        Update::Refresh => old_usage.max(link.usage),
+    };
     let incoming = u64::from(link.capacity);
     let (capacity, sum) = match link.mode {
         Update::Increase => (
@@ -108,6 +114,11 @@ fn update_existing(
             }
         }
     };
+    records::edit(
+        schema,
+        record,
+        ("usage", WireValue::Unsigned(u64::from(usage))),
+    )?;
     records::edit(
         schema,
         record,

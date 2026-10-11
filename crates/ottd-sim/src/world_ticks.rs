@@ -2,6 +2,7 @@
 mod access;
 mod clocks;
 mod company_history;
+mod company_name;
 mod domain;
 mod finance;
 #[expect(
@@ -21,6 +22,7 @@ mod plan;
 use clocks::save_clock;
 use phases::{competitor, daily, industry_month};
 mod tiles;
+mod town_ratings;
 mod towns;
 mod trees;
 use crate::{TickEvents, world_access::WorldAccessError};

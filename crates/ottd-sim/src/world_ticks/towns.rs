@@ -44,17 +44,7 @@ pub(super) fn monthly(state: &mut State<'_>, month: u8) -> Result<(), WorldTickE
         let WireValue::Array(ratings) = value_mut(&schema, row, "ratings")? else {
             return Err(unsupported("town_month", "ratings array"));
         };
-        for (index, value) in ratings.iter_mut().enumerate() {
-            let mut rating = number(value)?;
-            if companies
-                .iter()
-                .any(|id| usize::try_from(*id).ok() == Some(index))
-                && rating < 200
-            {
-                rating = rating.saturating_add(5).min(200);
-            }
-            *value = WireValue::Signed(rating.clamp(-1000, 1000));
-        }
+        super::town_ratings::update(state, id, ratings)?;
         let WireValue::Unsigned(valid) = row_field(&schema, row, "valid_history")? else {
             return Err(unsupported("town_month", "history mask"));
         };

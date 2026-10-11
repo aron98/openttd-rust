@@ -1,3 +1,5 @@
+#[path = "company_service.rs"]
+mod service;
 use super::{
     WorldTickError,
     access::{number, value_mut},
@@ -38,7 +40,7 @@ pub(super) fn quarter(state: &mut State<'_>, id: u32, assets: i64) -> Result<(),
     history.truncate(24);
     let money = state.number(b"PLYR", id, "money")?;
     let loan = state.number(b"PLYR", id, "current_loan")?;
-    let score = rating(&schema, &history, money, loan)?;
+    let score = rating(&schema, &history, money, loan)?.saturating_add(service::score(state, id)?);
     let first = history
         .first_mut()
         .ok_or_else(|| unsupported("company_quarter", "history"))?;

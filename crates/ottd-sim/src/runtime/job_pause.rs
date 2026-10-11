@@ -66,7 +66,7 @@ pub(super) fn after_load(
 ) -> Result<(), RuntimeError> {
     // Command-only runtimes retain opaque populated jobs. Their simulation consumer is
     // rejected explicitly below; it must not remove unrelated sale/order capabilities.
-    if transport.job_expectations.values().any(Option::is_none) {
+    if transport.job_inputs.values().any(Option::is_none) {
         return Ok(());
     }
     let mut transaction = world.transaction();
@@ -97,7 +97,7 @@ pub(super) fn before_tick(
     if pause != 0 && pause & 64 == 0 {
         return Ok(());
     }
-    if transport.job_expectations.values().any(Option::is_none) {
+    if transport.job_inputs.values().any(Option::is_none) {
         return Err(RuntimeError::Unsupported("populated link job execution").into());
     }
     let changed = if pause & 64 != 0 {

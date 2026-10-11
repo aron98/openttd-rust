@@ -65,11 +65,8 @@ pub(super) fn run(
         (world.map().width(), world.map().height()),
         stations::catchment_radius(world)?,
     )?;
-    plan.edits.extend(acceptance::zero_acceptance(
-        world,
-        geometry,
-        joining.then_some(station),
-    )?);
+    let acceptance =
+        crate::runtime::stations::acceptance::for_world(world, geometry, station, joining)?;
     let addition = effects::Addition {
         station,
         stop,
@@ -83,6 +80,7 @@ pub(super) fn run(
         addition.new_station(world, &mut plan.edits)?;
     }
     addition.tile_and_stop(world, &mut plan.edits)?;
+    plan.edits.extend(acceptance);
     let infrastructure = state
         .infrastructure
         .get_mut(&company)

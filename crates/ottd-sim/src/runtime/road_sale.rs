@@ -99,7 +99,17 @@ impl RoadVehicleContext<'_> {
         }
         let backups = pending_backups.validate(&prepared)?;
         let orders = pending_orders.validate(&prepared)?;
+        let mut cargo = self.cargo.clone();
+        let removed = cargo
+            .vehicles
+            .remove(&id.raw())
+            .ok_or(RuntimeError::Invalid("sale cargo cache absent"))?;
+        if removed != super::transport::cargo::VehicleList::default() {
+            return Err(RuntimeError::Invalid("sale cargo cache is not empty").into());
+        }
+        cargo.validate(prepared.view())?;
         prepared.commit();
+        *self.cargo = cargo;
         orders.publish(self.orders);
         backups.publish(self.orders);
         self.road.remove(&id);

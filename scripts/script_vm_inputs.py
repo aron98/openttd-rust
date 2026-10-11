@@ -13,6 +13,7 @@ OBSERVER_INPUTS: Final = (
     "arrays.hpp",
     "tables.hpp",
     "calls.hpp",
+    "closures.hpp",
 )
 
 
@@ -24,7 +25,8 @@ def source_names(root: Path) -> tuple[str, ...]:
     )
     names.update(
         regular(root, path)
-        for path in (root / "scripts/compat/script-vm/tables").rglob("*")
+        for subtree in ("tables", "varargs")
+        for path in (root / "scripts/compat/script-vm" / subtree).rglob("*")
         if path.is_file() and "__pycache__" not in path.parts
     )
     names.update(

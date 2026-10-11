@@ -121,7 +121,12 @@ def verify_sources(root: Path, native: Path, spec: Spec) -> None:
 
 def verify_observer_sources(root: Path, native: Path) -> None:
     for name in OBSERVER_INPUTS:
-        if digest(native / name) != digest(root / "scripts/compat/script-vm" / name):
+        copied = native / name
+        if (
+            not copied.is_file()
+            or copied.is_symlink()
+            or digest(copied) != digest(root / "scripts/compat/script-vm" / name)
+        ):
             raise WorldCheckError("Native observer source differs")
 
 

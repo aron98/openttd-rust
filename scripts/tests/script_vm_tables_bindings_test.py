@@ -2,6 +2,7 @@
 
 from dataclasses import replace
 from pathlib import Path
+import shutil
 
 import pytest
 
@@ -27,6 +28,7 @@ from scripts.world_check_support import WorldCheckError, read_json
         "arrays.hpp",
         "tables.hpp",
         "calls.hpp",
+        "closures.hpp",
     ],
 )
 def test_changed_copied_observer_source_is_rejected(
@@ -47,6 +49,7 @@ def test_changed_copied_observer_source_is_rejected(
         "arrays.hpp",
         "tables.hpp",
         "calls.hpp",
+        "closures.hpp",
     ):
         _ = (harness / name).write_text("original observer input")
         _ = (native / name).write_text("original observer input")
@@ -95,6 +98,7 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
         assert "source/" + name in spec.paths
     assert "native/tables.hpp" in spec.paths
     assert "native/calls.hpp" in spec.paths
+    assert "native/closures.hpp" in spec.paths
 
 
 @pytest.mark.parametrize(
@@ -112,6 +116,9 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
         "scripts/compat/script-vm/tables/objects.py",
         "crates/ottd-script/src/vm/native-calls-callee.txt",
         "scripts/compat/script-vm/calls.hpp",
+        "scripts/compat/script-vm/closures.hpp",
+        "scripts/compat/script-vm/varargs/case.py",
+        "crates/ottd-script/src/vm/closures.rs",
         "scripts/script_vm_roots_spec.py",
         "scripts/script_vm_roots_capture.py",
         "scripts/script_vm_roots_admission.py",
@@ -158,3 +165,33 @@ def test_effects_fixtures_match_both_native_abi_provenance_records() -> None:
         assert record["native_pin"] == PIN
         observed.add(abi)
     assert observed == {"linux-gnu-64-little", "apple-libcxx-abi1-64-little"}
+
+
+@pytest.mark.parametrize("change", ["missing", "tampered", "symlink"])
+def test_closure_observer_copy_must_be_regular_and_identical(
+    tmp_path: Path, change: str
+) -> None:
+    root = Path(__file__).resolve().parents[2]
+    native = tmp_path / "native"
+    native.mkdir()
+    for name in (
+        "observe.cpp",
+        "strings.hpp",
+        "constants.hpp",
+        "root_slots.hpp",
+        "arrays.hpp",
+        "tables.hpp",
+        "calls.hpp",
+        "closures.hpp",
+    ):
+        _ = shutil.copy2(root / "scripts/compat/script-vm" / name, native / name)
+    verify_observer_sources(root, native)
+    target = native / "closures.hpp"
+    if change == "tampered":
+        _ = target.write_bytes(target.read_bytes() + b"\n// changed\n")
+    else:
+        target.unlink()
+        if change == "symlink":
+            target.symlink_to(root / "scripts/compat/script-vm/closures.hpp")
+    with pytest.raises(WorldCheckError, match="Native observer source differs"):
+        verify_observer_sources(root, native)

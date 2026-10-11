@@ -112,6 +112,15 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
         "scripts/compat/script-vm/tables/objects.py",
         "crates/ottd-script/src/vm/native-calls-callee.txt",
         "scripts/compat/script-vm/calls.hpp",
+        "scripts/script_vm_roots_spec.py",
+        "scripts/script_vm_roots_capture.py",
+        "scripts/script_vm_roots_admission.py",
+        "scripts/script_vm_arrays_spec.py",
+        "scripts/script_vm_arrays_capture.py",
+        "scripts/script_vm_arrays_admission.py",
+        "scripts/script_vm_arrays_sessions.py",
+        "scripts/script_vm_branches_spec.py",
+        "scripts/script_vm_branches_capture.py",
     ],
 )
 def test_missing_embedded_input_rejected_before_native_validation(

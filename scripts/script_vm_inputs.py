@@ -1,4 +1,4 @@
-"""Current ScriptVM Cargo, native-observer and focused-table producer closure."""
+"""Current ScriptVM Cargo, native-observer and Python producer closure."""
 
 from pathlib import Path
 from typing import Final
@@ -37,5 +37,11 @@ def source_names(root: Path) -> tuple[str, ...]:
             "scripts/tests/test_script_vm_table_storage.py",
             ".github/workflows/script-tables.yml",
         )
+    )
+    names.update(
+        regular(root, path)
+        for part in ("roots", "arrays", "branches")
+        for path in (root / "scripts").glob(f"script_vm_{part}*.py")
+        if path.is_file()
     )
     return tuple(sorted(names))

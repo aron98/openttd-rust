@@ -10,8 +10,9 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
-Script increment `0a5bd83`, with corrected proof retention at `257c395`, adds
-native table deletion and table/array cloning. Gameplay increment `6d02ffe`,
+Script increment `d43c8fa` binds aggregate graph storage (`e17d7fb`) and
+first-class native roots (`a69500b`), following deletion/cloning at `257c395`.
+Gameplay increment `6d02ffe`,
 with current bindings at `7b78b96`, adds bounded terminal bus/truck station
 construction after station/depot order insertion. World increment `5e0fbf4`, with current bindings at `0047eb2`, adds
 bounded temperate spreading and genuine placement to complete world ticks. Increment `59fe7f6`
@@ -19,6 +20,31 @@ enables normal CI for the reviewed bounded single-vehicle road movement corpus.
 Complete transport cycles and further content loading are in progress. All seven
 completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
+
+The latest script increment uses common physical table storage for roots and
+graph values, real native closure identities and metadata, native default
+registration, mutable reserved `this`, and independent configured-root lookup.
+Its collector follows the original physical traversal, mark-on-enqueue LIFO
+and persistent-chain rules for the admitted host sequences. Forward/reverse
+alias orders retain the original collected counts 1 and 5 without normalization.
+Root independently executes 930 strict original/Rust comparisons per profile,
+180 script tests, fresh external registration/hash checks and twelve real
+corruption rejections. The current combined candidate passes 753 workspace
+tests, strict Clippy/formatting, 520 Python tests and 143 declaration checks.
+Independent review repeats the script tests and seven native host sessions,
+audits all 4,921 source blobs and 11,979 complete proof members, and approves
+exact `d43c8fa`. New GNU execution remains pending. General VM/shared/host GC
+ordering, callable functions, delegates, weakrefs and full AI/GameScript remain
+required; bounded storage/ownership proof does not close a broad stage gate.
+
+Inventory correction `7758500` adds the fifteen new tree proof inputs to each
+affected cargo/engine/currency-properties source inventory. Root reproduces
+the original CI failures, retains existing tests, and verifies all old source
+pairs and non-source fields are unchanged. Independent review approves the
+correction. Its ordinary Linux Rust job in run `38136540979` passes all 744
+workspace tests on merge `388cced`, including the ABI effects test without an
+override. This is separate from pending GNU graph/root execution and the
+still-running full interoperability baseline.
 
 Road order insertion preserves validation and nested error precedence, shared
 list allocation and indices, existing conditional-order retargeting, timetable

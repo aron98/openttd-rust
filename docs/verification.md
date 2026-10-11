@@ -1,5 +1,32 @@
 # Compatibility foundation verification
 
+## Reviewed stage 4 script storage increment
+
+On 2026-10-11, independent review approved `d43c8fa`, containing separate
+aggregate graph, first-class native root and current binding commits. Root
+executes 930 strict original/Rust comparisons per debug/release profile,
+180 script tests and separate fresh native registration/hash checks. Twelve
+corruption probes reject incorrect physical cursors, closure metadata,
+lifetimes and collection counts. The reviewer repeats these executions and
+seven native graph/root host sessions. Complete source and proof archives
+retain 4,921 Git blobs and 11,979 members with verified hashes and modes.
+
+The combined candidate passes 753 workspace tests, strict Clippy/formatting,
+520 Python tests and 143 offline declaration checks. The 82 ignored tests
+are not credited by that workspace run; selected external executions above
+are recorded separately. Evidence is retained under
+`.worktrees/stage04-script-integration/.omo/evidence/script-integration/` and
+`.omo/evidence/stage04-script-storage-review/report.md`.
+
+This verifies bounded graph ownership, physical root storage, native closure
+identity/metadata, mutable `this` and admitted collector sequences on the
+observed Apple target. New GNU graph/root execution, callable functions,
+delegates, general GC and OpenTTD AI/GameScript integration remain pending.
+The earlier published base `7758500` separately passes the ordinary
+[Linux Rust job](https://github.com/aron98/openttd-rust/actions/runs/38136540979/job/114461459007)
+with 744 tests; it is not evidence for the later script increment.
+All seven broad stage 4 gates remain open.
+
 ## Saved-world commands and tick execution
 
 On 2026-10-09, the stage 3 working tree passed the 18-case public replay matrix

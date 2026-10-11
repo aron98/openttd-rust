@@ -12,9 +12,10 @@ Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
 Script increment `8b4fa02` adds scalar table storage and execution to the shared
 arrays and persistent runners. Gameplay increment `55e422f` adds station/depot
-order insertion for supported road vehicles. Increment `59fe7f6` enables normal
-CI for the reviewed bounded single-vehicle road movement corpus. Complete
-transport cycles and further content loading are in progress. All seven
+order insertion for supported road vehicles. World increment `249a1e1` adds
+bounded temperate tree callbacks to complete world ticks. Increment `59fe7f6`
+enables normal CI for the reviewed bounded single-vehicle road movement corpus.
+Complete transport cycles and further content loading are in progress. All seven
 completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
 
@@ -65,15 +66,32 @@ the same two failures. Corrective increment `46f6d33` adds those exact paths and
 updates the two asset hashes, preserving producers, tests and scenario claims.
 Fresh root and independent-review discovery each pass all 73 tests. Both also
 audit actual copies of all 380 files per guard, including exact bytes and the
-deliberate stale-header newline. Independent review approves this correction;
-the Linux rerun and complete normal interoperability baseline remain pending.
+deliberate stale-header newline. Independent review approves this correction.
+The Linux Rust job at `b0b0cbd` passes in run `38126258630`; the complete normal
+interoperability baseline remains pending. CI for the new tree revision is
+separate from these results.
 
-The next private increments address road station construction, real script
-delete/clone operations, and temperate tree growth without spreading. Tree
-proofs include actual lifecycle ticks and saves continued in both directions;
-mixed tree/vehicle RNG ordering and integration review are still in progress.
-These private results do not yet establish a published tree capability or close
-any broad stage requirement.
+Tree integration `ed878c7` preserves temperate grass/rough growth under settings
+0 and 3, including grass work before the no-growth return, all seven stages,
+counts 1 through 4, one Grown Random draw and Dead-stage reset. The native tree
+placement counter remains 225 because the original returns early for these
+settings. The complete pure proof covers 36,864 calls, 9,216 callbacks and
+165,888 ordered events, seven naturally planted lifecycles and all eight Grown
+branches. A distinct passive observer epoch proves 115 complete mixed tree/road
+checkpoints, including natural tree RNG, vehicle crossings, daily RNG and saves
+continued in both directions. Root independently executes a different 36+38
+split with 78 complete comparisons. Independent review verifies both archives
+(8,598 and 8,050 files), recomputes all 193 mixed checkpoints, checks the pure
+event sequence and adds native/Rust runs and corruption controls. Current
+bindings preserve the frozen source/binary epochs. The exact integrated tree
+candidate passes 723 workspace tests, strict Clippy and formatting; 78 ignored
+external tests are not counted. Spreading, genuine tree placement, other
+climates, water and planting commands remain required. Normal tree CI and new
+Linux tree execution are not claimed; no broad completion gate is closed.
+
+Private increments next address road station construction, real script
+delete/clone operations, and temperate spreading/placement. They require
+current-source binding updates, root QA and independent review before admission.
 
 The full four-case bounded road movement capture now passes locally at
 `e167929`, followed by separate live recorded-corpus verification. The final

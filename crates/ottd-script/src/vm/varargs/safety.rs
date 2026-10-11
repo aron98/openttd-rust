@@ -173,7 +173,10 @@ fn deep_unnamed_stack_preserves_native_u16_lookup_base_and_count_cleanup() -> Re
     let source = include_str!("../../../../../scripts/compat/script-vm/varargs/fixtures/deep.nut");
     let program = crate::compile(source)?;
     let mut vm = Vm::new(&program)?;
-    assert_eq!(vm.resume(100_000)?, Execution::Returned(Value::Integer(329)));
+    assert_eq!(
+        vm.resume(100_000)?,
+        Execution::Returned(Value::Integer(329))
+    );
     assert!(vm.varargs_stack.is_empty());
     Ok(())
 }

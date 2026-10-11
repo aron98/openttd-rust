@@ -8,6 +8,14 @@ mod cargo_rollback_tests;
 mod company;
 mod daily;
 mod directed;
+#[cfg(test)]
+mod industry_capacity;
+#[cfg(test)]
+mod industry_controls;
+#[cfg(test)]
+mod industry_eligibility;
+#[cfg(test)]
+mod industry_rollback;
 mod loading;
 mod service;
 #[cfg(test)]
@@ -36,6 +44,13 @@ struct RoadPhases<'a> {
     transport: super::transport::TransportRuntime,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn industry_cargo(
+        &mut self,
+        state: &mut State<'_>,
+        production: crate::cargo::Production,
+    ) -> Result<u32, WorldTickError> {
+        self.transport.industry_production(state, production)
+    }
     fn town_cargo(
         &mut self,
         state: &mut State<'_>,

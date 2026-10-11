@@ -50,7 +50,7 @@ pub(crate) trait WorldTickPhases {
     fn industry_cargo(
         &mut self,
         state: &mut WorldTickState<'_>,
-        production: world_ticks::industries::IndustryCargoProduction<'_>,
+        production: cargo::Production,
     ) -> Result<u32, WorldTickError> {
         world_ticks::industries::deliver_empty(state, production)
     }

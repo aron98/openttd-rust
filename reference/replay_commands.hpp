@@ -11,6 +11,7 @@
 #include "../command_func.h"
 #include "../order_cmd.h"
 #include "../station_cmd.h"
+#include "../town_cmd.h"
 #include "../newgrf_roadstop.h"
 
 #include "reference_road_station_prepare.hpp"
@@ -19,6 +20,23 @@ namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "industry_recipient_prepare_scale300") {
+        Require(std::getenv("OTTD_INDUSTRY_RECIPIENT_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "industry recipient preparation requires offline normal game");
+        return Command<CMD_CHANGE_SETTING>::Post(std::string{"economy.industry_cargo_scale"}, int32_t{300});
+    }
+    if (kind == "industry_recipient_prepare_selectgoods") {
+        Require(std::getenv("OTTD_INDUSTRY_RECIPIENT_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "industry recipient preparation requires offline normal game");
+        const int32_t value = command.at("value").get<int32_t>();
+        Require(value == 0 || value == 1, "selectgoods preparation requires zero or one");
+        return Command<CMD_CHANGE_SETTING>::Post(std::string{"order.selectgoods"}, value);
+    }
+    if (kind == "industry_recipient_prepare_buy_rights") {
+        Require(std::getenv("OTTD_INDUSTRY_RECIPIENT_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "industry recipient preparation requires offline normal game");
+        const TownID id(command.at("town").get<uint16_t>());
+        const Town *town = Town::GetIfValid(id);
+        Require(town != nullptr, "industry recipient preparation requires an existing town");
+        return Command<CMD_DO_TOWN_ACTION>::Post(town->xy, id, TownAction::BuyRights);
+    }
     if (kind == "road_route_prepare_breakdowns_disabled") {
         Require(std::getenv("OTTD_ROAD_ROUTE_OBSERVE") != nullptr && !_networking && Vehicle::GetNumItems() == 0, "route reliability setting requires explicit empty offline command preparation");
         return Command<CMD_CHANGE_SETTING>::Post(std::string{"difficulty.vehicle_breakdowns"}, int32_t{0});

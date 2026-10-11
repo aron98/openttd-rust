@@ -790,7 +790,7 @@
   {
    "id": "replay-source-reference-replay-commands-hpp",
    "path": "reference/replay_commands.hpp",
-   "sha256": "955e9ede24faf90d9b077eb3b9efae0f55c52b6772187d5a3c819c7e0d336799",
+   "sha256": "68803a38c3f913652597a2f2836f0b73d6e4d520b624f03cf6e4694fc4c2db7d",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "766a349d24eef7c89df37e6b5dbbf7c8b2f5969470b292c5f9046475a06d48a0",
+   "sha256": "3b565374380362accd78adf196012aa011774efe04b590965bc0681fb46f5465",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "940ff1db362bb12a506929c5d54caa30162efe63025b93c720fe8d16cbfe029c",
+   "sha256": "d4c34db28cf0f99f13e2647de064f5830738e55e7f8758ffc603697c4974ed9d",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "7569a5be58b305850870e606421ec6479182e44979c562841197ff26626bffb9",
+   "sha256": "8f41d86b9dcb751748175ff8271cf9b84574f086a0359ffcd36d8af3c1138e0e",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "eb120fa1409b7a8197cae0d462baa78b0b582425ae9221832dbe0adc989c4fb6",
+   "sha256": "571b931e2594ce5f36a8fe4917ba0038ce20b4b281abecfd1c1ab2f83d759c4a",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "d08f3315ab4b6994ee1c04bd36b4729ebe9873964bee750d0f368193ec8122d8",
+   "sha256": "6018ae8cac0f329f8a5adaea50f674b1438934fa3fff86e04a2a14a4010cc7d5",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "81cf1697f9277b79db5f38cd1807ec0a3b425e68b5bc8c61c72ec8e4a27538cb",
+   "sha256": "29f38be778d74c75101cb319ed84559d5f740e81575a5a2ca78a196623f588e5",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "f0e8d05d2f98fcfb98a439c7ae8a5b9130f9755fe1edfced15b5c487a1157c20",
+   "sha256": "4bcd4eb7534a3b7e4baff318394c865f7fde73c82a0e9a284112573c87ddff7f",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "465458cfbb4acc9bfeb366908b9407c4ba743c9ff9d1444bb48960c674792750",
+   "sha256": "5b7f559f96dca3e4290b2f58a107a93a72096b799ae158ab4123cc29510d61d3",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "0c8ab57286318ef20c04f2275a005f32f75d8950d4749d4ec00b3941cdcefde6",
+   "sha256": "b5dd58dd7321bda7d06cd1e0b4bfccf2804f0a5af1a3d7e225eac3dff3c5297c",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "b6ff41ca82943e81315dd0d953be69f299a078b0f4fc796a57b4f535779869fb",
+   "sha256": "934081e80d6807434a4a486c24430d3c5141320e8325e40daaf16c7d0a02e7b0",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "20934280a87a16da36cff6bae775267796d91f84c5d1b61ca2d83c1cc2136d9e",
+   "sha256": "17705bffbe40545d257bfa4a748683172bc866987cbe5903ac1ed7b32fff6b15",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "a3edf953431970e15b0af41fb9597919a2eeef1e89991d70969c35586127f065",
+   "sha256": "b6ad5169d9ea98fdbee1ac8952c7ec7f71e8c838471bea112f7b08c5ee32c716",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "8a52208a5f06258bf3317442c2ada51431057e37a6eae1d3cc305457d29d76ed",
+   "sha256": "cca9357529f06a0eb73e765f31b57873cfeaabc227081982de24fb1b89e8c3dd",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "00d2d7a212a186815986e50e210151ca12d1160efee43ef6980a98c1ea236793",
+   "sha256": "a62266471f95b0c31e770210df66443b766415ea034c42db65a225612e31b9d5",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "b346c8f708bd379f4f7b1259c9a1aba1125aed34acd39ed8597b281785fd4fb2",
+   "sha256": "7861b5c0e32e2981879d6b1fec5277605271fcc19a90a1ec27db351b56e2aa22",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8296,7 +8296,7 @@
   {
    "id": "cargo-identity-reference-replay-commands-hpp",
    "path": "reference/replay_commands.hpp",
-   "sha256": "955e9ede24faf90d9b077eb3b9efae0f55c52b6772187d5a3c819c7e0d336799",
+   "sha256": "68803a38c3f913652597a2f2836f0b73d6e4d520b624f03cf6e4694fc4c2db7d",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "d2e256075e621bccc4dc5c0de6db687d039e65e462c9b00a78fb611f1ec93182",
+   "sha256": "a01928894cfe769b8ebfb8341ee156e2b9786fb27f465d3a92a19206b21d6ceb",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8548,7 +8548,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-world-ticks-shared-rs",
    "path": "crates/ottd-sim/src/world_ticks/shared.rs",
-   "sha256": "d1c17e82aa881d41514328eb85b3ba597a0931338d47d4d5ba9c8af7ffe7ad67",
+   "sha256": "fb25054cfdc64d6d1bdd9bc2334f90e2691cd7baaab4d03d923c613fb98bd7b4",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8557,7 +8557,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-runtime-movement-rs",
    "path": "crates/ottd-sim/src/runtime/movement.rs",
-   "sha256": "ec5bff66b40b19850c97447a2f0eb792740b7f97102bb06774184202de495c5b",
+   "sha256": "50bd4db0e3599129729a7cdcf3fdab7124e2e273dda8ba0c95e5eab3cea30bd9",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8998,7 +8998,7 @@
   {
    "id": "tree-growth-scripts-tree-growth-source-json",
    "path": "scripts/tree-growth-source.json",
-   "sha256": "5f340ce2764ea9766fef666da15a07063aee32a56d06f87dd5e2e25c66aa8c62",
+   "sha256": "8c04d2dd6625452123d441f7dd0fc66d1e400f048659530e593ba88e511eaee7",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "1128bd1b4f2f40ac49f90b891ee3d1615e8d8051b875a4930c64a73e32d1f4d0",
+   "sha256": "09e1fdd1fae9eb46c8e325cc978f7bd0c033c85c96c9dcdd99c853be52c9bf53",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -9367,7 +9367,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-rs",
    "path": "crates/ottd-sim/src/runtime/movement/directed.rs",
-   "sha256": "3689de296bcb1767053af974d2d6dd583473f0fffa83b251b37ea11fd696fc0f",
+   "sha256": "cc6370b15888f553a5f12c45eb780c539b3543d82023659690de6c816c960fb0",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -10483,7 +10483,7 @@
   {
    "id": "vanilla-industry-crates-ottd-sim-src-world-ticks-industries-rs",
    "path": "crates/ottd-sim/src/world_ticks/industries.rs",
-   "sha256": "6446fbad3184ed0057ef4e0a704a086214aa8b7714026bc4be18dc3e6023a444",
+   "sha256": "bf1b6f3165395949da3ccd3683c0c9ac4c0996149b70c8daa12225298f0a9494",
    "kind": "recipe",
    "provenance": "Bounded vanilla temperate forest and fund-only industry manager implementation, original-command fixtures and private complete-state proof. Recipients, other industry types, creation/closure, NewGRF and full industry compatibility remain required; no normal industry CI admission.",
    "save_version": null,
@@ -11284,7 +11284,7 @@
   {
    "id": "cargo-crates-ottd-sim-src-runtime-cargo-rs",
    "path": "crates/ottd-sim/src/runtime/cargo.rs",
-   "sha256": "b2e8317f523080506dabc52016ea58eb82ca9fd2971b29834e17f63105931887",
+   "sha256": "b5e8dc026bce0de856ca1a23e0ad31dab60145c75f98efa0900f8a2abee36317",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11626,7 +11626,7 @@
   {
    "id": "cargo-crates-ottd-sim-src-runtime-stations-acceptance-rs",
    "path": "crates/ottd-sim/src/runtime/stations/acceptance.rs",
-   "sha256": "f240f7ff0bb66c5bea7a524b17bef687d7df1f31baba8852d8e61f9571a41f34",
+   "sha256": "31b613f1884efdabdf70946fcae793d765b89bcc3eb0188407b235388018c411",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -12013,7 +12013,7 @@
   {
    "id": "rail-source-scripts-rail-restore-source-json",
    "path": "scripts/rail-restore-source.json",
-   "sha256": "7df71d6e2b81cbcefe58b249a7964b3333e5bfc238f0d2f2d6d292e178699fa2",
+   "sha256": "6fe2febe2c08f255bfd9f0d12a52c16637ac2f649bdcebec08fd1e8d590b822d",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
    "save_version": null,
@@ -12385,6 +12385,69 @@
    "sha256": "f21d5e4309fd3be078cc0d598a3be220b9494fe9d5df268045cf8ebd64c2c1fb",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-src-runtime-cargo-industry-rs",
+   "path": "crates/ottd-sim/src/runtime/cargo/industry.rs",
+   "sha256": "8c7549be8b5b2bd620c5e01b4735bd0648c406672ad4d724df870d699dbdba38",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-src-runtime-movement-industry-capacity-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/industry_capacity.rs",
+   "sha256": "b57336ed24ce2934c3127f45c4e60cea07c54a99bac1bbb38194b247a761dcf6",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-src-runtime-movement-industry-controls-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/industry_controls.rs",
+   "sha256": "33e05b1c504e5eb4ab40319a22594366bda0dcb7fcb760db3435e5657e2d9288",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-src-runtime-movement-industry-eligibility-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/industry_eligibility.rs",
+   "sha256": "71452e8465f8bdf9da208d7aaf3443a8fb5bd5f72d3bd94b8c59fa8d5327f9ab",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-src-runtime-movement-industry-rollback-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/industry_rollback.rs",
+   "sha256": "a65d59b24d7636ebab8742d1efa4007b9d4cb51d695f1414bcc5fba178320e31",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-tests-native-industry-recipients-rs",
+   "path": "crates/ottd-sim/tests/native_industry_recipients.rs",
+   "sha256": "d84854723ac733fd2c8da4b2aad9999441a0dfa0ebae1986f43d30580e11d225",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "forest-recipient-crates-ottd-sim-tests-industry-recipient-support-native-views-rs",
+   "path": "crates/ottd-sim/tests/industry_recipient_support/native_views.rs",
+   "sha256": "0a5a07e71913aa81a2483bc7c572d352c8b6deb5752ac62fe0fedd3f19b60119",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
    "save_version": null,
    "profile": null
   }

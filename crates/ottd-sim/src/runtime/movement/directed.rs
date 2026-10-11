@@ -13,7 +13,7 @@ use super::{
 use ottd_save::WireValue;
 
 pub(super) fn admit(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
-    if !matches!(v.engine_id()?, 116 | 119 | 123)
+    if !matches!(v.engine_id()?, 116 | 119 | 123 | 146)
         || v.stored_count()? > u32::from(v.capacity()?)
         || !matches!(v.common_number("vehstatus")?, 8 | 9)
         || v.setting("vehicle.roadveh_acceleration_model")? != 0

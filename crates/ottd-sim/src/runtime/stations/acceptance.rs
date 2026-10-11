@@ -1,4 +1,4 @@
-//! Native vanilla house acceptance over the actual terminal catchment union.
+//! Native vanilla house and forest acceptance over the actual terminal catchment union.
 use super::{RoadStationGeometry, RuntimeError};
 use crate::runtime::transport::cargo::read::Read;
 use ottd_save::{
@@ -33,6 +33,17 @@ pub(in crate::runtime) fn calculate(
         match tile.tile_type() >> 4 {
             0 | 1 | 2 | 4 | 6 | 7 | 9 => {}
             5 if matches!((tile.m6() >> 3) & 15, 2 | 3) => {}
+            8 => {
+                if view.number(*b"PATS", 0, "game_creation.landscape")? != 0
+                    || !view.ids(*b"NGRF")?.is_empty()
+                    || view.number(*b"INDY", u32::from(tile.m2()), "type")? != 3
+                    || !matches!(tile.m5(), 16 | 17)
+                    || tile.m6() & 4 != 0
+                {
+                    return Err(RuntimeError::Unsupported("forest acceptance specification"));
+                }
+                // Both vanilla forest tile specs have only invalid accepted cargo IDs.
+            }
             3 => {
                 if view.number(*b"PATS", 0, "game_creation.landscape")? != 0
                     || !view.ids(*b"NGRF")?.is_empty()

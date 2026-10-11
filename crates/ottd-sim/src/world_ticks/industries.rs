@@ -6,6 +6,7 @@ use super::{
     house_cargo::{TileArea, random},
     tiles, unsupported,
 };
+use crate::cargo::{CargoSource, Production};
 use crate::world_access::{field, unsigned};
 use ottd_save::{
     WireValue,
@@ -18,18 +19,6 @@ const WOOD: u8 = 7;
 const DEFAULT_RATE: u16 = 13;
 const MINIMAL_CARGO: u16 = 30;
 
-/// Industry's cached-recipient producer handoff; source is an industry pool ID.
-#[derive(Debug, Clone, Copy)]
-pub(crate) struct IndustryCargoProduction<'a> {
-    pub source: u16,
-    pub tile: u32,
-    pub area: TileArea,
-    pub cargo: u8,
-    pub amount: u32,
-    pub stations_near: &'a [u16],
-    pub exclusive_consumer: u8,
-}
-
 pub(super) fn validate(world: &World) -> Result<(), WorldTickError> {
     let table = world
         .tables()
@@ -39,17 +28,6 @@ pub(super) fn validate(world: &World) -> Result<(), WorldTickError> {
         return Err(unsupported(
             "industries",
             "multiple industry production/closure",
-        ));
-    }
-    if !table.records().is_empty()
-        && world
-            .tables()
-            .get(b"STNN")
-            .is_none_or(|t| !t.records().is_empty())
-    {
-        return Err(unsupported(
-            "industry_cargo",
-            "recipient catchment restoration",
         ));
     }
     for id in table.records().keys() {
@@ -82,7 +60,7 @@ pub(super) fn validate(world: &World) -> Result<(), WorldTickError> {
         if tile.m1() & 0x60 != 0x60 {
             return Err(unsupported("industries", "industry water tile loop"));
         }
-        if tile.m5() != 16 || tile.m6() & 4 != 0 {
+        if !matches!(tile.m5(), 16 | 17) || tile.m6() & 4 != 0 {
             return Err(unsupported(
                 "industries",
                 "forest graphics animation/effects",
@@ -132,26 +110,45 @@ pub(super) fn visit(
             .ok_or_else(|| unsupported("industry_cargo", "history"))?;
         history.production = history.production.wrapping_add(amount);
         saved::set_produced(state, id, &output)?;
-        let production = IndustryCargoProduction {
-            source: tile.m2,
-            tile: index,
+        let production = Production {
+            source: CargoSource::Industry(tile.m2),
             area: saved::area(state, id)?,
             cargo: WOOD,
             amount: u32::from(amount),
-            stations_near: &[],
-            exclusive_consumer: u8::try_from(state.number(b"INDY", id, "exclusive_consumer")?)
-                .map_err(|_| unsupported("industry_cargo", "exclusive consumer"))?,
         };
         let delivered = phases.industry_cargo(state, production)?;
         if delivered != 0 {
-            return Err(unsupported(
-                "industry_cargo",
-                "delivered forest cargo animation",
-            ));
+            let history = output
+                .history
+                .first_mut()
+                .ok_or_else(|| unsupported("industry_cargo", "history"))?;
+            let [low, high, _, _] = delivered.to_le_bytes();
+            history.transported = history
+                .transported
+                .wrapping_add(u16::from_le_bytes([low, high]));
+            saved::set_produced(state, id, &output)?;
+            let _cargo_animation_draw = random(state)?;
+            if tile.m5 == 16 {
+                tile.m1 = (tile.m1 & !0x8f) | 128;
+                tile.m5 = 17;
+                state.apply(WorldEdit::Tile {
+                    index,
+                    value: tiles::saved(&tile),
+                })?;
+                return Ok(());
+            }
         }
     }
     // Vanilla has no animation callback, but the wrapper draws before checking it.
     let _animation_draw = random(state)?;
+    if tile.m5 == 17 {
+        tile.m1 &= !0x8f;
+        tile.m5 = 16;
+        state.apply(WorldEdit::Tile {
+            index,
+            value: tiles::saved(&tile),
+        })?;
+    }
     Ok(())
 }
 
@@ -240,25 +237,23 @@ pub(super) fn change_production(state: &mut State<'_>, id: u32) -> Result<(), Wo
 
 pub(crate) fn deliver_empty(
     state: &State<'_>,
-    production: IndustryCargoProduction<'_>,
+    production: Production,
 ) -> Result<u32, WorldTickError> {
-    if state.table(b"STNN")?.records().next().is_some() || !production.stations_near.is_empty() {
+    if state.table(b"STNN")?.records().next().is_some() {
         return Err(unsupported(
             "industry_cargo",
             "station distribution and packet allocation",
         ));
     }
-    let tile = state.view().tile(production.tile)?;
-    let area = saved::area(state, u32::from(production.source))?;
-    if tile.tile_type() >> 4 != 8
-        || tile.m2() != production.source
-        || production.cargo != WOOD
+    let CargoSource::Industry(source) = production.source else {
+        return Err(unsupported("industry_cargo", "industry producer source"));
+    };
+    let area = saved::area(state, u32::from(source))?;
+    if production.cargo != WOOD
         || production.amount == 0
         || production.area.tile != area.tile
         || production.area.width != area.width
         || production.area.height != area.height
-        || i64::from(production.exclusive_consumer)
-            != state.number(b"INDY", u32::from(production.source), "exclusive_consumer")?
     {
         return Err(unsupported("industry_cargo", "producer source or area"));
     }

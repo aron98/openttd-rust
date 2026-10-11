@@ -5398,7 +5398,7 @@
     "scripts/compat/script-vm/tables.hpp": "f35aa8016a7c35e53d18de1abd6169683338349ac0b03135cffbff7efc1ed359",
     "scripts/compat/script-vm/tables/case.py": "06e39708022b0bb89e63a36241d2bf919804aa049aa4f3b3d6cf2b8c2be571bc",
     "scripts/compat/script-vm/tables/cases.py": "3c53d7804eae872e5df94b9b9bd7de03849d7a1d3952719af10f55c0b7e35ba3",
-    "scripts/compat/script-vm/tables/compare.py": "0ed059aa5fa1dd858ce1958aac2abf93b565ef1bd06aed0af3eb62771b237d2f",
+    "scripts/compat/script-vm/tables/compare.py": "3fd0c111da5d5a79e5b3f0740fa4d4508cb9c0b87ea1fd6a287cefb1742e3c12",
     "scripts/compat/script-vm/tables/controls.py": "48a5acbbb9fc82dbf22674ff5503f4169c5e204668aca89b3c0d80cb2bf159d8",
     "scripts/compat/script-vm/tables/fixtures/clone-owner.nut": "e92f8a4f81c9a0672375ee5200e2895be2f780e54f7763d4959a3127ffc4d341",
     "scripts/compat/script-vm/tables/fixtures/delete-effects.nut": "bc34c433f3ebc919361d3a08a60784c6f2e3ef80af07f9a9f6652f4f70aac7a4",
@@ -5422,7 +5422,7 @@
     "scripts/script_vm_constants.py": "eb08beaef1700adea6c24c0eb4b689af027b609992a681c6720749dd2b051e3a",
     "scripts/script_vm_evidence.py": "6acde61eca6a5e2726ce60f156d9e17f9ab6945a0b35a405539eeeaf96af985d",
     "scripts/script_vm_foreach.py": "42c849a13bfe48abbb4cbfa67b7a33c1f18db798b20e797ac8831fc78bb3e053",
-    "scripts/script_vm_inputs.py": "cae6d361983dc809cd2869ceb24a751415e521ee8b975f33a71bb3cb09e35d20",
+    "scripts/script_vm_inputs.py": "e953eddb1bb9ed18374d6812cdc68db54416f8f91db64e58936ea4dbec9519c3",
     "scripts/script_vm_iteration.py": "4535e114b1049435a7da8c8e79fb318ee71ad25a2cd159178d88245bdb23ab1c",
     "scripts/script_vm_observation.py": "04807840ca9965dc0cb2cd167b4222762d455bf4e967c5f21e1c94896721dabc",
     "scripts/script_vm_policy.py": "b0edd07b539779caadce6cd218a7588b1e141db7f648f5329ed83488c8b8828b",
@@ -5441,6 +5441,7 @@
     "scripts/tests/script_vm_tables_bindings_test.py": "078351f863c0d1027a30a09643cea36258ebe5915934c6911281bcf8dcad1062",
     "scripts/tests/test_script_vm_evidence.py": "e9633347b4113cbb695bfa2090f7ee0ee7d9368713c0b93838dd61e97ce1c76e",
     "scripts/tests/test_script_vm_policy.py": "4a6fff39a8a19697e555402f1a47d7c84036ecc120bcf4ed76abd5a7ec5ab1c5",
+    "scripts/tests/test_script_vm_table_storage.py": "d0de5947f56e7df4891cb316dab8dacedceb729563c00d7ce3785105eb12d5cc",
     "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047"
   },
   "native": {
@@ -115667,6 +115668,7 @@
     "source/scripts/tests/script_vm_tables_bindings_test.py",
     "source/scripts/tests/test_script_vm_evidence.py",
     "source/scripts/tests/test_script_vm_policy.py",
+    "source/scripts/tests/test_script_vm_table_storage.py",
     "source/scripts/world_check_support.py",
     "strings/feed-0.nut",
     "strings/feed-1.nut",

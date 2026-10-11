@@ -415,7 +415,7 @@
     "scripts/language_ci_compare.py": "ec4a0aa2f45a766ba8d70be040546af37d4d2708af8e855027e887f01cfadd40",
     "scripts/owned_restore_sources.py": "179e32285e016739b67650a399289e4c2c0539700747d9f845db902a1535f656",
     "scripts/reference.cfg": "85131afe85a23b2653aa976ee0457c31f5ad3d2665a05f2868a7cb300ca26a4b",
-    "scripts/script_vm_inputs.py": "cae6d361983dc809cd2869ceb24a751415e521ee8b975f33a71bb3cb09e35d20",
+    "scripts/script_vm_inputs.py": "e953eddb1bb9ed18374d6812cdc68db54416f8f91db64e58936ea4dbec9519c3",
     "scripts/script_vm_provenance.py": "980587fec3c3e4cf0982ccddabc29678f956ba9b0ae31a345fed99d1a65077ca",
     "scripts/setup-snapshot-reference.sh": "c9eedabf0f5c09788f82aeb9bc1f2ff87594cf184162623395c0f7eeefc64c08",
     "scripts/tree-terrain/control-vectors.json": "1a62b08927de7645bd51fb3ebb7022ddf596c7eca9ae3fecf2903aaf738ed625",

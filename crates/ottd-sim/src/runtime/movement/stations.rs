@@ -220,26 +220,5 @@ pub(super) fn vehicle_tick(
         set(state, id, true, "reverse_ctr", reverse.wrapping_sub(1))?;
     }
     cache.last_speed = 0;
-    age_cargo(state, id, cache)
-}
-pub(super) fn age_cargo(
-    state: &mut State<'_>,
-    id: VehicleId,
-    cache: &RoadVehicleCache,
-) -> Result<(), WorldTickError> {
-    if cache.cargo_age_period != 0 {
-        let period = i64::from(cache.cargo_age_period);
-        let next = number(state, id, false, "cargo_age_counter")?
-            .min(period)
-            .wrapping_sub(1)
-            & 65535;
-        set(
-            state,
-            id,
-            false,
-            "cargo_age_counter",
-            if next == 0 { period } else { next },
-        )?;
-    }
     Ok(())
 }

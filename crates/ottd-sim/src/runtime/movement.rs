@@ -1,5 +1,8 @@
 mod access;
 mod advance;
+mod cargo_age;
+#[cfg(test)]
+mod cargo_age_tests;
 mod company;
 mod daily;
 mod directed;
@@ -196,7 +199,8 @@ impl VehiclePhases for RoadPhases<'_> {
         } else if number(state, self.id, false, "vehstatus")? & 2 == 0 {
             directed::tick(self, state)
         } else {
-            stations::vehicle_tick(state, self.id, &mut self.cache)
+            stations::vehicle_tick(state, self.id, &mut self.cache)?;
+            self.age_cargo(state)
         }
     }
 }

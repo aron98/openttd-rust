@@ -201,7 +201,19 @@ pub(super) fn handle(
         false,
         id,
     )?;
-    runner.cache.trip_occupancy = 0;
+    let count = SavedVehicleView::candidate(state.view(), id)?.stored_count()?;
+    let capacity = u32::try_from(number(state, id, false, "cargo_cap")?)
+        .map_err(|_| unsupported("road_loading", "cargo capacity"))?;
+    runner.cache.trip_occupancy = if let Some(divisor) = std::num::NonZeroU32::new(capacity) {
+        let percent = if count.wrapping_mul(2) < capacity {
+            count.wrapping_mul(100).div_ceil(capacity)
+        } else {
+            count.wrapping_mul(100) / divisor
+        };
+        i8::try_from(percent).map_err(|_| unsupported("road_loading", "cargo occupancy"))?
+    } else {
+        100
+    };
     orders::advance(state, id)
 }
 #[cfg(test)]

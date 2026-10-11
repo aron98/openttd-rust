@@ -77,7 +77,7 @@ pub(super) fn tick(
     } else {
         motion::advance(runner, state)?;
     }
-    super::stations::age_cargo(state, id, &runner.cache)?;
+    runner.age_cargo(state)?;
     set(
         state,
         id,

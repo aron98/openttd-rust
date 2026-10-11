@@ -72,6 +72,24 @@ comparisons remain explicit, uncredited timing mismatches. Natural original
 slow prejoin, populated solvers, broader gameplay and GNU proof remain required;
 all seven completion gates stay open.
 
+Industry increment `c033301` integrates eight atomic observer, generated-name,
+fund-only manager, vanilla forest, proof, async-cache adaptation, formatting and
+current-binding changes. Root executes 66,130 forest calls with 45 complete
+World/derived/town/industry-cache boundaries and 69,974 empty-manager calls with
+27 World/derived/town boundaries plus live original builder comparisons.
+Independent review adds 56,776 lifecycle/manager calls, fresh original command
+preparation and both genuinely simulated forest save-origin continuations.
+Fresh mixed bus/forest comparisons cover 156 physical/content and 156 actual
+town/industry-cache boundaries. The house regression, 52 complete road pairs,
+24 routing pairs, seven timers, controlled jobs and late rollback/corruption
+checks pass. Source/proof archives verify 5,039 Git blobs, 202 raw Cargo depfiles
+and 12,003 complete proof files. Historical CMake wrapper reconstruction is
+explicitly distinguished from captured build files. Active forest recipients,
+graphics17/regrowth, other industries/climates, automatic creation and GNU/normal
+industry CI remain required. Populated cargo and script closure/variadic work
+remain private; their known diagnostic gaps are required fixes. All seven
+completion gates stay open.
+
 Earlier milestones and their bounded verification results are recorded below.
 
 Independent review approves exact `7779f39` after repeating 52 complete

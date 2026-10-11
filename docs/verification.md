@@ -1,5 +1,36 @@
 # Compatibility foundation verification
 
+## Reviewed fund-only industry manager and vanilla forest
+
+Independent review approves eight atomic commits through `c033301`. Whole-world
+transactions now run fund-only industry scheduling and real temperate forest
+construction, production, RNG, stockpile drain, histories and daily level policy.
+Active receiving stations, graphics17/regrowth and other industry families remain
+required; the typed producer handoff explicitly refuses unsupported recipients.
+
+Root executes 66,130 forest calls with 45 complete boundaries, 69,974 empty-manager
+calls with 27 boundaries, and the 63,881-call/89-boundary house regression.
+Forest and mixed tests compare actual IndustryCaches; the empty-manager recipe
+compares original live builder data with current saved World. Primary original
+corpora are explicitly reused. Fresh mixed bus/forest runs and both simulated
+save origins compare 156 physical/content and 156 town/industry-cache boundaries.
+52 complete road pairs, 24 routing pairs, seven timers, controlled async jobs,
+natural late rollback and 13 corruption controls pass. The independent reviewer
+adds 56,776 lifecycle/manager calls and fresh opposite-origin continuations.
+
+Workspace tests pass 781 cases; current targeted executables separately pass
+235 ordinary cases. Different executable hashes and feature-selection epochs
+are retained. Python tests, 143 declarations and strict static checks pass.
+The root proof retains 12,003 verified files, 5,039 source blobs and 202 raw
+Cargo depfiles. Historical omitted CMake precompile wrappers are reconstructed
+from retained generator inputs and explicitly labelled, with no historical
+byte-identical rebuild claim. Evidence is under
+`.worktrees/stage04-industry-integration/.omo/evidence/industry-integration/`
+and `.omo/evidence/stage04-industry-review/report.md`.
+
+No normal industry CI, GNU industry execution, positive recipient transport or
+full stage completion is claimed. All seven broad stage 4 gates remain open.
+
 ## Reviewed asynchronous zero-demand link jobs
 
 Independent review approves six atomic commits through `19f7a34`. Supported

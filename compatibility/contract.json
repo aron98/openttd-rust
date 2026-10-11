@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "0461a98f127fdb02495972861e0d820e8123c14ccaed680d0421996e8e777afb",
+   "sha256": "b9f5888576ac5b8e13bfe1fa17c8081a2278780953d29d3034befe9bc5f05058",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "af74a3b2af93e02001cf368caa87b9e1d400a4be88cdc23dacdd1dcebfe46036",
+   "sha256": "2dcc528d4c99648e78ea458775f83306dba63bd13d8e8fe8aa4214259c47a042",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "3bffbfef0227bb1c446abed67f298f749ce4fbe79156fd47a18a19b292994fc7",
+   "sha256": "1e0a545cf2502f50c93170dd60eb28ea68c3c3f272efb2c4404bd41d14e64330",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "dc5eda069e82180ac09d4fe7c29a130678cd30ec1a291b6a56fe221d22dc83b8",
+   "sha256": "b07a9d990caeabfa151ab00df7aa6c4de25b64ba564ac3a5706caccd15ccd15d",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "bf30a23502057f9f48366ab7fe5a2e779cd06e94a672ee14397f6026935cb8ff",
+   "sha256": "ebd918447ee86d27e99d9d1537b2b3b106d94a1e2f8e38e33a7f8f141185a95d",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "07c5fdb3e647ac845e89592f8f76d92c22b4468b4307b19c7d28d9da86038af9",
+   "sha256": "3b8957c8071f65b82f7c2ccc94f93a461721d72e31d7606bac99fd367d319aee",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "fde0636cbc888da3c26a438e1b1b4e1b03c10c49dec9d98a5b8fafb3fd394834",
+   "sha256": "3191db255c1310c6c2f153d03cb143208d226e9700cd3b59001139b51121568a",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "56214f76229da29bb855ab16f04cbd7db1ed770ad997a36661fbab7a53c8c763",
+   "sha256": "fa8aa9c1773fa7497fc06641f92035600b3b369da937a67405c16213f616677d",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "890d841995435f1bbe316a9ad5ed0652a5d9e271191d643d79fc83d36b3b2451",
+   "sha256": "14f39616d6721a18a46fe56bc6d9001ca7906813ea75583acafecca7dc6a0a81",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "8a584e5edcafcb053470af66d80d7c3124a28c790063b10ab72670dc4482098f",
+   "sha256": "94b375c010f99bd358df0a6770542b994f8254c0f6303f5ab275410875a820bc",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "04718223e18085ca3da86b44bc2fbcd31a57d4e4b2beec9a54fa64fdd76e67f6",
+   "sha256": "1cd4fd7c30307fcb49e04f8f4c03deb64c62785739196c6734a5acb3ae31389a",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4399,7 +4399,7 @@
   {
    "id": "scalar-constant-crates-ottd-script-src-realm-constants-tests-rs",
    "path": "crates/ottd-script/src/realm/constants/tests.rs",
-   "sha256": "09a513446eb1490691e9e5366549ff8a46a5dca8fe6eafac0ee4627d748c2eed",
+   "sha256": "2884dcdea600ed356cbb847b6fe47fc490af985fd1e3d9d46d039b1a406d7e92",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 closed compiler constants; native115 sessions and explicit bounded Rust projections.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "022496c6709ce468d8f97cdd83969486bd62dab5bd7d528f35a71d77f2b59d6a",
+   "sha256": "8a5062c072baf66d2222ef734a432976f698e6f7185312b82a00dcfd50fec225",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -7756,7 +7756,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-runner-rs",
    "path": "crates/ottd-script/src/runner.rs",
-   "sha256": "de3f6a6ddf31fc73d9427b0cd4194fc96fbb2f10ac6e50f35657f63fec1eed99",
+   "sha256": "73b7add8c137fc699b3dd612cec43b5e600945aef7e1f80ca2922d12303fe2ac",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7774,7 +7774,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-vm-root-sessions-rs",
    "path": "crates/ottd-script/src/vm/root_sessions.rs",
-   "sha256": "cb988591fdb074e23600860334a410f6077e0c178de145032ec8a3a79953eae4",
+   "sha256": "0fa3bce7afc7362cf673f559a73cb45c5a14fac28a8ff66d05a3b5e19c9382b3",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7783,7 +7783,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-vm-roots-rs",
    "path": "crates/ottd-script/src/vm/roots.rs",
-   "sha256": "9cb6b1dd1d4c24252f64fbc6bdc515689fb3a42f31fa98cfbd0319adfc080a99",
+   "sha256": "e785252506370073b8ed191e47481535682013840e7642f81323533e3da47912",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7801,7 +7801,7 @@
   {
    "id": "scalar-root-crates-ottd-script-tests-root-runner-rs",
    "path": "crates/ottd-script/tests/root_runner.rs",
-   "sha256": "2c23c6c74b03060e1662379cc081372a25796a6d66e20e0edcc28d923eb0e7ea",
+   "sha256": "4ded74e1aec55d994c94563e03e0be166ea4ff97d42b1cb6f13e30bd561206c0",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7846,7 +7846,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-array-rs",
    "path": "crates/ottd-script/src/array.rs",
-   "sha256": "ef22ec4244670a07b28db76c457153719e189f0e15da8d420dff2bd1308da532",
+   "sha256": "c730ec7a2a103469f0047858e2616fb053a1efff2008f7839e3b5e3d1ea69534",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7864,7 +7864,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-vm-array-sessions-rs",
    "path": "crates/ottd-script/src/vm/array_sessions.rs",
-   "sha256": "29bd414fdbed78866a2e9fca7639570364819b3ee33c2b85dc8aa4dd2a648da7",
+   "sha256": "237efc7ec736418612dc184f58a25c187165a68f7dd0f829b8ba2e4b7829654d",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7873,7 +7873,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-vm-arrays-rs",
    "path": "crates/ottd-script/src/vm/arrays.rs",
-   "sha256": "875e22336c8b9e7c474a9f5cef1232d6f1ac998ad614a03566339592237d08c5",
+   "sha256": "69ac8c15a8df28be1973480fd9b27e0f8626def8eff2a59e385cdf0c8cf09438",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7882,7 +7882,7 @@
   {
    "id": "script-arrays-crates-ottd-script-tests-arrays-rs",
    "path": "crates/ottd-script/tests/arrays.rs",
-   "sha256": "5e3d46762828107bb0b35b1d0e4c273e18647c36b9fd86a19a118e6f67375605",
+   "sha256": "6496031e42e2770d41ecc910ff18705e7e7c360f6cab4bb4aef1fcda65123b41",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "9dc9d9c6045cd74945461ca7f8a7b8043c598c1d54156fa80e423cca1e07b027",
+   "sha256": "ade25b8fdc3835fd5df0a4c469c947afedabc131eef8da693d26ea8f6755ed0f",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8467,7 +8467,7 @@
   {
    "id": "script-foreach-crates-ottd-script-src-vm-foreach-rs",
    "path": "crates/ottd-script/src/vm/foreach.rs",
-   "sha256": "4283a43cd06cf87cf7ecb9afcac38929308d693fba67d5b8cc7f1cf3333968e8",
+   "sha256": "5d5ab5110a24e0022fe20bd91c22436f5e9e841e7658ba63074a8be514a453a0",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 array and byte-string foreach;255 strict native sessions. Target C-char widening, exact frame/IP/debt/temp and owning-slot projection; no general iterable/GC claim.",
    "save_version": null,
@@ -8476,7 +8476,7 @@
   {
    "id": "script-foreach-crates-ottd-script-tests-foreach-bytecode-rs",
    "path": "crates/ottd-script/tests/foreach_bytecode.rs",
-   "sha256": "79392fedd05060a119e2ddcd446f6a4faaaf5882938a3164401dd941f952fc6c",
+   "sha256": "85f70fb61e41fbe69b409f010c958aaaa03b2d5ba8aa56c08060146801c050d3",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 array and byte-string foreach;255 strict native sessions. Target C-char widening, exact frame/IP/debt/temp and owning-slot projection; no general iterable/GC claim.",
    "save_version": null,
@@ -8845,7 +8845,7 @@
   {
    "id": "script-string-foreach-crates-ottd-script-src-vm-foreach-tests-rs",
    "path": "crates/ottd-script/src/vm/foreach/tests.rs",
-   "sha256": "a56c14735670d9d7923e29ac17d27405834d03f7fd4eb5226044d51b33ee2405",
+   "sha256": "c5515eef6573cb11cb36c8c50a95ea730c91bce65ffa48c489bd55254591d01f",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 byte-string FOREACH; stored bytes widen target C char, negative forged cursors rejected before native-undefined indexing.",
    "save_version": null,
@@ -8854,7 +8854,7 @@
   {
    "id": "script-string-foreach-crates-ottd-script-tests-string-foreach-bytecode-rs",
    "path": "crates/ottd-script/tests/string_foreach_bytecode.rs",
-   "sha256": "d81fb070a800fdbd8079dddba0905ce594080efe34632d7864f1203c562bdf78",
+   "sha256": "65e1123b865ad5dba2f04ad9a9867af735369dfb6cc1a93fc4e752114f2b5656",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 byte-string FOREACH; stored bytes widen target C char, negative forged cursors rejected before native-undefined indexing.",
    "save_version": null,

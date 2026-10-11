@@ -1,5 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
+#[cfg(feature = "async-trace")]
+pub mod async_trace;
 mod industries;
 pub mod rail;
 pub use industries::IndustryCaches;

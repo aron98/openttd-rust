@@ -1,5 +1,7 @@
 //! Source-ordered scheduling and publication of supported link graph jobs.
 use super::{RoadPhases, State, WorldTickError, records, unsupported};
+#[cfg(feature = "async-trace")]
+use crate::runtime::async_trace::{self, Kind};
 use crate::runtime::{
     RuntimeError,
     transport_jobs::{JobEnvironment, JobInput},
@@ -105,9 +107,14 @@ fn spawn(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), World
     .ok_or_else(|| unsupported("link_jobs", "populated job solver"))?;
     runner.transport.workers.insert(id, input.clone().spawn());
     runner.transport.job_inputs.insert(id, Some(input));
+    #[cfg(feature = "async-trace")]
+    async_trace::spawned(&runner.transport, id);
     let mut running = list(state, "running")?;
     running.push(WireValue::Unsigned(u64::from(id).wrapping_add(1)));
-    records::schedule(state, "running", running)
+    records::schedule(state, "running", running)?;
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, id, Kind::RunningAppended);
+    Ok(())
 }
 fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldTickError> {
     let mut running = list(state, "running")?;
@@ -133,6 +140,8 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
     if runner.transport.job_inputs.get(&job) != Some(&Some(input.clone())) {
         return Err(unsupported("link_jobs", "pending job result cache"));
     }
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, job, Kind::WaitBegin);
     let completed = runner
         .transport
         .workers
@@ -140,6 +149,11 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
         .ok_or_else(|| unsupported("link_jobs", "missing job worker"))?
         .wait()
         .map_err(RuntimeError::from)?;
+    #[cfg(feature = "async-trace")]
+    {
+        async_trace::job(&runner.transport, job, Kind::WaitReturned);
+        async_trace::job(&runner.transport, job, Kind::PublicationBegin);
+    }
     completed.publish(
         &input,
         &mut super::job_publication::Publication {
@@ -147,6 +161,8 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
             cargo: &mut runner.transport.cargo,
         },
     )?;
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, job, Kind::PublicationEnd);
     running.remove(0);
     records::schedule(state, "running", running)?;
     state.apply(WorldEdit::RemoveRecord {
@@ -159,6 +175,8 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
         .free(job)
         .map_err(RuntimeError::from)?;
     runner.transport.job_inputs.remove(&job);
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, job, Kind::StagedRemoval);
     runner.transport.workers.remove(&job);
     if state.table(b"LGRP")?.record(graph).is_some() {
         let pointer = WireValue::Unsigned(u64::from(graph).wrapping_add(1));

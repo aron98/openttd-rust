@@ -13,6 +13,8 @@
 #include "../3rdparty/nlohmann/json.hpp"
 #include <filesystem>
 
+namespace ReferenceMovement { nlohmann::json Snapshot(); }
+
 namespace ReferenceReplay {
 using Json = nlohmann::json;
 using ReferenceWorld::Require;
@@ -51,6 +53,7 @@ inline Json Checkpoint(const std::filesystem::path &directory, const std::string
     setenv("OTTD_WORLD_SCHEMA_PATH", (stem + ".schema.json").c_str(), 1);
     setenv("OTTD_WORLD_DERIVED_PATH", (stem + ".derived.json").c_str(), 1);
     const Json before = Runtime();
+    if (std::getenv("OTTD_FULL_RUNTIME_OBSERVE") != nullptr) Write(stem + ".movement.json", ReferenceMovement::Snapshot());
     Require(SaveOrLoad(stem + ".sav", SLO_SAVE, DFT_GAME_FILE, NO_DIRECTORY, false) == SL_OK, "native checkpoint save failed");
     ReferenceWorld::AfterLoad();
     const Json after = Runtime();

@@ -1,6 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
 mod industries;
+pub mod rail;
 pub use industries::IndustryCaches;
 mod command_context;
 pub(crate) use command_context::{RoadBuildState, new_road_record};

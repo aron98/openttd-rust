@@ -159,13 +159,6 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
     for path in directory.rglob("process.json"):
         relative = str(path.relative_to(directory))
         parts = path.relative_to(directory).parts
-        if (
-            len(parts) == 5
-            and parts[0] == "cases"
-            and parts[3] == "native"
-            and stages.get("/".join(parts[1:3])) == POLICY_STAGE
-        ):
-            continue  # Exact policy receipt and source bytes are checked by compare_case below.
         status = int(relative.startswith("controls/"))
         from scripts.script_vm_constants import CONTROLS as CONSTANT_CONTROLS
 
@@ -214,6 +207,8 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
                 ("native", str(Path(origin) / "native/observe")),
                 ("rust", rust_path),
             ):
+                if side == "native" and stages[key] == POLICY_STAGE:
+                    continue
                 argv = [binary, str(Path(origin) / "inputs" / name), *map(str, credit)]
                 if read_json(case / side / "argv.json") != argv:
                     raise WorldCheckError("VM matrix invocation differs")

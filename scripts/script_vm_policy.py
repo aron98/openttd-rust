@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: GPL-2.0-only
 """Explicit byte-bound fixtures for undefined native ctype arguments, never parity."""
 
-import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Final, Literal
 
 from scripts.script_vm_observation import compare_observation
 from scripts.world_check_support import (
-    ROOT,
     WorldCheckError,
     read_json,
     run,
@@ -63,26 +61,16 @@ UNDEFINED_INPUTS.update(
 
 
 def observe_native(argv: list[str], case: Path, source: bytes) -> None:
-    """Retain raw native results even if undefined behavior terminates the process."""
-    directory = case / "native"
+    """Execute defined inputs only; retain a refusal receipt for classified bytes."""
     if source not in UNDEFINED_INPUTS:
-        _ = run(argv, directory)
+        _ = run(argv, case / "native")
         return
-    directory.mkdir(parents=True, exist_ok=False)
-    write_json(directory / "argv.json", [argument for argument in argv])
-    result = subprocess.run(
-        argv, capture_output=True, timeout=65, check=False, cwd=ROOT
-    )
-    _ = (directory / "stdout.log").write_bytes(result.stdout)
-    _ = (directory / "stderr.log").write_bytes(result.stderr)
-    write_json(
-        directory / "process.json",
-        {"returncode": result.returncode, "policy": POLICY_STAGE},
-    )
+    case.mkdir(parents=True, exist_ok=False)
+    write_json(case / "policy.json", {"native_executed": False, "reason": POLICY_STAGE})
 
 
 def compare_case(source: bytes, case: Path, stage: str) -> None:
-    """Compare defined inputs strictly; independently assert explicit policy rejection."""
+    """Compare defined inputs strictly and require exact policy rejection."""
     policy = UNDEFINED_INPUTS.get(source)
     rust = (case / "rust/stdout.log").read_text()
     diagnostic = (case / "rust/stderr.log").read_text()
@@ -98,37 +86,41 @@ def compare_case(source: bytes, case: Path, stage: str) -> None:
         raise WorldCheckError("Missing exact Rust undefined-input rejection")
     if read_json(case / "rust/process.json") != {"returncode": 0, "expected": 0}:
         raise WorldCheckError("Rust policy process failed")
-    match read_json(case / "native/process.json"):
-        case {"returncode": int(), "policy": "undefined_native_input"}:
+    if (case / "native").exists() or (case / "native").is_symlink():
+        raise WorldCheckError("Undefined input has native execution evidence")
+    receipt = case / "policy.json"
+    if not receipt.is_file() or receipt.is_symlink():
+        raise WorldCheckError("Missing undefined-input policy receipt")
+    match read_json(receipt):
+        case {
+            "native_executed": False,
+            "reason": "undefined_native_input",
+        } as value if len(value) == 2:
             return
         case _:
-            raise WorldCheckError("Missing raw undefined native process observation")
+            raise WorldCheckError("Invalid undefined-input policy receipt")
 
 
-def compare_files(source: Path, prefix: Path, statuses: tuple[int, int]) -> None:
-    """Apply the same policy to the standalone shell driver's retained files."""
-    policy = UNDEFINED_INPUTS.get(source.read_bytes())
-    rust = Path(f"{prefix}.rust.stdout").read_text()
-    diagnostic = Path(f"{prefix}.rust.stderr").read_text()
-    if policy is None:
-        if statuses != (0, 0) or "UndefinedNativeCharacter" in diagnostic:
-            raise WorldCheckError("Defined-input process failed or was reclassified")
-        native = Path(f"{prefix}.native.stdout").read_text()
-        if not native or native != rust:
-            raise WorldCheckError("Defined-input observation differs")
-        _ = Path(f"{prefix}.diff").write_text("")
+def observe_pair(
+    source: Path, case: Path, native: str, rust: str, schedules: list[str]
+) -> None:
+    """Run the standalone driver's pair through the same defined-only boundary."""
+    body = source.read_bytes()
+    observe_native([native, str(source), *schedules], case, body)
+    result = run([rust, str(source), *schedules], case / "rust")
+    if body in UNDEFINED_INPUTS:
+        compare_case(body, case, POLICY_STAGE)
         return
-    expected = policy.diagnostic()
-    if statuses[1] != 0 or rust != "compile_error\n" or diagnostic != expected:
-        raise WorldCheckError("Missing exact Rust undefined-input rejection")
-    _ = Path(f"{prefix}.policy").write_text(
-        f"{POLICY_STAGE}: Rust rejection; native result is not parity\n"
-    )
+    if "UndefinedNativeCharacter" in result.stderr:
+        raise WorldCheckError("Defined input was reclassified")
+    output = (case / "native/stdout.log").read_text()
+    if not output or output != result.stdout:
+        raise WorldCheckError("Defined-input observation differs")
 
 
 if __name__ == "__main__":
     import sys
 
-    compare_files(
-        Path(sys.argv[1]), Path(sys.argv[2]), (int(sys.argv[3]), int(sys.argv[4]))
+    observe_pair(
+        Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3], sys.argv[4], sys.argv[5:]
     )

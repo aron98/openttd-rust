@@ -4,6 +4,7 @@
 # ruff: noqa: ISC003
 from .case import Case, literal
 from .compiler_cases import compiler_cases
+from .delegate_cases import delegate_cases
 from .diagnostic_cases import diagnostic_cases
 from .objects import object_cases
 from .root_cases import root_cases
@@ -139,6 +140,7 @@ def cases() -> list[Case]:
     result.extend(throw_cases())
     result.extend(trap_boundary_cases())
     result.extend(trap_compile_cases())
+    result.extend(delegate_cases())
     return result
 
 

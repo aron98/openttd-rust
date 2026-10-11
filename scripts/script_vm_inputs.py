@@ -14,6 +14,8 @@ OBSERVER_INPUTS: Final = (
     "tables.hpp",
     "calls.hpp",
     "closures.hpp",
+    "owner_trace.hpp",
+    "delegates.hpp",
 )
 
 

@@ -24,6 +24,11 @@ impl Vm<'_> {
     }
     pub(super) fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
+            0x06 => self.call(i)?,
+            0x07 | 0x08 => {
+                self.prepare_call(i)?;
+                return Ok(None);
+            }
             0x33 => {
                 self.foreach(i)?;
                 return Ok(None);

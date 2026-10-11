@@ -23,13 +23,15 @@ mod array;
 pub use array::Array;
 mod compiler;
 mod error;
+mod host_stack;
 mod lexer;
 mod program;
+pub use host_stack::HostStack;
 mod realm;
 mod runner;
 pub use program::Program;
 pub use realm::{ByteString, Realm};
-pub use runner::{RootEnvironment, Runner, RunnerFailure};
+pub use runner::{PrintSink, RootEnvironment, Runner, RunnerFailure};
 mod value;
 mod vm;
 pub use compiler::{compile, compile_bytes};
@@ -63,7 +65,9 @@ pub(crate) struct ProgramData {
 #[derive(Debug)]
 pub(crate) enum Temporary {
     Value(Value),
-    MainProgram { _program: std::rc::Rc<ProgramData> },
+    MainProgram {
+        _program: std::rc::Rc<program::MainClosure>,
+    },
 }
 #[derive(Debug)]
 pub(crate) enum Storage<'a> {

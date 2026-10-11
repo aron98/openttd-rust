@@ -10,6 +10,13 @@ out=$(CDPATH= cd -- "$out" && pwd)
 root=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
 cd "$root"
 export CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-"$out/target"}
+export OTTD_SCRIPT_CALL_CALLEE="$out/call-callee.stdout"
+export OTTD_SCRIPT_CALL_EMPTY="$out/call-empty.stdout"
+export OTTD_SCRIPT_CALL_RETAINED="$out/call-retained.stdout"
+export OTTD_SCRIPT_CALL_ARRAY_EMPTY="$out/call-array-empty.stdout"
+export OTTD_SCRIPT_CALL_ARRAY_RETAINED="$out/call-array-retained.stdout"
+export OTTD_SCRIPT_CALL_FAILURE="$out/call-failure.stdout"
+export OTTD_SCRIPT_CALL_CYCLE="$out/call-cycle.stdout"
 export OTTD_SCRIPT_TABLE_HASHES="$out/hashes.stdout"
 export OTTD_SCRIPT_TABLE_OWNER="$out/owner.stdout"
 export OTTD_SCRIPT_TABLE_MUTATION="$out/mutation.stdout"
@@ -48,6 +55,13 @@ done
 for repeat in 1 2 3; do
  "$out/native/observe" --table-pointer-keys > "$out/pointer-$repeat.stdout" 2> "$out/pointer-$repeat.stderr"
 done
+for entry in empty retained; do
+ "$out/native/observe" --call-entry "$entry" > "$out/call-$entry.stdout" 2> "$out/call-$entry.stderr"
+ "$out/native/observe" --call-array "$entry" > "$out/call-array-$entry.stdout" 2> "$out/call-array-$entry.stderr"
+done
+"$out/native/observe" --call-failure scripts/compat/script-vm/tables/fixtures/calls/late-error.nut > "$out/call-failure.stdout" 2> "$out/call-failure.stderr"
+"$out/native/observe" --call-cycle-teardown > "$out/call-cycle.stdout" 2> "$out/call-cycle.stderr"
+"$out/native/observe" --call-callee > "$out/call-callee.stdout" 2> "$out/call-callee.stderr"
 for profile in debug release; do
  flag=
  if [ "$profile" = release ]; then flag=--release; fi
@@ -56,6 +70,8 @@ for profile in debug release; do
  cargo build -vv -p ottd-script --example observe $flag > "$out/$profile-build.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.compare "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile" > "$out/$profile-compare.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.controls "$out/$profile" > "$out/$profile-controls.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.calls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-calls" > "$out/$profile-calls.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.call_controls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-call-controls" > "$out/$profile-call-controls.log" 2>&1
  cargo test -p ottd-script $flag > "$out/$profile-tests.log" 2>&1
  cargo test -p ottd-script $flag native_root_registration -- --ignored > "$out/$profile-root-registration.log" 2>&1
  cargo test -p ottd-script $flag native_string_hashes -- --ignored > "$out/$profile-hashes.log" 2>&1
@@ -65,4 +81,4 @@ for profile in debug release; do
 done
 cargo fmt --all -- --check > "$out/fmt.log" 2>&1
 cargo clippy -p ottd-script --all-targets -- -D warnings > "$out/clippy.log" 2>&1
-printf 'PASS native hashes, tables, lifetime, suspended mutation; debug and release\n' > "$out/result.txt"
+printf 'PASS native hashes, tables, calls, raw print, lifetime, suspended mutation; debug and release\n' > "$out/result.txt"

@@ -54,7 +54,7 @@ impl Compiler<'_> {
             .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
         if !matches!(
             self.token.kind,
-            TokenKind::Symbol(b'=')
+            TokenKind::Symbol(b'=' | b'(')
                 | TokenKind::NewSlot
                 | TokenKind::Compound(_)
                 | TokenKind::Increment(_)

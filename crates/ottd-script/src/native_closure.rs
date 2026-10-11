@@ -3,7 +3,7 @@ use crate::{
     ByteString, Realm, VmError,
     heap::{Handle, Object, Stored},
 };
-/// Source-defined native function identity; callable dispatch is not implemented.
+/// Source-defined native function identity for the four bare-root builtins.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum NativeFunction {
     /// The bare VM assertion function.

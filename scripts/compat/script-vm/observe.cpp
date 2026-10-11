@@ -35,8 +35,32 @@ void value(const SQObjectPtr &v) {
 #include "root_slots.hpp"
 #include "arrays.hpp"
 #include "tables.hpp"
+#include "calls.hpp"
+static std::ofstream print_output;
+static void record_print(HSQUIRRELVM, std::string_view bytes) {
+ uint64_t size=bytes.size();
+ for(unsigned shift=0;shift<64;shift+=8) print_output.put(static_cast<char>((size>>shift)&255));
+ print_output.write(bytes.data(),static_cast<std::streamsize>(bytes.size()));
+ print_output.flush();
+ if(!print_output) std::exit(74);
+}
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--call-callee") return call_callee_owner();
+ if(std::string_view(argv[1])=="--call-cycle-teardown") return call_cycle_teardown();
+ if(std::string_view(argv[1])=="--call-failure") return call_failure_session(argc,argv);
+ if(std::string_view(argv[1])=="--call-array") {
+  if(argc!=3) return 64;
+  if(std::string_view(argv[2])=="empty") return call_array_owners(false);
+  if(std::string_view(argv[2])=="retained") return call_array_owners(true);
+  return 64;
+ }
+ if(std::string_view(argv[1])=="--call-entry") {
+  if(argc!=3) return 64;
+  if(std::string_view(argv[2])=="empty") return call_entry_owners(false);
+  if(std::string_view(argv[2])=="retained") return call_entry_owners(true);
+  return 64;
+ }
  if(std::string_view(argv[1])=="--root-teardown") return root_teardown_session();
  if(std::string_view(argv[1])=="--root-ownership") return root_ownership_session(argc,argv);
  if(std::string_view(argv[1])=="--root-registration") return root_registration_session();
@@ -64,6 +88,11 @@ int main(int argc, char **argv){
  const bool frames=argc>2 && std::string_view(argv[2])=="--frames";
  const int first_credit=frames?3:2;
  auto v=sq_open(256);
+ if(const char *file=std::getenv("OTTD_SCRIPT_PRINT_FILE")) {
+  print_output.open(file,std::ios::binary|std::ios::trunc);
+  if(!print_output) return 74;
+  sq_setprintfunc(v,record_print);
+ }
  static_assert(sizeof(SQInteger)==8 && sizeof(SQFloat)==4);
 #if defined(SQUSEDOUBLE) || defined(NO_GARBAGE_COLLECTOR)
 #error wrong native variant

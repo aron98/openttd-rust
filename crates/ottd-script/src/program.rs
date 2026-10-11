@@ -3,7 +3,7 @@ use std::rc::Rc;
 /// Compiled main function retaining its shared string realm.
 #[derive(Clone, Debug)]
 pub struct Program {
-    pub(crate) data: Rc<ProgramData>,
+    pub(crate) data: Rc<MainClosure>,
 }
 impl Program {
     /// Construct bytecode in a fresh realm, reinterning all string literals.
@@ -38,7 +38,9 @@ impl Program {
     }
     pub(crate) fn freeze(data: ProgramData) -> Self {
         Self {
-            data: Rc::new(data),
+            data: Rc::new(MainClosure {
+                prototype: Rc::new(data),
+            }),
         }
     }
     /// Required register count including the reserved root slot.
@@ -62,3 +64,20 @@ impl PartialEq for Program {
     }
 }
 impl Eq for Program {}
+
+/// The compiled main closure owns one prototype; no captures or bound environment
+/// are admitted here. It is not a script Value or an internal heap graph edge.
+#[derive(Debug)]
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Main closure ownership is shared across private VM and host-stack modules"
+)]
+pub(crate) struct MainClosure {
+    pub(crate) prototype: Rc<ProgramData>,
+}
+impl std::ops::Deref for MainClosure {
+    type Target = ProgramData;
+    fn deref(&self) -> &Self::Target {
+        &self.prototype
+    }
+}

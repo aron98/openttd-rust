@@ -1,6 +1,13 @@
 //! Test-only native differential observer for scalar programs.
-use ottd_script::{Execution, Value, Vm, compile_bytes};
-use std::{env, error::Error, fs};
+use ottd_script::{Execution, Value, Vm};
+use std::{cell::RefCell, env, error::Error, fs, io::Write, rc::Rc};
+#[derive(Debug)]
+struct Prints(Rc<RefCell<Vec<Vec<u8>>>>);
+impl ottd_script::PrintSink for Prints {
+    fn print(&mut self, bytes: &[u8]) {
+        self.0.borrow_mut().push(bytes.to_vec());
+    }
+}
 fn value(value: &Value) {
     match value {
         Value::String(bytes) => {
@@ -26,7 +33,17 @@ fn main() -> Result<(), Box<dyn Error>> {
         return formats(&args.next().ok_or("bit-pattern file required")?);
     }
     let source = fs::read(filename)?;
-    let program = match compile_bytes(&source) {
+    let realm = ottd_script::Realm::new();
+    let mut runner = ottd_script::Runner::new(realm.default_root()?);
+    let prints = Rc::new(RefCell::new(Vec::new()));
+    let print_file = env::var_os("OTTD_SCRIPT_PRINT_FILE");
+    if let Some(file) = &print_file {
+        drop(fs::File::create(file)?);
+    }
+    if print_file.is_some() {
+        runner.set_print_sink(Some(Box::new(Prints(Rc::clone(&prints)))));
+    }
+    let program = match runner.compile_bytes(&source) {
         Ok(program) => program,
         Err(error) => {
             println!("compile_error");
@@ -52,7 +69,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     } else {
         credits.as_slice()
     };
-    let mut vm = Vm::new(&program)?;
+    let host = ottd_script::HostStack::new();
+    host.push_main(&program);
+    let mut vm = runner.start_with_host(&program, host)?;
     for credit in credits {
         match vm.resume(*credit) {
             Ok(Execution::Suspended) => println!(
@@ -67,9 +86,21 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
             Err(error) => {
                 println!("runtime_error {}", vm.remaining_ops());
-                eprintln!("{error}");
+                if let Some(error) = vm.native_error() {
+                    std::io::stderr().write_all(error.as_bytes())?;
+                    std::io::stderr().write_all(b"\n")?;
+                } else {
+                    eprintln!("{error}");
+                }
                 break;
             }
+        }
+    }
+    if let Some(file) = print_file {
+        let mut file = fs::File::create(file)?;
+        for payload in prints.borrow().iter() {
+            file.write_all(&u64::try_from(payload.len())?.to_le_bytes())?;
+            file.write_all(payload)?;
         }
     }
     Ok(())

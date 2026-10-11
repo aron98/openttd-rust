@@ -30,13 +30,13 @@ impl Compiler<'_> {
         self.load(key, Value::String(self.realm.string(name.as_bytes())))?;
         if matches!(
             self.token.kind,
-            TokenKind::Compound(_) | TokenKind::Increment(_) | TokenKind::Symbol(b'(')
+            TokenKind::Compound(_) | TokenKind::Increment(_)
         ) {
             return Err(self.error(CompileErrorKind::UnsupportedSyntax));
         }
         if !matches!(
             self.token.kind,
-            TokenKind::Symbol(b'=') | TokenKind::NewSlot
+            TokenKind::Symbol(b'=' | b'(') | TokenKind::NewSlot
         ) && (!state.deleting || matches!(self.token.kind, TokenKind::Symbol(b'.' | b'[')))
         {
             let key = self.pop()?;

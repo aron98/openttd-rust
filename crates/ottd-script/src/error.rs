@@ -52,6 +52,10 @@ impl std::error::Error for CompileError {}
 /// Checked execution failure; undefined native arithmetic remains unsupported.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VmError {
+    /// A represented callable raised a native error retained by its runner.
+    NativeCall,
+    /// CALL reached a noncallable represented value.
+    NotCallable,
     /// Target C++ standard-library string hash ABI is not admitted.
     UnsupportedTableHashTarget,
     /// Scalar table slots cannot yet retain aggregate graph edges.

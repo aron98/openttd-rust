@@ -1,0 +1,7 @@
+before 1 1 0
+suspended 0 3 0 4 2 1
+temporary 134218240
+argument after unbind 0
+returned 98 1 1 0
+local released 0 0
+host cleared 0 0

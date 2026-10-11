@@ -76,19 +76,13 @@ fn minimum_division_is_explicit_when_native_domain_is_undefined()
 }
 
 #[test]
-fn host_construct_is_rejected_when_compiling_outside_supported_grammar() {
-    // Given: a function requiring unimplemented host/package semantics.
-    let source = "return AIController.GetTick();";
-    // When: the scalar compiler sees it.
-    let result = compile(source);
-    // Then: it explicitly rejects, rather than evaluating a placeholder.
-    assert!(matches!(
-        result,
-        Err(ottd_script::CompileError {
-            kind: ottd_script::CompileErrorKind::UnsupportedSyntax,
-            ..
-        })
-    ));
+fn host_construct_fails_when_its_api_root_is_absent() {
+    // Given: call syntax is supported, but OpenTTD host API registration is pending.
+    let program = compile("return AIController.GetTick();").expect("call syntax");
+    // When: the main frame looks up the absent host API root.
+    let result = Vm::new(&program).expect("vm").resume(100);
+    // Then: no placeholder implements the unregistered host function.
+    assert_eq!(result, Err(ottd_script::VmError::MissingIndex));
 }
 
 #[test]

@@ -7,6 +7,7 @@ use std::rc::Rc;
     reason = "Native numeric conversion is shared with table hashing"
 )]
 pub(crate) mod arrays;
+mod calls;
 mod dispatch;
 mod foreach;
 mod objects;
@@ -24,7 +25,10 @@ pub enum Execution {
 /// Register VM retaining instruction pointer, registers and operation debt.
 #[derive(Debug)]
 pub struct Vm<'a> {
-    program: Option<Rc<ProgramData>>,
+    program: Option<Rc<crate::program::MainClosure>>,
+    _host: crate::HostStack,
+    origin: usize,
+    native_scratch: Value,
     registers: Vec<Value>,
     runner: Storage<'a>,
     started: bool,
@@ -44,6 +48,16 @@ impl<'a> Vm<'a> {
         )
     }
     pub(crate) fn with_runner(program: &Program, runner: Storage<'a>) -> Result<Self, VmError> {
+        Self::with_host_runner(program, runner, crate::HostStack::new())
+    }
+    pub(crate) fn with_host_runner(
+        program: &Program,
+        runner: Storage<'a>,
+        host: crate::HostStack,
+    ) -> Result<Self, VmError> {
+        if !host.same_realm(&program.data.realm) {
+            return Err(VmError::RealmMismatch);
+        }
         if !(1..=255).contains(&program.data.stack_size) {
             return Err(VmError::InvalidBytecode);
         }
@@ -52,6 +66,9 @@ impl<'a> Vm<'a> {
             Value::Table(runner.get().root.table());
         Ok(Self {
             program: Some(Rc::clone(&program.data)),
+            origin: host.len(),
+            _host: host,
+            native_scratch: Value::Null,
             registers,
             runner,
             started: false,
@@ -60,8 +77,25 @@ impl<'a> Vm<'a> {
             finished: false,
         })
     }
+    /// Start a fresh bare-root frame above real retained host entries.
+    /// # Errors
+    /// Rejects foreign entries, invalid stack shape, or root allocation failure.
+    pub fn with_host(program: &'a Program, host: crate::HostStack) -> Result<Self, VmError> {
+        Self::with_host_runner(
+            program,
+            Storage::Owned(Runner::new(program.data.realm.default_root()?)),
+            host,
+        )
+    }
+    /// Last native-call error bytes, including a failure in this active frame.
+    pub const fn native_error(&self) -> Option<&crate::ByteString> {
+        self.runner.get().native_error()
+    }
     fn program(&self) -> Result<&ProgramData, VmError> {
-        self.program.as_deref().ok_or(VmError::Finished)
+        self.program
+            .as_deref()
+            .map(|closure| &**closure)
+            .ok_or(VmError::Finished)
     }
     /// Index of the next instruction; meaningful at suspension boundaries.
     pub const fn instruction_pointer(&self) -> usize {
@@ -97,6 +131,7 @@ impl<'a> Vm<'a> {
             Ok(Execution::Returned(_)) | Err(_) => {
                 self.finished = true;
                 self.registers.fill(Value::Null);
+                self.native_scratch = Value::Null;
                 self.program = None;
                 if let Err(error) = result {
                     self.runner.get_mut().failure = Some(RunnerFailure::Runtime(error));
@@ -208,3 +243,6 @@ mod array_sessions;
 
 #[cfg(test)]
 mod native_roots;
+
+#[cfg(test)]
+mod native_calls;

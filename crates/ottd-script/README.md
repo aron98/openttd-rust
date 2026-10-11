@@ -488,8 +488,8 @@ configures an existing table without copying, and `Runner::friend` shares the
 current root while repeating native registration with fresh closure identities.
 The four represented closures retain exact function/name/arity/type-mask metadata,
 empty outer values and null environments. They support identity, storage, truth
-and native `typeof` without claiming callable implementations. Default delegate
-closure lookup and function dispatch remain explicit unsupported dependencies.
+and native `typeof`. The next atom below implements their bounded callable bodies.
+Default delegate closure lookup remains an explicit unsupported dependency.
 
 GET and SET compare the receiver with the current register-zero value before
 configured-root fallback; LOADROOTTABLE still reads the separately configured
@@ -503,5 +503,27 @@ native finalization counts 1 and 5 for opposite returned-array alias orders.
 This closes those admitted sequences, not general native GC/host-root ordering.
 Full native root registration (including target-dependent physical cursors) is
 an external test requiring fresh target-native output; ordinary tests do not use
-an Apple traversal fixture as a GNU expectation. Native callable functions,
-delegates, host registrations and full AI/GS execution remain required.
+an Apple traversal fixture as a GNU expectation. General functions, delegates,
+host registrations and full AI/GS execution remain required.
+
+Real CALL, PREPCALL and PREPCALLK now dispatch the four bare-root native closures.
+Local callees remain live during argument evaluation; member calls retain their
+receiver and callee before evaluating arguments. Native bodies run atomically in
+the existing budget loop. Arity precedes type masks; array fill retains aliases,
+negative sizes preserve native allocation/error sequencing, and native error bytes
+remain available through the runner. Print uses an optional synchronous `PrintSink`
+with exact bytes, including NUL. Scalar conversion occurs even without a sink;
+pointer-bearing aggregate/function formatting remains explicitly unsupported.
+
+`HostStack` retains actual compiled main closures, each owning its immutable
+prototype. A frame derives its origin from these real entries, preserving the
+pinned native cleanup arithmetic for empty and retained host entry. Main closures
+are host-only owners, never graph Values: this avoids a heap→program→realm strong
+cycle without pretending to implement general script-visible SQClosure storage.
+CallInfo closure ownership, returned arrays, suspension and late errors have
+passive original owner/ref witnesses. The print observer uses a separate framed
+binary channel so script output cannot forge execution records.
+
+User functions/captures, general native callbacks/reentry/exception suspension,
+script-visible main closures, delegates/classes, pointer-bearing identity and
+stringification, general GC ordering/counts and full AI/GS remain dependencies.

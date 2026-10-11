@@ -120,12 +120,19 @@ pub enum RunnerFailure {
     /// A main frame failed at runtime or reached an unsupported runtime domain.
     Runtime(VmError),
 }
+/// Synchronous host print callback receiving the exact native string bytes.
+pub trait PrintSink: std::fmt::Debug {
+    /// Emit one callback payload, without adding delimiters or changing NUL bytes.
+    fn print(&mut self, bytes: &[u8]);
+}
 /// Persistent configured execution context with independent temporary ownership.
 #[derive(Debug)]
 pub struct Runner {
     pub(crate) root: RootEnvironment,
     pub(crate) temporary: Temporary,
     pub(crate) failure: Option<RunnerFailure>,
+    pub(crate) native_error: Option<crate::ByteString>,
+    pub(crate) print_sink: Option<Box<dyn PrintSink>>,
 }
 impl Runner {
     /// Create an idle context sharing this root, with no prior temporary or failure.
@@ -134,7 +141,17 @@ impl Runner {
             root,
             temporary: Temporary::Value(Value::Null),
             failure: None,
+            native_error: None,
+            print_sink: None,
         }
+    }
+    /// Replace the synchronous native print callback; absence still performs conversion.
+    pub fn set_print_sink(&mut self, sink: Option<Box<dyn PrintSink>>) {
+        self.print_sink = sink;
+    }
+    /// Last native-call error bytes. Successful calls leave this native error object intact.
+    pub const fn native_error(&self) -> Option<&crate::ByteString> {
+        self.native_error.as_ref()
     }
     /// Create a friend context sharing the current root and re-registering defaults.
     /// # Errors
@@ -168,6 +185,19 @@ impl Runner {
             return Err(VmError::RealmMismatch);
         }
         Vm::with_runner(program, Storage::Borrowed(self))
+    }
+    /// Borrow this runner for a frame above actual retained host entries.
+    /// # Errors
+    /// Rejects foreign programs/entries or an invalid frame shape.
+    pub fn start_with_host<'a>(
+        &'a mut self,
+        program: &Program,
+        host: crate::HostStack,
+    ) -> Result<Vm<'a>, VmError> {
+        if !self.root.realm.same(&program.data.realm) {
+            return Err(VmError::RealmMismatch);
+        }
+        Vm::with_host_runner(program, Storage::Borrowed(self), host)
     }
     /// Install another configured root while this runner is idle.
     ///

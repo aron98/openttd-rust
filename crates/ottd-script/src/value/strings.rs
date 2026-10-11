@@ -6,7 +6,7 @@ impl Value {
         bytes.extend(other.text()?);
         Ok(Self::String(realm.string(&bytes)))
     }
-    fn text(&self) -> Result<Vec<u8>, VmError> {
+    pub(crate) fn text(&self) -> Result<Vec<u8>, VmError> {
         Ok(match self {
             Self::Array(_) | Self::Table(_) | Self::NativeClosure(_) => {
                 return Err(VmError::UnsupportedRuntimeValue);

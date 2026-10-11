@@ -10,6 +10,7 @@ use std::rc::Rc;
 pub(crate) mod arrays;
 mod dispatch;
 mod foreach;
+mod objects;
 mod roots;
 mod tables;
 mod updates;

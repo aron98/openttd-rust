@@ -1,0 +1,9 @@
+counts 0 0
+hidden before 1
+hidden after-source 0
+removed count 0
+removed held 1
+removed released 0
+array distinct 1
+array source-dropped 1
+array copy-dropped 0

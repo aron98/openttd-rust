@@ -1,0 +1,8 @@
+same 0
+alive result-dropped 1
+alive root-cleared 1
+alive compiled 1
+alive temp-replaced 0
+persistent integer 7
+alive root-only 0
+alive released 0

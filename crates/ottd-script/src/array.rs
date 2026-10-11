@@ -2,7 +2,7 @@
 use crate::{ByteString, Realm, Value, VmError};
 use std::{cell::RefCell, rc::Rc};
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 enum Element {
     Null,
     Bool(bool),
@@ -57,6 +57,15 @@ impl Array {
         elements.try_reserve(1).map_err(|_| VmError::Allocation)?;
         elements.push(value);
         Ok(())
+    }
+    /// Allocate an independent array retaining the same scalar elements.
+    /// # Errors
+    /// Returns `Allocation` if the copied element storage cannot be reserved.
+    pub fn shallow_clone(&self) -> Result<Self, VmError> {
+        let source = self.0.elements.borrow();
+        let copy = Self::reserved(&self.0.realm, source.len())?;
+        copy.0.elements.borrow_mut().extend(source.iter().cloned());
+        Ok(copy)
     }
     pub(crate) fn same_realm(&self, realm: &Realm) -> bool {
         self.0.realm.same(realm)

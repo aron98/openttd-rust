@@ -67,7 +67,7 @@ static int table_owner_session(int argc,char **argv) {
  }
  return 0;
 }
-static int table_mutation_session(int argc,char **argv) {
+static int table_mutation_session(int argc,char **argv,bool remove=false) {
  if(argc!=3)return 64;
  std::ifstream input(argv[2],std::ios::binary);if(!input)return 66;
  std::string source((std::istreambuf_iterator<char>(input)),{});
@@ -75,7 +75,8 @@ static int table_mutation_session(int argc,char **argv) {
  auto vm=owner.get();
  {
  SQObjectPtr table=SQTable::Create(_ss(vm),0);
- for(SQInteger key : {0,4,8,12})_table(table)->NewSlot(SQObjectPtr(key),SQObjectPtr(key));
+ if(remove){for(SQInteger key=0;key<32;++key)_table(table)->NewSlot(SQObjectPtr(key),SQObjectPtr(key));}
+ else for(SQInteger key : {0,4,8,12})_table(table)->NewSlot(SQObjectPtr(key),SQObjectPtr(key));
  SQObjectPtr held=SQString::Create(_ss(vm),"held");
  _table(vm->_roottable)->NewSlot(held,table);
  if(SQ_FAILED(sq_compilebuffer(vm,source,"table-mutation",SQFalse)))return 65;
@@ -88,7 +89,8 @@ static int table_mutation_session(int argc,char **argv) {
   if(!vm->_suspended){std::cout<<"return "<<vm->_ops_till_suspend<<' ';value(result);break;}
   std::cout<<"suspend "<<vm->_ops_till_suspend<<' '<<(vm->ci->_ip-proto->_instructions)<<'\n';
   if(step==5){
-   for(SQInteger key : {16,20,24,28,32})_table(table)->NewSlot(SQObjectPtr(key),SQObjectPtr(key+1));
+   if(remove){for(SQInteger key=2;key<32;++key)_table(table)->Remove(SQObjectPtr(key));}
+   else for(SQInteger key : {16,20,24,28,32})_table(table)->NewSlot(SQObjectPtr(key),SQObjectPtr(key+1));
    _table(vm->_roottable)->Set(held,SQObjectPtr(SQTable::Create(_ss(vm),0)));
    std::cout<<"host-mutated-and-rebound\n";
   }
@@ -109,5 +111,57 @@ static int table_pointer_keys() {
  std::cout<<"hash first "<<HashObj(first)<<" second "<<HashObj(second)<<'\n';
  SQObjectPtr key,val;SQInteger cursor=0;
  while((cursor=_table(table)->Next(false,cursor,key,val))!=-1){std::cout<<"cursor "<<cursor<<' ';value(val);}
+ return 0;
+}
+
+static int table_storage_session() {
+ std::unique_ptr<SQVM,decltype(&sq_close)> owner(sq_open(256),sq_close);auto vm=owner.get();
+ {
+ SQObjectPtr source=SQTable::Create(_ss(vm),0);
+ SQObjectPtr hidden=SQString::Create(_ss(vm),"hidden-value");
+ SQObjectPtr watch=_string(hidden)->GetWeakRef(OT_STRING);
+ _table(source)->Set(_null_,hidden);hidden.Null();
+ SQObjectPtr copy=_table(source)->Clone();
+ std::cout<<"counts "<<_table(source)->CountUsed()<<' '<<_table(copy)->CountUsed()<<'\n';
+ std::cout<<"hidden before "<<(type(_weakref(watch)->_obj)==OT_STRING)<<'\n';
+ source.Null();
+ std::cout<<"hidden after-source "<<(type(_weakref(watch)->_obj)==OT_STRING)<<'\n';
+ SQObjectPtr key=SQString::Create(_ss(vm),"key"),value=SQString::Create(_ss(vm),"removed-value");
+ watch=_string(value)->GetWeakRef(OT_STRING);
+ _table(copy)->NewSlot(key,value);value.Null();
+ SQObjectPtr removed; if(!vm->DeleteSlot(copy,key,removed))return 65;
+ std::cout<<"removed count "<<_table(copy)->CountUsed()<<'\n';
+ std::cout<<"removed held "<<(type(_weakref(watch)->_obj)==OT_STRING)<<'\n';
+ removed.Null();std::cout<<"removed released "<<(type(_weakref(watch)->_obj)==OT_STRING)<<'\n';
+ SQObjectPtr array=SQArray::Create(_ss(vm),0);
+ value=SQString::Create(_ss(vm),"array-value");watch=_string(value)->GetWeakRef(OT_STRING);
+ _array(array)->Append(value);value.Null();
+ SQObjectPtr array_copy=_array(array)->Clone();
+ std::cout<<"array distinct "<<(_array(array)!=_array(array_copy))<<'\n';
+ array.Null();std::cout<<"array source-dropped "<<(type(_weakref(watch)->_obj)==OT_STRING)<<'\n';
+ array_copy.Null();std::cout<<"array copy-dropped "<<(type(_weakref(watch)->_obj)==OT_STRING)<<'\n';
+ }
+ return 0;
+}
+
+static int table_effects_session(int argc,char **argv) {
+ if(argc!=3)return 64;
+ std::ifstream input(argv[2],std::ios::binary);if(!input)return 66;
+ std::string source((std::istreambuf_iterator<char>(input)),{});
+ std::unique_ptr<SQVM,decltype(&sq_close)> owner(sq_open(256),sq_close);auto vm=owner.get();
+ {
+ if(SQ_FAILED(sq_compilebuffer(vm,source,"table-effects",SQFalse)))return 65;
+ SQObjectPtr closure=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);
+ SQObjectPtr result;vm->_can_suspend=true;vm->_ops_till_suspend=10000;
+ bool ok=vm->Call(closure,1,vm->_top-1,result,SQFalse,SQTrue);
+ std::cout<<"result "<<ok<<' '<<vm->_ops_till_suspend<<'\n';
+ for(std::string_view name : {"held","copy"}) {
+  SQObjectPtr table;
+  if(!_table(vm->_roottable)->Get(SQObjectPtr(SQString::Create(_ss(vm),name)),table)||type(table)!=OT_TABLE)return 65;
+  std::cout<<name<<" count "<<_table(table)->CountUsed()<<'\n';
+  SQObjectPtr key,val;SQInteger cursor=0;
+  while((cursor=_table(table)->Next(false,cursor,key,val))!=-1){std::cout<<"cursor "<<cursor<<' ';value(key);value(val);}
+ }
+ }
  return 0;
 }

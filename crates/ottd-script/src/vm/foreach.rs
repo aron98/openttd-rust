@@ -1,4 +1,4 @@
-//! Array and byte-string iteration updates frame locals without replacing the runner temporary.
+//! Array, table and byte-string iteration updates frame locals without replacing the runner temporary.
 use super::{Instruction, Value, Vm, VmError};
 
 impl Vm<'_> {

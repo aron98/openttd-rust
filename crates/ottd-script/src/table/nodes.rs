@@ -124,21 +124,41 @@ impl Nodes {
             }
             self.free -= 1;
         }
-        let size = self.slots.len();
-        let capacity = if self.used >= size - size / 4 {
-            size.checked_mul(2).ok_or(VmError::Allocation)?
-        } else if self.used <= size / 4 && size > 4 {
-            size / 2
-        } else {
-            size
-        };
+        self.rehash(true)?;
+        self.insert(key, hash, value)
+    }
+    pub(super) fn remove(&mut self, key: &Scalar, hash: u64) -> Result<Scalar, VmError> {
+        let index = self.find(key, hash).ok_or(VmError::MissingIndex)?;
+        let value = std::mem::replace(&mut self.slots[index].value, Scalar::Null);
+        self.slots[index].key = Scalar::Null;
+        self.used -= 1;
+        self.rehash(false)?;
+        Ok(value)
+    }
+    pub(super) fn duplicate(&self) -> Result<Self, VmError> {
+        self.reinsert(self.slots.len())
+    }
+    fn reinsert(&self, capacity: usize) -> Result<Self, VmError> {
         let mut replacement = Self::new(capacity)?;
         for node in &self.slots {
             if node.key != Scalar::Null {
                 replacement.insert(node.key.clone(), node.hash, node.value.clone())?;
             }
         }
-        *self = replacement;
-        self.insert(key, hash, value)
+        Ok(replacement)
+    }
+    fn rehash(&mut self, force: bool) -> Result<(), VmError> {
+        let size = self.slots.len();
+        let capacity = if self.used >= size - size / 4 {
+            size.checked_mul(2).ok_or(VmError::Allocation)?
+        } else if self.used <= size / 4 && size > 4 {
+            size / 2
+        } else if force {
+            size
+        } else {
+            return Ok(());
+        };
+        *self = self.reinsert(capacity)?;
+        Ok(())
     }
 }

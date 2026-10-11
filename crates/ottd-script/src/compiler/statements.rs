@@ -72,6 +72,8 @@ impl Compiler<'_> {
             TokenKind::In
             | TokenKind::Root
             | TokenKind::NewSlot
+            | TokenKind::Clone
+            | TokenKind::Delete
             | TokenKind::TypeOf
             | TokenKind::Case
             | TokenKind::Default

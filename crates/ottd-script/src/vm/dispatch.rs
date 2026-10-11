@@ -27,6 +27,8 @@ impl Vm<'_> {
                 self.foreach(i)?;
                 return Ok(None);
             }
+            0x0c => self.delete_slot(i)?,
+            0x36 => self.clone_object(i)?,
             0x1e => self.new_table(i)?,
             0x1f => self.new_array(i)?,
             0x20 => {

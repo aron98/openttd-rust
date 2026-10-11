@@ -3,7 +3,7 @@ use crate::{ByteString, CompileError, Program, Realm, Storage, Temporary, Value,
 use std::{cell::RefCell, collections::BTreeMap, rc::Rc};
 
 type Slots = BTreeMap<Vec<u8>, (ByteString, Value)>;
-/// Shared plain root with byte keys, scalar values and same-realm scalar arrays.
+/// Shared plain root with byte keys, scalar values and same-realm scalar arrays/tables.
 #[derive(Clone, Debug)]
 pub struct RootEnvironment {
     pub(crate) realm: Realm,
@@ -41,10 +41,10 @@ impl RootEnvironment {
             Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => Ok(value),
         }
     }
-    /// Insert or replace an own slot, retaining scalar bytes or array identity.
+    /// Insert or replace an own slot, retaining scalar bytes or array/table identity.
     ///
     /// # Errors
-    /// Rejects an array from another realm before changing the root.
+    /// Rejects an array or table from another realm before changing the root.
     pub fn new_slot(&self, key: &[u8], value: Value) -> Result<(), VmError> {
         let value = self.intern(value)?;
         let name = self.realm.string(key);
@@ -54,7 +54,7 @@ impl RootEnvironment {
     /// Replace an existing own slot.
     ///
     /// # Errors
-    /// Returns `RealmMismatch` for a foreign array before looking up the key.
+    /// Returns `RealmMismatch` for a foreign array/table before looking up the key.
     /// Otherwise returns `MissingIndex` without inserting when the key is absent.
     pub fn set_existing(&self, key: &[u8], value: Value) -> Result<(), VmError> {
         let value = self.intern(value)?;
@@ -62,6 +62,16 @@ impl RootEnvironment {
         let (_, target) = slots.get_mut(key).ok_or(VmError::MissingIndex)?;
         *target = value;
         Ok(())
+    }
+    /// Remove an own byte-keyed slot without fallback lookup.
+    /// # Errors
+    /// Returns `MissingIndex` if the own slot does not exist.
+    pub fn delete_slot(&self, key: &[u8]) -> Result<Value, VmError> {
+        self.slots
+            .borrow_mut()
+            .remove(key)
+            .map(|(_, value)| value)
+            .ok_or(VmError::MissingIndex)
     }
     pub(crate) fn lookup(&self, key: &[u8], this: &Self, current: &Self) -> Result<Value, VmError> {
         if let Some(value) = self.raw_get(key) {

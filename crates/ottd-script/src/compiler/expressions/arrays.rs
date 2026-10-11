@@ -58,7 +58,8 @@ impl Compiler<'_> {
                 | TokenKind::NewSlot
                 | TokenKind::Compound(_)
                 | TokenKind::Increment(_)
-        ) {
+        ) && (!state.deleting || matches!(self.token.kind, TokenKind::Symbol(b'.' | b'[')))
+        {
             let key = self.pop()?;
             let receiver = self.pop()?;
             let target = self.push()?;

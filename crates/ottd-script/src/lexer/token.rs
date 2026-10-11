@@ -7,6 +7,8 @@ pub(crate) enum TokenKind<'a> {
     Enum,
     Return,
     TypeOf,
+    Clone,
+    Delete,
     Local,
     If,
     Else,
@@ -59,6 +61,8 @@ impl TokenKind<'_> {
             | Self::Root
             | Self::NewSlot
             | Self::Enum
+            | Self::Clone
+            | Self::Delete
             | Self::TypeOf
             | Self::Return
             | Self::Local

@@ -2,15 +2,8 @@
 
 # Keep explicit source-fragment joins required by the strict Python type checker.
 # ruff: noqa: ISC003
-from dataclasses import dataclass
-from typing import Literal
-
-
-@dataclass(frozen=True, slots=True)
-class Case:
-    name: str
-    source: str
-    stage: Literal["return", "runtime_error", "compile_error"] = "return"
+from .case import Case, literal
+from .objects import object_cases
 
 
 def cases() -> list[Case]:
@@ -128,15 +121,5 @@ def cases() -> list[Case]:
             + 'local s=""; foreach(k,v in t)s=s+k+":"+v+","; return s;'
         )
         result.append(Case(f"byte-keys-{length}", source))
+    result.extend(object_cases())
     return result
-
-
-def literal(length: int, seed: int) -> str:
-    state = seed + 1
-    data: list[str] = []
-    for _ in range(length):
-        state ^= (state << 13) & ((1 << 64) - 1)
-        state ^= state >> 7
-        state ^= (state << 17) & ((1 << 64) - 1)
-        data.append(f"\\x{state & 255:02x}")
-    return '"' + "".join(data) + '"'

@@ -37,6 +37,9 @@ void value(const SQObjectPtr &v) {
 #include "tables.hpp"
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--table-effects") return table_effects_session(argc,argv);
+ if(std::string_view(argv[1])=="--table-storage") return table_storage_session();
+ if(std::string_view(argv[1])=="--table-removal") return table_mutation_session(argc,argv,true);
  if(std::string_view(argv[1])=="--table-pointer-keys") return table_pointer_keys();
  if(std::string_view(argv[1])=="--table-mutation") return table_mutation_session(argc,argv);
  if(std::string_view(argv[1])=="--table-owner") return table_owner_session(argc,argv);

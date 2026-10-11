@@ -37,7 +37,8 @@ impl Compiler<'_> {
         if !matches!(
             self.token.kind,
             TokenKind::Symbol(b'=') | TokenKind::NewSlot
-        ) {
+        ) && (!state.deleting || matches!(self.token.kind, TokenKind::Symbol(b'.' | b'[')))
+        {
             let key = self.pop()?;
             let root = self.pop()?;
             let target = self.push()?;

@@ -377,8 +377,8 @@ replay the corpus; focused proof does not close the broad Stage 4 gates.
 
 ## Scalar tables and native traversal
 
-`Realm::table` creates an identity-bearing table. `Table::raw_get`, `new_slot`, and
-`set_existing` expose own slots; string arguments are interned in its Realm.
+`Realm::table` creates an identity-bearing table. `Table::raw_get`, `new_slot`,
+`set_existing`, and `delete_slot` expose own slots; string arguments are interned in its Realm.
 Tables retain their realm and survive returned-value, root, and runner owners.
 Root slots accept same-realm tables and reject foreign tables. Scalar table keys
 are integers, booleans, raw f32 values and byte strings; key equality requires
@@ -410,7 +410,7 @@ aggregate object graphs. Ordinary missing slots and invalid types remain runtime
 errors, separate from unimplemented aggregate keys/values and native-invalid
 float-to-integer hash conversions.
 
-The table corpus runs 267 strict byte comparisons per profile, including original
+The table corpus runs 750 strict byte comparisons per profile, including original
 stack/literals/instructions, returned/error stage, IP and debt, collision growth,
 all hash length branches, embedded NUL/high bytes and active iteration mutation.
 Additional genuine native sessions prove returned/root identity, temporary-only
@@ -422,7 +422,31 @@ identity dependency; they do not claim Rust pointer-key parity.
 Run `scripts/compat/script-vm/tables/verify.sh PINNED_OPENTTD NEW_OUTPUT` for fresh
 debug/release tables, hash, lifetime and full crate tests plus Clippy/fmt. The
 output freezes the real native/Rust executables and test binaries. General nested
-containers, delegates, clone/delete, closures, cycle collection, full root-table
+containers, delegates, closures, cycle collection, full root-table
 storage unification, existing AI/GS mods and gameplay integration remain later
 Stage 4 obligations. Scalar-only slot storage makes strong object cycles
 unrepresentable until a realm-owned graph heap with explicit roots is implemented.
+
+
+## Delete and clone
+
+Language `delete receiver[key]` and `clone object` emit native DELETE/CLONE
+instructions through the same compiler and budget loop. Delete retains the
+removed value, leaves native collision links/free positions intact, and performs
+native threshold rehashing. Clone allocates an independent table and reinserts
+visible slots in ascending physical order at the source capacity; it does not
+copy physical holes or invisible null-key values. Arrays clone scalar storage
+into an independent identity. Rust's `Clone` trait still clones shared handles;
+`shallow_clone` performs the language operation.
+
+String-root deletion removes own slots without fallback. Full root cloning and
+iteration await physical root/table unification. Default delegate methods,
+explicit delegates and `_delslot`/`_cloned` hooks require the later function and
+realm graph heap; this atom does not introduce standalone delegate APIs.
+
+Fresh native sessions cover cloned/deleted result ownership, retained invisible
+values, array clone release, late-error persistence, and host deletion/shrink
+while a script clones/deletes during suspended foreach. Existing scalar, array,
+root, string-foreach and table/hash regressions run in both build profiles. The
+previous GNU scalar-table proof does not establish this new delete/clone epoch;
+the portable focused CI job must execute the changed producer for that claim.

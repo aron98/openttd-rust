@@ -3,10 +3,18 @@ use crate::{Execution, Realm, Runner, Value};
 use std::fmt::Write;
 #[test]
 fn retained_owners_match_native_session() {
+    owner_session(
+        include_str!("../../../../scripts/compat/script-vm/tables/fixtures/owner.nut"),
+        &native(
+            "OTTD_SCRIPT_TABLE_OWNER",
+            include_str!("../../tests/tables-owner.txt"),
+        ),
+    );
+}
+fn owner_session(source: &str, native: &str) {
     let realm = Realm::new();
     let root = realm.empty_root();
     let mut runner = Runner::new(root.clone());
-    let source = include_str!("../../../../scripts/compat/script-vm/tables/fixtures/owner.nut");
     let program = runner.compile(source).expect("native source");
     let result = runner
         .start(&program)
@@ -76,19 +84,29 @@ fn retained_owners_match_native_session() {
     writeln!(output, "alive root-only {}", u8::from(watch().is_some())).expect("format");
     root.set_existing(b"held", Value::Null).expect("clear");
     writeln!(output, "alive released {}", u8::from(watch().is_some())).expect("format");
-    let native = std::env::var_os("OTTD_SCRIPT_TABLE_OWNER").map_or_else(
-        || include_str!("../../tests/tables-owner.txt").to_owned(),
-        |path| std::fs::read_to_string(path).expect("fresh native session"),
-    );
     assert_eq!(output, native);
 }
 
 #[test]
 fn suspended_host_mutation_matches_native_session() {
+    mutation_session(
+        false,
+        include_str!("../../../../scripts/compat/script-vm/tables/fixtures/mutation.nut"),
+        &native(
+            "OTTD_SCRIPT_TABLE_MUTATION",
+            include_str!("../../tests/tables-mutation.txt"),
+        ),
+    );
+}
+fn mutation_session(remove: bool, source: &str, native: &str) {
     let realm = Realm::new();
     let root = realm.empty_root();
     let table = realm.table().expect("table");
-    for key in [0, 4, 8, 12] {
+    for key in if remove {
+        (0..32).collect()
+    } else {
+        vec![0, 4, 8, 12]
+    } {
         table
             .new_slot(Value::Integer(key), Value::Integer(key))
             .expect("slot");
@@ -96,11 +114,7 @@ fn suspended_host_mutation_matches_native_session() {
     root.new_slot(b"held", Value::Table(table.clone()))
         .expect("root");
     let mut runner = Runner::new(root.clone());
-    let program = runner
-        .compile(include_str!(
-            "../../../../scripts/compat/script-vm/tables/fixtures/mutation.nut"
-        ))
-        .expect("source");
+    let program = runner.compile(source).expect("source");
     let mut vm = runner.start(&program).expect("frame");
     let mut output = String::new();
     for step in 0..200 {
@@ -114,10 +128,19 @@ fn suspended_host_mutation_matches_native_session() {
                 )
                 .expect("format");
                 if step == 5 {
-                    for key in [16, 20, 24, 28, 32] {
-                        table
-                            .new_slot(Value::Integer(key), Value::Integer(key + 1))
-                            .expect("mutate");
+                    if remove {
+                        for key in 2..32 {
+                            table.delete_slot(Value::Integer(key)).expect("delete");
+                        }
+                    } else {
+                        for key in [16, 20, 24, 28, 32] {
+                            table
+                                .new_slot(
+                                    Value::Integer(key),
+                                    Value::Integer(key.checked_add(1).expect("small fixture key")),
+                                )
+                                .expect("mutate");
+                        }
                     }
                     root.set_existing(b"held", Value::Table(realm.table().expect("replacement")))
                         .expect("rebind");
@@ -137,9 +160,44 @@ fn suspended_host_mutation_matches_native_session() {
             }
         }
     }
-    let native = std::env::var_os("OTTD_SCRIPT_TABLE_MUTATION").map_or_else(
-        || include_str!("../../tests/tables-mutation.txt").to_owned(),
-        |path| std::fs::read_to_string(path).expect("fresh native mutation"),
-    );
     assert_eq!(output, native);
 }
+
+fn native(variable: &str, frozen: &str) -> String {
+    std::env::var_os(variable).map_or_else(
+        || frozen.to_owned(),
+        |path| std::fs::read_to_string(path).expect("fresh native session"),
+    )
+}
+#[test]
+fn cloned_owner_matches_native_session() {
+    owner_session(
+        include_str!("../../../../scripts/compat/script-vm/tables/fixtures/clone-owner.nut"),
+        &native(
+            "OTTD_SCRIPT_CLONE_OWNER",
+            include_str!("../../tests/clone-owner.txt"),
+        ),
+    );
+}
+#[test]
+fn deleted_owner_matches_native_session() {
+    owner_session(
+        include_str!("../../../../scripts/compat/script-vm/tables/fixtures/delete-owner.nut"),
+        &native(
+            "OTTD_SCRIPT_DELETE_OWNER",
+            include_str!("../../tests/delete-owner.txt"),
+        ),
+    );
+}
+#[test]
+fn suspended_removal_matches_native_session() {
+    mutation_session(
+        true,
+        include_str!("../../../../scripts/compat/script-vm/tables/fixtures/delete-mutation.nut"),
+        &native(
+            "OTTD_SCRIPT_DELETE_MUTATION",
+            include_str!("../../tests/delete-mutation.txt"),
+        ),
+    );
+}
+mod storage;

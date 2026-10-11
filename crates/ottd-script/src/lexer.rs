@@ -86,6 +86,8 @@ impl<'a> Lexer<'a> {
                     "const" => TokenKind::Const,
                     "enum" => TokenKind::Enum,
                     "typeof" => TokenKind::TypeOf,
+                    "clone" => TokenKind::Clone,
+                    "delete" => TokenKind::Delete,
                     "return" => TokenKind::Return,
                     "local" => TokenKind::Local,
                     "if" => TokenKind::If,
@@ -103,9 +105,9 @@ impl<'a> Lexer<'a> {
                     "null" => TokenKind::Scalar(Value::Null),
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
-                    "function" | "delegate" | "delete" | "try" | "catch" | "throw" | "clone"
-                    | "yield" | "resume" | "this" | "parent" | "class" | "extends"
-                    | "instanceof" | "vargc" | "vargv" | "static" => {
+                    "function" | "delegate" | "try" | "catch" | "throw" | "yield" | "resume"
+                    | "this" | "parent" | "class" | "extends" | "instanceof" | "vargc"
+                    | "vargv" | "static" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,

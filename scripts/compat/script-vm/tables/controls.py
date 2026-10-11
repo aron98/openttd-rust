@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 
-from .cases import Case
+from .case import Case
 from .compare import validate
 
 

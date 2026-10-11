@@ -8,7 +8,8 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-from .cases import Case, cases
+from .case import Case
+from .cases import cases
 
 
 @dataclass(frozen=True, slots=True)

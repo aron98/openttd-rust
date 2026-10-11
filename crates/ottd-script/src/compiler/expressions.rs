@@ -8,9 +8,11 @@ pub(super) struct ExpressionState {
     dereference: Option<Register>,
     constant: bool,
     field: bool,
+    deleting: bool,
 }
 mod arrays;
 mod factors;
+mod objects;
 mod roots;
 mod tables;
 mod updates;

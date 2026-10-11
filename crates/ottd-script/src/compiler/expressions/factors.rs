@@ -68,36 +68,25 @@ impl Compiler<'_> {
                 Ok(None)
             }
             TokenKind::Symbol(operator @ (b'-' | b'!' | b'~')) => {
-                self.advance()?;
-                self.prefixed(depth, state)?;
-                let source = self.pop()?;
-                let target = self.push()?;
                 let opcode = match operator {
                     b'-' => 0x2d,
                     b'!' => 0x2e,
                     _ => 0x2f,
                 };
-                self.emit(Instruction {
-                    opcode,
-                    arg0: target.0,
-                    arg1: i32::from(source.0),
-                    arg2: 0,
-                    arg3: 0,
-                });
+                self.unary_expression(depth, state, opcode)?;
                 Ok(None)
             }
-            TokenKind::TypeOf => {
-                self.advance()?;
-                self.prefixed(depth, state)?;
-                let source = self.pop()?;
-                let target = self.push()?;
-                self.emit(Instruction {
-                    opcode: 0x37,
-                    arg0: target.0,
-                    arg1: i32::from(source.0),
-                    arg2: 0,
-                    arg3: 0,
-                });
+            TokenKind::Delete => {
+                self.delete_expression(depth)?;
+                Ok(None)
+            }
+            TokenKind::TypeOf | TokenKind::Clone => {
+                let opcode = if self.token.kind == TokenKind::Clone {
+                    0x36
+                } else {
+                    0x37
+                };
+                self.unary_expression(depth, state, opcode)?;
                 Ok(None)
             }
             TokenKind::Increment(amount) => {

@@ -75,6 +75,30 @@ impl Table {
         }
         nodes.set(&key, hash, Scalar::from_value(value, &self.0.realm)?)
     }
+    /// Remove an own slot and retain the removed scalar value.
+    /// # Errors
+    /// Null and missing keys return `MissingIndex`; aggregate keys are unsupported.
+    pub fn delete_slot(&self, key: Value) -> Result<Value, VmError> {
+        let key = Scalar::from_value(key, &self.0.realm)?;
+        if key == Scalar::Null {
+            return Err(VmError::MissingIndex);
+        }
+        self.0
+            .nodes
+            .borrow_mut()
+            .remove(&key, key.hash()?)
+            .map(|value| value.value())
+    }
+    /// Allocate an independent table by native physical-order reinsertion.
+    /// # Errors
+    /// Returns `Allocation` if the copied node storage cannot be reserved.
+    pub fn shallow_clone(&self) -> Result<Self, VmError> {
+        let nodes = self.0.nodes.borrow().duplicate()?;
+        Ok(Self(Rc::new(Data {
+            realm: self.0.realm.clone(),
+            nodes: RefCell::new(nodes),
+        })))
+    }
     pub(crate) fn next(&self, cursor: usize) -> Option<(usize, Value, Value)> {
         self.0
             .nodes

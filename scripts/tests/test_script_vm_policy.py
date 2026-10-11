@@ -10,10 +10,10 @@ from scripts.script_vm_policy import (
 )
 from scripts.script_vm_provenance import load_spec
 from scripts.tests import script_vm_policy_producer_checks as producer_checks
+from scripts.tests.script_vm_policy_assertions import world_check_rejected
 from scripts.world_check_support import (
     ROOT,
     Json,
-    WorldCheckError,
     write_json,
 )
 
@@ -27,11 +27,12 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
                 (b"\xed\xa0\x80", 0xD800),
             ):
                 source = prefix + payload + b'";'
-                self.assertIn(source, UNDEFINED_INPUTS)
+                assert source in UNDEFINED_INPUTS
                 policy = UNDEFINED_INPUTS[source]
-                self.assertEqual(
-                    (policy.codepoint, policy.context, policy.offset),
-                    (point, "HexEscape", len(prefix)),
+                assert (policy.codepoint, policy.context, policy.offset) == (
+                    point,
+                    "HexEscape",
+                    len(prefix),
                 )
 
     def test_hex_admission_requires_context_offset_and_unchanged_source(self) -> None:
@@ -56,10 +57,10 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
                     ),
                 ):
                     _ = (case / "rust/stderr.log").write_text(changed)
-                    with self.assertRaises(WorldCheckError):
+                    with world_check_rejected():
                         compare_case(source, case, POLICY_STAGE)
                 _ = (case / "rust/stderr.log").write_text(diagnostic)
-                with self.assertRaises(WorldCheckError):
+                with world_check_rejected():
                     compare_case(source + b" ", case, POLICY_STAGE)
 
     def test_manifest_classifies_only_exact_source_bodies(self) -> None:
@@ -71,13 +72,13 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
             policy = UNDEFINED_INPUTS.get(source)
             for schedule in spec.credits:
                 key = f"{Path(name).stem}/{'-'.join(map(str, schedule))}"
-                self.assertEqual(stages[key] == POLICY_STAGE, policy is not None, key)
+                assert (stages[key] == POLICY_STAGE) == (policy is not None), key
             if policy is not None:
                 found.add(source)
-        self.assertEqual(found, set(UNDEFINED_INPUTS))
+        assert found == set(UNDEFINED_INPUTS)
 
     def test_only_exact_undefined_bodies_are_classified(self) -> None:
-        self.assertEqual(len(UNDEFINED_INPUTS), 17)
+        assert len(UNDEFINED_INPUTS) == 17
         for payload in (b"\xc3\xa9", b"\xc4\x80", b"\xed\xa0\x80", b"\xff"):
             for source in (
                 b"return/*" + payload + b"*/1;\n",
@@ -85,9 +86,9 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
                 b"return 1;\0" + payload,
                 b'return "' + payload + b'";',
             ):
-                self.assertNotIn(source, UNDEFINED_INPUTS)
-        self.assertNotIn(b"return 1;/*x*/\xc3\xa9\n", UNDEFINED_INPUTS)
-        self.assertNotIn(b"return 1;/*x*/\xff\n", UNDEFINED_INPUTS)
+                assert source not in UNDEFINED_INPUTS
+        assert b"return 1;/*x*/\xc3\xa9\n" not in UNDEFINED_INPUTS
+        assert b"return 1;/*x*/\xff\n" not in UNDEFINED_INPUTS
 
     def test_defined_comparison_never_uses_policy_exemption(self) -> None:
         with TemporaryDirectory() as temporary:
@@ -99,14 +100,14 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
             _ = (case / "rust/stderr.log").write_text("UnsupportedSyntax at byte 7\n")
             source = b"return \xc3\xa9;"
             compare_case(source, case, "compile_error")
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, POLICY_STAGE)
             _ = (case / "native/stdout.log").write_text("return 9998 integer 1\n")
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, "compile_error")
             _ = (case / "native/stdout.log").write_text("compile_error\n")
             _ = (case / "rust/stderr.log").write_text("UndefinedNativeCharacter\n")
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, "compile_error")
 
     def test_policy_requires_exact_typed_rejection_without_native(self) -> None:
@@ -131,19 +132,18 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
                 diagnostic.replace("Token", "Identifier"),
             ):
                 _ = (case / "rust/stderr.log").write_text(changed)
-                with self.assertRaises(WorldCheckError):
+                with world_check_rejected():
                     compare_case(source, case, POLICY_STAGE)
             _ = (case / "rust/stderr.log").write_text(diagnostic)
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, "compile_error")
             _ = (case / "rust/stdout.log").write_text("return 9998 integer 1\n")
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, POLICY_STAGE)
             _ = (case / "rust/stdout.log").write_text("compile_error\n")
             write_json(case / "rust/process.json", {"returncode": 1, "expected": 0})
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, POLICY_STAGE)
-
 
     def test_policy_receipt_corruption_and_native_path_are_rejected(self) -> None:
         source, policy = next(iter(UNDEFINED_INPUTS.items()))
@@ -163,30 +163,28 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
             for receipt in receipts:
                 with self.subTest(receipt=receipt):
                     write_json(case / "policy.json", receipt)
-                    with self.assertRaises(WorldCheckError):
+                    with world_check_rejected():
                         compare_case(source, case, POLICY_STAGE)
             write_json(
                 case / "policy.json", {"native_executed": False, "reason": POLICY_STAGE}
             )
             compare_case(source, case, POLICY_STAGE)
             (case / "native").mkdir()
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, POLICY_STAGE)
             (case / "native").rmdir()
             (case / "native").symlink_to(case / "missing")
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, POLICY_STAGE)
-
-
 
     def test_manifest_policy_paths_exclude_native_receipts(self) -> None:
         spec = load_spec(ROOT / "scripts/script-vm-manifest.json")
         paths = set(spec.paths)
         for key, stage in spec.stages:
             if stage == POLICY_STAGE:
-                self.assertIn(f"cases/{key}/policy.json", paths)
-                self.assertFalse(
-                    any(path.startswith(f"cases/{key}/native/") for path in paths)
+                assert f"cases/{key}/policy.json" in paths
+                assert not any(
+                    path.startswith(f"cases/{key}/native/") for path in paths
                 )
 
     def test_missing_policy_receipt_is_rejected(self) -> None:
@@ -197,5 +195,5 @@ class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
             _ = (case / "rust/stdout.log").write_text("compile_error\n")
             _ = (case / "rust/stderr.log").write_text(policy.diagnostic())
             write_json(case / "rust/process.json", {"returncode": 0, "expected": 0})
-            with self.assertRaises(WorldCheckError):
+            with world_check_rejected():
                 compare_case(source, case, POLICY_STAGE)

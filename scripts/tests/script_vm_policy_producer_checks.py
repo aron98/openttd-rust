@@ -4,6 +4,7 @@
 # ///
 # Run: python3 -m unittest scripts.tests.test_script_vm_policy
 """Producer routing checks inherited by the existing policy test selectors."""
+
 import os
 import shutil
 import subprocess
@@ -30,12 +31,12 @@ class PolicyProducerChecks(unittest.TestCase):
             for index, source in enumerate(UNDEFINED_INPUTS):
                 case = root / str(index)
                 observe_native(argv, case, source)
-                self.assertFalse(marker.exists())
-                self.assertFalse((case / "native").exists())
-                self.assertEqual(
-                    read_json(case / "policy.json"),
-                    {"native_executed": False, "reason": POLICY_STAGE},
-                )
+                assert not marker.exists()
+                assert not (case / "native").exists()
+                assert read_json(case / "policy.json") == {
+                    "native_executed": False,
+                    "reason": POLICY_STAGE,
+                }
 
     def test_legacy_shell_never_invokes_native_for_policy_input(self) -> None:
         with TemporaryDirectory() as temporary:
@@ -55,7 +56,7 @@ class PolicyProducerChecks(unittest.TestCase):
             rust = root / "rust"
             _ = rust.write_text(
                 "#!/bin/sh\nprintf 'compile_error\\n'\n"
-                + f"printf '%s' '{policy.diagnostic()}' >&2\n"
+                 f"printf '%s' '{policy.diagnostic()}' >&2\n"
             )
             rust.chmod(0o755)
             result = subprocess.run(
@@ -65,9 +66,9 @@ class PolicyProducerChecks(unittest.TestCase):
                 check=False,
                 env={**os.environ, "PYTHONPATH": str(ROOT)},
             )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertFalse(marker.exists())
-            self.assertEqual(len(list((root / "out").rglob("policy.json"))), 9)
+            assert result.returncode == 0, result.stderr
+            assert not marker.exists()
+            assert len(list((root / "out").rglob("policy.json"))) == 9
 
     def test_defined_unicode_strings_and_comments_invoke_native(self) -> None:
         with TemporaryDirectory() as temporary:
@@ -83,8 +84,7 @@ class PolicyProducerChecks(unittest.TestCase):
                 ('return "€";', "return/*€*/1;", "return//€\n1;")
             ):
                 observe_native(argv, root / str(index), source.encode())
-                self.assertTrue(marker.exists())
-                self.assertTrue((root / str(index) / "native/process.json").is_file())
-                self.assertFalse((root / str(index) / "policy.json").exists())
+                assert marker.exists()
+                assert (root / str(index) / "native/process.json").is_file()
+                assert not (root / str(index) / "policy.json").exists()
                 marker.unlink()
-

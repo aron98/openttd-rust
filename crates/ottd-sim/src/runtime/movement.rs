@@ -1,4 +1,5 @@
 mod access;
+mod company;
 mod daily;
 mod directed;
 mod spatial;
@@ -56,6 +57,9 @@ struct RoadPhases<'a> {
     stations: stations::IdleStations,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn company_assets(&self, state: &State<'_>, owner: u32) -> Result<i64, WorldTickError> {
+        company::assets(state, self.content, owner)
+    }
     fn station_tiles(&self) -> bool {
         !self.stations.is_empty()
     }

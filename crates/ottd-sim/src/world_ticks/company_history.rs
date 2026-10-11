@@ -9,7 +9,7 @@ use ottd_save::{TableRecord, TableSchema, WireValue};
 fn checked(value: i128) -> Result<i64, WorldTickError> {
     i64::try_from(value).map_err(|_| unsupported("company_quarter", "accounting overflow"))
 }
-pub(super) fn quarter(state: &mut State<'_>, id: u32) -> Result<(), WorldTickError> {
+pub(super) fn quarter(state: &mut State<'_>, id: u32, assets: i64) -> Result<(), WorldTickError> {
     let table = state.table(b"PLYR")?;
     let schema = table
         .schema()
@@ -43,12 +43,8 @@ pub(super) fn quarter(state: &mut State<'_>, id: u32) -> Result<(), WorldTickErr
         .first_mut()
         .ok_or_else(|| unsupported("company_quarter", "history"))?;
     *value_mut(&schema, first, "performance_history")? = WireValue::Signed(score);
-    *value_mut(&schema, first, "company_value")? = WireValue::Signed(
-        money
-            .checked_sub(loan)
-            .ok_or_else(|| unsupported("company_quarter", "company value overflow"))?
-            .max(1),
-    );
+    *value_mut(&schema, first, "company_value")? =
+        WireValue::Signed(assets.saturating_sub(loan).saturating_add(money).max(1));
     state.set(b"PLYR", id, "old_economy", WireValue::Structs(history))?;
     state.set(
         b"PLYR",

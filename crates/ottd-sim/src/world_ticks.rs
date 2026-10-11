@@ -172,7 +172,7 @@ fn advance(
                     match event {
                         ClockEvent::EconomyDay => daily(state)?,
                         ClockEvent::EconomyMonth => {
-                            finance::monthly(state, clock.cache().economy_month)?;
+                            finance::monthly(state, clock.cache().economy_month, vehicles)?;
                             industry_month(
                                 state,
                                 clock.cache().economy_month,

@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "reference/cargo_movement_snapshot.hpp": "abf80a08cec96107ae623efb3863706840711b4b93dc0ebbcc7111092cd892e0",
+    "reference/cargo_observer.patch": "62add9975bc60ea0f9b67a3a117cea432e1d8511dcb379c3a986a46c80ca8ba7",
+    "reference/cargo_replay.hpp": "229cd6ab9fa45497a8e08113e4f8ede70b81206b27f44a88af87bf44e1a43449",
+    "reference/cargo_runtime.hpp": "5b5f28bd8bafa05da76b744df29188d5dbf3d823b272e692a0dc8ce7731cf76e",
+    "reference/house_cache.hpp": "c3e978d857e212346b3d0f32aec671aa3e838c98d6d16af15167601b4c84445f",
+    "reference/industry_cache_snapshot.hpp": "dd97b3c9962af0280d210d2d9814b2f9e54ddcf6c4e10e5f29114c1de6050978",
+    "reference/job_annotations.hpp": "34e4350865fccea29d43b56786821ece95d8557b2ea0f20c01ab00f5c54c4547",
+    "scripts/setup-cargo-observer.sh": "ba8cc2a21c5c390cb57c9436801ef6e8bb456b985b9241d02798f5876dc10a51"
+  }
+}

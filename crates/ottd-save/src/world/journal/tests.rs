@@ -396,3 +396,88 @@ fn unreferenced_saved_order_list_keeps_native_afterload_caches_uninitialized() -
     );
     Ok(())
 }
+
+#[test]
+fn atomic_lists_preserve_order_with_coupled_packet_allocation() -> Result {
+    // Given: native saved vehicle cargo and packet records.
+    let base = world()?;
+    let expected_edits = cargo(&base)?;
+    let mut expected = base.clone();
+    expected.edit_batch(expected_edits)?;
+    let mut actual = base;
+    // When: an ordered list grows with its packet and action-count changes.
+    actual.edit_batch(vec![
+        WorldEdit::ArrayList {
+            chunk: *b"VEHS",
+            record: 21,
+            path: common("cargo.packets"),
+            values: vec![
+                WireValue::Unsigned(4),
+                WireValue::Unsigned(3),
+                WireValue::Unsigned(6),
+            ],
+        },
+        WorldEdit::Field {
+            chunk: *b"VEHS",
+            record: 21,
+            path: common("cargo.action_counts"),
+            value: WireValue::Array(vec![
+                WireValue::Unsigned(0),
+                WireValue::Unsigned(0),
+                WireValue::Unsigned(28),
+                WireValue::Unsigned(0),
+            ]),
+        },
+        WorldEdit::InsertRecord {
+            chunk: *b"CAPA",
+            record: 5,
+            value: record(&actual, *b"CAPA", 2)?,
+        },
+    ])?;
+    // Then: order, saved bytes and every derived index match the object replacement.
+    assert_eq!(actual.saved_json()?, expected.saved_json()?);
+    assert_eq!(
+        actual.to_savegame()?.encode(Compression::None)?,
+        expected.to_savegame()?.encode(Compression::None)?
+    );
+    assert_eq!(
+        format!("{:?}", actual.derived()),
+        format!("{:?}", expected.derived())
+    );
+    Ok(())
+}
+
+#[test]
+fn atomic_list_late_invalid_reference_width_and_count_roll_back() -> Result {
+    // Given: a complete world with indexed cargo and fixed company arrays.
+    let base = world()?;
+    for invalid in [
+        WorldEdit::ArrayList {
+            chunk: *b"VEHS",
+            record: 21,
+            path: common("cargo.packets"),
+            values: vec![WireValue::Unsigned(999_999)],
+        },
+        WorldEdit::ArrayList {
+            chunk: *b"VEHS",
+            record: 21,
+            path: common("cargo.action_counts"),
+            values: vec![WireValue::Unsigned(0)],
+        },
+        WorldEdit::ArrayList {
+            chunk: *b"VEHS",
+            record: 21,
+            path: common("cargo.action_counts"),
+            values: vec![WireValue::Unsigned(u64::MAX); 4],
+        },
+    ] {
+        let mut actual = base.clone();
+        let before = format!("{actual:?}");
+        // When: a later array edit violates references, cardinality or wire width.
+        let result = actual.edit_batch(vec![money(), invalid]);
+        // Then: no earlier edit or derived publication escapes the failed candidate.
+        assert!(result.is_err());
+        assert_eq!(format!("{actual:?}"), before);
+    }
+    Ok(())
+}

@@ -43,6 +43,17 @@ pub enum PathElement {
 /// One mutation staged in a complete saved-world transaction.
 #[derive(Debug, Clone)]
 pub enum WorldEdit {
+    /// Replace an atomic list, validating cardinality and references with the final world.
+    ArrayList {
+        /// Native chunk.
+        chunk: [u8; 4],
+        /// Existing object identity.
+        record: u32,
+        /// Path to the atomic list.
+        path: Vec<PathElement>,
+        /// Replacement elements in their native order.
+        values: Vec<WireValue>,
+    },
     /// Insert a complete pool record at an explicitly supplied, unoccupied ID.
     InsertRecord {
         /// Native pool chunk, never a singleton or content mapping.

@@ -3,6 +3,19 @@ use super::{TableRecord, WireValue, WorldEdit, WorldError, edit, invalid};
 impl super::WorldTransaction<'_> {
     pub(super) fn stage(&mut self, edit: WorldEdit) -> Result<(), WorldError> {
         match edit {
+            WorldEdit::ArrayList {
+                chunk,
+                record,
+                path,
+                values,
+            } => {
+                let (schema, row) = self.row_mut(chunk, record)?;
+                let target = edit::select_mut(schema, row, &path)?;
+                if !matches!(target, WireValue::Array(_)) {
+                    return Err(invalid("edit", "expected atomic list"));
+                }
+                *target = WireValue::Array(values);
+            }
             WorldEdit::Tile { index, value } => {
                 if usize::try_from(index)
                     .ok()

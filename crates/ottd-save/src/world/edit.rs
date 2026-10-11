@@ -24,6 +24,27 @@ impl World {
         let mut candidate = self.clone();
         for edit in edits {
             match edit {
+                WorldEdit::ArrayList {
+                    chunk,
+                    record,
+                    path,
+                    values,
+                } => {
+                    let table = candidate
+                        .tables
+                        .get_mut(&chunk)
+                        .ok_or_else(|| invalid(&name(chunk), "missing table"))?;
+                    let schema = table.schema().clone();
+                    let row = table
+                        .records_mut()
+                        .get_mut(&record)
+                        .ok_or_else(|| invalid(&name(chunk), "missing record"))?;
+                    let target = select_mut(&schema, row, &path)?;
+                    if !matches!(target, WireValue::Array(_)) {
+                        return Err(invalid("edit", "expected atomic list"));
+                    }
+                    *target = WireValue::Array(values);
+                }
                 WorldEdit::InsertRecord {
                     chunk,
                     record,

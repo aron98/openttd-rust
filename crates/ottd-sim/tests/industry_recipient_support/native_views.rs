@@ -3,7 +3,11 @@ use ottd_sim::runtime::SimulationRuntime;
 use serde_json::{Value, json};
 use std::{fs, path::Path};
 
-pub fn compare(runtime: &SimulationRuntime, output: &Path, label: &str) -> super::Result {
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "the integration-test crate root consumes this private support module"
+)]
+pub(super) fn compare(runtime: &SimulationRuntime, output: &Path, label: &str) -> super::Result {
     let native = std::path::PathBuf::from(std::env::var("INDUSTRY_RECIPIENT_NATIVE")?);
     for (view, actual) in [
         ("world", runtime.saved_json()?),

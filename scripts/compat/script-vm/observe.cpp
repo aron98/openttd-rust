@@ -34,8 +34,13 @@ void value(const SQObjectPtr &v) {
 #include "constants.hpp"
 #include "root_slots.hpp"
 #include "arrays.hpp"
+#include "tables.hpp"
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--table-pointer-keys") return table_pointer_keys();
+ if(std::string_view(argv[1])=="--table-mutation") return table_mutation_session(argc,argv);
+ if(std::string_view(argv[1])=="--table-owner") return table_owner_session(argc,argv);
+ if(std::string_view(argv[1])=="--table-hashes") return table_hashes();
  if(std::string_view(argv[1])=="--array-session") return arrays_session(argc,argv);
  if(std::string_view(argv[1])=="--root-slots-session") return root_slots_session(argc,argv);
  if(std::string_view(argv[1])=="--constants-session") return constants_session(argc,argv);

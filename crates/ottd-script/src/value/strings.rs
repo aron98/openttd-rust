@@ -8,7 +8,7 @@ impl Value {
     }
     fn text(&self) -> Result<Vec<u8>, VmError> {
         Ok(match self {
-            Self::Array(_) => return Err(VmError::UnsupportedRuntimeValue),
+            Self::Array(_) | Self::Table(_) => return Err(VmError::UnsupportedRuntimeValue),
             Self::String(value) => value.as_bytes().to_vec(),
             Self::Integer(value) => value.to_string().into_bytes(),
             Self::Bool(value) => value.to_string().into_bytes(),
@@ -19,6 +19,7 @@ impl Value {
     pub(crate) fn type_name(&self, realm: &Realm) -> Self {
         let name: &[u8] = match self {
             Self::String(_) => b"string",
+            Self::Table(_) => b"table",
             Self::Array(_) => b"array",
             Self::Integer(_) => b"integer",
             Self::Bool(_) => b"bool",

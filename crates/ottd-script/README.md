@@ -1,4 +1,4 @@
-# Squirrel scalar, string, root and scalar-array foundation
+# Squirrel scalar, string, root, array and table foundation
 
 This crate independently compiles a bounded subset of OpenTTD 15.3's bundled
 Squirrel 2.2.5 and executes native register instructions. It has no C++ runtime
@@ -7,9 +7,9 @@ to game ticks.
 
 Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
-assignment, blocks, if/else, while/for/do loops, array/string foreach, scalar switch/case/default, break and continue. Values include null,
+assignment, blocks, if/else, while/for/do loops, array/string/table foreach, scalar switch/case/default, break and continue. Values include null,
 bool, i64 decimal/octal/hex integers, raw f32 values, immutable byte strings and
-identity-bearing arrays whose elements are structurally restricted to scalars.
+identity-bearing arrays and tables whose elements are structurally restricted to scalars.
 Normal, verbatim and character literals follow native escapes and encoded-byte
 length. `typeof` returns interned type-name strings. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
 comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
@@ -50,7 +50,7 @@ bytecode returns typed errors. Runtime errors and returns terminate the frame.
 
 Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
-is portable native semantics. Twenty-eight opcode handlers remain unimplemented.
+is portable native semantics. Twenty-six opcode handlers remain unimplemented.
 Other general iterables, general objects, functions/closures,
 cyclic graph ownership/GC/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
@@ -153,7 +153,7 @@ Defined compound/prefix updates operate on loaded temporaries and leave table
 bindings unchanged. Direct `=` assignment rejects after parsing its RHS. Constant
 postfix operations and minimum-native-integer declaration negation are explicitly
 unsupported increment boundaries, separate from the lexer ctype policy. General
-tables/objects, native closures, classes, require and host API registration remain
+aggregate object graphs, native closures, classes, require and host API registration remain
 outside this slice. Compiler constants remain scalar; configured root slots
 retain scalar values and same-realm scalar arrays through a bounded host interface.
 
@@ -190,7 +190,7 @@ receiver-equals-this fallback gate. SET never falls back to constants. A reached
 default-delegate closure or late enum table returns UnsupportedRuntimeValue;
 this is an explicit implementation boundary, not undefined lexer input.
 Root compound/prefix/postfix updates, arbitrary this/receiver objects, root value
-escape, dot members and generic table values remain unsupported. Array bracket
+escape and aggregate table graphs remain unsupported. Dot members now use the same GET/SET path as bracket members. Array bracket
 reads and plain assignments are supported; indexed compound/prefix/postfix updates
 remain unsupported syntax.
 
@@ -253,7 +253,7 @@ additional value type. `Realm::array(Vec<Value>)` constructs an opaque array;
 foreign-array `RealmMismatch`. `set_existing` checks that affinity before lookup.
 Both root stores preserve the old slot on rejection. Array strings are reinterned
 into their owning Realm; arrays retain identity and cannot cross Realm boundaries.
-`Program::from_parts` rejects array literals, so mutable data never enters the shared
+`Program::from_parts` rejects array/table literals, so mutable data never enters the shared
 compiler literal pool. No array storage or owner internals are publicly exported.
 
 Private element storage has no container variant. Host construction, host SET,
@@ -266,7 +266,7 @@ array ordering, pointer-bearing array stringification and reached default-delega
 closures are also explicit boundaries. Nonfinite or out-of-i64 f32 indices return
 `UnsupportedIndexConversion`; defined finite indices truncate toward zero. Ordinary
 missing indices and invalid operand types retain their distinct runtime errors.
-Array methods/calls, foreach, resize/append host APIs, general tables and serialization
+Array methods/calls, resize/append host APIs, aggregate graphs and serialization
 remain later dependencies.
 
 Focused tests replay 78 retained native sessions through the production opcode loop.
@@ -363,7 +363,7 @@ produces -128 through -1 for high bytes. Local string rebinding preserves the
 cursor; replacing a root slot preserves the previously evaluated receiver.
 Negative forged string cursors are rejected before indexing because native string
 Next would access before its buffer; negative array cursors still exhaust. Scalar
-non-iterables return `OperandType`. Tables, generators, host `_nexti`/`_get`, ScriptList iteration, cyclic
+non-iterables return `OperandType`. Generators, host `_nexti`/`_get`, ScriptList iteration, cyclic
 container storage/GC, functions and indexed compound updates remain outside this
 slice. Malformed public bytecode uses `InvalidBytecode`, not new native UB policy.
 
@@ -374,3 +374,55 @@ Raw native refcounts/external owner bookkeeping retain the established observer 
 boundary; weak lifecycle, string owners, values, instructions, frame slots, IP,
 debt and temporary state compare strictly. Complete CI profiles must independently
 replay the corpus; focused proof does not close the broad Stage 4 gates.
+
+## Scalar tables and native traversal
+
+`Realm::table` creates an identity-bearing table. `Table::raw_get`, `new_slot`, and
+`set_existing` expose own slots; string arguments are interned in its Realm.
+Tables retain their realm and survive returned-value, root, and runner owners.
+Root slots accept same-realm tables and reject foreign tables. Scalar table keys
+are integers, booleans, raw f32 values and byte strings; key equality requires
+matching type and payload, so integer 1, float 1.0 and true occupy distinct slots.
+Table ordering and pointer-bearing key/value graphs remain explicit boundaries.
+
+Table literals preserve native source-member capacity, including duplicate keys,
+and emit NEWTABLE/NEWSLOTA. Bracket and dot get/set/newslot, identity equality,
+typeof, truthiness, and foreach use the existing register VM and operation debt.
+The node array reproduces native descending free scans, chain relocation and
+rehash reinsertion order. Foreach retains a physical node cursor and observes
+live mutation/rehash, including host writes while suspended. GET replaces the
+runner temporary; table allocation, store and iteration do not.
+
+The pinned native string hash is `std::hash<string_view>`. The safe Rust
+implementation selects libc++ ABI 1 on 64-bit little-endian Apple targets and
+libstdc++ on 64-bit little-endian GNU Linux. Other string-hash ABIs return
+`UnsupportedTableHashTarget`. The algorithms and license provenance are retained
+in `src/table/hash/PROVENANCE.md`; no C++ library is linked by Rust. The focused
+portable driver generates 32,776 real SQString hashes and table expectations on
+its executing target. It never sorts traversal or substitutes macOS captures on
+Linux. The PR-only `script-tables.yml` job executes this GNU target proof.
+
+Native `Set` has an observable null-key quirk: an empty physical node can retain
+an invisible value, without adding a slot. Null Get still misses and NewSlot
+rejects null before receiver checks. Rehash discards invisible values. This
+behavior is preserved, including its scalar ownership; it is not generalized to
+aggregate object graphs. Ordinary missing slots and invalid types remain runtime
+errors, separate from unimplemented aggregate keys/values and native-invalid
+float-to-integer hash conversions.
+
+The table corpus runs 267 strict byte comparisons per profile, including original
+stack/literals/instructions, returned/error stage, IP and debt, collision growth,
+all hash length branches, embedded NUL/high bytes and active iteration mutation.
+Additional genuine native sessions prove returned/root identity, temporary-only
+retention, release, persistent programs, and suspended host mutation with root
+rebinding. Private Rust tests compare those captures. Pointer-key native probes
+retain raw hash values and cursor order as evidence of the pending allocator
+identity dependency; they do not claim Rust pointer-key parity.
+
+Run `scripts/compat/script-vm/tables/verify.sh PINNED_OPENTTD NEW_OUTPUT` for fresh
+debug/release tables, hash, lifetime and full crate tests plus Clippy/fmt. The
+output freezes the real native/Rust executables and test binaries. General nested
+containers, delegates, clone/delete, closures, cycle collection, full root-table
+storage unification, existing AI/GS mods and gameplay integration remain later
+Stage 4 obligations. Scalar-only slot storage makes strong object cycles
+unrepresentable until a realm-owned graph heap with explicit roots is implemented.

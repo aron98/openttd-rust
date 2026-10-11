@@ -16,7 +16,7 @@ impl Vm<'_> {
         }
         let receiver = self.register(i32::from(instruction.arg0))?;
         match &receiver {
-            Value::Array(_) | Value::String(_) => {}
+            Value::Array(_) | Value::Table(_) | Value::String(_) => {}
             Value::Null | Value::Bool(_) | Value::Integer(_) | Value::Float(_) => {
                 return Err(VmError::OperandType);
             }
@@ -24,11 +24,29 @@ impl Vm<'_> {
         let cursor = match self.register(i32::from(cursor_register))? {
             Value::Null => 0,
             Value::Integer(cursor) => cursor,
-            Value::Bool(_) | Value::Float(_) | Value::String(_) | Value::Array(_) => {
+            Value::Bool(_)
+            | Value::Float(_)
+            | Value::String(_)
+            | Value::Array(_)
+            | Value::Table(_) => {
                 return Err(VmError::InvalidBytecode);
             }
         };
+        if let Value::Table(table) = &receiver {
+            let cursor = usize::try_from(cursor).map_err(|_| VmError::InvalidBytecode)?;
+            if let Some((next, key, value)) = table.next(cursor) {
+                self.jump(1)?;
+                self.write(index, key)?;
+                self.write(value_register, value)?;
+                return self.write(
+                    cursor_register,
+                    Value::Integer(i64::try_from(next).map_err(|_| VmError::InvalidBytecode)?),
+                );
+            }
+            return self.jump(instruction.arg1);
+        }
         let value = match receiver {
+            Value::Table(_) => return Err(VmError::InvalidBytecode),
             Value::Array(array) => array.get(cursor),
             Value::String(string) => {
                 // Native string Next widens target C char; negative cursors are native UB.

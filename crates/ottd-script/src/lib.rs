@@ -2,6 +2,8 @@
 //!
 //! This foundation deliberately rejects the unimplemented language and VM surface.
 //! It does not yet execute AI/GS packages or connect to the game tick runtime.
+mod table;
+pub use table::Table;
 mod array;
 pub use array::Array;
 mod compiler;

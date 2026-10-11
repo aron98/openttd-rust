@@ -18,7 +18,7 @@ impl Element {
             Value::Integer(value) => Ok(Self::Integer(value)),
             Value::Float(value) => Ok(Self::Float(value)),
             Value::String(value) => Ok(Self::String(realm.string(value.as_bytes()))),
-            Value::Array(_) => Err(VmError::UnsupportedArrayElement),
+            Value::Array(_) | Value::Table(_) => Err(VmError::UnsupportedArrayElement),
         }
     }
     fn value(&self) -> Value {

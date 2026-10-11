@@ -75,7 +75,8 @@ impl Session {
                 self.label(array),
                 array.len()
             )),
-            Value::Null
+            Value::Table(_)
+            | Value::Null
             | Value::Bool(_)
             | Value::Integer(_)
             | Value::Float(_)

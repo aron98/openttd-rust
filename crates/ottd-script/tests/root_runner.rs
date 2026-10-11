@@ -115,13 +115,7 @@ fn host_preconditions_and_scalar_results_have_separate_ownership() -> Result<()>
 }
 #[test]
 fn unsupported_root_source_remains_distinct_from_lexer_policy() {
-    for source in [
-        "return this;",
-        "return ::score.x;",
-        "score += 1;",
-        "++score;",
-        "score++;",
-    ] {
+    for source in ["return this;", "score += 1;", "++score;", "score++;"] {
         let error = Realm::new()
             .compile(source)
             .expect_err("outside the scalar root domain");

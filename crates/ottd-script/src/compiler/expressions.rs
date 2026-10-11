@@ -12,6 +12,7 @@ pub(super) struct ExpressionState {
 mod arrays;
 mod factors;
 mod roots;
+mod tables;
 mod updates;
 impl Compiler<'_> {
     pub(super) fn expression(&mut self, depth: u8) -> Result<ExpressionState, CompileError> {

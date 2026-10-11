@@ -26,6 +26,12 @@ impl RootEnvironment {
     fn intern(&self, value: Value) -> Result<Value, VmError> {
         match value {
             Value::String(bytes) => Ok(Value::String(self.realm.string(bytes.as_bytes()))),
+            Value::Table(table) => {
+                if !table.same_realm(&self.realm) {
+                    return Err(VmError::RealmMismatch);
+                }
+                Ok(Value::Table(table))
+            }
             Value::Array(array) => {
                 if !array.same_realm(&self.realm) {
                     return Err(VmError::RealmMismatch);

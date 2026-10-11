@@ -30,7 +30,7 @@ impl Compiler<'_> {
         self.load(key, Value::String(self.realm.string(name.as_bytes())))?;
         if matches!(
             self.token.kind,
-            TokenKind::Compound(_) | TokenKind::Increment(_) | TokenKind::Symbol(b'(' | b'.')
+            TokenKind::Compound(_) | TokenKind::Increment(_) | TokenKind::Symbol(b'(')
         ) {
             return Err(self.error(CompileErrorKind::UnsupportedSyntax));
         }

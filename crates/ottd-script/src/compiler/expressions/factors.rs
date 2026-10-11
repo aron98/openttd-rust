@@ -8,8 +8,17 @@ impl Compiler<'_> {
         state: &mut ExpressionState,
     ) -> Result<(), CompileError> {
         let position = self.factor(depth, state)?;
-        while self.token.kind == TokenKind::Symbol(b'[') {
-            self.indexed(depth, state)?;
+        while matches!(self.token.kind, TokenKind::Symbol(b'[' | b'.')) {
+            if self.token.kind == TokenKind::Symbol(b'.') {
+                self.advance()?;
+                let TokenKind::Identifier(name) = self.token.kind else {
+                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                };
+                self.advance()?;
+                self.root_field(name, state)?;
+            } else {
+                self.indexed(depth, state)?;
+            }
         }
         if state.field && matches!(self.token.kind, TokenKind::Increment(_)) {
             return Err(self.error(CompileErrorKind::UnsupportedSyntax));
@@ -51,6 +60,7 @@ impl Compiler<'_> {
             TokenKind::Identifier(name) => self.identifier(name, state),
             TokenKind::Root => self.explicit_root(state),
             TokenKind::Symbol(b'[') => self.array_literal(depth),
+            TokenKind::Symbol(b'{') => self.table_literal(depth),
             TokenKind::Symbol(b'(') => {
                 self.advance()?;
                 self.comma(depth)?;

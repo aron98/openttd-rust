@@ -52,6 +52,14 @@ impl std::error::Error for CompileError {}
 /// Checked execution failure; undefined native arithmetic remains unsupported.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VmError {
+    /// Target C++ standard-library string hash ABI is not admitted.
+    UnsupportedTableHashTarget,
+    /// Scalar table slots cannot yet retain aggregate graph edges.
+    UnsupportedTableElement,
+    /// Native pointer-based table ordering is not yet supported.
+    UnsupportedTableOrdering,
+    /// A new slot cannot have a null key.
+    NullIndex,
     /// Native-valid aggregate elements are outside the scalar-array domain.
     UnsupportedArrayElement,
     /// Array ordering is outside the admitted identity-only comparison domain.

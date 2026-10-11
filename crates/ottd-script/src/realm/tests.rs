@@ -23,6 +23,7 @@ fn render(value: &Value) -> String {
                     output
                 })
         ),
+        Value::Table(_) => "unsupported 167772192".to_owned(),
         Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
         Value::Integer(n) => format!("integer {n}"),

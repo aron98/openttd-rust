@@ -55,7 +55,7 @@ impl Array {
             {
                 Err(VmError::UnsupportedRuntimeValue)
             }
-            Value::String(_) | Value::Null | Value::Bool(_) | Value::Array(_) => {
+            Value::String(_) | Value::Null | Value::Bool(_) | Value::Array(_) | Value::Table(_) => {
                 Err(VmError::MissingIndex)
             }
         }
@@ -64,14 +64,18 @@ impl Array {
         let index = match key {
             Value::Integer(index) => *index,
             Value::Float(bits) => float_index(*bits)?,
-            Value::Null | Value::Bool(_) | Value::String(_) | Value::Array(_) => {
+            Value::Null | Value::Bool(_) | Value::String(_) | Value::Array(_) | Value::Table(_) => {
                 return Err(VmError::OperandType);
             }
         };
         self.set(index, value)
     }
 }
-fn float_index(bits: u32) -> Result<i64, VmError> {
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Native numeric conversion is shared with table hashing"
+)]
+pub(crate) fn float_index(bits: u32) -> Result<i64, VmError> {
     let exponent = (bits >> 23) & 255;
     if exponent == 255 || exponent > 190 {
         return Err(VmError::UnsupportedIndexConversion);

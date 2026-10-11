@@ -23,7 +23,7 @@ impl Program {
             .into_iter()
             .map(|value| match value {
                 Value::String(bytes) => Ok(Value::String(realm.string(bytes.as_bytes()))),
-                Value::Array(_) => Err(VmError::InvalidBytecode),
+                Value::Array(_) | Value::Table(_) => Err(VmError::InvalidBytecode),
                 Value::Null | Value::Integer(_) | Value::Float(_) | Value::Bool(_) => Ok(value),
             })
             .collect::<Result<Vec<_>, VmError>>()?;

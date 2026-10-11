@@ -64,6 +64,7 @@ impl Vm<'_> {
                 )?
             }
             Slot::Value(Value::Array(array)) => array.lookup(&key)?,
+            Slot::Value(Value::Table(table)) => table.lookup(key)?,
             Slot::Value(
                 Value::Null
                 | Value::Bool(_)
@@ -75,15 +76,21 @@ impl Vm<'_> {
         self.store_temporary(value)
     }
     pub(super) fn root_store(&mut self, instruction: Instruction) -> Result<(), VmError> {
+        if instruction.opcode == 0x3c && instruction.arg0 != 0 {
+            return Err(VmError::InvalidBytecode);
+        }
         let key = self.register(i32::from(instruction.arg2))?;
         let value = self.register(i32::from(instruction.arg3))?;
+        if matches!(instruction.opcode, 0x0b | 0x3c) && key == Value::Null {
+            return Err(VmError::NullIndex);
+        }
         let index = usize::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
         match self.registers.get(index).ok_or(VmError::InvalidBytecode)? {
             Slot::Root(root) => {
                 let Value::String(key) = key else {
                     return Err(VmError::UnsupportedRuntimeValue);
                 };
-                if instruction.opcode == 0x0b {
+                if matches!(instruction.opcode, 0x0b | 0x3c) {
                     root.new_slot(key.as_bytes(), value.clone())?;
                 } else if let Err(error) = root.set_existing(key.as_bytes(), value.clone()) {
                     if root.same(self.root_receiver(0)?) {
@@ -96,8 +103,15 @@ impl Vm<'_> {
                     }
                 }
             }
+            Slot::Value(Value::Table(table)) => {
+                if matches!(instruction.opcode, 0x0b | 0x3c) {
+                    table.new_slot(key, value.clone())?;
+                } else {
+                    table.set_existing(key, value.clone())?;
+                }
+            }
             Slot::Value(Value::Array(array)) => {
-                if instruction.opcode == 0x0b {
+                if matches!(instruction.opcode, 0x0b | 0x3c) {
                     return Err(VmError::OperandType);
                 }
                 array.store(&key, value.clone())?;
@@ -110,7 +124,7 @@ impl Vm<'_> {
                 | Value::String(_),
             ) => return Err(VmError::UnsupportedReceiver),
         }
-        if instruction.arg0 != instruction.arg3 {
+        if instruction.opcode != 0x3c && instruction.arg0 != instruction.arg3 {
             self.write(instruction.arg0, value)?;
         }
         Ok(())

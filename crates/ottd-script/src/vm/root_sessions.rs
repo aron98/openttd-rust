@@ -13,6 +13,7 @@ struct Session {
 }
 pub(super) fn render(value: &Value) -> Result<String> {
     Ok(match value {
+        Value::Table(_) => "unsupported 167772192".to_owned(),
         Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
         Value::Bool(value) => format!("bool {}", u8::from(*value)),
@@ -384,11 +385,7 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
         std::path::PathBuf::from,
     );
     for feed in ["buffer", "unsigned", "utf8"] {
-        for name in [
-            "unsupported-root",
-            "unsupported-field",
-            "unsupported-update",
-        ] {
+        for name in ["unsupported-root", "unsupported-update"] {
             let native = fs::read_to_string(base.join(format!("native/{name}-{feed}.txt")))?;
             assert!(native.lines().any(|line| line == "compiled"));
             let source = fs::read(base.join(format!("fixtures/{name}.nut")))?;
@@ -400,6 +397,35 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
                 crate::CompileErrorKind::UnsupportedSyntax
             );
         }
+        let realm = Realm::new();
+        let root = realm.empty_root();
+        root.new_slot(b"score", Value::Integer(7))?;
+        let mut field_runner = Runner::new(root);
+        let field_source = fs::read(base.join("fixtures/unsupported-field.nut"))?;
+        let field = field_runner.compile_bytes(&field_source)?;
+        let native_field =
+            fs::read_to_string(base.join(format!("native/unsupported-field-{feed}.txt")))?;
+        let native_ops = native_field
+            .lines()
+            .filter(|line| line.starts_with("op "))
+            .collect::<Vec<_>>()
+            .join("\n");
+        let actual_ops = field
+            .instructions()
+            .iter()
+            .map(|i| {
+                format!(
+                    "op {} {} {} {} {}",
+                    i.opcode, i.arg0, i.arg1, i.arg2, i.arg3
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        assert_eq!(actual_ops, native_ops);
+        assert_eq!(
+            field_runner.start(&field)?.resume(1000),
+            Err(VmError::UnsupportedReceiver)
+        );
         let mut runner = Runner::new(Realm::new().empty_root());
         let reader = runner.compile("return Later;")?;
         runner.compile("enum Later { X=12 }")?;

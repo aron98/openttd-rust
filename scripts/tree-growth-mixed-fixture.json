@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "fixture": {
+    "profile": "populated",
+    "paused": false,
+    "company_money": 990701,
+    "company_loan": 100000,
+    "trees": {
+      "tiles": [
+        {
+          "tile": 1488,
+          "type": 0,
+          "count": 1,
+          "stage": 3,
+          "ground": 0,
+          "density": 3
+        }
+      ],
+      "towns": [],
+      "threshold": 20,
+      "magic_bulldozer": false
+    }
+  },
+  "actions": []
+}

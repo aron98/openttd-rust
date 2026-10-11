@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "3f4977b547d1e8532c8f112dbdd35ff616911cc0507609d66f6fd7c0b16af4b1",
+   "sha256": "9bf68403d3b7a3a058ee9d8998da71df6b735fe62b9ebd03cd4c360c2fe8d026",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "52903f313ff462ef9628cb2da6d1a816ce3df28b6c1ac7ba65907f1a5ff5f4c2",
+   "sha256": "b2354ab9e98c19c5c5b1d28a05d9acb2c5e6478f412a2ade16c62290c0599f98",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "8dda87cce4fd411892c1fbf550082a666a167a7c011b2f4ba79418cda5a6806d",
+   "sha256": "96f86d4db4b96425e15ab105a4993ae50327e49c8c08c7895b85e0099d406d4f",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "edda492c46b1fb45d73adddb8f6d6497c6e661bae347ce805476641cc82fe4ce",
+   "sha256": "cadc78e7555dfce9fa65072207fdf9693fe9df2bbb6aba34d08e34d52ea2a29d",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "7b584705c80a7a0a289fd60ee91090938007fd616d2070eb0a0929d6494d0847",
+   "sha256": "ce9379158a3ccacc67545b166100a4ce008a23848b226087d10c1e3436e6e978",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "1a75a0ad0544141e52772d11a64a36f2df7fd252e3d9def24a6c40dd8703cf70",
+   "sha256": "01b03ecd429ead5689f58398792d76900b2e802f7ea74c4cafd83b09ab9623cb",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "69485b0219bda6c4638c62c9e44e8e8781452b4a015e4c475ef78951fe92a14f",
+   "sha256": "4a3fb59df02c1c534c29507cde70f3715b4bd68a491139ff048ad6ff3d2f8fb0",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "02872437c6648008e5538b30ba60e762b18e5cd18d1d3066f6c8a22b9477619e",
+   "sha256": "1b4e10ccd0d5e213b4820921b2b1937ced282902022d5537f7647a69331e19c0",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "fda907980206558287c78ab3365d720bcfd9d76b4a4a53b556b6928109deae7c",
+   "sha256": "c56287669006483089d75a021b12373d13db2e7394dfb05b4d499c4cfdd4a6f2",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "e962c66bda1e2409cb9239f2a501e362033dd1635af447f3af4b3a2e642b8387",
+   "sha256": "1a5751fb87c1c318ded6078e4a7ebda941b0fd44697b38a8c3d1c77e04605de2",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "a2dab0b08eeb1d45b4794db2bfe3986b3e7b8377f9b0a235aea1d26dbe66e607",
+   "sha256": "a06c19488b3d020a622146d0937df4efd74ddd571c517e51a5b051b243418e1c",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "63a686a808ba1610e47df4c898df4b599d0a4f14d112cf716074ee8e0cf0d564",
+   "sha256": "575b46afe4f39b08541986d80de61712112d826a13bba2de13751632925d5805",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "920736ce1a75f89bc702c1cbde9117b724dee7efd8c6c08b88a002d253655aa3",
+   "sha256": "84595bb0ba0aa31ac530930ae17fc2528eb64821543c010c5e1883c93c0dbdb0",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "1f089ab7d719eb93af267ed0f12c7f9773fa9dc07afb0fc26b4b7c53df8b7b18",
+   "sha256": "fa555d6f905114ec2358642581b6e2641ea0eab9da14ac23ed99dd43034eba2b",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "7a2840c5e988c6ce3d910ca9837612c03f56d8e837841c533eb6be974b797223",
+   "sha256": "e026c3355c81d3d04c875be1d6c5a725764ae2cfadbb1fc372f3f2226700ecf3",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "4b8133f9b4975b28f91dab309e9dcb57d9419f6c72012e9ecf6a6167456661ad",
+   "sha256": "8926ab00663cad4b4311d2ce0e8ee250702600f7798b50ed4bc48fb1ac073ffa",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "b8c7f221605b5d599aa430524fe366e5bf5b9948648509275e9c1bafed854763",
+   "sha256": "4652a80e7cc417a6af51647606a09d28a52d74546a1335a279ba27db8fee2736",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "1a15ceb0468ada278abb0a9c78f3e96b31ed8b36549862930222fd83f304f002",
+   "sha256": "2539c7dcd9896f196eb86cbc1cafa2ad6ea83402a9aeaf794bc136778315a39a",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8866,6 +8866,195 @@
    "sha256": "c73552f9300f931b952a1c43d1b486dd71997152ec850c22f7c7bea4774385e0",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 byte-string FOREACH; stored bytes widen target C char, negative forged cursors rejected before native-undefined indexing.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-crates-ottd-sim-src-world-ticks-trees-rs",
+   "path": "crates/ottd-sim/src/world_ticks/trees.rs",
+   "sha256": "a584356d49fdfb4a69804fa41b87d2ffda1f735fef58b365c6fe87eca81be407",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-crates-ottd-sim-tests-native-world-trees-rs",
+   "path": "crates/ottd-sim/tests/native_world_trees.rs",
+   "sha256": "acb1bdb0cb98a695d894355de0d113abf1e637cabe60373162375d613993ce9b",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-crates-ottd-sim-tests-world-trees-rs",
+   "path": "crates/ottd-sim/tests/world_trees.rs",
+   "sha256": "5e3dfa42247f56d842ff165bc87bbd41980ffad3d856f6ecb5734d073dbbf0fa",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-reference-tree-growth-json",
+   "path": "reference/tree_growth.json",
+   "sha256": "7211f997de448ea6838c86a90ce52ec8108de53d247ab465806e5d7ada329c17",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-reference-tree-growth-patch",
+   "path": "reference/tree_growth.patch",
+   "sha256": "d6eb0ca963e7781498e35a7a97b01d2ca5239eb97d84c29d212dbe182166080b",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-reference-tree-growth-mixed-json",
+   "path": "reference/tree_growth_mixed.json",
+   "sha256": "cb264e9e7b8294091bb9fd2015013efa437ba3b5536f3aca2f9f0d76a0892ea9",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-reference-tree-growth-mixed-patch",
+   "path": "reference/tree_growth_mixed.patch",
+   "sha256": "2dbecb0331b78643ee6310a4e8a4f1859f738ebaa73d2be069e871f929cd6e31",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-reference-tree-growth-observer-hpp",
+   "path": "reference/tree_growth_observer.hpp",
+   "sha256": "b227005bdcd5450d3ff9f988e2dbbc62fbab85719dadfe008e7b8e7d5ac3c15d",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-build-tree-growth-mixed-reference-sh",
+   "path": "scripts/build-tree-growth-mixed-reference.sh",
+   "sha256": "c4cf76f8e8833bb798fb63d151f45c025fa42bef388553c77d32c71b8a0c693a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-build-tree-growth-reference-sh",
+   "path": "scripts/build-tree-growth-reference.sh",
+   "sha256": "5b65f1208fc70d4c224012b4a73a3116c4fde243a03873f1ff6f78172d7d3503",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-check-tree-growth-mixed-py",
+   "path": "scripts/check-tree-growth-mixed.py",
+   "sha256": "db8cc5bd8f883f3b005e8d55cfa4569c3f17f6db154acf8c9edd9a2d99a39d5e",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-check-tree-growth-py",
+   "path": "scripts/check-tree-growth.py",
+   "sha256": "5fbf14485eb20dd70266e875191e243a2a53ac038c6b40448c02838e91242adc",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tests-tree-growth-bindings-test-py",
+   "path": "scripts/tests/tree_growth_bindings_test.py",
+   "sha256": "3fec96ebd9c61a084e2869627401028f7f6c1b4bf6459f3e381cf998fa2e4a3f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-mixed-fixture-json",
+   "path": "scripts/tree-growth-mixed-fixture.json",
+   "sha256": "8d6f3cc5ec539aeb5d3e6d14f201856cab9fd3b7effa7f9da1aaa45b327b838b",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-source-json",
+   "path": "scripts/tree-growth-source.json",
+   "sha256": "cfc5f5a1ca23c8f3d4b0f60947b90df27c31bf2ec0c167f62d14c70069529112",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-inputs-py",
+   "path": "scripts/tree_growth_inputs.py",
+   "sha256": "64eccfbaa411aeb5158a00404521615e65117f70d161c6fbc073b6c5693d0a91",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-mixed-py",
+   "path": "scripts/tree_growth_mixed.py",
+   "sha256": "e0850dc0e97cfffb2bb7fe61c6eb06c6a134cc43d2991654315c0d437fc7f003",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-mixed-proof-py",
+   "path": "scripts/tree_growth_mixed_proof.py",
+   "sha256": "017e4379e36657d7286690b01c76627e0533b9f76b64a380ed439986fe50e5fe",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-proof-py",
+   "path": "scripts/tree_growth_proof.py",
+   "sha256": "5578402b5ce3393d26cb2314f483b556710d1214d838f42ea7e42f488621882f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-recipe-py",
+   "path": "scripts/tree_growth_recipe.py",
+   "sha256": "41cb9192e4c165d7654303a132dcdc66da1f2353124ea352c1d57ec488d833ad",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "tree-growth-scripts-tree-growth-run-py",
+   "path": "scripts/tree_growth_run.py",
+   "sha256": "eb39843874510b0e08f7be702a3e4de617f3959417702b7e39b6ac9d12141b65",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
    "profile": null
   }

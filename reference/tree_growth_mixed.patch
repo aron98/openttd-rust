@@ -1,0 +1,18 @@
+--- a/src/saveload/reference_movement_admission.hpp
++++ b/src/saveload/reference_movement_admission.hpp
+@@ -34,6 +34,15 @@
+     for (uint32_t id = 0; id < Map::Size(); ++id) {
+         const TileIndex tile(id);
+         if (IsTileType(tile, MP_CLEAR) || IsTileType(tile, MP_VOID)) continue;
++        if (IsTileType(tile, MP_TREES)) {
++            const char *observer = std::getenv("OTTD_TREE_GROWTH_EVENTS");
++            Tile raw(tile);
++            const auto setting = _settings_game.construction.extra_tree_placement;
++            Require(observer != nullptr && *observer != '\0' && (setting == 0 || setting == 3)
++                && ((raw.m2() >> 6) & 7) <= 1 && (raw.m5() & 7) <= 6 && raw.m3() < 12,
++                "mixed tree observer domain");
++            continue;
++        }
+         Require(IsTileType(tile, MP_ROAD) && (IsNormalRoad(tile) || IsRoadDepot(tile)), "movement pilot tile family");
+         Require(GetTileSlope(tile) == SLOPE_FLAT && !IsBridgeAbove(tile), "movement pilot road must be flat");
+         Require(GetRoadType(tile, RTT_ROAD) == ROADTYPE_ROAD && GetRoadType(tile, RTT_TRAM) == INVALID_ROADTYPE, "movement pilot vanilla road required");

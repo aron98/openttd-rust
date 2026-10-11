@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from scripts import script_vm_arrays as arrays
+from scripts import script_vm_arrays_spec as arrays_spec
 from scripts.script_vm_provenance import digest
 from scripts.world_check_support import ROOT, WorldCheckError, read_json
 
@@ -102,7 +103,7 @@ def test_pinned_corpus_member_or_manifest_mutation_is_refused(
         ROOT / "crates/ottd-script/tests/arrays-native",
         tmp_path / "crates/ottd-script/tests/arrays-native",
     )
-    monkeypatch.setattr(arrays, "ROOT", tmp_path)
+    monkeypatch.setattr(arrays_spec, "ROOT", tmp_path)
     arrays.validate_corpus()
     manifest = tmp_path / arrays.SOURCE / "witnesses.json"
     data = read_json(manifest)

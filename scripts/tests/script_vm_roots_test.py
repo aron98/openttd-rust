@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from scripts import script_vm_roots as roots
+from scripts import script_vm_roots_spec as roots_spec
 from scripts.currency_ci_capture import source_names as currency_source_names
 from scripts.engine_specs_ci_roster import GUARD_INPUT as ENGINE_GUARD_INPUT
 from scripts.script_vm_provenance import digest
@@ -101,7 +102,7 @@ def test_pinned_corpus_member_or_manifest_mutation_is_refused(
         ROOT / "crates/ottd-script/tests/roots",
         tmp_path / "crates/ottd-script/tests/roots",
     )
-    monkeypatch.setattr(roots, "ROOT", tmp_path)
+    monkeypatch.setattr(roots_spec, "ROOT", tmp_path)
     roots.validate_corpus()
     manifest = tmp_path / roots.SOURCE / "witnesses.json"
     data = read_json(manifest)

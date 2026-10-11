@@ -1,5 +1,30 @@
 # Compatibility foundation verification
 
+## Reviewed stage 4 native script calls
+
+On 2026-10-11, independent review approved `32490c7`, containing six atomic
+native-call, ownership, receipt-validation and source-binding increments.
+Root and reviewer each rebuild the original observer from pristine pinned
+source and execute 930 baseline plus 156 call comparisons per debug/release
+profile. The reviewer adds 36 comparisons per profile. Actual host sessions
+verify callee/prototype ownership, aliases and late failure; raw print framing
+preserves embedded NUL bytes. Compilation failures compare their structured
+stage; runtime errors and raw print bytes compare directly. Meaningful producer
+and host-owner corruptions are rejected.
+
+The combined candidate passes 764 workspace tests, 580 Python tests with
+21,221 subtests, strict static checks and 143 declaration checks. Root verifies
+4,976 source Git blobs, 245 compiled inputs, 1,523 pristine original source
+blobs and seven copied observer inputs. Its complete proof retains 33,294
+verified members, including the historical worker archive. Evidence is retained
+under `.worktrees/stage04-native-calls-integration/.omo/evidence/native-calls-integration/`
+and `.omo/evidence/stage04-native-calls-review/report.md`.
+
+Four bare-root native functions are admitted: `assert`, `print`, `type` and
+`array`. User functions/captures/defaults, nested frames/tail calls, general
+callable collection/root ordering, AI/GameScript/NewGRF integration and GNU
+native-call execution remain required. All seven broad stage 4 gates stay open.
+
 ## Reviewed stage 4 ordinary road round trips
 
 On 2026-10-11, independent review approved `7779f39`, containing six atomic

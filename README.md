@@ -22,8 +22,9 @@ terminal loading/timetables and both-origin save continuations. Populated cargo,
 default asynchronous link jobs and wider vehicle behavior remain required.
 The independent Squirrel library supports
 graph-backed arrays/tables, first-class roots, native closure identity and
-metadata, mutable `this`, and bounded ownership/cycle collection. Native calls,
-user functions, delegates and OpenTTD AI/GameScript integration remain required.
+metadata, mutable `this`, bounded ownership/cycle collection, and bare-root
+native calls to `assert`, `print`, `type` and `array`. User functions, delegates,
+general callable collection and OpenTTD AI/GameScript integration remain required.
 General gameplay, rendering, full scripts and multiplayer are not implemented.
 
 ## Use

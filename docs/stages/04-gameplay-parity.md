@@ -20,7 +20,14 @@ enables normal CI for the reviewed bounded single-vehicle road movement corpus.
 Road increment `7779f39` integrates ordinary empty-cargo bus/truck round trips
 and their routing/loading/payment/job prerequisites in six product atoms plus
 separate current bindings. Populated cargo, default asynchronous jobs and wider
-transport behavior remain in progress. All seven
+transport behavior remain in progress. Script increment `32490c7` adds native
+CALL/PREPCALL/PREPCALLK, real host-held main closures and four bare-root native
+functions. Independent review repeats 930 baseline plus 156 call comparisons
+per debug/release profile and adds 36 comparisons per profile. The integrated
+candidate passes 764 workspace tests, 580 Python tests with 21,221 subtests,
+strict static checks and 143 declaration checks. Source and complete proof
+archives retain 4,976 Git blobs and 33,294 verified members. User functions,
+general callable collection and GNU native-call proof remain required. All seven
 completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
 
@@ -43,7 +50,7 @@ Default asynchronous execution, load/pause/join behavior and populated graph
 algorithms remain required, alongside populated cargo, breakdown/effect
 lifecycles, service, multiple vehicles/stops and the other vehicle classes.
 
-The latest script increment uses common physical table storage for roots and
+The earlier graph/root script increment uses common physical table storage for roots and
 graph values, real native closure identities and metadata, native default
 registration, mutable reserved `this`, and independent configured-root lookup.
 Its collector follows the original physical traversal, mark-on-enqueue LIFO
@@ -59,7 +66,7 @@ exact `d43c8fa`. Subsequent PR head `f9536b3` passes the focused GNU job in
 run `38137706226`: root audits all 13,425 artifact files, both profiles'
 930 comparisons and all 1,523 pinned native source blobs. Its ordinary GNU
 workspace run passes 753 tests without an ABI-fixture override. This proves
-the graph/root epoch; native calls remain a separate pending increment.
+the graph/root epoch; GNU native calls remain a separate pending increment.
 General VM/shared/host GC
 ordering, callable functions, delegates, weakrefs and full AI/GameScript remain
 required; bounded storage/ownership proof does not close a broad stage gate.

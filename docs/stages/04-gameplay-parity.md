@@ -43,7 +43,12 @@ members. Root adds 36 native/Rust comparisons; independent review adds 54, runs
 archives and current source closure. Integrated product bytes match the frozen
 private implementation. Current binding changes at `db417c2` are a separate
 metadata epoch, not a new native execution claim. The Apple hash ABI has actual
-native proof; the focused GNU CI job added in `ebfd3a6` awaits execution. Other
+native proof. Focused GNU CI run `38125486543` also passes both profiles: 267
+strict comparisons, 162 crate tests, the external native hash test and five
+observation-corruption controls per profile. Root audits all 4,995 artifact
+files and all 1,532 original source blobs against the pinned Git tree. This run
+executes PR merge `70920af`, with source head `2a1db7a`; no local GNU execution
+is claimed. Other
 ABIs, aggregate edges, delegates, delete/clone, root storage unification,
 functions, closures, cycle collection, host APIs and full AI/GameScript remain
 required.
@@ -52,6 +57,16 @@ The combined order/table integration passes 716 executed workspace tests,
 strict locked workspace/all-target/all-feature Clippy, formatting and all 143
 offline contract declarations. The 77 ignored external tests are not credited
 by the workspace run; their native proofs are recorded separately above.
+
+The broader Rust CI job at `2a1db7a` fails two Python stale-source inventory
+checks. Both copy producers retain every top-level scripts/reference file;
+their declared copied paths omitted three newly added helpers. Root reproduces
+the same two failures. Corrective increment `46f6d33` adds those exact paths and
+updates the two asset hashes, preserving producers, tests and scenario claims.
+Fresh root and independent-review discovery each pass all 73 tests. Both also
+audit actual copies of all 380 files per guard, including exact bytes and the
+deliberate stale-header newline. Independent review approves this correction;
+the Linux rerun and complete normal interoperability baseline remain pending.
 
 The next private increments address road station construction, real script
 delete/clone operations, and temperate tree growth without spreading. Tree

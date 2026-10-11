@@ -26,6 +26,7 @@ from scripts.world_check_support import WorldCheckError, read_json
         "root_slots.hpp",
         "arrays.hpp",
         "tables.hpp",
+        "calls.hpp",
     ],
 )
 def test_changed_copied_observer_source_is_rejected(
@@ -45,6 +46,7 @@ def test_changed_copied_observer_source_is_rejected(
         "root_slots.hpp",
         "arrays.hpp",
         "tables.hpp",
+        "calls.hpp",
     ):
         _ = (harness / name).write_text("original observer input")
         _ = (native / name).write_text("original observer input")
@@ -92,6 +94,7 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
         assert pinned[name] == digest(root / name)
         assert "source/" + name in spec.paths
     assert "native/tables.hpp" in spec.paths
+    assert "native/calls.hpp" in spec.paths
 
 
 @pytest.mark.parametrize(
@@ -107,6 +110,8 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
         "scripts/compat/script-vm/tables/fixtures/delete-mutation.nut",
         "scripts/compat/script-vm/tables/case.py",
         "scripts/compat/script-vm/tables/objects.py",
+        "crates/ottd-script/src/vm/native-calls-callee.txt",
+        "scripts/compat/script-vm/calls.hpp",
     ],
 )
 def test_missing_embedded_input_rejected_before_native_validation(

@@ -12,6 +12,7 @@ OBSERVER_INPUTS: Final = (
     "root_slots.hpp",
     "arrays.hpp",
     "tables.hpp",
+    "calls.hpp",
 )
 
 

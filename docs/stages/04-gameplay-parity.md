@@ -13,8 +13,8 @@ and translation tables after the engine/spec loading completed in `e032dd2`.
 Script increment `0a5bd83`, with corrected proof retention at `257c395`, adds
 native table deletion and table/array cloning. Gameplay increment `6d02ffe`,
 with current bindings at `7b78b96`, adds bounded terminal bus/truck station
-construction after station/depot order insertion. World increment `249a1e1` adds
-bounded temperate tree callbacks to complete world ticks. Increment `59fe7f6`
+construction after station/depot order insertion. World increment `5e0fbf4`, with current bindings at `0047eb2`, adds
+bounded temperate spreading and genuine placement to complete world ticks. Increment `59fe7f6`
 enables normal CI for the reviewed bounded single-vehicle road movement corpus.
 Complete transport cycles and further content loading are in progress. All seven
 completion gates below remain open.
@@ -124,9 +124,13 @@ Both Rust profiles pass without an override and reject the wrong ABI trace with
 exit 101. Independent review verifies all 4,875 source blobs and 9,644 proof
 members, complete receipts, current source closure and unchanged historical
 bindings. Root's exact corrected candidate passes 738 workspace tests, strict
-Clippy/formatting, 75 Python checks and 143 declarations. Corrected ordinary
-GNU execution remains pending the next actual CI run. The full movement capture
-on `533313b` passes; its complete normal interoperability baseline remains pending.
+Clippy/formatting, 75 Python checks and 143 declarations. Actual ordinary
+GNU execution on corrected head `15fa7b4` passes all 738 workspace tests, including
+the effects test without an override. Root verifies the complete job log and
+merge source `97c2a90`. Focused GNU run `38133016835` also passes both profiles;
+root audits all 11,125 artifact files, 1,523 original source blobs and retained
+comparisons. Rust and full movement-capture jobs on `15fa7b4` pass; its complete
+normal interoperability baseline remains pending.
 
 Station integration `7b78b96` preserves all 35 frozen product files. It supports
 vanilla flat 1x1 terminal bus/truck stops, all four entrances and explicit owned
@@ -145,11 +149,30 @@ combined candidate passes 738 workspace tests, strict locked Clippy, formatting,
 75 Python checks and 143 declaration checks; 79 ignored external tests are not
 credited by that workspace run.
 
-Private work continues with directed road routes and station phases, temperate
-spreading/placement, and shared script graph/root storage. Each requires actual
-native proof, current-source bindings, root QA and independent review. All seven
-broad completion gates remain open. Rust and full movement-capture jobs on
-`80bf8bd` pass; the complete normal interoperability baseline remains pending.
+Tree integration `0047eb2` preserves native temperate settings 1/2 lifecycle,
+neighbor spreading/count/death and the saved post-vehicle placement counter,
+map scaling and Random order. Its complete native proof covers 32,768 setting-2
+calls, 4,096 setting-1 calls and genuine 512² placement. A mixed vehicle/tree
+world agrees through vehicle Random followed by tree Random and natural tile-52
+placement, including saves continued in both directions. Root adds 78 complete
+state/runtime boundaries and 40 uninterrupted mappings. Independent review
+recomputes 270 mixed boundaries, 79 mappings and 48 pure view comparisons, adds
+nine fresh complete cross-engine boundaries, and verifies rollback after a
+prefix containing natural placement. The native asserted out-of-map neighbor
+boundary remains an explicit transactional refusal; crash saves are diagnostic.
+The 4,096² case proves counter arithmetic only. All three complete archives,
+current source closure and historical execution identities are verified. The
+exact integrated candidate passes 744 workspace tests, strict Clippy/formatting,
+75 Python checks and 143 declarations; 81 ignored external tests are not credited.
+Other climates, snow/desert/water, planting commands, new GNU tree execution and
+normal tree CI admission remain required.
+
+Private work continues with terminal entry/loading and complete road cycles,
+shared script graph/root storage, and the remaining world gameplay families.
+Directed routing and graph storage prerequisites are frozen with native proof,
+but still require current-source integration and independent review. All seven
+broad completion gates remain open; the complete normal interoperability baseline
+remains pending.
 
 The full four-case bounded road movement capture now passes locally at
 `e167929`, followed by separate live recorded-corpus verification. The final

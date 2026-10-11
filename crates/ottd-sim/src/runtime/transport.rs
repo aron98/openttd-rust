@@ -1,23 +1,37 @@
 //! Native payment/link pool history and non-saved payment/job restoration state.
+use super::job_executor::Worker;
 use super::{
     RuntimeError, SavedVehicleView, VehicleId, pools::PoolAllocator, stations::saved::StationRow,
 };
 use ottd_save::world::{CandidateView, World};
 use serde::Serialize;
-use std::collections::BTreeMap;
+use std::{collections::BTreeMap, sync::Arc};
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub(super) struct EmptyJob {
     pub nodes: usize,
     pub edges: usize,
 }
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 pub(super) struct TransportRuntime {
     pub payments: PoolAllocator,
     pub graphs: PoolAllocator,
     pub jobs: PoolAllocator,
     pub payment_stations: BTreeMap<u32, u16>,
-    pub job_results: BTreeMap<u32, Option<EmptyJob>>,
+    /// Immutable validation summaries, not live solver completion.
+    pub job_expectations: BTreeMap<u32, Option<EmptyJob>>,
+    pub workers: BTreeMap<u32, Arc<Worker<EmptyJob>>>,
+}
+impl Drop for TransportRuntime {
+    fn drop(&mut self) {
+        // Native Clear aborts all jobs before pool destruction joins them. Candidate leases
+        // must leave committed workers alone; only uniquely owned jobs belong to this cleanup.
+        for worker in self.workers.values_mut() {
+            if let Some(worker) = Arc::get_mut(worker) {
+                worker.cancel_unfinished();
+            }
+        }
+    }
 }
 impl TransportRuntime {
     pub(super) fn restore(world: &World) -> Result<Self, RuntimeError> {
@@ -30,7 +44,7 @@ impl TransportRuntime {
         let payments = table(*b"CAPY")?;
         let graphs = table(*b"LGRP")?;
         let jobs = table(*b"LGRJ")?;
-        let job_results = jobs
+        let job_expectations = jobs
             .records()
             .iter()
             .map(|(id, record)| {
@@ -69,12 +83,17 @@ impl TransportRuntime {
                 ))
             })
             .collect::<Result<_, RuntimeError>>()?;
+        let payments = PoolAllocator::restore(0xff000, 512, payments.records().keys().copied())?;
+        let graphs = PoolAllocator::restore(65535, 32, graphs.records().keys().copied())?;
+        let jobs = PoolAllocator::restore(65535, 32, jobs.records().keys().copied())?;
+        let workers = super::transport_jobs::restore_workers(world)?;
         Ok(Self {
-            payments: PoolAllocator::restore(0xff000, 512, payments.records().keys().copied())?,
-            graphs: PoolAllocator::restore(65535, 32, graphs.records().keys().copied())?,
-            jobs: PoolAllocator::restore(65535, 32, jobs.records().keys().copied())?,
+            payments,
+            graphs,
+            jobs,
             payment_stations,
-            job_results,
+            job_expectations,
+            workers,
         })
     }
     pub(super) fn validate(&self, view: CandidateView<'_>) -> Result<(), RuntimeError> {
@@ -97,17 +116,58 @@ impl TransportRuntime {
         }
         if self.payments.snapshot().occupied
             != self.payment_stations.keys().copied().collect::<Vec<_>>()
-            || self.jobs.snapshot().occupied != self.job_results.keys().copied().collect::<Vec<_>>()
+            || self.jobs.snapshot().occupied
+                != self.job_expectations.keys().copied().collect::<Vec<_>>()
         {
             return Err(RuntimeError::Invalid(
                 "tentative transport cache publication",
             ));
         }
+        let executable: Vec<_> = self
+            .job_expectations
+            .iter()
+            .filter_map(|(id, result)| result.as_ref().map(|_| *id))
+            .collect();
+        if executable != self.workers.keys().copied().collect::<Vec<_>>() {
+            return Err(RuntimeError::Invalid("tentative worker ownership"));
+        }
         Ok(())
     }
     pub(super) fn snapshot(&self) -> serde_json::Value {
-        serde_json::json!({"payments":self.payments.snapshot(),"graphs":self.graphs.snapshot(),"jobs":self.jobs.snapshot(),
-            "payment_stations":self.payment_stations,"job_results":self.job_results})
+        let results: BTreeMap<_, _> = self
+            .workers
+            .iter()
+            .map(|(id, worker)| {
+                let value = match worker.poll() {
+                    Ok(Some(value)) => serde_json::json!(*value),
+                    Ok(None) => serde_json::Value::Null,
+                    Err(error) => serde_json::json!({"worker_error":error.to_string()}),
+                };
+                (*id, value)
+            })
+            .collect();
+        let mut snapshot = serde_json::Map::from_iter([
+            (
+                "payments".into(),
+                serde_json::json!(self.payments.snapshot()),
+            ),
+            ("graphs".into(), serde_json::json!(self.graphs.snapshot())),
+            ("jobs".into(), serde_json::json!(self.jobs.snapshot())),
+            (
+                "payment_stations".into(),
+                serde_json::json!(self.payment_stations),
+            ),
+            ("job_results".into(), serde_json::json!(results)),
+        ]);
+        let unsupported: Vec<_> = self
+            .job_expectations
+            .keys()
+            .filter_map(|id| (!self.workers.contains_key(id)).then_some(*id))
+            .collect();
+        if !unsupported.is_empty() {
+            snapshot.insert("unsupported_jobs".into(), serde_json::json!(unsupported));
+        }
+        serde_json::Value::Object(snapshot)
     }
 }
 pub(super) fn empty_job(graph: StationRow<'_>) -> Result<Option<EmptyJob>, RuntimeError> {

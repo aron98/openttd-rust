@@ -9,7 +9,7 @@ pub(super) fn validate(
     phases: &impl crate::WorldTickPhases,
 ) -> Result<bool, WorldTickError> {
     let stations = phases.station_tiles();
-    if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 {
+    if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 && !phases.transport_activity() {
         return Err(unsupported("pause", "linkgraph pause control"));
     }
     if !matches!(field(world,b"GSDT",0,"name")?,WireValue::Bytes(bytes) if bytes.is_empty()) {

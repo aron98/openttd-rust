@@ -80,11 +80,14 @@ struct RoadPhases<'a> {
     transport: super::transport::TransportRuntime,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn before_state_loop(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
+        super::job_pause::before_tick(state, &self.transport)
+    }
     fn company_assets(&self, state: &State<'_>, owner: u32) -> Result<i64, WorldTickError> {
         company::assets(state, self.content, owner)
     }
     fn transport_activity(&self) -> bool {
-        !self.stations.is_empty()
+        !self.stations.is_empty() || !self.transport.workers.is_empty()
     }
     fn link_graphs(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
         loading::link_tick(state, self)

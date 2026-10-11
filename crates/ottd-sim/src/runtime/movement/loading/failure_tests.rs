@@ -20,12 +20,17 @@ fn refusal(
     let (name, ticks, expected) = case;
     let before = format!("{runtime:?}");
     let saved = runtime.saved_json()?;
+    let live_before = runtime.transport_state_json();
     let result = runtime.advance_world(ticks);
     let error = format!("{result:?}");
+    let unchanged = before == format!("{runtime:?}");
+    let live_after = runtime.transport_state_json();
     std::fs::write(
         output.join(format!("{name}.json")),
         serde_json::to_vec_pretty(&serde_json::json!({
-            "ticks":ticks,"result":error,"entire_runtime_unchanged":before==format!("{runtime:?}"),
+            "ticks":ticks,"result":error,"entire_runtime_unchanged":unchanged && live_before == live_after,
+            "committed_runtime_unchanged":unchanged,
+            "live_transport_before":live_before,"live_transport_after":live_after,
             "entire_saved_world_unchanged":saved==runtime.saved_json()?,"probe":name,
         }))?,
     )?;
@@ -99,7 +104,7 @@ fn terminal_late_pool_order_job_failures_are_atomic() -> Result {
     // Given: native saved running job, with a deliberately inconsistent derived result.
     let mut job = load("ROAD_TERMINAL_RUNNING_JOB")?;
     job.transport
-        .job_results
+        .job_expectations
         .get_mut(&0)
         .ok_or("job cache")?
         .as_mut()

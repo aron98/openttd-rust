@@ -85,7 +85,12 @@ pub(in crate::runtime::movement) fn admit(
             return Err(unsupported("transport", "populated link graph"));
         }
     }
-    if runner.transport.job_results.values().any(Option::is_none) {
+    if runner
+        .transport
+        .job_expectations
+        .values()
+        .any(Option::is_none)
+    {
         return Err(unsupported("transport", "populated link graph job"));
     }
     schedule(world, runner)

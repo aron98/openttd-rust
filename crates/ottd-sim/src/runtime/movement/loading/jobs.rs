@@ -1,6 +1,6 @@
 //! Source-ordered scheduling and publication of zero-supply link graph jobs.
 use super::{RoadPhases, State, WorldTickError, records, unsupported};
-use crate::runtime::{RuntimeError, transport::empty_job};
+use crate::runtime::{RuntimeError, transport::empty_job, transport_jobs::EmptyInput};
 use ottd_save::{WireValue, world::WorldEdit};
 
 pub(in crate::runtime::movement) fn tick(
@@ -93,7 +93,10 @@ fn spawn(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), World
         record: id,
         value: record,
     })?;
-    runner.transport.job_results.insert(id, Some(result));
+    let input = EmptyInput::parse(records::row(state, *b"LGRJ", id)?.child("linkgraph")?)?
+        .ok_or_else(|| unsupported("link_jobs", "populated job solver"))?;
+    runner.transport.workers.insert(id, input.spawn());
+    runner.transport.job_expectations.insert(id, Some(result));
     let mut running = list(state, "running")?;
     running.push(WireValue::Unsigned(u64::from(id).wrapping_add(1)));
     records::schedule(state, "running", running)
@@ -112,8 +115,18 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
         .map_err(|_| unsupported("link_jobs", "graph index"))?;
     let result = empty_job(row.child("linkgraph")?)?
         .ok_or_else(|| unsupported("link_jobs", "populated job result"))?;
-    if runner.transport.job_results.get(&job) != Some(&Some(result)) {
+    if runner.transport.job_expectations.get(&job) != Some(&Some(result.clone())) {
         return Err(unsupported("link_jobs", "pending job result cache"));
+    }
+    let completed = runner
+        .transport
+        .workers
+        .get(&job)
+        .ok_or_else(|| unsupported("link_jobs", "missing job worker"))?
+        .wait()
+        .map_err(RuntimeError::from)?;
+    if *completed != result {
+        return Err(unsupported("link_jobs", "worker result differs"));
     }
     // Empty source/destination demand yields no MCF paths or FlowMapper flows.
     // Admission also requires empty station flow/cargo state, so joining changes no goods data.
@@ -128,7 +141,8 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
         .jobs
         .free(job)
         .map_err(RuntimeError::from)?;
-    runner.transport.job_results.remove(&job);
+    runner.transport.job_expectations.remove(&job);
+    runner.transport.workers.remove(&job);
     if state.table(b"LGRP")?.record(graph).is_some() {
         let pointer = WireValue::Unsigned(u64::from(graph).wrapping_add(1));
         let mut schedule = list(state, "schedule")?;

@@ -133,15 +133,18 @@ impl State<'_> {
             return Err(unsupported("budget", "tick limit"));
         }
         let paused = unsigned(world, b"DATE", 0, "pause_mode")? != 0;
-        let roads_admitted = domain::validate(world, paused, vehicles)?;
-        if !paused {
-            vehicles.admit(world)?;
-        }
+        let initial_roads = domain::validate(world, paused, vehicles)?;
         let mut clock = restore_clock(world)?;
-        let mut landscape = if paused {
-            None
-        } else {
-            Some(
+        // A pending link job may release pause during this horizon. Defer any active-domain
+        // error until that actually happens; an unrelated pause still admits only paused work.
+        let mut active_domain = Some((|| {
+            let roads_admitted = if paused {
+                domain::validate(world, false, vehicles)?
+            } else {
+                initial_roads
+            };
+            vehicles.admit(world)?;
+            Ok::<_, WorldTickError>((
                 Landscape::for_world(
                     map(world),
                     u32::try_from(unsigned(world, b"DATE", 0, "cur_tileloop_tile")?)
@@ -150,16 +153,22 @@ impl State<'_> {
                     vehicles.station_tiles(),
                 )?
                 .into_scheduler(),
-            )
-        };
-        let towns = if paused {
-            None
-        } else {
-            Some(crate::runtime::TownHouseCaches::restore(world)?)
-        };
-        let mut state = State::load(world, towns);
+                crate::runtime::TownHouseCaches::restore(world)?,
+            ))
+        })());
+        let mut landscape = None;
+        let mut state = State::load(world, None);
         let mut report = WorldTickReport { ticks: Vec::new() };
         for step in 0..ticks {
+            vehicles.before_state_loop(&mut state)?;
+            let paused = state.number(b"DATE", 0, "pause_mode")? != 0;
+            if !paused && landscape.is_none() {
+                let (scheduler, towns) = active_domain
+                    .take()
+                    .ok_or_else(|| unsupported("landscape", "missing active admission"))??;
+                landscape = Some(scheduler);
+                state.towns = Some(towns);
+            }
             let events = advance(&mut state, &mut clock, &mut landscape, vehicles, paused)
                 .map_err(|error| match error {
                     WorldTickError::Unsupported { phase, reason } => {

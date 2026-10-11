@@ -10,10 +10,11 @@ pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 mod backup_enabled_sale_native;
 #[cfg(test)]
 mod backup_sale_native;
-#[cfg(test)]
 mod job_executor;
+mod job_pause;
 pub(crate) mod stations;
 mod transport;
+mod transport_jobs;
 pub(crate) use stations::StationContext;
 pub use stations::{RoadStationGeometry, StationArea};
 mod depot;
@@ -418,7 +419,7 @@ impl SimulationRuntime {
                 Ok((id, cache))
             })
             .collect::<Result<BTreeMap<_, _>, RuntimeError>>()?;
-        Ok(Self {
+        let mut runtime = Self {
             orders,
             towns: TownHouseCaches::restore(&world)?,
             depot: depot::DepotRuntime::restore(&world)?,
@@ -429,7 +430,9 @@ impl SimulationRuntime {
             world,
             content,
             road,
-        })
+        };
+        job_pause::after_load(&mut runtime.world, &runtime.transport)?;
+        Ok(runtime)
     }
     /// Canonical live records; runtime save methods apply transient backup projection.
     /// Mutable access is intentionally absent.
@@ -437,7 +440,9 @@ impl SimulationRuntime {
         &self.world
     }
 
-    /// Live transport pool history and restored payment/job state.
+    /// Live transport pool history and payment/job observations.
+    /// Worker completion is timing-dependent and may change without advancing the World.
+    /// Unsupported populated jobs are identified explicitly, never reported as pending workers.
     pub fn transport_state_json(&self) -> serde_json::Value {
         self.transport.snapshot()
     }

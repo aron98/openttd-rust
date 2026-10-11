@@ -12,7 +12,8 @@ use ottd_save::{
 pub(super) struct IdleStations(Vec<u32>);
 impl IdleStations {
     pub(super) fn restore(world: &World, runtime: &StationRuntime) -> Result<Self, WorldTickError> {
-        if crate::world_access::unsigned(world, b"DATE", 0, "pause_mode")? != 0 {
+        let pause = crate::world_access::unsigned(world, b"DATE", 0, "pause_mode")?;
+        if pause != 0 && pause != 64 && pause != 192 {
             return Ok(Self(Vec::new()));
         }
         let table = world

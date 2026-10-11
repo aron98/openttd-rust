@@ -101,6 +101,19 @@ impl<T> Worker<T> {
             .cloned()
             .transpose()
     }
+    /// Signal cleanup cancellation without consuming ownership or joining yet.
+    pub(super) fn cancel_unfinished(&self) {
+        // Completed scheduled work is retired without aborting its published result.
+        // An unfinished owner is being discarded (rollback/runtime cleanup).
+        let pending = self
+            .completion
+            .result
+            .lock()
+            .map_or(true, |result| result.is_none());
+        if pending {
+            self.completion.cancelled.store(true, Ordering::Release);
+        }
+    }
     /// Wait for immutable publication without consuming a committed owner's thread handle.
     pub(super) fn wait(&self) -> Outcome<T> {
         let mut result = self
@@ -131,16 +144,7 @@ impl<T> Worker<T> {
 }
 impl<T> Drop for Worker<T> {
     fn drop(&mut self) {
-        // Completed scheduled work is retired without aborting its published result.
-        // An unfinished owner is being discarded (rollback/runtime cleanup).
-        let pending = self
-            .completion
-            .result
-            .lock()
-            .map_or(true, |result| result.is_none());
-        if pending {
-            self.completion.cancelled.store(true, Ordering::Release);
-        }
+        self.cancel_unfinished();
         if let Some(handle) = self.handle.take() {
             if handle.join().is_err() {
                 eprintln!("link graph worker failed outside its computation boundary");

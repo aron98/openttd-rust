@@ -29,12 +29,16 @@ fn run_horizon() -> Result {
     let mut runtime = SimulationRuntime::restore_vanilla(world)?;
     let before = format!("{runtime:?}");
     let before_world = runtime.saved_json()?;
+    let live_before = runtime.transport_state_json();
     std::fs::create_dir_all(&output)?;
     // When: the entire native-observed route horizon advances in one transaction.
     let result = runtime.advance_world(ticks);
-    // Then: refusals must leave every saved field and runtime member unchanged;
+    // Then: refusals preserve committed saved/cache/ownership state. Host workers may
+    // independently finish; their raw before/after observations remain visible.
+    //
     // the required route still fails RED until the whole horizon is supported.
     let unchanged = before == format!("{runtime:?}");
+    let live_after = runtime.transport_state_json();
     let description = match &result {
         Ok(report) => format!("Ok({} ticks)", report.ticks.len()),
         Err(error) => format!("Err({error:?})"),
@@ -43,7 +47,9 @@ fn run_horizon() -> Result {
         output.join("result.json"),
         serde_json::to_vec_pretty(&serde_json::json!({
             "ticks": ticks, "result": description,
-            "entire_runtime_unchanged": unchanged,
+            "committed_runtime_unchanged": unchanged,
+            "entire_runtime_unchanged": unchanged && live_before == live_after,
+            "live_transport_before": live_before, "live_transport_after": live_after,
             "saved_world_unchanged": before_world == runtime.saved_json()?
         }))?,
     )?;

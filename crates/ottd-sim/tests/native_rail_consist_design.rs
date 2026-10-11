@@ -1,7 +1,6 @@
-//! Success-expecting consist restoration REDs, without changing the single-engine API.
+//! Complete consist restoration witnesses, without changing the single-engine API.
 pub mod rail_consist_support;
-use ottd_sim::runtime::rail;
-use rail_consist_support::{Result, load, native, observation, save, world_equal};
+use rail_consist_support::{Result, load, native, observation, save, verify, world_equal};
 use serde_json::{Value, json};
 use std::path::PathBuf;
 
@@ -66,59 +65,14 @@ fn native_both_save_origins_and_observer_neutrality() -> Result {
     Ok(())
 }
 
-fn restoration_red(input: &std::path::Path, label: &str) -> Result {
-    let root = evidence()?;
-    let mut world = load(input)?;
-    let before = world.saved_json()?;
-    let expected = observation(&root.join("observe"))?;
-    // The current single-locomotive boundary is deliberately called unchanged. A new
-    // consist API is a design proposal, not a stub or an unapproved implementation.
-    let actual = rail::restore(&mut world);
-    std::fs::write(
-        root.join(format!("{label}.result.txt")),
-        format!("{actual:?}\n"),
-    )?;
-    assert!(
-        actual.is_ok(),
-        "missing consist restoration boundary: {actual:?}"
-    );
-    let cache = serde_json::to_value(actual?)?;
-    let keys = cache.as_object().ok_or("cache object")?;
-    let expected_caches = expected
-        .get("rail")
-        .and_then(Value::as_array)
-        .ok_or("rail array")?
-        .iter()
-        .map(|part| {
-            keys.keys()
-                .map(|key| {
-                    Ok((
-                        key.clone(),
-                        part.get(key).ok_or("missing native cache")?.clone(),
-                    ))
-                })
-                .collect::<Result<serde_json::Map<String, Value>>>()
-                .map(Value::Object)
-        })
-        .collect::<Result<Vec<_>>>()?;
-    assert_eq!(
-        vec![cache],
-        expected_caches,
-        "complete per-part train caches"
-    );
-    assert_eq!(before, world.saved_json()?);
-    world_equal(
-        &world,
-        &load(&root.join("observe/save/autosave/exit.sav"))?,
-        &root.join(format!("{label}.world")),
-    )?;
-    Ok(())
+fn restoration(input: &std::path::Path, label: &str) -> Result {
+    verify(&evidence()?, input, label)
 }
 
 #[test]
-#[ignore = "intentional missing-boundary RED using authentic native origin"]
+#[ignore = "requires authentic native origin"]
 fn original_origin_consist_restoration() -> Result {
-    restoration_red(
+    restoration(
         &evidence()?.join("prepare/save/autosave/exit.sav"),
         "original-red",
     )
@@ -127,5 +81,5 @@ fn original_origin_consist_restoration() -> Result {
 #[test]
 #[ignore = "intentional missing-boundary RED using Rust serialized origin"]
 fn rust_origin_consist_restoration() -> Result {
-    restoration_red(&evidence()?.join("rust-origin.sav"), "rust-red")
+    restoration(&evidence()?.join("rust-origin.sav"), "rust-red")
 }

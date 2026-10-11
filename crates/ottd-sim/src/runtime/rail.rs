@@ -1,5 +1,9 @@
 //! Isolated vanilla single-locomotive after-load boundary; no train ticking.
 mod cache;
+mod consist;
+pub use consist::{
+    ConsistCaches, ConsistError, ConsistField, ConsistPart, ConsistRefusal, restore_consists,
+};
 mod record;
 use crate::content::ContentCatalog;
 pub use cache::RailVehicleCache;

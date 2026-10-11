@@ -4,8 +4,8 @@ use ottd_save::{
     WireValue,
     world::{PathElement, World, WorldEdit},
 };
-use ottd_sim::runtime::rail::{self, RailRefusal, RailRestoreError};
-use rail_consist_support::{Result, load, native, observation, save, world_equal};
+use ottd_sim::runtime::rail::{self, ConsistError, ConsistRefusal};
+use rail_consist_support::{Result, load, native, observation, save, verify, world_equal};
 use std::path::PathBuf;
 
 fn field(id: u32, location: (bool, &str), value: u64) -> WorldEdit {
@@ -67,16 +67,25 @@ fn rust_only_invalid_chain_controls() -> Result {
             let before = encoded(&world)?;
             let derived = serde_json::to_value(world.derived())?;
             std::fs::write(directory.join(format!("{name}.before.sav")), &before)?;
-            let result = rail::restore(&mut world);
-            assert!(matches!(
-                result,
-                Err(RailRestoreError::Unsupported(RailRefusal::VehicleRoster))
-            ));
+            let result = rail::restore_consists(&mut world);
+            let actual = match &result {
+                Err(ConsistError::Unsupported(reason) | ConsistError::Part { reason, .. }) => {
+                    Some(*reason)
+                }
+                _ => None,
+            };
+            let expected = match name {
+                "detached-wagons" => ConsistRefusal::MultipleRoots,
+                "invalid-cargo" => ConsistRefusal::Cargo,
+                "saved-going-up" | "saved-going-down" | "saved-both-slopes" => {
+                    ConsistRefusal::SlopeFlags
+                }
+                _ => ConsistRefusal::Subtype,
+            };
+            assert_eq!(actual, Some(expected), "{result:?}");
             assert_eq!(encoded(&world)?, before);
             assert_eq!(serde_json::to_value(world.derived())?, derived);
-            format!(
-                "Current generic roster refusal, NOT a future consist-specific guard: {result:?}"
-            )
+            format!("Typed consist domain refusal: {result:?}")
         };
         save(&world, &directory.join(format!("{name}.after.sav")))?;
         std::fs::write(
@@ -94,6 +103,7 @@ enum Control {
     Powered,
     Capacity,
     Coupled,
+    ZeroTail,
 }
 
 fn saved_control(control: Control, name: &str) -> Result {
@@ -111,6 +121,7 @@ fn saved_control(control: Control, name: &str) -> Result {
             field(2, (false, "flags"), 8),
         ],
         Control::Capacity => vec![field(1, (true, "cargo_cap"), 37)],
+        Control::ZeroTail => vec![field(2, (true, "cargo_cap"), 0)],
         Control::Coupled => vec![
             field(0, (true, "acceleration"), 255),
             field(1, (false, "flags"), 8),
@@ -119,6 +130,9 @@ fn saved_control(control: Control, name: &str) -> Result {
     };
     if matches!(control, Control::Capacity | Control::Coupled) {
         expected_saved.edit_batch(vec![field(1, (true, "cargo_cap"), 37)])?;
+    }
+    if matches!(control, Control::ZeroTail) {
+        expected_saved.edit_batch(vec![field(2, (true, "cargo_cap"), 0)])?;
     }
     input.edit_batch(edits)?;
     let path = directory.join("input.sav");
@@ -148,34 +162,32 @@ fn saved_control(control: Control, name: &str) -> Result {
         directory.join("native-control.txt"),
         "PASS original after-load complete saved mutation set and full-cache/RNG/save continuation; capacity stays saved, no vanilla GRF diagnostic\n",
     )?;
-    let before = encoded(&input)?;
-    let result = rail::restore(&mut input);
-    std::fs::write(directory.join("rust-red.txt"), format!("{result:?}\n"))?;
-    assert_eq!(encoded(&input)?, before);
-    assert!(
-        result.is_ok(),
-        "missing consist restoration boundary: {result:?}"
-    );
-    Ok(())
+    verify(&directory, &path, "rust-restored")
 }
 
 #[test]
-#[ignore = "intentional native-backed stale acceleration RED"]
+#[ignore = "requires native-backed stale acceleration fixture"]
 fn stale_acceleration() -> Result {
     saved_control(Control::Acceleration, "stale-acceleration")
 }
 #[test]
-#[ignore = "intentional native-backed powered flags RED"]
+#[ignore = "requires native-backed powered flags fixture"]
 fn powered_flags() -> Result {
     saved_control(Control::Powered, "powered-flags")
 }
 #[test]
-#[ignore = "intentional native-backed saved capacity RED"]
+#[ignore = "requires native-backed saved capacity fixture"]
 fn saved_capacity() -> Result {
     saved_control(Control::Capacity, "saved-capacity")
 }
 #[test]
-#[ignore = "intentional native-backed coupled saved mutation RED"]
+#[ignore = "requires native-backed coupled saved mutation fixture"]
 fn coupled_saved_mutations() -> Result {
     saved_control(Control::Coupled, "coupled")
+}
+
+#[test]
+#[ignore = "requires native empty suffix-capacity witness"]
+fn suffix_occupancy() -> Result {
+    saved_control(Control::ZeroTail, "zero-tail-capacity")
 }

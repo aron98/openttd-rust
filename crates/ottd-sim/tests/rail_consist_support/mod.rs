@@ -1,7 +1,10 @@
 //! File and process boundary for the native consist design witnesses.
+mod snapshot;
+mod verify;
 use ottd_save::{Compression, Savegame, world::World};
 use serde_json::Value;
 use std::{path::Path, process::Command};
+pub use verify::verify;
 
 /// Fallible native evidence operation.
 pub type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;

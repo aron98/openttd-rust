@@ -33,6 +33,12 @@ def source_names(root: Path) -> tuple[str, ...]:
         regular(root, root / name)
         for name in (
             "scripts/script_vm_inputs.py",
+            "scripts/script_vm_receipts.py",
+            "scripts/tests/script_vm_policy_producer_checks.py",
+            "scripts/tests/script_vm_policy_assertions.py",
+            "scripts/tests/test_script_vm_policy_assertions.py",
+            "scripts/tests/script_vm_refactor_bindings_test.py",
+            "scripts/grf-control-ruff.toml",
             "scripts/owned_restore_sources.py",
             "scripts/script_vm_provenance.py",
             "scripts/tests/script_vm_tables_bindings_test.py",

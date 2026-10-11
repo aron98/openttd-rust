@@ -408,7 +408,7 @@
     "scripts/check-tree-spread.py": "f6763bb90daa796609cf11e1141bceff800c035e3846450f18107062f16252e2",
     "scripts/context_ci_support.py": "19e15e8eddbb16e6bd41e75995820cc564f150ac7f085fafa7884c8ffc7b0827",
     "scripts/gameplay_foundations.py": "64e71e50a3b110c8c2e7b24c7825c9ccf8eea840d1fa16052225d577848cadec",
-    "scripts/grf-control-ruff.toml": "9a0cfe50ec309b7f2c9b518dfc9ba99eca2b95ca3043979deb4012e32b323737",
+    "scripts/grf-control-ruff.toml": "efe4107b12ec3b1279d757be7933376baa7e8b8a8260c943ccd9c650b62cef98",
     "scripts/grf_control_evidence.py": "ced905de494306ee5773fb3badcca40d0f3c1ac3260fbfc5d9578f03a93e674b",
     "scripts/grf_control_run.py": "35bbf64c751a3cfaeca04a847b2d256548c6a07d7081bab3c2996d17d1886333",
     "scripts/language_ci_compare.py": "ec4a0aa2f45a766ba8d70be040546af37d4d2708af8e855027e887f01cfadd40",

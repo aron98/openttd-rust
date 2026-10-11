@@ -567,7 +567,7 @@
     "scripts/run-terrain-reference.cmake": "6b92dff6bca29ac46624fa4c551afa6df272be5539869407df7af991e83feb48",
     "scripts/sale_lifetime.py": "80fb39e6c167ab8236af48bcbab5d8e182b88291290b7bb3b8eec88eb1672bea",
     "scripts/sale_saved_state.py": "8d917ba8e1d016329bc3dff0ddab08c73afb9447701f85e6b7b52d18fdbdaec1",
-    "scripts/script_vm_inputs.py": "303ec9ee703ff7cbb46daae34303c46ae8b2b780afae38042bfe8ea4b36115c2",
+    "scripts/script_vm_inputs.py": "889cd6ca85928a538b5810da5d7509cc41c7cc79ccd542df13825852c5931778",
     "scripts/script_vm_provenance.py": "662d35c21d584567a6ac48bcea952a4d32b4e8253a575e38cac78a9685280d91",
     "scripts/setup-snapshot-reference.sh": "99061bd5f6bab072d03410f5a748c63bd27d9a4ff364c6d99dbb50e9af0c1594",
     "scripts/shared_restore_admission.py": "54af558a6978d841e277c05776e02353aee9944d1e31c9d67e648b6b3b002f3b",

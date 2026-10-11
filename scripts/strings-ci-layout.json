@@ -5517,6 +5517,7 @@
         "stale-source/scripts/script_vm_observation.py",
         "stale-source/scripts/script_vm_policy.py",
         "stale-source/scripts/script_vm_provenance.py",
+        "stale-source/scripts/script_vm_receipts.py",
         "stale-source/scripts/script_vm_roots.py",
         "stale-source/scripts/script_vm_roots_admission.py",
         "stale-source/scripts/script_vm_roots_capture.py",

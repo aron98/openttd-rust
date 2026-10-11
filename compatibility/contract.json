@@ -2392,7 +2392,7 @@
   {
    "id": "grf-control-scripts-grf-control-ruff-toml",
    "path": "scripts/grf-control-ruff.toml",
-   "sha256": "9a0cfe50ec309b7f2c9b518dfc9ba99eca2b95ca3043979deb4012e32b323737",
+   "sha256": "efe4107b12ec3b1279d757be7933376baa7e8b8a8260c943ccd9c650b62cef98",
    "kind": "recipe",
    "provenance": "Configured four-stage NewGRF control profile; original whole LoadNewGRF baseline and configured file decisions; upstream.toml. Full baseline execution/specifications/callbacks remain required.",
    "save_version": null,
@@ -3004,7 +3004,7 @@
   {
    "id": "scalar-vm-validator",
    "path": "scripts/script_vm_evidence.py",
-   "sha256": "85dbb2ccc5d47af3204a8586306a834390a36b2782bde62de9937c73c5000b99",
+   "sha256": "460a12989b00e4d62ce9301119cfef3d1463546534121ccd45deeebaf1bd1725",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "c584856d3c134640f8d22a3467413fec40ec59d4846f5ab73d458e1aee11c54b",
+   "sha256": "b307f0d16de05cb35d5e7c680e957ec7328d870ac1588ebbeb49f2aa1ec15bdf",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "04c50e6de8674e630b0cc58802605092315a8b3bb4dfc21d07c676a31a74e652",
+   "sha256": "9ef44f8e3152f972b48c64584de938677e761054d02f0bd1ecc540f349ac1425",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "3867b624b1703c55bffbc11a90f68213589fa05dff844ed80001b38effe50239",
+   "sha256": "a9d8691d40b2969723fec3f15200051f35a7df3cd75e2d9c5b220c1d0b70cb9e",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "ee56e63faca3045997e625e5243701cd4e2604ba5fc69f5a11e6cb7c9f3df979",
+   "sha256": "35680f0ed9b5cf0150226c71b1c32c510d5fc883d646f6e17a5653ad80e536c0",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "1eedeb7c653541db3f3c9459b73e29435479120c7111a6504a6d2d75665df4be",
+   "sha256": "31a9da5b9f2eef3d3dca6ae4de75511809fe28a6ce1d1a68a40bc9935b684cc8",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "d894488d993e70dc9b27ed9767393f1a7d5ca2327eee0deda4552866e1ee7201",
+   "sha256": "791554d16f1b89cf2f40fc7434697ec11c552a9132ae6d7c7266e44caa071472",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "66b71d82001171a5d1c9a5eaf5dcc41e0ce968eb9c21463c0ba2e9f87e9643de",
+   "sha256": "afa8950066b04274bcccca41eb6ca1c7346fab56ac94670e6b1c613ea1baa919",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "6468dc80b35741e42a768b7cf72004f8dd0f5bb97382f5c2393cc774aa7adda4",
+   "sha256": "569f1d6fb72a6065702bc29df9992b5d35d08b45bd97b32208432d16a4bb1121",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "845fab60333c83516d9489719c99c288d2def7517da323b25a1c106a927035b7",
+   "sha256": "a99cb90aed410c0ba1f2da9d52709338ef2517ea08a369a8485577f2c926ea2a",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "17839e784d1ecc562a0311f8307a441565a07f7792172b50697fe87228d747fa",
+   "sha256": "8333662d0e2229a4966fe8650ca6de21816ad84868b488c7aac8f6ed87bb15e0",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4156,7 +4156,7 @@
   {
    "id": "scalar-vm-input-policy-tests",
    "path": "scripts/tests/test_script_vm_policy.py",
-   "sha256": "3a021812c5e695bcbdfc966cd061ce9d0ac4128fd1bcc1228cdc508d1ef1fd7f",
+   "sha256": "ac14d24e5c37ad20633c64a4151b1605f56d52b7f1e15bd9d7b3eafa677e71e7",
    "kind": "recipe",
    "provenance": "Explicit rejection policy for reached out-of-byte-domain native ctype arguments; upstream.toml",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "e9dc5872fe37c57dcfdc10427152ffc31c5d73f5bb2d9161f4a8378da6d9a768",
+   "sha256": "e3f86c26790edb06feaac2eaefc14eeb966a9ccfb1d8c0fab40116fc3c584401",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "32089ca4660e66ee1868436d5a43cc6e9c09e13f683136f5261be2d930f64c58",
+   "sha256": "85b3c49144a982ea57fc58beccca25c6dc04444ba90e8f51378c1da50c6776b3",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "6d581210979890bf853ffc8b16ed2d7c84de98b8c41b94e4ea96c995868099ee",
+   "sha256": "1bb18418908c36b9ac47174f0fd765132121ae994a3b5a4567828bf502ce6487",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "6d6f1efed30fbd7cfdb515c3d3b849167485fc69d418d6c0a86680ce80503ab5",
+   "sha256": "cd4a018b0330753790c4e02408fbe266d488472e7b2e861401d991d802069259",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -7774,7 +7774,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-vm-root-sessions-rs",
    "path": "crates/ottd-script/src/vm/root_sessions.rs",
-   "sha256": "447aa37dc0dd4ac1549c9ba23a22de31651ed780ab9cc8af3bb81ab4542ac47a",
+   "sha256": "d9505315a2f174c3a3764485d785b870a744cb2e847d859e34e1801ab7013655",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7864,7 +7864,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-vm-array-sessions-rs",
    "path": "crates/ottd-script/src/vm/array_sessions.rs",
-   "sha256": "c64326fe28c4553b5eb649ef8276871dbe140a5cc4d18c8c63d2b5929c54961a",
+   "sha256": "bab1d2cfe08fe17c156a8e6a91d3b76fd82c1c52b3b2f29c487d223c0e4ac521",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "86c2c7063b3ce5bb5e0bc0a38d8e51e94b379cc29aaf32b1acd751544033d455",
+   "sha256": "b4f95a8820de461e91e739c4e682dfcab9c3758297063e4d3ea41d7fbbce062e",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "9aa2992be8b3f92296c49c0a037ffa6a3ce864e34aea6e0ab6b391fc38cf4772",
+   "sha256": "80f00685c0cb068d365baec459bb7c0eddaaec133322e5f8657d4f1992090add",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -9826,7 +9826,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-rs",
    "path": "crates/ottd-script/src/vm.rs",
-   "sha256": "f8bdb862a2871983c3f487e67df10f246e3c840f4dc8ffd192fba0166194557c",
+   "sha256": "57462fab7e6124b14227301ae98ca2d289adeaa0564fdc50befeef65f0657a05",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10033,7 +10033,7 @@
   {
    "id": "native-script-calls-scripts-script-vm-inputs-py",
    "path": "scripts/script_vm_inputs.py",
-   "sha256": "303ec9ee703ff7cbb46daae34303c46ae8b2b780afae38042bfe8ea4b36115c2",
+   "sha256": "889cd6ca85928a538b5810da5d7509cc41c7cc79ccd542df13825852c5931778",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10834,7 +10834,7 @@
   {
    "id": "script-runtime-crates-ottd-script-src-vm-closures-rs",
    "path": "crates/ottd-script/src/vm/closures.rs",
-   "sha256": "e5c216a0a4f62393eb887ab9e0fa439320e9bf4304864f72d11e65be13da8ace",
+   "sha256": "8eebf694371963cf84d155de76207ba5cd4d2426ff463b47ac7fdc928bd4e8ee",
    "kind": "recipe",
    "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,
@@ -11122,7 +11122,7 @@
   {
    "id": "script-diagnostics-crates-ottd-script-tests-diagnostics-rs",
    "path": "crates/ottd-script/tests/diagnostics.rs",
-   "sha256": "88a32d5ebb63a0b63fc392acfbf86faca004b310e37e659321dc65fdb8ed1dbd",
+   "sha256": "014ca020326d42250baaa3489b903b16fafc8c89f56db86f3f9371546f9816cf",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 sqdebug.cpp PrintObjVal/Raise_IdxError and sqvm.cpp; runtime diagnostic fidelity",
    "save_version": null,
@@ -11131,9 +11131,108 @@
   {
    "id": "script-diagnostics-scripts-compat-script-vm-tables-diagnostic-cases-py",
    "path": "scripts/compat/script-vm/tables/diagnostic_cases.py",
-   "sha256": "2045e3b1d8eecd9d1bc6cc101edf46d3f9c1f4e9840d11a0cb7a1d8df9c29a0d",
+   "sha256": "7c13fcbff6e6579f3ba5a3f255ac56e73e7acd5000df5d1ac68959338be16f78",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 sqdebug.cpp PrintObjVal/Raise_IdxError and sqvm.cpp; runtime diagnostic fidelity",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-crates-ottd-script-src-heap-ownership-rs",
+   "path": "crates/ottd-script/src/heap/ownership.rs",
+   "sha256": "1894809763fa29fcb422be079b08a35079aeb64acab310d035089f742a215791",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-crates-ottd-script-src-vm-registers-rs",
+   "path": "crates/ottd-script/src/vm/registers.rs",
+   "sha256": "449c460f0a472104b33e749151ed4b0a340441fb3df86fd1b41cff7a95183a70",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-crates-ottd-script-src-vm-root-sessions-session-rs",
+   "path": "crates/ottd-script/src/vm/root_sessions/session.rs",
+   "sha256": "3e2b87bf52613c58cc80ddea7c7fefb802da3f7d0392ac8f3334232c1b51affc",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-crates-ottd-script-src-vm-array-sessions-state-rs",
+   "path": "crates/ottd-script/src/vm/array_sessions/state.rs",
+   "sha256": "c0c171ecee1b81157ab24d788d26cb3c9258aa6c69e78ea282ada385e45289a1",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-crates-ottd-script-src-vm-array-sessions-execution-rs",
+   "path": "crates/ottd-script/src/vm/array_sessions/execution.rs",
+   "sha256": "b0dbf4471abb76e1f95932ad49a3021ab00656f52df970e577f48119784097da",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-crates-ottd-script-src-vm-array-sessions-commands-rs",
+   "path": "crates/ottd-script/src/vm/array_sessions/commands.rs",
+   "sha256": "6c3570cd614acd616f868134272071a00c38d0f005fff839aaa0885a9c80b9ed",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-scripts-script-vm-receipts-py",
+   "path": "scripts/script_vm_receipts.py",
+   "sha256": "9c17fdd15b4df1a784922c1fe93a9aebbae05821a2072b0a57f84c005cecd0bf",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-scripts-tests-script-vm-policy-producer-checks-py",
+   "path": "scripts/tests/script_vm_policy_producer_checks.py",
+   "sha256": "5ba2a6122668a1c9be3669e22c86973881aebe526d06ed0fc90c271ea4af97b5",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-scripts-tests-script-vm-policy-assertions-py",
+   "path": "scripts/tests/script_vm_policy_assertions.py",
+   "sha256": "382c5648a5502ef5fcf711d47ae73c60764fa578e8d8ddf06f36ff933d8b4b3b",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-scripts-tests-test-script-vm-policy-assertions-py",
+   "path": "scripts/tests/test_script_vm_policy_assertions.py",
+   "sha256": "800988f13cee333f48b8776c89b4fc3997dcb0cfae78750b2e679230eec2f20f",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-review-scripts-tests-script-vm-refactor-bindings-test-py",
+   "path": "scripts/tests/script_vm_refactor_bindings_test.py",
+   "sha256": "28458666004186494c57ad17f15d9789b4ae202b8dfeb42f72bea870224c9ecb",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
    "save_version": null,
    "profile": null
   }
@@ -20889,7 +20988,19 @@
     "script-runtime-scripts-compat-script-vm-varargs-verify-sh",
     "script-diagnostics-crates-ottd-script-src-vm-diagnostics-rs",
     "script-diagnostics-crates-ottd-script-tests-diagnostics-rs",
-    "script-diagnostics-scripts-compat-script-vm-tables-diagnostic-cases-py"
+    "script-diagnostics-scripts-compat-script-vm-tables-diagnostic-cases-py",
+    "script-review-crates-ottd-script-src-heap-ownership-rs",
+    "script-review-crates-ottd-script-src-vm-registers-rs",
+    "script-review-crates-ottd-script-src-vm-root-sessions-session-rs",
+    "script-review-crates-ottd-script-src-vm-array-sessions-state-rs",
+    "script-review-crates-ottd-script-src-vm-array-sessions-execution-rs",
+    "script-review-crates-ottd-script-src-vm-array-sessions-commands-rs",
+    "script-review-scripts-script-vm-receipts-py",
+    "script-review-scripts-tests-script-vm-policy-producer-checks-py",
+    "script-review-scripts-tests-script-vm-policy-assertions-py",
+    "script-review-scripts-tests-test-script-vm-policy-assertions-py",
+    "script-review-scripts-tests-script-vm-refactor-bindings-test-py",
+    "grf-control-scripts-grf-control-ruff-toml"
    ],
    "source_refs": [
     "scripts/check-script-vm.py",
@@ -20973,7 +21084,19 @@
     "scripts/compat/script-vm/varargs/observe.cpp",
     "scripts/compat/script-vm/varargs/owners.py",
     "scripts/compat/script-vm/varargs/varargs.hpp",
-    "scripts/compat/script-vm/varargs/verify.sh"
+    "scripts/compat/script-vm/varargs/verify.sh",
+    "crates/ottd-script/src/heap/ownership.rs",
+    "crates/ottd-script/src/vm/registers.rs",
+    "crates/ottd-script/src/vm/root_sessions/session.rs",
+    "crates/ottd-script/src/vm/array_sessions/state.rs",
+    "crates/ottd-script/src/vm/array_sessions/execution.rs",
+    "crates/ottd-script/src/vm/array_sessions/commands.rs",
+    "scripts/script_vm_receipts.py",
+    "scripts/tests/script_vm_policy_producer_checks.py",
+    "scripts/tests/script_vm_policy_assertions.py",
+    "scripts/tests/test_script_vm_policy_assertions.py",
+    "scripts/tests/script_vm_refactor_bindings_test.py",
+    "scripts/grf-control-ruff.toml"
    ],
    "evidence": [
     "summary.json",

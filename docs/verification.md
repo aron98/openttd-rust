@@ -1,5 +1,29 @@
 # Compatibility foundation verification
 
+## Reviewed strict ScriptVM CI correction
+
+Independent review approves the four atomic commits through `3d15d6d`.
+Stale scalar/root/array test names now select the existing native consumers.
+The frame driver runs exactly its original 34 required tests within the larger
+library, and admission rejects missing frames, extra tests and missing `--exact`.
+Three oversized Python modules are split into twelve cohesive modules with
+preserved public APIs, function bodies and native fixtures/budgets/controls.
+All nine extracted helpers are required, hashed and retained by the actual
+ScriptVM recipe. A first review rejected their omitted retention; that epoch
+is preserved, and the correction passes a fresh independent review.
+
+Root and reviewer each rebuild the original/Rust observers and run 10,666
+comparisons with 153 explicit undefined-input rejections. All 596 Python tests
+and 21,456 subtests pass. Nine omitted-helper checks and nine actual changed-byte
+validator processes reject, then restored complete evidence validates. The
+current source archive verifies 5,007 Git blobs and 4,287 recipe inputs; the
+complete compact proof verifies 1,276 members and retains the rejected epoch.
+Evidence is under `.worktrees/stage04-script-ci/.omo/evidence/script-ci-fixed/`
+and `.omo/evidence/stage04-script-ci-fixed-review/report.md`.
+
+This repairs the inherited strict CI recipe. Published GNU/interoperability
+runs remain to be checked; all seven broad stage 4 gates stay open.
+
 ## Reviewed stage 4 vanilla house simulation
 
 Independent review approved the seven atomic commits through `b355101`.
@@ -21,7 +45,7 @@ and `.omo/evidence/stage04-house-review/report.md`.
 Credited production scenarios have genuinely absent cargo recipients.
 Active recipients, animation, growth/rebuild, wider industries, NewGRF,
 AI/GameScript and GNU house execution remain required. The inherited normal-CI
-script selector issue is being corrected separately. All seven stage 4 gates
+script selector issue is corrected by the separately reviewed increment above. All seven stage 4 gates
 remain open.
 
 ## Reviewed stage 4 native script calls

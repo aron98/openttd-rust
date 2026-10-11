@@ -43,6 +43,19 @@ recipients, growth/rebuild, animations, NewGRF and wider industries remain
 required. Default asynchronous jobs, user closures, industry-manager and
 populated cargo increments are in private integration/development; their
 unreviewed work is not credited here. All seven completion gates remain open.
+CI correction `3d15d6d` integrates four separately reviewable source/binding
+atoms. It repairs stale scalar/root/array names and selects exactly the original
+34 required frame consumers without weakening membership guards. Twelve cohesive
+Python modules preserve the original helper APIs and behavior. All nine moved
+helpers now belong to the required, hashed, retained ScriptVM source closure;
+a first review rejected their omission, and fresh review verifies the fix.
+Root and reviewer each execute 10,666 original/Rust comparisons and 153 explicit
+undefined-input refusals. All 596 Python tests and 21,456 subtests pass, alongside
+nine omission checks, nine real retained-byte corruptions and three frame-argv
+corruptions. Current proof verifies 5,007 source blobs, 4,287 recipe inputs and
+1,276 compact archive members, including the rejected proof epoch. Published
+GNU/normal interoperability results remain pending. All seven gates stay open.
+
 Earlier milestones and their bounded verification results are recorded below.
 
 Independent review approves exact `7779f39` after repeating 52 complete

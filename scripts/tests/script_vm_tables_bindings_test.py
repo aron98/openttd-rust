@@ -17,7 +17,20 @@ from scripts.script_vm_provenance import (
 from scripts.world_check_support import WorldCheckError
 
 
-def test_changed_copied_table_header_is_rejected(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    "changed",
+    [
+        "observe.cpp",
+        "strings.hpp",
+        "constants.hpp",
+        "root_slots.hpp",
+        "arrays.hpp",
+        "tables.hpp",
+    ],
+)
+def test_changed_copied_observer_source_is_rejected(
+    tmp_path: Path, changed: str
+) -> None:
     harness = tmp_path / "scripts/compat/script-vm"
     native = tmp_path / "native"
     harness.mkdir(parents=True)
@@ -36,7 +49,7 @@ def test_changed_copied_table_header_is_rejected(tmp_path: Path) -> None:
         _ = (harness / name).write_text("original observer input")
         _ = (native / name).write_text("original observer input")
     verify_observer_sources(tmp_path, native)
-    _ = (native / "tables.hpp").write_text("substituted table observer")
+    _ = (native / changed).write_text("substituted observer input")
     with pytest.raises(WorldCheckError, match="Native observer source differs"):
         verify_observer_sources(tmp_path, native)
 
@@ -51,6 +64,16 @@ def test_script_targets_include_embedded_owner_and_mutation_data() -> None:
         "scripts/compat/script-vm/tables/fixtures/mutation.nut",
         "scripts/compat/script-vm/tables/fixtures/null-set.nut",
         "crates/ottd-script/examples/observe.rs",
+        "crates/ottd-script/src/table/tests/storage.rs",
+        "crates/ottd-script/tests/clone-owner.txt",
+        "crates/ottd-script/tests/delete-owner.txt",
+        "crates/ottd-script/tests/delete-mutation.txt",
+        "crates/ottd-script/tests/delete-effects.txt",
+        "crates/ottd-script/tests/table-storage.txt",
+        "scripts/compat/script-vm/tables/fixtures/clone-owner.nut",
+        "scripts/compat/script-vm/tables/fixtures/delete-owner.nut",
+        "scripts/compat/script-vm/tables/fixtures/delete-mutation.nut",
+        "scripts/compat/script-vm/tables/fixtures/delete-effects.nut",
     }
     assert expected <= set(
         crate_inputs(root, ("ottd-script",), ("src", "tests", "examples"))
@@ -70,12 +93,26 @@ def test_active_vm_manifest_closes_current_table_producer_inputs() -> None:
     assert "native/tables.hpp" in spec.paths
 
 
+@pytest.mark.parametrize(
+    "missing",
+    [
+        "crates/ottd-script/tests/tables-owner.txt",
+        "crates/ottd-script/tests/clone-owner.txt",
+        "crates/ottd-script/tests/delete-effects.txt",
+        "crates/ottd-script/tests/delete-mutation.txt",
+        "crates/ottd-script/tests/delete-owner.txt",
+        "crates/ottd-script/tests/table-storage.txt",
+        "scripts/compat/script-vm/tables/fixtures/delete-mutation.nut",
+        "scripts/compat/script-vm/tables/case.py",
+        "scripts/compat/script-vm/tables/objects.py",
+    ],
+)
 def test_missing_embedded_input_rejected_before_native_validation(
     tmp_path: Path,
+    missing: str,
 ) -> None:
     root = Path(__file__).resolve().parents[2]
     spec = load_spec(root / "scripts/script-vm-manifest.json")
-    missing = "crates/ottd-script/tests/tables-owner.txt"
     altered = replace(
         spec, sources=tuple(row for row in spec.sources if row[0] != missing)
     )

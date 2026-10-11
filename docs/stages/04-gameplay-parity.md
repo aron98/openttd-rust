@@ -46,7 +46,7 @@ metadata epoch, not a new native execution claim. The Apple hash ABI has actual
 native proof. Focused GNU CI run `38125486543` also passes both profiles: 267
 strict comparisons, 162 crate tests, the external native hash test and five
 observation-corruption controls per profile. Root audits all 4,995 artifact
-files and all 1,532 original source blobs against the pinned Git tree. This run
+files and all 1,523 original source blobs against the pinned Git tree. This run
 executes PR merge `70920af`, with source head `2a1db7a`; no local GNU execution
 is claimed. Other
 ABIs, aggregate edges, delegates, delete/clone, root storage unification,

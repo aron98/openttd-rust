@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "304571db1b4025d9989f7f850e63c22abc898df3c87896b6bdf5c00ad56e04cb",
+   "sha256": "04718223e18085ca3da86b44bc2fbcd31a57d4e4b2beec9a54fa64fdd76e67f6",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "cce9df7c11bfbcb617cbb6893f672370753e7c651c6d80e78b971349574c8c32",
+   "sha256": "022496c6709ce468d8f97cdd83969486bd62dab5bd7d528f35a71d77f2b59d6a",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "2712581f29a1d57442042c27d43c9e9dc41f565e69faaff4670f70f15627c52f",
+   "sha256": "9dc9d9c6045cd74945461ca7f8a7b8043c598c1d54156fa80e423cca1e07b027",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,

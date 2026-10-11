@@ -20,6 +20,10 @@ namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "industry_recipient_prepare_scale300") {
+        Require(std::getenv("OTTD_INDUSTRY_RECIPIENT_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "industry recipient preparation requires offline normal game");
+        return Command<CMD_CHANGE_SETTING>::Post(std::string{"economy.industry_cargo_scale"}, int32_t{300});
+    }
     if (kind == "industry_recipient_prepare_selectgoods") {
         Require(std::getenv("OTTD_INDUSTRY_RECIPIENT_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "industry recipient preparation requires offline normal game");
         const int32_t value = command.at("value").get<int32_t>();

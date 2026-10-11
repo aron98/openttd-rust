@@ -47,7 +47,8 @@ fn unfinished_due_worker_requests_pause_before_the_clock() -> Result {
         19
     );
     // When native pre-state-loop control runs before the clock.
-    let mut state = crate::WorldTickState::load(&mut world, None);
+    let industries = crate::runtime::IndustryCaches::restore(&world)?;
+    let mut state = crate::WorldTickState::load(&mut world, None, industries);
     before_tick(&mut state, &transport)?;
     state.finish()?.0.commit();
     // Then pause is requested without advancing the saved game tick.
@@ -62,7 +63,8 @@ fn unfinished_due_worker_requests_pause_before_the_clock() -> Result {
     // Completion is deliberately released only after inspecting the pending branch.
     gate.store(true, Ordering::Release);
     worker.wait()?;
-    let mut state = crate::WorldTickState::load(&mut world, None);
+    let industries = crate::runtime::IndustryCaches::restore(&world)?;
+    let mut state = crate::WorldTickState::load(&mut world, None, industries);
     before_tick(&mut state, &transport)?;
     state.finish()?.0.commit();
     assert_eq!(

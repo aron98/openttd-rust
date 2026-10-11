@@ -180,7 +180,8 @@ fn opaque_job_command_context_is_explicit_and_cannot_execute_pause_control() -> 
     let world = runtime.saved_json()?;
     let before = format!("{runtime:?}");
     // When the simulation-specific pre-tick consumer is requested.
-    let mut state = crate::WorldTickState::load(&mut runtime.world, None);
+    let mut state =
+        crate::WorldTickState::load(&mut runtime.world, None, runtime.industries.clone());
     let error =
         super::before_tick(&mut state, &runtime.transport).expect_err("opaque jobs must not run");
     drop(state);

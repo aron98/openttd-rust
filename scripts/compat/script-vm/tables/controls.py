@@ -5,7 +5,14 @@ import sys
 from pathlib import Path
 
 from .case import Case
-from .compare import validate, validate_runtime_stderr
+from .compare import (
+    BUDGETS,
+    Observation,
+    digest,
+    validate,
+    validate_runtime_stderr,
+    verify_observation,
+)
 
 
 def controls(output: Path) -> None:
@@ -46,8 +53,58 @@ def controls(output: Path) -> None:
         rejected.append("runtime-stderr")
     else:
         raise RuntimeError("Comparator accepted runtime stderr corruption")
+    compiler_control(output)
+    rejected.append("compiler-stderr")
     _ = (output / "controls.json").write_text(json.dumps(rejected) + "\n")
     print(f"PASS rejected {len(rejected)} native observation corruptions")
+
+
+def compiler_control(output: Path) -> None:
+    """Reject a rehashed mutation of genuine retained compiler stderr."""
+    output = output.resolve()
+    case = Case("invalid-literal", "return {a:1};", "compile_error")
+    source = output / "invalid-literal.nut"
+    prefix = "invalid-literal-0-rust"
+    stderr = output / f"{prefix}.stderr"
+    receipt = output / f"{prefix}.json"
+    original_error, original_receipt = stderr.read_bytes(), receipt.read_bytes()
+    if not original_error:
+        raise RuntimeError("Missing real compiler error")
+    record = Observation(
+        case.name,
+        0,
+        BUDGETS[0],
+        source.name,
+        "invalid-literal-0-native",
+        prefix,
+        digest(source),
+        digest(output / f"{prefix}.stdout"),
+    )
+    verify_observation(output, record, (case, BUDGETS[0]))
+    try:
+        _ = stderr.write_bytes(original_error + b"compiler corruption\n")
+        _ = receipt.write_text(
+            json.dumps(
+                {
+                    "argv": [str(output / "rust"), str(source), *map(str, BUDGETS[0])],
+                    "status": 0,
+                    "stdout_sha256": digest(output / f"{prefix}.stdout"),
+                    "stderr_sha256": digest(stderr),
+                }
+            )
+        )
+        _ = (output / "control-compiler-stderr.stderr").write_bytes(stderr.read_bytes())
+        _ = (output / "control-compiler-stderr.json").write_bytes(receipt.read_bytes())
+        try:
+            verify_observation(output, record, (case, BUDGETS[0]))
+        except RuntimeError as error:
+            _ = (output / "control-compiler-stderr.error").write_text(str(error))
+        else:
+            raise RuntimeError("Comparator accepted compiler stderr corruption")
+    finally:
+        _ = stderr.write_bytes(original_error)
+        _ = receipt.write_bytes(original_receipt)
+    verify_observation(output, record, (case, BUDGETS[0]))
 
 
 if __name__ == "__main__":

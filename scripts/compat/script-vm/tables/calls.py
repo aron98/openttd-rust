@@ -111,7 +111,7 @@ def audit(output: Path, scenarios: list[Case]) -> list[Record]:
             validate(case, native["stdout"], rust["stdout"])
             if native["print"] != rust["print"]:
                 raise RuntimeError(f"Print callback mismatch: {case.name}")
-            if case.stage != "compile_error" and native["stderr"] != rust["stderr"]:
+            if native["stderr"] != rust["stderr"]:
                 raise RuntimeError(f"Native call error mismatch: {case.name}")
             records.append(
                 Record(

@@ -94,7 +94,7 @@ def audit(output: Path, *, recorded: Path | None = None) -> list[Record]:
             terminal(case, native["stdout"], native["stderr"])
             if native["stdout"] != rust["stdout"] or native["print"] != rust["print"]:
                 raise RuntimeError(f"Full trace mismatch: {case.name}, budget {number}")
-            if case.stage != "compile_error" and native["stderr"] != rust["stderr"]:
+            if native["stderr"] != rust["stderr"]:
                 raise RuntimeError(f"Runtime error mismatch: {case.name}")
             records.append(
                 Record(

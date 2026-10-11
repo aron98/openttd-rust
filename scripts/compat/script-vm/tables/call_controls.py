@@ -16,6 +16,7 @@ Mutation = Literal[
     "framing",
     "stage",
     "error",
+    "compiler-error",
     "budget",
     "status",
     "status-bool",
@@ -47,8 +48,8 @@ def corrupt(output: Path, mutation: Mutation) -> None:
             _ = file.write_bytes(file.read_bytes()[:-1])
         case "stage":
             _ = Path(f"{prefix}.stdout").write_bytes(b"compile_error\n")
-        case "error":
-            _ = Path(f"{prefix}.stderr").write_bytes(b"wrong number of parameters\n")
+        case "error" | "compiler-error":
+            corrupt_error(prefix, mutation)
         case "budget" | "status" | "status-bool":
             # Reconstruct this known real invocation and mutate one semantic field.
             argv = [str(output / "rust"), str(output / "control.0.nut"), "10000"]
@@ -84,6 +85,17 @@ def corrupt(output: Path, mutation: Mutation) -> None:
     _ = Path(f"{prefix}.json").write_text(json.dumps(receipt))
 
 
+def corrupt_error(prefix: Path, mutation: Literal["error", "compiler-error"]) -> None:
+    file = Path(f"{prefix}.stderr")
+    if mutation == "compiler-error":
+        original = file.read_bytes()
+        if not original:
+            raise RuntimeError("Missing genuine compiler diagnostic")
+        _ = file.write_bytes(original + b"compiler corruption\n")
+    else:
+        _ = file.write_bytes(b"wrong number of parameters\n")
+
+
 def controls(native: Path, rust: Path, output: Path) -> None:
     case = Case(
         "control.0", 'print("A\\0B");\nprint("C");\nassert(false);', "runtime_error"
@@ -94,6 +106,7 @@ def controls(native: Path, rust: Path, output: Path) -> None:
         "framing",
         "stage",
         "error",
+        "compiler-error",
         "budget",
         "status",
         "status-bool",
@@ -101,22 +114,27 @@ def controls(native: Path, rust: Path, output: Path) -> None:
     )
     output.mkdir(parents=True, exist_ok=False)
     for mutation in mutations:
+        selected = (
+            Case("control.0", "return type(7,);", "compile_error")
+            if mutation == "compiler-error"
+            else case
+        )
         attempt = output / mutation
         attempt.mkdir()
-        source = attempt / f"{case.name}.nut"
-        _ = source.write_text(case.source)
+        source = attempt / f"{selected.name}.nut"
+        _ = source.write_text(selected.source)
         for side, binary in (("native", native), ("rust", rust)):
             _ = shutil.copy2(binary, attempt / side)
         for number, budget in enumerate(BUDGETS):
             for side in ("native", "rust"):
                 invoke(
                     [str(attempt / side), str(source), *map(str, budget)],
-                    attempt / f"{case.name}-{number}-{side}",
+                    attempt / f"{selected.name}-{number}-{side}",
                 )
-        _ = audit(attempt, [case])
+        _ = audit(attempt, [selected])
         corrupt(attempt, mutation)
         try:
-            _ = audit(attempt, [case])
+            _ = audit(attempt, [selected])
         except (RuntimeError, FileNotFoundError) as error:
             _ = (attempt / "rejection.txt").write_text(str(error) + "\n")
         else:

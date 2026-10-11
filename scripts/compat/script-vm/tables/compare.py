@@ -68,9 +68,9 @@ def validate(case: Case, native: bytes, rust: bytes) -> None:
 
 
 def validate_runtime_stderr(case: Case, native: bytes, rust: bytes) -> None:
-    """Compare raw runtime errors; compiler diagnostic fidelity remains pending."""
-    if case.stage != "compile_error" and native != rust:
-        raise RuntimeError(f"Strict native/Rust runtime stderr mismatch: {case.name}")
+    """Compare full raw compiler and runtime diagnostic channels."""
+    if native != rust:
+        raise RuntimeError(f"Strict native/Rust stderr mismatch: {case.name}")
 
 
 def verify_retention(

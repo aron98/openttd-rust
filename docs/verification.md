@@ -1,5 +1,29 @@
 # Compatibility foundation verification
 
+## Reviewed stage 4 vanilla house simulation
+
+Independent review approved the seven atomic commits through `b355101`.
+Root and reviewer each execute 63,881 original/Rust simulation calls and
+89 complete saved/derived/house-cache boundaries. Coverage includes the
+110-row vanilla house catalog, construction, original and binomial passenger/mail
+production, cargo scaling, monthly histories, year 2101 and reciprocal saves.
+The real zero-AI timer resets through owner-none script RNG state. Adjacent
+road/quarter checks and late faults preserve transactional cache publication.
+
+The candidate passes 765 ordinary Rust tests, 587 Python tests with 21,402
+subtests, strict static checks and 143 declaration checks. Root retains 4,998
+exact Git blobs, 362 compiled inputs and a complete 6,884-member proof archive.
+Independent review reproduces the fresh house recipe and audits those archives.
+Evidence is retained under
+`.worktrees/stage04-house-integration/.omo/evidence/house-integration/`
+and `.omo/evidence/stage04-house-review/report.md`.
+
+Credited production scenarios have genuinely absent cargo recipients.
+Active recipients, animation, growth/rebuild, wider industries, NewGRF,
+AI/GameScript and GNU house execution remain required. The inherited normal-CI
+script selector issue is being corrected separately. All seven stage 4 gates
+remain open.
+
 ## Reviewed stage 4 native script calls
 
 On 2026-10-11, independent review approved `32490c7`, containing six atomic
@@ -22,8 +46,12 @@ and `.omo/evidence/stage04-native-calls-review/report.md`.
 
 Four bare-root native functions are admitted: `assert`, `print`, `type` and
 `array`. User functions/captures/defaults, nested frames/tail calls, general
-callable collection/root ordering, AI/GameScript/NewGRF integration and GNU
-native-call execution remain required. All seven broad stage 4 gates stay open.
+callable collection/root ordering and AI/GameScript/NewGRF integration remain
+required. Focused GNU run `38144208950` on published head `5af6964` also passes
+930 baseline plus 156 call comparisons per profile. Root independently audits
+all 16,552 artifact files, 1,523 pinned C++ blobs, seven observer inputs, raw
+NUL-containing outputs, test selectors and corruption receipts. This closes
+GNU proof for that bounded native-call increment. All seven broad stage 4 gates stay open.
 
 ## Reviewed stage 4 ordinary road round trips
 

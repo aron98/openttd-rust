@@ -27,8 +27,22 @@ per debug/release profile and adds 36 comparisons per profile. The integrated
 candidate passes 764 workspace tests, 580 Python tests with 21,221 subtests,
 strict static checks and 143 declaration checks. Source and complete proof
 archives retain 4,976 Git blobs and 33,294 verified members. User functions,
-general callable collection and GNU native-call proof remain required. All seven
-completion gates below remain open.
+general callable collection remain required. Focused GNU run `38144208950`
+on published head `5af6964` supplies the bounded native-call proof: both profiles
+pass 930 baseline plus 156 call comparisons; root audits all 16,552 artifact
+files, original source identity and raw invocation receipts.
+
+House increment `b355101` integrates seven atomic construction, production,
+zero-AI timer, cache-publication and current-binding changes. Root and independent
+reviewer each execute 63,881 calls with 89 complete house boundaries, both
+simulation save origins, real monthly/year transitions and observer controls.
+The combined candidate passes 765 ordinary Rust tests, 587 Python tests with
+21,402 subtests, strict static checks and 143 declarations. Current proof
+retains 4,998 source Git blobs and 6,884 verified archive members. Active cargo
+recipients, growth/rebuild, animations, NewGRF and wider industries remain
+required. Default asynchronous jobs, user closures, industry-manager and
+populated cargo increments are in private integration/development; their
+unreviewed work is not credited here. All seven completion gates remain open.
 Earlier milestones and their bounded verification results are recorded below.
 
 Independent review approves exact `7779f39` after repeating 52 complete
@@ -66,7 +80,8 @@ exact `d43c8fa`. Subsequent PR head `f9536b3` passes the focused GNU job in
 run `38137706226`: root audits all 13,425 artifact files, both profiles'
 930 comparisons and all 1,523 pinned native source blobs. Its ordinary GNU
 workspace run passes 753 tests without an ABI-fixture override. This proves
-the graph/root epoch; GNU native calls remain a separate pending increment.
+the graph/root epoch; the subsequent native-call GNU proof above is a distinct
+source epoch.
 General VM/shared/host GC
 ordering, callable functions, delegates, weakrefs and full AI/GameScript remain
 required; bounded storage/ownership proof does not close a broad stage gate.

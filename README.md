@@ -20,6 +20,9 @@ validation, costs and execution. The public simulation runtime also supports
 bounded ordinary empty-cargo bus/truck round trips, directed road routing,
 terminal loading/timetables and both-origin save continuations. Populated cargo,
 default asynchronous link jobs and wider vehicle behavior remain required.
+Vanilla houses also advance construction and passenger/mail production with
+restored town caches, monthly histories, and both-origin save continuations.
+Active cargo recipients, town growth and broader industry behavior remain required.
 The independent Squirrel library supports
 graph-backed arrays/tables, first-class roots, native closure identity and
 metadata, mutable `this`, bounded ownership/cycle collection, and bare-root

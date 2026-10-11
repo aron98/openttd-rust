@@ -128,3 +128,7 @@ impl CargoRuntime {
         })
     }
 }
+
+#[cfg(test)]
+#[path = "cargo/control_tests.rs"]
+mod control_tests;

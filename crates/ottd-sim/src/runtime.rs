@@ -1,6 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
 mod industries;
+pub mod rail;
 pub use industries::IndustryCaches;
 pub(crate) mod towns;
 pub use towns::{TownHouseCache, TownHouseCaches};

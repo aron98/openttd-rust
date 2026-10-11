@@ -27,12 +27,17 @@ class IndustryNative:
         *,
         observe: bool = True,
         whole_loop: bool = False,
+        compressed: bool = False,
     ) -> Path:
         output.mkdir(parents=True)
         protocol = output / "protocol.json"
         config = output / "openttd.cfg"
         write_json(protocol, plan(actions))
-        _ = config.write_text(CONFIG)
+        _ = config.write_text(
+            CONFIG.replace("savegame_format = none", "savegame_format = zlib")
+            if compressed
+            else CONFIG
+        )
         variables = {
             "OTTD_REPLAY_PATH": str(protocol),
             "OTTD_REPLAY_OUTPUT": str(output),

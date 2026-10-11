@@ -1,0 +1,44 @@
+--- a/src/saveload/reference_movement_admission.hpp
++++ b/src/saveload/reference_movement_admission.hpp
+@@ -2,6 +2,8 @@
+ #ifndef OTTD_REFERENCE_MOVEMENT_ADMISSION_HPP
+ #define OTTD_REFERENCE_MOVEMENT_ADMISSION_HPP
+ #include "../road_map.h"
++#include "../industry_map.h"
++#include "../water_map.h"
+ #include "../newgrf_config.h"
+ #include "../game/game.hpp"
+ #include "../animated_tile_func.h"
+@@ -26,7 +28,18 @@
+     Require(Map::SizeX() == 64 && Map::SizeY() == 64, "movement pilot requires 64-square map");
+     Require(_grfconfig.empty() && _settings_game.game_creation.landscape == LandscapeType::Temperate, "movement pilot requires vanilla temperate content");
+     Require(Game::GetInstance() == nullptr, "movement pilot excludes GameScript");
+-    Require(BaseStation::GetNumItems() == 0 && Industry::GetNumItems() == 0 && Object::GetNumItems() == 0, "movement pilot excludes populated station/industry/object domains");
++    const char *industry_events = std::getenv("OTTD_INDUSTRY_EVENTS");
++    const bool industry_observation = industry_events != nullptr && *industry_events != '\0';
++    Require(BaseStation::GetNumItems() == 0 && Object::GetNumItems() == 0, "movement pilot excludes populated station/object domains");
++    if (Industry::GetNumItems() != 0) {
++        Require(industry_observation && Industry::GetNumItems() == 1, "mixed industry observer requires one forest");
++        for (const Industry *industry : Industry::Iterate()) {
++            Require(industry->type == 3 && industry->prod_level >= 4 && industry->prod_level <= 128
++                && industry->ctlflags.None() && industry->neutral_station == nullptr && industry->psa == nullptr
++                && industry->accepted.empty() && industry->produced.size() == 1 && industry->produced[0].cargo == 7
++                && industry->stations_near.empty(), "mixed industry observer forest domain");
++        }
++    }
+     Require(CargoPacket::GetNumItems() == 0 && CargoPayment::GetNumItems() == 0, "movement pilot excludes cargo packets/payments");
+     Require(LinkGraphJob::GetNumItems() == 0 && LinkGraph::GetNumItems() == 0, "movement pilot excludes linkgraphs");
+     for (const Company *company : Company::Iterate()) Require(!company->is_ai && company->ai_instance == nullptr, "movement pilot excludes AI");
+@@ -34,6 +47,12 @@
+     for (uint32_t id = 0; id < Map::Size(); ++id) {
+         const TileIndex tile(id);
+         if (IsTileType(tile, MP_CLEAR) || IsTileType(tile, MP_VOID)) continue;
++        if (IsTileType(tile, MP_INDUSTRY)) {
++            Require(industry_observation && GetIndustryGfx(tile) == 16 && !IsTileOnWater(tile)
++                && (IsIndustryCompleted(tile) || GetIndustryConstructionStage(tile) < INDUSTRY_COMPLETED),
++                "mixed industry observer tile domain");
++            continue;
++        }
+         if (IsTileType(tile, MP_TREES)) {
+             const char *observer = std::getenv("OTTD_TREE_GROWTH_EVENTS");
+             Tile raw(tile);

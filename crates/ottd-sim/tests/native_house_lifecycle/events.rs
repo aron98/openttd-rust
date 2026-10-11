@@ -117,7 +117,7 @@ pub(super) fn loop_equal(runtime: &SimulationRuntime, event: &LoopEvent) -> Resu
     Ok(())
 }
 
-fn raw(world: &World, index: u32) -> Result<[u64; 10]> {
+pub(super) fn raw(world: &World, index: u32) -> Result<[u64; 10]> {
     let tile = world
         .map()
         .tiles()

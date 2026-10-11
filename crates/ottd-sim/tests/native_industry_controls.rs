@@ -34,3 +34,30 @@ fn automatic_manager_refuses_without_publishing_any_runtime_effect() -> Result {
     assert_eq!(runtime.town_house_caches(), &towns);
     Ok(())
 }
+
+#[test]
+#[ignore = "requires original command-created forest save and its natural disaster horizon"]
+fn natural_late_disaster_rolls_back_complete_forest_runtime() -> Result {
+    let input = World::decode(&Savegame::decode(
+        &std::fs::read(std::env::var("OTTD_INDUSTRY_ROLLBACK_SAVE")?)?,
+        ottd_save::DEFAULT_MAX_BYTES,
+    )?)?;
+    let mut runtime = SimulationRuntime::restore_vanilla(input)?;
+    let before = runtime.saved_json()?;
+    let towns = runtime.town_house_caches().clone();
+    let industries = runtime.industry_caches().clone();
+    let roads = runtime.road_caches().clone();
+    let content = runtime.content().clone();
+    let derived = runtime.world().derived().clone();
+    let transport = runtime.transport_state_json();
+    assert!(matches!(runtime.advance_world(60680),
+        Err(WorldTickError::Unsupported {phase:"disaster_day",reason}) if reason.contains("call 60679")));
+    assert_eq!(runtime.saved_json()?, before);
+    assert_eq!(runtime.world().derived(), &derived);
+    assert_eq!(runtime.content(), &content);
+    assert_eq!(runtime.road_caches(), &roads);
+    assert_eq!(runtime.town_house_caches(), &towns);
+    assert_eq!(runtime.industry_caches(), &industries);
+    assert_eq!(runtime.transport_state_json(), transport);
+    Ok(())
+}

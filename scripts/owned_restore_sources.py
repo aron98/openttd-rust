@@ -24,16 +24,24 @@ def regular(root: Path, path: Path) -> str:
 
 def compiled_inputs(root: Path) -> tuple[str, ...]:
     """Inventory the CLI dependency crates and simulator lib's nested test inputs."""
+    return crate_inputs(root, CRATES)
+
+
+def crate_inputs(
+    root: Path, crates: tuple[str, ...], folders: tuple[str, ...] = ("src",)
+) -> tuple[str, ...]:
+    """Inventory selected Cargo targets and literal embedded source/data inputs."""
     required = {regular(root, root / name) for name in ("Cargo.toml", "Cargo.lock")}
     required.update(
         regular(root, path) for path in (root / "crates").glob("*/Cargo.toml")
     )
     required.update(regular(root, path) for path in (root / ".cargo").rglob("*.toml"))
     pending: list[Path] = []
-    for name in CRATES:
+    for name in crates:
         crate = root / "crates" / name
         required.add(regular(root, crate / "Cargo.toml"))
-        pending.extend(sorted((crate / "src").rglob("*.rs")))
+        for folder in folders:
+            pending.extend(sorted((crate / folder).rglob("*.rs")))
         if (crate / "build.rs").exists():
             raise WorldCheckError(f"Unreviewed compiled build script: {name}")
     inspected: set[str] = set()

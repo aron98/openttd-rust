@@ -10,6 +10,7 @@ import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 
+from scripts.script_vm_inputs import OBSERVER_INPUTS, source_names
 from scripts.world_check_support import Json, WorldCheckError, decode_json, read_json
 
 PIN = "14ec60f248547d4d062a1160f0fc26d742319888"
@@ -99,6 +100,9 @@ def check_blob(path: Path, expected: str) -> None:
 
 
 def verify_sources(root: Path, native: Path, spec: Spec) -> None:
+    missing = set(source_names(root)) - {name for name, _ in spec.sources}
+    if missing:
+        raise WorldCheckError(f"VM source closure omits inputs: {sorted(missing)}")
     for name, sha in spec.sources:
         if digest(root / name) != sha:
             raise WorldCheckError(f"VM source changed: {name}")
@@ -112,13 +116,11 @@ def verify_sources(root: Path, native: Path, spec: Spec) -> None:
     expected = f"pin={PIN}\ninteger_bits=64\nfloat_bits=32\ngc=enabled\n"
     if (native / "variant.txt").read_text() != expected:
         raise WorldCheckError("Native variant differs")
-    for name in (
-        "observe.cpp",
-        "strings.hpp",
-        "constants.hpp",
-        "root_slots.hpp",
-        "arrays.hpp",
-    ):
+    verify_observer_sources(root, native)
+
+
+def verify_observer_sources(root: Path, native: Path) -> None:
+    for name in OBSERVER_INPUTS:
         if digest(native / name) != digest(root / "scripts/compat/script-vm" / name):
             raise WorldCheckError("Native observer source differs")
 

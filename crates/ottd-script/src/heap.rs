@@ -169,3 +169,6 @@ mod tests;
 mod delegate_tests;
 #[cfg(test)]
 mod owner_probe;
+
+#[cfg(test)]
+mod delegate_lifetimes;

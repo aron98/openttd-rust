@@ -20,6 +20,18 @@ impl<'a> Probe<'a> {
     pub(super) fn register(&mut self, label: char, table: &Table) {
         self.identities.push((label, table.0.edge.life.id));
     }
+    pub(super) fn register_parent(&mut self, label: char, table: &Table) -> bool {
+        let parent = table.0.read(|object| match object {
+            Object::Table(data) => data.delegate.as_ref().map(|edge| edge.life.id),
+            Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => None,
+        });
+        if let Some(id) = parent {
+            self.identities.push((label, id));
+            true
+        } else {
+            false
+        }
+    }
     fn label(&self, id: ObjectId) -> char {
         let label = self
             .identities
@@ -54,6 +66,9 @@ impl<'a> Probe<'a> {
         drop(entries);
         if let Some(trace) = self.heap.retired.borrow_mut().as_mut() {
             for id in trace.drain(..) {
+                if !self.identities.iter().any(|(_, current)| *current == id) {
+                    continue;
+                }
                 let label = self.label(id);
                 writeln!(self.output, "free {label}")?;
             }

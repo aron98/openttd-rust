@@ -18,16 +18,22 @@ selected vehicle, house, company, station, and industry callbacks. Saved-world r
 integrates clocks, terrain and admitted company/town callbacks with command
 validation, costs and execution. The public simulation runtime also supports
 bounded ordinary empty-cargo bus/truck round trips, directed road routing,
-terminal loading/timetables and both-origin save continuations. Populated cargo,
-default asynchronous link jobs and wider vehicle behavior remain required.
+terminal loading/timetables, bounded passenger cargo loading/delivery/payments,
+and both-origin simulated save continuations. Manual-distribution link jobs have
+bounded restoration, execution and publication coverage; pending-worker timing,
+automatic distribution and wider vehicle behavior remain required.
+Separate after-load APIs restore stopped vanilla single locomotives and one
+straight consist on flat normal rail. Train movement remains required.
 Vanilla houses also advance construction and passenger/mail production with
 restored town caches, monthly histories, and both-origin save continuations.
-Active cargo recipients, town growth and broader industry behavior remain required.
+Town growth and broader industry behavior remain required. Forest production
+with active road cargo recipients is currently being implemented and verified.
 The independent Squirrel library supports
 graph-backed arrays/tables, first-class roots, native closure identity and
 metadata, mutable `this`, bounded ownership/cycle collection, and bare-root
-native calls to `assert`, `print`, `type` and `array`. User functions, delegates,
-general callable collection and OpenTTD AI/GameScript integration remain required.
+native calls to `assert`, `print`, `type` and `array`, plus bounded user closures,
+nested calls and variadic arguments. Delegates, general callable collection,
+complete VM semantics and OpenTTD AI/GameScript integration remain required.
 General gameplay, rendering, full scripts and multiplayer are not implemented.
 
 ## Use

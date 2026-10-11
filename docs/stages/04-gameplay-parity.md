@@ -8,6 +8,28 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
+Latest reviewed gameplay publication: `7aa188c` adds a separate bounded
+after-load API for one stopped vanilla rail consist, alongside the passenger
+cargo and single-locomotive restoration published at `aae3408`. Five authentic
+original-command consist rosters match complete observed per-part caches, links,
+stopped getters, RNG and saved/derived state through both serialized load
+origins. Five native controls and four deliberately corrupted cache expectations
+verify that the comparisons detect changes. Unsupported and late-failing
+contexts leave the committed World unchanged. Train movement is still refused.
+
+Populated passenger cargo has native-backed loading/delivery/payment,
+manual-distribution job publication and continuation from saves actually
+produced by both engines. The natural year boundary still reaches an explicit
+vehicle-callback refusal. Pending-worker timing, broader routing and complete
+native vehicle-pool/unit-number observations remain open. The dependency-free
+CI discovery correction is included; current consist checks pass 826 workspace
+tests and 642 Python tests, with ignored/native cases reported separately.
+
+Forest-to-road cargo production and script exceptions are separate active
+implementation/integration increments. All seven broad completion gates below
+remain **OPEN**. These milestones do not change the stage boundary or authorize
+stage 5.
+
 Current reviewed script increment: 27 atomic commits through `a8a8211` add
 graph-owned user closures, nested frames, frame-owned variadic arguments,
 defined-only original execution policy and exact admitted compiler/runtime
@@ -23,8 +45,9 @@ pass 821 cases, Python passes 636 tests and 22,101 subtests, and all 143 scenari
 declarations remain intact. The complete current proof verifies 31,592 outer
 and 97,880 nested members plus 5,103 Git source blobs. This is bounded language
 progress: full VM/GC, AI/GameScript APIs, NewGRF, reciprocal modded continuation
-and the seven broad completion gates remain open. Cargo/industry composition
-and initial rail after-load restoration remain in verification and integration.
+and the seven broad completion gates remain open. Passenger cargo and bounded
+rail after-load restoration are now published; broader industry composition
+remains in verification and integration.
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
@@ -37,8 +60,8 @@ bounded temperate spreading and genuine placement to complete world ticks. Incre
 enables normal CI for the reviewed bounded single-vehicle road movement corpus.
 Road increment `7779f39` integrates ordinary empty-cargo bus/truck round trips
 and their routing/loading/payment/job prerequisites in six product atoms plus
-separate current bindings. Populated cargo, default asynchronous jobs and wider
-transport behavior remain in progress. Script increment `32490c7` adds native
+separate current bindings. Wider cargo, asynchronous timing and transport
+behavior remain in progress. Script increment `32490c7` adds native
 CALL/PREPCALL/PREPCALLK, real host-held main closures and four bare-root native
 functions. Independent review repeats 930 baseline plus 156 call comparisons
 per debug/release profile and adds 36 comparisons per profile. The integrated

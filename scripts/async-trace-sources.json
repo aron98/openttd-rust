@@ -1,0 +1,36 @@
+{
+  "sources": {
+    "reference/async_trace.hpp": "de9584e67c8fa3bfd135ed56f8e341771681e4fad50fc10fbc130b0813cf01db",
+    "reference/async_trace.patch": "8739cb3186ea4a458d02a8ffd6d671fc1077ea9fcab59216bd830145deb7d5b7",
+    "reference/async_trace_input.hpp": "f8195ec14ea19d0bb4f58dcd1ef676054ca058d6bfce52c7d9394e5de3e0e6d7",
+    "reference/async_trace_jobs.hpp": "5df233d3177dc260795976e6c53f82c63e882538a6082f17a5b80197e76b1265",
+    "reference/async_trace_state.hpp": "cb2c478770262711d13c7822baffaf861bd247c1555d4b2e65103fe832c46c02",
+    "scripts/setup-async-trace-reference.sh": "6d478040a4d0e34a21af1af2e81842d3526ca921b637aed72dc1b98e19afd19b",
+    "scripts/async_trace_check.py": "e70a9862c52cc855929f747a01ec6881d9a0017f9503f820e1c6e8f325663055",
+    "scripts/async_trace_controls.py": "1cc557101f79c76c18d9b30f78cfce432a8985e8ae24f58eed966fd5c3119c88",
+    "scripts/async_trace_host.py": "fba900c557f526c0f43110966c86c0d81cc07710dd21201b32bf2274ef55dde9",
+    "scripts/async_trace_jobs.py": "f892b1eb5456320cf68fd669043a62cc61b9ed0377975b64e6e49b6e257d84b6",
+    "scripts/async_trace_model.py": "8eb56f9cb5cdb44079920dd06179737d7bde2123dca9843936126c26e19bcc10",
+    "scripts/async_trace_run.py": "a186a3a685c320d0bfd231aa5b68f01f210b7c9a8b824e750b87e18953c2326a",
+    "scripts/async_trace_sources.py": "0143e53dc30f65d076d70d4274334a17d9fcff2405d7e7a214057cb158bdb335",
+    "scripts/tests/test_async_trace_sources.py": "9109419dd2867a4ced9ac0e7f59e7bd0d941ae4c619d914c51749a3dd50bb3a0",
+    "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047"
+  },
+  "modes": {
+    "reference/async_trace.hpp": "100644",
+    "reference/async_trace.patch": "100644",
+    "reference/async_trace_input.hpp": "100644",
+    "reference/async_trace_jobs.hpp": "100644",
+    "reference/async_trace_state.hpp": "100644",
+    "scripts/setup-async-trace-reference.sh": "100755",
+    "scripts/async_trace_check.py": "100644",
+    "scripts/async_trace_controls.py": "100644",
+    "scripts/async_trace_host.py": "100644",
+    "scripts/async_trace_jobs.py": "100644",
+    "scripts/async_trace_model.py": "100644",
+    "scripts/async_trace_run.py": "100644",
+    "scripts/async_trace_sources.py": "100644",
+    "scripts/tests/test_async_trace_sources.py": "100644",
+    "scripts/world_check_support.py": "100644"
+  }
+}

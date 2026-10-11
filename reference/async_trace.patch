@@ -1,0 +1,215 @@
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -95,6 +95,7 @@
+ #endif
+ 
+ #include "saveload/reference_replay.hpp"
++#include "saveload/reference_async_trace_jobs.hpp"
+ #include "saveload/reference_order_fixture.hpp"
+ #include "safeguards.h"
+ 
+@@ -1213,10 +1214,12 @@
+ void StateGameLoop()
+ {
+ 	if (ReferenceReplay::Run()) return;
++	ReferenceAsync::Scope async_loop;
+ 	ReferenceMovement::Scope movement_loop("state_loop");
+ 	if (!_networking || _network_server) {
+ 		StateGameLoop_LinkGraphPauseControl();
+ 	}
++	ReferenceAsync::Event("after_pause_control");
+ 
+ 	/* Don't execute the state loop during pause or when modal windows are open. */
+ 	if (_pause_mode.Any() || HasModalProgress()) {
+@@ -1230,14 +1233,18 @@
+ 
+ 		if (!HasModalProgress()) {
+ 			ReferenceMovement::Emit("landscaping_limits", "enter");
++			ReferenceAsync::Callback("paused_landscaping_limits_enter");
+ 			UpdateLandscapingLimits();
+ 			ReferenceMovement::Emit("landscaping_limits", "leave");
++			ReferenceAsync::Callback("paused_landscaping_limits_leave");
+ 		}
+ #ifndef DEBUG_DUMP_COMMANDS
+ 		if (_game_mode == GM_NORMAL) {
+ 			ReferenceMovement::Emit("game_loop", "enter");
++			ReferenceAsync::Callback("paused_game_loop_enter");
+ 			Game::GameLoop();
+ 			ReferenceMovement::Emit("game_loop", "leave");
++			ReferenceAsync::Callback("paused_game_loop_leave");
+ 		}
+ #endif
+ 		return;
+--- a/src/misc_cmd.cpp
++++ b/src/misc_cmd.cpp
+@@ -25,6 +25,7 @@
+ 
+ #include "table/strings.h"
+ 
++#include "reference_async_trace.hpp"
+ #include "safeguards.h"
+ 
+ /**
+@@ -203,6 +204,7 @@
+ 				}
+ 			}
+ 
++			ReferenceAsync::PauseApplied(static_cast<uint32_t>(mode), prev_mode.base(), pause);
+ 			NetworkHandlePauseChange(prev_mode, mode);
+ 		}
+ 
+--- a/src/linkgraph/linkgraphschedule.h
++++ b/src/linkgraph/linkgraphschedule.h
+@@ -40,6 +40,7 @@
+ 	typedef std::list<LinkGraph *> GraphList;
+ 	typedef std::list<LinkGraphJob *> JobList;
+ 	friend SaveLoadTable GetLinkGraphScheduleDesc();
++	friend struct ReferenceAsyncAccess;
+ 
+ protected:
+ 	std::array<std::unique_ptr<ComponentHandler>, 6> handlers{}; ///< Handlers to be run for each job.
+--- a/src/linkgraph/linkgraphschedule.cpp
++++ b/src/linkgraph/linkgraphschedule.cpp
+@@ -18,6 +18,7 @@
+ #include "../network/network.h"
+ #include "../misc_cmd.h"
+ 
++#include "../reference_async_trace.hpp"
+ #include "../safeguards.h"
+ 
+ /**
+@@ -46,6 +47,7 @@
+ 		LinkGraphJob *job = new LinkGraphJob(*next);
+ 		job->SpawnThread();
+ 		this->running.push_back(job);
++		ReferenceAsync::JobEvent(job, "running_append");
+ 	} else {
+ 		NOT_REACHED();
+ 	}
+@@ -57,9 +59,17 @@
+  */
+ bool LinkGraphSchedule::IsJoinWithUnfinishedJobDue() const
+ {
+-	if (this->running.empty()) return false;
+-	const LinkGraphJob *next = this->running.front();
+-	return next->IsScheduledToBeJoined() && !next->IsJobCompleted();
++	if (!ReferenceAsync::Enabled()) {
++		if (this->running.empty()) return false;
++		const LinkGraphJob *next = this->running.front();
++		return next->IsScheduledToBeJoined() && !next->IsJobCompleted();
++	}
++	if (this->running.empty()) { ReferenceAsync::Sample(nullptr, false, -1); return false; }
++	LinkGraphJob *next = this->running.front();
++	const bool due = next->IsScheduledToBeJoined();
++	const int completed = due ? int(next->IsJobCompleted()) : -1;
++	ReferenceAsync::Sample(next, due, completed);
++	return due && completed == 0;
+ }
+ 
+ /**
+@@ -70,13 +80,17 @@
+ 	if (this->running.empty()) return;
+ 	LinkGraphJob *next = this->running.front();
+ 	if (!next->IsScheduledToBeJoined()) return;
++	ReferenceAsync::JobEvent(next, "join_begin");
++	const uint32_t trace_job_id = next->index.base();
+ 	this->running.pop_front();
+ 	LinkGraphID id = next->LinkGraphIndex();
+ 	delete next; // implicitly joins the thread
++	ReferenceAsync::Freed(trace_job_id);
+ 	if (LinkGraph::IsValidID(id)) {
+ 		LinkGraph *lg = LinkGraph::Get(id);
+ 		this->Dequeue(lg); // Dequeue to avoid double-queueing recycled IDs.
+ 		this->Queue(lg);
++		ReferenceAsync::QueueEvent("requeued");
+ 	}
+ }
+ 
+@@ -121,10 +135,13 @@
+ /* static */ void LinkGraphSchedule::Clear()
+ {
+ 	for (auto &it : instance.running) {
++		const uint64_t trace_lifetime = ReferenceAsync::Aborting(it);
+ 		it->AbortJob();
++		ReferenceAsync::AbortApplied(trace_lifetime);
+ 	}
+ 	instance.running.clear();
+ 	instance.schedule.clear();
++	ReferenceAsync::QueueEvent("schedule_cleared");
+ }
+ 
+ /**
+@@ -171,6 +188,7 @@
+ 	if (_pause_mode.Test(PauseMode::LinkGraph)) {
+ 		/* We are paused waiting on a job, check the job every tick. */
+ 		if (!LinkGraphSchedule::instance.IsJoinWithUnfinishedJobDue()) {
++			ReferenceAsync::PauseRequest(false);
+ 			Command<CMD_PAUSE>::Post(PauseMode::LinkGraph, false);
+ 		}
+ 	} else if (_pause_mode.None() &&
+@@ -179,6 +197,7 @@
+ 			LinkGraphSchedule::instance.IsJoinWithUnfinishedJobDue()) {
+ 		/* Perform check two TimerGameEconomy::date_fract ticks before we would join, to make
+ 		 * sure it also works in multiplayer. */
++		ReferenceAsync::PauseRequest(true);
+ 		Command<CMD_PAUSE>::Post(PauseMode::LinkGraph, true);
+ 	}
+ }
+@@ -192,6 +211,7 @@
+ {
+ 	if (LinkGraphSchedule::instance.IsJoinWithUnfinishedJobDue()) {
+ 		_pause_mode.Set(PauseMode::LinkGraph);
++		ReferenceAsync::Event("afterload_pause_set");
+ 	}
+ }
+ 
+--- a/src/linkgraph/linkgraphjob.cpp
++++ b/src/linkgraph/linkgraphjob.cpp
+@@ -13,6 +13,7 @@
+ #include "linkgraphjob.h"
+ #include "linkgraphschedule.h"
+ 
++#include "../reference_async_trace.hpp"
+ #include "../safeguards.h"
+ 
+ /* Initialize the link-graph-job-pool */
+@@ -58,7 +59,10 @@
+  */
+ void LinkGraphJob::SpawnThread()
+ {
+-	if (!StartNewThread(&this->thread, "ottd:linkgraph", &(LinkGraphSchedule::Run), this)) {
++	ReferenceAsync::Starting(this);
++	const bool trace_threaded = StartNewThread(&this->thread, "ottd:linkgraph", &(LinkGraphSchedule::Run), this);
++	ReferenceAsync::Backend(this, trace_threaded);
++	if (!trace_threaded) {
+ 		/* Of course this will hang a bit.
+ 		 * On the other hand, if you want to play games which make this hang noticeably
+ 		 * on a platform without threads then you'll probably get other problems first.
+@@ -85,7 +89,9 @@
+  */
+ LinkGraphJob::~LinkGraphJob()
+ {
++	ReferenceAsync::Joining(this);
+ 	this->JoinThread();
++	ReferenceAsync::Joined(this, CleaningPool());
+ 
+ 	/* Don't update stuff from other pools, when everything is being removed.
+ 	 * Accessing other pools may be invalid. */
+@@ -97,7 +103,8 @@
+ 	assert(!this->IsJobAborted());
+ 
+ 	/* Link graph has been merged into another one. */
+-	if (!LinkGraph::IsValidID(this->link_graph.index)) return;
++	if (!LinkGraph::IsValidID(this->link_graph.index)) { ReferenceAsync::JobEvent(this, "publication_graph_missing"); return; }
++	ReferenceAsync::JobEvent(this, "publication_begin");
+ 
+ 	uint16_t size = this->Size();
+ 	for (NodeID node_id = 0; node_id < size; ++node_id) {
+@@ -172,6 +179,7 @@
+ 		if (ge.GetData().IsEmpty()) ge.ClearData();
+ 		InvalidateWindowData(WC_STATION_VIEW, st->index, this->Cargo());
+ 	}
++	ReferenceAsync::JobEvent(this, "publication_end");
+ }
+ 
+ /**

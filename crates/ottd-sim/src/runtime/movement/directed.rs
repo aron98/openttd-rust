@@ -4,6 +4,9 @@ mod frames;
 mod motion;
 mod orders;
 mod routing;
+mod terminal;
+mod terminal_far;
+mod terminal_near;
 use super::{
     RoadPhases, SavedVehicleView, State, VehicleId, WorldTickError, number, set, unsupported,
 };
@@ -19,14 +22,7 @@ pub(super) fn admit(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
     {
         return Err(unsupported("road_route", "vanilla directed road profile"));
     }
-    for name in [
-        "next",
-        "next_shared",
-        "breakdown_ctr",
-        "vehicle_flags",
-        "load_unload_ticks",
-        "waiting_triggers",
-    ] {
+    for name in ["next", "next_shared", "breakdown_ctr", "waiting_triggers"] {
         if v.common_number(name)? != 0 {
             return Err(unsupported("road_route", name));
         }
@@ -42,7 +38,10 @@ pub(super) fn admit(v: SavedVehicleView<'_>) -> Result<(), WorldTickError> {
             return Err(unsupported("road_route", name));
         }
     }
-    if !matches!(v.common_number("current_order.type")?, 0 | 33) {
+    if !matches!(v.common_number("current_order.type")?, 0 | 33 | 195 | 4)
+        || v.common_number("vehicle_flags")? & !0x0109 != 0
+        || !matches!(v.common_number("load_unload_ticks")?, 0 | 1 | 20)
+    {
         return Err(unsupported("road_route", "loading/order lifecycle"));
     }
     Ok(())
@@ -70,7 +69,10 @@ pub(super) fn tick(
         number(state, id, false, "current_order_time")?.wrapping_add(1) & 0xffff_ffff,
     )?;
     orders::process(state, id, runner.content)?;
-    if number(state, id, true, "state")? == 254 {
+    super::loading::handle(state, runner)?;
+    if number(state, id, false, "current_order.type")? & 15 == 3 {
+        // The controller returns while loading; the outer vehicle tick still ages cargo.
+    } else if number(state, id, true, "state")? == 254 {
         depot::leave(runner, state)?;
     } else {
         motion::advance(runner, state)?;

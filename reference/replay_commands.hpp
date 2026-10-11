@@ -19,6 +19,10 @@ namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "road_route_prepare_breakdowns_disabled") {
+        Require(std::getenv("OTTD_ROAD_ROUTE_OBSERVE") != nullptr && !_networking && Vehicle::GetNumItems() == 0, "route reliability setting requires explicit empty offline command preparation");
+        return Command<CMD_CHANGE_SETTING>::Post(std::string{"difficulty.vehicle_breakdowns"}, int32_t{0});
+    }
     if (kind == "road_route_prepare_acceleration") {
         Require(std::getenv("OTTD_ROAD_ROUTE_OBSERVE") != nullptr && !_networking && Vehicle::GetNumItems() == 0, "route setting requires explicit empty offline command preparation");
         return Command<CMD_CHANGE_SETTING>::Post(std::string{"vehicle.roadveh_acceleration_model"}, int32_t{0});

@@ -35,8 +35,6 @@ fn selected(state: &State<'_>, id: VehicleId) -> Result<([i64; 7], usize), World
         if order.number("type")? != 33
             || order.number("flags")? != 0
             || order.number("refit_cargo")? != 254
-            || order.number("wait_time")? != 0
-            || order.number("travel_time")? != 0
         {
             return Err(unsupported(
                 "road_orders",
@@ -70,6 +68,9 @@ pub(super) fn process(
     id: VehicleId,
     content: &crate::content::ContentCatalog,
 ) -> Result<(), WorldTickError> {
+    if matches!(number(state, id, false, "current_order.type")? & 15, 3 | 4) {
+        return Ok(());
+    }
     let (values, real) = selected(state, id)?;
     set(
         state,
@@ -79,7 +80,7 @@ pub(super) fn process(
         i64::try_from(real).map_err(|_| unsupported("road_orders", "index"))?,
     )?;
     let mut unchanged = number(state, id, false, "dest_tile")? != 0;
-    for ((_, field), value) in FIELDS.iter().zip(values) {
+    for ((_, field), value) in FIELDS.iter().zip(values).take(3) {
         unchanged &= number(state, id, false, field)? == value;
     }
     if unchanged {

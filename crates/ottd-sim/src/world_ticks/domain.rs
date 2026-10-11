@@ -6,8 +6,9 @@ use ottd_save::{WireValue, world::World};
 pub(super) fn validate(
     world: &World,
     paused: bool,
-    stations: bool,
+    phases: &impl crate::WorldTickPhases,
 ) -> Result<bool, WorldTickError> {
+    let stations = phases.station_tiles();
     if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 {
         return Err(unsupported("pause", "linkgraph pause control"));
     }
@@ -31,6 +32,9 @@ pub(super) fn validate(
         if id == *b"STNN" && stations {
             continue;
         }
+        if phases.transport_activity() && matches!(&id, b"LGRP" | b"LGRJ" | b"CAPY") {
+            continue;
+        }
         if world
             .tables()
             .get(&id)
@@ -47,6 +51,9 @@ pub(super) fn validate(
         (b"LGRS", "running"),
         (b"LGRS", "schedule"),
     ] {
+        if id == b"LGRS" && phases.transport_activity() {
+            continue;
+        }
         if !matches!(field(world,id,0,name)?,WireValue::Array(items) if items.is_empty()) {
             return Err(unsupported("domain", name));
         }

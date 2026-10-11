@@ -42,8 +42,8 @@ impl IdleStations {
                 }
             }
             if normal.number("always_accepted")? != 0
-                || normal.number("had_vehicle_of_type")? != 0
-                || !matches!(row_field(normal.schema, normal.record, "loading_vehicles")?, WireValue::Array(values) if values.is_empty())
+                || normal.number("had_vehicle_of_type")? & !0x0c != 0
+                || !matches!(row_field(normal.schema, normal.record, "loading_vehicles")?, WireValue::Array(values) if values.len() <= 1)
             {
                 return Err(unsupported("station", "acceptance or loading activity"));
             }
@@ -56,8 +56,6 @@ impl IdleStations {
                 for (name, value) in [
                     ("status", 0),
                     ("rating", 175),
-                    ("link_graph", 65535),
-                    ("node", 65535),
                     ("cargo.reserved_count", 0),
                     ("max_waiting_cargo", 0),
                 ] {
@@ -85,6 +83,26 @@ impl IdleStations {
     pub(super) fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
+    pub(super) fn month(&self, state: &State<'_>) -> Result<(), WorldTickError> {
+        // The admitted goods have no acceptance/current-month flags. Native monthly
+        // CurrentMonth -> LastMonth publication consequently preserves zero status.
+        for id in &self.0 {
+            let table = state.table(b"STNN")?;
+            let row = saved::StationRow {
+                schema: table.schema(),
+                record: table
+                    .record(*id)
+                    .ok_or_else(|| unsupported("station_month", "station"))?,
+            };
+            let (schema, goods) = row.child("normal")?.rows("goods")?;
+            for record in goods {
+                if (saved::StationRow { schema, record }).number("status")? != 0 {
+                    return Err(unsupported("station_month", "active acceptance history"));
+                }
+            }
+        }
+        Ok(())
+    }
     pub(super) fn tick(&self, state: &mut State<'_>) -> Result<(), WorldTickError> {
         for id in &self.0 {
             let table = state.table(b"STNN")?;
@@ -109,6 +127,7 @@ impl IdleStations {
                 ],
                 value: WireValue::Unsigned(counter.wrapping_add(1) % 185),
             })?;
+            super::loading::station_links(state, *id)?;
         }
         Ok(())
     }

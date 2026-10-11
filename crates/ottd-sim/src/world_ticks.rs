@@ -116,7 +116,7 @@ impl State<'_> {
             return Err(unsupported("budget", "tick limit"));
         }
         let paused = unsigned(world, b"DATE", 0, "pause_mode")? != 0;
-        let roads_admitted = domain::validate(world, paused, vehicles.station_tiles())?;
+        let roads_admitted = domain::validate(world, paused, vehicles)?;
         if !paused {
             vehicles.admit(world)?;
         }
@@ -179,6 +179,7 @@ fn advance(
                                 clock.cache().economy_year,
                                 before.days_since_last_month.wrapping_add(1),
                             )?;
+                            vehicles.station_month(state)?;
                             towns::monthly(state, clock.cache().economy_month)?;
                         }
                         ClockEvent::EconomyYear => finance::yearly(state)?,
@@ -237,6 +238,7 @@ fn advance(
                 .wrapping_add(1)
                 % 15,
         )?;
+        vehicles.link_graphs(state)?;
     }
     finance::limits(state)?;
     Ok(TickEvents {

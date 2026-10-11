@@ -35,10 +35,14 @@ fn run_horizon() -> Result {
     // Then: refusals must leave every saved field and runtime member unchanged;
     // the required route still fails RED until the whole horizon is supported.
     let unchanged = before == format!("{runtime:?}");
+    let description = match &result {
+        Ok(report) => format!("Ok({} ticks)", report.ticks.len()),
+        Err(error) => format!("Err({error:?})"),
+    };
     std::fs::write(
         output.join("result.json"),
         serde_json::to_vec_pretty(&serde_json::json!({
-            "ticks": ticks, "result": format!("{result:?}"),
+            "ticks": ticks, "result": description,
             "entire_runtime_unchanged": unchanged,
             "saved_world_unchanged": before_world == runtime.saved_json()?
         }))?,
@@ -59,12 +63,17 @@ fn run_horizon() -> Result {
         runtime.to_savegame()?.encode(Compression::None)?,
     )?;
     std::fs::write(
+        output.join("final.derived.json"),
+        serde_json::to_vec(runtime.world().derived())?,
+    )?;
+    std::fs::write(
         output.join("final.runtime.json"),
         serde_json::to_vec(&serde_json::json!({
             "road": runtime.road_caches().values().collect::<Vec<_>>(),
             "station_geometry": runtime.road_station_geometry(),
             "station_infrastructure": runtime.station_infrastructure(),
             "station_pool": runtime.station_pool(), "road_stop_pool": runtime.road_stop_pool(),
+            "transport": runtime.transport_state_json(),
             "spatial": runtime.single_road_tile_occupancy()?, "orders": runtime.order_state_json()?
         }))?,
     )?;

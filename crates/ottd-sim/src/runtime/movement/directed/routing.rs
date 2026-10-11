@@ -108,7 +108,11 @@ pub(super) fn next(
     let vehicle = super::SavedVehicleView::candidate(state.view(), runner.id)?;
     Network::new(state, runner.id)?.next(vehicle.tile()?, direction)
 }
-pub(super) fn physical_tile(state: &State<'_>, id: super::VehicleId) -> Result<(), WorldTickError> {
+pub(super) fn physical_tile(
+    state: &State<'_>,
+    runner: &RoadPhases<'_>,
+) -> Result<(), WorldTickError> {
+    let id = runner.id;
     let tile = super::SavedVehicleView::candidate(state.view(), id)?.tile()?;
     match Network::new(state, id)?.tile(tile)?.kind {
         TileKind::Road => Ok(()),
@@ -120,9 +124,55 @@ pub(super) fn physical_tile(state: &State<'_>, id: super::VehicleId) -> Result<(
             }
             Ok(())
         }
-        TileKind::Terminal { .. } => Err(unsupported("road_route", "terminal entry lifecycle")),
+        TileKind::Terminal {
+            direction,
+            kind,
+            status,
+            ..
+        } => {
+            let vehicle = super::SavedVehicleView::candidate(state.view(), id)?;
+            let cargo = runner
+                .content
+                .cargo()
+                .get(usize::from(vehicle.cargo_type()?))
+                .ok_or_else(|| unsupported("road_terminal", "cargo specification"))?;
+            let track = number(state, id, true, "state")?;
+            let expected = match direction {
+                0 => 8,
+                1 => 9,
+                2 => 0,
+                3 => 1,
+                _ => return Err(unsupported("road_terminal", "direction")),
+            };
+            if state.view().tile(tile)?.m1() & 31 != vehicle.owner()?
+                || kind != if cargo.classes & 1 != 0 { 3 } else { 2 }
+                || (track < 32 && (track != expected || number(state, id, true, "frame")? != 0))
+                || (track >= 32
+                    && (!(32..48).contains(&track)
+                        || track & !0x26 != expected
+                        || i64::from(status) & (1 << ((track >> 1) & 1)) != 0))
+            {
+                return Err(unsupported(
+                    "road_terminal",
+                    "saved bay occupancy or entry state",
+                ));
+            }
+            Ok(())
+        }
         TileKind::Empty => Err(unsupported("road_route", "vehicle outside road")),
     }
+}
+pub(super) fn stop(
+    state: &State<'_>,
+    id: super::VehicleId,
+    tile: u32,
+) -> Result<(u32, i64), WorldTickError> {
+    let network = Network::new(state, id)?;
+    let (index, row) = network.stop(tile)?;
+    Ok((
+        index,
+        i64::try_from(row.number("status")?).map_err(|_| unsupported("road_terminal", "status"))?,
+    ))
 }
 
 fn destination(

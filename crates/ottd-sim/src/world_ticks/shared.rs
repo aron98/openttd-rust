@@ -19,6 +19,9 @@ pub(crate) trait WorldTickPhases {
         Ok(0)
     }
     fn station_tiles(&self) -> bool { false }
+    fn transport_activity(&self) -> bool { false }
+    fn link_graphs(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
+    fn station_month(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn stations(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn admit(&self, world: &ottd_save::world::World) -> Result<(), WorldTickError>;
     fn economy_boundary(&self, events: &ottd_core::ClockEvents) -> Result<(), WorldTickError>;

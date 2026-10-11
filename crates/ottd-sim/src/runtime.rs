@@ -9,6 +9,7 @@ mod backup_enabled_sale_native;
 #[cfg(test)]
 mod backup_sale_native;
 pub(crate) mod stations;
+mod transport;
 pub(crate) use stations::StationContext;
 pub use stations::{RoadStationGeometry, StationArea};
 mod depot;
@@ -137,6 +138,7 @@ pub struct SimulationRuntime {
     allocation: VehicleAllocation,
     depot: depot::DepotRuntime,
     stations: stations::StationRuntime,
+    transport: transport::TransportRuntime,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -415,6 +417,7 @@ impl SimulationRuntime {
             orders,
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
+            transport: transport::TransportRuntime::restore(&world)?,
             serializer_cargo_paid_for: serialization::restore(&world)?,
             allocation: VehicleAllocation::restore(&world)?,
             world,
@@ -426,6 +429,11 @@ impl SimulationRuntime {
     /// Mutable access is intentionally absent.
     pub const fn world(&self) -> &World {
         &self.world
+    }
+
+    /// Live transport pool history and restored payment/job state.
+    pub fn transport_state_json(&self) -> serde_json::Value {
+        self.transport.snapshot()
     }
 
     /// Station pool allocation metadata.

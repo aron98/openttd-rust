@@ -2,6 +2,7 @@ mod access;
 mod company;
 mod daily;
 mod directed;
+mod loading;
 mod spatial;
 mod stations;
 mod step;
@@ -40,12 +41,15 @@ impl SimulationRuntime {
             content: &self.content,
             spatial: Spatial::restore(&self.world, id)?,
             stations: stations::IdleStations::restore(&self.world, &self.stations)?,
+            transport: self.transport.clone(),
         };
         let (candidate, report) = State::plan(&mut self.world, ticks, &mut runner)?;
         let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
         runner.spatial.validate(vehicle, candidate.map().width())?;
+        runner.transport.validate(candidate.view())?;
         candidate.commit();
         self.road.insert(id, runner.cache);
+        self.transport = runner.transport;
         Ok(report)
     }
 }
@@ -55,10 +59,20 @@ struct RoadPhases<'a> {
     content: &'a ContentCatalog,
     spatial: Spatial,
     stations: stations::IdleStations,
+    transport: super::transport::TransportRuntime,
 }
 impl VehiclePhases for RoadPhases<'_> {
     fn company_assets(&self, state: &State<'_>, owner: u32) -> Result<i64, WorldTickError> {
         company::assets(state, self.content, owner)
+    }
+    fn transport_activity(&self) -> bool {
+        !self.stations.is_empty()
+    }
+    fn link_graphs(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
+        loading::link_tick(state, self)
+    }
+    fn station_month(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
+        self.stations.month(state)
     }
     fn station_tiles(&self) -> bool {
         !self.stations.is_empty()
@@ -76,6 +90,7 @@ impl VehiclePhases for RoadPhases<'_> {
         }
         let v = SavedVehicleView::new(world, self.id)?;
         if !self.stations.is_empty() {
+            loading::admit(world, self)?;
             return if v.common_number("vehstatus")? & 2 != 0 {
                 stations::admit_vehicle(v)
             } else {
@@ -160,10 +175,8 @@ impl VehiclePhases for RoadPhases<'_> {
     }
     fn economy_boundary(&self, events: &ottd_core::ClockEvents) -> Result<(), WorldTickError> {
         if events.iter().any(|event| {
-            matches!(
-                event,
-                ottd_core::ClockEvent::EconomyMonth | ottd_core::ClockEvent::EconomyYear
-            )
+            matches!(event, ottd_core::ClockEvent::EconomyYear)
+                || self.stations.is_empty() && matches!(event, ottd_core::ClockEvent::EconomyMonth)
         }) {
             return Err(unsupported("road_economy", "vehicle month/year callbacks"));
         }
@@ -175,7 +188,11 @@ impl VehiclePhases for RoadPhases<'_> {
         clock: &ClockState,
         progressed: bool,
     ) -> Result<(), WorldTickError> {
-        if progressed && clock.snapshot().date_fract.0 == 0 && clock.snapshot().date.ymd().2 == 1 {
+        if self.stations.is_empty()
+            && progressed
+            && clock.snapshot().date_fract.0 == 0
+            && clock.snapshot().date.ymd().2 == 1
+        {
             return Err(unsupported("road_calendar", "vehicle month/year callbacks"));
         }
         if progressed && self.id.raw() % 74 == u32::from(clock.snapshot().date_fract.0) {
@@ -191,6 +208,7 @@ impl VehiclePhases for RoadPhases<'_> {
         if self.id.raw() % 74 == u32::from(clock.snapshot().economy_date_fract.0) {
             daily::run(state, self.id, self.content)?;
         }
+        loading::station_tick(state, self)?;
         if self.stations.is_empty() {
             self.tick(state)
         } else if number(state, self.id, false, "vehstatus")? & 2 == 0 {

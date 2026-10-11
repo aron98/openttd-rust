@@ -3,8 +3,39 @@
 #ifndef OTTD_REFERENCE_MOVEMENT_SNAPSHOT_HPP
 #define OTTD_REFERENCE_MOVEMENT_SNAPSHOT_HPP
 #include "reference_runtime_road.hpp"
+#include "reference_road_station_runtime.hpp"
+#include "../economy_base.h"
+#include "../linkgraph/linkgraphjob.h"
 namespace ReferenceMovement {
 using Json = nlohmann::json;
+inline Json Transport()
+{
+    Json payments = Json::object(), jobs = Json::object();
+    for (const CargoPayment *payment : CargoPayment::Iterate()) {
+        payments[std::to_string(payment->index.base())] = payment->current_station.base();
+    }
+    for (LinkGraphJob *job : LinkGraphJob::Iterate()) {
+        const std::string id = std::to_string(job->index.base());
+        jobs[id] = nullptr;
+        // Acquire completion before reading worker-owned annotations. Never wait,
+        // join, mutate scheduling or observe the incomplete vectors.
+        if (!job->IsJobCompleted()) continue;
+        size_t edges = 0;
+        bool empty = true;
+        for (NodeID node_id = 0; node_id < job->Size(); ++node_id) {
+            const auto &node = (*job)[node_id];
+            edges += node.edges.size();
+            empty &= node.undelivered_supply == 0 && node.paths.empty() && node.flows.empty();
+            for (const auto &edge : node.edges) empty &= edge.Flow() == 0;
+            for (const auto &demand : node.demands) empty &= demand.demand == 0 && demand.unsatisfied_demand == 0;
+        }
+        if (empty) jobs[id] = {{"nodes", job->Size()}, {"edges", edges}};
+    }
+    return {{"payments", ReferenceOrderState::PoolState(_cargo_payment_pool)},
+        {"graphs", ReferenceOrderState::PoolState(_link_graph_pool)},
+        {"jobs", ReferenceOrderState::PoolState(_link_graph_job_pool)},
+        {"payment_stations", payments}, {"job_results", jobs}};
+}
 inline Json Snapshot()
 {
     Json vehicles = Json::array();
@@ -43,6 +74,7 @@ inline Json Snapshot()
         {"money", static_cast<int64_t>(c->money)}, {"money_fraction", c->money_fraction},
         {"loan", static_cast<int64_t>(c->current_loan)}});
     return {{"vehicles", vehicles}, {"companies", companies},
+        {"transport", Transport()}, {"stations", supported_runtime ? ReferenceRoadStationRuntime::Snapshot() : Json(nullptr)},
         {"runtime_road", supported_runtime ? ReferenceRuntimeRoad::Live() : Json(nullptr)},
         {"runtime_road_supported", supported_runtime}};
 }

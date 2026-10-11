@@ -203,6 +203,9 @@ const DATA: [&[(u8, u8)]; 16] = [
     &[(6, 0), (7, 0), (8, 0), (9, 0), (65, 0)],
 ];
 pub(super) fn at(track: i64, frame: i64) -> Result<(u8, u8), WorldTickError> {
+    if (32..48).contains(&track) {
+        return super::terminal::frame(track, frame);
+    }
     let track =
         usize::try_from(track).map_err(|_| unsupported("road_route", "drive table track"))?;
     let frame =

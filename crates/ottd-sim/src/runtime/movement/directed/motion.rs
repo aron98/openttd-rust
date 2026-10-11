@@ -1,6 +1,7 @@
 //! `RoadVehController` advance loop and `IndividualRoadVehicleController` road frames.
 use super::{
-    RoadPhases, SavedVehicleView, State, WorldTickError, frames, number, routing, set, unsupported,
+    RoadPhases, SavedVehicleView, State, WorldTickError, frames, number, routing, set, terminal,
+    unsupported,
 };
 fn distance(state: &State<'_>, runner: &RoadPhases<'_>) -> Result<i64, WorldTickError> {
     Ok(if number(state, runner.id, false, "direction")? & 1 != 0 {
@@ -51,7 +52,7 @@ fn turn(
     )?;
     Ok(true)
 }
-fn step(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldTickError> {
+fn step(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<bool, WorldTickError> {
     let id = runner.id;
     let track = number(state, id, true, "state")?;
     let frame = number(state, id, true, "frame")?;
@@ -89,24 +90,39 @@ fn step(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
             .wrapping_mul(16)
             .wrapping_add(i64::from(local.1)),
     );
-    if turn(state, runner, position)? && !crossing {
-        return Ok(());
+    if !crossing && turn(state, runner, position)? {
+        return Ok(true);
+    }
+    if !crossing && !terminal::at_bay(state, runner)? {
+        set(state, id, false, "cur_speed", 0)?;
+        return Ok(false);
+    }
+    if !terminal::enter(state, id, tile)?
+        || (crossing && (32..48).contains(&track) && matches!(next_track, 6 | 7 | 14 | 15))
+    {
+        set(state, id, false, "cur_speed", 0)?;
+        return Ok(false);
+    }
+    if crossing {
+        terminal::leave(state, id)?;
+        let _changed = turn(state, runner, position)?;
+        set(state, id, true, "state", next_track)?;
     }
     set(state, id, false, "tile", i64::from(tile))?;
-    set(state, id, true, "state", next_track)?;
     set(state, id, true, "frame", next_frame)?;
     set(state, id, false, "x_pos", position.0)?;
     set(state, id, false, "y_pos", position.1)?;
     runner
         .spatial
-        .update(SavedVehicleView::candidate(state.view(), id)?, state.width)
+        .update(SavedVehicleView::candidate(state.view(), id)?, state.width)?;
+    Ok(true)
 }
 pub(super) fn advance(
     runner: &mut RoadPhases<'_>,
     state: &mut State<'_>,
 ) -> Result<(), WorldTickError> {
     let id = runner.id;
-    routing::physical_tile(state, id)?;
+    routing::physical_tile(state, runner)?;
     let tile = SavedVehicleView::candidate(state.view(), id)?.tile()?;
     let local = frames::at(
         number(state, id, true, "state")?,
@@ -142,8 +158,12 @@ pub(super) fn advance(
         (speed.wrapping_mul(3) / 4).wrapping_add(number(state, id, false, "progress")?);
     set(state, id, false, "progress", 0)?;
     while progress >= distance(state, runner)? {
-        progress = progress.wrapping_sub(distance(state, runner)?);
-        step(state, runner)?;
+        let distance = distance(state, runner)?;
+        progress = progress.wrapping_sub(distance);
+        if !step(state, runner)? {
+            progress = distance.wrapping_sub(1);
+            break;
+        }
     }
     set(state, id, false, "progress", progress)?;
     runner.cache.last_speed = u16::try_from(number(state, id, false, "cur_speed")?)

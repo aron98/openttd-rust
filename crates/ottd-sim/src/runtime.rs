@@ -171,6 +171,7 @@ pub(crate) struct OrderContext<'a> {
 }
 
 pub(crate) struct RoadVehicleContext<'a> {
+    pub(in crate::runtime) cargo: &'a mut transport::cargo::CargoRuntime,
     orders: &'a mut order_state::OrderState,
     pub serializer_cargo_paid_for: u16,
     pub content: &'a ContentCatalog,

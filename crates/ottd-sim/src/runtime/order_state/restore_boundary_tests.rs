@@ -138,6 +138,7 @@ fn restore_cache_failure_rolls_back_consumption_list_allocation_money_and_rng() 
         crate::world_access::field_edit(*b"DATE", 0, "random_state[0]", WireValue::Unsigned(987)),
     ];
     let result = super::super::RoadVehicleContext {
+        cargo: &mut runtime.transport.cargo,
         orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,

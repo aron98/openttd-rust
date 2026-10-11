@@ -138,7 +138,17 @@ impl RoadVehicleContext<'_> {
             return Err(RuntimeError::Invalid("purchase candidate vehicle membership").into());
         }
         let cache = creation_cache(prepared.view(), id, self.content)?;
+        let mut cargo = self.cargo.clone();
+        if cargo
+            .vehicles
+            .insert(id.raw(), super::transport::cargo::VehicleList::default())
+            .is_some()
+        {
+            return Err(RuntimeError::Invalid("purchase cargo cache already exists").into());
+        }
+        cargo.validate(prepared.view())?;
         prepared.commit();
+        *self.cargo = cargo;
         restored.publish(self.orders);
         self.road.insert(id, cache);
         *self.allocation = allocation;

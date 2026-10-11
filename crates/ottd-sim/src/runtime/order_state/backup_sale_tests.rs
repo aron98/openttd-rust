@@ -127,6 +127,7 @@ fn failed_sale_candidate_rolls_back_backup_retarget_and_all_allocators() -> Resu
     let allocation = runtime.allocation.clone();
     let road = runtime.road.clone();
     let result = super::super::RoadVehicleContext {
+        cargo: &mut runtime.transport.cargo,
         orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,
@@ -177,6 +178,7 @@ fn composed_sale_preflights_native_slot_index_deletion_boundary() -> Result {
     let road = runtime.road.clone();
     // Internal transaction control; this does not admit public network command dispatch.
     let result = super::super::RoadVehicleContext {
+        cargo: &mut runtime.transport.cargo,
         orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,

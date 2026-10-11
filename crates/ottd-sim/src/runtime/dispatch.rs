@@ -21,6 +21,7 @@ impl SimulationRuntime {
         }
         match request.command {
             crate::Command::BuildRoadStop { .. } => StationContext {
+                cargo: &mut self.transport.cargo,
                 content: &self.content,
                 stations: &mut self.stations,
                 road: &mut self.depot.road,
@@ -41,6 +42,7 @@ impl SimulationRuntime {
             }
             crate::Command::BuildVehicle { .. } | crate::Command::SellVehicle { .. } => {
                 RoadVehicleContext {
+                    cargo: &mut self.transport.cargo,
                     orders: &mut self.orders,
                     serializer_cargo_paid_for: self.serializer_cargo_paid_for,
                     content: &self.content,

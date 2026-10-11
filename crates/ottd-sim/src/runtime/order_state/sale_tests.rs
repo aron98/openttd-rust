@@ -146,6 +146,7 @@ fn ordered_estimate_and_failed_prepare_leave_all_order_lifetimes_unchanged() -> 
             .success
     );
     let result = RoadVehicleContext {
+        cargo: &mut runtime.transport.cargo,
         orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,

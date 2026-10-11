@@ -1,8 +1,11 @@
 //! Native payment/link pool history and non-saved payment/job restoration state.
 use super::job_executor::Worker;
+#[path = "cargo.rs"]
+pub(super) mod cargo;
 use super::{
     RuntimeError, SavedVehicleView, VehicleId, pools::PoolAllocator, stations::saved::StationRow,
 };
+use cargo::CargoRuntime;
 use ottd_save::world::{CandidateView, World};
 use serde::Serialize;
 use std::{collections::BTreeMap, sync::Arc};
@@ -14,6 +17,7 @@ pub(super) struct EmptyJob {
 }
 #[derive(Debug, Clone)]
 pub(super) struct TransportRuntime {
+    pub cargo: CargoRuntime,
     pub payments: PoolAllocator,
     pub graphs: PoolAllocator,
     pub jobs: PoolAllocator,
@@ -86,8 +90,10 @@ impl TransportRuntime {
         let payments = PoolAllocator::restore(0xff000, 512, payments.records().keys().copied())?;
         let graphs = PoolAllocator::restore(65535, 32, graphs.records().keys().copied())?;
         let jobs = PoolAllocator::restore(65535, 32, jobs.records().keys().copied())?;
+        let cargo = CargoRuntime::restore(world)?;
         let workers = super::transport_jobs::restore_workers(world)?;
         Ok(Self {
+            cargo,
             payments,
             graphs,
             jobs,
@@ -97,6 +103,7 @@ impl TransportRuntime {
         })
     }
     pub(super) fn validate(&self, view: CandidateView<'_>) -> Result<(), RuntimeError> {
+        self.cargo.validate(view)?;
         for (chunk, pool) in [
             (*b"CAPY", &self.payments),
             (*b"LGRP", &self.graphs),
@@ -147,6 +154,7 @@ impl TransportRuntime {
             })
             .collect();
         let mut snapshot = serde_json::Map::from_iter([
+            ("cargo".into(), self.cargo.snapshot()),
             (
                 "payments".into(),
                 serde_json::json!(self.payments.snapshot()),

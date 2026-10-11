@@ -144,6 +144,7 @@ fn backup_enabled_failed_candidate_rolls_back_replacement_detach_and_refund() ->
     let depot = runtime.depot.clone();
     // When the final candidate leaves the sold vehicle referencing a freed list.
     let result = super::super::RoadVehicleContext {
+        cargo: &mut runtime.transport.cargo,
         orders: &mut runtime.orders,
         serializer_cargo_paid_for: runtime.serializer_cargo_paid_for,
         content: &runtime.content,

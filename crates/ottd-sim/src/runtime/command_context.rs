@@ -1,3 +1,7 @@
+#![expect(
+    clippy::redundant_pub_crate,
+    reason = "constructor exports are re-exported only within the crate"
+)]
 //! Candidate validation and atomic publication for runtime command contexts.
 use super::{
     DepotContext, RoadVehicleContext, RuntimeError, VehicleAllocation, VehicleId, creation_cache,
@@ -6,7 +10,7 @@ use super::{
 use super::{pools, road_record};
 use ottd_save::world::World;
 #[derive(Debug, Clone, Copy)]
-pub struct RoadBuildState {
+pub(crate) struct RoadBuildState {
     pub owner: u8,
     pub unit: u16,
     pub tile: u32,
@@ -30,7 +34,7 @@ pub struct RoadBuildState {
     pub value: i64,
     pub random_bits: u16,
 }
-pub fn new_road_record(
+pub(crate) fn new_road_record(
     schema: &ottd_save::TableSchema,
     state: RoadBuildState,
     cargo_paid_for: u16,

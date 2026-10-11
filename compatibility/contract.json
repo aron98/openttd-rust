@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "57d5980a9403e0d8b14f75c4ddbe9a7ee153a792c6871207025fe2b0831a4a63",
+   "sha256": "7e2c019eb702b69343f91c7d99c4be1b37848456b589ec56908b1edbc6af70fd",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,

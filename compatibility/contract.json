@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "78466e907cab8380b8953aabd3552eb0b4b0b72dda2231408c3238814225924d",
+   "sha256": "c903e636e9278fa5faacdd8b6843e5720ec45b2378b84ff061060a313e5f4577",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "e1e8814e9dd738b59dcb82cf18954ac976f065b7a78e1a59bd12822aebd2a66e",
+   "sha256": "9ee11f9d335929e3e71a2d210f9323567d52a97faf198525259384196c60ca02",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "8c8fe7d83310527e1e3728b22d44ec31fc4bb94a8c3a0e1ad982ed95a9d2aae6",
+   "sha256": "3d96965a6cede4901de9b132fc7894a25a57488d5214cfff5a7d16061d480597",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "07a0a70e047f7781e3ae3079a33ef6c60ead0d2940088b71c5c628d75743839f",
+   "sha256": "f3f79aff7c2de27f8b4df3fbe5b3572134a85648a68ff73f1ba4294c8222f697",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "7e70c43fc5da1e4aad6f802dfd6938e74b6c79c15c1992e09168c531647dff58",
+   "sha256": "886ac7ed2846efe68b8bb486ab30b9df3692b196fe01665d19d7b73e31cf45bf",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "4370c5ef40a3c7d3da8c94a08642fe68a8e032a34cef88d477375c861cd69af6",
+   "sha256": "061dac8d1d982c8234ed2f1ab06db323482217434aadf1768be59b4999c60475",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "99e1cc6608371fe09b2ba9d16245e43076037aed064de0c83379dd2fff228b04",
+   "sha256": "86ce3d33fc3015012176f433ddcb0ff73c6a11668e146e7f4b5bc75da2bc71ad",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -11212,7 +11212,7 @@
   {
    "id": "cargo-reference-cargo-replay-hpp",
    "path": "reference/cargo_replay.hpp",
-   "sha256": "229cd6ab9fa45497a8e08113e4f8ede70b81206b27f44a88af87bf44e1a43449",
+   "sha256": "8c9f8773e44e1a5cdb4d1ec9601e66b35e78d7c439223960531fc30f4ee3691d",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11257,7 +11257,7 @@
   {
    "id": "cargo-scripts-cargo-observer-sources-json",
    "path": "scripts/cargo-observer-sources.json",
-   "sha256": "df99a617b3491fbff9c437b27b9017cc4dadd92714c2ab65e2753889bedeb058",
+   "sha256": "58c60f18dca74baeb7b5ae7176179a4ca7a72f1c8509bf1870768a6d7b436693",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11287,6 +11287,15 @@
    "sha256": "f4b1e1decec2aa35c9a82c4c2b1dad9902b10f911fe3671b478e0112d37b846c",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "cargo-crates-ottd-sim-tests-native-whole-runtime-rs",
+   "path": "crates/ottd-sim/tests/native_whole_runtime.rs",
+   "sha256": "5aaeb7f6fa4522df2c352905a147dcb71d613338da6d3e0f883328b10066170f",
+   "kind": "recipe",
+   "provenance": "Complete saved, derived and actual runtime cache comparison against the pinned original on unchanged whole-interval inputs.",
    "save_version": null,
    "profile": null
   }
@@ -18054,7 +18063,8 @@
     "cargo-scripts-cargo-observer-sources-json",
     "cargo-scripts-cargo-observer-inputs-py",
     "cargo-scripts-setup-cargo-observer-sh",
-    "cargo-scripts-tests-test-cargo-observer-inputs-py"
+    "cargo-scripts-tests-test-cargo-observer-inputs-py",
+    "cargo-crates-ottd-sim-tests-native-whole-runtime-rs"
    ],
    "source_refs": [
     "docs/roadmap.md"

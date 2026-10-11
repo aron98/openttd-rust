@@ -447,7 +447,7 @@
     "reference/cargo_identity_state.hpp": "439951a2f6deee888c61da9e345c9b3ff62a2886331db535f0c00f3ce3fefe78",
     "reference/cargo_movement_snapshot.hpp": "abf80a08cec96107ae623efb3863706840711b4b93dc0ebbcc7111092cd892e0",
     "reference/cargo_observer.patch": "62add9975bc60ea0f9b67a3a117cea432e1d8511dcb379c3a986a46c80ca8ba7",
-    "reference/cargo_replay.hpp": "229cd6ab9fa45497a8e08113e4f8ede70b81206b27f44a88af87bf44e1a43449",
+    "reference/cargo_replay.hpp": "8c9f8773e44e1a5cdb4d1ec9601e66b35e78d7c439223960531fc30f4ee3691d",
     "reference/cargo_runtime.hpp": "5b5f28bd8bafa05da76b744df29188d5dbf3d823b272e692a0dc8ce7731cf76e",
     "reference/content.hpp": "e0b12048fac759c673c2f486c7b0f2a40c1aa43893d663b373963b4ff3be9a1b",
     "reference/depot_runtime.hpp": "d7e2b834a276780efb8fe0ead4bc66dd09aeb648672a01abf00bc09a83fb3740",

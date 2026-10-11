@@ -1,5 +1,6 @@
 mod access;
 mod daily;
+mod directed;
 mod spatial;
 mod stations;
 mod step;
@@ -71,7 +72,11 @@ impl VehiclePhases for RoadPhases<'_> {
         }
         let v = SavedVehicleView::new(world, self.id)?;
         if !self.stations.is_empty() {
-            return stations::admit_vehicle(v);
+            return if v.common_number("vehstatus")? & 2 != 0 {
+                stations::admit_vehicle(v)
+            } else {
+                directed::admit(v)
+            };
         }
         if v.setting("vehicle.roadveh_acceleration_model")? != 0
             || v.setting("vehicle.road_side")? != 1
@@ -184,6 +189,8 @@ impl VehiclePhases for RoadPhases<'_> {
         }
         if self.stations.is_empty() {
             self.tick(state)
+        } else if number(state, self.id, false, "vehstatus")? & 2 == 0 {
+            directed::tick(self, state)
         } else {
             stations::vehicle_tick(state, self.id, &mut self.cache)
         }

@@ -47,6 +47,7 @@ static void record_print(HSQUIRRELVM, std::string_view bytes) {
 }
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--trap-error-owner") return trap_error_owner(argc,argv);
  if(std::string_view(argv[1])=="--closure-compound-store") return compound_store_errors();
  if(std::string_view(argv[1])=="--closure-publication") return closure_compile_publication();
  if(std::string_view(argv[1])=="--closure-persistence") return persistent_closure_session(false);
@@ -56,7 +57,8 @@ int main(int argc, char **argv){
  if(std::string_view(argv[1])=="--closure-orphan") return failed_capture();
  if(std::string_view(argv[1])=="--closure-default-cycle") return default_cycle();
  if(std::string_view(argv[1])=="--closure-view") return prototype_view();
- const bool error_trace=std::getenv("OTTD_SCRIPT_ERROR_TRACE")!=nullptr;
+ const bool error_option=argc>2 && std::string_view(argv[2])=="--errors";
+ const bool error_trace=error_option || std::getenv("OTTD_SCRIPT_ERROR_TRACE")!=nullptr;
  const bool closure_trace=std::getenv("OTTD_SCRIPT_CLOSURE_TRACE")!=nullptr;
  if(std::string_view(argv[1])=="--call-callee") return call_callee_owner();
  if(std::string_view(argv[1])=="--call-cycle-teardown") return call_cycle_teardown();
@@ -98,7 +100,7 @@ int main(int argc, char **argv){
  std::ifstream input(argv[1],std::ios::binary); if(!input) return 66;
  std::string source((std::istreambuf_iterator<char>(input)),{});
  const bool frames=argc>2 && std::string_view(argv[2])=="--frames";
- const int first_credit=frames?3:2;
+ const int first_credit=(frames || error_option)?3:2;
  auto v=sq_open(256);
  if(const char *file=std::getenv("OTTD_SCRIPT_PRINT_FILE")) {
   print_output.open(file,std::ios::binary|std::ios::trunc);

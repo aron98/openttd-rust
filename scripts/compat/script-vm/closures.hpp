@@ -151,3 +151,22 @@ static int compound_store_errors() {
  }
  return 0;
 }
+
+static int trap_error_owner(int argc,char **argv) {
+ if(argc!=3)return 64;
+ std::ifstream input(argv[2],std::ios::binary);if(!input)return 66;
+ std::string source((std::istreambuf_iterator<char>(input)),{});
+ auto owner=std::unique_ptr<SQVM,decltype(&sq_close)>(sq_open(256),sq_close);auto vm=owner.get();
+ if(SQ_FAILED(sq_compilebuffer(vm,source,"trap-owner",SQFalse)))return 65;
+ SQObjectPtr main=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);SQObjectPtr result;
+ vm->_can_suspend=true;vm->_ops_till_suspend=10000;
+ bool ok=vm->Call(main,1,vm->_top-1,result,SQFalse,SQTrue);
+ std::cout<<"completed "<<ok<<' '<<vm->_callsstacksize<<' '<<vm->_etraps.size()<<' ';value(vm->_lasterror);
+ if(type(vm->_lasterror)!=OT_ARRAY)return 65;
+ SQObjectPtr watch=_array(vm->_lasterror)->GetWeakRef(OT_ARRAY);
+ main.Null();result.Null();vm->temp_reg.Null();sq_settop(vm,0);sq_collectgarbage(vm);
+ std::cout<<"error retains "<<(type(_weakref(watch)->_obj)==OT_ARRAY)<<' '<<_array(vm->_lasterror)->_uiRef<<'\n';
+ sq_reseterror(vm);sq_collectgarbage(vm);
+ std::cout<<"error reset "<<(type(_weakref(watch)->_obj)==OT_ARRAY)<<'\n';
+ return 0;
+}

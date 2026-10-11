@@ -2,6 +2,12 @@
 use ottd_script::{Value, Vm, VmError};
 use std::io::Write;
 
+/// Consume the explicit trace option before parsing unchanged numeric credits.
+pub fn trace_flag(args: &mut std::iter::Peekable<impl Iterator<Item = String>>) -> bool {
+    let requested = args.next_if(|argument| argument == "--errors").is_some();
+    requested || std::env::var_os("OTTD_SCRIPT_ERROR_TRACE").is_some()
+}
+
 /// Print the raw typed object only when the passive error trace is requested.
 pub fn snapshot(enabled: bool, error: &Value) {
     if enabled {

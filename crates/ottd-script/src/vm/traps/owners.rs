@@ -4,16 +4,22 @@ use std::fmt::Write;
 
 #[test]
 fn last_error_retains_caught_and_uncaught_graphs_until_reset() {
-    for (source, expected) in [
+    for (source, expected, environment) in [
         (
             "try{throw [7];\n}catch(e){}return 1;\n",
             include_str!("caught_owner.txt"),
+            "OTTD_SCRIPT_TRAP_CAUGHT_OWNER",
         ),
         (
             "local a=[null];\na[0]=a;\ntry{throw a;\n}catch(e){}a=null;\nreturn 1;\n",
             include_str!("caught_cycle_owner.txt"),
+            "OTTD_SCRIPT_TRAP_CYCLE_OWNER",
         ),
-        ("throw [7];\n", include_str!("uncaught_array.txt")),
+        (
+            "throw [7];\n",
+            include_str!("uncaught_array.txt"),
+            "OTTD_SCRIPT_TRAP_UNCAUGHT_OWNER",
+        ),
     ] {
         let realm = Realm::new();
         let mut runner = Runner::new(realm.default_root().expect("root"));
@@ -50,6 +56,10 @@ fn last_error_retains_caught_and_uncaught_graphs_until_reset() {
         runner.reset_native_error();
         realm.collect_cycles();
         writeln!(output, "error reset {}", u8::from(references().is_some())).expect("format");
+        let expected = std::env::var_os(environment).map_or_else(
+            || expected.to_owned(),
+            |path| std::fs::read_to_string(path).expect("current native lifetime capture"),
+        );
         assert_eq!(output, expected);
     }
 }

@@ -79,14 +79,23 @@ for profile in debug release; do
  if [ "$profile" = release ]; then flag=--release; fi
  cargo clean -p ottd-script $flag > "$out/$profile-clean.log" 2>&1
  printf "0\n" > "$out/$profile-clean.status"
- cargo build -vv -p ottd-script --example observe $flag > "$out/$profile-build.log" 2>&1
- python3 -m scripts.compat.script-vm.tables.compare "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile" > "$out/$profile-compare.log" 2>&1
+ cargo build -vv -p ottd-script --example observe $flag --message-format=json > "$out/$profile-build.jsonl" 2> "$out/$profile-build.log"
+ rust=$(python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import select_executable; print(select_executable(Path(sys.argv[1]).read_text(), "observe", "example", False))' "$out/$profile-build.jsonl")
+ printf '%s\n' "$rust" > "$out/$profile-selected-observer.txt"
+ python3 -m scripts.compat.script-vm.tables.compare "$out/native/observe" "$rust" "$out/$profile" > "$out/$profile-compare.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.controls "$out/$profile" > "$out/$profile-controls.log" 2>&1
- python3 -m scripts.compat.script-vm.tables.calls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-calls" > "$out/$profile-calls.log" 2>&1
- python3 -m scripts.compat.script-vm.tables.call_controls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-call-controls" > "$out/$profile-call-controls.log" 2>&1
- python3 -m scripts.compat.script-vm.tables.closures "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-closures" > "$out/$profile-closures.log" 2>&1
- python3 -m scripts.compat.script-vm.tables.closure_controls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-closure-controls" > "$out/$profile-closure-controls.log" 2>&1
- cargo test -p ottd-script $flag > "$out/$profile-tests.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.trap_controls "$out/$profile" > "$out/$profile-trap-controls.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.calls "$out/native/observe" "$rust" "$out/$profile-calls" > "$out/$profile-calls.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.call_controls "$out/native/observe" "$rust" "$out/$profile-call-controls" > "$out/$profile-call-controls.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.closures "$out/native/observe" "$rust" "$out/$profile-closures" > "$out/$profile-closures.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.closure_controls "$out/native/observe" "$rust" "$out/$profile-closure-controls" > "$out/$profile-closure-controls.log" 2>&1
+ for trap_case in caught_owner caught_cycle_owner uncaught_array; do
+  "$out/native/observe" --trap-error-owner "$out/$profile/trap-$trap_case.nut" > "$out/$profile-trap-$trap_case.stdout" 2> "$out/$profile-trap-$trap_case.stderr"
+ done
+ export OTTD_SCRIPT_TRAP_CAUGHT_OWNER="$out/$profile-trap-caught_owner.stdout"
+ export OTTD_SCRIPT_TRAP_CYCLE_OWNER="$out/$profile-trap-caught_cycle_owner.stdout"
+ export OTTD_SCRIPT_TRAP_UNCAUGHT_OWNER="$out/$profile-trap-uncaught_array.stdout"
+ cargo test -p ottd-script $flag --message-format=json > "$out/$profile-tests.jsonl" 2> "$out/$profile-tests.log"
  cargo test -p ottd-script $flag native_root_registration -- --ignored > "$out/$profile-root-registration.log" 2>&1
  cargo test -p ottd-script $flag native_string_hashes -- --ignored > "$out/$profile-hashes.log" 2>&1
  # Freeze all executable test artifacts, which otherwise drift in the shared cache.

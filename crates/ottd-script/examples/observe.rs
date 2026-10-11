@@ -30,7 +30,7 @@ fn value(value: &Value) {
     }
 }
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut args = env::args().skip(1);
+    let mut args = env::args().skip(1).peekable();
     let filename = args.next().ok_or("source path required")?;
     if filename == "--format" {
         return formats(&args.next().ok_or("bit-pattern file required")?);
@@ -46,7 +46,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     if print_file.is_some() {
         runner.set_print_sink(Some(Box::new(Prints(Rc::clone(&prints)))));
     }
-    let error_trace = env::var_os("OTTD_SCRIPT_ERROR_TRACE").is_some();
+    let error_trace = errors::trace_flag(&mut args);
     let program = match runner.compile_bytes_named(&source, c"fixture") {
         Ok(program) => program,
         Err(error) => {

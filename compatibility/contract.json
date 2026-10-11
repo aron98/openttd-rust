@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "7e2c019eb702b69343f91c7d99c4be1b37848456b589ec56908b1edbc6af70fd",
+   "sha256": "d236b5bdb9fc5286363815e96eb6c3ba814c67e8630d7e438e8f6b38a4182889",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "22b778088b86138ed839584ee9ea1bf1d4035f7ae004463d5816672464c71858",
+   "sha256": "f7ed1b192d2a5fe90f70c6e3d6a29aa0619435e5c029521ca77857d2059c1f8c",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "0db193a0bffb2aad86125d3351152eb9a105728e1f6520498646433e3e4db650",
+   "sha256": "7b6b58440fc4a14ba2f5863769837adf7ee53a254fb5a8c68b5e7d39ddac5032",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "04d2a3e0b7d409bc9d7a58e10805bb51ede1c4a6f2f0dc61c7b08763ac4041b5",
+   "sha256": "82bb54214a1b8dfc64fcd26cdc2fb596b03cf48add8c214da2b8bcd2e1ae47df",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "af7b2b7173581183727282993d47dfeb5e376bc01cd2ebc8515d598780461ce1",
+   "sha256": "c364e5bf8fdd48b1767221001e89542192895f927b5c8fdf79e1c9b65f1e8df3",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "6763e4c5856381d2e6fea1530d513f8a6a81b673f88bd2ba37805dc9b6a5432c",
+   "sha256": "c882906ee5d4b83fef0ea1e8f27cced5f98cbe8890e45ffde0fd8462a4cb39a6",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "bb56e448bf96a8f0c9360c19eaca70b03901a91b1ed62ea8ef87570ab396d1e8",
+   "sha256": "83430222352187757391d09fefafee9dc3184aa94a1245c11dc36de1873e270e",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "50482bf5297fd103a4bc4d94b8c638679f48d02f3479a98e73c8e70ef1a04c51",
+   "sha256": "2ffd44c6675307bf8ee4352d0fba40fa8eb95964503e7f9f5c0a4a76ca2b25c3",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "bab3e4246d3b2e664170c1f68c4aae573d2c95dc8ec914d4cf981df45dc6dd27",
+   "sha256": "fdad3524d914a212618fe1ac1e621f17ffbbb594d5d122cd053c156a9f337a16",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "57cd6f26c19dcc4e51656ea39dd9c5cd722b0e08d9f40f450dd6d7bfa9d27310",
+   "sha256": "9ea2c06d148b73c21352a57df8b34fb3c5f1066254f2e4db5ab180068c1d54d4",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "c808be6f8d567f2dec50532be8b63228a2f22d0e33c7069d7c6b2079df2677f4",
+   "sha256": "36fe411a6a49f256a93fcc1a130fba9603dc2eee2a811c29ceb24255592e50f7",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -7756,7 +7756,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-runner-rs",
    "path": "crates/ottd-script/src/runner.rs",
-   "sha256": "14e4081ea2a01c717533e2586a1a5b86d9e476e000962d986bc4c641d2f5bbe0",
+   "sha256": "ad64c0090e53b087a4706c6ebf5940d66ab92deff398f085cc33093faac5e68a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "d18eebbcd96e5d09992fd5f140bde1b69f38703939f3aac37fa1ffb92e74fa55",
+   "sha256": "bb36d60424dae475451ad3151694af981d3b277c76034e8dbd35dff0ff706fda",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8467,7 +8467,7 @@
   {
    "id": "script-foreach-crates-ottd-script-src-vm-foreach-rs",
    "path": "crates/ottd-script/src/vm/foreach.rs",
-   "sha256": "a3618f88142a0448796fc0ed73d57b670e6feee5863e82651cb5a960c09c8856",
+   "sha256": "791aaddb4d40ffe732350c1e20311e5be52e158c46123a911d78e767a239277c",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 array and byte-string foreach;255 strict native sessions. Target C-char widening, exact frame/IP/debt/temp and owning-slot projection; no general iterable/GC claim.",
    "save_version": null,
@@ -9727,7 +9727,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-examples-observe-rs",
    "path": "crates/ottd-script/examples/observe.rs",
-   "sha256": "05e8ac2ffd9374b9081da571eff712502a037b881875d124c893934c203c437a",
+   "sha256": "fe0e215935345bab246cb9b7d9f173bb54008b9ce2bfdd39b33f0b6da13f7249",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9763,7 +9763,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-compiler-expressions-factors-rs",
    "path": "crates/ottd-script/src/compiler/expressions/factors.rs",
-   "sha256": "fdf75d220cb96cf69582c36fc8bef71397e75b208a5f2c7fc34932c8c1cbf155",
+   "sha256": "f03f4c185c09bc523a80fd095e84ddab1cbc0f12f8c4b43d65bc58b1431a24bb",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9772,7 +9772,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-error-rs",
    "path": "crates/ottd-script/src/error.rs",
-   "sha256": "9f57d7645d3ff776b06d22478126ec4170cd3155574b66411e07fe92563c3d50",
+   "sha256": "f8b3f7cf67acbaa58facb6168bf42a56c5e086bff1fd1191b8a5d9623a1cba21",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9826,7 +9826,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-rs",
    "path": "crates/ottd-script/src/vm.rs",
-   "sha256": "57462fab7e6124b14227301ae98ca2d289adeaa0564fdc50befeef65f0657a05",
+   "sha256": "f43a2de0043e0a119dd0998a27fe7ea68ca539266c080faf80460bead0020c6a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9835,7 +9835,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-calls-rs",
    "path": "crates/ottd-script/src/vm/calls.rs",
-   "sha256": "7f1bc86b1342ff6b5b5e8006e2c3037010ad397e7cb99424f79123bb10644f9f",
+   "sha256": "3112e13e4689a092a6f3ef5efd0e6ef2e3bd5e2aea337042a4f570890d1b28b2",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9844,7 +9844,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-dispatch-rs",
    "path": "crates/ottd-script/src/vm/dispatch.rs",
-   "sha256": "ae1f102cd669cdf59f8e9c738c5dc56ab19e597239730321b4b94ae578c095df",
+   "sha256": "91511c47455816ee5025177fa85c544ef22b48b1842292b65d138c7d21b2d97a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9970,7 +9970,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-observe-cpp",
    "path": "scripts/compat/script-vm/observe.cpp",
-   "sha256": "990c2fa5b54a1b68b401f9e097f02755a1e361fbe2b318a915ca4139654d3f27",
+   "sha256": "83f64577a4f4d74f0c3863cbbbdf184af5d4d2736b09f2923fc5cfa15b7871cf",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10006,7 +10006,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-tables-compare-py",
    "path": "scripts/compat/script-vm/tables/compare.py",
-   "sha256": "07876b1eca7678ca5d71768c902ccaf473ccdd570682a302adfa4d00d3960f61",
+   "sha256": "9e21b63795d32db3c770ab722d488dfbc01e19c1fbc0f9e96cab9bc025200ff8",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10024,7 +10024,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-tables-verify-sh",
    "path": "scripts/compat/script-vm/tables/verify.sh",
-   "sha256": "0b2622e9e39718d591a21909f67284f5231e24fb7354863ebcfadd85cf6c778b",
+   "sha256": "6201edea577085a26e8831468644e8427306267c99b38220b8ae0f1663d9d364",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10690,7 +10690,7 @@
   {
    "id": "script-runtime-crates-ottd-script-src-compiler-functions-rs",
    "path": "crates/ottd-script/src/compiler/functions.rs",
-   "sha256": "73a2fbc8aa301c3598de46b0096a4639b7c7116ae3f300e5549120ac8399a14f",
+   "sha256": "994e55f960c172e9a7dba97ae2d8ea3e2fd3412d7a93dc5a264e6879edd45192",
    "kind": "recipe",
    "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,
@@ -10843,7 +10843,7 @@
   {
    "id": "script-runtime-crates-ottd-script-src-vm-frames-rs",
    "path": "crates/ottd-script/src/vm/frames.rs",
-   "sha256": "c4817ad07d875e041e0b61552ada7457a83b7d03203c5dc10a14af7c99647dff",
+   "sha256": "e831d5f5b0e3611fcc74249b37ac70531706915f38fe14608de717d84e213f62",
    "kind": "recipe",
    "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,
@@ -10924,7 +10924,7 @@
   {
    "id": "script-runtime-scripts-compat-script-vm-closures-hpp",
    "path": "scripts/compat/script-vm/closures.hpp",
-   "sha256": "e9d3ecd418a0a543b5c197a2f57bf0d5145ccaec7cda5f57e056bfef0f93b2c5",
+   "sha256": "77ede8cf656786e7d6958437f22bf628a543aeb14224d97997893e4d3118acb1",
    "kind": "recipe",
    "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,
@@ -11104,7 +11104,7 @@
   {
    "id": "script-runtime-scripts-compat-script-vm-varargs-verify-sh",
    "path": "scripts/compat/script-vm/varargs/verify.sh",
-   "sha256": "16a6ea2d14efbef00e94c28c4d900a9481fad1b1079ea8af0be895551c816958",
+   "sha256": "40bf202b98b9a645d9720c0ce2b9232f53cb9572cf0525da71fad73e91e41a8d",
    "kind": "recipe",
    "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,
@@ -11113,7 +11113,7 @@
   {
    "id": "script-diagnostics-crates-ottd-script-src-vm-diagnostics-rs",
    "path": "crates/ottd-script/src/vm/diagnostics.rs",
-   "sha256": "5eda57906c62bf93b307975cf2d6c856e1926b93739dd04cb384f90f875dd547",
+   "sha256": "8623ab3ce2f708e334d748f5ba3f501937bd0d3d0852c395c6c7fc16c982321d",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 sqdebug.cpp PrintObjVal/Raise_IdxError and sqvm.cpp; runtime diagnostic fidelity",
    "save_version": null,
@@ -11230,7 +11230,7 @@
   {
    "id": "script-review-scripts-tests-script-vm-refactor-bindings-test-py",
    "path": "scripts/tests/script_vm_refactor_bindings_test.py",
-   "sha256": "28458666004186494c57ad17f15d9789b4ae202b8dfeb42f72bea870224c9ecb",
+   "sha256": "31d98cfa47a963b4fa55d03536c32894694ae5c76f1f7b66d005a8671c0ec0e5",
    "kind": "recipe",
    "provenance": "Pinned Squirrel runtime and defined-only admission responsibility extraction; upstream.toml",
    "save_version": null,
@@ -12034,6 +12034,159 @@
    "sha256": "87a78172eea7da7f3b3a65d0597904b021a8e11af24cda59569f0c7bf0a4b4d1",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-examples-observe-errors-rs",
+   "path": "crates/ottd-script/examples/observe/errors.rs",
+   "sha256": "eb4b0b07d069db8794cbc68eec25ff395c3e879b89f023d867ee3f0705672ec0",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-compiler-statements-traps-rs",
+   "path": "crates/ottd-script/src/compiler/statements/traps.rs",
+   "sha256": "3e3b0d2e74eae41e2c020355a292e0d596be2c29613c5be1cb2c378c39376494",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-runner-error-state-rs",
+   "path": "crates/ottd-script/src/runner/error_state.rs",
+   "sha256": "ad95a347f3b0cf8f1782a4bba20004d894845fe4f37c7ed4c10d54173a062580",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-vm-operations-rs",
+   "path": "crates/ottd-script/src/vm/operations.rs",
+   "sha256": "90492f5270cb47c2f43ae4284afea74b344f032a245e29911c186fb6daea0ef2",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-vm-traps-rs",
+   "path": "crates/ottd-script/src/vm/traps.rs",
+   "sha256": "785c54899abe52c7e4b87d8a270f0735f1935668854cab8e7c2a2b4fbf3fe221",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-vm-traps-caught-cycle-owner-txt",
+   "path": "crates/ottd-script/src/vm/traps/caught_cycle_owner.txt",
+   "sha256": "7c5b093543a74c32b9d38280421c706c7edd83532c176e5f884ab8e9dd5a5a64",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-vm-traps-caught-owner-txt",
+   "path": "crates/ottd-script/src/vm/traps/caught_owner.txt",
+   "sha256": "4207e1d94f529142b985c0a7ee956112c92a6ffb9c851355ef95367ae1dc5155",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-vm-traps-owners-rs",
+   "path": "crates/ottd-script/src/vm/traps/owners.rs",
+   "sha256": "3b83e6f06a7afa212d7a73d73a064f25e3eb811978ed3d511113e026f2863ccb",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-src-vm-traps-uncaught-array-txt",
+   "path": "crates/ottd-script/src/vm/traps/uncaught_array.txt",
+   "sha256": "e65de819bfe5f6888a7c749588fa99b791e6ce26370ccc0aac42d4002d47bc9a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-tests-runtime-diagnostics-rs",
+   "path": "crates/ottd-script/tests/runtime_diagnostics.rs",
+   "sha256": "11448e33c119bfb68fb4fcf014697cdf0df91f2a4c0e1a7fcdcbf990d42e08d5",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-crates-ottd-script-tests-traps-rs",
+   "path": "crates/ottd-script/tests/traps.rs",
+   "sha256": "a571d35efafb1804f089ec6c0cc48ae66c692b7b359964aeeb7c80d1ac6cf430",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-scripts-compat-script-vm-tables-throw-cases-py",
+   "path": "scripts/compat/script-vm/tables/throw_cases.py",
+   "sha256": "a1dd5755dca9fffd13941e70f97858673f8a6523b73bdee1f78371bf039da978",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-scripts-compat-script-vm-tables-trap-boundary-cases-py",
+   "path": "scripts/compat/script-vm/tables/trap_boundary_cases.py",
+   "sha256": "15a3c83f8002fbb1b0b28c5d80bd30183bc491b06bb1a4de0139d60c36c5098f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-scripts-compat-script-vm-tables-trap-compile-cases-py",
+   "path": "scripts/compat/script-vm/tables/trap_compile_cases.py",
+   "sha256": "870d9a288dd26e48275e391dd6ee62973606fc03268b0ca6311ab9b44bf81cf6",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-scripts-compat-script-vm-tables-trap-control-cases-py",
+   "path": "scripts/compat/script-vm/tables/trap_control_cases.py",
+   "sha256": "0229344951e5142841f5ca1e4a1ff721b820f9686afcfca058bedde2a935ab71",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-scripts-compat-script-vm-tables-trap-controls-py",
+   "path": "scripts/compat/script-vm/tables/trap_controls.py",
+   "sha256": "e832a26c915e2f4de999c3951dd54d6232e79b93479e77dbcaa951008d276bb8",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-traps-scripts-compat-script-vm-tables-trap-scope-cases-py",
+   "path": "scripts/compat/script-vm/tables/trap_scope_cases.py",
+   "sha256": "f21d5e4309fd3be078cc0d598a3be220b9494fe9d5df268045cf8ebd64c2c1fb",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 Squirrel exception traps, arbitrary error object ownership and defined-only native evidence",
    "save_version": null,
    "profile": null
   }
@@ -19665,8 +19818,8 @@
    "id": "script.scalar-vm",
    "status": "implemented",
    "scope": "rust_behavior",
-   "domain": "Scalar locals/expressions/iteration/switch/comments and native compilebuffer bytes; immutable byte strings, persistent string Realm, TYPEOF and 35/62 bundled Squirrel handlers. i64/f32/GC-enabled native variant. Defined shifts 0..63; undefined counts return UnsupportedShiftCount. Closed Realm constants/enums with parser-time publication, local precedence and scalar inlining are supported. Constant postfix and minimum-integer declaration negation remain UnsupportedSyntax; Configured empty scalar root slots, GET/GETK/SET/NEWSLOT/LOADROOTTABLE, shared root identity and separate persistent Runner temporary ownership are supported. General objects/GC/calls, arbitrary receivers and host APIs, unchanged AI/GS and saved-script integration remain unfinished; signed arithmetic overflow remains an explicit boundary. Reached native byte-classifier arguments 256..65535 are rejected with typed codepoint/context/offset diagnostics, including HexEscape lookahead; defined byte0..255 and plain string/comment Unicode remain strict. Scalar-element arrays add per-execution NEWARRAY/APPENDARRAY, bracket GET/plain SET, shared identity and same-Realm root/host values. Nested/self-array insertion, ordering, pointer stringification, reached delegates and unsafe numeric-index conversion remain separately typed implementation boundaries, not lexer policy. Array and byte-string FOREACH retains index/value/cursor and persistent temporary ownership; emitted POSTFOREACH is skipped and remains UnsupportedOpcode if reached. Strings iterate stored bytes using target C-char signedness; negative forged string cursors are InvalidBytecode; no indexed compound/table/generator/ScriptList/GC expansion.",
-   "expected": "Fresh pinned native compiler/VM versus Cargo observer: 1188 fixtures x9 schedules +127 targeted budgets =10819 cases: 10666 strict comparisons and153 explicit policy rejections. All850 final-octal baseline and317 frozen string fixtures retained; 21 additional unique policy/control bodies added. All15 defined low-byte octal continuation fixtures remain strict. Seventeen exact policy bodies never execute original native code: retain exact policy.json native_executed:false plus actual Rust argv/status/stdout/stderr and require the precise typed rejection. These are eight original Token bodies plus nine HexEscape bodies. 62 scalar public,3 constant public and34 private Rust tests,12 native frame captures,four native lifetime sessions,23071 raw-f32 renderings,18 separate native source-feed observations,25 prior corruption controls and4 string controls. No undefined-domain observation is counted as native parity. Ordinary Unicode/native encoded-codepoint strings, byte-domain hex terminators, NUL/decoder and earlier-error ordering remain defined comparisons. This candidate requires fresh complete debug and optimized profiles; old candidate passes do not establish its admission. Constants add115 exact native session observations,37 strict buffer compiler/table comparisons,one of which additionally requires typed MissingIndex at runtime and3 stateful compile/lookup/execution projections. Native refcount/temp/drop-child records remain exact native observations alongside separate representable Rust ownership tests, not full raw Rust session parity. Four additional corruption controls require actual session admission PASS for the original and a specific typed stdout-mismatch REJECT for copied publication/counter/shared-state/lifetime mutations; argv/cwd/status/stderr and original bytes remain bound. Both full profiles must be newly executed for this source epoch. Configured roots add90 fresh native sessions:75 supported stateful projections compare instructions/literals/frames/IP/debt/roots/temporary/string-owner counts through the existing VM loop;9 syntax and6 unsupported runtime-value observations remain separately typed boundaries, never lexer-policy exemptions. Seven public Runner tests and four real admission corruption controls are required. The selected unit test binary reads the exact fresh native captures. Both complete profiles must run on the newly frozen source; prior focused/native proofs are not relabeled. Arrays require93 fresh native sessions:78 full-state projections (including6 compile-only),12 explicit boundary sessions (27 exact compiler blocks with18 typed implementation boundaries,6 MissingIndex and3 cleanup returns),and3 actual protocol refusals. Eleven public tests and four real copied-stdout admission controls are required. Three pointer-bearing boundary outputs retain raw bytes; only exact native pointer formatting/length and same return/temp identity are portable, never pointer-text parity. All other fields stay exact. Selected production tests consume fresh native array captures; both full profiles must execute after this source freeze. Foreach requires255 fresh native sessions:255 strict stateful projections including six promoted historical string sessions and120 byte-string sessions. 19 public tests,34 private frame tests and15 copied-stdout admission controls execute against selected actual Cargo binaries. Both full profiles must freshly build and run all native sessions; focused evidence is not profile admission. Table diagnostics require exact raw runtime stderr alongside stdout/stage for all310 inherited feeds plus48 diagnostic controls across three schedules and both profiles. Preserve typed Rust errors and native error bytes; fmt precision is50 codepoints and embedded NUL remains length-delimited. Compiler diagnostics additionally require exact full raw stderr for all inherited table/call/closure/variadic compile-error feeds and51 additive defined compiler/Unicode/lazy-input controls. Preserve public typed CompileError categories/offsets and first-error ordering; compiler exception adoption follows C-string termination, separately from length-delimited runtime diagnostics. Rehashed actual compiler-stderr corruptions must be rejected at production readback. Future unsupported grammar remains REQUIRED; this bounded compiler increment does not close broader runtime or stage gates.",
+   "domain": "Scalar locals/expressions/iteration/switch/comments and native compilebuffer bytes; immutable byte strings, persistent string Realm, TYPEOF and 35/62 bundled Squirrel handlers. i64/f32/GC-enabled native variant. Defined shifts 0..63; undefined counts return UnsupportedShiftCount. Closed Realm constants/enums with parser-time publication, local precedence and scalar inlining are supported. Constant postfix and minimum-integer declaration negation remain UnsupportedSyntax; Configured empty scalar root slots, GET/GETK/SET/NEWSLOT/LOADROOTTABLE, shared root identity and separate persistent Runner temporary ownership are supported. General objects/GC/calls, arbitrary receivers and host APIs, unchanged AI/GS and saved-script integration remain unfinished; signed arithmetic overflow remains an explicit boundary. Reached native byte-classifier arguments 256..65535 are rejected with typed codepoint/context/offset diagnostics, including HexEscape lookahead; defined byte0..255 and plain string/comment Unicode remain strict. Scalar-element arrays add per-execution NEWARRAY/APPENDARRAY, bracket GET/plain SET, shared identity and same-Realm root/host values. Nested/self-array insertion, ordering, pointer stringification, reached delegates and unsafe numeric-index conversion remain separately typed implementation boundaries, not lexer policy. Array and byte-string FOREACH retains index/value/cursor and persistent temporary ownership; emitted POSTFOREACH is skipped and remains UnsupportedOpcode if reached. Strings iterate stored bytes using target C-char signedness; negative forged string cursors are InvalidBytecode; no indexed compound/table/generator/ScriptList/GC expansion. Subsequent table, graph, call, closure and vararg increments supersede the earlier foundation-only exclusions above. The current bounded VM also compiles try/catch/throw, nested lexical traps and return/break/continue trap cleanup. Numeric trap records restore caller frames, physical varargs and inclusive native register clearing through the existing instruction-debt loop. Arbitrary admitted scalar/string/array/table/script-closure/native-closure Values may be thrown; Runner retains one actual error Value with borrowed native_error_value and explicit reset_native_error, preserving the existing const string accessor and typed last_failure history. Reached native runtime errors may be caught; undefined-input policies, implementation boundaries and malformed-bytecode guards remain uncatchable. General classes, generators, delegates, host APIs, native callbacks/reentry, persistence and full AI/GS integration remain required future work.",
+   "expected": "Fresh pinned native compiler/VM versus Cargo observer: 1188 fixtures x9 schedules +127 targeted budgets =10819 cases: 10666 strict comparisons and153 explicit policy rejections. All850 final-octal baseline and317 frozen string fixtures retained; 21 additional unique policy/control bodies added. All15 defined low-byte octal continuation fixtures remain strict. Seventeen exact policy bodies never execute original native code: retain exact policy.json native_executed:false plus actual Rust argv/status/stdout/stderr and require the precise typed rejection. These are eight original Token bodies plus nine HexEscape bodies. 62 scalar public,3 constant public and34 private Rust tests,12 native frame captures,four native lifetime sessions,23071 raw-f32 renderings,18 separate native source-feed observations,25 prior corruption controls and4 string controls. No undefined-domain observation is counted as native parity. Ordinary Unicode/native encoded-codepoint strings, byte-domain hex terminators, NUL/decoder and earlier-error ordering remain defined comparisons. This candidate requires fresh complete debug and optimized profiles; old candidate passes do not establish its admission. Constants add115 exact native session observations,37 strict buffer compiler/table comparisons,one of which additionally requires typed MissingIndex at runtime and3 stateful compile/lookup/execution projections. Native refcount/temp/drop-child records remain exact native observations alongside separate representable Rust ownership tests, not full raw Rust session parity. Four additional corruption controls require actual session admission PASS for the original and a specific typed stdout-mismatch REJECT for copied publication/counter/shared-state/lifetime mutations; argv/cwd/status/stderr and original bytes remain bound. Both full profiles must be newly executed for this source epoch. Configured roots add90 fresh native sessions:75 supported stateful projections compare instructions/literals/frames/IP/debt/roots/temporary/string-owner counts through the existing VM loop;9 syntax and6 unsupported runtime-value observations remain separately typed boundaries, never lexer-policy exemptions. Seven public Runner tests and four real admission corruption controls are required. The selected unit test binary reads the exact fresh native captures. Both complete profiles must run on the newly frozen source; prior focused/native proofs are not relabeled. Arrays require93 fresh native sessions:78 full-state projections (including6 compile-only),12 explicit boundary sessions (27 exact compiler blocks with18 typed implementation boundaries,6 MissingIndex and3 cleanup returns),and3 actual protocol refusals. Eleven public tests and four real copied-stdout admission controls are required. Three pointer-bearing boundary outputs retain raw bytes; only exact native pointer formatting/length and same return/temp identity are portable, never pointer-text parity. All other fields stay exact. Selected production tests consume fresh native array captures; both full profiles must execute after this source freeze. Foreach requires255 fresh native sessions:255 strict stateful projections including six promoted historical string sessions and120 byte-string sessions. 19 public tests,34 private frame tests and15 copied-stdout admission controls execute against selected actual Cargo binaries. Both full profiles must freshly build and run all native sessions; focused evidence is not profile admission. Table diagnostics require exact raw runtime stderr alongside stdout/stage for all310 inherited feeds plus48 diagnostic controls across three schedules and both profiles. Preserve typed Rust errors and native error bytes; fmt precision is50 codepoints and embedded NUL remains length-delimited. Compiler diagnostics additionally require exact full raw stderr for all inherited table/call/closure/variadic compile-error feeds and51 additive defined compiler/Unicode/lazy-input controls. Preserve public typed CompileError categories/offsets and first-error ordering; compiler exception adoption follows C-string termination, separately from length-delimited runtime diagnostics. Rehashed actual compiler-stderr corruptions must be rejected at production readback. Future unsupported grammar remains REQUIRED; this bounded compiler increment does not close broader runtime or stage gates. Exception increment: 61 immutable source-design bodies x3 schedules plus 20 boundary bodies and 16 compiler-error bodies produce 291 additional strict raw stdout/stderr pairs per profile, with a mandatory passive last_error object channel. The complete table recipe now executes 1530 pairs per profile, retaining all 1239 predecessor pairs, 156 calls and 135 closures. Eight real error-channel/receipt/stderr corruption controls and three fresh native catch/cycle/uncaught owner transcripts accompany both debug and release. The separate variadic recipe retains 144 pairs and 135 closure regressions per profile. This evidence does not close any broad Stage 4 gate or establish unexecuted platform parity.",
    "driver": "script-vm",
    "assets": [
     "scalar-vm-driver",
@@ -20141,7 +20294,24 @@
     "grf-control-scripts-grf-control-ruff-toml",
     "script-compiler-crates-ottd-script-src-compiler-diagnostics-rs",
     "script-compiler-crates-ottd-script-tests-compiler-diagnostics-rs",
-    "script-compiler-scripts-compat-script-vm-tables-compiler-cases-py"
+    "script-compiler-scripts-compat-script-vm-tables-compiler-cases-py",
+    "script-traps-crates-ottd-script-examples-observe-errors-rs",
+    "script-traps-crates-ottd-script-src-compiler-statements-traps-rs",
+    "script-traps-crates-ottd-script-src-runner-error-state-rs",
+    "script-traps-crates-ottd-script-src-vm-operations-rs",
+    "script-traps-crates-ottd-script-src-vm-traps-rs",
+    "script-traps-crates-ottd-script-src-vm-traps-caught-cycle-owner-txt",
+    "script-traps-crates-ottd-script-src-vm-traps-caught-owner-txt",
+    "script-traps-crates-ottd-script-src-vm-traps-owners-rs",
+    "script-traps-crates-ottd-script-src-vm-traps-uncaught-array-txt",
+    "script-traps-crates-ottd-script-tests-runtime-diagnostics-rs",
+    "script-traps-crates-ottd-script-tests-traps-rs",
+    "script-traps-scripts-compat-script-vm-tables-throw-cases-py",
+    "script-traps-scripts-compat-script-vm-tables-trap-boundary-cases-py",
+    "script-traps-scripts-compat-script-vm-tables-trap-compile-cases-py",
+    "script-traps-scripts-compat-script-vm-tables-trap-control-cases-py",
+    "script-traps-scripts-compat-script-vm-tables-trap-controls-py",
+    "script-traps-scripts-compat-script-vm-tables-trap-scope-cases-py"
    ],
    "source_refs": [
     "scripts/check-script-vm.py",
@@ -20237,7 +20407,24 @@
     "scripts/tests/script_vm_policy_assertions.py",
     "scripts/tests/test_script_vm_policy_assertions.py",
     "scripts/tests/script_vm_refactor_bindings_test.py",
-    "scripts/grf-control-ruff.toml"
+    "scripts/grf-control-ruff.toml",
+    "crates/ottd-script/examples/observe/errors.rs",
+    "crates/ottd-script/src/compiler/statements/traps.rs",
+    "crates/ottd-script/src/runner/error_state.rs",
+    "crates/ottd-script/src/vm/operations.rs",
+    "crates/ottd-script/src/vm/traps.rs",
+    "crates/ottd-script/src/vm/traps/caught_cycle_owner.txt",
+    "crates/ottd-script/src/vm/traps/caught_owner.txt",
+    "crates/ottd-script/src/vm/traps/owners.rs",
+    "crates/ottd-script/src/vm/traps/uncaught_array.txt",
+    "crates/ottd-script/tests/runtime_diagnostics.rs",
+    "crates/ottd-script/tests/traps.rs",
+    "scripts/compat/script-vm/tables/throw_cases.py",
+    "scripts/compat/script-vm/tables/trap_boundary_cases.py",
+    "scripts/compat/script-vm/tables/trap_compile_cases.py",
+    "scripts/compat/script-vm/tables/trap_control_cases.py",
+    "scripts/compat/script-vm/tables/trap_controls.py",
+    "scripts/compat/script-vm/tables/trap_scope_cases.py"
    ],
    "evidence": [
     "summary.json",

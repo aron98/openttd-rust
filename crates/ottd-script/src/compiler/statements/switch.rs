@@ -13,7 +13,7 @@ impl Compiler<'_> {
             .registers
             .top()
             .ok_or_else(|| self.error(crate::CompileErrorKind::ExpectedToken))?;
-        self.break_targets.push(Vec::new());
+        self.break_targets.push(super::ExitTarget::default());
         let mut next_condition = None;
         while self.token.kind == TokenKind::Case {
             let skip_condition = if let Some(previous) = next_condition {

@@ -10,28 +10,30 @@ impl Vm<'_> {
         let equal = self.register(i32::from(i.arg2))?.equal(&right)?;
         Ok(Value::Bool(if i.opcode == 0x0f { equal } else { !equal }))
     }
-    fn bit_not(&self, source: i32) -> Result<Value, VmError> {
-        match self.register(source)? {
-            Value::Integer(value) => Ok(Value::Integer(!value)),
-            Value::Null
-            | Value::Float(_)
-            | Value::Bool(_)
-            | Value::String(_)
-            | Value::Array(_)
-            | Value::Table(_)
-            | Value::NativeClosure(_)
-            | Value::ScriptClosure(_) => Err(VmError::OperandType),
+    fn bit_not(&mut self, source: i32) -> Result<Value, VmError> {
+        let value = self.register(source)?;
+        if let Value::Integer(integer) = value {
+            return Ok(Value::Integer(!integer));
         }
+        let message = format!(
+            "attempt to perform a bitwise op on a {}",
+            value.type_label()
+        );
+        Err(self.native_failure(message.as_bytes(), VmError::OperandType))
     }
     fn arithmetic_temporary(&mut self, i: Instruction) -> Result<Value, VmError> {
-        let value = self.register(i32::from(i.arg2))?.arithmetic(
+        let value = self.arithmetic_values(
+            &self.register(i32::from(i.arg2))?,
             &self.register(i.arg1)?,
             i.arg3,
-            &self.runner.get().root.realm,
         )?;
         self.store_temporary(value)
     }
     pub(super) fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
+        if matches!(i.opcode, 0x38..=0x3a) {
+            self.trap_instruction(i)?;
+            return Ok(None);
+        }
         let value = match i.opcode {
             0x05 | 0x06 => {
                 self.dispatch_call(i)?;
@@ -89,9 +91,7 @@ impl Vm<'_> {
                 }
                 return Ok(None);
             }
-            0x12 => self
-                .register(i32::from(i.arg2))?
-                .bitwise(self.register(i.arg1)?, i.arg3)?,
+            0x12 | 0x28 => self.binary_operation(i)?,
             0x22 => {
                 self.compound_field(i)?;
                 return Ok(None);
@@ -100,9 +100,6 @@ impl Vm<'_> {
                 self.update(i)?;
                 return Ok(None);
             }
-            0x28 => self
-                .register(i32::from(i.arg2))?
-                .compare(&self.register(i.arg1)?, i.arg3)?,
             0x2b | 0x2c => {
                 let source = self.register(i32::from(i.arg2))?;
                 if source.is_false() == (i.opcode == 0x2b) {
@@ -125,7 +122,7 @@ impl Vm<'_> {
             0x37 => self
                 .register(i.arg1)?
                 .type_name(&self.runner.get().root.realm),
-            0x2d => self.register(i.arg1)?.negate()?,
+            0x2d => self.negate_value(&self.register(i.arg1)?)?,
             0x2e => Value::Bool(self.register(i.arg1)?.is_false()),
             0x2f => self.bit_not(i.arg1)?,
             opcode => return Err(VmError::UnsupportedOpcode(opcode)),

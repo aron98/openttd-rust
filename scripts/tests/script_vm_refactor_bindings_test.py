@@ -11,6 +11,23 @@ from scripts.script_vm_provenance import load_spec, verify_sources
 from scripts.world_check_support import ROOT, WorldCheckError
 
 EXTRACTED_INPUTS: Final = (
+    "crates/ottd-script/src/runner/error_state.rs",
+    "crates/ottd-script/src/vm/operations.rs",
+    "crates/ottd-script/src/compiler/statements/traps.rs",
+    "crates/ottd-script/src/vm/traps.rs",
+    "crates/ottd-script/src/vm/traps/owners.rs",
+    "crates/ottd-script/src/vm/traps/caught_owner.txt",
+    "crates/ottd-script/src/vm/traps/caught_cycle_owner.txt",
+    "crates/ottd-script/src/vm/traps/uncaught_array.txt",
+    "crates/ottd-script/tests/runtime_diagnostics.rs",
+    "crates/ottd-script/tests/traps.rs",
+    "crates/ottd-script/examples/observe/errors.rs",
+    "scripts/compat/script-vm/tables/trap_control_cases.py",
+    "scripts/compat/script-vm/tables/trap_scope_cases.py",
+    "scripts/compat/script-vm/tables/throw_cases.py",
+    "scripts/compat/script-vm/tables/trap_boundary_cases.py",
+    "scripts/compat/script-vm/tables/trap_compile_cases.py",
+    "scripts/compat/script-vm/tables/trap_controls.py",
     "crates/ottd-script/src/heap/ownership.rs",
     "crates/ottd-script/src/vm/registers.rs",
     "crates/ottd-script/src/vm/root_sessions/session.rs",

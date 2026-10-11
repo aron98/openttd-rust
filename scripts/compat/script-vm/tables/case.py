@@ -9,6 +9,7 @@ class Case:
     name: str
     source: str
     stage: Literal["return", "runtime_error", "compile_error"] = "return"
+    error_trace: bool = False
 
 
 def literal(length: int, seed: int) -> str:

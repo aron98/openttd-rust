@@ -7,6 +7,12 @@ mod constants;
 mod foreach;
 mod iteration;
 mod switch;
+mod traps;
+#[derive(Default)]
+pub(super) struct ExitTarget {
+    jumps: Vec<i32>,
+    traps: u8,
+}
 impl Compiler<'_> {
     pub(super) fn main(&mut self) -> Result<(), CompileFailure> {
         while self.token.kind != TokenKind::End {
@@ -55,6 +61,8 @@ impl Compiler<'_> {
             TokenKind::Return => {
                 self.return_statement()?;
             }
+            TokenKind::Try => self.try_catch(depth)?,
+            TokenKind::Throw => self.throw_statement()?,
             TokenKind::Function => self.function_statement(depth)?,
             TokenKind::Const => self.constant_declaration()?,
             TokenKind::Enum => self.enum_declaration()?,
@@ -73,7 +81,8 @@ impl Compiler<'_> {
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::In
+            TokenKind::Catch
+            | TokenKind::In
             | TokenKind::Ellipsis
             | TokenKind::Vargc
             | TokenKind::Vargv
@@ -115,6 +124,7 @@ impl Compiler<'_> {
             self.comma(0)?;
             (1, i32::from(self.pop()?.0))
         };
+        self.pop_traps(self.traps);
         if self.function_depth > 0 && arg0 != 255 && self.emitter.instructions.len() > return_start
         {
             if let Some(last) = self.emitter.instructions.last_mut() {

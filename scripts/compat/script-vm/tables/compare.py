@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -38,6 +39,10 @@ class Observation:
 BUDGETS: Final = ((10000,), (0, 1, 2, 4, 0, 8, 16, 32, 10000), (*([2] * 40), 10000))
 
 
+def source_arguments(case: Case, source: Path, budget: tuple[int, ...]) -> list[str]:
+    return [str(source), *(["--errors"] if case.error_trace else []), *map(str, budget)]
+
+
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -57,9 +62,64 @@ def run(argv: list[str], prefix: Path) -> bytes:
     return completed.stdout
 
 
+def validate_error_value(line: bytes) -> None:
+    parts = line.split(b" ", 3)
+    if parts == [b"last_error", b"null"]:
+        return
+    try:
+        if len(parts) == 4 and parts[1] == b"string":
+            size = int(parts[2])
+            if (
+                size >= 0
+                and len(parts[3]) == size * 2
+                and re.fullmatch(rb"[0-9a-f]*", parts[3])
+            ):
+                return
+        if len(parts) == 3:
+            value = int(parts[2])
+            limits = {
+                b"integer": (-(1 << 63), (1 << 63) - 1),
+                b"float": (0, (1 << 32) - 1),
+                b"bool": (0, 1),
+            }
+            if parts[1] in limits:
+                low, high = limits[parts[1]]
+                if low <= value <= high and str(value).encode() == parts[2]:
+                    return
+            if parts[1] == b"unsupported" and value in {
+                134217984,
+                134218240,
+                167772192,
+                134217792,
+            }:
+                return
+    except ValueError as error:
+        raise RuntimeError("Malformed native error object") from error
+    raise RuntimeError("Malformed native error object")
+
+
+def validate_error_trace(case: Case, output: bytes) -> None:
+    if not case.error_trace:
+        return
+    lines = output.splitlines()
+    states = [
+        i
+        for i, line in enumerate(lines)
+        if line == b"compile_error"
+        or line.startswith((b"suspend ", b"return ", b"runtime_error "))
+    ]
+    snapshots = [i for i, line in enumerate(lines) if line.startswith(b"last_error ")]
+    expected = [i + 1 if lines[i] == b"compile_error" else i - 1 for i in states]
+    if not states or snapshots != expected:
+        raise RuntimeError("Missing or misplaced native error object channel")
+    for position in snapshots:
+        validate_error_value(lines[position])
+
+
 def validate(case: Case, native: bytes, rust: bytes) -> None:
     if native != rust:
         raise RuntimeError(f"Strict native/Rust mismatch: {case.name}")
+    validate_error_trace(case, native)
     if not any(
         line.startswith(case.stage.encode() + b" ") or line == case.stage.encode()
         for line in native.splitlines()
@@ -126,7 +186,7 @@ def verify_observation(
         stderr = output / f"{name}.stderr"
         receipt = read_json(output / f"{name}.json")
         expected_receipt = {
-            "argv": [str(output / side), str(source), *map(str, budget)],
+            "argv": [str(output / side), *source_arguments(case, source, budget)],
             "status": 0,
             "stdout_sha256": digest(stdout),
             "stderr_sha256": digest(stderr),
@@ -153,7 +213,7 @@ def compare(native: Path, rust: Path, output: Path) -> None:
         source = output / f"{case.name}.nut"
         _ = source.write_text(case.source)
         for number, budget in enumerate(BUDGETS):
-            argv = [str(source), *map(str, budget)]
+            argv = source_arguments(case, source, budget)
             left = run(
                 [str(output / "native"), *argv], output / f"{case.name}-{number}-native"
             )

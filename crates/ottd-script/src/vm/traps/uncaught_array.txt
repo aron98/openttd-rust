@@ -1,0 +1,3 @@
+completed 0 0 0 unsupported 134217792
+error retains 1 1
+error reset 0

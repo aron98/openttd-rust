@@ -13,7 +13,7 @@ impl Vm<'_> {
         } else {
             b'+'
         };
-        let result = source.arithmetic(&increment, operation, &self.runner.get().root.realm)?;
+        let result = self.arithmetic_values(&source, &increment, operation)?;
         let register = u8::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
         self.write(
             instruction.arg0,
@@ -37,7 +37,7 @@ impl Vm<'_> {
             result => result?,
         };
         let increment = self.register(i.arg1 & 0xffff)?;
-        let value = source.arithmetic(&increment, i.arg3, &self.runner.get().root.realm)?;
+        let value = self.arithmetic_values(&source, &increment, i.arg3)?;
         self.write(i.arg0, value.clone())?;
         let current_this = receiver == self.register(0)?;
         let stored = match &receiver {

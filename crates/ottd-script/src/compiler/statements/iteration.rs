@@ -4,8 +4,8 @@ use crate::compiler::diagnostics::CompileFailure;
 use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
     pub(super) fn begin_loop(&mut self) -> Result<(), CompileFailure> {
-        self.break_targets.push(Vec::new());
-        self.continue_targets.push(Vec::new());
+        self.break_targets.push(super::ExitTarget::default());
+        self.continue_targets.push(super::ExitTarget::default());
         self.last_stack_size = self.size()?;
         Ok(())
     }
@@ -15,7 +15,7 @@ impl Compiler<'_> {
             .pop()
             .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
         let end = self.position()?;
-        for position in targets {
+        for position in targets.jumps {
             self.patch(position, end)?;
         }
         Ok(())
@@ -26,7 +26,7 @@ impl Compiler<'_> {
             .continue_targets
             .pop()
             .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
-        for position in targets {
+        for position in targets.jumps {
             self.patch(position, continue_target)?;
         }
         Ok(())

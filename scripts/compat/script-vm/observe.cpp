@@ -47,6 +47,7 @@ static void record_print(HSQUIRRELVM, std::string_view bytes) {
 }
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--trap-error-owner") return trap_error_owner(argc,argv);
  if(std::string_view(argv[1])=="--closure-compound-store") return compound_store_errors();
  if(std::string_view(argv[1])=="--closure-publication") return closure_compile_publication();
  if(std::string_view(argv[1])=="--closure-persistence") return persistent_closure_session(false);
@@ -56,6 +57,8 @@ int main(int argc, char **argv){
  if(std::string_view(argv[1])=="--closure-orphan") return failed_capture();
  if(std::string_view(argv[1])=="--closure-default-cycle") return default_cycle();
  if(std::string_view(argv[1])=="--closure-view") return prototype_view();
+ const bool error_option=argc>2 && std::string_view(argv[2])=="--errors";
+ const bool error_trace=error_option || std::getenv("OTTD_SCRIPT_ERROR_TRACE")!=nullptr;
  const bool closure_trace=std::getenv("OTTD_SCRIPT_CLOSURE_TRACE")!=nullptr;
  if(std::string_view(argv[1])=="--call-callee") return call_callee_owner();
  if(std::string_view(argv[1])=="--call-cycle-teardown") return call_cycle_teardown();
@@ -97,7 +100,7 @@ int main(int argc, char **argv){
  std::ifstream input(argv[1],std::ios::binary); if(!input) return 66;
  std::string source((std::istreambuf_iterator<char>(input)),{});
  const bool frames=argc>2 && std::string_view(argv[2])=="--frames";
- const int first_credit=frames?3:2;
+ const int first_credit=(frames || error_option)?3:2;
  auto v=sq_open(256);
  if(const char *file=std::getenv("OTTD_SCRIPT_PRINT_FILE")) {
   print_output.open(file,std::ios::binary|std::ios::trunc);
@@ -109,7 +112,7 @@ int main(int argc, char **argv){
 #error wrong native variant
 #endif
  if(SQ_FAILED(sq_compilebuffer(v,source,"fixture",SQFalse))) {
-  std::cout<<"compile_error\n"; std::cerr<<_stringval(v->_lasterror)<<'\n'; sq_close(v); return 0;
+  std::cout<<"compile_error\n"; if(error_trace){std::cout<<"last_error ";value(v->_lasterror);} std::cerr<<_stringval(v->_lasterror)<<'\n'; sq_close(v); return 0;
  }
  // Retain closure while the call stack is mutated.
  {
@@ -125,7 +128,8 @@ int main(int argc, char **argv){
  v->_ops_till_suspend=argc>first_credit?std::stoll(argv[first_credit]):10000;
  bool ok=v->Call(closure,1,v->_top-1,result,SQFalse,SQTrue);
  for(int step=0;;++step){
-  if(!ok){std::cout<<"runtime_error "<<v->_ops_till_suspend<<'\n';std::cerr<<_stringval(v->_lasterror)<<'\n';break;}
+  if(error_trace){std::cout<<"last_error ";value(v->_lasterror);}
+  if(!ok){std::cout<<"runtime_error "<<v->_ops_till_suspend<<'\n';if(type(v->_lasterror)==OT_STRING)std::cerr<<_stringval(v->_lasterror)<<'\n';break;}
   if(!v->_suspended){std::cout<<"return "<<v->_ops_till_suspend<<' ';value(result);break;}
   auto active=_funcproto(_closure(v->ci->_closure)->_function);
   if(closure_trace)std::cout<<"suspend "<<v->_ops_till_suspend<<' '<<function_path(proto,active)<<' '<<(v->ci->_ip-active->_instructions)<<' '<<v->_callsstacksize<<' '<<v->_stackbase<<' '<<v->_top<<'\n';

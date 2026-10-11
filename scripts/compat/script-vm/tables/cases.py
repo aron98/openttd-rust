@@ -3,6 +3,7 @@
 # Keep explicit source-fragment joins required by the strict Python type checker.
 # ruff: noqa: ISC003
 from .case import Case, literal
+from .diagnostic_cases import diagnostic_cases
 from .objects import object_cases
 from .root_cases import root_cases
 
@@ -125,6 +126,7 @@ def cases() -> list[Case]:
     result.extend(object_cases())
     result.extend(graph_cases())
     result.extend(root_cases())
+    result.extend(diagnostic_cases())
     return result
 
 

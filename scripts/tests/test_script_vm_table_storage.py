@@ -114,6 +114,12 @@ elif mutation == "budget":
     records[0] = replace(records[0], credits=(999,))
 elif mutation in ("stdout", "stderr"):
     (root / (name + "." + mutation)).write_text("changed")
+elif mutation == "coherent-runtime-stderr":
+    stderr = root / (name + ".stderr")
+    stderr.write_bytes(b"different runtime diagnostic\\n")
+    receipt = json.loads(receipt_path.read_text())
+    receipt["stderr_sha256"] = producer.digest(stderr)
+    receipt_path.write_text(json.dumps(receipt))
 elif mutation in ("status", "status-boolean", "hash", "argv"):
     receipt = json.loads(receipt_path.read_text())
     if mutation == "status": receipt["status"] = 7
@@ -170,6 +176,7 @@ class TableStorageTest(unittest.TestCase):
             "record-hash",
             "source-identity",
             "coherent-stage",
+            "coherent-runtime-stderr",
         ):
             with (
                 self.subTest(mutation=mutation),

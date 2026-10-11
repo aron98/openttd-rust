@@ -67,6 +67,12 @@ def validate(case: Case, native: bytes, rust: bytes) -> None:
         raise RuntimeError(f"Expected {case.stage}: {case.name}")
 
 
+def validate_runtime_stderr(case: Case, native: bytes, rust: bytes) -> None:
+    """Compare raw runtime errors; compiler diagnostic fidelity remains pending."""
+    if case.stage != "compile_error" and native != rust:
+        raise RuntimeError(f"Strict native/Rust runtime stderr mismatch: {case.name}")
+
+
 def verify_retention(
     output: Path, scenarios: list[Case], records: list[Observation]
 ) -> None:
@@ -108,6 +114,7 @@ def verify_observation(
     ):
         raise RuntimeError("Retained source or budget differs")
     values: list[bytes] = []
+    errors: list[bytes] = []
     for side, prefix in (
         ("native", record.native_prefix),
         ("rust", record.rust_prefix),
@@ -131,7 +138,9 @@ def verify_observation(
         if record.stdout_sha256 != digest(stdout):
             raise RuntimeError("Retained result differs")
         values.append(stdout.read_bytes())
+        errors.append(stderr.read_bytes())
     validate(case, values[0], values[1])
+    validate_runtime_stderr(case, errors[0], errors[1])
 
 
 def compare(native: Path, rust: Path, output: Path) -> None:
@@ -152,6 +161,11 @@ def compare(native: Path, rust: Path, output: Path) -> None:
                 [str(output / "rust"), *argv], output / f"{case.name}-{number}-rust"
             )
             validate(case, left, right)
+            validate_runtime_stderr(
+                case,
+                (output / f"{case.name}-{number}-native.stderr").read_bytes(),
+                (output / f"{case.name}-{number}-rust.stderr").read_bytes(),
+            )
             records.append(
                 Observation(
                     case.name,

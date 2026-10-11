@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 from .case import Case
-from .compare import validate
+from .compare import validate, validate_runtime_stderr
 
 
 def controls(output: Path) -> None:
@@ -32,6 +32,20 @@ def controls(output: Path) -> None:
             rejected.append(name)
         else:
             raise RuntimeError(f"Comparator accepted corruption: {name}")
+    runtime = (output / "missing-get-0-native.stderr").read_bytes()
+    if not runtime:
+        raise RuntimeError("Missing genuine native runtime diagnostic")
+    changed_error = runtime + b"corrupted runtime diagnostic\n"
+    _ = (output / "control-runtime-stderr.stderr").write_bytes(changed_error)
+    try:
+        validate_runtime_stderr(
+            Case("missing-get", "", "runtime_error"), runtime, changed_error
+        )
+    except RuntimeError as error:
+        _ = (output / "control-runtime-stderr.error").write_text(str(error))
+        rejected.append("runtime-stderr")
+    else:
+        raise RuntimeError("Comparator accepted runtime stderr corruption")
     _ = (output / "controls.json").write_text(json.dumps(rejected) + "\n")
     print(f"PASS rejected {len(rejected)} native observation corruptions")
 

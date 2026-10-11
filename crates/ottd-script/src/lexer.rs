@@ -83,6 +83,9 @@ impl<'a> Lexer<'a> {
                 let name = std::str::from_utf8(name)
                     .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
                 match name {
+                    "try" => TokenKind::Try,
+                    "catch" => TokenKind::Catch,
+                    "throw" => TokenKind::Throw,
                     "function" => TokenKind::Function,
                     "vargc" => TokenKind::Vargc,
                     "vargv" => TokenKind::Vargv,
@@ -109,8 +112,8 @@ impl<'a> Lexer<'a> {
                     "null" => TokenKind::Scalar(Value::Null),
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
-                    "delegate" | "try" | "catch" | "throw" | "yield" | "resume" | "parent"
-                    | "class" | "extends" | "instanceof" | "static" => {
+                    "delegate" | "yield" | "resume" | "parent" | "class" | "extends"
+                    | "instanceof" | "static" => {
                         return Err(CompileFailure::new(
                             offset,
                             CompileErrorKind::UnsupportedSyntax,

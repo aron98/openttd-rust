@@ -52,6 +52,8 @@ impl std::error::Error for CompileError {}
 /// Checked execution failure; undefined native arithmetic remains unsupported.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum VmError {
+    /// An explicit script throw escaped every active exception trap.
+    ThrownValue,
     /// A represented callable raised a native error retained by its runner.
     NativeCall,
     /// CALL reached a noncallable represented value.

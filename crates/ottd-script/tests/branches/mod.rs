@@ -112,17 +112,18 @@ fn scope_cleanup_rejects_counter_overflow() -> Result<(), Box<dyn std::error::Er
 
 #[test]
 fn unsupported_language_is_rejected_even_when_unreachable() {
-    for source in [
-        "if(false){return missing;} return 1;",
-        "local x=1; x<-2;",
-        "try{}catch(e){}",
-    ] {
+    for source in ["if(false){return missing;} return 1;", "local x=1; x<-2;"] {
         // Given: source explicitly outside the approved local/branch subset.
         // When: compiling, including unreachable branches.
         let result = compile(source);
         // Then: no host or object semantics are invented.
         assert!(result.is_err(), "unexpected support for {source}");
     }
+    let traps = compile("try{}catch(e){}").expect("exception syntax is now admitted");
+    assert_eq!(
+        Vm::new(&traps).expect("frame").resume(100),
+        Ok(Execution::Returned(Value::Null))
+    );
 }
 
 #[test]

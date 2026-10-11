@@ -18,6 +18,9 @@ impl Vm<'_> {
         right: &Value,
         operation: u8,
     ) -> Result<Value, VmError> {
+        if !matches!(operation, b'+' | b'-' | b'*' | b'/' | b'%') {
+            return Err(VmError::InvalidBytecode);
+        }
         let result = left.arithmetic(right, operation, &self.runner.get().root.realm);
         result.map_err(|error| {
             let message = match error {
@@ -66,6 +69,9 @@ impl Vm<'_> {
         right: &Value,
         selector: u8,
     ) -> Result<Value, VmError> {
+        if !matches!(selector, 0 | 2 | 3 | 4) {
+            return Err(VmError::InvalidBytecode);
+        }
         left.compare(right, selector).map_err(|error| {
             if !native_comparison_error(left, right) {
                 return error;

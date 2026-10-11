@@ -30,6 +30,10 @@ impl Vm<'_> {
         self.store_temporary(value)
     }
     pub(super) fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
+        if matches!(i.opcode, 0x38..=0x3a) {
+            self.trap_instruction(i)?;
+            return Ok(None);
+        }
         let value = match i.opcode {
             0x05 | 0x06 => {
                 self.dispatch_call(i)?;

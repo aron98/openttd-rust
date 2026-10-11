@@ -57,37 +57,7 @@ impl<'a> Compiler<'a> {
     ) -> Result<(), CompileFailure> {
         self.depth(depth)?;
         let parameters = self.parameters(depth)?;
-        let mut captures = Vec::new();
-        if self.token.kind == TokenKind::Symbol(b':') {
-            self.advance()?;
-            self.expect(b'(')?;
-            while self.token.kind != TokenKind::Symbol(b')') {
-                let TokenKind::Identifier(name) = self.token.kind else {
-                    return Err(self.expected_identifier());
-                };
-                let capture = if let Some(register) = self.registers.local(name) {
-                    Capture::Local(register.0)
-                } else if let Some(index) =
-                    self.captures.iter().position(|(found, _)| *found == name)
-                {
-                    Capture::Outer(
-                        u8::try_from(index).map_err(|_| self.error(CompileErrorKind::Limit))?,
-                    )
-                } else {
-                    Capture::Symbol(self.realm.string(name.as_bytes()))
-                };
-                captures.push((name, capture));
-                self.advance()?;
-                if self.token.kind == TokenKind::Symbol(b',') {
-                    self.advance()?;
-                } else if self.token.kind != TokenKind::Symbol(b')') {
-                    return Err(self
-                        .error(CompileErrorKind::ExpectedToken)
-                        .native("expected ')' or ','"));
-                }
-            }
-            self.advance()?;
-        }
+        let captures = self.function_captures()?;
         let parent_registers = mem::replace(&mut self.registers, parameters.registers);
         let parent_emitter = mem::replace(&mut self.emitter, Emitter::new());
         let parent_literals = mem::take(&mut self.literals);
@@ -95,6 +65,7 @@ impl<'a> Compiler<'a> {
         let parent_captures = mem::replace(&mut self.captures, captures);
         let parent_breaks = mem::take(&mut self.break_targets);
         let parent_continues = mem::take(&mut self.continue_targets);
+        let parent_traps = mem::replace(&mut self.traps, 0);
         let parent_last_stack = mem::replace(&mut self.last_stack_size, 0);
         self.function_depth = self
             .function_depth
@@ -142,6 +113,7 @@ impl<'a> Compiler<'a> {
         self.break_targets = parent_breaks;
         self.continue_targets = parent_continues;
         self.last_stack_size = parent_last_stack;
+        self.traps = parent_traps;
         self.function_depth = self.function_depth.saturating_sub(1);
         let index =
             i32::try_from(self.children.len()).map_err(|_| self.error(CompileErrorKind::Limit))?;
@@ -155,6 +127,49 @@ impl<'a> Compiler<'a> {
             arg3: 0,
         });
         Ok(())
+    }
+    pub(super) fn function_expression(
+        &mut self,
+        depth: u8,
+    ) -> Result<Option<Register>, CompileFailure> {
+        self.advance()?;
+        self.expect(b'(')?;
+        self.create_function(depth, None)?;
+        Ok(None)
+    }
+    fn function_captures(&mut self) -> Result<Vec<(&'a str, Capture)>, CompileFailure> {
+        let mut captures = Vec::new();
+        if self.token.kind == TokenKind::Symbol(b':') {
+            self.advance()?;
+            self.expect(b'(')?;
+            while self.token.kind != TokenKind::Symbol(b')') {
+                let TokenKind::Identifier(name) = self.token.kind else {
+                    return Err(self.expected_identifier());
+                };
+                let capture = if let Some(register) = self.registers.local(name) {
+                    Capture::Local(register.0)
+                } else if let Some(index) =
+                    self.captures.iter().position(|(found, _)| *found == name)
+                {
+                    Capture::Outer(
+                        u8::try_from(index).map_err(|_| self.error(CompileErrorKind::Limit))?,
+                    )
+                } else {
+                    Capture::Symbol(self.realm.string(name.as_bytes()))
+                };
+                captures.push((name, capture));
+                self.advance()?;
+                if self.token.kind == TokenKind::Symbol(b',') {
+                    self.advance()?;
+                } else if self.token.kind != TokenKind::Symbol(b')') {
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("expected ')' or ','"));
+                }
+            }
+            self.advance()?;
+        }
+        Ok(captures)
     }
     fn parameters(&mut self, depth: u8) -> Result<Parameters<'a>, CompileFailure> {
         let mut registers = Registers::new();

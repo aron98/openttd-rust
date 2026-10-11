@@ -130,9 +130,9 @@ pub trait PrintSink: std::fmt::Debug {
 #[derive(Debug)]
 pub struct Runner {
     pub(crate) root: RootEnvironment,
+    pub(crate) native_error: Value,
     pub(crate) temporary: Temporary,
     pub(crate) failure: Option<RunnerFailure>,
-    pub(crate) native_error: Value,
     pub(crate) print_sink: Option<Box<dyn PrintSink>>,
 }
 impl Runner {
@@ -140,9 +140,9 @@ impl Runner {
     pub const fn new(root: RootEnvironment) -> Self {
         Self {
             root,
+            native_error: Value::Null,
             temporary: Temporary::Value(Value::Null),
             failure: None,
-            native_error: Value::Null,
             print_sink: None,
         }
     }

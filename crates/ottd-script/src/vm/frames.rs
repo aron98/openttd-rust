@@ -123,6 +123,9 @@ impl Vm<'_> {
         Ok(())
     }
     pub(super) fn frame_return(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
+        if self.has_frame_trap() {
+            return Err(VmError::InvalidBytecode);
+        }
         if self.frames.is_empty() {
             let result = self.return_value(i)?;
             self.pop_varargs()?;
@@ -147,6 +150,16 @@ impl Vm<'_> {
             *self.native_slot(index)? = Value::Null;
         }
         Ok(None)
+    }
+    pub(super) fn unwind_parent(&mut self) -> Result<(), VmError> {
+        self.pop_varargs()?;
+        let parent = self.frames.pop().ok_or(VmError::InvalidBytecode)?;
+        self.program = Some(parent.closure);
+        self.base = parent.base;
+        self.top = parent.top;
+        self.ip = parent.ip;
+        self.varargs = parent.varargs;
+        Ok(())
     }
     fn fill_defaults(
         &mut self,

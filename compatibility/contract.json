@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "1fdc832bcc14dffc8f1b02bc99ed3f863f60672c8205ff7910a7c8af048d9146",
+   "sha256": "e7068b39434add90553fa1c66b35dbf29450cdd198599be33a19e5d9e8c819da",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "ab830ae905aa86be5e8f394c001a3f6d57474e1c736282dfbbaa80afb73a9bc1",
+   "sha256": "ee8b7cebafe9990de88b1fdb8429ce2b48b37f3250294b67b9399fa9f0f6c1d7",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "806a76da8a756805f2fe0a951053bc3491594437d7464a83fea71871ebabc167",
+   "sha256": "91d416d989b457b3f6b7d0f7f6b6860033f15054e99511876d98cdbc27f65d77",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "d1d7e1402c5fdf6acb8963a5b2a81637f70c49d4714d22cebaa0bb360cd85553",
+   "sha256": "99ee6885b3012dd9ff7d66ce3ec8f8a3a9e87c87e9314bf5537228f54dc9bfa7",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "523384c40ec60184d61e0f4e528836327b76cefbf63c56985cf9cce0e5c5441d",
+   "sha256": "1cb5471f26aa18c6eb7073ac9ab176a1c7c17c1c4b63f1a88cad65ab1b535cf4",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "c7e7b5821760bfe23c7359a2a82221ebc6a2238c4c4ad1ae0418eb06793b6a7c",
+   "sha256": "81c8b2fedcc4ad24d9490514b22414d11cf739f0616855767221b4b1d9f39b77",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "0636d62769d42152b25be7f5815bf967a433dffaef8296736dd88560cb6a984d",
+   "sha256": "87a9fc85f2e972854994fa1115d723780898e5836c0e59a81a3d8407d17532a8",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "05ee1ed08a73a208fccadc0428e0a5293a42dcafc43a44dc7d13012b590e960c",
+   "sha256": "1277c52b55d554680fa13cf45af99e03b6aacb014e39f5d0389f68c341db8f31",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "e3bea73d57ea9ba4db573cea5d1ba5996a6aa455f521e77b46a8b5ba49a73e3d",
+   "sha256": "8c645216ae2c6379a160a8106a392bf1b93b83a2314f3bd9919d591fd5c080f2",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "3b488f42c3ed7f8afb5ac66dd576dbb8397c2103862fd79bf57eb137a943f1b5",
+   "sha256": "f0c1faad8ba63260e3bc5d7f97868b9c504b19db9b0c5ab869008f4b173f35b8",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "448fab90dd61416873ac4293dd7ba1bb3f11a31fc9d7a71a810c5c9dde95c4bc",
+   "sha256": "347936994e6bff331e204f881cd54a5c1f573a98f1c4f84c19af15802e1efbab",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "7858864a7c41b06662d421a815ada53c7eae7c13470ecd2831ec84e85e0efe99",
+   "sha256": "8eaa2b8d9557c9e2dcfd4aeef53cf031e5001e8fc820ac1f3fdd863d6e3d1cb6",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "49a7ff2934bcf9aa656357979bae01fe34e21582f8188ebd661745217b9c0b4f",
+   "sha256": "55d02b4ef416a20be436bbf31e1f2619696d71449826f6e9b377cb60f196ae81",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -7747,7 +7747,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-compiler-expressions-roots-rs",
    "path": "crates/ottd-script/src/compiler/expressions/roots.rs",
-   "sha256": "350a745ba1f00812e340eb8a7ecb5920c51c03c483b6ce862867dfd0cc648db7",
+   "sha256": "e170c0f2f1ac8d06a27813e6041c52dd4e638669daf24893a561f15651634638",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7756,7 +7756,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-runner-rs",
    "path": "crates/ottd-script/src/runner.rs",
-   "sha256": "73b7add8c137fc699b3dd612cec43b5e600945aef7e1f80ca2922d12303fe2ac",
+   "sha256": "6c73b931f9eb268dafc37b1ce48cc742dbd23f526aec3a12a28513b94db1f4bc",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7855,7 +7855,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-compiler-expressions-arrays-rs",
    "path": "crates/ottd-script/src/compiler/expressions/arrays.rs",
-   "sha256": "1313ba55a081764c1d09e7e707882f4d776b3b91166b8146be586b1a7a0f84e5",
+   "sha256": "ab17bb1277628c951a649799dbb758a52041b088a01ab3c8d4acd0e3264e22b0",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "60167344e035cc07cb388eb0b75e506a191b53b3af4a8caa8b806b9fa1e21c07",
+   "sha256": "515ff3264a16424e4e1045306a3b6d5faff2d99d7683bf7e81950927bed4afe0",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -9712,6 +9712,348 @@
    "sha256": "17240f8d7b5e8f03643c81a9c54c07f235e32aeb30a001e464a143fffc714b9c",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-readme-md",
+   "path": "crates/ottd-script/README.md",
+   "sha256": "e4550f82d2cafe4c47bd6bbf488576af4621a54fef1cb8f10cd384b22775dc80",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-examples-observe-rs",
+   "path": "crates/ottd-script/examples/observe.rs",
+   "sha256": "4519237eb66a579f3ef844e686ee7cbd94b4b73beaf32f33363a7b3c76c569a0",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-compiler-emitter-rs",
+   "path": "crates/ottd-script/src/compiler/emitter.rs",
+   "sha256": "d9b31e8f98ed08345c44979decc6ee25e8c63cdb263fd28cda7a9d33bde7263c",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-compiler-expressions-rs",
+   "path": "crates/ottd-script/src/compiler/expressions.rs",
+   "sha256": "103c822fd5574fd6263fb05bf66e484f9c519fc37f86cb2e87c50b727ad00f44",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-compiler-expressions-calls-rs",
+   "path": "crates/ottd-script/src/compiler/expressions/calls.rs",
+   "sha256": "282296330e0a15adff0683502eed1fad8bfd62b31b43602c96d3b2c491aef100",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-compiler-expressions-factors-rs",
+   "path": "crates/ottd-script/src/compiler/expressions/factors.rs",
+   "sha256": "c9a42566cb4a12b00bcf025a8531eda502d80bf5370932bc2680f02c9f5ea00f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-error-rs",
+   "path": "crates/ottd-script/src/error.rs",
+   "sha256": "8b94e3dddc2014f4ca4651643100c9a2f4a1b80f036d4d6e357e48410f898ba7",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-host-stack-rs",
+   "path": "crates/ottd-script/src/host_stack.rs",
+   "sha256": "29692065f9f4d979824b5ffa1cdd234a326992965660f066d99c02607f331a13",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-lib-rs",
+   "path": "crates/ottd-script/src/lib.rs",
+   "sha256": "a1bb5b1b845c0dfd96924c97e92c87ea51fe716ad5c4981f474e33af4799b73f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-native-closure-rs",
+   "path": "crates/ottd-script/src/native_closure.rs",
+   "sha256": "0e783e9660c13f939d9ed62fb0611cf7401a1230c1cca34db1d1d1f2c3cf3d99",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-program-rs",
+   "path": "crates/ottd-script/src/program.rs",
+   "sha256": "70222392df511c920f471b04c8263c8d8e5bf09bfb8a397fb8895cf4fa181931",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-value-strings-rs",
+   "path": "crates/ottd-script/src/value/strings.rs",
+   "sha256": "a5e100922ddde99084622ba73d115fb1049b5653b61f7b37c0a3e1df7f86b091",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-rs",
+   "path": "crates/ottd-script/src/vm.rs",
+   "sha256": "84b501026de2161b8f3feeefa0b8092a1b762ee1332e6018d1611ee4afe5f901",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-calls-rs",
+   "path": "crates/ottd-script/src/vm/calls.rs",
+   "sha256": "58111ec5008038070167cad55116d5b2feb775e270d4b57f79ab3f3c6842d057",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-dispatch-rs",
+   "path": "crates/ottd-script/src/vm/dispatch.rs",
+   "sha256": "9de472ab555835821163e118615b540e6f64e9ba4d07d6438c36d9b614922f05",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-array-txt",
+   "path": "crates/ottd-script/src/vm/native-calls-array.txt",
+   "sha256": "f1a93df1188a76240ed160ee903213f1663e7fa7c65ae37b3c40d8f57774cea6",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-callee-txt",
+   "path": "crates/ottd-script/src/vm/native-calls-callee.txt",
+   "sha256": "51ec4da90cb42a5b4d5484f9491562200bc91366aa25f181f9fe92f0ed45ccfe",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-cycle-txt",
+   "path": "crates/ottd-script/src/vm/native-calls-cycle.txt",
+   "sha256": "12abaca65011898a503e06e79754d8877a32e07cc198d2fd861956ca8a72ef7c",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-empty-txt",
+   "path": "crates/ottd-script/src/vm/native-calls-empty.txt",
+   "sha256": "5a0c9d095cce105bec014920eaf706ce34b0dcee5418ccd6b835cc18900bbe7d",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-failure-txt",
+   "path": "crates/ottd-script/src/vm/native-calls-failure.txt",
+   "sha256": "4f27f0343889f9cb5294bdf9f283bbaced964b1382623bfc519b721b5a20abfe",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-retained-txt",
+   "path": "crates/ottd-script/src/vm/native-calls-retained.txt",
+   "sha256": "cc69a340b0a20c0bb00d9f8a982fe951ec6f56fe34507c56bca0a31d28e5848b",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-rs",
+   "path": "crates/ottd-script/src/vm/native_calls.rs",
+   "sha256": "4af884e4b9bf5c8b6c7dce4d1a7cf2389c9d50a45d9e4bddb5ef63d1cfa3ef1f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-aliases-rs",
+   "path": "crates/ottd-script/src/vm/native_calls/aliases.rs",
+   "sha256": "285ae0aea12096e0b7527e412c48299c985e252a4a9ea98f2fbe8f741d2aea07",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-owners-rs",
+   "path": "crates/ottd-script/src/vm/native_calls/owners.rs",
+   "sha256": "c8dbf15181489a9274042a19408fee8ceb4e14a96f8825e24530a9531c984892",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-safety-rs",
+   "path": "crates/ottd-script/src/vm/native_calls/safety.rs",
+   "sha256": "8d5ff2cb57a3b23a8c94d1a0e85ef2be62c748db2fd9938532e55473d4d2f5f4",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-crates-ottd-script-tests-scalar-rs",
+   "path": "crates/ottd-script/tests/scalar.rs",
+   "sha256": "e7b1340541ace06b2af2ab1a6fc62ceb37708135169eb340ad90215645352957",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-build-native-sh",
+   "path": "scripts/compat/script-vm/build-native.sh",
+   "sha256": "10af11e69e7a10e11cf8aeaaf8b6ee244ef5552cc01bf6368baef2630d0fcf21",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-calls-hpp",
+   "path": "scripts/compat/script-vm/calls.hpp",
+   "sha256": "78aae94d668682da27b92c95eb550dead23ff4bbc9904f6caee3fcdb486685fe",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-observe-cpp",
+   "path": "scripts/compat/script-vm/observe.cpp",
+   "sha256": "8b3a589a4e5d2dfd8ec2a8dce081fc4084ee73870002380917a18e89a6f50da2",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-tables-call-cases-py",
+   "path": "scripts/compat/script-vm/tables/call_cases.py",
+   "sha256": "1f06ceddd08c3b1e9a717eed18faf56df95075c12bb62c31304468e8065ceec5",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-tables-call-controls-py",
+   "path": "scripts/compat/script-vm/tables/call_controls.py",
+   "sha256": "1345234bb7cc335408cbe955428dc7519b3fdb38b07815f71e122004ebdc121e",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-tables-calls-py",
+   "path": "scripts/compat/script-vm/tables/calls.py",
+   "sha256": "cf398a8bd7db0ed29abcd66c1e19e1ff66d2fabbfe2cc0ea6689cb7053c299c5",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-tables-compare-py",
+   "path": "scripts/compat/script-vm/tables/compare.py",
+   "sha256": "1c3586c0599273416784501cb85b2b973d2f5677b2f726a86032cbc83c2f4103",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-tables-fixtures-calls-late-error-nut",
+   "path": "scripts/compat/script-vm/tables/fixtures/calls/late-error.nut",
+   "sha256": "0f9ffc257ad235e5b75563da19632ced2764f24f298f398cb352fe3a6b21a59b",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-compat-script-vm-tables-verify-sh",
+   "path": "scripts/compat/script-vm/tables/verify.sh",
+   "sha256": "bdc9c9f39b1c262dcf2853094e5b5b51b29c46f05f56c2d7837d8e09f70aa9d3",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-script-vm-inputs-py",
+   "path": "scripts/script_vm_inputs.py",
+   "sha256": "49c7ea86f800dabbc0e46292f718693984bf342341915b731fbc2407aca75b5a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-tests-script-vm-tables-bindings-test-py",
+   "path": "scripts/tests/script_vm_tables_bindings_test.py",
+   "sha256": "f64300b7fefa7f68a1e9f766697221dbe4f12ad31373f538e1a7e364eca3c648",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "native-script-calls-scripts-tests-test-script-vm-table-storage-py",
+   "path": "scripts/tests/test_script_vm_table_storage.py",
+   "sha256": "8a542ba0d8180befe7ec90467c78f4a026a36ff9277e5f5bc51221d3c40cf1cc",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
    "profile": null
   },

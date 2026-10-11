@@ -1,6 +1,9 @@
 //! Directed vanilla road controller; unsupported reached choices roll back the horizon.
 mod depot;
+mod frames;
+mod motion;
 mod orders;
+mod routing;
 use super::{
     RoadPhases, SavedVehicleView, State, VehicleId, WorldTickError, number, set, unsupported,
 };
@@ -70,7 +73,7 @@ pub(super) fn tick(
     if number(state, id, true, "state")? == 254 {
         depot::leave(runner, state)?;
     } else {
-        depot::advance(runner, state)?;
+        motion::advance(runner, state)?;
     }
     super::stations::age_cargo(state, id, &runner.cache)?;
     set(

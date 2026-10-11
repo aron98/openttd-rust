@@ -59,6 +59,17 @@ inline Json Checkpoint(const std::filesystem::path &directory, const std::string
 }
 #include "reference_movement_replay.hpp"
 namespace ReferenceReplay {
+inline std::ofstream route_search;
+inline uint64_t route_search_sequence = 0;
+inline void ObserveRouteSearch(const ReferenceMovement::RouteEvent &event)
+{
+    route_search << Json{{"sequence", route_search_sequence++}, {"runtime", Runtime()},
+        {"phase", event.phase}, {"tile", event.tile}, {"track", event.track},
+        {"end_tile", event.end_tile}, {"end_track", event.end_track},
+        {"parent_tile", event.parent_tile}, {"parent_track", event.parent_track},
+        {"cost", event.cost}, {"estimate", event.estimate}, {"slot", event.slot},
+        {"count", event.count}}.dump() << '\n';
+}
 inline bool Run()
 {
     if (std::getenv("OTTD_MOVEMENT_OBSERVE") != nullptr) return ReferenceMovement::Run();
@@ -80,6 +91,9 @@ inline bool Run()
     if (std::getenv("OTTD_ROAD_ROUTE_OBSERVE") != nullptr) {
         route_trace.exceptions(std::ios::failbit | std::ios::badbit);
         route_trace.open(directory / "route.jsonl");
+        route_search.exceptions(std::ios::failbit | std::ios::badbit);
+        route_search.open(directory / "route-search.jsonl");
+        ReferenceMovement::route_sink = ObserveRouteSearch;
     }
     Require(!std::filesystem::exists(directory / "results.json"), "stale native replay results");
     Json results = {{"schema_version", 1}, {"actions", Json::array()}, {"checkpoints", Json::array()}};
@@ -130,6 +144,7 @@ inline bool Run()
         results["actions"].push_back(std::move(observation));
     }
     results["checkpoints"].push_back(Checkpoint(directory, "final"));
+    ReferenceMovement::route_sink = nullptr;
     Write(directory / "results.json", results);
     unsetenv("OTTD_WORLD_PATH");
     unsetenv("OTTD_WORLD_SCHEMA_PATH");

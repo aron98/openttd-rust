@@ -725,3 +725,77 @@
  }
  
  /**
+--- a/src/pathfinder/yapf/yapf_road.cpp
++++ b/src/pathfinder/yapf/yapf_road.cpp
+@@ -358,6 +358,7 @@
+ 			/* choose diagonal trackdir reachable from enterdir */
+ 			return DiagDirToDiagTrackdir(enterdir);
+ 		}
++		ReferenceMovement::RoutingScope route_observation;
+ 		/* our source tile will be the next vehicle tile (should be the given one) */
+ 		TileIndex src_tile = tile;
+ 		/* get available trackdirs on the start tile */
+--- a/src/pathfinder/yapf/yapf_base.hpp
++++ b/src/pathfinder/yapf/yapf_base.hpp
+@@ -14,6 +14,7 @@
+ #include "../../settings_type.h"
+ #include "../../misc/dbg_helpers.h"
+ #include "yapf_type.hpp"
++#include "../../reference_movement_hooks.hpp"
+ 
+ /**
+  * CYapfBaseT - A-star type path finder base class.
+@@ -107,6 +108,7 @@
+ 			this->num_steps++;
+ 			Node *best_open_node = this->nodes.GetBestOpenNode();
+ 			if (best_open_node == nullptr) break;
++			ReferenceMovement::RouteNode("best_open", *best_open_node);
+ 
+ 			if (Yapf().PfDetectDestination(*best_open_node)) {
+ 				this->best_dest_node = best_open_node;
+@@ -197,9 +199,11 @@
+ 			this->stats_cache_hits++;
+ 		}
+ 
++		ReferenceMovement::RouteNode("candidate", n);
+ 		bool valid = Yapf().PfCalcCost(n, &follower);
+ 
+ 		if (valid) valid = Yapf().PfCalcEstimate(n);
++		ReferenceMovement::RouteNode(valid ? "evaluated" : "discarded", n);
+ 
+ 		/* have the cost or estimate callbacks marked this node as invalid? */
+ 		if (!valid) return;
+--- a/src/misc/binaryheap.hpp
++++ b/src/misc/binaryheap.hpp
+@@ -9,6 +9,7 @@
+ 
+ #ifndef BINARYHEAP_HPP
+ #define BINARYHEAP_HPP
++#include "../reference_movement_hooks.hpp"
+ 
+ /** Enable it if you suspect binary heap doesn't work well */
+ #define BINARYHEAP_CHECK 0
+@@ -198,6 +199,7 @@
+ 		this->data.emplace_back();
+ 		size_t gap = this->HeapifyUp(++items, new_item);
+ 		this->data[gap] = new_item;
++		ReferenceMovement::RouteHeap("heap_include", this->data, this->items);
+ 		CHECK_CONSISTY();
+ 	}
+ 
+@@ -232,6 +234,7 @@
+ 	 */
+ 	inline void Remove(size_t index)
+ 	{
++		ReferenceMovement::RouteNode("heap_removed_node", *this->data[index], index, this->items);
+ 		if (index < this->items) {
+ 			assert(index != 0);
+ 			this->items--;
+@@ -248,6 +251,7 @@
+ 			this->items--;
+ 		}
+ 		this->data.pop_back();
++		ReferenceMovement::RouteHeap("heap_remove", this->data, this->items);
+ 
+ 		CHECK_CONSISTY();
+ 	}

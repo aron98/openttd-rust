@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "23640424d22836c935432480fa1cb29b532cdbd7a1d573277c636bca6290eab0",
+   "sha256": "fda907980206558287c78ab3365d720bcfd9d76b4a4a53b556b6928109deae7c",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "f6749eb42e4c941637ae5e66b500df1628194c112aea999dd35e7bfa211c6d38",
+   "sha256": "a2dab0b08eeb1d45b4794db2bfe3986b3e7b8377f9b0a235aea1d26dbe66e607",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,

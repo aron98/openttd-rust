@@ -6,6 +6,8 @@ mod command_tests;
 mod distribution;
 #[path = "cargo/graph.rs"]
 mod graph;
+#[path = "cargo/industry.rs"]
+mod industry;
 #[path = "cargo/load.rs"]
 pub(in crate::runtime) mod load;
 #[cfg(test)]

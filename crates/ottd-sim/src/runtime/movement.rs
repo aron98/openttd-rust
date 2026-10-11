@@ -36,6 +36,13 @@ struct RoadPhases<'a> {
     transport: super::transport::TransportRuntime,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn industry_cargo(
+        &mut self,
+        state: &mut State<'_>,
+        production: crate::cargo::Production,
+    ) -> Result<u32, WorldTickError> {
+        self.transport.industry_production(state, production)
+    }
     fn town_cargo(
         &mut self,
         state: &mut State<'_>,

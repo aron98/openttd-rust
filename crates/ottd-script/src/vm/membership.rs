@@ -9,7 +9,7 @@ impl Vm<'_> {
         let receiver = self.register(instruction.arg1)?;
         let key = self.register(i32::from(instruction.arg2))?;
         let value = match receiver {
-            Value::Table(table) => table.raw_get(key)?,
+            Value::Table(table) => table.raw_chain_get(key)?,
             Value::Array(array) => numeric_index(&key)?.and_then(|index| array.get(index)),
             Value::String(string) => {
                 let length = i64::try_from(string.as_bytes().len())

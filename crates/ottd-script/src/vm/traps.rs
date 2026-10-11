@@ -26,7 +26,8 @@ impl Vm<'_> {
                 | VmError::UnsupportedTableOrdering
                 | VmError::UnsupportedArrayOrdering
                 | VmError::UnsupportedRuntimeValue => true,
-                VmError::UnsupportedTableHashTarget
+                VmError::UnsupportedMetamethod
+                | VmError::UnsupportedTableHashTarget
                 | VmError::UnsupportedTableElement
                 | VmError::UnsupportedArrayElement
                 | VmError::UnsupportedIndexConversion

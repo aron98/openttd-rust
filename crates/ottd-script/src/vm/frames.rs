@@ -20,6 +20,9 @@ impl Vm<'_> {
                 self.write(i.arg0, result)
             }
             other => {
+                if let Value::Table(table) = &other {
+                    table.refuse_metamethod(b"_call")?;
+                }
                 let Value::String(kind) = other.type_name(&self.runner.get().root.realm) else {
                     return Err(VmError::InvalidBytecode);
                 };

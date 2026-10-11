@@ -2,6 +2,14 @@
 use super::{Instruction, Value, Vm, VmError};
 
 impl Vm<'_> {
+    pub(super) fn typeof_value(&self, source: i32) -> Result<Value, VmError> {
+        let value = self.register(source)?;
+        if let Value::Table(table) = &value {
+            table.refuse_metamethod(b"_typeof")?;
+        }
+        Ok(value.type_name(&self.runner.get().root.realm))
+    }
+
     pub(super) fn binary_operation(&mut self, i: Instruction) -> Result<Value, VmError> {
         let left = self.register(i32::from(i.arg2))?;
         let right = self.register(i.arg1)?;
@@ -20,6 +28,25 @@ impl Vm<'_> {
     ) -> Result<Value, VmError> {
         if !matches!(operation, b'+' | b'-' | b'*' | b'/' | b'%') {
             return Err(VmError::InvalidBytecode);
+        }
+        if operation == b'+'
+            && (matches!(left, Value::String(_)) || matches!(right, Value::String(_)))
+        {
+            for value in [left, right] {
+                if let Value::Table(table) = value {
+                    table.refuse_metamethod(b"_tostring")?;
+                }
+            }
+        } else if let Value::Table(table) = left {
+            let method: &[u8] = match operation {
+                b'+' => b"_add",
+                b'-' => b"_sub",
+                b'*' => b"_mul",
+                b'/' => b"_div",
+                b'%' => b"_modulo",
+                _ => return Err(VmError::InvalidBytecode),
+            };
+            table.refuse_metamethod(method)?;
         }
         let result = left.arithmetic(right, operation, &self.runner.get().root.realm);
         result.map_err(|error| {
@@ -55,6 +82,9 @@ impl Vm<'_> {
         })
     }
     pub(super) fn negate_value(&mut self, value: &Value) -> Result<Value, VmError> {
+        if let Value::Table(table) = value {
+            table.refuse_metamethod(b"_unm")?;
+        }
         value.negate().map_err(|error| {
             if error != VmError::OperandType {
                 return error;
@@ -71,6 +101,11 @@ impl Vm<'_> {
     ) -> Result<Value, VmError> {
         if !matches!(selector, 0 | 2 | 3 | 4) {
             return Err(VmError::InvalidBytecode);
+        }
+        if let (Value::Table(left), Value::Table(right)) = (left, right) {
+            if !left.same_identity(right) {
+                left.refuse_metamethod(b"_cmp")?;
+            }
         }
         left.compare(right, selector).map_err(|error| {
             if !native_comparison_error(left, right) {

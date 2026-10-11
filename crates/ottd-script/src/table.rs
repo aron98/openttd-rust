@@ -134,6 +134,14 @@ impl Table {
         if let Some(value) = self.raw_get(key.clone())? {
             return Ok(value);
         }
+        if let Some(delegate) = self.delegate() {
+            match delegate.lookup(key.clone()) {
+                Ok(value) => return Ok(value),
+                Err(VmError::MissingIndex) => {}
+                Err(error) => return Err(error),
+            }
+        }
+        self.refuse_metamethod(b"_get")?;
         if let Value::String(key) = key {
             if matches!(
                 key.as_bytes(),

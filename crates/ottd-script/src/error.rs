@@ -56,6 +56,8 @@ pub enum VmError {
     ThrownValue,
     /// Attaching this delegate would form a direct or transitive delegate cycle.
     DelegateCycle,
+    /// A reached native metamethod requires a nested invocation boundary not yet admitted.
+    UnsupportedMetamethod,
     /// A represented callable raised a native error retained by its runner.
     NativeCall,
     /// CALL reached a noncallable represented value.

@@ -132,8 +132,11 @@ impl Vm<'_> {
         match receiver {
             Value::Table(table) => {
                 if newslot {
+                    if table.raw_get(key.clone())?.is_none() {
+                        table.refuse_metamethod(b"_newslot")?;
+                    }
                     table.new_slot(key, value)?;
-                } else if let Err(error) = table.set_existing(key.clone(), value.clone()) {
+                } else if let Err(error) = table.set_delegated(key.clone(), value.clone()) {
                     if error == VmError::MissingIndex && *receiver == self.register(0)? {
                         self.runner.get().root.table.set_existing(key, value)?;
                     } else {

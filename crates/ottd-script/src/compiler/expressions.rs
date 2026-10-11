@@ -14,6 +14,7 @@ pub(super) struct ExpressionState {
 }
 mod arrays;
 mod calls;
+mod delegates;
 mod factors;
 mod objects;
 mod roots;

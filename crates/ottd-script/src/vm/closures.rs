@@ -56,9 +56,10 @@ impl Vm<'_> {
                     });
                     match self.lookup_value(&self.register(0)?, Value::String(key.clone())) {
                         Ok(value) => value,
-                        Err(error) => {
+                        Err(error @ (VmError::MissingIndex | VmError::UnsupportedReceiver)) => {
                             return Err(self.index_failure(&Value::String(key.clone()), error));
                         }
+                        Err(error) => return Err(error),
                     }
                 }
             };

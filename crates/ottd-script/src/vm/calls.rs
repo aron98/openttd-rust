@@ -119,6 +119,9 @@ impl Vm<'_> {
                 Ok(Value::Null)
             }
             NativeFunction::Print => {
+                if let Value::Table(table) = first {
+                    table.refuse_metamethod(b"_tostring")?;
+                }
                 let bytes = first.text()?;
                 let string = self.runner.get().root.realm.string(&bytes);
                 *self.native_slot(top)? = Value::String(string);

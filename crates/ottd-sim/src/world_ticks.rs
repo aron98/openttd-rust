@@ -17,10 +17,7 @@ use phases::{competitor, daily, industry_month};
 mod tiles;
 mod towns;
 mod trees;
-use crate::{
-    TickEvents,
-    world_access::{WorldAccessError, unsigned},
-};
+use crate::{TickEvents, world_access::WorldAccessError};
 use crate::{
     WorldTickPhases as VehiclePhases, WorldTickState as State, unsupported_tick as unsupported,
 };

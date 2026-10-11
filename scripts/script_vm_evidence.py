@@ -9,10 +9,9 @@
 import sys
 from pathlib import Path
 
-from scripts.script_vm_arrays import CONTROLS as ARRAY_CONTROLS
-from scripts.script_vm_arrays import declarations as array_declarations
 from scripts.script_vm_arrays import validate_arrays
-from scripts.script_vm_foreach import CONTROLS as FOREACH_CONTROLS
+from scripts.script_vm_branches import validate_branches
+from scripts.script_vm_constants import validate_constants
 from scripts.script_vm_foreach import validate_foreach
 from scripts.script_vm_observation import (
     compare_observation,
@@ -20,15 +19,16 @@ from scripts.script_vm_observation import (
 )
 from scripts.script_vm_policy import POLICY_STAGE, compare_case
 from scripts.script_vm_provenance import (
+    Spec,
     archive_files,
     digest,
     load_spec,
-    select_executable,
     verify_archive,
     verify_sources,
 )
-from scripts.script_vm_roots import CONTROLS as ROOT_CONTROLS
+from scripts.script_vm_receipts import validate_receipts
 from scripts.script_vm_roots import validate_roots
+from scripts.script_vm_strings import validate_strings
 from scripts.world_check_support import ROOT, WorldCheckError, at, read_json
 
 __all__ = (
@@ -60,8 +60,7 @@ def require_paths(
         raise WorldCheckError("Incomplete or substituted VM evidence membership")
 
 
-def validate(directory: Path, *, packaged: bool = True) -> None:
-    spec = load_spec(MANIFEST)
+def validate_layout(directory: Path, spec: Spec, *, packaged: bool) -> None:
     expected = set(spec.paths)
     actual = {
         str(p.relative_to(directory)) for p in directory.rglob("*") if p.is_file()
@@ -84,117 +83,12 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
             raise WorldCheckError("Empty substantive VM evidence")
     if (directory / "manifest.json").read_bytes() != MANIFEST.read_bytes():
         raise WorldCheckError("VM manifest identity changed")
-    verify_sources(ROOT, directory / "native", spec)
-    for name, sha in spec.sources:
-        if digest(directory / "source" / name) != sha:
-            raise WorldCheckError("Retained VM source changed")
-    identities = read_json(directory / "identities.json")
-    match identities:
-        case {
-            "artifact_root": str() as origin,
-            "rust": {"path": str() as rust_path, "sha256": str() as rust_sha},
-            "tests": {"path": str() as test_path, "sha256": str() as test_sha},
-            "native": str() as native_sha,
-        }:
-            pass
-        case _:
-            raise WorldCheckError("Missing VM executable identities")
-    for relative, sha in (
-        ("bin/rust-observe", rust_sha),
-        ("bin/scalar-tests", test_sha),
-        ("native/observe", native_sha),
-    ):
-        if digest(directory / relative) != sha:
-            raise WorldCheckError("VM executable changed")
-    if read_json(directory / "identity-after.json") != identities:
-        raise WorldCheckError("VM identity changed during execution")
-    expected_builds = {
-        "build-rust": [
-            "cargo",
-            "build",
-            "--locked",
-            "-p",
-            "ottd-script",
-            "--example",
-            "observe",
-            "--message-format=json",
-        ],
-        "build-tests": [
-            "cargo",
-            "test",
-            "--locked",
-            "-p",
-            "ottd-script",
-            "--test",
-            "scalar",
-            "--no-run",
-            "--message-format=json",
-        ],
-        "native-compiler": ["c++", "--version"],
-        "rust-compiler": ["rustc", "--version"],
-    }
-    for label, argv in expected_builds.items():
-        if read_json(directory / "logs" / label / "argv.json") != argv:
-            raise WorldCheckError("VM build selection differs")
-    match read_json(directory / "logs/native-build/argv.json"):
-        case ["sh", str() as builder, str(), str() as destination] if builder == str(
-            ROOT / "scripts/compat/script-vm/build-native.sh"
-        ) and destination == str(Path(origin) / "native"):
-            pass
-        case _:
-            raise WorldCheckError("VM native builder differs")
-    for name, target, kind, testing, path in (
-        ("build-rust", "observe", "example", False, rust_path),
-        ("build-tests", "scalar", "test", True, test_path),
-    ):
-        selected = select_executable(
-            (directory / "logs" / name / "stdout.log").read_text(),
-            target,
-            kind,
-            testing,
-        )
-        if str(selected) != path:
-            raise WorldCheckError("VM Cargo identity differs")
-    stages = dict(spec.stages)
-    for path in directory.rglob("process.json"):
-        relative = str(path.relative_to(directory))
-        parts = path.relative_to(directory).parts
-        status = int(relative.startswith("controls/"))
-        from scripts.script_vm_constants import CONTROLS as CONSTANT_CONTROLS
 
-        if (
-            len(parts) > 2
-            and parts[0] == "controls"
-            and parts[1]
-            in (
-                {f"constant-{name}" for name in CONSTANT_CONTROLS}
-                | {f"root-{name}" for name in ROOT_CONTROLS}
-                | {f"array-{name}" for name in ARRAY_CONTROLS}
-                | {f"foreach-{name}" for name in FOREACH_CONTROLS}
-            )
-        ):
-            status = int(parts[2] == "admit-mutant")
-        if len(parts) == 4 and parts[:2] == ("arrays", "sessions"):
-            status = array_declarations()[parts[2]].status
-        expected_receipt = (
-            {"returncode": 0}
-            if relative.startswith("logs/")
-            else {"returncode": status, "expected": status}
-        )
-        if read_json(path) != expected_receipt:
-            raise WorldCheckError(f"VM process failed: {relative}")
-    if read_json(directory / "tests/argv.json") != [test_path, "--test-threads=1"]:
-        raise WorldCheckError("VM test selection changed")
-    require_tests((directory / "tests/stdout.log").read_text(), spec.tests)
-    zero = (directory / "zero-tests/stdout.log").read_text()
-    if "test result: ok. 0 passed; 0 failed; 0 ignored;" not in zero:
-        raise WorldCheckError("Missing actual zero-test negative")
-    try:
-        require_tests(zero, spec.tests)
-    except WorldCheckError:
-        pass
-    else:
-        raise WorldCheckError("Zero-test evidence admitted")
+
+def validate_matrix(
+    directory: Path, spec: Spec, identities: tuple[str, str]
+) -> None:
+    origin, rust_path = identities
     stages = dict(spec.stages)
     for name in spec.fixtures:
         source = ROOT / "scripts/compat/script-vm/fixtures" / name
@@ -213,6 +107,17 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
                 if read_json(case / side / "argv.json") != argv:
                     raise WorldCheckError("VM matrix invocation differs")
             compare_case(source.read_bytes(), case, stages[key])
+
+
+def validate(directory: Path, *, packaged: bool = True) -> None:
+    spec = load_spec(MANIFEST)
+    validate_layout(directory, spec, packaged=packaged)
+    verify_sources(ROOT, directory / "native", spec)
+    for name, sha in spec.sources:
+        if digest(directory / "source" / name) != sha:
+            raise WorldCheckError("Retained VM source changed")
+    origin, rust_path = validate_receipts(directory, spec)
+    validate_matrix(directory, spec, (origin, rust_path))
     base = directory / "cases/precedence/0-1-2-3-100/native/stdout.log"
     for name, (old, new) in CONTROLS.items():
         changed = directory / "controls" / name / "changed.stdout"
@@ -229,14 +134,8 @@ def validate(directory: Path, *, packaged: bool = True) -> None:
             str(Path(origin) / changed.relative_to(directory)),
         ]:
             raise WorldCheckError("VM corruption was not compared")
-    from scripts.script_vm_branches import validate_branches
-
     validate_branches(directory)
-    from scripts.script_vm_strings import validate_strings
-
     validate_strings(directory, Path(origin), rust_path)
-    from scripts.script_vm_constants import validate_constants
-
     validate_constants(directory, Path(origin))
 
     validate_roots(directory, Path(origin))

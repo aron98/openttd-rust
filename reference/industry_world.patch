@@ -1,0 +1,77 @@
+--- a/src/industry_cmd.cpp
++++ b/src/industry_cmd.cpp
+@@ -12,6 +12,7 @@
+ #include "misc/history_func.hpp"
+ #include "clear_map.h"
+ #include "industry.h"
++#include "reference_industry_observer.hpp"
+ #include "station_base.h"
+ #include "landscape.h"
+ #include "viewport_func.h"
+@@ -832,6 +833,7 @@
+ 
+ static void TileLoop_Industry(TileIndex tile)
+ {
++	ReferenceIndustry::Scope observation("tile_loop", Industry::GetByTile(tile), tile);
+ 	if (IsTileOnWater(tile)) TileLoop_Water(tile);
+ 
+ 	/* Normally this doesn't happen, but if an industry NewGRF is removed
+@@ -1159,6 +1161,7 @@
+ 
+ static void ProduceIndustryGoods(Industry *i)
+ {
++	ReferenceIndustry::Scope observation("production", i);
+ 	const IndustrySpec *indsp = GetIndustrySpec(i->type);
+ 
+ 	/* play a sound? */
+@@ -2676,6 +2679,7 @@
+  */
+ void IndustryBuildData::TryBuildNewIndustry()
+ {
++	ReferenceIndustry::Scope observation("builder");
+ 	this->SetupTargetCount();
+ 
+ 	int missing = 0;       // Number of industries that need to be build.
+@@ -3085,6 +3089,7 @@
+  */
+ static const IntervalTimer<TimerGameEconomy> _economy_industries_daily({TimerGameEconomy::DAY, TimerGameEconomy::Priority::INDUSTRY}, [](auto)
+ {
++	ReferenceIndustry::Scope observation("daily");
+ 	_economy.industry_daily_change_counter += _economy.industry_daily_increment;
+ 
+ 	/* Bits 16-31 of industry_construction_counter contain the number of industries to change/create today,
+--- a/src/saveload/reference_replay_commands.hpp
++++ b/src/saveload/reference_replay_commands.hpp
+@@ -11,12 +11,14 @@
+ #include "../vehicle_cmd.h"
+ #include "../command_func.h"
+ #include "reference_house_prepare.hpp"
++#include "reference_industry_prepare.hpp"
+ 
+ namespace ReferenceReplay {
+ inline bool Post(const Json &command)
+ {
+     const std::string kind = command.at("kind");
+     if (kind.starts_with("house_")) return HouseCommand(command);
++    if (kind.starts_with("industry_")) return IndustryCommand(command);
+     if (kind == "movement_prepare_original_acceleration") {
+         for (const char *name : {"OTTD_MOVEMENT_OBSERVE", "OTTD_MOVEMENT_PREPARE"}) {
+             const char *enabled = std::getenv(name);
+--- a/src/saveload/reference_replay.hpp
++++ b/src/saveload/reference_replay.hpp
+@@ -22,6 +22,7 @@
+ #include "reference_replay_commands.hpp"
+ #include "reference_replay_fixture.hpp"
+ #include "../reference_house_observer.hpp"
++#include "../reference_industry_observer.hpp"
+ 
+ namespace ReferenceReplay {
+ inline Json Runtime()
+@@ -54,6 +55,7 @@
+         Write(stem + ".houses.json", ReferenceHouse::Cache());
+         Write(stem + ".house-specs.json", ReferenceHouse::Specs());
+     }
++    if (std::getenv("OTTD_INDUSTRY_CACHE") != nullptr) Write(stem + ".industries.json", ReferenceIndustry::Cache());
+     const Json before = Runtime();
+     Require(SaveOrLoad(stem + ".sav", SLO_SAVE, DFT_GAME_FILE, NO_DIRECTORY, false) == SL_OK, "native checkpoint save failed");
+     ReferenceWorld::AfterLoad();

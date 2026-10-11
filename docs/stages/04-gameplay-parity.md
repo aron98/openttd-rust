@@ -17,9 +17,31 @@ with current bindings at `7b78b96`, adds bounded terminal bus/truck station
 construction after station/depot order insertion. World increment `5e0fbf4`, with current bindings at `0047eb2`, adds
 bounded temperate spreading and genuine placement to complete world ticks. Increment `59fe7f6`
 enables normal CI for the reviewed bounded single-vehicle road movement corpus.
-Complete transport cycles and further content loading are in progress. All seven
+Road increment `7779f39` integrates ordinary empty-cargo bus/truck round trips
+and their routing/loading/payment/job prerequisites in six product atoms plus
+separate current bindings. Populated cargo, default asynchronous jobs and wider
+transport behavior remain in progress. All seven
 completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
+
+Independent review approves exact `7779f39` after repeating 52 complete
+saved/derived/defined-runtime pairs and 24 separately scoped routing pairs,
+including both save origins, quarterly assets, graph compression and idle
+station regressions. Five injected late faults and two genuine joined-stop
+refusals preserve the complete saved World and runtime. The combined candidate
+passes 755 workspace tests, strict Clippy/formatting, 577 Python tests and 143
+declaration checks. Current source archives retain 4,957 exact Git blobs;
+the complete root proof retains 2,808 verified members including the full
+9,469-member original worker proof. Normal route CI admission and GNU execution
+for this exact road increment are pending.
+
+The ordinary immediate link-job spawn at 1057 is a retained, uncredited
+full-runtime mismatch: original worker pending, Rust synchronous empty result.
+Two native repeats were both pending; no observed timing variability is claimed.
+This backend follows the original thread-creation-failure fallback only.
+Default asynchronous execution, load/pause/join behavior and populated graph
+algorithms remain required, alongside populated cargo, breakdown/effect
+lifecycles, service, multiple vehicles/stops and the other vehicle classes.
 
 The latest script increment uses common physical table storage for roots and
 graph values, real native closure identities and metadata, native default
@@ -33,7 +55,12 @@ corruption rejections. The current combined candidate passes 753 workspace
 tests, strict Clippy/formatting, 520 Python tests and 143 declaration checks.
 Independent review repeats the script tests and seven native host sessions,
 audits all 4,921 source blobs and 11,979 complete proof members, and approves
-exact `d43c8fa`. New GNU execution remains pending. General VM/shared/host GC
+exact `d43c8fa`. Subsequent PR head `f9536b3` passes the focused GNU job in
+run `38137706226`: root audits all 13,425 artifact files, both profiles'
+930 comparisons and all 1,523 pinned native source blobs. Its ordinary GNU
+workspace run passes 753 tests without an ABI-fixture override. This proves
+the graph/root epoch; native calls remain a separate pending increment.
+General VM/shared/host GC
 ordering, callable functions, delegates, weakrefs and full AI/GameScript remain
 required; bounded storage/ownership proof does not close a broad stage gate.
 
@@ -43,7 +70,7 @@ the original CI failures, retains existing tests, and verifies all old source
 pairs and non-source fields are unchanged. Independent review approves the
 correction. Its ordinary Linux Rust job in run `38136540979` passes all 744
 workspace tests on merge `388cced`, including the ABI effects test without an
-override. This is separate from pending GNU graph/root execution and the
+override. This is separate from the later verified GNU graph/root epoch and the
 still-running full interoperability baseline.
 
 Road order insertion preserves validation and nested error precedence, shared

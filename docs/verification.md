@@ -1,5 +1,36 @@
 # Compatibility foundation verification
 
+## Reviewed stage 4 ordinary road round trips
+
+On 2026-10-11, independent review approved `7779f39`, containing six atomic
+product increments and separate current source bindings. Root and reviewer
+each execute 52 complete saved World/derived World/defined simulation-runtime
+pairs and 24 separately scoped routing pairs against pinned OpenTTD 15.3.
+Coverage includes ordinary bus/truck round trips, loading/timetable/payment
+lifetime, both save origins, native equal-cost routing/cache order, idle
+stations, quarterly assets and authentic graph compression. Five labelled
+injected faults and two genuine joined-stop refusals preserve all saved and
+runtime state. The original accepts those joined routes; Rust explicitly
+rejects the unimplemented multiple-target-stop path.
+
+The combined candidate passes 755 workspace tests, strict Clippy/formatting,
+577 Python tests with 21,091 subtests and 143 declaration checks. The 86
+ignored workspace tests are uncredited by that run; the actual external
+executions above are recorded separately. Current source archives verify all
+4,957 Git blobs. The complete root proof archive verifies 2,808 members and
+includes the entire 9,469-member native worker proof. Evidence is retained
+under `.worktrees/stage04-road-integration/.omo/evidence/road-integration/`
+and `.omo/evidence/stage04-road-roundtrip-review/report.md`.
+
+The immediate original job spawn at 1057 remains a raw full-runtime mismatch:
+native pending versus Rust synchronous completion. Two native repeats both
+remain pending, so observed timing variability is not established. This
+increment supports only the original synchronous zero-demand fallback.
+Default asynchronous workers/restoration/pause, populated solver/flows/cargo,
+breakdowns/effects, service, wider stops/vehicles and other classes remain
+required. Normal route CI admission and GNU-road execution for this source
+epoch remain pending; all seven broad stage 4 gates stay open.
+
 ## Reviewed stage 4 script storage increment
 
 On 2026-10-11, independent review approved `d43c8fa`, containing separate
@@ -20,8 +51,14 @@ are recorded separately. Evidence is retained under
 
 This verifies bounded graph ownership, physical root storage, native closure
 identity/metadata, mutable `this` and admitted collector sequences on the
-observed Apple target. New GNU graph/root execution, callable functions,
-delegates, general GC and OpenTTD AI/GameScript integration remain pending.
+observed Apple target. Subsequent head `f9536b3` passes the focused
+[GNU graph/root job](https://github.com/aron98/openttd-rust/actions/runs/38137706226/job/114464879551).
+Root independently audits its complete 13,425-file artifact, 1,523 pinned
+native source blobs, both 930-comparison profiles and raw process receipts.
+Its [ordinary GNU workspace job](https://github.com/aron98/openttd-rust/actions/runs/38137706253/job/114464880006)
+passes 753 tests without an effects-fixture override. This covers the
+graph/root source epoch; callable functions, delegates, general GC and OpenTTD
+AI/GameScript integration remain pending.
 The earlier published base `7758500` separately passes the ordinary
 [Linux Rust job](https://github.com/aron98/openttd-rust/actions/runs/38136540979/job/114461459007)
 with 744 tests; it is not evidence for the later script increment.

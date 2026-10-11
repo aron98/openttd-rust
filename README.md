@@ -16,7 +16,11 @@ An explicit subsystem fixture can advance calendar/economy clocks and temperate
 clear terrain against original C++ results. A separate typed-state runner executes
 selected vehicle, house, company, station, and industry callbacks. Saved-world replay
 integrates clocks, terrain and admitted company/town callbacks with command
-validation, costs and execution. The independent Squirrel library supports
+validation, costs and execution. The public simulation runtime also supports
+bounded ordinary empty-cargo bus/truck round trips, directed road routing,
+terminal loading/timetables and both-origin save continuations. Populated cargo,
+default asynchronous link jobs and wider vehicle behavior remain required.
+The independent Squirrel library supports
 graph-backed arrays/tables, first-class roots, native closure identity and
 metadata, mutable `this`, and bounded ownership/cycle collection. Native calls,
 user functions, delegates and OpenTTD AI/GameScript integration remain required.

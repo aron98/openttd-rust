@@ -122,4 +122,107 @@ def cases() -> list[Case]:
         )
         result.append(Case(f"byte-keys-{length}", source))
     result.extend(object_cases())
+    result.extend(graph_cases())
     return result
+
+
+def graph_cases() -> list[Case]:
+    return [
+        Case(
+            "graph-nested-alias",
+            "local t={key=7};\n"
+            + "local a=[t];\n"
+            + "local b=clone a;\n"
+            + "b[0].key=9;\n"
+            + "return a[0].key;",
+        ),
+        Case(
+            "graph-table-array",
+            "local a=[7];\n"
+            + "local t={child=a};\n"
+            + "local c=clone t;\n"
+            + "c.child[0]=9;\n"
+            + "return t.child[0];",
+        ),
+        Case("graph-nested-literal", "local t={child={key=7}};\nreturn t.child.key;"),
+        Case("graph-array-cycle", "local a=[null];\na[0]=a;\nreturn a[0]==a;"),
+        Case("graph-table-cycle", "local t={};\nt.self<-t;\nreturn t.self==t;"),
+        Case(
+            "graph-mixed-cycle",
+            "local a=[null];\nlocal t={child=a};\na[0]=t;\nreturn t.child[0]==t;",
+        ),
+        Case(
+            "graph-cloned-cycle",
+            "local t={};\nt.self<-t;\nlocal c=clone t;\nreturn c.self==t && c!=t;",
+        ),
+        Case(
+            "graph-cloned-array-cycle",
+            "local a=[null];\na[0]=a;\nlocal c=clone a;\nreturn c[0]==a && c!=a;",
+        ),
+        Case(
+            "graph-delete-child",
+            "local t={child={key=7}};\nlocal c=delete t.child;\nreturn c.key;",
+        ),
+        Case(
+            "graph-delete-cycle",
+            "local t={};\nt.self<-t;\nlocal c=delete t.self;\nreturn c==t;",
+        ),
+        Case(
+            "graph-null.0",
+            "local t={};\n"
+            + "t[null]=[7];\n"
+            + "local c=clone t;\n"
+            + "local n=0;\n"
+            + "foreach(k,v in c)n++;\n"
+            + "return n;",
+        ),
+        Case(
+            "graph-table-foreach",
+            "local t={a={key=1},b={key=2}};\n"
+            + "local n=0;\n"
+            + "foreach(k,v in t)n=n+v.key;\n"
+            + "return n;",
+        ),
+        Case(
+            "graph-array-foreach",
+            "local a=[{key=1},{key=2}];\n"
+            + "local n=0;\n"
+            + "foreach(v in a)n=n+v.key;\n"
+            + "return n;",
+        ),
+        Case(
+            "graph-foreach-alias",
+            "local a=[{key=1},{key=2}];\n"
+            + "local n=0;\n"
+            + "foreach(k,v in a){v.key=v.key+3;\n"
+            + "n=n+a[k].key;} return n;",
+        ),
+        Case(
+            "graph-rebind-parent",
+            "local t={child=[7]};\nlocal a=t.child;\nt.child=[9];\nreturn a[0];",
+        ),
+        Case(
+            "graph-root",
+            "held<-{child=[7]};\n"
+            + "local c=clone held;\n"
+            + "c.child[0]=9;\n"
+            + "return held.child[0];",
+        ),
+        Case(
+            "graph-late-error",
+            "held<-[{key=7}];\nheld[0].key=9;\nreturn absent;",
+            "runtime_error",
+        ),
+        Case(
+            "graph-partial-error",
+            "local a=[{key=7},absent];\nreturn a;",
+            "runtime_error",
+        ),
+        Case(
+            "graph-missing-set", "local t={};\nt.child=[7];\nreturn 9;", "runtime_error"
+        ),
+        Case(
+            "graph-byte-string",
+            'local t={child=["a\\0b"]};\nlocal c=clone t;\nreturn c.child[0];',
+        ),
+    ]

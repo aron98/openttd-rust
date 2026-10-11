@@ -519,33 +519,42 @@ fn actual_native_owned_array_sessions() -> Result {
 
 #[test]
 fn native_valid_object_boundaries_keep_exact_compilation() -> Result {
+    enum Outcome {
+        Array,
+        Integer(i64),
+        Error(VmError),
+    }
+    use Outcome::{Array, Error, Integer};
     let base = corpus().join("attempt-01");
     for feed in ["buffer", "unsigned", "utf8"] {
         for (family, bodies) in [
             (
                 "nested-and-cycle",
-                vec![
-                    ("nested-and-cycle-0", VmError::UnsupportedArrayElement),
-                    ("nested-and-cycle-1", VmError::UnsupportedArrayElement),
-                ],
+                vec![("nested-and-cycle-0", Array), ("nested-and-cycle-1", Array)],
             ),
-            (
-                "cycle-collection",
-                vec![("native-cycle", VmError::UnsupportedArrayElement)],
-            ),
+            ("cycle-collection", vec![("native-cycle", Integer(0))]),
             (
                 "ordering-conversion",
                 vec![
-                    ("ordering-conversion-0", VmError::UnsupportedArrayOrdering),
-                    ("ordering-conversion-1", VmError::UnsupportedRuntimeValue),
+                    (
+                        "ordering-conversion-0",
+                        Error(VmError::UnsupportedArrayOrdering),
+                    ),
+                    (
+                        "ordering-conversion-1",
+                        Error(VmError::UnsupportedRuntimeValue),
+                    ),
                 ],
             ),
             (
                 "delegate-and-missing",
                 vec![
-                    ("delegate-and-missing-0", VmError::UnsupportedRuntimeValue),
-                    ("delegate-and-missing-1", VmError::MissingIndex),
-                    ("delegate-and-missing-2", VmError::MissingIndex),
+                    (
+                        "delegate-and-missing-0",
+                        Error(VmError::UnsupportedRuntimeValue),
+                    ),
+                    ("delegate-and-missing-1", Error(VmError::MissingIndex)),
+                    ("delegate-and-missing-2", Error(VmError::MissingIndex)),
                 ],
             ),
         ] {
@@ -566,12 +575,9 @@ fn native_valid_object_boundaries_keep_exact_compilation() -> Result {
                         + "\n"
                 })
                 .collect();
-            let mut bodies: Vec<_> = bodies
-                .into_iter()
-                .map(|(name, error)| (name, Err(error)))
-                .collect();
+            let mut bodies = bodies;
             if family == "nested-and-cycle" {
-                bodies.push(("scalar-return", Ok(Execution::Returned(Value::Integer(0)))));
+                bodies.push(("scalar-return", Integer(0)));
             }
             assert_eq!(blocks.len(), bodies.len());
             for ((name, expected), block) in bodies.into_iter().zip(blocks) {
@@ -589,7 +595,19 @@ fn native_valid_object_boundaries_keep_exact_compilation() -> Result {
                 let mut compiled = String::new();
                 dump(&program, &mut compiled)?;
                 assert_eq!(compiled, block, "{family}-{feed}/{name}");
-                assert_eq!(Vm::new(&program)?.resume(10_000), expected, "{name}");
+                let result = Vm::new(&program)?.resume(10_000);
+                match expected {
+                    Array => assert!(
+                        matches!(result, Ok(Execution::Returned(Value::Array(_)))),
+                        "{name}"
+                    ),
+                    Integer(value) => assert_eq!(
+                        result,
+                        Ok(Execution::Returned(Value::Integer(value))),
+                        "{name}"
+                    ),
+                    Error(error) => assert_eq!(result, Err(error), "{name}"),
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ type Pool = RefCell<BTreeMap<Vec<u8>, Weak<StringData>>>;
 pub struct Realm {
     pool: Rc<Pool>,
     constants: Rc<RefCell<constants::Table>>,
+    pub(crate) heap: Rc<crate::heap::Heap>,
 }
 impl Realm {
     /// Create an independent realm.
@@ -92,3 +93,38 @@ impl Eq for ByteString {}
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Weak ownership is shared with the crate-private heap tests"
+)]
+pub(crate) struct WeakRealm {
+    pool: Weak<Pool>,
+    constants: Weak<RefCell<constants::Table>>,
+    heap: Weak<crate::heap::Heap>,
+}
+#[cfg(test)]
+impl WeakRealm {
+    pub(crate) fn upgrade(&self) -> Option<Realm> {
+        Some(Realm {
+            pool: self.pool.upgrade()?,
+            constants: self.constants.upgrade()?,
+            heap: self.heap.upgrade()?,
+        })
+    }
+}
+impl Realm {
+    /// Collect unreachable table/array cycles; ordinary zero-reference objects release immediately.
+    pub fn collect_cycles(&self) {
+        let _finalizations = self.heap.collect();
+    }
+    #[cfg(test)]
+    pub(crate) fn downgrade(&self) -> WeakRealm {
+        WeakRealm {
+            pool: Rc::downgrade(&self.pool),
+            constants: Rc::downgrade(&self.constants),
+            heap: Rc::downgrade(&self.heap),
+        }
+    }
+}

@@ -42,18 +42,13 @@ fn scalar_storage_and_alias_identity() -> Result {
     Ok(())
 }
 #[test]
-fn all_host_insertions_reject_container_edges_before_publication() -> Result {
+fn host_insertions_retain_container_identity_and_check_missing_indices_first() -> Result {
     let realm = Realm::new();
     let values = realm.array(vec![Value::Integer(1)])?;
-    assert_eq!(
-        realm.array(vec![Value::Array(values.clone())]),
-        Err(VmError::UnsupportedArrayElement)
-    );
-    assert_eq!(
-        values.set(0, Value::Array(values.clone())),
-        Err(VmError::UnsupportedArrayElement)
-    );
-    assert_eq!(values.get(0), Some(Value::Integer(1)));
+    let parent = realm.array(vec![Value::Array(values.clone())])?;
+    assert_eq!(parent.get(0), Some(Value::Array(values.clone())));
+    values.set(0, Value::Array(values.clone()))?;
+    assert_eq!(values.get(0), Some(Value::Array(values.clone())));
     assert_eq!(
         values.set(8, Value::Array(values.clone())),
         Err(VmError::MissingIndex)
@@ -142,13 +137,13 @@ fn actual_native_scalar_idioms_and_defined_float_indices() -> Result {
     Ok(())
 }
 #[test]
-fn nested_arrays_are_reached_runtime_boundaries_not_lexer_policy() -> Result {
+fn nested_arrays_and_cycles_are_executable_graph_consumers() -> Result {
     for source in ["return [[1]];", "local a=[null]; a[0]=a; return a;"] {
         let program = compile(source)?;
-        assert_eq!(
-            Vm::new(&program)?.resume(100),
-            Err(VmError::UnsupportedArrayElement)
-        );
+        assert!(matches!(
+            Vm::new(&program)?.resume(100)?,
+            Execution::Returned(Value::Array(_))
+        ));
     }
     let program = compile("local a=[1]; a[2]=[3]; return a;")?;
     assert_eq!(Vm::new(&program)?.resume(100), Err(VmError::MissingIndex));

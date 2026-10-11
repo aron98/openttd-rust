@@ -3,7 +3,7 @@ use crate::{ByteString, CompileError, Program, Realm, Storage, Temporary, Value,
 use std::{cell::RefCell, collections::BTreeMap, rc::Rc};
 
 type Slots = BTreeMap<Vec<u8>, (ByteString, Value)>;
-/// Shared plain root with byte keys, scalar values and same-realm scalar arrays/tables.
+/// Shared plain root with byte keys, scalar values and same-realm arrays/tables.
 #[derive(Clone, Debug)]
 pub struct RootEnvironment {
     pub(crate) realm: Realm,

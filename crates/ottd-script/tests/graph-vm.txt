@@ -1,0 +1,10 @@
+suspended 0 1
+frame-held 1 1
+returned 99
+host-result-held 1 1
+result-released 0 0
+late-error 0 9985
+late-value integer 9
+late-root-held 1 1
+late-root-cleared 0 1
+late-temp-replaced 0 0

@@ -3,12 +3,12 @@ mod strings;
 
 use crate::VmError;
 
-/// Scalar value; float bits preserve negative zero and nonfinite payloads.
+/// Runtime value; float bits preserve negative zero and nonfinite payloads.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Value {
-    /// Shared mutable native table with scalar keys and values.
+    /// Shared mutable native table with scalar keys and graph values.
     Table(crate::Table),
-    /// Shared mutable identity with scalar-only elements.
+    /// Shared mutable identity with same-realm graph elements.
     Array(crate::Array),
     /// Immutable interned byte string.
     String(crate::ByteString),

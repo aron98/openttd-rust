@@ -1,111 +1,107 @@
-//! Array identity with structurally scalar storage; no container edges or cycles.
-use crate::{ByteString, Realm, Value, VmError};
-use std::{cell::RefCell, rc::Rc};
-
+//! Array identity and elements use the same realm graph as tables.
+use crate::{
+    Realm, Value, VmError,
+    heap::{Handle, Object, Stored},
+};
+/// Shared mutable array identity; internal aggregate edges do not own the realm.
 #[derive(Clone, Debug)]
-enum Element {
-    Null,
-    Bool(bool),
-    Integer(i64),
-    Float(u32),
-    String(ByteString),
-}
-impl Element {
-    fn from_value(value: Value, realm: &Realm) -> Result<Self, VmError> {
-        match value {
-            Value::Null => Ok(Self::Null),
-            Value::Bool(value) => Ok(Self::Bool(value)),
-            Value::Integer(value) => Ok(Self::Integer(value)),
-            Value::Float(value) => Ok(Self::Float(value)),
-            Value::String(value) => Ok(Self::String(realm.string(value.as_bytes()))),
-            Value::Array(_) | Value::Table(_) => Err(VmError::UnsupportedArrayElement),
-        }
-    }
-    fn value(&self) -> Value {
-        match self {
-            Self::Null => Value::Null,
-            Self::Bool(value) => Value::Bool(*value),
-            Self::Integer(value) => Value::Integer(*value),
-            Self::Float(value) => Value::Float(*value),
-            Self::String(value) => Value::String(value.clone()),
-        }
-    }
-}
-#[derive(Debug)]
-struct Data {
-    realm: Realm,
-    elements: RefCell<Vec<Element>>,
-}
-/// Shared mutable array identity containing only scalar elements.
-/// Clone retains the allocation; equality compares identity, not contents.
-#[derive(Clone, Debug)]
-pub struct Array(Rc<Data>);
+pub struct Array(pub(crate) Handle);
 impl Array {
     pub(crate) fn reserved(realm: &Realm, capacity: usize) -> Result<Self, VmError> {
         let mut elements = Vec::new();
         elements
             .try_reserve_exact(capacity)
             .map_err(|_| VmError::Allocation)?;
-        Ok(Self(Rc::new(Data {
-            realm: realm.clone(),
-            elements: RefCell::new(elements),
-        })))
+        realm
+            .heap
+            .allocate(realm, Object::Array(elements))
+            .map(Self)
+    }
+    #[expect(
+        clippy::unreachable,
+        reason = "Array handles are constructed only for array entries"
+    )]
+    fn read<T>(&self, read: impl FnOnce(&[Stored]) -> T) -> T {
+        self.0.read(|object| match object {
+            Object::Array(values) => read(values),
+            Object::Table(_) => unreachable!(),
+        })
+    }
+    #[expect(
+        clippy::unreachable,
+        reason = "Array handles are constructed only for array entries"
+    )]
+    fn mutate<T>(&self, mutate: impl FnOnce(&mut Vec<Stored>) -> T) -> T {
+        self.0.mutate(|object| match object {
+            Object::Array(values) => mutate(values),
+            Object::Table(_) => unreachable!(),
+        })
     }
     pub(crate) fn append(&self, value: Value) -> Result<(), VmError> {
-        let value = Element::from_value(value, &self.0.realm)?;
-        let mut elements = self.0.elements.borrow_mut();
-        elements.try_reserve(1).map_err(|_| VmError::Allocation)?;
-        elements.push(value);
-        Ok(())
+        let value = Stored::from_value(value, &self.0.realm)?;
+        self.mutate(|values| {
+            values.try_reserve(1).map_err(|_| VmError::Allocation)?;
+            values.push(value);
+            Ok(())
+        })
     }
-    /// Allocate an independent array retaining the same scalar elements.
+    /// Allocate an independent array retaining the same element identities.
     /// # Errors
-    /// Returns `Allocation` if the copied element storage cannot be reserved.
+    /// Returns `Allocation` if element or object storage cannot be reserved.
     pub fn shallow_clone(&self) -> Result<Self, VmError> {
-        let source = self.0.elements.borrow();
-        let copy = Self::reserved(&self.0.realm, source.len())?;
-        copy.0.elements.borrow_mut().extend(source.iter().cloned());
-        Ok(copy)
+        let elements = self.read(|source| {
+            let mut values = Vec::new();
+            values
+                .try_reserve_exact(source.len())
+                .map_err(|_| VmError::Allocation)?;
+            values.extend_from_slice(source);
+            Ok(values)
+        })?;
+        self.0
+            .realm
+            .heap
+            .allocate(&self.0.realm, Object::Array(elements))
+            .map(Self)
     }
     pub(crate) fn same_realm(&self, realm: &Realm) -> bool {
         self.0.realm.same(realm)
     }
-    /// Number of currently initialized elements.
+    /// Number of initialized elements.
     pub fn len(&self) -> usize {
-        self.0.elements.borrow().len()
+        self.read(<[Stored]>::len)
     }
-    /// Whether this array has no initialized elements.
+    /// Whether this array has no elements.
     pub fn is_empty(&self) -> bool {
-        self.0.elements.borrow().is_empty()
+        self.len() == 0
     }
-    /// Read a scalar element, retaining a returned string independently.
+    /// Read an element, retaining returned strings and aggregates independently.
     pub fn get(&self, index: i64) -> Option<Value> {
-        self.0
-            .elements
-            .borrow()
-            .get(usize::try_from(index).ok()?)
-            .map(Element::value)
+        let index = usize::try_from(index).ok()?;
+        self.read(|values| values.get(index).cloned())
+            .map(|value| value.value(&self.0.realm))
     }
-    /// Replace an existing scalar element; strings are interned in this array's realm.
-    ///
+    /// Replace an existing element, retaining same-realm aggregate identity.
     /// # Errors
-    /// Returns `MissingIndex` for an absent index before checking the value.
-    /// Returns `UnsupportedArrayElement` for an array value, without replacing the element.
+    /// Missing indices fail before foreign values are rejected with `RealmMismatch`.
     pub fn set(&self, index: i64, value: Value) -> Result<(), VmError> {
         let index = usize::try_from(index).map_err(|_| VmError::MissingIndex)?;
-        let mut elements = self.0.elements.borrow_mut();
-        let target = elements.get_mut(index).ok_or(VmError::MissingIndex)?;
-        *target = Element::from_value(value, &self.0.realm)?;
-        Ok(())
+        if index >= self.len() {
+            return Err(VmError::MissingIndex);
+        }
+        let value = Stored::from_value(value, &self.0.realm)?;
+        self.mutate(|values| {
+            *values.get_mut(index).ok_or(VmError::MissingIndex)? = value;
+            Ok(())
+        })
     }
-    /// Whether both handles refer to the same mutable allocation.
+    /// Whether both handles retain the same mutable object.
     pub fn same_identity(&self, other: &Self) -> bool {
-        Rc::ptr_eq(&self.0, &other.0)
+        self.0.same(&other.0)
     }
     #[cfg(test)]
     pub(crate) fn watch(&self) -> impl Fn() -> Option<Self> + use<> {
-        let weak = Rc::downgrade(&self.0);
-        move || weak.upgrade().map(Self)
+        let watch = self.0.watch();
+        move || watch().map(Self)
     }
 }
 impl PartialEq for Array {
@@ -115,11 +111,10 @@ impl PartialEq for Array {
 }
 impl Eq for Array {}
 impl Realm {
-    /// Allocate an independent array with scalar elements in this realm.
-    ///
+    /// Allocate an independent array, retaining same-realm aggregate elements.
     /// # Errors
-    /// Returns `UnsupportedArrayElement` for aggregate elements or `Allocation`
-    /// if element storage cannot be reserved. No partial array is published.
+    /// Foreign aggregates return `RealmMismatch`; allocation can return `Allocation`.
+    /// No partial array is published on failure.
     pub fn array(&self, values: Vec<Value>) -> Result<Array, VmError> {
         let array = Array::reserved(self, values.len())?;
         for value in values {

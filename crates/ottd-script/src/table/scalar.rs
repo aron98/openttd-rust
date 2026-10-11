@@ -1,7 +1,7 @@
-//! Scalar-only slots make cycles impossible until the realm heap migration.
+//! Scalar table keys retain native hash/equality; graph values live in the heap.
 use crate::{ByteString, Realm, Value, VmError};
 #[derive(Clone, Debug, PartialEq, Eq)]
-pub(super) enum Scalar {
+pub(crate) enum Scalar {
     Null,
     Bool(bool),
     Integer(i64),
@@ -9,7 +9,7 @@ pub(super) enum Scalar {
     String(ByteString),
 }
 impl Scalar {
-    pub(super) fn from_value(value: Value, realm: &Realm) -> Result<Self, VmError> {
+    pub(crate) fn from_value(value: Value, realm: &Realm) -> Result<Self, VmError> {
         match value {
             Value::Null => Ok(Self::Null),
             Value::Bool(value) => Ok(Self::Bool(value)),
@@ -19,7 +19,7 @@ impl Scalar {
             Value::Array(_) | Value::Table(_) => Err(VmError::UnsupportedTableElement),
         }
     }
-    pub(super) fn value(&self) -> Value {
+    pub(crate) fn value(&self) -> Value {
         match self {
             Self::Null => Value::Null,
             Self::Bool(value) => Value::Bool(*value),
@@ -28,7 +28,7 @@ impl Scalar {
             Self::String(value) => Value::String(value.clone()),
         }
     }
-    pub(super) fn hash(&self) -> Result<u64, VmError> {
+    pub(crate) fn hash(&self) -> Result<u64, VmError> {
         match self {
             Self::Null => Err(VmError::NullIndex),
             Self::Bool(value) => Ok(u64::from(*value)),

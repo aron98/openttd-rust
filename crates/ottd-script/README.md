@@ -9,7 +9,7 @@ Supported source includes scalar returns and expression statements, local
 variables with optional initialization and grouped declarations, scalar local
 assignment, blocks, if/else, while/for/do loops, array/string/table foreach, scalar switch/case/default, break and continue. Values include null,
 bool, i64 decimal/octal/hex integers, raw f32 values, immutable byte strings and
-identity-bearing arrays and tables whose elements are structurally restricted to scalars.
+identity-bearing arrays and tables with same-realm aggregate values and scalar table keys.
 Normal, verbatim and character literals follow native escapes and encoded-byte
 length. `typeof` returns interned type-name strings. Expressions support parentheses, unary `- ! ~`, arithmetic `+ - * / %`,
 comparisons `== != < <= > >=`, value-preserving short circuit `&& ||`,
@@ -52,7 +52,7 @@ Signed arithmetic overflow and MIN/-1 remain unfinished compatibility work:
 Rust returns `UnsupportedOverflow` rather than claiming guessed wrapping behavior
 is portable native semantics. Twenty-six opcode handlers remain unimplemented.
 Other general iterables, general objects, functions/closures,
-cyclic graph ownership/GC/classes/generators/traps, standard library/imports, host APIs,
+native callable GC/weakrefs/classes/generators/traps, standard library/imports, host APIs,
 AI/GS scheduling and Save/Load integration remain explicit later obligations.
 Float NaN payload witnesses are specific to the tested native/Rust toolchain.
 
@@ -153,9 +153,9 @@ Defined compound/prefix updates operate on loaded temporaries and leave table
 bindings unchanged. Direct `=` assignment rejects after parsing its RHS. Constant
 postfix operations and minimum-native-integer declaration negation are explicitly
 unsupported increment boundaries, separate from the lexer ctype policy. General
-aggregate object graphs, native closures, classes, require and host API registration remain
+native closures, classes, require and host API registration remain
 outside this slice. Compiler constants remain scalar; configured root slots
-retain scalar values and same-realm scalar arrays through a bounded host interface.
+retain scalar values and same-realm arrays and tables through a bounded host interface.
 
 Focused tests retain 37 original buffer observations: 36 closed-constant compiler
 outcomes/bytecode/table snapshots are strict comparisons. The formerly unsupported
@@ -174,7 +174,7 @@ requires newly executed complete debug and optimized profiles for these inputs.
 ## Configured roots and persistent runners
 
 `Realm::empty_root` creates an independent plain root with byte-string keys and
-scalar values or same-realm scalar arrays. RootEnvironment clones share slots; another empty root shares
+scalar values or same-realm arrays/tables. RootEnvironment clones share slots; another empty root shares
 only the Realm's interner/constants. `raw_get`, `new_slot` and `set_existing`
 provide explicit own-slot host access, including empty/NUL-containing keys.
 Newslot replaces existing entries; set requires an existing entry. Strings are
@@ -190,7 +190,7 @@ receiver-equals-this fallback gate. SET never falls back to constants. A reached
 default-delegate closure or late enum table returns UnsupportedRuntimeValue;
 this is an explicit implementation boundary, not undefined lexer input.
 Root compound/prefix/postfix updates, arbitrary this/receiver objects, root value
-escape and aggregate table graphs remain unsupported. Dot members now use the same GET/SET path as bracket members. Array bracket
+escape remain unsupported. Dot members now use the same GET/SET path as bracket members. Array bracket
 reads and plain assignments are supported; indexed compound/prefix/postfix updates
 remain unsupported syntax.
 
@@ -256,17 +256,15 @@ into their owning Realm; arrays retain identity and cannot cross Realm boundarie
 `Program::from_parts` rejects array/table literals, so mutable data never enters the shared
 compiler literal pool. No array storage or owner internals are publicly exported.
 
-Private element storage has no container variant. Host construction, host SET,
-VM APPENDARRAY and VM SET all reject a reached nested/self-array element with
-`UnsupportedArrayElement`. An absent SET index returns MissingIndex first. This
-structural restriction prevents cycles in the admitted ownership graph; it is not
-an implementation of native GC. Native-valid nested arrays and self-cycles remain
-explicit runtime boundaries, separate from the unchanged lexer policy. Relational
+Private element storage now retains same-realm array/table graph edges. Host
+construction, host SET, VM APPENDARRAY and VM SET admit nested and self-references.
+An absent SET index returns MissingIndex before checking value affinity. Acyclic
+objects release immediately; explicit host cycle collection is described below. Relational
 array ordering, pointer-bearing array stringification and reached default-delegate
 closures are also explicit boundaries. Nonfinite or out-of-i64 f32 indices return
 `UnsupportedIndexConversion`; defined finite indices truncate toward zero. Ordinary
 missing indices and invalid operand types retain their distinct runtime errors.
-Array methods/calls, resize/append host APIs, aggregate graphs and serialization
+Array methods/calls, resize/append host APIs and serialization
 remain later dependencies.
 
 Focused tests replay 78 retained native sessions through the production opcode loop.
@@ -276,8 +274,8 @@ owners. Native array reference counts, external handle-table bookkeeping, VM-roo
 bookkeeping and stack-top counts remain raw native observations; they are not
 normalized to Rust counts. Only a witnessed no-op `collected 0` is omitted, and its
 Rust replay asserts all watched arrays are already dead. Separate tests preserve
-native-valid cycle/ordering/delegate observations while asserting typed Rust
-boundaries. The old array-rejection body now has supported comparisons under all three feeds.
+native-valid cycle/ordering/delegate observations. Cycles now execute; ordering
+and delegate operations retain their typed Rust boundaries. The old array-rejection body now has supported comparisons under all three feeds.
 The normal driver declares 93 fresh native array sessions, retains their actual
 argv/cwd/status/streams, and passes fresh captures to the production unit-test binary.
 It requires 11 public array tests, 31 private crate tests, and four controls which
@@ -383,7 +381,7 @@ Tables retain their realm and survive returned-value, root, and runner owners.
 Root slots accept same-realm tables and reject foreign tables. Scalar table keys
 are integers, booleans, raw f32 values and byte strings; key equality requires
 matching type and payload, so integer 1, float 1.0 and true occupy distinct slots.
-Table ordering and pointer-bearing key/value graphs remain explicit boundaries.
+Table ordering and aggregate pointer-bearing keys remain explicit boundaries.
 
 Table literals preserve native source-member capacity, including duplicate keys,
 and emit NEWTABLE/NEWSLOTA. Bracket and dot get/set/newslot, identity equality,
@@ -405,12 +403,12 @@ Linux. The PR-only `script-tables.yml` job executes this GNU target proof.
 Native `Set` has an observable null-key quirk: an empty physical node can retain
 an invisible value, without adding a slot. Null Get still misses and NewSlot
 rejects null before receiver checks. Rehash discards invisible values. This
-behavior is preserved, including its scalar ownership; it is not generalized to
-aggregate object graphs. Ordinary missing slots and invalid types remain runtime
-errors, separate from unimplemented aggregate keys/values and native-invalid
+behavior is preserved for scalar and aggregate values, including hidden-edge
+retention and omission during clone/rehash. Ordinary missing slots and invalid
+types remain runtime errors, separate from unimplemented aggregate keys and native-invalid
 float-to-integer hash conversions.
 
-The table corpus runs 750 strict byte comparisons per profile, including original
+The current table/graph corpus runs 810 strict byte comparisons per profile, including original
 stack/literals/instructions, returned/error stage, IP and debt, collision growth,
 all hash length branches, embedded NUL/high bytes and active iteration mutation.
 Additional genuine native sessions prove returned/root identity, temporary-only
@@ -421,11 +419,9 @@ identity dependency; they do not claim Rust pointer-key parity.
 
 Run `scripts/compat/script-vm/tables/verify.sh PINNED_OPENTTD NEW_OUTPUT` for fresh
 debug/release tables, hash, lifetime and full crate tests plus Clippy/fmt. The
-output freezes the real native/Rust executables and test binaries. General nested
-containers, delegates, closures, cycle collection, full root-table
-storage unification, existing AI/GS mods and gameplay integration remain later
-Stage 4 obligations. Scalar-only slot storage makes strong object cycles
-unrepresentable until a realm-owned graph heap with explicit roots is implemented.
+output freezes the real native/Rust executables and test binaries. Delegates,
+closures, callable native GC, full root-table storage unification, existing AI/GS
+mods and gameplay integration remain later Stage 4 obligations.
 
 
 ## Delete and clone
@@ -435,14 +431,14 @@ instructions through the same compiler and budget loop. Delete retains the
 removed value, leaves native collision links/free positions intact, and performs
 native threshold rehashing. Clone allocates an independent table and reinserts
 visible slots in ascending physical order at the source capacity; it does not
-copy physical holes or invisible null-key values. Arrays clone scalar storage
+copy physical holes or invisible null-key values. Arrays clone element storage
 into an independent identity. Rust's `Clone` trait still clones shared handles;
 `shallow_clone` performs the language operation.
 
 String-root deletion removes own slots without fallback. Full root cloning and
 iteration await physical root/table unification. Default delegate methods,
-explicit delegates and `_delslot`/`_cloned` hooks require the later function and
-realm graph heap; this atom does not introduce standalone delegate APIs.
+explicit delegates and `_delslot`/`_cloned` hooks require later function support;
+this atom does not introduce standalone delegate APIs.
 
 Fresh native sessions cover cloned/deleted result ownership, retained invisible
 values, array clone release, late-error persistence, and host deletion/shrink
@@ -450,3 +446,40 @@ while a script clones/deletes during suspended foreach. Existing scalar, array,
 root, string-foreach and table/hash regressions run in both build profiles. The
 previous GNU scalar-table proof does not establish this new delete/clone epoch;
 the portable focused CI job must execute the changed producer for that claim.
+
+
+## Realm-owned aggregate storage
+
+Arrays and ordinary tables now share a realm-owned heap. Typed generational
+object IDs locate storage; internal edges retain object ownership metadata with
+only a weak heap link. Public handles retain the realm and register external
+ownership. The heap never stores public handles, so a table/array cycle cannot
+create a strong Rust ownership cycle. Root slots, runner temporaries, returned
+values and suspended registers continue to hold real public owners.
+
+Zero-reference objects release immediately through a LIFO queue, following the
+bundled delayed-free mechanism without recursive graph destruction.
+`Realm::collect_cycles()` separately traces external owners and internal edges,
+including invisible table-node values, and finalizes unreachable cycles. It is a
+host memory-management operation with no native callable-GC count contract.
+Native GC-chain ordering, pointer-hashed host-ref bookkeeping, finalizers, weakref
+script APIs and callable `collectgarbage` remain required future dependencies.
+Exact original counts are retained and compared for the admitted passive host
+sequence; they are not normalized into a generic collected-object count.
+
+Shallow clones retain aggregate identities; deleted values become independent
+external owners. Missing-index and null-key error precedence is unchanged, and
+foreign aggregate values fail without publishing a replacement. The physical
+node/free/chain/rehash algorithm and the single VM debt loop are unchanged.
+
+Passive `--graph-storage` and `--graph-vm` original observations cover immediate
+DAG and deep-chain release, hidden edges, cloned aliases, host-rooted and
+unreachable cycles, suspended root rebinding, returned handles, late errors and
+temporary replacement. The graph tests also verify stale-generation rejection
+and realm teardown. New source cases run through the same strict comparator and
+receipt-membership postcondition as all prior table/delete/clone cases.
+
+Configured roots still use their earlier byte-keyed representation. Native
+default root population, first-class `this`, root iteration/clone and opaque
+native closure identities are the next required storage consumers. This graph
+foundation does not claim those six pre-change root RED cases now pass.

@@ -1,15 +1,15 @@
 //! `SQTable`'s physical node array, descending free scan and collision relocation.
 use super::scalar::Scalar;
-use crate::VmError;
+use crate::{VmError, heap::Stored};
 #[derive(Clone, Debug)]
 struct Node {
     key: Scalar,
-    value: Scalar,
+    value: Stored,
     hash: u64,
     next: Option<usize>,
 }
 #[derive(Debug)]
-pub(super) struct Nodes {
+pub(crate) struct Nodes {
     slots: Vec<Node>,
     free: usize,
     used: usize,
@@ -24,7 +24,7 @@ pub(super) struct Nodes {
     reason = "Power-of-two capacity >=4 and valid node indices bound all arithmetic"
 )]
 impl Nodes {
-    pub(super) fn new(capacity: usize) -> Result<Self, VmError> {
+    pub(crate) fn new(capacity: usize) -> Result<Self, VmError> {
         let capacity = capacity
             .max(4)
             .checked_next_power_of_two()
@@ -37,7 +37,7 @@ impl Nodes {
             capacity,
             Node {
                 key: Scalar::Null,
-                value: Scalar::Null,
+                value: Stored::null(),
                 hash: 0,
                 next: None,
             },
@@ -62,19 +62,19 @@ impl Nodes {
             index = node.next?;
         }
     }
-    pub(super) fn get(&self, key: &Scalar, hash: u64) -> Option<Scalar> {
+    pub(crate) fn get(&self, key: &Scalar, hash: u64) -> Option<Stored> {
         self.find(key, hash)
             .map(|index| self.slots[index].value.clone())
     }
-    pub(super) fn set(&mut self, key: &Scalar, hash: u64, value: Scalar) -> Result<(), VmError> {
+    pub(crate) fn set(&mut self, key: &Scalar, hash: u64, value: Stored) -> Result<(), VmError> {
         let index = self.find(key, hash).ok_or(VmError::MissingIndex)?;
         self.slots[index].value = value;
         Ok(())
     }
-    pub(super) const fn len(&self) -> usize {
+    pub(crate) const fn len(&self) -> usize {
         self.used
     }
-    pub(super) fn next(&self, cursor: usize) -> Option<(usize, Scalar, Scalar)> {
+    pub(crate) fn next(&self, cursor: usize) -> Option<(usize, Scalar, Stored)> {
         self.slots
             .iter()
             .enumerate()
@@ -84,7 +84,7 @@ impl Nodes {
                     .then(|| (index + 1, node.key.clone(), node.value.clone()))
             })
     }
-    pub(super) fn insert(&mut self, key: Scalar, hash: u64, value: Scalar) -> Result<(), VmError> {
+    pub(crate) fn insert(&mut self, key: Scalar, hash: u64, value: Stored) -> Result<(), VmError> {
         if let Some(index) = self.find(&key, hash) {
             self.slots[index].value = value;
             return Ok(());
@@ -101,7 +101,7 @@ impl Nodes {
                 self.slots[free] = self.slots[main].clone();
                 self.slots[main] = Node {
                     key: Scalar::Null,
-                    value: Scalar::Null,
+                    value: Stored::null(),
                     hash: 0,
                     next: None,
                 };
@@ -127,15 +127,18 @@ impl Nodes {
         self.rehash(true)?;
         self.insert(key, hash, value)
     }
-    pub(super) fn remove(&mut self, key: &Scalar, hash: u64) -> Result<Scalar, VmError> {
+    pub(crate) fn remove(&mut self, key: &Scalar, hash: u64) -> Result<Stored, VmError> {
         let index = self.find(key, hash).ok_or(VmError::MissingIndex)?;
-        let value = std::mem::replace(&mut self.slots[index].value, Scalar::Null);
+        let value = std::mem::replace(&mut self.slots[index].value, Stored::null());
         self.slots[index].key = Scalar::Null;
         self.used -= 1;
         self.rehash(false)?;
         Ok(value)
     }
-    pub(super) fn duplicate(&self) -> Result<Self, VmError> {
+    pub(crate) fn values(&self) -> impl Iterator<Item = &Stored> {
+        self.slots.iter().map(|node| &node.value)
+    }
+    pub(crate) fn duplicate(&self) -> Result<Self, VmError> {
         self.reinsert(self.slots.len())
     }
     fn reinsert(&self, capacity: usize) -> Result<Self, VmError> {

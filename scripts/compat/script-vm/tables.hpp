@@ -165,3 +165,115 @@ static int table_effects_session(int argc,char **argv) {
  }
  return 0;
 }
+
+// Host handles registered with sq_addref are GC roots, unlike bare local SQObjectPtr.
+static int graph_storage_session() {
+ std::unique_ptr<SQVM,decltype(&sq_close)> owner(sq_open(256),sq_close);auto vm=owner.get();
+ auto alive=[](const SQObjectPtr &watch){return type(_weakref(watch)->_obj)!=OT_NULL;};
+ {
+ SQObjectPtr key=SQString::Create(_ss(vm),"key");
+ SQObjectPtr leaf=SQTable::Create(_ss(vm),0);
+ _table(leaf)->NewSlot(key,SQObjectPtr(SQString::Create(_ss(vm),"graph-leaf")));
+ SQObjectPtr watch=_table(leaf)->GetWeakRef(OT_TABLE);
+ SQObjectPtr array=SQArray::Create(_ss(vm),0);_array(array)->Append(leaf);
+ SQObjectPtr parent=SQTable::Create(_ss(vm),0);_table(parent)->NewSlot(key,array);
+ SQObjectPtr copy=_table(parent)->Clone(),found;
+ _table(copy)->Get(key,found);
+ std::cout<<"clone alias "<<(_array(found)==_array(array))<<'\n';found.Null();
+ leaf.Null();array.Null();parent.Null();
+ std::cout<<"dag clone-held "<<alive(watch)<<'\n';copy.Null();
+ std::cout<<"dag released "<<alive(watch)<<'\n';
+ SQObjectPtr hidden=SQTable::Create(_ss(vm),0);
+ leaf=SQTable::Create(_ss(vm),0);watch=_table(leaf)->GetWeakRef(OT_TABLE);
+ _table(hidden)->Set(_null_,leaf);leaf.Null();copy=_table(hidden)->Clone();
+ std::cout<<"hidden held "<<alive(watch)<<'\n';hidden.Null();
+ std::cout<<"hidden clone-omits "<<alive(watch)<<'\n';copy.Null();
+ SQObjectPtr cycle=SQTable::Create(_ss(vm),0);
+ watch=_table(cycle)->GetWeakRef(OT_TABLE);_table(cycle)->NewSlot(key,cycle);
+ sq_addref(vm,&cycle);
+ std::cout<<"cycle rooted-collect "<<sq_collectgarbage(vm)<<' '<<alive(watch)<<'\n';
+ sq_release(vm,&cycle);cycle.Null();
+ std::cout<<"cycle unrooted-before "<<alive(watch)<<'\n';
+ std::cout<<"cycle collected "<<sq_collectgarbage(vm)<<' '<<alive(watch)<<'\n';
+ array=SQArray::Create(_ss(vm),0);parent=SQTable::Create(_ss(vm),0);
+ SQObjectPtr array_watch=_array(array)->GetWeakRef(OT_ARRAY);
+ watch=_table(parent)->GetWeakRef(OT_TABLE);
+ _array(array)->Append(parent);_table(parent)->NewSlot(key,array);
+ sq_addref(vm,&array);parent.Null();
+ std::cout<<"pair rooted-collect "<<sq_collectgarbage(vm)<<' '<<alive(watch)<<' '<<alive(array_watch)<<'\n';
+ sq_release(vm,&array);array.Null();
+ std::cout<<"pair unrooted-before "<<alive(watch)<<' '<<alive(array_watch)<<'\n';
+ std::cout<<"pair collected "<<sq_collectgarbage(vm)<<' '<<alive(watch)<<' '<<alive(array_watch)<<'\n';
+ leaf=SQTable::Create(_ss(vm),0);watch=_table(leaf)->GetWeakRef(OT_TABLE);
+ SQObjectPtr chain=leaf;leaf.Null();
+ for(int index=0;index<2048;++index){SQObjectPtr next=SQArray::Create(_ss(vm),0);_array(next)->Append(chain);chain=next;}
+ std::cout<<"deep held "<<alive(watch)<<'\n';chain.Null();
+ std::cout<<"deep released "<<alive(watch)<<'\n';
+ }
+ return 0;
+}
+
+static int graph_vm_session(int argc,char **argv) {
+ if(argc!=4)return 64;
+ auto read=[](const char *path){std::ifstream input(path,std::ios::binary);if(!input)throw std::runtime_error("missing graph fixture");return std::string((std::istreambuf_iterator<char>(input)),{});};
+ const auto suspended=read(argv[2]),failure=read(argv[3]);
+ std::unique_ptr<SQVM,decltype(&sq_close)> owner(sq_open(256),sq_close);auto vm=owner.get();
+ auto alive=[](const SQObjectPtr &watch){return type(_weakref(watch)->_obj)!=OT_NULL;};
+ {
+ SQObjectPtr held=SQString::Create(_ss(vm),"held"),key=SQString::Create(_ss(vm),"key");
+ SQObjectPtr leaf=SQTable::Create(_ss(vm),0),array=SQArray::Create(_ss(vm),0);
+ _table(leaf)->NewSlot(key,SQObjectPtr(SQInteger(7)));_array(array)->Append(leaf);
+ _table(vm->_roottable)->NewSlot(held,array);
+ SQObjectPtr leaf_watch=_table(leaf)->GetWeakRef(OT_TABLE),array_watch=_array(array)->GetWeakRef(OT_ARRAY);
+ if(SQ_FAILED(sq_compilebuffer(vm,suspended,"graph",SQFalse)))return 65;
+ SQObjectPtr closure=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);
+ SQObjectPtr result;vm->_can_suspend=true;vm->_ops_till_suspend=2;
+ bool ok=vm->Call(closure,1,vm->_top-1,result,SQFalse,SQTrue);
+ if(!ok||!vm->_suspended)return 65;
+ std::cout<<"suspended "<<vm->_ops_till_suspend<<' '<<(vm->ci->_ip-_funcproto(_closure(closure)->_function)->_instructions)<<'\n';
+ _table(vm->_roottable)->Set(held,_null_);leaf.Null();array.Null();sq_collectgarbage(vm);
+ std::cout<<"frame-held "<<alive(array_watch)<<' '<<alive(leaf_watch)<<'\n';
+ vm->_ops_till_suspend+=100;
+ ok=vm->Execute(_null_,vm->_top,-1,-1,result,SQFalse,SQVM::ET_RESUME_OPENTTD);
+ if(!ok||vm->_suspended||type(result)!=OT_ARRAY)return 65;
+ sq_addref(vm,&result);sq_settop(vm,0);closure.Null();
+ std::cout<<"returned "<<vm->_ops_till_suspend<<'\n';
+ auto run=[&](std::string_view source) {
+  if(SQ_FAILED(sq_compilebuffer(vm,source,"graph",SQFalse)))throw std::runtime_error("compile graph");
+  SQObjectPtr fn=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);SQObjectPtr scalar;
+  vm->_ops_till_suspend=10000;
+  bool passed=vm->Call(fn,1,vm->_top-1,scalar,SQFalse,SQTrue);sq_settop(vm,0);return passed;
+ };
+ if(!run("return 1;"))return 65;sq_collectgarbage(vm);
+ std::cout<<"host-result-held "<<alive(array_watch)<<' '<<alive(leaf_watch)<<'\n';
+ sq_release(vm,&result);result.Null();
+ std::cout<<"result-released "<<alive(array_watch)<<' '<<alive(leaf_watch)<<'\n';
+ bool passed=run(failure);std::cout<<"late-error "<<passed<<' '<<vm->_ops_till_suspend<<'\n';
+ if(!_table(vm->_roottable)->Get(held,array)||type(array)!=OT_ARRAY)return 65;
+ if(!_array(array)->Get(0,leaf)||type(leaf)!=OT_TABLE)return 65;
+ array_watch=_array(array)->GetWeakRef(OT_ARRAY);leaf_watch=_table(leaf)->GetWeakRef(OT_TABLE);
+ SQObjectPtr scalar;_table(leaf)->Get(key,scalar);std::cout<<"late-value ";value(scalar);
+ array.Null();leaf.Null();sq_collectgarbage(vm);
+ std::cout<<"late-root-held "<<alive(array_watch)<<' '<<alive(leaf_watch)<<'\n';
+ _table(vm->_roottable)->Set(held,_null_);
+ std::cout<<"late-root-cleared "<<alive(array_watch)<<' '<<alive(leaf_watch)<<'\n';
+ if(!run("return 1;"))return 65;
+ std::cout<<"late-temp-replaced "<<alive(array_watch)<<' '<<alive(leaf_watch)<<'\n';
+ }
+ return 0;
+}
+
+static int graph_teardown_session() {
+ // SQWeakRef is not shared-state-owned; finalized objects null its payload.
+ SQObjectPtr table_watch,array_watch;
+ std::unique_ptr<SQVM,decltype(&sq_close)> owner(sq_open(256),sq_close);auto vm=owner.get();
+ {
+ SQObjectPtr table=SQTable::Create(_ss(vm),0),array=SQArray::Create(_ss(vm),0);
+ table_watch=_table(table)->GetWeakRef(OT_TABLE);array_watch=_array(array)->GetWeakRef(OT_ARRAY);
+ _array(array)->Append(table);_table(table)->NewSlot(SQObjectPtr(SQInteger(1)),array);
+ }
+ std::cout<<"teardown before "<<(type(_weakref(table_watch)->_obj)==OT_TABLE)<<' '<<(type(_weakref(array_watch)->_obj)==OT_ARRAY)<<'\n';
+ owner.reset();
+ std::cout<<"teardown after "<<(type(_weakref(table_watch)->_obj)==OT_TABLE)<<' '<<(type(_weakref(array_watch)->_obj)==OT_ARRAY)<<'\n';
+ return 0;
+}

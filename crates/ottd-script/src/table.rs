@@ -1,43 +1,59 @@
-//! Native physical table layout with scalar slots and independently owned identity.
+//! Native physical tables with scalar keys and realm-owned graph values.
 mod hash;
-mod nodes;
-mod scalar;
-use crate::{Realm, Value, VmError};
+pub(super) mod nodes;
+pub(super) mod scalar;
+use crate::{
+    Realm, Value, VmError,
+    heap::{Handle, Object, Stored},
+};
 use nodes::Nodes;
 use scalar::Scalar;
-use std::{cell::RefCell, rc::Rc};
-#[derive(Debug)]
-struct Data {
-    realm: Realm,
-    nodes: RefCell<Nodes>,
-}
-/// Shared mutable native table identity with scalar keys and values.
-/// Nested objects and delegates await the realm-owned graph heap.
+/// Shared mutable table identity. Aggregate keys and delegates are not yet admitted.
 #[derive(Clone, Debug)]
-pub struct Table(Rc<Data>);
+pub struct Table(pub(crate) Handle);
 impl Table {
     pub(crate) fn reserved(realm: &Realm, capacity: usize) -> Result<Self, VmError> {
-        Ok(Self(Rc::new(Data {
-            realm: realm.clone(),
-            nodes: RefCell::new(Nodes::new(capacity)?),
-        })))
+        realm
+            .heap
+            .allocate(realm, Object::Table(Nodes::new(capacity)?))
+            .map(Self)
+    }
+    #[expect(
+        clippy::unreachable,
+        reason = "Table handles are constructed only for table entries"
+    )]
+    fn read<T>(&self, read: impl FnOnce(&Nodes) -> T) -> T {
+        self.0.read(|object| match object {
+            Object::Table(nodes) => read(nodes),
+            Object::Array(_) => unreachable!(),
+        })
+    }
+    #[expect(
+        clippy::unreachable,
+        reason = "Table handles are constructed only for table entries"
+    )]
+    fn mutate<T>(&self, mutate: impl FnOnce(&mut Nodes) -> T) -> T {
+        self.0.mutate(|object| match object {
+            Object::Table(nodes) => mutate(nodes),
+            Object::Array(_) => unreachable!(),
+        })
     }
     pub(crate) fn same_realm(&self, realm: &Realm) -> bool {
         self.0.realm.same(realm)
     }
-    /// Whether both handles retain the same allocation.
+    /// Whether both handles retain the same object identity.
     pub fn same_identity(&self, other: &Self) -> bool {
-        Rc::ptr_eq(&self.0, &other.0)
+        self.0.same(&other.0)
     }
     /// Number of own slots.
     pub fn len(&self) -> usize {
-        self.0.nodes.borrow().len()
+        self.read(Nodes::len)
     }
     /// Whether this table has no own slots.
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
-    /// Read an own slot, without default delegates or root fallback.
+    /// Read an own slot without delegation or root fallback.
     /// # Errors
     /// Rejects aggregate keys and unrepresentable float hashing conversions.
     pub fn raw_get(&self, key: Value) -> Result<Option<Value>, VmError> {
@@ -45,66 +61,58 @@ impl Table {
         if key == Scalar::Null {
             return Ok(None);
         }
+        let hash = key.hash()?;
         Ok(self
-            .0
-            .nodes
-            .borrow()
-            .get(&key, key.hash()?)
-            .map(|value| value.value()))
+            .read(|nodes| nodes.get(&key, hash))
+            .map(|value| value.value(&self.0.realm)))
     }
-    /// Insert or replace an own slot.
+    /// Insert or replace an own slot, retaining same-realm aggregate identity.
     /// # Errors
-    /// Rejects null keys before checking values, aggregates and invalid float conversions.
+    /// Rejects null keys before values, aggregate keys, invalid hashes and foreign values.
     pub fn new_slot(&self, key: Value, value: Value) -> Result<(), VmError> {
         let key = Scalar::from_value(key, &self.0.realm)?;
         let hash = key.hash()?;
-        let value = Scalar::from_value(value, &self.0.realm)?;
-        self.0.nodes.borrow_mut().insert(key, hash, value)
+        let value = Stored::from_value(value, &self.0.realm)?;
+        self.mutate(|nodes| nodes.insert(key, hash, value))
     }
     /// Replace an existing own slot.
     /// # Errors
-    /// Missing slots fail before checking the replacement value; aggregate keys unsupported.
+    /// Missing slots fail before validating the replacement's realm.
     pub fn set_existing(&self, key: Value, value: Value) -> Result<(), VmError> {
         let key = Scalar::from_value(key, &self.0.realm)?;
-        // SQTable::Set performs raw lookup even for null: an empty node can retain
-        // an invisible value until rehash/release, without becoming an own slot.
         let hash = if key == Scalar::Null { 0 } else { key.hash()? };
-        let mut nodes = self.0.nodes.borrow_mut();
-        if nodes.get(&key, hash).is_none() {
+        if self.read(|nodes| nodes.get(&key, hash)).is_none() {
             return Err(VmError::MissingIndex);
         }
-        nodes.set(&key, hash, Scalar::from_value(value, &self.0.realm)?)
+        let value = Stored::from_value(value, &self.0.realm)?;
+        self.mutate(|nodes| nodes.set(&key, hash, value))
     }
-    /// Remove an own slot and retain the removed scalar value.
+    /// Remove an own slot, independently retaining the removed value.
     /// # Errors
-    /// Null and missing keys return `MissingIndex`; aggregate keys are unsupported.
+    /// Null/missing keys return `MissingIndex`; aggregate keys remain unsupported.
     pub fn delete_slot(&self, key: Value) -> Result<Value, VmError> {
         let key = Scalar::from_value(key, &self.0.realm)?;
         if key == Scalar::Null {
             return Err(VmError::MissingIndex);
         }
-        self.0
-            .nodes
-            .borrow_mut()
-            .remove(&key, key.hash()?)
-            .map(|value| value.value())
+        let hash = key.hash()?;
+        self.mutate(|nodes| nodes.remove(&key, hash))
+            .map(|value| value.value(&self.0.realm))
     }
     /// Allocate an independent table by native physical-order reinsertion.
     /// # Errors
-    /// Returns `Allocation` if the copied node storage cannot be reserved.
+    /// Returns `Allocation` if the node or object storage cannot be reserved.
     pub fn shallow_clone(&self) -> Result<Self, VmError> {
-        let nodes = self.0.nodes.borrow().duplicate()?;
-        Ok(Self(Rc::new(Data {
-            realm: self.0.realm.clone(),
-            nodes: RefCell::new(nodes),
-        })))
+        let nodes = self.read(Nodes::duplicate)?;
+        self.0
+            .realm
+            .heap
+            .allocate(&self.0.realm, Object::Table(nodes))
+            .map(Self)
     }
     pub(crate) fn next(&self, cursor: usize) -> Option<(usize, Value, Value)> {
-        self.0
-            .nodes
-            .borrow()
-            .next(cursor)
-            .map(|(next, key, value)| (next, key.value(), value.value()))
+        self.read(|nodes| nodes.next(cursor))
+            .map(|(next, key, value)| (next, key.value(), value.value(&self.0.realm)))
     }
     pub(crate) fn lookup(&self, key: Value) -> Result<Value, VmError> {
         if let Some(value) = self.raw_get(key.clone())? {
@@ -129,8 +137,8 @@ impl Table {
     }
     #[cfg(test)]
     pub(crate) fn watch(&self) -> impl Fn() -> Option<Self> + use<> {
-        let weak = Rc::downgrade(&self.0);
-        move || weak.upgrade().map(Self)
+        let watch = self.0.watch();
+        move || watch().map(Self)
     }
 }
 impl PartialEq for Table {
@@ -140,13 +148,12 @@ impl PartialEq for Table {
 }
 impl Eq for Table {}
 impl Realm {
-    /// Allocate an independent empty scalar table.
+    /// Allocate an independent empty table in this realm.
     /// # Errors
-    /// Returns `Allocation` if the initial node array cannot be reserved.
+    /// Returns `Allocation` if node or object storage cannot be reserved.
     pub fn table(&self) -> Result<Table, VmError> {
         Table::reserved(self, 0)
     }
 }
-
 #[cfg(test)]
 mod tests;

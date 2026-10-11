@@ -2,6 +2,15 @@
 //!
 //! This foundation deliberately rejects the unimplemented language and VM surface.
 //! It does not yet execute AI/GS packages or connect to the game tick runtime.
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Graph implementation types are shared across crate modules but are not public API"
+)]
+mod heap;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Physical table storage is shared with the crate-private graph heap"
+)]
 mod table;
 pub use table::Table;
 mod array;

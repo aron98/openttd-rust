@@ -56,13 +56,13 @@ fn returned_table_keeps_its_realm_after_execution_owners_drop() {
 }
 
 #[test]
-fn aggregate_graph_edges_and_foreign_roots_remain_explicit_boundaries() {
+fn aggregate_values_retain_identity_while_keys_and_foreign_roots_stay_checked() {
     use ottd_script::{Realm, VmError};
     let realm = Realm::new();
     let table = realm.table().expect("table");
     assert_eq!(
         table.new_slot(Value::Integer(1), Value::Table(table.clone())),
-        Err(VmError::UnsupportedTableElement)
+        Ok(())
     );
     assert_eq!(
         table.new_slot(Value::Table(table.clone()), Value::Integer(1)),
@@ -76,7 +76,10 @@ fn aggregate_graph_edges_and_foreign_roots_remain_explicit_boundaries() {
         table.set_existing(Value::Integer(2), Value::Table(table.clone())),
         Err(VmError::MissingIndex)
     );
-    assert!(table.is_empty());
+    assert_eq!(
+        table.raw_get(Value::Integer(1)),
+        Ok(Some(Value::Table(table.clone())))
+    );
     let foreign = Realm::new().empty_root();
     assert_eq!(
         foreign.new_slot(b"table", Value::Table(table)),

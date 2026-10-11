@@ -2005,7 +2005,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-rs",
    "path": "crates/ottd-sim/src/runtime.rs",
-   "sha256": "4c7a031da4a13972b1b7551d5c9cabc6511c38351187eb66c59a822e7b5bb261",
+   "sha256": "f95f477356d5376b30058caf61b49f52d6c9687c67c5226022523e4f2adb81b8",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "1106f100f911567cc7a7141a984febf2070036a194698540ae1cb888abe88f7a",
+   "sha256": "f1124d3f61f110c2746eae7412246a56b53b8d861a6291404b51b68c85013188",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "1dfc9297f20d267c2480c3b40a038aa6046f0856280b6ff562f10d3676c44b03",
+   "sha256": "8af40c0d322f7c6f3025a909a9261a16cbf0819c778ac4146546e1f0ee9b24cb",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "ba21f79ce15b5457d709b0cae03f249ba9c570939c704e5688a48cd9d6cb88f9",
+   "sha256": "71f00d4d4d662cfc99f52001d28281b116a803086c3045abfa434dad9d373207",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "5e89da3e71e6cf846d21d658b79459832335dd3fa33eef2b0ac7cdf50e1a6cfd",
+   "sha256": "8174d06080b6b23b0cae339eb9cc4467d0d9d83a65505b4d63dbe79097346827",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "e31caca675ebaa118b4764714598873a1c20752d5d3565daca8999a2328d8694",
+   "sha256": "081ec1b23dd29cf68d14884ec1a59a42caad8ea18bc79268c11598140751c3c2",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "5cda2766384a4603239d8698226f380cef1ed6c55abd571a8c3e31220c94b101",
+   "sha256": "d9d5b59cd204ea0d3e226fc4263793a78af6b7c55e5cd49adac36f5677be0cea",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "1c4b0085d91bb9905d717dc6b928288e0146bb6aadf7e85d6621790059f5ec1c",
+   "sha256": "accd9002adb4680732bb25b6ca2b454f6eae1d7e6a72f878c841226040616ed4",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "184f4747e219828ded6b59e8519b3d2200be8b103bc88e089c8c52f6aed7d07c",
+   "sha256": "4b895f4fddb4c43ed7d861bc8e8263dec2b5a71e593deebfc8a5606f614cde91",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "d894488d993e70dc9b27ed9767393f1a7d5ca2327eee0deda4552866e1ee7201",
+   "sha256": "b9b4aef0ddb9082dbf4009824c32573866972c1b689d88285f7ef88e08278213",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "3f22aa53bc6299bbf2cb368f11932cb7e7da4f7c8115c531b276983a73130286",
+   "sha256": "b60c908ba8d18934cf8d37cbe992421a084f24b32e7e54f07b03eb99a5366cb3",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "1fd9e4e10d8c8454a9a79c696a87b0a3cf61929c2df69e5a84e1da19814c5781",
+   "sha256": "3fe24e7ec195de1005e9b08d1d83cd22462084aabf69672d7cb3c3852c55a340",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "9dabf37372eb599fad816d2a7ebf8de5637aad4c866c57f82c2c4caf58c7e242",
+   "sha256": "5bbd199213cf63682273254e30b9fcdd30fae04158aea94889f216b2c4244838",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "eb00add7b27f6dd092979c6bb1bf2dda36b38d5dc3d98a220bc464d53bb37cc3",
+   "sha256": "6664fbdb8d5febf69e716b2bd82299533646840cd74682d3d48e7450c0d2cee0",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "abbff6f641e51c1a35dd5157dc7e7659d49b0be4fe576f0652dbf0393bb495df",
+   "sha256": "a54166b0d11e5050e08d0fb1f893def8c8d2aedd6cc2ea536af6c1ecd98724c8",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "ee8d8c34d82f5ac249867544a8ac2589f7de6f4c01fe802821e78b3a292024ec",
+   "sha256": "04012a2d44e0bd927f4d84c33377b65bea125ff2917ea8d06c81fca1ce4ef678",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "98ed6997f3ef166c169ebf1024034a88e440d7b5490fb5c59646e5b24ec94a13",
+   "sha256": "f4c78c3353472e81a08fac04ee9f7ebbcc933a761d0eb7e68cb11f4a083885ad",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "c4f221dd2a88bc6ab01b29cdd1d1616b125ffaee7a303a37498e30fbed61565f",
+   "sha256": "7b3144610661a3239ac90eb1cb40af989c46182319d339b27a43ce2c3fcd1edd",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "cb9beeaf68f9e5335f32dc9bc41b29f99c25efd13632b55d8cb17d7ec97224b7",
+   "sha256": "76d6c6db3e94c79e4af7cb03dbc5ca3f3612f71f0f7f63f94b59900eb08d434a",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8998,7 +8998,7 @@
   {
    "id": "tree-growth-scripts-tree-growth-source-json",
    "path": "scripts/tree-growth-source.json",
-   "sha256": "5340b7613bb3fc60ec014434ebf753b866cccd8e5c2e5965ddd6d88d9f49a769",
+   "sha256": "a162410545d5d231642ade96be6f541ecdc67c34efec2d7fa968ab27b8173989",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "9aa2992be8b3f92296c49c0a037ffa6a3ce864e34aea6e0ab6b391fc38cf4772",
+   "sha256": "ae55218a092c3ab5f738c41e5d74c8491284eab6d27ecc407f5b244749b3c7ea",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -10684,6 +10684,159 @@
    "sha256": "e21d395e85e475a442930d64852cf5d70fd526b7bf2e42a52c0332bbedb3a375",
    "kind": "recipe",
    "provenance": "Bounded vanilla temperate forest and fund-only industry manager implementation, original-command fixtures and private complete-state proof. Recipients, other industry types, creation/closure, NewGRF and full industry compatibility remain required; no normal industry CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-crates-ottd-sim-src-runtime-rail-rs",
+   "path": "crates/ottd-sim/src/runtime/rail.rs",
+   "sha256": "bc17e5bf4fe3f52527387fc1bbc56fbe02727bb6a3a5c90721a8715bbf545b82",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-crates-ottd-sim-src-runtime-rail-cache-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/cache.rs",
+   "sha256": "f3d3cb6aae757f1a7705ce438490d7ca97f2ade64ac20efb4b42fb0e0a434d1d",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-crates-ottd-sim-src-runtime-rail-record-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/record.rs",
+   "sha256": "c26e02f4cda04be5b2e3c23b27bad3775ee1883509498f94c845f86be01c514c",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-crates-ottd-sim-tests-native-rail-controls-rs",
+   "path": "crates/ottd-sim/tests/native_rail_controls.rs",
+   "sha256": "1b7028a1b397ad871f690a06d07625021e349a05eb9d731f16471a86f5a614da",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-crates-ottd-sim-tests-native-rail-restoration-rs",
+   "path": "crates/ottd-sim/tests/native_rail_restoration.rs",
+   "sha256": "f85c4d28a39fcbdb230d5509f9e5c540c0961baab4a71810cda156f1b15b40f4",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-crates-ottd-sim-tests-rail-restoration-support-mod-rs",
+   "path": "crates/ottd-sim/tests/rail_restoration_support/mod.rs",
+   "sha256": "2c342a4d44fbb3a2fd8f40fdc29c37f39c97f1f373683ab966a7bb700dfe6932",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-reference-rail-restore-hpp",
+   "path": "reference/rail_restore.hpp",
+   "sha256": "773b0262397b5ef6f87d6b04b7b84138dc9b59225c19e3273cc5b56a5404a4f2",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-reference-rail-restore-patch",
+   "path": "reference/rail_restore.patch",
+   "sha256": "3ce4951de4e6cb228aeb44939e1e499ab2c6081d4f21615d14d6161af8aac5c0",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-reference-rail-restore-fixture-hpp",
+   "path": "reference/rail_restore_fixture.hpp",
+   "sha256": "baa6eabb1d266d49f46a2b77ee9e17715eab980483cf7f558d52d6496196e34b",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-rust-toolchain-toml",
+   "path": "rust-toolchain.toml",
+   "sha256": "47b9d6173449a742363513ab4a3bbad85a9cd8911d579e0ecfa9fa7aee679059",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-build-rail-restore-reference-sh",
+   "path": "scripts/build-rail-restore-reference.sh",
+   "sha256": "66d69a1ad110cb2524cd66120945d64b406ea90839eaa20cb462fd6e6c7f639c",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-check-rail-restore-reference-cmake",
+   "path": "scripts/check-rail-restore-reference.cmake",
+   "sha256": "def991a4e5599349878a59d3d56ab52984893afca331eeb1a426dc00d9ae37e4",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-check-rail-restore-sh",
+   "path": "scripts/check-rail-restore.sh",
+   "sha256": "b504d320d9e9549451545c4a01e4beb74a9eba595072fb08ea1b7541b38e257d",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-owned-restore-sources-py",
+   "path": "scripts/owned_restore_sources.py",
+   "sha256": "179e32285e016739b67650a399289e4c2c0539700747d9f845db902a1535f656",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-rail-restore-source-json",
+   "path": "scripts/rail-restore-source.json",
+   "sha256": "238681cd2dcdaf7526a6b5fd6e621d3289007956dde14cbefd74fd969279deb8",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-rail-sources-py",
+   "path": "scripts/rail_sources.py",
+   "sha256": "f1f1f822a647b1439df4946fa1040f921622c4b3e6386b3ca54fcc1cdde0bec8",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "rail-source-scripts-tests-rail-sources-test-py",
+   "path": "scripts/tests/rail_sources_test.py",
+   "sha256": "87a78172eea7da7f3b3a65d0597904b021a8e11af24cda59569f0c7bf0a4b4d1",
+   "kind": "recipe",
+   "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
    "save_version": null,
    "profile": null
   }

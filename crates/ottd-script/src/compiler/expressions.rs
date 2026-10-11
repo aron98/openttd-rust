@@ -54,14 +54,39 @@ impl Compiler<'_> {
         } else {
             self.binary(0, depth, state)?;
         }
-        let token = if level == 0 {
-            TokenKind::Or
-        } else {
-            TokenKind::And
-        };
-        if self.token.kind != token {
-            return Ok(());
+        loop {
+            if level == 1 && self.token.kind == TokenKind::In {
+                self.advance()?;
+                self.binary(0, depth, state)?;
+                let receiver = self.pop()?;
+                let key = self.pop()?;
+                let target = self.push()?;
+                self.emit(Instruction {
+                    opcode: 0x29,
+                    arg0: target.0,
+                    arg1: i32::from(receiver.0),
+                    arg2: key.0,
+                    arg3: 0,
+                });
+                continue;
+            }
+            let token = if level == 0 {
+                TokenKind::Or
+            } else {
+                TokenKind::And
+            };
+            if self.token.kind != token {
+                return Ok(());
+            }
+            self.logical_branch(level, depth, state)?;
         }
+    }
+    fn logical_branch(
+        &mut self,
+        level: u8,
+        depth: u8,
+        state: &mut ExpressionState,
+    ) -> Result<(), CompileFailure> {
         let first = self.pop()?;
         let target = self.push()?;
         self.emit(Instruction {

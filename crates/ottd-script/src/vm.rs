@@ -10,6 +10,7 @@ mod diagnostics;
 mod dispatch;
 mod foreach;
 mod frames;
+mod membership;
 mod objects;
 mod operations;
 mod registers;
@@ -228,3 +229,6 @@ mod native_roots;
 
 #[cfg(test)]
 mod native_calls;
+
+#[cfg(test)]
+mod membership_tests;

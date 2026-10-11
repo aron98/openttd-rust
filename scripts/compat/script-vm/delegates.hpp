@@ -78,3 +78,33 @@ static int delegate_owner_session(int argc,char **argv) {
  if(mode=="mutations")return delegate_mutations(record=="on");
  return 64;
 }
+
+static int delegate_cycle_owner(int argc,char **argv) {
+ if(argc!=5)return 64;
+ const std::string_view kind=argv[2],record=argv[4];
+ if((kind!="capture" && kind!="default" && kind!="error") || (record!="on" && record!="off"))return 64;
+ std::ifstream input(argv[3],std::ios::binary);if(!input)return 66;
+ std::string source((std::istreambuf_iterator<char>(input)),{});
+ auto owner=std::unique_ptr<SQVM,decltype(&sq_close)>(sq_open(256),sq_close);auto vm=owner.get();
+ if(SQ_FAILED(sq_compilebuffer(vm,source,"delegate-owner",SQFalse)))return 65;
+ SQObjectPtr main=stack_get(vm,-1);sq_settop(vm,0);sq_pushroottable(vm);SQObjectPtr result;
+ vm->_can_suspend=true;vm->_ops_till_suspend=10000;
+ if(!vm->Call(main,1,vm->_top-1,result,SQFalse,SQTrue) || type(result)!=OT_TABLE)return 65;
+ auto o=_table(result),d=o->_delegate;
+ if(d==nullptr)return 65;
+ owner_trace::begin(record=="on");
+ if(!owner_trace::add(o,'O') || !owner_trace::add(d,'D'))return 65;
+ delegate_snapshot("result retained");
+ main.Null();result.Null();vm->temp_reg.Null();sq_settop(vm,0);
+ if(kind=="error") {
+  if(type(vm->_lasterror)!=OT_TABLE || _table(vm->_lasterror)!=o)return 65;
+  std::cout<<"collected error retained "<<sq_collectgarbage(vm)<<'\n';
+  if(type(vm->_lasterror)!=OT_TABLE || _table(vm->_lasterror)!=o)return 65;
+  delegate_snapshot("error retained");delegate_chain(vm);
+  sq_reseterror(vm);
+ }
+ std::cout<<"collected released "<<sq_collectgarbage(vm)<<'\n';
+ for(const auto &entry:owner_trace::identities)if(entry.pointer!=nullptr)return 65;
+ delegate_snapshot("released");
+ return owner_trace::finish()?0:65;
+}

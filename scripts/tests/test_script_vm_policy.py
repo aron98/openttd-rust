@@ -1,10 +1,5 @@
 """Admission controls for explicit undefined-native-input fixture policy."""
 
-import os
-import shutil
-import subprocess
-import sys
-import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -12,19 +7,18 @@ from scripts.script_vm_policy import (
     POLICY_STAGE,
     UNDEFINED_INPUTS,
     compare_case,
-    observe_native,
 )
 from scripts.script_vm_provenance import load_spec
+from scripts.tests import script_vm_policy_producer_checks as producer_checks
 from scripts.world_check_support import (
     ROOT,
     Json,
     WorldCheckError,
-    read_json,
     write_json,
 )
 
 
-class ScriptVmPolicyTests(unittest.TestCase):
+class ScriptVmPolicyTests(producer_checks.PolicyProducerChecks):
     def test_reached_hex_lookahead_has_explicit_policy_metadata(self) -> None:
         for prefix in (b'return "\\x', b'return "\\x1', b'return "\\x1234'):
             for payload, point in (
@@ -150,25 +144,6 @@ class ScriptVmPolicyTests(unittest.TestCase):
             with self.assertRaises(WorldCheckError):
                 compare_case(source, case, POLICY_STAGE)
 
-    def test_undefined_producer_never_invokes_native(self) -> None:
-        with TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            marker = root / "native-invoked"
-            argv = [
-                sys.executable,
-                "-c",
-                "from pathlib import Path; import sys; Path(sys.argv[1]).touch()",
-                str(marker),
-            ]
-            for index, source in enumerate(UNDEFINED_INPUTS):
-                case = root / str(index)
-                observe_native(argv, case, source)
-                self.assertFalse(marker.exists())
-                self.assertFalse((case / "native").exists())
-                self.assertEqual(
-                    read_json(case / "policy.json"),
-                    {"native_executed": False, "reason": POLICY_STAGE},
-                )
 
     def test_policy_receipt_corruption_and_native_path_are_rejected(self) -> None:
         source, policy = next(iter(UNDEFINED_INPUTS.items()))
@@ -202,56 +177,7 @@ class ScriptVmPolicyTests(unittest.TestCase):
             with self.assertRaises(WorldCheckError):
                 compare_case(source, case, POLICY_STAGE)
 
-    def test_legacy_shell_never_invokes_native_for_policy_input(self) -> None:
-        with TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            harness = root / "scripts/compat/script-vm"
-            (harness / "fixtures").mkdir(parents=True)
-            source, policy = next(iter(UNDEFINED_INPUTS.items()))
-            _ = (harness / "fixtures/undefined.nut").write_bytes(source)
-            shell = harness / "differential.sh"
-            _ = shutil.copy2(ROOT / "scripts/compat/script-vm/differential.sh", shell)
-            native = root / "native"
-            marker = root / "native-invoked"
-            _ = native.write_text(
-                f"#!/bin/sh\ntouch '{marker}'\nprintf 'compile_error\\n'\n"
-            )
-            native.chmod(0o755)
-            rust = root / "rust"
-            _ = rust.write_text(
-                "#!/bin/sh\nprintf 'compile_error\\n'\n"
-                + f"printf '%s' '{policy.diagnostic()}' >&2\n"
-            )
-            rust.chmod(0o755)
-            result = subprocess.run(
-                ["/bin/sh", str(shell), str(native), str(rust), str(root / "out")],
-                capture_output=True,
-                text=True,
-                check=False,
-                env={**os.environ, "PYTHONPATH": str(ROOT)},
-            )
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertFalse(marker.exists())
-            self.assertEqual(len(list((root / "out").rglob("policy.json"))), 9)
 
-    def test_defined_unicode_strings_and_comments_invoke_native(self) -> None:
-        with TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            marker = root / "native-invoked"
-            argv = [
-                sys.executable,
-                "-c",
-                "from pathlib import Path; import sys; Path(sys.argv[1]).touch()",
-                str(marker),
-            ]
-            for index, source in enumerate(
-                ('return "€";', "return/*€*/1;", "return//€\n1;")
-            ):
-                observe_native(argv, root / str(index), source.encode())
-                self.assertTrue(marker.exists())
-                self.assertTrue((root / str(index) / "native/process.json").is_file())
-                self.assertFalse((root / str(index) / "policy.json").exists())
-                marker.unlink()
 
     def test_manifest_policy_paths_exclude_native_receipts(self) -> None:
         spec = load_spec(ROOT / "scripts/script-vm-manifest.json")

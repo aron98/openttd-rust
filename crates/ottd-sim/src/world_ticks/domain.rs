@@ -61,9 +61,12 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<bool, WorldTickErr
     }
     if !matches!(
         unsigned(world, b"PATS", 0, "construction.extra_tree_placement")?,
-        0 | 3
+        0..=3
     ) {
-        return Err(unsupported("trees", "tree spreading"));
+        return Err(unsupported(
+            "trees",
+            "setting outside native tree placement range",
+        ));
     }
     if signed(world, b"ECMY", 0, "fluct")? <= 0 {
         return Err(unsupported("economy", "recession"));

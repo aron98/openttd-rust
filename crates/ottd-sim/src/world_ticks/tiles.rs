@@ -39,3 +39,18 @@ pub(super) fn map(world: &World) -> Map {
             .collect(),
     }
 }
+
+pub(super) fn saved(tile: &Tile) -> ottd_save::TileState {
+    ottd_save::TileState::from(ottd_save::TileRawParts {
+        tile_type: tile.tile_type,
+        height: tile.height,
+        m1: tile.m1,
+        m2: tile.m2,
+        m3: tile.m3,
+        m4: tile.m4,
+        m5: tile.m5,
+        m6: tile.m6,
+        m7: tile.m7,
+        m8: tile.m8,
+    })
+}

@@ -19,7 +19,7 @@ use crate::{
 };
 use ottd_core::{ClockEvent, ClockEvents, ClockPhase, ClockState};
 use ottd_save::{
-    TileRawParts, WireValue,
+    WireValue,
     world::{PreparedWorldTransaction, World, WorldEdit},
 };
 use serde::{Deserialize, Serialize};
@@ -205,18 +205,7 @@ fn advance(
                 } else {
                     tile.visit_landscape();
                 }
-                let after = ottd_save::TileState::from(TileRawParts {
-                    tile_type: tile.tile_type,
-                    height: tile.height,
-                    m1: tile.m1,
-                    m2: tile.m2,
-                    m3: tile.m3,
-                    m4: tile.m4,
-                    m5: tile.m5,
-                    m6: tile.m6,
-                    m7: tile.m7,
-                    m8: tile.m8,
-                });
+                let after = tiles::saved(&tile);
                 if before != after {
                     state.apply(WorldEdit::Tile {
                         index,
@@ -236,6 +225,7 @@ fn advance(
             )?;
         }
         vehicles.ticks(state, clock)?;
+        trees::tick(state, clock.snapshot().tick_counter.0)?;
         state.set_number(
             b"DATE",
             0,

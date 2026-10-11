@@ -1,0 +1,58 @@
+{
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "save_version": 362,
+  "license": "GPL-2.0-only",
+  "native_binary_sha256": "eb8ce7b451c5ba55392985b03130bdc056ec7fe789361ab422bbedf050a5bbba",
+  "preparation": "Original tree_growth_setting CMD_CHANGE_SETTING1/2 from frozen original command-planted64-square tree fixture; entire native WorldTick loops without assigned RNG or tree counter.",
+  "recipes": {
+    "rainforest-only.sav": {
+      "artifact": "setting-1/final.sav",
+      "sha256": "eff4fd6d8243a1a9929996e89af3cd12ba4fb263cb3c05392aef7f3bfd09d974"
+    },
+    "all-spread.sav": {
+      "artifact": "setting-2/final.sav",
+      "sha256": "71a5bca0ab47487914632eb87eb35cd02484869a45d6c7977db13fdc55d4c076"
+    },
+    "rainforest-only-4096.sav": {
+      "artifact": "pure-1/final.sav",
+      "sha256": "c2ef309cb06e4e1bc59dc49285839be651d7e69803a55332eff315d4c14d91dc"
+    },
+    "all-spread-4096.sav": {
+      "artifact": "pure-2/final.sav",
+      "sha256": "d67c978751342edd01f5969370623cafa863e1d9fe8e8e6b15973217addd45d5"
+    },
+    "before-placement.sav": {
+      "artifact": "before-placement/final.sav",
+      "sha256": "132ea955f3c4c3a99e7e92eebb53f9dcbc9fa9b31ed99e002c0e40df266e29df"
+    },
+    "after-placement.sav": {
+      "artifact": "placement/final.sav",
+      "sha256": "883cd52ea12e3082f948b25c3e174f828ef2fec10309c473ea8679cfa263f575"
+    },
+    "edge-planted.sav": {
+      "artifact": "edge-planted/final.sav",
+      "sha256": "ddde0769741f37287048af95126ae11fc769f68e10aba2a5b9ab8522f1ea61f2",
+      "preparation": "Actual original PlantTrees on row0 tiles1..62, then ChangeSetting2; callback later reaches original assertion"
+    }
+  },
+  "phases": {
+    "before-placement": 3615,
+    "after-placement": 3616,
+    "complete": 4096
+  },
+  "frozen_seed": {
+    "path": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6/.omo/evidence/tree-growth/proof-typed-complete/prepare-command/final.sav",
+    "sha256": "c823cd553a5cbfcee1eb7f2c1048aaa5c07490ada16d858b6a4501b4bab3b321",
+    "epoch": "587b native original CMD_PLANT_TREE complete preparation; no new clock/RNG/counter assignment"
+  },
+  "retained_recipe_files": {
+    "setting-1/actions.json": "c7ef60cd06bc0b3ee6ed11ac843ce63eedcb32e76e5e8ecb864074bcb75ec24b",
+    "setting-2/actions.json": "57e5c9bb64b7538855bc52e0ad4384de6a56c72325629690afa09f860fd733f1",
+    "pure-1/actions.json": "1be594579301b7427f359911c6ab672330e232170501d9817d4e75fa98d5b3aa",
+    "pure-2/actions.json": "1be594579301b7427f359911c6ab672330e232170501d9817d4e75fa98d5b3aa",
+    "before-placement/actions.json": "4b2c507ace1fb36d6581c9c5b82fafecb82c8543420347554cb7ef2a34552386",
+    "placement/actions.json": "77293b434016e6cde7985c95bdfb207758c49ef8599fc8f6d6ae7fe8c593bee8",
+    "edge-clear/actions.json": "b68d8b56712c8cd432f1da440506277f94a753dac46f52be13f7aaada972627a",
+    "edge-planted/actions.json": "3e3bb046f245d5f61445a9fb366eefa9499cf972e7ac3ef7e9ac098f2ebc7be8"
+  }
+}

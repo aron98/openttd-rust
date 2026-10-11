@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "7e2c019eb702b69343f91c7d99c4be1b37848456b589ec56908b1edbc6af70fd",
+   "sha256": "e4a5fb2515b866340eca7b5789beeff579f226822e2f02c4ffe7b7882cc523d8",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "5491a25c6f6771ae66bd7b9cc68ac125cbaf4e37b5b9e8aa056e7a7547adeb1a",
+   "sha256": "4c035049e8facc5340bff4a1f44bbdb6e77ddaf19d7283e2cce9e98f4332bff8",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "fedd36807286a0ab274c403ad43b679c7cd5a6f7a032756cff279dd54dc6d1d1",
+   "sha256": "c55a8c6bc30c6471a382611023862f6eefcf5f3593cfefaa278848e0cab321b8",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "22b778088b86138ed839584ee9ea1bf1d4035f7ae004463d5816672464c71858",
+   "sha256": "d3f80fec7d01a343fd38236d7f0b3101726706d3609d8e28adc0d36e694fefc5",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "9a6ddc61717a7341494e3eeb918c48462b6603164bf127976b0070881d959d3b",
+   "sha256": "7569a5be58b305850870e606421ec6479182e44979c562841197ff26626bffb9",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "0db193a0bffb2aad86125d3351152eb9a105728e1f6520498646433e3e4db650",
+   "sha256": "63fee06e5dbb54a6d8e12b6ad723ecb9b7b1533aa51adeeb59e20491e40000c9",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "04d2a3e0b7d409bc9d7a58e10805bb51ede1c4a6f2f0dc61c7b08763ac4041b5",
+   "sha256": "0bde60c5f9f00fef86cf8b13c3f21f2a6506eed044b48806f2bc2a12df13c207",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "af7b2b7173581183727282993d47dfeb5e376bc01cd2ebc8515d598780461ce1",
+   "sha256": "712e6936833ed1b2db95045bddca40655502c665c97ada1a882d8a6e84da24bb",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "cdf40d23edf4f0239b2e64feabcb98b447ac337c65a7f5c0e02912b5f04424fc",
+   "sha256": "f0e8d05d2f98fcfb98a439c7ae8a5b9130f9755fe1edfced15b5c487a1157c20",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "6763e4c5856381d2e6fea1530d513f8a6a81b673f88bd2ba37805dc9b6a5432c",
+   "sha256": "a3d7704296df73fa0c3f9bd6a5765afb6e0e9a7285b1f3d7075921c3d443f4c4",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "46d0428d68e80a144e3a5e6a68cfa030c4bb533646602cfc587f66a3f3b5ab48",
+   "sha256": "c92bb4b2fcc8952075b855cb65500880f9ba16e9024eb8e9fca6e60e2237ebb6",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "50482bf5297fd103a4bc4d94b8c638679f48d02f3479a98e73c8e70ef1a04c51",
+   "sha256": "b5814a0d336e35687851d307165c37af691629f0c55e9ce57f4ca9df92d22226",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "2ce6a6634df691de2eb8ca552b2fe59f080efe3111101c3a4e06f23213b25dfe",
+   "sha256": "20934280a87a16da36cff6bae775267796d91f84c5d1b61ca2d83c1cc2136d9e",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "bab3e4246d3b2e664170c1f68c4aae573d2c95dc8ec914d4cf981df45dc6dd27",
+   "sha256": "1d5bd6e554ce20e90c8570626bc1117797d192c2651e46d4d217cd1965e35550",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "fe92514aeb898af2d86852e34ec20fc076e9968bd997dc6efb7cbaefa62804db",
+   "sha256": "0f2d3ce49cab0f430b8bdfd29e121e684eeb697f339d72bc8ec7f4c036d29a03",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "bd88e0481d2294e2d08dcfad95925901f565a87f471f14de9a3836972d4b75dd",
+   "sha256": "00d2d7a212a186815986e50e210151ca12d1160efee43ef6980a98c1ea236793",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "0685ac09cb8fcf3bc42c51c7e3863946ef70973b2a9fecd3df6346609ceb4fb2",
+   "sha256": "20cb576586204a8fab7be8ac7afc79de97ae059724b4958e2fcddfa22db48f54",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "d19a9c9df2d8c878b205f052a008093a6a9c5876aaf89689d5f9ea88da4624e6",
+   "sha256": "cc956859fdeed5f5526a7a432f6f25710f8d71d4deb4bd7d993b2a075bc42d95",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8998,7 +8998,7 @@
   {
    "id": "tree-growth-scripts-tree-growth-source-json",
    "path": "scripts/tree-growth-source.json",
-   "sha256": "14735c8c2f5bf82d8ce0b571ea5c8ded8e2397d50e2c31abb8ee394d910be25c",
+   "sha256": "5f340ce2764ea9766fef666da15a07063aee32a56d06f87dd5e2e25c66aa8c62",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "35af2c4019a0bb1cc9ddaa86a7a5254c24587b74d182798b336604b5d206789a",
+   "sha256": "1128bd1b4f2f40ac49f90b891ee3d1615e8d8051b875a4930c64a73e32d1f4d0",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -11887,7 +11887,7 @@
   {
    "id": "rail-source-crates-ottd-sim-src-runtime-rail-rs",
    "path": "crates/ottd-sim/src/runtime/rail.rs",
-   "sha256": "bc17e5bf4fe3f52527387fc1bbc56fbe02727bb6a3a5c90721a8715bbf545b82",
+   "sha256": "a9c42c0cbfda6202233e70c9d82ce859fdf1d9e05fb1ba38536e431faf9d0341",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
    "save_version": null,
@@ -12013,7 +12013,7 @@
   {
    "id": "rail-source-scripts-rail-restore-source-json",
    "path": "scripts/rail-restore-source.json",
-   "sha256": "bca3be879d160ba95e904abe25380295110feeeccbae37e30ef5519a49e0e3ac",
+   "sha256": "7df71d6e2b81cbcefe58b249a7964b3333e5bfc238f0d2f2d6d292e178699fa2",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
    "save_version": null,
@@ -12022,7 +12022,7 @@
   {
    "id": "rail-source-scripts-rail-sources-py",
    "path": "scripts/rail_sources.py",
-   "sha256": "f1f1f822a647b1439df4946fa1040f921622c4b3e6386b3ca54fcc1cdde0bec8",
+   "sha256": "ba1963b83ed5273e7973bc17e6b8df0bd5cb005b22c8c82f798574359892ddd1",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
    "save_version": null,
@@ -12031,9 +12031,207 @@
   {
    "id": "rail-source-scripts-tests-rail-sources-test-py",
    "path": "scripts/tests/rail_sources_test.py",
-   "sha256": "87a78172eea7da7f3b3a65d0597904b021a8e11af24cda59569f0c7bf0a4b4d1",
+   "sha256": "2bb07e14c3e430e93503905e70b385db32638812f4bde3a90317b401b3599442",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist.rs",
+   "sha256": "10b1b6fa94efc7e14f733132a4d0152919c06c518de5c36877a67a7baea641eb",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-cache-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist/cache.rs",
+   "sha256": "bcf4ecef5707572a6468444abde22865a938ca73d3fbe020531e4e3f339e1daf",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-fields-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist/fields.rs",
+   "sha256": "d425e634b2dfa47309c2824d3e095523b876810f94e44ae324341b5a8c5abd1f",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-geometry-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist/geometry.rs",
+   "sha256": "aef1789b32768db4c36e8332fe0eb2ce06dc6a8cd43de70d7973402debb60b9b",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-graph-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist/graph.rs",
+   "sha256": "e40870d845ec9ce6887b34811233fadd8e09f7a227e66c53fe42d9b5e426e968",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-input-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist/input.rs",
+   "sha256": "6875b8c0a3fc6c98b8c8d3d59c950c843c62c34a55e38b8ffeee9b303ad02857",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-src-runtime-rail-consist-types-rs",
+   "path": "crates/ottd-sim/src/runtime/rail/consist/types.rs",
+   "sha256": "63919d96aeda978ed5eff57952a4110d344f8f36821e1d405e716512094d4eec",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-native-rail-consist-controls-rs",
+   "path": "crates/ottd-sim/tests/native_rail_consist_controls.rs",
+   "sha256": "cb83c5c68a8e5c67009c9f2df4ad6b4c0335cdc4c1d6a00bb7a896416272622f",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-native-rail-consist-design-rs",
+   "path": "crates/ottd-sim/tests/native_rail_consist_design.rs",
+   "sha256": "5eceea77cf7e5684d9407c26139140bc1473dccdf243f390e75ad9f5764bcf55",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-native-rail-consist-refusals-rs",
+   "path": "crates/ottd-sim/tests/native_rail_consist_refusals.rs",
+   "sha256": "47d678c500ded9107ccba60e0078248f72459633439174b8c4364029cd8ce7d9",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-rail-consist-support-mod-rs",
+   "path": "crates/ottd-sim/tests/rail_consist_support/mod.rs",
+   "sha256": "a3790567c24309b7dc9cfe48e110138ceb74bcc84fc7fa230b6307dfb299cd08",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-rail-consist-support-snapshot-rs",
+   "path": "crates/ottd-sim/tests/rail_consist_support/snapshot.rs",
+   "sha256": "1e371ddeb6ada040f345ce6b39d32f62f7d13f4f97b0791e601d30db45bf35a7",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-rail-consist-support-verify-rs",
+   "path": "crates/ottd-sim/tests/rail_consist_support/verify.rs",
+   "sha256": "55403f7cc78802ef61eae88b20f4439d10d1ed75af3517425e5e9486c3e7e303",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-reference-rail-consist-hpp",
+   "path": "reference/rail_consist.hpp",
+   "sha256": "89cdd1a56ad75ff8b25ac49417c447f42aa3f584c2e57436d0f8261451bf73d8",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-reference-rail-consist-patch",
+   "path": "reference/rail_consist.patch",
+   "sha256": "65e22e8f2afbf1d480324e9d7a2497bcf282d79e814e43849b902a4a3ae96541",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-reference-rail-consist-design-md",
+   "path": "reference/rail_consist_design.md",
+   "sha256": "a31afbe8939c3b8c7c0b7533422392bb9e646a599d037c36726abcbd5c2fa665",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-reference-rail-consist-fixture-hpp",
+   "path": "reference/rail_consist_fixture.hpp",
+   "sha256": "147dd06ecb432189fde8893d6cd9b33a4abf3e18d4d18d5f9503d4207acfd48f",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-scripts-build-rail-consist-reference-sh",
+   "path": "scripts/build-rail-consist-reference.sh",
+   "sha256": "348a66401193096d790d81d3fb141d77a1b3cf6236e957fe41614433dba7f9cb",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-scripts-check-rail-consist-design-sh",
+   "path": "scripts/check-rail-consist-design.sh",
+   "sha256": "63164ecae290583d77c56bd023214f5494e8f2e95d4ab64cc1ca3ec12fa61265",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-scripts-check-rail-consist-reference-cmake",
+   "path": "scripts/check-rail-consist-reference.cmake",
+   "sha256": "f5860b8944cfe1768a420f803f2ca379cc8ec6aad1a9847a0d1086271704ebad",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-scripts-check-rail-consist-sh",
+   "path": "scripts/check-rail-consist.sh",
+   "sha256": "c8ef9ff726ab5891f3b893debe9aeefb8bcca49dc95d66d95058bf7ef4ca0c83",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "consist-source-crates-ottd-sim-tests-native-rail-consist-context-rs",
+   "path": "crates/ottd-sim/tests/native_rail_consist_context.rs",
+   "sha256": "15f1e4aca04671bafb53f24e37b196ad78d91f025f6a7581b4199661622e13d1",
+   "kind": "recipe",
+   "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
    "save_version": null,
    "profile": null
   }

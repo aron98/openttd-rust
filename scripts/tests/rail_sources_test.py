@@ -89,6 +89,8 @@ class RailSourcesTest(unittest.TestCase):
             for producer in (
                 "build-rail-restore-reference.sh",
                 "check-rail-restore.sh",
+                "build-rail-consist-reference.sh",
+                "check-rail-consist.sh",
             ):
                 for index, name in enumerate(REQUIRED):
                     target = copied / name
@@ -111,6 +113,7 @@ class RailSourcesTest(unittest.TestCase):
                                 )
                             assert not (output / "native-source").exists()
                             assert not (output / "engine-0").exists()
+                            assert not (output / "0,27,29").exists()
                             _ = target.write_bytes(original)
                             target.chmod(mode)
 

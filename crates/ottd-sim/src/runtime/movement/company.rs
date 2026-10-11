@@ -66,7 +66,8 @@ mod tests {
         let mut before = world("ROAD_QUARTER_BEFORE")?;
         let native = world("ROAD_QUARTER_AFTER")?;
         let content = ContentCatalog::from_world(&before)?;
-        let state = State::load(&mut before, None);
+        let industries = crate::runtime::IndustryCaches::restore(&before)?;
+        let state = State::load(&mut before, None, industries);
         // When: value every admitted native physical road object and station facility.
         let assets = assets(&state, &content, 0)?;
         let value = assets

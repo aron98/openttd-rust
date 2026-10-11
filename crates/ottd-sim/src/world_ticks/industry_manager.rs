@@ -13,7 +13,7 @@ struct BuildData {
 }
 
 pub(super) fn daily(state: &mut State<'_>) -> Result<(), WorldTickError> {
-    let increment = state.width.saturating_mul(state.height) / 31;
+    let increment = state.industries.daily_increment;
     let counter = u32::try_from(state.number(b"ECMY", 0, "industry_daily_change_counter")?)
         .map_err(|_| unsupported("industry_day", "counter"))?
         .wrapping_add(increment);
@@ -36,7 +36,10 @@ pub(super) fn daily(state: &mut State<'_>) -> Result<(), WorldTickError> {
     let wanted = u32::try_from(state.number(b"IBLD", 0, "wanted_inds")?)
         .map_err(|_| unsupported("industry_day", "wanted industries"))?
         >> 16;
-    let percent = 3_u32.saturating_add(wanted).min(9);
+    let count = u32::try_from(state.table(b"INDY")?.records().count())
+        .map_err(|_| unsupported("industry_day", "pool size"))?;
+    let percent = 3_u32.saturating_add(wanted.saturating_sub(count)).min(9);
+    let industry = state.table(b"INDY")?.records().next().map(|(id, _)| id);
     for _ in 0..attempts {
         let chance = (random(state)? & 0xffff)
             .saturating_mul(100)
@@ -44,8 +47,11 @@ pub(super) fn daily(state: &mut State<'_>) -> Result<(), WorldTickError> {
             >> 16;
         if chance < percent {
             try_build(state, wanted)?;
+        } else if let Some(id) = industry {
+            // GetRandom draws even for a one-element pool; admission excludes larger pools.
+            let _selection_draw = random(state)?;
+            super::industries::change_production(state, id)?;
         }
-        // Industry::GetRandom returns nullptr without drawing for the admitted empty pool.
     }
     Ok(())
 }
@@ -83,7 +89,22 @@ fn try_build(state: &mut State<'_>, wanted: u32) -> Result<(), WorldTickError> {
             row.target = 0;
         }
     }
-    if rows.iter().any(|row| row.target > 0 && row.wait == 0) {
+    let mut missing = 0_i32;
+    let mut eligible = false;
+    for (kind, row) in rows.iter().enumerate() {
+        let count = state
+            .industries
+            .type_members
+            .get(kind)
+            .ok_or_else(|| unsupported("industry_builder", "type membership"))?
+            .len();
+        let difference = i32::from(row.target).saturating_sub(
+            i32::try_from(count).map_err(|_| unsupported("industry_builder", "type count"))?,
+        );
+        missing = missing.saturating_add(difference);
+        eligible |= difference > 0 && row.wait == 0;
+    }
+    if missing > 0 && eligible {
         return Err(unsupported(
             "industry_builder",
             "reached original PlaceIndustry",

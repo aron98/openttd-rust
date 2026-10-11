@@ -1,5 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
+mod industries;
+pub use industries::IndustryCaches;
 pub(crate) mod towns;
 pub use towns::{TownHouseCache, TownHouseCaches};
 mod movement;
@@ -145,6 +147,7 @@ pub struct SimulationRuntime {
     stations: stations::StationRuntime,
     transport: transport::TransportRuntime,
     towns: TownHouseCaches,
+    industries: IndustryCaches,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -422,6 +425,7 @@ impl SimulationRuntime {
         let mut runtime = Self {
             orders,
             towns: TownHouseCaches::restore(&world)?,
+            industries: IndustryCaches::restore(&world)?,
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
             transport: transport::TransportRuntime::restore(&world)?,
@@ -450,6 +454,11 @@ impl SimulationRuntime {
     /// Population, building counts and radii used by vanilla house/town gameplay.
     pub const fn town_house_caches(&self) -> &TownHouseCaches {
         &self.towns
+    }
+
+    /// Native industry type membership and map-scaled daily scheduling.
+    pub const fn industry_caches(&self) -> &IndustryCaches {
+        &self.industries
     }
 
     /// Station pool allocation metadata.

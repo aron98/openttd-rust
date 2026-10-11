@@ -10,6 +10,11 @@ mod finance;
 )]
 pub(crate) mod house_cargo;
 mod houses;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "typed industry producer handoff is shared with transport phases"
+)]
+pub(crate) mod industries;
 mod industry_manager;
 mod phases;
 mod plan;
@@ -165,28 +170,7 @@ fn advance(
     if !paused {
         if let Some(landscape) = landscape {
             landscape.advance(clock.snapshot().tick_counter.0, |index| {
-                let index =
-                    u32::try_from(index).map_err(|_| unsupported("landscape", "tile index"))?;
-                let before = state.view().tile(index)?;
-                if before.tile_type() >> 4 == 3 {
-                    return houses::visit(state, index, clock.snapshot().tick_counter.0, vehicles);
-                }
-                let mut tile = tile(&before);
-                if tile.tile_type >> 4 == 4 {
-                    trees::visit(state, &mut tile, index, clock.snapshot().tick_counter.0)?;
-                } else if tile.tile_type >> 4 == 2 {
-                    houses::road(state, &mut tile, index)?;
-                } else {
-                    tile.visit_landscape();
-                }
-                let after = tiles::saved(&tile);
-                if before != after {
-                    state.apply(WorldEdit::Tile {
-                        index,
-                        value: after,
-                    })?;
-                }
-                Ok::<(), WorldTickError>(())
+                visit(state, index, clock.snapshot().tick_counter.0, vehicles)
             })?;
             state.set(
                 b"DATE",
@@ -201,6 +185,7 @@ fn advance(
         vehicles.ticks(state, clock)?;
         trees::tick(state, clock.snapshot().tick_counter.0)?;
         vehicles.stations(state)?;
+        industries::tick(state)?;
         phases::company_tick(state)?;
         state.set_number(
             b"DATE",
@@ -219,4 +204,36 @@ fn advance(
         calendar_progressed: events.calendar_progressed,
         events: events.iter().map(|event| event.name().into()).collect(),
     })
+}
+
+fn visit(
+    state: &mut State<'_>,
+    index: usize,
+    tick: u64,
+    vehicles: &mut impl VehiclePhases,
+) -> Result<(), WorldTickError> {
+    let index = u32::try_from(index).map_err(|_| unsupported("landscape", "tile index"))?;
+    let before = state.view().tile(index)?;
+    if before.tile_type() >> 4 == 3 {
+        return houses::visit(state, index, tick, vehicles);
+    }
+    if before.tile_type() >> 4 == 8 {
+        return industries::visit(state, index, vehicles);
+    }
+    let mut tile = tile(&before);
+    if tile.tile_type >> 4 == 4 {
+        trees::visit(state, &mut tile, index, tick)?;
+    } else if tile.tile_type >> 4 == 2 {
+        houses::road(state, &mut tile, index)?;
+    } else {
+        tile.visit_landscape();
+    }
+    let after = tiles::saved(&tile);
+    if before != after {
+        state.apply(WorldEdit::Tile {
+            index,
+            value: after,
+        })?;
+    }
+    Ok(())
 }

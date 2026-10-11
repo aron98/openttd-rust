@@ -89,7 +89,7 @@ pub(super) fn industry_month(
         random_state: state.random_state()?,
         wanted_inds: u32::try_from(state.number(b"IBLD", 0, "wanted_inds")?)
             .map_err(|_| unsupported("industry_month", "builder"))?,
-        industries: Vec::new(),
+        industries: super::industries::monthly_state(state)?,
     };
     let result = crate::run_industry_month(
         callback,
@@ -99,5 +99,6 @@ pub(super) fn industry_month(
             days_since_last_month: days,
         },
     )?;
-    state.set_number(b"IBLD", 0, "wanted_inds", i64::from(result.wanted_inds))
+    state.set_number(b"IBLD", 0, "wanted_inds", i64::from(result.wanted_inds))?;
+    super::industries::publish_month(state, &result.industries)
 }

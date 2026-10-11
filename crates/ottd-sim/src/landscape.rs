@@ -85,7 +85,7 @@ impl Landscape {
                 7 => {}
                 2 if roads => road::validate(&map, index)?,
                 5 if stations => {}
-                3 if world_families => {}
+                3 | 8 if world_families => {}
                 4 if world_families
                     && (tile.m2 >> 6) & 7 <= 1
                     && tile.m5 & 7 <= 6

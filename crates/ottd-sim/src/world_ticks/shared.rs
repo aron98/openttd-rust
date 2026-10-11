@@ -3,6 +3,7 @@ pub(crate) struct WorldTickState<'w> {
     width: u32,
     height: u32,
     towns: Option<crate::runtime::TownHouseCaches>,
+    industries: crate::runtime::IndustryCaches,
 }
 
 #[derive(Debug, Clone)]
@@ -44,6 +45,13 @@ pub(crate) trait WorldTickPhases {
         production: world_ticks::house_cargo::TownCargoProduction,
     ) -> Result<u32, WorldTickError> {
         world_ticks::house_cargo::deliver_empty(state, production)
+    }
+    fn industry_cargo(
+        &mut self,
+        state: &mut WorldTickState<'_>,
+        production: world_ticks::industries::IndustryCargoProduction<'_>,
+    ) -> Result<u32, WorldTickError> {
+        world_ticks::industries::deliver_empty(state, production)
     }
 }
 

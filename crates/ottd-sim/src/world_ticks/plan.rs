@@ -46,7 +46,8 @@ impl State<'_> {
             ))
         })());
         let mut landscape = None;
-        let mut state = State::load(world, None);
+        let industries = crate::runtime::IndustryCaches::restore(world)?;
+        let mut state = State::load(world, None, industries);
         let mut report = WorldTickReport { ticks: Vec::new() };
         for step in 0..ticks {
             vehicles.before_state_loop(&mut state)?;

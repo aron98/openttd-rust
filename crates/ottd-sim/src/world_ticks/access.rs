@@ -50,6 +50,7 @@ impl<'w> State<'w> {
     pub(crate) const fn load(
         world: &'w mut World,
         towns: Option<crate::runtime::TownHouseCaches>,
+        industries: crate::runtime::IndustryCaches,
     ) -> Self {
         let width = world.map().width();
         let height = world.map().height();
@@ -58,6 +59,7 @@ impl<'w> State<'w> {
             width,
             height,
             towns,
+            industries,
         }
     }
     pub(crate) fn value(

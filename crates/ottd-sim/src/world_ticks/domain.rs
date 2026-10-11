@@ -27,7 +27,7 @@ pub(super) fn validate(
         return Ok(false);
     }
     for id in [
-        *b"NGRF", *b"INDY", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
+        *b"NGRF", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
     ] {
         if id == *b"STNN" && stations {
             continue;
@@ -98,6 +98,7 @@ pub(super) fn validate(
     validate_towns(world)?;
     validate_companies(world)?;
     super::houses::validate(world)?;
+    super::industries::validate(world)?;
     validate_roads(world, stations)
 }
 fn validate_companies(world: &World) -> Result<(), WorldTickError> {
@@ -170,7 +171,7 @@ fn validate_roads(world: &World, stations: bool) -> Result<bool, WorldTickError>
         }
     }
     for tile in world.map().tiles() {
-        if !(matches!(tile.tile_type() >> 4, 0 | 2 | 3 | 4 | 7)
+        if !(matches!(tile.tile_type() >> 4, 0 | 2 | 3 | 4 | 7 | 8)
             || stations && tile.tile_type() >> 4 == 5)
         {
             return Err(unsupported(

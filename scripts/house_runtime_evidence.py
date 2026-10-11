@@ -26,7 +26,10 @@ def native_receipts(directory: Path, binary: Path) -> None:
     if at(binding, ("input_sha256",)) != digest(source):
         raise WorldCheckError("Native saved input drift")
     process = read_json(directory / "logs/native/process.json")
-    if at(process, ("returncode",)) != 0 or at(process, ("expected",)) != 0:
+    if (
+        number(at(process, ("returncode",))) != 0
+        or number(at(process, ("expected",))) != 0
+    ):
         raise WorldCheckError("Native process did not succeed")
     results = read_json(directory / "results.json")
     for row in sequence(at(results, ("actions",))):
@@ -51,7 +54,7 @@ def audit(corpus: Path, proof: Path, binary: Path) -> None:
             native_receipts(directory, binary)
     for name, count in counts.items():
         result = read_json(proof / name / "PASS.json")
-        if at(result, ("calls",)) != count:
+        if number(at(result, ("calls",))) != count:
             raise WorldCheckError("Incomplete named house horizon")
         if count > 7:
             _ = production(corpus / name)
@@ -63,7 +66,7 @@ def audit(corpus: Path, proof: Path, binary: Path) -> None:
         raise WorldCheckError("Missing genuine year boundary")
     for origin in ("native-origin", "rust-origin"):
         result = read_json(proof / (origin + "-rust") / "PASS.json")
-        if at(result, ("calls",)) != 4096:
+        if number(at(result, ("calls",))) != 4096:
             raise WorldCheckError("Incomplete saved continuation")
     write_json(
         proof / "audit.json",

@@ -47,3 +47,40 @@ fn original_inert_name_passes_and_active_generation_remains_explicit() -> Result
     assert_eq!(company_number(&original, "name_1")?, 28902);
     Ok(())
 }
+
+#[test]
+#[ignore = "requires authentic industry preparation with original generated company name"]
+fn generated_name_matches_original_and_unnamed_active_state_rolls_back() -> Result {
+    use ottd_sim::runtime::SimulationRuntime;
+    let directory = PathBuf::from(std::env::var("OTTD_INDUSTRY_DESIGN_DIR")?);
+    let input = load(&directory.join("generated-name-one/initial.sav"))?;
+    assert_eq!(company_number(&input.saved_json()?, "name_1")?, 28902);
+    assert_eq!(
+        company_number(&input.saved_json()?, "last_build_coordinate")?,
+        331
+    );
+    let mut runtime = SimulationRuntime::restore_vanilla(input)?;
+    runtime.advance_world(1)?;
+    let original = load(&directory.join("generated-name-one/final.sav"))?;
+    assert_eq!(runtime.saved_json()?, original.saved_json()?);
+    assert_eq!(runtime.world().derived(), original.derived());
+    let restored = SimulationRuntime::restore_vanilla(original)?;
+    assert_eq!(runtime.town_house_caches(), restored.town_house_caches());
+    assert_eq!(runtime.road_caches(), restored.road_caches());
+    let input = load(&directory.join("manager-search/random-plant-7/final.sav"))?;
+    let mut active = SimulationRuntime::restore_vanilla(input)?;
+    let before = active.saved_json()?;
+    assert_eq!(company_number(&before, "name_1")?, 0x6001);
+    assert_eq!(company_number(&before, "last_build_coordinate")?, 331);
+    let towns = active.town_house_caches().clone();
+    let roads = active.road_caches().clone();
+    let derived = active.world().derived().clone();
+    assert!(matches!(active.advance_world(1),
+        Err(WorldTickError::Unsupported { phase: "company", reason })
+        if reason == "automatic name generation"));
+    assert_eq!(active.saved_json()?, before);
+    assert_eq!(active.world().derived(), &derived);
+    assert_eq!(active.town_house_caches(), &towns);
+    assert_eq!(active.road_caches(), &roads);
+    Ok(())
+}

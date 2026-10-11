@@ -111,7 +111,9 @@ fn validate_companies(world: &World) -> Result<(), WorldTickError> {
                 return Err(unsupported("company", name));
             }
         }
-        if unsigned(world, b"PLYR", *id, "name_1")? != 0
+        // GenerateCompanyName returns immediately for any already-generated name.
+        // OpenTTD 15.3 company_cmd.cpp:413-416; STR_SV_UNNAMED is 0x6001.
+        if unsigned(world, b"PLYR", *id, "name_1")? == 0x6001
             && unsigned(world, b"PLYR", *id, "last_build_coordinate")? != 0
         {
             return Err(unsupported("company", "automatic name generation"));

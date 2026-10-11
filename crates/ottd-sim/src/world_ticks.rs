@@ -9,6 +9,7 @@ use clocks::{restore_clock, save_clock};
 use phases::{competitor, daily, industry_month};
 mod tiles;
 mod towns;
+mod trees;
 use crate::{
     Landscape, MAX_TICKS, TickEvents,
     world_access::{WorldAccessError, unsigned},
@@ -199,7 +200,11 @@ fn advance(
                     u32::try_from(index).map_err(|_| unsupported("landscape", "tile index"))?;
                 let before = state.view().tile(index)?;
                 let mut tile = tile(&before);
-                tile.visit_landscape();
+                if tile.tile_type >> 4 == 4 {
+                    trees::visit(state, &mut tile, index, clock.snapshot().tick_counter.0)?;
+                } else {
+                    tile.visit_landscape();
+                }
                 let after = ottd_save::TileState::from(TileRawParts {
                     tile_type: tile.tile_type,
                     height: tile.height,

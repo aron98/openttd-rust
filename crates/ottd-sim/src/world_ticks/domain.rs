@@ -145,10 +145,10 @@ fn validate_roads(world: &World) -> Result<bool, WorldTickError> {
         }
     }
     for tile in world.map().tiles() {
-        if !matches!(tile.tile_type() >> 4, 0 | 2 | 7) {
+        if !matches!(tile.tile_type() >> 4, 0 | 2 | 4 | 7) {
             return Err(unsupported(
                 "road_tile_loop",
-                "requires house-free clear/road/void map",
+                "requires house-free clear/road/tree/void map",
             ));
         }
         if tile.tile_type() >> 4 == 2

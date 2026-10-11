@@ -18,14 +18,14 @@ const FEEDBACKS: [usize; 13] = [
     0x0080_0B87,
 ];
 
-/// Input outside the supported temperate clear landscape contract.
+/// Input outside the supported temperate landscape callbacks.
 #[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 pub enum LandscapeError {
     /// Invalid map dimensions or tile count.
     #[error("invalid map dimensions or tile count")]
     Map,
     /// Tile requires an unported tile procedure or climate rule.
-    #[error("unsupported terrain at tile {0}; expected snow-free grass, rough, rocks or void")]
+    #[error("unsupported terrain or climate rule at tile {0}")]
     Tile(usize),
     /// A void neighbor may flood; water procedures are outside this domain.
     #[error(
@@ -49,15 +49,15 @@ impl Landscape {
     /// # Errors
     /// Rejects invalid dimensions, cursors, snowy tiles or unsupported tile kinds.
     pub fn new(map: Map, cursor: u32) -> Result<Self, LandscapeError> {
-        Self::validate(map, cursor, false)
+        Self::validate(map, cursor, false, false)
     }
 
     /// Road callbacks require the caller's saved-world admission, unlike `new`.
     pub(crate) fn for_world(map: Map, cursor: u32, roads: bool) -> Result<Self, LandscapeError> {
-        Self::validate(map, cursor, roads)
+        Self::validate(map, cursor, roads, true)
     }
 
-    fn validate(map: Map, cursor: u32, roads: bool) -> Result<Self, LandscapeError> {
+    fn validate(map: Map, cursor: u32, roads: bool, trees: bool) -> Result<Self, LandscapeError> {
         let dimensions =
             MapDimensions::new(map.width, map.height).map_err(|_| LandscapeError::Map)?;
         let count = usize::try_from(dimensions.tile_count()).map_err(|_| LandscapeError::Map)?;
@@ -73,6 +73,7 @@ impl Landscape {
                 0 if tile.m3 & 16 == 0 && (tile.m5 >> 2) & 7 <= 2 => {}
                 7 => {}
                 2 if roads => road::validate(&map, index)?,
+                4 if trees && (tile.m2 >> 6) & 7 <= 1 && tile.m5 & 7 <= 6 && tile.m3 < 12 => {}
                 _ => return Err(LandscapeError::Tile(index)),
             }
         }

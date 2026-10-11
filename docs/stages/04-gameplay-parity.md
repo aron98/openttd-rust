@@ -11,10 +11,10 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
 Script increment `e2b9181` adds byte-string foreach iteration to the shared scalar
-arrays and persistent runners. The latest admitted
-gameplay increment remains
-`3d952b0`, for empty-road tile callbacks. Populated movement and further content
-loading are in progress. All seven completion gates below remain open.
+arrays and persistent runners. The latest admitted gameplay increment is
+`59fe7f6`, enabling normal CI for the reviewed bounded single-vehicle road
+movement corpus. Complete transport cycles and further content loading are in
+progress. All seven completion gates below remain open.
 Earlier milestones and their bounded verification results are recorded below.
 
 The full four-case bounded road movement capture now passes locally at
@@ -23,8 +23,16 @@ archive validates 27,839 members. Actual producer runs exposed duplicate source
 inputs, a native/CLI result-inventory mix-up and temporary/archive filesystem
 races; regression-backed corrections preserve strict missing-evidence and
 corruption rejection. Independent review approves those corrections; root owns
-the complete capture result. The normal movement gate remains false and the
-new PR-only Linux capture job still needs a successful run on this revision.
+the complete capture result. PR run `38084351336` at `a715adf` also completed
+the Linux capture and separate live verification successfully. Its complete
+archive validates 27,841 members, including all 4,777 tracked source inputs;
+the preceding interoperability job stopped at the explicit pending-admission
+gate. Increment `59fe7f6` now enables that bounded normal gate after a fresh
+normal run and live verification passed locally. Root CLI checks compare twelve
+complete World/derived snapshots and verify three unsupported horizons publish
+no output. Independent review approves admission after auditing both complete
+captures and reproducing the CLI checks. The full normal Linux job on the
+activated revision remains pending.
 
 Byte-string foreach preserves native byte offsets and target C-char values,
 including NUL, suspension, local/root rebinding and temporary ownership.

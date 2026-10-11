@@ -35,5 +35,11 @@
     "Arctic/Tropic/snow/desert",
     "water/shore tree callbacks"
   ],
-  "normal_road_movement_gate": "unchanged true"
+  "normal_road_movement_gate": "unchanged true",
+  "driver_sources": [
+    "scripts/check-tree-growth.py",
+    "scripts/tree_growth_run.py",
+    "scripts/tree_growth_proof.py",
+    "scripts/tree_growth_recipe.py"
+  ]
 }

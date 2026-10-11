@@ -80,9 +80,7 @@ def loop_controls(native: Path, binary: Path, output: Path) -> None:
             if not isinstance(current, int):
                 raise WorldCheckError("Invalid observed event integer")
             replace(rows[1], field, current ^ 1)
-            _ = path.write_text(
-                "\n".join(json.dumps(row) for row in rows) + "\n"
-            )
+            _ = path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
         result = ControlRun(root, case, binary).run(
             "reject",
             [str(binary), "--ignored", "--exact", TEST, "--nocapture"],

@@ -10,6 +10,8 @@ pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 mod backup_enabled_sale_native;
 #[cfg(test)]
 mod backup_sale_native;
+#[cfg(test)]
+mod job_executor;
 pub(crate) mod stations;
 mod transport;
 pub(crate) use stations::StationContext;

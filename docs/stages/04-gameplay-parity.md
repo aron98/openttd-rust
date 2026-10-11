@@ -114,6 +114,20 @@ blobs and every retained invocation/source/output. The executed merge is
 GNU claim. Aggregate graphs, physical root unification, delegates, functions,
 closures, cycle collection, host APIs and full AI/GameScript remain required.
 
+The ordinary Rust job on `533313b` exposed an ABI-specific test fixture:
+GNU correctly produces physical cursor 4 where the embedded Apple trace has 3.
+Corrective increment `1b53083` selects the exact native fixture for the already
+admitted 64-bit little-endian Apple/GNU targets. Runtime, hashing and raw equality
+remain unchanged. The GNU bytes come from the independently audited original
+artifact above; fresh Apple execution reproduces the unchanged Apple bytes.
+Both Rust profiles pass without an override and reject the wrong ABI trace with
+exit 101. Independent review verifies all 4,875 source blobs and 9,644 proof
+members, complete receipts, current source closure and unchanged historical
+bindings. Root's exact corrected candidate passes 738 workspace tests, strict
+Clippy/formatting, 75 Python checks and 143 declarations. Corrected ordinary
+GNU execution remains pending the next actual CI run. The full movement capture
+on `533313b` passes; its complete normal interoperability baseline remains pending.
+
 Station integration `7b78b96` preserves all 35 frozen product files. It supports
 vanilla flat 1x1 terminal bus/truck stops, all four entrances and explicit owned
 joins, with native command precedence, costs, town ratings, naming/RNG, sparse

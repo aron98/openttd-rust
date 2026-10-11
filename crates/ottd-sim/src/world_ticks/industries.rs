@@ -60,7 +60,7 @@ pub(super) fn validate(world: &World) -> Result<(), WorldTickError> {
         if tile.m1() & 0x60 != 0x60 {
             return Err(unsupported("industries", "industry water tile loop"));
         }
-        if tile.m5() != 16 || tile.m6() & 4 != 0 {
+        if !matches!(tile.m5(), 16 | 17) || tile.m6() & 4 != 0 {
             return Err(unsupported(
                 "industries",
                 "forest graphics animation/effects",
@@ -118,14 +118,37 @@ pub(super) fn visit(
         };
         let delivered = phases.industry_cargo(state, production)?;
         if delivered != 0 {
-            return Err(unsupported(
-                "industry_cargo",
-                "delivered forest cargo animation",
-            ));
+            let history = output
+                .history
+                .first_mut()
+                .ok_or_else(|| unsupported("industry_cargo", "history"))?;
+            let [low, high, _, _] = delivered.to_le_bytes();
+            history.transported = history
+                .transported
+                .wrapping_add(u16::from_le_bytes([low, high]));
+            saved::set_produced(state, id, &output)?;
+            let _cargo_animation_draw = random(state)?;
+            if tile.m5 == 16 {
+                tile.m1 = (tile.m1 & !0x8f) | 128;
+                tile.m5 = 17;
+                state.apply(WorldEdit::Tile {
+                    index,
+                    value: tiles::saved(&tile),
+                })?;
+                return Ok(());
+            }
         }
     }
     // Vanilla has no animation callback, but the wrapper draws before checking it.
     let _animation_draw = random(state)?;
+    if tile.m5 == 17 {
+        tile.m1 &= !0x8f;
+        tile.m5 = 16;
+        state.apply(WorldEdit::Tile {
+            index,
+            value: tiles::saved(&tile),
+        })?;
+    }
     Ok(())
 }
 

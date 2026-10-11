@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "dedb48c18a3977295e60b22da83e0de519d778853867e455948319cb52ffaf55",
+   "sha256": "564a0eea754920baec04b3cd716f96591c27865841344d50fee17f916496d7f2",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "779a8c363a81f4ea9c1456505dddb635eae8bb4ebea69ed6d59657eeda82db05",
+   "sha256": "94e95dc8932d9eb39aad8d033988e3e24bffc95516b4c825c3be29acd25c9361",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "01085703afd41c1de6ba709651264f43bb67c355c9c27a37e076af243be9cbe1",
+   "sha256": "58a6561ffd0b9bb11fe223ca3f5f3a549a736bb46195c8e7f89c88977e2b6c2b",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "610d358614ae718fb2c0780328793fc1a9cc0b6a1778a7f7b152ada30c24babe",
+   "sha256": "aec8edc7daa3a1cb984ad6e12cdaf9ba313610ba0bdb8fd4f2e9edd57ba38bfc",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "93a84f55c2ce9f233f7558513eaafe5c4b2e4a2f26aef4731c881aba4aee89f7",
+   "sha256": "6594988d54cf2ca523804521436c5c212076bcdfd963b65e82021396d2431bff",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -7828,7 +7828,7 @@
   {
    "id": "scalar-root-scripts-script-vm-roots-py",
    "path": "scripts/script_vm_roots.py",
-   "sha256": "22628457cf8f39054b2ac7c7f74d31d6c4574b2c274a6929a467784248b43aac",
+   "sha256": "cd78b3f7d4f71d4f6c929d99cdc446b15b64f7d54079607c6d7cf152cd72e63e",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7837,7 +7837,7 @@
   {
    "id": "scalar-root-scripts-tests-script-vm-roots-test-py",
    "path": "scripts/tests/script_vm_roots_test.py",
-   "sha256": "76f3cca76ead6a8c0b20cbf20b07ed580b47228fcaaec50650b513ba9a92ca7c",
+   "sha256": "1a622138c60eceb9c8d879cf18405487f1ebe1c1622399adbc8e22056b70827c",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7918,7 +7918,7 @@
   {
    "id": "script-arrays-scripts-script-vm-arrays-py",
    "path": "scripts/script_vm_arrays.py",
-   "sha256": "7ea98fdfde35c58a3f784989c88ac971137a01fb2ce2609bade5e25e3a6e162c",
+   "sha256": "edd4e0dcde0f266e2084e5f162ce02879a2d01440f035456f96574773248a23d",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7927,7 +7927,7 @@
   {
    "id": "script-arrays-scripts-tests-script-vm-arrays-test-py",
    "path": "scripts/tests/script_vm_arrays_test.py",
-   "sha256": "8423f1e2fd3680439e1c9d9135a74bd08c69b477cd6f263761da0d8e0ea7f67b",
+   "sha256": "92e2108276860247f9f8f1eabc58c11fe77d490539c19a8cc9a4bd53298c7918",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "9f440148994011464151095e650c26dca104fd6634e419cd42cda01634ac9721",
+   "sha256": "69e9df589b341abd7ce83748108fe769b12447d0a8e75763f28b4ddf2baff19b",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -10315,6 +10315,87 @@
    "sha256": "c91cd0d9a5e80f148a29277b12e31ce054a6c4bcb70790e31e65129568427bfb",
    "kind": "recipe",
    "provenance": "House proof rejects untrusted Boolean, floating and null process-status types; unit metadata controls, no game execution claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-arrays-admission-py",
+   "path": "scripts/script_vm_arrays_admission.py",
+   "sha256": "7156358bddad8bb874f07b64f844658383b0de287bb648665c6dd8abd22fc90e",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-arrays-capture-py",
+   "path": "scripts/script_vm_arrays_capture.py",
+   "sha256": "fe8d620660401c51bb80c99302af03f4c387c3bbe044257e64fc3748650969cc",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-arrays-sessions-py",
+   "path": "scripts/script_vm_arrays_sessions.py",
+   "sha256": "384beb5f6026b8b6be1bc2e0e4365c3ea123922b34e6e048df3c4d34c201b922",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-arrays-spec-py",
+   "path": "scripts/script_vm_arrays_spec.py",
+   "sha256": "d5e72e3b04ddd4f33ee58d4ccd3c0a9af8c043e16a03dfb7560f2d8caedd2d6e",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-branches-capture-py",
+   "path": "scripts/script_vm_branches_capture.py",
+   "sha256": "7926ab63c3e5bb65978449d601e8836ff0fbe23af3b747ef0f3e1f6a837d8542",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-branches-spec-py",
+   "path": "scripts/script_vm_branches_spec.py",
+   "sha256": "18e049434d6d832c1b0ecc2a8e4ce6bff3b9220d2e5fffdcca04b865280a38c3",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-roots-admission-py",
+   "path": "scripts/script_vm_roots_admission.py",
+   "sha256": "1e8a4c615154fbf96925db0b21ca40990c72488265b039f9787b24541fafe312",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-roots-capture-py",
+   "path": "scripts/script_vm_roots_capture.py",
+   "sha256": "16c520d3646469ee7e981abb1adff52b5a898fb95002c0ab839bdd7371d7aece",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "legacy-script-vm-scripts-script-vm-roots-spec-py",
+   "path": "scripts/script_vm_roots_spec.py",
+   "sha256": "b22d9b4ef7147e5bb2c0aeecadab1368d0fe843a19ff4f01f34b817fbfe5be0c",
+   "kind": "recipe",
+   "provenance": "Current source-only decomposition of existing strict scalar/root/array/frame capture and admission; preserves all existing native fixtures, test rosters, budgets and controls.",
    "save_version": null,
    "profile": null
   }
@@ -20011,7 +20092,16 @@
     "script-foreach-scripts-tests-script-vm-foreach-test-py",
     "script-string-foreach-crates-ottd-script-src-vm-foreach-tests-rs",
     "script-string-foreach-crates-ottd-script-tests-string-foreach-bytecode-rs",
-    "script-string-foreach-crates-ottd-script-tests-string-foreach-public-rs"
+    "script-string-foreach-crates-ottd-script-tests-string-foreach-public-rs",
+    "legacy-script-vm-scripts-script-vm-arrays-admission-py",
+    "legacy-script-vm-scripts-script-vm-arrays-capture-py",
+    "legacy-script-vm-scripts-script-vm-arrays-sessions-py",
+    "legacy-script-vm-scripts-script-vm-arrays-spec-py",
+    "legacy-script-vm-scripts-script-vm-branches-capture-py",
+    "legacy-script-vm-scripts-script-vm-branches-spec-py",
+    "legacy-script-vm-scripts-script-vm-roots-admission-py",
+    "legacy-script-vm-scripts-script-vm-roots-capture-py",
+    "legacy-script-vm-scripts-script-vm-roots-spec-py"
    ],
    "source_refs": [
     "scripts/check-script-vm.py",
@@ -20039,7 +20129,16 @@
     "crates/ottd-script/src/vm/arrays.rs",
     "scripts/script_vm_foreach.py",
     "crates/ottd-script/src/compiler/statements/foreach.rs",
-    "crates/ottd-script/src/vm/foreach.rs"
+    "crates/ottd-script/src/vm/foreach.rs",
+    "scripts/script_vm_arrays_admission.py",
+    "scripts/script_vm_arrays_capture.py",
+    "scripts/script_vm_arrays_sessions.py",
+    "scripts/script_vm_arrays_spec.py",
+    "scripts/script_vm_branches_capture.py",
+    "scripts/script_vm_branches_spec.py",
+    "scripts/script_vm_roots_admission.py",
+    "scripts/script_vm_roots_capture.py",
+    "scripts/script_vm_roots_spec.py"
    ],
    "evidence": [
     "summary.json",

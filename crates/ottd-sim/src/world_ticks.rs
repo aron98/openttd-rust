@@ -2,6 +2,7 @@
 mod access;
 mod clocks;
 mod company_history;
+mod company_name;
 mod domain;
 mod finance;
 #[expect(

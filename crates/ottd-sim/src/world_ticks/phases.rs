@@ -31,6 +31,7 @@ pub(super) fn competitor(state: &mut State<'_>) -> Result<(), WorldTickError> {
 }
 
 pub(super) fn company_tick(state: &mut State<'_>) -> Result<(), WorldTickError> {
+    super::company_name::tick(state)?;
     if state.number(b"DATE", 0, "competitors_interval_fired")? == 0 {
         return Ok(());
     }

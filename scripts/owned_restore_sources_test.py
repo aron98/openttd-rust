@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from scripts.currency_ci_capture import source_names
 from scripts.grf_control_evidence import sequence, text
 from scripts.language_ci_compare import mapping
 from scripts.owned_restore_sources import compiled_inputs, verify_compiled
@@ -83,3 +84,8 @@ def test_repository_wrong_source_copy_roster_matches_snapshot() -> None:
         if text(path).startswith(prefix)
     )
     assert copied == expected
+
+
+def test_currency_family_inventory_contains_all_compiled_inputs() -> None:
+    root = Path(__file__).resolve().parents[1]
+    assert set(compiled_inputs(root)) <= set(source_names(root))

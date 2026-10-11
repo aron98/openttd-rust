@@ -15,6 +15,7 @@ from scripts.gameplay_foundations import digest
 from scripts.grf_control_evidence import sequence
 from scripts.language_ci_bindings import manifest_digest, normalized
 from scripts.language_ci_compare import compare, mapping
+from scripts.owned_restore_sources import compiled_inputs
 from scripts.world_check_support import Json, WorldCheckError, at, read_json
 
 
@@ -100,6 +101,7 @@ def source_names(root: Path) -> tuple[str, ...]:
             *COMPILER_INPUTS,
         )
     ]
+    paths.extend(root / name for name in compiled_inputs(root))
     paths.extend(
         path
         for folder in ("crates", "reference", "scripts")

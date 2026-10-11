@@ -19,17 +19,19 @@ impl Value {
         })
     }
     pub(crate) fn type_name(&self, realm: &Realm) -> Self {
-        let name: &[u8] = match self {
-            Self::NativeClosure(_) | Self::ScriptClosure(_) => b"function",
-            Self::String(_) => b"string",
-            Self::Table(_) => b"table",
-            Self::Array(_) => b"array",
-            Self::Integer(_) => b"integer",
-            Self::Bool(_) => b"bool",
-            Self::Null => b"null",
-            Self::Float(_) => b"float",
-        };
-        Self::String(realm.string(name))
+        Self::String(realm.string(self.type_label().as_bytes()))
+    }
+    pub(crate) const fn type_label(&self) -> &'static str {
+        match self {
+            Self::NativeClosure(_) | Self::ScriptClosure(_) => "function",
+            Self::String(_) => "string",
+            Self::Table(_) => "table",
+            Self::Array(_) => "array",
+            Self::Integer(_) => "integer",
+            Self::Bool(_) => "bool",
+            Self::Null => "null",
+            Self::Float(_) => "float",
+        }
     }
 }
 #[expect(

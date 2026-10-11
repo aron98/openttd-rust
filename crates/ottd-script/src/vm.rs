@@ -6,6 +6,7 @@ use crate::{Instruction, Program, Runner, RunnerFailure, Storage, Temporary, Val
 pub(crate) mod arrays;
 mod calls;
 mod closures;
+mod diagnostics;
 mod dispatch;
 mod foreach;
 mod frames;

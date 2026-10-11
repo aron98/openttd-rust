@@ -36,11 +36,8 @@ impl Vm<'_> {
         let receiver = self.register(receiver)?;
         let value = match self.lookup_value(&receiver, key.clone()) {
             Ok(value) => value,
-            Err(VmError::MissingIndex) => {
-                let mut message = b"the index '".to_vec();
-                message.extend(key.text()?);
-                message.extend_from_slice(b"' does not exist");
-                return Err(self.native_failure(&message, VmError::MissingIndex));
+            Err(error @ (VmError::MissingIndex | VmError::UnsupportedReceiver)) => {
+                return Err(self.index_failure(&key, error));
             }
             Err(error) => return Err(error),
         };
@@ -100,20 +97,49 @@ impl Vm<'_> {
         let value = self.register(i32::from(instruction.arg3))?;
         let newslot = matches!(instruction.opcode, 0x0b | 0x3c);
         if newslot && key == Value::Null {
-            return Err(VmError::NullIndex);
+            return Err(self.native_failure(b"null cannot be used as index", VmError::NullIndex));
         }
         let receiver = self.register(instruction.arg1)?;
-        match &receiver {
+        if let Err(error) = self.store_value(&receiver, key.clone(), value.clone(), newslot) {
+            return Err(match error {
+                VmError::MissingIndex | VmError::UnsupportedReceiver | VmError::OperandType => {
+                    if newslot {
+                        let message = format!(
+                            "indexing {} with {}",
+                            receiver.type_label(),
+                            key.type_label()
+                        );
+                        self.native_failure(message.as_bytes(), error)
+                    } else {
+                        self.index_failure(&key, error)
+                    }
+                }
+                other => other,
+            });
+        }
+        if instruction.opcode != 0x3c && instruction.arg0 != instruction.arg3 {
+            self.write(instruction.arg0, value)?;
+        }
+        Ok(())
+    }
+    fn store_value(
+        &self,
+        receiver: &Value,
+        key: Value,
+        value: Value,
+        newslot: bool,
+    ) -> Result<(), VmError> {
+        match receiver {
             Value::Table(table) => {
                 if newslot {
-                    table.new_slot(key, value.clone())?;
+                    table.new_slot(key, value)?;
                 } else if let Err(error) = table.set_existing(key.clone(), value.clone()) {
-                    if error == VmError::MissingIndex && receiver == self.register(0)? {
+                    if error == VmError::MissingIndex && *receiver == self.register(0)? {
                         self.runner
                             .get()
                             .root
                             .table
-                            .set_existing(key, value.clone())?;
+                            .set_existing(key, value)?;
                     } else {
                         return Err(error);
                     }
@@ -123,7 +149,7 @@ impl Vm<'_> {
                 if newslot {
                     return Err(VmError::OperandType);
                 }
-                array.store(&key, value.clone())?;
+                array.store(&key, value)?;
             }
             Value::Null
             | Value::Bool(_)
@@ -132,9 +158,6 @@ impl Vm<'_> {
             | Value::String(_)
             | Value::NativeClosure(_)
             | Value::ScriptClosure(_) => return Err(VmError::UnsupportedReceiver),
-        }
-        if instruction.opcode != 0x3c && instruction.arg0 != instruction.arg3 {
-            self.write(instruction.arg0, value)?;
         }
         Ok(())
     }

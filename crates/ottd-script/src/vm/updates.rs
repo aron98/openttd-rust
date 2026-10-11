@@ -30,7 +30,12 @@ impl Vm<'_> {
     pub(super) fn compound_field(&mut self, i: Instruction) -> Result<(), VmError> {
         let receiver = self.register((i.arg1 >> 16) & 0xffff)?;
         let key = self.register(i32::from(i.arg2))?;
-        let source = self.lookup_value(&receiver, key.clone())?;
+        let source = match self.lookup_value(&receiver, key.clone()) {
+            Err(error @ (VmError::MissingIndex | VmError::UnsupportedReceiver)) => {
+                return Err(self.index_failure(&key, error));
+            }
+            result => result?,
+        };
         let increment = self.register(i.arg1 & 0xffff)?;
         let value = source.arithmetic(&increment, i.arg3, &self.runner.get().root.realm)?;
         self.write(i.arg0, value.clone())?;

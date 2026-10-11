@@ -32,7 +32,8 @@ The independent Squirrel library supports
 graph-backed arrays/tables, first-class roots, native closure identity and
 metadata, mutable `this`, bounded ownership/cycle collection, and bare-root
 native calls to `assert`, `print`, `type` and `array`, plus bounded user closures,
-nested calls and variadic arguments. Delegates, general callable collection,
+nested calls, variadic arguments, and bounded `try`/`catch`/`throw` with native
+error-object ownership and diagnostics. Delegates, general callable collection,
 complete VM semantics and OpenTTD AI/GameScript integration remain required.
 General gameplay, rendering, full scripts and multiplayer are not implemented.
 

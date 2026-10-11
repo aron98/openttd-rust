@@ -22,32 +22,37 @@ manual-distribution job publication and continuation from saves actually
 produced by both engines. The natural year boundary still reaches an explicit
 vehicle-callback refusal. Pending-worker timing, broader routing and complete
 native vehicle-pool/unit-number observations remain open. The dependency-free
-CI discovery correction is included; current consist checks pass 826 workspace
-tests and 642 Python tests, with ignored/native cases reported separately.
+CI discovery correction is included. The reviewed combined script/consist build
+at `167b185` passes 835 workspace tests and 676 Python tests plus 25,065 subtests,
+with ignored/native cases reported separately. Root's narrower `scripts/tests`
+selection passes 619 tests; the broader selection includes 57 additional nodes.
 
-Forest-to-road cargo production and script exceptions are separate active
-implementation/integration increments. All seven broad completion gates below
+Forest-to-road cargo production remains a separate active integration increment.
+All seven broad completion gates below
 remain **OPEN**. These milestones do not change the stage boundary or authorize
 stage 5.
 
-Current reviewed script increment: 27 atomic commits through `a8a8211` add
-graph-owned user closures, nested frames, frame-owned variadic arguments,
-defined-only original execution policy and exact admitted compiler/runtime
-diagnostics. An earlier review rejected long capture-name rendering and six
-oversized changed modules; a fresh review verifies the shared renderer and
-coherent responsibility splits. All 109 changed Rust/Python files in the
-published-base delta remain at or below 250 pure LOC.
+Current reviewed script publication: `167b185` composes native-backed
+`try`/`catch`/`throw`, nested trap unwinding and error-object ownership with
+the stopped-consist build. Catch slots, frame/variadic cleanup, compiler exits,
+uncaught errors and byte-exact diagnostics follow the pinned original. Policy,
+internal and source-proven undefined errors remain explicitly uncatchable.
+Valid Unicode strings/comments are preserved. The earlier user closures,
+nested frames and frame-owned variadic arguments remain included.
 
-Root and reviewer each execute 1,239 table, 156 call, 135 closure and 144
-variadic comparisons. Both author profiles pass; 300 frozen compiler pairs
-close the old diagnostic gaps without changing source bodies. Workspace tests
-pass 821 cases, Python passes 636 tests and 22,101 subtests, and all 143 scenario
-declarations remain intact. The complete current proof verifies 31,592 outer
-and 97,880 nested members plus 5,103 Git source blobs. This is bounded language
-progress: full VM/GC, AI/GameScript APIs, NewGRF, reciprocal modded continuation
-and the seven broad completion gates remain open. Passenger cargo and bounded
-rail after-load restoration are now published; broader industry composition
-remains in verification and integration.
+Root and the fresh composition reviewer each execute 1,530 debug table/trap
+comparisons, eight actual corruption controls, three original ownership
+captures consumed by current Rust tests, two command-built consists with both
+serialized origins, and passenger cargo continued from both actually simulated
+save origins. Author coverage additionally includes both script profiles,
+all five consist rosters, calls/closures/variadics, frozen compiler pairs and
+10,666 strict normal-driver comparisons with 153 Rust-only undefined-input
+refusals. These audited author executions are distinct from fresh root/reviewer
+checks. All 143 scenarios and 36 drivers remain intact. Complete proof readback
+verifies 44,377 author members, 97,960 nested normal members and 5,226 Git source
+blobs; necessary raw bytes, executable modes and external dependencies remain
+retained. Full VM/GC, delegates, AI/GameScript APIs, NewGRF, reciprocal modded
+continuation and all seven broad completion gates remain open.
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.

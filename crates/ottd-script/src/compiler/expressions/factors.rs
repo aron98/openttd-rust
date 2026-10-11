@@ -56,12 +56,7 @@ impl Compiler<'_> {
         state.field = false;
         match self.token.kind.clone() {
             TokenKind::Vargc | TokenKind::Vargv => self.vararg_expression(depth),
-            TokenKind::Function => {
-                self.advance()?;
-                self.expect(b'(')?;
-                self.create_function(depth, None)?;
-                Ok(None)
-            }
+            TokenKind::Function => self.function_expression(depth),
             TokenKind::Scalar(value) => {
                 let target = self.push()?;
                 self.load(target, value)?;
@@ -146,6 +141,9 @@ impl Compiler<'_> {
             | TokenKind::GreaterEqual
             | TokenKind::And
             | TokenKind::Or
+            | TokenKind::Try
+            | TokenKind::Catch
+            | TokenKind::Throw
             | TokenKind::End => Err(self
                 .error(CompileErrorKind::ExpectedToken)
                 .native("expression expected")),

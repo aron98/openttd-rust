@@ -91,6 +91,13 @@ impl Compiler<'_> {
                     "'break' has to be in a loop block"
                 }));
         }
+        let traps = if continuing {
+            self.continue_targets.last().map(|target| target.traps)
+        } else {
+            self.break_targets.last().map(|target| target.traps)
+        }
+        .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
+        self.pop_traps(traps);
         self.scope_end(self.last_stack_size)?;
         self.emit(Instruction {
             opcode: 0x18,
@@ -106,7 +113,7 @@ impl Compiler<'_> {
         } else {
             self.break_targets.last_mut()
         };
-        targets.ok_or(error)?.push(position);
+        targets.ok_or(error)?.jumps.push(position);
         self.advance()
     }
 }

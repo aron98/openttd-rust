@@ -130,9 +130,9 @@ pub trait PrintSink: std::fmt::Debug {
 #[derive(Debug)]
 pub struct Runner {
     pub(crate) root: RootEnvironment,
+    pub(crate) native_error: Value,
     pub(crate) temporary: Temporary,
     pub(crate) failure: Option<RunnerFailure>,
-    pub(crate) native_error: Option<crate::ByteString>,
     pub(crate) print_sink: Option<Box<dyn PrintSink>>,
 }
 impl Runner {
@@ -140,9 +140,9 @@ impl Runner {
     pub const fn new(root: RootEnvironment) -> Self {
         Self {
             root,
+            native_error: Value::Null,
             temporary: Temporary::Value(Value::Null),
             failure: None,
-            native_error: None,
             print_sink: None,
         }
     }
@@ -152,7 +152,19 @@ impl Runner {
     }
     /// Last native compiler or execution error bytes. Successful operations retain this object.
     pub const fn native_error(&self) -> Option<&crate::ByteString> {
-        self.native_error.as_ref()
+        if let Value::String(message) = &self.native_error {
+            Some(message)
+        } else {
+            None
+        }
+    }
+    /// Borrow the retained native error object without converting or copying it.
+    pub const fn native_error_value(&self) -> &Value {
+        &self.native_error
+    }
+    /// Release the retained native error object, preserving Rust diagnostic history.
+    pub fn reset_native_error(&mut self) {
+        self.native_error = Value::Null;
     }
     /// Create a friend context sharing the current root and re-registering defaults.
     /// # Errors
@@ -185,7 +197,9 @@ impl Runner {
     ) -> Result<Program, CompileError> {
         crate::compiler::compile_in(&self.root.realm, source, name.to_bytes()).map_err(|failure| {
             self.failure = Some(RunnerFailure::Compile(failure.error));
-            self.native_error = failure.native_message(&self.root.realm);
+            self.native_error = failure
+                .native_message(&self.root.realm)
+                .map_or(Value::Null, Value::String);
             failure.error
         })
     }
@@ -248,3 +262,6 @@ mod tests;
 
 #[cfg(test)]
 mod native_roots;
+
+#[cfg(test)]
+mod error_state;

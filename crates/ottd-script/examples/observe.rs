@@ -1,5 +1,7 @@
 //! Test-only native differential observer for scalar programs.
 use ottd_script::{Execution, Value, Vm};
+#[path = "observe/errors.rs"]
+pub mod errors;
 use std::{cell::RefCell, env, error::Error, fs, io::Write, rc::Rc};
 #[derive(Debug)]
 struct Prints(Rc<RefCell<Vec<Vec<u8>>>>);
@@ -28,7 +30,7 @@ fn value(value: &Value) {
     }
 }
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut args = env::args().skip(1);
+    let mut args = env::args().skip(1).peekable();
     let filename = args.next().ok_or("source path required")?;
     if filename == "--format" {
         return formats(&args.next().ok_or("bit-pattern file required")?);
@@ -44,11 +46,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     if print_file.is_some() {
         runner.set_print_sink(Some(Box::new(Prints(Rc::clone(&prints)))));
     }
+    let error_trace = errors::trace_flag(&mut args);
     let program = match runner.compile_bytes_named(&source, c"fixture") {
         Ok(program) => program,
         Err(error) => {
             println!("compile_error");
-            write_diagnostic(runner.native_error(), &error)?;
+            errors::snapshot(error_trace, runner.native_error_value());
+            errors::write_diagnostic(runner.native_error(), &error)?;
             return Ok(());
         }
     };
@@ -79,7 +83,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     host.push_main(&program);
     let mut vm = runner.start_with_host(&program, host)?;
     for credit in credits {
-        match vm.resume(*credit) {
+        let execution = vm.resume(*credit);
+        errors::snapshot(error_trace, vm.native_error_value());
+        match execution {
             Ok(Execution::Suspended) => {
                 if varargs_trace {
                     varargs(&vm);
@@ -109,7 +115,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
             Err(error) => {
                 println!("runtime_error {}", vm.remaining_ops());
-                write_diagnostic(vm.native_error(), &error)?;
+                errors::write_runtime(&vm, error)?;
                 break;
             }
         }
@@ -122,18 +128,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     }
     Ok(())
-}
-
-fn write_diagnostic(
-    message: Option<&ottd_script::ByteString>,
-    error: &impl std::fmt::Display,
-) -> std::io::Result<()> {
-    if let Some(message) = message {
-        std::io::stderr().write_all(message.as_bytes())?;
-        std::io::stderr().write_all(b"\n")
-    } else {
-        writeln!(std::io::stderr(), "{error}")
-    }
 }
 
 fn varargs(vm: &Vm<'_>) {

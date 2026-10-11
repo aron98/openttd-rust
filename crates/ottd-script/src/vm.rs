@@ -11,9 +11,11 @@ mod dispatch;
 mod foreach;
 mod frames;
 mod objects;
+mod operations;
 mod registers;
 mod roots;
 mod tables;
+mod traps;
 mod updates;
 mod varargs;
 /// Outcome of an operation-budget slice.
@@ -33,6 +35,8 @@ pub struct Vm<'a> {
     base: usize,
     top: usize,
     frames: Vec<frames::ParentFrame>,
+    traps: Vec<traps::Trap>,
+    raised: bool,
     varargs: varargs::VarArgs,
     varargs_stack: Vec<Value>,
     native_scratch: Value,
@@ -77,6 +81,8 @@ impl<'a> Vm<'a> {
             base: 0,
             top: registers.len(),
             frames: Vec::new(),
+            traps: Vec::new(),
+            raised: false,
             varargs: varargs::VarArgs::default(),
             varargs_stack: Vec::new(),
             _host: host,
@@ -102,6 +108,10 @@ impl<'a> Vm<'a> {
     /// Last native-call error bytes, including a failure in this active frame.
     pub const fn native_error(&self) -> Option<&crate::ByteString> {
         self.runner.get().native_error()
+    }
+    /// Borrow the retained native error object without changing VM state.
+    pub const fn native_error_value(&self) -> &Value {
+        self.runner.get().native_error_value()
     }
     fn program(&self) -> Result<crate::Prototype, VmError> {
         self.program
@@ -163,6 +173,8 @@ impl<'a> Vm<'a> {
                 self.native_scratch = Value::Null;
                 self.program = None;
                 self.frames.clear();
+                self.traps.clear();
+                self.raised = false;
                 self.varargs_stack.clear();
                 self.varargs = varargs::VarArgs::default();
                 if let Err(error) = result {
@@ -188,8 +200,15 @@ impl<'a> Vm<'a> {
                 .get(self.ip)
                 .ok_or(VmError::InvalidBytecode)?;
             self.ip = self.ip.checked_add(1).ok_or(VmError::InvalidBytecode)?;
-            if let Some(value) = self.step(instruction)? {
-                return Ok(Execution::Returned(value));
+            self.raised = false;
+            match self.step(instruction) {
+                Ok(Some(value)) => return Ok(Execution::Returned(value)),
+                Ok(None) => {}
+                Err(error) => {
+                    if !self.catchable(error) || !self.restore_trap()? {
+                        return Err(error);
+                    }
+                }
             }
         }
     }

@@ -7,6 +7,11 @@ from .compiler_cases import compiler_cases
 from .diagnostic_cases import diagnostic_cases
 from .objects import object_cases
 from .root_cases import root_cases
+from .throw_cases import throw_cases
+from .trap_boundary_cases import trap_boundary_cases
+from .trap_compile_cases import trap_compile_cases
+from .trap_control_cases import trap_control_cases
+from .trap_scope_cases import trap_scope_cases
 
 
 def cases() -> list[Case]:
@@ -129,6 +134,11 @@ def cases() -> list[Case]:
     result.extend(root_cases())
     result.extend(diagnostic_cases())
     result.extend(compiler_cases())
+    result.extend(trap_control_cases())
+    result.extend(trap_scope_cases())
+    result.extend(throw_cases())
+    result.extend(trap_boundary_cases())
+    result.extend(trap_compile_cases())
     return result
 
 

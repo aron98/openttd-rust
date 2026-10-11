@@ -7,6 +7,7 @@ test ! -e "$evidence"
 mkdir -p "$evidence"
 evidence="$(cd "$evidence" && pwd)"
 cd "$root"
+python3 -m scripts.rail_sources "$root" "$evidence/source-closure"
 exec > "$evidence/invocations.log" 2>&1
 set -x
 for engine in 0 8 13; do

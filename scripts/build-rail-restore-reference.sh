@@ -4,6 +4,8 @@ root="$(cd "$(dirname "$0")/.." && pwd)"
 evidence="${1:?pass an isolated rail evidence directory}"
 mkdir -p "$evidence"
 evidence="$(cd "$evidence" && pwd)"
+cd "$root"
+python3 -m scripts.rail_sources "$root" "$evidence/source-closure"
 source_dir="$evidence/native-source"
 build_dir="$evidence/native-build"
 commit=14ec60f248547d4d062a1160f0fc26d742319888

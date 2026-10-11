@@ -205,3 +205,12 @@ pub(super) fn empty_job(graph: StationRow<'_>) -> Result<Option<EmptyJob>, Runti
         edges,
     }))
 }
+
+impl super::SimulationRuntime {
+    /// Live transport pool history and payment/job observations.
+    /// Worker completion is timing-dependent and may change without advancing the World.
+    /// Unsupported populated jobs are identified explicitly, never reported as pending workers.
+    pub fn transport_state_json(&self) -> serde_json::Value {
+        self.transport.snapshot()
+    }
+}

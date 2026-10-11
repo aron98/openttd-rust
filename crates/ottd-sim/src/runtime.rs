@@ -256,13 +256,6 @@ impl SimulationRuntime {
         &self.world
     }
 
-    /// Live transport pool history and payment/job observations.
-    /// Worker completion is timing-dependent and may change without advancing the World.
-    /// Unsupported populated jobs are identified explicitly, never reported as pending workers.
-    pub fn transport_state_json(&self) -> serde_json::Value {
-        self.transport.snapshot()
-    }
-
     /// Population, building counts and radii used by vanilla house/town gameplay.
     pub const fn town_house_caches(&self) -> &TownHouseCaches {
         &self.towns

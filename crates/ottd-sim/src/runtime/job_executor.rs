@@ -17,6 +17,8 @@ pub(super) enum Backend {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, thiserror::Error)]
 pub(super) enum WorkerError {
+    #[error("link graph worker input/annotation invariant")]
+    InvalidInput,
     #[error("link graph worker panicked")]
     Panicked,
     #[error("link graph worker result synchronization failed")]

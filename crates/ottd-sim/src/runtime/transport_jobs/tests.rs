@@ -1,5 +1,8 @@
 use super::*;
-use std::time::{Duration, Instant};
+use std::{
+    sync::atomic::{AtomicBool, Ordering},
+    time::{Duration, Instant},
+};
 
 #[test]
 fn cleanup_cancels_all_solely_owned_workers_before_joining_any()
@@ -26,7 +29,11 @@ fn cleanup_cancels_all_solely_owned_workers_before_joining_any()
                 }
                 std::thread::yield_now();
             }
-            Ok(EmptyJob { nodes: 0, edges: 0 })
+            Ok(JobResult {
+                nodes: 0,
+                edges: 0,
+                annotations: Vec::new(),
+            })
         }));
         transport.workers.insert(id, worker);
     }

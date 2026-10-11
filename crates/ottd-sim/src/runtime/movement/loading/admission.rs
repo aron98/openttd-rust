@@ -1,7 +1,7 @@
 //! Empty-transport capability checks before any world or runtime publication.
 use super::{RoadPhases, SavedVehicleView, WorldTickError, unsupported};
 use crate::{
-    runtime::{stations::saved, transport::empty_job},
+    runtime::{stations::saved, transport_jobs::graph_supported},
     world_access::field,
 };
 use ottd_save::{WireValue, world::World};
@@ -81,16 +81,11 @@ pub(in crate::runtime::movement) fn admit(
         .records()
         .keys()
     {
-        if empty_job(saved::row(world, *b"LGRP", *id)?)?.is_none() {
+        if !graph_supported(saved::row(world, *b"LGRP", *id)?)? {
             return Err(unsupported("transport", "populated link graph"));
         }
     }
-    if runner
-        .transport
-        .job_expectations
-        .values()
-        .any(Option::is_none)
-    {
+    if runner.transport.job_inputs.values().any(Option::is_none) {
         return Err(unsupported("transport", "populated link graph job"));
     }
     schedule(world, runner)

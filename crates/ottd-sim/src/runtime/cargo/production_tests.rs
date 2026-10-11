@@ -18,7 +18,8 @@ fn original_town_packet_distribution_effects() -> Result {
         ottd_save::DEFAULT_MAX_BYTES,
     )?)?;
     let stations = StationRuntime::restore(&world)?;
-    let mut transport = TransportRuntime::restore(&world)?;
+    let mut transport =
+        TransportRuntime::restore(&world, &crate::content::ContentCatalog::from_world(&world)?)?;
     let mut state = WorldTickState::load(&mut world, None);
     let moved = transport.town_production(
         &mut state,

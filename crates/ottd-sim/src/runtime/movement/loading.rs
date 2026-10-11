@@ -2,6 +2,7 @@
 mod admission;
 #[cfg(test)]
 mod failure_tests;
+mod job_publication;
 mod jobs;
 pub(super) use admission::admit;
 mod links;
@@ -203,3 +204,5 @@ pub(super) fn handle(
     runner.cache.trip_occupancy = 0;
     orders::advance(state, id)
 }
+#[cfg(test)]
+mod job_publication_tests;

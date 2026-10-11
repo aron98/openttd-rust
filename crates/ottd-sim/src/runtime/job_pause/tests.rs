@@ -27,10 +27,12 @@ fn due_restore_pauses_zero_calls_preserve_it_and_completed_work_releases_it() ->
     let mut runtime = load("ASYNC_DUE_INPUT")?;
     let result = runtime
         .transport
-        .job_expectations
+        .workers
         .get(&0)
-        .and_then(Clone::clone)
-        .ok_or("missing job0")?;
+        .ok_or("missing job0")?
+        .wait()?
+        .as_ref()
+        .clone();
     let gate = Arc::new(AtomicBool::new(false));
     let input_gate = Arc::clone(&gate);
     let worker = Arc::new(Worker::spawn(move |cancel| {

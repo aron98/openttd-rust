@@ -240,7 +240,7 @@ impl SimulationRuntime {
             industries: IndustryCaches::restore(&world)?,
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
-            transport: transport::TransportRuntime::restore(&world)?,
+            transport: transport::TransportRuntime::restore(&world, &content)?,
             serializer_cargo_paid_for: serialization::restore(&world)?,
             allocation: VehicleAllocation::restore(&world)?,
             world,

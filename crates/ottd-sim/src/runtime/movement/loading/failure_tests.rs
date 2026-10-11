@@ -104,12 +104,13 @@ fn terminal_late_pool_order_job_failures_are_atomic() -> Result {
     // Given: native saved running job, with a deliberately inconsistent derived result.
     let mut job = load("ROAD_TERMINAL_RUNNING_JOB")?;
     job.transport
-        .job_expectations
+        .job_inputs
         .get_mut(&0)
         .ok_or("job cache")?
         .as_mut()
         .ok_or("empty job result")?
-        .edges = 999;
+        .settings
+        .accuracy = 255;
     refusal(
         job,
         (

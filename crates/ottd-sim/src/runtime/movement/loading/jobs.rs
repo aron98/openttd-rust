@@ -1,6 +1,9 @@
-//! Source-ordered scheduling and publication of zero-supply link graph jobs.
+//! Source-ordered scheduling and publication of supported link graph jobs.
 use super::{RoadPhases, State, WorldTickError, records, unsupported};
-use crate::runtime::{RuntimeError, transport::empty_job, transport_jobs::EmptyInput};
+use crate::runtime::{
+    RuntimeError,
+    transport_jobs::{JobEnvironment, JobInput},
+};
 use ottd_save::{WireValue, world::WorldEdit};
 
 pub(in crate::runtime::movement) fn tick(
@@ -65,8 +68,6 @@ fn spawn(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), World
         .allocate()
         .map_err(RuntimeError::from)?;
     let source = records::row(state, *b"LGRP", graph)?;
-    let result =
-        empty_job(source)?.ok_or_else(|| unsupported("link_jobs", "populated job solver"))?;
     let schema = state.table(b"LGRJ")?.schema();
     let graph_schema = records::child(schema, "linkgraph")?;
     if graph_schema != source.schema {
@@ -93,10 +94,17 @@ fn spawn(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), World
         record: id,
         value: record,
     })?;
-    let input = EmptyInput::parse(records::row(state, *b"LGRJ", id)?.child("linkgraph")?)?
-        .ok_or_else(|| unsupported("link_jobs", "populated job solver"))?;
-    runner.transport.workers.insert(id, input.spawn());
-    runner.transport.job_expectations.insert(id, Some(result));
+    let input = JobInput::parse(
+        records::row(state, *b"LGRJ", id)?,
+        &JobEnvironment {
+            width: state.width,
+            height: state.height,
+            content: runner.content,
+        },
+    )?
+    .ok_or_else(|| unsupported("link_jobs", "populated job solver"))?;
+    runner.transport.workers.insert(id, input.clone().spawn());
+    runner.transport.job_inputs.insert(id, Some(input));
     let mut running = list(state, "running")?;
     running.push(WireValue::Unsigned(u64::from(id).wrapping_add(1)));
     records::schedule(state, "running", running)
@@ -113,9 +121,16 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
     let row = records::row(state, *b"LGRJ", job)?;
     let graph = u32::try_from(row.number("link_graph.index")?)
         .map_err(|_| unsupported("link_jobs", "graph index"))?;
-    let result = empty_job(row.child("linkgraph")?)?
-        .ok_or_else(|| unsupported("link_jobs", "populated job result"))?;
-    if runner.transport.job_expectations.get(&job) != Some(&Some(result.clone())) {
+    let input = JobInput::parse(
+        row,
+        &JobEnvironment {
+            width: state.width,
+            height: state.height,
+            content: runner.content,
+        },
+    )?
+    .ok_or_else(|| unsupported("link_jobs", "populated job result"))?;
+    if runner.transport.job_inputs.get(&job) != Some(&Some(input.clone())) {
         return Err(unsupported("link_jobs", "pending job result cache"));
     }
     let completed = runner
@@ -125,11 +140,13 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
         .ok_or_else(|| unsupported("link_jobs", "missing job worker"))?
         .wait()
         .map_err(RuntimeError::from)?;
-    if *completed != result {
-        return Err(unsupported("link_jobs", "worker result differs"));
-    }
-    // Empty source/destination demand yields no MCF paths or FlowMapper flows.
-    // Admission also requires empty station flow/cargo state, so joining changes no goods data.
+    completed.publish(
+        &input,
+        &mut super::job_publication::Publication {
+            state,
+            cargo: &mut runner.transport.cargo,
+        },
+    )?;
     running.remove(0);
     records::schedule(state, "running", running)?;
     state.apply(WorldEdit::RemoveRecord {
@@ -141,7 +158,7 @@ fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldT
         .jobs
         .free(job)
         .map_err(RuntimeError::from)?;
-    runner.transport.job_expectations.remove(&job);
+    runner.transport.job_inputs.remove(&job);
     runner.transport.workers.remove(&job);
     if state.table(b"LGRP")?.record(graph).is_some() {
         let pointer = WireValue::Unsigned(u64::from(graph).wrapping_add(1));

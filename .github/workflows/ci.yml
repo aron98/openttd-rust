@@ -222,7 +222,7 @@ jobs:
         run: ccache --show-stats --verbose
 
   movement-capture:
-    name: Full movement capture (normal admission remains closed)
+    name: Full movement capture
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:

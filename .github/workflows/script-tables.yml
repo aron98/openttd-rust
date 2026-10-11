@@ -1,0 +1,37 @@
+name: Script table native ABI proof
+on:
+  pull_request:
+    paths:
+      - 'crates/ottd-script/**'
+      - 'scripts/compat/script-vm/**'
+      - '.github/workflows/script-tables.yml'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tables:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: OpenTTD/OpenTTD
+          ref: 14ec60f248547d4d062a1160f0fc26d742319888
+          path: .reference/OpenTTD
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - name: Execute actual GNU hash and bundled table comparisons
+        run: scripts/compat/script-vm/tables/verify.sh .reference/OpenTTD .omo/evidence/script-tables-linux
+      - name: Archive complete fresh evidence
+        if: always()
+        run: tar -czf script-tables-linux.tar.gz --exclude=target .omo/evidence/script-tables-linux
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: script-tables-linux
+          path: script-tables-linux.tar.gz
+          if-no-files-found: error

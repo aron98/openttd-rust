@@ -3004,7 +3004,7 @@
   {
    "id": "scalar-vm-validator",
    "path": "scripts/script_vm_evidence.py",
-   "sha256": "6acde61eca6a5e2726ce60f156d9e17f9ab6945a0b35a405539eeeaf96af985d",
+   "sha256": "85dbb2ccc5d47af3204a8586306a834390a36b2782bde62de9937c73c5000b99",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3013,7 +3013,7 @@
   {
    "id": "scalar-vm-provenance",
    "path": "scripts/script_vm_provenance.py",
-   "sha256": "980587fec3c3e4cf0982ccddabc29678f956ba9b0ae31a345fed99d1a65077ca",
+   "sha256": "662d35c21d584567a6ac48bcea952a4d32b4e8253a575e38cac78a9685280d91",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "1106f100f911567cc7a7141a984febf2070036a194698540ae1cb888abe88f7a",
+   "sha256": "9104ce13f32cc508c334f6f4308834199fc31febd1d0476eddae443504141f81",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "5e89da3e71e6cf846d21d658b79459832335dd3fa33eef2b0ac7cdf50e1a6cfd",
+   "sha256": "cd8c7baf0fca3e2e5ad9684929b14c896c588883e52b108257f5c436f6f4961b",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "5cda2766384a4603239d8698226f380cef1ed6c55abd571a8c3e31220c94b101",
+   "sha256": "718fdb029dd0089503bbdbfce70570e25dcd179e41219fc3c224e3e8adafd1ea",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "1c4b0085d91bb9905d717dc6b928288e0146bb6aadf7e85d6621790059f5ec1c",
+   "sha256": "1333a747e7f75e9c3bb6c763b2b3b26f5dc5be1b329dae987bd691d8d8ed61ea",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "184f4747e219828ded6b59e8519b3d2200be8b103bc88e089c8c52f6aed7d07c",
+   "sha256": "472b2d19379490f34f996053edaa6aa7af7c5bbc58ca99461977511ae3eea0a6",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "3f22aa53bc6299bbf2cb368f11932cb7e7da4f7c8115c531b276983a73130286",
+   "sha256": "cf1689246d5c9e41949563514877e85523623f7f6b115df86efca7578996eb1b",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "1fd9e4e10d8c8454a9a79c696a87b0a3cf61929c2df69e5a84e1da19814c5781",
+   "sha256": "89707c31803175d31af89dad1f0abac2e84e8cd51fb64b1e24379ad8f2e1d55e",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "9dabf37372eb599fad816d2a7ebf8de5637aad4c866c57f82c2c4caf58c7e242",
+   "sha256": "95015ca8ca43365cd521e3d58b8a1e9fcff3f53d6b33af2a01769d899b4d429f",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "eb00add7b27f6dd092979c6bb1bf2dda36b38d5dc3d98a220bc464d53bb37cc3",
+   "sha256": "17839e784d1ecc562a0311f8307a441565a07f7792172b50697fe87228d747fa",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4147,7 +4147,7 @@
   {
    "id": "scalar-vm-input-policy",
    "path": "scripts/script_vm_policy.py",
-   "sha256": "b0edd07b539779caadce6cd218a7588b1e141db7f648f5329ed83488c8b8828b",
+   "sha256": "f5b475fbe2254545a741ac3de61e6505738678ce1de1ad4235e3d628a7da9baf",
    "kind": "recipe",
    "provenance": "Explicit rejection policy for reached out-of-byte-domain native ctype arguments; upstream.toml",
    "save_version": null,
@@ -4156,7 +4156,7 @@
   {
    "id": "scalar-vm-input-policy-tests",
    "path": "scripts/tests/test_script_vm_policy.py",
-   "sha256": "4a6fff39a8a19697e555402f1a47d7c84036ecc120bcf4ed76abd5a7ec5ab1c5",
+   "sha256": "3a021812c5e695bcbdfc966cd061ce9d0ac4128fd1bcc1228cdc508d1ef1fd7f",
    "kind": "recipe",
    "provenance": "Explicit rejection policy for reached out-of-byte-domain native ctype arguments; upstream.toml",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "abbff6f641e51c1a35dd5157dc7e7659d49b0be4fe576f0652dbf0393bb495df",
+   "sha256": "cc4b919aa39083451bc2b92bb14916a3c385a85cc4e550ae47ea222093342f6a",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "ee8d8c34d82f5ac249867544a8ac2589f7de6f4c01fe802821e78b3a292024ec",
+   "sha256": "5eaeed3d25cff2e631f99f4d9a9aa2b158c5402d2fbf9ade82cf6219160b2001",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "98ed6997f3ef166c169ebf1024034a88e440d7b5490fb5c59646e5b24ec94a13",
+   "sha256": "6d581210979890bf853ffc8b16ed2d7c84de98b8c41b94e4ea96c995868099ee",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -4399,7 +4399,7 @@
   {
    "id": "scalar-constant-crates-ottd-script-src-realm-constants-tests-rs",
    "path": "crates/ottd-script/src/realm/constants/tests.rs",
-   "sha256": "2884dcdea600ed356cbb847b6fe47fc490af985fd1e3d9d46d039b1a406d7e92",
+   "sha256": "c974de194825f26966c6411fbcf5ed46150e8928bae3f69ebc0376d8f7490486",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 closed compiler constants; native115 sessions and explicit bounded Rust projections.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "c4f221dd2a88bc6ab01b29cdd1d1616b125ffaee7a303a37498e30fbed61565f",
+   "sha256": "1067804d704cb4493d5687dc4643614fadc6047dccd3384c8a7ce4fe2bd15fde",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -7747,7 +7747,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-compiler-expressions-roots-rs",
    "path": "crates/ottd-script/src/compiler/expressions/roots.rs",
-   "sha256": "e170c0f2f1ac8d06a27813e6041c52dd4e638669daf24893a561f15651634638",
+   "sha256": "f2da92dec05f1e87cddffc5ca0677435b07d44cab9a885f2a973cb4f6a6638f2",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7756,7 +7756,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-runner-rs",
    "path": "crates/ottd-script/src/runner.rs",
-   "sha256": "6c73b931f9eb268dafc37b1ce48cc742dbd23f526aec3a12a28513b94db1f4bc",
+   "sha256": "85aa5d4889b7b9beeb2fb90a90115ebf455205a3b9ff3037e4e634216960f4e9",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7765,7 +7765,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-runner-tests-rs",
    "path": "crates/ottd-script/src/runner/tests.rs",
-   "sha256": "b3b5d81e74801ed6427958c927dd1a0e295b4a137492d35793e6d30f0536752e",
+   "sha256": "09a18e2a9e736719477167e59c8d3e5d572e22261cc5e2f0e90da04fecc9487f",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7774,7 +7774,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-vm-root-sessions-rs",
    "path": "crates/ottd-script/src/vm/root_sessions.rs",
-   "sha256": "0fa3bce7afc7362cf673f559a73cb45c5a14fac28a8ff66d05a3b5e19c9382b3",
+   "sha256": "447aa37dc0dd4ac1549c9ba23a22de31651ed780ab9cc8af3bb81ab4542ac47a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7783,7 +7783,7 @@
   {
    "id": "scalar-root-crates-ottd-script-src-vm-roots-rs",
    "path": "crates/ottd-script/src/vm/roots.rs",
-   "sha256": "e785252506370073b8ed191e47481535682013840e7642f81323533e3da47912",
+   "sha256": "7bb30c438eb6484570cc1ed87815422499690433bda9c7432803281b1566ea83",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7801,7 +7801,7 @@
   {
    "id": "scalar-root-crates-ottd-script-tests-root-runner-rs",
    "path": "crates/ottd-script/tests/root_runner.rs",
-   "sha256": "4ded74e1aec55d994c94563e03e0be166ea4ff97d42b1cb6f13e30bd561206c0",
+   "sha256": "86220fd94e444849886dcf163559d8d34c3661308e4c4a92fac0ebab5cc88604",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 configured scalar roots;90 native sessions,72 strict stateful projections and18 explicit runtime/syntax boundaries.",
    "save_version": null,
@@ -7846,7 +7846,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-array-rs",
    "path": "crates/ottd-script/src/array.rs",
-   "sha256": "c730ec7a2a103469f0047858e2616fb053a1efff2008f7839e3b5e3d1ea69534",
+   "sha256": "906784f45ab7d8cbb5ab16e8fc09fc7eebfacad8a7534faab792de1d00ff08f7",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7855,7 +7855,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-compiler-expressions-arrays-rs",
    "path": "crates/ottd-script/src/compiler/expressions/arrays.rs",
-   "sha256": "ab17bb1277628c951a649799dbb758a52041b088a01ab3c8d4acd0e3264e22b0",
+   "sha256": "a5ae7b1fd683daaa2bcc84b3f2fd55a86768af9904f103d2d859bf6ef36c04bc",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7864,7 +7864,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-vm-array-sessions-rs",
    "path": "crates/ottd-script/src/vm/array_sessions.rs",
-   "sha256": "237efc7ec736418612dc184f58a25c187165a68f7dd0f829b8ba2e4b7829654d",
+   "sha256": "c64326fe28c4553b5eb649ef8276871dbe140a5cc4d18c8c63d2b5929c54961a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -7873,7 +7873,7 @@
   {
    "id": "script-arrays-crates-ottd-script-src-vm-arrays-rs",
    "path": "crates/ottd-script/src/vm/arrays.rs",
-   "sha256": "69ac8c15a8df28be1973480fd9b27e0f8626def8eff2a59e385cdf0c8cf09438",
+   "sha256": "ec157a139631ebc8d74caa7e3c64cd450125fb84377182b990e2011890155043",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 scalar arrays;93 native sessions,78 stateful projections,12 explicit runtime boundary sessions and3 protocol refusals. No general cycle/GC claim.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "cb9beeaf68f9e5335f32dc9bc41b29f99c25efd13632b55d8cb17d7ec97224b7",
+   "sha256": "3428ec177b040c251dc94ca24ffe9801e8c519f8660f827a860fce0fa1b9e774",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8467,7 +8467,7 @@
   {
    "id": "script-foreach-crates-ottd-script-src-vm-foreach-rs",
    "path": "crates/ottd-script/src/vm/foreach.rs",
-   "sha256": "5d5ab5110a24e0022fe20bd91c22436f5e9e841e7658ba63074a8be514a453a0",
+   "sha256": "a3618f88142a0448796fc0ed73d57b670e6feee5863e82651cb5a960c09c8856",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 array and byte-string foreach;255 strict native sessions. Target C-char widening, exact frame/IP/debt/temp and owning-slot projection; no general iterable/GC claim.",
    "save_version": null,
@@ -9727,7 +9727,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-examples-observe-rs",
    "path": "crates/ottd-script/examples/observe.rs",
-   "sha256": "4519237eb66a579f3ef844e686ee7cbd94b4b73beaf32f33363a7b3c76c569a0",
+   "sha256": "353e467a5b35f6c750b72ed63f588fe9499247ae098323d72d1780e087390e7b",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9745,7 +9745,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-compiler-expressions-rs",
    "path": "crates/ottd-script/src/compiler/expressions.rs",
-   "sha256": "103c822fd5574fd6263fb05bf66e484f9c519fc37f86cb2e87c50b727ad00f44",
+   "sha256": "4a6ca36865a5b86e5a09b483f823b0742478783809a04ac119b19ba313837eff",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9763,7 +9763,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-compiler-expressions-factors-rs",
    "path": "crates/ottd-script/src/compiler/expressions/factors.rs",
-   "sha256": "c9a42566cb4a12b00bcf025a8531eda502d80bf5370932bc2680f02c9f5ea00f",
+   "sha256": "5e2191a18f5b5a3d7f49763259afc3a6a3321eed3a98c23a3f0d24fbe26e258c",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9772,7 +9772,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-error-rs",
    "path": "crates/ottd-script/src/error.rs",
-   "sha256": "8b94e3dddc2014f4ca4651643100c9a2f4a1b80f036d4d6e357e48410f898ba7",
+   "sha256": "9f57d7645d3ff776b06d22478126ec4170cd3155574b66411e07fe92563c3d50",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9781,7 +9781,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-host-stack-rs",
    "path": "crates/ottd-script/src/host_stack.rs",
-   "sha256": "29692065f9f4d979824b5ffa1cdd234a326992965660f066d99c02607f331a13",
+   "sha256": "87fe33846fca482ab2de3f79178ce904ab5e966321045c6011c5d8871321878a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9790,7 +9790,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-lib-rs",
    "path": "crates/ottd-script/src/lib.rs",
-   "sha256": "a1bb5b1b845c0dfd96924c97e92c87ea51fe716ad5c4981f474e33af4799b73f",
+   "sha256": "2da49192440b509502ed73dea5413b5df9e16a7df725ecb7884a079e8ac16e5c",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9799,7 +9799,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-native-closure-rs",
    "path": "crates/ottd-script/src/native_closure.rs",
-   "sha256": "0e783e9660c13f939d9ed62fb0611cf7401a1230c1cca34db1d1d1f2c3cf3d99",
+   "sha256": "004eed5ff148855c736df70842ca3e8f4fdab57e3dfaa92768dbebae4165b155",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9808,7 +9808,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-program-rs",
    "path": "crates/ottd-script/src/program.rs",
-   "sha256": "70222392df511c920f471b04c8263c8d8e5bf09bfb8a397fb8895cf4fa181931",
+   "sha256": "0434aa3c85bf73f4d145da51b9457642f55d0f8f14f8da4726c01613ba875474",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9817,7 +9817,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-value-strings-rs",
    "path": "crates/ottd-script/src/value/strings.rs",
-   "sha256": "a5e100922ddde99084622ba73d115fb1049b5653b61f7b37c0a3e1df7f86b091",
+   "sha256": "20deb54b5d24acef86a84a00883f7e741e21f53b9124ff8e389392fedc2faf2a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9826,7 +9826,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-rs",
    "path": "crates/ottd-script/src/vm.rs",
-   "sha256": "84b501026de2161b8f3feeefa0b8092a1b762ee1332e6018d1611ee4afe5f901",
+   "sha256": "25217887cc8947988b5f0a6d0cf65f244099cf63e57bffb411fddac17864f277",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9835,7 +9835,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-calls-rs",
    "path": "crates/ottd-script/src/vm/calls.rs",
-   "sha256": "58111ec5008038070167cad55116d5b2feb775e270d4b57f79ab3f3c6842d057",
+   "sha256": "7f1bc86b1342ff6b5b5e8006e2c3037010ad397e7cb99424f79123bb10644f9f",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9844,7 +9844,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-dispatch-rs",
    "path": "crates/ottd-script/src/vm/dispatch.rs",
-   "sha256": "9de472ab555835821163e118615b540e6f64e9ba4d07d6438c36d9b614922f05",
+   "sha256": "ae1f102cd669cdf59f8e9c738c5dc56ab19e597239730321b4b94ae578c095df",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9925,7 +9925,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-owners-rs",
    "path": "crates/ottd-script/src/vm/native_calls/owners.rs",
-   "sha256": "c8dbf15181489a9274042a19408fee8ceb4e14a96f8825e24530a9531c984892",
+   "sha256": "c099271efb291211aa371a73732774ebdba20b1e6f435bb09235b2905f949228",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9934,7 +9934,7 @@
   {
    "id": "native-script-calls-crates-ottd-script-src-vm-native-calls-safety-rs",
    "path": "crates/ottd-script/src/vm/native_calls/safety.rs",
-   "sha256": "8d5ff2cb57a3b23a8c94d1a0e85ef2be62c748db2fd9938532e55473d4d2f5f4",
+   "sha256": "b2503577cc12087d41667de5c864516ffeaff6e1ab7af52b0c831f6684b302a9",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9952,7 +9952,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-build-native-sh",
    "path": "scripts/compat/script-vm/build-native.sh",
-   "sha256": "10af11e69e7a10e11cf8aeaaf8b6ee244ef5552cc01bf6368baef2630d0fcf21",
+   "sha256": "a505d57f0c785d7a2627299d904db3c57f3a335ada3928e4af315f28d14bd0dd",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9970,7 +9970,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-observe-cpp",
    "path": "scripts/compat/script-vm/observe.cpp",
-   "sha256": "8b3a589a4e5d2dfd8ec2a8dce081fc4084ee73870002380917a18e89a6f50da2",
+   "sha256": "990c2fa5b54a1b68b401f9e097f02755a1e361fbe2b318a915ca4139654d3f27",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -9997,7 +9997,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-tables-calls-py",
    "path": "scripts/compat/script-vm/tables/calls.py",
-   "sha256": "cf398a8bd7db0ed29abcd66c1e19e1ff66d2fabbfe2cc0ea6689cb7053c299c5",
+   "sha256": "46f50256cbe06f3367f8ca6f290b3368af827a95a34b165896c961f4eeb9dba3",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10024,7 +10024,7 @@
   {
    "id": "native-script-calls-scripts-compat-script-vm-tables-verify-sh",
    "path": "scripts/compat/script-vm/tables/verify.sh",
-   "sha256": "bdc9c9f39b1c262dcf2853094e5b5b51b29c46f05f56c2d7837d8e09f70aa9d3",
+   "sha256": "0b2622e9e39718d591a21909f67284f5231e24fb7354863ebcfadd85cf6c778b",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10033,7 +10033,7 @@
   {
    "id": "native-script-calls-scripts-script-vm-inputs-py",
    "path": "scripts/script_vm_inputs.py",
-   "sha256": "edf01b4b08509226c1f994f5c862c7ea3b26346e9d11c6168118405b2a0cbee7",
+   "sha256": "303ec9ee703ff7cbb46daae34303c46ae8b2b780afae38042bfe8ea4b36115c2",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10042,7 +10042,7 @@
   {
    "id": "native-script-calls-scripts-tests-script-vm-tables-bindings-test-py",
    "path": "scripts/tests/script_vm_tables_bindings_test.py",
-   "sha256": "dc93f591933d89d9396c24aa449a1c92afc6cf778ad92130482a3b37ad62e36a",
+   "sha256": "3cd98027499f6e72a0b35a2cf80b354849bf3ecbbe7c7a7c7aee9a1747c35fed",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bare-root native CALL/PREPCALL/PREPCALLK, actual host-frame ownership and raw print framing; broader user functions, closure GC, AI/GameScript and GNU native-call admission remain required.",
    "save_version": null,
@@ -10684,6 +10684,429 @@
    "sha256": "e21d395e85e475a442930d64852cf5d70fd526b7bf2e42a52c0332bbedb3a375",
    "kind": "recipe",
    "provenance": "Bounded vanilla temperate forest and fund-only industry manager implementation, original-command fixtures and private complete-state proof. Recipients, other industry types, creation/closure, NewGRF and full industry compatibility remain required; no normal industry CI admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-compiler-functions-rs",
+   "path": "crates/ottd-script/src/compiler/functions.rs",
+   "sha256": "dd0f7c3960ba935d3dea883137ae9214cec9c71f01faec14b60f13838be44fa9",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-prototype-rs",
+   "path": "crates/ottd-script/src/prototype.rs",
+   "sha256": "ec7458bdf89e3cb4c16703574a80db27f9afad8aec3f6528d5d75d170c321ff7",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-rs",
+   "path": "crates/ottd-script/src/script_closure.rs",
+   "sha256": "d0dbfbb8d660ef4375daec48c812e58b35f5798efd3f69c1771bf777e982745e",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-acyclic-txt",
+   "path": "crates/ottd-script/src/script_closure/acyclic.txt",
+   "sha256": "661bd44a278b0e6c17ff19dced4bc721c7c609e0ddb89fc2f956d28c333ed3f6",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-compound-store-txt",
+   "path": "crates/ottd-script/src/script_closure/compound-store.txt",
+   "sha256": "2af0be45870130b5c07b242324919036fd2ac7effe2a0996d798906ca015808c",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-cycle-txt",
+   "path": "crates/ottd-script/src/script_closure/cycle.txt",
+   "sha256": "848373a4a453359be47cd0d87a0ec1ac3604efe5bdf7907c0c52c4eb85f9d2b7",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-default-cycle-txt",
+   "path": "crates/ottd-script/src/script_closure/default-cycle.txt",
+   "sha256": "7a4b07dc935b42514bb583888f1be36762028a03185f1fcb147c0d2b30755c45",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-late-error-txt",
+   "path": "crates/ottd-script/src/script_closure/late-error.txt",
+   "sha256": "4eadf9dae7ae0858757058a9343d28b6907fb1a62af65ef76722ca1aa4d79377",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-orphan-txt",
+   "path": "crates/ottd-script/src/script_closure/orphan.txt",
+   "sha256": "890fe6f76913d87a14798b9740940cb0970cb4d4944a53a49f0423dd18a19307",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-persistence-rs",
+   "path": "crates/ottd-script/src/script_closure/persistence.rs",
+   "sha256": "eacdef3b2465b20f472d9622ae01b18f7bd15ad2196c0ba5c37ad850ed27db72",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-persistence-txt",
+   "path": "crates/ottd-script/src/script_closure/persistence.txt",
+   "sha256": "46fd0c24a81ccf4cd9908f73d66ba4ea54e49e26b32246a20d13e126b50ee089",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-publication-txt",
+   "path": "crates/ottd-script/src/script_closure/publication.txt",
+   "sha256": "a89ed92538152ed710db59277ae7a2ea80449ba597de508eec322b9c8652ce4a",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-safety-rs",
+   "path": "crates/ottd-script/src/script_closure/safety.rs",
+   "sha256": "3bc3fd36eb2f184ca1bb3f8226340245cb10b86d7ab199fc82f5e414ff732fa1",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-stores-rs",
+   "path": "crates/ottd-script/src/script_closure/stores.rs",
+   "sha256": "48f15316f5f9eec9c87dddb85fe5f0381f6f0f3b206e41c6764ea5924e5fd285",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-tests-rs",
+   "path": "crates/ottd-script/src/script_closure/tests.rs",
+   "sha256": "f7e62eec06a6d805c83a320f7c4166762453d386ed538bb1f828be86c67379b3",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-script-closure-view-txt",
+   "path": "crates/ottd-script/src/script_closure/view.txt",
+   "sha256": "2fafccc504d1e5a44885b318d1cdbd2275ae6765d5b1512fbe1ae914d043b0cf",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-closures-rs",
+   "path": "crates/ottd-script/src/vm/closures.rs",
+   "sha256": "e5c216a0a4f62393eb887ab9e0fa439320e9bf4304864f72d11e65be13da8ace",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-frames-rs",
+   "path": "crates/ottd-script/src/vm/frames.rs",
+   "sha256": "c4817ad07d875e041e0b61552ada7457a83b7d03203c5dc10a14af7c99647dff",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-script-closure-type-txt",
+   "path": "crates/ottd-script/src/vm/script-closure-type.txt",
+   "sha256": "f10a62353e45685170574d868f61fc48f509cf79d270d92087ef92997e49195c",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-varargs-rs",
+   "path": "crates/ottd-script/src/vm/varargs.rs",
+   "sha256": "1bcd1630046de91dee0c117053a70abe25b7cb265c3ca7605314aad55e3b9491",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-varargs-owner-error-txt",
+   "path": "crates/ottd-script/src/vm/varargs/owner-error.txt",
+   "sha256": "9924a9fa64695ed93f6a5d96d8769e8e7d44ba234cdc0c887369cae45338f534",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-varargs-owner-return-txt",
+   "path": "crates/ottd-script/src/vm/varargs/owner-return.txt",
+   "sha256": "c71c97a45051aeec479312c492d3bfc9ea1c0b0522c2be0efd86a2c6d4a9ae5a",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-varargs-owner-tail-txt",
+   "path": "crates/ottd-script/src/vm/varargs/owner-tail.txt",
+   "sha256": "596353a2f749cf7fe5e2561634c21adb664fef0f306d95086e4e3eb58f27e2fb",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-varargs-owners-rs",
+   "path": "crates/ottd-script/src/vm/varargs/owners.rs",
+   "sha256": "da5db6a09765c302d0a3af5d25bb32df9f2a54436dbf394c8a688b64a327d88b",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-src-vm-varargs-safety-rs",
+   "path": "crates/ottd-script/src/vm/varargs/safety.rs",
+   "sha256": "1770a56e2465f70025c62462e6af4fbe63af2ab9e6ff73d5d530eecad6921fbc",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-crates-ottd-script-tests-varargs-production-red-rs",
+   "path": "crates/ottd-script/tests/varargs_production_red.rs",
+   "sha256": "db08badc7ec13791c17732d55a63ef71e1b029ddde5a9af37c38ea85fe9fba3b",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-closures-hpp",
+   "path": "scripts/compat/script-vm/closures.hpp",
+   "sha256": "e9d3ecd418a0a543b5c197a2f57bf0d5145ccaec7cda5f57e056bfef0f93b2c5",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-tables-closure-cases-py",
+   "path": "scripts/compat/script-vm/tables/closure_cases.py",
+   "sha256": "52b440058c31da68ae73e8721474ace478ee31014884f128a6d7a8de9d6750dc",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-tables-closure-controls-py",
+   "path": "scripts/compat/script-vm/tables/closure_controls.py",
+   "sha256": "acff46f16ff70a9bf16c96f855fde3a27c70458e9670f543242eaf7ae984968c",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-tables-closures-py",
+   "path": "scripts/compat/script-vm/tables/closures.py",
+   "sha256": "9623afa035603234e6bf2b63ffdcf7e3e925f993b4a8324acd4385899e8423bf",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-readme-md",
+   "path": "scripts/compat/script-vm/varargs/README.md",
+   "sha256": "9ff6abc9be72b1739e4685ecd9c06d1929bf89a2b99ca4d58fd7327ef3c1ca13",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-audit-controls-py",
+   "path": "scripts/compat/script-vm/varargs/audit_controls.py",
+   "sha256": "20e46cbb88fc84ae847878f4f328ccf20d181d15f8929d92d4a30f7082acc0d7",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-build-native-sh",
+   "path": "scripts/compat/script-vm/varargs/build-native.sh",
+   "sha256": "1f5ee0e051c3b84018fb97d1d58749b7f64eb67e1b52768b93b796970be5c10b",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-case-py",
+   "path": "scripts/compat/script-vm/varargs/case.py",
+   "sha256": "4aa1cf6a42c16a9caf28a27ae055d53fbe608e03c09080b13da6a888d566100f",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-cases-py",
+   "path": "scripts/compat/script-vm/varargs/cases.py",
+   "sha256": "40c4b592a8386d202b45ff91fc92ebc4f6e05b86755b7276282f0ae36e231ac7",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-compare-py",
+   "path": "scripts/compat/script-vm/varargs/compare.py",
+   "sha256": "24eca4df99f151e4be030f45aad14e426557cadd181de31d8ef555235d7c83e1",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-controls-py",
+   "path": "scripts/compat/script-vm/varargs/controls.py",
+   "sha256": "70464069ed95e8c9d91e6b545d885be00bbe4e8d4b874d1f65333567281a07f0",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-fixtures-deep-nut",
+   "path": "scripts/compat/script-vm/varargs/fixtures/deep.nut",
+   "sha256": "603f6d53f19cac17bc78348da477d3338a2ccd3f7605707994cc6821bc8c6d45",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-fixtures-discovery-nut",
+   "path": "scripts/compat/script-vm/varargs/fixtures/discovery.nut",
+   "sha256": "f42faa07a176997306e03ac0e1da194a626c082c21fe8425bd2809594f567fe9",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-fixtures-owner-error-nut",
+   "path": "scripts/compat/script-vm/varargs/fixtures/owner-error.nut",
+   "sha256": "0851eda51f3c180e3fac26d76d6ce4561e5e7ce0f94a57e5e92d9bb8c265cd7a",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-fixtures-owner-return-nut",
+   "path": "scripts/compat/script-vm/varargs/fixtures/owner-return.nut",
+   "sha256": "7aaa84c77147cc0018c86f50c8dfc575f27cb2db83889eafcaab45d602ed69c3",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-fixtures-owner-tail-nut",
+   "path": "scripts/compat/script-vm/varargs/fixtures/owner-tail.nut",
+   "sha256": "781903d26ee9051870c91455aebabe75225c421e1d27ca5a63bc7ae779a85101",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-fixtures-tail-arity-failure-nut",
+   "path": "scripts/compat/script-vm/varargs/fixtures/tail-arity-failure.nut",
+   "sha256": "7d83f84703201966c192adfeb40ea44ab57dd641812165c21faaf3ed4d058f8e",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-observe-cpp",
+   "path": "scripts/compat/script-vm/varargs/observe.cpp",
+   "sha256": "9ff25c50b14501b8f970b518423c52d2d03f88e520515156b871f1b1f20dfc88",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-owners-py",
+   "path": "scripts/compat/script-vm/varargs/owners.py",
+   "sha256": "7f45e28f9dc0d8f8f71dffd32f0936831c4d2cfc76802d51ef36538adc6865d1",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-varargs-hpp",
+   "path": "scripts/compat/script-vm/varargs/varargs.hpp",
+   "sha256": "d1f5a3fce64beff08ea075a2fa8b3e17977b1fde49b92909d12ea1fe927a6e59",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "script-runtime-scripts-compat-script-vm-varargs-verify-sh",
+   "path": "scripts/compat/script-vm/varargs/verify.sh",
+   "sha256": "16a6ea2d14efbef00e94c28c4d900a9481fad1b1079ea8af0be895551c816958",
+   "kind": "recipe",
+   "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,
    "profile": null
   }
@@ -19979,7 +20402,7 @@
    "status": "implemented",
    "scope": "rust_behavior",
    "domain": "Scalar locals/expressions/iteration/switch/comments and native compilebuffer bytes; immutable byte strings, persistent string Realm, TYPEOF and 35/62 bundled Squirrel handlers. i64/f32/GC-enabled native variant. Defined shifts 0..63; undefined counts return UnsupportedShiftCount. Closed Realm constants/enums with parser-time publication, local precedence and scalar inlining are supported. Constant postfix and minimum-integer declaration negation remain UnsupportedSyntax; Configured empty scalar root slots, GET/GETK/SET/NEWSLOT/LOADROOTTABLE, shared root identity and separate persistent Runner temporary ownership are supported. General objects/GC/calls, arbitrary receivers and host APIs, unchanged AI/GS and saved-script integration remain unfinished; signed arithmetic overflow remains an explicit boundary. Reached native byte-classifier arguments 256..65535 are rejected with typed codepoint/context/offset diagnostics, including HexEscape lookahead; defined byte0..255 and plain string/comment Unicode remain strict. Scalar-element arrays add per-execution NEWARRAY/APPENDARRAY, bracket GET/plain SET, shared identity and same-Realm root/host values. Nested/self-array insertion, ordering, pointer stringification, reached delegates and unsafe numeric-index conversion remain separately typed implementation boundaries, not lexer policy. Array and byte-string FOREACH retains index/value/cursor and persistent temporary ownership; emitted POSTFOREACH is skipped and remains UnsupportedOpcode if reached. Strings iterate stored bytes using target C-char signedness; negative forged string cursors are InvalidBytecode; no indexed compound/table/generator/ScriptList/GC expansion.",
-   "expected": "Fresh pinned native compiler/VM versus Cargo observer: 1188 fixtures x9 schedules +127 targeted budgets =10819 cases: 10666 strict comparisons and153 explicit policy rejections. All850 final-octal baseline and317 frozen string fixtures retained; 21 additional unique policy/control bodies added. All15 defined low-byte octal continuation fixtures remain strict. Seventeen exact policy bodies retain native raw argv/status/stdout/stderr and independently require Rust rejection: eight original Token bodies plus nine HexEscape bodies. 62 scalar public,3 constant public and34 private Rust tests,12 native frame captures,four native lifetime sessions,23071 raw-f32 renderings,18 separate native source-feed observations,25 prior corruption controls and4 string controls. No undefined-domain observation is counted as native parity. Ordinary Unicode/native encoded-codepoint strings, byte-domain hex terminators, NUL/decoder and earlier-error ordering remain defined comparisons. This candidate requires fresh complete debug and optimized profiles; old candidate passes do not establish its admission. Constants add115 exact native session observations,37 strict buffer compiler/table comparisons,one of which additionally requires typed MissingIndex at runtime and3 stateful compile/lookup/execution projections. Native refcount/temp/drop-child records remain exact native observations alongside separate representable Rust ownership tests, not full raw Rust session parity. Four additional corruption controls require actual session admission PASS for the original and a specific typed stdout-mismatch REJECT for copied publication/counter/shared-state/lifetime mutations; argv/cwd/status/stderr and original bytes remain bound. Both full profiles must be newly executed for this source epoch. Configured roots add90 fresh native sessions:75 supported stateful projections compare instructions/literals/frames/IP/debt/roots/temporary/string-owner counts through the existing VM loop;9 syntax and6 unsupported runtime-value observations remain separately typed boundaries, never lexer-policy exemptions. Seven public Runner tests and four real admission corruption controls are required. The selected unit test binary reads the exact fresh native captures. Both complete profiles must run on the newly frozen source; prior focused/native proofs are not relabeled. Arrays require93 fresh native sessions:78 full-state projections (including6 compile-only),12 explicit boundary sessions (27 exact compiler blocks with18 typed implementation boundaries,6 MissingIndex and3 cleanup returns),and3 actual protocol refusals. Eleven public tests and four real copied-stdout admission controls are required. Three pointer-bearing boundary outputs retain raw bytes; only exact native pointer formatting/length and same return/temp identity are portable, never pointer-text parity. All other fields stay exact. Selected production tests consume fresh native array captures; both full profiles must execute after this source freeze. Foreach requires255 fresh native sessions:255 strict stateful projections including six promoted historical string sessions and120 byte-string sessions. 19 public tests,34 private frame tests and15 copied-stdout admission controls execute against selected actual Cargo binaries. Both full profiles must freshly build and run all native sessions; focused evidence is not profile admission.",
+   "expected": "Fresh pinned native compiler/VM versus Cargo observer: 1188 fixtures x9 schedules +127 targeted budgets =10819 cases: 10666 strict comparisons and153 explicit policy rejections. All850 final-octal baseline and317 frozen string fixtures retained; 21 additional unique policy/control bodies added. All15 defined low-byte octal continuation fixtures remain strict. Seventeen exact policy bodies never execute original native code: retain exact policy.json native_executed:false plus actual Rust argv/status/stdout/stderr and require the precise typed rejection. These are eight original Token bodies plus nine HexEscape bodies. 62 scalar public,3 constant public and34 private Rust tests,12 native frame captures,four native lifetime sessions,23071 raw-f32 renderings,18 separate native source-feed observations,25 prior corruption controls and4 string controls. No undefined-domain observation is counted as native parity. Ordinary Unicode/native encoded-codepoint strings, byte-domain hex terminators, NUL/decoder and earlier-error ordering remain defined comparisons. This candidate requires fresh complete debug and optimized profiles; old candidate passes do not establish its admission. Constants add115 exact native session observations,37 strict buffer compiler/table comparisons,one of which additionally requires typed MissingIndex at runtime and3 stateful compile/lookup/execution projections. Native refcount/temp/drop-child records remain exact native observations alongside separate representable Rust ownership tests, not full raw Rust session parity. Four additional corruption controls require actual session admission PASS for the original and a specific typed stdout-mismatch REJECT for copied publication/counter/shared-state/lifetime mutations; argv/cwd/status/stderr and original bytes remain bound. Both full profiles must be newly executed for this source epoch. Configured roots add90 fresh native sessions:75 supported stateful projections compare instructions/literals/frames/IP/debt/roots/temporary/string-owner counts through the existing VM loop;9 syntax and6 unsupported runtime-value observations remain separately typed boundaries, never lexer-policy exemptions. Seven public Runner tests and four real admission corruption controls are required. The selected unit test binary reads the exact fresh native captures. Both complete profiles must run on the newly frozen source; prior focused/native proofs are not relabeled. Arrays require93 fresh native sessions:78 full-state projections (including6 compile-only),12 explicit boundary sessions (27 exact compiler blocks with18 typed implementation boundaries,6 MissingIndex and3 cleanup returns),and3 actual protocol refusals. Eleven public tests and four real copied-stdout admission controls are required. Three pointer-bearing boundary outputs retain raw bytes; only exact native pointer formatting/length and same return/temp identity are portable, never pointer-text parity. All other fields stay exact. Selected production tests consume fresh native array captures; both full profiles must execute after this source freeze. Foreach requires255 fresh native sessions:255 strict stateful projections including six promoted historical string sessions and120 byte-string sessions. 19 public tests,34 private frame tests and15 copied-stdout admission controls execute against selected actual Cargo binaries. Both full profiles must freshly build and run all native sessions; focused evidence is not profile admission.",
    "driver": "script-vm",
    "assets": [
     "scalar-vm-driver",
@@ -20389,7 +20812,54 @@
     "legacy-script-vm-scripts-script-vm-branches-spec-py",
     "legacy-script-vm-scripts-script-vm-roots-admission-py",
     "legacy-script-vm-scripts-script-vm-roots-capture-py",
-    "legacy-script-vm-scripts-script-vm-roots-spec-py"
+    "legacy-script-vm-scripts-script-vm-roots-spec-py",
+    "script-runtime-crates-ottd-script-src-compiler-functions-rs",
+    "script-runtime-crates-ottd-script-src-prototype-rs",
+    "script-runtime-crates-ottd-script-src-script-closure-rs",
+    "script-runtime-crates-ottd-script-src-script-closure-acyclic-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-compound-store-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-cycle-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-default-cycle-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-late-error-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-orphan-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-persistence-rs",
+    "script-runtime-crates-ottd-script-src-script-closure-persistence-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-publication-txt",
+    "script-runtime-crates-ottd-script-src-script-closure-safety-rs",
+    "script-runtime-crates-ottd-script-src-script-closure-stores-rs",
+    "script-runtime-crates-ottd-script-src-script-closure-tests-rs",
+    "script-runtime-crates-ottd-script-src-script-closure-view-txt",
+    "script-runtime-crates-ottd-script-src-vm-closures-rs",
+    "script-runtime-crates-ottd-script-src-vm-frames-rs",
+    "script-runtime-crates-ottd-script-src-vm-script-closure-type-txt",
+    "script-runtime-crates-ottd-script-src-vm-varargs-rs",
+    "script-runtime-crates-ottd-script-src-vm-varargs-owner-error-txt",
+    "script-runtime-crates-ottd-script-src-vm-varargs-owner-return-txt",
+    "script-runtime-crates-ottd-script-src-vm-varargs-owner-tail-txt",
+    "script-runtime-crates-ottd-script-src-vm-varargs-owners-rs",
+    "script-runtime-crates-ottd-script-src-vm-varargs-safety-rs",
+    "script-runtime-crates-ottd-script-tests-varargs-production-red-rs",
+    "script-runtime-scripts-compat-script-vm-closures-hpp",
+    "script-runtime-scripts-compat-script-vm-tables-closure-cases-py",
+    "script-runtime-scripts-compat-script-vm-tables-closure-controls-py",
+    "script-runtime-scripts-compat-script-vm-tables-closures-py",
+    "script-runtime-scripts-compat-script-vm-varargs-readme-md",
+    "script-runtime-scripts-compat-script-vm-varargs-audit-controls-py",
+    "script-runtime-scripts-compat-script-vm-varargs-build-native-sh",
+    "script-runtime-scripts-compat-script-vm-varargs-case-py",
+    "script-runtime-scripts-compat-script-vm-varargs-cases-py",
+    "script-runtime-scripts-compat-script-vm-varargs-compare-py",
+    "script-runtime-scripts-compat-script-vm-varargs-controls-py",
+    "script-runtime-scripts-compat-script-vm-varargs-fixtures-deep-nut",
+    "script-runtime-scripts-compat-script-vm-varargs-fixtures-discovery-nut",
+    "script-runtime-scripts-compat-script-vm-varargs-fixtures-owner-error-nut",
+    "script-runtime-scripts-compat-script-vm-varargs-fixtures-owner-return-nut",
+    "script-runtime-scripts-compat-script-vm-varargs-fixtures-owner-tail-nut",
+    "script-runtime-scripts-compat-script-vm-varargs-fixtures-tail-arity-failure-nut",
+    "script-runtime-scripts-compat-script-vm-varargs-observe-cpp",
+    "script-runtime-scripts-compat-script-vm-varargs-owners-py",
+    "script-runtime-scripts-compat-script-vm-varargs-varargs-hpp",
+    "script-runtime-scripts-compat-script-vm-varargs-verify-sh"
    ],
    "source_refs": [
     "scripts/check-script-vm.py",
@@ -20426,7 +20896,54 @@
     "scripts/script_vm_branches_spec.py",
     "scripts/script_vm_roots_admission.py",
     "scripts/script_vm_roots_capture.py",
-    "scripts/script_vm_roots_spec.py"
+    "scripts/script_vm_roots_spec.py",
+    "crates/ottd-script/src/compiler/functions.rs",
+    "crates/ottd-script/src/prototype.rs",
+    "crates/ottd-script/src/script_closure.rs",
+    "crates/ottd-script/src/script_closure/acyclic.txt",
+    "crates/ottd-script/src/script_closure/compound-store.txt",
+    "crates/ottd-script/src/script_closure/cycle.txt",
+    "crates/ottd-script/src/script_closure/default-cycle.txt",
+    "crates/ottd-script/src/script_closure/late-error.txt",
+    "crates/ottd-script/src/script_closure/orphan.txt",
+    "crates/ottd-script/src/script_closure/persistence.rs",
+    "crates/ottd-script/src/script_closure/persistence.txt",
+    "crates/ottd-script/src/script_closure/publication.txt",
+    "crates/ottd-script/src/script_closure/safety.rs",
+    "crates/ottd-script/src/script_closure/stores.rs",
+    "crates/ottd-script/src/script_closure/tests.rs",
+    "crates/ottd-script/src/script_closure/view.txt",
+    "crates/ottd-script/src/vm/closures.rs",
+    "crates/ottd-script/src/vm/frames.rs",
+    "crates/ottd-script/src/vm/script-closure-type.txt",
+    "crates/ottd-script/src/vm/varargs.rs",
+    "crates/ottd-script/src/vm/varargs/owner-error.txt",
+    "crates/ottd-script/src/vm/varargs/owner-return.txt",
+    "crates/ottd-script/src/vm/varargs/owner-tail.txt",
+    "crates/ottd-script/src/vm/varargs/owners.rs",
+    "crates/ottd-script/src/vm/varargs/safety.rs",
+    "crates/ottd-script/tests/varargs_production_red.rs",
+    "scripts/compat/script-vm/closures.hpp",
+    "scripts/compat/script-vm/tables/closure_cases.py",
+    "scripts/compat/script-vm/tables/closure_controls.py",
+    "scripts/compat/script-vm/tables/closures.py",
+    "scripts/compat/script-vm/varargs/README.md",
+    "scripts/compat/script-vm/varargs/audit_controls.py",
+    "scripts/compat/script-vm/varargs/build-native.sh",
+    "scripts/compat/script-vm/varargs/case.py",
+    "scripts/compat/script-vm/varargs/cases.py",
+    "scripts/compat/script-vm/varargs/compare.py",
+    "scripts/compat/script-vm/varargs/controls.py",
+    "scripts/compat/script-vm/varargs/fixtures/deep.nut",
+    "scripts/compat/script-vm/varargs/fixtures/discovery.nut",
+    "scripts/compat/script-vm/varargs/fixtures/owner-error.nut",
+    "scripts/compat/script-vm/varargs/fixtures/owner-return.nut",
+    "scripts/compat/script-vm/varargs/fixtures/owner-tail.nut",
+    "scripts/compat/script-vm/varargs/fixtures/tail-arity-failure.nut",
+    "scripts/compat/script-vm/varargs/observe.cpp",
+    "scripts/compat/script-vm/varargs/owners.py",
+    "scripts/compat/script-vm/varargs/varargs.hpp",
+    "scripts/compat/script-vm/varargs/verify.sh"
    ],
    "evidence": [
     "summary.json",

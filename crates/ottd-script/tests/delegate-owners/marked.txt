@@ -1,0 +1,23 @@
+snapshot attached
+object A 1 1 0 -
+object B 1 1 0 -
+object D 1 1 0 -
+object O 1 2 3 D
+collected reachable 0
+snapshot rooted
+object A 1 1 0 -
+object B 1 1 0 -
+object D 1 1 0 -
+object O 1 2 3 D
+chain D A B O
+collected unreachable 4
+snapshot released
+object A 0
+object B 0
+object D 0
+object O 0
+free A 88
+free B 88
+free D 88
+free O 88
+recorder 1

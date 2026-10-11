@@ -14,6 +14,7 @@ impl Vm<'_> {
         self.raised
             && match error {
                 VmError::ThrownValue
+                | VmError::DelegateCycle
                 | VmError::NativeCall
                 | VmError::NotCallable
                 | VmError::NullIndex

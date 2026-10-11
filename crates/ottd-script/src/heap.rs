@@ -1,8 +1,9 @@
 //! Realm-owned objects. Internal edges retain identities without owning the heap.
 mod collection;
+mod delegates;
 mod ownership;
 mod value;
-use crate::{Realm, VmError, table::nodes::Nodes};
+use crate::{Realm, VmError, table::Data};
 pub(crate) use ownership::{Edge, Handle, Unpublished};
 use ownership::{Life, ObjectId};
 use std::{
@@ -15,7 +16,7 @@ pub(crate) use value::Stored;
 pub(crate) enum Object {
     ScriptClosure(crate::script_closure::Data),
     NativeClosure(crate::native_closure::Data),
-    Table(Nodes),
+    Table(Data),
     Array(Vec<Stored>),
 }
 impl Object {
@@ -28,19 +29,24 @@ impl Object {
         };
         table
             .into_iter()
-            .flat_map(Nodes::values)
-            .chain(array.into_iter().flatten())
+            .filter_map(|data| data.delegate.as_ref())
             .chain(
-                closure
+                table
                     .into_iter()
-                    .flat_map(crate::native_closure::Data::values),
+                    .flat_map(|data| data.nodes.values())
+                    .chain(array.into_iter().flatten())
+                    .chain(
+                        closure
+                            .into_iter()
+                            .flat_map(crate::native_closure::Data::values),
+                    )
+                    .chain(
+                        script
+                            .into_iter()
+                            .flat_map(crate::script_closure::Data::values),
+                    )
+                    .filter_map(Stored::edge),
             )
-            .chain(
-                script
-                    .into_iter()
-                    .flat_map(crate::script_closure::Data::values),
-            )
-            .filter_map(Stored::edge)
     }
 }
 #[derive(Debug)]
@@ -158,3 +164,8 @@ impl Heap {
 mod release_tests;
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod delegate_tests;
+#[cfg(test)]
+mod owner_probe;

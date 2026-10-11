@@ -54,6 +54,8 @@ impl std::error::Error for CompileError {}
 pub enum VmError {
     /// An explicit script throw escaped every active exception trap.
     ThrownValue,
+    /// Attaching this delegate would form a direct or transitive delegate cycle.
+    DelegateCycle,
     /// A represented callable raised a native error retained by its runner.
     NativeCall,
     /// CALL reached a noncallable represented value.

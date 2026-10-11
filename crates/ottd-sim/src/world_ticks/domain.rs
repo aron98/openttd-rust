@@ -105,10 +105,15 @@ fn validate_companies(world: &World) -> Result<(), WorldTickError> {
         .get(b"PLYR")
         .ok_or_else(|| unsupported("company", "pool"))?;
     for id in companies.records().keys() {
-        for name in ["is_ai", "bankrupt_asked", "months_of_bankruptcy", "name_1"] {
+        for name in ["is_ai", "bankrupt_asked", "months_of_bankruptcy"] {
             if unsigned(world, b"PLYR", *id, name)? != 0 {
                 return Err(unsupported("company", name));
             }
+        }
+        if unsigned(world, b"PLYR", *id, "name_1")? != 0
+            && unsigned(world, b"PLYR", *id, "last_build_coordinate")? != 0
+        {
+            return Err(unsupported("company", "automatic name generation"));
         }
         if unsigned(world, b"PLYR", *id, "location_of_HQ")? != u64::from(u32::MAX) {
             return Err(unsupported("company", "headquarters"));

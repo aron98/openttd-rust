@@ -1,0 +1,10 @@
+--- a/src/reference_tree_growth_observer.hpp
++++ b/src/reference_tree_growth_observer.hpp
+@@ -26,6 +26,7 @@
+         event["raw"] = {tile.type(), tile.height(), tile.m1(), tile.m2(), tile.m3(), tile.m4(), tile.m5(), tile.m6(), tile.m7(), tile.m8()};
+     }
+     stream << event.dump() << '\n';
++    stream.flush();
+     if (!stream.good()) throw std::runtime_error("tree observation write failed");
+ }
+ class Scope {

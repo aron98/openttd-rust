@@ -1,0 +1,48 @@
+{
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "save_version": 362,
+  "parent": "frozen tree-growth mixed observer source from ed878c7 proof",
+  "native_source_inputs": {
+    "src/tree_cmd.cpp": {
+      "base_sha256": "0018000c85f0a0f3fb35628b4617d9300ce0c5fb491c83b709a6356d1e6a1f20",
+      "patched_sha256": "f9b748bdc81940b4b13796a7a655793a55eb783d1175cb0b570dca2002acf0f6"
+    },
+    "src/saveload/reference_replay_commands.hpp": {
+      "base_sha256": "eebde26ed9f7f552b2caea09ca5e0c2ed515e9e288bb9e450ac982e9e0f29565",
+      "patched_sha256": "398ed435a5cb3417a5e75b903f1575bbe2dcd83ba1e707adc4975682c1c66ccc"
+    },
+    "src/saveload/reference_movement_admission.hpp": {
+      "base_sha256": "3e2ac7f0042d12c1583ca1f035f8778ef4526d83cca6a879202ece9cb0bf62be",
+      "patched_sha256": "965bf9db9bd4c1339c2a2cfbf120153710bd1f46a7574c19aeedc018748ab8c6"
+    }
+  },
+  "scope": "Passive plant/death mutation observations; original CMD_CHANGE_SETTING values0..3; opt-in movement observer exact temperate tree domain",
+  "license": "GPL-2.0-only; original OpenTTD gameplay unchanged",
+  "patch_sha256": "c7cf55536da48b34e62919ef287bb63719f12962a3954ff853e4b08d1f0caef1",
+  "assertion_only_epoch": {
+    "patch_sha256": "7f4e0d311c459aa4819a099875abbfd7b96b2b3e49318df57e8f7f36ce676c9e",
+    "change": "flush every passive observer line for reached assertion diagnostics; gameplay unchanged",
+    "binary_sha256": "64882e8926ad384f1434ab7e630e9028265177728e6c29f94ef80be7489f880f"
+  },
+  "native_binary_sha256": "eb8ce7b451c5ba55392985b03130bdc056ec7fe789361ab422bbedf050a5bbba",
+  "build": {
+    "script": "scripts/build-tree-spread-reference.sh",
+    "parent_native_sha256": "5aa7d158cc7f78b55f1648a6c29b3cbb915177b3490f3375db43c77999f263e7",
+    "mode": "Release dedicated with assertions; ordinary ccache; -j4",
+    "source_parent": "ed878c7 frozen tree-integration/native/source; native30 movement hooks plus original tree observer",
+    "original_gameplay_commit": "14ec60f248547d4d062a1160f0fc26d742319888"
+  },
+  "proof": {
+    "driver": "scripts/check-tree-spread.py",
+    "rust_event_test": "crates/ottd-sim/tests/native_world_tree_spread.rs",
+    "arithmetic_probe": "scripts/tree_spread_counter.py",
+    "scope": "Private full state-loop temperate settings1/2 on64-square and512-square maps;4096-square scale256 tested only in source-extracted arithmetic probe",
+    "not_claimed": [
+      "normal-tree CI admission",
+      "Arctic/Tropic climate",
+      "snow/desert/water",
+      "Rust planting command parity",
+      "large-world4096-square full state loop"
+    ]
+  }
+}

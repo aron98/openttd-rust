@@ -5,7 +5,7 @@ pub(super) fn validate(map: &Map, index: usize) -> Result<(), LandscapeError> {
     let tile = map.tiles.get(index).ok_or(LandscapeError::Tile(index))?;
     let kind = tile.m5 >> 6;
     let supported = match kind {
-        0 => tile.m5 & 15 != 0 && (tile.m6 >> 3) & 7 <= 1,
+        0 => tile.m5 & 15 != 0 && matches!((tile.m6 >> 3) & 7, 0..=3 | 5),
         2 => true,
         _ => false,
     };

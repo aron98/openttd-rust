@@ -5,6 +5,8 @@ mod cargo_data;
 mod engine_data;
 mod engines;
 pub mod grf;
+mod house;
+mod house_data;
 mod price;
 mod price_data;
 mod prices;
@@ -15,11 +17,31 @@ mod types;
 mod vehicle;
 mod world;
 pub use cargo::CargoSpec;
+pub use house::HouseSpec;
 pub use price::Price;
 pub use prices::{Difficulty, PriceSettings, Prices};
 use serde::Serialize;
 pub use types::{CargoLabelSource, Climate, EngineInfo, EngineSpec, VehicleSpec};
 pub use vehicle::{AircraftSpec, RailSpec, RoadSpec, ShipSpec};
+
+pub(crate) fn vanilla_town_cargoes(effect: u8) -> Result<Vec<(u8, CargoSpec)>, ContentError> {
+    let indices = cargo_data::CLIMATE_CARGO
+        .first()
+        .ok_or(ContentError::Arithmetic)?;
+    let mut result = Vec::new();
+    for (id, index) in indices.iter().enumerate() {
+        let cargo = cargo_data::CARGO
+            .get(*index)
+            .ok_or(ContentError::Arithmetic)?;
+        if cargo.bitnum != 255 && cargo.town_production_effect == effect {
+            result.push((
+                u8::try_from(id).map_err(|_| ContentError::Arithmetic)?,
+                *cargo,
+            ));
+        }
+    }
+    Ok(result)
+}
 
 /// Content initialization failed without substituting unsupported definitions.
 #[derive(Debug, thiserror::Error)]

@@ -1,0 +1,24 @@
+--- a/src/newgrf_house.cpp
++++ b/src/newgrf_house.cpp
+@@ -180,6 +180,11 @@
+ std::span<const uint> GetBuildingHouseIDCounts()
+ {
+ 	return _building_counts.id_count;
++}
++
++std::span<const uint> ReferenceHouseGlobalClassCounts()
++{
++	return _building_counts.class_count;
+ }
+ 
+ /**
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -1214,6 +1214,7 @@
+ void StateGameLoop()
+ {
+ 	if (ReferenceReplay::Run()) return;
++	ReferenceHouse::WorldScope house_observation;
+ 	ReferenceMovement::Scope movement_loop("state_loop");
+ 	if (!_networking || _network_server) {
+ 		StateGameLoop_LinkGraphPauseControl();

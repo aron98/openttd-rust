@@ -21,7 +21,7 @@ inline bool HouseCommand(const Json &command)
         command.at("house").get<uint16_t>(), false, command.at("replace").get<bool>());
     if (kind == "house_setting") {
         const std::string name = command.at("name");
-        Require(name == "economy.place_houses" || name == "economy.town_cargogen_mode" || name == "economy.town_cargo_scale", "house setting outside preparation allowlist");
+        Require(name == "economy.place_houses" || name == "economy.town_cargogen_mode" || name == "economy.town_cargo_scale" || name == "difficulty.competitors_interval", "house setting outside preparation allowlist");
         return Command<CMD_CHANGE_SETTING>::Post(name, command.at("value").get<int32_t>());
     }
     throw std::runtime_error("unknown original house preparation command");

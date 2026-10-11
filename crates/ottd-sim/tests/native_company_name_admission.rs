@@ -27,14 +27,12 @@ fn original_inert_name_passes_and_active_generation_remains_explicit() -> Result
     let before = inert.saved_json()?;
     assert_eq!(company_number(&before, "name_1")?, 24577);
     assert_eq!(company_number(&before, "last_build_coordinate")?, 0);
-    assert!(matches!(
-        advance_world(&mut inert, 1),
-        Err(WorldTickError::Unsupported {
-            phase: "road_tile_loop",
-            ..
-        })
-    ));
-    assert_eq!(inert.saved_json()?, before);
+    advance_world(&mut inert, 1)?;
+    assert_eq!(company_number(&inert.saved_json()?, "name_1")?, 24577);
+    assert_eq!(
+        company_number(&inert.saved_json()?, "last_build_coordinate")?,
+        0
+    );
     let mut active = load(&directory.join("native-active-name/active-name.sav"))?;
     let before = active.saved_json()?;
     assert_eq!(company_number(&before, "name_1")?, 24577);

@@ -97,6 +97,7 @@ pub(super) fn validate(
     }
     validate_towns(world)?;
     validate_companies(world)?;
+    super::houses::validate(world)?;
     validate_roads(world, stations)
 }
 fn validate_companies(world: &World) -> Result<(), WorldTickError> {
@@ -167,12 +168,12 @@ fn validate_roads(world: &World, stations: bool) -> Result<bool, WorldTickError>
         }
     }
     for tile in world.map().tiles() {
-        if !(matches!(tile.tile_type() >> 4, 0 | 2 | 4 | 7)
+        if !(matches!(tile.tile_type() >> 4, 0 | 2 | 3 | 4 | 7)
             || stations && tile.tile_type() >> 4 == 5)
         {
             return Err(unsupported(
                 "road_tile_loop",
-                "requires house-free clear/road/tree/void map",
+                "requires clear/road/house/tree/void map",
             ));
         }
         if tile.tile_type() >> 4 == 2

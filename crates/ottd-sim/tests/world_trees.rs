@@ -121,14 +121,27 @@ fn grown_tree_draws_once_for_every_no_spread_branch() -> Result {
 #[test]
 fn late_tick_failure_rolls_back_tree_and_rng_edits() -> Result {
     let mut world = tree_world(3, 2, 0, 1)?;
-    world.edit_batch(vec![field(*b"DATE", "competitors_interval", 2)])?;
+    // Deliberate unit fault injection: industry failure follows the first tree draw.
+    world.edit_batch(vec![
+        field(*b"DATE", "date_fract", 72),
+        field(*b"DATE", "economy_date_fract", 72),
+        field(*b"ECMY", "industry_daily_change_counter", 65535),
+    ])?;
     let before = world.saved_json()?;
     let derived = world.derived().clone();
+    let mut prefix = World::decode(&world.to_savegame()?)?;
+    advance_world(&mut prefix, 1)?;
+    let progressed = prefix.saved_json()?;
+    for field in ["random_state[0]", "random_state[1]"] {
+        let path = format!("/chunks/DATE/records/0/{field}");
+        assert_ne!(progressed.pointer(&path), before.pointer(&path));
+    }
+    assert_ne!(prefix.map().tiles().get(586), world.map().tiles().get(586));
     let result = advance_world(&mut world, 2);
     assert!(matches!(
         result,
         Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "tick_timer",
+            phase: "industry_day",
             ..
         })
     ));

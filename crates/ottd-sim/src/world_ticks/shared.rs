@@ -2,6 +2,7 @@ pub(crate) struct WorldTickState<'w> {
     transaction: ottd_save::world::WorldTransaction<'w>,
     width: u32,
     height: u32,
+    towns: Option<crate::runtime::TownHouseCaches>,
 }
 
 #[derive(Debug, Clone)]
@@ -36,6 +37,13 @@ pub(crate) trait WorldTickPhases {
         state: &mut WorldTickState<'_>,
         clock: &ottd_core::ClockState,
     ) -> Result<(), WorldTickError>;
+    fn town_cargo(
+        &mut self,
+        state: &mut WorldTickState<'_>,
+        production: world_ticks::house_cargo::TownCargoProduction,
+    ) -> Result<u32, WorldTickError> {
+        world_ticks::house_cargo::deliver_empty(state, production)
+    }
 }
 
 pub(crate) fn unsupported_tick(phase: &'static str, reason: &str) -> WorldTickError {

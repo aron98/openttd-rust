@@ -30,6 +30,18 @@ impl SimulationRuntime {
         if self.save_context() != super::RuntimeSaveContext::SinglePlayer {
             return Err(unsupported("host", "network world-loop context"));
         }
+        if self.road.is_empty() {
+            let (candidate, report, towns) = State::plan(
+                &mut self.world,
+                ticks,
+                &mut crate::world_ticks::EmptyVehicles,
+            )?;
+            candidate.commit();
+            if let Some(towns) = towns {
+                self.towns = towns;
+            }
+            return Ok(report);
+        }
         if self.road.len() != 1 {
             return Err(unsupported("road", "exactly one vehicle required"));
         }
@@ -46,13 +58,16 @@ impl SimulationRuntime {
             stations: stations::IdleStations::restore(&self.world, &self.stations)?,
             transport: self.transport.clone(),
         };
-        let (candidate, report) = State::plan(&mut self.world, ticks, &mut runner)?;
+        let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
         let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
         runner.spatial.validate(vehicle, candidate.map().width())?;
         runner.transport.validate(candidate.view())?;
         candidate.commit();
         self.road.insert(id, runner.cache);
         self.transport = runner.transport;
+        if let Some(towns) = towns {
+            self.towns = towns;
+        }
         Ok(report)
     }
 }

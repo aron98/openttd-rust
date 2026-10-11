@@ -63,19 +63,58 @@ fn genuine_counter_wrap_places_a_tree_and_survives_reload() -> Result {
     Ok(())
 }
 #[test]
-fn failure_after_natural_placement_rolls_back_whole_world() -> Result {
+fn competitor_reset_follows_natural_placement() -> Result {
     let mut actual = world(BEFORE)?;
     actual.edit_batch(vec![date("competitors_interval", 2)])?;
     let before = actual.saved_json()?;
+    let mut split = World::decode(&actual.to_savegame()?)?;
+    advance_world(&mut actual, 2)?;
+    advance_world(&mut split, 1)?;
+    advance_world(&mut split, 1)?;
+    assert_eq!(actual.saved_json()?, split.saved_json()?);
+    assert_eq!(actual.derived(), split.derived());
+    assert_ne!(
+        actual.saved_json()?.pointer("/chunks/SRND/records/16"),
+        before.pointer("/chunks/SRND/records/16")
+    );
+    assert_eq!(
+        actual.map().tiles().get(2469).ok_or("tree")?.tile_type() >> 4,
+        4
+    );
+    Ok(())
+}
+
+#[test]
+fn injected_late_industry_failure_discards_actual_tree_placement() -> Result {
+    let mut actual = world(BEFORE)?;
+    // Unit fault injection only: preserve native tree/map/RNG inputs, arrange a day
+    // boundary after the first genuine placement. This is not a native parity fixture.
+    actual.edit_batch(vec![
+        date("date_fract", 72),
+        date("economy_date_fract", 72),
+        WorldEdit::Field {
+            chunk: *b"ECMY",
+            record: 0,
+            path: vec![PathElement::Field("industry_daily_change_counter".into())],
+            value: WireValue::Unsigned(65535),
+        },
+    ])?;
+    let before = actual.saved_json()?;
     let derived = actual.derived().clone();
-    let failure = advance_world(&mut actual, 2);
-    assert!(matches!(
-        failure,
-        Err(WorldTickError::Unsupported {
-            phase: "tick_timer",
-            ..
-        })
-    ));
+    let mut prefix = World::decode(&actual.to_savegame()?)?;
+    advance_world(&mut prefix, 1)?;
+    assert_eq!(
+        prefix.map().tiles().get(2469).ok_or("tree")?.tile_type() >> 4,
+        4
+    );
+    let placed = prefix.saved_json()?;
+    for field in ["trees_tick_counter", "random_state[0]", "random_state[1]"] {
+        let path = format!("/chunks/DATE/records/0/{field}");
+        assert_ne!(placed.pointer(&path), before.pointer(&path));
+    }
+    assert!(matches!(advance_world(&mut actual, 2),
+        Err(WorldTickError::Unsupported { phase: "industry_day", reason })
+            if reason.starts_with("call 1:")));
     assert_eq!(actual.saved_json()?, before);
     assert_eq!(actual.derived(), &derived);
     Ok(())

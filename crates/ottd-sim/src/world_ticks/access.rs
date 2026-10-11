@@ -23,8 +23,16 @@ impl<'w> State<'w> {
     pub(crate) fn apply(&mut self, edit: WorldEdit) -> Result<(), WorldTickError> {
         Ok(self.transaction.apply(edit)?)
     }
-    pub(crate) fn finish(self) -> Result<PreparedWorldTransaction<'w>, WorldTickError> {
-        Ok(self.transaction.prepare()?)
+    pub(crate) fn finish(
+        self,
+    ) -> Result<
+        (
+            PreparedWorldTransaction<'w>,
+            Option<crate::runtime::TownHouseCaches>,
+        ),
+        WorldTickError,
+    > {
+        Ok((self.transaction.prepare()?, self.towns))
     }
     pub(crate) fn table(&self, id: &[u8; 4]) -> Result<CandidateTable<'_>, WorldTickError> {
         self.view()
@@ -39,13 +47,17 @@ impl<'w> State<'w> {
                 .map_err(|_| unsupported("random", "state word"))?,
         ])
     }
-    pub(crate) const fn load(world: &'w mut World) -> Self {
+    pub(crate) const fn load(
+        world: &'w mut World,
+        towns: Option<crate::runtime::TownHouseCaches>,
+    ) -> Self {
         let width = world.map().width();
         let height = world.map().height();
         Self {
             transaction: world.transaction(),
             width,
             height,
+            towns,
         }
     }
     pub(crate) fn value(

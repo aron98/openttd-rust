@@ -66,7 +66,7 @@ impl Landscape {
         map: Map,
         cursor: u32,
         roads: bool,
-        trees: bool,
+        world_families: bool,
         stations: bool,
     ) -> Result<Self, LandscapeError> {
         let dimensions =
@@ -85,7 +85,11 @@ impl Landscape {
                 7 => {}
                 2 if roads => road::validate(&map, index)?,
                 5 if stations => {}
-                4 if trees && (tile.m2 >> 6) & 7 <= 1 && tile.m5 & 7 <= 6 && tile.m3 < 12 => {}
+                3 if world_families => {}
+                4 if world_families
+                    && (tile.m2 >> 6) & 7 <= 1
+                    && tile.m5 & 7 <= 6
+                    && tile.m3 < 12 => {}
                 _ => return Err(LandscapeError::Tile(index)),
             }
         }

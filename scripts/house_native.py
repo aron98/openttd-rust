@@ -88,6 +88,7 @@ class HouseNative:
         }
         if observe:
             variables["OTTD_HOUSE_EVENTS"] = str(output / "events.jsonl")
+            variables["OTTD_HOUSE_WORLD_EVENTS"] = str(output / "world-events.jsonl")
         argv = [
             str(self.binary),
             "-X",

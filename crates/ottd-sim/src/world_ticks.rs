@@ -4,6 +4,12 @@ mod clocks;
 mod company_history;
 mod domain;
 mod finance;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "typed producer handoff is shared internally with station transactions"
+)]
+pub(crate) mod house_cargo;
+mod houses;
 mod phases;
 use clocks::{restore_clock, save_clock};
 use phases::{competitor, daily, industry_month};
@@ -73,12 +79,16 @@ pub fn advance_world(world: &mut World, ticks: u32) -> Result<WorldTickReport, W
     if ticks == 0 {
         return Ok(WorldTickReport { ticks: Vec::new() });
     }
-    let (candidate, report) = State::plan(world, ticks, &mut EmptyVehicles)?;
+    let (candidate, report, _) = State::plan(world, ticks, &mut EmptyVehicles)?;
     candidate.commit();
     Ok(report)
 }
 
-struct EmptyVehicles;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "the public runtime shares the empty-vehicle phase runner"
+)]
+pub(crate) struct EmptyVehicles;
 impl VehiclePhases for EmptyVehicles {
     fn admit(&self, world: &World) -> Result<(), WorldTickError> {
         if world
@@ -111,7 +121,14 @@ impl State<'_> {
         world: &'w mut World,
         ticks: u32,
         vehicles: &mut impl VehiclePhases,
-    ) -> Result<(PreparedWorldTransaction<'w>, WorldTickReport), WorldTickError> {
+    ) -> Result<
+        (
+            PreparedWorldTransaction<'w>,
+            WorldTickReport,
+            Option<crate::runtime::TownHouseCaches>,
+        ),
+        WorldTickError,
+    > {
         if ticks > MAX_TICKS {
             return Err(unsupported("budget", "tick limit"));
         }
@@ -135,7 +152,12 @@ impl State<'_> {
                 .into_scheduler(),
             )
         };
-        let mut state = State::load(world);
+        let towns = if paused {
+            None
+        } else {
+            Some(crate::runtime::TownHouseCaches::restore(world)?)
+        };
+        let mut state = State::load(world, towns);
         let mut report = WorldTickReport { ticks: Vec::new() };
         for step in 0..ticks {
             let events = advance(&mut state, &mut clock, &mut landscape, vehicles, paused)
@@ -147,7 +169,8 @@ impl State<'_> {
                 })?;
             report.ticks.push(events);
         }
-        Ok((state.finish()?, report))
+        let (candidate, towns) = state.finish()?;
+        Ok((candidate, report, towns))
     }
 }
 
@@ -182,7 +205,10 @@ fn advance(
                             vehicles.station_month(state)?;
                             towns::monthly(state, clock.cache().economy_month)?;
                         }
-                        ClockEvent::EconomyYear => finance::yearly(state)?,
+                        ClockEvent::EconomyYear => {
+                            houses::yearly(state)?;
+                            finance::yearly(state)?;
+                        }
                         ClockEvent::CalendarDay
                         | ClockEvent::CalendarMonth
                         | ClockEvent::CalendarYear
@@ -201,9 +227,14 @@ fn advance(
                 let index =
                     u32::try_from(index).map_err(|_| unsupported("landscape", "tile index"))?;
                 let before = state.view().tile(index)?;
+                if before.tile_type() >> 4 == 3 {
+                    return houses::visit(state, index, clock.snapshot().tick_counter.0, vehicles);
+                }
                 let mut tile = tile(&before);
                 if tile.tile_type >> 4 == 4 {
                     trees::visit(state, &mut tile, index, clock.snapshot().tick_counter.0)?;
+                } else if tile.tile_type >> 4 == 2 {
+                    houses::road(state, &mut tile, index)?;
                 } else {
                     tile.visit_landscape();
                 }

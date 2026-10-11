@@ -1,5 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
+pub(crate) mod towns;
+pub use towns::{TownHouseCache, TownHouseCaches};
 mod movement;
 pub use movement::SingleRoadTileOccupancy;
 mod order_state;
@@ -139,6 +141,7 @@ pub struct SimulationRuntime {
     depot: depot::DepotRuntime,
     stations: stations::StationRuntime,
     transport: transport::TransportRuntime,
+    towns: TownHouseCaches,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -415,6 +418,7 @@ impl SimulationRuntime {
             .collect::<Result<BTreeMap<_, _>, RuntimeError>>()?;
         Ok(Self {
             orders,
+            towns: TownHouseCaches::restore(&world)?,
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
             transport: transport::TransportRuntime::restore(&world)?,
@@ -434,6 +438,11 @@ impl SimulationRuntime {
     /// Live transport pool history and restored payment/job state.
     pub fn transport_state_json(&self) -> serde_json::Value {
         self.transport.snapshot()
+    }
+
+    /// Population, building counts and radii used by vanilla house/town gameplay.
+    pub const fn town_house_caches(&self) -> &TownHouseCaches {
+        &self.towns
     }
 
     /// Station pool allocation metadata.

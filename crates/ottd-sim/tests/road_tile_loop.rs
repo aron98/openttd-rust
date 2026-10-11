@@ -79,7 +79,7 @@ fn unsupported_road_fields_are_rejected_before_publication() -> Result {
         let mut tile = ottd_save::TileRawParts::from(world.map().tiles().get(648).ok_or("tile")?);
         match case {
             0 => tile.m6 = (tile.m6 & !0x38) | 0x30,
-            1 => tile.m6 = (tile.m6 & !0x38) | 16,
+            1 => tile.m6 = (tile.m6 & !0x38) | 0x38,
             2 => tile.m4 = 1,
             3 => tile.m8 = 64,
             4 => tile.tile_type |= 4,

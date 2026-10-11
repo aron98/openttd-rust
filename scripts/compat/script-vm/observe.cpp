@@ -8,9 +8,10 @@
 #include "src/3rdparty/squirrel/squirrel/sqfuncproto.h"
 #include "src/3rdparty/squirrel/squirrel/sqclosure.h"
 #include "src/3rdparty/squirrel/squirrel/sqstring.h"
+#include "owner_trace.hpp"
 void *sq_vm_malloc(SQUnsignedInteger n){ auto p=std::malloc(n); if(!p) std::abort(); return p; }
 void *sq_vm_realloc(void *p,SQUnsignedInteger,SQUnsignedInteger n){auto q=std::realloc(p,n); if(!q && n) std::abort(); return q;}
-void sq_vm_free(void *p,SQUnsignedInteger){std::free(p);}
+void sq_vm_free(void *p,SQUnsignedInteger n){owner_trace::on_free(p,n);std::free(p);}
 [[noreturn]] void AssertFailedError(std::string_view msg, std::source_location){std::cerr<<msg; std::abort();}
 [[noreturn]] void NOT_REACHED(std::source_location){std::abort();}
 void DebugPrint(std::string_view, int, std::string &&msg){std::cerr<<msg<<'\n';}
@@ -37,6 +38,7 @@ void value(const SQObjectPtr &v) {
 #include "tables.hpp"
 #include "calls.hpp"
 #include "closures.hpp"
+#include "delegates.hpp"
 static std::ofstream print_output;
 static void record_print(HSQUIRRELVM, std::string_view bytes) {
  uint64_t size=bytes.size();
@@ -47,6 +49,7 @@ static void record_print(HSQUIRRELVM, std::string_view bytes) {
 }
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--delegate-owner") return delegate_owner_session(argc,argv);
  if(std::string_view(argv[1])=="--trap-error-owner") return trap_error_owner(argc,argv);
  if(std::string_view(argv[1])=="--closure-compound-store") return compound_store_errors();
  if(std::string_view(argv[1])=="--closure-publication") return closure_compile_publication();

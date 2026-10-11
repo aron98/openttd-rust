@@ -180,7 +180,24 @@ impl Recorder {
                 }
                 owner.phase = Phase::Published;
             }
-            _ => {}
+            Kind::CandidateBegin
+            | Kind::CandidatePrepared
+            | Kind::CandidateCommitted
+            | Kind::CandidateRefused
+            | Kind::HostEnter
+            | Kind::AfterPauseControl
+            | Kind::InnerExit
+            | Kind::InnerRefused
+            | Kind::OwnerFirstSeen
+            | Kind::WorkerSpawned
+            | Kind::RunningAppended
+            | Kind::StagedRemoval
+            | Kind::CommittedRelease
+            | Kind::CandidateDiscard
+            | Kind::BranchSample
+            | Kind::PauseApplied
+            | Kind::SnapshotBefore
+            | Kind::SnapshotAfter => {}
         }
         let identity = owner.identity;
         self.emit(kind, None);

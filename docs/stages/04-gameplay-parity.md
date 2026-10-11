@@ -40,7 +40,7 @@ The combined candidate passes 765 ordinary Rust tests, 587 Python tests with
 21,402 subtests, strict static checks and 143 declarations. Current proof
 retains 4,998 source Git blobs and 6,884 verified archive members. Active cargo
 recipients, growth/rebuild, animations, NewGRF and wider industries remain
-required. Default asynchronous jobs, user closures, industry-manager and
+required. User closures, industry-manager and
 populated cargo increments are in private integration/development; their
 unreviewed work is not credited here. All seven completion gates remain open.
 CI correction `3d15d6d` integrates four separately reviewable source/binding
@@ -55,6 +55,22 @@ nine omission checks, nine real retained-byte corruptions and three frame-argv
 corruptions. Current proof verifies 5,007 source blobs, 4,287 recipe inputs and
 1,276 compact archive members, including the rejected proof epoch. Published
 GNU/normal interoperability results remain pending. All seven gates stay open.
+
+Asynchronous increment `19f7a34` integrates six atomic executor, pause,
+transactional ownership, house-cache composition and current-binding changes.
+Independent review approves actual host execution for the bounded zero-demand
+job pipeline, saved-order restart, scheduled waits and rollback-safe leases.
+Root verifies 75 complete road pairs, 24 narrower routing pairs, four controlled
+worker consumers and seven timer comparisons. Root and reviewer each run
+63,881 current Rust house calls with 89 complete boundaries against genuine
+original captures; the native primary corpus is reused and both save-origin
+continuations execute the original anew. The combined candidate passes 772
+ordinary Rust tests, 596 Python tests with 21,608 subtests, strict checks and
+143 declarations. Its complete proof verifies 6,316 members and 5,015 source
+Git blobs. Two live completion observations and seven zero-call pause
+comparisons remain explicit, uncredited timing mismatches. Natural original
+slow prejoin, populated solvers, broader gameplay and GNU proof remain required;
+all seven completion gates stay open.
 
 Earlier milestones and their bounded verification results are recorded below.
 

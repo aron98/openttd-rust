@@ -1,5 +1,32 @@
 # Compatibility foundation verification
 
+## Reviewed asynchronous zero-demand link jobs
+
+Independent review approves six atomic commits through `19f7a34`. Supported
+zero-demand jobs now execute on owned host threads, restart in saved running-list
+order, observe original afterload/pre-tick pause, and wait at scheduled joins.
+Candidate leases preserve committed workers; failed candidates cancel all their
+new workers before joining any. Active landscape and house caches are installed
+together when a restored job pause releases.
+
+Root verifies 75 complete road state/runtime pairs and 24 narrower routing
+pairs. Root and reviewer each run the current Rust house loop for 63,881 calls
+and 89 complete boundaries against genuine original captures: the primary
+native corpus is reused unchanged, and both save-origin continuations execute
+the original anew. Four controlled worker checks, seven timer comparisons and
+late rollback checks pass. The candidate passes 772 ordinary Rust tests,
+596 Python tests with 21,608 subtests, strict static checks and 143 declarations.
+Its compact proof retains 6,316 verified members, all 5,015 source Git blobs,
+six selected executables and 104 actual Cargo depfiles. Evidence is under
+`.worktrees/stage04-async-integration/.omo/evidence/async-integration/current-proof/`
+and `.omo/evidence/stage04-async-review/report.md`.
+
+Two live worker observations and seven zero-call restored-pause comparisons
+remain uncredited timing mismatches. Natural original slow prejoin, populated
+Demand/MCF/FlowMapper, broader cargo/vehicles/settings and GNU execution remain
+required. Controlled scheduling tests are labelled Rust-only. All seven broad
+stage 4 gates stay open.
+
 ## Reviewed strict ScriptVM CI correction
 
 Independent review approves the four atomic commits through `3d15d6d`.

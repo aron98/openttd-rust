@@ -121,11 +121,11 @@ fn grown_tree_draws_once_for_every_no_spread_branch() -> Result {
 #[test]
 fn late_tick_failure_rolls_back_tree_and_rng_edits() -> Result {
     let mut world = tree_world(3, 2, 0, 1)?;
-    // Deliberate unit fault injection: industry failure follows the first tree draw.
+    // Deliberate unit fault injection: disaster failure follows the first tree draw.
     world.edit_batch(vec![
         field(*b"DATE", "date_fract", 72),
         field(*b"DATE", "economy_date_fract", 72),
-        field(*b"ECMY", "industry_daily_change_counter", 65535),
+        field(*b"DATE", "next_disaster_start", 1),
     ])?;
     let before = world.saved_json()?;
     let derived = world.derived().clone();
@@ -141,7 +141,7 @@ fn late_tick_failure_rolls_back_tree_and_rng_edits() -> Result {
     assert!(matches!(
         result,
         Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "industry_day",
+            phase: "disaster_day",
             ..
         })
     ));

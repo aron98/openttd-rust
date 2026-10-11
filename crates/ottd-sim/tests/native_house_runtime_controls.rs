@@ -17,7 +17,7 @@ fn world() -> Result<World> {
 
 #[test]
 #[ignore = "requires original populated stage-zero house save"]
-fn late_native_valid_industry_boundary_preserves_complete_house_runtime() -> Result {
+fn late_native_valid_disaster_boundary_preserves_complete_house_runtime() -> Result {
     let mut prefix = SimulationRuntime::restore_vanilla(world()?)?;
     let initial = prefix.saved_json()?;
     let initial_cache = prefix.town_house_caches().clone();
@@ -36,9 +36,9 @@ fn late_native_valid_industry_boundary_preserves_complete_house_runtime() -> Res
     let content = runtime.content().clone();
     let roads = runtime.road_caches().clone();
     assert!(matches!(
-        runtime.advance_world(36_778),
+        runtime.advance_world(60_680),
         Err(WorldTickError::Unsupported {
-            phase: "industry_day",
+            phase: "disaster_day",
             ..
         })
     ));

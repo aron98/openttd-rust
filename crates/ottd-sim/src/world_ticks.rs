@@ -10,6 +10,7 @@ mod finance;
 )]
 pub(crate) mod house_cargo;
 mod houses;
+mod industry_manager;
 mod phases;
 mod plan;
 use clocks::save_clock;

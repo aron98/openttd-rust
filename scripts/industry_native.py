@@ -20,7 +20,14 @@ class IndustryNative:
     binary: Path
     source: Path
 
-    def run(self, output: Path, actions: list[Json], *, observe: bool = True) -> Path:
+    def run(
+        self,
+        output: Path,
+        actions: list[Json],
+        *,
+        observe: bool = True,
+        whole_loop: bool = False,
+    ) -> Path:
         output.mkdir(parents=True)
         protocol = output / "protocol.json"
         config = output / "openttd.cfg"
@@ -35,6 +42,9 @@ class IndustryNative:
         }
         if observe:
             variables["OTTD_INDUSTRY_EVENTS"] = str(output / "industry-events.jsonl")
+        if whole_loop:
+            variables["OTTD_HOUSE_EVENTS"] = str(output / "events.jsonl")
+            variables["OTTD_HOUSE_WORLD_EVENTS"] = str(output / "world-events.jsonl")
         argv = [
             str(self.binary),
             "-X",

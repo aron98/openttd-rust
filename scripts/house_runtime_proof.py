@@ -64,7 +64,7 @@ class HouseProof:
 
     def controls_run(self, ready: Path, corpus: Path, output: Path) -> None:
         for name in (
-            "late_native_valid_industry_boundary_preserves_complete_house_runtime",
+            "late_native_valid_disaster_boundary_preserves_complete_house_runtime",
             "network_ticks_remain_explicit_and_zero_calls_are_inert",
             "original_animation_and_growth_controls_are_transactionally_refused",
         ):

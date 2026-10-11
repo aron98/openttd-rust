@@ -8,25 +8,9 @@ pub(super) fn daily(state: &mut State<'_>) -> Result<(), WorldTickError> {
         return Err(unsupported("disaster_day", "disaster delay reset/RNG"));
     }
     state.set_number(b"DATE", 0, "next_disaster_start", delay)?;
-    let increment = u64::from(state.width).saturating_mul(u64::from(state.height)) / 31;
-    let counter = u64::try_from(state.number(b"ECMY", 0, "industry_daily_change_counter")?)
-        .map_err(|_| unsupported("industry_day", "counter"))?
-        .wrapping_add(increment)
-        & 0xffff_ffff;
-    if counter >> 16 != 0 {
-        return Err(unsupported(
-            "industry_day",
-            "industry production/construction attempt",
-        ));
-    }
-    state.set_number(
-        b"ECMY",
-        0,
-        "industry_daily_change_counter",
-        i64::try_from(counter).map_err(|_| unsupported("industry_day", "counter"))?,
-    )?;
-    Ok(())
+    super::industry_manager::daily(state)
 }
+
 pub(super) fn competitor(state: &mut State<'_>) -> Result<(), WorldTickError> {
     if state.number(b"DATE", 0, "competitors_interval_fired")? != 0 {
         return Ok(());

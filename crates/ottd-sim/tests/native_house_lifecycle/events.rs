@@ -139,7 +139,12 @@ fn raw(world: &World, index: u32) -> Result<[u64; 10]> {
 
 pub(super) fn scheduled_houses(runtime: &SimulationRuntime, next_tick: u64) -> Result<Vec<u32>> {
     let world = runtime.world();
-    assert_eq!((world.map().width(), world.map().height()), (64, 64));
+    // Pinned landscape.cpp RunTileLoop: sum of map exponents selects feedback.
+    let (feedback, count) = match (world.map().width(), world.map().height()) {
+        (64, 64) => (0x0d8f, 16),
+        (128, 128) => (0x2496, 64),
+        _ => return Err("map shape outside this native proof corpus".into()),
+    };
     if number(world, *b"DATE", 0, "pause_mode")? != 0 {
         return Ok(Vec::new());
     }
@@ -148,9 +153,9 @@ pub(super) fn scheduled_houses(runtime: &SimulationRuntime, next_tick: u64) -> R
     if next_tick % 256 == 0 {
         visits.push(0);
     }
-    for _ in visits.len()..16 {
+    for _ in visits.len()..count {
         visits.push(cursor);
-        cursor = (cursor >> 1) ^ if cursor & 1 == 1 { 0x0d8f } else { 0 };
+        cursor = (cursor >> 1) ^ if cursor & 1 == 1 { feedback } else { 0 };
     }
     visits
         .into_iter()

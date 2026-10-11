@@ -46,7 +46,7 @@ fn native_zero_ai_timer_matches_complete_world_loop() -> Result {
 
 #[test]
 #[ignore = "requires genuine original fired timer input and its native first reset"]
-fn late_industry_boundary_rolls_back_prior_script_random_reset() -> Result {
+fn late_disaster_boundary_rolls_back_prior_script_random_reset() -> Result {
     let directory = PathBuf::from(std::env::var("OTTD_COMPETITOR_NATIVE_DIR")?);
     let save = Savegame::decode(
         &std::fs::read(directory.join("initial.sav"))?,
@@ -62,9 +62,9 @@ fn late_industry_boundary_rolls_back_prior_script_random_reset() -> Result {
     let mut world = World::decode(&save)?;
     let derived = world.derived().clone();
     assert!(matches!(
-        ottd_sim::advance_world(&mut world, 36_778),
+        ottd_sim::advance_world(&mut world, 60_680),
         Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "industry_day",
+            phase: "disaster_day",
             ..
         })
     ));

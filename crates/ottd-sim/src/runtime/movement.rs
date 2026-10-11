@@ -13,6 +13,8 @@ mod industry_capacity;
 #[cfg(test)]
 mod industry_controls;
 #[cfg(test)]
+mod industry_eligibility;
+#[cfg(test)]
 mod industry_rollback;
 mod loading;
 mod service;

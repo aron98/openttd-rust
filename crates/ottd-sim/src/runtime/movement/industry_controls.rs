@@ -19,6 +19,7 @@ fn synthetic_forest_stock_history_wrapping_and_fraction_only_handoff() -> Result
         ("history-wrap", 156_u16, 65_500_u16, 175_u8, 107_u16, 64_u8),
         ("clamped-stock", 65_535, 65_500, 175, 175, 80),
         ("fraction-only", 31, 0, 1, 0, 62),
+        ("zero-rating", 156, 0, 0, 0, 0),
     ] {
         // Given explicit synthetic saved arithmetic values over the real first handoff input.
         let mut world = World::decode(&Savegame::decode(

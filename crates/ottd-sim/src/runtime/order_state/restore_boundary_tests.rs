@@ -1,9 +1,12 @@
+#[path = "restore_boundary_tests_support.rs"]
+mod support;
 use super::restore_tests::{build, copied_backup, sell};
 use super::*;
 use ottd_save::{
     TableRecord, WireValue,
     world::{PathElement, WorldEdit},
 };
+use support::common;
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 #[test]
@@ -106,20 +109,7 @@ fn restore_preserves_nonempty_renewal_rows_and_company_link() -> Result {
     );
     Ok(())
 }
-fn common(id: u32, name: &str, value: WireValue) -> WorldEdit {
-    WorldEdit::Field {
-        chunk: *b"VEHS",
-        record: id,
-        path: vec![
-            PathElement::Field("roadveh".into()),
-            PathElement::Index(0),
-            PathElement::Field("common".into()),
-            PathElement::Index(0),
-            PathElement::Field(name.into()),
-        ],
-        value,
-    }
-}
+
 #[test]
 fn restore_cache_failure_rolls_back_consumption_list_allocation_money_and_rng() -> Result {
     let (mut runtime, tile, _, first, second) = super::tests::shared_fixture()?;

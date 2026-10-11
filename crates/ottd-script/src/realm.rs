@@ -53,7 +53,7 @@ impl Realm {
         source: &[u8],
         name: &std::ffi::CStr,
     ) -> Result<Program, CompileError> {
-        crate::compiler::compile_in(self, source, name.to_bytes())
+        crate::compiler::compile_in(self, source, name.to_bytes()).map_err(|failure| failure.error)
     }
     /// Intern immutable length-delimited bytes, including embedded NUL.
     pub fn string(&self, bytes: &[u8]) -> ByteString {

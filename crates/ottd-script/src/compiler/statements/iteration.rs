@@ -1,14 +1,15 @@
 //! Native post-test loops and for-increment extraction/re-emission.
 use super::super::Compiler;
-use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
-    pub(super) fn begin_loop(&mut self) -> Result<(), CompileError> {
+    pub(super) fn begin_loop(&mut self) -> Result<(), CompileFailure> {
         self.break_targets.push(Vec::new());
         self.continue_targets.push(Vec::new());
         self.last_stack_size = self.size()?;
         Ok(())
     }
-    pub(super) fn finish_breaks(&mut self) -> Result<(), CompileError> {
+    pub(super) fn finish_breaks(&mut self) -> Result<(), CompileFailure> {
         let targets = self
             .break_targets
             .pop()
@@ -19,7 +20,7 @@ impl Compiler<'_> {
         }
         Ok(())
     }
-    pub(super) fn finish_loop(&mut self, continue_target: i32) -> Result<(), CompileError> {
+    pub(super) fn finish_loop(&mut self, continue_target: i32) -> Result<(), CompileFailure> {
         self.finish_breaks()?;
         let targets = self
             .continue_targets
@@ -30,7 +31,7 @@ impl Compiler<'_> {
         }
         Ok(())
     }
-    pub(super) fn do_loop(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn do_loop(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         let head = self.position()?;
         let size = self.size()?;
@@ -38,7 +39,9 @@ impl Compiler<'_> {
         self.statement(depth)?;
         self.registers.truncate(size);
         if self.token.kind != TokenKind::While {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native("expected 'while'"));
         }
         self.advance()?;
         let continue_target = self.position()?;
@@ -56,7 +59,7 @@ impl Compiler<'_> {
         self.patch(self.position()?, head)?;
         self.finish_loop(continue_target)
     }
-    pub(super) fn for_loop(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn for_loop(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         let size = self.size()?;
         self.expect(b'(')?;

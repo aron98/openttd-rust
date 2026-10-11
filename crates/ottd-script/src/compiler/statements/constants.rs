@@ -1,21 +1,22 @@
 //! Declaration publication follows parser traversal, including failed compiles.
 use super::super::Compiler;
+use crate::compiler::diagnostics::CompileFailure;
 use crate::{
-    ByteString, CompileError, CompileErrorKind, Value,
+    ByteString, CompileErrorKind, Value,
     lexer::TokenKind,
     realm::constants::{Binding, Members, Scalar},
 };
 use std::rc::Rc;
 impl Compiler<'_> {
-    pub(in crate::compiler) fn constant_name(&mut self) -> Result<ByteString, CompileError> {
+    pub(in crate::compiler) fn constant_name(&mut self) -> Result<ByteString, CompileFailure> {
         let TokenKind::Identifier(name) = self.token.kind else {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self.expected_identifier());
         };
         let name = self.realm.string(name.as_bytes());
         self.advance()?;
         Ok(name)
     }
-    fn scalar(&mut self) -> Result<Scalar, CompileError> {
+    fn scalar(&mut self) -> Result<Scalar, CompileFailure> {
         let negative = self.token.kind == TokenKind::Symbol(b'-');
         if negative {
             self.advance()?;
@@ -32,12 +33,20 @@ impl Compiler<'_> {
                 Scalar::Float(if negative { bits ^ 0x8000_0000 } else { bits })
             }
             TokenKind::Scalar(Value::String(value)) if !negative => Scalar::String(value),
-            _ => return Err(self.error(CompileErrorKind::ExpectedToken)),
+            _ => {
+                return Err(self
+                    .error(CompileErrorKind::ExpectedToken)
+                    .native(if negative {
+                        "scalar expected : integer,float"
+                    } else {
+                        "scalar expected : integer,float or string"
+                    }));
+            }
         };
         self.advance()?;
         Ok(scalar)
     }
-    pub(super) fn constant_declaration(&mut self) -> Result<(), CompileError> {
+    pub(super) fn constant_declaration(&mut self) -> Result<(), CompileFailure> {
         self.advance()?;
         let name = self.constant_name()?;
         self.expect(b'=')?;
@@ -46,7 +55,7 @@ impl Compiler<'_> {
         self.realm.publish(name, Binding::Scalar(value));
         Ok(())
     }
-    pub(super) fn enum_declaration(&mut self) -> Result<(), CompileError> {
+    pub(super) fn enum_declaration(&mut self) -> Result<(), CompileFailure> {
         self.advance()?;
         let name = self.constant_name()?;
         self.expect(b'{')?;

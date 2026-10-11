@@ -48,7 +48,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         Ok(program) => program,
         Err(error) => {
             println!("compile_error");
-            eprintln!("{error}");
+            write_diagnostic(runner.native_error(), &error)?;
             return Ok(());
         }
     };
@@ -109,12 +109,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
             Err(error) => {
                 println!("runtime_error {}", vm.remaining_ops());
-                if let Some(error) = vm.native_error() {
-                    std::io::stderr().write_all(error.as_bytes())?;
-                    std::io::stderr().write_all(b"\n")?;
-                } else {
-                    eprintln!("{error}");
-                }
+                write_diagnostic(vm.native_error(), &error)?;
                 break;
             }
         }
@@ -127,6 +122,18 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     }
     Ok(())
+}
+
+fn write_diagnostic(
+    message: Option<&ottd_script::ByteString>,
+    error: &impl std::fmt::Display,
+) -> std::io::Result<()> {
+    if let Some(message) = message {
+        std::io::stderr().write_all(message.as_bytes())?;
+        std::io::stderr().write_all(b"\n")
+    } else {
+        writeln!(std::io::stderr(), "{error}")
+    }
 }
 
 fn varargs(vm: &Vm<'_>) {

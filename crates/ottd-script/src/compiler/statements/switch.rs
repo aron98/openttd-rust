@@ -1,8 +1,9 @@
 //! Switch retains selector/case targets and owns breaks but not continues.
 use super::super::Compiler;
-use crate::{CompileError, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{Instruction, lexer::TokenKind};
 impl Compiler<'_> {
-    pub(super) fn switch_statement(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn switch_statement(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         self.expect(b'(')?;
         self.comma(0)?;
@@ -66,7 +67,7 @@ impl Compiler<'_> {
         let _selector = self.pop()?;
         self.finish_breaks()
     }
-    fn switch_body(&mut self, depth: u8) -> Result<(), CompileError> {
+    fn switch_body(&mut self, depth: u8) -> Result<(), CompileFailure> {
         let size = self.size()?;
         self.last_stack_size = size;
         self.statements(depth)?;

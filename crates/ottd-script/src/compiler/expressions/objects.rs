@@ -1,13 +1,14 @@
 //! Native delete owns a nested expression state and retains its terminal field.
 use super::{Compiler, ExpressionState};
-use crate::{CompileError, CompileErrorKind, Instruction};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction};
 impl Compiler<'_> {
     pub(super) fn unary_expression(
         &mut self,
         depth: u8,
         state: &mut ExpressionState,
         opcode: u8,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         self.advance()?;
         self.prefixed(depth, state)?;
         let source = self.pop()?;
@@ -21,7 +22,7 @@ impl Compiler<'_> {
         });
         Ok(())
     }
-    pub(super) fn delete_expression(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn delete_expression(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         let mut state = ExpressionState {
             deleting: true,
@@ -29,7 +30,13 @@ impl Compiler<'_> {
         };
         self.prefixed(depth, &mut state)?;
         if !state.field {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self.error(CompileErrorKind::ExpectedToken).native(
+                if state.dereference.is_none() {
+                    "can't delete an expression"
+                } else {
+                    "cannot delete a local"
+                },
+            ));
         }
         let key = self.pop()?;
         let receiver = self.pop()?;

@@ -1,7 +1,8 @@
 //! Child prototypes share the lexer while retaining independent register state.
 use super::{Compiler, Emitter, Register, Registers};
+use crate::compiler::diagnostics::CompileFailure;
 use crate::{
-    CompileError, CompileErrorKind, Instruction, Value,
+    CompileErrorKind, Instruction, Value,
     lexer::TokenKind,
     prototype::{Capture, Data},
     table::scalar::Scalar,
@@ -14,7 +15,7 @@ struct Parameters<'a> {
     variadic: bool,
 }
 impl<'a> Compiler<'a> {
-    pub(super) fn scalar_literals(&self) -> Result<Vec<Scalar>, CompileError> {
+    pub(super) fn scalar_literals(&self) -> Result<Vec<Scalar>, CompileFailure> {
         self.literals
             .iter()
             .cloned()
@@ -24,10 +25,10 @@ impl<'a> Compiler<'a> {
             })
             .collect()
     }
-    pub(super) fn function_statement(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn function_statement(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         let TokenKind::Identifier(name) = self.token.kind else {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self.expected_identifier());
         };
         self.advance()?;
         self.registers.reference(Register(0));
@@ -53,7 +54,7 @@ impl<'a> Compiler<'a> {
         &mut self,
         depth: u8,
         name: Option<&str>,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         self.depth(depth)?;
         let parameters = self.parameters(depth)?;
         let mut captures = Vec::new();
@@ -62,7 +63,7 @@ impl<'a> Compiler<'a> {
             self.expect(b'(')?;
             while self.token.kind != TokenKind::Symbol(b')') {
                 let TokenKind::Identifier(name) = self.token.kind else {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self.expected_identifier());
                 };
                 let capture = if let Some(register) = self.registers.local(name) {
                     Capture::Local(register.0)
@@ -80,7 +81,9 @@ impl<'a> Compiler<'a> {
                 if self.token.kind == TokenKind::Symbol(b',') {
                     self.advance()?;
                 } else if self.token.kind != TokenKind::Symbol(b')') {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("expected ')' or ','"));
                 }
             }
             self.advance()?;
@@ -153,7 +156,7 @@ impl<'a> Compiler<'a> {
         });
         Ok(())
     }
-    fn parameters(&mut self, depth: u8) -> Result<Parameters<'a>, CompileError> {
+    fn parameters(&mut self, depth: u8) -> Result<Parameters<'a>, CompileFailure> {
         let mut registers = Registers::new();
         let mut defaults = Vec::new();
         let mut parameters = vec![self.realm.string(b"this")];
@@ -161,17 +164,19 @@ impl<'a> Compiler<'a> {
         while self.token.kind != TokenKind::Symbol(b')') {
             if self.token.kind == TokenKind::Ellipsis {
                 if !defaults.is_empty() {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self.error(CompileErrorKind::ExpectedToken).native("function with default parameters cannot have variable number of parameters"));
                 }
                 variadic = true;
                 self.advance()?;
                 if self.token.kind != TokenKind::Symbol(b')') {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("expected ')'"));
                 }
                 break;
             }
             let TokenKind::Identifier(name) = self.token.kind else {
-                return Err(self.error(CompileErrorKind::ExpectedToken));
+                return Err(self.expected_identifier());
             };
             registers
                 .bind(name)
@@ -188,12 +193,16 @@ impl<'a> Compiler<'a> {
                         .0,
                 );
             } else if !defaults.is_empty() {
-                return Err(self.error(CompileErrorKind::ExpectedToken));
+                return Err(self
+                    .error(CompileErrorKind::ExpectedToken)
+                    .native("expected '='"));
             }
             if self.token.kind == TokenKind::Symbol(b',') {
                 self.advance()?;
             } else if self.token.kind != TokenKind::Symbol(b')') {
-                return Err(self.error(CompileErrorKind::ExpectedToken));
+                return Err(self
+                    .error(CompileErrorKind::ExpectedToken)
+                    .native("expected ')' or ','"));
             }
         }
         self.advance()?;

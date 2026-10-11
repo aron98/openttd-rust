@@ -1,7 +1,8 @@
 use super::Lexer;
-use crate::{CompileError, CompileErrorKind, NativeCharacterContext, Value};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, NativeCharacterContext, Value};
 impl Lexer<'_> {
-    pub(super) fn number(&mut self) -> Result<Value, CompileError> {
+    pub(super) fn number(&mut self) -> Result<Value, CompileFailure> {
         let start = self.position;
         let first = self.peek();
         self.advance()?;
@@ -34,7 +35,13 @@ impl Lexer<'_> {
                     .is_some_and(|b| b.is_ascii_digit()))
                 || (radix == 16 && self.position.saturating_sub(digits) > 16)
             {
-                return Err(self.error(CompileErrorKind::InvalidNumber));
+                return Err(self
+                    .error(CompileErrorKind::InvalidNumber)
+                    .native(if radix == 8 {
+                        "invalid octal number"
+                    } else {
+                        "too many digits for an Hex number"
+                    }));
             }
             let text = self
                 .source
@@ -64,7 +71,9 @@ impl Lexer<'_> {
                         .classify(NativeCharacterContext::Number)?
                         .is_some_and(|b| b.is_ascii_digit())
                     {
-                        return Err(self.error(CompileErrorKind::InvalidNumber));
+                        return Err(self
+                            .error(CompileErrorKind::InvalidNumber)
+                            .native("exponent expected"));
                     }
                 }
                 _ => break,

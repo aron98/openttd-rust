@@ -1,8 +1,9 @@
 //! Native allocation and indexed expression-target lowering.
 use super::{Compiler, ExpressionState, Register};
-use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
-    pub(super) fn array_literal(&mut self, depth: u8) -> Result<Option<Register>, CompileError> {
+    pub(super) fn array_literal(&mut self, depth: u8) -> Result<Option<Register>, CompileFailure> {
         let array = self.push()?;
         self.emit(Instruction {
             opcode: 0x1f,
@@ -41,9 +42,11 @@ impl Compiler<'_> {
         &mut self,
         depth: u8,
         state: &mut ExpressionState,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         if self.token.newline {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native("cannot brake deref/or comma needed after [exp]=exp slot declaration"));
         }
         self.advance()?;
         let _index = self.expression(self.depth(depth)?)?;

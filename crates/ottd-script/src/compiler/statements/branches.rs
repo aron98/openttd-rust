@@ -1,8 +1,9 @@
 //! Branch patching and loop exit ownership.
 use super::super::Compiler;
-use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
-    pub(super) fn conditional(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn conditional(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         self.expect(b'(')?;
         self.comma(0)?;
@@ -44,7 +45,7 @@ impl Compiler<'_> {
         self.patch(branch, end_first)?;
         Ok(())
     }
-    pub(super) fn while_loop(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn while_loop(&mut self, depth: u8) -> Result<(), CompileFailure> {
         let head = self.position()?;
         self.advance()?;
         self.expect(b'(')?;
@@ -75,14 +76,20 @@ impl Compiler<'_> {
         self.patch(branch, end)?;
         self.finish_loop(head)
     }
-    pub(super) fn loop_exit(&mut self, continuing: bool) -> Result<(), CompileError> {
+    pub(super) fn loop_exit(&mut self, continuing: bool) -> Result<(), CompileFailure> {
         let missing = if continuing {
             self.continue_targets.is_empty()
         } else {
             self.break_targets.is_empty()
         };
         if missing {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native(if continuing {
+                    "'continue' has to be in a loop block"
+                } else {
+                    "'break' has to be in a loop block"
+                }));
         }
         self.scope_end(self.last_stack_size)?;
         self.emit(Instruction {

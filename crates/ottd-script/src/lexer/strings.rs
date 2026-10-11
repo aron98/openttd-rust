@@ -1,8 +1,9 @@
 //! String decoding follows native codepoint input and `APPEND_CHAR` UTF-8 encoding.
-use super::{CompileError, CompileErrorKind, Lexer, NativeCharacterContext};
+use super::{CompileErrorKind, Lexer, NativeCharacterContext};
 use crate::Value;
+use crate::compiler::diagnostics::CompileFailure;
 impl Lexer<'_> {
-    pub(super) fn string(&mut self, verbatim: bool) -> Result<Value, CompileError> {
+    pub(super) fn string(&mut self, verbatim: bool) -> Result<Value, CompileFailure> {
         let delimiter = self
             .peek()
             .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
@@ -10,7 +11,11 @@ impl Lexer<'_> {
         let mut bytes = Vec::new();
         loop {
             match self.peek() {
-                None | Some(0) => return Err(self.error(CompileErrorKind::ExpectedToken)),
+                None | Some(0) => {
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("unfinished string"));
+                }
                 Some(byte) if byte == delimiter => {
                     self.advance()?;
                     if verbatim && self.peek() == Some(b'"') {
@@ -20,7 +25,11 @@ impl Lexer<'_> {
                         break;
                     }
                 }
-                Some(b'\n') if !verbatim => return Err(self.error(CompileErrorKind::ExpectedToken)),
+                Some(b'\n') if !verbatim => {
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("newline in a constant"));
+                }
                 Some(b'\\') if !verbatim => {
                     self.advance()?;
                     self.escape(&mut bytes)?;
@@ -37,16 +46,23 @@ impl Lexer<'_> {
         }
         if delimiter == b'\'' {
             let [byte] = bytes.as_slice() else {
-                return Err(self.error(CompileErrorKind::ExpectedToken));
+                return Err(self.error(CompileErrorKind::ExpectedToken).native(
+                    if bytes.is_empty() {
+                        "empty constant"
+                    } else {
+                        "constant too long"
+                    },
+                ));
             };
             return Ok(Value::Integer(i64::from(*byte)));
         }
         Ok(Value::String(self.realm.string(&bytes)))
     }
-    fn escape(&mut self, bytes: &mut Vec<u8>) -> Result<(), CompileError> {
-        let byte = self
-            .peek()
-            .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
+    fn escape(&mut self, bytes: &mut Vec<u8>) -> Result<(), CompileFailure> {
+        let byte = self.peek().ok_or_else(|| {
+            self.error(CompileErrorKind::ExpectedToken)
+                .native("unrecognised escaper char")
+        })?;
         if byte == b'x' {
             self.advance()?;
             let mut value = 0_u16;
@@ -66,7 +82,9 @@ impl Lexer<'_> {
                 count = count.saturating_add(1);
             }
             if count == 0 {
-                return Err(self.error(CompileErrorKind::InvalidNumber));
+                return Err(self
+                    .error(CompileErrorKind::InvalidNumber)
+                    .native("hexadecimal number expected"));
             }
             // Native narrows through target C char before APPEND_CHAR encoding.
             let narrowed = std::ffi::c_char::from_ne_bytes([value.to_le_bytes()[0]]);
@@ -88,7 +106,11 @@ impl Lexer<'_> {
             b'f' => 12,
             b'0' => 0,
             b'\\' | b'"' | b'\'' => byte,
-            _ => return Err(self.error(CompileErrorKind::ExpectedToken)),
+            _ => {
+                return Err(self
+                    .error(CompileErrorKind::ExpectedToken)
+                    .native("unrecognised escaper char"));
+            }
         });
         self.advance()?;
         Ok(())

@@ -1,13 +1,14 @@
 //! Statement boundaries, declarations and scope lifetime.
 use super::Compiler;
-use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, Value, lexer::TokenKind};
 mod branches;
 mod constants;
 mod foreach;
 mod iteration;
 mod switch;
 impl Compiler<'_> {
-    pub(super) fn main(&mut self) -> Result<(), CompileError> {
+    pub(super) fn main(&mut self) -> Result<(), CompileFailure> {
         while self.token.kind != TokenKind::End {
             self.statement(0)?;
             if self.previous != TokenKind::Symbol(b'}') {
@@ -31,16 +32,18 @@ impl Compiler<'_> {
                 TokenKind::End | TokenKind::Symbol(b';' | b'}')
             )
     }
-    fn semicolon(&mut self) -> Result<(), CompileError> {
+    fn semicolon(&mut self) -> Result<(), CompileFailure> {
         if self.token.kind == TokenKind::Symbol(b';') {
             return self.advance();
         }
         if !self.end_statement() {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native("end of statement expected (; or lf)"));
         }
         Ok(())
     }
-    pub(super) fn statement(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn statement(&mut self, depth: u8) -> Result<(), CompileFailure> {
         let depth = self.depth(depth)?;
         match self.token.kind.clone() {
             TokenKind::Symbol(b';') => {
@@ -103,7 +106,7 @@ impl Compiler<'_> {
         self.emitter.barrier();
         Ok(())
     }
-    fn return_statement(&mut self) -> Result<(), CompileError> {
+    fn return_statement(&mut self) -> Result<(), CompileFailure> {
         self.advance()?;
         let return_start = self.emitter.instructions.len();
         let (arg0, arg1) = if self.end_statement() {
@@ -129,7 +132,7 @@ impl Compiler<'_> {
         });
         Ok(())
     }
-    fn block(&mut self, depth: u8) -> Result<(), CompileError> {
+    fn block(&mut self, depth: u8) -> Result<(), CompileFailure> {
         let start = self.size()?;
         self.advance()?;
         self.statements(depth)?;
@@ -138,7 +141,7 @@ impl Compiler<'_> {
         self.registers.truncate(start);
         Ok(())
     }
-    fn statements(&mut self, depth: u8) -> Result<(), CompileError> {
+    fn statements(&mut self, depth: u8) -> Result<(), CompileFailure> {
         while !matches!(
             self.token.kind,
             TokenKind::Symbol(b'}') | TokenKind::Case | TokenKind::Default
@@ -150,11 +153,11 @@ impl Compiler<'_> {
         }
         Ok(())
     }
-    fn local(&mut self) -> Result<(), CompileError> {
+    fn local(&mut self) -> Result<(), CompileFailure> {
         loop {
             self.advance()?;
             let TokenKind::Identifier(name) = self.token.kind.clone() else {
-                return Err(self.error(CompileErrorKind::ExpectedToken));
+                return Err(self.expected_identifier());
             };
             self.advance()?;
             if self.token.kind == TokenKind::Symbol(b'=') {
@@ -180,7 +183,7 @@ impl Compiler<'_> {
         }
         Ok(())
     }
-    fn scope_end(&mut self, start: u8) -> Result<(), CompileError> {
+    fn scope_end(&mut self, start: u8) -> Result<(), CompileFailure> {
         self.emit(Instruction {
             opcode: 0x3d,
             arg0: start,

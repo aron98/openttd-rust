@@ -1,14 +1,17 @@
 //! Main-frame root fields retain native receiver/key targets until a store.
 use super::{Compiler, ExpressionState, Register};
-use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, Value, lexer::TokenKind};
 impl Compiler<'_> {
     pub(super) fn explicit_root(
         &mut self,
         state: &mut ExpressionState,
-    ) -> Result<Option<Register>, CompileError> {
+    ) -> Result<Option<Register>, CompileFailure> {
         self.advance()?;
         let TokenKind::Identifier(name) = self.token.kind else {
-            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            return Err(self
+                .error(CompileErrorKind::UnsupportedSyntax)
+                .native("expected 'IDENTIFIER'"));
         };
         self.advance()?;
         let root = self.push()?;
@@ -25,7 +28,7 @@ impl Compiler<'_> {
         &mut self,
         name: &str,
         state: &mut ExpressionState,
-    ) -> Result<Option<Register>, CompileError> {
+    ) -> Result<Option<Register>, CompileFailure> {
         let key = self.push()?;
         self.load(key, Value::String(self.realm.string(name.as_bytes())))?;
         if !matches!(

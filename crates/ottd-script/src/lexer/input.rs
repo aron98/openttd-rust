@@ -1,10 +1,10 @@
 //! Pinned `DecodeUtf8` plus `SQLexer::Next` admission, evaluated one lookahead at a time.
-use super::{CompileError, CompileErrorKind, Lexer, NativeCharacterContext};
+use super::{CompileErrorKind, CompileFailure, Lexer, NativeCharacterContext};
 impl Lexer<'_> {
     pub(super) fn classify(
         &self,
         context: NativeCharacterContext,
-    ) -> Result<Option<u8>, CompileError> {
+    ) -> Result<Option<u8>, CompileFailure> {
         if self.width != 0 && self.character > 255 {
             return Err(self.error(CompileErrorKind::UndefinedNativeCharacter {
                 codepoint: self.character,
@@ -13,7 +13,7 @@ impl Lexer<'_> {
         }
         Ok(self.peek())
     }
-    pub(super) fn read(&mut self) -> Result<(), CompileError> {
+    pub(super) fn read(&mut self) -> Result<(), CompileFailure> {
         let tail = self
             .source
             .get(self.position..)

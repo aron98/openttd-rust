@@ -1,19 +1,20 @@
 //! Native foreach retains its iterable target and three adjacent local registers.
 use super::super::Compiler;
-use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, Value, lexer::TokenKind};
 
 impl Compiler<'_> {
-    pub(super) fn foreach_loop(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn foreach_loop(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         self.expect(b'(')?;
         let TokenKind::Identifier(first) = self.token.kind else {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self.expected_identifier());
         };
         self.advance()?;
         let (index, value) = if self.token.kind == TokenKind::Symbol(b',') {
             self.advance()?;
             let TokenKind::Identifier(value) = self.token.kind else {
-                return Err(self.error(CompileErrorKind::ExpectedToken));
+                return Err(self.expected_identifier());
             };
             self.advance()?;
             (first, value)
@@ -21,7 +22,9 @@ impl Compiler<'_> {
             ("@INDEX@", first)
         };
         if self.token.kind != TokenKind::In {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native("expected 'in'"));
         }
         self.advance()?;
         let size = self.size()?;

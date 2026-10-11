@@ -1,12 +1,13 @@
 //! Native call targets preserve local aliases and snapshot member receivers.
 use super::{Compiler, ExpressionState, Register};
-use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
     pub(super) fn function_call(
         &mut self,
         depth: u8,
         state: &mut ExpressionState,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         if state.field && state.dereference.is_some() {
             let key = self.pop()?;
             let receiver = self.pop()?;
@@ -44,7 +45,9 @@ impl Compiler<'_> {
             if self.token.kind == TokenKind::Symbol(b',') {
                 self.advance()?;
                 if self.token.kind == TokenKind::Symbol(b')') {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("expression expected, found ')'"));
                 }
             }
         }

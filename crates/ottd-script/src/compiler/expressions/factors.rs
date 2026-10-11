@@ -1,12 +1,13 @@
 //! Factor position and postfix targeting are independent of expression dereference.
 use super::{Compiler, ExpressionState, Register};
-use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
     pub(super) fn prefixed(
         &mut self,
         depth: u8,
         state: &mut ExpressionState,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         let mut position = self.factor(depth, state)?;
         while matches!(self.token.kind, TokenKind::Symbol(b'[' | b'.' | b'(')) {
             if self.token.kind == TokenKind::Symbol(b'(') {
@@ -14,7 +15,7 @@ impl Compiler<'_> {
             } else if self.token.kind == TokenKind::Symbol(b'.') {
                 self.advance()?;
                 let TokenKind::Identifier(name) = self.token.kind else {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self.expected_identifier());
                 };
                 self.advance()?;
                 self.root_field(name, state)?;
@@ -49,7 +50,7 @@ impl Compiler<'_> {
         &mut self,
         depth: u8,
         state: &mut ExpressionState,
-    ) -> Result<Option<Register>, CompileError> {
+    ) -> Result<Option<Register>, CompileFailure> {
         let depth = self.depth(depth)?;
         state.dereference = None;
         state.field = false;
@@ -145,10 +146,12 @@ impl Compiler<'_> {
             | TokenKind::GreaterEqual
             | TokenKind::And
             | TokenKind::Or
-            | TokenKind::End => Err(self.error(CompileErrorKind::ExpectedToken)),
+            | TokenKind::End => Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native("expression expected")),
         }
     }
-    fn vararg_expression(&mut self, depth: u8) -> Result<Option<Register>, CompileError> {
+    fn vararg_expression(&mut self, depth: u8) -> Result<Option<Register>, CompileFailure> {
         let indexed = self.token.kind == TokenKind::Vargv;
         self.advance()?;
         let source = if indexed {
@@ -173,7 +176,7 @@ impl Compiler<'_> {
         &mut self,
         name: &str,
         state: &mut ExpressionState,
-    ) -> Result<Option<Register>, CompileError> {
+    ) -> Result<Option<Register>, CompileFailure> {
         state.constant = false;
         state.capture = None;
         self.advance()?;
@@ -207,7 +210,10 @@ impl Compiler<'_> {
                 members
                     .get(member.as_bytes())
                     .map(|(_, value)| value.clone())
-                    .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?
+                    .ok_or_else(|| {
+                        self.error(CompileErrorKind::ExpectedToken)
+                            .invalid_constant(name.as_bytes(), member.as_bytes())
+                    })?
             }
         };
         let register = self.push()?;

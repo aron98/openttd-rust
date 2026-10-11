@@ -2,7 +2,8 @@
     clippy::redundant_pub_crate,
     reason = "Crate-private lexer types must satisfy unreachable_pub"
 )]
-use crate::{CompileError, CompileErrorKind, NativeCharacterContext, Value};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, NativeCharacterContext, Value};
 mod comments;
 mod input;
 mod numbers;
@@ -17,7 +18,7 @@ pub(crate) struct Lexer<'a> {
     position: usize,
 }
 impl<'a> Lexer<'a> {
-    pub(super) fn new(source: &'a [u8], realm: crate::Realm) -> Result<Self, CompileError> {
+    pub(super) fn new(source: &'a [u8], realm: crate::Realm) -> Result<Self, CompileFailure> {
         let mut lexer = Self {
             source,
             realm,
@@ -35,20 +36,17 @@ impl<'a> Lexer<'a> {
             self.source.get(self.position).copied()
         }
     }
-    fn advance(&mut self) -> Result<(), CompileError> {
+    fn advance(&mut self) -> Result<(), CompileFailure> {
         if self.width == 0 {
             return Ok(());
         }
         self.position = self.position.saturating_add(self.width);
         self.read()
     }
-    const fn error(&self, kind: CompileErrorKind) -> CompileError {
-        CompileError {
-            offset: self.position,
-            kind,
-        }
+    const fn error(&self, kind: CompileErrorKind) -> CompileFailure {
+        CompileFailure::new(self.position, kind)
     }
-    pub(super) fn next(&mut self) -> Result<Token<'a>, CompileError> {
+    pub(super) fn next(&mut self) -> Result<Token<'a>, CompileFailure> {
         let newline = self.trivia()?;
         let offset = self.position;
         let Some(c) = self.peek() else {
@@ -64,7 +62,9 @@ impl<'a> Lexer<'a> {
             b'@' => {
                 self.advance()?;
                 if self.peek() != Some(b'"') {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("string expected"));
                 }
                 TokenKind::Scalar(self.string(true)?)
             }
@@ -111,10 +111,10 @@ impl<'a> Lexer<'a> {
                     "false" => TokenKind::Scalar(Value::Bool(false)),
                     "delegate" | "try" | "catch" | "throw" | "yield" | "resume" | "parent"
                     | "class" | "extends" | "instanceof" | "static" => {
-                        return Err(CompileError {
+                        return Err(CompileFailure::new(
                             offset,
-                            kind: CompileErrorKind::UnsupportedSyntax,
-                        });
+                            CompileErrorKind::UnsupportedSyntax,
+                        ));
                     }
                     _ => TokenKind::Identifier(name),
                 }
@@ -123,7 +123,14 @@ impl<'a> Lexer<'a> {
             | b',' | b'?' | b':' | b'^' | b'=' | b'<' | b'>' | b'&' | b'|' | b'.' | b'[' | b']' => {
                 self.symbol(c)?
             }
-            _ => return Err(self.error(CompileErrorKind::UnsupportedSyntax)),
+            _ => {
+                let failure = self.error(CompileErrorKind::UnsupportedSyntax);
+                return Err(if c.is_ascii_control() {
+                    failure.native("unexpected character(control)")
+                } else {
+                    failure
+                });
+            }
         };
         Ok(Token {
             kind,
@@ -131,7 +138,7 @@ impl<'a> Lexer<'a> {
             newline,
         })
     }
-    fn symbol(&mut self, first: u8) -> Result<TokenKind<'a>, CompileError> {
+    fn symbol(&mut self, first: u8) -> Result<TokenKind<'a>, CompileFailure> {
         let offset = self.position;
         self.advance()?;
         let pair = (first, self.peek());
@@ -139,7 +146,9 @@ impl<'a> Lexer<'a> {
             (b'.', Some(b'.')) => {
                 self.advance()?;
                 if self.peek() != Some(b'.') {
-                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                    return Err(self
+                        .error(CompileErrorKind::ExpectedToken)
+                        .native("invalid token '..'"));
                 }
                 Some(TokenKind::Ellipsis)
             }
@@ -166,10 +175,10 @@ impl<'a> Lexer<'a> {
                 return Ok(TokenKind::Shift(5));
             }
             (b'/', Some(b'/' | b'*' | b'>')) | (b'<', Some(b'/')) => {
-                return Err(CompileError {
+                return Err(CompileFailure::new(
                     offset,
-                    kind: CompileErrorKind::UnsupportedSyntax,
-                });
+                    CompileErrorKind::UnsupportedSyntax,
+                ));
             }
             _ => None,
         };

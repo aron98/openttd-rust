@@ -1,8 +1,9 @@
 //! Native table literals preserve source member capacity and NEWSLOTA lowering.
 use super::{Compiler, Register};
-use crate::{CompileError, CompileErrorKind, Instruction, Value, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, Value, lexer::TokenKind};
 impl Compiler<'_> {
-    pub(super) fn table_literal(&mut self, depth: u8) -> Result<Option<Register>, CompileError> {
+    pub(super) fn table_literal(&mut self, depth: u8) -> Result<Option<Register>, CompileFailure> {
         let table = self.push()?;
         self.emit(Instruction {
             opcode: 0x1e,

@@ -1,6 +1,7 @@
 //! Scalar expression lowering with native local aliasing and precedence.
 use super::{Compiler, Register};
-use crate::{CompileError, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{Instruction, lexer::TokenKind};
 /// One native PushExpState/PopExpState lifetime, owned by a recursive expression.
 /// Operators share this state; parenthesized expressions create a separate owner.
 #[derive(Default)]
@@ -19,7 +20,7 @@ mod roots;
 mod tables;
 mod updates;
 impl Compiler<'_> {
-    pub(super) fn expression(&mut self, depth: u8) -> Result<ExpressionState, CompileError> {
+    pub(super) fn expression(&mut self, depth: u8) -> Result<ExpressionState, CompileFailure> {
         self.depth(depth)?;
         let mut state = ExpressionState::default();
         self.logical(0, depth, &mut state)?;
@@ -32,7 +33,7 @@ impl Compiler<'_> {
         }
         Ok(state)
     }
-    pub(super) fn comma(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn comma(&mut self, depth: u8) -> Result<(), CompileFailure> {
         let _state = self.expression(depth)?;
         while self.token.kind == TokenKind::Symbol(b',') {
             let _target = self.pop()?;
@@ -46,7 +47,7 @@ impl Compiler<'_> {
         level: u8,
         depth: u8,
         state: &mut ExpressionState,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         self.depth(depth)?;
         if level == 0 {
             self.logical(1, depth, state)?;
@@ -90,7 +91,7 @@ impl Compiler<'_> {
         precedence: u8,
         depth: u8,
         state: &mut ExpressionState,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         let depth = self.depth(depth)?;
         self.prefixed(depth, state)?;
         while let Some((rank, opcode, operation)) = self.token.kind.binary() {

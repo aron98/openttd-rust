@@ -1,7 +1,13 @@
+use crate::compiler::diagnostics::CompileFailure;
 use crate::{
-    CompileError, CompileErrorKind, Instruction, Program, Value,
+    CompileErrorKind, Instruction, Program, Value,
     lexer::{Lexer, Token, TokenKind},
 };
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Private failure transport is shared with the lexer and runner"
+)]
+pub(crate) mod diagnostics;
 mod emitter;
 mod expressions;
 mod functions;
@@ -14,7 +20,7 @@ use registers::{Register, Registers};
 ///
 /// # Errors
 /// Rejects unsupported syntax, malformed literals and bounded resource excess.
-pub fn compile(source: &str) -> Result<Program, CompileError> {
+pub fn compile(source: &str) -> Result<Program, crate::CompileError> {
     compile_bytes(source.as_bytes())
 }
 /// Compile bytes with the native compilebuffer decoder and lazy NUL termination.
@@ -22,7 +28,7 @@ pub fn compile(source: &str) -> Result<Program, CompileError> {
 /// # Errors
 /// Rejects consumed invalid characters, reached undefined native ctype arguments,
 /// unsupported syntax and bounded resource excess.
-pub fn compile_bytes(source: &[u8]) -> Result<Program, CompileError> {
+pub fn compile_bytes(source: &[u8]) -> Result<Program, crate::CompileError> {
     crate::Realm::new().compile_bytes(source)
 }
 #[expect(
@@ -33,12 +39,9 @@ pub(crate) fn compile_in(
     realm: &crate::Realm,
     source: &[u8],
     source_name: &[u8],
-) -> Result<Program, CompileError> {
+) -> Result<Program, CompileFailure> {
     if source.len() > 65_536 {
-        return Err(CompileError {
-            offset: 0,
-            kind: CompileErrorKind::Limit,
-        });
+        return Err(CompileFailure::new(0, CompileErrorKind::Limit));
     }
     let mut lexer = Lexer::new(source, realm.clone())?;
     let token = lexer.next()?;
@@ -82,10 +85,7 @@ pub(crate) fn compile_in(
     };
     crate::ScriptClosure::new(realm, std::rc::Rc::new(data))
         .map(|data| Program { data })
-        .map_err(|_| CompileError {
-            offset: source.len(),
-            kind: CompileErrorKind::Limit,
-        })
+        .map_err(|_| CompileFailure::new(source.len(), CompileErrorKind::Limit))
 }
 struct Compiler<'a> {
     realm: crate::Realm,
@@ -104,13 +104,14 @@ struct Compiler<'a> {
     function_depth: u8,
 }
 impl Compiler<'_> {
-    const fn error(&self, kind: CompileErrorKind) -> CompileError {
-        CompileError {
-            offset: self.token.offset,
-            kind,
-        }
+    const fn error(&self, kind: CompileErrorKind) -> CompileFailure {
+        CompileFailure::new(self.token.offset, kind)
     }
-    fn advance(&mut self) -> Result<(), CompileError> {
+    fn expected_identifier(&self) -> CompileFailure {
+        self.error(CompileErrorKind::ExpectedToken)
+            .native("expected 'IDENTIFIER'")
+    }
+    fn advance(&mut self) -> Result<(), CompileFailure> {
         let next = self.lexer.next()?;
         self.previous = if next.newline {
             TokenKind::Symbol(b'\n')
@@ -120,27 +121,27 @@ impl Compiler<'_> {
         self.token = next;
         Ok(())
     }
-    fn push(&mut self) -> Result<Register, CompileError> {
+    fn push(&mut self) -> Result<Register, CompileFailure> {
         self.registers
             .push()
             .ok_or_else(|| self.error(CompileErrorKind::Limit))
     }
-    fn pop(&mut self) -> Result<Register, CompileError> {
+    fn pop(&mut self) -> Result<Register, CompileFailure> {
         self.registers
             .pop()
             .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))
     }
-    fn size(&self) -> Result<u8, CompileError> {
+    fn size(&self) -> Result<u8, CompileFailure> {
         self.registers
             .size()
             .ok_or_else(|| self.error(CompileErrorKind::Limit))
     }
-    fn position(&self) -> Result<i32, CompileError> {
+    fn position(&self) -> Result<i32, CompileFailure> {
         self.emitter
             .position()
             .ok_or_else(|| self.error(CompileErrorKind::Limit))
     }
-    fn patch(&mut self, position: i32, target: i32) -> Result<(), CompileError> {
+    fn patch(&mut self, position: i32, target: i32) -> Result<(), CompileFailure> {
         let offset = target
             .checked_sub(position)
             .ok_or_else(|| self.error(CompileErrorKind::Limit))?;
@@ -151,19 +152,19 @@ impl Compiler<'_> {
     fn emit(&mut self, instruction: Instruction) {
         self.emitter.emit(instruction, &self.registers);
     }
-    fn expect(&mut self, symbol: u8) -> Result<(), CompileError> {
+    fn expect(&mut self, symbol: u8) -> Result<(), CompileFailure> {
         if self.token.kind != TokenKind::Symbol(symbol) {
-            return Err(self.error(CompileErrorKind::ExpectedToken));
+            return Err(self.error(CompileErrorKind::ExpectedToken).expected(symbol));
         }
         self.advance()
     }
-    const fn depth(&self, depth: u8) -> Result<u8, CompileError> {
+    const fn depth(&self, depth: u8) -> Result<u8, CompileFailure> {
         if depth >= 128 {
             return Err(self.error(CompileErrorKind::Limit));
         }
         Ok(depth.saturating_add(1))
     }
-    fn load(&mut self, register: Register, value: Value) -> Result<(), CompileError> {
+    fn load(&mut self, register: Register, value: Value) -> Result<(), CompileFailure> {
         let (opcode, arg1) = match value {
             Value::Integer(n) if (0..=i64::from(i32::MAX)).contains(&n) => (
                 0x02,

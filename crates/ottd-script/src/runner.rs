@@ -150,7 +150,7 @@ impl Runner {
     pub fn set_print_sink(&mut self, sink: Option<Box<dyn PrintSink>>) {
         self.print_sink = sink;
     }
-    /// Last native-call error bytes. Successful calls leave this native error object intact.
+    /// Last native compiler or execution error bytes. Successful operations retain this object.
     pub const fn native_error(&self) -> Option<&crate::ByteString> {
         self.native_error.as_ref()
     }
@@ -183,12 +183,11 @@ impl Runner {
         source: &[u8],
         name: &std::ffi::CStr,
     ) -> Result<Program, CompileError> {
-        self.root
-            .realm
-            .compile_bytes_named(source, name)
-            .inspect_err(|error| {
-                self.failure = Some(RunnerFailure::Compile(*error));
-            })
+        crate::compiler::compile_in(&self.root.realm, source, name.to_bytes()).map_err(|failure| {
+            self.failure = Some(RunnerFailure::Compile(failure.error));
+            self.native_error = failure.native_message(&self.root.realm);
+            failure.error
+        })
     }
     /// Borrow this context for one main frame; the program's immutable data is shared.
     ///

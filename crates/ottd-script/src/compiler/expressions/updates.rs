@@ -1,21 +1,26 @@
 //! Assignment and conditional-expression lowering with native state boundaries.
 use super::{Compiler, ExpressionState};
-use crate::{CompileError, CompileErrorKind, Instruction, lexer::TokenKind};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
 impl Compiler<'_> {
     pub(super) fn assignment(
         &mut self,
         depth: u8,
         state: &ExpressionState,
-    ) -> Result<(), CompileError> {
+    ) -> Result<(), CompileFailure> {
         if state.dereference.is_none() {
-            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            return Err(self
+                .error(CompileErrorKind::UnsupportedSyntax)
+                .native("can't assign expression"));
         }
         let operation = self.token.kind.clone();
         self.advance()?;
         let _rhs = self.expression(self.depth(depth)?)?;
         let right = self.pop()?;
         if state.capture.is_some() && !matches!(operation, TokenKind::Compound(_)) {
-            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            return Err(self
+                .error(CompileErrorKind::UnsupportedSyntax)
+                .native("free variables cannot be modified"));
         }
         if state.field {
             let key = self.pop()?;
@@ -45,7 +50,9 @@ impl Compiler<'_> {
             return Ok(());
         }
         if operation == TokenKind::NewSlot {
-            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
+            return Err(self
+                .error(CompileErrorKind::UnsupportedSyntax)
+                .native("can't 'create' a local slot"));
         }
         if let TokenKind::Compound(operator) = operation {
             let left = self.pop()?;
@@ -69,7 +76,7 @@ impl Compiler<'_> {
         }
         Ok(())
     }
-    pub(super) fn ternary(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn ternary(&mut self, depth: u8) -> Result<(), CompileFailure> {
         self.advance()?;
         let condition = self.pop()?;
         self.emit(Instruction {

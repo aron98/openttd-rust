@@ -229,6 +229,7 @@ fn advance(
         vehicles.ticks(state, clock)?;
         trees::tick(state, clock.snapshot().tick_counter.0)?;
         vehicles.stations(state)?;
+        phases::company_tick(state)?;
         state.set_number(
             b"DATE",
             0,

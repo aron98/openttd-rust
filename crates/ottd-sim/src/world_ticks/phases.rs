@@ -29,7 +29,7 @@ pub(super) fn daily(state: &mut State<'_>) -> Result<(), WorldTickError> {
 }
 pub(super) fn competitor(state: &mut State<'_>) -> Result<(), WorldTickError> {
     if state.number(b"DATE", 0, "competitors_interval_fired")? != 0 {
-        return Err(unsupported("company_tick", "competitor reset/script RNG"));
+        return Ok(());
     }
     let period = state.number(b"DATE", 0, "competitors_interval")?;
     if period == 0 {
@@ -39,10 +39,50 @@ pub(super) fn competitor(state: &mut State<'_>) -> Result<(), WorldTickError> {
         .number(b"DATE", 0, "competitors_interval_elapsed")?
         .wrapping_add(1)
         & 0xffff_ffff;
+    state.set_number(b"DATE", 0, "competitors_interval_elapsed", elapsed)?;
     if elapsed >= period {
-        return Err(unsupported("tick_timer", "competitor timeout"));
+        state.set_number(b"DATE", 0, "competitors_interval_fired", 1)?;
     }
-    state.set_number(b"DATE", 0, "competitors_interval_elapsed", elapsed)
+    Ok(())
+}
+
+pub(super) fn company_tick(state: &mut State<'_>) -> Result<(), WorldTickError> {
+    if state.number(b"DATE", 0, "competitors_interval_fired")? == 0 {
+        return Ok(());
+    }
+    if state.number(b"PATS", 0, "difficulty.max_no_competitors")? != 0 {
+        return Err(unsupported("company_tick", "new AI company"));
+    }
+    let interval = u32::try_from(state.number(b"PATS", 0, "difficulty.competitors_interval")?)
+        .map_err(|_| unsupported("company_tick", "competitor interval"))?;
+    let seconds = if interval == 0 {
+        600
+    } else {
+        interval
+            .checked_mul(60)
+            .ok_or_else(|| unsupported("company_tick", "competitor interval overflow"))?
+    };
+    let timeout = seconds
+        .checked_mul(37)
+        .ok_or_else(|| unsupported("company_tick", "competitor timeout overflow"))?;
+    let mut random = ottd_core::Randomizer::from_state([
+        u32::try_from(state.number(b"SRND", 16, "state[0]")?)
+            .map_err(|_| unsupported("company_tick", "script random word"))?,
+        u32::try_from(state.number(b"SRND", 16, "state[1]")?)
+            .map_err(|_| unsupported("company_tick", "script random word"))?,
+    ]);
+    let jitter = random.next_bounded(timeout / 4);
+    for (name, value) in ["state[0]", "state[1]"].into_iter().zip(random.state()) {
+        state.set_number(b"SRND", 16, name, i64::from(value))?;
+    }
+    let timeout = timeout
+        .checked_add(jitter)
+        .and_then(|value| value.checked_sub(timeout / 8))
+        .ok_or_else(|| unsupported("company_tick", "competitor jitter overflow"))?
+        .max(1);
+    state.set_number(b"DATE", 0, "competitors_interval", i64::from(timeout))?;
+    state.set_number(b"DATE", 0, "competitors_interval_elapsed", 0)?;
+    state.set_number(b"DATE", 0, "competitors_interval_fired", 0)
 }
 pub(super) fn industry_month(
     state: &mut State<'_>,

@@ -27,6 +27,9 @@ impl SimulationRuntime {
         if ticks == 0 {
             return Ok(WorldTickReport { ticks: Vec::new() });
         }
+        if self.save_context() != super::RuntimeSaveContext::SinglePlayer {
+            return Err(unsupported("host", "network world-loop context"));
+        }
         if self.road.len() != 1 {
             return Err(unsupported("road", "exactly one vehicle required"));
         }

@@ -189,7 +189,7 @@ fn industry_attempt_horizon_rejects_without_publishing_clock_changes() -> Result
 }
 
 #[test]
-fn competitor_timer_expiry_rolls_back_complete_request() -> Result {
+fn zero_ai_competitor_expiry_resets_only_its_script_randomizer() -> Result {
     let mut world = clear_world()?;
     world.edit_batch(vec![edit(
         *b"DATE",
@@ -198,14 +198,26 @@ fn competitor_timer_expiry_rolls_back_complete_request() -> Result {
         WireValue::Unsigned(2),
     )])?;
     let before = world.saved_json()?;
-    assert!(matches!(
-        advance_world(&mut world, 2),
-        Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "tick_timer",
-            ..
-        })
-    ));
-    assert_eq!(before, world.saved_json()?);
+    advance_world(&mut world, 2)?;
+    let after = world.saved_json()?;
+    assert_ne!(
+        before["chunks"]["SRND"]["records"]["16"],
+        after["chunks"]["SRND"]["records"]["16"]
+    );
+    for name in ["random_state[0]", "random_state[1]"] {
+        assert_eq!(
+            before["chunks"]["DATE"]["records"]["0"][name],
+            after["chunks"]["DATE"]["records"]["0"][name]
+        );
+    }
+    assert_eq!(
+        after["chunks"]["DATE"]["records"]["0"]["competitors_interval_fired"],
+        0
+    );
+    assert_eq!(
+        after["chunks"]["DATE"]["records"]["0"]["competitors_interval_elapsed"],
+        0
+    );
     Ok(())
 }
 

@@ -10,25 +10,21 @@ Twelve actual runtime horizon-refusal controls percase also execute the CLI and 
 
 ## Capture and normal admission
 
-`fixtures/road-movement/layout.json` deliberately retains `verified_native_corpus:false`. Source readiness and the separately reviewed focused witnesses do not constitute a fresh complete CI capture. Capture is executable now but must receive a storage/producer allocation:
+`fixtures/road-movement/layout.json` admits the reviewed complete four-case corpus. The local capture at `e167929` passed independent full retained-corpus verification; all executable source inputs match `a715adf`. Linux run [38084351336](https://github.com/aron98/openttd-rust/actions/runs/38084351336), job114307587872, also completed native setup, full capture and live verification. Its retained artifact11681757078 binds the exact `a715adf` source. The review checks actual command preparation, every continuation and rollback, selected Cargo executables, native/config/source identities, serialized corruption refusals and both complete archives.
+
+Normal CI now rebuilds its own three actual selected Rust executables and repeats all native observations. Capture remains available for independently allocated external proofs:
 
 ```
 OTTD_GRF_ORACLE=/absolute/immutable/openttd CARGO_TARGET_DIR=/absolute/fresh/movement-target python3 scripts/check-road-movement-ci.py --capture /absolute/fresh/external/movement-capture
+OTTD_GRF_ORACLE=/absolute/immutable/openttd CARGO_TARGET_DIR=/absolute/fresh/movement-normal-target python3 scripts/check-contract.py --run road-movement
 ```
 
-The oracle must match the assembled reference/setup freshness stamp and materialized native source. Root owns additive fusion after the intervening array/cargo commits. Never substitute another native epoch merely because its default-off tests passed.
-
-After the entire capture, archive/mutations and actual Cargo/native/source identities are independently reviewed, publish an explicit successor changing the layout gate and the pending contract scenario to implemented/rust_behavior with driver road-movement. Refresh the asset hashes. That successor then performs a fresh normal run, rebuilding its own three actual selected Rust executables and all native observations:
-
-```
-OTTD_GRF_ORACLE=/absolute/immutable/openttd CARGO_TARGET_DIR=/absolute/fresh/movement-normal-target python3 scripts/check-road-movement-ci.py
-python3 scripts/check-contract.py --run road-movement
-```
+The oracle must match the assembled reference/setup freshness stamp and materialized native source. Never substitute another native epoch merely because its default-off tests passed.
 
 Read-only full existing-corpus admission is `python3 scripts/check-road-movement-ci.py --verify /absolute/corpus`; it verifies actual retained processes, source/executable provenance, every comparison/control and both archives, without new producers. The original bound source and baseline paths must remain materialized.
 
-Contract validation is source-only: `python3 scripts/check-contract.py --validate`. Until activation, the scenario remains unimplemented/future and cannot advertise executable evidence; the explicit driver entry is present but its normal gate refuses.
+Contract validation is source-only: `python3 scripts/check-contract.py --validate`. The bounded scenario is implemented/rust_behavior and uses the road-movement driver; validation alone does not execute it.
 
-The layout reserves6GiB proof plus1GiB free floor. A fresh Cargo target is external and must receive a separate measured allocation (initial estimate512MiB, debug0/incremental0/jobs1); an outer total-cap monitor is required when allocating a complete run because native checkpoints are bounded live while Cargo/Rust/archive storage is checked between phases. Measured four-case focused evidence suggests roughly2–3GiB raw corpus plus retained sources/executables and two archives, below the deliberately conservative6GiB ceiling; no successful full-capture footprint is claimed. Capture and normal need separate proof/target allocations. Any host cap is a host failure, never an original gameplay outcome.
+The layout reserves6GiB proof plus1GiB free floor. A fresh Cargo target is external and must receive a separate measured allocation (initial estimate512MiB, debug0/incremental0/jobs1); an outer total-cap monitor is required when allocating a complete run because native checkpoints are bounded live while Cargo/Rust/archive storage is checked between phases. The complete local capture and fresh Cargo target occupy approximately3.1GiB, below the conservative6GiB ceiling. Capture and normal need separate proof/target allocations. Any host cap is a host failure, never an original gameplay outcome.
 
 All seven Stage4 gates remain open pending the complete integrated portfolio and review.

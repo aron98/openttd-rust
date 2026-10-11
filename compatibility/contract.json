@@ -8521,18 +8521,18 @@
   {
    "id": "road-movement-docs-road-movement-md",
    "path": "docs/road-movement.md",
-   "sha256": "eb1b9065b6f941f7ab62e20f637b101ba3b762005070f3411443a44e02bbe421",
+   "sha256": "d758b3dadb67c313101c13de24f97b4502823d5bdb98694f32dfcca845dfbe61",
    "kind": "recipe",
-   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "provenance": "Reviewed complete bounded movement corpus; normal admission repeats all native/Rust producers and archive controls.",
    "save_version": null,
    "profile": null
   },
   {
    "id": "road-movement-fixtures-road-movement-layout-json",
    "path": "fixtures/road-movement/layout.json",
-   "sha256": "91b71ca89567cbe045686d65a6bbdd68b347aa32c9344db888dcfe30280b722e",
+   "sha256": "245ddee73f1103893d2280dd09e614e0e166270ae13a438f2f767d8f971f9e6c",
    "kind": "recipe",
-   "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
+   "provenance": "Reviewed complete bounded movement corpus; normal admission repeats all native/Rust producers and archive controls.",
    "save_version": null,
    "profile": null
   },
@@ -21321,11 +21321,11 @@
   },
   {
    "id": "world.bounded-road-movement",
-   "status": "unimplemented",
-   "scope": "future",
+   "status": "implemented",
+   "scope": "rust_behavior",
    "domain": "One vanilla116/123 right-hand NE/state0 flat straight orderless cargo-empty road vehicle; IDs0/1/75 portfolio.",
-   "expected": "Fresh complete four-case capture, normal paired native/Rust continuation and exact archive/corruption admission; focused witnesses are prerequisites only.",
-   "driver": null,
+   "expected": "Complete four-case paired native/Rust continuation, non-publication controls and exact archive/corruption admission; gameplay and physical scope only, excluding viewport state.",
+   "driver": "road-movement",
    "assets": [
     "road-movement-docs-road-movement-md",
     "road-movement-fixtures-road-movement-layout-json",
@@ -21392,7 +21392,21 @@
     "scripts/tests/movement_archive_test.py",
     "scripts/tests/movement_ci_test.py"
    ],
-   "evidence": []
+   "evidence": [
+    "summary.json",
+    "binaries.json",
+    "zero-test-rejected.json",
+    "evidence-index.json",
+    "evidence.tar.gz",
+    "sources/inputs.json",
+    "native-inputs/inputs.json",
+    "baseline-inputs/inputs.json",
+    "binding-corruption/summary.json",
+    "archive-controls/summary.json",
+    "bin/ottd",
+    "bin/road_movement_ci",
+    "bin/road_movement"
+   ]
   }
  ]
 }

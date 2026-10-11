@@ -34,11 +34,12 @@ uses the existing `UnsupportedIndexConversion` policy only after the empty-extra
 check. The u8 call count includes the receiver, bounding per-frame extras to254;
 invalid bytecode is rejected separately.
 
-Compiler diagnostics remain typed Rust diagnostics; compiler-error cases compare
-terminal stage while pinning the original diagnostic payload. Executable cases
-compare complete stdout, raw prints and runtime-error bytes. Corruption controls
-mutate only private copies, verifying missing receipts, changed source, changed
-output and malformed receipt rejection before restoring the copied baseline.
+Public compiler failures retain their typed Rust errors. The observer also
+retains native compiler messages, and every case compares complete stdout,
+raw prints and compiler/runtime stderr. Compiler exception adoption stops at
+the first NUL; runtime messages preserve their full byte length. Corruption
+controls include rehashed diagnostic mutations and verify rejection before
+restoring the copied baseline.
 
 This is a bounded language consumer. General GC, traps, generators, classes,
 host API integration, GNU-platform proof and Stage4 completion are not claimed.

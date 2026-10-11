@@ -5594,7 +5594,7 @@
     "scripts/compat/script-vm/tables/root_cases.py": "e30147c07058a6929bd57a77657b61e3d8e44dde885a93123643fbabac759511",
     "scripts/compat/script-vm/tables/verify.sh": "0b2622e9e39718d591a21909f67284f5231e24fb7354863ebcfadd85cf6c778b",
     "scripts/compat/script-vm/unicode-categories.json": "8092f4871e1bcfa88ffb6b0151024b4de8b84753d42067792e112b23a966feee",
-    "scripts/compat/script-vm/varargs/README.md": "9ff6abc9be72b1739e4685ecd9c06d1929bf89a2b99ca4d58fd7327ef3c1ca13",
+    "scripts/compat/script-vm/varargs/README.md": "b2045e4d308d2d705dd2d9c9437bc79d15e237dc5c22b215081a0a6fd279e11a",
     "scripts/compat/script-vm/varargs/audit_controls.py": "555ebd08c6e9b3a1aa89fa12e4993f2075c2013bbf877d55f064474a030dadcf",
     "scripts/compat/script-vm/varargs/build-native.sh": "1f5ee0e051c3b84018fb97d1d58749b7f64eb67e1b52768b93b796970be5c10b",
     "scripts/compat/script-vm/varargs/case.py": "4aa1cf6a42c16a9caf28a27ae055d53fbe608e03c09080b13da6a888d566100f",

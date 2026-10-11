@@ -8,6 +8,24 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
+Current reviewed script increment: 27 atomic commits through `a8a8211` add
+graph-owned user closures, nested frames, frame-owned variadic arguments,
+defined-only original execution policy and exact admitted compiler/runtime
+diagnostics. An earlier review rejected long capture-name rendering and six
+oversized changed modules; a fresh review verifies the shared renderer and
+coherent responsibility splits. All 109 changed Rust/Python files in the
+published-base delta remain at or below 250 pure LOC.
+
+Root and reviewer each execute 1,239 table, 156 call, 135 closure and 144
+variadic comparisons. Both author profiles pass; 300 frozen compiler pairs
+close the old diagnostic gaps without changing source bodies. Workspace tests
+pass 821 cases, Python passes 636 tests and 22,101 subtests, and all 143 scenario
+declarations remain intact. The complete current proof verifies 31,592 outer
+and 97,880 nested members plus 5,103 Git source blobs. This is bounded language
+progress: full VM/GC, AI/GameScript APIs, NewGRF, reciprocal modded continuation
+and the seven broad completion gates remain open. Cargo/industry composition
+and initial rail after-load restoration remain in verification and integration.
+
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
 Script increment `d43c8fa` binds aggregate graph storage (`e17d7fb`) and
@@ -40,9 +58,9 @@ The combined candidate passes 765 ordinary Rust tests, 587 Python tests with
 21,402 subtests, strict static checks and 143 declarations. Current proof
 retains 4,998 source Git blobs and 6,884 verified archive members. Active cargo
 recipients, growth/rebuild, animations, NewGRF and wider industries remain
-required. User closures, industry-manager and
-populated cargo increments are in private integration/development; their
-unreviewed work is not credited here. All seven completion gates remain open.
+required. At that increment, user closures, industry-manager and populated cargo
+were in private development; subsequent reviewed increments are recorded here.
+All seven completion gates remain open.
 CI correction `3d15d6d` integrates four separately reviewable source/binding
 atoms. It repairs stale scalar/root/array names and selects exactly the original
 34 required frame consumers without weakening membership guards. Twelve cohesive

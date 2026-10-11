@@ -1,5 +1,35 @@
 # Compatibility foundation verification
 
+## Reviewed script closures, variadic frames and diagnostics
+
+Independent review approves the 27 atomic commits through `a8a8211`. The
+bounded VM now executes graph-owned user closures, explicit captures, defaults,
+nested frames and frame-owned variadic arguments. Compiler failures preserve
+public typed errors while retaining original message bytes. Compiler and runtime
+stderr are compared in full by the table, call/closure and variadic producers.
+The capture renderer applies the original 50-codepoint precision. Compiler
+C-string adoption and runtime byte-string transport keep their distinct NUL
+behavior.
+
+Root and reviewer each execute 1,239 table, 156 call, 135 closure and 144
+variadic pairs. Root adds 150 frozen compiler pairs; the reviewer adds 300
+supplementary pairs and real owner-consumer corruption checks. Both author
+profiles pass, alongside 821 workspace tests, 636 Python tests with 22,101
+subtests, 84 standard-library discovery tests and strict static checks.
+204 source omission/tamper refusals and 16 normal-admission corruptions pass.
+The normal driver retains 10,666 comparisons and 153 Rust-only refusals of
+source-proven undefined inputs; valid Unicode strings and comments execute
+against the original.
+
+Root and reviewer verify all 31,592 outer and 97,880 nested proof members,
+5,103 Git source blobs, actual executable selections and modes. Reports are
+under `.omo/evidence/stage04-script-combined-qa/`,
+`.omo/evidence/stage04-script-combined-review/` and the frozen combined script
+worktree's `.omo/evidence/script-combined-diagnostics/`.
+GNU execution, broader grammar/GC, AI/GameScript host integration and all seven
+stage 4 gates remain open. The variadic README correction changes documentation
+and its source hashes after the reviewed product commit.
+
 ## Reviewed fund-only industry manager and vanilla forest
 
 Independent review approves eight atomic commits through `c033301`. Whole-world

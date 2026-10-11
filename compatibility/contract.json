@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "2b2a1f78cdac65729e8087da0ec4b3cece433473cf8c4b76ff83a56e8b598f24",
+   "sha256": "f30e60734452c3a443ca906a719614dbb70d74585f09687ebedfaa575a1b58fe",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -10960,7 +10960,7 @@
   {
    "id": "script-runtime-scripts-compat-script-vm-varargs-readme-md",
    "path": "scripts/compat/script-vm/varargs/README.md",
-   "sha256": "9ff6abc9be72b1739e4685ecd9c06d1929bf89a2b99ca4d58fd7327ef3c1ca13",
+   "sha256": "b2045e4d308d2d705dd2d9c9437bc79d15e237dc5c22b215081a0a6fd279e11a",
    "kind": "recipe",
    "provenance": "Pinned Squirrel 2.2 closure/variadic runtime and defined-only producer; upstream.toml",
    "save_version": null,

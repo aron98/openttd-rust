@@ -73,6 +73,7 @@ impl Compiler<'_> {
         }
         state.dereference = Some(key);
         state.field = true;
+        state.capture = None;
         state.constant = false;
         Ok(())
     }

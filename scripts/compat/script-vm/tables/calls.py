@@ -128,11 +128,16 @@ def audit(output: Path, scenarios: list[Case]) -> list[Record]:
     return records
 
 
-def compare(native: Path, rust: Path, output: Path) -> None:
+def compare_scenarios(
+    native: Path,
+    rust: Path,
+    output: Path,
+    scenarios: list[Case],
+    required_prefix: bytes = b"",
+) -> None:
     output.mkdir(parents=True, exist_ok=False)
     for side, binary in (("native", native), ("rust", rust)):
         _ = shutil.copy2(binary, output / side)
-    scenarios = cases()
     for case in scenarios:
         source = output / f"{case.name}.nut"
         _ = source.write_bytes(case.source.encode())
@@ -143,6 +148,14 @@ def compare(native: Path, rust: Path, output: Path) -> None:
                     output / f"{case.name}-{number}-{side}",
                 )
     records = audit(output, scenarios)
+    for case in scenarios:
+        if case.stage == "compile_error":
+            continue
+        for number in range(len(BUDGETS)):
+            for side in ("native", "rust"):
+                raw = output / f"{case.name}-{number}-{side}.stdout"
+                if not raw.read_bytes().startswith(required_prefix):
+                    raise RuntimeError(f"Missing required observer records: {raw}")
     _ = (output / "manifest.json").write_text(
         json.dumps(
             {
@@ -156,6 +169,10 @@ def compare(native: Path, rust: Path, output: Path) -> None:
         + "\n"
     )
     print(f"PASS {len(records)} raw-safe native call comparisons")
+
+
+def compare(native: Path, rust: Path, output: Path) -> None:
+    compare_scenarios(native, rust, output, cases())
 
 
 if __name__ == "__main__":

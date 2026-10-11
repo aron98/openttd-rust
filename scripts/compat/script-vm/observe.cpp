@@ -36,6 +36,7 @@ void value(const SQObjectPtr &v) {
 #include "arrays.hpp"
 #include "tables.hpp"
 #include "calls.hpp"
+#include "closures.hpp"
 static std::ofstream print_output;
 static void record_print(HSQUIRRELVM, std::string_view bytes) {
  uint64_t size=bytes.size();
@@ -46,6 +47,16 @@ static void record_print(HSQUIRRELVM, std::string_view bytes) {
 }
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--closure-compound-store") return compound_store_errors();
+ if(std::string_view(argv[1])=="--closure-publication") return closure_compile_publication();
+ if(std::string_view(argv[1])=="--closure-persistence") return persistent_closure_session(false);
+ if(std::string_view(argv[1])=="--closure-late-error") return persistent_closure_session(true);
+ if(std::string_view(argv[1])=="--closure-acyclic") return lifetime(false);
+ if(std::string_view(argv[1])=="--closure-cycle") return lifetime(true);
+ if(std::string_view(argv[1])=="--closure-orphan") return failed_capture();
+ if(std::string_view(argv[1])=="--closure-default-cycle") return default_cycle();
+ if(std::string_view(argv[1])=="--closure-view") return prototype_view();
+ const bool closure_trace=std::getenv("OTTD_SCRIPT_CLOSURE_TRACE")!=nullptr;
  if(std::string_view(argv[1])=="--call-callee") return call_callee_owner();
  if(std::string_view(argv[1])=="--call-cycle-teardown") return call_cycle_teardown();
  if(std::string_view(argv[1])=="--call-failure") return call_failure_session(argc,argv);
@@ -104,6 +115,7 @@ int main(int argc, char **argv){
  {
  SQObjectPtr closure=stack_get(v,-1);
  auto proto=_funcproto(_closure(closure)->_function);
+ if(closure_trace)function_metadata(proto);
  std::cout<<"stack "<<proto->_stacksize<<'\n';
  for(SQInteger n=0;n<proto->_nliterals;++n){std::cout<<"literal ";value(proto->_literals[n]);}
  for(SQInteger n=0;n<proto->_ninstructions;++n){const auto &i=proto->_instructions[n];std::cout<<"op "<<unsigned(i.op)<<' '<<unsigned(i._arg0)<<' '<<i._arg1<<' '<<unsigned(i._arg2)<<' '<<unsigned(i._arg3)<<'\n';}
@@ -115,8 +127,10 @@ int main(int argc, char **argv){
  for(int step=0;;++step){
   if(!ok){std::cout<<"runtime_error "<<v->_ops_till_suspend<<'\n';std::cerr<<_stringval(v->_lasterror)<<'\n';break;}
   if(!v->_suspended){std::cout<<"return "<<v->_ops_till_suspend<<' ';value(result);break;}
-  std::cout<<"suspend "<<v->_ops_till_suspend<<' '<<(v->ci->_ip-proto->_instructions)<<'\n';
-  if(frames) for(SQInteger slot=1;slot<proto->_stacksize;++slot){
+  auto active=_funcproto(_closure(v->ci->_closure)->_function);
+  if(closure_trace)std::cout<<"suspend "<<v->_ops_till_suspend<<' '<<function_path(proto,active)<<' '<<(v->ci->_ip-active->_instructions)<<' '<<v->_callsstacksize<<' '<<v->_stackbase<<' '<<v->_top<<'\n';
+  else std::cout<<"suspend "<<v->_ops_till_suspend<<' '<<(v->ci->_ip-active->_instructions)<<'\n';
+  if(frames) for(SQInteger slot=1;slot<active->_stacksize;++slot){
    std::cout<<"frame "<<slot<<' '; value(v->GetAt(v->_stackbase+slot));
   }
   if(step+first_credit+1>=argc) break;

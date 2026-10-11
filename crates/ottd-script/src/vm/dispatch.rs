@@ -19,12 +19,26 @@ impl Vm<'_> {
             | Value::String(_)
             | Value::Array(_)
             | Value::Table(_)
-            | Value::NativeClosure(_) => Err(VmError::OperandType),
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => Err(VmError::OperandType),
         }
+    }
+    fn arithmetic_temporary(&mut self, i: Instruction) -> Result<Value, VmError> {
+        let value = self.register(i32::from(i.arg2))?.arithmetic(
+            &self.register(i.arg1)?,
+            i.arg3,
+            &self.runner.get().root.realm,
+        )?;
+        self.store_temporary(value)
     }
     pub(super) fn step(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         let value = match i.opcode {
-            0x06 => self.call(i)?,
+            0x05 | 0x06 => {
+                self.dispatch_call(i)?;
+                return Ok(None);
+            }
+            0x30 => self.create_closure(i)?,
+            0x1b => self.load_outer(i.arg1)?,
             0x07 | 0x08 => {
                 self.prepare_call(i)?;
                 return Ok(None);
@@ -77,6 +91,10 @@ impl Vm<'_> {
             0x12 => self
                 .register(i32::from(i.arg2))?
                 .bitwise(self.register(i.arg1)?, i.arg3)?,
+            0x22 => {
+                self.compound_field(i)?;
+                return Ok(None);
+            }
             0x23 | 0x25 | 0x27 => {
                 self.update(i)?;
                 return Ok(None);
@@ -96,15 +114,8 @@ impl Vm<'_> {
                 self.scope_end(i)?;
                 return Ok(None);
             }
-            0x11 => {
-                let value = self.register(i32::from(i.arg2))?.arithmetic(
-                    &self.register(i.arg1)?,
-                    i.arg3,
-                    &self.runner.get().root.realm,
-                )?;
-                self.store_temporary(value)?
-            }
-            0x13 => return self.return_value(i).map(Some),
+            0x11 => self.arithmetic_temporary(i)?,
+            0x13 => return self.frame_return(i),
             0x14 => {
                 self.load_nulls(i)?;
                 return Ok(None);

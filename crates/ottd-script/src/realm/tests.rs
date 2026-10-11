@@ -24,6 +24,7 @@ fn render(value: &Value) -> String {
                 })
         ),
         Value::NativeClosure(_) => "unsupported 134218240".to_owned(),
+        Value::ScriptClosure(_) => "unsupported 134217984".to_owned(),
         Value::Table(_) => "unsupported 167772192".to_owned(),
         Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
@@ -62,9 +63,9 @@ fn sliced(
     }
     Err("unexpected nontermination".into())
 }
-fn first_string(program: &Program) -> Result<&super::ByteString, Box<dyn std::error::Error>> {
+fn first_string(program: &Program) -> Result<super::ByteString, Box<dyn std::error::Error>> {
     match program.literals().first() {
-        Some(Value::String(value)) => Ok(value),
+        Some(Value::String(value)) => Ok(value.clone()),
         _ => Err("missing string literal".into()),
     }
 }
@@ -91,7 +92,7 @@ fn realm_lifetimes_match_native_when_programs_and_runner_are_released()
     writeln!(
         output,
         "same_literal {}",
-        u8::from(first_string(&first)?.same_identity(first_string(&second)?))
+        u8::from(first_string(&first)?.same_identity(&first_string(&second)?))
     )?;
     drop(first);
     refs(&realm, "drop_first", &mut output)?;
@@ -103,7 +104,7 @@ fn realm_lifetimes_match_native_when_programs_and_runner_are_released()
     writeln!(
         output,
         "same_runtime {}",
-        u8::from(bytes.same_identity(first_string(&second)?))
+        u8::from(bytes.same_identity(&first_string(&second)?))
     )?;
     drop(runner);
     refs(&realm, "drop_runner", &mut output)?;
@@ -140,7 +141,7 @@ fn independent_suspended_owners_match_native_when_one_runner_is_dropped()
     writeln!(
         output,
         "separate_identity {}",
-        u8::from(!first_string(&program)?.same_identity(first_string(&foreign)?))
+        u8::from(!first_string(&program)?.same_identity(&first_string(&foreign)?))
     )?;
     drop(foreign);
     refs(&realm, "program", &mut output)?;
@@ -209,7 +210,8 @@ fn parts_constructor_reinterns_foreign_strings_before_native_identity_equality()
     assert!(!a.same_identity(&b));
     // When: hand-authored literals cross the checked Program boundary.
     let program = Program::from_parts(2, vec![Value::String(a), Value::String(b)], vec![])?;
-    let [Value::String(first), Value::String(second)] = program.literals() else {
+    let literals = program.literals();
+    let [Value::String(first), Value::String(second)] = literals.as_slice() else {
         return Err("missing literals".into());
     };
     // Then: both belong to the program's identity domain, with all bytes retained.

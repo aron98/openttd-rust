@@ -74,7 +74,7 @@ impl NativeClosure {
     fn read<T>(&self, read: impl FnOnce(&Data) -> T) -> T {
         self.0.read(|object| match object {
             Object::NativeClosure(data) => read(data),
-            Object::Table(_) | Object::Array(_) => unreachable!(),
+            Object::Table(_) | Object::Array(_) | Object::ScriptClosure(_) => unreachable!(),
         })
     }
     /// Interned native registration name.

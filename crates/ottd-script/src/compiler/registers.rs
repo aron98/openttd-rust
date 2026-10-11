@@ -11,6 +11,7 @@ pub(super) struct Registers<'a> {
     slots: Vec<Slot<'a>>,
     targets: Vec<Register>,
     pub high_water: u16,
+    pub local_names: Vec<&'a str>,
 }
 impl<'a> Registers<'a> {
     pub(super) fn new() -> Self {
@@ -18,6 +19,7 @@ impl<'a> Registers<'a> {
             slots: vec![Slot::Root],
             targets: Vec::new(),
             high_water: 1,
+            local_names: Vec::new(),
         }
     }
     pub(super) fn size(&self) -> Option<u8> {
@@ -73,6 +75,13 @@ impl<'a> Registers<'a> {
         self.allocate(Slot::Local(name))
     }
     pub(super) fn truncate(&mut self, size: u8) {
+        for slot in self.slots.iter().skip(usize::from(size)).rev() {
+            match slot {
+                Slot::Local(name) => self.local_names.push(name),
+                Slot::Root => self.local_names.push("this"),
+                Slot::Temporary => {}
+            }
+        }
         self.slots.truncate(usize::from(size));
     }
 }

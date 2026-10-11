@@ -115,7 +115,17 @@ fn host_preconditions_and_scalar_results_have_separate_ownership() -> Result<()>
 }
 #[test]
 fn unsupported_root_source_remains_distinct_from_lexer_policy() {
-    for source in ["score += 1;", "++score;", "score++;"] {
+    let realm = Realm::new();
+    let root = realm.empty_root();
+    root.new_slot(b"score", Value::Integer(7)).expect("seed");
+    let mut runner = Runner::new(root.clone());
+    let program = runner.compile("score += 1;").expect("compound source");
+    assert_eq!(
+        runner.start(&program).expect("start").resume(100),
+        Ok(Execution::Returned(Value::Null))
+    );
+    assert_eq!(root.raw_get(b"score"), Some(Value::Integer(8)));
+    for source in ["++score;", "score++;"] {
         let error = Realm::new()
             .compile(source)
             .expect_err("outside the scalar root domain");

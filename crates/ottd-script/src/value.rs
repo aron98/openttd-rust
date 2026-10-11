@@ -6,6 +6,8 @@ use crate::VmError;
 /// Runtime value; float bits preserve negative zero and nonfinite payloads.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Value {
+    /// Graph-owned script closure identity and captures.
+    ScriptClosure(crate::ScriptClosure),
     /// Native closure object identity; callable execution remains unsupported.
     NativeClosure(crate::NativeClosure),
     /// Shared mutable native table with scalar keys and graph values.
@@ -30,7 +32,11 @@ impl Value {
             Self::Integer(n) => *n == 0,
             Self::Float(bits) => bits.trailing_zeros() >= 31,
             Self::Bool(b) => !*b,
-            Self::String(_) | Self::Array(_) | Self::Table(_) | Self::NativeClosure(_) => false,
+            Self::String(_)
+            | Self::Array(_)
+            | Self::Table(_)
+            | Self::NativeClosure(_)
+            | Self::ScriptClosure(_) => false,
         }
     }
     pub(crate) fn negate(&self) -> Result<Self, VmError> {
@@ -45,7 +51,8 @@ impl Value {
             | Self::String(_)
             | Self::Array(_)
             | Self::Table(_)
-            | Self::NativeClosure(_) => Err(VmError::OperandType),
+            | Self::NativeClosure(_)
+            | Self::ScriptClosure(_) => Err(VmError::OperandType),
         }
     }
     #[expect(
@@ -61,7 +68,8 @@ impl Value {
             | Self::String(_)
             | Self::Array(_)
             | Self::Table(_)
-            | Self::NativeClosure(_) => Err(VmError::OperandType),
+            | Self::NativeClosure(_)
+            | Self::ScriptClosure(_) => Err(VmError::OperandType),
         }
     }
     pub(crate) fn arithmetic(
@@ -107,7 +115,8 @@ impl Value {
                 | Self::String(_)
                 | Self::Array(_)
                 | Self::Table(_)
-                | Self::NativeClosure(_),
+                | Self::NativeClosure(_)
+                | Self::ScriptClosure(_),
                 _,
             )
             | (
@@ -117,7 +126,8 @@ impl Value {
                 | Self::String(_)
                 | Self::Array(_)
                 | Self::Table(_)
-                | Self::NativeClosure(_),
+                | Self::NativeClosure(_)
+                | Self::ScriptClosure(_),
             ) => Err(VmError::OperandType),
         }
     }

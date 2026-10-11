@@ -16,6 +16,7 @@ fn scalar(value: &Value) -> String {
                 })
         ),
         Value::NativeClosure(_) => "unsupported 134218240".to_owned(),
+        Value::ScriptClosure(_) => "unsupported 134217984".to_owned(),
         Value::Table(_) => "unsupported 167772192".to_owned(),
         Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),

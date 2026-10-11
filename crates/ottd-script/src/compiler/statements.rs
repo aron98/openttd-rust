@@ -40,7 +40,7 @@ impl Compiler<'_> {
         }
         Ok(())
     }
-    fn statement(&mut self, depth: u8) -> Result<(), CompileError> {
+    pub(super) fn statement(&mut self, depth: u8) -> Result<(), CompileError> {
         let depth = self.depth(depth)?;
         match self.token.kind.clone() {
             TokenKind::Symbol(b';') => {
@@ -52,6 +52,7 @@ impl Compiler<'_> {
             TokenKind::Return => {
                 self.return_statement()?;
             }
+            TokenKind::Function => self.function_statement(depth)?,
             TokenKind::Const => self.constant_declaration()?,
             TokenKind::Enum => self.enum_declaration()?,
             TokenKind::Local => {
@@ -101,12 +102,21 @@ impl Compiler<'_> {
     }
     fn return_statement(&mut self) -> Result<(), CompileError> {
         self.advance()?;
+        let return_start = self.emitter.instructions.len();
         let (arg0, arg1) = if self.end_statement() {
             (255, 0)
         } else {
             self.comma(0)?;
             (1, i32::from(self.pop()?.0))
         };
+        if self.function_depth > 0 && arg0 != 255 && self.emitter.instructions.len() > return_start
+        {
+            if let Some(last) = self.emitter.instructions.last_mut() {
+                if last.opcode == 0x06 {
+                    last.opcode = 0x05;
+                }
+            }
+        }
         self.emit(Instruction {
             opcode: 0x13,
             arg0,

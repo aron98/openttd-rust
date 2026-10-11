@@ -13,7 +13,8 @@ impl Vm<'_> {
             | Value::Integer(_)
             | Value::Float(_)
             | Value::String(_)
-            | Value::NativeClosure(_) => Err(VmError::OperandType),
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => Err(VmError::OperandType),
         }
     }
     pub(super) fn delete_slot(&self, i: Instruction) -> Result<Value, VmError> {
@@ -29,7 +30,8 @@ impl Vm<'_> {
             | Value::Float(_)
             | Value::String(_)
             | Value::Array(_)
-            | Value::NativeClosure(_) => Err(VmError::OperandType),
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => Err(VmError::OperandType),
         }
     }
 }

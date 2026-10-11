@@ -26,7 +26,19 @@ mod error;
 mod host_stack;
 mod lexer;
 mod program;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Prototype storage is shared across private compiler and graph modules"
+)]
+mod prototype;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "Closure storage is shared across private graph and runtime modules"
+)]
+mod script_closure;
 pub use host_stack::HostStack;
+pub use prototype::Prototype;
+pub use script_closure::ScriptClosure;
 mod realm;
 mod runner;
 pub use program::Program;
@@ -65,9 +77,7 @@ pub(crate) struct ProgramData {
 #[derive(Debug)]
 pub(crate) enum Temporary {
     Value(Value),
-    MainProgram {
-        _program: std::rc::Rc<program::MainClosure>,
-    },
+    MainProgram { _program: ScriptClosure },
 }
 #[derive(Debug)]
 pub(crate) enum Storage<'a> {

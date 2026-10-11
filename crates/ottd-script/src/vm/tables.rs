@@ -6,7 +6,11 @@ impl Vm<'_> {
             return Err(VmError::InvalidBytecode);
         }
         self.registers
-            .get(usize::from(instruction.arg0))
+            .get(
+                self.base
+                    .checked_add(usize::from(instruction.arg0))
+                    .ok_or(VmError::InvalidBytecode)?,
+            )
             .ok_or(VmError::InvalidBytecode)?;
         let capacity = usize::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
         crate::Table::reserved(&self.runner.get().root.realm, capacity).map(Value::Table)

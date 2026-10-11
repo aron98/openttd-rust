@@ -1,0 +1,6 @@
+owners 1 3 2 1
+main released proto 1
+result released closure 2
+temporary released 1 1 1
+collected 1
+final 0 0 0

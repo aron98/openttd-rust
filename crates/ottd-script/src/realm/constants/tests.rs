@@ -7,7 +7,9 @@ use crate::{Program, Value};
 use std::fmt::Write;
 pub(super) fn value(value: &Value) -> Result<String, std::fmt::Error> {
     Ok(match value {
-        Value::Array(_) | Value::Table(_) | Value::NativeClosure(_) => return Err(std::fmt::Error),
+        Value::Array(_) | Value::Table(_) | Value::NativeClosure(_) | Value::ScriptClosure(_) => {
+            return Err(std::fmt::Error);
+        }
         Value::Null => "null".to_owned(),
         Value::Bool(value) => format!("bool {}", u8::from(*value)),
         Value::Integer(value) => format!("integer {value}"),
@@ -24,7 +26,7 @@ pub(super) fn value(value: &Value) -> Result<String, std::fmt::Error> {
 pub(super) fn dump(program: &Program) -> Result<String, std::fmt::Error> {
     let mut output = format!("stack {}\n", program.stack_size());
     for literal in program.literals() {
-        writeln!(output, "literal {}", value(literal)?)?;
+        writeln!(output, "literal {}", value(&literal)?)?;
     }
     for instruction in program.instructions() {
         writeln!(

@@ -37,6 +37,7 @@ impl RootEnvironment {
         let same = match value {
             Value::Table(table) => table.same_realm(&self.realm),
             Value::Array(array) => array.same_realm(&self.realm),
+            Value::ScriptClosure(closure) => closure.same_realm(&self.realm),
             Value::NativeClosure(closure) => closure.same_realm(&self.realm),
             Value::Null
             | Value::Bool(_)
@@ -172,16 +173,29 @@ impl Runner {
     /// # Errors
     /// Returns and records the compiler diagnostic on failure.
     pub fn compile_bytes(&mut self, source: &[u8]) -> Result<Program, CompileError> {
-        self.root.realm.compile_bytes(source).inspect_err(|error| {
-            self.failure = Some(RunnerFailure::Compile(*error));
-        })
+        self.compile_bytes_named(source, c"buffer")
+    }
+    /// Compile bytes with a retained source name without replacing the runtime temporary.
+    /// # Errors
+    /// Returns and records the compiler diagnostic on failure.
+    pub fn compile_bytes_named(
+        &mut self,
+        source: &[u8],
+        name: &std::ffi::CStr,
+    ) -> Result<Program, CompileError> {
+        self.root
+            .realm
+            .compile_bytes_named(source, name)
+            .inspect_err(|error| {
+                self.failure = Some(RunnerFailure::Compile(*error));
+            })
     }
     /// Borrow this context for one main frame; the program's immutable data is shared.
     ///
     /// # Errors
     /// Rejects a program from another realm or malformed stack size.
     pub fn start<'a>(&'a mut self, program: &Program) -> Result<Vm<'a>, VmError> {
-        if !self.root.realm.same(&program.data.realm) {
+        if !self.root.realm.same(&program.data.0.realm) {
             return Err(VmError::RealmMismatch);
         }
         Vm::with_runner(program, Storage::Borrowed(self))
@@ -194,7 +208,7 @@ impl Runner {
         program: &Program,
         host: crate::HostStack,
     ) -> Result<Vm<'a>, VmError> {
-        if !self.root.realm.same(&program.data.realm) {
+        if !self.root.realm.same(&program.data.0.realm) {
             return Err(VmError::RealmMismatch);
         }
         Vm::with_host_runner(program, Storage::Borrowed(self), host)

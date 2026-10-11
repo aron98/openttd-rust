@@ -10,6 +10,15 @@ out=$(CDPATH= cd -- "$out" && pwd)
 root=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
 cd "$root"
 export CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-"$out/target"}
+export OTTD_SCRIPT_CLOSURE_COMPOUND_STORE="$out/closure-compound-store.stdout"
+export OTTD_SCRIPT_CLOSURE_PUBLICATION="$out/closure-publication.stdout"
+export OTTD_SCRIPT_CLOSURE_ACYCLIC="$out/closure-acyclic.stdout"
+export OTTD_SCRIPT_CLOSURE_CYCLE="$out/closure-cycle.stdout"
+export OTTD_SCRIPT_CLOSURE_ORPHAN="$out/closure-orphan.stdout"
+export OTTD_SCRIPT_CLOSURE_VIEW="$out/closure-view.stdout"
+export OTTD_SCRIPT_CLOSURE_DEFAULT_CYCLE="$out/closure-default-cycle.stdout"
+export OTTD_SCRIPT_CLOSURE_PERSISTENCE="$out/closure-persistence.stdout"
+export OTTD_SCRIPT_CLOSURE_LATE_ERROR="$out/closure-late-error.stdout"
 export OTTD_SCRIPT_CALL_CALLEE="$out/call-callee.stdout"
 export OTTD_SCRIPT_CALL_EMPTY="$out/call-empty.stdout"
 export OTTD_SCRIPT_CALL_RETAINED="$out/call-retained.stdout"
@@ -62,6 +71,9 @@ done
 "$out/native/observe" --call-failure scripts/compat/script-vm/tables/fixtures/calls/late-error.nut > "$out/call-failure.stdout" 2> "$out/call-failure.stderr"
 "$out/native/observe" --call-cycle-teardown > "$out/call-cycle.stdout" 2> "$out/call-cycle.stderr"
 "$out/native/observe" --call-callee > "$out/call-callee.stdout" 2> "$out/call-callee.stderr"
+for session in acyclic cycle orphan view default-cycle persistence late-error publication compound-store; do
+ "$out/native/observe" "--closure-$session" > "$out/closure-$session.stdout" 2> "$out/closure-$session.stderr"
+done
 for profile in debug release; do
  flag=
  if [ "$profile" = release ]; then flag=--release; fi
@@ -72,6 +84,8 @@ for profile in debug release; do
  python3 -m scripts.compat.script-vm.tables.controls "$out/$profile" > "$out/$profile-controls.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.calls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-calls" > "$out/$profile-calls.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.call_controls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-call-controls" > "$out/$profile-call-controls.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.closures "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-closures" > "$out/$profile-closures.log" 2>&1
+ python3 -m scripts.compat.script-vm.tables.closure_controls "$out/native/observe" "$CARGO_TARGET_DIR/$profile/examples/observe" "$out/$profile-closure-controls" > "$out/$profile-closure-controls.log" 2>&1
  cargo test -p ottd-script $flag > "$out/$profile-tests.log" 2>&1
  cargo test -p ottd-script $flag native_root_registration -- --ignored > "$out/$profile-root-registration.log" 2>&1
  cargo test -p ottd-script $flag native_string_hashes -- --ignored > "$out/$profile-hashes.log" 2>&1

@@ -26,22 +26,15 @@ impl Vm<'_> {
         self.write(i.arg3, receiver)?;
         self.write(i.arg0, closure)
     }
-    fn native_failure(&mut self, message: &[u8], error: VmError) -> VmError {
+    pub(super) fn native_failure(&mut self, message: &[u8], error: VmError) -> VmError {
         self.runner.get_mut().native_error = Some(self.runner.get().root.realm.string(message));
         error
     }
-    pub(super) fn call(&mut self, i: Instruction) -> Result<Value, VmError> {
-        let callee = self.register(i.arg1)?;
-        let callee = self.store_temporary(callee)?;
-        let Value::NativeClosure(closure) = callee else {
-            let Value::String(kind) = callee.type_name(&self.runner.get().root.realm) else {
-                return Err(VmError::InvalidBytecode);
-            };
-            let mut message = b"attempt to call '".to_vec();
-            message.extend_from_slice(kind.as_bytes());
-            message.push(b'\'');
-            return Err(self.native_failure(&message, VmError::NotCallable));
-        };
+    pub(super) fn call(
+        &mut self,
+        i: Instruction,
+        closure: NativeClosure,
+    ) -> Result<Value, VmError> {
         let count = i64::from(i.arg3);
         let check = closure.parameter_check();
         if (check > 0 && count != check)
@@ -49,11 +42,14 @@ impl Vm<'_> {
         {
             return Err(self.native_failure(b"wrong number of parameters", VmError::NativeCall));
         }
-        let base = usize::from(i.arg2);
+        let base = self
+            .base
+            .checked_add(usize::from(i.arg2))
+            .ok_or(VmError::InvalidBytecode)?;
         let top = base
             .checked_add(usize::from(i.arg3))
             .ok_or(VmError::InvalidBytecode)?;
-        if i.arg3 == 0 || top > self.registers.len() {
+        if i.arg3 == 0 || top > self.top {
             return Err(VmError::InvalidBytecode);
         }
         let first = self.register(
@@ -88,18 +84,16 @@ impl Vm<'_> {
         // argument base. Preserve this pinned arithmetic, including the top slot.
         let threshold = self
             .origin
-            .checked_add(base)
+            .checked_add(self.base)
+            .and_then(|origin| origin.checked_add(base))
             .ok_or(VmError::InvalidBytecode)?;
-        for index in (0..=self.registers.len())
-            .rev()
-            .take_while(|index| *index > threshold)
-        {
+        for index in (0..=self.top).rev().take_while(|index| *index > threshold) {
             *self.native_slot(index)? = Value::Null;
         }
         drop(failure_owner);
         result
     }
-    fn native_slot(&mut self, index: usize) -> Result<&mut Value, VmError> {
+    pub(super) fn native_slot(&mut self, index: usize) -> Result<&mut Value, VmError> {
         if index == self.registers.len() {
             return Ok(&mut self.native_scratch);
         }
@@ -144,7 +138,8 @@ impl Vm<'_> {
                     | Value::String(_)
                     | Value::Array(_)
                     | Value::Table(_)
-                    | Value::NativeClosure(_) => return Err(VmError::InvalidBytecode),
+                    | Value::NativeClosure(_)
+                    | Value::ScriptClosure(_) => return Err(VmError::InvalidBytecode),
                 };
                 let error = if size < 0 {
                     Some(self.native_failure(
@@ -157,10 +152,10 @@ impl Vm<'_> {
                 let length = usize::try_from(size.max(0)).map_err(|_| VmError::Allocation)?;
                 let array = Array::reserved(&self.runner.get().root.realm, length)?;
                 let fill = if count > 2 {
-                    self.register(
-                        i32::try_from(base.checked_add(2).ok_or(VmError::InvalidBytecode)?)
-                            .map_err(|_| VmError::InvalidBytecode)?,
-                    )?
+                    self.registers
+                        .get(base.checked_add(2).ok_or(VmError::InvalidBytecode)?)
+                        .cloned()
+                        .ok_or(VmError::InvalidBytecode)?
                 } else {
                     Value::Null
                 };

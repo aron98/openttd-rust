@@ -4,6 +4,7 @@ use crate::{
 };
 mod emitter;
 mod expressions;
+mod functions;
 mod registers;
 mod statements;
 use emitter::Emitter;
@@ -28,7 +29,11 @@ pub fn compile_bytes(source: &[u8]) -> Result<Program, CompileError> {
     clippy::redundant_pub_crate,
     reason = "Realm compilation must remain crate-private while public wrappers are reexported"
 )]
-pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program, CompileError> {
+pub(crate) fn compile_in(
+    realm: &crate::Realm,
+    source: &[u8],
+    source_name: &[u8],
+) -> Result<Program, CompileError> {
     if source.len() > 65_536 {
         return Err(CompileError {
             offset: 0,
@@ -39,6 +44,7 @@ pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program,
     let token = lexer.next()?;
     let mut compiler = Compiler {
         realm: realm.clone(),
+        source_name: realm.string(source_name),
         lexer,
         token,
         previous: TokenKind::End,
@@ -48,17 +54,41 @@ pub(crate) fn compile_in(realm: &crate::Realm, source: &[u8]) -> Result<Program,
         break_targets: Vec::new(),
         continue_targets: Vec::new(),
         last_stack_size: 0,
+        captures: Vec::new(),
+        children: Vec::new(),
+        function_depth: 0,
     };
     compiler.main()?;
-    Ok(Program::freeze(crate::ProgramData {
-        realm: realm.clone(),
+    compiler.registers.truncate(0);
+    let data = crate::prototype::Data {
+        source_name: Some(compiler.source_name.clone()),
+        name: Some(realm.string(b"main")),
+        parameter_names: vec![realm.string(b"this")],
+        capture_names: Vec::new(),
+        local_names: compiler
+            .registers
+            .local_names
+            .iter()
+            .map(|name| realm.string(name.as_bytes()))
+            .collect(),
         stack_size: compiler.registers.high_water,
-        literals: compiler.literals,
+        literals: compiler.scalar_literals()?,
         instructions: compiler.emitter.instructions,
-    }))
+        children: compiler.children,
+        captures: Vec::new(),
+        defaults: Vec::new(),
+        parameters: 1,
+    };
+    crate::ScriptClosure::new(realm, std::rc::Rc::new(data))
+        .map(|data| Program { data })
+        .map_err(|_| CompileError {
+            offset: source.len(),
+            kind: CompileErrorKind::Limit,
+        })
 }
 struct Compiler<'a> {
     realm: crate::Realm,
+    source_name: crate::ByteString,
     lexer: Lexer<'a>,
     token: Token<'a>,
     previous: TokenKind<'a>,
@@ -68,6 +98,9 @@ struct Compiler<'a> {
     break_targets: Vec<Vec<i32>>,
     continue_targets: Vec<Vec<i32>>,
     last_stack_size: u8,
+    captures: Vec<(&'a str, crate::prototype::Capture)>,
+    children: Vec<std::rc::Rc<crate::prototype::Data>>,
+    function_depth: u8,
 }
 impl Compiler<'_> {
     const fn error(&self, kind: CompileErrorKind) -> CompileError {
@@ -152,7 +185,10 @@ impl Compiler<'_> {
             Value::Float(bits) => (0x03, i32::from_ne_bytes(bits.to_ne_bytes())),
             Value::Null => (0x14, 1),
             Value::Bool(b) => (0x16, i32::from(b)),
-            Value::Array(_) | Value::Table(_) | Value::NativeClosure(_) => {
+            Value::Array(_)
+            | Value::Table(_)
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => {
                 return Err(self.error(CompileErrorKind::UnsupportedSyntax));
             }
         };

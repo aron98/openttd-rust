@@ -1,15 +1,14 @@
-use crate::{
-    Instruction, Program, ProgramData, Runner, RunnerFailure, Storage, Temporary, Value, VmError,
-};
-use std::rc::Rc;
+use crate::{Instruction, Program, Runner, RunnerFailure, Storage, Temporary, Value, VmError};
 #[expect(
     clippy::redundant_pub_crate,
     reason = "Native numeric conversion is shared with table hashing"
 )]
 pub(crate) mod arrays;
 mod calls;
+mod closures;
 mod dispatch;
 mod foreach;
+mod frames;
 mod objects;
 mod roots;
 mod tables;
@@ -25,9 +24,12 @@ pub enum Execution {
 /// Register VM retaining instruction pointer, registers and operation debt.
 #[derive(Debug)]
 pub struct Vm<'a> {
-    program: Option<Rc<crate::program::MainClosure>>,
+    program: Option<crate::ScriptClosure>,
     _host: crate::HostStack,
     origin: usize,
+    base: usize,
+    top: usize,
+    frames: Vec<frames::ParentFrame>,
     native_scratch: Value,
     registers: Vec<Value>,
     runner: Storage<'a>,
@@ -44,7 +46,7 @@ impl<'a> Vm<'a> {
     pub fn new(program: &'a Program) -> Result<Self, VmError> {
         Self::with_runner(
             program,
-            Storage::Owned(Runner::new(program.data.realm.default_root()?)),
+            Storage::Owned(Runner::new(program.data.0.realm.default_root()?)),
         )
     }
     pub(crate) fn with_runner(program: &Program, runner: Storage<'a>) -> Result<Self, VmError> {
@@ -55,18 +57,21 @@ impl<'a> Vm<'a> {
         runner: Storage<'a>,
         host: crate::HostStack,
     ) -> Result<Self, VmError> {
-        if !host.same_realm(&program.data.realm) {
+        if !host.same_realm(&program.data.0.realm) {
             return Err(VmError::RealmMismatch);
         }
-        if !(1..=255).contains(&program.data.stack_size) {
+        if !(1..=255).contains(&program.stack_size()) {
             return Err(VmError::InvalidBytecode);
         }
-        let mut registers = vec![Value::Null; usize::from(program.data.stack_size)];
+        let mut registers = vec![Value::Null; usize::from(program.stack_size())];
         *registers.first_mut().ok_or(VmError::InvalidBytecode)? =
             Value::Table(runner.get().root.table());
         Ok(Self {
-            program: Some(Rc::clone(&program.data)),
+            program: Some(program.data.clone()),
             origin: host.len(),
+            base: 0,
+            top: registers.len(),
+            frames: Vec::new(),
             _host: host,
             native_scratch: Value::Null,
             registers,
@@ -83,7 +88,7 @@ impl<'a> Vm<'a> {
     pub fn with_host(program: &'a Program, host: crate::HostStack) -> Result<Self, VmError> {
         Self::with_host_runner(
             program,
-            Storage::Owned(Runner::new(program.data.realm.default_root()?)),
+            Storage::Owned(Runner::new(program.data.0.realm.default_root()?)),
             host,
         )
     }
@@ -91,15 +96,27 @@ impl<'a> Vm<'a> {
     pub const fn native_error(&self) -> Option<&crate::ByteString> {
         self.runner.get().native_error()
     }
-    fn program(&self) -> Result<&ProgramData, VmError> {
+    fn program(&self) -> Result<crate::Prototype, VmError> {
         self.program
-            .as_deref()
-            .map(|closure| &**closure)
+            .as_ref()
+            .map(crate::ScriptClosure::prototype)
             .ok_or(VmError::Finished)
     }
     /// Index of the next instruction; meaningful at suspension boundaries.
     pub const fn instruction_pointer(&self) -> usize {
         self.ip
+    }
+    /// Independently retained metadata of the current script frame.
+    pub fn active_prototype(&self) -> Option<crate::Prototype> {
+        self.program.as_ref().map(crate::ScriptClosure::prototype)
+    }
+    /// Current absolute stack base, top, and active script frame count.
+    pub fn frame_position(&self) -> Option<(usize, usize, usize)> {
+        Some((
+            self.origin.checked_add(self.base)?,
+            self.origin.checked_add(self.top)?,
+            self.frames.len().checked_add(1)?,
+        ))
     }
     /// Remaining operations, including pre-dispatch suspension debt.
     pub const fn remaining_ops(&self) -> i64 {
@@ -121,7 +138,7 @@ impl<'a> Vm<'a> {
             .checked_add(i64::from(credit))
             .ok_or(VmError::BudgetOverflow)?;
         if !self.started {
-            let program = Rc::clone(self.program.as_ref().ok_or(VmError::Finished)?);
+            let program = self.program.as_ref().ok_or(VmError::Finished)?.clone();
             self.runner.get_mut().temporary = Temporary::MainProgram { _program: program };
             self.started = true;
         }
@@ -133,6 +150,7 @@ impl<'a> Vm<'a> {
                 self.registers.fill(Value::Null);
                 self.native_scratch = Value::Null;
                 self.program = None;
+                self.frames.clear();
                 if let Err(error) = result {
                     self.runner.get_mut().failure = Some(RunnerFailure::Runtime(error));
                 }
@@ -151,6 +169,7 @@ impl<'a> Vm<'a> {
             }
             let instruction = *self
                 .program()?
+                .0
                 .instructions
                 .get(self.ip)
                 .ok_or(VmError::InvalidBytecode)?;
@@ -162,6 +181,13 @@ impl<'a> Vm<'a> {
     }
     fn register(&self, index: i32) -> Result<Value, VmError> {
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
+        let index = self
+            .base
+            .checked_add(index)
+            .ok_or(VmError::InvalidBytecode)?;
+        if index >= self.top {
+            return Err(VmError::InvalidBytecode);
+        }
         self.registers
             .get(index)
             .cloned()
@@ -170,15 +196,23 @@ impl<'a> Vm<'a> {
     fn literal(&self, index: i32) -> Result<Value, VmError> {
         let index = usize::try_from(index).map_err(|_| VmError::InvalidBytecode)?;
         self.program()?
+            .0
             .literals
             .get(index)
-            .cloned()
+            .map(crate::table::scalar::Scalar::value)
             .ok_or(VmError::InvalidBytecode)
     }
     fn write(&mut self, index: u8, value: Value) -> Result<(), VmError> {
+        let index = self
+            .base
+            .checked_add(usize::from(index))
+            .ok_or(VmError::InvalidBytecode)?;
+        if index >= self.top {
+            return Err(VmError::InvalidBytecode);
+        }
         *self
             .registers
-            .get_mut(usize::from(index))
+            .get_mut(index)
             .ok_or(VmError::InvalidBytecode)? = value;
         Ok(())
     }
@@ -188,20 +222,23 @@ impl<'a> Vm<'a> {
             .ip
             .checked_add_signed(offset)
             .ok_or(VmError::InvalidBytecode)?;
-        if target >= self.program()?.instructions.len() {
+        if target >= self.program()?.0.instructions.len() {
             return Err(VmError::InvalidBytecode);
         }
         self.ip = target;
         Ok(())
     }
     fn scope_end(&mut self, instruction: Instruction) -> Result<(), VmError> {
-        let from = usize::from(instruction.arg0);
+        let from = self
+            .base
+            .checked_add(usize::from(instruction.arg0))
+            .ok_or(VmError::InvalidBytecode)?;
         let count = instruction
             .arg1
             .checked_sub(i32::from(instruction.arg0))
             .and_then(|n| n.checked_add(2))
             .ok_or(VmError::InvalidBytecode)?;
-        if from == 0 || from > self.registers.len() {
+        if from == 0 || from > self.top {
             return Err(VmError::InvalidBytecode);
         }
         // Nested-loop native last_stacksize may outlive inner local scopes.
@@ -214,7 +251,7 @@ impl<'a> Vm<'a> {
         if from == 0 {
             return Err(VmError::InvalidBytecode);
         }
-        if end <= self.registers.len() {
+        if end <= self.top {
             self.registers
                 .get_mut(from..end)
                 .ok_or(VmError::InvalidBytecode)?

@@ -26,6 +26,10 @@ pub(crate) struct Edge {
     external: bool,
 }
 impl Edge {
+    #[cfg(test)]
+    pub(crate) fn references(&self) -> usize {
+        self.life.references.get()
+    }
     #[expect(
         clippy::arithmetic_side_effects,
         reason = "An allocated edge bounds each ownership count below usize::MAX"
@@ -75,16 +79,18 @@ impl Drop for Edge {
 }
 #[derive(Debug)]
 pub(crate) enum Object {
+    ScriptClosure(crate::script_closure::Data),
     NativeClosure(crate::native_closure::Data),
     Table(Nodes),
     Array(Vec<Stored>),
 }
 impl Object {
     fn edges(&self) -> impl Iterator<Item = &Edge> {
-        let (table, array, closure) = match self {
-            Self::Table(nodes) => (Some(nodes), None, None),
-            Self::Array(values) => (None, Some(values), None),
-            Self::NativeClosure(data) => (None, None, Some(data)),
+        let (table, array, closure, script) = match self {
+            Self::ScriptClosure(data) => (None, None, None, Some(data)),
+            Self::Table(nodes) => (Some(nodes), None, None, None),
+            Self::Array(values) => (None, Some(values), None, None),
+            Self::NativeClosure(data) => (None, None, Some(data), None),
         };
         table
             .into_iter()
@@ -94,6 +100,11 @@ impl Object {
                 closure
                     .into_iter()
                     .flat_map(crate::native_closure::Data::values),
+            )
+            .chain(
+                script
+                    .into_iter()
+                    .flat_map(crate::script_closure::Data::values),
             )
             .filter_map(Stored::edge)
     }
@@ -117,6 +128,13 @@ impl Heap {
         realm: &Realm,
         object: Object,
     ) -> Result<Handle, VmError> {
+        self.unpublished(realm, object).map(Unpublished::publish)
+    }
+    pub(crate) fn unpublished(
+        self: &Rc<Self>,
+        realm: &Realm,
+        object: Object,
+    ) -> Result<Unpublished, VmError> {
         self.chain
             .borrow_mut()
             .try_reserve(1)
@@ -147,12 +165,11 @@ impl Heap {
             references: Cell::new(0),
             external: Cell::new(0),
         });
-        let edge = Edge::retain(&life, true);
-        entry.life = Some(life);
+        entry.life = Some(Rc::clone(&life));
         entry.object = Some(object);
-        self.chain.borrow_mut().insert(0, edge.life.id);
-        Ok(Handle {
-            edge,
+        self.chain.borrow_mut().insert(0, life.id);
+        Ok(Unpublished {
+            life,
             realm: realm.clone(),
         })
     }
@@ -237,7 +254,16 @@ impl Heap {
                     .filter(|entry| entry.generation == id.generation)
                     .and_then(|entry| {
                         let life = entry.life.as_ref()?;
-                        Some((Edge::retain(life, false), entry.object.take()))
+                        let guard = Edge::retain(life, false);
+                        let released = match entry.object.as_mut()? {
+                            Object::ScriptClosure(data) => {
+                                Object::Array(std::mem::take(&mut data.outers))
+                            }
+                            Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => {
+                                entry.object.take()?
+                            }
+                        };
+                        Some((guard, released))
                     })
             };
             if let Some((guard, object)) = object {
@@ -268,6 +294,37 @@ impl Heap {
         }
     }
 }
+/// Native `CLOSURE_OP` links a zero-reference object before capture resolution.
+/// Dropping this construction token leaves an orphan for collection; it does not
+/// fabricate an owner whose release would eagerly destroy partially set outers.
+#[derive(Debug)]
+pub(crate) struct Unpublished {
+    life: Rc<Life>,
+    realm: Realm,
+}
+impl Unpublished {
+    pub(crate) fn publish(self) -> Handle {
+        Handle {
+            edge: Edge::retain(&self.life, true),
+            realm: self.realm.clone(),
+        }
+    }
+    #[expect(
+        clippy::expect_used,
+        reason = "The construction token's realm keeps its newly allocated uncollected entry alive"
+    )]
+    pub(crate) fn mutate<T>(&self, mutate: impl FnOnce(&mut Object) -> T) -> T {
+        let result = {
+            let mut entries = self.realm.heap.entries.borrow_mut();
+            let entry = entries
+                .get_mut(self.life.id.index)
+                .expect("unpublished object index");
+            mutate(entry.object.as_mut().expect("unpublished object storage"))
+        };
+        self.realm.heap.release_pending();
+        result
+    }
+}
 /// Public owners retain the realm; storage edges never do.
 #[derive(Clone, Debug)]
 pub(crate) struct Handle {
@@ -276,6 +333,15 @@ pub(crate) struct Handle {
     pub(crate) realm: Realm,
 }
 impl Handle {
+    #[cfg(test)]
+    pub(crate) fn references(&self) -> usize {
+        self.edge.life.references.get()
+    }
+    #[cfg(test)]
+    pub(crate) fn reference_probe(&self) -> impl Fn() -> Option<usize> + use<> {
+        let life = Rc::downgrade(&self.edge.life);
+        move || life.upgrade().map(|life| life.references.get())
+    }
     pub(crate) fn from_edge(edge: &Edge, realm: &Realm) -> Self {
         Self {
             edge: edge.external(),

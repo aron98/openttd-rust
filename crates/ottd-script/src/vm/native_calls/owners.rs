@@ -15,8 +15,8 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
         root.new_slot(b"held", Value::Table(held)).expect("slot");
         let mut runner = Runner::new(root.clone());
         let program = runner.compile("type(held);\nreturn 0;").expect("source");
-        let closure_watch = Rc::downgrade(&program.data);
-        let prototype_watch = Rc::downgrade(&program.data.prototype);
+        let closure_watch = program.data.0.watch();
+        let prototype_watch = program.data.read(|data| Rc::downgrade(&data.prototype));
         let host = HostStack::new();
         if retained {
             host.push_main(&program);
@@ -25,8 +25,8 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
         writeln!(
             output,
             "before {} {} {}",
-            Rc::strong_count(&program.data),
-            Rc::strong_count(&program.data.prototype),
+            program.data.0.references(),
+            program.data.read(|data| Rc::strong_count(&data.prototype)),
             host.len()
         )
         .expect("format");
@@ -39,8 +39,8 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
             vm.instruction_pointer(),
             vm.origin,
             vm.origin + vm.registers.len(),
-            Rc::strong_count(&program.data),
-            Rc::strong_count(&program.data.prototype)
+            program.data.0.references(),
+            program.data.read(|data| Rc::strong_count(&data.prototype))
         )
         .expect("format");
         match &vm.runner.get().temporary {
@@ -61,8 +61,8 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
             output,
             "returned {} {} {} {}",
             vm.remaining_ops(),
-            Rc::strong_count(&program.data),
-            Rc::strong_count(&program.data.prototype),
+            program.data.0.references(),
+            program.data.read(|data| Rc::strong_count(&data.prototype)),
             u8::from(watch().is_some())
         )
         .expect("format");
@@ -71,7 +71,7 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
         writeln!(
             output,
             "local released {} {}",
-            u8::from(closure_watch.upgrade().is_some()),
+            u8::from(closure_watch().is_some()),
             u8::from(prototype_watch.upgrade().is_some())
         )
         .expect("format");
@@ -79,7 +79,7 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
         writeln!(
             output,
             "host cleared {} {}",
-            u8::from(closure_watch.upgrade().is_some()),
+            u8::from(closure_watch().is_some()),
             u8::from(prototype_watch.upgrade().is_some())
         )
         .expect("format");

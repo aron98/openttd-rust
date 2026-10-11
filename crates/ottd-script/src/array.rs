@@ -24,7 +24,9 @@ impl Array {
     fn read<T>(&self, read: impl FnOnce(&[Stored]) -> T) -> T {
         self.0.read(|object| match object {
             Object::Array(values) => read(values),
-            Object::Table(_) | Object::NativeClosure(_) => unreachable!(),
+            Object::Table(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
+                unreachable!()
+            }
         })
     }
     #[expect(
@@ -34,7 +36,9 @@ impl Array {
     fn mutate<T>(&self, mutate: impl FnOnce(&mut Vec<Stored>) -> T) -> T {
         self.0.mutate(|object| match object {
             Object::Array(values) => mutate(values),
-            Object::Table(_) | Object::NativeClosure(_) => unreachable!(),
+            Object::Table(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
+                unreachable!()
+            }
         })
     }
     pub(crate) fn append(&self, value: Value) -> Result<(), VmError> {

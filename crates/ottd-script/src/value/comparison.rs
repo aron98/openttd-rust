@@ -4,6 +4,9 @@ use std::cmp::Ordering;
 impl Value {
     pub(crate) fn equal(&self, other: &Self) -> Result<bool, VmError> {
         match (self, other) {
+            (Self::ScriptClosure(left), Self::ScriptClosure(right)) => {
+                Ok(left.same_identity(right))
+            }
             (Self::NativeClosure(left), Self::NativeClosure(right)) => {
                 Ok(left.same_identity(right))
             }
@@ -23,7 +26,8 @@ impl Value {
                 | Self::String(_)
                 | Self::Array(_)
                 | Self::Table(_)
-                | Self::NativeClosure(_),
+                | Self::NativeClosure(_)
+                | Self::ScriptClosure(_),
                 _,
             )
             | (
@@ -33,7 +37,8 @@ impl Value {
                 | Self::String(_)
                 | Self::Array(_)
                 | Self::Table(_)
-                | Self::NativeClosure(_),
+                | Self::NativeClosure(_)
+                | Self::ScriptClosure(_),
             ) => Ok(false),
         }
     }
@@ -43,7 +48,8 @@ impl Value {
     )]
     fn order(&self, other: &Self) -> Result<Ordering, VmError> {
         match (self, other) {
-            (Self::NativeClosure(_), _) | (_, Self::NativeClosure(_)) => {
+            (Self::NativeClosure(_) | Self::ScriptClosure(_), _)
+            | (_, Self::NativeClosure(_) | Self::ScriptClosure(_)) => {
                 Err(VmError::UnsupportedRuntimeValue)
             }
             (Self::Table(_), _) | (_, Self::Table(_)) => Err(VmError::UnsupportedTableOrdering),

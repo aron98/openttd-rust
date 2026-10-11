@@ -3,7 +3,10 @@ use super::{Instruction, Temporary, Value, Vm, VmError};
 impl Vm<'_> {
     pub(super) fn load_nulls(&mut self, i: Instruction) -> Result<(), VmError> {
         let length = usize::try_from(i.arg1).map_err(|_| VmError::InvalidBytecode)?;
-        let start = usize::from(i.arg0);
+        let start = self
+            .base
+            .checked_add(usize::from(i.arg0))
+            .ok_or(VmError::InvalidBytecode)?;
         if start == 0 {
             return Err(VmError::InvalidBytecode);
         }
@@ -31,13 +34,26 @@ impl Vm<'_> {
             )
         };
         let receiver = self.register(receiver)?;
-        let current_this = receiver == self.register(0)?;
+        let value = match self.lookup_value(&receiver, key.clone()) {
+            Ok(value) => value,
+            Err(VmError::MissingIndex) => {
+                let mut message = b"the index '".to_vec();
+                message.extend(key.text()?);
+                message.extend_from_slice(b"' does not exist");
+                return Err(self.native_failure(&message, VmError::MissingIndex));
+            }
+            Err(error) => return Err(error),
+        };
+        self.store_temporary(value)
+    }
+    pub(super) fn lookup_value(&self, receiver: &Value, key: Value) -> Result<Value, VmError> {
+        let current_this = *receiver == self.register(0)?;
         let own = match &receiver {
             Value::Table(table) => table.lookup(key.clone()),
             Value::Array(array) => {
                 let found = array.lookup(&key);
                 if matches!(key, Value::Integer(_) | Value::Float(_)) {
-                    return self.store_temporary(found?);
+                    return found;
                 }
                 found
             }
@@ -46,11 +62,12 @@ impl Vm<'_> {
             | Value::Integer(_)
             | Value::Float(_)
             | Value::String(_)
-            | Value::NativeClosure(_) => {
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => {
                 if !current_this {
                     return Err(VmError::UnsupportedReceiver);
                 }
-                this_scalar_lookup(&receiver, &key)
+                this_scalar_lookup(receiver, &key)
             }
         };
         let value = match own {
@@ -58,7 +75,7 @@ impl Vm<'_> {
             Err(VmError::MissingIndex) if current_this => self.configured_get(key)?,
             Err(error) => return Err(error),
         };
-        self.store_temporary(value)
+        Ok(value)
     }
     fn configured_get(&self, key: Value) -> Result<Value, VmError> {
         if let Some(value) = self.runner.get().root.table.raw_get(key.clone())? {
@@ -113,7 +130,8 @@ impl Vm<'_> {
             | Value::Integer(_)
             | Value::Float(_)
             | Value::String(_)
-            | Value::NativeClosure(_) => return Err(VmError::UnsupportedReceiver),
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => return Err(VmError::UnsupportedReceiver),
         }
         if instruction.opcode != 0x3c && instruction.arg0 != instruction.arg3 {
             self.write(instruction.arg0, value)?;
@@ -148,7 +166,7 @@ fn this_scalar_lookup(receiver: &Value, key: &Value) -> Result<Value, VmError> {
             key,
             b"tointeger" | b"tofloat" | b"tostring" | b"tochar" | b"weakref"
         ),
-        Value::NativeClosure(_) => matches!(
+        Value::NativeClosure(_) | Value::ScriptClosure(_) => matches!(
             key,
             b"call"
                 | b"pcall"

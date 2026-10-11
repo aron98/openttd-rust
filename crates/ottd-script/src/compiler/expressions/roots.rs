@@ -28,15 +28,12 @@ impl Compiler<'_> {
     ) -> Result<Option<Register>, CompileError> {
         let key = self.push()?;
         self.load(key, Value::String(self.realm.string(name.as_bytes())))?;
-        if matches!(
-            self.token.kind,
-            TokenKind::Compound(_) | TokenKind::Increment(_)
-        ) {
-            return Err(self.error(CompileErrorKind::UnsupportedSyntax));
-        }
         if !matches!(
             self.token.kind,
-            TokenKind::Symbol(b'=' | b'(') | TokenKind::NewSlot
+            TokenKind::Symbol(b'=' | b'(')
+                | TokenKind::NewSlot
+                | TokenKind::Compound(_)
+                | TokenKind::Increment(_)
         ) && (!state.deleting || matches!(self.token.kind, TokenKind::Symbol(b'.' | b'[')))
         {
             let key = self.pop()?;
@@ -52,6 +49,7 @@ impl Compiler<'_> {
         }
         state.dereference = Some(key);
         state.field = true;
+        state.capture = None;
         Ok(None)
     }
 }

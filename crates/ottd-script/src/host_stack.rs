@@ -30,6 +30,6 @@ impl HostStack {
         self.0
             .borrow()
             .iter()
-            .all(|program| program.data.realm.same(realm))
+            .all(|program| program.data.0.realm.same(realm))
     }
 }

@@ -54,6 +54,12 @@ impl Compiler<'_> {
         state.dereference = None;
         state.field = false;
         match self.token.kind.clone() {
+            TokenKind::Function => {
+                self.advance()?;
+                self.expect(b'(')?;
+                self.create_function(depth, None)?;
+                Ok(None)
+            }
             TokenKind::Scalar(value) => {
                 let target = self.push()?;
                 self.load(target, value)?;
@@ -146,11 +152,25 @@ impl Compiler<'_> {
         state: &mut ExpressionState,
     ) -> Result<Option<Register>, CompileError> {
         state.constant = false;
+        state.capture = None;
         self.advance()?;
         if let Some(register) = self.registers.local(name) {
             self.registers.reference(register);
             state.dereference = Some(register);
             return Ok(Some(register));
+        }
+        if let Some(index) = self.captures.iter().position(|(found, _)| *found == name) {
+            let target = self.push()?;
+            self.emit(Instruction {
+                opcode: 0x1b,
+                arg0: target.0,
+                arg1: i32::try_from(index).map_err(|_| self.error(CompileErrorKind::Limit))?,
+                arg2: 0,
+                arg3: 0,
+            });
+            state.dereference = Some(target);
+            state.capture = Some(target);
+            return Ok(Some(target));
         }
         let Some(binding) = self.realm.constant(name) else {
             self.registers.reference(Register(0));

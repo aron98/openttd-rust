@@ -1,7 +1,6 @@
 //! Exact ownership transitions use the same interner observed by native ref probes.
 use super::{Runner, Temporary};
 use crate::{Execution, Realm, Value, VmError};
-use std::rc::Rc;
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 #[test]
 fn program_clone_shares_one_literal_pool_and_failed_call_retains_real_program() -> Result<()> {
@@ -9,7 +8,7 @@ fn program_clone_shares_one_literal_pool_and_failed_call_retains_real_program() 
     let mut runner = Runner::new(realm.empty_root());
     let a = runner.compile("local keep=\"compile-owner-A\"; return absent;")?;
     let clone = a.clone();
-    assert!(Rc::ptr_eq(&a.data, &clone.data));
+    assert!(a.data.same_identity(&clone.data));
     assert_eq!(realm.owners(b"compile-owner-A"), 1);
     let b = runner.compile("return \"compile-owner-B\";")?;
     assert!(matches!(runner.temporary, Temporary::Value(Value::Null)));
@@ -26,7 +25,7 @@ fn program_clone_shares_one_literal_pool_and_failed_call_retains_real_program() 
     let Temporary::MainProgram { _program: owner } = &runner.temporary else {
         return Err("missing actual program owner".into());
     };
-    assert_eq!(owner.literals.len(), 2);
+    assert_eq!(owner.read(|data| data.prototype.literals.len()), 2);
     let c = runner.compile("return null;")?;
     assert_eq!(realm.owners(b"compile-owner-A"), 1);
     drop(runner.start(&c)?);

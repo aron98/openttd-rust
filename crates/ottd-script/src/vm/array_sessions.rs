@@ -76,6 +76,7 @@ impl Session {
                 array.len()
             )),
             Value::NativeClosure(_)
+            | Value::ScriptClosure(_)
             | Value::Table(_)
             | Value::Null
             | Value::Bool(_)

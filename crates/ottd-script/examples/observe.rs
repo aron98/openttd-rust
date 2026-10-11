@@ -18,6 +18,7 @@ fn value(value: &Value) {
             println!();
         }
         Value::NativeClosure(_) => println!("unsupported 134218240"),
+        Value::ScriptClosure(_) => println!("unsupported 134217984"),
         Value::Table(_) => println!("unsupported 167772192"),
         Value::Array(_) => println!("unsupported 134217792"),
         Value::Null => println!("null"),
@@ -43,7 +44,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     if print_file.is_some() {
         runner.set_print_sink(Some(Box::new(Prints(Rc::clone(&prints)))));
     }
-    let program = match runner.compile_bytes(&source) {
+    let program = match runner.compile_bytes_named(&source, c"fixture") {
         Ok(program) => program,
         Err(error) => {
             println!("compile_error");
@@ -51,10 +52,14 @@ fn main() -> Result<(), Box<dyn Error>> {
             return Ok(());
         }
     };
+    let closure_trace = env::var_os("OTTD_SCRIPT_CLOSURE_TRACE").is_some();
+    if closure_trace {
+        metadata(&program.prototype(), "main");
+    }
     println!("stack {}", program.stack_size());
     for literal in program.literals() {
         print!("literal ");
-        value(literal);
+        value(&literal);
     }
     for i in program.instructions() {
         println!(
@@ -74,11 +79,25 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut vm = runner.start_with_host(&program, host)?;
     for credit in credits {
         match vm.resume(*credit) {
-            Ok(Execution::Suspended) => println!(
-                "suspend {} {}",
-                vm.remaining_ops(),
-                vm.instruction_pointer()
-            ),
+            Ok(Execution::Suspended) => {
+                if closure_trace {
+                    let active = vm.active_prototype().ok_or("active closure")?;
+                    let path = function_path(&program.prototype(), &active, "main")
+                        .ok_or("prototype outside main tree")?;
+                    let (base, top, count) = vm.frame_position().ok_or("frame coordinates")?;
+                    println!(
+                        "suspend {} {path} {} {count} {base} {top}",
+                        vm.remaining_ops(),
+                        vm.instruction_pointer()
+                    );
+                } else {
+                    println!(
+                        "suspend {} {}",
+                        vm.remaining_ops(),
+                        vm.instruction_pointer()
+                    );
+                }
+            }
             Ok(Execution::Returned(result)) => {
                 print!("return {} ", vm.remaining_ops());
                 value(&result);
@@ -151,4 +170,65 @@ fn formats(filename: &str) -> Result<(), Box<dyn Error>> {
         value(&result);
     }
     Ok(())
+}
+
+fn metadata(proto: &ottd_script::Prototype, path: &str) {
+    let children = proto.children();
+    let captures = proto.captures();
+    println!(
+        "prototype {path} {} {} {} {} {} 0",
+        proto.stack_size(),
+        proto.parameter_count(),
+        children.len(),
+        captures.len(),
+        proto.default_registers().len()
+    );
+    print!("source {path} ");
+    value(
+        &proto
+            .source_name()
+            .cloned()
+            .map_or(Value::Null, Value::String),
+    );
+    print!("name {path} ");
+    value(&proto.name().cloned().map_or(Value::Null, Value::String));
+    for (label, names) in [
+        ("parameter", proto.parameter_names()),
+        ("local", proto.local_names()),
+        ("capture-name", proto.capture_names()),
+    ] {
+        for (index, name) in names.iter().enumerate() {
+            print!("{label} {path} {index} ");
+            value(&Value::String(name.clone()));
+        }
+    }
+    for (index, (kind, source)) in captures.iter().enumerate() {
+        print!("outer {path} {index} {kind} ");
+        value(source);
+    }
+    for (index, register) in proto.default_registers().iter().enumerate() {
+        println!("default {path} {index} {register}");
+    }
+    for i in proto.instructions() {
+        println!(
+            "child-op {path} {} {} {} {} {}",
+            i.opcode, i.arg0, i.arg1, i.arg2, i.arg3
+        );
+    }
+    for (index, child) in children.iter().enumerate() {
+        metadata(child, &format!("{path}.{index}"));
+    }
+}
+fn function_path(
+    root: &ottd_script::Prototype,
+    target: &ottd_script::Prototype,
+    path: &str,
+) -> Option<String> {
+    if root.same_identity(target) {
+        return Some(path.into());
+    }
+    root.children()
+        .iter()
+        .enumerate()
+        .find_map(|(index, child)| function_path(child, target, &format!("{path}.{index}")))
 }

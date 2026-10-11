@@ -7,7 +7,11 @@ impl Vm<'_> {
             return Err(VmError::InvalidBytecode);
         }
         self.registers
-            .get(usize::from(instruction.arg0))
+            .get(
+                self.base
+                    .checked_add(usize::from(instruction.arg0))
+                    .ok_or(VmError::InvalidBytecode)?,
+            )
             .ok_or(VmError::InvalidBytecode)?;
         let capacity = usize::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
         Array::reserved(&self.runner.get().root.realm, capacity).map(Value::Array)
@@ -15,7 +19,11 @@ impl Vm<'_> {
     pub(super) fn append_array(&self, instruction: Instruction) -> Result<(), VmError> {
         let Value::Array(array) = self
             .registers
-            .get(usize::from(instruction.arg0))
+            .get(
+                self.base
+                    .checked_add(usize::from(instruction.arg0))
+                    .ok_or(VmError::InvalidBytecode)?,
+            )
             .ok_or(VmError::InvalidBytecode)?
         else {
             return Err(VmError::InvalidBytecode);
@@ -60,7 +68,8 @@ impl Array {
             | Value::Bool(_)
             | Value::Array(_)
             | Value::Table(_)
-            | Value::NativeClosure(_) => Err(VmError::MissingIndex),
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => Err(VmError::MissingIndex),
         }
     }
     pub(crate) fn store(&self, key: &Value, value: Value) -> Result<(), VmError> {
@@ -72,7 +81,8 @@ impl Array {
             | Value::String(_)
             | Value::Array(_)
             | Value::Table(_)
-            | Value::NativeClosure(_) => {
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => {
                 return Err(VmError::OperandType);
             }
         };

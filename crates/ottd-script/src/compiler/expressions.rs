@@ -7,6 +7,7 @@ use crate::{CompileError, Instruction, lexer::TokenKind};
 pub(super) struct ExpressionState {
     dereference: Option<Register>,
     constant: bool,
+    capture: Option<Register>,
     field: bool,
     deleting: bool,
 }

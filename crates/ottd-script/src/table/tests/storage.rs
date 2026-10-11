@@ -144,7 +144,7 @@ fn bad_delete_destination_preserves_completed_slot_removal() {
         let source = runner
             .compile("held<-{a=7};\nreturn delete held.a;")
             .expect("source");
-        let mut instructions = source.instructions().to_vec();
+        let mut instructions = source.instructions();
         instructions
             .iter_mut()
             .find(|i| i.opcode == 0x0c)
@@ -152,7 +152,7 @@ fn bad_delete_destination_preserves_completed_slot_removal() {
             .arg0 = destination;
         let program = crate::Program::freeze(crate::ProgramData {
             stack_size: source.stack_size(),
-            literals: source.literals().to_vec(),
+            literals: source.literals(),
             instructions,
             realm: realm.clone(),
         });

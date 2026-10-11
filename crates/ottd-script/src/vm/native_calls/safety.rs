@@ -17,7 +17,7 @@ pub(super) fn invalid_call_destination_preserves_prior_native_print_side_effects
     let source = runner
         .compile("print(\"before\\0after\");")
         .expect("source");
-    let mut instructions = source.instructions().to_vec();
+    let mut instructions = source.instructions();
     instructions
         .iter_mut()
         .find(|i| i.opcode == 6)
@@ -25,7 +25,7 @@ pub(super) fn invalid_call_destination_preserves_prior_native_print_side_effects
         .arg0 = 254;
     let program = crate::Program::freeze(crate::ProgramData {
         stack_size: source.stack_size(),
-        literals: source.literals().to_vec(),
+        literals: source.literals(),
         instructions,
         realm,
     });
@@ -55,7 +55,7 @@ pub(super) fn malformed_native_argument_ranges_fail_without_dispatching_the_body
     let mut runner = Runner::new(realm.default_root().expect("root"));
     let source = runner.compile("return array(2);").expect("source");
     for base in [254, 255] {
-        let mut instructions = source.instructions().to_vec();
+        let mut instructions = source.instructions();
         instructions
             .iter_mut()
             .find(|i| i.opcode == 6)
@@ -63,7 +63,7 @@ pub(super) fn malformed_native_argument_ranges_fail_without_dispatching_the_body
             .arg2 = base;
         let program = crate::Program::freeze(crate::ProgramData {
             stack_size: source.stack_size(),
-            literals: source.literals().to_vec(),
+            literals: source.literals(),
             instructions,
             realm: realm.clone(),
         });

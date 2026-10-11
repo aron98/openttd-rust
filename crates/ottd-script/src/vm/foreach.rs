@@ -20,7 +20,8 @@ impl Vm<'_> {
             | Value::Bool(_)
             | Value::Integer(_)
             | Value::Float(_)
-            | Value::NativeClosure(_) => {
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => {
                 return Err(VmError::OperandType);
             }
         }
@@ -32,7 +33,8 @@ impl Vm<'_> {
             | Value::String(_)
             | Value::Array(_)
             | Value::Table(_)
-            | Value::NativeClosure(_) => {
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => {
                 return Err(VmError::InvalidBytecode);
             }
         };
@@ -64,7 +66,8 @@ impl Vm<'_> {
             | Value::Bool(_)
             | Value::Integer(_)
             | Value::Float(_)
-            | Value::NativeClosure(_) => {
+            | Value::NativeClosure(_)
+            | Value::ScriptClosure(_) => {
                 return Err(VmError::OperandType);
             }
         };

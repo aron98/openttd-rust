@@ -14,6 +14,7 @@ struct Session {
 pub(super) fn render(value: &Value) -> Result<String> {
     Ok(match value {
         Value::NativeClosure(_) => "unsupported 134218240".to_owned(),
+        Value::ScriptClosure(_) => "unsupported 134217984".to_owned(),
         Value::Table(_) => "unsupported 167772192".to_owned(),
         Value::Array(_) => "unsupported 134217792".to_owned(),
         Value::Null => "null".to_owned(),
@@ -44,7 +45,7 @@ pub(super) fn number(fields: &[&str], index: usize) -> Result<usize> {
 pub(super) fn dump(program: &Program, out: &mut String) -> Result<()> {
     writeln!(out, "stack {}", program.stack_size())?;
     for value in program.literals() {
-        writeln!(out, "literal {}", render(value)?)?;
+        writeln!(out, "literal {}", render(&value)?)?;
     }
     for i in program.instructions() {
         writeln!(
@@ -387,19 +388,11 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
         std::path::PathBuf::from,
     );
     for feed in ["buffer", "unsigned", "utf8"] {
-        {
-            let name = "unsupported-update";
-            let native = fs::read_to_string(base.join(format!("native/{name}-{feed}.txt")))?;
-            assert!(native.lines().any(|line| line == "compiled"));
-            let source = fs::read(base.join(format!("fixtures/{name}.nut")))?;
-            assert_eq!(
-                Realm::new()
-                    .compile_bytes(&source)
-                    .expect_err("closed root syntax domain")
-                    .kind,
-                crate::CompileErrorKind::UnsupportedSyntax
-            );
-        }
+        replay(
+            &base,
+            &base.join(format!("fixtures/unsupported-update-{feed}.session")),
+            &base.join(format!("native/unsupported-update-{feed}.txt")),
+        )?;
         let realm = Realm::new();
         let root = realm.empty_root();
         let program =
@@ -463,5 +456,23 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
             Execution::Returned(Value::Integer(3))
         );
     }
+    Ok(())
+}
+
+#[test]
+fn script_closure_observation_keeps_its_distinct_native_object_tag() -> Result<()> {
+    let realm = Realm::new();
+    let mut runner = Runner::new(realm.default_root()?);
+    let main = runner.compile("return function(){return 7;};")?;
+    let mut vm = runner.start(&main)?;
+    let Execution::Returned(result) = vm.resume(10000)? else {
+        return Err("closure return required".into());
+    };
+    let actual = format!("return {} {}", vm.remaining_ops(), render(&result)?);
+    let expected = include_str!("script-closure-type.txt")
+        .lines()
+        .find(|line| line.starts_with("return "))
+        .ok_or("native closure return record")?;
+    assert_eq!(actual, expected);
     Ok(())
 }

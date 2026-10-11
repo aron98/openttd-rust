@@ -3,6 +3,7 @@ use super::{Edge, Handle};
 use crate::{Array, Realm, Table, Value, VmError, table::scalar::Scalar};
 #[derive(Clone, Debug)]
 pub(crate) enum Stored {
+    ScriptClosure(Edge),
     NativeClosure(Edge),
     Scalar(Scalar),
     Array(Edge),
@@ -14,6 +15,12 @@ impl Stored {
     }
     pub(crate) fn from_value(value: Value, realm: &Realm) -> Result<Self, VmError> {
         match value {
+            Value::ScriptClosure(closure) => {
+                if !closure.same_realm(realm) {
+                    return Err(VmError::RealmMismatch);
+                }
+                Ok(Self::ScriptClosure(closure.0.edge.internal()))
+            }
             Value::NativeClosure(closure) => {
                 if !closure.same_realm(realm) {
                     return Err(VmError::RealmMismatch);
@@ -41,6 +48,9 @@ impl Stored {
     }
     pub(crate) fn value(&self, realm: &Realm) -> Value {
         match self {
+            Self::ScriptClosure(edge) => {
+                Value::ScriptClosure(crate::ScriptClosure(Handle::from_edge(edge, realm)))
+            }
             Self::NativeClosure(edge) => {
                 Value::NativeClosure(crate::NativeClosure(Handle::from_edge(edge, realm)))
             }
@@ -49,10 +59,13 @@ impl Stored {
             Self::Table(edge) => Value::Table(Table(Handle::from_edge(edge, realm))),
         }
     }
-    pub(super) const fn edge(&self) -> Option<&Edge> {
+    pub(crate) const fn edge(&self) -> Option<&Edge> {
         match self {
             Self::Scalar(_) => None,
-            Self::Array(edge) | Self::Table(edge) | Self::NativeClosure(edge) => Some(edge),
+            Self::Array(edge)
+            | Self::Table(edge)
+            | Self::NativeClosure(edge)
+            | Self::ScriptClosure(edge) => Some(edge),
         }
     }
 }

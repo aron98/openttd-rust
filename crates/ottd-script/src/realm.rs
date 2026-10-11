@@ -43,7 +43,17 @@ impl Realm {
     /// # Errors
     /// Returns the compiler's diagnostic for consumed invalid or unsupported input.
     pub fn compile_bytes(&self, source: &[u8]) -> Result<Program, CompileError> {
-        crate::compiler::compile_in(self, source)
+        self.compile_bytes_named(source, c"buffer")
+    }
+    /// Compile bytes with an explicit host-provided source name retained by every prototype.
+    /// # Errors
+    /// Returns the compiler diagnostic for invalid or unsupported source.
+    pub fn compile_bytes_named(
+        &self,
+        source: &[u8],
+        name: &std::ffi::CStr,
+    ) -> Result<Program, CompileError> {
+        crate::compiler::compile_in(self, source, name.to_bytes())
     }
     /// Intern immutable length-delimited bytes, including embedded NUL.
     pub fn string(&self, bytes: &[u8]) -> ByteString {

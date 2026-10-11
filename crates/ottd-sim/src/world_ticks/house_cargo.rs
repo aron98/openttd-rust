@@ -9,25 +9,7 @@ use super::{
 use crate::world_access::row_field;
 use ottd_save::{TableRecord, TableSchema, WireValue};
 
-#[derive(Debug, Clone, Copy)]
-pub(crate) enum CargoSource {
-    Town(u16),
-}
-
-#[derive(Debug, Clone, Copy)]
-pub(crate) struct TileArea {
-    pub tile: u32,
-    pub width: u16,
-    pub height: u16,
-}
-
-#[derive(Debug, Clone, Copy)]
-pub(crate) struct TownCargoProduction {
-    pub source: CargoSource,
-    pub area: TileArea,
-    pub cargo: u8,
-    pub amount: u32,
-}
+pub(crate) use crate::cargo::{CargoSource, Production as TownCargoProduction, TileArea};
 
 pub(super) fn random(state: &mut State<'_>) -> Result<u32, WorldTickError> {
     let mut rng = ottd_core::Randomizer::from_state(state.random_state()?);
@@ -102,7 +84,9 @@ pub(crate) fn deliver_empty(
             "station distribution and packet allocation",
         ));
     }
-    let CargoSource::Town(town) = production.source;
+    let CargoSource::Town(town) = production.source else {
+        return Err(unsupported("house_cargo", "town producer identity"));
+    };
     let tile = state.view().tile(production.area.tile)?;
     if production.area.width != 1
         || production.area.height != 1
@@ -139,7 +123,9 @@ fn publish(
     production: TownCargoProduction,
     delivered: u32,
 ) -> Result<(), WorldTickError> {
-    let CargoSource::Town(town) = production.source;
+    let CargoSource::Town(town) = production.source else {
+        return Err(unsupported("house_cargo", "town producer identity"));
+    };
     let schema = state.table(b"CITY")?.schema().clone();
     let supplied_schema = child(&schema, "supplied")?;
     let history_schema = child(supplied_schema, "history")?;

@@ -5,6 +5,7 @@ mod failure_tests;
 mod jobs;
 pub(super) use admission::admit;
 mod links;
+mod load_cargo;
 pub(super) use links::station_links;
 mod orders;
 pub(super) use jobs::tick as link_tick;
@@ -108,6 +109,17 @@ pub(super) fn station_tick(
     }
     let station = u32::try_from(number(state, id, false, "last_station_visited")?)
         .map_err(|_| unsupported("road_loading", "station ID"))?;
+    if number(state, id, false, "vehicle_flags")? & 64 != 0 {
+        payment::delete(state, runner)?;
+        set(state, id, false, "load_unload_ticks", 20)?;
+        return set(
+            state,
+            id,
+            false,
+            "vehicle_flags",
+            (number(state, id, false, "vehicle_flags")? & !64) | 1,
+        );
+    }
     let cargo = SavedVehicleView::candidate(state.view(), id)?.cargo_type()?;
     let capacity = number(state, id, false, "cargo_cap")?;
     set(state, id, false, "refit_cap", capacity)?;
@@ -128,22 +140,28 @@ pub(super) fn station_tick(
     ] {
         records::goods_field(state, (station, cargo), (name, WireValue::Unsigned(value)))?;
     }
-    if capacity > 0 {
-        records::goods_field(
-            state,
-            (station, cargo),
-            ("time_since_pickup", WireValue::Unsigned(0)),
-        )?;
-    }
+    let capacity = u32::try_from(capacity).map_err(|_| unsupported("cargo_load", "capacity"))?;
+    let (loaded, possible) = load_cargo::load(state, runner, station, cargo, capacity)?;
     payment::delete(state, runner)?;
-    set(state, id, false, "load_unload_ticks", 20)?;
-    set(
-        state,
-        id,
-        false,
-        "vehicle_flags",
-        number(state, id, false, "vehicle_flags")? | 1,
-    )
+    let flags = number(state, id, false, "vehicle_flags")? & !64;
+    if loaded != 0 {
+        let wait = if state.number(b"PATS", 0, "order.gradual_loading")? != 0 {
+            20
+        } else {
+            i64::from(loaded)
+        };
+        set(state, id, false, "load_unload_ticks", wait.max(1))?;
+        set(
+            state,
+            id,
+            false,
+            "vehicle_flags",
+            flags | if loaded < possible { 64 } else { 0 },
+        )
+    } else {
+        set(state, id, false, "load_unload_ticks", 20)?;
+        set(state, id, false, "vehicle_flags", flags | 1)
+    }
 }
 pub(super) fn handle(
     state: &mut State<'_>,

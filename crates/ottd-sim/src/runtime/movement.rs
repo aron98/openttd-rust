@@ -16,7 +16,6 @@ use access::{number, random, set};
 use ottd_core::ClockState;
 use ottd_save::{WireValue, world::World};
 pub use spatial::SingleRoadTileOccupancy;
-use spatial::Spatial;
 
 impl SimulationRuntime {
     /// Advances the bounded single-road-vehicle gameplay domain atomically.
@@ -54,8 +53,9 @@ impl SimulationRuntime {
             id,
             cache: cache.clone(),
             content: &self.content,
-            spatial: Spatial::restore(&self.world, id)?,
+            spatial: spatial::Spatial::restore(&self.world, id)?,
             stations: stations::IdleStations::restore(&self.world, &self.stations)?,
+            station_context: &self.stations,
             transport: self.transport.clone(),
         };
         let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
@@ -75,11 +75,20 @@ struct RoadPhases<'a> {
     id: VehicleId,
     cache: RoadVehicleCache,
     content: &'a ContentCatalog,
-    spatial: Spatial,
+    spatial: spatial::Spatial,
     stations: stations::IdleStations,
+    station_context: &'a super::stations::StationRuntime,
     transport: super::transport::TransportRuntime,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn town_cargo(
+        &mut self,
+        state: &mut State<'_>,
+        production: crate::cargo::Production,
+    ) -> Result<u32, WorldTickError> {
+        self.transport
+            .town_production(state, production, self.station_context)
+    }
     fn before_state_loop(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
         super::job_pause::before_tick(state, &self.transport)
     }
@@ -99,7 +108,12 @@ impl VehiclePhases for RoadPhases<'_> {
         !self.stations.is_empty()
     }
     fn stations(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
-        self.stations.tick(state)
+        self.stations.tick(
+            state,
+            &mut self.transport,
+            self.station_context,
+            self.content,
+        )
     }
     fn admit(&self, world: &World) -> Result<(), WorldTickError> {
         if world

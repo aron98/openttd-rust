@@ -2,12 +2,36 @@
 #[cfg(test)]
 #[path = "cargo/command_tests.rs"]
 mod command_tests;
+#[path = "cargo/distribution.rs"]
+mod distribution;
+#[path = "cargo/graph.rs"]
+mod graph;
+#[path = "cargo/load.rs"]
+pub(in crate::runtime) mod load;
+#[cfg(test)]
+#[path = "cargo/load_tests.rs"]
+mod load_tests;
+#[path = "cargo/packet.rs"]
+mod packet;
+#[path = "cargo/production.rs"]
+mod production;
+#[cfg(test)]
+#[path = "cargo/production_tests.rs"]
+mod production_tests;
+#[path = "cargo/ratings.rs"]
+mod ratings;
 #[path = "cargo/read.rs"]
 pub(in crate::runtime) mod read;
 #[path = "cargo/recipients.rs"]
 mod recipients;
 #[path = "cargo/restore.rs"]
 mod restore;
+#[path = "cargo/truncate.rs"]
+mod truncate;
+#[path = "cargo/validate.rs"]
+mod validate;
+#[path = "cargo/write.rs"]
+mod write;
 use crate::runtime::{RuntimeError, pools::PoolAllocator};
 use ottd_save::world::{CandidateView, World};
 use serde::Serialize;
@@ -57,7 +81,7 @@ impl CargoRuntime {
         if ids != self.pool.snapshot().occupied {
             return Err(RuntimeError::Invalid("candidate cargo pool membership"));
         }
-        Ok(())
+        validate::lists(self, view)
     }
 
     pub(in crate::runtime) fn station_change(
@@ -80,6 +104,16 @@ impl CargoRuntime {
         }
         candidate.validate(view)?;
         Ok(candidate)
+    }
+
+    pub(in crate::runtime) fn refresh_recipients(
+        &mut self,
+        state: &crate::WorldTickState<'_>,
+        stations: &crate::runtime::stations::StationRuntime,
+    ) -> Result<(), RuntimeError> {
+        (self.town_near, self.industry_near) =
+            recipients::from_view(read::Read::Candidate(state.view()), &stations.geometry)?;
+        Ok(())
     }
 
     pub(in crate::runtime) fn snapshot(&self) -> serde_json::Value {

@@ -23,6 +23,7 @@ pub(crate) struct Data {
     pub(crate) captures: Vec<Capture>,
     pub(crate) defaults: Vec<u8>,
     pub(crate) parameters: usize,
+    pub(crate) variadic: bool,
 }
 
 /// An independently owning view of immutable function metadata.
@@ -58,6 +59,10 @@ impl Prototype {
     /// Fixed parameter count, including the receiver.
     pub fn parameter_count(&self) -> usize {
         self.0.parameters
+    }
+    /// Whether the frame accepts additional unnamed arguments.
+    pub fn is_variadic(&self) -> bool {
+        self.0.variadic
     }
     /// Default values' source registers in the enclosing function.
     pub fn default_registers(&self) -> &[u8] {

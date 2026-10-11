@@ -2,6 +2,9 @@
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) enum TokenKind<'a> {
     Function,
+    Ellipsis,
+    Vargc,
+    Vargv,
     This,
     Const,
     Root,
@@ -60,6 +63,9 @@ impl TokenKind<'_> {
             Self::Symbol(op @ (b'+' | b'-')) => Some((6, 0x11, *op)),
             Self::Symbol(op @ (b'*' | b'/' | b'%')) => Some((7, 0x11, *op)),
             Self::Function
+            | Self::Ellipsis
+            | Self::Vargc
+            | Self::Vargv
             | Self::This
             | Self::Const
             | Self::Root

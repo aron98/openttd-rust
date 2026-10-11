@@ -78,6 +78,7 @@ pub(crate) fn compile_in(
         captures: Vec::new(),
         defaults: Vec::new(),
         parameters: 1,
+        variadic: false,
     };
     crate::ScriptClosure::new(realm, std::rc::Rc::new(data))
         .map(|data| Program { data })

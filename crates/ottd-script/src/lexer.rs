@@ -84,6 +84,8 @@ impl<'a> Lexer<'a> {
                     .map_err(|_| self.error(CompileErrorKind::InvalidCharacter))?;
                 match name {
                     "function" => TokenKind::Function,
+                    "vargc" => TokenKind::Vargc,
+                    "vargv" => TokenKind::Vargv,
                     "this" => TokenKind::This,
                     "const" => TokenKind::Const,
                     "enum" => TokenKind::Enum,
@@ -108,7 +110,7 @@ impl<'a> Lexer<'a> {
                     "true" => TokenKind::Scalar(Value::Bool(true)),
                     "false" => TokenKind::Scalar(Value::Bool(false)),
                     "delegate" | "try" | "catch" | "throw" | "yield" | "resume" | "parent"
-                    | "class" | "extends" | "instanceof" | "vargc" | "vargv" | "static" => {
+                    | "class" | "extends" | "instanceof" | "static" => {
                         return Err(CompileError {
                             offset,
                             kind: CompileErrorKind::UnsupportedSyntax,
@@ -134,6 +136,13 @@ impl<'a> Lexer<'a> {
         self.advance()?;
         let pair = (first, self.peek());
         let combined = match pair {
+            (b'.', Some(b'.')) => {
+                self.advance()?;
+                if self.peek() != Some(b'.') {
+                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                }
+                Some(TokenKind::Ellipsis)
+            }
             (b'=', Some(b'=')) => Some(TokenKind::Equal),
             (b'!', Some(b'=')) => Some(TokenKind::NotEqual),
             (b'<', Some(b'-')) => Some(TokenKind::NewSlot),

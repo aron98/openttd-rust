@@ -8,6 +8,7 @@ pub(super) struct ParentFrame {
     top: usize,
     ip: usize,
     target: u8,
+    varargs: super::varargs::VarArgs,
 }
 impl Vm<'_> {
     pub(super) fn dispatch_call(&mut self, i: Instruction) -> Result<(), VmError> {
@@ -44,64 +45,59 @@ impl Vm<'_> {
         if argument_end > self.top {
             return Err(VmError::InvalidBytecode);
         }
-        if tail {
-            for offset in 0..usize::from(i.arg3) {
-                let source = argument_base
-                    .checked_add(offset)
-                    .ok_or(VmError::InvalidBytecode)?;
-                let destination = self
-                    .base
-                    .checked_add(offset)
-                    .ok_or(VmError::InvalidBytecode)?;
-                let value = self
-                    .registers
-                    .get(source)
-                    .cloned()
-                    .ok_or(VmError::InvalidBytecode)?;
-                *self
-                    .registers
-                    .get_mut(destination)
-                    .ok_or(VmError::InvalidBytecode)? = value;
-            }
-        }
-        let base = if tail { self.base } else { argument_base };
         let proto = closure.prototype();
         let count = usize::from(i.arg3);
         let missing = proto.0.parameters.checked_sub(count);
-        if count != proto.0.parameters
-            && missing.is_none_or(|missing| missing > proto.0.defaults.len())
-        {
+        let arity_ok = if proto.is_variadic() {
+            count >= proto.0.parameters
+        } else {
+            missing.is_some_and(|missing| missing <= proto.0.defaults.len())
+        };
+        if tail && self.varargs.len != 0 && !arity_ok {
+            return Err(VmError::UndefinedNativeVarargsTailCall);
+        }
+        let extras = if proto.is_variadic() {
+            count.saturating_sub(proto.0.parameters)
+        } else {
+            0
+        };
+        self.varargs_stack
+            .try_reserve(extras)
+            .map_err(|_| VmError::Allocation)?;
+        if tail {
+            self.pop_varargs()?;
+            self.move_tail_arguments(argument_base, i.arg3)?;
+        }
+        let base = if tail { self.base } else { argument_base };
+        if !arity_ok {
             return Err(self.native_failure(b"wrong number of parameters", VmError::NativeCall));
         }
         let top = base
             .checked_add(usize::from(proto.0.stack_size))
             .ok_or(VmError::InvalidBytecode)?;
         self.grow_stack(top)?;
-        if let Some(missing) = missing {
-            for offset in 0..missing {
-                let index = proto
-                    .0
-                    .defaults
-                    .len()
-                    .checked_sub(missing)
-                    .and_then(|index| index.checked_add(offset))
-                    .ok_or(VmError::InvalidBytecode)?;
-                let value = closure
-                    .read(|data| {
-                        data.defaults
-                            .get(index)
-                            .map(|value| value.value(&closure.0.realm))
-                    })
-                    .ok_or(VmError::InvalidBytecode)?;
-                let slot = base
-                    .checked_add(count)
-                    .and_then(|slot| slot.checked_add(offset))
-                    .ok_or(VmError::InvalidBytecode)?;
-                *self
-                    .registers
+        if !tail {
+            self.frames
+                .try_reserve(1)
+                .map_err(|_| VmError::Allocation)?;
+        }
+        self.fill_defaults(&closure, base, count, missing.unwrap_or(0))?;
+        let varargs = super::varargs::VarArgs {
+            base: self.varargs_stack.len() & usize::from(u16::MAX),
+            len: extras,
+        };
+        for offset in 0..extras {
+            let slot = base
+                .checked_add(proto.0.parameters)
+                .and_then(|slot| slot.checked_add(offset))
+                .ok_or(VmError::InvalidBytecode)?;
+            let value = std::mem::replace(
+                self.registers
                     .get_mut(slot)
-                    .ok_or(VmError::InvalidBytecode)? = value;
-            }
+                    .ok_or(VmError::InvalidBytecode)?,
+                Value::Null,
+            );
+            self.varargs_stack.push(value);
         }
         let previous = self.program.replace(closure).ok_or(VmError::Finished)?;
         if !tail {
@@ -111,8 +107,10 @@ impl Vm<'_> {
                 top: self.top,
                 ip: self.ip,
                 target: i.arg0,
+                varargs: self.varargs,
             });
         }
+        self.varargs = varargs;
         let old_top = self.top;
         self.base = base;
         self.top = top;
@@ -126,7 +124,9 @@ impl Vm<'_> {
     }
     pub(super) fn frame_return(&mut self, i: Instruction) -> Result<Option<Value>, VmError> {
         if self.frames.is_empty() {
-            return self.return_value(i).map(Some);
+            let result = self.return_value(i)?;
+            self.pop_varargs()?;
+            return Ok(Some(result));
         }
         let value = if i.arg0 == 255 {
             Value::Null
@@ -135,16 +135,73 @@ impl Vm<'_> {
         };
         let old_base = self.base;
         let old_top = self.top;
+        self.pop_varargs()?;
         let parent = self.frames.pop().ok_or(VmError::InvalidBytecode)?;
         self.program = Some(parent.closure);
         self.base = parent.base;
         self.top = parent.top;
         self.ip = parent.ip;
+        self.varargs = parent.varargs;
         self.write(parent.target, value)?;
         for index in (old_base.saturating_add(1)..=old_top).rev() {
             *self.native_slot(index)? = Value::Null;
         }
         Ok(None)
+    }
+    fn fill_defaults(
+        &mut self,
+        closure: &ScriptClosure,
+        base: usize,
+        count: usize,
+        missing: usize,
+    ) -> Result<(), VmError> {
+        let proto = closure.prototype();
+        for offset in 0..missing {
+            let index = proto
+                .0
+                .defaults
+                .len()
+                .checked_sub(missing)
+                .and_then(|index| index.checked_add(offset))
+                .ok_or(VmError::InvalidBytecode)?;
+            let value = closure
+                .read(|data| {
+                    data.defaults
+                        .get(index)
+                        .map(|value| value.value(&closure.0.realm))
+                })
+                .ok_or(VmError::InvalidBytecode)?;
+            let slot = base
+                .checked_add(count)
+                .and_then(|slot| slot.checked_add(offset))
+                .ok_or(VmError::InvalidBytecode)?;
+            *self
+                .registers
+                .get_mut(slot)
+                .ok_or(VmError::InvalidBytecode)? = value;
+        }
+        Ok(())
+    }
+    fn move_tail_arguments(&mut self, argument_base: usize, count: u8) -> Result<(), VmError> {
+        for offset in 0..usize::from(count) {
+            let source = argument_base
+                .checked_add(offset)
+                .ok_or(VmError::InvalidBytecode)?;
+            let destination = self
+                .base
+                .checked_add(offset)
+                .ok_or(VmError::InvalidBytecode)?;
+            let value = self
+                .registers
+                .get(source)
+                .cloned()
+                .ok_or(VmError::InvalidBytecode)?;
+            *self
+                .registers
+                .get_mut(destination)
+                .ok_or(VmError::InvalidBytecode)? = value;
+        }
+        Ok(())
     }
     fn grow_stack(&mut self, top: usize) -> Result<(), VmError> {
         // The spare slot models native TOP writes, while every grown slot remains a root.

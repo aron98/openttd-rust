@@ -53,6 +53,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     };
     let closure_trace = env::var_os("OTTD_SCRIPT_CLOSURE_TRACE").is_some();
+    let varargs_trace = env::var_os("OTTD_SCRIPT_VARARGS_TRACE").is_some();
     if closure_trace {
         metadata(&program.prototype(), "main");
     }
@@ -80,6 +81,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     for credit in credits {
         match vm.resume(*credit) {
             Ok(Execution::Suspended) => {
+                if varargs_trace {
+                    varargs(&vm);
+                }
                 if closure_trace {
                     let active = vm.active_prototype().ok_or("active closure")?;
                     let path = function_path(&program.prototype(), &active, "main")
@@ -123,6 +127,15 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     }
     Ok(())
+}
+
+fn varargs(vm: &Vm<'_>) {
+    let (values, base, len) = vm.vararg_state();
+    println!("varargs {} {base} {len}", values.len());
+    for (index, arg) in values.iter().enumerate() {
+        print!("vararg {index} ");
+        value(arg);
+    }
 }
 
 fn formats(filename: &str) -> Result<(), Box<dyn Error>> {
@@ -176,12 +189,13 @@ fn metadata(proto: &ottd_script::Prototype, path: &str) {
     let children = proto.children();
     let captures = proto.captures();
     println!(
-        "prototype {path} {} {} {} {} {} 0",
+        "prototype {path} {} {} {} {} {} {}",
         proto.stack_size(),
         proto.parameter_count(),
         children.len(),
         captures.len(),
-        proto.default_registers().len()
+        proto.default_registers().len(),
+        u8::from(proto.is_variadic())
     );
     print!("source {path} ");
     value(

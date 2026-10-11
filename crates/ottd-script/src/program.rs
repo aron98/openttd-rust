@@ -62,6 +62,7 @@ impl Program {
             captures: Vec::new(),
             defaults: Vec::new(),
             parameters: 1,
+            variadic: false,
         };
         Self {
             data: crate::ScriptClosure::new(&data.realm, Rc::new(prototype))

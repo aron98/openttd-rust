@@ -70,6 +70,8 @@ pub enum VmError {
     UnsupportedArrayOrdering,
     /// A nonfinite or out-of-range f32 cannot be converted to a native integer index.
     UnsupportedIndexConversion,
+    /// A reached failing closure tail call would consume native varargs twice.
+    UndefinedNativeVarargsTailCall,
     /// Host element storage allocation failed; not a native semantic comparison.
     Allocation,
     /// Root belongs to a different string/constant realm.

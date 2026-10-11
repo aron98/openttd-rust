@@ -39,6 +39,7 @@ impl Vm<'_> {
             }
             0x30 => self.create_closure(i)?,
             0x1b => self.load_outer(i.arg1)?,
+            0x1c | 0x1d => self.vararg(i)?,
             0x07 | 0x08 => {
                 self.prepare_call(i)?;
                 return Ok(None);

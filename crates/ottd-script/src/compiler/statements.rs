@@ -71,6 +71,9 @@ impl Compiler<'_> {
                 self.loop_exit(true)?;
             }
             TokenKind::In
+            | TokenKind::Ellipsis
+            | TokenKind::Vargc
+            | TokenKind::Vargv
             | TokenKind::This
             | TokenKind::Root
             | TokenKind::NewSlot

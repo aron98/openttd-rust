@@ -54,6 +54,7 @@ impl Compiler<'_> {
         state.dereference = None;
         state.field = false;
         match self.token.kind.clone() {
+            TokenKind::Vargc | TokenKind::Vargv => self.vararg_expression(depth),
             TokenKind::Function => {
                 self.advance()?;
                 self.expect(b'(')?;
@@ -118,6 +119,7 @@ impl Compiler<'_> {
                 Ok(None)
             }
             TokenKind::NewSlot
+            | TokenKind::Ellipsis
             | TokenKind::Const
             | TokenKind::Enum
             | TokenKind::Switch
@@ -145,6 +147,27 @@ impl Compiler<'_> {
             | TokenKind::Or
             | TokenKind::End => Err(self.error(CompileErrorKind::ExpectedToken)),
         }
+    }
+    fn vararg_expression(&mut self, depth: u8) -> Result<Option<Register>, CompileError> {
+        let indexed = self.token.kind == TokenKind::Vargv;
+        self.advance()?;
+        let source = if indexed {
+            self.expect(b'[')?;
+            self.expression(depth)?;
+            self.expect(b']')?;
+            i32::from(self.pop()?.0)
+        } else {
+            0
+        };
+        let target = self.push()?;
+        self.emit(Instruction {
+            opcode: if indexed { 0x1d } else { 0x1c },
+            arg0: target.0,
+            arg1: source,
+            arg2: 0,
+            arg3: 0,
+        });
+        Ok(None)
     }
     fn identifier(
         &mut self,

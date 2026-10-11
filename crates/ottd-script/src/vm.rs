@@ -13,6 +13,7 @@ mod objects;
 mod roots;
 mod tables;
 mod updates;
+mod varargs;
 /// Outcome of an operation-budget slice.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Execution {
@@ -30,6 +31,8 @@ pub struct Vm<'a> {
     base: usize,
     top: usize,
     frames: Vec<frames::ParentFrame>,
+    varargs: varargs::VarArgs,
+    varargs_stack: Vec<Value>,
     native_scratch: Value,
     registers: Vec<Value>,
     runner: Storage<'a>,
@@ -72,6 +75,8 @@ impl<'a> Vm<'a> {
             base: 0,
             top: registers.len(),
             frames: Vec::new(),
+            varargs: varargs::VarArgs::default(),
+            varargs_stack: Vec::new(),
             _host: host,
             native_scratch: Value::Null,
             registers,
@@ -122,6 +127,11 @@ impl<'a> Vm<'a> {
     pub const fn remaining_ops(&self) -> i64 {
         self.remaining
     }
+    /// Retained unnamed arguments and the current frame's base and length.
+    /// Borrowing this view does not add ownership references to the values.
+    pub fn vararg_state(&self) -> (&[Value], usize, usize) {
+        (&self.varargs_stack, self.varargs.base, self.varargs.len)
+    }
     /// Add operations to the retained counter and execute until suspension/return.
     ///
     /// A zero credit still charges one operation before suspension, as native does.
@@ -151,6 +161,8 @@ impl<'a> Vm<'a> {
                 self.native_scratch = Value::Null;
                 self.program = None;
                 self.frames.clear();
+                self.varargs_stack.clear();
+                self.varargs = varargs::VarArgs::default();
                 if let Err(error) = result {
                     self.runner.get_mut().failure = Some(RunnerFailure::Runtime(error));
                 }

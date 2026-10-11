@@ -7,6 +7,12 @@ use crate::{
     table::scalar::Scalar,
 };
 use std::{mem, rc::Rc};
+struct Parameters<'a> {
+    registers: Registers<'a>,
+    defaults: Vec<u8>,
+    names: Vec<crate::ByteString>,
+    variadic: bool,
+}
 impl<'a> Compiler<'a> {
     pub(super) fn scalar_literals(&self) -> Result<Vec<Scalar>, CompileError> {
         self.literals
@@ -49,7 +55,7 @@ impl<'a> Compiler<'a> {
         name: Option<&str>,
     ) -> Result<(), CompileError> {
         self.depth(depth)?;
-        let (registers, defaults, parameter_names) = self.parameters(depth)?;
+        let parameters = self.parameters(depth)?;
         let mut captures = Vec::new();
         if self.token.kind == TokenKind::Symbol(b':') {
             self.advance()?;
@@ -79,7 +85,7 @@ impl<'a> Compiler<'a> {
             }
             self.advance()?;
         }
-        let parent_registers = mem::replace(&mut self.registers, registers);
+        let parent_registers = mem::replace(&mut self.registers, parameters.registers);
         let parent_emitter = mem::replace(&mut self.emitter, Emitter::new());
         let parent_literals = mem::take(&mut self.literals);
         let parent_children = mem::take(&mut self.children);
@@ -104,8 +110,9 @@ impl<'a> Compiler<'a> {
         let prototype = Data {
             source_name: Some(self.source_name.clone()),
             name: name.map(|name| self.realm.string(name.as_bytes())),
-            parameters: parameter_names.len(),
-            parameter_names,
+            parameters: parameters.names.len(),
+            variadic: parameters.variadic,
+            parameter_names: parameters.names,
             capture_names: self
                 .captures
                 .iter()
@@ -125,7 +132,7 @@ impl<'a> Compiler<'a> {
                 .into_iter()
                 .map(|(_, capture)| capture)
                 .collect(),
-            defaults,
+            defaults: parameters.defaults,
         };
         self.registers = parent_registers;
         self.literals = parent_literals;
@@ -146,14 +153,23 @@ impl<'a> Compiler<'a> {
         });
         Ok(())
     }
-    fn parameters(
-        &mut self,
-        depth: u8,
-    ) -> Result<(Registers<'a>, Vec<u8>, Vec<crate::ByteString>), CompileError> {
+    fn parameters(&mut self, depth: u8) -> Result<Parameters<'a>, CompileError> {
         let mut registers = Registers::new();
         let mut defaults = Vec::new();
         let mut parameters = vec![self.realm.string(b"this")];
+        let mut variadic = false;
         while self.token.kind != TokenKind::Symbol(b')') {
+            if self.token.kind == TokenKind::Ellipsis {
+                if !defaults.is_empty() {
+                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                }
+                variadic = true;
+                self.advance()?;
+                if self.token.kind != TokenKind::Symbol(b')') {
+                    return Err(self.error(CompileErrorKind::ExpectedToken));
+                }
+                break;
+            }
             let TokenKind::Identifier(name) = self.token.kind else {
                 return Err(self.error(CompileErrorKind::ExpectedToken));
             };
@@ -184,6 +200,11 @@ impl<'a> Compiler<'a> {
         for _ in &defaults {
             self.pop()?;
         }
-        Ok((registers, defaults, parameters))
+        Ok(Parameters {
+            registers,
+            defaults,
+            names: parameters,
+            variadic,
+        })
     }
 }

@@ -1,0 +1,88 @@
+owner 0 1 1 -1 0 1 1
+mutation integer 1
+varargs 0 0 0
+collected 0
+owner 1 1 1 0 0 1 1
+mutation integer 1
+varargs 0 0 0
+collected 0
+owner 2 1 1 0 0 1 1
+mutation integer 1
+varargs 0 0 0
+collected 0
+owner 3 1 1 0 0 1 1
+mutation integer 1
+varargs 0 0 0
+collected 0
+owner 4 1 1 0 0 1 3
+mutation integer 1
+varargs 0 0 0
+collected 0
+owner 5 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 6 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 7 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 8 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 9 1 1 0 1 1 1
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 10 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 11 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 12 1 1 0 1 1 2
+mutation integer 1
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 13 1 1 0 1 1 1
+mutation integer 9
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 14 1 1 0 1 1 1
+mutation integer 9
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 15 1 1 0 1 1 2
+mutation integer 9
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 16 1 1 0 1 1 1
+mutation integer 9
+varargs 1 0 1
+vararg 0 unsupported 167772192
+collected 0
+owner 17 1 1 0 0 0 0
+varargs 0 0 0
+collected 0
+owner 18 1 0 1 0 0 0
+returned integer 9
+released 0 0
+final collection 0
+final alive 0

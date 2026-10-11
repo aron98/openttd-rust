@@ -98,6 +98,7 @@ def source_names(root: Path) -> tuple[str, ...]:
             "rust-toolchain.toml",
             "scripts/reference.cfg",
             "scripts/cargo-observer-sources.json",
+            "scripts/async-trace-sources.json",
             "fixtures/replay/clear-v362.sav",
             *COMPILER_INPUTS,
         )

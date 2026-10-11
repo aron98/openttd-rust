@@ -12,6 +12,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
+from scripts.async_trace_sources import verify
 from scripts.movement_ci.value import require
 
 
@@ -31,6 +32,7 @@ def digest(path: Path) -> str:
 
 
 def run(replay: Replay) -> int:
+    verify(Path(__file__).resolve().parents[1])
     directory = replay.directory.resolve()
     directory.mkdir(parents=True, exist_ok=False)
     for source, name in (

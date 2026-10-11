@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "4c035049e8facc5340bff4a1f44bbdb6e77ddaf19d7283e2cce9e98f4332bff8",
+   "sha256": "893a96374ed92af2e23f4b58985d16237c9919f6baf077acf4a8d3a83468b6a1",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "c55a8c6bc30c6471a382611023862f6eefcf5f3593cfefaa278848e0cab321b8",
+   "sha256": "9ba32b6b7b8bd4d59ab131e7d214b3181cc336ed1076e63eadc4ded0506e7fdc",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "7569a5be58b305850870e606421ec6479182e44979c562841197ff26626bffb9",
+   "sha256": "14b5d149bea2529efefb238529d0d54dbbd06263a404b695bcf40f417f080d28",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "f0e8d05d2f98fcfb98a439c7ae8a5b9130f9755fe1edfced15b5c487a1157c20",
+   "sha256": "470bf926200a274be1ea21210f5b0652087781747fdf22c1d20d48ad0ff4938a",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3625,7 +3625,7 @@
   {
    "id": "currency-ci-currency-ci-capture-py",
    "path": "scripts/currency_ci_capture.py",
-   "sha256": "d1814e62271e4074d806f5691685d4bf1b4d6583cd920375abf29d1b838cf855",
+   "sha256": "57db4742858b268ee078974ba7a7624ce58f71c5966a05b8878a71a9c7583cff",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "40aaaf597d7b1a627967fa24e4fef1cef26ee418a42ca4beba4560df0ad64881",
+   "sha256": "1ee4d6fd389620d1bcb82f9ea0980ca5eac216d37b7533b03b32591842c03dd6",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "35caf06d7108c6b5a19b3c60cc4244c5a4c4ec5decd9db638572ee643012e052",
+   "sha256": "a2f946ce23578367406151a2468a61f304827b53843b1f4a022fe4eb26fc5e25",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "00d2d7a212a186815986e50e210151ca12d1160efee43ef6980a98c1ea236793",
+   "sha256": "e625313a9e705fd90281d79151e8aa80069bd8f1c322b76aca82e1fa3855226b",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "dc40e7e059502c7071b13d57950c02f63fa8d0c9a0b29c24bc4aa6352bd15597",
+   "sha256": "4e4e656cbb57f7e8da50debb2ad6078981be6093482a4ea2140b4c4eb54f1076",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "6c886c14c78cc7c85286e0126510ec820bd642e6413a47077d89e94c2ae78be7",
+   "sha256": "730bfbeab4ca160459b26b4c07ee83054670a5016e3832d6adba0cad4374b62e",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -12232,6 +12232,141 @@
    "sha256": "15f1e4aca04671bafb53f24e37b196ad78d91f025f6a7581b4199661622e13d1",
    "kind": "recipe",
    "provenance": "Vanilla one-consist after-load; no rail ticks; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-reference-async-trace-hpp",
+   "path": "reference/async_trace.hpp",
+   "sha256": "de9584e67c8fa3bfd135ed56f8e341771681e4fad50fc10fbc130b0813cf01db",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-reference-async-trace-patch",
+   "path": "reference/async_trace.patch",
+   "sha256": "8739cb3186ea4a458d02a8ffd6d671fc1077ea9fcab59216bd830145deb7d5b7",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-reference-async-trace-input-hpp",
+   "path": "reference/async_trace_input.hpp",
+   "sha256": "f8195ec14ea19d0bb4f58dcd1ef676054ca058d6bfce52c7d9394e5de3e0e6d7",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-reference-async-trace-jobs-hpp",
+   "path": "reference/async_trace_jobs.hpp",
+   "sha256": "5df233d3177dc260795976e6c53f82c63e882538a6082f17a5b80197e76b1265",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-reference-async-trace-state-hpp",
+   "path": "reference/async_trace_state.hpp",
+   "sha256": "cb2c478770262711d13c7822baffaf861bd247c1555d4b2e65103fe832c46c02",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-sources-json",
+   "path": "scripts/async-trace-sources.json",
+   "sha256": "db92e87242d69b1b51f84b38572fc97a3bd7d9f2f2a9c261107995388e5d04d0",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-check-py",
+   "path": "scripts/async_trace_check.py",
+   "sha256": "e70a9862c52cc855929f747a01ec6881d9a0017f9503f820e1c6e8f325663055",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-controls-py",
+   "path": "scripts/async_trace_controls.py",
+   "sha256": "1cc557101f79c76c18d9b30f78cfce432a8985e8ae24f58eed966fd5c3119c88",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-host-py",
+   "path": "scripts/async_trace_host.py",
+   "sha256": "fba900c557f526c0f43110966c86c0d81cc07710dd21201b32bf2274ef55dde9",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-jobs-py",
+   "path": "scripts/async_trace_jobs.py",
+   "sha256": "f892b1eb5456320cf68fd669043a62cc61b9ed0377975b64e6e49b6e257d84b6",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-model-py",
+   "path": "scripts/async_trace_model.py",
+   "sha256": "8eb56f9cb5cdb44079920dd06179737d7bde2123dca9843936126c26e19bcc10",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-run-py",
+   "path": "scripts/async_trace_run.py",
+   "sha256": "a186a3a685c320d0bfd231aa5b68f01f210b7c9a8b824e750b87e18953c2326a",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-async-trace-sources-py",
+   "path": "scripts/async_trace_sources.py",
+   "sha256": "0143e53dc30f65d076d70d4274334a17d9fcff2405d7e7a214057cb158bdb335",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-setup-async-trace-reference-sh",
+   "path": "scripts/setup-async-trace-reference.sh",
+   "sha256": "6d478040a4d0e34a21af1af2e81842d3526ca921b637aed72dc1b98e19afd19b",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "async-source-scripts-tests-test-async-trace-sources-py",
+   "path": "scripts/tests/test_async_trace_sources.py",
+   "sha256": "9109419dd2867a4ced9ac0e7f59e7bd0d941ae4c619d914c51749a3dd50bb3a0",
+   "kind": "recipe",
+   "provenance": "Passive native async trace source binding only; no timing or gameplay parity claim; upstream.toml",
    "save_version": null,
    "profile": null
   }

@@ -2,6 +2,7 @@
 set -euo pipefail
 source_dir="${1:?usage: setup-async-trace-reference.sh PREPARED_SOURCE}"
 root="$(cd "$(dirname "$0")/.." && pwd)"
+PYTHONPATH="$root" python3 -m scripts.async_trace_sources "$root"
 source_dir="$(cd "$source_dir" && pwd)"
 pin=14ec60f248547d4d062a1160f0fc26d742319888
 [[ "$(git -C "$source_dir" rev-parse HEAD)" == "$pin" ]]

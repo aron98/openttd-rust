@@ -114,9 +114,10 @@ elif mutation == "budget":
     records[0] = replace(records[0], credits=(999,))
 elif mutation in ("stdout", "stderr"):
     (root / (name + "." + mutation)).write_text("changed")
-elif mutation in ("status", "hash", "argv"):
+elif mutation in ("status", "status-boolean", "hash", "argv"):
     receipt = json.loads(receipt_path.read_text())
     if mutation == "status": receipt["status"] = 7
+    if mutation == "status-boolean": receipt["status"] = False
     if mutation == "hash": receipt["stdout_sha256"] = "0" * 64
     if mutation == "argv": receipt["argv"][-1] = "999"
     receipt_path.write_text(json.dumps(receipt))
@@ -162,6 +163,7 @@ class TableStorageTest(unittest.TestCase):
             "stdout",
             "stderr",
             "status",
+            "status-boolean",
             "hash",
             "argv",
             "swapped",

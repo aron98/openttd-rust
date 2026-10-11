@@ -118,12 +118,15 @@ def verify_observation(
         stdout = output / f"{name}.stdout"
         stderr = output / f"{name}.stderr"
         receipt = read_json(output / f"{name}.json")
-        if receipt != {
+        expected_receipt = {
             "argv": [str(output / side), str(source), *map(str, budget)],
             "status": 0,
             "stdout_sha256": digest(stdout),
             "stderr_sha256": digest(stderr),
-        }:
+        }
+        if json.dumps(receipt, sort_keys=True) != json.dumps(
+            expected_receipt, sort_keys=True
+        ):
             raise RuntimeError("Retained process receipt differs")
         if record.stdout_sha256 != digest(stdout):
             raise RuntimeError("Retained result differs")

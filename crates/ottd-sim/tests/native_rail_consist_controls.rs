@@ -44,6 +44,9 @@ fn rust_only_invalid_chain_controls() -> Result {
         ("unpaired-multihead", field(0, (true, "subtype"), 41)),
         ("invalid-owner", field(1, (true, "owner"), 15)),
         ("invalid-cargo", field(1, (true, "cargo_type"), 255)),
+        ("saved-going-up", field(1, (false, "gv_flags"), 1)),
+        ("saved-going-down", field(1, (false, "gv_flags"), 2)),
+        ("saved-both-slopes", field(1, (false, "gv_flags"), 3)),
     ] {
         let mut world = original.clone();
         let before_edit = encoded(&world)?;

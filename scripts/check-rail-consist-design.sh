@@ -49,4 +49,4 @@ for scenario in stale_acceleration powered_flags saved_capacity coupled_saved_mu
     test "$code" -eq 101
     rg -q 'missing consist restoration boundary: Err\(Unsupported\(VehicleRoster\)\)' "$proof/$scenario.log"
 done
-printf '%s\n' 'OBSERVED fourteen intended missing-boundary REDs; five actual original/Rust-origin cache/world/RNG/neutrality controls plus four native saved controls PASS; nine Rust-only refusal controls; no product implementation' > "$proof/result.txt"
+printf '%s\n' 'OBSERVED fourteen intended missing-boundary REDs; five actual original/Rust-origin cache/world/RNG/neutrality controls plus four native saved controls PASS; twelve Rust-only refusal controls; no product implementation' > "$proof/result.txt"

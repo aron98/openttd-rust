@@ -34,6 +34,15 @@ fn native_both_save_origins_and_observer_neutrality() -> Result {
         rows.iter()
             .all(|v| v.get("stored_count") == Some(&json!(0)))
     );
+    let saved = original.saved_json()?;
+    for part in rows {
+        let id = part.get("id").and_then(Value::as_u64).ok_or("part id")?;
+        assert_eq!(
+            saved.pointer(&format!("/chunks/VEHS/records/{id}/train/0/gv_flags")),
+            Some(&json!(0)),
+            "flat terrain alone does not establish saved slope flags"
+        );
+    }
     let reloaded = load(&root.join("observe/save/autosave/exit.sav"))?;
     world_equal(&original, &reloaded, &root.join("original-roundtrip"))?;
     let rust_save = root.join("rust-origin.sav");

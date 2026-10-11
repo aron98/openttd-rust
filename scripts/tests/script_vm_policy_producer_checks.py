@@ -55,8 +55,10 @@ class PolicyProducerChecks(unittest.TestCase):
             native.chmod(0o755)
             rust = root / "rust"
             _ = rust.write_text(
-                "#!/bin/sh\nprintf 'compile_error\\n'\n"
-                 f"printf '%s' '{policy.diagnostic()}' >&2\n"
+                f"""#!/bin/sh
+printf 'compile_error\\n'
+printf '%s' '{policy.diagnostic()}' >&2
+"""
             )
             rust.chmod(0o755)
             result = subprocess.run(

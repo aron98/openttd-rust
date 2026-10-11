@@ -28,8 +28,18 @@ impl crate::runtime::RoadVehicleContext<'_> {
     }
 }
 enum OwnedContext<'a> {
+    Orders(crate::runtime::OrderContext<'a>),
     RoadVehicle(crate::runtime::RoadVehicleContext<'a>),
     Depot(crate::runtime::DepotContext<'a>),
+}
+impl crate::runtime::OrderContext<'_> {
+    pub(crate) fn execute(
+        self,
+        world: &mut World,
+        request: &CommandRequest,
+    ) -> Result<CommandReceipt, CommandError> {
+        execute(world, request, Some(OwnedContext::Orders(self)))
+    }
 }
 impl crate::runtime::DepotContext<'_> {
     pub(crate) fn execute(
@@ -64,6 +74,7 @@ fn execute(
 const fn tile(command: &Command) -> u32 {
     match command {
         Command::BuildRoadDepot { tile, .. }
+        | Command::InsertOrder { location: tile, .. }
         | Command::SellVehicle { location: tile, .. }
         | Command::BuildRoad { tile, .. }
         | Command::BuildVehicle { tile, .. }
@@ -158,6 +169,14 @@ fn execute_admitted(
 ) -> Result<CommandReceipt, CommandError> {
     if let Some(args) = super::terrain_run::Args::from_command(world, &request.command)? {
         return super::terrain_run::execute(world, request.company, args, estimate);
+    }
+    if let Command::InsertOrder { .. } = request.command {
+        return match context {
+            Some(OwnedContext::Orders(context)) => context.insert(world, request, estimate),
+            _ => Err(CommandError::Unsupported(
+                "order insertion needs owned runtime",
+            )),
+        };
     }
     if matches!(request.command, Command::BuildRoadDepot { .. })
         || (matches!(request.command, Command::LandscapeClear { .. })
@@ -373,7 +392,7 @@ fn gated(gate: CommandGate, request: &CommandRequest) -> CommandReceipt {
 
 const fn pause_level(command: &Command) -> u64 {
     match command {
-        Command::ChangeServiceInterval { .. } => 1,
+        Command::ChangeServiceInterval { .. } | Command::InsertOrder { .. } => 1,
         Command::BuildRoadDepot { .. }
         | Command::BuildRoad { .. }
         | Command::LandscapeClear { .. }

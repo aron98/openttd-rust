@@ -71,6 +71,7 @@ fn original_owned_restore_case() -> Result {
                 if !matches!(
                     request.command,
                     Command::BuildVehicle { .. }
+                        | Command::InsertOrder { .. }
                         | Command::SellVehicle { .. }
                         | Command::LandscapeClear { .. }
                 ) {

@@ -94,7 +94,8 @@ inline Json Action(const Json &a)
         Require(!_networking, "depot command fixture requires actual single player startup");
         const auto &request = a.at("request");
         const std::string kind = request.at("command").at("kind").get<std::string>();
-        Require(owned_restore ? (kind == "build_vehicle" || kind == "sell_vehicle" || kind == "landscape_clear") : (backup_enabled_sale || backup_sale) ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
+        const bool road_cycle = std::getenv("OTTD_ROAD_CYCLE_PREPARE") != nullptr;
+        Require(road_cycle ? (kind == "insert_order" || kind == "road_cycle_prepare_stop" || kind == "build_road_depot" || kind == "build_vehicle") : owned_restore ? (kind == "build_vehicle" || kind == "sell_vehicle" || kind == "landscape_clear") : (backup_enabled_sale || backup_sale) ? (kind == "sell_vehicle" || kind == "landscape_clear") : (ordered_sale ? kind == "sell_vehicle" : (kind == "landscape_clear" || kind == "build_road_depot")), "unsupported lifecycle fixture command");
         if (backup_sale && kind == "sell_vehicle") Require(!request.at("command").at("backup_order").get<bool>(), "backup-enabled sale is outside bridge mode");
         Json receipt = ReferenceReplay::Execute(request);
         return {{"receipt", std::move(receipt)}, {"native_metadata", ReferenceReplay::metadata}};

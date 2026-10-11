@@ -9,11 +9,28 @@
 #include "../terraform_cmd.h"
 #include "../vehicle_cmd.h"
 #include "../command_func.h"
+#include "../order_cmd.h"
+#include "../station_cmd.h"
+#include "../newgrf_roadstop.h"
 
 namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "insert_order") {
+        const auto &raw = command.at("order");
+        Order order(raw.at("type").get<uint8_t>(), raw.at("flags").get<uint8_t>(), DestinationID(raw.at("dest").get<uint16_t>()));
+        order.SetRefit(raw.at("refit_cargo").get<uint8_t>());
+        order.SetWaitTime(raw.at("wait_time").get<uint16_t>());
+        order.SetTravelTime(raw.at("travel_time").get<uint16_t>());
+        order.SetMaxSpeed(raw.at("max_speed").get<uint16_t>());
+        return Command<CMD_INSERT_ORDER>::Post(TileIndex(command.at("location").get<uint32_t>()), VehicleID(command.at("vehicle").get<uint32_t>()), command.at("index").get<uint8_t>(), order);
+    }
+    if (kind == "road_cycle_prepare_stop") {
+        Require(std::getenv("OTTD_ROAD_CYCLE_PREPARE") != nullptr, "road stop preparation requires explicit protocol");
+        return Command<CMD_BUILD_ROAD_STOP>::Post(TileIndex(command.at("tile").get<uint32_t>()), uint8_t{1}, uint8_t{1}, static_cast<RoadStopType>(command.at("stop_type").get<uint8_t>()), false,
+            static_cast<DiagDirection>(command.at("direction").get<uint8_t>()), RoadType{0}, ROADSTOP_CLASS_DFLT, uint16_t{0}, NEW_STATION, true);
+    }
     if (kind == "movement_prepare_original_acceleration") {
         for (const char *name : {"OTTD_MOVEMENT_OBSERVE", "OTTD_MOVEMENT_PREPARE"}) {
             const char *enabled = std::getenv(name);

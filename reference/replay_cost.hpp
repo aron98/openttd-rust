@@ -16,6 +16,18 @@ inline Json ErrorSymbol(StringID id)
         case STR_ERROR_VEHICLE_IS_DESTROYED: return "STR_ERROR_VEHICLE_IS_DESTROYED";
         case STR_ERROR_ROAD_VEHICLE_MUST_BE_STOPPED_INSIDE_DEPOT: return "STR_ERROR_ROAD_VEHICLE_MUST_BE_STOPPED_INSIDE_DEPOT";
 #define REPLAY_ERROR(name) case name: return #name;
+        REPLAY_ERROR(STR_ERROR_CAN_T_ADD_ORDER)
+        REPLAY_ERROR(STR_ERROR_CAN_T_ADD_ORDER_SHARED)
+        REPLAY_ERROR(STR_ERROR_NO_BUS_STATION)
+        REPLAY_ERROR(STR_ERROR_NO_TRUCK_STATION)
+        REPLAY_ERROR(STR_ERROR_NO_STOP_COMPATIBLE_ROAD_TYPE)
+        REPLAY_ERROR(STR_ERROR_NO_STOP_COMPATIBLE_TRAM_TYPE)
+        REPLAY_ERROR(STR_ERROR_UNBUNCHING_NO_FULL_LOAD)
+        REPLAY_ERROR(STR_ERROR_UNBUNCHING_NO_UNBUNCHING_FULL_LOAD)
+        REPLAY_ERROR(STR_ERROR_UNBUNCHING_ONLY_ONE_ALLOWED)
+        REPLAY_ERROR(STR_ERROR_UNBUNCHING_NO_UNBUNCHING_CONDITIONAL)
+        REPLAY_ERROR(STR_ERROR_TOO_MANY_ORDERS)
+        REPLAY_ERROR(STR_ERROR_NO_MORE_SPACE_FOR_ORDERS)
         REPLAY_ERROR(STR_ERROR_MAXIMUM_PERMITTED_LOAN)
         REPLAY_ERROR(STR_ERROR_ALREADY_AT_SEA_LEVEL)
         REPLAY_ERROR(STR_ERROR_TOO_HIGH)
@@ -70,9 +82,11 @@ inline Json Cost(const CommandCost &cost)
         params.push_back(number);
         pos = end;
     }
-    return {{"success", cost.Succeeded()}, {"cost", static_cast<int64_t>(cost.GetCost())},
+    Json result = {{"success", cost.Succeeded()}, {"cost", static_cast<int64_t>(cost.GetCost())},
         {"expenses", static_cast<uint8_t>(cost.GetExpensesType())},
         {"error", cost.Succeeded() ? Json(nullptr) : ErrorSymbol(cost.GetErrorMessage())}, {"error_params", params}};
+    if (cost.GetExtraErrorMessage() != INVALID_STRING_ID) result["extra_error"] = ErrorSymbol(cost.GetExtraErrorMessage());
+    return result;
 }
 void Phase(const char *phase, const CommandCost &cost)
 {

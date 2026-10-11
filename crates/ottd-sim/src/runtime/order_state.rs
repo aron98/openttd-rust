@@ -1,6 +1,9 @@
 //! One authoritative order backing with native live allocation and save context.
 mod airport;
 mod backup;
+mod insert;
+#[cfg(test)]
+mod insert_tests;
 use backup::BackupAllocation;
 pub use backup::BackupReset;
 #[cfg(test)]

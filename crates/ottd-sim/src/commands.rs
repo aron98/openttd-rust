@@ -8,6 +8,8 @@ mod landscape;
 mod level_land;
 mod naming;
 mod occupancy;
+mod order;
+pub use order::InsertOrder;
 mod pause;
 mod pipeline;
 mod road;
@@ -39,6 +41,17 @@ pub enum CommandMode {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Insert a native order into a primary road vehicle's shared list.
+    InsertOrder {
+        /// Native posting feedback location.
+        location: u32,
+        /// Vehicle pool ID.
+        vehicle: u32,
+        /// Position before which to insert.
+        index: u8,
+        /// Native order payload.
+        order: InsertOrder,
+    },
     /// Build or rotate a vanilla road depot.
     BuildRoadDepot {
         /// Map tile.
@@ -179,6 +192,9 @@ pub struct CommandCost {
     pub error: Option<String>,
     /// Integer parameters of the native encoded error.
     pub error_params: Vec<i64>,
+    /// Native secondary error reason, when the command supplies one.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub extra_error: Option<String>,
 }
 impl CommandCost {
     pub(crate) const fn success(cost: i64, expenses: u8) -> Self {
@@ -188,6 +204,7 @@ impl CommandCost {
             expenses,
             error: None,
             error_params: Vec::new(),
+            extra_error: None,
         }
     }
     pub(crate) fn failure(symbol: &str) -> Self {
@@ -197,6 +214,7 @@ impl CommandCost {
             expenses: 255,
             error: Some(symbol.to_owned()),
             error_params: Vec::new(),
+            extra_error: None,
         }
     }
     fn parameterized(symbol: &str, value: i64) -> Self {
@@ -304,6 +322,7 @@ impl Plan {
 fn body(world: &World, request: &CommandRequest) -> Result<Plan, CommandError> {
     match &request.command {
         Command::BuildRoadDepot { .. }
+        | Command::InsertOrder { .. }
         | Command::BuildVehicle { .. }
         | Command::SellVehicle { .. } => Err(CommandError::Unsupported(
             "vehicle construction needs owned runtime",

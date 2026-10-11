@@ -14,7 +14,7 @@ pub use world_ticks::{WorldTickError, WorldTickReport, advance_world};
 mod commands;
 pub use commands::{
     CargoCapacities, Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt,
-    CommandRequest, CommandReturn, CommandReturnPhases, execute_command,
+    CommandRequest, CommandReturn, CommandReturnPhases, InsertOrder, execute_command,
 };
 mod map;
 pub(crate) mod world_access;

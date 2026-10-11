@@ -1,0 +1,34 @@
+{
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "save_version": 362,
+  "oracle_sha256": "221ee94266bd1c814aaa7527093355d0a63e8ae8bcbec6d69a4078eadf9a2b66",
+  "inputs": {
+    "fixtures/replay/clear-v362.sav": "26a604958172a84ddfd895836da5e55666baf28a085bc438236cbdc8931464d2",
+    "fixtures/road-orders/prepare.json": "f2b7786bd6db309fde3fda18e2bb53a821da8ddb2101fe9b6aec2a908c0ab6b0"
+  },
+  "outputs": {
+    "stations-v362.sav": "aa0efe568167edbf034317afa2d4b8be9bd9abdb165516439b172903419b6af8",
+    "first-order-v362.sav": "7b822e4344de052da91ec613baf7339c54e9138e3501e42a653be99937f343e9"
+  },
+  "first_order": {
+    "company": 0,
+    "mode": "post",
+    "command": {
+      "kind": "insert_order",
+      "location": 0,
+      "vehicle": 0,
+      "index": 0,
+      "order": {
+        "type": 33,
+        "flags": 0,
+        "dest": 0,
+        "refit_cargo": 254,
+        "wait_time": 0,
+        "travel_time": 0,
+        "max_speed": 65535
+      }
+    }
+  },
+  "native_build_manifest": ".reference/snapshot-build/replay-build.sha256",
+  "evidence": ".omo/evidence/road-cycle/runtime-02"
+}

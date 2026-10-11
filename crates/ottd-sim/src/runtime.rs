@@ -178,6 +178,11 @@ pub(crate) struct DepotContext<'a> {
     pub pool: &'a mut pools::PoolAllocator,
     pub road: &'a mut BTreeMap<u8, [u32; 63]>,
 }
+pub(crate) struct OrderContext<'a> {
+    state: &'a mut order_state::OrderState,
+    content: &'a ContentCatalog,
+    road: &'a BTreeMap<VehicleId, RoadVehicleCache>,
+}
 impl DepotContext<'_> {
     pub(crate) fn publish(
         self,
@@ -324,6 +329,10 @@ impl SimulationRuntime {
             ));
         }
         match request.command {
+            crate::Command::InsertOrder { .. } => {
+                OrderContext::new(&mut self.orders, &self.content, &self.road)
+                    .execute(&mut self.world, request)
+            }
             crate::Command::BuildRoadDepot { .. } | crate::Command::LandscapeClear { .. } => {
                 DepotContext {
                     orders: &mut self.orders,

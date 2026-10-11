@@ -17580,6 +17580,8 @@
     "stale/stale/reference/replay_hooks.hpp",
     "stale/stale/reference/road_slope.hpp",
     "stale/stale/reference/road_slope.patch",
+    "stale/stale/reference/road_station_prepare.hpp",
+    "stale/stale/reference/road_station_runtime.hpp",
     "stale/stale/reference/runtime_road.hpp",
     "stale/stale/reference/runtime_road_fixture.hpp",
     "stale/stale/reference/runtime_road_fixture_tiles.hpp",

@@ -64,15 +64,7 @@ pub(super) fn run(
             return Err(unsupported("road_day", "reached breakdown lifecycle"));
         }
     }
-    if number(state, id, false, "date_of_last_service")?.saturating_add(number(
-        state,
-        id,
-        false,
-        "service_interval",
-    )?) < state.number(b"DATE", 0, "economy_date")?
-    {
-        return Err(unsupported("road_day", "reached service interval"));
-    }
+    super::service::check(state, id)?;
     running_cost(state, id, content)
 }
 fn running_cost(

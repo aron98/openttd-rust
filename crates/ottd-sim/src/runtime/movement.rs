@@ -9,6 +9,9 @@ mod company;
 mod daily;
 mod directed;
 mod loading;
+mod service;
+#[cfg(test)]
+mod service_tests;
 mod spatial;
 mod stations;
 mod step;

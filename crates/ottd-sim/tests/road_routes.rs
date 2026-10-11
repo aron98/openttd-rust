@@ -27,9 +27,21 @@ fn run_horizon() -> Result {
         ottd_save::DEFAULT_MAX_BYTES,
     )?)?;
     let mut runtime = SimulationRuntime::restore_vanilla(world)?;
+    #[cfg(feature = "async-trace")]
+    let trace = std::env::var_os("OTTD_RUST_ASYNC_TRACE")
+        .map(|_| ottd_sim::runtime::async_trace::Session::begin())
+        .transpose()?;
     let before = format!("{runtime:?}");
     let before_world = runtime.saved_json()?;
+    #[cfg(feature = "async-trace")]
+    if let Some(trace) = &trace {
+        trace.snapshot_before();
+    }
     let live_before = runtime.transport_state_json();
+    #[cfg(feature = "async-trace")]
+    if let Some(trace) = &trace {
+        trace.snapshot_after();
+    }
     std::fs::create_dir_all(&output)?;
     // When: the entire native-observed route horizon advances in one transaction.
     let result = runtime.advance_world(ticks);
@@ -38,7 +50,15 @@ fn run_horizon() -> Result {
     //
     // the required route still fails RED until the whole horizon is supported.
     let unchanged = before == format!("{runtime:?}");
+    #[cfg(feature = "async-trace")]
+    if let Some(trace) = &trace {
+        trace.snapshot_before();
+    }
     let live_after = runtime.transport_state_json();
+    #[cfg(feature = "async-trace")]
+    if let Some(trace) = &trace {
+        trace.snapshot_after();
+    }
     let description = match &result {
         Ok(report) => format!("Ok({} ticks)", report.ticks.len()),
         Err(error) => format!("Err({error:?})"),
@@ -53,6 +73,10 @@ fn run_horizon() -> Result {
             "saved_world_unchanged": before_world == runtime.saved_json()?
         }))?,
     )?;
+    #[cfg(feature = "async-trace")]
+    if let Some(trace) = trace {
+        trace.finish(&output.join("async.json"))?;
+    }
     if result.is_err() {
         assert!(unchanged, "rejected round trip published tentative state");
     }

@@ -3288,7 +3288,7 @@
     "crates/ottd-sim/tests/level_land.rs": "0e610919c622e404558623ed3b34f2c462116eed05ce7149c3003a5b5fd018d8",
     "crates/ottd-sim/tests/native_cargo_cache.rs": "65cc4841ef1980bdd93ea4b79d07b5045ecb85ad89878bbd010e9d4718aecb82",
     "crates/ottd-sim/tests/native_cargo_commands.rs": "3133d09b0222e9523fdefb0115ec7c0cee7c3cdb368bc11add60f3ab65047a99",
-    "crates/ottd-sim/tests/native_company_name_admission.rs": "7625b17de56d4413f8299a4cde85a2ddab719987acbee316cf4b17984647ea45",
+    "crates/ottd-sim/tests/native_company_name_admission.rs": "653c19d17d37b6c8200061bfa19f407d9d0aaaa0f19383da4fc1822012ce9073",
     "crates/ottd-sim/tests/native_competitor_timer.rs": "c9edf117a21136dae30bd91f4090c61823763616a16e058b4ad94984a0f9554a",
     "crates/ottd-sim/tests/native_content.rs": "f8ae994c344ee022693b1917aca0da04eb831374d3e9b5e5891e21777bcb8889",
     "crates/ottd-sim/tests/native_depot_build.rs": "7d91e1075e070cc9738160247f20adff2fc0662a7acd8a8c53bc23902646417d",

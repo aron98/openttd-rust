@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "337a454fd3007ca412029872fc19832ada37450ad6975f258ea4426b943b0a6a",
+   "sha256": "78466e907cab8380b8953aabd3552eb0b4b0b72dda2231408c3238814225924d",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "f7e07df670b38ca8b7d7eb455f0f8f180a74685d7b010296cf17f7bedcddb14c",
+   "sha256": "8c8fe7d83310527e1e3728b22d44ec31fc4bb94a8c3a0e1ad982ed95a9d2aae6",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "e91f8be1b2ed00a714ab2ff8e1cdebb76c216732259d0b2fd1176b8b9a0a4edc",
+   "sha256": "07a0a70e047f7781e3ae3079a33ef6c60ead0d2940088b71c5c628d75743839f",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "26dba2ee92423a88f1eb2e994857c7cdc0688ca65d41a2a1dfd915548b0dcab0",
+   "sha256": "4370c5ef40a3c7d3da8c94a08642fe68a8e032a34cef88d477375c861cd69af6",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "e5a9fe668abd38661ffc00202ee56dc95aff18bd240cc8d20c2cf106a8564e6b",
+   "sha256": "99e1cc6608371fe09b2ba9d16245e43076037aed064de0c83379dd2fff228b04",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -10150,7 +10150,7 @@
   {
    "id": "vanilla-house-runtime-crates-ottd-sim-tests-native-company-name-admission-rs",
    "path": "crates/ottd-sim/tests/native_company_name_admission.rs",
-   "sha256": "7625b17de56d4413f8299a4cde85a2ddab719987acbee316cf4b17984647ea45",
+   "sha256": "653c19d17d37b6c8200061bfa19f407d9d0aaaa0f19383da4fc1822012ce9073",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 temperate nonanimated house construction, production and transactional town caches; receiving cargo, expansion, animation, industries, mods and GNU runtime proof remain required.",
    "save_version": null,

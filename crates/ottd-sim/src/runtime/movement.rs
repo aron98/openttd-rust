@@ -1,6 +1,7 @@
 mod access;
 mod daily;
 mod spatial;
+mod stations;
 mod step;
 use super::{RoadVehicleCache, SavedVehicleView, SimulationRuntime, VehicleId};
 use crate::{
@@ -36,6 +37,7 @@ impl SimulationRuntime {
             cache: cache.clone(),
             content: &self.content,
             spatial: Spatial::restore(&self.world, id)?,
+            stations: stations::IdleStations::restore(&self.world, &self.stations)?,
         };
         let (candidate, report) = State::plan(&mut self.world, ticks, &mut runner)?;
         let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
@@ -50,8 +52,15 @@ struct RoadPhases<'a> {
     cache: RoadVehicleCache,
     content: &'a ContentCatalog,
     spatial: Spatial,
+    stations: stations::IdleStations,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn station_tiles(&self) -> bool {
+        !self.stations.is_empty()
+    }
+    fn stations(&mut self, state: &mut State<'_>) -> Result<(), WorldTickError> {
+        self.stations.tick(state)
+    }
     fn admit(&self, world: &World) -> Result<(), WorldTickError> {
         if world
             .tables()
@@ -61,6 +70,9 @@ impl VehiclePhases for RoadPhases<'_> {
             return Err(unsupported("road", "exactly one saved vehicle required"));
         }
         let v = SavedVehicleView::new(world, self.id)?;
+        if !self.stations.is_empty() {
+            return stations::admit_vehicle(v);
+        }
         if v.setting("vehicle.roadveh_acceleration_model")? != 0
             || v.setting("vehicle.road_side")? != 1
             || v.setting("economy.timekeeping_units")? != 0
@@ -170,6 +182,10 @@ impl VehiclePhases for RoadPhases<'_> {
         if self.id.raw() % 74 == u32::from(clock.snapshot().economy_date_fract.0) {
             daily::run(state, self.id, self.content)?;
         }
-        self.tick(state)
+        if self.stations.is_empty() {
+            self.tick(state)
+        } else {
+            stations::vehicle_tick(state, self.id, &mut self.cache)
+        }
     }
 }

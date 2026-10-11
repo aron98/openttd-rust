@@ -49,15 +49,26 @@ impl Landscape {
     /// # Errors
     /// Rejects invalid dimensions, cursors, snowy tiles or unsupported tile kinds.
     pub fn new(map: Map, cursor: u32) -> Result<Self, LandscapeError> {
-        Self::validate(map, cursor, false, false)
+        Self::validate(map, cursor, false, false, false)
     }
 
     /// Road callbacks require the caller's saved-world admission, unlike `new`.
-    pub(crate) fn for_world(map: Map, cursor: u32, roads: bool) -> Result<Self, LandscapeError> {
-        Self::validate(map, cursor, roads, true)
+    pub(crate) fn for_world(
+        map: Map,
+        cursor: u32,
+        roads: bool,
+        stations: bool,
+    ) -> Result<Self, LandscapeError> {
+        Self::validate(map, cursor, roads, true, stations)
     }
 
-    fn validate(map: Map, cursor: u32, roads: bool, trees: bool) -> Result<Self, LandscapeError> {
+    fn validate(
+        map: Map,
+        cursor: u32,
+        roads: bool,
+        trees: bool,
+        stations: bool,
+    ) -> Result<Self, LandscapeError> {
         let dimensions =
             MapDimensions::new(map.width, map.height).map_err(|_| LandscapeError::Map)?;
         let count = usize::try_from(dimensions.tile_count()).map_err(|_| LandscapeError::Map)?;
@@ -73,6 +84,7 @@ impl Landscape {
                 0 if tile.m3 & 16 == 0 && (tile.m5 >> 2) & 7 <= 2 => {}
                 7 => {}
                 2 if roads => road::validate(&map, index)?,
+                5 if stations => {}
                 4 if trees && (tile.m2 >> 6) & 7 <= 1 && tile.m5 & 7 <= 6 && tile.m3 < 12 => {}
                 _ => return Err(LandscapeError::Tile(index)),
             }

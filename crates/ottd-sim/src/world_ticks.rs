@@ -116,7 +116,7 @@ impl State<'_> {
             return Err(unsupported("budget", "tick limit"));
         }
         let paused = unsigned(world, b"DATE", 0, "pause_mode")? != 0;
-        let roads_admitted = domain::validate(world, paused)?;
+        let roads_admitted = domain::validate(world, paused, vehicles.station_tiles())?;
         if !paused {
             vehicles.admit(world)?;
         }
@@ -130,6 +130,7 @@ impl State<'_> {
                     u32::try_from(unsigned(world, b"DATE", 0, "cur_tileloop_tile")?)
                         .map_err(|_| unsupported("landscape", "cursor"))?,
                     roads_admitted,
+                    vehicles.station_tiles(),
                 )?
                 .into_scheduler(),
             )
@@ -226,6 +227,7 @@ fn advance(
         }
         vehicles.ticks(state, clock)?;
         trees::tick(state, clock.snapshot().tick_counter.0)?;
+        vehicles.stations(state)?;
         state.set_number(
             b"DATE",
             0,

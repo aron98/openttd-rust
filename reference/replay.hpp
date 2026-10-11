@@ -76,6 +76,11 @@ inline bool Run()
     Require(output != nullptr, "native replay output directory required");
     const std::filesystem::path directory(output);
     std::filesystem::create_directories(directory);
+    std::ofstream route_trace;
+    if (std::getenv("OTTD_ROAD_ROUTE_OBSERVE") != nullptr) {
+        route_trace.exceptions(std::ios::failbit | std::ios::badbit);
+        route_trace.open(directory / "route.jsonl");
+    }
     Require(!std::filesystem::exists(directory / "results.json"), "stale native replay results");
     Json results = {{"schema_version", 1}, {"actions", Json::array()}, {"checkpoints", Json::array()}};
     if (protocol.contains("fixture")) {
@@ -102,7 +107,20 @@ inline bool Run()
             const uint32_t count = action.at("count");
             total_ticks += count;
             Require(total_ticks <= 100000, "native replay tick limit exceeded");
-            for (uint32_t i = 0; i < count; ++i) StateGameLoop();
+            for (uint32_t i = 0; i < count; ++i) {
+                StateGameLoop();
+                if (route_trace.is_open()) {
+                    Json stops = Json::array();
+                    for (const RoadStop *stop : RoadStop::Iterate()) stops.push_back({{"id", stop->index.base()}, {"tile", stop->xy.base()}, {"status", stop->status}});
+                    Json loading = Json::array();
+                    for (const Station *station : Station::Iterate()) {
+                        Json vehicles = Json::array();
+                        for (const Vehicle *vehicle : station->loading_vehicles) vehicles.push_back(vehicle->index.base());
+                        loading.push_back({{"id", station->index.base()}, {"vehicles", vehicles}, {"counter", station->delete_ctr}});
+                    }
+                    route_trace << Json{{"runtime", Runtime()}, {"movement", ReferenceMovement::Snapshot()}, {"stops", stops}, {"loading", loading}}.dump() << '\n';
+                }
+            }
         } else if (op == "checkpoint") {
             results["checkpoints"].push_back(Checkpoint(directory, action.at("label")));
         } else {

@@ -3,7 +3,11 @@ use crate::world_access::{field, signed, unsigned};
 use ottd_save::{WireValue, world::World};
 
 /// Returns whether this saved-world context admits empty-road callbacks.
-pub(super) fn validate(world: &World, paused: bool) -> Result<bool, WorldTickError> {
+pub(super) fn validate(
+    world: &World,
+    paused: bool,
+    stations: bool,
+) -> Result<bool, WorldTickError> {
     if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 {
         return Err(unsupported("pause", "linkgraph pause control"));
     }
@@ -24,6 +28,9 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<bool, WorldTickErr
     for id in [
         *b"NGRF", *b"INDY", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
     ] {
+        if id == *b"STNN" && stations {
+            continue;
+        }
         if world
             .tables()
             .get(&id)
@@ -83,7 +90,7 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<bool, WorldTickErr
     }
     validate_towns(world)?;
     validate_companies(world)?;
-    validate_roads(world)
+    validate_roads(world, stations)
 }
 fn validate_companies(world: &World) -> Result<(), WorldTickError> {
     let companies = world
@@ -129,7 +136,7 @@ fn validate_towns(world: &World) -> Result<(), WorldTickError> {
     Ok(())
 }
 
-fn validate_roads(world: &World) -> Result<bool, WorldTickError> {
+fn validate_roads(world: &World, stations: bool) -> Result<bool, WorldTickError> {
     if !world
         .map()
         .tiles()
@@ -148,7 +155,9 @@ fn validate_roads(world: &World) -> Result<bool, WorldTickError> {
         }
     }
     for tile in world.map().tiles() {
-        if !matches!(tile.tile_type() >> 4, 0 | 2 | 4 | 7) {
+        if !(matches!(tile.tile_type() >> 4, 0 | 2 | 4 | 7)
+            || stations && tile.tile_type() >> 4 == 5)
+        {
             return Err(unsupported(
                 "road_tile_loop",
                 "requires house-free clear/road/tree/void map",

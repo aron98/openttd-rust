@@ -12,6 +12,8 @@ pub(crate) struct TileLoop {
 }
 
 pub(crate) trait WorldTickPhases {
+    fn station_tiles(&self) -> bool { false }
+    fn stations(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn admit(&self, world: &ottd_save::world::World) -> Result<(), WorldTickError>;
     fn economy_boundary(&self, events: &ottd_core::ClockEvents) -> Result<(), WorldTickError>;
     fn calendar(

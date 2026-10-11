@@ -772,7 +772,7 @@
   {
    "id": "replay-source-reference-replay-hpp",
    "path": "reference/replay.hpp",
-   "sha256": "24467b22973bbc99e966654cea4a5718791e532ffce602f1f6b4b8908ae6e05b",
+   "sha256": "11291eeb205995539fd0a699429079b2e8a4ce49148c4964d490f4bf6b405719",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -790,7 +790,7 @@
   {
    "id": "replay-source-reference-replay-commands-hpp",
    "path": "reference/replay_commands.hpp",
-   "sha256": "aa940a677c44ac1e6bf9224e685446d3e2afa2391ac8f64c14cee165deea9e5d",
+   "sha256": "955e9ede24faf90d9b077eb3b9efae0f55c52b6772187d5a3c819c7e0d336799",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -2005,7 +2005,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-rs",
    "path": "crates/ottd-sim/src/runtime.rs",
-   "sha256": "a3f4e533557ce07fdd209ec85fae9cf247d1f225a6dfc0f9cc4f9fc89b38d79b",
+   "sha256": "4e52e7ac0892862e8a2607e396a378eba953679b0dfe764656dea65220a97619",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "b9f5888576ac5b8e13bfe1fa17c8081a2278780953d29d3034befe9bc5f05058",
+   "sha256": "1fdc832bcc14dffc8f1b02bc99ed3f863f60672c8205ff7910a7c8af048d9146",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "2dcc528d4c99648e78ea458775f83306dba63bd13d8e8fe8aa4214259c47a042",
+   "sha256": "ab830ae905aa86be5e8f394c001a3f6d57474e1c736282dfbbaa80afb73a9bc1",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "f0173db797eac70b4cedffc6a7d12a5cd464a6f1b40101faca6a17477f6a920e",
+   "sha256": "abcbd7000618547a8c1ef4170c54a3eba3a8eaa8449f6f76c2846edd452f85cd",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "1e0a545cf2502f50c93170dd60eb28ea68c3c3f272efb2c4404bd41d14e64330",
+   "sha256": "806a76da8a756805f2fe0a951053bc3491594437d7464a83fea71871ebabc167",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "b07a9d990caeabfa151ab00df7aa6c4de25b64ba564ac3a5706caccd15ccd15d",
+   "sha256": "d1d7e1402c5fdf6acb8963a5b2a81637f70c49d4714d22cebaa0bb360cd85553",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "ebd918447ee86d27e99d9d1537b2b3b106d94a1e2f8e38e33a7f8f141185a95d",
+   "sha256": "523384c40ec60184d61e0f4e528836327b76cefbf63c56985cf9cce0e5c5441d",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "f56a3504812c9b6a8c7a97ef3556bd2a78bbb24a058e6d5a945055389a9a783c",
+   "sha256": "9eb37a28bece3f890c0c46370800d14fb8e0e230869c750d8d3b57d1d19cf1ce",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "3b8957c8071f65b82f7c2ccc94f93a461721d72e31d7606bac99fd367d319aee",
+   "sha256": "c7e7b5821760bfe23c7359a2a82221ebc6a2238c4c4ad1ae0418eb06793b6a7c",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "3191db255c1310c6c2f153d03cb143208d226e9700cd3b59001139b51121568a",
+   "sha256": "0636d62769d42152b25be7f5815bf967a433dffaef8296736dd88560cb6a984d",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "fa8aa9c1773fa7497fc06641f92035600b3b369da937a67405c16213f616677d",
+   "sha256": "05ee1ed08a73a208fccadc0428e0a5293a42dcafc43a44dc7d13012b590e960c",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "14f39616d6721a18a46fe56bc6d9001ca7906813ea75583acafecca7dc6a0a81",
+   "sha256": "e3bea73d57ea9ba4db573cea5d1ba5996a6aa455f521e77b46a8b5ba49a73e3d",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "94b375c010f99bd358df0a6770542b994f8254c0f6303f5ab275410875a820bc",
+   "sha256": "3b488f42c3ed7f8afb5ac66dd576dbb8397c2103862fd79bf57eb137a943f1b5",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "1cd4fd7c30307fcb49e04f8f4c03deb64c62785739196c6734a5acb3ae31389a",
+   "sha256": "448fab90dd61416873ac4293dd7ba1bb3f11a31fc9d7a71a810c5c9dde95c4bc",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "25138f5022de8a419d0da303c6d5133e13641f37b3fbd93ec7308fe14e4773b1",
+   "sha256": "7858864a7c41b06662d421a815ada53c7eae7c13470ecd2831ec84e85e0efe99",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "8a5062c072baf66d2222ef734a432976f698e6f7185312b82a00dcfd50fec225",
+   "sha256": "49a7ff2934bcf9aa656357979bae01fe34e21582f8188ebd661745217b9c0b4f",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8179,7 +8179,7 @@
   {
    "id": "cargo-identity-reference-movement-patch",
    "path": "reference/movement.patch",
-   "sha256": "87daa0346dfb797d7b38686d8576d41599d2be60d5c6467cb792a14fd422fcda",
+   "sha256": "10e12c961874a7469801eedb7942b0f6f23b2f663ab59924eaf273bcae3a6792",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8224,7 +8224,7 @@
   {
    "id": "cargo-identity-reference-movement-hooks-hpp",
    "path": "reference/movement_hooks.hpp",
-   "sha256": "5be999673a84913688af294870ef25e4c6cd4d385a9d4186e0132ac2ca2f93d3",
+   "sha256": "003cb2c89fc8154661e208be87d24a8a7b4fbeafbf472d18ff8db518f12579b4",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8269,7 +8269,7 @@
   {
    "id": "cargo-identity-reference-movement-snapshot-hpp",
    "path": "reference/movement_snapshot.hpp",
-   "sha256": "ba325e38c72662fc3caeed607eca821acfd49ef72097bb10b2c236b51985641b",
+   "sha256": "051f1f915b5afa84c32abd8ca42401fde69808c8d81b765abda601816e647fc0",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8287,7 +8287,7 @@
   {
    "id": "cargo-identity-reference-replay-hpp",
    "path": "reference/replay.hpp",
-   "sha256": "24467b22973bbc99e966654cea4a5718791e532ffce602f1f6b4b8908ae6e05b",
+   "sha256": "11291eeb205995539fd0a699429079b2e8a4ce49148c4964d490f4bf6b405719",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8296,7 +8296,7 @@
   {
    "id": "cargo-identity-reference-replay-commands-hpp",
    "path": "reference/replay_commands.hpp",
-   "sha256": "aa940a677c44ac1e6bf9224e685446d3e2afa2391ac8f64c14cee165deea9e5d",
+   "sha256": "955e9ede24faf90d9b077eb3b9efae0f55c52b6772187d5a3c819c7e0d336799",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "ade25b8fdc3835fd5df0a4c469c947afedabc131eef8da693d26ea8f6755ed0f",
+   "sha256": "60167344e035cc07cb388eb0b75e506a191b53b3af4a8caa8b806b9fa1e21c07",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8548,7 +8548,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-world-ticks-shared-rs",
    "path": "crates/ottd-sim/src/world_ticks/shared.rs",
-   "sha256": "b5e4e610d1a241230690bc2b51a31741b82f1d0e1464e1e7869a9046d84a94f4",
+   "sha256": "2e71088c643a42978e52c2942af54c9b09bbf3fa971654f523329898338cd7fb",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8557,7 +8557,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-runtime-movement-rs",
    "path": "crates/ottd-sim/src/runtime/movement.rs",
-   "sha256": "f0cd25eefb092521ae90723c69dafb1ace65bae29f05e00a54ec24fbaac8d4b9",
+   "sha256": "cfe605154784f34c351fcc1cd4a8b9831782f9ad811abcba7fea9daf35b4a1fd",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8998,7 +8998,7 @@
   {
    "id": "tree-growth-scripts-tree-growth-source-json",
    "path": "scripts/tree-growth-source.json",
-   "sha256": "94bcbd932a336d209071034ad0fe785989e5ee3ff362b5ca3990eaa50903968b",
+   "sha256": "a54d864186bc2c258ce1c979b27a19721c7fa15bcdf3103f9eb4f696497d3ecf",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "fd7a09220be034f032c2911b2b0fb884c05eeb4706d4cadbb95664cf8477d090",
+   "sha256": "0ec6889e64aac49b29bc18baad32c639fa8ad03c6a3b2d7c43b940da05d75768",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -9307,6 +9307,411 @@
    "sha256": "f4279e68f3fc8393cd1a7057846761390838240895badd7890291413d072b562",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-save-src-world-rs",
+   "path": "crates/ottd-save/src/world.rs",
+   "sha256": "9f73c67c2d3b1d046ba08453651f3842f68066eeff7b88e29350dfcc53d3053d",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-save-src-world-edit-rs",
+   "path": "crates/ottd-save/src/world/edit.rs",
+   "sha256": "789cf22545f43fbcc0e3e8119013b8eeec2f6d575756c059bba9a8f8c966cdd3",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-save-src-world-journal-stage-rs",
+   "path": "crates/ottd-save/src/world/journal/stage.rs",
+   "sha256": "0f50eaabfb222f7bcc3348fa284a087945ca5e57476fcf894226543d506c4c89",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-save-src-world-journal-tests-rs",
+   "path": "crates/ottd-save/src/world/journal/tests.rs",
+   "sha256": "0b29223cba13943fa536f284aa75979fe52a9b40f104f6782cf3fee72b7c3f32",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-landscape-rs",
+   "path": "crates/ottd-sim/src/landscape.rs",
+   "sha256": "5320e7ecbdd7cdc8d05e056c08dd308d42e8e4a909f7247c4454684c4d6ce9b5",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-company-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/company.rs",
+   "sha256": "bf328d789f67a82905b2046ff3cf1c00d07102284c53db03f9708ca9b0cd209a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed.rs",
+   "sha256": "5e2ebc4674b4fcef1d649555e2bc7920e0040ad1900ee744627f772facde8cb4",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-depot-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/depot.rs",
+   "sha256": "c7997d7fd8859074753488356f8f61524bb1a0958e0c7df7c6bde967348737e3",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-frames-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/frames.rs",
+   "sha256": "bda9cbf4ec1920c3060c731e50a7ccb923f1f6a8cab2cdaa09ebbdf463c570bd",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-motion-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/motion.rs",
+   "sha256": "a122b08dc36c0c4bc3f0f93ab3d579b586086cd703577820f653174becfae6f0",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-orders-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/orders.rs",
+   "sha256": "bbab5260ccdfcd2d9132b8c64e44037e118c601346780997ce8e7ef22960abae",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-routing-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/routing.rs",
+   "sha256": "2cf00cf9924f87a693860190431002a0ea78586c78857082d9238cafa86d1a99",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-routing-cache-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/routing/cache.rs",
+   "sha256": "16c18673f8abde065d4709d08c74cef6b0409efac2ee7ef1748b41835d050212",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-routing-cost-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/routing/cost.rs",
+   "sha256": "96a3c4664bfb137b73e570f331931396a9ed21b6092b1c01ca14b22455154693",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-routing-heap-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/routing/heap.rs",
+   "sha256": "fc7ba977c1808d593e871cc34878776f8332e71e59ce7c96dd2c0c5de162410a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-routing-network-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/routing/network.rs",
+   "sha256": "1198883d93d51ba8c54e17761b66573e1a4c41684b6205b4d8c71b32e5f8eb87",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-routing-search-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/routing/search.rs",
+   "sha256": "f3df2536aafd8536eeb3f2101038e20675b7d7ed57a7aa74df88c6517bea323b",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-terminal-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/terminal.rs",
+   "sha256": "10f987363020e0d851bf47714b3e7736cbb4bb6190098abe52419f76031d9ab2",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-terminal-far-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/terminal_far.rs",
+   "sha256": "4de66f6e1741e871418622947656a2ca3d2334d7107b115b67d3a46f964e9988",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-directed-terminal-near-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/directed/terminal_near.rs",
+   "sha256": "6052f436c08c1d524b13315536bc343b631f8449df5d5befbd62765cf21ffa9a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading.rs",
+   "sha256": "75b6298aba720834311224db1c9ec31021853054c08d84e7652c2ced300ce229",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-admission-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/admission.rs",
+   "sha256": "a02cd5547231c96acfcf7c7b609e41769b8de20635af5affb1f9dd2019d21993",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-failure-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/failure_tests.rs",
+   "sha256": "ef984668cfcfb818b7efecb720c255993477dac5d300890c07cd1e0c8f9dacdc",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-jobs-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/jobs.rs",
+   "sha256": "fa8aa8f85ed42abf81451da2c94db8a6ff318996c29560344a836be8ffb1141c",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-links-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/links.rs",
+   "sha256": "a141fc8a6b573288c1064bbbbc138ff562c9332e518450589d0259ec9862a51e",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-links-edge-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/links/edge.rs",
+   "sha256": "23487a0ff89ea1e02d13e01480d7df18076327eee1e00821ecff827b98ab15ff",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-links-maintenance-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/links/maintenance.rs",
+   "sha256": "14d1cf75355f002831e9d0498938aedeeab201997cdc4a6919e4ce25df7e97b3",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-links-nodes-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/links/nodes.rs",
+   "sha256": "cfdd2c1e5b67143fca98ad1baa3b97042bcb84ed697234564433908cb3fa3bb0",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-orders-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/orders.rs",
+   "sha256": "6254dd91a2252f85478e291c6a697c3183252df7b45c9cb910976d68e76f5ea8",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-payment-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/payment.rs",
+   "sha256": "54d9a278f86a9085c470425b69cb47a1a032231549aa1cee6a48633b69549c13",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-loading-records-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/loading/records.rs",
+   "sha256": "154a5e81dfa81c90e8dbe8aa585e15a9bb7ed19dfc4f6326cca64e04f9401b0f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-movement-stations-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/stations.rs",
+   "sha256": "f9fbf832f2ecc3fd862e4617dcf546b19ed874bb0b4ee794fbf6c8b072ea87b6",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-runtime-transport-rs",
+   "path": "crates/ottd-sim/src/runtime/transport.rs",
+   "sha256": "31a38de0a2911e182b26bf8c33ea40390442381d5088e28d92030049d5934c84",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-world-ticks-rs",
+   "path": "crates/ottd-sim/src/world_ticks.rs",
+   "sha256": "2c054257fb32e11b4b3b7deb7a80b328f9c06989ca5410bed1c025050913ad57",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-world-ticks-company-history-rs",
+   "path": "crates/ottd-sim/src/world_ticks/company_history.rs",
+   "sha256": "f2d0b3777471e371e71b14b44b349b842895b518c039fa28339403e65d15a35a",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-world-ticks-domain-rs",
+   "path": "crates/ottd-sim/src/world_ticks/domain.rs",
+   "sha256": "a97e58bcd34112fb711322941035937f926e1bf7feacefa32e96cae6b8a601ec",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-src-world-ticks-finance-rs",
+   "path": "crates/ottd-sim/src/world_ticks/finance.rs",
+   "sha256": "409254a7ca8546a0ea7bc2f0e809860537a98ef23ff970970b619b86aa7f8ddb",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-crates-ottd-sim-tests-road-routes-rs",
+   "path": "crates/ottd-sim/tests/road_routes.rs",
+   "sha256": "59e1067acd92144c7604af933e71ede8c7a4a720998701cc96d6165aebefbe03",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-departure-py",
+   "path": "scripts/road_route_departure.py",
+   "sha256": "22cc0f2efbcc3789eecbc76c6cd40fd0f4eb7907b680dfca70b729ea30cc7f78",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-discover-py",
+   "path": "scripts/road_route_discover.py",
+   "sha256": "7fd9b71ad6adf3a72b10603e64fcd96a40c341fd878e6fae50f58e3f47bb2b45",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-idle-py",
+   "path": "scripts/road_route_idle.py",
+   "sha256": "4b262942a41ae907ae4f2b535b2d8727c619caf83a2aa4cccc1df11af2876912",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-junction-py",
+   "path": "scripts/road_route_junction.py",
+   "sha256": "d382a2726ea9a39071568033ac4357813267b01fe7e135a3896d4e872f37a6c8",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-long-py",
+   "path": "scripts/road_route_long.py",
+   "sha256": "b271fc2cfc598b4bbf4105f93480e5b0f0c0665333b7778d73e7e62471c4692f",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-routing-py",
+   "path": "scripts/road_route_routing.py",
+   "sha256": "caec3926c4667344c4bf6afc3e075211af58dc4a8b986bdd113f69b6e8f4b7bb",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "road-round-trips-scripts-road-route-terminal-py",
+   "path": "scripts/road_route_terminal.py",
+   "sha256": "17240f8d7b5e8f03643c81a9c54c07f235e32aeb30a001e464a143fffc714b9c",
+   "kind": "recipe",
+   "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
    "profile": null
   }

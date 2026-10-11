@@ -10,9 +10,10 @@ Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pu
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.
-Script increment `8b4fa02` adds scalar table storage and execution to the shared
-arrays and persistent runners. Gameplay increment `55e422f` adds station/depot
-order insertion for supported road vehicles. World increment `249a1e1` adds
+Script increment `0a5bd83`, with corrected proof retention at `257c395`, adds
+native table deletion and table/array cloning. Gameplay increment `6d02ffe`,
+with current bindings at `7b78b96`, adds bounded terminal bus/truck station
+construction after station/depot order insertion. World increment `249a1e1` adds
 bounded temperate tree callbacks to complete world ticks. Increment `59fe7f6`
 enables normal CI for the reviewed bounded single-vehicle road movement corpus.
 Complete transport cycles and further content loading are in progress. All seven
@@ -50,7 +51,7 @@ observation-corruption controls per profile. Root audits all 4,995 artifact
 files and all 1,523 original source blobs against the pinned Git tree. This run
 executes PR merge `70920af`, with source head `2a1db7a`; no local GNU execution
 is claimed. Other
-ABIs, aggregate edges, delegates, delete/clone, root storage unification,
+ABIs, aggregate edges, delegates, root storage unification,
 functions, closures, cycle collection, host APIs and full AI/GameScript remain
 required.
 
@@ -89,9 +90,52 @@ external tests are not counted. Spreading, genuine tree placement, other
 climates, water and planting commands remain required. Normal tree CI and new
 Linux tree execution are not claimed; no broad completion gate is closed.
 
-Private increments next address road station construction, real script
-delete/clone operations, and temperate spreading/placement. They require
-current-source binding updates, root QA and independent review before admission.
+Delete/clone integration `257c395` preserves the native compiler and existing
+VM dispatch, physical table removal/shrink and clone reinsertion, independent
+scalar-array identity, own-root deletion, ownership and suspension. Initial
+review found that decimal case names overwrote process receipts. The correction
+appends extensions to complete names and rechecks unique source/process
+membership, budgets, argv, status, hashes and expected result stages before
+publishing success. The old incomplete proof is preserved without renewed
+credit. Four fresh complete profiles each retain 750 comparisons, including
+execution of the exact frozen product binaries. Rebuilt debug/release profiles
+each pass 171 crate tests and the external native hash test. Independent review
+verifies all 20,663 proof files and 4,853 source blobs, adds 30 guarded comparisons
+and 14 retention-corruption checks, and repeats native ownership/storage/effect
+sessions. Root separately adds 60 product comparisons, 36 correction comparisons
+and eight receipt controls. No new Rust behavior is attributed to the receipt fix.
+
+Actual [GNU CI run `38130117301`](https://github.com/aron98/openttd-rust/actions/runs/38130117301)
+passes the new delete/clone corpus in both profiles: 750 comparisons, 171 crate
+tests, one explicit external hash test and five comparator-corruption controls
+per profile. Root audits all 11,125 downloaded files, 1,523 pinned original source
+blobs and every retained invocation/source/output. The executed merge is
+`bcc1c17`, with source head `257c395`; this is remote GNU execution, not a local
+GNU claim. Aggregate graphs, physical root unification, delegates, functions,
+closures, cycle collection, host APIs and full AI/GameScript remain required.
+
+Station integration `7b78b96` preserves all 35 frozen product files. It supports
+vanilla flat 1x1 terminal bus/truck stops, all four entrances and explicit owned
+joins, with native command precedence, costs, town ratings, naming/RNG, sparse
+station/stop allocation, facility chains, infrastructure and checked catchment.
+Saved records and live caches publish together; estimates are pure and late
+pool/cache failures roll back. The frozen proof has 40 complete command/state
+boundaries, public CLI composition and saves continued in both directions.
+Root adds 13 boundaries and independent review adds 12, rechecks all 65 complete
+saved/derived/runtime/RNG comparisons and all 4,652 archive members, and executes
+fresh CLI and rollback cases. The corrected-base current inventories include
+all 64 native header stamp inputs without relabeling historical execution.
+Native-valid X=0 sentinel behavior, wider stations/acceptance, moving transport,
+loading/payment and normal station CI admission remain required. The exact
+combined candidate passes 738 workspace tests, strict locked Clippy, formatting,
+75 Python checks and 143 declaration checks; 79 ignored external tests are not
+credited by that workspace run.
+
+Private work continues with directed road routes and station phases, temperate
+spreading/placement, and shared script graph/root storage. Each requires actual
+native proof, current-source bindings, root QA and independent review. All seven
+broad completion gates remain open. Rust and full movement-capture jobs on
+`80bf8bd` pass; the complete normal interoperability baseline remains pending.
 
 The full four-case bounded road movement capture now passes locally at
 `e167929`, followed by separate live recorded-corpus verification. The final

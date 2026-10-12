@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
+PYTHONPATH="$root" python3 -m scripts.vehicle_year_sources "$root"
 cd "$root"
 commit="$(sed -n 's/^commit = "\([^"]*\)"/\1/p' upstream.toml)"
 repository="$(sed -n 's/^repository = "\([^"]*\)"/\1/p' upstream.toml)"

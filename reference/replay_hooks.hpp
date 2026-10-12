@@ -3,9 +3,11 @@
 #define OTTD_REFERENCE_REPLAY_HOOKS_HPP
 #include "vehicle_type.h"
 #include "cargo_type.h"
+#include "group_type.h"
 namespace ReferenceReplay {
 void Phase(const char *phase, const CommandCost &cost);
 void Gate(const char *gate);
+void GroupReturns(const char *phase, GroupID id);
 void LandscapeReturns(const char *phase, int64_t additional_money, uint32_t tile);
 void VehicleReturns(const char *phase, VehicleID id, uint capacity, uint16_t mail, const CargoArray &capacities);
 template <typename T>
@@ -15,6 +17,9 @@ void CapturePhase(const char *phase, const T &value)
         Phase(phase, value);
     } else {
         Phase(phase, std::get<0>(value));
+        if constexpr (std::is_same_v<T, std::tuple<CommandCost, GroupID>>) {
+            GroupReturns(phase, std::get<1>(value));
+        }
         if constexpr (std::is_same_v<T, std::tuple<CommandCost, Money, TileIndex>>) {
             LandscapeReturns(phase, static_cast<int64_t>(std::get<1>(value)), std::get<2>(value).base());
         }

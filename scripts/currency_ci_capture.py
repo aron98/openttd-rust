@@ -99,6 +99,7 @@ def source_names(root: Path) -> tuple[str, ...]:
             "scripts/reference.cfg",
             "scripts/cargo-observer-sources.json",
             "scripts/async-trace-sources.json",
+            "scripts/vehicle-year-sources.json",
             "fixtures/replay/clear-v362.sav",
             *COMPILER_INPUTS,
         )

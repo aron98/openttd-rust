@@ -790,7 +790,7 @@
   {
    "id": "replay-source-reference-replay-commands-hpp",
    "path": "reference/replay_commands.hpp",
-   "sha256": "68803a38c3f913652597a2f2836f0b73d6e4d520b624f03cf6e4694fc4c2db7d",
+   "sha256": "b6cc092168e912ec96c57c14c5234e2e2cac7bc511ba37a29d825745148b7538",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -799,7 +799,7 @@
   {
    "id": "replay-source-reference-replay-cost-hpp",
    "path": "reference/replay_cost.hpp",
-   "sha256": "a009d1239b817d35d62ddde1d45196f275cc1aeabbb2636440c6dfef3fe2bcdf",
+   "sha256": "1bbdeee2566d4e476b14ccdeb4539478044a779f3040028c897aa90c4efd2aed",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -817,7 +817,7 @@
   {
    "id": "replay-source-reference-replay-hooks-hpp",
    "path": "reference/replay_hooks.hpp",
-   "sha256": "99d336735d6cb0dbb2f4f18de1abb3b411a3192095909ca7b7bfb0aa5a14c1cb",
+   "sha256": "d9d11b1afbbf05e54daf1bf5b3350a38077e9305252bbaa1e00b5adffffec6d7",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -898,7 +898,7 @@
   {
    "id": "replay-source-scripts-setup-snapshot-reference-sh",
    "path": "scripts/setup-snapshot-reference.sh",
-   "sha256": "99061bd5f6bab072d03410f5a748c63bd27d9a4ff364c6d99dbb50e9af0c1594",
+   "sha256": "8dba0c457b8792cf2e2687e433fe16c5b48987c4805ec5c79d21c11380b4c833",
    "kind": "recipe",
    "provenance": "Pinned replay schema, driver or native instrumentation source; upstream.toml; original callbacks remain active",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "a29f56f503e5b924ccbf037b72f5991770b2aff3dc0d944802848fb600b0f519",
+   "sha256": "f937bcb257a6970f82bd86d65fac5c2fcbbfa2d288234bd99b446ecf3bc12798",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "893a96374ed92af2e23f4b58985d16237c9919f6baf077acf4a8d3a83468b6a1",
+   "sha256": "d119d1a76c301978da8f040cbbccf2f859587ab3fbef72e9867dbc87bf79d8a7",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "9ba32b6b7b8bd4d59ab131e7d214b3181cc336ed1076e63eadc4ded0506e7fdc",
+   "sha256": "36c8662bb8fa3ff18f37f20cf867c6fb59d62a1a9f2c933edbeaac0d9a1bbc80",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "a769895fb669d193906cba8d59f29b4eb8f268acee186c960ff6b1a6cf007256",
+   "sha256": "997ef0e07e891f3897b76e83c20322b7c1b58e1b8578ad3ef00a8acfebb1d545",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "a8c35f7f02b0a1bcb2a591f4bea867a09816504ebca9bb0a2eed11a0c80361ed",
+   "sha256": "4d19982b9a7295449bdfafec9a7cbd0c34633d87db48dcccc0fec0e78075339c",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "016797946025c322a43b87146db3f7927ab51156145e37201244ea8a059f2e35",
+   "sha256": "c7498f1e354e8ae3e7bef10ee6a4554c5d0269d3403c0d257e1bc97eb62e0202",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "a4b2835d735ea0d55743772cb9b889caf89bf34839e098f7e74bcb406800c61a",
+   "sha256": "1a7e554f043b29d6402e6860c21c6c66c99a7817c6a4fab680acc47706c91333",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "387d2a8e1e3622e8466d12c1f98d9ae28e27b24c89cb00dc23bf8076b0920cad",
+   "sha256": "dec3eb4b5f6baad142954cb5ff013a89b69f34f38d6425c261f2fce180b6417d",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "b72bce0cf9d9aa40dca0cef8ed72ab80b269f1c717a62774eb31b0345c112229",
+   "sha256": "531be6ea714e1fb9c9d915ebcef83aa063ffbbb79fb10c0a3017c61b2014e449",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "f19499e02779f0e099aef5bf63e9423aeb34cbfcb9683b52bc9b886fb2a0697a",
+   "sha256": "8abb8a58dea1060eb0fa81a9f8e359a907e27e7f26f16584d13af6a01b5006c9",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3625,7 +3625,7 @@
   {
    "id": "currency-ci-currency-ci-capture-py",
    "path": "scripts/currency_ci_capture.py",
-   "sha256": "57db4742858b268ee078974ba7a7624ce58f71c5966a05b8878a71a9c7583cff",
+   "sha256": "9ff8f3d611f111da11f693ae141a0da0dcbe0ea7a0278706f94c1fe7fe448f5e",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "06caf130a386782a11972e610caac142f1f0f53351006ad937bf7b77d379b2c6",
+   "sha256": "4ad5b875df5165c07ec03386d7afa9ee96d775f6426d458811cde9d9a61b6125",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "583c5a2049f3c6ed23f869dd4db99a5d003e5fd06d886491755deede48c29ff3",
+   "sha256": "76d8f78b01953ef92f00dd8272bd0106fb9b27d6ac4ab7962f5fd5a41170359e",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "7fda07561df782302b021fed036200c28e22f02777671eda0450d4713a8f86a3",
+   "sha256": "86696cbfc51e0e02d34be72c394b72eb602d2a65691641d972d63b94dfd5f649",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4084,7 +4084,7 @@
   {
    "id": "tree-terrain-scripts-tree-ci-bindings-py",
    "path": "scripts/tree_ci_bindings.py",
-   "sha256": "1c8e5f03421882f9369e7aa2e9eb879ceb029a8d58df8cc5c344daeaaaa25b10",
+   "sha256": "0885cec3bffc79a0afdd5154cb9224e604720a8f322a8a3d3032d66a03ec8be4",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "2040b5f498aafa5cb256fa03b59f5f1bfc27f460da823c0a0548f3d3a9a8fa91",
+   "sha256": "129d3955c6e6762c4caf5dbb465470ad46dcc83b855ab563ac5310e3c45961a3",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "39943eafc7aa740ba31e99ad57e0c763e276999c936c3b022814e893fbe4a188",
+   "sha256": "1b2d1d45da3da00a3c8fc2f274eb7434aebc66377bdfb1714922cba3cac08f11",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "e006388e8fe79a761a4b8e327df7a8a290869fc71df46ed768be19bc3682cca1",
+   "sha256": "3c513744d71431347e2976d11c5d43154fd7aa1f8f9f0ff5eaf50f20e8d7473d",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "bda3dc8ae948928af09bc9d8d09901b57d440b8bb6443bedf4d8fd904388a46b",
+   "sha256": "b49a2677dc5874f027fee89118e61011eb204d334768bd4a58cb76ee8cbc65da",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8296,7 +8296,7 @@
   {
    "id": "cargo-identity-reference-replay-commands-hpp",
    "path": "reference/replay_commands.hpp",
-   "sha256": "68803a38c3f913652597a2f2836f0b73d6e4d520b624f03cf6e4694fc4c2db7d",
+   "sha256": "b6cc092168e912ec96c57c14c5234e2e2cac7bc511ba37a29d825745148b7538",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "b55db82b4f823b612e1e355513c7b7905a95ebdfa6cf5db2a175341fde44a831",
+   "sha256": "89a4c41a8eff3d37fe7732d75f6c33f2789f8fc77b1c4beac2eb36e724f2415f",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8422,7 +8422,7 @@
   {
    "id": "cargo-identity-scripts-setup-snapshot-reference-sh",
    "path": "scripts/setup-snapshot-reference.sh",
-   "sha256": "99061bd5f6bab072d03410f5a748c63bd27d9a4ff364c6d99dbb50e9af0c1594",
+   "sha256": "8dba0c457b8792cf2e2687e433fe16c5b48987c4805ec5c79d21c11380b4c833",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -11797,7 +11797,7 @@
   {
    "id": "cargo-reference-cargo-replay-hpp",
    "path": "reference/cargo_replay.hpp",
-   "sha256": "8c9f8773e44e1a5cdb4d1ec9601e66b35e78d7c439223960531fc30f4ee3691d",
+   "sha256": "fc7ff3123ad1be3c54b9d6f0fea97cb340f8056b519a318083c6a6e31db1b9eb",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11842,7 +11842,7 @@
   {
    "id": "cargo-scripts-cargo-observer-sources-json",
    "path": "scripts/cargo-observer-sources.json",
-   "sha256": "58c60f18dca74baeb7b5ae7176179a4ca7a72f1c8509bf1870768a6d7b436693",
+   "sha256": "f07d9871b70184724774a045abca792bdb8c0d4000d68766d5a3839eaab6522b",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11851,7 +11851,7 @@
   {
    "id": "cargo-scripts-cargo-observer-inputs-py",
    "path": "scripts/cargo_observer_inputs.py",
-   "sha256": "54aa19873205d2491f9054e4a638862ab8709466adf0e69e120448914930bb78",
+   "sha256": "d16f614d0138fff4c3d8f814b49ed6f3ff28dd3d9cd6bac1ad6499a414e6bee8",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11860,7 +11860,7 @@
   {
    "id": "cargo-scripts-setup-cargo-observer-sh",
    "path": "scripts/setup-cargo-observer.sh",
-   "sha256": "ba8cc2a21c5c390cb57c9436801ef6e8bb456b985b9241d02798f5876dc10a51",
+   "sha256": "4c8f60038b67e21aa35fd50f41255417bb7f0202b12cc4cd430dd8fbbc472a73",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -12673,6 +12673,96 @@
    "sha256": "6357374f5a8450cb60269a4348be4ff4a996c9f708d06d5fd4d3a3fe558e463b",
    "kind": "recipe",
    "provenance": "Feature-gated passive main-thread async diagnostics and behavior-preserving runtime type extraction; no scheduler or parity claim",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-reference-group-profit-snapshot-hpp",
+   "path": "reference/group_profit_snapshot.hpp",
+   "sha256": "0a1b5fda6055e3ca184cb96a859a7dabb6aec0907651b9a62c7eff0d356fc611",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-reference-vehicle-year-trace-hpp",
+   "path": "reference/vehicle_year_trace.hpp",
+   "sha256": "99cd5e86e42a3aab2369728fb2f86204da6d427c8d8662a6937dcad6058105ce",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-reference-vehicle-year-patch",
+   "path": "reference/vehicle_year.patch",
+   "sha256": "33ee4154ab72446452cbbc530e4acebc7a694d28de4cbd56932606b5482cc916",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-vehicle-year-model-py",
+   "path": "scripts/vehicle_year_model.py",
+   "sha256": "3a10f60b4b845020c6dce2678bbb81fb916e693c428f19fb9ceeadeb0fe2f019",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-vehicle-year-sources-py",
+   "path": "scripts/vehicle_year_sources.py",
+   "sha256": "1dd6f273ff844a7967679feed37a1459498e435ffe0a0dd06969edefc5f6638e",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-vehicle-year-run-py",
+   "path": "scripts/vehicle_year_run.py",
+   "sha256": "38399f28f90326dc51829e132b6bfa897dbf487d2768315e1d814e889e20b46a",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-tests-test-vehicle-year-model-py",
+   "path": "scripts/tests/test_vehicle_year_model.py",
+   "sha256": "c08ef2281437546fe4e57dc1e920542261e6f89260943c6a9aa2ea37df27c970",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-tests-test-vehicle-year-sources-py",
+   "path": "scripts/tests/test_vehicle_year_sources.py",
+   "sha256": "aa9f223974fdc657dcb0d401b159db3fb498cb37b91ebdee6f866ede6f936001",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-setup-vehicle-year-reference-sh",
+   "path": "scripts/setup-vehicle-year-reference.sh",
+   "sha256": "7d526bbd8c440140c24611e7a3860a1feb554390fd7f187ff676254b373092a5",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-source-scripts-vehicle-year-sources-json",
+   "path": "scripts/vehicle-year-sources.json",
+   "sha256": "33c240425eb330223280c127f17466a23590e39b125116568e957f4ba7dc60a6",
+   "kind": "recipe",
+   "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
    "save_version": null,
    "profile": null
   }

@@ -2,11 +2,27 @@
   "sources": {
     "reference/cargo_movement_snapshot.hpp": "abf80a08cec96107ae623efb3863706840711b4b93dc0ebbcc7111092cd892e0",
     "reference/cargo_observer.patch": "62add9975bc60ea0f9b67a3a117cea432e1d8511dcb379c3a986a46c80ca8ba7",
-    "reference/cargo_replay.hpp": "8c9f8773e44e1a5cdb4d1ec9601e66b35e78d7c439223960531fc30f4ee3691d",
+    "reference/cargo_replay.hpp": "fc7ff3123ad1be3c54b9d6f0fea97cb340f8056b519a318083c6a6e31db1b9eb",
     "reference/cargo_runtime.hpp": "5b5f28bd8bafa05da76b744df29188d5dbf3d823b272e692a0dc8ce7731cf76e",
+    "reference/group_profit_snapshot.hpp": "0a1b5fda6055e3ca184cb96a859a7dabb6aec0907651b9a62c7eff0d356fc611",
     "reference/house_cache.hpp": "c3e978d857e212346b3d0f32aec671aa3e838c98d6d16af15167601b4c84445f",
     "reference/industry_cache_snapshot.hpp": "dd97b3c9962af0280d210d2d9814b2f9e54ddcf6c4e10e5f29114c1de6050978",
     "reference/job_annotations.hpp": "34e4350865fccea29d43b56786821ece95d8557b2ea0f20c01ab00f5c54c4547",
-    "scripts/setup-cargo-observer.sh": "ba8cc2a21c5c390cb57c9436801ef6e8bb456b985b9241d02798f5876dc10a51"
+    "reference/replay_commands.hpp": "b6cc092168e912ec96c57c14c5234e2e2cac7bc511ba37a29d825745148b7538",
+    "reference/replay_cost.hpp": "1bbdeee2566d4e476b14ccdeb4539478044a779f3040028c897aa90c4efd2aed",
+    "reference/replay_hooks.hpp": "d9d11b1afbbf05e54daf1bf5b3350a38077e9305252bbaa1e00b5adffffec6d7",
+    "reference/vehicle_year.patch": "33ee4154ab72446452cbbc530e4acebc7a694d28de4cbd56932606b5482cc916",
+    "reference/vehicle_year_trace.hpp": "99cd5e86e42a3aab2369728fb2f86204da6d427c8d8662a6937dcad6058105ce",
+    "scripts/movement_ci/value.py": "bf57b7c83e7a86f010992cfcc5958678e218df8ae678ade3f4fd1719f46b5088",
+    "scripts/setup-cargo-observer.sh": "4c8f60038b67e21aa35fd50f41255417bb7f0202b12cc4cd430dd8fbbc472a73",
+    "scripts/setup-snapshot-reference.sh": "8dba0c457b8792cf2e2687e433fe16c5b48987c4805ec5c79d21c11380b4c833",
+    "scripts/setup-vehicle-year-reference.sh": "7d526bbd8c440140c24611e7a3860a1feb554390fd7f187ff676254b373092a5",
+    "scripts/tests/test_vehicle_year_model.py": "c08ef2281437546fe4e57dc1e920542261e6f89260943c6a9aa2ea37df27c970",
+    "scripts/tests/test_vehicle_year_sources.py": "aa9f223974fdc657dcb0d401b159db3fb498cb37b91ebdee6f866ede6f936001",
+    "scripts/vehicle-year-sources.json": "33c240425eb330223280c127f17466a23590e39b125116568e957f4ba7dc60a6",
+    "scripts/vehicle_year_model.py": "3a10f60b4b845020c6dce2678bbb81fb916e693c428f19fb9ceeadeb0fe2f019",
+    "scripts/vehicle_year_run.py": "38399f28f90326dc51829e132b6bfa897dbf487d2768315e1d814e889e20b46a",
+    "scripts/vehicle_year_sources.py": "1dd6f273ff844a7967679feed37a1459498e435ffe0a0dd06969edefc5f6638e",
+    "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047"
   }
 }

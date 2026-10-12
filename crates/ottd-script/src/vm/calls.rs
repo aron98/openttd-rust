@@ -1,6 +1,6 @@
 //! Atomic native bodies share the main budget loop and original caller cleanup.
 use super::{Instruction, Value, Vm, VmError};
-use crate::{Array, NativeClosure, NativeFunction};
+use crate::{Array, NativeClosure, NativeFunction, heap::Operand};
 /// The admitted native frame owns its `CallInfo` closure independently of CALL's
 /// retained local callee and the VM temporary. Its arguments remain live slots.
 struct NativeFrame {
@@ -70,13 +70,14 @@ impl Vm<'_> {
             message.extend_from_slice(b"' ; expected: 'integer|float'");
             return Err(self.native_failure(&message, VmError::NativeCall));
         }
+        let first = Operand::new(first)?;
         let frame = NativeFrame {
             closure: closure.clone(),
             base,
             top,
             count: i.arg3,
         };
-        let result = self.native_body(&frame, &first);
+        let result = self.native_body(&frame, first.value());
         // Successful CallNative replaces CALL's local callee with the result
         // before popping CallInfo; failure leaves that local owner until unwind.
         let failure_owner = result.is_err().then_some(closure);

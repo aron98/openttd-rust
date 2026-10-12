@@ -1,0 +1,17 @@
+print collect-active
+active before 9996 2 2 5 0
+local-reference 2 1 D
+chain O D
+collected active 1
+active after 9996 2 2 5 0
+local-reference 1 1 -
+chain
+free D 88
+completed 1 0 9994 integer 1
+own-get 0 null
+clone-used 0 -
+free C 88
+insert-used 2 integer 9
+collected released 0
+free O 88
+recorder 1

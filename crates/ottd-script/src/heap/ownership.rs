@@ -1,6 +1,6 @@
 //! Reference edges and unpublished or external ownership handles.
 use super::{Heap, Object};
-use crate::Realm;
+use crate::{Realm, VmError};
 use std::{
     cell::Cell,
     rc::{Rc, Weak},
@@ -18,11 +18,17 @@ pub(super) struct Life {
     pub(super) references: Cell<usize>,
     pub(super) external: Cell<usize>,
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(super) enum Ownership {
+    HostRoot,
+    Reference,
+    Stored,
+}
 /// An ownership edge; its metadata has no strong link to object storage.
 #[derive(Debug)]
 pub(crate) struct Edge {
     pub(super) life: Rc<Life>,
-    external: bool,
+    ownership: Ownership,
 }
 impl Edge {
     #[cfg(test)]
@@ -33,26 +39,39 @@ impl Edge {
         clippy::arithmetic_side_effects,
         reason = "An allocated edge bounds each ownership count below usize::MAX"
     )]
-    pub(super) fn retain(life: &Rc<Life>, external: bool) -> Self {
+    pub(super) fn retain(life: &Rc<Life>, ownership: Ownership) -> Self {
         life.references.set(life.references.get() + 1);
-        if external {
+        if ownership == Ownership::HostRoot {
             life.external.set(life.external.get() + 1);
         }
         Self {
             life: Rc::clone(life),
-            external,
+            ownership,
         }
     }
     pub(crate) fn internal(&self) -> Self {
-        Self::retain(&self.life, false)
+        Self::retain(&self.life, Ownership::Stored)
+    }
+    pub(crate) fn make_reference(&mut self) -> Result<(), VmError> {
+        if self.ownership == Ownership::HostRoot {
+            let roots = self
+                .life
+                .external
+                .get()
+                .checked_sub(1)
+                .ok_or(VmError::InvalidBytecode)?;
+            self.life.external.set(roots);
+        }
+        self.ownership = Ownership::Reference;
+        Ok(())
     }
     fn external(&self) -> Self {
-        Self::retain(&self.life, true)
+        Self::retain(&self.life, Ownership::HostRoot)
     }
 }
 impl Clone for Edge {
     fn clone(&self) -> Self {
-        Self::retain(&self.life, self.external)
+        Self::retain(&self.life, self.ownership)
     }
 }
 impl Drop for Edge {
@@ -62,7 +81,7 @@ impl Drop for Edge {
     )]
     fn drop(&mut self) {
         let life = &self.life;
-        if self.external {
+        if self.ownership == Ownership::HostRoot {
             life.external.set(life.external.get() - 1);
         }
         life.references.set(life.references.get() - 1);
@@ -70,7 +89,7 @@ impl Drop for Edge {
             if life.references.get() == 0 {
                 heap.pending.borrow_mut().push(life.id);
             }
-            if self.external {
+            if self.ownership != Ownership::Stored {
                 heap.release_pending();
             }
         }
@@ -87,7 +106,7 @@ pub(crate) struct Unpublished {
 impl Unpublished {
     pub(crate) fn publish(self) -> Handle {
         Handle {
-            edge: Edge::retain(&self.life, true),
+            edge: Edge::retain(&self.life, Ownership::HostRoot),
             realm: self.realm.clone(),
         }
     }
@@ -108,11 +127,19 @@ impl Unpublished {
     }
 }
 /// Public owners retain the realm; storage edges never do.
-#[derive(Clone, Debug)]
+#[derive(Debug)]
 pub(crate) struct Handle {
     // Drop the edge (and drain native-style immediate release) before the realm.
     pub(crate) edge: Edge,
     pub(crate) realm: Realm,
+}
+impl Clone for Handle {
+    fn clone(&self) -> Self {
+        Self {
+            edge: self.edge.external(),
+            realm: self.realm.clone(),
+        }
+    }
 }
 impl Handle {
     #[cfg(test)]
@@ -135,7 +162,7 @@ impl Handle {
     }
     #[expect(
         clippy::expect_used,
-        reason = "A live external edge prevents collection and generation reuse"
+        reason = "A live owning edge prevents retirement and generation reuse; finalizers retain cleared storage"
     )]
     pub(crate) fn read<T>(&self, read: impl FnOnce(&Object) -> T) -> T {
         let entries = self.realm.heap.entries.borrow();
@@ -147,7 +174,7 @@ impl Handle {
     }
     #[expect(
         clippy::expect_used,
-        reason = "A live external edge prevents collection and generation reuse"
+        reason = "A live owning edge prevents retirement and generation reuse; finalizers retain cleared storage"
     )]
     pub(crate) fn mutate<T>(&self, mutate: impl FnOnce(&mut Object) -> T) -> T {
         let result = {
@@ -172,7 +199,7 @@ impl Handle {
                 return None;
             }
             Some(Self {
-                edge: Edge::retain(&life, true),
+                edge: Edge::retain(&life, Ownership::HostRoot),
                 realm,
             })
         }

@@ -1,5 +1,12 @@
 //! Native marking order and unmarked-object finalization.
+use super::ownership::Ownership;
 use super::{Edge, Entry, Heap, Object, ObjectId};
+
+enum Finalization {
+    Table,
+    Sequence,
+    Released(Object),
+}
 
 impl Heap {
     #[expect(
@@ -51,14 +58,13 @@ impl Heap {
                     .filter(|entry| entry.generation == id.generation)
                     .and_then(|entry| {
                         let life = entry.life.as_ref()?;
-                        let guard = Edge::retain(life, false);
+                        let guard = Edge::retain(life, Ownership::Stored);
                         let released = match entry.object.as_mut()? {
-                            Object::ScriptClosure(data) => {
-                                Object::Array(std::mem::take(&mut data.outers))
-                            }
-                            Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => {
-                                entry.object.take()?
-                            }
+                            Object::ScriptClosure(data) => Finalization::Released(Object::Array(
+                                std::mem::take(&mut data.outers),
+                            )),
+                            Object::Table(_) => Finalization::Table,
+                            Object::Array(_) | Object::NativeClosure(_) => Finalization::Sequence,
                         };
                         Some((guard, released))
                     })
@@ -67,17 +73,9 @@ impl Heap {
                 // Like SQSharedState's temporary reference, retain the current
                 // object while Finalize immediately releases outgoing edges.
                 match object {
-                    Object::Table(data) => {
-                        data.nodes.finalize(|value| {
-                            drop(value);
-                            self.release_pending();
-                        });
-                        drop(data.delegate);
-                        self.release_pending();
-                    }
-                    Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
-                        drop(object);
-                    }
+                    Finalization::Table => self.finalize_table(id),
+                    Finalization::Sequence => self.finalize_sequence(id),
+                    Finalization::Released(object) => drop(object),
                 }
                 self.release_pending();
                 drop(guard);
@@ -89,6 +87,64 @@ impl Heap {
         reachable.reverse();
         *self.chain.borrow_mut() = reachable;
         count
+    }
+    fn finalize_table(&self, id: ObjectId) {
+        for slot in 0.. {
+            let released = {
+                let mut entries = self.entries.borrow_mut();
+                entries
+                    .get_mut(id.index)
+                    .and_then(|entry| match entry.object.as_mut()? {
+                        Object::Table(data) => data.nodes.finalize_slot(slot),
+                        Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
+                            None
+                        }
+                    })
+            };
+            let Some((key, value)) = released else {
+                break;
+            };
+            drop(key);
+            drop(value);
+            self.release_pending();
+        }
+        let delegate = {
+            let mut entries = self.entries.borrow_mut();
+            entries
+                .get_mut(id.index)
+                .and_then(|entry| match entry.object.as_mut()? {
+                    Object::Table(data) => data.delegate.take(),
+                    Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => None,
+                })
+        };
+        drop(delegate);
+        self.release_pending();
+    }
+    fn finalize_sequence(&self, id: ObjectId) {
+        for slot in 0.. {
+            let released = {
+                let mut entries = self.entries.borrow_mut();
+                entries.get_mut(id.index).and_then(|entry| {
+                    let values = match entry.object.as_mut()? {
+                        Object::Array(values) => values,
+                        Object::NativeClosure(data) => &mut data.outer_values,
+                        Object::Table(_) | Object::ScriptClosure(_) => return None,
+                    };
+                    if slot == values.len() {
+                        values.clear();
+                        return None;
+                    }
+                    values
+                        .get_mut(slot)
+                        .map(|value| std::mem::replace(value, super::Stored::null()))
+                })
+            };
+            let Some(value) = released else {
+                break;
+            };
+            drop(value);
+            self.release_pending();
+        }
     }
     fn enqueue(entries: &[Entry], marked: &mut [bool], todo: &mut Vec<ObjectId>, id: ObjectId) {
         if entries

@@ -1,4 +1,5 @@
 //! Delegate installation retains the new edge, releases the old edge, then publishes.
+use super::ownership::Ownership;
 use super::{Edge, Handle, Heap, Object, ObjectId};
 use crate::VmError;
 
@@ -46,7 +47,7 @@ impl Heap {
                         .get(id.index)
                         .and_then(|entry| entry.life.as_ref())
                         .ok_or(VmError::InvalidBytecode)?;
-                    Ok(Edge::retain(life, false))
+                    Ok(Edge::retain(life, Ownership::Stored))
                 })
                 .transpose()?
         };

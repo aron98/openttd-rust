@@ -1,7 +1,9 @@
 //! Realm-owned objects. Internal edges retain identities without owning the heap.
 mod collection;
 mod delegates;
+mod operand;
 mod ownership;
+pub(crate) use operand::Operand;
 mod value;
 use crate::{Realm, VmError, table::Data};
 pub(crate) use ownership::{Edge, Handle, Unpublished};
@@ -172,3 +174,15 @@ mod owner_probe;
 
 #[cfg(test)]
 mod delegate_lifetimes;
+
+#[cfg(test)]
+mod active_owner_tests;
+
+#[cfg(test)]
+mod reference_value_tests;
+
+#[cfg(test)]
+mod active_root_tests;
+
+#[cfg(test)]
+mod operand_tests;

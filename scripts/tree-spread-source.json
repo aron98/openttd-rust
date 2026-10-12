@@ -453,7 +453,7 @@
     "crates/ottd-sim/src/world_ticks/industries.rs": "bf1b6f3165395949da3ccd3683c0c9ac4c0996149b70c8daa12225298f0a9494",
     "crates/ottd-sim/src/world_ticks/industries/saved.rs": "bb60fde23345cfd56b73b9b8ed984b2affe72a0fdb8434dfedf4be505631cdc3",
     "crates/ottd-sim/src/world_ticks/industry_manager.rs": "c9b156d423916aecc39326261efe796040c908736bb0b530caa97e6d51a38dae",
-    "crates/ottd-sim/src/world_ticks/phases.rs": "bdf2defc172080e6894c471984b73f3b503d9b67bd14f61c3de0872c4c8dced8",
+    "crates/ottd-sim/src/world_ticks/phases.rs": "676ec1d912888f67d0b5bba0cbb698dc044a24a02435946fa50b084b39f3c529",
     "crates/ottd-sim/src/world_ticks/plan.rs": "9881096baf240ec9db89d0abcdfcea6bccb0d9c2251f54a6768fa666ebcf2013",
     "crates/ottd-sim/src/world_ticks/shared.rs": "2da15cd6beb2c92dc2564a73e7ed457c77ef273c44ca869ae9e4dc7cdb49b9c8",
     "crates/ottd-sim/src/world_ticks/tiles.rs": "f592c576f3fcedfc32b60bd232efc3e63715d11d03a53e46b671ff0a4201711f",
@@ -469,8 +469,8 @@
     "crates/ottd-sim/tests/road_movement_ci.rs": "8ff137a0d79a3915d29a34a53d3141ceae00c9e3631a5fa80bdf629b2a4ac776",
     "crates/ottd-sim/tests/road_movement_ci/controls.rs": "a2d442e64df1e540dc9a52c14a25a3ece19a96cfc6feabc3f9e86558b3594227",
     "crates/ottd-sim/tests/vehicle_year_support/groups.rs": "484633d0e685c126a2c190f47e241d9d177f78989a10ad362e6f7b759535e786",
-    "crates/ottd-sim/tests/world_tree_spread.rs": "3d6a8e17465f6a22a032773215e64783f6b12f52c4fe4c1926269b151b8a214e",
-    "crates/ottd-sim/tests/world_trees.rs": "722ad9773814247809579380fa53cbb5f60360a2ccb3f04c84e32150d661c1a9",
+    "crates/ottd-sim/tests/world_tree_spread.rs": "a09fa08de3a49e9e954783ba4d84fa3b8dec4ebc62913d03e48d7d8698e00771",
+    "crates/ottd-sim/tests/world_trees.rs": "252d49dcb9e58599d677bccb3e661e7cec84c8146e24459809f4acc10c420f8c",
     "fixtures/content/contract-speed.grf": "dd8325f1398ca34c44a7d9071597f108b8a67bf90883069a6357d19139ec5a69",
     "fixtures/replay/clear-v362.sav": "26a604958172a84ddfd895836da5e55666baf28a085bc438236cbdc8931464d2",
     "fixtures/road-orders/first-order-v362.sav": "7b822e4344de052da91ec613baf7339c54e9138e3501e42a653be99937f343e9",
@@ -527,6 +527,7 @@
     "scripts/tree_spread_proof.py": "44bd7790d531fa34e41d03823479df78f006184c7069874a81fe602ff23f3f8f",
     "scripts/tree_spread_recipe.py": "f4279e68f3fc8393cd1a7057846761390838240895badd7890291413d072b562",
     "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047",
-    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241"
+    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241",
+    "crates/ottd-sim/src/world_ticks/disaster_tests.rs": "06ff7f3a942a64f28ae55559a5f17c009dd4a2515a899ff506625561b6a3e32f"
   }
 }

@@ -160,9 +160,8 @@ pub(crate) fn road_company_count(world: &World, company: u8) -> Result<u64, Runt
         .records()
         .keys()
         .try_fold(0_u64, |count, id| {
-            Ok(count.saturating_add(u64::from(
-                SavedVehicleView::new(world, VehicleId::new(*id))?.owner()? == company,
-            )))
+            let owner = SavedVehicleView::new(world, VehicleId::new(*id))?.owner()?;
+            Ok(count.saturating_add(u64::from(owner == company)))
         })
 }
 impl SimulationRuntime {
@@ -264,6 +263,17 @@ impl SimulationRuntime {
     /// Native depot pool identity metadata restored from the authoritative world.
     pub fn depot_pool(&self) -> pools::PoolSnapshot {
         self.depot.pool.snapshot()
+    }
+
+    /// Native vehicle pool identity metadata restored from the authoritative world.
+    pub fn vehicle_pool(&self) -> pools::PoolSnapshot {
+        self.allocation.pool.snapshot()
+    }
+    /// Per-company next road unit numbers; native group vehicle counts stay uncredited.
+    /// # Errors
+    /// Rejects invalid saved company IDs.
+    pub fn road_unit_numbers(&self) -> Result<Vec<pools::RoadUnitNumbers>, RuntimeError> {
+        self.allocation.road_unit_numbers(&self.world)
     }
 
     /// Company road/tram infrastructure for all 63 native road-type slots.

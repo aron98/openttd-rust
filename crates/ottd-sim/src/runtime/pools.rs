@@ -205,3 +205,12 @@ impl UnitNumberAllocator {
         Ok(())
     }
 }
+
+/// One company's road unit-number generator state.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub struct RoadUnitNumbers {
+    /// Owning company pool index.
+    pub company: u8,
+    /// Lowest unused unit number; 65535 is the native exhaustion sentinel.
+    pub next: u16,
+}

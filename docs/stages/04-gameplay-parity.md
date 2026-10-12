@@ -8,20 +8,27 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed gameplay publication: `644b9e3` composes vanilla temperate
-forest-to-road cargo production with the published script and stopped-consist
-runtime. Production uses the existing recipient/distribution pipeline and
-matches original stock/history, graphics/RNG, packets and nine declared cache
-coordinates. Actual handoff, regrowth, loaded cargo, normal scale300 preparation
-and six continuations from saves genuinely simulated by both engines pass.
-The original station does not accept wood; processing-industry delivery and
-payment remain required.
+Latest reviewed composition: `935121d` integrates passive original-engine async
+tracing with the published forest, script and stopped-consist runtime. The trace
+records existing branch-used readiness samples, pause callbacks, publication and
+owner lifetimes without additional polls or scheduling controls. Both producers
+require exact source membership, bytes and modes. The unchanged 1,513-item
+artifact list now uses the existing bounded external-list mechanism.
 
-The author's 38-cut forest portfolio retains one genuine tick6400 failure:
-original job0 is pending while Rust has completed. Root and the fresh whole
-reviewer each observe a separate tick6400 pass. Those epochs remain distinct;
-the passing captures do not close pending-worker timing or replace the failure.
-Raw561, YAPF1247 and the natural vehicle-year refusal remain open.
+Vanilla temperate forest production uses the existing recipient/distribution
+pipeline and matches original stock/history, graphics/RNG, packets and nine
+declared cache coordinates at verified handoff, regrowth, loaded continuation
+and normal scale300 graphics boundaries. Processing-industry delivery and payment
+remain required; the original station does not accept wood.
+
+The current author's 38-cut portfolio passes 36 cuts. Tick512 and tick6400 retain
+original job0 pending versus completed Rust failures. Five of six continuations
+from saves genuinely simulated by both engines pass; the native3081 origin fails
+at its initial pending-job comparison. Root observes an independent tick6400 pass,
+which does not replace either failure. Earlier `644b9e3` counts of 37/38 and six
+continuations describe a distinct epoch. Raw561, YAPF1247, automatic demand/old
+flows and the natural vehicle-year refusal remain open. Initial unsaved
+interactive-RNG differences also remain failed full-state comparisons.
 
 Separate after-load APIs restore stopped vanilla single locomotives and one
 straight consist on flat normal rail. Five authentic original-command rosters
@@ -33,27 +40,29 @@ job publication and continuation from saves actually simulated by both engines.
 Native road vehicle-pool and unit-number arrays remain uncredited.
 
 The combined candidate passes 835 workspace tests with 148 separately counted
-ignored cases, 676 Python tests plus 25,177 subtests, 87 dependency-free tests,
-Clippy, formatting and the scoped strict Python checks. Root and the fresh whole
-reviewer each execute 1,530 debug table/trap comparisons, eight actual corruption
-controls, three native error-owner captures consumed by current Rust tests,
-two command-built consists through both serialized origins, passenger cargo
-and forest continuations, scale300 graphics, and real threaded-worker rollback.
-Author coverage additionally includes both script profiles, all five consist
-rosters and 10,666 strict normal-driver comparisons with 153 Rust-only refusals
-of source-proven undefined inputs. Valid Unicode strings/comments are preserved.
-All 143 scenarios and 36 expanded drivers remain intact. Complete proof readback
-verifies 51,243 logical author artifacts, 21,771 deduplicated blobs, 97,965 nested
-normal members and 5,233 Git source files with necessary bytes and modes retained.
+ignored cases, 678 Python tests plus 25,339 subtests, 89 dependency-free tests,
+Clippy, formatting and scoped strict Python checks. Root executes 1,530 debug
+table/trap comparisons, eight actual corruption controls, three native error-owner
+captures consumed by current Rust tests, two command-built consists through both
+serialized origins, passenger/forest continuations, scale300 graphics and real
+threaded-worker rollback. The fresh reviewer repeats guarded pause tracing and
+forest handoff and audits the complete root executions. Author coverage includes
+both script profiles, all five consist rosters and 10,666 strict normal-driver
+comparisons with 153 Rust-only refusals of source-proven undefined inputs. Valid
+Unicode strings/comments are preserved. All 143 scenarios and 36 expanded drivers
+remain intact. Complete proof readback verifies 59,100 logical author artifacts,
+24,376 deduplicated blobs, 97,965 nested normal members and 5,249 Git source files
+with necessary bytes and modes retained. The merged native observer is genuinely
+rebuilt from its current source; predecessor binaries retain distinct identities.
 
 Current reviewed script publication includes bounded `try`/`catch`/`throw`, nested
 trap unwinding, exact error-object ownership/diagnostics, user closures, nested
 frames and frame-owned variadic arguments. Policy, internal and source-proven
-undefined errors remain explicitly uncatchable. Delegates and passive causal
-tracing are separate active increments. Full VM/GC, AI/GameScript APIs, NewGRF execution,
-reciprocal modded continuation and all seven broad completion gates below remain
-**OPEN**. These milestones preserve the agreed stage boundary; only maintainer
-merge of the completed stage authorizes stage 5.
+undefined errors remain explicitly uncatchable. Script delegates and optional
+Rust causal tracing remain separate active integrations. Full VM/GC,
+AI/GameScript APIs, NewGRF execution, reciprocal modded continuation and all seven
+broad completion gates below remain **OPEN**. These milestones preserve the agreed
+stage boundary; only maintainer merge of the completed stage authorizes stage 5.
 
 Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
 and translation tables after the engine/spec loading completed in `e032dd2`.

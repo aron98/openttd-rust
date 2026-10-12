@@ -3205,7 +3205,7 @@
     "crates/ottd-sim/src/runtime/order_state/restore.rs": "01d4b47945fda8575a8b1fd7f253ef7abcdf0c47736bf190635c89d6975b41db",
     "crates/ottd-sim/src/runtime/order_state/restore/properties.rs": "1571301ffba27f802313cd4759f9bf5e50885544e5eae6b36b5e1ea57ff59969",
     "crates/ottd-sim/src/runtime/order_state/restore/shared.rs": "1a3579e9657a880a55a3b2fce5aead3dda9828da0516e68a6c4dc2d2338bfd25",
-    "crates/ottd-sim/src/runtime/order_state/restore_boundary_tests.rs": "6ff1ebfefa0677681447c879490170630d58765a6ca59171ed53965f2c9c4bdd",
+    "crates/ottd-sim/src/runtime/order_state/restore_boundary_tests.rs": "34a94950f6beba7f5645807b46ff34c9a120ce0a68ba36f27377b76457fe4667",
     "crates/ottd-sim/src/runtime/order_state/restore_boundary_tests_support.rs": "d043151cd244b71aea3679e0834dce984173f0e207b115162250d62f2b1900fe",
     "crates/ottd-sim/src/runtime/order_state/restore_tests.rs": "4af3bc9f1f834ca0afde193302761b8f2a607c1c327d00ef7ddb079a2c53100c",
     "crates/ottd-sim/src/runtime/order_state/sale.rs": "fb03c59699f4b15034063e44b136b4724683a217b3007a6b2d5140354e730fbe",

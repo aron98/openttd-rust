@@ -123,11 +123,8 @@ fn restore_cache_failure_rolls_back_consumption_list_allocation_money_and_rng() 
     let road = runtime.road.clone();
     let mut candidate = allocation.clone();
     let id = candidate.pool.allocate()?;
-    candidate
-        .freeunits
-        .entry((0, VehicleType::Road))
-        .or_default()
-        .use_id(2);
+    let units = &mut candidate.freeunits;
+    units.entry((0, VehicleType::Road)).or_default().use_id(2);
     let record = view::row(runtime.world(), *b"VEHS", first)?.record.clone();
     let edits = vec![
         WorldEdit::InsertRecord {

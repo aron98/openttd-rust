@@ -5639,7 +5639,8 @@
         "stale-source/scripts/world_check_support.py",
         "status.json",
         "stderr.log",
-        "stdout.log"
+        "stdout.log",
+        "stale-source/scripts/worlds-artifact-layout.json"
       ],
       "diagnostic": "Stale native replay binary/source",
       "status": 1

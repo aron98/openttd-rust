@@ -2311,7 +2311,8 @@
         "stdout.log",
         "stale-source/scripts/script_vm_native_roots.py",
         "stale-source/scripts/script_vm_native_roots_audit.py",
-        "stale-source/scripts/script_vm_native_roots_model.py"
+        "stale-source/scripts/script_vm_native_roots_model.py",
+        "stale-source/scripts/worlds-artifact-layout.json"
       ],
       "argv": {
         "argv": [

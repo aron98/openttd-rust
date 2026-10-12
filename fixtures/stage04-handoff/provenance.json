@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "purpose": "original-generated inputs for fresh remote native recapture; not golden results or source-equivalent binaries",
+  "upstream": {
+    "repository": "https://github.com/OpenTTD/OpenTTD.git",
+    "commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+    "release": "15.3",
+    "savegame_version": 362
+  },
+  "historical_native_binary_sha256": "1c046d71ac0f070818026fc08201dfc08e3076827d4a37a79deeaa32786f31a6",
+  "historical_labels_are_dependencies": false,
+  "new_native_admission": false,
+  "historical_false_claims_changed": false,
+  "stage_gates": [
+    "OPEN",
+    "OPEN",
+    "OPEN",
+    "OPEN",
+    "OPEN",
+    "OPEN",
+    "OPEN"
+  ],
+  "cases": [
+    {
+      "name": "forest",
+      "horizon_calls": 60680,
+      "checkpoints": {
+        "initial": 0,
+        "prefix": 8192,
+        "final": 60680
+      },
+      "historical_process_returncode": 0,
+      "historical_driver": {
+        "historical_label": ".worktrees/stage04-disabled-disaster-runtime/scripts/company_rating_run.py",
+        "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+        "bytes": 3486,
+        "mode": 33188,
+        "lstat_mode": 33188
+      },
+      "historical_witnesses": {
+        "invocation.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/forest/native/invocation.json",
+          "sha256": "92607bce89cb3f9c9c283c4e5988dcb2dae018ff12fa0fd022ead91f976d72be",
+          "bytes": 4795,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "process.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/forest/native/process.json",
+          "sha256": "2915a30fdfe12580226709e71220c4187b7216d8decaa8fb7d681df26fd53289",
+          "bytes": 58,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "results.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/forest/native/results.json",
+          "sha256": "47e4ad881e9f492278cfd6474f7d55c47c8a6b07323241eeffbb28cac84c4842",
+          "bytes": 2815,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      },
+      "files": [
+        {
+          "role": "input.sav",
+          "bundle_path": "forest/input.sav",
+          "historical_source_label": ".omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-design/forest-build-b/final.sav",
+          "invocation_input_index": 1,
+          "sha256": "5e3034f4d92efc2b0df485d2b1897aad94669e1ea1be362ffeeba47f1c84a1f7",
+          "bytes": 85601,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "actions.json",
+          "bundle_path": "forest/actions.json",
+          "historical_source_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/forest/actions.json",
+          "invocation_input_index": 2,
+          "sha256": "37a117d3b8cc7fcb68a735be0522bd62cd86ae2270abc46ada13a098f64c088c",
+          "bytes": 275,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "openttd.cfg",
+          "bundle_path": "forest/openttd.cfg",
+          "historical_source_label": ".omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-design/forest-build-b/openttd.cfg",
+          "invocation_input_index": 3,
+          "sha256": "f7b884fe672cd49728004d81e7474d188d71efb202d4bd70ccc8ad86d1301f46",
+          "bytes": 657,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      ]
+    },
+    {
+      "name": "house",
+      "horizon_calls": 60680,
+      "checkpoints": {
+        "initial": 0,
+        "prefix": 6144,
+        "final": 60680
+      },
+      "historical_process_returncode": 0,
+      "historical_driver": {
+        "historical_label": ".worktrees/stage04-disabled-disaster-runtime/scripts/company_rating_run.py",
+        "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+        "bytes": 3486,
+        "mode": 33188,
+        "lstat_mode": 33188
+      },
+      "historical_witnesses": {
+        "invocation.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/house/native/invocation.json",
+          "sha256": "da3f22f29b0b2b160f0a2951239b95035455b1a3ab949b908dc781b2fc1cc5a1",
+          "bytes": 4776,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "process.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/house/native/process.json",
+          "sha256": "8328bac4222dd6e98f850faf695e8d414884e1fe97426cf1d5d6ebbf9125df8a",
+          "bytes": 58,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "results.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/house/native/results.json",
+          "sha256": "db42c52b4a6e61d004de71b903d54f640df4d157b0784df3f215fc0811374090",
+          "bytes": 2803,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      },
+      "files": [
+        {
+          "role": "input.sav",
+          "bundle_path": "house/input.sav",
+          "historical_source_label": ".omo/teams/team-72ec0a2a/worktrees/T6-town-houses/.omo/evidence/town-houses/proof/ready/final.sav",
+          "invocation_input_index": 1,
+          "sha256": "cb0659bf47a08c96e8bdd2238610fe2cf4e5c8337196b009a3eb4fc0a334f10e",
+          "bytes": 85298,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "actions.json",
+          "bundle_path": "house/actions.json",
+          "historical_source_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/house/actions.json",
+          "invocation_input_index": 2,
+          "sha256": "ed02e707a286bdd8fabb31040488dfe348c08eb9f33a644b12950e5fa94d4234",
+          "bytes": 275,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "openttd.cfg",
+          "bundle_path": "house/openttd.cfg",
+          "historical_source_label": ".omo/teams/team-72ec0a2a/worktrees/T6-town-houses/.omo/evidence/town-houses/proof/ready/openttd.cfg",
+          "invocation_input_index": 3,
+          "sha256": "f7b884fe672cd49728004d81e7474d188d71efb202d4bd70ccc8ad86d1301f46",
+          "bytes": 657,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      ]
+    },
+    {
+      "name": "timer",
+      "horizon_calls": 60680,
+      "checkpoints": {
+        "initial": 0,
+        "prefix": 1,
+        "final": 60680
+      },
+      "historical_process_returncode": 0,
+      "historical_driver": {
+        "historical_label": ".worktrees/stage04-disabled-disaster-runtime/scripts/company_rating_run.py",
+        "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+        "bytes": 3486,
+        "mode": 33188,
+        "lstat_mode": 33188
+      },
+      "historical_witnesses": {
+        "invocation.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/timer/native/invocation.json",
+          "sha256": "97e4b4d74adef3a9a852b7343f0ef4aeae8e6d48ead98e6888094fd9dad2a7e7",
+          "bytes": 4807,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "process.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/timer/native/process.json",
+          "sha256": "d991fd0eca17366d93c0e9a8eb7da981e3ba067f879681b7b8c3e4a0cee90d1c",
+          "bytes": 58,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "results.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/timer/native/results.json",
+          "sha256": "7bab2040b368ed5945565e41a8a86eba944df02c59ef337fa1501047f51ad54a",
+          "bytes": 2783,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      },
+      "files": [
+        {
+          "role": "input.sav",
+          "bundle_path": "timer/input.sav",
+          "historical_source_label": ".worktrees/stage04-company-rating-runtime/.omo/evidence/company-rating-runtime/timer-current/one/initial.sav",
+          "invocation_input_index": 1,
+          "sha256": "4faeea85e1d42e063880c5425e3d0df13b39456264623c738cc2d598e17b066a",
+          "bytes": 85298,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "actions.json",
+          "bundle_path": "timer/actions.json",
+          "historical_source_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/disabled-disaster-runtime/natural/timer/actions.json",
+          "invocation_input_index": 2,
+          "sha256": "407df8bf2af9e556f7d410e97ecec3cda6ba9ae942aafe8ab3651d3de5b9d767",
+          "bytes": 272,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "openttd.cfg",
+          "bundle_path": "timer/openttd.cfg",
+          "historical_source_label": ".worktrees/stage04-company-rating-runtime/.omo/evidence/company-rating-runtime/timer-current/one/openttd.cfg",
+          "invocation_input_index": 3,
+          "sha256": "f7b884fe672cd49728004d81e7474d188d71efb202d4bd70ccc8ad86d1301f46",
+          "bytes": 657,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      ]
+    },
+    {
+      "name": "late-disaster",
+      "horizon_calls": 27010,
+      "checkpoints": {
+        "initial": 0,
+        "prefix": 27009,
+        "final": 27010
+      },
+      "historical_process_returncode": 0,
+      "historical_driver": {
+        "historical_label": ".worktrees/stage04-company-rating-runtime/scripts/company_rating_run.py",
+        "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+        "bytes": 3486,
+        "mode": 33188,
+        "lstat_mode": 33188
+      },
+      "historical_witnesses": {
+        "invocation.json": {
+          "historical_label": ".worktrees/stage04-company-rating-runtime/.omo/evidence/company-rating-runtime/native-late-disaster/invocation.json",
+          "sha256": "5d6a2996d1ecdc2593c7089483c80d9e8a51eb0223bdf14a8baa6a8f6ec403d9",
+          "bytes": 4765,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "process.json": {
+          "historical_label": ".worktrees/stage04-company-rating-runtime/.omo/evidence/company-rating-runtime/native-late-disaster/process.json",
+          "sha256": "1dbaac25530e80129b16c5ae9af0357fc00e0ffb75bb88a549563f09229d1510",
+          "bytes": 58,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "results.json": {
+          "historical_label": ".worktrees/stage04-company-rating-runtime/.omo/evidence/company-rating-runtime/native-late-disaster/results.json",
+          "sha256": "74e9996ddba97c2607e42dcd09bdca770395bd069787aad95127167e760a3ebc",
+          "bytes": 2824,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      },
+      "files": [
+        {
+          "role": "input.sav",
+          "bundle_path": "late-disaster/input.sav",
+          "historical_source_label": ".worktrees/stage04-company-rating-older-fixture/.omo/evidence/company-rating-older-fixture/native/initial.sav",
+          "invocation_input_index": 1,
+          "sha256": "fc9610b85df17651f4ce72d8f16bf95d26b1d9d2b2ff6bf603dea213dfda0a41",
+          "bytes": 90079,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "actions.json",
+          "bundle_path": "late-disaster/actions.json",
+          "historical_source_label": ".worktrees/stage04-company-rating-runtime/.omo/evidence/company-rating-runtime/late-disaster-actions.json",
+          "invocation_input_index": 2,
+          "sha256": "83ed5000993782f6c6a75c275a2bf77380048c111f9ffe6c979e0e299d67c89a",
+          "bytes": 272,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "openttd.cfg",
+          "bundle_path": "late-disaster/openttd.cfg",
+          "historical_source_label": ".worktrees/stage04-company-rating-older-fixture/.omo/evidence/company-rating-older-fixture/native/openttd.cfg",
+          "invocation_input_index": 3,
+          "sha256": "2f55ed7200b091ac59f5e90f1b02ab1a680e7954c20a10111d9ea046a23a5a2a",
+          "bytes": 148,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      ]
+    },
+    {
+      "name": "older-whole",
+      "horizon_calls": 33744,
+      "checkpoints": {
+        "initial": 0,
+        "year2102": 20350,
+        "age730": 28490,
+        "age731": 28564,
+        "quarter_prefix": 33743,
+        "final": 33744
+      },
+      "historical_process_returncode": 0,
+      "historical_driver": {
+        "historical_label": ".worktrees/stage04-company-rating-older-fixture/scripts/company_rating_run.py",
+        "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+        "bytes": 3486,
+        "mode": 33188,
+        "lstat_mode": 33188
+      },
+      "historical_witnesses": {
+        "invocation.json": {
+          "historical_label": ".worktrees/stage04-company-rating-older-fixture/.omo/evidence/company-rating-older-fixture/native/invocation.json",
+          "sha256": "e7a24b311d3078769a4060e6a2c14ad8c35aaf2357b79ddce748c5a88f0d9345",
+          "bytes": 4738,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "process.json": {
+          "historical_label": ".worktrees/stage04-company-rating-older-fixture/.omo/evidence/company-rating-older-fixture/native/process.json",
+          "sha256": "596cf106daf2f0d43936e9b3f58095eb3eb97af5062acf4bb709eee7b589f84b",
+          "bytes": 58,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "results.json": {
+          "historical_label": ".worktrees/stage04-company-rating-older-fixture/.omo/evidence/company-rating-older-fixture/native/results.json",
+          "sha256": "5b063109d25c24bb296a425773419ff941fff44eacbc2f29698a11d42883d793",
+          "bytes": 7391,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      },
+      "files": [
+        {
+          "role": "input.sav",
+          "bundle_path": "older-whole/input.sav",
+          "historical_source_label": ".worktrees/stage04-company-rating-observer/.omo/evidence/company-rating-observer/postyear/on/final.sav",
+          "invocation_input_index": 1,
+          "sha256": "fc9610b85df17651f4ce72d8f16bf95d26b1d9d2b2ff6bf603dea213dfda0a41",
+          "bytes": 90079,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "actions.json",
+          "bundle_path": "older-whole/actions.json",
+          "historical_source_label": ".worktrees/stage04-company-rating-older-fixture/.omo/evidence/company-rating-older-fixture/actions.json",
+          "invocation_input_index": 2,
+          "sha256": "52fe967a286433981d0f8fb74fa89fcd8fd4f0acd6d4c5bd6e98cd8a550a6d57",
+          "bytes": 748,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "openttd.cfg",
+          "bundle_path": "older-whole/openttd.cfg",
+          "historical_source_label": ".worktrees/stage04-company-rating-observer/.omo/evidence/company-rating-observer/postyear/on/openttd.cfg",
+          "invocation_input_index": 3,
+          "sha256": "2f55ed7200b091ac59f5e90f1b02ab1a680e7954c20a10111d9ea046a23a5a2a",
+          "bytes": 148,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      ]
+    },
+    {
+      "name": "annual-warning",
+      "horizon_calls": 27010,
+      "checkpoints": {
+        "initial": 0,
+        "prefix": 27009,
+        "final": 27010
+      },
+      "historical_process_returncode": 0,
+      "historical_driver": {
+        "historical_label": ".worktrees/stage04-disabled-disaster-runtime/scripts/company_rating_run.py",
+        "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+        "bytes": 3486,
+        "mode": 33188,
+        "lstat_mode": 33188
+      },
+      "historical_witnesses": {
+        "invocation.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/post-disaster-rollback-execution/native/invocation.json",
+          "sha256": "5e5a4caa3d6bcaad269f47317ae1990dab9e4a3caadb77d6fdbc91f49e0f6779",
+          "bytes": 4729,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "process.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/post-disaster-rollback-execution/native/process.json",
+          "sha256": "838c9404ad8f2aa0038d954c07030a41f18c82dff395777b314d7da2357845d6",
+          "bytes": 58,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        "results.json": {
+          "historical_label": ".worktrees/stage04-disabled-disaster-runtime/.omo/evidence/post-disaster-rollback-execution/native/results.json",
+          "sha256": "1846df24918d7b2d93b4fb48c7a07013f2d6cba5ac511e349552681a62d9039f",
+          "bytes": 2838,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      },
+      "files": [
+        {
+          "role": "input.sav",
+          "bundle_path": "annual-warning/input.sav",
+          "historical_source_label": ".worktrees/stage04-vehicle-year-observer/.omo/evidence/vehicle-year-observer/age731/on/initial.sav",
+          "invocation_input_index": 1,
+          "sha256": "2ca5bf7fb2130ebf30099fee1fba6216188a9a5513a7a9dee31de4240d093c48",
+          "bytes": 91168,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "actions.json",
+          "bundle_path": "annual-warning/actions.json",
+          "historical_source_label": ".worktrees/stage04-vehicle-year-runtime/.omo/evidence/vehicle-year-runtime/native-warning/actions.json",
+          "invocation_input_index": 2,
+          "sha256": "4b543fce8b9b1b733838f78d92feba465e8e2388bd7383cf2bc7a09bcce71b01",
+          "bytes": 178,
+          "mode": 33188,
+          "lstat_mode": 33188
+        },
+        {
+          "role": "openttd.cfg",
+          "bundle_path": "annual-warning/openttd.cfg",
+          "historical_source_label": ".worktrees/stage04-vehicle-year-runtime/.omo/evidence/vehicle-year-runtime/native-warning/openttd.cfg",
+          "invocation_input_index": 3,
+          "sha256": "2f55ed7200b091ac59f5e90f1b02ab1a680e7954c20a10111d9ea046a23a5a2a",
+          "bytes": 148,
+          "mode": 33188,
+          "lstat_mode": 33188
+        }
+      ]
+    }
+  ]
+}

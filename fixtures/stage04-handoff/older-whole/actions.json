@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "actions": [
+    {
+      "ordinal": 0,
+      "op": "tick",
+      "count": 20350
+    },
+    {
+      "ordinal": 1,
+      "op": "checkpoint",
+      "label": "year2102"
+    },
+    {
+      "ordinal": 2,
+      "op": "tick",
+      "count": 8140
+    },
+    {
+      "ordinal": 3,
+      "op": "checkpoint",
+      "label": "age730"
+    },
+    {
+      "ordinal": 4,
+      "op": "tick",
+      "count": 74
+    },
+    {
+      "ordinal": 5,
+      "op": "checkpoint",
+      "label": "age731"
+    },
+    {
+      "ordinal": 6,
+      "op": "tick",
+      "count": 5179
+    },
+    {
+      "ordinal": 7,
+      "op": "checkpoint",
+      "label": "quarter_prefix"
+    },
+    {
+      "ordinal": 8,
+      "op": "tick",
+      "count": 1
+    }
+  ]
+}

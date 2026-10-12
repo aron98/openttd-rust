@@ -38,6 +38,8 @@ impl Context<'_> {
             return Err(RuntimeError::Invalid("job running list"));
         };
         let Some(first) = running.first() else {
+            #[cfg(feature = "async-trace")]
+            super::async_trace::sample(None, None, None);
             return Ok(false);
         };
         let WireValue::Unsigned(pointer) = first else {
@@ -50,13 +52,28 @@ impl Context<'_> {
         )
         .map_err(|_| RuntimeError::Invalid("job pointer width"))?;
         if self.number(*b"LGRJ", id, "join_date")? > self.number(*b"DATE", 0, "economy_date")? {
+            #[cfg(feature = "async-trace")]
+            super::async_trace::sample(
+                transport.workers.get(&id).map(|w| (w, id)),
+                Some(false),
+                None,
+            );
             return Ok(false);
         }
         let worker = transport
             .workers
             .get(&id)
             .ok_or(RuntimeError::Invalid("missing due worker"))?;
-        Ok(worker.poll()?.is_none())
+        #[cfg(not(feature = "async-trace"))]
+        {
+            Ok(worker.poll()?.is_none())
+        }
+        #[cfg(feature = "async-trace")]
+        {
+            let pending = worker.poll()?.is_none();
+            super::async_trace::sample(Some((worker, id)), Some(true), Some(!pending));
+            Ok(pending)
+        }
     }
 }
 
@@ -128,6 +145,8 @@ pub(super) fn before_tick(
     };
     if let Some(pause) = changed {
         state.set_number(b"DATE", 0, "pause_mode", pause)?;
+        #[cfg(feature = "async-trace")]
+        super::async_trace::phase(super::async_trace::Kind::PauseApplied, state);
     }
     Ok(())
 }

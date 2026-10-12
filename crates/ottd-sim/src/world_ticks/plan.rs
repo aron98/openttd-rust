@@ -50,7 +50,19 @@ impl State<'_> {
         let mut state = State::load(world, None, industries);
         let mut report = WorldTickReport { ticks: Vec::new() };
         for step in 0..ticks {
+            #[cfg(feature = "async-trace")]
+            crate::runtime::async_trace::phase(
+                crate::runtime::async_trace::Kind::HostEnter,
+                &state,
+            );
+            #[cfg(feature = "async-trace")]
+            let mut trace_host = crate::runtime::async_trace::Host::begin();
             vehicles.before_state_loop(&mut state)?;
+            #[cfg(feature = "async-trace")]
+            crate::runtime::async_trace::phase(
+                crate::runtime::async_trace::Kind::AfterPauseControl,
+                &state,
+            );
             let paused = state.number(b"DATE", 0, "pause_mode")? != 0;
             if !paused && landscape.is_none() {
                 let (scheduler, towns) = active_domain
@@ -66,6 +78,13 @@ impl State<'_> {
                     }
                     other => other,
                 })?;
+            #[cfg(feature = "async-trace")]
+            crate::runtime::async_trace::phase(
+                crate::runtime::async_trace::Kind::InnerExit,
+                &state,
+            );
+            #[cfg(feature = "async-trace")]
+            trace_host.finish();
             report.ticks.push(events);
         }
         let (candidate, towns) = state.finish()?;

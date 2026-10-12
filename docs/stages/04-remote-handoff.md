@@ -93,7 +93,7 @@ unsupported world tick phase vehicle_year: call 27009: unprofitable warning/news
 
 The test checks complete committed World/derived/cache/transport equality and the actual original threaded worker Arc identity, count and backend. Compare all150 raw company ratings during the successful prefix. This proves rollback, not implementation of news/AI behavior or equality with the original's final warning state. Require the exact phase/error string beyond the existing generic harness's substring assertion.
 
-Native road pool/unit arrays, other group fields and wider ownership/HQ/news/AI contexts remain uncredited. Stopped rail restoration is not train movement. Metadata registration is not default-method execution.
+Native road pool fields and per-company unit-number `next` values are credited by `580eb6a` whole-runtime comparisons; the native units `count`, other group fields and wider ownership/HQ/news/AI contexts remain uncredited. Stopped rail restoration is not train movement. Metadata registration is not default-method execution.
 
 Keep previous failed forest/async/route/RNG epochs explicit, including forest36/38 cuts and5/6 origin continuations,512/6400/native3081 failures, raw561/scale/expanded1247 transport epochs, paused-load initial movement and unsaved interactive RNG. New bounded passes do not erase unrelated failures or prove universal tracing neutrality.
 

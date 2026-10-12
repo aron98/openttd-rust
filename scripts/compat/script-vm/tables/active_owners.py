@@ -89,7 +89,8 @@ def capture(native: Path, output: Path) -> None:
         + "\n"
     )
     print(
-        "PASS fourteen active-owner sessions; collection actions distinct; recorder controls equal"
+        "PASS fourteen active-owner sessions; "
+        "collection actions distinct; recorder controls equal"
     )
 
 

@@ -2005,7 +2005,7 @@
   {
    "id": "purchase-crates-ottd-sim-src-runtime-rs",
    "path": "crates/ottd-sim/src/runtime.rs",
-   "sha256": "364bd33cc9cd5b5405661f68b9b1e93456220759e270946b5cb17a29311ad52a",
+   "sha256": "2a0bcd590f8bc244148ca796aee76fedb674a03d84ee28723534dff9bbf8b37f",
    "kind": "recipe",
    "provenance": "Vanilla single-part no-refit owned-runtime road purchase matrix; original BuildVehicle phases and live pool/cache observation; upstream.toml",
    "save_version": null,
@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "f937bcb257a6970f82bd86d65fac5c2fcbbfa2d288234bd99b446ecf3bc12798",
+   "sha256": "a7cfd4bf2be951e46e8fbfe5f92a07f34258b294bf69171ee97768d4a4233f39",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "997ef0e07e891f3897b76e83c20322b7c1b58e1b8578ad3ef00a8acfebb1d545",
+   "sha256": "7835911fedc64cc800338696176233eb3b5a861b6739bdb7a9049776c12306a1",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "4d19982b9a7295449bdfafec9a7cbd0c34633d87db48dcccc0fec0e78075339c",
+   "sha256": "dfb80e785868ec03efedb7442eee2e6bf59a96dd6568de23da769807dc237e35",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "c7498f1e354e8ae3e7bef10ee6a4554c5d0269d3403c0d257e1bc97eb62e0202",
+   "sha256": "1a839062d78ed787640cac86c5365321b8183977925a9f022c8a073d8285ec1a",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "1a7e554f043b29d6402e6860c21c6c66c99a7817c6a4fab680acc47706c91333",
+   "sha256": "72591fb6e6fb2d820baf5888d834df5f20d20ac37874f6e69fdff85bb54d351c",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "dec3eb4b5f6baad142954cb5ff013a89b69f34f38d6425c261f2fce180b6417d",
+   "sha256": "f06c3f07abe5ab9d997080ee0fa259d5f419727b152fff3ebeaed142cd84ffde",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "531be6ea714e1fb9c9d915ebcef83aa063ffbbb79fb10c0a3017c61b2014e449",
+   "sha256": "0e3bb481419df94521832de6bac31d089604b73391baf13b198d06838887f641",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "8abb8a58dea1060eb0fa81a9f8e359a907e27e7f26f16584d13af6a01b5006c9",
+   "sha256": "e8b556044722dcd83f0ab4677d9167026be1f64ee1f708c3f3c11db673d44c6d",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "4ad5b875df5165c07ec03386d7afa9ee96d775f6426d458811cde9d9a61b6125",
+   "sha256": "23c21b709c0b2fd0a24b02c6d2321a0df2f574c3ec892ff7cb4a8e6bc5544f9d",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "76d8f78b01953ef92f00dd8272bd0106fb9b27d6ac4ab7962f5fd5a41170359e",
+   "sha256": "78b6b8ca57eb7fc92c8d4b133ba7fc18aa10b797106ef6d7312324d595bcb5ef",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "86696cbfc51e0e02d34be72c394b72eb602d2a65691641d972d63b94dfd5f649",
+   "sha256": "eb88e4fc1ea249f81c45a65c8e45ff22d054701ae2b4f50ed0cd37bcc7c8b674",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "129d3955c6e6762c4caf5dbb465470ad46dcc83b855ab563ac5310e3c45961a3",
+   "sha256": "a0d4f2360d4e493b63f02cd4d54f1381b1793e612a2f2f5d3e1c5603a8fc4f87",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "1b2d1d45da3da00a3c8fc2f274eb7434aebc66377bdfb1714922cba3cac08f11",
+   "sha256": "5c8c685d22e4976f46ade4ba189c32ca872d83ad18481eca2734aba37cb9aa75",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "3c513744d71431347e2976d11c5d43154fd7aa1f8f9f0ff5eaf50f20e8d7473d",
+   "sha256": "5fa6e2406a7fd9effb02b085d9dc183f90caaf0a9dd1d5bbe6c975b143e6e785",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "b49a2677dc5874f027fee89118e61011eb204d334768bd4a58cb76ee8cbc65da",
+   "sha256": "f8333f1ea08f6ab5ebd415ff6e4017d20a4d6307a7df4819a4490fd15fc1e04b",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "89a4c41a8eff3d37fe7732d75f6c33f2789f8fc77b1c4beac2eb36e724f2415f",
+   "sha256": "2a1b88f0f81b6a35df633dba44ca8a81dd058f43c6d004ae9cb0a2e22721cb24",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -8548,7 +8548,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-world-ticks-shared-rs",
    "path": "crates/ottd-sim/src/world_ticks/shared.rs",
-   "sha256": "fb25054cfdc64d6d1bdd9bc2334f90e2691cd7baaab4d03d923c613fb98bd7b4",
+   "sha256": "24b334705cb5353afc48999c966f6389a45a2bb1b158e38005c384d9e18bb32d",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8557,7 +8557,7 @@
   {
    "id": "road-movement-crates-ottd-sim-src-runtime-movement-rs",
    "path": "crates/ottd-sim/src/runtime/movement.rs",
-   "sha256": "50bd4db0e3599129729a7cdcf3fdab7124e2e273dda8ba0c95e5eab3cea30bd9",
+   "sha256": "d6baa31f779f51fc6f633d86f5599a0bc449ef7ee4bd034433b217b487400a63",
    "kind": "recipe",
    "provenance": "Source-ready bounded movement portfolio; normal admission remains gated pending complete capture review.",
    "save_version": null,
@@ -8998,7 +8998,7 @@
   {
    "id": "tree-growth-scripts-tree-growth-source-json",
    "path": "scripts/tree-growth-source.json",
-   "sha256": "017c4ba445901115c7b03ca3fe5e4678091b79583fe1fdf3238356b809e3e87e",
+   "sha256": "0144a0cecd802c2505eb1b66cea33106077a3aa9d658f555ea9a44a381e4ec93",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded temperate settings 0/3 WorldTick tree growth and opt-in mixed vehicle proof; no normal tree CI admission.",
    "save_version": null,
@@ -9241,7 +9241,7 @@
   {
    "id": "tree-spread-scripts-tree-spread-source-json",
    "path": "scripts/tree-spread-source.json",
-   "sha256": "413fe0e9556a386c6c1fb638e0a5bfdcf5bfb385b33d97b26afe325426a5d9a1",
+   "sha256": "290d43caeb815cc9528767e684fa3c22e90ce9e453801df507e2cc15ec2e255a",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD15.3 private temperate settings1/2 WorldTick spreading, placement counter and coupled vehicle proof; normal tree CI admission not claimed.",
    "save_version": null,
@@ -9610,7 +9610,7 @@
   {
    "id": "road-round-trips-crates-ottd-sim-src-world-ticks-rs",
    "path": "crates/ottd-sim/src/world_ticks.rs",
-   "sha256": "ad417e4accbfa3a212fe9d8c78207fbbc87865ee6396f02be0d4767b6cb5de34",
+   "sha256": "c7b28d4dd6329ac7a91f5b31b3a5d8f42b2c78c01369fe2d4953c097d85351c9",
    "kind": "recipe",
    "provenance": "Pinned OpenTTD 15.3 bounded ordinary empty-cargo bus/truck round trips and synchronous zero-demand link jobs; normal route CI admission, default asynchronous workers and populated cargo are not claimed.",
    "save_version": null,
@@ -11473,7 +11473,7 @@
   {
    "id": "cargo-crates-ottd-sim-src-runtime-movement-advance-rs",
    "path": "crates/ottd-sim/src/runtime/movement/advance.rs",
-   "sha256": "00fd40dd53ee5c881e775adbba180d282108b73ed37873f66ed641a2beabda26",
+   "sha256": "5e60cd6acf94cba4c4e33b03275d3d3161738c3697c7d7ffe00c5932c31ac2e6",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11491,7 +11491,7 @@
   {
    "id": "cargo-crates-ottd-sim-src-runtime-movement-cargo-age-tests-rs",
    "path": "crates/ottd-sim/src/runtime/movement/cargo_age_tests.rs",
-   "sha256": "78748b879e26d57c01ae62196f2381bcfeac52b86d424f59c006ad9504a4690f",
+   "sha256": "1143a0c4ec5fd40cc8690cb7c38eab53fd31f4a47c3da49b838e62372e9b86ab",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11500,7 +11500,7 @@
   {
    "id": "cargo-crates-ottd-sim-src-runtime-movement-cargo-rollback-tests-rs",
    "path": "crates/ottd-sim/src/runtime/movement/cargo_rollback_tests.rs",
-   "sha256": "aa42a51395c5efa82a6066b46843846d4a6f56b9a7a52408a018f293b42dba95",
+   "sha256": "c9b8cbd7d6b39413e9aa7a6ff907cd19efacef13cca49dbc34aafa8832eb0d79",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11590,7 +11590,7 @@
   {
    "id": "cargo-crates-ottd-sim-src-runtime-movement-service-tests-rs",
    "path": "crates/ottd-sim/src/runtime/movement/service_tests.rs",
-   "sha256": "37197eb201cbbb86e2a0c9a111c1f036af1971a21c3f1d885c94fa26a73f934b",
+   "sha256": "2bb5174f0da9e74c83a5e02c886d083124f252597263248ae4b188cdbc5f471a",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -12013,7 +12013,7 @@
   {
    "id": "rail-source-scripts-rail-restore-source-json",
    "path": "scripts/rail-restore-source.json",
-   "sha256": "e6cfdb8110f33f5b5011c371600805303add98b9708f865a8f34f65ecc16f231",
+   "sha256": "c8047a51b5106cc77814cd9ae223d72195700261ffc914457c2923dab63e48c3",
    "kind": "recipe",
    "provenance": "Bounded isolated vanilla single-front empty stopped locomotive after-load source; no rail motion admission; no-GRF capacity mismatch remains silent; upstream.toml",
    "save_version": null,
@@ -12400,7 +12400,7 @@
   {
    "id": "forest-recipient-crates-ottd-sim-src-runtime-movement-industry-capacity-rs",
    "path": "crates/ottd-sim/src/runtime/movement/industry_capacity.rs",
-   "sha256": "b57336ed24ce2934c3127f45c4e60cea07c54a99bac1bbb38194b247a761dcf6",
+   "sha256": "e80e1e01c902b1a42d19f8586be59255c1a6b7c1b443418cd9ebc3dec5622cc5",
    "kind": "recipe",
    "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
    "save_version": null,
@@ -12427,7 +12427,7 @@
   {
    "id": "forest-recipient-crates-ottd-sim-src-runtime-movement-industry-rollback-rs",
    "path": "crates/ottd-sim/src/runtime/movement/industry_rollback.rs",
-   "sha256": "a65d59b24d7636ebab8742d1efa4007b9d4cb51d695f1414bcc5fba178320e31",
+   "sha256": "fef2c1bd04bc1aa63c81a1773d6c843a9d01f187b5135f990e812e47dacae15f",
    "kind": "recipe",
    "provenance": "Bounded vanilla forest recipient producer and explicit native or synthetic private proof; broader industry compatibility remains required.",
    "save_version": null,
@@ -12763,6 +12763,105 @@
    "sha256": "33c240425eb330223280c127f17466a23590e39b125116568e957f4ba7dc60a6",
    "kind": "recipe",
    "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-group-profit-rs",
+   "path": "crates/ottd-sim/src/runtime/group_profit.rs",
+   "sha256": "a48ca172e4c53770c214662af28cfdabea079b2d79444ec3e45f6081c61a0fa8",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-group-profit-age-rs",
+   "path": "crates/ottd-sim/src/runtime/group_profit/age.rs",
+   "sha256": "176f4fbf9fbb8bc05750fc997459b74cb6b9517c95fb2f2ecb710eba2a7e546e",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-group-profit-restore-rs",
+   "path": "crates/ottd-sim/src/runtime/group_profit/restore.rs",
+   "sha256": "f173104aa337c36e2412f64e4bed005223e23e9a3f75ccbc49c9c3d7321a7f8c",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-group-profit-tests-rs",
+   "path": "crates/ottd-sim/src/runtime/group_profit/tests.rs",
+   "sha256": "82d30ee11f9c6699d763c692a5c8e15e32ada6e39063991ab63acb8d91cd3b7c",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-group-profit-update-rs",
+   "path": "crates/ottd-sim/src/runtime/group_profit/update.rs",
+   "sha256": "408ced42520054e3a39adf3d4b8b356ded81f77d51df700c3f882124cc09c1cf",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-movement-year-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/year.rs",
+   "sha256": "56ad9a4a3fd3b93dfaf4eda7bf6d26a30bed4b6d8cfe0def84215f0d8fa75731",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-movement-year-native-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/year_native.rs",
+   "sha256": "01261914370bb98f15231377841a0d40627a655a87dd58446efd916aaaee1e01",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-src-runtime-movement-year-rollback-rs",
+   "path": "crates/ottd-sim/src/runtime/movement/year_rollback.rs",
+   "sha256": "2235906c6969424cd9b74d7559a9afaf2660af10e136a2ee41ea5890969563d9",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-tests-native-vehicle-year-rs",
+   "path": "crates/ottd-sim/tests/native_vehicle_year.rs",
+   "sha256": "25b07129ef734f060817cba9d702a4385e7a139146e3ac484087b7d10e74bded",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-tests-native-vehicle-year-cache-rs",
+   "path": "crates/ottd-sim/tests/native_vehicle_year_cache.rs",
+   "sha256": "614498e81a969722169198f61abc8f37180a964abb4e3188a367b9b88e208c44",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "vehicle-year-crates-ottd-sim-tests-vehicle-year-support-groups-rs",
+   "path": "crates/ottd-sim/tests/vehicle_year_support/groups.rs",
+   "sha256": "484633d0e685c126a2c190f47e241d9d177f78989a10ad362e6f7b759535e786",
+   "kind": "recipe",
+   "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
    "save_version": null,
    "profile": null
   }
@@ -16206,9 +16305,32 @@
    "domain": "Stage 4: All vehicle types/subtypes movement, track/pathfinding/reservations, orders/loading/refits/depot/service/reliability/breakdowns/aging and replacement.",
    "expected": "Required future original-versus-Rust observable scenarios and checkpoint evidence; not implemented in this stage.",
    "driver": null,
-   "assets": [],
+   "assets": [
+    "vehicle-year-crates-ottd-sim-src-runtime-group-profit-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-group-profit-age-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-group-profit-restore-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-group-profit-tests-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-group-profit-update-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-movement-year-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-movement-year-native-rs",
+    "vehicle-year-crates-ottd-sim-src-runtime-movement-year-rollback-rs",
+    "vehicle-year-crates-ottd-sim-tests-native-vehicle-year-rs",
+    "vehicle-year-crates-ottd-sim-tests-native-vehicle-year-cache-rs",
+    "vehicle-year-crates-ottd-sim-tests-vehicle-year-support-groups-rs"
+   ],
    "source_refs": [
-    "docs/roadmap.md"
+    "docs/roadmap.md",
+    "crates/ottd-sim/src/runtime/group_profit.rs",
+    "crates/ottd-sim/src/runtime/group_profit/age.rs",
+    "crates/ottd-sim/src/runtime/group_profit/restore.rs",
+    "crates/ottd-sim/src/runtime/group_profit/tests.rs",
+    "crates/ottd-sim/src/runtime/group_profit/update.rs",
+    "crates/ottd-sim/src/runtime/movement/year.rs",
+    "crates/ottd-sim/src/runtime/movement/year_native.rs",
+    "crates/ottd-sim/src/runtime/movement/year_rollback.rs",
+    "crates/ottd-sim/tests/native_vehicle_year.rs",
+    "crates/ottd-sim/tests/native_vehicle_year_cache.rs",
+    "crates/ottd-sim/tests/vehicle_year_support/groups.rs"
    ],
    "evidence": []
   },

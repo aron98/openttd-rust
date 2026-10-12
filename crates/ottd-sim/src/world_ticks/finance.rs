@@ -30,14 +30,16 @@ pub(super) fn limits(state: &mut State<'_>) -> Result<(), WorldTickError> {
 pub(super) fn monthly(
     state: &mut State<'_>,
     month: u8,
-    vehicles: &impl crate::WorldTickPhases,
+    vehicles: &mut impl crate::WorldTickPhases,
 ) -> Result<(), WorldTickError> {
     for id in state.company_ids() {
         solvent(state, id)?;
         state.set_number(b"PLYR", id, "months_of_bankruptcy", 0)?;
         state.set_number(b"PLYR", id, "bankrupt_asked", 0)?;
-        if month % 3 == 0 {
-            super::company_history::quarter(state, id, vehicles.company_assets(state, id)?)?;
+    }
+    if month % 3 == 0 {
+        for id in state.company_ids() {
+            super::company_history::quarter(state, id, vehicles)?;
         }
     }
     let inflation = state.unsigned(b"ECMY", 0, "inflation_prices")?;

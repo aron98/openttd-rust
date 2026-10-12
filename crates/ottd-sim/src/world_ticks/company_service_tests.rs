@@ -1,5 +1,5 @@
 //! Synthetic source-predicate controls; these are not native parity fixtures.
-use super::{State, score};
+use super::{State, facilities as score};
 use ottd_save::{
     Savegame, WireValue,
     world::{PathElement, World, WorldEdit},
@@ -21,8 +21,8 @@ fn service_facility_owner_boundaries_and_omitted_vehicle_guard() -> Result {
         ("different-owner", 1, 1, 0, 0, 1, 0),
         ("waypoint", 0, 129, 0, 0, 1, 0),
         ("unused-sign", 0, 0, 0, 0, 1, 0),
-        ("multiple-facilities", 0, 31, 0, 0, 1, 6),
-        ("facility-clamp", 0, 31, 0, 0, 17, 100),
+        ("multiple-facilities", 0, 31, 0, 0, 1, 5),
+        ("facility-clamp", 0, 31, 0, 0, 17, 85),
     ] {
         let mut world = World::decode(&Savegame::decode(&bytes, ottd_save::DEFAULT_MAX_BYTES)?)?;
         let before = world.saved_json()?;
@@ -87,12 +87,12 @@ fn station_field(id: u32, name: &str, value: u64) -> WorldEdit {
     }
 }
 fn vehicle_guards(bytes: &[u8], results: &mut Vec<serde_json::Value>) -> Result {
-    for (age, profit, owner, rejected) in [
-        (0, 1, 0, true),
-        (731, 1, 0, true),
-        (731, 0, 0, false),
-        (731, -1, 0, false),
-        (0, 1, 1, false),
+    for (age, profit, owner, expected) in [
+        (0, 1, 0, (1, 0)),
+        (731, 1, 0, (1, 0)),
+        (731, 0, 0, (0, 0)),
+        (731, -1, 0, (0, 0)),
+        (0, 1, 1, (0, 0)),
     ] {
         let mut world = World::decode(&Savegame::decode(bytes, ottd_save::DEFAULT_MAX_BYTES)?)?;
         let industries = crate::runtime::IndustryCaches::restore(&world)?;
@@ -115,9 +115,9 @@ fn vehicle_guards(bytes: &[u8], results: &mut Vec<serde_json::Value>) -> Result 
                 value,
             })?;
         }
-        let result = score(&state, 0);
-        assert_eq!(result.is_err(), rejected);
-        results.push(serde_json::json!({"synthetic":true,"age":age,"profit_last_year":profit,"owner":owner,"refused":rejected}));
+        let result = crate::world_ticks::company_vehicle_rating::vehicles(&state, 0)?;
+        assert_eq!(result, expected);
+        results.push(serde_json::json!({"synthetic":true,"age":age,"profit_last_year":profit,"owner":owner,"raw_vehicle_parts":result}));
     }
     Ok(())
 }

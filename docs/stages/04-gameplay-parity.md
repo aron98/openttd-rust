@@ -8,12 +8,19 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed composition: `df37195` combines company rating caches with the
-reviewed annual-vehicle runtime, script reference ownership and passive Rust
-transport tracing. Atomic source, test and binding commits remain in the merge
-history. All 5,362 nonmetadata files match their designated parents; composition resolves
-metadata unions only. Root manual QA and one fresh whole reviewer approve this
-bounded integration. All seven broad stage gates remain OPEN.
+Latest source composition: `57d5e33` combines the reviewed company/annual/script
+runtime with disabled-disaster reset and the cumulative script metadata
+prerequisite. Both component reviews approve their exact frozen source. Atomic
+source, test, binding and metadata-layout commits remain in nonsquash history.
+All 5,443 product file origins and 23,007 source-hash bindings are checked; no
+parent files are removed. Final whole-integration QA/review and PR CI remain
+separate gates. All seven broad stage gates remain OPEN.
+
+Remote development instructions and the next-agent prompt are committed in
+[the remote handoff](04-remote-handoff.md). The small
+[original-input bundle](../../fixtures/stage04-handoff/README.md) supplies six
+unchanged saves/configs/action protocols for fresh-platform observation; native
+binaries and large local historical archives are not prerequisites to clone.
 
 The single-primary-road runtime now advances annual profit rotation and three
 owned group-profit fields, with the native finance/house/vehicle ordering, strict
@@ -40,23 +47,36 @@ Runner construction and borrowed error accessors retain their behavior. These
 fixes do not implement the complete native shared VM, RefTable, defaults or
 AI/GameScript host.
 
-The current author passes 916 workspace tests with 155 separately counted ignored
-cases, 901 Python tests plus 28,971 subtests, Clippy and formatting. Current normal
+The combined author passes 928 workspace tests with 158 separately counted ignored
+cases, 910 Python tests plus 29,275 subtests, 125 stdlib tests, Clippy and formatting. Current normal
 script comparison covers 10,666 defined inputs and 153 explicit Rust-only
 refusals of source-proven undefined inputs; valid Unicode strings/comments remain
-covered. Complete proof readback verifies 51,049 logical members, 22,231 archive
-blobs, 98,139 nested normal members and 5,424 Git files, with actual compiler
-dependencies and selected executable identities retained. All 143 scenario
-statuses/scopes/evidence, 36 drivers and profiles are preserved. The reviewed
-scalar scenario additions and annual/company source references are additive;
-1,572 asset digests validate within the unchanged 1 MiB contract cap. The merge
-verifies 27 distinct source inventories; 55 recorded audit rows include repeats.
+covered in the identified script source epoch. The combined source retains fresh
+Cargo selections and focused native consumers; this is not a new full normal-driver
+execution. All 143 scenario statuses/scopes/evidence, 36 expanded drivers and six
+profiles are preserved. The 1,604 current asset digests validate in the 1,046,121-byte
+contract, below the unchanged 1 MiB cap. The exact 334-entry worlds artifact list now
+uses the existing bounded external-list mechanism. The prior company composition's
+27 distinct inventories/55 recorded rows and its large proof counts remain historical,
+not relabeled as this source epoch.
 
-Required failures remain explicit. The uninterrupted older 33,744-call request
-still refuses at disaster call 27,009 in this published tree. Disaster delay
-reset/RNG and warning event queues remain required; separately implemented timer
-and script metadata increments await their own review and whole integration.
-Forest passes 36/38
+The disabled-disaster timer now consumes the native reset draw before daily industry
+work. Original-backed 27,010-call and uninterrupted 33,744-call road continuations,
+and forest/house/timer 60,680-call continuations, pass the declared complete
+World/derived/cache/group/raw-rating scope. The three historical rollback-named
+60,680 selectors prove positive continuation only. A separate genuine annual-warning
+case matches the full 27,009-call prefix, then refuses the unsupported warning callback
+while preserving complete committed state and the real worker lease.
+
+Script metadata now describes 70 source registrations and 44 callback identities,
+with separately owned masks and explicit uncatchable default-function refusals.
+The existing four native bodies remain supported; default bodies, full shared VM,
+physical RefTable, NativeSession and AI/GameScript host remain required. Four genuine
+shared-table/friend graph comparisons still fail in the two component profiles;
+the combined debug tests preserve both failures. No synthetic graph gains credit.
+
+Required failures remain explicit. Enabled disasters, warning event queues and
+broader simulation/content/script behavior remain required. Forest passes 36/38
 cuts and five of six simulated-origin continuations; tick512/tick6400 and the
 native3081 origin retain transport failures. The fresh raw561 success belongs
 to a distinct scheduling epoch and does not replace retained failures. A scale

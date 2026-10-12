@@ -6,6 +6,8 @@ mod cargo_age_tests;
 #[cfg(test)]
 mod cargo_rollback_tests;
 mod company;
+#[cfg(test)]
+mod company_rollback;
 mod daily;
 mod directed;
 mod empty_rating;

@@ -84,3 +84,7 @@ fn zero(value: &mut WireValue) -> Result<(), WorldTickError> {
     }
     Ok(())
 }
+
+#[cfg(test)]
+#[path = "company_quarter_fault.rs"]
+mod fault;

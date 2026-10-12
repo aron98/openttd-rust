@@ -7,6 +7,7 @@ use std::{
     path::{Path, PathBuf},
 };
 include!("vehicle_year_support/groups.rs");
+include!("company_rating_support/ratings.rs");
 #[path = "industry_recipient_support/native_views.rs"]
 mod native_views;
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
@@ -27,30 +28,11 @@ fn compare(runtime: &SimulationRuntime, output: &Path, label: &str) -> Result {
         serde_json::to_value(runtime.group_profit_caches())?,
         owned_native(&groups)?
     );
-    let rating: Value =
-        serde_json::from_slice(&fs::read(native.join(format!("{label}.rating.json")))?)?;
-    let rows = rating
-        .get("scores")
-        .and_then(Value::as_array)
-        .ok_or("native score slots")?;
-    assert_eq!(rows.len(), 15);
-    let mut expected = Vec::new();
-    for (owner, row) in rows.iter().enumerate() {
-        assert_eq!(row.get("owner"), Some(&json!(owner)));
-        expected.push(serde_json::from_value::<[i64; 10]>(
-            row.get("parts").ok_or("raw parts")?.clone(),
-        )?);
-    }
-    let expected: [[i64; 10]; 15] = expected.try_into().map_err(|_| "native owner count")?;
     fs::write(
         output.join(format!("{label}.ratings.json")),
         serde_json::to_vec(runtime.company_rating_caches())?,
     )?;
-    assert_eq!(
-        runtime.company_rating_caches().parts(),
-        &expected,
-        "{label}: all 150 raw score slots"
-    );
+    compare_raw_ratings(runtime, &native, label)?;
     Ok(())
 }
 

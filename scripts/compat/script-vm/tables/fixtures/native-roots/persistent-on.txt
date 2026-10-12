@@ -1,0 +1,2096 @@
+roots result 1 integer 1
+roots collected retained 0
+roots begin retained
+roots vm V 1 1 256 0 0 0 0 0 9992
+roots object error 134217792 E 1 1
+roots object handler 16777217 - 0 -1
+roots object debug 16777217 - 0 -1
+roots object root 167772192 O 1 8
+roots object temporary 83886082 - 0 -1
+roots stack 0
+roots object slot 16777217 - 0 -1
+roots stack 1
+roots object slot 16777217 - 0 -1
+roots stack 2
+roots object slot 16777217 - 0 -1
+roots stack 3
+roots object slot 16777217 - 0 -1
+roots stack 4
+roots object slot 16777217 - 0 -1
+roots stack 5
+roots object slot 16777217 - 0 -1
+roots stack 6
+roots object slot 16777217 - 0 -1
+roots stack 7
+roots object slot 16777217 - 0 -1
+roots stack 8
+roots object slot 16777217 - 0 -1
+roots stack 9
+roots object slot 16777217 - 0 -1
+roots stack 10
+roots object slot 16777217 - 0 -1
+roots stack 11
+roots object slot 16777217 - 0 -1
+roots stack 12
+roots object slot 16777217 - 0 -1
+roots stack 13
+roots object slot 16777217 - 0 -1
+roots stack 14
+roots object slot 16777217 - 0 -1
+roots stack 15
+roots object slot 16777217 - 0 -1
+roots stack 16
+roots object slot 16777217 - 0 -1
+roots stack 17
+roots object slot 16777217 - 0 -1
+roots stack 18
+roots object slot 16777217 - 0 -1
+roots stack 19
+roots object slot 16777217 - 0 -1
+roots stack 20
+roots object slot 16777217 - 0 -1
+roots stack 21
+roots object slot 16777217 - 0 -1
+roots stack 22
+roots object slot 16777217 - 0 -1
+roots stack 23
+roots object slot 16777217 - 0 -1
+roots stack 24
+roots object slot 16777217 - 0 -1
+roots stack 25
+roots object slot 16777217 - 0 -1
+roots stack 26
+roots object slot 16777217 - 0 -1
+roots stack 27
+roots object slot 16777217 - 0 -1
+roots stack 28
+roots object slot 16777217 - 0 -1
+roots stack 29
+roots object slot 16777217 - 0 -1
+roots stack 30
+roots object slot 16777217 - 0 -1
+roots stack 31
+roots object slot 16777217 - 0 -1
+roots stack 32
+roots object slot 16777217 - 0 -1
+roots stack 33
+roots object slot 16777217 - 0 -1
+roots stack 34
+roots object slot 16777217 - 0 -1
+roots stack 35
+roots object slot 16777217 - 0 -1
+roots stack 36
+roots object slot 16777217 - 0 -1
+roots stack 37
+roots object slot 16777217 - 0 -1
+roots stack 38
+roots object slot 16777217 - 0 -1
+roots stack 39
+roots object slot 16777217 - 0 -1
+roots stack 40
+roots object slot 16777217 - 0 -1
+roots stack 41
+roots object slot 16777217 - 0 -1
+roots stack 42
+roots object slot 16777217 - 0 -1
+roots stack 43
+roots object slot 16777217 - 0 -1
+roots stack 44
+roots object slot 16777217 - 0 -1
+roots stack 45
+roots object slot 16777217 - 0 -1
+roots stack 46
+roots object slot 16777217 - 0 -1
+roots stack 47
+roots object slot 16777217 - 0 -1
+roots stack 48
+roots object slot 16777217 - 0 -1
+roots stack 49
+roots object slot 16777217 - 0 -1
+roots stack 50
+roots object slot 16777217 - 0 -1
+roots stack 51
+roots object slot 16777217 - 0 -1
+roots stack 52
+roots object slot 16777217 - 0 -1
+roots stack 53
+roots object slot 16777217 - 0 -1
+roots stack 54
+roots object slot 16777217 - 0 -1
+roots stack 55
+roots object slot 16777217 - 0 -1
+roots stack 56
+roots object slot 16777217 - 0 -1
+roots stack 57
+roots object slot 16777217 - 0 -1
+roots stack 58
+roots object slot 16777217 - 0 -1
+roots stack 59
+roots object slot 16777217 - 0 -1
+roots stack 60
+roots object slot 16777217 - 0 -1
+roots stack 61
+roots object slot 16777217 - 0 -1
+roots stack 62
+roots object slot 16777217 - 0 -1
+roots stack 63
+roots object slot 16777217 - 0 -1
+roots stack 64
+roots object slot 16777217 - 0 -1
+roots stack 65
+roots object slot 16777217 - 0 -1
+roots stack 66
+roots object slot 16777217 - 0 -1
+roots stack 67
+roots object slot 16777217 - 0 -1
+roots stack 68
+roots object slot 16777217 - 0 -1
+roots stack 69
+roots object slot 16777217 - 0 -1
+roots stack 70
+roots object slot 16777217 - 0 -1
+roots stack 71
+roots object slot 16777217 - 0 -1
+roots stack 72
+roots object slot 16777217 - 0 -1
+roots stack 73
+roots object slot 16777217 - 0 -1
+roots stack 74
+roots object slot 16777217 - 0 -1
+roots stack 75
+roots object slot 16777217 - 0 -1
+roots stack 76
+roots object slot 16777217 - 0 -1
+roots stack 77
+roots object slot 16777217 - 0 -1
+roots stack 78
+roots object slot 16777217 - 0 -1
+roots stack 79
+roots object slot 16777217 - 0 -1
+roots stack 80
+roots object slot 16777217 - 0 -1
+roots stack 81
+roots object slot 16777217 - 0 -1
+roots stack 82
+roots object slot 16777217 - 0 -1
+roots stack 83
+roots object slot 16777217 - 0 -1
+roots stack 84
+roots object slot 16777217 - 0 -1
+roots stack 85
+roots object slot 16777217 - 0 -1
+roots stack 86
+roots object slot 16777217 - 0 -1
+roots stack 87
+roots object slot 16777217 - 0 -1
+roots stack 88
+roots object slot 16777217 - 0 -1
+roots stack 89
+roots object slot 16777217 - 0 -1
+roots stack 90
+roots object slot 16777217 - 0 -1
+roots stack 91
+roots object slot 16777217 - 0 -1
+roots stack 92
+roots object slot 16777217 - 0 -1
+roots stack 93
+roots object slot 16777217 - 0 -1
+roots stack 94
+roots object slot 16777217 - 0 -1
+roots stack 95
+roots object slot 16777217 - 0 -1
+roots stack 96
+roots object slot 16777217 - 0 -1
+roots stack 97
+roots object slot 16777217 - 0 -1
+roots stack 98
+roots object slot 16777217 - 0 -1
+roots stack 99
+roots object slot 16777217 - 0 -1
+roots stack 100
+roots object slot 16777217 - 0 -1
+roots stack 101
+roots object slot 16777217 - 0 -1
+roots stack 102
+roots object slot 16777217 - 0 -1
+roots stack 103
+roots object slot 16777217 - 0 -1
+roots stack 104
+roots object slot 16777217 - 0 -1
+roots stack 105
+roots object slot 16777217 - 0 -1
+roots stack 106
+roots object slot 16777217 - 0 -1
+roots stack 107
+roots object slot 16777217 - 0 -1
+roots stack 108
+roots object slot 16777217 - 0 -1
+roots stack 109
+roots object slot 16777217 - 0 -1
+roots stack 110
+roots object slot 16777217 - 0 -1
+roots stack 111
+roots object slot 16777217 - 0 -1
+roots stack 112
+roots object slot 16777217 - 0 -1
+roots stack 113
+roots object slot 16777217 - 0 -1
+roots stack 114
+roots object slot 16777217 - 0 -1
+roots stack 115
+roots object slot 16777217 - 0 -1
+roots stack 116
+roots object slot 16777217 - 0 -1
+roots stack 117
+roots object slot 16777217 - 0 -1
+roots stack 118
+roots object slot 16777217 - 0 -1
+roots stack 119
+roots object slot 16777217 - 0 -1
+roots stack 120
+roots object slot 16777217 - 0 -1
+roots stack 121
+roots object slot 16777217 - 0 -1
+roots stack 122
+roots object slot 16777217 - 0 -1
+roots stack 123
+roots object slot 16777217 - 0 -1
+roots stack 124
+roots object slot 16777217 - 0 -1
+roots stack 125
+roots object slot 16777217 - 0 -1
+roots stack 126
+roots object slot 16777217 - 0 -1
+roots stack 127
+roots object slot 16777217 - 0 -1
+roots stack 128
+roots object slot 16777217 - 0 -1
+roots stack 129
+roots object slot 16777217 - 0 -1
+roots stack 130
+roots object slot 16777217 - 0 -1
+roots stack 131
+roots object slot 16777217 - 0 -1
+roots stack 132
+roots object slot 16777217 - 0 -1
+roots stack 133
+roots object slot 16777217 - 0 -1
+roots stack 134
+roots object slot 16777217 - 0 -1
+roots stack 135
+roots object slot 16777217 - 0 -1
+roots stack 136
+roots object slot 16777217 - 0 -1
+roots stack 137
+roots object slot 16777217 - 0 -1
+roots stack 138
+roots object slot 16777217 - 0 -1
+roots stack 139
+roots object slot 16777217 - 0 -1
+roots stack 140
+roots object slot 16777217 - 0 -1
+roots stack 141
+roots object slot 16777217 - 0 -1
+roots stack 142
+roots object slot 16777217 - 0 -1
+roots stack 143
+roots object slot 16777217 - 0 -1
+roots stack 144
+roots object slot 16777217 - 0 -1
+roots stack 145
+roots object slot 16777217 - 0 -1
+roots stack 146
+roots object slot 16777217 - 0 -1
+roots stack 147
+roots object slot 16777217 - 0 -1
+roots stack 148
+roots object slot 16777217 - 0 -1
+roots stack 149
+roots object slot 16777217 - 0 -1
+roots stack 150
+roots object slot 16777217 - 0 -1
+roots stack 151
+roots object slot 16777217 - 0 -1
+roots stack 152
+roots object slot 16777217 - 0 -1
+roots stack 153
+roots object slot 16777217 - 0 -1
+roots stack 154
+roots object slot 16777217 - 0 -1
+roots stack 155
+roots object slot 16777217 - 0 -1
+roots stack 156
+roots object slot 16777217 - 0 -1
+roots stack 157
+roots object slot 16777217 - 0 -1
+roots stack 158
+roots object slot 16777217 - 0 -1
+roots stack 159
+roots object slot 16777217 - 0 -1
+roots stack 160
+roots object slot 16777217 - 0 -1
+roots stack 161
+roots object slot 16777217 - 0 -1
+roots stack 162
+roots object slot 16777217 - 0 -1
+roots stack 163
+roots object slot 16777217 - 0 -1
+roots stack 164
+roots object slot 16777217 - 0 -1
+roots stack 165
+roots object slot 16777217 - 0 -1
+roots stack 166
+roots object slot 16777217 - 0 -1
+roots stack 167
+roots object slot 16777217 - 0 -1
+roots stack 168
+roots object slot 16777217 - 0 -1
+roots stack 169
+roots object slot 16777217 - 0 -1
+roots stack 170
+roots object slot 16777217 - 0 -1
+roots stack 171
+roots object slot 16777217 - 0 -1
+roots stack 172
+roots object slot 16777217 - 0 -1
+roots stack 173
+roots object slot 16777217 - 0 -1
+roots stack 174
+roots object slot 16777217 - 0 -1
+roots stack 175
+roots object slot 16777217 - 0 -1
+roots stack 176
+roots object slot 16777217 - 0 -1
+roots stack 177
+roots object slot 16777217 - 0 -1
+roots stack 178
+roots object slot 16777217 - 0 -1
+roots stack 179
+roots object slot 16777217 - 0 -1
+roots stack 180
+roots object slot 16777217 - 0 -1
+roots stack 181
+roots object slot 16777217 - 0 -1
+roots stack 182
+roots object slot 16777217 - 0 -1
+roots stack 183
+roots object slot 16777217 - 0 -1
+roots stack 184
+roots object slot 16777217 - 0 -1
+roots stack 185
+roots object slot 16777217 - 0 -1
+roots stack 186
+roots object slot 16777217 - 0 -1
+roots stack 187
+roots object slot 16777217 - 0 -1
+roots stack 188
+roots object slot 16777217 - 0 -1
+roots stack 189
+roots object slot 16777217 - 0 -1
+roots stack 190
+roots object slot 16777217 - 0 -1
+roots stack 191
+roots object slot 16777217 - 0 -1
+roots stack 192
+roots object slot 16777217 - 0 -1
+roots stack 193
+roots object slot 16777217 - 0 -1
+roots stack 194
+roots object slot 16777217 - 0 -1
+roots stack 195
+roots object slot 16777217 - 0 -1
+roots stack 196
+roots object slot 16777217 - 0 -1
+roots stack 197
+roots object slot 16777217 - 0 -1
+roots stack 198
+roots object slot 16777217 - 0 -1
+roots stack 199
+roots object slot 16777217 - 0 -1
+roots stack 200
+roots object slot 16777217 - 0 -1
+roots stack 201
+roots object slot 16777217 - 0 -1
+roots stack 202
+roots object slot 16777217 - 0 -1
+roots stack 203
+roots object slot 16777217 - 0 -1
+roots stack 204
+roots object slot 16777217 - 0 -1
+roots stack 205
+roots object slot 16777217 - 0 -1
+roots stack 206
+roots object slot 16777217 - 0 -1
+roots stack 207
+roots object slot 16777217 - 0 -1
+roots stack 208
+roots object slot 16777217 - 0 -1
+roots stack 209
+roots object slot 16777217 - 0 -1
+roots stack 210
+roots object slot 16777217 - 0 -1
+roots stack 211
+roots object slot 16777217 - 0 -1
+roots stack 212
+roots object slot 16777217 - 0 -1
+roots stack 213
+roots object slot 16777217 - 0 -1
+roots stack 214
+roots object slot 16777217 - 0 -1
+roots stack 215
+roots object slot 16777217 - 0 -1
+roots stack 216
+roots object slot 16777217 - 0 -1
+roots stack 217
+roots object slot 16777217 - 0 -1
+roots stack 218
+roots object slot 16777217 - 0 -1
+roots stack 219
+roots object slot 16777217 - 0 -1
+roots stack 220
+roots object slot 16777217 - 0 -1
+roots stack 221
+roots object slot 16777217 - 0 -1
+roots stack 222
+roots object slot 16777217 - 0 -1
+roots stack 223
+roots object slot 16777217 - 0 -1
+roots stack 224
+roots object slot 16777217 - 0 -1
+roots stack 225
+roots object slot 16777217 - 0 -1
+roots stack 226
+roots object slot 16777217 - 0 -1
+roots stack 227
+roots object slot 16777217 - 0 -1
+roots stack 228
+roots object slot 16777217 - 0 -1
+roots stack 229
+roots object slot 16777217 - 0 -1
+roots stack 230
+roots object slot 16777217 - 0 -1
+roots stack 231
+roots object slot 16777217 - 0 -1
+roots stack 232
+roots object slot 16777217 - 0 -1
+roots stack 233
+roots object slot 16777217 - 0 -1
+roots stack 234
+roots object slot 16777217 - 0 -1
+roots stack 235
+roots object slot 16777217 - 0 -1
+roots stack 236
+roots object slot 16777217 - 0 -1
+roots stack 237
+roots object slot 16777217 - 0 -1
+roots stack 238
+roots object slot 16777217 - 0 -1
+roots stack 239
+roots object slot 16777217 - 0 -1
+roots stack 240
+roots object slot 16777217 - 0 -1
+roots stack 241
+roots object slot 16777217 - 0 -1
+roots stack 242
+roots object slot 16777217 - 0 -1
+roots stack 243
+roots object slot 16777217 - 0 -1
+roots stack 244
+roots object slot 16777217 - 0 -1
+roots stack 245
+roots object slot 16777217 - 0 -1
+roots stack 246
+roots object slot 16777217 - 0 -1
+roots stack 247
+roots object slot 16777217 - 0 -1
+roots stack 248
+roots object slot 16777217 - 0 -1
+roots stack 249
+roots object slot 16777217 - 0 -1
+roots stack 250
+roots object slot 16777217 - 0 -1
+roots stack 251
+roots object slot 16777217 - 0 -1
+roots stack 252
+roots object slot 16777217 - 0 -1
+roots stack 253
+roots object slot 16777217 - 0 -1
+roots stack 254
+roots object slot 16777217 - 0 -1
+roots stack 255
+roots object slot 16777217 - 0 -1
+roots chain 86 E????OV???????????????????????????????????????????????????????????????????????????????
+roots end retained
+roots compile failure 1
+roots collected compile-error 0
+free E 72
+roots begin compile-error
+roots vm V 1 1 256 0 0 0 0 0 9992
+roots object error 134217744 ? 1 -1
+roots bytes error 21 657870656374656420274944454e54494649455227
+roots object handler 16777217 - 0 -1
+roots object debug 16777217 - 0 -1
+roots object root 167772192 O 1 8
+roots object temporary 83886082 - 0 -1
+roots stack 0
+roots object slot 16777217 - 0 -1
+roots stack 1
+roots object slot 16777217 - 0 -1
+roots stack 2
+roots object slot 16777217 - 0 -1
+roots stack 3
+roots object slot 16777217 - 0 -1
+roots stack 4
+roots object slot 16777217 - 0 -1
+roots stack 5
+roots object slot 16777217 - 0 -1
+roots stack 6
+roots object slot 16777217 - 0 -1
+roots stack 7
+roots object slot 16777217 - 0 -1
+roots stack 8
+roots object slot 16777217 - 0 -1
+roots stack 9
+roots object slot 16777217 - 0 -1
+roots stack 10
+roots object slot 16777217 - 0 -1
+roots stack 11
+roots object slot 16777217 - 0 -1
+roots stack 12
+roots object slot 16777217 - 0 -1
+roots stack 13
+roots object slot 16777217 - 0 -1
+roots stack 14
+roots object slot 16777217 - 0 -1
+roots stack 15
+roots object slot 16777217 - 0 -1
+roots stack 16
+roots object slot 16777217 - 0 -1
+roots stack 17
+roots object slot 16777217 - 0 -1
+roots stack 18
+roots object slot 16777217 - 0 -1
+roots stack 19
+roots object slot 16777217 - 0 -1
+roots stack 20
+roots object slot 16777217 - 0 -1
+roots stack 21
+roots object slot 16777217 - 0 -1
+roots stack 22
+roots object slot 16777217 - 0 -1
+roots stack 23
+roots object slot 16777217 - 0 -1
+roots stack 24
+roots object slot 16777217 - 0 -1
+roots stack 25
+roots object slot 16777217 - 0 -1
+roots stack 26
+roots object slot 16777217 - 0 -1
+roots stack 27
+roots object slot 16777217 - 0 -1
+roots stack 28
+roots object slot 16777217 - 0 -1
+roots stack 29
+roots object slot 16777217 - 0 -1
+roots stack 30
+roots object slot 16777217 - 0 -1
+roots stack 31
+roots object slot 16777217 - 0 -1
+roots stack 32
+roots object slot 16777217 - 0 -1
+roots stack 33
+roots object slot 16777217 - 0 -1
+roots stack 34
+roots object slot 16777217 - 0 -1
+roots stack 35
+roots object slot 16777217 - 0 -1
+roots stack 36
+roots object slot 16777217 - 0 -1
+roots stack 37
+roots object slot 16777217 - 0 -1
+roots stack 38
+roots object slot 16777217 - 0 -1
+roots stack 39
+roots object slot 16777217 - 0 -1
+roots stack 40
+roots object slot 16777217 - 0 -1
+roots stack 41
+roots object slot 16777217 - 0 -1
+roots stack 42
+roots object slot 16777217 - 0 -1
+roots stack 43
+roots object slot 16777217 - 0 -1
+roots stack 44
+roots object slot 16777217 - 0 -1
+roots stack 45
+roots object slot 16777217 - 0 -1
+roots stack 46
+roots object slot 16777217 - 0 -1
+roots stack 47
+roots object slot 16777217 - 0 -1
+roots stack 48
+roots object slot 16777217 - 0 -1
+roots stack 49
+roots object slot 16777217 - 0 -1
+roots stack 50
+roots object slot 16777217 - 0 -1
+roots stack 51
+roots object slot 16777217 - 0 -1
+roots stack 52
+roots object slot 16777217 - 0 -1
+roots stack 53
+roots object slot 16777217 - 0 -1
+roots stack 54
+roots object slot 16777217 - 0 -1
+roots stack 55
+roots object slot 16777217 - 0 -1
+roots stack 56
+roots object slot 16777217 - 0 -1
+roots stack 57
+roots object slot 16777217 - 0 -1
+roots stack 58
+roots object slot 16777217 - 0 -1
+roots stack 59
+roots object slot 16777217 - 0 -1
+roots stack 60
+roots object slot 16777217 - 0 -1
+roots stack 61
+roots object slot 16777217 - 0 -1
+roots stack 62
+roots object slot 16777217 - 0 -1
+roots stack 63
+roots object slot 16777217 - 0 -1
+roots stack 64
+roots object slot 16777217 - 0 -1
+roots stack 65
+roots object slot 16777217 - 0 -1
+roots stack 66
+roots object slot 16777217 - 0 -1
+roots stack 67
+roots object slot 16777217 - 0 -1
+roots stack 68
+roots object slot 16777217 - 0 -1
+roots stack 69
+roots object slot 16777217 - 0 -1
+roots stack 70
+roots object slot 16777217 - 0 -1
+roots stack 71
+roots object slot 16777217 - 0 -1
+roots stack 72
+roots object slot 16777217 - 0 -1
+roots stack 73
+roots object slot 16777217 - 0 -1
+roots stack 74
+roots object slot 16777217 - 0 -1
+roots stack 75
+roots object slot 16777217 - 0 -1
+roots stack 76
+roots object slot 16777217 - 0 -1
+roots stack 77
+roots object slot 16777217 - 0 -1
+roots stack 78
+roots object slot 16777217 - 0 -1
+roots stack 79
+roots object slot 16777217 - 0 -1
+roots stack 80
+roots object slot 16777217 - 0 -1
+roots stack 81
+roots object slot 16777217 - 0 -1
+roots stack 82
+roots object slot 16777217 - 0 -1
+roots stack 83
+roots object slot 16777217 - 0 -1
+roots stack 84
+roots object slot 16777217 - 0 -1
+roots stack 85
+roots object slot 16777217 - 0 -1
+roots stack 86
+roots object slot 16777217 - 0 -1
+roots stack 87
+roots object slot 16777217 - 0 -1
+roots stack 88
+roots object slot 16777217 - 0 -1
+roots stack 89
+roots object slot 16777217 - 0 -1
+roots stack 90
+roots object slot 16777217 - 0 -1
+roots stack 91
+roots object slot 16777217 - 0 -1
+roots stack 92
+roots object slot 16777217 - 0 -1
+roots stack 93
+roots object slot 16777217 - 0 -1
+roots stack 94
+roots object slot 16777217 - 0 -1
+roots stack 95
+roots object slot 16777217 - 0 -1
+roots stack 96
+roots object slot 16777217 - 0 -1
+roots stack 97
+roots object slot 16777217 - 0 -1
+roots stack 98
+roots object slot 16777217 - 0 -1
+roots stack 99
+roots object slot 16777217 - 0 -1
+roots stack 100
+roots object slot 16777217 - 0 -1
+roots stack 101
+roots object slot 16777217 - 0 -1
+roots stack 102
+roots object slot 16777217 - 0 -1
+roots stack 103
+roots object slot 16777217 - 0 -1
+roots stack 104
+roots object slot 16777217 - 0 -1
+roots stack 105
+roots object slot 16777217 - 0 -1
+roots stack 106
+roots object slot 16777217 - 0 -1
+roots stack 107
+roots object slot 16777217 - 0 -1
+roots stack 108
+roots object slot 16777217 - 0 -1
+roots stack 109
+roots object slot 16777217 - 0 -1
+roots stack 110
+roots object slot 16777217 - 0 -1
+roots stack 111
+roots object slot 16777217 - 0 -1
+roots stack 112
+roots object slot 16777217 - 0 -1
+roots stack 113
+roots object slot 16777217 - 0 -1
+roots stack 114
+roots object slot 16777217 - 0 -1
+roots stack 115
+roots object slot 16777217 - 0 -1
+roots stack 116
+roots object slot 16777217 - 0 -1
+roots stack 117
+roots object slot 16777217 - 0 -1
+roots stack 118
+roots object slot 16777217 - 0 -1
+roots stack 119
+roots object slot 16777217 - 0 -1
+roots stack 120
+roots object slot 16777217 - 0 -1
+roots stack 121
+roots object slot 16777217 - 0 -1
+roots stack 122
+roots object slot 16777217 - 0 -1
+roots stack 123
+roots object slot 16777217 - 0 -1
+roots stack 124
+roots object slot 16777217 - 0 -1
+roots stack 125
+roots object slot 16777217 - 0 -1
+roots stack 126
+roots object slot 16777217 - 0 -1
+roots stack 127
+roots object slot 16777217 - 0 -1
+roots stack 128
+roots object slot 16777217 - 0 -1
+roots stack 129
+roots object slot 16777217 - 0 -1
+roots stack 130
+roots object slot 16777217 - 0 -1
+roots stack 131
+roots object slot 16777217 - 0 -1
+roots stack 132
+roots object slot 16777217 - 0 -1
+roots stack 133
+roots object slot 16777217 - 0 -1
+roots stack 134
+roots object slot 16777217 - 0 -1
+roots stack 135
+roots object slot 16777217 - 0 -1
+roots stack 136
+roots object slot 16777217 - 0 -1
+roots stack 137
+roots object slot 16777217 - 0 -1
+roots stack 138
+roots object slot 16777217 - 0 -1
+roots stack 139
+roots object slot 16777217 - 0 -1
+roots stack 140
+roots object slot 16777217 - 0 -1
+roots stack 141
+roots object slot 16777217 - 0 -1
+roots stack 142
+roots object slot 16777217 - 0 -1
+roots stack 143
+roots object slot 16777217 - 0 -1
+roots stack 144
+roots object slot 16777217 - 0 -1
+roots stack 145
+roots object slot 16777217 - 0 -1
+roots stack 146
+roots object slot 16777217 - 0 -1
+roots stack 147
+roots object slot 16777217 - 0 -1
+roots stack 148
+roots object slot 16777217 - 0 -1
+roots stack 149
+roots object slot 16777217 - 0 -1
+roots stack 150
+roots object slot 16777217 - 0 -1
+roots stack 151
+roots object slot 16777217 - 0 -1
+roots stack 152
+roots object slot 16777217 - 0 -1
+roots stack 153
+roots object slot 16777217 - 0 -1
+roots stack 154
+roots object slot 16777217 - 0 -1
+roots stack 155
+roots object slot 16777217 - 0 -1
+roots stack 156
+roots object slot 16777217 - 0 -1
+roots stack 157
+roots object slot 16777217 - 0 -1
+roots stack 158
+roots object slot 16777217 - 0 -1
+roots stack 159
+roots object slot 16777217 - 0 -1
+roots stack 160
+roots object slot 16777217 - 0 -1
+roots stack 161
+roots object slot 16777217 - 0 -1
+roots stack 162
+roots object slot 16777217 - 0 -1
+roots stack 163
+roots object slot 16777217 - 0 -1
+roots stack 164
+roots object slot 16777217 - 0 -1
+roots stack 165
+roots object slot 16777217 - 0 -1
+roots stack 166
+roots object slot 16777217 - 0 -1
+roots stack 167
+roots object slot 16777217 - 0 -1
+roots stack 168
+roots object slot 16777217 - 0 -1
+roots stack 169
+roots object slot 16777217 - 0 -1
+roots stack 170
+roots object slot 16777217 - 0 -1
+roots stack 171
+roots object slot 16777217 - 0 -1
+roots stack 172
+roots object slot 16777217 - 0 -1
+roots stack 173
+roots object slot 16777217 - 0 -1
+roots stack 174
+roots object slot 16777217 - 0 -1
+roots stack 175
+roots object slot 16777217 - 0 -1
+roots stack 176
+roots object slot 16777217 - 0 -1
+roots stack 177
+roots object slot 16777217 - 0 -1
+roots stack 178
+roots object slot 16777217 - 0 -1
+roots stack 179
+roots object slot 16777217 - 0 -1
+roots stack 180
+roots object slot 16777217 - 0 -1
+roots stack 181
+roots object slot 16777217 - 0 -1
+roots stack 182
+roots object slot 16777217 - 0 -1
+roots stack 183
+roots object slot 16777217 - 0 -1
+roots stack 184
+roots object slot 16777217 - 0 -1
+roots stack 185
+roots object slot 16777217 - 0 -1
+roots stack 186
+roots object slot 16777217 - 0 -1
+roots stack 187
+roots object slot 16777217 - 0 -1
+roots stack 188
+roots object slot 16777217 - 0 -1
+roots stack 189
+roots object slot 16777217 - 0 -1
+roots stack 190
+roots object slot 16777217 - 0 -1
+roots stack 191
+roots object slot 16777217 - 0 -1
+roots stack 192
+roots object slot 16777217 - 0 -1
+roots stack 193
+roots object slot 16777217 - 0 -1
+roots stack 194
+roots object slot 16777217 - 0 -1
+roots stack 195
+roots object slot 16777217 - 0 -1
+roots stack 196
+roots object slot 16777217 - 0 -1
+roots stack 197
+roots object slot 16777217 - 0 -1
+roots stack 198
+roots object slot 16777217 - 0 -1
+roots stack 199
+roots object slot 16777217 - 0 -1
+roots stack 200
+roots object slot 16777217 - 0 -1
+roots stack 201
+roots object slot 16777217 - 0 -1
+roots stack 202
+roots object slot 16777217 - 0 -1
+roots stack 203
+roots object slot 16777217 - 0 -1
+roots stack 204
+roots object slot 16777217 - 0 -1
+roots stack 205
+roots object slot 16777217 - 0 -1
+roots stack 206
+roots object slot 16777217 - 0 -1
+roots stack 207
+roots object slot 16777217 - 0 -1
+roots stack 208
+roots object slot 16777217 - 0 -1
+roots stack 209
+roots object slot 16777217 - 0 -1
+roots stack 210
+roots object slot 16777217 - 0 -1
+roots stack 211
+roots object slot 16777217 - 0 -1
+roots stack 212
+roots object slot 16777217 - 0 -1
+roots stack 213
+roots object slot 16777217 - 0 -1
+roots stack 214
+roots object slot 16777217 - 0 -1
+roots stack 215
+roots object slot 16777217 - 0 -1
+roots stack 216
+roots object slot 16777217 - 0 -1
+roots stack 217
+roots object slot 16777217 - 0 -1
+roots stack 218
+roots object slot 16777217 - 0 -1
+roots stack 219
+roots object slot 16777217 - 0 -1
+roots stack 220
+roots object slot 16777217 - 0 -1
+roots stack 221
+roots object slot 16777217 - 0 -1
+roots stack 222
+roots object slot 16777217 - 0 -1
+roots stack 223
+roots object slot 16777217 - 0 -1
+roots stack 224
+roots object slot 16777217 - 0 -1
+roots stack 225
+roots object slot 16777217 - 0 -1
+roots stack 226
+roots object slot 16777217 - 0 -1
+roots stack 227
+roots object slot 16777217 - 0 -1
+roots stack 228
+roots object slot 16777217 - 0 -1
+roots stack 229
+roots object slot 16777217 - 0 -1
+roots stack 230
+roots object slot 16777217 - 0 -1
+roots stack 231
+roots object slot 16777217 - 0 -1
+roots stack 232
+roots object slot 16777217 - 0 -1
+roots stack 233
+roots object slot 16777217 - 0 -1
+roots stack 234
+roots object slot 16777217 - 0 -1
+roots stack 235
+roots object slot 16777217 - 0 -1
+roots stack 236
+roots object slot 16777217 - 0 -1
+roots stack 237
+roots object slot 16777217 - 0 -1
+roots stack 238
+roots object slot 16777217 - 0 -1
+roots stack 239
+roots object slot 16777217 - 0 -1
+roots stack 240
+roots object slot 16777217 - 0 -1
+roots stack 241
+roots object slot 16777217 - 0 -1
+roots stack 242
+roots object slot 16777217 - 0 -1
+roots stack 243
+roots object slot 16777217 - 0 -1
+roots stack 244
+roots object slot 16777217 - 0 -1
+roots stack 245
+roots object slot 16777217 - 0 -1
+roots stack 246
+roots object slot 16777217 - 0 -1
+roots stack 247
+roots object slot 16777217 - 0 -1
+roots stack 248
+roots object slot 16777217 - 0 -1
+roots stack 249
+roots object slot 16777217 - 0 -1
+roots stack 250
+roots object slot 16777217 - 0 -1
+roots stack 251
+roots object slot 16777217 - 0 -1
+roots stack 252
+roots object slot 16777217 - 0 -1
+roots stack 253
+roots object slot 16777217 - 0 -1
+roots stack 254
+roots object slot 16777217 - 0 -1
+roots stack 255
+roots object slot 16777217 - 0 -1
+roots chain 85 ????OV???????????????????????????????????????????????????????????????????????????????
+roots end compile-error
+roots collected compile-success 0
+roots begin compile-success
+roots vm V 1 1 256 0 0 0 0 0 9992
+roots object error 134217744 ? 1 -1
+roots bytes error 21 657870656374656420274944454e54494649455227
+roots object handler 16777217 - 0 -1
+roots object debug 16777217 - 0 -1
+roots object root 167772192 O 1 8
+roots object temporary 83886082 - 0 -1
+roots stack 0
+roots object slot 16777217 - 0 -1
+roots stack 1
+roots object slot 16777217 - 0 -1
+roots stack 2
+roots object slot 16777217 - 0 -1
+roots stack 3
+roots object slot 16777217 - 0 -1
+roots stack 4
+roots object slot 16777217 - 0 -1
+roots stack 5
+roots object slot 16777217 - 0 -1
+roots stack 6
+roots object slot 16777217 - 0 -1
+roots stack 7
+roots object slot 16777217 - 0 -1
+roots stack 8
+roots object slot 16777217 - 0 -1
+roots stack 9
+roots object slot 16777217 - 0 -1
+roots stack 10
+roots object slot 16777217 - 0 -1
+roots stack 11
+roots object slot 16777217 - 0 -1
+roots stack 12
+roots object slot 16777217 - 0 -1
+roots stack 13
+roots object slot 16777217 - 0 -1
+roots stack 14
+roots object slot 16777217 - 0 -1
+roots stack 15
+roots object slot 16777217 - 0 -1
+roots stack 16
+roots object slot 16777217 - 0 -1
+roots stack 17
+roots object slot 16777217 - 0 -1
+roots stack 18
+roots object slot 16777217 - 0 -1
+roots stack 19
+roots object slot 16777217 - 0 -1
+roots stack 20
+roots object slot 16777217 - 0 -1
+roots stack 21
+roots object slot 16777217 - 0 -1
+roots stack 22
+roots object slot 16777217 - 0 -1
+roots stack 23
+roots object slot 16777217 - 0 -1
+roots stack 24
+roots object slot 16777217 - 0 -1
+roots stack 25
+roots object slot 16777217 - 0 -1
+roots stack 26
+roots object slot 16777217 - 0 -1
+roots stack 27
+roots object slot 16777217 - 0 -1
+roots stack 28
+roots object slot 16777217 - 0 -1
+roots stack 29
+roots object slot 16777217 - 0 -1
+roots stack 30
+roots object slot 16777217 - 0 -1
+roots stack 31
+roots object slot 16777217 - 0 -1
+roots stack 32
+roots object slot 16777217 - 0 -1
+roots stack 33
+roots object slot 16777217 - 0 -1
+roots stack 34
+roots object slot 16777217 - 0 -1
+roots stack 35
+roots object slot 16777217 - 0 -1
+roots stack 36
+roots object slot 16777217 - 0 -1
+roots stack 37
+roots object slot 16777217 - 0 -1
+roots stack 38
+roots object slot 16777217 - 0 -1
+roots stack 39
+roots object slot 16777217 - 0 -1
+roots stack 40
+roots object slot 16777217 - 0 -1
+roots stack 41
+roots object slot 16777217 - 0 -1
+roots stack 42
+roots object slot 16777217 - 0 -1
+roots stack 43
+roots object slot 16777217 - 0 -1
+roots stack 44
+roots object slot 16777217 - 0 -1
+roots stack 45
+roots object slot 16777217 - 0 -1
+roots stack 46
+roots object slot 16777217 - 0 -1
+roots stack 47
+roots object slot 16777217 - 0 -1
+roots stack 48
+roots object slot 16777217 - 0 -1
+roots stack 49
+roots object slot 16777217 - 0 -1
+roots stack 50
+roots object slot 16777217 - 0 -1
+roots stack 51
+roots object slot 16777217 - 0 -1
+roots stack 52
+roots object slot 16777217 - 0 -1
+roots stack 53
+roots object slot 16777217 - 0 -1
+roots stack 54
+roots object slot 16777217 - 0 -1
+roots stack 55
+roots object slot 16777217 - 0 -1
+roots stack 56
+roots object slot 16777217 - 0 -1
+roots stack 57
+roots object slot 16777217 - 0 -1
+roots stack 58
+roots object slot 16777217 - 0 -1
+roots stack 59
+roots object slot 16777217 - 0 -1
+roots stack 60
+roots object slot 16777217 - 0 -1
+roots stack 61
+roots object slot 16777217 - 0 -1
+roots stack 62
+roots object slot 16777217 - 0 -1
+roots stack 63
+roots object slot 16777217 - 0 -1
+roots stack 64
+roots object slot 16777217 - 0 -1
+roots stack 65
+roots object slot 16777217 - 0 -1
+roots stack 66
+roots object slot 16777217 - 0 -1
+roots stack 67
+roots object slot 16777217 - 0 -1
+roots stack 68
+roots object slot 16777217 - 0 -1
+roots stack 69
+roots object slot 16777217 - 0 -1
+roots stack 70
+roots object slot 16777217 - 0 -1
+roots stack 71
+roots object slot 16777217 - 0 -1
+roots stack 72
+roots object slot 16777217 - 0 -1
+roots stack 73
+roots object slot 16777217 - 0 -1
+roots stack 74
+roots object slot 16777217 - 0 -1
+roots stack 75
+roots object slot 16777217 - 0 -1
+roots stack 76
+roots object slot 16777217 - 0 -1
+roots stack 77
+roots object slot 16777217 - 0 -1
+roots stack 78
+roots object slot 16777217 - 0 -1
+roots stack 79
+roots object slot 16777217 - 0 -1
+roots stack 80
+roots object slot 16777217 - 0 -1
+roots stack 81
+roots object slot 16777217 - 0 -1
+roots stack 82
+roots object slot 16777217 - 0 -1
+roots stack 83
+roots object slot 16777217 - 0 -1
+roots stack 84
+roots object slot 16777217 - 0 -1
+roots stack 85
+roots object slot 16777217 - 0 -1
+roots stack 86
+roots object slot 16777217 - 0 -1
+roots stack 87
+roots object slot 16777217 - 0 -1
+roots stack 88
+roots object slot 16777217 - 0 -1
+roots stack 89
+roots object slot 16777217 - 0 -1
+roots stack 90
+roots object slot 16777217 - 0 -1
+roots stack 91
+roots object slot 16777217 - 0 -1
+roots stack 92
+roots object slot 16777217 - 0 -1
+roots stack 93
+roots object slot 16777217 - 0 -1
+roots stack 94
+roots object slot 16777217 - 0 -1
+roots stack 95
+roots object slot 16777217 - 0 -1
+roots stack 96
+roots object slot 16777217 - 0 -1
+roots stack 97
+roots object slot 16777217 - 0 -1
+roots stack 98
+roots object slot 16777217 - 0 -1
+roots stack 99
+roots object slot 16777217 - 0 -1
+roots stack 100
+roots object slot 16777217 - 0 -1
+roots stack 101
+roots object slot 16777217 - 0 -1
+roots stack 102
+roots object slot 16777217 - 0 -1
+roots stack 103
+roots object slot 16777217 - 0 -1
+roots stack 104
+roots object slot 16777217 - 0 -1
+roots stack 105
+roots object slot 16777217 - 0 -1
+roots stack 106
+roots object slot 16777217 - 0 -1
+roots stack 107
+roots object slot 16777217 - 0 -1
+roots stack 108
+roots object slot 16777217 - 0 -1
+roots stack 109
+roots object slot 16777217 - 0 -1
+roots stack 110
+roots object slot 16777217 - 0 -1
+roots stack 111
+roots object slot 16777217 - 0 -1
+roots stack 112
+roots object slot 16777217 - 0 -1
+roots stack 113
+roots object slot 16777217 - 0 -1
+roots stack 114
+roots object slot 16777217 - 0 -1
+roots stack 115
+roots object slot 16777217 - 0 -1
+roots stack 116
+roots object slot 16777217 - 0 -1
+roots stack 117
+roots object slot 16777217 - 0 -1
+roots stack 118
+roots object slot 16777217 - 0 -1
+roots stack 119
+roots object slot 16777217 - 0 -1
+roots stack 120
+roots object slot 16777217 - 0 -1
+roots stack 121
+roots object slot 16777217 - 0 -1
+roots stack 122
+roots object slot 16777217 - 0 -1
+roots stack 123
+roots object slot 16777217 - 0 -1
+roots stack 124
+roots object slot 16777217 - 0 -1
+roots stack 125
+roots object slot 16777217 - 0 -1
+roots stack 126
+roots object slot 16777217 - 0 -1
+roots stack 127
+roots object slot 16777217 - 0 -1
+roots stack 128
+roots object slot 16777217 - 0 -1
+roots stack 129
+roots object slot 16777217 - 0 -1
+roots stack 130
+roots object slot 16777217 - 0 -1
+roots stack 131
+roots object slot 16777217 - 0 -1
+roots stack 132
+roots object slot 16777217 - 0 -1
+roots stack 133
+roots object slot 16777217 - 0 -1
+roots stack 134
+roots object slot 16777217 - 0 -1
+roots stack 135
+roots object slot 16777217 - 0 -1
+roots stack 136
+roots object slot 16777217 - 0 -1
+roots stack 137
+roots object slot 16777217 - 0 -1
+roots stack 138
+roots object slot 16777217 - 0 -1
+roots stack 139
+roots object slot 16777217 - 0 -1
+roots stack 140
+roots object slot 16777217 - 0 -1
+roots stack 141
+roots object slot 16777217 - 0 -1
+roots stack 142
+roots object slot 16777217 - 0 -1
+roots stack 143
+roots object slot 16777217 - 0 -1
+roots stack 144
+roots object slot 16777217 - 0 -1
+roots stack 145
+roots object slot 16777217 - 0 -1
+roots stack 146
+roots object slot 16777217 - 0 -1
+roots stack 147
+roots object slot 16777217 - 0 -1
+roots stack 148
+roots object slot 16777217 - 0 -1
+roots stack 149
+roots object slot 16777217 - 0 -1
+roots stack 150
+roots object slot 16777217 - 0 -1
+roots stack 151
+roots object slot 16777217 - 0 -1
+roots stack 152
+roots object slot 16777217 - 0 -1
+roots stack 153
+roots object slot 16777217 - 0 -1
+roots stack 154
+roots object slot 16777217 - 0 -1
+roots stack 155
+roots object slot 16777217 - 0 -1
+roots stack 156
+roots object slot 16777217 - 0 -1
+roots stack 157
+roots object slot 16777217 - 0 -1
+roots stack 158
+roots object slot 16777217 - 0 -1
+roots stack 159
+roots object slot 16777217 - 0 -1
+roots stack 160
+roots object slot 16777217 - 0 -1
+roots stack 161
+roots object slot 16777217 - 0 -1
+roots stack 162
+roots object slot 16777217 - 0 -1
+roots stack 163
+roots object slot 16777217 - 0 -1
+roots stack 164
+roots object slot 16777217 - 0 -1
+roots stack 165
+roots object slot 16777217 - 0 -1
+roots stack 166
+roots object slot 16777217 - 0 -1
+roots stack 167
+roots object slot 16777217 - 0 -1
+roots stack 168
+roots object slot 16777217 - 0 -1
+roots stack 169
+roots object slot 16777217 - 0 -1
+roots stack 170
+roots object slot 16777217 - 0 -1
+roots stack 171
+roots object slot 16777217 - 0 -1
+roots stack 172
+roots object slot 16777217 - 0 -1
+roots stack 173
+roots object slot 16777217 - 0 -1
+roots stack 174
+roots object slot 16777217 - 0 -1
+roots stack 175
+roots object slot 16777217 - 0 -1
+roots stack 176
+roots object slot 16777217 - 0 -1
+roots stack 177
+roots object slot 16777217 - 0 -1
+roots stack 178
+roots object slot 16777217 - 0 -1
+roots stack 179
+roots object slot 16777217 - 0 -1
+roots stack 180
+roots object slot 16777217 - 0 -1
+roots stack 181
+roots object slot 16777217 - 0 -1
+roots stack 182
+roots object slot 16777217 - 0 -1
+roots stack 183
+roots object slot 16777217 - 0 -1
+roots stack 184
+roots object slot 16777217 - 0 -1
+roots stack 185
+roots object slot 16777217 - 0 -1
+roots stack 186
+roots object slot 16777217 - 0 -1
+roots stack 187
+roots object slot 16777217 - 0 -1
+roots stack 188
+roots object slot 16777217 - 0 -1
+roots stack 189
+roots object slot 16777217 - 0 -1
+roots stack 190
+roots object slot 16777217 - 0 -1
+roots stack 191
+roots object slot 16777217 - 0 -1
+roots stack 192
+roots object slot 16777217 - 0 -1
+roots stack 193
+roots object slot 16777217 - 0 -1
+roots stack 194
+roots object slot 16777217 - 0 -1
+roots stack 195
+roots object slot 16777217 - 0 -1
+roots stack 196
+roots object slot 16777217 - 0 -1
+roots stack 197
+roots object slot 16777217 - 0 -1
+roots stack 198
+roots object slot 16777217 - 0 -1
+roots stack 199
+roots object slot 16777217 - 0 -1
+roots stack 200
+roots object slot 16777217 - 0 -1
+roots stack 201
+roots object slot 16777217 - 0 -1
+roots stack 202
+roots object slot 16777217 - 0 -1
+roots stack 203
+roots object slot 16777217 - 0 -1
+roots stack 204
+roots object slot 16777217 - 0 -1
+roots stack 205
+roots object slot 16777217 - 0 -1
+roots stack 206
+roots object slot 16777217 - 0 -1
+roots stack 207
+roots object slot 16777217 - 0 -1
+roots stack 208
+roots object slot 16777217 - 0 -1
+roots stack 209
+roots object slot 16777217 - 0 -1
+roots stack 210
+roots object slot 16777217 - 0 -1
+roots stack 211
+roots object slot 16777217 - 0 -1
+roots stack 212
+roots object slot 16777217 - 0 -1
+roots stack 213
+roots object slot 16777217 - 0 -1
+roots stack 214
+roots object slot 16777217 - 0 -1
+roots stack 215
+roots object slot 16777217 - 0 -1
+roots stack 216
+roots object slot 16777217 - 0 -1
+roots stack 217
+roots object slot 16777217 - 0 -1
+roots stack 218
+roots object slot 16777217 - 0 -1
+roots stack 219
+roots object slot 16777217 - 0 -1
+roots stack 220
+roots object slot 16777217 - 0 -1
+roots stack 221
+roots object slot 16777217 - 0 -1
+roots stack 222
+roots object slot 16777217 - 0 -1
+roots stack 223
+roots object slot 16777217 - 0 -1
+roots stack 224
+roots object slot 16777217 - 0 -1
+roots stack 225
+roots object slot 16777217 - 0 -1
+roots stack 226
+roots object slot 16777217 - 0 -1
+roots stack 227
+roots object slot 16777217 - 0 -1
+roots stack 228
+roots object slot 16777217 - 0 -1
+roots stack 229
+roots object slot 16777217 - 0 -1
+roots stack 230
+roots object slot 16777217 - 0 -1
+roots stack 231
+roots object slot 16777217 - 0 -1
+roots stack 232
+roots object slot 16777217 - 0 -1
+roots stack 233
+roots object slot 16777217 - 0 -1
+roots stack 234
+roots object slot 16777217 - 0 -1
+roots stack 235
+roots object slot 16777217 - 0 -1
+roots stack 236
+roots object slot 16777217 - 0 -1
+roots stack 237
+roots object slot 16777217 - 0 -1
+roots stack 238
+roots object slot 16777217 - 0 -1
+roots stack 239
+roots object slot 16777217 - 0 -1
+roots stack 240
+roots object slot 16777217 - 0 -1
+roots stack 241
+roots object slot 16777217 - 0 -1
+roots stack 242
+roots object slot 16777217 - 0 -1
+roots stack 243
+roots object slot 16777217 - 0 -1
+roots stack 244
+roots object slot 16777217 - 0 -1
+roots stack 245
+roots object slot 16777217 - 0 -1
+roots stack 246
+roots object slot 16777217 - 0 -1
+roots stack 247
+roots object slot 16777217 - 0 -1
+roots stack 248
+roots object slot 16777217 - 0 -1
+roots stack 249
+roots object slot 16777217 - 0 -1
+roots stack 250
+roots object slot 16777217 - 0 -1
+roots stack 251
+roots object slot 16777217 - 0 -1
+roots stack 252
+roots object slot 16777217 - 0 -1
+roots stack 253
+roots object slot 16777217 - 0 -1
+roots stack 254
+roots object slot 16777217 - 0 -1
+roots stack 255
+roots object slot 16777217 - 0 -1
+roots chain 85 ????OV???????????????????????????????????????????????????????????????????????????????
+roots end compile-success
+roots collected reset 0
+roots begin reset
+roots vm V 1 1 256 0 0 0 0 0 9992
+roots object error 16777217 - 0 -1
+roots object handler 16777217 - 0 -1
+roots object debug 16777217 - 0 -1
+roots object root 167772192 O 1 8
+roots object temporary 83886082 - 0 -1
+roots stack 0
+roots object slot 16777217 - 0 -1
+roots stack 1
+roots object slot 16777217 - 0 -1
+roots stack 2
+roots object slot 16777217 - 0 -1
+roots stack 3
+roots object slot 16777217 - 0 -1
+roots stack 4
+roots object slot 16777217 - 0 -1
+roots stack 5
+roots object slot 16777217 - 0 -1
+roots stack 6
+roots object slot 16777217 - 0 -1
+roots stack 7
+roots object slot 16777217 - 0 -1
+roots stack 8
+roots object slot 16777217 - 0 -1
+roots stack 9
+roots object slot 16777217 - 0 -1
+roots stack 10
+roots object slot 16777217 - 0 -1
+roots stack 11
+roots object slot 16777217 - 0 -1
+roots stack 12
+roots object slot 16777217 - 0 -1
+roots stack 13
+roots object slot 16777217 - 0 -1
+roots stack 14
+roots object slot 16777217 - 0 -1
+roots stack 15
+roots object slot 16777217 - 0 -1
+roots stack 16
+roots object slot 16777217 - 0 -1
+roots stack 17
+roots object slot 16777217 - 0 -1
+roots stack 18
+roots object slot 16777217 - 0 -1
+roots stack 19
+roots object slot 16777217 - 0 -1
+roots stack 20
+roots object slot 16777217 - 0 -1
+roots stack 21
+roots object slot 16777217 - 0 -1
+roots stack 22
+roots object slot 16777217 - 0 -1
+roots stack 23
+roots object slot 16777217 - 0 -1
+roots stack 24
+roots object slot 16777217 - 0 -1
+roots stack 25
+roots object slot 16777217 - 0 -1
+roots stack 26
+roots object slot 16777217 - 0 -1
+roots stack 27
+roots object slot 16777217 - 0 -1
+roots stack 28
+roots object slot 16777217 - 0 -1
+roots stack 29
+roots object slot 16777217 - 0 -1
+roots stack 30
+roots object slot 16777217 - 0 -1
+roots stack 31
+roots object slot 16777217 - 0 -1
+roots stack 32
+roots object slot 16777217 - 0 -1
+roots stack 33
+roots object slot 16777217 - 0 -1
+roots stack 34
+roots object slot 16777217 - 0 -1
+roots stack 35
+roots object slot 16777217 - 0 -1
+roots stack 36
+roots object slot 16777217 - 0 -1
+roots stack 37
+roots object slot 16777217 - 0 -1
+roots stack 38
+roots object slot 16777217 - 0 -1
+roots stack 39
+roots object slot 16777217 - 0 -1
+roots stack 40
+roots object slot 16777217 - 0 -1
+roots stack 41
+roots object slot 16777217 - 0 -1
+roots stack 42
+roots object slot 16777217 - 0 -1
+roots stack 43
+roots object slot 16777217 - 0 -1
+roots stack 44
+roots object slot 16777217 - 0 -1
+roots stack 45
+roots object slot 16777217 - 0 -1
+roots stack 46
+roots object slot 16777217 - 0 -1
+roots stack 47
+roots object slot 16777217 - 0 -1
+roots stack 48
+roots object slot 16777217 - 0 -1
+roots stack 49
+roots object slot 16777217 - 0 -1
+roots stack 50
+roots object slot 16777217 - 0 -1
+roots stack 51
+roots object slot 16777217 - 0 -1
+roots stack 52
+roots object slot 16777217 - 0 -1
+roots stack 53
+roots object slot 16777217 - 0 -1
+roots stack 54
+roots object slot 16777217 - 0 -1
+roots stack 55
+roots object slot 16777217 - 0 -1
+roots stack 56
+roots object slot 16777217 - 0 -1
+roots stack 57
+roots object slot 16777217 - 0 -1
+roots stack 58
+roots object slot 16777217 - 0 -1
+roots stack 59
+roots object slot 16777217 - 0 -1
+roots stack 60
+roots object slot 16777217 - 0 -1
+roots stack 61
+roots object slot 16777217 - 0 -1
+roots stack 62
+roots object slot 16777217 - 0 -1
+roots stack 63
+roots object slot 16777217 - 0 -1
+roots stack 64
+roots object slot 16777217 - 0 -1
+roots stack 65
+roots object slot 16777217 - 0 -1
+roots stack 66
+roots object slot 16777217 - 0 -1
+roots stack 67
+roots object slot 16777217 - 0 -1
+roots stack 68
+roots object slot 16777217 - 0 -1
+roots stack 69
+roots object slot 16777217 - 0 -1
+roots stack 70
+roots object slot 16777217 - 0 -1
+roots stack 71
+roots object slot 16777217 - 0 -1
+roots stack 72
+roots object slot 16777217 - 0 -1
+roots stack 73
+roots object slot 16777217 - 0 -1
+roots stack 74
+roots object slot 16777217 - 0 -1
+roots stack 75
+roots object slot 16777217 - 0 -1
+roots stack 76
+roots object slot 16777217 - 0 -1
+roots stack 77
+roots object slot 16777217 - 0 -1
+roots stack 78
+roots object slot 16777217 - 0 -1
+roots stack 79
+roots object slot 16777217 - 0 -1
+roots stack 80
+roots object slot 16777217 - 0 -1
+roots stack 81
+roots object slot 16777217 - 0 -1
+roots stack 82
+roots object slot 16777217 - 0 -1
+roots stack 83
+roots object slot 16777217 - 0 -1
+roots stack 84
+roots object slot 16777217 - 0 -1
+roots stack 85
+roots object slot 16777217 - 0 -1
+roots stack 86
+roots object slot 16777217 - 0 -1
+roots stack 87
+roots object slot 16777217 - 0 -1
+roots stack 88
+roots object slot 16777217 - 0 -1
+roots stack 89
+roots object slot 16777217 - 0 -1
+roots stack 90
+roots object slot 16777217 - 0 -1
+roots stack 91
+roots object slot 16777217 - 0 -1
+roots stack 92
+roots object slot 16777217 - 0 -1
+roots stack 93
+roots object slot 16777217 - 0 -1
+roots stack 94
+roots object slot 16777217 - 0 -1
+roots stack 95
+roots object slot 16777217 - 0 -1
+roots stack 96
+roots object slot 16777217 - 0 -1
+roots stack 97
+roots object slot 16777217 - 0 -1
+roots stack 98
+roots object slot 16777217 - 0 -1
+roots stack 99
+roots object slot 16777217 - 0 -1
+roots stack 100
+roots object slot 16777217 - 0 -1
+roots stack 101
+roots object slot 16777217 - 0 -1
+roots stack 102
+roots object slot 16777217 - 0 -1
+roots stack 103
+roots object slot 16777217 - 0 -1
+roots stack 104
+roots object slot 16777217 - 0 -1
+roots stack 105
+roots object slot 16777217 - 0 -1
+roots stack 106
+roots object slot 16777217 - 0 -1
+roots stack 107
+roots object slot 16777217 - 0 -1
+roots stack 108
+roots object slot 16777217 - 0 -1
+roots stack 109
+roots object slot 16777217 - 0 -1
+roots stack 110
+roots object slot 16777217 - 0 -1
+roots stack 111
+roots object slot 16777217 - 0 -1
+roots stack 112
+roots object slot 16777217 - 0 -1
+roots stack 113
+roots object slot 16777217 - 0 -1
+roots stack 114
+roots object slot 16777217 - 0 -1
+roots stack 115
+roots object slot 16777217 - 0 -1
+roots stack 116
+roots object slot 16777217 - 0 -1
+roots stack 117
+roots object slot 16777217 - 0 -1
+roots stack 118
+roots object slot 16777217 - 0 -1
+roots stack 119
+roots object slot 16777217 - 0 -1
+roots stack 120
+roots object slot 16777217 - 0 -1
+roots stack 121
+roots object slot 16777217 - 0 -1
+roots stack 122
+roots object slot 16777217 - 0 -1
+roots stack 123
+roots object slot 16777217 - 0 -1
+roots stack 124
+roots object slot 16777217 - 0 -1
+roots stack 125
+roots object slot 16777217 - 0 -1
+roots stack 126
+roots object slot 16777217 - 0 -1
+roots stack 127
+roots object slot 16777217 - 0 -1
+roots stack 128
+roots object slot 16777217 - 0 -1
+roots stack 129
+roots object slot 16777217 - 0 -1
+roots stack 130
+roots object slot 16777217 - 0 -1
+roots stack 131
+roots object slot 16777217 - 0 -1
+roots stack 132
+roots object slot 16777217 - 0 -1
+roots stack 133
+roots object slot 16777217 - 0 -1
+roots stack 134
+roots object slot 16777217 - 0 -1
+roots stack 135
+roots object slot 16777217 - 0 -1
+roots stack 136
+roots object slot 16777217 - 0 -1
+roots stack 137
+roots object slot 16777217 - 0 -1
+roots stack 138
+roots object slot 16777217 - 0 -1
+roots stack 139
+roots object slot 16777217 - 0 -1
+roots stack 140
+roots object slot 16777217 - 0 -1
+roots stack 141
+roots object slot 16777217 - 0 -1
+roots stack 142
+roots object slot 16777217 - 0 -1
+roots stack 143
+roots object slot 16777217 - 0 -1
+roots stack 144
+roots object slot 16777217 - 0 -1
+roots stack 145
+roots object slot 16777217 - 0 -1
+roots stack 146
+roots object slot 16777217 - 0 -1
+roots stack 147
+roots object slot 16777217 - 0 -1
+roots stack 148
+roots object slot 16777217 - 0 -1
+roots stack 149
+roots object slot 16777217 - 0 -1
+roots stack 150
+roots object slot 16777217 - 0 -1
+roots stack 151
+roots object slot 16777217 - 0 -1
+roots stack 152
+roots object slot 16777217 - 0 -1
+roots stack 153
+roots object slot 16777217 - 0 -1
+roots stack 154
+roots object slot 16777217 - 0 -1
+roots stack 155
+roots object slot 16777217 - 0 -1
+roots stack 156
+roots object slot 16777217 - 0 -1
+roots stack 157
+roots object slot 16777217 - 0 -1
+roots stack 158
+roots object slot 16777217 - 0 -1
+roots stack 159
+roots object slot 16777217 - 0 -1
+roots stack 160
+roots object slot 16777217 - 0 -1
+roots stack 161
+roots object slot 16777217 - 0 -1
+roots stack 162
+roots object slot 16777217 - 0 -1
+roots stack 163
+roots object slot 16777217 - 0 -1
+roots stack 164
+roots object slot 16777217 - 0 -1
+roots stack 165
+roots object slot 16777217 - 0 -1
+roots stack 166
+roots object slot 16777217 - 0 -1
+roots stack 167
+roots object slot 16777217 - 0 -1
+roots stack 168
+roots object slot 16777217 - 0 -1
+roots stack 169
+roots object slot 16777217 - 0 -1
+roots stack 170
+roots object slot 16777217 - 0 -1
+roots stack 171
+roots object slot 16777217 - 0 -1
+roots stack 172
+roots object slot 16777217 - 0 -1
+roots stack 173
+roots object slot 16777217 - 0 -1
+roots stack 174
+roots object slot 16777217 - 0 -1
+roots stack 175
+roots object slot 16777217 - 0 -1
+roots stack 176
+roots object slot 16777217 - 0 -1
+roots stack 177
+roots object slot 16777217 - 0 -1
+roots stack 178
+roots object slot 16777217 - 0 -1
+roots stack 179
+roots object slot 16777217 - 0 -1
+roots stack 180
+roots object slot 16777217 - 0 -1
+roots stack 181
+roots object slot 16777217 - 0 -1
+roots stack 182
+roots object slot 16777217 - 0 -1
+roots stack 183
+roots object slot 16777217 - 0 -1
+roots stack 184
+roots object slot 16777217 - 0 -1
+roots stack 185
+roots object slot 16777217 - 0 -1
+roots stack 186
+roots object slot 16777217 - 0 -1
+roots stack 187
+roots object slot 16777217 - 0 -1
+roots stack 188
+roots object slot 16777217 - 0 -1
+roots stack 189
+roots object slot 16777217 - 0 -1
+roots stack 190
+roots object slot 16777217 - 0 -1
+roots stack 191
+roots object slot 16777217 - 0 -1
+roots stack 192
+roots object slot 16777217 - 0 -1
+roots stack 193
+roots object slot 16777217 - 0 -1
+roots stack 194
+roots object slot 16777217 - 0 -1
+roots stack 195
+roots object slot 16777217 - 0 -1
+roots stack 196
+roots object slot 16777217 - 0 -1
+roots stack 197
+roots object slot 16777217 - 0 -1
+roots stack 198
+roots object slot 16777217 - 0 -1
+roots stack 199
+roots object slot 16777217 - 0 -1
+roots stack 200
+roots object slot 16777217 - 0 -1
+roots stack 201
+roots object slot 16777217 - 0 -1
+roots stack 202
+roots object slot 16777217 - 0 -1
+roots stack 203
+roots object slot 16777217 - 0 -1
+roots stack 204
+roots object slot 16777217 - 0 -1
+roots stack 205
+roots object slot 16777217 - 0 -1
+roots stack 206
+roots object slot 16777217 - 0 -1
+roots stack 207
+roots object slot 16777217 - 0 -1
+roots stack 208
+roots object slot 16777217 - 0 -1
+roots stack 209
+roots object slot 16777217 - 0 -1
+roots stack 210
+roots object slot 16777217 - 0 -1
+roots stack 211
+roots object slot 16777217 - 0 -1
+roots stack 212
+roots object slot 16777217 - 0 -1
+roots stack 213
+roots object slot 16777217 - 0 -1
+roots stack 214
+roots object slot 16777217 - 0 -1
+roots stack 215
+roots object slot 16777217 - 0 -1
+roots stack 216
+roots object slot 16777217 - 0 -1
+roots stack 217
+roots object slot 16777217 - 0 -1
+roots stack 218
+roots object slot 16777217 - 0 -1
+roots stack 219
+roots object slot 16777217 - 0 -1
+roots stack 220
+roots object slot 16777217 - 0 -1
+roots stack 221
+roots object slot 16777217 - 0 -1
+roots stack 222
+roots object slot 16777217 - 0 -1
+roots stack 223
+roots object slot 16777217 - 0 -1
+roots stack 224
+roots object slot 16777217 - 0 -1
+roots stack 225
+roots object slot 16777217 - 0 -1
+roots stack 226
+roots object slot 16777217 - 0 -1
+roots stack 227
+roots object slot 16777217 - 0 -1
+roots stack 228
+roots object slot 16777217 - 0 -1
+roots stack 229
+roots object slot 16777217 - 0 -1
+roots stack 230
+roots object slot 16777217 - 0 -1
+roots stack 231
+roots object slot 16777217 - 0 -1
+roots stack 232
+roots object slot 16777217 - 0 -1
+roots stack 233
+roots object slot 16777217 - 0 -1
+roots stack 234
+roots object slot 16777217 - 0 -1
+roots stack 235
+roots object slot 16777217 - 0 -1
+roots stack 236
+roots object slot 16777217 - 0 -1
+roots stack 237
+roots object slot 16777217 - 0 -1
+roots stack 238
+roots object slot 16777217 - 0 -1
+roots stack 239
+roots object slot 16777217 - 0 -1
+roots stack 240
+roots object slot 16777217 - 0 -1
+roots stack 241
+roots object slot 16777217 - 0 -1
+roots stack 242
+roots object slot 16777217 - 0 -1
+roots stack 243
+roots object slot 16777217 - 0 -1
+roots stack 244
+roots object slot 16777217 - 0 -1
+roots stack 245
+roots object slot 16777217 - 0 -1
+roots stack 246
+roots object slot 16777217 - 0 -1
+roots stack 247
+roots object slot 16777217 - 0 -1
+roots stack 248
+roots object slot 16777217 - 0 -1
+roots stack 249
+roots object slot 16777217 - 0 -1
+roots stack 250
+roots object slot 16777217 - 0 -1
+roots stack 251
+roots object slot 16777217 - 0 -1
+roots stack 252
+roots object slot 16777217 - 0 -1
+roots stack 253
+roots object slot 16777217 - 0 -1
+roots stack 254
+roots object slot 16777217 - 0 -1
+roots stack 255
+roots object slot 16777217 - 0 -1
+roots chain 85 ????OV???????????????????????????????????????????????????????????????????????????????
+roots end reset
+free O 88
+free V 384
+recorder 1

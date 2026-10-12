@@ -610,7 +610,7 @@
     "scripts/movement_ci/value.py": "bf57b7c83e7a86f010992cfcc5958678e218df8ae678ade3f4fd1719f46b5088",
     "scripts/owned_restore_sources.py": "179e32285e016739b67650a399289e4c2c0539700747d9f845db902a1535f656",
     "scripts/reference.cfg": "85131afe85a23b2653aa976ee0457c31f5ad3d2665a05f2868a7cb300ca26a4b",
-    "scripts/script_vm_inputs.py": "1f095a8c3c257451ebab8331569cb47ac0144e59ec78958c1c67b9de2dd3ff0e",
+    "scripts/script_vm_inputs.py": "b3e7cff00e99e7363ffd961c5225feac19200670a96ca321ed4891bba181e583",
     "scripts/script_vm_provenance.py": "fc006707c4863b7537a7587734d16244ffa328878a900c46927663e88c9f0f58",
     "scripts/setup-cargo-observer.sh": "2fdf18f8b26d102544626e5a112dfde8f729a59fcd79ac68d4f472911ea6407f",
     "scripts/setup-company-rating-reference.sh": "b340787cf04f8a0e23434ceee11b31f0412f78094c2f3b7d39951edd7bf592f8",

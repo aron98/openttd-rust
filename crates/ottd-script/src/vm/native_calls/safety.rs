@@ -47,7 +47,10 @@ pub(super) fn foreign_host_entries_fail_before_a_main_frame_is_installed() {
         runner.start_with_host(&program, host),
         Err(crate::VmError::RealmMismatch)
     ));
-    assert!(matches!(runner.temporary, Temporary::Value(Value::Null)));
+    assert!(matches!(
+        runner.temporary.as_ref(),
+        Temporary::Value(Value::Null)
+    ));
 }
 
 pub(super) fn malformed_native_argument_ranges_fail_without_dispatching_the_body() {
@@ -113,7 +116,7 @@ pub(super) fn call_temporary_retains_the_exact_unbound_callee_until_return() {
     let program = runner.compile("type(7);\nreturn 0;").expect("source");
     let mut vm = runner.start(&program).expect("vm");
     assert_eq!(vm.resume(4), Ok(Execution::Suspended));
-    let Temporary::Value(Value::NativeClosure(actual)) = &vm.runner.get().temporary else {
+    let Temporary::Value(Value::NativeClosure(actual)) = vm.runner.get().temporary.as_ref() else {
         panic!("callee temporary");
     };
     let mut output = format!(

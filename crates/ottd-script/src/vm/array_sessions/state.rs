@@ -49,7 +49,7 @@ impl Session {
             .ok_or_else(|| "runner busy/released".into())
     }
     pub(super) fn root(&self, id: usize) -> Result<&RootEnvironment> {
-        Ok(&self.runner(id)?.root)
+        Ok(self.runner(id)?.root.as_ref())
     }
     pub(super) fn handle(&self, slot: usize) -> Result<&Array> {
         self.handles
@@ -86,7 +86,7 @@ impl Session {
         }
     }
     pub(super) fn temp(&mut self, id: usize, out: &mut String) -> Result {
-        let value = match &self.runner(id)?.temporary {
+        let value = match self.runner(id)?.temporary.as_ref() {
             Temporary::Value(value) => Some(value.clone()),
             Temporary::MainProgram { .. } => None,
         };

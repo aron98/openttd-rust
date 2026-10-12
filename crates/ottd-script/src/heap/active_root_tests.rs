@@ -101,6 +101,7 @@ fn check(case: &Case) {
     let identities = [('O', table.0.edge.life.id), ('D', delegate.0.edge.life.id)];
     runner
         .root
+        .as_ref()
         .new_slot(
             b"__owner_setup",
             Value::Array(

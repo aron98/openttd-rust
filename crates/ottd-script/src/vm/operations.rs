@@ -7,7 +7,7 @@ impl Vm<'_> {
         if let Value::Table(table) = &value {
             table.refuse_metamethod(b"_typeof")?;
         }
-        Ok(value.type_name(&self.runner.get().root.realm))
+        Ok(value.type_name(&self.runner.get().root.as_ref().realm))
     }
 
     pub(super) fn binary_operation(&mut self, i: Instruction) -> Result<Value, VmError> {
@@ -48,7 +48,7 @@ impl Vm<'_> {
             };
             table.refuse_metamethod(method)?;
         }
-        let result = left.arithmetic(right, operation, &self.runner.get().root.realm);
+        let result = left.arithmetic(right, operation, &self.runner.get().root.as_ref().realm);
         result.map_err(|error| {
             let message = match error {
                 VmError::DivisionByZero => b"division by zero".to_vec(),

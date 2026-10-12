@@ -23,7 +23,8 @@ impl Vm<'_> {
                 if let Value::Table(table) = &other {
                     table.refuse_metamethod(b"_call")?;
                 }
-                let Value::String(kind) = other.type_name(&self.runner.get().root.realm) else {
+                let Value::String(kind) = other.type_name(&self.runner.get().root.as_ref().realm)
+                else {
                     return Err(VmError::InvalidBytecode);
                 };
                 let mut message = b"attempt to call '".to_vec();

@@ -27,6 +27,7 @@ impl Vm<'_> {
                 | VmError::UnsupportedArrayOrdering
                 | VmError::UnsupportedRuntimeValue => true,
                 VmError::UnsupportedMetamethod
+                | VmError::UnsupportedNativeFunction(_)
                 | VmError::UnsupportedTableHashTarget
                 | VmError::UnsupportedTableElement
                 | VmError::UnsupportedArrayElement
@@ -57,7 +58,7 @@ impl Vm<'_> {
             0x39 if i.arg1 == 0 => self.pop_traps(i.arg0),
             0x3a if i.arg1 == 0 => {
                 let error = self.register(i32::from(i.arg0))?;
-                self.runner.get_mut().native_error = error;
+                self.runner.get_mut().native_error.set(error);
                 self.raised = true;
                 Err(VmError::ThrownValue)
             }
@@ -111,7 +112,7 @@ impl Vm<'_> {
         let Some(trap) = self.traps.last().copied() else {
             return Ok(false);
         };
-        let error = self.runner.get().native_error.clone();
+        let error = self.runner.get().native_error.as_ref().clone();
         let last_top = self.top;
         while self.frames.len() > trap.frame {
             self.unwind_parent()?;
@@ -136,3 +137,21 @@ impl Vm<'_> {
 
 #[cfg(test)]
 mod owners;
+
+#[test]
+fn unsupported_default_is_uncatchable_even_with_a_raised_marker() {
+    // Given: a VM with a retained genuine error and its raised marker set.
+    let realm = crate::Realm::new();
+    let mut runner = crate::Runner::new(realm.default_root().expect("root"));
+    let program = runner.compile("return 0;").expect("source");
+    let mut vm = runner.start(&program).expect("frame");
+    vm.runner.get_mut().native_error.set(Value::Integer(9));
+    vm.raised = true;
+    // When: catchability is queried for an unsupported known callback.
+    let catchable = vm.catchable(VmError::UnsupportedNativeFunction(
+        crate::DefaultFunction::ArrayAppend,
+    ));
+    // Then: an implementation refusal cannot enter a script catch block.
+    assert!(!catchable);
+    assert_eq!(vm.runner.get().native_error_value(), &Value::Integer(9));
+}

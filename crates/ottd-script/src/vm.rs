@@ -76,7 +76,7 @@ impl<'a> Vm<'a> {
         }
         let mut registers = vec![Value::Null; usize::from(program.stack_size())];
         *registers.first_mut().ok_or(VmError::InvalidBytecode)? =
-            Value::Table(runner.get().root.table());
+            Value::Table(runner.get().root.as_ref().table());
         Ok(Self {
             program: Some(program.data.clone()),
             origin: host.len(),
@@ -163,7 +163,10 @@ impl<'a> Vm<'a> {
             .ok_or(VmError::BudgetOverflow)?;
         if !self.started {
             let program = self.program.as_ref().ok_or(VmError::Finished)?.clone();
-            self.runner.get_mut().temporary = Temporary::MainProgram { _program: program };
+            self.runner
+                .get_mut()
+                .temporary
+                .set(Temporary::MainProgram { _program: program });
             self.started = true;
         }
         let result = self.run();

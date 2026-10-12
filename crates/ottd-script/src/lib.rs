@@ -17,7 +17,9 @@ mod native_closure;
     reason = "Physical table storage is shared with the crate-private graph heap"
 )]
 mod table;
-pub use native_closure::{NativeClosure, NativeFunction};
+pub use native_closure::{
+    DefaultFunction, NativeClosure, NativeFunction, NativeRegistration, NativeRegistry,
+};
 pub use table::Table;
 mod array;
 pub use array::Array;
@@ -40,6 +42,7 @@ pub use host_stack::HostStack;
 pub use prototype::Prototype;
 pub use script_closure::ScriptClosure;
 mod realm;
+mod root_slot;
 mod runner;
 pub use program::Program;
 pub use realm::{ByteString, Realm};
@@ -67,6 +70,9 @@ pub struct Instruction {
 }
 
 // Shared private owner types live at the crate boundary, without public re-exports.
+pub(crate) struct RootSlot<T> {
+    value: T,
+}
 #[derive(Debug)]
 pub(crate) struct ProgramData {
     pub(crate) stack_size: u16,

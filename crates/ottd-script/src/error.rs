@@ -58,6 +58,8 @@ pub enum VmError {
     DelegateCycle,
     /// A reached native metamethod requires a nested invocation boundary not yet admitted.
     UnsupportedMetamethod,
+    /// Known native default callback whose implementation is not yet admitted.
+    UnsupportedNativeFunction(crate::DefaultFunction),
     /// A represented callable raised a native error retained by its runner.
     NativeCall,
     /// CALL reached a noncallable represented value.

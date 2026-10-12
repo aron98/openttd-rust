@@ -86,7 +86,7 @@ fn ownership_trace(source: &str, cycle: bool) -> String {
     )
     .expect("format");
     drop(result);
-    let Temporary::Value(Value::ScriptClosure(temporary)) = &runner.temporary else {
+    let Temporary::Value(Value::ScriptClosure(temporary)) = runner.temporary.as_ref() else {
         panic!("temporary closure");
     };
     writeln!(
@@ -95,7 +95,7 @@ fn ownership_trace(source: &str, cycle: bool) -> String {
         temporary.0.references()
     )
     .expect("format");
-    runner.temporary = Temporary::Value(Value::Null);
+    runner.temporary.set(Temporary::Value(Value::Null));
     writeln!(
         output,
         "temporary released {} {} {}",
@@ -139,7 +139,7 @@ fn failed_symbol_capture_retains_earlier_edges_in_unpublished_native_orphan() {
     drop(frame);
     drop(root.delete_slot(b"held").expect("delete"));
     drop(main);
-    runner.temporary = Temporary::Value(Value::Null);
+    runner.temporary.set(Temporary::Value(Value::Null));
     let mut output = format!(
         "result 0 {debt} {}\n",
         std::str::from_utf8(message.as_bytes()).expect("error bytes")
@@ -194,7 +194,7 @@ fn prototype_view_retains_code_without_retaining_closure_or_realm() {
     .expect("format");
     drop(main);
     drop(result);
-    runner.temporary = Temporary::Value(Value::Null);
+    runner.temporary.set(Temporary::Value(Value::Null));
     writeln!(
         output,
         "owners released {} {} {}",

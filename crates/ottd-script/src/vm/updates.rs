@@ -42,9 +42,13 @@ impl Vm<'_> {
         let current_this = receiver == self.register(0)?;
         let stored = match &receiver {
             Value::Table(table) => match table.set_delegated(key.clone(), value.clone()) {
-                Err(VmError::MissingIndex) if current_this => {
-                    self.runner.get().root.table.set_existing(key, value)
-                }
+                Err(VmError::MissingIndex) if current_this => self
+                    .runner
+                    .get()
+                    .root
+                    .as_ref()
+                    .table
+                    .set_existing(key, value),
                 result => result,
             },
             Value::Array(array) => array.store(&key, value),
@@ -55,7 +59,9 @@ impl Vm<'_> {
             | Value::String(_)
             | Value::NativeClosure(_)
             | Value::ScriptClosure(_) => {
-                let Value::String(kind) = receiver.type_name(&self.runner.get().root.realm) else {
+                let Value::String(kind) =
+                    receiver.type_name(&self.runner.get().root.as_ref().realm)
+                else {
                     return Err(VmError::InvalidBytecode);
                 };
                 let mut message = b"trying to set '".to_vec();

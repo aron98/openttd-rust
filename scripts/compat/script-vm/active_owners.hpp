@@ -7,6 +7,7 @@ static SQArray *local_array=nullptr;
 static SQNativeClosure *local_native=nullptr;
 static SQTable *host_table=nullptr;
 static void state(HSQUIRRELVM vm,std::string_view phase) {
+ if(native_roots::active_snapshot)native_roots::snapshot(vm,phase);
  std::cout<<"active "<<phase<<' '<<vm->_ops_till_suspend<<' '<<vm->_callsstacksize<<' '<<vm->_stackbase<<' '<<vm->_top<<' '<<vm->_vargsstack.size()<<'\n';
  for(SQUnsignedInteger i=0;i<vm->_stack.size();++i) {
   const auto &slot=vm->_stack[i];

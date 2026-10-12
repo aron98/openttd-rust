@@ -87,7 +87,7 @@ fn owner(source: &str, expected: &str, environment: &str) -> Result {
     drop(vm);
     drop(program);
     drop(result);
-    runner.temporary = Temporary::Value(Value::Null);
+    runner.temporary.set(Temporary::Value(Value::Null));
     if root.raw_get(b"held").is_some() {
         drop(root.delete_slot(b"held")?);
     }

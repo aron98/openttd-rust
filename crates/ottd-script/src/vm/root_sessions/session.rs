@@ -44,10 +44,10 @@ impl Session {
             .ok_or_else(|| "runner is active or released".into())
     }
     fn root(&self, id: usize) -> Result<&RootEnvironment> {
-        Ok(&self.runner(id)?.root)
+        Ok(self.runner(id)?.root.as_ref())
     }
     fn temp(&self, id: usize, out: &mut String) -> Result<()> {
-        match &self.runner(id)?.temporary {
+        match self.runner(id)?.temporary.as_ref() {
             Temporary::Value(value) => writeln!(out, "temp {}", render(value)?)?,
             Temporary::MainProgram { .. } => writeln!(out, "temp unsupported 134217984")?,
         }
@@ -70,7 +70,7 @@ impl Session {
                 for (slot, value) in frame.registers.iter().enumerate() {
                     match value {
                         Value::Table(root)
-                            if root.same_identity(&frame.runner.get().root.table) =>
+                            if root.same_identity(&frame.runner.get().root.as_ref().table) =>
                         {
                             writeln!(
                                 out,

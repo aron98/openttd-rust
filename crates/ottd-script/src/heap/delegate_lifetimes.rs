@@ -40,7 +40,7 @@ fn captures_defaults_and_last_error_follow_original_collection_lifetimes() {
         drop(vm);
         drop(program);
         drop(result);
-        runner.temporary = Temporary::Value(Value::Null);
+        runner.temporary.set(Temporary::Value(Value::Null));
         if kind == "error" {
             let Value::Table(error) = runner.native_error_value() else {
                 panic!("table error root");

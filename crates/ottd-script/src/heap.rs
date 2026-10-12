@@ -186,3 +186,8 @@ mod active_root_tests;
 
 #[cfg(test)]
 mod operand_tests;
+
+#[cfg(test)]
+pub(crate) mod observation;
+#[cfg(test)]
+mod observation_tests;

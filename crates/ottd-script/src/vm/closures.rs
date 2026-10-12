@@ -34,7 +34,7 @@ impl Vm<'_> {
             .get(index)
             .cloned()
             .ok_or(VmError::InvalidBytecode)?;
-        let realm = self.runner.get().root.realm.clone();
+        let realm = self.runner.get().root.as_ref().realm.clone();
         let unpublished = realm.heap.unpublished(
             &realm,
             Object::ScriptClosure(crate::script_closure::Data {

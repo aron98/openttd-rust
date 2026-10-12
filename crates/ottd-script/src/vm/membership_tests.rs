@@ -16,7 +16,10 @@ fn successful_membership_retains_value_and_missing_lookup_keeps_it() {
     let mut vm = Vm::new(&program).expect("frame");
     vm.write(1, Value::Table(table.clone())).expect("receiver");
     vm.write(2, key.clone()).expect("key");
-    vm.runner.get_mut().temporary = Temporary::Value(Value::Integer(17));
+    vm.runner
+        .get_mut()
+        .temporary
+        .set(Temporary::Value(Value::Integer(17)));
     let instruction = Instruction {
         opcode: 0x29,
         arg0: 3,

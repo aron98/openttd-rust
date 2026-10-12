@@ -28,8 +28,8 @@ impl Vm<'_> {
     }
     pub(super) fn native_failure(&mut self, message: &[u8], error: VmError) -> VmError {
         self.raised = true;
-        self.runner.get_mut().native_error =
-            Value::String(self.runner.get().root.realm.string(message));
+        let value = Value::String(self.runner.get().root.as_ref().realm.string(message));
+        self.runner.get_mut().native_error.set(value);
         error
     }
     pub(super) fn call(
@@ -37,6 +37,15 @@ impl Vm<'_> {
         i: Instruction,
         closure: NativeClosure,
     ) -> Result<Value, VmError> {
+        match closure.function() {
+            NativeFunction::Default(function) => {
+                return Err(VmError::UnsupportedNativeFunction(function));
+            }
+            NativeFunction::Assert
+            | NativeFunction::Print
+            | NativeFunction::Array
+            | NativeFunction::Type => {}
+        }
         let count = i64::from(i.arg3);
         let check = closure.parameter_check();
         if (check > 0 && count != check)
@@ -62,7 +71,8 @@ impl Vm<'_> {
         if closure.function() == NativeFunction::Array
             && !matches!(first, Value::Integer(_) | Value::Float(_))
         {
-            let Value::String(kind) = first.type_name(&self.runner.get().root.realm) else {
+            let Value::String(kind) = first.type_name(&self.runner.get().root.as_ref().realm)
+            else {
                 return Err(VmError::InvalidBytecode);
             };
             let mut message = b"parameter 1 has an invalid type '".to_vec();
@@ -113,6 +123,7 @@ impl Vm<'_> {
         } = frame;
         let (base, top, count) = (*base, *top, *count);
         match closure.function() {
+            NativeFunction::Default(function) => Err(VmError::UnsupportedNativeFunction(function)),
             NativeFunction::Assert => {
                 if first.is_false() {
                     return Err(self.native_failure(b"assertion failed", VmError::NativeCall));
@@ -124,7 +135,7 @@ impl Vm<'_> {
                     table.refuse_metamethod(b"_tostring")?;
                 }
                 let bytes = first.text()?;
-                let string = self.runner.get().root.realm.string(&bytes);
+                let string = self.runner.get().root.as_ref().realm.string(&bytes);
                 *self.native_slot(top)? = Value::String(string);
                 if let Some(sink) = &mut self.runner.get_mut().print_sink {
                     sink.print(&bytes);
@@ -132,7 +143,7 @@ impl Vm<'_> {
                 Ok(Value::Null)
             }
             NativeFunction::Type => {
-                *self.native_slot(top)? = first.type_name(&self.runner.get().root.realm);
+                *self.native_slot(top)? = first.type_name(&self.runner.get().root.as_ref().realm);
                 Ok(std::mem::replace(self.native_slot(top)?, Value::Null))
             }
             NativeFunction::Array => {
@@ -156,7 +167,7 @@ impl Vm<'_> {
                     None
                 };
                 let length = usize::try_from(size.max(0)).map_err(|_| VmError::Allocation)?;
-                let array = Array::reserved(&self.runner.get().root.realm, length)?;
+                let array = Array::reserved(&self.runner.get().root.as_ref().realm, length)?;
                 let fill = if count > 2 {
                     self.registers
                         .get(base.checked_add(2).ok_or(VmError::InvalidBytecode)?)

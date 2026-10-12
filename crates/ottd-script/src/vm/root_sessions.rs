@@ -221,7 +221,7 @@ fn native_success_outside_scalar_root_domain_is_explicitly_rejected() -> Result<
             fs::read_to_string(base.join(format!("native/delegate-precedence-{feed}.txt")))?
                 .contains("return 998 unsupported 134218240")
         );
-        runner.root.new_slot(b"len", Value::Integer(3))?;
+        runner.root.as_ref().new_slot(b"len", Value::Integer(3))?;
         assert_eq!(
             runner.start(&delegate)?.resume(1000)?,
             Execution::Returned(Value::Integer(3))

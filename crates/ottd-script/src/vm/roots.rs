@@ -18,8 +18,8 @@ impl Vm<'_> {
         Ok(())
     }
     pub(super) fn store_temporary(&mut self, value: Value) -> Result<Value, VmError> {
-        self.runner.get_mut().temporary = Temporary::Value(value);
-        match &self.runner.get().temporary {
+        self.runner.get_mut().temporary.set(Temporary::Value(value));
+        match self.runner.get().temporary.as_ref() {
             Temporary::Value(value) => Ok(value.clone()),
             Temporary::MainProgram { .. } => Err(VmError::UnsupportedRuntimeValue),
         }
@@ -75,11 +75,18 @@ impl Vm<'_> {
         Ok(value)
     }
     fn configured_get(&self, key: Value) -> Result<Value, VmError> {
-        if let Some(value) = self.runner.get().root.table.raw_get(key.clone())? {
+        if let Some(value) = self.runner.get().root.as_ref().table.raw_get(key.clone())? {
             return Ok(value);
         }
         if let Value::String(key) = key {
-            match self.runner.get().root.realm.constant_bytes(key.as_bytes()) {
+            match self
+                .runner
+                .get()
+                .root
+                .as_ref()
+                .realm
+                .constant_bytes(key.as_bytes())
+            {
                 Some(crate::realm::constants::Binding::Scalar(value)) => return Ok(value.value()),
                 Some(crate::realm::constants::Binding::Enum(_)) => {
                     return Err(VmError::UnsupportedRuntimeValue);
@@ -138,7 +145,12 @@ impl Vm<'_> {
                     table.new_slot(key, value)?;
                 } else if let Err(error) = table.set_delegated(key.clone(), value.clone()) {
                     if error == VmError::MissingIndex && *receiver == self.register(0)? {
-                        self.runner.get().root.table.set_existing(key, value)?;
+                        self.runner
+                            .get()
+                            .root
+                            .as_ref()
+                            .table
+                            .set_existing(key, value)?;
                     } else {
                         return Err(error);
                     }

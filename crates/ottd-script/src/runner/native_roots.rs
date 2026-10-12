@@ -75,7 +75,7 @@ fn registration_trace() -> String {
     writeln!(
         output,
         "friend root {}",
-        u8::from(root.table.same_identity(&friend.root.table))
+        u8::from(root.table.same_identity(&friend.root.as_ref().table))
     )
     .expect("format");
     writeln!(
@@ -140,7 +140,7 @@ fn default_roots_retain_real_metadata_and_friend_identities() {
     let watch = old.watch();
     let runner = Runner::new(root.clone());
     let friend = runner.friend().expect("friend");
-    assert!(root.table.same_identity(&friend.root.table));
+    assert!(root.table.same_identity(&friend.root.as_ref().table));
     assert!(!old.same_identity(&closure(&root)));
     drop(old);
     assert!(watch().is_none());

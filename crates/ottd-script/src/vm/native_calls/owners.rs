@@ -43,7 +43,7 @@ pub(super) fn host_entries_preserve_original_call_owner_and_argument_lifetimes()
             program.data.read(|data| Rc::strong_count(&data.prototype))
         )
         .expect("format");
-        match &vm.runner.get().temporary {
+        match vm.runner.get().temporary.as_ref() {
             Temporary::Value(Value::NativeClosure(_)) => {
                 writeln!(output, "temporary 134218240").expect("format");
             }
@@ -126,7 +126,10 @@ pub(super) fn call_created_cycles_release_on_realm_teardown() {
         let watches = (table.watch(), array.watch());
         drop(table);
         drop(array);
-        vm.runner.get_mut().temporary = Temporary::Value(Value::Null);
+        vm.runner
+            .get_mut()
+            .temporary
+            .set(Temporary::Value(Value::Null));
         writeln!(
             output,
             "cycle before {} {}",

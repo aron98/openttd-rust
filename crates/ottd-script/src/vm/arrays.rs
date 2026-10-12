@@ -14,7 +14,7 @@ impl Vm<'_> {
             )
             .ok_or(VmError::InvalidBytecode)?;
         let capacity = usize::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
-        Array::reserved(&self.runner.get().root.realm, capacity).map(Value::Array)
+        Array::reserved(&self.runner.get().root.as_ref().realm, capacity).map(Value::Array)
     }
     pub(super) fn append_array(&self, instruction: Instruction) -> Result<(), VmError> {
         let Value::Array(array) = self

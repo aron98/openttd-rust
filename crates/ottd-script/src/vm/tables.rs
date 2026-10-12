@@ -13,6 +13,6 @@ impl Vm<'_> {
             )
             .ok_or(VmError::InvalidBytecode)?;
         let capacity = usize::try_from(instruction.arg1).map_err(|_| VmError::InvalidBytecode)?;
-        crate::Table::reserved(&self.runner.get().root.realm, capacity).map(Value::Table)
+        crate::Table::reserved(&self.runner.get().root.as_ref().realm, capacity).map(Value::Table)
     }
 }

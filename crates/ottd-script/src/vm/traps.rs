@@ -57,7 +57,7 @@ impl Vm<'_> {
             0x39 if i.arg1 == 0 => self.pop_traps(i.arg0),
             0x3a if i.arg1 == 0 => {
                 let error = self.register(i32::from(i.arg0))?;
-                self.runner.get_mut().native_error = error;
+                self.runner.get_mut().native_error.set(error);
                 self.raised = true;
                 Err(VmError::ThrownValue)
             }
@@ -111,7 +111,7 @@ impl Vm<'_> {
         let Some(trap) = self.traps.last().copied() else {
             return Ok(false);
         };
-        let error = self.runner.get().native_error.clone();
+        let error = self.runner.get().native_error.as_ref().clone();
         let last_top = self.top;
         while self.frames.len() > trap.frame {
             self.unwind_parent()?;

@@ -35,7 +35,7 @@ fn ownership(reverse: bool) {
         vm.instruction_pointer()
     )
     .expect("format");
-    vm.runner.get_mut().root = realm.empty_root();
+    vm.runner.get_mut().root.set(realm.empty_root());
     writeln!(
         output,
         "frame collect {} {} {}",

@@ -23,13 +23,16 @@ fn string_exhaustion_and_errors_preserve_frame_and_temporary() -> Result<(), VmE
         vm.write(2, Value::Integer(77))?;
         vm.write(3, Value::String(realm.string(b"retained")))?;
         vm.write(4, Value::Integer(cursor))?;
-        vm.runner.get_mut().temporary = Temporary::Value(Value::String(realm.string(b"temporary")));
+        vm.runner
+            .get_mut()
+            .temporary
+            .set(Temporary::Value(Value::String(realm.string(b"temporary"))));
         assert_eq!(vm.foreach(instruction), expected);
         assert_eq!(vm.register(2)?, Value::Integer(77));
         assert_eq!(vm.register(3)?, Value::String(realm.string(b"retained")));
         assert_eq!(vm.register(4)?, Value::Integer(cursor));
         assert!(
-            matches!(&vm.runner.get().temporary, Temporary::Value(Value::String(s)) if s.as_bytes()==b"temporary")
+            matches!(vm.runner.get().temporary.as_ref(), Temporary::Value(Value::String(s)) if s.as_bytes()==b"temporary")
         );
         assert!(matches!(vm.registers.first(), Some(Value::Table(_))));
     }

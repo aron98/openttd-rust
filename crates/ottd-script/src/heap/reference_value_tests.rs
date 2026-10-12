@@ -151,7 +151,11 @@ fn run(kind: Kind) {
         Kind::Native => {
             drop(table);
             drop(delegate);
-            runner.root.delete_slot(b"array").expect("native owner")
+            runner
+                .root
+                .as_ref()
+                .delete_slot(b"array")
+                .expect("native owner")
         }
     };
     let identity = match &value {

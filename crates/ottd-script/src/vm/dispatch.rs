@@ -66,7 +66,7 @@ impl Vm<'_> {
                 self.root_store(i)?;
                 return Ok(None);
             }
-            0x15 => Value::Table(self.runner.get().root.table()),
+            0x15 => Value::Table(self.runner.get().root.as_ref().table()),
             0x01 => self.literal(i.arg1)?,
             0x02 => Value::Integer(i64::from(i.arg1)),
             0x03 => Value::Float(u32::from_ne_bytes(i.arg1.to_ne_bytes())),

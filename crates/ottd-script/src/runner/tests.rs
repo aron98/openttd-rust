@@ -11,7 +11,10 @@ fn program_clone_shares_one_literal_pool_and_failed_call_retains_real_program() 
     assert!(a.data.same_identity(&clone.data));
     assert_eq!(realm.owners(b"compile-owner-A"), 1);
     let b = runner.compile("return \"compile-owner-B\";")?;
-    assert!(matches!(runner.temporary, Temporary::Value(Value::Null)));
+    assert!(matches!(
+        runner.temporary.as_ref(),
+        Temporary::Value(Value::Null)
+    ));
     drop(clone);
     {
         let mut frame = runner.start(&a)?;
@@ -22,7 +25,7 @@ fn program_clone_shares_one_literal_pool_and_failed_call_retains_real_program() 
         assert_eq!(frame.resume(100), Err(VmError::MissingIndex));
         assert_eq!(realm.owners(b"compile-owner-A"), 1);
     }
-    let Temporary::MainProgram { _program: owner } = &runner.temporary else {
+    let Temporary::MainProgram { _program: owner } = runner.temporary.as_ref() else {
         return Err("missing actual program owner".into());
     };
     assert_eq!(owner.read(|data| data.prototype.literals.len()), 2);

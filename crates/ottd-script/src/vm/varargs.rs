@@ -37,7 +37,8 @@ impl Vm<'_> {
             | Value::Table(_)
             | Value::NativeClosure(_)
             | Value::ScriptClosure(_) => {
-                let Value::String(kind) = index.type_name(&self.runner.get().root.realm) else {
+                let Value::String(kind) = index.type_name(&self.runner.get().root.as_ref().realm)
+                else {
                     return Err(VmError::InvalidBytecode);
                 };
                 let mut message = b"indexing 'vargv' with ".to_vec();

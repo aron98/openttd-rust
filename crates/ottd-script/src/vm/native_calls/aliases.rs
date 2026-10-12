@@ -59,7 +59,10 @@ pub(super) fn returned_native_arrays_retain_fill_aliases_until_the_last_temporar
             u8::from(watch().is_some())
         )
         .expect("format");
-        vm.runner.get_mut().temporary = Temporary::Value(Value::Null);
+        vm.runner
+            .get_mut()
+            .temporary
+            .set(Temporary::Value(Value::Null));
         writeln!(
             output,
             "temporary released {} {}",
@@ -120,7 +123,7 @@ pub(super) fn native_failure_preserves_aliases_mutation_and_reusable_runner_stat
         u8::from(copy.get(1) == Some(Value::Table(held.clone())))
     )
     .expect("format");
-    match &vm.runner.get().temporary {
+    match vm.runner.get().temporary.as_ref() {
         Temporary::Value(Value::NativeClosure(_)) => {
             writeln!(output, "temporary 134218240").expect("format");
         }

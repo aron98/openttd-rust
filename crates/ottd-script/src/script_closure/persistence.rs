@@ -72,7 +72,7 @@ fn persistent_closure_frames_and_late_errors_match_original_owners() {
         )
         .expect("format");
         drop(result);
-        runner.temporary = Temporary::Value(Value::Null);
+        runner.temporary.set(Temporary::Value(Value::Null));
         writeln!(output, "final {}", u8::from(leaf_watch().is_some())).expect("format");
         let (variable, fixture) = if failure {
             (

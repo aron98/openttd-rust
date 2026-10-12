@@ -44,7 +44,7 @@ fn last_error_retains_caught_and_uncaught_graphs_until_reset() {
         let references = array.0.reference_probe();
         drop(program);
         drop(result);
-        runner.temporary = Temporary::Value(Value::Null);
+        runner.temporary.set(Temporary::Value(Value::Null));
         realm.collect_cycles();
         writeln!(
             output,

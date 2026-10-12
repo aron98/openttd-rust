@@ -1,4 +1,5 @@
 //! Persistent execution owners, separate from shared root slots and compiler state.
+use crate::RootSlot;
 use crate::{CompileError, Program, Realm, Storage, Table, Temporary, Value, Vm, VmError};
 /// A configured root retaining the ordinary graph-backed physical table identity.
 #[derive(Clone, Debug)]
@@ -129,9 +130,9 @@ pub trait PrintSink: std::fmt::Debug {
 /// Persistent configured execution context with independent temporary ownership.
 #[derive(Debug)]
 pub struct Runner {
-    pub(crate) root: RootEnvironment,
-    pub(crate) native_error: Value,
-    pub(crate) temporary: Temporary,
+    pub(crate) root: RootSlot<RootEnvironment>,
+    pub(crate) native_error: RootSlot<Value>,
+    pub(crate) temporary: RootSlot<Temporary>,
     pub(crate) failure: Option<RunnerFailure>,
     pub(crate) print_sink: Option<Box<dyn PrintSink>>,
 }
@@ -139,9 +140,9 @@ impl Runner {
     /// Create an idle context sharing this root, with no prior temporary or failure.
     pub const fn new(root: RootEnvironment) -> Self {
         Self {
-            root,
-            native_error: Value::Null,
-            temporary: Temporary::Value(Value::Null),
+            root: RootSlot::new(root),
+            native_error: RootSlot::new(Value::Null),
+            temporary: RootSlot::new(Temporary::Value(Value::Null)),
             failure: None,
             print_sink: None,
         }
@@ -152,7 +153,7 @@ impl Runner {
     }
     /// Last native compiler or execution error bytes. Successful operations retain this object.
     pub const fn native_error(&self) -> Option<&crate::ByteString> {
-        if let Value::String(message) = &self.native_error {
+        if let Value::String(message) = self.native_error.as_ref() {
             Some(message)
         } else {
             None
@@ -160,18 +161,18 @@ impl Runner {
     }
     /// Borrow the retained native error object without converting or copying it.
     pub const fn native_error_value(&self) -> &Value {
-        &self.native_error
+        self.native_error.as_ref()
     }
     /// Release the retained native error object, preserving Rust diagnostic history.
     pub fn reset_native_error(&mut self) {
-        self.native_error = Value::Null;
+        self.native_error.set(Value::Null);
     }
     /// Create a friend context sharing the current root and re-registering defaults.
     /// # Errors
     /// Allocation failure may leave the same partial registration as the native host.
     pub fn friend(&self) -> Result<Self, VmError> {
-        self.root.register_defaults()?;
-        Ok(Self::new(self.root.clone()))
+        self.root.as_ref().register_defaults()?;
+        Ok(Self::new(self.root.as_ref().clone()))
     }
     /// Compile in this runner's realm without replacing its runtime temporary.
     ///
@@ -195,20 +196,24 @@ impl Runner {
         source: &[u8],
         name: &std::ffi::CStr,
     ) -> Result<Program, CompileError> {
-        crate::compiler::compile_in(&self.root.realm, source, name.to_bytes()).map_err(|failure| {
-            self.failure = Some(RunnerFailure::Compile(failure.error));
-            self.native_error = failure
-                .native_message(&self.root.realm)
-                .map_or(Value::Null, Value::String);
-            failure.error
-        })
+        crate::compiler::compile_in(&self.root.as_ref().realm, source, name.to_bytes()).map_err(
+            |failure| {
+                self.failure = Some(RunnerFailure::Compile(failure.error));
+                self.native_error.set(
+                    failure
+                        .native_message(&self.root.as_ref().realm)
+                        .map_or(Value::Null, Value::String),
+                );
+                failure.error
+            },
+        )
     }
     /// Borrow this context for one main frame; the program's immutable data is shared.
     ///
     /// # Errors
     /// Rejects a program from another realm or malformed stack size.
     pub fn start<'a>(&'a mut self, program: &Program) -> Result<Vm<'a>, VmError> {
-        if !self.root.realm.same(&program.data.0.realm) {
+        if !self.root.as_ref().realm.same(&program.data.0.realm) {
             return Err(VmError::RealmMismatch);
         }
         Vm::with_runner(program, Storage::Borrowed(self))
@@ -221,7 +226,7 @@ impl Runner {
         program: &Program,
         host: crate::HostStack,
     ) -> Result<Vm<'a>, VmError> {
-        if !self.root.realm.same(&program.data.0.realm) {
+        if !self.root.as_ref().realm.same(&program.data.0.realm) {
             return Err(VmError::RealmMismatch);
         }
         Vm::with_host_runner(program, Storage::Borrowed(self), host)
@@ -231,10 +236,10 @@ impl Runner {
     /// # Errors
     /// Rejects a different realm without changing the current root.
     pub fn replace_root(&mut self, root: RootEnvironment) -> Result<(), VmError> {
-        if !self.root.realm.same(&root.realm) {
+        if !self.root.as_ref().realm.same(&root.realm) {
             return Err(VmError::RealmMismatch);
         }
-        self.root = root;
+        self.root.set(root);
         Ok(())
     }
     /// Last Rust diagnostic; successful calls leave this history intact.

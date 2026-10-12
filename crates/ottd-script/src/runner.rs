@@ -270,3 +270,13 @@ mod native_roots;
 
 #[cfg(test)]
 mod error_state;
+
+#[cfg(test)]
+mod observation;
+#[cfg(test)]
+mod observation_tests;
+
+#[cfg(test)]
+mod observation_native;
+#[cfg(test)]
+mod observation_red;

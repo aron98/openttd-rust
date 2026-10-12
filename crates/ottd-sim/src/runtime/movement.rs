@@ -26,6 +26,8 @@ mod step;
 mod year;
 #[cfg(test)]
 mod year_native;
+#[cfg(test)]
+mod year_rollback;
 use super::{RoadVehicleCache, RuntimeSaveContext, SavedVehicleView, SimulationRuntime, VehicleId};
 use crate::{
     WorldTickError, WorldTickPhases as VehiclePhases, WorldTickReport, WorldTickState as State,
@@ -226,7 +228,7 @@ impl VehiclePhases for RoadPhases<'_> {
     }
     fn ticks(&mut self, state: &mut State<'_>, clock: &ClockState) -> Result<(), WorldTickError> {
         if self.id.raw() % 74 == u32::from(clock.snapshot().economy_date_fract.0) {
-            daily::run(state, self.id, self.content)?;
+            daily::run(state, self)?;
         }
         loading::station_tick(state, self)?;
         if self.stations.is_empty() {

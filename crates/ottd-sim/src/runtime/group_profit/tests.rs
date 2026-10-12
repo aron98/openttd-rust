@@ -95,3 +95,16 @@ fn native_money_saturates_and_minimum_count_wraps() {
     assert_eq!(profit.profit_last_year_min_age, i64::MIN);
     assert_eq!(profit.num_vehicle_min_age, 0);
 }
+
+#[test]
+fn reaching_minimum_age_preserves_all_age_sum() {
+    let mut profit = ProfitFields {
+        profit_last_year: 41,
+        profit_last_year_min_age: -7,
+        num_vehicle_min_age: u16::MAX,
+    };
+    profit.reached_min_age(19);
+    assert_eq!(profit.profit_last_year, 41);
+    assert_eq!(profit.profit_last_year_min_age, 12);
+    assert_eq!(profit.num_vehicle_min_age, 0);
+}

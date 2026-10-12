@@ -9,14 +9,20 @@ const BREAKDOWN_CHANCE: [i64; 64] = [
 ];
 pub(super) fn run(
     state: &mut State<'_>,
-    id: VehicleId,
-    content: &ContentCatalog,
+    runner: &mut super::RoadPhases<'_>,
 ) -> Result<(), WorldTickError> {
-    let age = number(state, id, false, "economy_age")?.saturating_add(1);
-    if age > 730 {
-        return Err(unsupported("road_day", "profit group age transition"));
+    let id = runner.id;
+    let age = number(state, id, false, "economy_age")?;
+    // Native TimerGame economy MAX_DATE: end of calendar year 5,000,000.
+    if age < 1_826_212_865 {
+        let next = age.saturating_add(1);
+        set(state, id, false, "economy_age", next)?;
+        if next == 731 {
+            runner
+                .group_profits
+                .reached_min_age(SavedVehicleView::candidate(state.view(), id)?)?;
+        }
     }
-    set(state, id, false, "economy_age", age)?;
     let day = number(state, id, false, "day_counter")?.wrapping_add(1) & 255;
     set(state, id, false, "day_counter", day)?;
     if day.trailing_zeros() >= 3 {
@@ -65,7 +71,7 @@ pub(super) fn run(
         }
     }
     super::service::check(state, id)?;
-    running_cost(state, id, content)
+    running_cost(state, id, runner.content)
 }
 fn running_cost(
     state: &mut State<'_>,

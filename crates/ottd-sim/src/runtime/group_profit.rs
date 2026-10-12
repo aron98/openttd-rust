@@ -1,4 +1,5 @@
 //! Owned fields changed by native `GroupStatistics::UpdateProfits` and age731.
+mod age;
 mod restore;
 #[cfg(test)]
 mod tests;
@@ -17,9 +18,7 @@ impl ProfitFields {
     const fn add(&mut self, display_profit: i64, eligible: bool) {
         self.profit_last_year = self.profit_last_year.saturating_add(display_profit);
         if eligible {
-            self.profit_last_year_min_age =
-                self.profit_last_year_min_age.saturating_add(display_profit);
-            self.num_vehicle_min_age = self.num_vehicle_min_age.wrapping_add(1);
+            self.reached_min_age(display_profit);
         }
     }
 }
@@ -60,6 +59,16 @@ impl GroupProfitCaches {
         display_profit: i64,
         eligible: bool,
     ) -> Result<(), RuntimeError> {
+        let (all, target) = self.road_groups(owner, group)?;
+        all.add(display_profit, eligible);
+        target.add(display_profit, eligible);
+        Ok(())
+    }
+    fn road_groups(
+        &mut self,
+        owner: u8,
+        group: u16,
+    ) -> Result<(&mut ProfitFields, &mut ProfitFields), RuntimeError> {
         let company = self
             .companies
             .get_mut(&owner)
@@ -79,12 +88,10 @@ impl GroupProfitCaches {
             }
             &mut named.profit
         };
-        company
+        let all = company
             .all
             .get_mut(1)
-            .ok_or(RuntimeError::Invalid("road group type"))?
-            .add(display_profit, eligible);
-        target.add(display_profit, eligible);
-        Ok(())
+            .ok_or(RuntimeError::Invalid("road group type"))?;
+        Ok((all, target))
     }
 }

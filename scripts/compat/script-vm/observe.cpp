@@ -39,6 +39,7 @@ void value(const SQObjectPtr &v) {
 #include "calls.hpp"
 #include "closures.hpp"
 #include "delegates.hpp"
+#include "active_owners.hpp"
 static std::ofstream print_output;
 static void record_print(HSQUIRRELVM, std::string_view bytes) {
  uint64_t size=bytes.size();
@@ -49,6 +50,7 @@ static void record_print(HSQUIRRELVM, std::string_view bytes) {
 }
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--active-owner") return active_owner::session(argc,argv);
  if(std::string_view(argv[1])=="--delegate-cycle-owner") return delegate_cycle_owner(argc,argv);
  if(std::string_view(argv[1])=="--delegate-owner") return delegate_owner_session(argc,argv);
  if(std::string_view(argv[1])=="--trap-error-owner") return trap_error_owner(argc,argv);

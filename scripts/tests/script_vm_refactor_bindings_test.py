@@ -129,6 +129,7 @@ EXTRACTED_INPUTS: Final = (
     "scripts/compat/script-vm/owner_trace.hpp",
     "scripts/compat/script-vm/tables/delegate_cases.py",
     "scripts/compat/script-vm/tables/delegate_owners.py",
+    "crates/ottd-script/tests/delegation/qualified-parent.nut",
 )
 
 

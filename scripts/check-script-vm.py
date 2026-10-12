@@ -16,7 +16,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.gameplay_foundations import FoundationRun
 from scripts.script_vm_arrays import run_arrays
-from scripts.script_vm_foreach import run_foreach
 from scripts.script_vm_branches import finish_branches, run_branches
 from scripts.script_vm_constants import run_constants
 from scripts.script_vm_evidence import (
@@ -25,8 +24,10 @@ from scripts.script_vm_evidence import (
     package,
     require_tests,
 )
+from scripts.script_vm_foreach import run_foreach
 from scripts.script_vm_policy import compare_case, observe_native
 from scripts.script_vm_provenance import (
+    Spec,
     digest,
     load_spec,
     select_executable,
@@ -37,91 +38,7 @@ from scripts.script_vm_strings import run_strings
 from scripts.world_check_support import ROOT, Json, WorldCheckError, run, write_json
 
 
-def main() -> None:
-    os.environ["CARGO_INCREMENTAL"] = "0"
-    spec = load_spec(MANIFEST)
-    parent = ROOT / ".artifacts"
-    parent.mkdir(exist_ok=True)
-    output = Path(tempfile.mkdtemp(prefix="script-vm-", dir=parent))
-    print(f"Artifacts: {output}", flush=True)
-    checkout = Path(
-        os.environ.get("OTTD_SCRIPT_VM_SOURCE", str(ROOT / ".reference/OpenTTD"))
-    ).resolve(strict=True)
-    native = output / "native"
-    builder = FoundationRun(ROOT, output, native / "observe")
-    _ = builder.run("native-compiler", ["c++", "--version"])
-    _ = builder.run("rust-compiler", ["rustc", "--version"])
-    for name, sha in spec.sources:
-        source = ROOT / name
-        if digest(source) != sha:
-            raise WorldCheckError(f"VM source does not match pinned manifest: {name}")
-        target = output / "source" / name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        _ = shutil.copy2(source, target)
-    _ = shutil.copy2(MANIFEST, output / "manifest.json")
-    _ = builder.run(
-        "native-build",
-        [
-            "sh",
-            str(ROOT / "scripts/compat/script-vm/build-native.sh"),
-            str(checkout),
-            str(native),
-        ],
-    )
-    verify_sources(ROOT, native, spec)
-    built = builder.run(
-        "build-rust",
-        [
-            "cargo",
-            "build",
-            "--locked",
-            "-p",
-            "ottd-script",
-            "--example",
-            "observe",
-            "--message-format=json",
-        ],
-    )
-    rust = select_executable(built.stdout, "observe", "example", False)
-    built_tests = builder.run(
-        "build-tests",
-        [
-            "cargo",
-            "test",
-            "--locked",
-            "-p",
-            "ottd-script",
-            "--test",
-            "scalar",
-            "--no-run",
-            "--message-format=json",
-        ],
-    )
-    tests = select_executable(built_tests.stdout, "scalar", "test", True)
-    (output / "bin").mkdir()
-    for source, name in ((rust, "rust-observe"), (tests, "scalar-tests")):
-        target = output / "bin" / name
-        _ = shutil.copy2(source, target)
-        target.chmod(0o555)
-    (native / "observe").chmod(0o555)
-    identities: Json = {
-        "artifact_root": str(output),
-        "rust": {"path": str(rust), "sha256": digest(rust)},
-        "tests": {"path": str(tests), "sha256": digest(tests)},
-        "native": digest(native / "observe"),
-    }
-    write_json(output / "identities.json", identities)
-    test_run = run([str(tests), "--test-threads=1"], output / "tests")
-    require_tests(test_run.stdout, spec.tests)
-    zero = run(
-        [str(tests), "--exact", "script_vm_ci_missing_test"], output / "zero-tests"
-    )
-    try:
-        require_tests(zero.stdout, spec.tests)
-    except WorldCheckError:
-        pass
-    else:
-        raise WorldCheckError("Actual zero-test run admitted")
+def run_scalar_cases(output: Path, native: Path, rust: Path, spec: Spec) -> None:
     (output / "inputs").mkdir()
     stages = dict(spec.stages)
     for name in spec.fixtures:
@@ -147,6 +64,100 @@ def main() -> None:
         target = directory / "changed.stdout"
         _ = target.write_text(base.read_text().replace(old, new))
         _ = run(["diff", "-u", str(base), str(target)], directory / "compare", 1)
+
+
+def prepare_native(
+    builder: FoundationRun, spec: Spec, output: Path, native: Path, checkout: Path
+) -> None:
+    for name, sha in spec.sources:
+        source = ROOT / name
+        if digest(source) != sha:
+            raise WorldCheckError(f"VM source does not match pinned manifest: {name}")
+        target = output / "source" / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        _ = shutil.copy2(source, target)
+    _ = shutil.copy2(MANIFEST, output / "manifest.json")
+    _ = builder.run(
+        "native-build",
+        [
+            "sh",
+            str(ROOT / "scripts/compat/script-vm/build-native.sh"),
+            str(checkout),
+            str(native),
+        ],
+    )
+    verify_sources(ROOT, native, spec)
+
+
+def main() -> None:
+    os.environ["CARGO_INCREMENTAL"] = "0"
+    spec = load_spec(MANIFEST)
+    parent = ROOT / ".artifacts"
+    parent.mkdir(exist_ok=True)
+    output = Path(tempfile.mkdtemp(prefix="script-vm-", dir=parent))
+    print(f"Artifacts: {output}", flush=True)
+    checkout = Path(
+        os.environ.get("OTTD_SCRIPT_VM_SOURCE", str(ROOT / ".reference/OpenTTD"))
+    ).resolve(strict=True)
+    native = output / "native"
+    builder = FoundationRun(ROOT, output, native / "observe")
+    _ = builder.run("native-compiler", ["c++", "--version"])
+    _ = builder.run("rust-compiler", ["rustc", "--version"])
+    prepare_native(builder, spec, output, native, checkout)
+    built = builder.run(
+        "build-rust",
+        [
+            "cargo",
+            "build",
+            "--locked",
+            "-p",
+            "ottd-script",
+            "--example",
+            "observe",
+            "--message-format=json",
+        ],
+    )
+    rust = select_executable(built.stdout, "observe", "example", test=False)
+    built_tests = builder.run(
+        "build-tests",
+        [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "ottd-script",
+            "--test",
+            "scalar",
+            "--no-run",
+            "--message-format=json",
+        ],
+    )
+    tests = select_executable(built_tests.stdout, "scalar", "test", test=True)
+    (output / "bin").mkdir()
+    for source, name in ((rust, "rust-observe"), (tests, "scalar-tests")):
+        target = output / "bin" / name
+        _ = shutil.copy2(source, target)
+        target.chmod(0o555)
+    (native / "observe").chmod(0o555)
+    identities: Json = {
+        "artifact_root": str(output),
+        "rust": {"path": str(rust), "sha256": digest(rust)},
+        "tests": {"path": str(tests), "sha256": digest(tests)},
+        "native": digest(native / "observe"),
+    }
+    write_json(output / "identities.json", identities)
+    test_run = run([str(tests), "--test-threads=1"], output / "tests")
+    require_tests(test_run.stdout, spec.tests)
+    zero = run(
+        [str(tests), "--exact", "script_vm_ci_missing_test"], output / "zero-tests"
+    )
+    try:
+        require_tests(zero.stdout, spec.tests)
+    except WorldCheckError:
+        pass
+    else:
+        raise WorldCheckError("Actual zero-test run admitted")
+    run_scalar_cases(output, native, rust, spec)
     run_roots(builder)
     run_arrays(builder)
     run_foreach(builder)

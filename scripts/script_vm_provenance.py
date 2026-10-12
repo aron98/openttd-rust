@@ -7,11 +7,18 @@
 """Pinned source export and Cargo executable identities."""
 
 import hashlib
+import tarfile
 from dataclasses import dataclass
 from pathlib import Path
 
 from scripts.script_vm_inputs import OBSERVER_INPUTS, source_names
-from scripts.world_check_support import Json, WorldCheckError, decode_json, read_json
+from scripts.world_check_support import (
+    Json,
+    WorldCheckError,
+    decode_json,
+    read_json,
+    write_json,
+)
 
 PIN = "14ec60f248547d4d062a1160f0fc26d742319888"
 
@@ -91,7 +98,9 @@ def digest(path: Path) -> str:
 
 def blob_digest(path: Path) -> str:
     data = path.read_bytes()
-    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+    return hashlib.sha1(
+        b"blob " + str(len(data)).encode() + b"\0" + data, usedforsecurity=False
+    ).hexdigest()
 
 
 def check_blob(path: Path, expected: str) -> None:
@@ -130,7 +139,7 @@ def verify_observer_sources(root: Path, native: Path) -> None:
             raise WorldCheckError("Native observer source differs")
 
 
-def select_executable(output: str, name: str, kind: str, test: bool) -> Path:
+def select_executable(output: str, name: str, kind: str, *, test: bool) -> Path:
     candidates: list[Path] = []
     for line in output.splitlines():
         match decode_json(line):
@@ -151,10 +160,6 @@ def select_executable(output: str, name: str, kind: str, test: bool) -> Path:
 
 
 def archive_files(directory: Path, paths: tuple[str, ...]) -> None:
-    import tarfile
-
-    from scripts.world_check_support import write_json
-
     hashes: dict[str, Json] = {name: digest(directory / name) for name in paths}
     destination = directory / "evidence.tar.gz"
     with tarfile.open(destination, "x:gz") as archive:
@@ -168,8 +173,6 @@ def archive_files(directory: Path, paths: tuple[str, ...]) -> None:
 
 
 def verify_archive(directory: Path, paths: tuple[str, ...]) -> None:
-    import tarfile
-
     hashes = {name: digest(directory / name) for name in paths}
     destination = directory / "evidence.tar.gz"
     seen: set[str] = set()

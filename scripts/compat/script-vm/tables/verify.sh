@@ -83,7 +83,7 @@ for profile in debug release; do
  cargo clean -p ottd-script $flag > "$out/$profile-clean.log" 2>&1
  printf "0\n" > "$out/$profile-clean.status"
  cargo build -vv -p ottd-script --example observe $flag --message-format=json > "$out/$profile-build.jsonl" 2> "$out/$profile-build.log"
- rust=$(python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import select_executable; print(select_executable(Path(sys.argv[1]).read_text(), "observe", "example", False))' "$out/$profile-build.jsonl")
+ rust=$(python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import select_executable; print(select_executable(Path(sys.argv[1]).read_text(), "observe", "example", test=False))' "$out/$profile-build.jsonl")
  printf '%s\n' "$rust" > "$out/$profile-selected-observer.txt"
  python3 -m scripts.compat.script-vm.tables.compare "$out/native/observe" "$rust" "$out/$profile" > "$out/$profile-compare.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.controls "$out/$profile" > "$out/$profile-controls.log" 2>&1

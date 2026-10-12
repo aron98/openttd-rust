@@ -9,11 +9,14 @@ from scripts.gameplay_foundations import digest
 from scripts.grf_control_evidence import text
 from scripts.language_ci_compare import compare, mapping
 from scripts.owned_restore_sources import compiled_inputs, verify_compiled
+from scripts.vehicle_year_sources import MANIFEST as YEAR_MANIFEST
+from scripts.vehicle_year_sources import REQUIRED as YEAR_REQUIRED
 from scripts.world_check_support import Json, WorldCheckError, at, read_json, write_json
 
 
 def source_names(root: Path) -> list[str]:
     names = set(compiled_inputs(root))
+    names.update((*YEAR_REQUIRED, YEAR_MANIFEST))
     names.update(
         mapping(
             at(

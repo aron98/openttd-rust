@@ -5,6 +5,8 @@ from typing import Final
 
 from scripts.context_ci_support import sources
 from scripts.language_ci_compare import mapping
+from scripts.vehicle_year_sources import REQUIRED as YEAR_REQUIRED
+from scripts.vehicle_year_sources import verify as verify_year
 from scripts.world_check_support import Json, WorldCheckError, at, read_json
 
 REQUIRED: Final = (
@@ -16,6 +18,8 @@ REQUIRED: Final = (
     "reference/cargo_replay.hpp",
     "reference/cargo_observer.patch",
     "scripts/setup-cargo-observer.sh",
+    "scripts/vehicle-year-sources.json",
+    *YEAR_REQUIRED,
 )
 
 
@@ -27,6 +31,7 @@ def verify(root: Path, layout: Json) -> None:
             f"Cargo observer closure omits required helpers: {sorted(missing)}"
         )
     sources(root, layout)
+    verify_year(root)
 
 
 def current() -> None:

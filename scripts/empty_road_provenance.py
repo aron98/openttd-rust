@@ -11,11 +11,14 @@ from scripts.grf_control_run import ControlRun
 from scripts.language_ci_compare import compare, mapping
 from scripts.owned_restore_sources import INCLUDE, LITERAL, compiled_inputs, regular
 from scripts.script_vm_provenance import select_executable
+from scripts.vehicle_year_sources import MANIFEST as YEAR_MANIFEST
+from scripts.vehicle_year_sources import REQUIRED as YEAR_REQUIRED
 from scripts.world_check_support import Json, WorldCheckError, at, read_json, write_json
 
 
 def source_names(root: Path) -> tuple[str, ...]:
     names = set(compiled_inputs(root))
+    names.update((*YEAR_REQUIRED, YEAR_MANIFEST))
     names.update(
         (
             "upstream.toml",

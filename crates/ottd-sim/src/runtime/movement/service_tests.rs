@@ -1,4 +1,4 @@
-//! Synthetic service predicates plus genuine, unmodified year-boundary rollback.
+//! Synthetic service predicates plus genuine, unmodified year-boundary continuation.
 use super::{State, VehicleId, number, service};
 use crate::runtime::SimulationRuntime;
 use ottd_save::{
@@ -66,74 +66,28 @@ fn service_interval_and_replacement_list_predicates() -> Result {
     Ok(())
 }
 #[test]
-#[ignore = "requires unchanged NATURAL_INPUT, NATURAL_PREFIX, NATURAL_BOUNDARY and NATURAL_OUTPUT"]
+#[ignore = "requires NATURAL_YEAR_NATIVE and NATURAL_OUTPUT; historical refusal selector retained"]
 fn genuine_positive_cargo_prefix_then_vehicle_year_refusal_is_atomic() -> Result {
-    let input = PathBuf::from(std::env::var("NATURAL_INPUT")?);
-    let prefix = PathBuf::from(std::env::var("NATURAL_PREFIX")?);
-    let boundary = PathBuf::from(std::env::var("NATURAL_BOUNDARY")?);
+    let native = PathBuf::from(std::env::var("NATURAL_YEAR_NATIVE")?);
     let output = PathBuf::from(std::env::var("NATURAL_OUTPUT")?);
     std::fs::create_dir_all(&output)?;
-    let mut positive = load(&input)?;
-    assert_eq!(positive.advance_world(18817)?.ticks.len(), 18817);
-    let native: serde_json::Value =
-        serde_json::from_slice(&std::fs::read(prefix.join("native/final.world.json"))?)?;
-    assert_eq!(positive.saved_json()?, native);
-    let native_derived: serde_json::Value =
-        serde_json::from_slice(&std::fs::read(prefix.join("native/final.derived.json"))?)?;
-    assert_eq!(
-        serde_json::to_value(positive.world.derived())?,
-        native_derived
-    );
-    let live: serde_json::Value =
-        serde_json::from_slice(&std::fs::read(prefix.join("native-last-tick.json"))?)?;
-    assert_eq!(
-        Some(&positive.transport_state_json()),
-        live.pointer("/movement/transport")
-    );
-    assert_eq!(
-        Some(&serde_json::to_value(positive.town_house_caches())?),
-        live.pointer("/movement/house_caches")
-    );
-    assert_eq!(
-        Some(&serde_json::to_value(
-            positive.road_caches().values().collect::<Vec<_>>()
-        )?),
-        live.pointer("/movement/runtime_road/road")
-    );
-    let before_year: serde_json::Value = serde_json::from_slice(&std::fs::read(boundary)?)?;
-    assert_eq!(
-        before_year
-            .pointer("/runtime/economy_year")
-            .and_then(serde_json::Value::as_u64),
-        Some(2101)
-    );
-    let mut runtime = load(&input)?;
-    let before = snapshot(&runtime)?;
-    let error = runtime
-        .advance_world(18818)
-        .expect_err("genuine next year remains required");
-    assert!(format!("{error:?}").contains("call 18817: vehicle month/year callbacks"));
-    let after = snapshot(&runtime)?;
-    assert_eq!(before, after);
-    std::fs::write(output.join("before.json"), serde_json::to_vec(&before)?)?;
-    std::fs::write(output.join("after.json"), serde_json::to_vec(&after)?)?;
+    // Given the unchanged original passenger input and its observed prefix/year snapshots.
+    let mut runtime = load(&native.join("initial.sav"))?;
+    super::year_native::compare(&runtime, &native, "initial")?;
+    assert_eq!(runtime.advance_world(18817)?.ticks.len(), 18817);
+    super::year_native::compare(&runtime, &native, "prefix")?;
+    // When the next call crosses the actual original year boundary.
+    assert_eq!(runtime.advance_world(1)?.ticks.len(), 1);
+    // Then the formerly refused call matches every explicitly compared native coordinate.
+    super::year_native::compare(&runtime, &native, "final")?;
     std::fs::write(
         output.join("PASS.json"),
         serde_json::to_vec_pretty(&serde_json::json!({
-            "synthetic":false,"same_input_shorter_success":18817,"whole_requested":18818,
-            "original_valid_year":2101,"actual_refusal":format!("{error:?}"),"complete_committed_world_cache_unchanged":true,
-            "parity_credit":"positive prefix only; vehicle-year consumer remains required"
+            "synthetic": false, "positive_prefix":18817, "year_call":18818,
+            "historical_selector":"genuine_positive_cargo_prefix_then_vehicle_year_refusal_is_atomic",
+            "year_supported":true, "whole_world_derived_nine_views_three_group_fields":true,
+            "rollback_credit":false
         }))?,
     )?;
     Ok(())
-}
-fn snapshot(runtime: &SimulationRuntime) -> Result<serde_json::Value> {
-    Ok(
-        serde_json::json!({"complete_debug":format!("{runtime:?}"),"world":runtime.saved_json()?,
-        "derived":runtime.world.derived(),"transport":runtime.transport_state_json(),
-        "house_caches":runtime.town_house_caches(),"road_caches":runtime.road_caches(),
-        "station_geometry":runtime.road_station_geometry(),"station_infrastructure":runtime.station_infrastructure(),
-        "station_pool":runtime.station_pool(),"road_stop_pool":runtime.road_stop_pool(),
-        "spatial":runtime.single_road_tile_occupancy()?,"orders":runtime.order_state_json()?}),
-    )
 }

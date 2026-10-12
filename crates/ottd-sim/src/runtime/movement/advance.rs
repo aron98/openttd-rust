@@ -52,16 +52,19 @@ impl SimulationRuntime {
             stations: stations::IdleStations::restore(&self.world, &self.stations)?,
             station_context: &self.stations,
             transport: self.transport.clone(),
+            group_profits: self.group_profits.clone(),
         };
         let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
         let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
         runner.spatial.validate(vehicle, candidate.map().width())?;
         runner.transport.validate(candidate.view())?;
+        runner.group_profits.validate(candidate.view())?;
         #[cfg(feature = "async-trace")]
         trace.prepared();
         candidate.commit();
         self.road.insert(id, runner.cache);
         self.transport = runner.transport;
+        self.group_profits = runner.group_profits;
         if let Some(towns) = towns {
             self.towns = towns;
         }

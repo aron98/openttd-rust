@@ -32,6 +32,8 @@ mod depot_removal;
 #[cfg(test)]
 mod depot_removal_native;
 mod group_counts;
+mod group_profit;
+pub use group_profit::GroupProfitCaches;
 #[cfg(test)]
 mod ordered_sale_native;
 #[cfg(test)]
@@ -111,6 +113,7 @@ pub struct SimulationRuntime {
     transport: transport::TransportRuntime,
     towns: TownHouseCaches,
     industries: IndustryCaches,
+    group_profits: GroupProfitCaches,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -198,6 +201,7 @@ impl SimulationRuntime {
             orders,
             towns: TownHouseCaches::restore(&world)?,
             industries: IndustryCaches::restore(&world)?,
+            group_profits: GroupProfitCaches::restore(&world)?,
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
             transport: transport::TransportRuntime::restore(&world, &content)?,
@@ -224,6 +228,11 @@ impl SimulationRuntime {
     /// Native industry type membership and map-scaled daily scheduling.
     pub const fn industry_caches(&self) -> &IndustryCaches {
         &self.industries
+    }
+
+    /// Retained native profit statistics; excludes engine/count/autoreplace fields.
+    pub const fn group_profit_caches(&self) -> &GroupProfitCaches {
+        &self.group_profits
     }
 
     /// Station pool allocation metadata.

@@ -6,8 +6,11 @@ mod cargo_age_tests;
 #[cfg(test)]
 mod cargo_rollback_tests;
 mod company;
+#[cfg(test)]
+mod company_rollback;
 mod daily;
 mod directed;
+mod empty_rating;
 #[cfg(test)]
 mod industry_capacity;
 #[cfg(test)]
@@ -48,8 +51,12 @@ struct RoadPhases<'a> {
     station_context: &'a super::stations::StationRuntime,
     transport: super::transport::TransportRuntime,
     group_profits: super::GroupProfitCaches,
+    company_ratings: super::CompanyRatingCaches,
 }
 impl VehiclePhases for RoadPhases<'_> {
+    fn company_rating(&mut self, owner: u32, parts: [i64; 10]) -> Result<(), WorldTickError> {
+        Ok(self.company_ratings.update(owner, parts)?)
+    }
     fn industry_cargo(
         &mut self,
         state: &mut State<'_>,

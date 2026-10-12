@@ -4,6 +4,8 @@ import ast
 import shutil
 from pathlib import Path
 
+from scripts.company_rating_sources import MANIFEST as RATING_MANIFEST
+from scripts.company_rating_sources import REQUIRED as RATING_REQUIRED
 from scripts.context_ci_support import sources
 from scripts.gameplay_foundations import digest
 from scripts.grf_control_evidence import text
@@ -16,7 +18,7 @@ from scripts.world_check_support import Json, WorldCheckError, at, read_json, wr
 
 def source_names(root: Path) -> list[str]:
     names = set(compiled_inputs(root))
-    names.update((*YEAR_REQUIRED, YEAR_MANIFEST))
+    names.update((*YEAR_REQUIRED, YEAR_MANIFEST, *RATING_REQUIRED, RATING_MANIFEST))
     names.update(
         mapping(
             at(

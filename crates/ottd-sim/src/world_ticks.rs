@@ -3,6 +3,9 @@ mod access;
 mod clocks;
 mod company_history;
 mod company_name;
+mod company_rating;
+mod company_rating_history;
+mod company_vehicle_rating;
 mod domain;
 mod finance;
 #[expect(
@@ -79,6 +82,9 @@ pub struct WorldTickReport {
 }
 
 /// Execute complete admitted state-loop calls and atomically publish their saved effects.
+///
+/// This stateless World-only API does not retain unsaved company rating slots;
+/// use `SimulationRuntime` to retain that process-owned callback cache.
 /// # Errors
 /// Rejects unsupported state or any event reached within the horizon without changing `world`.
 pub fn advance_world(world: &mut World, ticks: u32) -> Result<WorldTickReport, WorldTickError> {

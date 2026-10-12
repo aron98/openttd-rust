@@ -3,6 +3,8 @@
 from pathlib import Path
 from typing import Final
 
+from scripts.company_rating_sources import REQUIRED as RATING_REQUIRED
+from scripts.company_rating_sources import verify as verify_rating
 from scripts.context_ci_support import sources
 from scripts.language_ci_compare import mapping
 from scripts.vehicle_year_sources import REQUIRED as YEAR_REQUIRED
@@ -20,6 +22,8 @@ REQUIRED: Final = (
     "scripts/setup-cargo-observer.sh",
     "scripts/vehicle-year-sources.json",
     *YEAR_REQUIRED,
+    "scripts/company-rating-sources.json",
+    *RATING_REQUIRED,
 )
 
 
@@ -32,6 +36,7 @@ def verify(root: Path, layout: Json) -> None:
         )
     sources(root, layout)
     verify_year(root)
+    verify_rating(root)
 
 
 def current() -> None:

@@ -1,0 +1,43 @@
+snapshot attached
+object D 1 1 0 -
+object N 1 1 0 -
+object O 1 1 0 D
+snapshot same
+object D 1 1 0 -
+object N 1 1 0 -
+object O 1 1 0 D
+snapshot replaced
+object D 0
+object N 1 1 0 -
+object O 1 1 0 N
+free D 88
+snapshot cloned
+object D 0
+object N 1 2 0 -
+object O 1 1 0 N
+object C 1 1 0 N
+cycle refusal 0 0
+snapshot cycles
+object D 0
+object N 1 2 0 -
+object O 1 1 0 N
+object C 1 1 0 N
+snapshot detached
+object D 0
+object N 1 1 0 -
+object O 1 1 0 -
+object C 1 1 0 N
+snapshot owner released
+object D 0
+object N 1 1 0 -
+object O 0
+object C 1 1 0 N
+free O 88
+snapshot clone released
+object D 0
+object N 0
+object O 0
+object C 0
+free C 88
+free N 88
+recorder 1

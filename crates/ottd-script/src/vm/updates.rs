@@ -41,7 +41,7 @@ impl Vm<'_> {
         self.write(i.arg0, value.clone())?;
         let current_this = receiver == self.register(0)?;
         let stored = match &receiver {
-            Value::Table(table) => match table.set_existing(key.clone(), value.clone()) {
+            Value::Table(table) => match table.set_delegated(key.clone(), value.clone()) {
                 Err(VmError::MissingIndex) if current_this => {
                     self.runner.get().root.table.set_existing(key, value)
                 }

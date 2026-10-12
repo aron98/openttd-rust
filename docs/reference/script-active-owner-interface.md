@@ -1,0 +1,53 @@
+# Active collection ownership prerequisite
+
+This bounded interface follows the approved hook design at4ae10501efa8e67e145ef7d52d1a697539fd940a. It does not enable metamethods, default methods, weak references or a new evaluator. Its purpose is to make a native reference-only operand safe across actual collection while preserving the existing public host-root contract. Root enumeration and nested evaluator changes require a separate source review after this prerequisite.
+
+## Original action and measured behavior
+
+The dedicated observer's print callback accepts exactly the finite ASCII payload `collect-active`, then calls the real `sq_collectgarbage(vm)` when its action is enabled. It grants no operation credit and installs no timing hook. Collection-off is an intentional no-action control; it is not asserted to have the same GC states as collection-on. For each action, the unchanged preallocated recorder runs off/on with equal non-recorder endpoints. The recorder still only compares pointer labels/sizes before free, clears registration before reuse and never dereferences or retains the freed object.
+
+Setup tables and the array are genuine configured-root slots until that setup root is deliberately released. A native SQObjectPtr local is a reference owner, not a GC root. The host control uses actual sq_addref/sq_release. The error-handler control installs a real script closure through sq_seterrorhandler; it exercises the existing exception_trap/CallErrorHandler source path, not a fabricated error observer. Every live borrowed read is under an actual local reference, host root, VM slot, vararg, current frame capture, error root or live collector chain. Own Get/Clone/NewSlot after collection are explicit subsequent native operations, not hidden observations that mask counts.
+
+Pinned source: sqtable.cpp185–203 Finalize nulls own keys/values and detaches the delegate, but preserves `_usednodes`, free position and links. Clear resets the counter separately. In the measured reference-only table session, refs2/used1/delegateD becomes refs1/used1/no delegate after collect1. D retires during collection and O only when its remaining local owner releases. Subsequent own Get(0) misses; Clone has used0; inserting (1,9) into O yields used2. Rust must retain that source metadata rather than repairing it to conventional container semantics.
+
+`sqarray.h:23–25` and `sqclosure.h:111–116` finalize values/outers without destroying the reference-owned array/native-closure allocation. `squtils.h:53–69` destroys resized-away elements in ascending index order. Native independent array children retire O,D; the predecessor Rust batch retired D,O. Native closure name/function/arity/type checks/environment remain present after its outer values are cleared. Existing script-closure finalization (outers cleared, defaults preserved) is unchanged by this prerequisite.
+
+Fresh native root witnesses include frame locals, closure captures, physical varargs, retained error, live/expired weak environments and the exception-handler path. A normal nested addition around a table method return leaves the returned receiver at physical stack slot7 while native Print's top is6. Collection still marks it. No physical stack mutation was needed. A simpler closure.call body and a fixed-arity tail body did not establish that witness and are retained without credit for it. Weak/error-handler native traces are prerequisites, not claims that Rust already implements those paths.
+
+## Implemented private boundary
+
+`heap/ownership.rs` distinguishes three edge roles:
+
+| Role | Reference count | Collector seed | Drop |
+| --- | --- | --- | --- |
+| HostRoot | One real owner | Existing external-owner seed | Decrement; drain native-style pending releases |
+| Reference | One real owner | None | Decrement; drain pending releases |
+| Stored | One graph edge | Only through marked container | Decrement; surrounding mutation/finalizer drains after its heap borrow ends |
+
+`heap::Operand::new(Value)` consumes one owner and changes its root role to Reference, without adding/removing a reference, changing object identity, or allocating a graph object. Root-count subtraction is checked. `Operand::value()` is a crate-private borrowed view. Operand is not Clone and has no public API. Its only production consumer is the native-call local argument in `vm/calls.rs`; the four exhaustive NativeFunction branches either return null, a newly produced scalar/string or a newly allocated array. They do not return that borrowed graph view as an unrooted public value.
+
+Public Handle/Value/Table/Array/closure Clone always obtains a HostRoot, including a clone requested from a private reference view. This is deliberate: inheriting Reference through the public Clone implementation would leak private ownership semantics to callers. An original dual local+sq_addref session expects collect0; the initial private-role implementation actually collected1, and the success-expecting Rust control failed. The explicit HostRoot Clone correction makes the same input pass. Internal stored-edge cloning still retains its Stored role. Any future private operand copy must explicitly obtain an Operand rather than assuming public Clone is a native local copy.
+
+Reference-owned table/array/native-closure entries remain present after Finalize until their last owner releases. Table finalization replaces one key/value pair at a time; array/native-closure finalization replaces and releases each element before proceeding, then sets the vector length to zero while retaining capacity. No mutable arena borrow crosses release/drain. A collector guard retains the current allocation through finalization. Metadata, counters, alias identity and generation remain intact until actual retirement. The previous late drop behavior of a plain Stored edge is not reused for a local operand: a genuine RED had refs0 storage still queued after local release; Reference drop now retires it immediately.
+
+## Existing public entry points and callers
+
+`Runner::new(RootEnvironment) -> Runner` remains const, with the same fields and no registry initialization/allocation added. `Runner::friend`, `replace_root`, `compile*`, `start`, `start_with_host`, `Vm::new` and `Vm::with_host` retain their existing behavior. Runner error/temporary values, configured roots, host entries, registers and physical varargs are not reclassified in this atom. `native_error()` and `native_error_value()` retain their public/const signatures; reset_native_error still releases the same single authoritative value. No duplicate saved error owner was added.
+
+The complete current source-location inventory is `.omo/evidence/script-hooks-runtime/public-call-sites.txt`. Production construction occurs in `Vm::new`/`with_host` and the observe example; constructor sites elsewhere are direct tests/session fixtures covering empty/shared/replaced roots, host entries, native calls, source errors, script captures, varargs and traps. `Runner::friend` calls Self::new after source-defined default re-registration. Constructor behavior is unchanged by source diff.
+
+Borrowed error consumers are Runner's const error-state accessor, Vm's forwarding accessor, the observe example's typed `errors::snapshot`, trap tests, delegate lifetime/policy tests and the trap owner oracle. The delegate policy test explicitly calls `vm.native_error_value().clone()`; aggregate trap tests borrow the actual array; the error-state test borrows its ByteString. These must keep their host-ownership contract. The new public Clone control protects the private-reference boundary; full existing tests remain required. No observer calls sq_getstring on a non-string error object.
+
+## Root-model boundary for the next review
+
+The current collector still enumerates existing external host owners; this atom does not claim it implements native VM/shared-state root ordering. Five current Rust PrintSink witnesses match native collection count, marked O/D chain and operation debt for admitted frame/capture/error/vararg/allocated-stack bodies. That is bounded evidence, not permission to turn all public values into private references.
+
+The next root interface must distinguish actual VM/shared roots from local references without duplicate owners. Native VM enumeration includes last_error, handlers, configured root, global temporary, the entire allocated stack, physical varargs and CallInfo closures (`sqobject.cpp:487–498`), plus shared/default roots (`sqstate.cpp:267–329`). A proposed non-owning root membership structure would hold checked generation identities, never extra Values/Handles; it must track real storage lifetimes and preserve source enqueue order at every collection boundary. Public clones must always acquire host roots. The persistent Runner's const construction and its idle compile/error/reset states must be handled explicitly; merely refreshing a snapshot at Print would miss collection between resumes or after a failed compile. No such broader reclassification is implemented or approved here.
+
+Likewise a nested Execute must use its own local trap accounting and root-frame marker, shared debt, physical stack/varargs and non-suspending native boundary. The existing ordinary script-call path is not relabeled as that implementation. All 101 design bodies, 303 original successes, 558 deterministic REDs, the six root-fallback REDs and eight raw address-bearing cases remain required. Full 48 current-family defaults, classes/generators/libraries, host scheduling and AI/GS remain open.
+
+## Proof and freeze obligations
+
+The evidence folder retains each predecessor source/binary and actual RED→GREEN channel separately: table missing storage; array/native-closure missing storage; array child order; late reference retirement; public Clone losing its host root. New observer-copy missing/content/mode/symlink corruptions were actually admitted before the guard and now receive typed WorldCheckError, with baseline/restored success. The standard table recipe invokes that copied-source guard and the dedicated active-owner producer. The separate variadic observer does not compile this new header and retains its own original source authority.
+
+Before binding/publication, complete current debug/release table/call/closure/varargs/owner recipes, compiler/runtime raw stderr controls, workspace/plain-stdlib/Python/static checks, the unchanged normal defined-only protocol/policy/16 controls, all compiled source/dependency/binary custody and compact all-byte/mode seal. Metadata remains untouched until root approves the semantic/source freeze. All seven Stage04 gates remain open; root owns independent QA and final review.

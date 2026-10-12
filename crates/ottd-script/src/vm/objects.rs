@@ -6,7 +6,10 @@ impl Vm<'_> {
             return Err(VmError::InvalidBytecode);
         }
         match self.register(i.arg1)? {
-            Value::Table(table) => table.shallow_clone().map(Value::Table),
+            Value::Table(table) => {
+                table.refuse_metamethod(b"_cloned")?;
+                table.shallow_clone().map(Value::Table)
+            }
             Value::Array(array) => array.shallow_clone().map(Value::Array),
             receiver @ (Value::Null
             | Value::Bool(_)
@@ -26,10 +29,15 @@ impl Vm<'_> {
         }
         let key = self.register(i32::from(i.arg2))?;
         match self.register(i.arg1)? {
-            Value::Table(table) => match table.delete_slot(key.clone()) {
-                Err(VmError::MissingIndex) => Err(self.index_failure(&key, VmError::MissingIndex)),
-                result => result,
-            },
+            Value::Table(table) => {
+                table.refuse_metamethod(b"_delslot")?;
+                match table.delete_slot(key.clone()) {
+                    Err(VmError::MissingIndex) => {
+                        Err(self.index_failure(&key, VmError::MissingIndex))
+                    }
+                    result => result,
+                }
+            }
             receiver @ (Value::Null
             | Value::Bool(_)
             | Value::Integer(_)

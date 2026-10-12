@@ -1,0 +1,16 @@
+print collect-active
+active before 9996 2 2 5 0
+host-reference 3 1 D
+local-reference 3 1 D
+chain O D
+collected active 0
+active after 9996 2 2 5 0
+host-reference 3 1 D
+local-reference 3 1 D
+chain D O
+completed 1 0 9994 integer 1
+released local owners
+collected released 2
+free D 88
+free O 88
+recorder 1

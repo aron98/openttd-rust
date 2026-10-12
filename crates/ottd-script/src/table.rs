@@ -1,5 +1,8 @@
 //! Native physical tables with scalar keys and realm-owned graph values.
+mod data;
+mod delegates;
 mod hash;
+pub(crate) use data::Data;
 pub(super) mod nodes;
 pub(super) mod scalar;
 use crate::{
@@ -8,14 +11,14 @@ use crate::{
 };
 use nodes::Nodes;
 use scalar::Scalar;
-/// Shared mutable table identity. Aggregate keys and delegates are not yet admitted.
+/// Shared mutable table identity. Aggregate keys are not yet admitted.
 #[derive(Clone, Debug)]
 pub struct Table(pub(crate) Handle);
 impl Table {
     pub(crate) fn reserved(realm: &Realm, capacity: usize) -> Result<Self, VmError> {
         realm
             .heap
-            .allocate(realm, Object::Table(Nodes::new(capacity)?))
+            .allocate(realm, Object::Table(Data::new(capacity)?))
             .map(Self)
     }
     #[expect(
@@ -24,7 +27,7 @@ impl Table {
     )]
     fn read<T>(&self, read: impl FnOnce(&Nodes) -> T) -> T {
         self.0.read(|object| match object {
-            Object::Table(nodes) => read(nodes),
+            Object::Table(data) => read(&data.nodes),
             Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
                 unreachable!()
             }
@@ -36,7 +39,7 @@ impl Table {
     )]
     fn mutate<T>(&self, mutate: impl FnOnce(&mut Nodes) -> T) -> T {
         self.0.mutate(|object| match object {
-            Object::Table(nodes) => mutate(nodes),
+            Object::Table(data) => mutate(&mut data.nodes),
             Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
                 unreachable!()
             }
@@ -108,11 +111,20 @@ impl Table {
     /// Returns `Allocation` if the node or object storage cannot be reserved.
     pub fn shallow_clone(&self) -> Result<Self, VmError> {
         let nodes = self.read(Nodes::duplicate)?;
-        self.0
+        let copy = self
+            .0
             .realm
             .heap
-            .allocate(&self.0.realm, Object::Table(nodes))
-            .map(Self)
+            .allocate(
+                &self.0.realm,
+                Object::Table(Data {
+                    delegate: None,
+                    nodes,
+                }),
+            )
+            .map(Self)?;
+        self.0.realm.heap.copy_delegate(&self.0, &copy.0)?;
+        Ok(copy)
     }
     pub(crate) fn next(&self, cursor: usize) -> Option<(usize, Value, Value)> {
         self.read(|nodes| nodes.next(cursor))
@@ -122,6 +134,14 @@ impl Table {
         if let Some(value) = self.raw_get(key.clone())? {
             return Ok(value);
         }
+        if let Some(delegate) = self.delegate() {
+            match delegate.lookup(key.clone()) {
+                Ok(value) => return Ok(value),
+                Err(VmError::MissingIndex) => {}
+                Err(error) => return Err(error),
+            }
+        }
+        self.refuse_metamethod(b"_get")?;
         if let Value::String(key) = key {
             if matches!(
                 key.as_bytes(),

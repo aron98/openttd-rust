@@ -14,6 +14,11 @@ impl Compiler<'_> {
                 self.function_call(depth, state)?;
             } else if self.token.kind == TokenKind::Symbol(b'.') {
                 self.advance()?;
+                if self.token.kind == TokenKind::Parent {
+                    self.parent_field(state)?;
+                    position = None;
+                    continue;
+                }
                 let TokenKind::Identifier(name) = self.token.kind else {
                     return Err(self.expected_identifier());
                 };
@@ -55,6 +60,8 @@ impl Compiler<'_> {
         state.dereference = None;
         state.field = false;
         match self.token.kind.clone() {
+            TokenKind::Delegate => self.delegate_expression(depth),
+            TokenKind::Parent => self.bare_parent(),
             TokenKind::Vargc | TokenKind::Vargv => self.vararg_expression(depth),
             TokenKind::Function => self.function_expression(depth),
             TokenKind::Scalar(value) => {

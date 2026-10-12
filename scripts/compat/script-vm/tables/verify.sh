@@ -10,6 +10,9 @@ out=$(CDPATH= cd -- "$out" && pwd)
 root=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
 cd "$root"
 export CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-"$out/target"}
+export OTTD_SCRIPT_ACTIVE_OWNER_DIR="$out/active-owners"
+export OTTD_SCRIPT_DELEGATE_OWNER_DIR="$out/delegate-owners"
+export OTTD_SCRIPT_GC_OWN="$out/delegate-owners/gc-own.txt"
 export OTTD_SCRIPT_CLOSURE_COMPOUND_STORE="$out/closure-compound-store.stdout"
 export OTTD_SCRIPT_CLOSURE_PUBLICATION="$out/closure-publication.stdout"
 export OTTD_SCRIPT_CLOSURE_ACYCLIC="$out/closure-acyclic.stdout"
@@ -45,6 +48,9 @@ c++ --version > "$out/cxx-version.txt"
 rustc -vV > "$out/rust-version.txt"
 git rev-parse HEAD > "$out/base-revision.txt"
 scripts/compat/script-vm/build-native.sh "$checkout" "$out/native" > "$out/native-build.log" 2>&1
+python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import verify_observer_sources; verify_observer_sources(Path.cwd(), Path(sys.argv[1]))' "$out/native" > "$out/native-inputs.log" 2>&1
+python3 -m scripts.compat.script-vm.tables.active_owners "$out/native/observe" "$out/active-owners" > "$out/active-owners.log" 2>&1
+python3 -m scripts.compat.script-vm.tables.delegate_owners "$out/native/observe" "$out/delegate-owners" > "$out/delegate-owners.log" 2>&1
 "$out/native/observe" --table-hashes > "$out/hashes.stdout" 2> "$out/hashes.stderr"
 "$out/native/observe" --table-owner scripts/compat/script-vm/tables/fixtures/owner.nut > "$out/owner.stdout" 2> "$out/owner.stderr"
 "$out/native/observe" --table-mutation scripts/compat/script-vm/tables/fixtures/mutation.nut > "$out/mutation.stdout" 2> "$out/mutation.stderr"
@@ -80,7 +86,7 @@ for profile in debug release; do
  cargo clean -p ottd-script $flag > "$out/$profile-clean.log" 2>&1
  printf "0\n" > "$out/$profile-clean.status"
  cargo build -vv -p ottd-script --example observe $flag --message-format=json > "$out/$profile-build.jsonl" 2> "$out/$profile-build.log"
- rust=$(python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import select_executable; print(select_executable(Path(sys.argv[1]).read_text(), "observe", "example", False))' "$out/$profile-build.jsonl")
+ rust=$(python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import select_executable; print(select_executable(Path(sys.argv[1]).read_text(), "observe", "example", test=False))' "$out/$profile-build.jsonl")
  printf '%s\n' "$rust" > "$out/$profile-selected-observer.txt"
  python3 -m scripts.compat.script-vm.tables.compare "$out/native/observe" "$rust" "$out/$profile" > "$out/$profile-compare.log" 2>&1
  python3 -m scripts.compat.script-vm.tables.controls "$out/$profile" > "$out/$profile-controls.log" 2>&1

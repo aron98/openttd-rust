@@ -32,7 +32,7 @@ pub(crate) struct Data {
     parameter_check: i64,
     type_checks: &'static [i64],
     environment: Stored,
-    outer_values: Vec<Stored>,
+    pub(crate) outer_values: Vec<Stored>,
 }
 impl Data {
     pub(crate) fn values(&self) -> impl Iterator<Item = &Stored> {

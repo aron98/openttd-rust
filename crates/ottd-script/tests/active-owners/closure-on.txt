@@ -1,0 +1,13 @@
+print collect-active
+active before 9973 3 6 9 0
+capture-root 1 0 O
+chain O D
+collected active 0
+active after 9973 3 6 9 0
+capture-root 1 0 O
+chain D O
+completed 1 0 9962 integer 1
+collected released 2
+free D 88
+free O 88
+recorder 1

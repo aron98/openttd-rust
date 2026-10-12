@@ -138,6 +138,13 @@ impl Nodes {
     pub(crate) fn values(&self) -> impl Iterator<Item = &Stored> {
         self.slots.iter().map(|node| &node.value)
     }
+    pub(crate) fn finalize_slot(&mut self, index: usize) -> Option<(Scalar, Stored)> {
+        let node = self.slots.get_mut(index)?;
+        Some((
+            std::mem::replace(&mut node.key, Scalar::Null),
+            std::mem::replace(&mut node.value, Stored::null()),
+        ))
+    }
     pub(crate) fn duplicate(&self) -> Result<Self, VmError> {
         self.reinsert(self.slots.len())
     }

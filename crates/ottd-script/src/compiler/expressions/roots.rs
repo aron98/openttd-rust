@@ -8,12 +8,6 @@ impl Compiler<'_> {
         state: &mut ExpressionState,
     ) -> Result<Option<Register>, CompileFailure> {
         self.advance()?;
-        let TokenKind::Identifier(name) = self.token.kind else {
-            return Err(self
-                .error(CompileErrorKind::UnsupportedSyntax)
-                .native("expected 'IDENTIFIER'"));
-        };
-        self.advance()?;
         let root = self.push()?;
         self.emit(Instruction {
             opcode: 0x15,
@@ -22,6 +16,16 @@ impl Compiler<'_> {
             arg2: 0,
             arg3: 0,
         });
+        if self.token.kind == TokenKind::Parent {
+            self.parent_field(state)?;
+            return Ok(None);
+        }
+        let TokenKind::Identifier(name) = self.token.kind else {
+            return Err(self
+                .error(CompileErrorKind::UnsupportedSyntax)
+                .native("expected 'IDENTIFIER'"));
+        };
+        self.advance()?;
         self.root_field(name, state)
     }
     pub(super) fn root_field(

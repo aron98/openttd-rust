@@ -1,7 +1,11 @@
 //! Realm-owned objects. Internal edges retain identities without owning the heap.
+mod collection;
+mod delegates;
+mod operand;
 mod ownership;
+pub(crate) use operand::Operand;
 mod value;
-use crate::{Realm, VmError, table::nodes::Nodes};
+use crate::{Realm, VmError, table::Data};
 pub(crate) use ownership::{Edge, Handle, Unpublished};
 use ownership::{Life, ObjectId};
 use std::{
@@ -14,7 +18,7 @@ pub(crate) use value::Stored;
 pub(crate) enum Object {
     ScriptClosure(crate::script_closure::Data),
     NativeClosure(crate::native_closure::Data),
-    Table(Nodes),
+    Table(Data),
     Array(Vec<Stored>),
 }
 impl Object {
@@ -27,19 +31,24 @@ impl Object {
         };
         table
             .into_iter()
-            .flat_map(Nodes::values)
-            .chain(array.into_iter().flatten())
+            .filter_map(|data| data.delegate.as_ref())
             .chain(
-                closure
+                table
                     .into_iter()
-                    .flat_map(crate::native_closure::Data::values),
+                    .flat_map(|data| data.nodes.values())
+                    .chain(array.into_iter().flatten())
+                    .chain(
+                        closure
+                            .into_iter()
+                            .flat_map(crate::native_closure::Data::values),
+                    )
+                    .chain(
+                        script
+                            .into_iter()
+                            .flat_map(crate::script_closure::Data::values),
+                    )
+                    .filter_map(Stored::edge),
             )
-            .chain(
-                script
-                    .into_iter()
-                    .flat_map(crate::script_closure::Data::values),
-            )
-            .filter_map(Stored::edge)
     }
 }
 #[derive(Debug)]
@@ -54,6 +63,8 @@ pub(crate) struct Heap {
     pending: RefCell<Vec<ObjectId>>,
     releasing: Cell<bool>,
     chain: RefCell<Vec<ObjectId>>,
+    #[cfg(test)]
+    retired: RefCell<Option<Vec<ObjectId>>>,
 }
 impl Heap {
     pub(crate) fn allocate(
@@ -114,7 +125,7 @@ impl Heap {
             let Some(id) = self.pending.borrow_mut().pop() else {
                 break;
             };
-            let object = {
+            let retired = {
                 let mut entries = self.entries.borrow_mut();
                 entries
                     .get_mut(id.index)
@@ -125,108 +136,53 @@ impl Heap {
                                 .as_ref()
                                 .is_some_and(|life| life.references.get() == 0)
                     })
-                    .and_then(|entry| {
+                    .map(|entry| {
                         entry.life = None;
                         entry.object.take()
                     })
+            };
+            let Some(object) = retired else {
+                continue;
             };
             if object.is_some() {
                 self.chain.borrow_mut().retain(|entry| *entry != id);
             }
             // Child-edge drops append to the queue; the arena borrow has ended.
             drop(object);
+            #[cfg(test)]
+            if let Some(trace) = self.retired.borrow_mut().as_mut() {
+                assert!(
+                    trace.len() < trace.capacity(),
+                    "pre-reserved retirement trace overflow"
+                );
+                trace.push(id);
+            }
         }
         self.releasing.set(false);
-    }
-    #[expect(
-        clippy::arithmetic_side_effects,
-        reason = "Finalization count is bounded by the finite unmarked object list"
-    )]
-    pub(crate) fn collect(&self) -> usize {
-        self.release_pending();
-        let (unmarked, mut reachable) = {
-            let entries = self.entries.borrow();
-            let mut marked = vec![false; entries.len()];
-            let mut todo = Vec::new();
-            // External owner enumeration is an internal host seam, not a claim
-            // about native pointer-hashed RefTable or full VM root ordering.
-            for entry in &*entries {
-                if let Some(life) = &entry.life {
-                    if life.external.get() > 0 {
-                        Self::enqueue(&entries, &mut marked, &mut todo, life.id);
-                    }
-                }
-            }
-            let mut reachable = Vec::new();
-            while let Some(id) = todo.pop() {
-                if let Some(object) = entries
-                    .get(id.index)
-                    .and_then(|entry| entry.object.as_ref())
-                {
-                    for edge in object.edges() {
-                        Self::enqueue(&entries, &mut marked, &mut todo, edge.life.id);
-                    }
-                }
-                reachable.push(id);
-            }
-            let unmarked = self
-                .chain
-                .borrow()
-                .iter()
-                .copied()
-                .filter(|id| !marked.get(id.index).copied().unwrap_or(false))
-                .collect::<Vec<_>>();
-            (unmarked, reachable)
-        };
-        let mut count = 0;
-        for id in unmarked {
-            let object = {
-                let mut entries = self.entries.borrow_mut();
-                entries
-                    .get_mut(id.index)
-                    .filter(|entry| entry.generation == id.generation)
-                    .and_then(|entry| {
-                        let life = entry.life.as_ref()?;
-                        let guard = Edge::retain(life, false);
-                        let released = match entry.object.as_mut()? {
-                            Object::ScriptClosure(data) => {
-                                Object::Array(std::mem::take(&mut data.outers))
-                            }
-                            Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => {
-                                entry.object.take()?
-                            }
-                        };
-                        Some((guard, released))
-                    })
-            };
-            if let Some((guard, object)) = object {
-                // Like SQSharedState's temporary reference, retain the current
-                // object while Finalize immediately releases outgoing edges.
-                drop(object);
-                self.release_pending();
-                drop(guard);
-                self.release_pending();
-                count += 1;
-            }
-        }
-        // Native AddToChain prepends each popped object to the next live chain.
-        reachable.reverse();
-        *self.chain.borrow_mut() = reachable;
-        count
-    }
-    fn enqueue(entries: &[Entry], marked: &mut [bool], todo: &mut Vec<ObjectId>, id: ObjectId) {
-        if entries
-            .get(id.index)
-            .is_some_and(|entry| entry.generation == id.generation && entry.object.is_some())
-        {
-            if let Some(mark) = marked.get_mut(id.index) {
-                if !std::mem::replace(mark, true) {
-                    todo.push(id);
-                }
-            }
-        }
     }
 }
 
 #[cfg(test)]
+mod release_tests;
+#[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod delegate_tests;
+#[cfg(test)]
+mod owner_probe;
+
+#[cfg(test)]
+mod delegate_lifetimes;
+
+#[cfg(test)]
+mod active_owner_tests;
+
+#[cfg(test)]
+mod reference_value_tests;
+
+#[cfg(test)]
+mod active_root_tests;
+
+#[cfg(test)]
+mod operand_tests;

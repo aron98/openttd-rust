@@ -52,6 +52,9 @@ impl Value {
             | (_, Self::NativeClosure(_) | Self::ScriptClosure(_)) => {
                 Err(VmError::UnsupportedRuntimeValue)
             }
+            (Self::Table(left), Self::Table(right)) if left.same_identity(right) => {
+                Ok(Ordering::Equal)
+            }
             (Self::Table(_), _) | (_, Self::Table(_)) => Err(VmError::UnsupportedTableOrdering),
             (Self::Array(_), _) | (_, Self::Array(_)) => Err(VmError::UnsupportedArrayOrdering),
             (Self::String(left), Self::String(right)) => Ok(left.as_bytes().cmp(right.as_bytes())),

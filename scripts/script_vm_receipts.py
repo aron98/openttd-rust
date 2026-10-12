@@ -86,7 +86,7 @@ def validate_builds(directory: Path, identities: tuple[str, str, str]) -> None:
             (directory / "logs" / name / "stdout.log").read_text(),
             target,
             kind,
-            testing,
+            test=testing,
         )
         if str(selected) != path:
             raise WorldCheckError("VM Cargo identity differs")

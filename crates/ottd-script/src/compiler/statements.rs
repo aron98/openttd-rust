@@ -81,7 +81,9 @@ impl Compiler<'_> {
             TokenKind::Continue => {
                 self.loop_exit(true)?;
             }
-            TokenKind::Catch
+            TokenKind::Delegate
+            | TokenKind::Parent
+            | TokenKind::Catch
             | TokenKind::In
             | TokenKind::Ellipsis
             | TokenKind::Vargc

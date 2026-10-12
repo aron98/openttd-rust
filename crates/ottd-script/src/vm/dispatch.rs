@@ -39,6 +39,9 @@ impl Vm<'_> {
                 self.dispatch_call(i)?;
                 return Ok(None);
             }
+            0x21 => self.parent_value(i)?,
+            0x35 => self.attach_delegate(i)?,
+            0x29 => self.membership(i)?,
             0x30 => self.create_closure(i)?,
             0x1b => self.load_outer(i.arg1)?,
             0x1c | 0x1d => self.vararg(i)?,
@@ -119,9 +122,7 @@ impl Vm<'_> {
                 return Ok(None);
             }
             0x16 => Value::Bool(i.arg1 != 0),
-            0x37 => self
-                .register(i.arg1)?
-                .type_name(&self.runner.get().root.realm),
+            0x37 => self.typeof_value(i.arg1)?,
             0x2d => self.negate_value(&self.register(i.arg1)?)?,
             0x2e => Value::Bool(self.register(i.arg1)?.is_false()),
             0x2f => self.bit_not(i.arg1)?,

@@ -8,7 +8,23 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest source composition: `57d5e33` combines the reviewed company/annual/script
+Latest source composition: `3babb29` credits the native road vehicle pool
+(all five fields) and every company's road unit-number `next` in the
+whole-runtime evidence test against fresh forest/late-disaster/older-whole
+captures (`580eb6a`, pins `bfa224d`), and materializes the idle native
+session graph: the complete initial 13 shared tables, 66 default closures,
+four base closures, primary context and empty four-slot RefTable in native
+source order, proven against fresh native receipts with capability
+refusals before mutation (`0717292` pins). Both slices passed independent
+adversarial review; each review caught and repaired stale source-hash
+pins before integration. The workspace suite passes 947 tests with 162
+separately counted ignored cases; Python admissions pass 910 tests with
+29,377 subtests; 125 dependency-free tests pass. The four genuine
+shared-table/friend graph failures remain. Default-method execution,
+active graph attachment, Runner execution and the AI/GameScript host
+remain required. All seven broad stage gates remain OPEN.
+
+Previous source composition: `57d5e33` combines the reviewed company/annual/script
 runtime with disabled-disaster reset and the cumulative script metadata
 prerequisite. Both component reviews approve their exact frozen source. Atomic
 source, test, binding and metadata-layout commits remain in nonsquash history.
@@ -70,8 +86,13 @@ while preserving complete committed state and the real worker lease.
 
 Script metadata now describes 70 source registrations and 44 callback identities,
 with separately owned masks and explicit uncatchable default-function refusals.
-The existing four native bodies remain supported; default bodies, full shared VM,
-physical RefTable, NativeSession and AI/GameScript host remain required. Four genuine
+The existing four native bodies remain supported. The `3babb29` idle session
+materializes the initial 13 shared tables, 66 default closures, four base
+closures, primary context and empty four-slot RefTable in source order against
+fresh native receipts, with idle construction, collection and close order
+proven exactly and capability refusals before mutation. Default bodies,
+active graph attachment, full shared VM execution and the AI/GameScript host
+remain required. Four genuine
 shared-table/friend graph comparisons still fail in the two component profiles;
 the combined debug tests preserve both failures. No synthetic graph gains credit.
 

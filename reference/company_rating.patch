@@ -1,0 +1,63 @@
+--- a/src/economy.cpp
++++ b/src/economy.cpp
+@@ -60,6 +60,7 @@
+ #include "table/strings.h"
+ #include "table/pricebase.h"
+ 
++#include "saveload/reference_company_rating_trace.hpp"
+ #include "safeguards.h"
+ 
+ 
+@@ -640,11 +641,13 @@
+  */
+ static void CompaniesGenStatistics()
+ {
++	ReferenceCompanyRating::Event("statistics_enter");
+ 	/* Check for bankruptcy each month */
+ 	for (Company *c : Company::Iterate()) {
+ 		CompanyCheckBankrupt(c);
+ 	}
+ 
++	ReferenceCompanyRating::Event("bankruptcy_complete");
+ 	Backup<CompanyID> cur_company(_current_company);
+ 
+ 	/* Pay Infrastructure Maintenance, if enabled */
+@@ -673,10 +676,13 @@
+ 	}
+ 	cur_company.Restore();
+ 
++	ReferenceCompanyRating::Event("maintenance_complete");
++
+ 	/* Only run the economic statistics and update company stats every 3rd economy month (1st of quarter). */
+ 	if (!HasBit(1 << 0 | 1 << 3 | 1 << 6 | 1 << 9, TimerGameEconomy::month)) return;
+ 
+ 	for (Company *c : Company::Iterate()) {
++		ReferenceCompanyRating::Event("history_before", c->index);
+ 		/* Drop the oldest history off the end */
+ 		std::copy_backward(c->old_economy.data(), c->old_economy.data() + MAX_HISTORY_QUARTERS - 1, c->old_economy.data() + MAX_HISTORY_QUARTERS);
+ 		c->old_economy[0] = c->cur_economy;
+@@ -684,8 +690,10 @@
+ 
+ 		if (c->num_valid_stat_ent != MAX_HISTORY_QUARTERS) c->num_valid_stat_ent++;
+ 
++		ReferenceCompanyRating::Event("history_after", c->index);
+ 		UpdateCompanyRatingAndValue(c, true);
+ 		if (c->block_preview != 0) c->block_preview--;
++		ReferenceCompanyRating::Event("rating_complete", c->index);
+ 	}
+ 
+ 	SetWindowDirty(WC_INCOME_GRAPH, 0);
+@@ -1978,9 +1986,13 @@
+  */
+ static const IntervalTimer<TimerGameEconomy> _economy_companies_monthly({ TimerGameEconomy::MONTH, TimerGameEconomy::Priority::COMPANY }, [](auto)
+ {
++	ReferenceCompanyRating::Event("month_enter");
+ 	CompaniesGenStatistics();
++	ReferenceCompanyRating::Event("interest_before");
+ 	CompaniesPayInterest();
++	ReferenceCompanyRating::Event("interest_after");
+ 	HandleEconomyFluctuations();
++	ReferenceCompanyRating::Event("month_leave");
+ });
+ 
+ static void DoAcquireCompany(Company *c, bool hostile_takeover)

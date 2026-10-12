@@ -7,6 +7,7 @@
 #include "reference_world_derived.hpp"
 #include "reference_cargo_runtime.hpp"
 #include "reference_group_profit_snapshot.hpp"
+#include "reference_company_rating_snapshot.hpp"
 #include "../core/random_func.hpp"
 #include "../timer/timer_game_calendar.h"
 #include "../timer/timer_game_economy.h"
@@ -56,6 +57,7 @@ inline Json Checkpoint(const std::filesystem::path &directory, const std::string
     const Json before = Runtime();
     if (std::getenv("OTTD_FULL_RUNTIME_OBSERVE") != nullptr) Write(stem + ".movement.json", ReferenceMovement::Snapshot());
     if (ReferenceGroupProfit::Enabled()) Write(stem + ".groups.json", ReferenceGroupProfit::Snapshot());
+    if (ReferenceCompanyRating::Enabled()) Write(stem + ".rating.json", ReferenceCompanyRating::Snapshot());
     Require(SaveOrLoad(stem + ".sav", SLO_SAVE, DFT_GAME_FILE, NO_DIRECTORY, false) == SL_OK, "native checkpoint save failed");
     ReferenceWorld::AfterLoad();
     const Json after = Runtime();

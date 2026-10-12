@@ -8,7 +8,31 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed composition: `935121d` integrates passive original-engine async
+Latest reviewed composition: `7c682e5` integrates optional passive Rust transport
+tracing with the current gameplay branch. The recorder observes existing worker
+identities, readiness samples, waits and publication without owning a worker or
+adding scheduling operations. Existing public APIs remain unchanged. Fresh root
+and independent review each pass 245 simulation tests, 89 dependency-free tests,
+six native-backed route executions and causal trace corruption controls. Five
+original-expecting annual route executions still fail at required boundaries.
+
+The current author passes 840 workspace tests with 148 ignored cases and retains
+218,409 logical proof members, 68,774 deduplicated blobs, 97,972 normal-script
+members and 5,256 Git source files. All 143 declarations and 36 expanded drivers
+remain unchanged. Raw driver serialization follows the published parent; each
+parent's own pinned literal arrays expand to identical driver semantics.
+
+Native async outcomes remain distinct observations. In both fresh root and
+reviewer raw561 runs, trace-OFF is pending and mismatches Rust at the last route
+snapshot, then completes and matches at the later checkpoint. Trace-ON matches
+at both checkpoints. The author's OFF/ON runs remain pending at both. Forest
+tick6400 and three of six serialized-origin continuations still fail. Wood
+initial/prefix/final runtime RNG differences and paused-load initial movement
+differences remain FALSE. No timing neutrality or scheduler fix is claimed.
+Separate annual-profit/age731 and script ownership/delegation work remains
+private pending its own integration and reviews. All seven stage gates stay OPEN.
+
+Previous published composition: `935121d` integrates passive original-engine async
 tracing with the published forest, script and stopped-consist runtime. The trace
 records existing branch-used readiness samples, pause callbacks, publication and
 owner lifetimes without additional polls or scheduling controls. Both producers
@@ -21,7 +45,7 @@ declared cache coordinates at verified handoff, regrowth, loaded continuation
 and normal scale300 graphics boundaries. Processing-industry delivery and payment
 remain required; the original station does not accept wood.
 
-The current author's 38-cut portfolio passes 36 cuts. Tick512 and tick6400 retain
+The `935121d` author's 38-cut portfolio passes 36 cuts. Tick512 and tick6400 retain
 original job0 pending versus completed Rust failures. Five of six continuations
 from saves genuinely simulated by both engines pass; the native3081 origin fails
 at its initial pending-job comparison. Root observes an independent tick6400 pass,
@@ -39,7 +63,7 @@ Passenger cargo has native-backed loading/delivery/payment, manual-distribution
 job publication and continuation from saves actually simulated by both engines.
 Native road vehicle-pool and unit-number arrays remain uncredited.
 
-The combined candidate passes 835 workspace tests with 148 separately counted
+The `935121d` candidate passes 835 workspace tests with 148 separately counted
 ignored cases, 678 Python tests plus 25,339 subtests, 89 dependency-free tests,
 Clippy, formatting and scoped strict Python checks. Root executes 1,530 debug
 table/trap comparisons, eight actual corruption controls, three native error-owner
@@ -58,8 +82,8 @@ rebuilt from its current source; predecessor binaries retain distinct identities
 Current reviewed script publication includes bounded `try`/`catch`/`throw`, nested
 trap unwinding, exact error-object ownership/diagnostics, user closures, nested
 frames and frame-owned variadic arguments. Policy, internal and source-proven
-undefined errors remain explicitly uncatchable. Script delegates and optional
-Rust causal tracing remain separate active integrations. Full VM/GC,
+undefined errors remain explicitly uncatchable. Script delegates and active
+ownership remain separate private integrations. Full VM/GC,
 AI/GameScript APIs, NewGRF execution, reciprocal modded continuation and all seven
 broad completion gates below remain **OPEN**. These milestones preserve the agreed
 stage boundary; only maintainer merge of the completed stage authorizes stage 5.

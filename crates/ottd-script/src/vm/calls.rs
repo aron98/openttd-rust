@@ -37,6 +37,15 @@ impl Vm<'_> {
         i: Instruction,
         closure: NativeClosure,
     ) -> Result<Value, VmError> {
+        match closure.function() {
+            NativeFunction::Default(function) => {
+                return Err(VmError::UnsupportedNativeFunction(function));
+            }
+            NativeFunction::Assert
+            | NativeFunction::Print
+            | NativeFunction::Array
+            | NativeFunction::Type => {}
+        }
         let count = i64::from(i.arg3);
         let check = closure.parameter_check();
         if (check > 0 && count != check)
@@ -114,6 +123,7 @@ impl Vm<'_> {
         } = frame;
         let (base, top, count) = (*base, *top, *count);
         match closure.function() {
+            NativeFunction::Default(function) => Err(VmError::UnsupportedNativeFunction(function)),
             NativeFunction::Assert => {
                 if first.is_false() {
                     return Err(self.native_failure(b"assertion failed", VmError::NativeCall));

@@ -3,34 +3,17 @@ use crate::{
     ByteString, Realm, VmError,
     heap::{Handle, Object, Stored},
 };
-/// Source-defined native function identity for the four bare-root builtins.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum NativeFunction {
-    /// The bare VM assertion function.
-    Assert,
-    /// The bare VM print function.
-    Print,
-    /// The bare VM array constructor.
-    Array,
-    /// The bare VM type function.
-    Type,
-}
-impl NativeFunction {
-    const fn name(self) -> &'static [u8] {
-        match self {
-            Self::Assert => b"assert",
-            Self::Print => b"print",
-            Self::Array => b"array",
-            Self::Type => b"type",
-        }
-    }
-}
-#[derive(Debug)]
+mod catalog;
+mod function;
+mod object_catalog;
+mod registration;
+pub use function::{DefaultFunction, NativeFunction};
+pub use registration::{NativeRegistration, NativeRegistry};
+#[derive(Clone, Debug)]
 pub(crate) struct Data {
     name: ByteString,
-    function: NativeFunction,
-    parameter_check: i64,
-    type_checks: &'static [i64],
+    registration: &'static NativeRegistration,
+    type_checks: Vec<i64>,
     environment: Stored,
     pub(crate) outer_values: Vec<Stored>,
 }
@@ -44,23 +27,38 @@ impl Data {
 pub struct NativeClosure(pub(crate) Handle);
 impl NativeClosure {
     pub(crate) fn new(realm: &Realm, function: NativeFunction) -> Result<Self, VmError> {
+        let descriptor = match function {
+            NativeFunction::Assert
+            | NativeFunction::Print
+            | NativeFunction::Array
+            | NativeFunction::Type => NativeRegistry::Base
+                .registrations()
+                .iter()
+                .find(|row| row.function() == function)
+                .ok_or(VmError::InvalidBytecode)?,
+            NativeFunction::Default(function) => {
+                return Err(VmError::UnsupportedNativeFunction(function));
+            }
+        };
+        Self::registered(realm, descriptor)
+    }
+    pub(crate) fn registered(
+        realm: &Realm,
+        registration: &'static NativeRegistration,
+    ) -> Result<Self, VmError> {
+        let mut type_checks = Vec::new();
+        type_checks
+            .try_reserve_exact(registration.type_checks().len())
+            .map_err(|_| VmError::Allocation)?;
+        type_checks.extend_from_slice(registration.type_checks());
         realm
             .heap
             .allocate(
                 realm,
                 Object::NativeClosure(Data {
-                    name: realm.string(function.name()),
-                    function,
-                    parameter_check: if function == NativeFunction::Array {
-                        -2
-                    } else {
-                        2
-                    },
-                    type_checks: if function == NativeFunction::Array {
-                        &[-1, 6]
-                    } else {
-                        &[]
-                    },
+                    name: realm.string(registration.name()),
+                    registration,
+                    type_checks,
                     environment: Stored::null(),
                     outer_values: Vec::new(),
                 }),
@@ -83,15 +81,19 @@ impl NativeClosure {
     }
     /// Original native implementation identity, distinct from callable support.
     pub fn function(&self) -> NativeFunction {
-        self.read(|data| data.function)
+        self.read(|data| data.registration.function())
     }
     /// Native arity check, including negative minimum-arity encoding.
     pub fn parameter_check(&self) -> i64 {
-        self.read(|data| data.parameter_check)
+        self.read(|data| data.registration.parameter_check())
     }
     /// Native compiled argument type masks; -1 admits any type, 6 admits numeric.
     pub fn type_checks(&self) -> &'static [i64] {
-        self.read(|data| data.type_checks)
+        self.read(|data| data.registration.type_checks())
+    }
+    /// Number of masks in this object's separately owned native vector.
+    pub fn type_check_count(&self) -> usize {
+        self.read(|data| data.type_checks.len())
     }
     /// Number of captured outer values in this registered native closure.
     pub fn outer_value_count(&self) -> usize {
@@ -121,3 +123,8 @@ impl PartialEq for NativeClosure {
     }
 }
 impl Eq for NativeClosure {}
+
+#[cfg(test)]
+mod invocation_tests;
+#[cfg(test)]
+mod tests;

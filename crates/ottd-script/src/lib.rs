@@ -17,7 +17,9 @@ mod native_closure;
     reason = "Physical table storage is shared with the crate-private graph heap"
 )]
 mod table;
-pub use native_closure::{NativeClosure, NativeFunction};
+pub use native_closure::{
+    DefaultFunction, NativeClosure, NativeFunction, NativeRegistration, NativeRegistry,
+};
 pub use table::Table;
 mod array;
 pub use array::Array;

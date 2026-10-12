@@ -27,6 +27,7 @@ impl Vm<'_> {
                 | VmError::UnsupportedArrayOrdering
                 | VmError::UnsupportedRuntimeValue => true,
                 VmError::UnsupportedMetamethod
+                | VmError::UnsupportedNativeFunction(_)
                 | VmError::UnsupportedTableHashTarget
                 | VmError::UnsupportedTableElement
                 | VmError::UnsupportedArrayElement
@@ -136,3 +137,21 @@ impl Vm<'_> {
 
 #[cfg(test)]
 mod owners;
+
+#[test]
+fn unsupported_default_is_uncatchable_even_with_a_raised_marker() {
+    // Given: a VM with a retained genuine error and its raised marker set.
+    let realm = crate::Realm::new();
+    let mut runner = crate::Runner::new(realm.default_root().expect("root"));
+    let program = runner.compile("return 0;").expect("source");
+    let mut vm = runner.start(&program).expect("frame");
+    vm.runner.get_mut().native_error.set(Value::Integer(9));
+    vm.raised = true;
+    // When: catchability is queried for an unsupported known callback.
+    let catchable = vm.catchable(VmError::UnsupportedNativeFunction(
+        crate::DefaultFunction::ArrayAppend,
+    ));
+    // Then: an implementation refusal cannot enter a script catch block.
+    assert!(!catchable);
+    assert_eq!(vm.runner.get().native_error_value(), &Value::Integer(9));
+}

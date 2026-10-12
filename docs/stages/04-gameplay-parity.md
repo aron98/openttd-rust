@@ -8,29 +8,55 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed composition: `7c682e5` integrates optional passive Rust transport
-tracing with the current gameplay branch. The recorder observes existing worker
-identities, readiness samples, waits and publication without owning a worker or
-adding scheduling operations. Existing public APIs remain unchanged. Fresh root
-and independent review each pass 245 simulation tests, 89 dependency-free tests,
-six native-backed route executions and causal trace corruption controls. Five
-original-expecting annual route executions still fail at required boundaries.
+Latest reviewed composition: `3eef5b0` combines the reviewed annual-vehicle
+runtime and script reference-ownership changes with passive Rust transport
+tracing. Atomic source, test and binding commits remain in the merge history.
+All 5,339 nonmetadata files match their designated parents; composition resolves
+metadata unions only. Root manual QA and one fresh whole reviewer approve this
+bounded integration. All seven broad stage gates remain OPEN.
 
-The current author passes 840 workspace tests with 148 ignored cases and retains
-218,409 logical proof members, 68,774 deduplicated blobs, 97,972 normal-script
-members and 5,256 Git source files. All 143 declarations and 36 expanded drivers
-remain unchanged. Raw driver serialization follows the published parent; each
-parent's own pinned literal arrays expand to identical driver semantics.
+The single-primary-road runtime now advances annual profit rotation and three
+owned group-profit fields, with the native finance/house/vehicle ordering, strict
+minimum-profit age threshold and exact age731 transition. Full native-backed
+23,930-call wood and 18,818-call passenger annual horizons pass. Named/default
+groups and reciprocal load origins are checked. Unsupported warning/news/AI
+contexts preserve committed state; these event queues remain required.
 
-Native async outcomes remain distinct observations. In both fresh root and
-reviewer raw561 runs, trace-OFF is pending and mismatches Rust at the last route
-snapshot, then completes and matches at the later checkpoint. Trace-ON matches
-at both checkpoints. The author's OFF/ON runs remain pending at both. Forest
-tick6400 and three of six serialized-origin continuations still fail. Wood
-initial/prefix/final runtime RNG differences and paused-load initial movement
-differences remain FALSE. No timing neutrality or scheduler fix is claimed.
-Separate annual-profit/age731 and script ownership/delegation work remains
-private pending its own integration and reviews. All seven stage gates stay OPEN.
+Script operands now distinguish reference ownership from public host roots.
+Reference-live finalized storage preserves native table metadata, and edge
+release occurs in the native order outside heap borrows. Active-root tests cover
+a real allocated stack slot above the logical top. Public HostRoot Clone, const
+Runner construction and borrowed error accessors retain their behavior. These
+fixes do not implement the complete native shared VM, RefTable, defaults or
+AI/GameScript host.
+
+The current author passes 901 workspace tests with 153 separately counted ignored
+cases, 880 Python tests plus 28,109 subtests, Clippy and formatting. Current normal
+script comparison covers 10,666 defined inputs and 153 explicit Rust-only
+refusals of source-proven undefined inputs; valid Unicode strings/comments remain
+covered. Complete proof readback verifies 57,884 logical members, 23,764 archive
+blobs, 98,117 nested normal members and 5,400 Git files, with actual compiler
+dependencies and selected executable identities retained. All 143 scenario
+statuses/scopes/evidence, 36 drivers and profiles are preserved. The reviewed
+scalar scenario additions and annual source references are additive; 1,548 asset
+digests validate within the unchanged 1 MiB contract cap.
+
+Required failures remain explicit. Profitable quarter scoring still fails in
+this published tree; company scoring is a separate private increment. Disaster
+delay reset/RNG and warning event queues remain required. Forest passes 36/38
+cuts and five of six simulated-origin continuations; tick512/tick6400 and the
+native3081 origin retain transport failures. The fresh raw561 success belongs
+to a distinct scheduling epoch and does not replace retained failures. A scale
+cycle, paused-load initial movement and unsaved interactive-RNG comparisons also
+remain FALSE. No retries, additional polling, prejoins or normalization earn
+compatibility credit.
+
+Previous reviewed composition: `7c682e5` integrated optional passive Rust causal
+tracing. Its author retained pending raw561 results at both checkpoints; root
+and reviewer trace-OFF failed at the last route checkpoint and passed at the
+later one, while trace-ON passed both. Those observations and earlier forest
+epochs remain retained separately. The newer annual and ownership results above
+do not erase unrelated compatibility failures.
 
 Previous published composition: `935121d` integrates passive original-engine async
 tracing with the published forest, script and stopped-consist runtime. The trace
@@ -82,8 +108,8 @@ rebuilt from its current source; predecessor binaries retain distinct identities
 Current reviewed script publication includes bounded `try`/`catch`/`throw`, nested
 trap unwinding, exact error-object ownership/diagnostics, user closures, nested
 frames and frame-owned variadic arguments. Policy, internal and source-proven
-undefined errors remain explicitly uncatchable. Script delegates and active
-ownership remain separate private integrations. Full VM/GC,
+undefined errors remain explicitly uncatchable. Complete native shared-state and
+context-root materialization remains a separate private integration. Full VM/GC,
 AI/GameScript APIs, NewGRF execution, reciprocal modded continuation and all seven
 broad completion gates below remain **OPEN**. These milestones preserve the agreed
 stage boundary; only maintainer merge of the completed stage authorizes stage 5.

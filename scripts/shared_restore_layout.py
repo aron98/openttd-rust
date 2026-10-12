@@ -9,6 +9,8 @@ from scripts.grf_control_evidence import sequence, text
 from scripts.owned_restore_sources import compiled_inputs, regular
 from scripts.shared_restore_guards import cases
 from scripts.shared_restore_units import SELECTORS
+from scripts.vehicle_year_sources import MANIFEST as YEAR_MANIFEST
+from scripts.vehicle_year_sources import REQUIRED as YEAR_REQUIRED
 from scripts.world_check_support import Json, WorldCheckError, at, read_json, write_json
 
 COMMAND: Final = ("argv.json", "process.json", "stdout.log", "stderr.log")
@@ -163,6 +165,7 @@ def control_paths(mutations: Json, sources: tuple[str, ...]) -> set[str]:
 
 def source_names(root: Path) -> tuple[str, ...]:
     required = set(compiled_inputs(root))
+    required.update((*YEAR_REQUIRED, YEAR_MANIFEST))
     required.update(regular(root, path) for path in root.glob("crates/**/*.rs"))
     required.update(
         (

@@ -37,7 +37,7 @@ impl Heap {
                     .get(id.index)
                     .filter(|entry| entry.generation == id.generation)
                     .ok_or(VmError::InvalidBytecode)?;
-                let Some(Object::Table(data)) = entry.object.as_ref() else {
+                let Some(Object::Table(data)) = entry.object.as_deref() else {
                     return Err(VmError::InvalidBytecode);
                 };
                 current = data.delegate.as_ref().map(|edge| edge.life.id);

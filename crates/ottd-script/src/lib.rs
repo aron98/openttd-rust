@@ -45,7 +45,10 @@ mod native_session;
 mod realm;
 mod root_slot;
 mod runner;
-pub use native_session::{NativeCapability, NativeCollector, NativeContextError, NativeSession};
+pub use native_session::{
+    NativeCapability, NativeCollector, NativeContextError, NativeFriendField, NativeFriendScalars,
+    NativeFriendView, NativeSession, RetainedNativeFriend,
+};
 pub use program::Program;
 pub use realm::{ByteString, Realm};
 pub use runner::{PrintSink, RootEnvironment, Runner, RunnerFailure};

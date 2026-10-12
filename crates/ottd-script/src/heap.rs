@@ -54,7 +54,12 @@ impl Object {
 struct Entry {
     generation: u64,
     life: Option<Rc<Life>>,
-    object: Option<Object>,
+    /// Stable actual-payload allocation of one object: the box target holds
+    /// the object's real storage and never moves while the object lives, so
+    /// its address is the native raw-value analogue of an `SQObjectPtr`
+    /// (`sqobject.h` `_unVal` pointer member) — unique per live object,
+    /// identical for aliases, and ended by actual retirement.
+    object: Option<Box<Object>>,
 }
 #[derive(Debug, Default)]
 pub(crate) struct Heap {
@@ -111,7 +116,7 @@ impl Heap {
             external: Cell::new(0),
         });
         entry.life = Some(Rc::clone(&life));
-        entry.object = Some(object);
+        entry.object = Some(Box::new(object));
         self.chain.borrow_mut().insert(0, life.id);
         Ok(Unpublished {
             life,
@@ -131,6 +136,69 @@ impl Heap {
         state: std::rc::Weak<crate::native_session::SharedState>,
     ) {
         *self.native.borrow_mut() = Some(state);
+    }
+    /// Stable actual-payload address of one live object: the allocation
+    /// address that a native `SQObjectPtr` carries as its raw value for
+    /// refcounted pointer types. Two live objects never share an address,
+    /// every alias of one object reads the same address, and the address
+    /// ends at actual retirement (the allocation drops); reuse of a retired
+    /// address by a later object is permitted, like the native allocator.
+    /// The read adds no owner and mutates no state.
+    pub(crate) fn payload_address(&self, id: ObjectId) -> Option<u64> {
+        let entries = self.entries.borrow();
+        let entry = entries.get(id.index)?;
+        if entry.generation != id.generation {
+            return None;
+        }
+        let object = entry.object.as_deref()?;
+        u64::try_from(std::ptr::from_ref(object).addr()).ok()
+    }
+    /// Live owner count of one object, read without adding an owner.
+    pub(crate) fn references(&self, id: ObjectId) -> Option<usize> {
+        let entries = self.entries.borrow();
+        let entry = entries.get(id.index)?;
+        if entry.generation != id.generation {
+            return None;
+        }
+        entry.life.as_ref().map(|life| life.references.get())
+    }
+    /// Used-slot extent of one live table object, read without an owner.
+    pub(crate) fn table_used(&self, id: ObjectId) -> Option<usize> {
+        let entries = self.entries.borrow();
+        let entry = entries.get(id.index)?;
+        if entry.generation != id.generation {
+            return None;
+        }
+        match entry.object.as_deref()? {
+            Object::Table(data) => Some(data.nodes.len()),
+            _ => None,
+        }
+    }
+    /// Take one live object's whole payload allocation out of its arena slot,
+    /// leaving the entry alive but empty for a scoped storage lease; the
+    /// payload address is unchanged by the move, and `reattach_payload`
+    /// restores it allocation-free. The caller must guarantee the leased
+    /// object stays marked for the whole lease.
+    pub(crate) fn take_payload(&self, id: ObjectId) -> Option<Box<Object>> {
+        let mut entries = self.entries.borrow_mut();
+        let entry = entries.get_mut(id.index)?;
+        if entry.generation != id.generation {
+            return None;
+        }
+        entry.object.take()
+    }
+    /// Reattach a leased payload allocation to its reserved arena slot.
+    pub(crate) fn reattach_payload(&self, id: ObjectId, payload: Box<Object>) {
+        let mut entries = self.entries.borrow_mut();
+        if let Some(entry) = entries.get_mut(id.index) {
+            if entry.generation == id.generation && entry.life.is_some() {
+                debug_assert!(
+                    entry.object.is_none(),
+                    "payload lease reattached over a live object"
+                );
+                entry.object = Some(payload);
+            }
+        }
     }
     /// Run one source-ordered native collection for the attached session, if
     /// its shared state still exists; ordinary legacy realms have none.

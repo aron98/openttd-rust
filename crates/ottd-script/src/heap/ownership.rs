@@ -144,7 +144,12 @@ impl Unpublished {
             let entry = entries
                 .get_mut(self.life.id.index)
                 .expect("unpublished object index");
-            mutate(entry.object.as_mut().expect("unpublished object storage"))
+            mutate(
+                entry
+                    .object
+                    .as_deref_mut()
+                    .expect("unpublished object storage"),
+            )
         };
         self.realm.heap.release_pending();
         result
@@ -194,7 +199,7 @@ impl Handle {
             .get(self.edge.life.id.index)
             .filter(|entry| entry.generation == self.edge.life.id.generation)
             .expect("live object index and generation");
-        read(entry.object.as_ref().expect("live object storage"))
+        read(entry.object.as_deref().expect("live object storage"))
     }
     #[expect(
         clippy::expect_used,
@@ -207,7 +212,7 @@ impl Handle {
                 .get_mut(self.edge.life.id.index)
                 .filter(|entry| entry.generation == self.edge.life.id.generation)
                 .expect("live object index and generation");
-            mutate(entry.object.as_mut().expect("live object storage"))
+            mutate(entry.object.as_deref_mut().expect("live object storage"))
         };
         self.realm.heap.release_pending();
         result

@@ -1,38 +1,28 @@
-//! Source-faithful physical `RefTable` storage and algorithm.
+//! Source-faithful physical `RefTable` storage and algorithm
+//! (`sqstate.cpp:367-515`).
 //!
-//! Host retention through this table is refused by the idle session boundary
-//! (`NativeCapability::NonEmptyRefTable`), so a materialized idle session can
-//! never populate it; the physical layout, ascending free chain, doubling
-//! resize and ascending mark/finalize scans are the implemented source
-//! algorithm from `sqstate.cpp`, pending the stable payload-identity
-//! prerequisite that must supply real slot objects and native hash/equality.
-use super::error::NativeContextError;
+//! Each node owns one real object reference like the native `RefNode`'s
+//! `SQObjectPtr`: a slot store is an owning `Stored` value plus its cached
+//! raw identity, so repeated `AddRef` only increments the node handle count
+//! and the final `Release` drops the owning reference after unlinking.
+//! Keys hash and compare by the native `HashObj` rules (`ref_identity.rs`).
+mod ops;
 
-/// Neutral slot token: an exact raw identity plus its native type tag. A
-/// future stable-identity atom replaces this with real native handles; no
-/// pointer identity or hash parity is claimed for the token itself.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(crate) struct RawSlot {
-    raw: u64,
-    tag: u32,
+use super::error::NativeContextError;
+use super::ref_identity::RawSlot;
+use crate::heap::Stored;
+
+/// One occupied physical slot: the owning object and its raw identity key.
+#[derive(Clone, Debug)]
+struct RefSlot {
+    object: Stored,
+    key: RawSlot,
 }
-impl RawSlot {
-    /// Construct a neutral token; real native handles arrive with the
-    /// identity prerequisite.
-    #[cfg(test)]
-    pub(super) const fn new(raw: u64, tag: u32) -> Self {
-        Self { raw, tag }
-    }
-    /// Source pointer-path main-position hash arithmetic (raw value shift 3).
-    const fn hash(self) -> u64 {
-        self.raw >> 3
-    }
-}
-/// One physical `RefNode`: a single owning object plus its handle refcount
-/// and hash-chain link; the free chain reuses node indexes ascending.
+/// One physical `RefNode` (`sqstate.h:50-56`): an owning object slot, its
+/// handle refcount and the next link; free nodes chain through `next`.
 #[derive(Clone, Debug)]
 struct RefNode {
-    object: Option<RawSlot>,
+    slot: Option<RefSlot>,
     refs: u64,
     next: Option<usize>,
 }
@@ -55,7 +45,8 @@ pub(crate) struct RefTable {
     reason = "Power-of-two slot counts and valid chain indexes bound all arithmetic"
 )]
 impl RefTable {
-    /// Construct with the source's four initial physical slots and buckets.
+    /// Construct with the source's four initial physical slots and buckets
+    /// (`sqstate.cpp:367-369 RefTable::RefTable` -> `AllocNodes(4)`).
     /// # Errors
     /// Returns `Allocation` if the initial storage cannot be reserved.
     pub(crate) fn new() -> Result<Self, NativeContextError> {
@@ -85,6 +76,8 @@ impl RefTable {
     pub(crate) const fn slotused(&self) -> u64 {
         self.slotused
     }
+    /// `RefTable::AllocNodes` (`sqstate.cpp:489-515`): one storage block of
+    /// null slots whose free chain ascends from slot zero.
     fn alloc_nodes(&mut self, size: u64) -> Result<(), NativeContextError> {
         let Ok(size) = usize::try_from(size) else {
             return Err(NativeContextError::Allocation);
@@ -98,7 +91,7 @@ impl RefTable {
             .try_reserve_exact(size)
             .map_err(|_| NativeContextError::Allocation)?;
         nodes.resize_with(size, || RefNode {
-            object: None,
+            slot: None,
             refs: 0,
             next: None,
         });
@@ -115,25 +108,33 @@ impl RefTable {
         self.numofslots = size as u64;
         Ok(())
     }
-    fn main_position(&self, token: RawSlot) -> usize {
-        usize::try_from(token.hash() & (self.numofslots - 1)).unwrap_or_default()
+    /// Main hash bucket of one key (`HashObj(key) & (_numofslots-1)`).
+    fn main_position(&self, key: RawSlot) -> usize {
+        usize::try_from(key.hash() & (self.numofslots - 1)).unwrap_or_default()
     }
-    /// `RefTable::Get`: walk the hash bucket chain comparing the exact raw
-    /// value and type tag; the add path first doubles a full table.
-    pub(super) fn get(
+    /// `RefTable::Get` (`sqstate.cpp:467-487`): walk the hash bucket chain
+    /// comparing raw value and exact type; the found node, its chain
+    /// predecessor and the main position come back together, and a missing
+    /// key is added when requested — doubling a full table first and
+    /// recomputing the main position like the source.
+    fn get(
         &mut self,
-        token: RawSlot,
+        key: RawSlot,
         add: bool,
-    ) -> Result<Option<usize>, NativeContextError> {
-        let mut mainpos = self.main_position(token);
+    ) -> Result<(Option<usize>, Option<usize>, usize), NativeContextError> {
+        let mut mainpos = self.main_position(key);
+        let mut prev = None;
         let mut found = self.buckets[mainpos];
         while let Some(index) = found {
             let Some(node) = self.nodes.get(index) else {
                 break;
             };
-            if node.object == Some(token) {
-                break;
+            if let Some(slot) = &node.slot {
+                if slot.key == key {
+                    break;
+                }
             }
+            prev = found;
             found = node.next;
         }
         if found.is_none() && add {
@@ -143,19 +144,24 @@ impl RefTable {
                     .checked_mul(2)
                     .ok_or(NativeContextError::Allocation)?;
                 self.resize(doubled)?;
-                mainpos = self.main_position(token);
+                mainpos = self.main_position(key);
             }
-            found = Some(self.add_node(mainpos, token));
+            found = Some(self.add_node(mainpos));
         }
-        Ok(found)
+        Ok((found, prev, mainpos))
     }
-    /// `RefTable::Add`: take the first free slot, prepend it to its bucket
-    /// and advance the ascending free chain.
-    fn add_node(&mut self, mainpos: usize, token: RawSlot) -> usize {
-        let index = self.freelist.unwrap_or_default();
+    /// `RefTable::Add` (`sqstate.cpp:454-465`): take the first free slot,
+    /// store the object, prepend it to its bucket and advance the free chain.
+    fn add_node(&mut self, mainpos: usize) -> usize {
+        #[expect(
+            clippy::expect_used,
+            reason = "Get doubles a full table before Add, so a free node exists"
+        )]
+        let index = self
+            .freelist
+            .expect("freelist node after full-table resize");
         let next = self.nodes.get(index).and_then(|node| node.next);
         if let Some(node) = self.nodes.get_mut(index) {
-            node.object = Some(token);
             node.next = self.buckets[mainpos];
         }
         self.buckets[mainpos] = Some(index);
@@ -163,125 +169,26 @@ impl RefTable {
         self.slotused += 1;
         index
     }
-    #[cfg_attr(
-        not(test),
-        expect(
-            dead_code,
-            reason = "physical host-retention algorithm; the idle session boundary refuses populating the RefTable"
-        )
-    )]
-    /// `RefTable::AddRef`: repeated retention of one raw object only
-    /// increments the node's handle refcount.
+    /// `RefTable::AddRef` (`sqstate.cpp:402-406`): a repeated handle only
+    /// increments the node's refcount; the passed owning object is stored
+    /// for a fresh node and otherwise released unchanged.
     /// # Errors
     /// Returns `Allocation` if a full table cannot double its storage.
-    pub(super) fn add_ref(&mut self, token: RawSlot) -> Result<(), NativeContextError> {
-        if let Some(index) = self.get(token, true)? {
+    pub(super) fn add_ref(
+        &mut self,
+        object: Stored,
+        key: RawSlot,
+    ) -> Result<(), NativeContextError> {
+        if let (Some(index), _, _) = self.get(key, true)? {
             if let Some(node) = self.nodes.get_mut(index) {
+                if node.slot.is_none() {
+                    node.slot = Some(RefSlot { object, key });
+                }
                 node.refs = node.refs.saturating_add(1);
+                return Ok(());
             }
         }
+        drop(object);
         Ok(())
-    }
-    #[cfg_attr(
-        not(test),
-        expect(
-            dead_code,
-            reason = "physical host-retention algorithm; the idle session boundary refuses populating the RefTable"
-        )
-    )]
-    /// `RefTable::Release`: decrement the handle refcount; a final release
-    /// retains the object temporarily, unlinks the bucket node, prepends the
-    /// freed slot to the free chain and drops the temporary at function exit.
-    /// # Errors
-    /// Returns `Allocation` on resize failure; absence reports `false` like
-    /// the source's failed assertion path.
-    pub(super) fn release(&mut self, token: RawSlot) -> Result<bool, NativeContextError> {
-        let Some(index) = self.get(token, false)? else {
-            return Ok(false);
-        };
-        let Some(node) = self.nodes.get_mut(index) else {
-            return Ok(false);
-        };
-        node.refs = node.refs.saturating_sub(1);
-        if node.refs > 0 {
-            return Ok(false);
-        }
-        node.object = None;
-        let next = node.next;
-        node.next = self.freelist;
-        self.freelist = Some(index);
-        let mainpos = self.main_position(token);
-        if self.buckets[mainpos] == Some(index) {
-            self.buckets[mainpos] = next;
-        } else {
-            let mut cursor = self.buckets[mainpos];
-            while let Some(candidate) = cursor {
-                let Some(node) = self.nodes.get_mut(candidate) else {
-                    break;
-                };
-                if node.next == Some(index) {
-                    node.next = next;
-                    break;
-                }
-                cursor = node.next;
-            }
-        }
-        self.slotused -= 1;
-        Ok(true)
-    }
-    /// `RefTable::Resize`: double the storage, then re-Add the old physical
-    /// nodes ascending with their refcounts, null the old owners and free the
-    /// old storage.
-    fn resize(&mut self, size: u64) -> Result<(), NativeContextError> {
-        let mut replacement = Self {
-            numofslots: 0,
-            slotused: 0,
-            nodes: Vec::new(),
-            buckets: Vec::new(),
-            freelist: None,
-        };
-        replacement.alloc_nodes(size)?;
-        for node in &self.nodes {
-            if let Some(token) = node.object {
-                let mainpos = replacement.main_position(token);
-                let index = replacement.add_node(mainpos, token);
-                if let Some(moved) = replacement.nodes.get_mut(index) {
-                    moved.refs = node.refs;
-                }
-            }
-        }
-        *self = replacement;
-        Ok(())
-    }
-    /// `RefTable::Finalize`: null every stored object, scanning ascending;
-    /// the source leaves the free chain and counters untouched.
-    pub(crate) fn finalize(&mut self) {
-        for node in &mut self.nodes {
-            node.object = None;
-        }
-    }
-    /// `RefTable::EnqueueMarkObject`: retainable objects in ascending slot
-    /// order; the idle table holds none, so no root edge follows the scan.
-    #[cfg_attr(
-        not(test),
-        expect(
-            dead_code,
-            reason = "physical root class; the identity atom binds real handles"
-        )
-    )]
-    pub(super) fn mark_objects(&self) -> impl Iterator<Item = RawSlot> + '_ {
-        self.nodes.iter().filter_map(|node| node.object)
-    }
-    /// Physical free-chain inspection for owner-algorithm tests.
-    #[cfg(test)]
-    pub(super) fn free_chain(&self) -> Vec<Option<usize>> {
-        let mut chain = Vec::new();
-        let mut cursor = self.freelist;
-        while let Some(index) = cursor {
-            chain.push(Some(index));
-            cursor = self.nodes.get(index).and_then(|node| node.next);
-        }
-        chain.push(None);
-        chain
     }
 }

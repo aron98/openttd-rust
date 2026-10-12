@@ -58,7 +58,7 @@ impl Heap {
                 });
                 EntrySnapshot {
                     identity: id.into(),
-                    kind: entry.object.as_ref().map(|object| match object {
+                    kind: entry.object.as_deref().map(|object| match object {
                         Object::Table(_) => ObjectKind::Table,
                         Object::Array(_) => ObjectKind::Array,
                         Object::NativeClosure(_) => ObjectKind::NativeClosure,
@@ -106,7 +106,7 @@ impl Heap {
         entries
             .get(identity.index)?
             .object
-            .as_ref()
+            .as_deref()
             .map(|object| match object {
                 Object::Table(data) => data.nodes.len(),
                 Object::Array(_)

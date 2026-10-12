@@ -50,7 +50,7 @@ impl<'a> Probe<'a> {
             let live = entries
                 .get(id.index)
                 .filter(|entry| entry.generation == id.generation)
-                .and_then(|entry| Some((entry.life.as_ref()?, entry.object.as_ref()?)));
+                .and_then(|entry| Some((entry.life.as_ref()?, entry.object.as_deref()?)));
             if let Some((life, Object::Table(data))) = live {
                 let parent = data
                     .delegate

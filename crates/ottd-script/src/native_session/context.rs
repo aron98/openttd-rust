@@ -39,10 +39,6 @@ impl ContextLife {
         }
     }
     /// Current lifecycle phase.
-    #[cfg_attr(
-        not(test),
-        expect(dead_code, reason = "idle observation state; consuming atoms read it")
-    )]
     pub(super) fn phase(&self) -> ContextPhase {
         self.phase.get()
     }
@@ -89,42 +85,89 @@ pub(super) enum RootMembership {
 }
 impl RootMembership {
     /// Classify one stored field piece without adding any owner; a heap edge
-    /// target is reported as its numeric object identity, and no context can
-    /// be a slot value until the future friend-context atom lands.
+    /// target is reported as its numeric object identity. A context edge
+    /// carries its heap object identity at storage level; registry-level
+    /// context membership is resolved by the session records, not by
+    /// storage classification.
     pub(super) fn of(stored: &Stored) -> Self {
         match stored {
             Stored::Table(edge)
             | Stored::Array(edge)
             | Stored::NativeClosure(edge)
-            | Stored::ScriptClosure(edge) => Self::Object(edge.identity()),
+            | Stored::ScriptClosure(edge)
+            | Stored::Context(edge) => Self::Object(edge.identity()),
             Stored::Scalar(crate::table::scalar::Scalar::Null) => Self::Null,
             Stored::Scalar(_) => Self::NonCollectable,
         }
     }
 }
-/// Storage kind of one context; the primary is protected by `_root_vm`.
+/// Storage kind of one context; the primary is protected by `_root_vm`, a
+/// retained friend by its explicit `RefTable` host retention.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(super) enum ContextStorage {
     /// The session's primary context, retained once by `_root_vm`.
     Primary,
+    /// A friend context retained through the physical `RefTable`
+    /// (`sqapi.cpp:155 sq_addref`).
+    Friend,
+}
+/// One slot of the session's context arena. A retired record's slot keeps
+/// its generation counter, so reuse of the slot increments the identity
+/// generation without ever wrapping; a slot whose generation reaches
+/// `u64::MAX` stays permanently unavailable (design §45).
+#[derive(Debug)]
+pub(super) struct ContextSlot {
+    next_generation: std::cell::Cell<u64>,
+    record: Option<ContextRecord>,
+}
+impl ContextSlot {
+    pub(super) const fn from_record(record: ContextRecord) -> Self {
+        Self {
+            next_generation: std::cell::Cell::new(record.id.generation),
+            record: Some(record),
+        }
+    }
+    /// Reserve the next identity of this slot for a fresh record; occupied
+    /// and generation-exhausted slots stay unavailable.
+    pub(super) fn reserve(&self, index: usize) -> Option<ContextId> {
+        Some(ContextId {
+            index,
+            generation: self.next_generation.get().checked_add(1)?,
+        })
+    }
+    /// A fresh unoccupied slot whose first reservation gets generation one.
+    pub(super) const fn vacant() -> Self {
+        Self {
+            next_generation: std::cell::Cell::new(0),
+            record: None,
+        }
+    }
+    /// Publish a reserved record into its slot.
+    pub(super) fn publish(&mut self, record: ContextRecord) {
+        self.next_generation.set(record.id.generation);
+        self.record = Some(record);
+    }
+    /// Retire the record, freeing the slot for a later incremented reuse.
+    pub(super) const fn retire(&mut self) -> Option<ContextRecord> {
+        self.record.take()
+    }
+    pub(super) const fn record(&self) -> Option<&ContextRecord> {
+        self.record.as_ref()
+    }
 }
 /// One registry record: identity, lifecycle, numeric persistent-field
 /// memberships and the storage kind.
 #[derive(Debug)]
 pub(super) struct ContextRecord {
-    #[cfg_attr(
-        not(test),
-        expect(
-            dead_code,
-            reason = "numeric registry identity; consuming atoms read it"
-        )
-    )]
     pub(super) id: ContextId,
     pub(super) life: ContextLife,
     pub(super) storage: ContextStorage,
     #[cfg_attr(
         not(test),
-        expect(dead_code, reason = "scalar-only membership; consuming atoms read it")
+        expect(
+            dead_code,
+            reason = "friend memberships arrive with the retained-friend atom's records"
+        )
     )]
     pub(super) membership: [RootMembership; 5],
 }

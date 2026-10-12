@@ -32,7 +32,7 @@ impl Sink {
         if entry.generation != self.identity.generation {
             return None;
         }
-        let elements = match entry.object.as_ref()? {
+        let elements = match entry.object.as_deref()? {
             Object::Array(values) => values.len(),
             Object::NativeClosure(data) => data.values().count(),
             Object::Table(_) | Object::ScriptClosure(_) | Object::Context(_) => return None,

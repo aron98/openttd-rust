@@ -1,12 +1,17 @@
 //! Test-only scalar copies of the idle session state; no observation adds an
 //! owner or mutates the graph.
+pub(super) mod lookup;
 use super::{
-    context::{ContextId, ContextPhase, RootMembership},
+    context::{ContextId, ContextPhase, ContextStorage, RootMembership},
     payload,
     session::SharedState,
 };
-use crate::heap::observation::{Counts, EntrySnapshot, HeapSnapshot, Identity, ObjectKind};
+use crate::heap::observation::{HeapSnapshot, Identity};
 use crate::heap::{Handle, Object, Stored};
+pub(super) use lookup::{
+    chain_positions, counts, kind_count, label_identity, labeled_positions, observation_root_table,
+    receipt_labels,
+};
 
 /// One idle snapshot: heap state, the source-labeled identities, the primary
 /// context scalars, the persistent-field memberships and the `RefTable` state.
@@ -16,6 +21,9 @@ pub(super) struct SessionSnapshot {
     pub(super) labels: Vec<(char, Identity)>,
     pub(super) vm: Option<VmLine>,
     pub(super) fields: [(&'static str, RootMembership); 5],
+    /// Registry records of every retained friend: identity, lifecycle phase
+    /// and logical reference count.
+    pub(super) friends: Vec<(ContextId, ContextPhase, u64)>,
     pub(super) ref_slots: u64,
     pub(super) ref_used: u64,
     pub(super) ref_free: Vec<Option<usize>>,
@@ -100,19 +108,29 @@ impl SharedState {
             .contexts
             .borrow()
             .iter()
-            .flatten()
+            .filter_map(|slot| slot.record())
             .map(|record| {
                 (
                     record.id,
                     record.life.phase(),
                     record.life.references(),
+                    record.storage,
                     // The registry's scalar membership is the authority; the
-                    // shared `_root_vm` field itself targets this context.
+                    // shared `_root_vm` field itself targets the primary.
                     (record.membership, RootMembership::Context(record.id)),
                 )
             })
-            .next();
-        let context = registry.map_or(
+            .collect::<Vec<_>>();
+        let friends = registry
+            .iter()
+            .filter(|record| record.3 == ContextStorage::Friend)
+            .map(|record| (record.0, record.1, record.2))
+            .collect();
+        let primary = registry
+            .iter()
+            .find(|record| record.3 == ContextStorage::Primary)
+            .map(|record| (record.0, record.1, record.2, record.4));
+        let context = primary.map_or(
             (
                 ContextId {
                     index: 0,
@@ -172,6 +190,7 @@ impl SharedState {
             labels,
             vm,
             fields,
+            friends,
             ref_slots,
             ref_used,
             ref_free,
@@ -180,67 +199,4 @@ impl SharedState {
             call_records,
         }
     }
-}
-/// Count live entries of one object kind in a snapshot.
-pub(super) fn kind_count(snapshot: &HeapSnapshot, kind: ObjectKind) -> usize {
-    snapshot
-        .entries
-        .iter()
-        .filter(|entry| entry.kind == Some(kind) && entry.life.is_some())
-        .count()
-}
-/// Look up the heap counts of one identity.
-pub(super) fn counts(snapshot: &HeapSnapshot, identity: Identity) -> Option<Counts> {
-    snapshot
-        .entries
-        .iter()
-        .find(|entry| entry.identity == identity)
-        .and_then(|entry: &EntrySnapshot| entry.life)
-}
-/// Map a chain to labeled positions, like the receipt's chain line.
-pub(super) fn chain_positions(snapshot: &SessionSnapshot) -> Vec<(usize, char)> {
-    snapshot
-        .heap
-        .chain
-        .iter()
-        .enumerate()
-        .filter_map(|(index, identity)| {
-            snapshot
-                .labels
-                .iter()
-                .find(|(_, candidate)| candidate == identity)
-                .map(|(label, _)| (index, *label))
-        })
-        .collect()
-}
-/// The identity a snapshot label carries.
-pub(super) fn label_identity(snapshot: &SessionSnapshot, label: char) -> Option<Identity> {
-    snapshot
-        .labels
-        .iter()
-        .find(|(candidate, _)| *candidate == label)
-        .map(|(_, identity)| *identity)
-}
-/// Borrow the materialized root table as a public table value for content
-/// assertions; the test-only owner is released when the value drops.
-pub(super) fn observation_root_table(
-    session: &super::session::NativeSession,
-) -> Option<crate::Table> {
-    let shared = &session.shared;
-    let roots = shared.roots.borrow();
-    let roots = roots.as_ref()?;
-    let primary = roots.primary.as_ref()?;
-    let handle = Handle::from_edge(primary, &shared.realm);
-    let edge = handle.read(|object| match object {
-        Object::Context(payload) => match &payload.persistent()[payload::ROOT] {
-            Stored::Table(edge) => Some(edge.clone()),
-            _ => None,
-        },
-        Object::Array(_)
-        | Object::NativeClosure(_)
-        | Object::ScriptClosure(_)
-        | Object::Table(_) => None,
-    });
-    drop(handle);
-    edge.map(|edge| crate::Table(Handle::from_edge(&edge, &shared.realm)))
 }

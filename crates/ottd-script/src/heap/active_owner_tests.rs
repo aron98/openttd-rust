@@ -16,7 +16,7 @@ fn snapshot(heap: &Heap, id: ObjectId) -> Option<Snapshot> {
         return None;
     }
     let life = entry.life.as_ref()?;
-    match entry.object.as_ref()? {
+    match entry.object.as_deref()? {
         Object::Table(data) => Some(Snapshot {
             references: life.references.get(),
             used: data.nodes.len(),

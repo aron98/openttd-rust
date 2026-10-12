@@ -39,16 +39,31 @@ pub(super) fn receipt(mode: &str) -> String {
 }
 /// The `roots vm` line of the first snapshot in this receipt.
 pub(super) fn vm_line(raw: &str) -> VmReceipt {
-    let fields = raw
+    let line = raw
         .lines()
         .find(|line| line.starts_with("roots vm "))
-        .expect("native vm line")
-        .split_whitespace()
-        .collect::<Vec<_>>();
+        .expect("native vm line");
+    vm_line_of(line)
+}
+/// The `roots vm` line of one phase's snapshot.
+pub(super) fn vm_line_in(raw: &str, phase: &str) -> VmReceipt {
+    let begin = format!("roots begin {phase}");
+    let end = format!("roots end {phase}");
+    let line = raw
+        .lines()
+        .skip_while(|line| *line != begin)
+        .skip(1)
+        .take_while(|line| *line != end)
+        .find(|line| line.starts_with("roots vm "))
+        .expect("native vm line");
+    vm_line_of(line)
+}
+/// Parse one `roots vm` line into its nine native scalars.
+fn vm_line_of(line: &str) -> VmReceipt {
+    let fields = line.split_whitespace().collect::<Vec<_>>();
     assert_eq!(fields.len(), 12);
     assert_eq!(fields.first(), Some(&"roots"));
     assert_eq!(fields.get(1), Some(&"vm"));
-    assert_eq!(fields.get(2), Some(&"V"));
     let numbers = fields
         .iter()
         .skip(3)

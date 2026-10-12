@@ -54,8 +54,21 @@ pub(crate) fn collect_shared_state(state: &SharedState) -> usize {
     let Some(roots) = roots.as_ref() else {
         return 0;
     };
+    // `SQSharedState::CollectGarbage` enqueues the primary `_root_vm` first,
+    // then the physical `RefTable` objects ascending (`sqstate.cpp:315-331`),
+    // then registry, consts, the metamethod map and the ten default delegates
+    // in generator/thread-before-closure order.
     let edges = roots.collect_order();
-    // Physical `RefTable` nodes enqueue between the primary context and the
-    // registry; the idle session's table holds none, so no root edge follows it.
-    state.realm.heap.collect_native(&edges)
+    let mut ids = Vec::new();
+    if let Some(primary) = &roots.primary {
+        ids.push(primary.identity());
+    }
+    {
+        let refs = state.refs.borrow();
+        if let Some(table) = refs.as_ref() {
+            ids.extend(table.mark_targets());
+        }
+    }
+    ids.extend(edges.iter().map(|edge| edge.identity()));
+    state.realm.heap.collect_native(&ids)
 }

@@ -1,6 +1,6 @@
 //! The exact source close sequence of `sq_close` plus `~SQSharedState`.
 use super::{
-    context::ContextPhase,
+    context::{ContextPhase, ContextSlot, ContextStorage},
     session::{Phase, SharedState},
 };
 use crate::heap::{Handle, Object};
@@ -15,16 +15,18 @@ pub(super) fn close(state: &SharedState) {
     let realm = state.realm.clone();
     let mut roots = state.roots.borrow_mut().take();
     let mut refs = state.refs.borrow_mut().take();
-    let record = state
-        .contexts
-        .borrow_mut()
-        .iter_mut()
-        .find_map(|slot| {
-            slot.as_ref()
-                .is_some_and(|record| record.storage == super::context::ContextStorage::Primary)
-                .then(|| slot.take())
-        })
-        .flatten();
+    let mut contexts = state.contexts.borrow_mut();
+    let record = contexts.iter_mut().find_map(|slot: &mut ContextSlot| {
+        if slot
+            .record()
+            .is_some_and(|record| record.storage == ContextStorage::Primary)
+        {
+            slot.retire()
+        } else {
+            None
+        }
+    });
+    drop(contexts);
     let Some(roots) = roots.as_mut() else {
         state.phase.set(Phase::Closed);
         return;
@@ -69,11 +71,20 @@ pub(super) fn close(state: &SharedState) {
     for (_, edge) in std::mem::take(&mut roots.defaults) {
         drop(edge);
     }
-    // Finalize the physical RefTable ascending, then release its storage.
+    // Finalize the physical RefTable ascending, releasing each stored owner
+    // after the table borrow ends, then release its storage; every retained
+    // friend's sole owner is gone with its node.
     if let Some(table) = refs.as_mut() {
-        table.finalize();
+        let released = table.finalize();
+        drop(refs);
+        for piece in released {
+            drop(piece);
+            realm.heap.drain_releases();
+        }
+    } else {
+        drop(refs);
     }
-    drop(refs);
+    retire_friend_records(state);
     // Sweep and drain the remaining collectables; every shared owner is gone.
     realm.heap.drain_releases();
     // Destroy the type, system and metamethod vectors last; the string table
@@ -81,6 +92,23 @@ pub(super) fn close(state: &SharedState) {
     roots.metamethods.clear();
     roots.types.clear();
     state.phase.set(Phase::Closed);
+}
+/// Retire every remaining friend record: the `RefTable` close above released
+/// each friend's sole owning reference, so every friend context is retired
+/// storage whose registry slot is reusable with an incremented generation.
+fn retire_friend_records(state: &SharedState) {
+    let mut contexts = state.contexts.borrow_mut();
+    for slot in contexts.iter_mut() {
+        let Some(record) = slot.retire() else {
+            continue;
+        };
+        if record.storage == ContextStorage::Friend {
+            record.life.release();
+            record.life.set_phase(ContextPhase::Retired);
+        } else {
+            slot.publish(record);
+        }
+    }
 }
 /// `SQVM::Finalize` through a short borrowed handle, releasing each taken
 /// payload piece immediately after the borrow ends.

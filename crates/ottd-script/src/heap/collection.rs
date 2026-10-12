@@ -25,13 +25,12 @@ impl Heap {
         };
         self.collect_roots(&roots)
     }
-    /// Collect with the given source-ordered root edges, mirroring native
-    /// `SQSharedState::CollectGarbage`: marking happens at enqueue, the chain
-    /// is rebuilt from the LIFO pop order and unmarked nodes finalize in chain
-    /// head order.
-    pub(crate) fn collect_native(&self, roots: &[&Edge]) -> usize {
-        let ids = roots.iter().map(|edge| edge.identity()).collect::<Vec<_>>();
-        self.collect_roots(&ids)
+    /// Collect with the given source-ordered root identities, mirroring
+    /// native `SQSharedState::CollectGarbage`: marking happens at enqueue,
+    /// the chain is rebuilt from the LIFO pop order and unmarked nodes
+    /// finalize in chain head order.
+    pub(crate) fn collect_native(&self, roots: &[ObjectId]) -> usize {
+        self.collect_roots(roots)
     }
     #[expect(
         clippy::arithmetic_side_effects,
@@ -50,7 +49,7 @@ impl Heap {
             while let Some(id) = todo.pop() {
                 if let Some(object) = entries
                     .get(id.index)
-                    .and_then(|entry| entry.object.as_ref())
+                    .and_then(|entry| entry.object.as_deref())
                 {
                     for edge in object.edges() {
                         Self::enqueue(&entries, &mut marked, &mut todo, edge.life.id);
@@ -77,7 +76,7 @@ impl Heap {
                     .and_then(|entry| {
                         let life = entry.life.as_ref()?;
                         let guard = Edge::retain(life, Ownership::Stored);
-                        let released = match entry.object.as_mut()? {
+                        let released = match entry.object.as_deref_mut()? {
                             Object::ScriptClosure(data) => Finalization::Released(Object::Array(
                                 std::mem::take(&mut data.outers),
                             )),
@@ -114,7 +113,7 @@ impl Heap {
                 let mut entries = self.entries.borrow_mut();
                 entries
                     .get_mut(id.index)
-                    .and_then(|entry| match entry.object.as_mut()? {
+                    .and_then(|entry| match entry.object.as_deref_mut()? {
                         Object::Table(data) => data.nodes.finalize_slot(slot),
                         Object::Array(_)
                         | Object::NativeClosure(_)
@@ -133,7 +132,7 @@ impl Heap {
             let mut entries = self.entries.borrow_mut();
             entries
                 .get_mut(id.index)
-                .and_then(|entry| match entry.object.as_mut()? {
+                .and_then(|entry| match entry.object.as_deref_mut()? {
                     Object::Table(data) => data.delegate.take(),
                     Object::Array(_)
                     | Object::NativeClosure(_)
@@ -149,7 +148,7 @@ impl Heap {
             let released = {
                 let mut entries = self.entries.borrow_mut();
                 entries.get_mut(id.index).and_then(|entry| {
-                    let values = match entry.object.as_mut()? {
+                    let values = match entry.object.as_deref_mut()? {
                         Object::Array(values) => values,
                         Object::NativeClosure(data) => &mut data.outer_values,
                         Object::Table(_) | Object::ScriptClosure(_) | Object::Context(_) => {
@@ -183,7 +182,7 @@ impl Heap {
             let mut entries = self.entries.borrow_mut();
             entries
                 .get_mut(id.index)
-                .and_then(|entry| match entry.object.as_mut()? {
+                .and_then(|entry| match entry.object.as_deref_mut()? {
                     Object::Context(payload) => Some(payload.finalize()),
                     Object::Array(_)
                     | Object::NativeClosure(_)
@@ -200,7 +199,7 @@ impl Heap {
     fn enqueue(entries: &[Entry], marked: &mut [bool], todo: &mut Vec<ObjectId>, id: ObjectId) {
         if entries
             .get(id.index)
-            .is_some_and(|entry| entry.generation == id.generation && entry.object.is_some())
+            .is_some_and(|entry| entry.generation == id.generation && entry.life.is_some())
         {
             if let Some(mark) = marked.get_mut(id.index) {
                 if !std::mem::replace(mark, true) {

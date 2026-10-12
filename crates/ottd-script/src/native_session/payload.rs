@@ -108,11 +108,22 @@ impl ContextPayload {
     pub(crate) fn publish_root(&mut self, root: Edge) {
         self.persistent[ROOT] = Stored::Table(root);
     }
+    /// `SQVM::Init` friend path (`sqvm.cpp:329-333`): copy the friend VM's
+    /// roottable, errorhandler and debughook fields, each assignment
+    /// retaining exactly one owner like an `SQObjectPtr` copy.
+    pub(crate) fn publish_friend_fields(
+        &mut self,
+        root: Edge,
+        error: Stored,
+        handler: Stored,
+        debug: Stored,
+    ) {
+        self.persistent[ROOT] = Stored::Table(root);
+        self.persistent[ERROR] = error;
+        self.persistent[HANDLER] = handler;
+        self.persistent[DEBUG] = debug;
+    }
     /// Scalar view of the source counter state, for idle observations only.
-    #[cfg_attr(
-        not(test),
-        expect(dead_code, reason = "source scalar state; later atoms read it")
-    )]
     pub(crate) fn scalars(&self) -> ContextScalars {
         ContextScalars {
             suspended: self.suspended,

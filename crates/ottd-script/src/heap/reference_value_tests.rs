@@ -35,7 +35,7 @@ impl Sink {
         let elements = match entry.object.as_ref()? {
             Object::Array(values) => values.len(),
             Object::NativeClosure(data) => data.values().count(),
-            Object::Table(_) | Object::ScriptClosure(_) => return None,
+            Object::Table(_) | Object::ScriptClosure(_) | Object::Context(_) => return None,
         };
         Some(State {
             references: entry.life.as_ref()?.references.get(),

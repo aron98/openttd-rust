@@ -22,7 +22,10 @@ fn snapshot(heap: &Heap, id: ObjectId) -> Option<Snapshot> {
             used: data.nodes.len(),
             delegate: data.delegate.is_some(),
         }),
-        Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => None,
+        Object::Array(_)
+        | Object::NativeClosure(_)
+        | Object::ScriptClosure(_)
+        | Object::Context(_) => None,
     }
 }
 #[derive(Debug, Default)]

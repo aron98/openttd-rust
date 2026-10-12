@@ -46,24 +46,34 @@ impl NativeClosure {
         realm: &Realm,
         registration: &'static NativeRegistration,
     ) -> Result<Self, VmError> {
+        let data = Self::data(realm, registration)?;
+        realm
+            .heap
+            .allocate(realm, Object::NativeClosure(data))
+            .map(Self)
+    }
+    /// Allocate a fresh zero-reference closure for source-order registration;
+    /// only the actual table-slot or field assignment retains it.
+    pub(crate) fn unpublished(
+        realm: &Realm,
+        registration: &'static NativeRegistration,
+    ) -> Result<crate::heap::Unpublished, VmError> {
+        let data = Self::data(realm, registration)?;
+        realm.heap.unpublished(realm, Object::NativeClosure(data))
+    }
+    fn data(realm: &Realm, registration: &'static NativeRegistration) -> Result<Data, VmError> {
         let mut type_checks = Vec::new();
         type_checks
             .try_reserve_exact(registration.type_checks().len())
             .map_err(|_| VmError::Allocation)?;
         type_checks.extend_from_slice(registration.type_checks());
-        realm
-            .heap
-            .allocate(
-                realm,
-                Object::NativeClosure(Data {
-                    name: realm.string(registration.name()),
-                    registration,
-                    type_checks,
-                    environment: Stored::null(),
-                    outer_values: Vec::new(),
-                }),
-            )
-            .map(Self)
+        Ok(Data {
+            name: realm.string(registration.name()),
+            registration,
+            type_checks,
+            environment: Stored::null(),
+            outer_values: Vec::new(),
+        })
     }
     #[expect(
         clippy::unreachable,
@@ -72,7 +82,9 @@ impl NativeClosure {
     fn read<T>(&self, read: impl FnOnce(&Data) -> T) -> T {
         self.0.read(|object| match object {
             Object::NativeClosure(data) => read(data),
-            Object::Table(_) | Object::Array(_) | Object::ScriptClosure(_) => unreachable!(),
+            Object::Table(_) | Object::Array(_) | Object::ScriptClosure(_) | Object::Context(_) => {
+                unreachable!()
+            }
         })
     }
     /// Interned native registration name.

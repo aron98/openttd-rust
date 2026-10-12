@@ -23,7 +23,10 @@ impl<'a> Probe<'a> {
     pub(super) fn register_parent(&mut self, label: char, table: &Table) -> bool {
         let parent = table.0.read(|object| match object {
             Object::Table(data) => data.delegate.as_ref().map(|edge| edge.life.id),
-            Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => None,
+            Object::Array(_)
+            | Object::NativeClosure(_)
+            | Object::ScriptClosure(_)
+            | Object::Context(_) => None,
         });
         if let Some(id) = parent {
             self.identities.push((label, id));

@@ -45,7 +45,9 @@ impl ScriptClosure {
     pub(crate) fn read<T>(&self, read: impl FnOnce(&Data) -> T) -> T {
         self.0.read(|object| match object {
             Object::ScriptClosure(data) => read(data),
-            Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => unreachable!(),
+            Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) | Object::Context(_) => {
+                unreachable!()
+            }
         })
     }
     /// Retain an independent prototype owner without retaining this closure.

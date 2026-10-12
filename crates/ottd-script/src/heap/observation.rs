@@ -21,6 +21,7 @@ pub(crate) enum ObjectKind {
     Array,
     NativeClosure,
     ScriptClosure,
+    Context,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) struct Counts {
@@ -62,6 +63,7 @@ impl Heap {
                         Object::Array(_) => ObjectKind::Array,
                         Object::NativeClosure(_) => ObjectKind::NativeClosure,
                         Object::ScriptClosure(_) => ObjectKind::ScriptClosure,
+                        Object::Context(_) => ObjectKind::Context,
                     }),
                     life,
                     reference_live_off_chain: life.is_some_and(|counts| counts.references > 0)
@@ -73,6 +75,45 @@ impl Heap {
             entries: copied,
             chain: chain.iter().copied().map(Identity::from).collect(),
         }
+    }
+    /// Ordered retirement identities from the reserved test-only release
+    /// trace; the trace must have been installed with sufficient capacity.
+    pub(crate) fn retired_identities(&self) -> Vec<Identity> {
+        self.retired
+            .borrow()
+            .iter()
+            .flatten()
+            .copied()
+            .map(Identity::from)
+            .collect()
+    }
+    /// Install the test-only retirement trace with pre-reserved capacity.
+    pub(crate) fn install_retired_trace(&self, capacity: usize) {
+        *self.retired.borrow_mut() = Some(Vec::with_capacity(capacity));
+    }
+    /// Live reference count of the entry at one identity; zero when absent.
+    pub(crate) fn entry_references(&self, identity: Identity) -> usize {
+        self.entries
+            .borrow()
+            .get(identity.index)
+            .filter(|entry| entry.generation == identity.generation)
+            .and_then(|entry| entry.life.as_ref())
+            .map_or(0, |life| life.references.get())
+    }
+    /// Physical own-slot count of the table at one identity, if it is one.
+    pub(crate) fn table_extent(&self, identity: Identity) -> Option<usize> {
+        let entries = self.entries.borrow();
+        entries
+            .get(identity.index)?
+            .object
+            .as_ref()
+            .map(|object| match object {
+                Object::Table(data) => data.nodes.len(),
+                Object::Array(_)
+                | Object::NativeClosure(_)
+                | Object::ScriptClosure(_)
+                | Object::Context(_) => 0,
+            })
     }
 }
 impl Handle {

@@ -6,8 +6,8 @@ mod ownership;
 pub(crate) use operand::Operand;
 mod value;
 use crate::{Realm, VmError, table::Data};
-pub(crate) use ownership::{Edge, Handle, Unpublished};
-use ownership::{Life, ObjectId};
+use ownership::Life;
+pub(crate) use ownership::{Edge, Handle, ObjectId, Unpublished};
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
@@ -20,35 +20,34 @@ pub(crate) enum Object {
     NativeClosure(crate::native_closure::Data),
     Table(Data),
     Array(Vec<Stored>),
+    Context(Box<crate::native_session::payload::ContextPayload>),
 }
 impl Object {
     fn edges(&self) -> impl Iterator<Item = &Edge> {
-        let (table, array, closure, script) = match self {
-            Self::ScriptClosure(data) => (None, None, None, Some(data)),
-            Self::Table(nodes) => (Some(nodes), None, None, None),
-            Self::Array(values) => (None, Some(values), None, None),
-            Self::NativeClosure(data) => (None, None, Some(data), None),
-        };
-        table
-            .into_iter()
-            .filter_map(|data| data.delegate.as_ref())
-            .chain(
-                table
-                    .into_iter()
-                    .flat_map(|data| data.nodes.values())
-                    .chain(array.into_iter().flatten())
-                    .chain(
-                        closure
-                            .into_iter()
-                            .flat_map(crate::native_closure::Data::values),
-                    )
-                    .chain(
-                        script
-                            .into_iter()
-                            .flat_map(crate::script_closure::Data::values),
-                    )
-                    .filter_map(Stored::edge),
-            )
+        // Delegate and slot edges are gathered once so a context can yield its
+        // source-ordered child edges directly, without a heterogeneous chain.
+        let mut edges = Vec::new();
+        match self {
+            Self::ScriptClosure(data) => {
+                edges.extend(data.values().filter_map(Stored::edge));
+            }
+            Self::Table(nodes) => {
+                if let Some(delegate) = nodes.delegate.as_ref() {
+                    edges.push(delegate);
+                }
+                edges.extend(nodes.nodes.values().filter_map(Stored::edge));
+            }
+            Self::Array(values) => {
+                edges.extend(values.iter().filter_map(Stored::edge));
+            }
+            Self::NativeClosure(data) => {
+                edges.extend(data.values().filter_map(Stored::edge));
+            }
+            Self::Context(payload) => {
+                edges.extend(payload.stored_edges());
+            }
+        }
+        edges.into_iter()
     }
 }
 #[derive(Debug)]
@@ -63,6 +62,8 @@ pub(crate) struct Heap {
     pending: RefCell<Vec<ObjectId>>,
     releasing: Cell<bool>,
     chain: RefCell<Vec<ObjectId>>,
+    /// Weak hook to the native root enumerator of a materialized session.
+    native: RefCell<Option<std::rc::Weak<crate::native_session::SharedState>>>,
     #[cfg(test)]
     retired: RefCell<Option<Vec<ObjectId>>>,
 }
@@ -116,6 +117,32 @@ impl Heap {
             life,
             realm: realm.clone(),
         })
+    }
+    /// Queue a recorded zero-reference construction allocation for direct
+    /// release, as the source constructor's rollback would destroy the raw
+    /// prefix; nonzero references leave the entry live.
+    pub(crate) fn release_orphan(&self, unpublished: &Unpublished) {
+        self.pending.borrow_mut().push(unpublished.life.id);
+        self.release_pending();
+    }
+    /// Attach the weak native root enumerator of one materialized session.
+    pub(crate) fn install_native_session(
+        &self,
+        state: std::rc::Weak<crate::native_session::SharedState>,
+    ) {
+        *self.native.borrow_mut() = Some(state);
+    }
+    /// Run one source-ordered native collection for the attached session, if
+    /// its shared state still exists; ordinary legacy realms have none.
+    pub(crate) fn collect_native_dispatch(&self) -> Option<usize> {
+        let native = self.native.borrow();
+        let state = native.as_ref().and_then(std::rc::Weak::upgrade)?;
+        Some(crate::native_session::collect_shared_state(&state))
+    }
+    /// Drain queued zero-reference releases after payload pieces were dropped
+    /// outside a heap entry borrow, mirroring immediate `SQObjectPtr` release.
+    pub(crate) fn drain_releases(&self) {
+        self.release_pending();
     }
     fn release_pending(&self) {
         if self.releasing.replace(true) {

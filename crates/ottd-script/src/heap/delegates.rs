@@ -14,9 +14,10 @@ impl Heap {
     pub(crate) fn copy_delegate(&self, source: &Handle, copy: &Handle) -> Result<(), VmError> {
         let delegate = source.read(|object| match object {
             Object::Table(data) => Ok(data.delegate.as_ref().map(|edge| edge.life.id)),
-            Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
-                Err(VmError::InvalidBytecode)
-            }
+            Object::Array(_)
+            | Object::NativeClosure(_)
+            | Object::ScriptClosure(_)
+            | Object::Context(_) => Err(VmError::InvalidBytecode),
         })?;
         self.attach_delegate_id(copy, delegate)
     }
@@ -53,9 +54,10 @@ impl Heap {
         };
         let old = owner.mutate(|object| match object {
             Object::Table(data) => Ok(data.delegate.take()),
-            Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
-                Err(VmError::InvalidBytecode)
-            }
+            Object::Array(_)
+            | Object::NativeClosure(_)
+            | Object::ScriptClosure(_)
+            | Object::Context(_) => Err(VmError::InvalidBytecode),
         })?;
         drop(old);
         self.release_pending();
@@ -64,9 +66,10 @@ impl Heap {
                 data.delegate = replacement;
                 Ok(())
             }
-            Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
-                Err(VmError::InvalidBytecode)
-            }
+            Object::Array(_)
+            | Object::NativeClosure(_)
+            | Object::ScriptClosure(_)
+            | Object::Context(_) => Err(VmError::InvalidBytecode),
         })
     }
 }

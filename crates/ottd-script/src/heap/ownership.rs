@@ -7,9 +7,9 @@ use std::{
 };
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(super) struct ObjectId {
-    pub(super) index: usize,
-    pub(super) generation: u64,
+pub(crate) struct ObjectId {
+    pub(crate) index: usize,
+    pub(crate) generation: u64,
 }
 #[derive(Debug)]
 pub(super) struct Life {
@@ -51,6 +51,11 @@ impl Edge {
     }
     pub(crate) fn internal(&self) -> Self {
         Self::retain(&self.life, Ownership::Stored)
+    }
+    /// Numeric arena identity of this edge's target; this carries no claim
+    /// about native pointer identity.
+    pub(crate) fn identity(&self) -> ObjectId {
+        self.life.id
     }
     pub(crate) fn make_reference(&mut self) -> Result<(), VmError> {
         if self.ownership == Ownership::HostRoot {
@@ -109,6 +114,25 @@ impl Unpublished {
             edge: Edge::retain(&self.life, Ownership::HostRoot),
             realm: self.realm.clone(),
         }
+    }
+    /// Clone this construction token for guard bookkeeping; the share owns no
+    /// reference and only records the zero-ref allocation for rollback drains.
+    pub(crate) fn share(&self) -> Self {
+        Self {
+            life: Rc::clone(&self.life),
+            realm: self.realm.clone(),
+        }
+    }
+    /// Retain the single owner a source `SQObjectPtr` field assignment adds to
+    /// this raw zero-reference allocation; the owner drains releases directly
+    /// instead of deferring them like storage-internal edges.
+    pub(crate) fn publish_shared(self) -> Edge {
+        Edge::retain(&self.life, Ownership::Reference)
+    }
+    /// Retain one internal storage owner for assignment into another object's
+    /// slot or field; the enclosing release path drains it later.
+    pub(crate) fn stored(self) -> Edge {
+        Edge::retain(&self.life, Ownership::Stored)
     }
     #[expect(
         clippy::expect_used,

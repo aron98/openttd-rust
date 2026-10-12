@@ -5,28 +5,46 @@ use super::{Edge, Entry, Heap, Object, ObjectId};
 enum Finalization {
     Table,
     Sequence,
+    Context,
     Released(Object),
 }
 
 impl Heap {
+    pub(crate) fn collect(&self) -> usize {
+        let roots = {
+            let entries = self.entries.borrow();
+            let mut roots = Vec::new();
+            for entry in &*entries {
+                if let Some(life) = &entry.life {
+                    if life.external.get() > 0 {
+                        roots.push(life.id);
+                    }
+                }
+            }
+            roots
+        };
+        self.collect_roots(&roots)
+    }
+    /// Collect with the given source-ordered root edges, mirroring native
+    /// `SQSharedState::CollectGarbage`: marking happens at enqueue, the chain
+    /// is rebuilt from the LIFO pop order and unmarked nodes finalize in chain
+    /// head order.
+    pub(crate) fn collect_native(&self, roots: &[&Edge]) -> usize {
+        let ids = roots.iter().map(|edge| edge.identity()).collect::<Vec<_>>();
+        self.collect_roots(&ids)
+    }
     #[expect(
         clippy::arithmetic_side_effects,
         reason = "Finalization count is bounded by the finite unmarked object list"
     )]
-    pub(crate) fn collect(&self) -> usize {
+    fn collect_roots(&self, roots: &[ObjectId]) -> usize {
         self.release_pending();
         let (unmarked, mut reachable) = {
             let entries = self.entries.borrow();
             let mut marked = vec![false; entries.len()];
             let mut todo = Vec::new();
-            // External owner enumeration is an internal host seam, not a claim
-            // about native pointer-hashed RefTable or full VM root ordering.
-            for entry in &*entries {
-                if let Some(life) = &entry.life {
-                    if life.external.get() > 0 {
-                        Self::enqueue(&entries, &mut marked, &mut todo, life.id);
-                    }
-                }
+            for id in roots {
+                Self::enqueue(&entries, &mut marked, &mut todo, *id);
             }
             let mut reachable = Vec::new();
             while let Some(id) = todo.pop() {
@@ -65,6 +83,7 @@ impl Heap {
                             )),
                             Object::Table(_) => Finalization::Table,
                             Object::Array(_) | Object::NativeClosure(_) => Finalization::Sequence,
+                            Object::Context(_) => Finalization::Context,
                         };
                         Some((guard, released))
                     })
@@ -75,6 +94,7 @@ impl Heap {
                 match object {
                     Finalization::Table => self.finalize_table(id),
                     Finalization::Sequence => self.finalize_sequence(id),
+                    Finalization::Context => self.finalize_context(id),
                     Finalization::Released(object) => drop(object),
                 }
                 self.release_pending();
@@ -96,9 +116,10 @@ impl Heap {
                     .get_mut(id.index)
                     .and_then(|entry| match entry.object.as_mut()? {
                         Object::Table(data) => data.nodes.finalize_slot(slot),
-                        Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => {
-                            None
-                        }
+                        Object::Array(_)
+                        | Object::NativeClosure(_)
+                        | Object::ScriptClosure(_)
+                        | Object::Context(_) => None,
                     })
             };
             let Some((key, value)) = released else {
@@ -114,7 +135,10 @@ impl Heap {
                 .get_mut(id.index)
                 .and_then(|entry| match entry.object.as_mut()? {
                     Object::Table(data) => data.delegate.take(),
-                    Object::Array(_) | Object::NativeClosure(_) | Object::ScriptClosure(_) => None,
+                    Object::Array(_)
+                    | Object::NativeClosure(_)
+                    | Object::ScriptClosure(_)
+                    | Object::Context(_) => None,
                 })
         };
         drop(delegate);
@@ -128,7 +152,9 @@ impl Heap {
                     let values = match entry.object.as_mut()? {
                         Object::Array(values) => values,
                         Object::NativeClosure(data) => &mut data.outer_values,
-                        Object::Table(_) | Object::ScriptClosure(_) => return None,
+                        Object::Table(_) | Object::ScriptClosure(_) | Object::Context(_) => {
+                            return None;
+                        }
                     };
                     if slot == values.len() {
                         values.clear();
@@ -143,6 +169,31 @@ impl Heap {
                 break;
             };
             drop(value);
+            self.release_pending();
+        }
+    }
+    /// Finalize the table targeted by this edge, releasing slots in source
+    /// order for the explicit `Finalize` calls of the shared close sequence.
+    pub(crate) fn finalize_table_edge(&self, edge: &Edge) {
+        self.finalize_table(edge.identity());
+    }
+    /// Finalize a context exactly like `SQVM::Finalize`, releasing the payload    /// pieces taken under a short borrow one by one afterward.
+    fn finalize_context(&self, id: ObjectId) {
+        let released = {
+            let mut entries = self.entries.borrow_mut();
+            entries
+                .get_mut(id.index)
+                .and_then(|entry| match entry.object.as_mut()? {
+                    Object::Context(payload) => Some(payload.finalize()),
+                    Object::Array(_)
+                    | Object::NativeClosure(_)
+                    | Object::ScriptClosure(_)
+                    | Object::Table(_) => None,
+                })
+                .unwrap_or_default()
+        };
+        for piece in released {
+            drop(piece);
             self.release_pending();
         }
     }

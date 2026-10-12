@@ -50,9 +50,10 @@ impl Vm<'_> {
                 Capture::Symbol(key) => {
                     unpublished.mutate(|object| match object {
                         Object::ScriptClosure(data) => data.outers.push(Stored::null()),
-                        Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => {
-                            unreachable!()
-                        }
+                        Object::Array(_)
+                        | Object::Table(_)
+                        | Object::NativeClosure(_)
+                        | Object::Context(_) => unreachable!(),
                     });
                     match self.lookup_value(&self.register(0)?, Value::String(key.clone())) {
                         Ok(value) => value,
@@ -71,14 +72,20 @@ impl Vm<'_> {
                     }
                     data.outers.push(value);
                 }
-                Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => unreachable!(),
+                Object::Array(_)
+                | Object::Table(_)
+                | Object::NativeClosure(_)
+                | Object::Context(_) => unreachable!(),
             });
         }
         for index in &proto.defaults {
             let value = Stored::from_value(self.register(i32::from(*index))?, &realm)?;
             unpublished.mutate(|object| match object {
                 Object::ScriptClosure(data) => data.defaults.push(value),
-                Object::Array(_) | Object::Table(_) | Object::NativeClosure(_) => unreachable!(),
+                Object::Array(_)
+                | Object::Table(_)
+                | Object::NativeClosure(_)
+                | Object::Context(_) => unreachable!(),
             });
         }
         Ok(Value::ScriptClosure(ScriptClosure(unpublished.publish())))

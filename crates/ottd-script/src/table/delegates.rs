@@ -11,7 +11,8 @@ impl Table {
                 .map(|edge| Self(Handle::from_edge(edge, &self.0.realm))),
             crate::heap::Object::Array(_)
             | crate::heap::Object::NativeClosure(_)
-            | crate::heap::Object::ScriptClosure(_) => None,
+            | crate::heap::Object::ScriptClosure(_)
+            | crate::heap::Object::Context(_) => None,
         })
     }
     /// Attach or detach a delegate without changing this table's own slots.

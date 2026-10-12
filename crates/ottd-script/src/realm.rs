@@ -126,7 +126,14 @@ impl WeakRealm {
 }
 impl Realm {
     /// Collect unreachable table/array cycles; ordinary zero-reference objects release immediately.
+    ///
+    /// A live materialized native session dispatches to its source-ordered
+    /// native root enumerator instead, so ordinary collection cannot select
+    /// the legacy external-enumeration algorithm for that realm.
     pub fn collect_cycles(&self) {
+        if self.heap.collect_native_dispatch().is_some() {
+            return;
+        }
         let _finalizations = self.heap.collect();
     }
     #[cfg(test)]

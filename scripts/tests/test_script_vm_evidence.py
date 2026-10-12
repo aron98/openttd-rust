@@ -35,14 +35,18 @@ class ScriptVmEvidenceTests(unittest.TestCase):
 
     def test_only_exact_tests_are_admitted(self) -> None:
         require_tests(
-            "test one ... ok\ntest two ... ok\n"
-            "test result: ok. 2 passed; 0 failed; 0 ignored;",
+            (
+                "test one ... ok\ntest two ... ok\n"
+                "test result: ok. 2 passed; 0 failed; 0 ignored;"
+            ),
             ["one", "two"],
         )
         with world_check_rejected():
             require_tests(
-                "test wrong ... ok\ntest two ... ok\n"
-                "test result: ok. 2 passed; 0 failed; 0 ignored;",
+                (
+                    "test wrong ... ok\ntest two ... ok\n"
+                    "test result: ok. 2 passed; 0 failed; 0 ignored;"
+                ),
                 ["one", "two"],
             )
 

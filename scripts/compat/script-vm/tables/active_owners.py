@@ -90,10 +90,11 @@ def capture(native: Path, output: Path) -> None:
         )
         + "\n"
     )
-    print(
+    message = (
         "PASS sixteen active-owner sessions; "
         "collection actions distinct; recorder controls equal"
     )
+    print(message)
 
 
 if __name__ == "__main__":

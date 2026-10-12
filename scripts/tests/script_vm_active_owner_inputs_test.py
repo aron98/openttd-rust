@@ -2,7 +2,7 @@
 
 import shutil
 from pathlib import Path
-from typing import Literal, assert_never
+from typing import Literal
 
 import pytest
 
@@ -34,8 +34,6 @@ def test_active_owner_observer_copy_is_mandatory(
         case "symlink":
             helper.unlink()
             helper.symlink_to(root / "scripts/compat/script-vm/active_owners.hpp")
-        case unreachable:
-            assert_never(unreachable)
     with pytest.raises(WorldCheckError, match="Native observer source differs"):
         verify_observer_sources(root, native)
     if helper.is_symlink():

@@ -32,6 +32,7 @@ fn synthetic_false_capacity_preserves_fraction_and_actual_transported_history() 
             station_context: &runtime.stations,
             transport: runtime.transport.clone(),
             group_profits: runtime.group_profits.clone(),
+            company_ratings: runtime.company_ratings.clone(),
         };
         // Given a deliberately synthetic full one-item allocator, unrelated to actual native pool capacity.
         runner.transport.cargo.pool = PoolAllocator::restore(1, 1024, [0])?;

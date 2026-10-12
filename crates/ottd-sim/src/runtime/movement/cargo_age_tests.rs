@@ -34,6 +34,7 @@ fn packet_age_saturation_countdown_and_candidate_rollback() -> Result {
             station_context: &runtime.stations,
             transport: runtime.transport.clone(),
             group_profits: runtime.group_profits.clone(),
+            company_ratings: runtime.company_ratings.clone(),
         };
         runner.cache.cargo_age_period = period;
         {

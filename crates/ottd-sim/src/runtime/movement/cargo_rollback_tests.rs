@@ -38,6 +38,7 @@ fn transported_and_joined_prefix_then_late_cache_fault_is_atomic() -> Result {
             station_context: &runtime.stations,
             transport: runtime.transport.clone(),
             group_profits: runtime.group_profits.clone(),
+            company_ratings: runtime.company_ratings.clone(),
         };
         let (candidate, report, towns) = State::plan(&mut runtime.world, 8192, &mut runner)?;
         assert_eq!(report.ticks.len(), 8192);

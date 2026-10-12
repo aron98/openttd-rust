@@ -21,14 +21,14 @@ impl SimulationRuntime {
             return Err(unsupported("host", "network world-loop context"));
         }
         if self.road.is_empty() {
-            let (candidate, report, towns) = State::plan(
-                &mut self.world,
-                ticks,
-                &mut crate::world_ticks::EmptyVehicles,
-            )?;
+            let mut runner = super::empty_rating::EmptyRatingPhases {
+                ratings: self.company_ratings.clone(),
+            };
+            let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
             #[cfg(feature = "async-trace")]
             trace.prepared();
             candidate.commit();
+            self.company_ratings = runner.ratings;
             if let Some(towns) = towns {
                 self.towns = towns;
             }
@@ -53,6 +53,7 @@ impl SimulationRuntime {
             station_context: &self.stations,
             transport: self.transport.clone(),
             group_profits: self.group_profits.clone(),
+            company_ratings: self.company_ratings.clone(),
         };
         let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
         let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
@@ -65,6 +66,7 @@ impl SimulationRuntime {
         self.road.insert(id, runner.cache);
         self.transport = runner.transport;
         self.group_profits = runner.group_profits;
+        self.company_ratings = runner.company_ratings;
         if let Some(towns) = towns {
             self.towns = towns;
         }

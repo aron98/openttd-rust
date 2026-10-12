@@ -27,12 +27,14 @@ mod transport;
 mod transport_jobs;
 pub(crate) use stations::StationContext;
 pub use stations::{RoadStationGeometry, StationArea};
+mod company_rating;
 mod depot;
 mod depot_removal;
 #[cfg(test)]
 mod depot_removal_native;
 mod group_counts;
 mod group_profit;
+pub use company_rating::CompanyRatingCaches;
 pub use group_profit::GroupProfitCaches;
 #[cfg(test)]
 mod ordered_sale_native;
@@ -114,6 +116,7 @@ pub struct SimulationRuntime {
     towns: TownHouseCaches,
     industries: IndustryCaches,
     group_profits: GroupProfitCaches,
+    company_ratings: CompanyRatingCaches,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -202,6 +205,7 @@ impl SimulationRuntime {
             towns: TownHouseCaches::restore(&world)?,
             industries: IndustryCaches::restore(&world)?,
             group_profits: GroupProfitCaches::restore(&world)?,
+            company_ratings: CompanyRatingCaches::fresh_process(),
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
             transport: transport::TransportRuntime::restore(&world, &content)?,
@@ -233,6 +237,11 @@ impl SimulationRuntime {
     /// Retained native profit statistics; excludes engine/count/autoreplace fields.
     pub const fn group_profit_caches(&self) -> &GroupProfitCaches {
         &self.group_profits
+    }
+
+    /// Native raw rating slots for this independent process context; not save-derived.
+    pub const fn company_rating_caches(&self) -> &CompanyRatingCaches {
+        &self.company_ratings
     }
 
     /// Station pool allocation metadata.

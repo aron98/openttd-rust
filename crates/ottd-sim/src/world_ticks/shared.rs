@@ -14,6 +14,7 @@ pub(crate) struct TileLoop {
 }
 
 pub(crate) trait WorldTickPhases {
+    fn company_rating(&mut self, _: u32, _: [i64; 10]) -> Result<(), WorldTickError> { Ok(()) }
     fn before_state_loop(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn company_assets(&self, state: &WorldTickState<'_>, _:u32) -> Result<i64,WorldTickError> {
         if state.table(b"VEHS")?.records().next().is_some() || state.table(b"STNN")?.records().next().is_some() {

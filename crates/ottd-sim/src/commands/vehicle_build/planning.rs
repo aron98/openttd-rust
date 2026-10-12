@@ -83,8 +83,8 @@ pub(super) fn validate(
     }
     let unit = context
         .allocation
-        .road_units
-        .get(&company)
+        .freeunits
+        .get(&(company, crate::runtime::pools::VehicleType::Road))
         .map_or(1, crate::runtime::pools::UnitNumberAllocator::next_id);
     if exceeds_company_limit(world, company, unit)? {
         return Ok(Err(CommandCost::failure(

@@ -82,8 +82,8 @@ pub(super) fn run(
         .allocate()
         .map_err(crate::runtime::RuntimeError::from)?;
     allocation
-        .road_units
-        .entry(company)
+        .freeunits
+        .entry((company, crate::runtime::pools::VehicleType::Road))
         .or_default()
         .use_id(plan.state.unit);
     let mut rng = ottd_core::Randomizer::from_state([

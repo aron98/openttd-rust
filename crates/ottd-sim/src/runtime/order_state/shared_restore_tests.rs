@@ -1,5 +1,6 @@
 use super::restore_tests::build;
 use super::*;
+use crate::runtime::pools::VehicleType;
 use crate::{CommandMode, CommandReturn};
 use ottd_save::{
     WireValue,
@@ -196,7 +197,11 @@ fn shared_restore_candidate_failure_rolls_back_links_and_consumption() -> Result
     let road = runtime.road.clone();
     let mut candidate = allocation.clone();
     let id = candidate.pool.allocate()?;
-    candidate.road_units.entry(0).or_default().use_id(3);
+    candidate
+        .freeunits
+        .entry((0, VehicleType::Road))
+        .or_default()
+        .use_id(3);
     let record = view::row(runtime.world(), *b"VEHS", first)?.record.clone();
     let edits = vec![
         WorldEdit::InsertRecord {

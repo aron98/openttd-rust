@@ -1,4 +1,5 @@
 use super::*;
+use crate::runtime::pools::VehicleType;
 
 #[test]
 fn purchase_publishes_native_identity_rng_record_and_creation_cache() -> Result {
@@ -44,7 +45,11 @@ fn actual_candidate_cache_failure_rolls_back_world_rng_units_and_pool() -> Resul
     let caches = runtime.road.clone();
     let mut candidate = allocation.clone();
     let id = candidate.pool.allocate()?;
-    candidate.road_units.entry(0).or_default().use_id(2);
+    candidate
+        .freeunits
+        .entry((0, VehicleType::Road))
+        .or_default()
+        .use_id(2);
     let record = runtime
         .world
         .tables()

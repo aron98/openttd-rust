@@ -54,7 +54,7 @@ fn live(runtime: &SimulationRuntime) -> Result<Value> {
         .keys()
     {
         let owner = u8::try_from(*owner)?;
-        units.push(json!({"company":owner,"next":runtime.allocation.road_units.get(&owner).map_or(1,pools::UnitNumberAllocator::next_id),"count":road_company_count(&runtime.world,owner)?}));
+        units.push(json!({"company":owner,"next":runtime.allocation.freeunits.get(&(owner, pools::VehicleType::Road)).map_or(1,pools::UnitNumberAllocator::next_id),"count":road_company_count(&runtime.world,owner)?}));
     }
     Ok(
         json!({"road":runtime.road.values().collect::<Vec<_>>(),"pool":runtime.allocation.pool.snapshot(),"units":units}),

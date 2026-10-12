@@ -1,6 +1,6 @@
 use super::{
     RuntimeError, SavedVehicleView, VehicleId,
-    pools::{PoolAllocator, RoadUnitNumbers, UnitNumberAllocator},
+    pools::{PoolAllocator, RoadUnitNumbers, UnitNumberAllocator, VehicleType},
 };
 use ottd_save::world::World;
 use std::collections::BTreeMap;
@@ -13,15 +13,18 @@ impl VehicleAllocation {
             .get(b"VEHS")
             .ok_or(RuntimeError::Invalid("VEHS"))?;
         let pool = PoolAllocator::restore(0xFF000, 512, table.records().keys().copied())?;
-        let mut road_units = BTreeMap::<u8, UnitNumberAllocator>::new();
+        let mut freeunits = BTreeMap::<(u8, VehicleType), UnitNumberAllocator>::new();
         for id in table.records().keys() {
             let vehicle = SavedVehicleView::new(world, VehicleId::new(*id))?;
-            road_units
-                .entry(vehicle.owner()?)
+            // Native Company::freeunits[v->type].UseID(v->unitnumber) at
+            // saveload/vehicle_sl.cpp:538; the saved view guarantees VEH_ROAD,
+            // and every other family fails restoration before reaching here.
+            freeunits
+                .entry((vehicle.owner()?, VehicleType::Road))
                 .or_default()
                 .use_id(vehicle.unit_number()?);
         }
-        Ok(Self { pool, road_units })
+        Ok(Self { pool, freeunits })
     }
 
     /// Native per-company road unit-number state; companies without vehicles report 1.
@@ -43,8 +46,8 @@ impl VehicleAllocation {
                 Ok(RoadUnitNumbers {
                     company,
                     next: self
-                        .road_units
-                        .get(&company)
+                        .freeunits
+                        .get(&(company, VehicleType::Road))
                         .map_or(1, UnitNumberAllocator::next_id),
                 })
             })

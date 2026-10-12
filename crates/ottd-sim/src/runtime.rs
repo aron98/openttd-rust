@@ -122,7 +122,8 @@ pub struct SimulationRuntime {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct VehicleAllocation {
     pub pool: pools::PoolAllocator,
-    pub road_units: BTreeMap<u8, pools::UnitNumberAllocator>,
+    /// Native `Company::freeunits[VEH_ROAD]`, keyed per (owner, vehicle type).
+    pub freeunits: BTreeMap<(u8, pools::VehicleType), pools::UnitNumberAllocator>,
 }
 pub(crate) struct DepotContext<'a> {
     orders: &'a mut order_state::OrderState,

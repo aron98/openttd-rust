@@ -41,8 +41,8 @@ fn observe(runtime: &SimulationRuntime) -> Result<Value> {
         let id = u8::try_from(*id)?;
         let next = runtime
             .allocation
-            .road_units
-            .get(&id)
+            .freeunits
+            .get(&(id, crate::runtime::pools::VehicleType::Road))
             .map_or(1, crate::runtime::pools::UnitNumberAllocator::next_id);
         units.push(
             json!({"company":id,"next":next,"count":crate::runtime::road_company_count(world,id)?}),

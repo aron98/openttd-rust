@@ -1,3 +1,4 @@
+use super::pools::VehicleType;
 use super::{RoadVehicleContext, RuntimeError, SavedVehicleView, VehicleId};
 use crate::{CommandCost, CommandError};
 use ottd_save::{
@@ -72,8 +73,8 @@ impl RoadVehicleContext<'_> {
         let mut allocation = self.allocation.clone();
         allocation.pool.free(id.raw()).map_err(RuntimeError::from)?;
         allocation
-            .road_units
-            .get_mut(&vehicle.owner()?)
+            .freeunits
+            .get_mut(&(vehicle.owner()?, VehicleType::Road))
             .ok_or(RuntimeError::Invalid("vehicle unit owner"))?
             .release_id(vehicle.unit_number()?)
             .map_err(|_| RuntimeError::Invalid("vehicle unit allocation"))?;

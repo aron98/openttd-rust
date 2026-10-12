@@ -2,6 +2,7 @@
 mod support;
 use super::restore_tests::{build, copied_backup, sell};
 use super::*;
+use crate::runtime::pools::VehicleType;
 use ottd_save::{
     TableRecord, WireValue,
     world::{PathElement, WorldEdit},
@@ -122,7 +123,11 @@ fn restore_cache_failure_rolls_back_consumption_list_allocation_money_and_rng() 
     let road = runtime.road.clone();
     let mut candidate = allocation.clone();
     let id = candidate.pool.allocate()?;
-    candidate.road_units.entry(0).or_default().use_id(2);
+    candidate
+        .freeunits
+        .entry((0, VehicleType::Road))
+        .or_default()
+        .use_id(2);
     let record = view::row(runtime.world(), *b"VEHS", first)?.record.clone();
     let edits = vec![
         WorldEdit::InsertRecord {

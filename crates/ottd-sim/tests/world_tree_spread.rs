@@ -85,9 +85,9 @@ fn competitor_reset_follows_natural_placement() -> Result {
 }
 
 #[test]
-fn injected_late_disaster_failure_discards_actual_tree_placement() -> Result {
+fn injected_late_industry_failure_discards_tree_placement_and_disaster_reset() -> Result {
     let mut actual = world(BEFORE)?;
-    // Unit fault injection only: preserve native tree/map/RNG inputs, arrange a day
+    // Synthetic industry refusal: preserve native tree/map/RNG inputs, arrange a day
     // boundary after the first genuine placement. This is not a native parity fixture.
     actual.edit_batch(vec![
         date("date_fract", 72),
@@ -96,6 +96,18 @@ fn injected_late_disaster_failure_discards_actual_tree_placement() -> Result {
             chunk: *b"DATE",
             record: 0,
             path: vec![PathElement::Field("next_disaster_start".into())],
+            value: WireValue::Unsigned(1),
+        },
+        WorldEdit::Field {
+            chunk: *b"ECMY",
+            record: 0,
+            path: vec![PathElement::Field("industry_daily_change_counter".into())],
+            value: WireValue::Unsigned(65_535),
+        },
+        WorldEdit::Field {
+            chunk: *b"PATS",
+            record: 0,
+            path: vec![PathElement::Field("difficulty.industry_density".into())],
             value: WireValue::Unsigned(1),
         },
     ])?;
@@ -113,8 +125,8 @@ fn injected_late_disaster_failure_discards_actual_tree_placement() -> Result {
         assert_ne!(placed.pointer(&path), before.pointer(&path));
     }
     assert!(matches!(advance_world(&mut actual, 2),
-        Err(WorldTickError::Unsupported { phase: "disaster_day", reason })
-            if reason.starts_with("call 1:")));
+        Err(WorldTickError::Unsupported { phase: "industry_day", reason })
+            if reason == "call 1: automatic industry creation settings"));
     assert_eq!(actual.saved_json()?, before);
     assert_eq!(actual.derived(), &derived);
     Ok(())

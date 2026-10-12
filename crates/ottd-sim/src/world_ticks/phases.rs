@@ -4,9 +4,11 @@ pub(super) fn daily(state: &mut State<'_>) -> Result<(), WorldTickError> {
         .number(b"DATE", 0, "next_disaster_start")?
         .wrapping_sub(1)
         & 0xffff;
-    if delay == 0 {
-        return Err(unsupported("disaster_day", "disaster delay reset/RNG"));
-    }
+    let delay = if delay == 0 {
+        i64::from((super::house_cargo::random(state)? & 0x1ff).wrapping_add(730))
+    } else {
+        delay
+    };
     state.set_number(b"DATE", 0, "next_disaster_start", delay)?;
     super::industry_manager::daily(state)
 }
@@ -103,3 +105,7 @@ pub(super) fn industry_month(
     state.set_number(b"IBLD", 0, "wanted_inds", i64::from(result.wanted_inds))?;
     super::industries::publish_month(state, &result.industries)
 }
+
+#[cfg(test)]
+#[path = "disaster_tests.rs"]
+mod disaster_tests;

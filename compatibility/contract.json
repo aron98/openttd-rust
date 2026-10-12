@@ -3022,7 +3022,7 @@
   {
    "id": "scalar-vm-manifest",
    "path": "scripts/script-vm-manifest.json",
-   "sha256": "a7cfd4bf2be951e46e8fbfe5f92a07f34258b294bf69171ee97768d4a4233f39",
+   "sha256": "989925d6378280f7ded436a31cc0ebb0833c70f16f9b221d1c00eb826ae1d2d8",
    "kind": "recipe",
    "provenance": "Pinned scalar Squirrel VM vertical; upstream.toml",
    "save_version": null,
@@ -3085,7 +3085,7 @@
   {
    "id": "context-ci-layout",
    "path": "scripts/context-ci-layout.json",
-   "sha256": "d119d1a76c301978da8f040cbbccf2f859587ab3fbef72e9867dbc87bf79d8a7",
+   "sha256": "684bac5aeed821edbca492550da7a409f138ab7ef88ed74bbf0ad110bdde01d0",
    "kind": "recipe",
    "provenance": "Pinned driver or complete layout/source manifest.",
    "save_version": null,
@@ -3220,7 +3220,7 @@
   {
    "id": "safety-ci-safety-ci-layout",
    "path": "scripts/safety-ci-layout.json",
-   "sha256": "36c8662bb8fa3ff18f37f20cf867c6fb59d62a1a9f2c933edbeaac0d9a1bbc80",
+   "sha256": "6e08debab7f6e73730aea12160e502b81c9d6c5635b6a6dc515fb78c9080a62e",
    "kind": "recipe",
    "provenance": "Pinned safety source, native observations and complete raw proof.",
    "save_version": null,
@@ -3265,7 +3265,7 @@
   {
    "id": "order-state-order-state-layout",
    "path": "scripts/order-state-layout.json",
-   "sha256": "7835911fedc64cc800338696176233eb3b5a861b6739bdb7a9049776c12306a1",
+   "sha256": "f8eb85c2b1de7395f401469e195470a83ba3c55fc99b3ae5d624679899b32994",
    "kind": "recipe",
    "provenance": "Native14 shared order and live backup CI admission; explicit pinned source/descriptor/path membership and original role inputs.",
    "save_version": null,
@@ -3337,7 +3337,7 @@
   {
    "id": "language-ci-language-ci-layout-json",
    "path": "scripts/language-ci-layout.json",
-   "sha256": "dfb80e785868ec03efedb7442eee2e6bf59a96dd6568de23da769807dc237e35",
+   "sha256": "17378f4808e99213464b83e1bd2aceda35a82985da82e093efc1fd97586b646b",
    "kind": "recipe",
    "provenance": "Original ordered language A-C; strict complete evidence.",
    "save_version": null,
@@ -3418,7 +3418,7 @@
   {
    "id": "depot-removal-layout",
    "path": "scripts/depot-removal-layout.json",
-   "sha256": "1a839062d78ed787640cac86c5365321b8183977925a9f022c8a073d8285ec1a",
+   "sha256": "f3ac389dd47df99153d36fa49748418512778178200c7b1d273191ef8d361b99",
    "kind": "recipe",
    "provenance": "Native16 single-tile ordinary-company road/tram depot removal; explicit literal source, input, command and artifact membership.",
    "save_version": null,
@@ -3454,7 +3454,7 @@
   {
    "id": "ordered-sale-layout",
    "path": "scripts/ordered-sale-layout.json",
-   "sha256": "72591fb6e6fb2d820baf5888d834df5f20d20ac37874f6e69fdff85bb54d351c",
+   "sha256": "489c804359244c7f82a242da153ff72fd2936e73eb0a2b5c19872f631b717d14",
    "kind": "recipe",
    "provenance": "Stopped vanilla single-part road sale with owned/shared orders; backup_order=false and empty BKOR. Exact pinned loaded inputs and native command evidence.",
    "save_version": null,
@@ -3490,7 +3490,7 @@
   {
    "id": "backup-sale-layout",
    "path": "scripts/backup-sale-layout.json",
-   "sha256": "f06c3f07abe5ab9d997080ee0fa259d5f419727b152fff3ebeaed142cd84ffde",
+   "sha256": "f97507895c6485ccfe13e6cdb479ef5cc24fa1337ff3574703c69e3bd1ca6410",
    "kind": "recipe",
    "provenance": "Live BKOR cleanup before ordered road sale, backup_order=false, new live-backup public domain single-player. Exact source/input/native command/archive membership.",
    "save_version": null,
@@ -3562,7 +3562,7 @@
   {
    "id": "strings-ci-strings-ci-layout-json",
    "path": "scripts/strings-ci-layout.json",
-   "sha256": "0e3bb481419df94521832de6bac31d089604b73391baf13b198d06838887f641",
+   "sha256": "a94321b791d9ac8cfaea5578a443118594a87028d89b58b82abe9e3f9a3a9684",
    "kind": "recipe",
    "provenance": "Private original string D1/D2 complete evidence.",
    "save_version": null,
@@ -3589,7 +3589,7 @@
   {
    "id": "backup-enabled-sale-layout",
    "path": "scripts/backup-enabled-sale-layout.json",
-   "sha256": "e8b556044722dcd83f0ab4677d9167026be1f64ee1f708c3f3c11db673d44c6d",
+   "sha256": "b960dcf1914f30a57a1873a544bf6dc50e0c342902eef25d484c9547511291a7",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP backup-enabled stopped vanilla single-part road sale. Fixed16 strict native20 pairs with complete canonical state,25 command receipts,14 refusal controls; no Restore/movement/network admission.",
    "save_version": null,
@@ -3625,7 +3625,7 @@
   {
    "id": "currency-ci-currency-ci-capture-py",
    "path": "scripts/currency_ci_capture.py",
-   "sha256": "9ff8f3d611f111da11f693ae141a0da0dcbe0ea7a0278706f94c1fe7fe448f5e",
+   "sha256": "04e7c15d6381cc90ea088c319e7ddd5a5e664fda9694c717626533df70592fc9",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3679,7 +3679,7 @@
   {
    "id": "currency-ci-currency-ci-layout-json",
    "path": "scripts/currency-ci-layout.json",
-   "sha256": "23c21b709c0b2fd0a24b02c6d2321a0df2f574c3ec892ff7cb4a8e6bc5544f9d",
+   "sha256": "3e1efb8d1114fb13dcd0208271f134e9ff120efaf96bf8589f687e8b10d1efcc",
    "kind": "recipe",
    "provenance": "Private currency 0A owner and deferred mapping native admission.",
    "save_version": null,
@@ -3706,7 +3706,7 @@
   {
    "id": "owned-restore-layout",
    "path": "scripts/owned-restore-layout.json",
-   "sha256": "78b6b8ca57eb7fc92c8d4b133ba7fc18aa10b797106ef6d7312324d595bcb5ef",
+   "sha256": "8822af34bdd3948b3112168c347f85d783ba4c42d2424b38f79be994b6dfbbe5",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP owned/default-group road purchase Restore; fixed29 native23 pairs, strict loaded state and per-incarnation fresh duration ledger. No shared/group/network/movement admission.",
    "save_version": null,
@@ -4039,7 +4039,7 @@
   {
    "id": "tree-terrain-scripts-tree-terrain-layout-json",
    "path": "scripts/tree-terrain/layout.json",
-   "sha256": "eb88e4fc1ea249f81c45a65c8e45ff22d054701ae2b4f50ed0cd37bcc7c8b674",
+   "sha256": "ee73cd70d5d7f29276f5dfb60e90ccac31b4365534ef6c0a771362f714249f2f",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4084,7 +4084,7 @@
   {
    "id": "tree-terrain-scripts-tree-ci-bindings-py",
    "path": "scripts/tree_ci_bindings.py",
-   "sha256": "0885cec3bffc79a0afdd5154cb9224e604720a8f322a8a3d3032d66a03ec8be4",
+   "sha256": "21b0cdf6891202cad0b074d0b156bad118504575485a293d2680237f7675ac60",
    "kind": "recipe",
    "provenance": "Pinned tree/terrain implementation and fresh native24 differential CI; complete capture and separate normal verification.",
    "save_version": null,
@@ -4183,7 +4183,7 @@
   {
    "id": "shared-restore-layout",
    "path": "scripts/shared-restore-layout.json",
-   "sha256": "a0d4f2360d4e493b63f02cd4d54f1381b1793e612a2f2f5d3e1c5603a8fc4f87",
+   "sha256": "b62083d58d4446d8d4e71ae5be9f1af0c939dd5d3f6fab71cac8c37343c78e30",
    "kind": "recipe",
    "provenance": "Pinned ordinary-SP existing-ORDL shared/default Restore acceptance; strict full saved/live comparison and zero new timing, no duration exception. Original15.3 pin14ec60f2.",
    "save_version": null,
@@ -4219,7 +4219,7 @@
   {
    "id": "currency-properties-currency-properties-ci-layout-json",
    "path": "scripts/currency-properties-ci-layout.json",
-   "sha256": "5c8c685d22e4976f46ade4ba189c32ca872d83ad18481eca2734aba37cb9aa75",
+   "sha256": "21af962f9cb82450f1a99b003d161a8bd9f9775e94442c788b2e6e1062cee84e",
    "kind": "recipe",
    "provenance": "Proposed currency 0B-0F strict byte-owner corpus admission; apply only after capture and normal driver verification.",
    "save_version": null,
@@ -4336,7 +4336,7 @@
   {
    "id": "empty-road-layout",
    "path": "scripts/empty-road-layout.json",
-   "sha256": "5fa6e2406a7fd9effb02b085d9dc183f90caaf0a9dd1d5bbe6c975b143e6e785",
+   "sha256": "a6fa0ed4def2f79e8253728d7f608b67dca8cc7ac434edf406d3d5ea5e44d652",
    "kind": "recipe",
    "provenance": "Pinned original15.3 empty-world vanilla road/depot tile-loop proof; strict saved/derived/gameplay RNG and recognized host runtime projection only.",
    "save_version": null,
@@ -7675,7 +7675,7 @@
   {
    "id": "engine-specs-scripts-engine-specs-ci-layout-json",
    "path": "scripts/engine-specs-ci-layout.json",
-   "sha256": "f8333f1ea08f6ab5ebd415ff6e4017d20a4d6307a7df4819a4490fd15fc1e04b",
+   "sha256": "b8af1b575f97188befc6a612c5017a4ead85c2d365ddd72e44e9a0c273326a17",
    "kind": "recipe",
    "provenance": "Private raw engine/spec source candidate; strict paired capture and normal admission pending.",
    "save_version": null,
@@ -8332,7 +8332,7 @@
   {
    "id": "cargo-identity-scripts-cargo-identity-ci-layout-json",
    "path": "scripts/cargo-identity-ci-layout.json",
-   "sha256": "2a1b88f0f81b6a35df633dba44ca8a81dd058f43c6d004ae9cb0a2e22721cb24",
+   "sha256": "dbf8bc1a2d8142e422e34484217ad4ee2f05f30ba251ce73e58e13dba2db955f",
    "kind": "recipe",
    "provenance": "Private raw cargo source candidate; fresh paired capture and normal admission pending.",
    "save_version": null,
@@ -11797,7 +11797,7 @@
   {
    "id": "cargo-reference-cargo-replay-hpp",
    "path": "reference/cargo_replay.hpp",
-   "sha256": "fc7ff3123ad1be3c54b9d6f0fea97cb340f8056b519a318083c6a6e31db1b9eb",
+   "sha256": "090c4f595ec6802cdd2727ddd1fe07fa0c154a726f2e99a8f98b2299fc99dcf5",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11842,7 +11842,7 @@
   {
    "id": "cargo-scripts-cargo-observer-sources-json",
    "path": "scripts/cargo-observer-sources.json",
-   "sha256": "f07d9871b70184724774a045abca792bdb8c0d4000d68766d5a3839eaab6522b",
+   "sha256": "e587f157d1ec51a59b50e794181822320dcfe92a632358e3cffd185efafc5aeb",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11851,7 +11851,7 @@
   {
    "id": "cargo-scripts-cargo-observer-inputs-py",
    "path": "scripts/cargo_observer_inputs.py",
-   "sha256": "d16f614d0138fff4c3d8f814b49ed6f3ff28dd3d9cd6bac1ad6499a414e6bee8",
+   "sha256": "ca3f8a069e1fd0342ea318c45030c4761df485390432f82e0b134b933f8f5a91",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -11860,7 +11860,7 @@
   {
    "id": "cargo-scripts-setup-cargo-observer-sh",
    "path": "scripts/setup-cargo-observer.sh",
-   "sha256": "4c8f60038b67e21aa35fd50f41255417bb7f0202b12cc4cd430dd8fbbc472a73",
+   "sha256": "2fdf18f8b26d102544626e5a112dfde8f729a59fcd79ac68d4f472911ea6407f",
    "kind": "recipe",
    "provenance": "Manual passenger consumer and passive original proof; broader cargo gate remains open.",
    "save_version": null,
@@ -12760,7 +12760,7 @@
   {
    "id": "vehicle-year-source-scripts-vehicle-year-sources-json",
    "path": "scripts/vehicle-year-sources.json",
-   "sha256": "33c240425eb330223280c127f17466a23590e39b125116568e957f4ba7dc60a6",
+   "sha256": "11617d777eb5d95c3b2a4e928b31c177152d16e629ff76269bb9eddb3b0fc372",
    "kind": "recipe",
    "provenance": "Passive original vehicle-year cache observer and guarded source closure; no Rust annual behavior or news-queue parity claim; upstream.toml",
    "save_version": null,
@@ -12862,6 +12862,123 @@
    "sha256": "484633d0e685c126a2c190f47e241d9d177f78989a10ad362e6f7b759535e786",
    "kind": "recipe",
    "provenance": "Bounded vanilla primary-road annual rotation and three owned group-profit fields; broader vehicle, warning/news/AI and gameplay domains remain required.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-reference-company-rating-patch",
+   "path": "reference/company_rating.patch",
+   "sha256": "77c19673cb3fd2ae0ce2e6a571d3f24d400236eeacb9da7acdb4f8624d5f61a3",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-reference-company-rating-snapshot-hpp",
+   "path": "reference/company_rating_snapshot.hpp",
+   "sha256": "0046f333e109bbb3296177b5238672e1e4107f4b9df83ad32a83d75c484dc380",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-reference-company-rating-trace-hpp",
+   "path": "reference/company_rating_trace.hpp",
+   "sha256": "0caa3bc1074851d04ce9299dd7628fe0627fcb530a23424c8f34dd12f6b8f51f",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-company-rating-events-py",
+   "path": "scripts/company_rating_events.py",
+   "sha256": "4f5e781d6ac2e2037265109da92ec7e16aff151bdd5ee156d20dd2aef69407a7",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-company-rating-model-py",
+   "path": "scripts/company_rating_model.py",
+   "sha256": "510d51bc3c6abdbf5307263e04480250b3ae88e38bdc95dc1edb8d451dce4d29",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-company-rating-run-py",
+   "path": "scripts/company_rating_run.py",
+   "sha256": "a53a07b6c66b686791aea1fc65d070b9012d1cdb69e071c60e571ccf2306b6fa",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-company-rating-sources-py",
+   "path": "scripts/company_rating_sources.py",
+   "sha256": "505d2339fe6029e46180ba7cc9711cfb2c2bcbb732c53de55ee27139d318b244",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-setup-company-rating-reference-sh",
+   "path": "scripts/setup-company-rating-reference.sh",
+   "sha256": "b340787cf04f8a0e23434ceee11b31f0412f78094c2f3b7d39951edd7bf592f8",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-tests-company-rating-fixture-py",
+   "path": "scripts/tests/company_rating_fixture.py",
+   "sha256": "1bef9d5832e9e51ac8cfefd68137f069ab23815f5ded20b89d066fb6c648a550",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-tests-test-company-rating-events-py",
+   "path": "scripts/tests/test_company_rating_events.py",
+   "sha256": "62de3999c2a1079c97ebb2d535f54fc134274d77cc45701c45e6ac3607540640",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-tests-test-company-rating-model-py",
+   "path": "scripts/tests/test_company_rating_model.py",
+   "sha256": "c99aec1a4399ea02ce4ed6a05552c95e5ce947ea6c1beea413729db5ee60b063",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-company-rating-sources-json",
+   "path": "scripts/company-rating-sources.json",
+   "sha256": "9c9a8190d5e3250e04515edcea5bee7eae45d0522dbd9772b1824dff7bcf0fda",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
+   "save_version": null,
+   "profile": null
+  },
+  {
+   "id": "company-rating-scripts-tests-test-company-rating-sources-py",
+   "path": "scripts/tests/test_company_rating_sources.py",
+   "sha256": "d3b4515bfb6502da438d79ddba4749142950f220721dcff4281c5b065a7ecb0b",
+   "kind": "recipe",
+   "provenance": "Passive native company rating cache and company-month observation; no Rust quarter gameplay or HQ/lifecycle admission.",
    "save_version": null,
    "profile": null
   }

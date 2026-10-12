@@ -4,6 +4,8 @@ import ast
 from pathlib import Path
 from typing import Final
 
+from scripts.company_rating_sources import MANIFEST as RATING_MANIFEST
+from scripts.company_rating_sources import REQUIRED as RATING_REQUIRED
 from scripts.gameplay_foundations import digest
 from scripts.grf_control_evidence import sequence, text
 from scripts.owned_restore_sources import compiled_inputs, regular
@@ -165,7 +167,7 @@ def control_paths(mutations: Json, sources: tuple[str, ...]) -> set[str]:
 
 def source_names(root: Path) -> tuple[str, ...]:
     required = set(compiled_inputs(root))
-    required.update((*YEAR_REQUIRED, YEAR_MANIFEST))
+    required.update((*YEAR_REQUIRED, YEAR_MANIFEST, *RATING_REQUIRED, RATING_MANIFEST))
     required.update(regular(root, path) for path in root.glob("crates/**/*.rs"))
     required.update(
         (

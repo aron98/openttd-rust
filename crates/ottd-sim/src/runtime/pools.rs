@@ -207,7 +207,7 @@ impl UnitNumberAllocator {
 }
 
 /// Native vehicle-type axis of one company's unit-number generators
-/// (`Company::freeunits[type]`, company_base.h:143; values from vehicle_type.h).
+/// (`Company::freeunits[type]`, `company_base.h`:143; values from `vehicle_type.h`).
 ///
 /// Only `VEH_ROAD` vehicles are restorable today; a later family must add a
 /// variant here so it can never silently share a company's road generator.
@@ -217,11 +217,13 @@ pub enum VehicleType {
     Road,
 }
 
-/// One company's road unit-number generator state.
+/// One company's road unit-number generator state and native vehicle count.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RoadUnitNumbers {
     /// Owning company pool index.
     pub company: u8,
+    /// Native `group_all[VEH_ROAD].num_vehicle`, recomputed from vehicle records.
+    pub count: u16,
     /// Lowest unused unit number; 65535 is the native exhaustion sentinel.
     pub next: u16,
 }

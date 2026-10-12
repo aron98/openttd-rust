@@ -144,8 +144,13 @@ job publication and continuation from saves actually simulated by both engines.
 The `580eb6a` credit compares the native road vehicle pool (all five
 fields) and every company's road unit-number `next` in the whole-runtime
 evidence test against fresh forest/late-disaster/older-whole captures;
-the native units `count` (`group_all[VEH_ROAD].num_vehicle`) remains
-uncredited because no restore path rebuilds group `num_vehicle`.
+the follow-up keys the restored unit allocators per (company, vehicle
+type) like native `Company::freeunits`, and credits the native units
+`count` (`group_all[VEH_ROAD].num_vehicle`) by mirroring the native
+load-time recomputation exactly: the field is NOSAVE, `UpdateAfterLoad`
+counts front road vehicles from restored records, and restoration admits
+only single-part front road vehicles, so the live per-company record
+count equals the native value across all fresh captures.
 
 The `935121d` candidate passes 835 workspace tests with 148 separately counted
 ignored cases, 678 Python tests plus 25,339 subtests, 89 dependency-free tests,

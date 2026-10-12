@@ -29,6 +29,16 @@ impl VehicleAllocation {
 
     /// Native per-company road unit-number state; companies without vehicles report 1.
     ///
+    /// `count` mirrors native `group_all[company][VEH_ROAD].num_vehicle`: that
+    /// field is NOSAVE (group.h:80), so native load recomputes it from vehicle
+    /// records via `GroupStatistics::UpdateAfterLoad` (group_cmd.cpp:120-145,
+    /// called at afterload.cpp:297), counting every `IsEngineCountable` and
+    /// `IsPrimaryVehicle` vehicle, which for `VEH_ROAD` is exactly the front
+    /// engines (vehicle.cpp:692, roadveh.h:122). Restoration admits only
+    /// single-part front road vehicles (`saved_vehicle.rs` rejects other
+    /// families and non-front parts), so the live count of each company's
+    /// restored vehicle records equals the native recomputation.
+    ///
     /// # Errors
     /// Rejects invalid saved company IDs.
     pub(super) fn road_unit_numbers(
@@ -43,8 +53,12 @@ impl VehicleAllocation {
             .keys()
             .map(|id| {
                 let company = u8::try_from(*id).map_err(|_| RuntimeError::Invalid("company ID"))?;
+                // Native uint16_t num_vehicle wraps past 65535 owned vehicles.
+                let owned = super::road_company_count(world, company)?;
                 Ok(RoadUnitNumbers {
                     company,
+                    count: u16::try_from(owned & u64::from(u16::MAX))
+                        .map_err(|_| RuntimeError::Invalid("vehicle count"))?,
                     next: self
                         .freeunits
                         .get(&(company, VehicleType::Road))

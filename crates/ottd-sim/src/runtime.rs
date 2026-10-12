@@ -270,7 +270,7 @@ impl SimulationRuntime {
     pub fn vehicle_pool(&self) -> pools::PoolSnapshot {
         self.allocation.pool.snapshot()
     }
-    /// Per-company next road unit numbers; native group vehicle counts stay uncredited.
+    /// Per-company road unit-number generators and native group vehicle counts.
     /// # Errors
     /// Rejects invalid saved company IDs.
     pub fn road_unit_numbers(&self) -> Result<Vec<pools::RoadUnitNumbers>, RuntimeError> {

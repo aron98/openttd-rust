@@ -47,6 +47,7 @@ fn capture(runtime: &SimulationRuntime, native: &Path, output: &Path, label: &st
         "/transport",
         "/runtime_road/road",
         "/runtime_road/pool",
+        "/runtime_road/units",
         "/stations/orders",
         "/stations/geometry",
         "/stations/infrastructure",
@@ -59,27 +60,6 @@ fn capture(runtime: &SimulationRuntime, native: &Path, output: &Path, label: &st
             "{label}{field}",
         );
     }
-    // The native units count field is not a restored runtime field; compare only
-    // the genuinely restored per-company unit-number generator state.
-    let units = expected
-        .pointer("/runtime_road/units")
-        .and_then(Value::as_array)
-        .ok_or("missing native units")?
-        .iter()
-        .map(|row| {
-            Ok(json!({
-                "company": row.get("company").ok_or("missing native unit company")?,
-                "next": row.get("next").ok_or("missing native unit next")?,
-            }))
-        })
-        .collect::<Result<Vec<_>>>()?;
-    assert_eq!(
-        actual
-            .pointer("/runtime_road/units")
-            .ok_or("missing actual field")?,
-        &Value::Array(units),
-        "{label}/runtime_road/units",
-    );
     Ok(())
 }
 

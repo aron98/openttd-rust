@@ -2,6 +2,7 @@
 #ifndef OTTD_REFERENCE_REPLAY_COMMANDS_HPP
 #define OTTD_REFERENCE_REPLAY_COMMANDS_HPP
 #include "../company_cmd.h"
+#include "../group_cmd.h"
 #include "../landscape_cmd.h"
 #include "../misc_cmd.h"
 #include "../road_cmd.h"
@@ -20,6 +21,14 @@ namespace ReferenceReplay {
 inline bool Post(const Json &command)
 {
     const std::string kind = command.at("kind");
+    if (kind == "vehicle_year_prepare_create_group" || kind == "vehicle_year_prepare_add_vehicle_group") {
+        Require(std::getenv("OTTD_VEHICLE_YEAR_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "group preparation requires explicit offline normal game");
+        if (kind == "vehicle_year_prepare_create_group") {
+            return Command<CMD_CREATE_GROUP>::Post(static_cast<VehicleType>(command.at("type").get<uint8_t>()), GroupID(command.at("parent").get<uint16_t>()));
+        }
+        const VehicleListIdentifier list(VLT_END, VEH_INVALID, CompanyID::Invalid());
+        return Command<CMD_ADD_VEHICLE_GROUP>::Post(GroupID(command.at("group").get<uint16_t>()), VehicleID(command.at("vehicle").get<uint32_t>()), false, list);
+    }
     if (kind == "industry_recipient_prepare_scale300") {
         Require(std::getenv("OTTD_INDUSTRY_RECIPIENT_PREPARE") != nullptr && !_networking && _game_mode == GM_NORMAL, "industry recipient preparation requires offline normal game");
         return Command<CMD_CHANGE_SETTING>::Post(std::string{"economy.industry_cargo_scale"}, int32_t{300});
@@ -115,6 +124,7 @@ inline Json Execute(const Json &request)
     }
     Json result = {{"posted", false}, {"gate", nullptr}, {"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
     if (request.at("command").at("kind") == "terraform_land" || request.at("command").at("kind") == "level_land" || request.at("command").at("kind") == "build_vehicle") result["returns"] = {{"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
+    if (request.at("command").at("kind") == "vehicle_year_prepare_create_group" || request.at("command").at("kind") == "vehicle_year_prepare_add_vehicle_group") result["returns"] = {{"test", nullptr}, {"exec", nullptr}, {"result", nullptr}};
     const CompanyID company(request.at("company").get<uint8_t>());
     AutoRestoreBackup current(_current_company, company);
     AutoRestoreBackup local(_local_company, company);

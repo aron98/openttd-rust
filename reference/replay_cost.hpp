@@ -106,6 +106,11 @@ void Gate(const char *gate)
 {
     if (receipt != nullptr) (*receipt)["gate"] = gate;
 }
+void GroupReturns(const char *phase, GroupID id)
+{
+    if (receipt == nullptr || !receipt->contains("returns")) return;
+    (*receipt)["returns"][phase] = {{"kind", "group"}, {"group", id.base()}};
+}
 void LandscapeReturns(const char *phase, int64_t additional_money, uint32_t tile)
 {
     if (receipt == nullptr || !receipt->contains("returns")) return;

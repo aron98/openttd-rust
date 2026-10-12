@@ -17,6 +17,9 @@ OBSERVER_INPUTS: Final = (
     "owner_trace.hpp",
     "delegates.hpp",
     "active_owners.hpp",
+    "native_roots_trace.hpp",
+    "native_roots_sessions.hpp",
+    "native_roots_refs.hpp",
 )
 
 
@@ -36,6 +39,10 @@ def source_names(root: Path) -> tuple[str, ...]:
         regular(root, root / name)
         for name in (
             "scripts/script_vm_inputs.py",
+            "scripts/script_vm_native_roots.py",
+            "scripts/script_vm_native_roots_model.py",
+            "scripts/script_vm_native_roots_audit.py",
+            "scripts/tests/test_script_vm_native_roots.py",
             "scripts/script_vm_receipts.py",
             "scripts/tests/script_vm_policy_producer_checks.py",
             "scripts/tests/script_vm_policy_assertions.py",

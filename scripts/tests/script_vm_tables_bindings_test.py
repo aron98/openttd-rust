@@ -32,6 +32,9 @@ from scripts.world_check_support import WorldCheckError, read_json
         "owner_trace.hpp",
         "delegates.hpp",
         "active_owners.hpp",
+        "native_roots_trace.hpp",
+        "native_roots_sessions.hpp",
+        "native_roots_refs.hpp",
     ],
 )
 def test_changed_copied_observer_source_is_rejected(
@@ -56,6 +59,9 @@ def test_changed_copied_observer_source_is_rejected(
         "owner_trace.hpp",
         "delegates.hpp",
         "active_owners.hpp",
+        "native_roots_trace.hpp",
+        "native_roots_sessions.hpp",
+        "native_roots_refs.hpp",
     ):
         _ = (harness / name).write_text("original observer input")
         _ = (native / name).write_text("original observer input")

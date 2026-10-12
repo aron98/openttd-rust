@@ -39,6 +39,9 @@ void value(const SQObjectPtr &v) {
 #include "calls.hpp"
 #include "closures.hpp"
 #include "delegates.hpp"
+#include "native_roots_trace.hpp"
+#include "native_roots_sessions.hpp"
+#include "native_roots_refs.hpp"
 #include "active_owners.hpp"
 static std::ofstream print_output;
 static void record_print(HSQUIRRELVM, std::string_view bytes) {
@@ -50,6 +53,13 @@ static void record_print(HSQUIRRELVM, std::string_view bytes) {
 }
 int main(int argc, char **argv){
  if(argc < 2) return 64;
+ if(std::string_view(argv[1])=="--native-roots") return native_roots::session(argc,argv);
+ if(std::string_view(argv[1])=="--native-roots-active") {
+  if(argc!=5)return 64;
+  native_roots::active_snapshot=true;
+  char script[]="script"; char *arguments[]={argv[0],argv[1],script,argv[2],argv[3],argv[4]};
+  return active_owner::session(6,arguments);
+ }
  if(std::string_view(argv[1])=="--active-owner") return active_owner::session(argc,argv);
  if(std::string_view(argv[1])=="--delegate-cycle-owner") return delegate_cycle_owner(argc,argv);
  if(std::string_view(argv[1])=="--delegate-owner") return delegate_owner_session(argc,argv);

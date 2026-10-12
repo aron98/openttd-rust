@@ -16,6 +16,7 @@ OBSERVER_INPUTS: Final = (
     "closures.hpp",
     "owner_trace.hpp",
     "delegates.hpp",
+    "active_owners.hpp",
 )
 
 
@@ -44,6 +45,7 @@ def source_names(root: Path) -> tuple[str, ...]:
             "scripts/owned_restore_sources.py",
             "scripts/script_vm_provenance.py",
             "scripts/tests/script_vm_tables_bindings_test.py",
+            "scripts/tests/script_vm_active_owner_inputs_test.py",
             "scripts/tests/test_script_vm_table_storage.py",
             ".github/workflows/script-tables.yml",
         )

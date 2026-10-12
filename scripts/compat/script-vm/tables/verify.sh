@@ -10,6 +10,7 @@ out=$(CDPATH= cd -- "$out" && pwd)
 root=$(CDPATH= cd -- "$(dirname "$0")/../../../.." && pwd)
 cd "$root"
 export CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-"$out/target"}
+export OTTD_SCRIPT_ACTIVE_OWNER_DIR="$out/active-owners"
 export OTTD_SCRIPT_DELEGATE_OWNER_DIR="$out/delegate-owners"
 export OTTD_SCRIPT_GC_OWN="$out/delegate-owners/gc-own.txt"
 export OTTD_SCRIPT_CLOSURE_COMPOUND_STORE="$out/closure-compound-store.stdout"
@@ -47,6 +48,8 @@ c++ --version > "$out/cxx-version.txt"
 rustc -vV > "$out/rust-version.txt"
 git rev-parse HEAD > "$out/base-revision.txt"
 scripts/compat/script-vm/build-native.sh "$checkout" "$out/native" > "$out/native-build.log" 2>&1
+python3 -c 'import sys; from pathlib import Path; from scripts.script_vm_provenance import verify_observer_sources; verify_observer_sources(Path.cwd(), Path(sys.argv[1]))' "$out/native" > "$out/native-inputs.log" 2>&1
+python3 -m scripts.compat.script-vm.tables.active_owners "$out/native/observe" "$out/active-owners" > "$out/active-owners.log" 2>&1
 python3 -m scripts.compat.script-vm.tables.delegate_owners "$out/native/observe" "$out/delegate-owners" > "$out/delegate-owners.log" 2>&1
 "$out/native/observe" --table-hashes > "$out/hashes.stdout" 2> "$out/hashes.stderr"
 "$out/native/observe" --table-owner scripts/compat/script-vm/tables/fixtures/owner.nut > "$out/owner.stdout" 2> "$out/owner.stderr"

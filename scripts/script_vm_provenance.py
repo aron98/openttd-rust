@@ -7,6 +7,7 @@
 """Pinned source export and Cargo executable identities."""
 
 import hashlib
+import stat
 import tarfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -135,6 +136,8 @@ def verify_observer_sources(root: Path, native: Path) -> None:
             not copied.is_file()
             or copied.is_symlink()
             or digest(copied) != digest(root / "scripts/compat/script-vm" / name)
+            or stat.S_IMODE(copied.stat().st_mode)
+            != stat.S_IMODE((root / "scripts/compat/script-vm" / name).stat().st_mode)
         ):
             raise WorldCheckError("Native observer source differs")
 

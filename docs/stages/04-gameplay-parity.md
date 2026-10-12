@@ -8,10 +8,10 @@ merge authorizes stage 5.
 
 Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
 
-Latest reviewed composition: `3eef5b0` combines the reviewed annual-vehicle
-runtime and script reference-ownership changes with passive Rust transport
-tracing. Atomic source, test and binding commits remain in the merge history.
-All 5,339 nonmetadata files match their designated parents; composition resolves
+Latest reviewed composition: `df37195` combines company rating caches with the
+reviewed annual-vehicle runtime, script reference ownership and passive Rust
+transport tracing. Atomic source, test and binding commits remain in the merge
+history. All 5,362 nonmetadata files match their designated parents; composition resolves
 metadata unions only. Root manual QA and one fresh whole reviewer approve this
 bounded integration. All seven broad stage gates remain OPEN.
 
@@ -22,6 +22,16 @@ minimum-profit age threshold and exact age731 transition. Full native-backed
 groups and reciprocal load origins are checked. Unsupported warning/news/AI
 contexts preserve committed state; these event queues remain required.
 
+The bounded quarterly company calculation now preserves all 150 raw score slots,
+including raw minimum profit before display shifting, native component weights,
+history rotation and fresh-process cache ownership. Original-backed profitable
+post-year 6,660-call and whole 25,478-call continuations, older reload and January
+boundaries pass. Both simulated save origins reach their next supported quarter.
+A genuine later disaster refusal after a changed 27,009-call prefix preserves the
+complete committed world, rating cache and actual worker ownership. Native pool
+arrays, wider company contexts, positive multi-fleet weighting and event queues
+remain required.
+
 Script operands now distinguish reference ownership from public host roots.
 Reference-live finalized storage preserves native table metadata, and edge
 release occurs in the native order outside heap borrows. Active-root tests cover
@@ -30,20 +40,23 @@ Runner construction and borrowed error accessors retain their behavior. These
 fixes do not implement the complete native shared VM, RefTable, defaults or
 AI/GameScript host.
 
-The current author passes 901 workspace tests with 153 separately counted ignored
-cases, 880 Python tests plus 28,109 subtests, Clippy and formatting. Current normal
+The current author passes 916 workspace tests with 155 separately counted ignored
+cases, 901 Python tests plus 28,971 subtests, Clippy and formatting. Current normal
 script comparison covers 10,666 defined inputs and 153 explicit Rust-only
 refusals of source-proven undefined inputs; valid Unicode strings/comments remain
-covered. Complete proof readback verifies 57,884 logical members, 23,764 archive
-blobs, 98,117 nested normal members and 5,400 Git files, with actual compiler
+covered. Complete proof readback verifies 51,049 logical members, 22,231 archive
+blobs, 98,139 nested normal members and 5,424 Git files, with actual compiler
 dependencies and selected executable identities retained. All 143 scenario
 statuses/scopes/evidence, 36 drivers and profiles are preserved. The reviewed
-scalar scenario additions and annual source references are additive; 1,548 asset
-digests validate within the unchanged 1 MiB contract cap.
+scalar scenario additions and annual/company source references are additive;
+1,572 asset digests validate within the unchanged 1 MiB contract cap. The merge
+verifies 27 distinct source inventories; 55 recorded audit rows include repeats.
 
-Required failures remain explicit. Profitable quarter scoring still fails in
-this published tree; company scoring is a separate private increment. Disaster
-delay reset/RNG and warning event queues remain required. Forest passes 36/38
+Required failures remain explicit. The uninterrupted older 33,744-call request
+still refuses at disaster call 27,009 in this published tree. Disaster delay
+reset/RNG and warning event queues remain required; separately implemented timer
+and script metadata increments await their own review and whole integration.
+Forest passes 36/38
 cuts and five of six simulated-origin continuations; tick512/tick6400 and the
 native3081 origin retain transport failures. The fresh raw561 success belongs
 to a distinct scheduling epoch and does not replace retained failures. A scale

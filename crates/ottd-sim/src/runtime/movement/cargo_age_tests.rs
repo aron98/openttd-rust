@@ -33,6 +33,7 @@ fn packet_age_saturation_countdown_and_candidate_rollback() -> Result {
             stations: stations::IdleStations::restore(&runtime.world, &runtime.stations)?,
             station_context: &runtime.stations,
             transport: runtime.transport.clone(),
+            group_profits: runtime.group_profits.clone(),
         };
         runner.cache.cargo_age_period = period;
         {

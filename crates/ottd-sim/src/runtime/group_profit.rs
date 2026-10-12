@@ -2,6 +2,7 @@
 mod restore;
 #[cfg(test)]
 mod tests;
+mod update;
 use super::{RuntimeError, SavedVehicleView};
 use serde::Serialize;
 use std::collections::BTreeMap;

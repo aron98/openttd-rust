@@ -154,8 +154,9 @@ fn advance(
                             towns::monthly(state, clock.cache().economy_month)?;
                         }
                         ClockEvent::EconomyYear => {
-                            houses::yearly(state)?;
                             finance::yearly(state)?;
+                            houses::yearly(state)?;
+                            vehicles.vehicle_year(state, clock)?;
                         }
                         ClockEvent::CalendarDay
                         | ClockEvent::CalendarMonth

@@ -23,6 +23,9 @@ mod service_tests;
 mod spatial;
 mod stations;
 mod step;
+mod year;
+#[cfg(test)]
+mod year_native;
 use super::{RoadVehicleCache, RuntimeSaveContext, SavedVehicleView, SimulationRuntime, VehicleId};
 use crate::{
     WorldTickError, WorldTickPhases as VehiclePhases, WorldTickReport, WorldTickState as State,
@@ -42,6 +45,7 @@ struct RoadPhases<'a> {
     stations: stations::IdleStations,
     station_context: &'a super::stations::StationRuntime,
     transport: super::transport::TransportRuntime,
+    group_profits: super::GroupProfitCaches,
 }
 impl VehiclePhases for RoadPhases<'_> {
     fn industry_cargo(
@@ -182,13 +186,21 @@ impl VehiclePhases for RoadPhases<'_> {
         Ok(())
     }
     fn economy_boundary(&self, events: &ottd_core::ClockEvents) -> Result<(), WorldTickError> {
-        if events.iter().any(|event| {
-            matches!(event, ottd_core::ClockEvent::EconomyYear)
-                || self.stations.is_empty() && matches!(event, ottd_core::ClockEvent::EconomyMonth)
-        }) {
+        if self.stations.is_empty()
+            && events
+                .iter()
+                .any(|event| matches!(event, ottd_core::ClockEvent::EconomyMonth))
+        {
             return Err(unsupported("road_economy", "vehicle month/year callbacks"));
         }
         Ok(())
+    }
+    fn vehicle_year(
+        &mut self,
+        state: &mut State<'_>,
+        _: &ClockState,
+    ) -> Result<(), WorldTickError> {
+        year::run(state, self)
     }
     fn calendar(
         &mut self,

@@ -28,6 +28,12 @@ pub(crate) trait WorldTickPhases {
     fn station_month(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn stations(&mut self, _: &mut WorldTickState<'_>) -> Result<(), WorldTickError> { Ok(()) }
     fn admit(&self, world: &ottd_save::world::World) -> Result<(), WorldTickError>;
+    fn vehicle_year(&mut self, state: &mut WorldTickState<'_>, _: &ottd_core::ClockState) -> Result<(), WorldTickError> {
+        if state.table(b"VEHS")?.records().next().is_some() {
+            return Err(unsupported_tick("vehicle_year", "active vehicles require annual phase support"));
+        }
+        Ok(())
+    }
     fn economy_boundary(&self, events: &ottd_core::ClockEvents) -> Result<(), WorldTickError>;
     fn calendar(
         &mut self,

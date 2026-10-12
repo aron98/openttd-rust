@@ -20,8 +20,10 @@ class Session:
 SESSIONS: Final = (
     Session("local", "local", "local"),
     Session("local-array", "local-array", "local"),
+    Session("local-array-acyclic", "local-array-acyclic", "local"),
     Session("local-native", "local-native", "local"),
     Session("host", "host", "local"),
+    Session("local-host", "local-host", "local"),
     Session("frame", "script", "frame"),
     Session("varargs", "script", "varargs"),
     Session("error", "script", "error"),
@@ -89,7 +91,7 @@ def capture(native: Path, output: Path) -> None:
         + "\n"
     )
     print(
-        "PASS fourteen active-owner sessions; "
+        "PASS sixteen active-owner sessions; "
         "collection actions distinct; recorder controls equal"
     )
 

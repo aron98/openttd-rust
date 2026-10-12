@@ -5,6 +5,7 @@ static unsigned callbacks=0;
 static SQTable *local=nullptr;
 static SQArray *local_array=nullptr;
 static SQNativeClosure *local_native=nullptr;
+static SQTable *host_table=nullptr;
 static void state(HSQUIRRELVM vm,std::string_view phase) {
  std::cout<<"active "<<phase<<' '<<vm->_ops_till_suspend<<' '<<vm->_callsstacksize<<' '<<vm->_stackbase<<' '<<vm->_top<<' '<<vm->_vargsstack.size()<<'\n';
  for(SQUnsignedInteger i=0;i<vm->_stack.size();++i) {
@@ -38,6 +39,7 @@ static void state(HSQUIRRELVM vm,std::string_view phase) {
  }
  if(type(vm->temp_reg)==OT_TABLE)std::cout<<"temporary-root "<<owner_trace::label(_table(vm->temp_reg))<<'\n';
  if(type(vm->_lasterror)==OT_TABLE)std::cout<<"error-root "<<owner_trace::label(_table(vm->_lasterror))<<'\n';
+ if(host_table!=nullptr)std::cout<<"host-reference "<<(host_table->_uiRef & ~MARK_FLAG)<<' '<<host_table->CountUsed()<<' '<<owner_trace::label(host_table->_delegate)<<'\n';
  if(local_native!=nullptr)std::cout<<"native-reference "<<(local_native->_uiRef & ~MARK_FLAG)<<' '<<local_native->_nparamscheck<<' '<<local_native->_outervalues.size()<<' '<<_stringval(local_native->_name)<<'\n';
  if(local_array!=nullptr)std::cout<<"array-reference "<<(local_array->_uiRef & ~MARK_FLAG)<<' '<<local_array->Size()<<'\n';
  if(local!=nullptr)std::cout<<"local-reference "<<(local->_uiRef & ~MARK_FLAG)<<' '<<local->CountUsed()<<' '<<owner_trace::label(local->_delegate)<<'\n';
@@ -54,7 +56,7 @@ static void print(HSQUIRRELVM vm,std::string_view bytes) {
 static int session(int argc,char **argv) {
  if(argc!=6 && argc!=7)return 64;
  const std::string_view mode=argv[2],action=argv[4],record=argv[5];
- if((mode!="local" && mode!="script" && mode!="host" && mode!="handler" && mode!="local-array" && mode!="local-native") || (action!="on" && action!="off") || (record!="on" && record!="off"))return 64;
+ if((mode!="local" && mode!="script" && mode!="host" && mode!="handler" && mode!="local-array" && mode!="local-native" && mode!="local-array-acyclic" && mode!="local-host") || (action!="on" && action!="off") || (record!="on" && record!="off"))return 64;
  std::ifstream input(argv[3],std::ios::binary);if(!input)return 66;
  const std::string source((std::istreambuf_iterator<char>(input)),{});
  auto owner=std::unique_ptr<SQVM,decltype(&sq_close)>(sq_open(256),sq_close);auto vm=owner.get();
@@ -78,8 +80,14 @@ static int session(int argc,char **argv) {
  const SQObjectPtr key=SQString::Create(_ss(vm),"__owner_setup");
  _table(vm->_roottable)->NewSlot(key,bundle);
  SQObjectPtr retained;
- if(mode=="local") {retained=o;local=_table(retained);}
- if(mode=="local-array") {retained=bundle;local_array=_array(retained);owner_trace::add(local_array,'A');}
+ if(mode=="local" || mode=="local-host") {retained=o;local=_table(retained);}
+ if(mode=="local-array" || mode=="local-array-acyclic") {
+  if(mode=="local-array-acyclic") {
+   _table(o)->Remove(SQObjectPtr(SQInteger(0)));
+   if(!_table(o)->SetDelegate(nullptr))return 65;
+  }
+  retained=bundle;local_array=_array(retained);if(!owner_trace::add(local_array,'A'))return 65;
+ }
  if(mode=="local-native") {
   const SQObjectPtr name=SQString::Create(_ss(vm),"array");
   if(!_table(vm->_roottable)->Get(name,retained) || type(retained)!=OT_NATIVECLOSURE)return 65;
@@ -87,8 +95,8 @@ static int session(int argc,char **argv) {
   _table(vm->_roottable)->Remove(name);
  }
  HSQOBJECT host=o;
- if(mode=="host")sq_addref(vm,&host);
- if(mode=="local" || mode=="host" || mode=="local-array" || mode=="local-native")_table(vm->_roottable)->Remove(key);
+ if(mode=="host" || mode=="local-host") {sq_addref(vm,&host);host_table=_table(host);}
+ if(mode=="local" || mode=="host" || mode=="local-array" || mode=="local-native" || mode=="local-array-acyclic" || mode=="local-host")_table(vm->_roottable)->Remove(key);
  bundle.Null();o.Null();d.Null();
  collect=action=="on";callbacks=0;sq_setprintfunc(vm,print);
  sq_pushroottable(vm);SQObjectPtr result;vm->_can_suspend=true;vm->_ops_till_suspend=10000;
@@ -110,7 +118,8 @@ static int session(int argc,char **argv) {
  main.Null();result.Null();vm->temp_reg.Null();sq_settop(vm,0);sq_reseterror(vm);
  _table(vm->_roottable)->Remove(key);
  retained.Null();local=nullptr;local_array=nullptr;local_native=nullptr;
- if(mode=="host")sq_release(vm,&host);
+ if(mode=="host" || mode=="local-host") {sq_release(vm,&host);host_table=nullptr;}
+ std::cout<<"released local owners\n";owner_trace::emit();
  std::cout<<"collected released "<<sq_collectgarbage(vm)<<'\n';
  owner_trace::emit();
  return owner_trace::finish()?0:65;

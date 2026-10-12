@@ -1,10 +1,10 @@
-//! Whole-transaction refusal after real house, cargo, year and script RNG work.
+//! Natural disabled-disaster continuation and remaining house/context refusals.
 use ottd_save::{Savegame, world::World};
-use ottd_sim::{
-    WorldTickError,
-    runtime::{RuntimeSaveContext, SimulationRuntime},
-};
+use ottd_sim::{WorldTickError, runtime::RuntimeSaveContext};
 use std::path::PathBuf;
+#[path = "industry_recipient_support/native_views.rs"]
+mod native_views;
+include!("disaster_support/mod.rs");
 type Result<T = ()> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn world() -> Result<World> {
@@ -16,9 +16,12 @@ fn world() -> Result<World> {
 }
 
 #[test]
-#[ignore = "requires original populated stage-zero house save"]
+#[ignore = "requires actual 60680-call original capture; historical refusal selector retained without rollback credit"]
 fn late_native_valid_disaster_boundary_preserves_complete_house_runtime() -> Result {
-    let mut prefix = SimulationRuntime::restore_vanilla(world()?)?;
+    let input = world()?;
+    let capture = DisasterCapture::required(&input)?;
+    let mut prefix = SimulationRuntime::restore_vanilla(input.clone())?;
+    capture.compare(&prefix, "initial")?;
     let initial = prefix.saved_json()?;
     let initial_cache = prefix.town_house_caches().clone();
     prefix.advance_world(6144)?;
@@ -31,23 +34,10 @@ fn late_native_valid_disaster_boundary_preserves_complete_house_runtime() -> Res
         prefix.saved_json()?.pointer("/chunks/SRND/records/16"),
         initial.pointer("/chunks/SRND/records/16")
     );
-    let mut runtime = SimulationRuntime::restore_vanilla(world()?)?;
-    let derived = runtime.world().derived().clone();
-    let content = runtime.content().clone();
-    let roads = runtime.road_caches().clone();
-    assert!(matches!(
-        runtime.advance_world(60_680),
-        Err(WorldTickError::Unsupported {
-            phase: "disaster_day",
-            ..
-        })
-    ));
-    assert_eq!(runtime.saved_json()?, initial);
-    assert_eq!(runtime.world().derived(), &derived);
-    assert_eq!(runtime.town_house_caches(), &initial_cache);
-    assert_eq!(runtime.content(), &content);
-    assert_eq!(runtime.road_caches(), &roads);
-    Ok(())
+    capture.compare(&prefix, "prefix")?;
+    let mut runtime = SimulationRuntime::restore_vanilla(input)?;
+    runtime.advance_world(60_680)?;
+    capture.finish(&runtime, 6144)
 }
 
 #[test]

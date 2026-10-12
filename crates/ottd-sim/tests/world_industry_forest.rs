@@ -106,11 +106,17 @@ fn injected_stockpile_threshold_is_strict_and_drain_is_byte_clamped() -> Result 
 }
 
 #[test]
-fn injected_late_disaster_refusal_discards_prior_industry_counter_and_random() -> Result {
+fn injected_late_industry_refusal_discards_forest_and_disaster_random() -> Result {
     let mut world = world(END)?;
     world.edit_batch(vec![
         edit(*b"INDY", vec![field("counter")], 64),
         edit(*b"DATE", vec![field("next_disaster_start")], 1),
+        edit(
+            *b"ECMY",
+            vec![field("industry_daily_change_counter")],
+            65_535,
+        ),
+        edit(*b"PATS", vec![field("difficulty.industry_density")], 1),
         edit(*b"DATE", vec![field("date_fract")], 72),
         edit(*b"DATE", vec![field("economy_date_fract")], 72),
     ])?;
@@ -134,9 +140,9 @@ fn injected_late_disaster_refusal_discards_prior_industry_counter_and_random() -
     assert!(matches!(
         runtime.advance_world(2),
         Err(WorldTickError::Unsupported {
-            phase: "disaster_day",
-            ..
-        })
+            phase: "industry_day",
+            reason
+        }) if reason == "call 1: automatic industry creation settings"
     ));
     assert_eq!(runtime.saved_json()?, before);
     assert_eq!(runtime.world().derived(), &derived);

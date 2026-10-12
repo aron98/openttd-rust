@@ -824,7 +824,7 @@
     "crates/ottd-sim/src/world_ticks/industries.rs": "bf1b6f3165395949da3ccd3683c0c9ac4c0996149b70c8daa12225298f0a9494",
     "crates/ottd-sim/src/world_ticks/industries/saved.rs": "bb60fde23345cfd56b73b9b8ed984b2affe72a0fdb8434dfedf4be505631cdc3",
     "crates/ottd-sim/src/world_ticks/industry_manager.rs": "c9b156d423916aecc39326261efe796040c908736bb0b530caa97e6d51a38dae",
-    "crates/ottd-sim/src/world_ticks/phases.rs": "bdf2defc172080e6894c471984b73f3b503d9b67bd14f61c3de0872c4c8dced8",
+    "crates/ottd-sim/src/world_ticks/phases.rs": "676ec1d912888f67d0b5bba0cbb698dc044a24a02435946fa50b084b39f3c529",
     "crates/ottd-sim/src/world_ticks/plan.rs": "9881096baf240ec9db89d0abcdfcea6bccb0d9c2251f54a6768fa666ebcf2013",
     "crates/ottd-sim/src/world_ticks/shared.rs": "2da15cd6beb2c92dc2564a73e7ed457c77ef273c44ca869ae9e4dc7cdb49b9c8",
     "crates/ottd-sim/src/world_ticks/tiles.rs": "f592c576f3fcedfc32b60bd232efc3e63715d11d03a53e46b671ff0a4201711f",
@@ -891,7 +891,7 @@
     "crates/ottd-sim/tests/vehicle_oracle.rs": "80e5667354226ff1cba45aa755891105d196683a9aebe6763e000234791aa6f9",
     "crates/ottd-sim/tests/vehicle_year_support/groups.rs": "484633d0e685c126a2c190f47e241d9d177f78989a10ad362e6f7b759535e786",
     "crates/ottd-sim/tests/world_commands.rs": "edf360bfc9ee87c8b8185b32a4ecb296170a48cbd856c37f6f5390d6ca3b7efb",
-    "crates/ottd-sim/tests/world_ticks.rs": "f8e178d3eea218d6b580cced254a4ad49df3a4614a1776c50a510227476f1e46",
+    "crates/ottd-sim/tests/world_ticks.rs": "81584ed20e0dce48de35c1ac5e95d80589e76783e65dfb7c577053db73cf4e59",
     "crates/ottd-sim/tests/world_town_history.rs": "e0a04817a065146da3c5b348a2668a6d8e4361014830c17c02d9b05f0beedc58",
     "fixtures/README.md": "052c7b707577b37a62e76f2a1e6e33a8497279c636bed1c7d77028fe7d2b73a7",
     "fixtures/content/LICENSE": "50ac792e113700dd23ecb25ed6f341eb383bed36cb8fd87aa164f4e44f2760b3",
@@ -1255,7 +1255,9 @@
     "scripts/vehicle_year_run.py": "38399f28f90326dc51829e132b6bfa897dbf487d2768315e1d814e889e20b46a",
     "scripts/vehicle_year_sources.py": "1dd6f273ff844a7967679feed37a1459498e435ffe0a0dd06969edefc5f6638e",
     "scripts/world_check_support.py": "9a19e73f250865f5702fd793dc28b02acce1c82c155cbcd4ad236cfb34dea047",
-    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241"
+    "upstream.toml": "006585bb0e06da5f1539e85d3e0e98bc9d101a9bf4c6b7d322bf0f8e0057d241",
+    "crates/ottd-sim/src/world_ticks/disaster_tests.rs": "06ff7f3a942a64f28ae55559a5f17c009dd4a2515a899ff506625561b6a3e32f",
+    "crates/ottd-sim/tests/world_tick_support/disaster.rs": "e4d046c49c38af1b575fe7cb1e8983dd3fd4eb1fbd6644b80971bacef5d9842f"
   },
   "cases": [
     "matrix/copy-sale-clear",

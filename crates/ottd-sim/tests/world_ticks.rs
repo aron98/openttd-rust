@@ -130,28 +130,8 @@ fn large_loan_interest_saturates_native_money_before_division() -> Result {
     );
     Ok(())
 }
-#[test]
-fn later_disaster_expiry_rolls_back_earlier_ticks() -> Result {
-    let mut world = clear_world()?;
-    boundary(&mut world, 0, 1)?;
-    world.edit_batch(vec![edit(
-        *b"DATE",
-        0,
-        "next_disaster_start",
-        WireValue::Unsigned(2),
-    )])?;
-    let before = world.saved_json()?;
-    let result = advance_world(&mut world, 75);
-    assert!(matches!(
-        result,
-        Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "disaster_day",
-            ..
-        })
-    ));
-    assert_eq!(world.saved_json()?, before);
-    Ok(())
-}
+#[path = "world_tick_support/disaster.rs"]
+mod disaster;
 
 #[test]
 fn saved_reload_continuation_matches_uninterrupted_ticks() -> Result {

@@ -119,13 +119,15 @@ fn grown_tree_draws_once_for_every_no_spread_branch() -> Result {
 }
 
 #[test]
-fn late_tick_failure_rolls_back_tree_and_rng_edits() -> Result {
+fn late_industry_failure_rolls_back_tree_and_disaster_rng_edits() -> Result {
     let mut world = tree_world(3, 2, 0, 1)?;
-    // Deliberate unit fault injection: disaster failure follows the first tree draw.
+    // Synthetic industry refusal follows the first tree draw and the disaster reset.
     world.edit_batch(vec![
         field(*b"DATE", "date_fract", 72),
         field(*b"DATE", "economy_date_fract", 72),
         field(*b"DATE", "next_disaster_start", 1),
+        field(*b"ECMY", "industry_daily_change_counter", 65_535),
+        field(*b"PATS", "difficulty.industry_density", 1),
     ])?;
     let before = world.saved_json()?;
     let derived = world.derived().clone();
@@ -141,9 +143,9 @@ fn late_tick_failure_rolls_back_tree_and_rng_edits() -> Result {
     assert!(matches!(
         result,
         Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "disaster_day",
-            ..
-        })
+            phase: "industry_day",
+            reason
+        }) if reason == "call 1: automatic industry creation settings"
     ));
     assert_eq!(world.saved_json()?, before);
     assert_eq!(world.derived(), &derived);

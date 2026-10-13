@@ -130,28 +130,8 @@ fn large_loan_interest_saturates_native_money_before_division() -> Result {
     );
     Ok(())
 }
-#[test]
-fn later_disaster_expiry_rolls_back_earlier_ticks() -> Result {
-    let mut world = clear_world()?;
-    boundary(&mut world, 0, 1)?;
-    world.edit_batch(vec![edit(
-        *b"DATE",
-        0,
-        "next_disaster_start",
-        WireValue::Unsigned(2),
-    )])?;
-    let before = world.saved_json()?;
-    let result = advance_world(&mut world, 75);
-    assert!(matches!(
-        result,
-        Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "disaster_day",
-            ..
-        })
-    ));
-    assert_eq!(world.saved_json()?, before);
-    Ok(())
-}
+#[path = "world_tick_support/disaster.rs"]
+mod disaster;
 
 #[test]
 fn saved_reload_continuation_matches_uninterrupted_ticks() -> Result {
@@ -167,7 +147,7 @@ fn saved_reload_continuation_matches_uninterrupted_ticks() -> Result {
 }
 
 #[test]
-fn industry_attempt_horizon_rejects_without_publishing_clock_changes() -> Result {
+fn empty_industry_attempt_publishes_fraction_and_gameplay_random() -> Result {
     let mut world = clear_world()?;
     boundary(&mut world, 0, 1)?;
     world.edit_batch(vec![edit(
@@ -177,19 +157,21 @@ fn industry_attempt_horizon_rejects_without_publishing_clock_changes() -> Result
         WireValue::Unsigned(65_535),
     )])?;
     let before = world.saved_json()?;
-    assert!(matches!(
-        advance_world(&mut world, 1),
-        Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "industry_day",
-            ..
-        })
-    ));
-    assert_eq!(before, world.saved_json()?);
+    advance_world(&mut world, 1)?;
+    let after = world.saved_json()?;
+    assert_eq!(
+        after["chunks"]["ECMY"]["records"]["0"]["industry_daily_change_counter"],
+        131
+    );
+    assert_ne!(
+        before["chunks"]["DATE"]["records"]["0"]["random_state[0]"],
+        after["chunks"]["DATE"]["records"]["0"]["random_state[0]"]
+    );
     Ok(())
 }
 
 #[test]
-fn competitor_timer_expiry_rolls_back_complete_request() -> Result {
+fn zero_ai_competitor_expiry_resets_only_its_script_randomizer() -> Result {
     let mut world = clear_world()?;
     world.edit_batch(vec![edit(
         *b"DATE",
@@ -198,14 +180,26 @@ fn competitor_timer_expiry_rolls_back_complete_request() -> Result {
         WireValue::Unsigned(2),
     )])?;
     let before = world.saved_json()?;
-    assert!(matches!(
-        advance_world(&mut world, 2),
-        Err(ottd_sim::WorldTickError::Unsupported {
-            phase: "tick_timer",
-            ..
-        })
-    ));
-    assert_eq!(before, world.saved_json()?);
+    advance_world(&mut world, 2)?;
+    let after = world.saved_json()?;
+    assert_ne!(
+        before["chunks"]["SRND"]["records"]["16"],
+        after["chunks"]["SRND"]["records"]["16"]
+    );
+    for name in ["random_state[0]", "random_state[1]"] {
+        assert_eq!(
+            before["chunks"]["DATE"]["records"]["0"][name],
+            after["chunks"]["DATE"]["records"]["0"][name]
+        );
+    }
+    assert_eq!(
+        after["chunks"]["DATE"]["records"]["0"]["competitors_interval_fired"],
+        0
+    );
+    assert_eq!(
+        after["chunks"]["DATE"]["records"]["0"]["competitors_interval_elapsed"],
+        0
+    );
     Ok(())
 }
 

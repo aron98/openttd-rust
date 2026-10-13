@@ -1,0 +1,13 @@
+stack 3
+op 2 1 7 0 0
+op 2 2 0 0 0
+op 35 2 1 2 47
+op 19 1 1 0 0
+op 19 255 0 0 0
+suspend 0 1
+frame 1 integer 7
+frame 2 null
+suspend 0 2
+frame 1 integer 7
+frame 2 integer 0
+runtime_error 99

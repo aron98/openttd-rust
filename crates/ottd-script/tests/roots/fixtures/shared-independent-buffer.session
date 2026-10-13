@@ -1,0 +1,14 @@
+seed 0 73636f7265 integer 7
+raw 1 73636f7265
+raw 2 73636f7265
+compile 1 0 buffer fixtures/read.nut
+run 1 0 1000
+empty 1
+raw 0 73636f7265
+raw 1 73636f7265
+compile 1 1 buffer fixtures/late-read.nut
+compile 0 2 buffer fixtures/late-scalar.nut
+run 1 1 1000
+share 1 0
+root 1
+run 1 0 1000

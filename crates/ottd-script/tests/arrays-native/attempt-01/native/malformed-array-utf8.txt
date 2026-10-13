@@ -1,0 +1,8 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 utf8 fixtures/malformed-array.nut
+compile_error string 19 65787072657373696f6e206578706563746564
+stack_top 0 0
+external_child 1
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1

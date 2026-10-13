@@ -1,0 +1,26 @@
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -1255,6 +1255,7 @@
+  * better make this more robust in the future. */
+ #include "reference_grf_load_context.hpp"
+ #include "reference_grf_load_control.hpp"
++#include "reference_grf_safety.hpp"
+ 
+ static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
+ {
+@@ -1292,6 +1293,7 @@
+ 		GrfMsg(1, "DecodeSpecialSprite: Tried to read past end of pseudo-sprite data");
+ 		DisableGrf(STR_NEWGRF_ERROR_READ_BOUNDS);
+ 	}
++	ReferenceGrfSafety::Decoded(stage, buf[0], num - br.Remaining());
+ }
+ 
+ /**
+@@ -1350,6 +1352,7 @@
+ 		uint8_t type = file.ReadByte();
+ 		_cur_gps.nfo_line++;
+ 		ReferenceGrfControl::Record(num, type, grf_container_version);
++		ReferenceGrfSafety::Record safety_record(stage, grf_container_version);
+ 
+ 		if (type == 0xFF) {
+ 			if (_cur_gps.skip_sprites == 0) {

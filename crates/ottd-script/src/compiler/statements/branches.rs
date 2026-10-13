@@ -1,0 +1,119 @@
+//! Branch patching and loop exit ownership.
+use super::super::Compiler;
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, lexer::TokenKind};
+impl Compiler<'_> {
+    pub(super) fn conditional(&mut self, depth: u8) -> Result<(), CompileFailure> {
+        self.advance()?;
+        self.expect(b'(')?;
+        self.comma(0)?;
+        self.expect(b')')?;
+        let condition = self.pop()?;
+        self.emit(Instruction {
+            opcode: 0x1a,
+            arg0: condition.0,
+            arg1: 0,
+            arg2: 0,
+            arg3: 0,
+        });
+        let branch = self.position()?;
+        let size = self.size()?;
+        self.statement(depth)?;
+        if !matches!(self.token.kind, TokenKind::Symbol(b'}') | TokenKind::Else) {
+            self.semicolon()?;
+        }
+        self.registers.truncate(size);
+        let mut end_first = self.position()?;
+        if self.token.kind == TokenKind::Else {
+            self.emit(Instruction {
+                opcode: 0x18,
+                arg0: 0,
+                arg1: 0,
+                arg2: 0,
+                arg3: 0,
+            });
+            let skip = self.position()?;
+            self.advance()?;
+            self.statement(depth)?;
+            self.semicolon()?;
+            self.registers.truncate(size);
+            self.patch(skip, self.position()?)?;
+            end_first = end_first
+                .checked_add(1)
+                .ok_or_else(|| self.error(CompileErrorKind::Limit))?;
+        }
+        self.patch(branch, end_first)?;
+        Ok(())
+    }
+    pub(super) fn while_loop(&mut self, depth: u8) -> Result<(), CompileFailure> {
+        let head = self.position()?;
+        self.advance()?;
+        self.expect(b'(')?;
+        self.comma(0)?;
+        self.expect(b')')?;
+        let condition = self.pop()?;
+        self.emit(Instruction {
+            opcode: 0x1a,
+            arg0: condition.0,
+            arg1: 0,
+            arg2: 0,
+            arg3: 0,
+        });
+        let branch = self.position()?;
+        let size = self.size()?;
+        self.begin_loop()?;
+        self.statement(depth)?;
+        self.registers.truncate(size);
+        self.emit(Instruction {
+            opcode: 0x18,
+            arg0: 0,
+            arg1: 0,
+            arg2: 0,
+            arg3: 0,
+        });
+        self.patch(self.position()?, head)?;
+        let end = self.position()?;
+        self.patch(branch, end)?;
+        self.finish_loop(head)
+    }
+    pub(super) fn loop_exit(&mut self, continuing: bool) -> Result<(), CompileFailure> {
+        let missing = if continuing {
+            self.continue_targets.is_empty()
+        } else {
+            self.break_targets.is_empty()
+        };
+        if missing {
+            return Err(self
+                .error(CompileErrorKind::ExpectedToken)
+                .native(if continuing {
+                    "'continue' has to be in a loop block"
+                } else {
+                    "'break' has to be in a loop block"
+                }));
+        }
+        let traps = if continuing {
+            self.continue_targets.last().map(|target| target.traps)
+        } else {
+            self.break_targets.last().map(|target| target.traps)
+        }
+        .ok_or_else(|| self.error(CompileErrorKind::ExpectedToken))?;
+        self.pop_traps(traps);
+        self.scope_end(self.last_stack_size)?;
+        self.emit(Instruction {
+            opcode: 0x18,
+            arg0: 0,
+            arg1: 0,
+            arg2: 0,
+            arg3: 0,
+        });
+        let position = self.position()?;
+        let error = self.error(CompileErrorKind::ExpectedToken);
+        let targets = if continuing {
+            self.continue_targets.last_mut()
+        } else {
+            self.break_targets.last_mut()
+        };
+        targets.ok_or(error)?.jumps.push(position);
+        self.advance()
+    }
+}

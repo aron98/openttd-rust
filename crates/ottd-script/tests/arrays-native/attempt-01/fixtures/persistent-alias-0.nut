@@ -1,0 +1,1 @@
+local work=[10,20,30]; pending <- work; local alias=work; alias[1]=25; return pending[1];

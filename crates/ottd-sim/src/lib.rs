@@ -1,15 +1,21 @@
 //! Deterministic, explicitly scoped landscape simulation for OpenTTD 15.3.
+pub(crate) mod cargo;
+pub mod content;
 mod landscape;
 mod replay;
+pub mod runtime;
+pub mod terrain;
 pub use replay::{
     ReplayAction, ReplayCursor, ReplayError, ReplayEvent, ReplayObservation, ReplayOutcome,
     ReplayPlan, ReplayRuntime, run_replay,
 };
 mod world_ticks;
+include!("world_ticks/shared.rs");
 pub use world_ticks::{WorldTickError, WorldTickReport, advance_world};
 mod commands;
 pub use commands::{
-    Command, CommandCost, CommandError, CommandGate, CommandMode, CommandReceipt, CommandRequest,
+    BuildRoadStop, CargoCapacities, Command, CommandCost, CommandError, CommandGate, CommandMode,
+    CommandReceipt, CommandRequest, CommandReturn, CommandReturnPhases, InsertOrder,
     execute_command,
 };
 mod map;

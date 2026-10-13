@@ -1,0 +1,66 @@
+{
+  "pin": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "native_sha256": "bcf12c2e5b269039e183e14ab1461cf3a8edb1ef1460d2e338e3eb6e71984617",
+  "captures": [
+    {
+      "fixture": "scripts/compat/script-vm/tables/fixtures/native-roots/idle-off.txt",
+      "sha256": "417e68e96fb07829d4ee17bdc9c12feed4137dc88ee67eeee9349826ba150232",
+      "process": {
+        "argv": [
+          "/Users/erdelyia/Projects/openttd-rust/.worktrees/stage04-script-native-roots-observer/.omo/evidence/script-native-roots-observer/producer-initial/native",
+          "--native-roots",
+          "idle",
+          "off"
+        ],
+        "status": 0,
+        "stdout_sha256": "417e68e96fb07829d4ee17bdc9c12feed4137dc88ee67eeee9349826ba150232",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "fixture": "scripts/compat/script-vm/tables/fixtures/native-roots/idle-on.txt",
+      "sha256": "16fceccff5d7762d7e08047bd9e070614e55f5ce8557d9b6b37dc73d5001b6fd",
+      "process": {
+        "argv": [
+          "/Users/erdelyia/Projects/openttd-rust/.worktrees/stage04-script-native-roots-observer/.omo/evidence/script-native-roots-observer/producer-initial/native",
+          "--native-roots",
+          "idle",
+          "on"
+        ],
+        "status": 0,
+        "stdout_sha256": "16fceccff5d7762d7e08047bd9e070614e55f5ce8557d9b6b37dc73d5001b6fd",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "fixture": "scripts/compat/script-vm/tables/fixtures/native-roots/persistent-on.txt",
+      "sha256": "c546c1455943439537f16bbd0a65f9b829412a500cf7d51308e5313d3619f1c0",
+      "process": {
+        "argv": [
+          "/Users/erdelyia/Projects/openttd-rust/.worktrees/stage04-script-native-roots-observer/.omo/evidence/script-native-roots-observer/producer-initial/native",
+          "--native-roots",
+          "persistent",
+          "on"
+        ],
+        "status": 0,
+        "stdout_sha256": "c546c1455943439537f16bbd0a65f9b829412a500cf7d51308e5313d3619f1c0",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "fixture": "scripts/compat/script-vm/tables/fixtures/native-roots/friend-local-on.txt",
+      "sha256": "0a24e900699417b1dd79e5992a579e961660b87cd3aa183eb8142ecc59432911",
+      "process": {
+        "argv": [
+          "/Users/erdelyia/Projects/openttd-rust/.worktrees/stage04-script-native-roots-observer/.omo/evidence/script-native-roots-observer/producer-initial/native",
+          "--native-roots",
+          "friend-local",
+          "on"
+        ],
+        "status": 0,
+        "stdout_sha256": "0a24e900699417b1dd79e5992a579e961660b87cd3aa183eb8142ecc59432911",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

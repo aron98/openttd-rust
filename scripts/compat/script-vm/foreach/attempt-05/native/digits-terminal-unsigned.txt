@@ -1,0 +1,42 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 unsigned digits.nut
+compiled
+stack 8
+literal string 4 31327834
+op 2 1 1 0 0
+op 1 2 0 0 0
+op 20 3 3 0 0
+op 51 2 15 3 0
+op 52 2 15 3 0
+op 2 6 48 0 0
+op 40 6 6 4 3
+op 44 6 3 6 0
+op 2 7 57 0 0
+op 40 7 7 4 0
+op 10 6 7 0 0
+op 26 6 5 0 0
+op 2 6 0 0 0
+op 10 1 6 0 0
+op 61 6 6 0 0
+op 24 0 3 0 0
+op 61 6 6 0 0
+op 61 6 6 0 0
+op 24 0 -16 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 10000
+return 9964 integer 0
+temp integer 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1

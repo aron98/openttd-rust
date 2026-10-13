@@ -1,0 +1,124 @@
+stack 7
+op 2 1 2 0 0
+op 39 2 1 0 1
+op 37 3 1 0 1
+op 2 4 3 0 0
+op 10 1 4 0 0
+op 35 4 1 1 43
+op 2 5 1000 0 0
+op 17 5 5 1 42
+op 2 6 100 0 0
+op 17 6 6 2 42
+op 17 5 6 5 43
+op 2 6 10 0 0
+op 17 6 6 3 42
+op 17 5 6 5 43
+op 17 5 4 5 43
+op 19 1 5 0 0
+op 19 255 0 0 0
+suspend 0 1
+frame 1 integer 2
+frame 2 null
+frame 3 null
+frame 4 null
+frame 5 null
+frame 6 null
+suspend 0 2
+frame 1 integer 3
+frame 2 integer 2
+frame 3 null
+frame 4 null
+frame 5 null
+frame 6 null
+suspend 0 3
+frame 1 integer 4
+frame 2 integer 2
+frame 3 integer 4
+frame 4 null
+frame 5 null
+frame 6 null
+suspend 0 4
+frame 1 integer 4
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 3
+frame 5 null
+frame 6 null
+suspend 0 5
+frame 1 integer 3
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 3
+frame 5 null
+frame 6 null
+suspend 0 6
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 null
+frame 6 null
+suspend 0 7
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 1000
+frame 6 null
+suspend 0 8
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6000
+frame 6 null
+suspend 0 9
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6000
+frame 6 integer 100
+suspend 0 10
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6000
+frame 6 integer 200
+suspend 0 11
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6200
+frame 6 integer 200
+suspend 0 12
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6200
+frame 6 integer 10
+suspend 0 13
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6200
+frame 6 integer 40
+suspend 0 14
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6240
+frame 6 integer 40
+suspend 0 15
+frame 1 integer 6
+frame 2 integer 2
+frame 3 integer 4
+frame 4 integer 6
+frame 5 integer 6246
+frame 6 integer 40
+return 1 integer 6246

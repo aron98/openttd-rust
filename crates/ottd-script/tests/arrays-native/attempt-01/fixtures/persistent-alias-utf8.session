@@ -1,0 +1,21 @@
+compile 0 0 utf8 fixtures/persistent-alias-0.nut
+run 0 0 1000
+hold-root 0 0 70656e64696e67
+compile 0 1 utf8 fixtures/persistent-alias-1.nut
+run 0 1 1000
+hold-result 0 1
+same-object 0 0 1
+clear-result 0
+empty 0
+empty 1
+drop 0 0
+drop 0 1
+drop-handle 0 0
+drop-handle 0 1
+weak-state 0 1
+compile 0 2 utf8 fixtures/scalar-return.nut
+run 0 2 1000
+drop 0 2
+weak-state 0 1
+collect 0
+weak-state 0 1

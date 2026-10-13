@@ -57,6 +57,10 @@ pub(super) fn restore_orders(
             if kind > 8 {
                 return Err(invalid("ORDL/orders/type", "unknown order type"));
             }
+            // AfterLoadVehicles initializes only lists reached through a shared head.
+            if first_shared.is_none() {
+                continue;
+            }
             if kind != 8 {
                 value.num_manual_orders = value
                     .num_manual_orders

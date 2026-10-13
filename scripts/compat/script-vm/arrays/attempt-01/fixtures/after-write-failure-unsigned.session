@@ -1,0 +1,3 @@
+compile 0 0 unsigned fixtures/after-write-failure-0.nut
+run 0 0 10000
+raw 0 70656e64696e67

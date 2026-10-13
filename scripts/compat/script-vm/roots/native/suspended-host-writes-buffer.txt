@@ -1,0 +1,93 @@
+configured_empty_roots 0 0 1
+step 0 seed 0 73636f7265 integer 1
+seeded
+step 1 compile 0 0 buffer fixtures/update.nut
+compiled
+stack 4
+literal string 5 73636f7265
+op 4 1 0 2 0
+op 14 2 0 2 0
+op 2 3 1 0 0
+op 17 2 3 2 43
+op 13 1 0 1 2
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 2 run 0 0 0
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+temp unsupported 134217984
+step 3 seed 0 73636f7265 integer 10
+seeded
+step 4 advance 0 3
+suspend 0 1
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 string 5 73636f7265
+frame 3 null
+temp unsupported 134217984
+step 5 raw 0 73636f7265
+raw 73636f7265 integer 10
+step 6 seed 0 73636f7265 integer 11
+seeded
+step 7 advance 0 2
+suspend 0 2
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 integer 11
+frame 3 null
+temp integer 11
+step 8 raw 0 73636f7265
+raw 73636f7265 integer 11
+step 9 seed 0 73636f7265 integer 12
+seeded
+step 10 advance 0 2
+suspend 0 3
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 integer 11
+frame 3 integer 1
+temp integer 11
+step 11 raw 0 73636f7265
+raw 73636f7265 integer 12
+step 12 seed 0 73636f7265 integer 13
+seeded
+step 13 advance 0 2
+suspend 0 4
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 integer 12
+frame 3 integer 1
+temp integer 12
+step 14 raw 0 73636f7265
+raw 73636f7265 integer 13
+step 15 seed 0 73636f7265 integer 14
+seeded
+step 16 advance 0 2
+suspend 0 5
+frame 0 root 0
+frame 1 integer 12
+frame 2 integer 12
+frame 3 integer 1
+temp integer 12
+step 17 raw 0 73636f7265
+raw 73636f7265 integer 12
+step 18 seed 0 73636f7265 integer 15
+seeded
+step 19 advance 0 2
+suspend 0 6
+frame 0 root 0
+frame 1 integer 15
+frame 2 integer 12
+frame 3 integer 1
+temp integer 15
+step 20 raw 0 73636f7265
+raw 73636f7265 integer 15
+step 21 advance 0 1000
+return 999 integer 15
+temp integer 15
+step 22 raw 0 73636f7265
+raw 73636f7265 integer 15

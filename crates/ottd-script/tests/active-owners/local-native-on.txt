@@ -1,0 +1,14 @@
+print collect-active
+active before 9996 2 2 5 0
+native-reference 1 -2 0 array
+chain O D N
+collected active 2
+active after 9996 2 2 5 0
+native-reference 1 -2 0 array
+chain
+free D 88
+free O 88
+completed 1 0 9994 integer 1
+collected released 0
+free N 144
+recorder 1

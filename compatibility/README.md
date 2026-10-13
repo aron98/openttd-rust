@@ -162,3 +162,23 @@ and [game-info encoding](https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4
 provide the baseline. The query proves those observed metadata fields only;
 command negotiation, synchronization and playable mixed sessions remain future
 requirements.
+
+## Pinned artifact-list representation
+
+A driver's `artifact_globs` may be its existing inline string array or the exact
+object `{"asset": "asset-id"}`. A referenced asset must have kind
+`evidence-layout`, null profile/save version, a repository-relative nonsymlink
+path and a matching SHA-256. Its JSON content must be a literal array of
+nonempty strings. Nested references and duplicate JSON object keys are rejected.
+
+The checker hashes and parses the same bounded bytes before constructing the
+ordinary `Driver.artifact_globs` tuple. String order and multiplicity remain
+unchanged. Scenario evidence checks and the execution runner consume that same
+tuple, so externalization does not add wildcards or relax missing/empty evidence
+checks. The layout's asset identity is included in execution reports.
+
+The root contract retains its 1 MiB cap. Each external layout also has a 1 MiB
+cap; all external reference uses together have a separate 1 MiB byte budget per
+load, charging repeated uses again. No recursive reference resolution occurs.
+The replay list is stored in [`replays-artifacts.json`](replays-artifacts.json);
+other drivers retain their inline representations.

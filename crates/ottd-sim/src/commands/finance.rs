@@ -76,6 +76,7 @@ pub(super) fn loan(
         current.saturating_sub(value)
     };
     Ok(Plan {
+        returns: None,
         cost: CommandCost::success(0, if increase { 12 } else { 255 }),
         edits: vec![
             field_edit(*b"PLYR", company, "money", WireValue::Signed(next_money)),

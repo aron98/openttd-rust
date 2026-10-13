@@ -1,0 +1,11 @@
+--- a/src/road_cmd.cpp
++++ b/src/road_cmd.cpp
+@@ -46,6 +46,8 @@
+ #include "table/strings.h"
+ #include "table/roadtypes.h"
+ 
++#include "reference_road_slope.hpp"
++
+ #include "safeguards.h"
+ 
+ /** Helper type for lists/vectors of road vehicles */

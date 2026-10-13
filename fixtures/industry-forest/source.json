@@ -1,0 +1,51 @@
+{
+  "upstream": "OpenTTD 15.3",
+  "commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "save_version": 362,
+  "license": "GPL-2.0-only",
+  "preparation": "Original FoundTown house world; CMD_BUILD_INDUSTRY type3 tile520 fundtrue seed12345, then zero or8192 complete native state loops. Original zlib re-save changes no saved fields.",
+  "fixtures": [
+    {
+      "file": "construction.sav",
+      "sha256": "ab98b7550b7b13f472df412597211adcf8b589afa27248e85f52ad8db61402b1",
+      "native": {
+        "binary": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-native-c/bin-c/openttd",
+        "binary_sha256": "950b5ad5aad2f210efc735621ddf68405a40c54386da10a5b11fee41f135e129",
+        "input": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-design/forest-build-b/final.sav",
+        "input_sha256": "5e3034f4d92efc2b0df485d2b1897aad94669e1ea1be362ffeeba47f1c84a1f7",
+        "protocol_sha256": "a75374163b483819e53e01954505bf6d7e97ceb5558499c35ec02fc088f86f8a",
+        "config_sha256": "c605c5edce9fe041f2618f5d95ebb389b6efe2ed81c61cfb2dadd9130194403d",
+        "event_observer_enabled": true
+      },
+      "receipts": ".omo/evidence/industry-forest/compressed-fixture",
+      "full_world_equal_to_prior_uncompressed": {
+        "equal": true,
+        "expected": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-design/forest-build-b/final.world.json",
+        "actual": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-forest/compressed-fixture/final.world.json",
+        "expected_sha256": "b8ea2535d87f7f43a0e4ec327d748de96b14730ce67cc4912362af8d9a62932e",
+        "actual_sha256": "b8ea2535d87f7f43a0e4ec327d748de96b14730ce67cc4912362af8d9a62932e"
+      }
+    },
+    {
+      "file": "after-8192.sav",
+      "sha256": "d965a1058381b832ad38117e6a0a3a318b48feae5f613fccc69582af5ea4c5e9",
+      "native": {
+        "binary": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-native-c/bin-c/openttd",
+        "binary_sha256": "950b5ad5aad2f210efc735621ddf68405a40c54386da10a5b11fee41f135e129",
+        "input": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-design/forest-8192-b/final.sav",
+        "input_sha256": "1b8639c5dc43838d1c42ab88882e057cc458a03ee2db894d3b504bb33e1bd0f5",
+        "protocol_sha256": "a75374163b483819e53e01954505bf6d7e97ceb5558499c35ec02fc088f86f8a",
+        "config_sha256": "c605c5edce9fe041f2618f5d95ebb389b6efe2ed81c61cfb2dadd9130194403d",
+        "event_observer_enabled": true
+      },
+      "receipts": ".omo/evidence/industry-forest/compressed-final",
+      "full_world_equal_to_prior_uncompressed": {
+        "equal": true,
+        "expected": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-design/forest-8192-b/final.world.json",
+        "actual": "/Users/erdelyia/Projects/openttd-rust/.omo/teams/team-72ec0a2a/worktrees/T6-industry/.omo/evidence/industry-forest/compressed-final/final.world.json",
+        "expected_sha256": "db7261d9fcf553a4d12cc8626c91d328e03ba975c53528463e7dde4cc876f499",
+        "actual_sha256": "db7261d9fcf553a4d12cc8626c91d328e03ba975c53528463e7dde4cc876f499"
+      }
+    }
+  ]
+}

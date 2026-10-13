@@ -1,0 +1,17 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 buffer fixtures/late-read.nut
+compiled
+stack 2
+literal string 5 4c61746572
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 1 compile 0 1 buffer fixtures/late-scalar.nut
+compiled
+stack 1
+op 19 255 0 0 0
+step 2 run 0 0 1000
+return 998 integer 11
+temp integer 11
+step 3 raw 0 4c61746572
+raw 4c61746572 absent

@@ -1,0 +1,1 @@
+local a=[1]; local b=a; return a==b && a!=[1];

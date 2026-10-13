@@ -1,0 +1,39 @@
+refs initial 0
+refs first 1
+refs second 2
+refs dynamic 2
+same_literal 1
+refs drop_first 1
+suspend -1 0
+refs suspended 1
+suspend 0 0
+refs suspended 1
+suspend 0 1
+refs suspended 1
+suspend 0 2
+refs suspended 1
+suspend 0 3
+refs suspended 3
+return 1 string 11 706f6f6c2d736861726564
+refs returned 3
+same_runtime 1
+refs drop_runner 2
+refs drop_second 1
+refs drop_dynamic 1
+retained string 11 706f6f6c2d736861726564
+refs drop_result 0
+suspend -1 0
+refs suspended 0
+suspend 0 0
+refs suspended 0
+suspend 0 1
+refs suspended 0
+suspend 0 2
+refs suspended 0
+suspend 0 3
+refs suspended 2
+suspend 0 4
+refs suspended 1
+runtime_error 98
+refs error 0
+refs drop_error 0

@@ -1,0 +1,87 @@
+{
+  "owner": {
+    "badges": [],
+    "dynamic": {
+      "age": 0,
+      "company_avail": 0,
+      "company_hidden": 0,
+      "display_flags": 0,
+      "display_last_variant": 65535,
+      "duration_phase_1": 0,
+      "duration_phase_2": 0,
+      "duration_phase_3": 0,
+      "flags": 0,
+      "intro_date": 0,
+      "name_bytes": [],
+      "preview_asked": 0,
+      "preview_company": 255,
+      "preview_wait": 0,
+      "reliability": 0,
+      "reliability_final": 0,
+      "reliability_max": 0,
+      "reliability_spd_dec": 0,
+      "reliability_start": 0
+    },
+    "grfid": 1128354305,
+    "id": 256,
+    "info": {
+      "base_intro": 0,
+      "base_life": 255,
+      "callback_mask": 0,
+      "cargo_age_period": 185,
+      "cargo_label": {
+        "Fixed": 4294967295
+      },
+      "cargo_type": 12,
+      "climates": 0,
+      "decay_speed": 0,
+      "extra_flags": 0,
+      "lifelength": 0,
+      "load_amount": 0,
+      "misc_flags": 0,
+      "refit_cost": 0,
+      "refit_mask": 0,
+      "retire_early": 0,
+      "string_id": 65535,
+      "variant_id": 65535
+    },
+    "list_position": 88,
+    "local_id": 88,
+    "original_image_index": 0,
+    "spritegroups": [],
+    "stored_grfid": 1128354305,
+    "type": 1,
+    "vehicle": {
+      "Road": {
+        "air_drag": 0,
+        "capacity": 0,
+        "cost_factor": 0,
+        "image_index": 0,
+        "max_speed": 0,
+        "power": 0,
+        "roadtype": 0,
+        "running_cost": 0,
+        "running_cost_class": "StationValue",
+        "sfx": 0,
+        "shorten_factor": 0,
+        "tractive_effort": 76,
+        "visual_effect": 255,
+        "weight": 0
+      }
+    },
+    "wagon_overrides": []
+  },
+  "temporary": {
+    "cargo_allowed": 0,
+    "cargo_allowed_required": 0,
+    "cargo_disallowed": 0,
+    "ctt_exclude_mask": 0,
+    "ctt_include_mask": 0,
+    "defaultcargo_grfid": 1128354305,
+    "index": 256,
+    "railtypelabels": [],
+    "refittability": 0,
+    "roadtramtype": 0,
+    "rv_max_speed": 0
+  }
+}

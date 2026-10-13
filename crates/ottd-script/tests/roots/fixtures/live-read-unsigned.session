@@ -1,0 +1,5 @@
+compile 0 0 unsigned fixtures/read.nut
+seed 0 73636f7265 integer 7
+run 0 0 1000
+seed 0 73636f7265 integer 9
+run 0 0 1000

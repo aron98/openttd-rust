@@ -1,0 +1,2848 @@
+{
+  "schema_version": 1,
+  "jobs": [
+    {
+      "kind": "edit",
+      "directory": "matrix/rate-edit",
+      "source": "matrix/prepared/save/autosave/exit.sav",
+      "output": "matrix/zero-rates.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.clear_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.terraform_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.tree_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_object_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/tram-other-company",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "tram-other-company",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/clear-pad",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "clear-pad",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "clear"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/fleet",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "fleet",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "save",
+            "label": "fleet"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir2-slope0-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir2-slope0.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 130,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir3-slope0-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir3-slope0.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 131,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir0-slope0-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir0-slope0.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 128,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir1-slope0-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir1-slope0.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 129,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir3-slope1-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir3-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 131,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1559,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir2-slope1-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir2-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 130,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1623,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir1-slope1-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir1-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 4,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 129,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1622,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type1-dir0-slope1-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "matrix/geometry-type1-dir0-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1558,
+            "value": {
+              "type": 32,
+              "height": 5,
+              "m1": 1,
+              "m2": 130,
+              "m3": 16,
+              "m4": 63,
+              "m5": 128,
+              "m6": 0,
+              "m7": 1,
+              "m8": 64
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "supplement/eight-water-neighbors-edit-command",
+      "source": "matrix/zero-rates.sav",
+      "output": "supplement/eight-water-neighbors.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1491,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1492,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1493,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1555,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1557,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1619,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1620,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "tile",
+            "index": 1621,
+            "value": {
+              "type": 96,
+              "height": 4,
+              "m1": 32,
+              "m2": 0,
+              "m3": 1,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir3-slope1",
+      "source": "matrix/geometry-type1-dir3-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir3-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/setup-timetable-payload-combinations",
+      "source": "matrix/fleet/original/native/fleet.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "timetable-payload-combinations-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 0,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 0,
+            "order": {
+              "type": 194,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 53,
+              "travel_time": 59,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 1,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 10,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 0,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 1,
+            "order": {
+              "type": 194,
+              "flags": 10,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 53,
+              "travel_time": 59,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 2,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 130,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 2,
+            "order": {
+              "type": 194,
+              "flags": 130,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 53,
+              "travel_time": 59,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 3,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 138,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 3,
+            "order": {
+              "type": 194,
+              "flags": 138,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 53,
+              "travel_time": 59,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir3-slope0",
+      "source": "matrix/geometry-type1-dir3-slope0.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir3-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir1-slope0",
+      "source": "matrix/geometry-type1-dir1-slope0.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir1-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir1-slope1",
+      "source": "matrix/geometry-type1-dir1-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir1-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/setup-unrelated-order-namespaces",
+      "source": "matrix/fleet/original/native/fleet.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "unrelated-order-namespaces-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 1,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 1,
+            "order": {
+              "type": 8,
+              "flags": 2,
+              "dest": 1,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 2,
+            "order": {
+              "type": 6,
+              "flags": 2,
+              "dest": 2,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 3,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 1,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir2-slope0-setup",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir2-slope0-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 2
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/setup-nearest-current-versus-scheduled",
+      "source": "matrix/fleet/original/native/fleet.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "nearest-current-versus-scheduled-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 18,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 0,
+            "order": {
+              "type": 2,
+              "flags": 18,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/setup",
+      "source": "matrix/fleet/original/native/fleet.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-three-members-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 1,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 1,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 2,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 17,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "share",
+            "vehicle": 2,
+            "source": 0
+          },
+          {
+            "op": "current_order",
+            "vehicle": 0,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 1,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "current_order",
+            "vehicle": 2,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir3-slope0-setup",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir3-slope0-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 3
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir1-slope0-setup",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir1-slope0-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 1
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir2-slope0",
+      "source": "matrix/geometry-type1-dir2-slope0.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir2-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir2-slope1",
+      "source": "matrix/geometry-type1-dir2-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir2-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir0-slope0-setup",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir0-slope0-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir0-slope1",
+      "source": "matrix/geometry-type1-dir0-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir0-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type1-dir0-slope0",
+      "source": "matrix/geometry-type1-dir0-slope0.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type1-dir0-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/setup-remote-owned-nearest-and-clone",
+      "source": "matrix/fleet/original/native/fleet.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "remote-owned-nearest-and-clone-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 1,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 1,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 2,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 17,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "share",
+            "vehicle": 2,
+            "source": 0
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 3,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 2,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 5,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 18,
+              "dest": 0,
+              "refit_cargo": 0,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 123
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 4,
+            "source": 0
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type0-dir2-slope1-edit-command",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "output": "matrix/geometry-type0-dir2-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1621,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_on_slopes"
+            ],
+            "value": {
+              "signed": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type0-dir3-slope1-edit-command",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "output": "matrix/geometry-type0-dir3-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1557,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_on_slopes"
+            ],
+            "value": {
+              "signed": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type0-dir0-slope1-edit-command",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "output": "matrix/geometry-type0-dir0-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1556,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 0,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_on_slopes"
+            ],
+            "value": {
+              "signed": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/geometry-type0-dir1-slope1-edit-command",
+      "source": "matrix/clear-pad/original/native/clear.sav",
+      "output": "matrix/geometry-type0-dir1-slope1.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1620,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 3,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_on_slopes"
+            ],
+            "value": {
+              "signed": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "supplement/eight-water-neighbors",
+      "source": "supplement/eight-water-neighbors.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "eight-water-neighbors",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir0-slope0",
+      "source": "matrix/geometry-type0-dir0-slope0-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir0-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/nearest-current-versus-scheduled",
+      "source": "matrix/setup-nearest-current-versus-scheduled/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "nearest-current-versus-scheduled",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 100
+          },
+          {
+            "op": "backup",
+            "vehicle": 4,
+            "user": 101
+          },
+          {
+            "op": "backup",
+            "vehicle": 5,
+            "user": 102
+          },
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir2-slope1-setup",
+      "source": "matrix/geometry-type0-dir2-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir2-slope1-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 2
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/owner-before-occupied",
+      "source": "matrix/setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "owner-before-occupied",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1560
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/shared-remove-reuse",
+      "source": "matrix/setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-remove-reuse",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 100
+          },
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "rebuilt"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir3-slope1-setup",
+      "source": "matrix/geometry-type0-dir3-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir3-slope1-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 3
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir2-slope0",
+      "source": "matrix/geometry-type0-dir2-slope0-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir2-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/timetable-payload-combinations",
+      "source": "matrix/setup-timetable-payload-combinations/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "timetable-payload-combinations",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 100
+          },
+          {
+            "op": "backup",
+            "vehicle": 4,
+            "user": 101
+          },
+          {
+            "op": "backup",
+            "vehicle": 5,
+            "user": 102
+          },
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/wrong-owner",
+      "source": "matrix/setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "wrong-owner",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/remote-owned-nearest-and-clone",
+      "source": "matrix/setup-remote-owned-nearest-and-clone/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "remote-owned-nearest-and-clone",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 100
+          },
+          {
+            "op": "backup",
+            "vehicle": 4,
+            "user": 101
+          },
+          {
+            "op": "backup",
+            "vehicle": 5,
+            "user": 102
+          },
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir1-slope0",
+      "source": "matrix/geometry-type0-dir1-slope0-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir1-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/occupied",
+      "source": "matrix/setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "occupied",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1560
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/unrelated-order-namespaces",
+      "source": "matrix/setup-unrelated-order-namespaces/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "unrelated-order-namespaces",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 100
+          },
+          {
+            "op": "backup",
+            "vehicle": 4,
+            "user": 101
+          },
+          {
+            "op": "backup",
+            "vehicle": 5,
+            "user": 102
+          },
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir3-slope0",
+      "source": "matrix/geometry-type0-dir3-slope0-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir3-slope0",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/estimate",
+      "source": "matrix/setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "estimate",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir1-slope1-setup",
+      "source": "matrix/geometry-type0-dir1-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir1-slope1-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 1
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir0-slope1-setup",
+      "source": "matrix/geometry-type0-dir0-slope1.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir0-slope1-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_road_depot",
+                "tile": 1556,
+                "road_type": 0,
+                "direction": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/limit-exact-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "matrix/limit-exact.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "clear_limit"
+            ],
+            "value": {
+              "unsigned": 65536
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/cash-exact-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "matrix/cash-exact.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "money"
+            ],
+            "value": {
+              "signed": 60
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/cash-insufficient-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "matrix/cash-insufficient.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "money"
+            ],
+            "value": {
+              "signed": 59
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/limit-before-owner-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "matrix/limit-before-owner.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "clear_limit"
+            ],
+            "value": {
+              "unsigned": 65535
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/cash-negative-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "matrix/cash-negative.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "money"
+            ],
+            "value": {
+              "signed": -1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/limit-zero-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "matrix/limit-zero.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "clear_limit"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "supplement/occupied-max-corner-edit-command",
+      "source": "matrix/setup/original/native/initial.sav",
+      "output": "supplement/occupied-max-corner.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "tile",
+            "index": 1624,
+            "value": {
+              "type": 0,
+              "height": 5,
+              "m1": 16,
+              "m2": 0,
+              "m3": 0,
+              "m4": 0,
+              "m5": 7,
+              "m6": 0,
+              "m7": 0,
+              "m8": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "z_pos"
+            ],
+            "value": {
+              "signed": 40
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "z_pos"
+            ],
+            "value": {
+              "signed": 40
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "z_pos"
+            ],
+            "value": {
+              "signed": 40
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "z_pos"
+            ],
+            "value": {
+              "signed": 40
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 4,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "z_pos"
+            ],
+            "value": {
+              "signed": 40
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 5,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "z_pos"
+            ],
+            "value": {
+              "signed": 40
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/limit-before-owner",
+      "source": "matrix/limit-before-owner.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "limit-before-owner",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1558
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir0-slope1",
+      "source": "matrix/geometry-type0-dir0-slope1-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir0-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir2-slope1",
+      "source": "matrix/geometry-type0-dir2-slope1-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir2-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/cash-insufficient",
+      "source": "matrix/cash-insufficient.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "cash-insufficient",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir1-slope1",
+      "source": "matrix/geometry-type0-dir1-slope1-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir1-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/limit-zero",
+      "source": "matrix/limit-zero.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "limit-zero",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/cash-exact",
+      "source": "matrix/cash-exact.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "cash-exact",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/geometry-type0-dir3-slope1",
+      "source": "matrix/geometry-type0-dir3-slope1-setup/original/native/initial.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "geometry-type0-dir3-slope1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/cash-negative",
+      "source": "matrix/cash-negative.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "cash-negative",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/limit-exact",
+      "source": "matrix/limit-exact.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "limit-exact",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1556
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "supplement/occupied-max-corner",
+      "source": "supplement/occupied-max-corner.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "occupied-max-corner",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1560
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    }
+  ],
+  "cases": [
+    "matrix/shared-remove-reuse",
+    "matrix/estimate",
+    "matrix/occupied",
+    "matrix/wrong-owner",
+    "matrix/limit-zero",
+    "matrix/limit-before-owner",
+    "matrix/limit-exact",
+    "matrix/cash-insufficient",
+    "matrix/cash-exact",
+    "matrix/cash-negative",
+    "matrix/owner-before-occupied",
+    "matrix/tram-other-company",
+    "matrix/remote-owned-nearest-and-clone",
+    "matrix/nearest-current-versus-scheduled",
+    "matrix/timetable-payload-combinations",
+    "matrix/unrelated-order-namespaces",
+    "matrix/geometry-type0-dir0-slope0",
+    "matrix/geometry-type0-dir0-slope1",
+    "matrix/geometry-type0-dir1-slope0",
+    "matrix/geometry-type0-dir1-slope1",
+    "matrix/geometry-type0-dir2-slope0",
+    "matrix/geometry-type0-dir2-slope1",
+    "matrix/geometry-type0-dir3-slope0",
+    "matrix/geometry-type0-dir3-slope1",
+    "matrix/geometry-type1-dir0-slope0",
+    "matrix/geometry-type1-dir0-slope1",
+    "matrix/geometry-type1-dir1-slope0",
+    "matrix/geometry-type1-dir1-slope1",
+    "matrix/geometry-type1-dir2-slope0",
+    "matrix/geometry-type1-dir2-slope1",
+    "matrix/geometry-type1-dir3-slope0",
+    "matrix/geometry-type1-dir3-slope1",
+    "supplement/occupied-max-corner",
+    "supplement/eight-water-neighbors"
+  ]
+}

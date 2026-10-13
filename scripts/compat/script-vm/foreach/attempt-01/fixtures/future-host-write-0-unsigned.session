@@ -1,0 +1,4 @@
+make-array 0 0 3 integer 1 integer 2 integer 3
+root-store-array 0 70656e64696e67 0
+compile 0 0 unsigned future-host-write-0.nut
+run 0 0 10000

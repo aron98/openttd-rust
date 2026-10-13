@@ -1,0 +1,10 @@
+compile 0 0 buffer fixtures/native-cycle.nut
+run 0 0 1000
+hold-root 0 0 70656e64696e67
+weak-state 0 1
+seed 0 70656e64696e67 null -
+drop-handle 0 0
+drop 0 0
+weak-state 0 1
+collect 0
+weak-state 0 1

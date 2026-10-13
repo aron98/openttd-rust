@@ -1,0 +1,90 @@
+--- a/src/tree_cmd.cpp
++++ b/src/tree_cmd.cpp
+@@ -32,6 +32,7 @@
+ #include "table/tree_land.h"
+ #include "table/clear_land.h"
+ 
++#include "reference_tree_growth_observer.hpp"
+ #include "safeguards.h"
+ 
+ /** Where to place trees while in-game? */
+@@ -832,6 +833,7 @@
+ 
+ static void TileLoop_Trees(TileIndex tile)
+ {
++	ReferenceTreeGrowth::Scope observation("tile_tree", tile.base());
+ 	if (GetTreeGround(tile) == TREE_GROUND_SHORE) {
+ 		TileLoop_Water(tile);
+ 	} else {
+@@ -985,6 +987,7 @@
+ 
+ void OnTick_Trees()
+ {
++	ReferenceTreeGrowth::Scope observation("on_tick_trees");
+ 	/* Don't spread trees if that's not allowed */
+ 	if (_settings_game.construction.extra_tree_placement == ETP_NO_SPREAD || _settings_game.construction.extra_tree_placement == ETP_NO_GROWTH_NO_SPREAD) return;
+ 
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -96,6 +96,7 @@
+ 
+ #include "saveload/reference_replay.hpp"
+ #include "saveload/reference_order_fixture.hpp"
++#include "reference_tree_growth_observer.hpp"
+ #include "safeguards.h"
+ 
+ void CallLandscapeTick();
+@@ -1249,7 +1250,9 @@
+ 	if (_game_mode == GM_EDITOR) {
+ 		BasePersistentStorageArray::SwitchMode(PSM_ENTER_GAMELOOP);
+ 		RunTileLoop();
++		ReferenceTreeGrowth::Emit("vehicle_ticks", "enter", UINT32_MAX);
+ 		CallVehicleTicks();
++		ReferenceTreeGrowth::Emit("vehicle_ticks", "leave", UINT32_MAX);
+ 		ReferenceMovement::Emit("landscape_tick", "enter");
+ 		CallLandscapeTick();
+ 		ReferenceMovement::Emit("landscape_tick", "leave");
+@@ -1289,7 +1292,9 @@
+ 		TimerManager<TimerGameTick>::Elapsed(1);
+ 		ReferenceMovement::Emit("tick_timer", "leave");
+ 		RunTileLoop();
++		ReferenceTreeGrowth::Emit("vehicle_ticks", "enter", UINT32_MAX);
+ 		CallVehicleTicks();
++		ReferenceTreeGrowth::Emit("vehicle_ticks", "leave", UINT32_MAX);
+ 		ReferenceMovement::Emit("landscape_tick", "enter");
+ 		CallLandscapeTick();
+ 		ReferenceMovement::Emit("landscape_tick", "leave");
+--- a/src/saveload/reference_replay_commands.hpp
++++ b/src/saveload/reference_replay_commands.hpp
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ #ifndef OTTD_REFERENCE_REPLAY_COMMANDS_HPP
+ #define OTTD_REFERENCE_REPLAY_COMMANDS_HPP
++#include "../tree_cmd.h"
+ #include "../company_cmd.h"
+ #include "../landscape_cmd.h"
+ #include "../misc_cmd.h"
+@@ -30,6 +31,12 @@
+         const Vehicle *vehicle = Vehicle::GetIfValid(id);
+         Require(vehicle != nullptr, "movement preparer vehicle disappeared");
+         return Command<CMD_START_STOP_VEHICLE>::Post(vehicle->tile, id, true);
++    }
++    if (kind == "tree_growth_plant") return Command<CMD_PLANT_TREE>::Post(TileIndex(command.at("tile").get<uint32_t>()), TileIndex(command.at("start_tile").get<uint32_t>()), command.at("type").get<uint8_t>(), false);
++    if (kind == "tree_growth_setting") {
++        const auto setting = command.at("value").get<int32_t>();
++        Require(setting == 0 || setting == 3, "tree growth setting outside first atom");
++        return Command<CMD_CHANGE_SETTING>::Post(std::string{"construction.extra_tree_placement"}, setting);
+     }
+     if (kind == "build_road_depot") return Command<CMD_BUILD_ROAD_DEPOT>::Post(TileIndex(command.at("tile").get<uint32_t>()), static_cast<RoadType>(command.at("road_type").get<uint8_t>()), static_cast<DiagDirection>(command.at("direction").get<uint8_t>()));
+     if (kind == "sell_vehicle") return Command<CMD_SELL_VEHICLE>::Post(TileIndex(command.at("location").get<uint32_t>()), VehicleID(command.at("vehicle").get<uint32_t>()), command.at("sell_chain").get<bool>(), command.at("backup_order").get<bool>(), ClientID(command.at("client_id").get<uint32_t>()));
+--- a/src/saveload/reference_tree_fixture.hpp
++++ b/src/saveload/reference_tree_fixture.hpp
+@@ -32,7 +32,7 @@
+         Require(IsTileType(tile, MP_CLEAR), "tree fixture needs clear tile");
+         Require(!IsBridgeAbove(tile), "tree fixture bridge boundary");
+         Require(count >= 1, "tree fixture needs at least one tree");
+-        MakeTree(tile, static_cast<TreeType>(type), count - 1, TreeGrowthStage::Grown, static_cast<TreeGround>(ground), 3);
++        MakeTree(tile, static_cast<TreeType>(type), count - 1, static_cast<TreeGrowthStage>(TreeFixtureUnsigned(entry.value("stage", Json(3u)), 6)), static_cast<TreeGround>(ground), TreeFixtureUnsigned(entry.value("density", Json(3u)), 3));
+     }
+     for (const auto &entry : towns) {
+         Town *town = Town::GetIfValid(TownID(static_cast<uint16_t>(TreeFixtureUnsigned(entry.at("id"), UINT16_MAX))));

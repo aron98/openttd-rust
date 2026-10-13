@@ -1,0 +1,41 @@
+configured_empty_roots 0 0 1
+step 0 seed 0 73636f7265 integer 1
+seeded
+step 1 compile 0 0 utf8 fixtures/explicit.nut
+compiled
+stack 3
+literal string 5 73636f7265
+op 21 1 0 0 0
+op 9 1 0 1 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 2 compile 0 1 utf8 fixtures/unresolved.nut
+compiled
+stack 2
+literal string 5 73636f7265
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 3 compile 0 2 utf8 fixtures/inline.nut
+compiled
+stack 2
+op 2 1 9 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 4 empty 0
+root 2
+step 5 seed 0 73636f7265 integer 2
+seeded
+step 6 raw 1 73636f7265
+raw 73636f7265 integer 1
+step 7 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 8 run 0 0 1000
+return 997 integer 2
+temp integer 2
+step 9 run 0 1 1000
+return 998 integer 2
+temp integer 2
+step 10 run 0 2 1000
+return 998 integer 9
+temp integer 9

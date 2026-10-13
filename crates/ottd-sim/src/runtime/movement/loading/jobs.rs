@@ -1,0 +1,189 @@
+//! Source-ordered scheduling and publication of supported link graph jobs.
+use super::{RoadPhases, State, WorldTickError, records, unsupported};
+#[cfg(feature = "async-trace")]
+use crate::runtime::async_trace::{self, Kind};
+use crate::runtime::{
+    RuntimeError,
+    transport_jobs::{JobEnvironment, JobInput},
+};
+use ottd_save::{WireValue, world::WorldEdit};
+
+pub(in crate::runtime::movement) fn tick(
+    state: &mut State<'_>,
+    runner: &mut RoadPhases<'_>,
+) -> Result<(), WorldTickError> {
+    if state.number(b"DATE", 0, "economy_date_fract")? != 21 {
+        return Ok(());
+    }
+    let interval = state.number(b"PATS", 0, "linkgraph.recalc_interval")? / 2;
+    if interval <= 0 {
+        return Err(unsupported("link_jobs", "recalculation interval"));
+    }
+    let offset = state
+        .number(b"DATE", 0, "economy_date")?
+        .checked_rem(interval)
+        .ok_or_else(|| unsupported("link_jobs", "recalculation interval"))?;
+    if offset == 0 {
+        spawn(state, runner)?;
+    } else if offset == interval / 2 {
+        join(state, runner)?;
+    }
+    Ok(())
+}
+fn list(state: &State<'_>, name: &str) -> Result<Vec<WireValue>, WorldTickError> {
+    let WireValue::Array(values) = state.value(b"LGRS", 0, name)? else {
+        return Err(unsupported("link_jobs", "schedule list"));
+    };
+    Ok(values.clone())
+}
+fn index(pointer: &WireValue) -> Result<u32, WorldTickError> {
+    u32::try_from(
+        State::number_value(pointer)?
+            .checked_sub(1)
+            .ok_or_else(|| unsupported("link_jobs", "null scheduled pointer"))?,
+    )
+    .map_err(|_| unsupported("link_jobs", "scheduled pointer"))
+}
+fn spawn(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldTickError> {
+    let mut schedule = list(state, "schedule")?;
+    let mut selected = None;
+    for _ in 0..schedule.len() {
+        let graph = index(
+            schedule
+                .first()
+                .ok_or_else(|| unsupported("link_jobs", "schedule front"))?,
+        )?;
+        if records::row(state, *b"LGRP", graph)?.rows("nodes")?.1.len() >= 2 {
+            selected = Some(graph);
+            break;
+        }
+        schedule.rotate_left(1);
+    }
+    let Some(graph) = selected else {
+        return Ok(());
+    };
+    schedule.remove(0);
+    records::schedule(state, "schedule", schedule)?;
+    let id = runner
+        .transport
+        .jobs
+        .allocate()
+        .map_err(RuntimeError::from)?;
+    let source = records::row(state, *b"LGRP", graph)?;
+    let schema = state.table(b"LGRJ")?.schema();
+    let graph_schema = records::child(schema, "linkgraph")?;
+    if graph_schema != source.schema {
+        return Err(unsupported("link_jobs", "copied graph schema"));
+    }
+    let mut fields = Vec::with_capacity(schema.fields().len());
+    for field in schema.fields() {
+        let value = match field.name() {
+            "linkgraph" => WireValue::Structs(vec![source.record.clone()]),
+            "link_graph.index" => WireValue::Unsigned(u64::from(graph)),
+            "join_date" => WireValue::Signed(
+                state
+                    .number(b"DATE", 0, "economy_date")?
+                    .wrapping_add(state.number(b"PATS", 0, "linkgraph.recalc_time")? / 2),
+            ),
+            name if name.starts_with("linkgraph.") => state.value(b"PATS", 0, name)?.clone(),
+            _ => return Err(unsupported("link_jobs", "constructor field")),
+        };
+        fields.push((field.name(), value));
+    }
+    let record = records::construct(schema, &fields)?;
+    state.apply(WorldEdit::InsertRecord {
+        chunk: *b"LGRJ",
+        record: id,
+        value: record,
+    })?;
+    let input = JobInput::parse(
+        records::row(state, *b"LGRJ", id)?,
+        &JobEnvironment {
+            width: state.width,
+            height: state.height,
+            content: runner.content,
+        },
+    )?
+    .ok_or_else(|| unsupported("link_jobs", "populated job solver"))?;
+    runner.transport.workers.insert(id, input.clone().spawn());
+    runner.transport.job_inputs.insert(id, Some(input));
+    #[cfg(feature = "async-trace")]
+    async_trace::spawned(&runner.transport, id);
+    let mut running = list(state, "running")?;
+    running.push(WireValue::Unsigned(u64::from(id).wrapping_add(1)));
+    records::schedule(state, "running", running)?;
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, id, Kind::RunningAppended);
+    Ok(())
+}
+fn join(state: &mut State<'_>, runner: &mut RoadPhases<'_>) -> Result<(), WorldTickError> {
+    let mut running = list(state, "running")?;
+    let Some(front) = running.first() else {
+        return Ok(());
+    };
+    let job = index(front)?;
+    if state.number(b"LGRJ", job, "join_date")? > state.number(b"DATE", 0, "economy_date")? {
+        return Ok(());
+    }
+    let row = records::row(state, *b"LGRJ", job)?;
+    let graph = u32::try_from(row.number("link_graph.index")?)
+        .map_err(|_| unsupported("link_jobs", "graph index"))?;
+    let input = JobInput::parse(
+        row,
+        &JobEnvironment {
+            width: state.width,
+            height: state.height,
+            content: runner.content,
+        },
+    )?
+    .ok_or_else(|| unsupported("link_jobs", "populated job result"))?;
+    if runner.transport.job_inputs.get(&job) != Some(&Some(input.clone())) {
+        return Err(unsupported("link_jobs", "pending job result cache"));
+    }
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, job, Kind::WaitBegin);
+    let completed = runner
+        .transport
+        .workers
+        .get(&job)
+        .ok_or_else(|| unsupported("link_jobs", "missing job worker"))?
+        .wait()
+        .map_err(RuntimeError::from)?;
+    #[cfg(feature = "async-trace")]
+    {
+        async_trace::job(&runner.transport, job, Kind::WaitReturned);
+        async_trace::job(&runner.transport, job, Kind::PublicationBegin);
+    }
+    completed.publish(
+        &input,
+        &mut super::job_publication::Publication {
+            state,
+            cargo: &mut runner.transport.cargo,
+        },
+    )?;
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, job, Kind::PublicationEnd);
+    running.remove(0);
+    records::schedule(state, "running", running)?;
+    state.apply(WorldEdit::RemoveRecord {
+        chunk: *b"LGRJ",
+        record: job,
+    })?;
+    runner
+        .transport
+        .jobs
+        .free(job)
+        .map_err(RuntimeError::from)?;
+    runner.transport.job_inputs.remove(&job);
+    #[cfg(feature = "async-trace")]
+    async_trace::job(&runner.transport, job, Kind::StagedRemoval);
+    runner.transport.workers.remove(&job);
+    if state.table(b"LGRP")?.record(graph).is_some() {
+        let pointer = WireValue::Unsigned(u64::from(graph).wrapping_add(1));
+        let mut schedule = list(state, "schedule")?;
+        schedule.retain(|value| value != &pointer);
+        schedule.push(pointer);
+        records::schedule(state, "schedule", schedule)?;
+    }
+    Ok(())
+}

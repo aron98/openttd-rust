@@ -1,0 +1,31 @@
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -54,4 +54,6 @@
+ #include "core/random_func.hpp"
+ #include <fstream>
++
++#include "reference_movement_baseline.hpp"
+ 
+ #include "safeguards.h"
+@@ -1785,4 +1787,5 @@
+ void LoadNewGRF(SpriteID load_index, uint num_baseset)
+ {
++	ReferenceMovementBaseline::Consume(num_baseset);
+ 	ReferenceGrfControl::Begin(num_baseset);
+ 	ReferenceEngineSpecs::Begin(ReferenceGrfControl::manifest);
+--- a/src/saveload/afterload.cpp
++++ b/src/saveload/afterload.cpp
+@@ -79,3 +79,5 @@
+ 
++#include "../reference_movement_baseline.hpp"
++
+ #include "../safeguards.h"
+ 
+@@ -804,5 +804,7 @@
+ 	/* Load the sprites */
+ 	ReferenceArmGrfControl();
++	ReferenceMovementBaseline::Arm();
+ 	GfxLoadSprites();
++	ReferenceMovementBaseline::Finish();
+ 	ReferenceRunGrfCurrencyReload();
+ 	LoadStringWidthTable();

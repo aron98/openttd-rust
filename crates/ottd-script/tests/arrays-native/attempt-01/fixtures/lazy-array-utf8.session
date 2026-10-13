@@ -1,0 +1,2 @@
+compile 0 0 utf8 fixtures/lazy-array.nut
+run 0 0 1000

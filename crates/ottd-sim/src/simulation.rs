@@ -50,7 +50,7 @@ pub fn simulate(mut fixture: Fixture, ticks: u32) -> Result<Fixture, SimulationE
         let events = clock.advance(fixture.context.paused);
         let tick_counter = clock.snapshot().tick_counter.0;
         if !fixture.context.paused {
-            landscape.advance(tick_counter);
+            landscape.advance(tick_counter)?;
         }
         fixture.events.push(TickEvents {
             tick_counter,

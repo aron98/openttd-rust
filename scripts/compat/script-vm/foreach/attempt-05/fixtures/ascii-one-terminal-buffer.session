@@ -1,0 +1,2 @@
+compile 0 0 buffer ascii-one.nut
+run 0 0 10000

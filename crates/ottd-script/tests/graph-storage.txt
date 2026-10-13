@@ -1,0 +1,13 @@
+clone alias 1
+dag clone-held 1
+dag released 0
+hidden held 1
+hidden clone-omits 0
+cycle rooted-collect 0 1
+cycle unrooted-before 1
+cycle collected 1 0
+pair rooted-collect 0 1 1
+pair unrooted-before 1 1
+pair collected 1 0 0
+deep held 1
+deep released 0

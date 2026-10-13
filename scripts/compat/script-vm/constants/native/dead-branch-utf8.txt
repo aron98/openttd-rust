@@ -1,0 +1,12 @@
+step 0 compile 0 0 utf8 fixtures/dead-branch.nut
+compile_error string 35 656e64206f662073746174656d656e7420657870656374656420283b206f72206c6629
+step 1 lookup 0 K -
+lookup K - integer 7
+step 2 lookup 0 E -
+lookup E - absent
+step 3 lookup 0 E A
+lookup E A absent
+step 4 lookup 0 E B
+lookup E B absent
+step 5 lookup 0 E D
+lookup E D absent

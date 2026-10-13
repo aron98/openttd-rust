@@ -1,0 +1,424 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 utf8 key-value-0.nut
+compiled
+stack 6
+op 31 1 2 0 0
+op 2 2 4 0 0
+op 32 1 2 0 0
+op 2 2 7 0 0
+op 32 1 2 0 0
+op 20 2 3 0 0
+op 51 1 6 2 0
+op 52 1 6 2 0
+op 2 5 2 0 0
+op 17 5 5 3 42
+op 13 5 1 2 5
+op 61 5 5 0 0
+op 24 0 -7 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 0
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 0 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 2 advance 0 2
+suspend 0 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 3 advance 0 2
+suspend 0 1
+frame 0 root 0
+frame 1 array 1 length 0
+frame 2 null
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 0
+array_refs 1 1
+step 4 advance 0 2
+suspend 0 2
+frame 0 root 0
+frame 1 array 1 length 0
+frame 2 integer 4
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 0
+array_refs 1 1
+step 5 advance 0 2
+suspend 0 3
+frame 0 root 0
+frame 1 array 1 length 1
+frame 2 integer 4
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 integer 4
+array_refs 1 1
+step 6 advance 0 2
+suspend 0 4
+frame 0 root 0
+frame 1 array 1 length 1
+frame 2 integer 7
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 integer 4
+array_refs 1 1
+step 7 advance 0 2
+suspend 0 5
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 7
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 4
+element 1 1 integer 7
+array_refs 1 1
+step 8 advance 0 2
+suspend 0 6
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 null
+frame 3 null
+frame 4 null
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 4
+element 1 1 integer 7
+array_refs 1 1
+step 9 advance 0 2
+suspend 0 8
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 0
+frame 3 integer 4
+frame 4 integer 1
+frame 5 null
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 4
+element 1 1 integer 7
+array_refs 1 1
+step 10 advance 0 2
+suspend 0 9
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 0
+frame 3 integer 4
+frame 4 integer 1
+frame 5 integer 2
+temp unsupported 134217984
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 4
+element 1 1 integer 7
+array_refs 1 1
+step 11 advance 0 2
+suspend 0 10
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 0
+frame 3 integer 4
+frame 4 integer 1
+frame 5 integer 8
+temp integer 8
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 4
+element 1 1 integer 7
+array_refs 1 1
+step 12 advance 0 2
+suspend 0 11
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 0
+frame 3 integer 4
+frame 4 integer 1
+frame 5 integer 8
+temp integer 8
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 7
+array_refs 1 1
+step 13 advance 0 2
+suspend 0 12
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 0
+frame 3 integer 4
+frame 4 integer 1
+frame 5 integer 8
+temp integer 8
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 7
+array_refs 1 1
+step 14 advance 0 2
+suspend 0 6
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 0
+frame 3 integer 4
+frame 4 integer 1
+frame 5 integer 8
+temp integer 8
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 7
+array_refs 1 1
+step 15 advance 0 2
+suspend 0 8
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 8
+temp integer 8
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 7
+array_refs 1 1
+step 16 advance 0 2
+suspend 0 9
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 2
+temp integer 8
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 7
+array_refs 1 1
+step 17 advance 0 2
+suspend 0 10
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 14
+temp integer 14
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 7
+array_refs 1 1
+step 18 advance 0 2
+suspend 0 11
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 14
+temp integer 14
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 14
+array_refs 1 1
+step 19 advance 0 2
+suspend 0 12
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 14
+temp integer 14
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 14
+array_refs 1 1
+step 20 advance 0 2
+suspend 0 6
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 14
+temp integer 14
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 14
+array_refs 1 1
+step 21 advance 0 2
+suspend 0 13
+frame 0 root 0
+frame 1 array 1 length 2
+frame 2 integer 1
+frame 3 integer 7
+frame 4 integer 2
+frame 5 integer 14
+temp integer 14
+stack_top 6 6
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active 0
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 14
+array_refs 1 1
+step 22 advance 0 2
+return 1 array 1 length 2
+temp array 1 length 2
+stack_top 6 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 2
+element 1 0 integer 8
+element 1 1 integer 14
+array_refs 1 2

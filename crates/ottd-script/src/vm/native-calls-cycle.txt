@@ -1,0 +1,3 @@
+cycle returned 9992 1
+cycle before 1 1
+cycle after 0 0

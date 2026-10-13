@@ -1,0 +1,4 @@
+before view 2 2
+with view 2 3
+owners released 0 1 4
+view released 0

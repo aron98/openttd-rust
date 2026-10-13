@@ -1,0 +1,39 @@
+{
+  "source_fixture": "scripts/compat/script-vm/tables/fixtures/delete-effects.nut",
+  "source_sha256": "bc34c433f3ebc919361d3a08a60784c6f2e3ef80af07f9a9f6652f4f70aac7a4",
+  "observations": [
+    {
+      "abi": "linux-gnu-64-little",
+      "fixture": "crates/ottd-script/tests/delete-effects-gnu.txt",
+      "stdout_sha256": "b201067dfea2c7c5ea96d3033f23ea85803fca1ab17a6835e03e5f8da95b28d7",
+      "run": "https://github.com/aron98/openttd-rust/actions/runs/38130117301",
+      "source_commit": "bcc1c17b4b38bb3006ce67093ee8ca12db4d63bd",
+      "archive_sha256": "7f714112b5c0f895328996b5ccbe397bed0a1213f48d98528f2eaf8221c0c5a9",
+      "archive_member": ".omo/evidence/script-tables-linux/delete-effects.stdout",
+      "native_sha256": "af95826d35e47c2e4068cdf7f2e1d75072019dc1cb04126b00ed4c8a927a9b65",
+      "native_pin": "14ec60f248547d4d062a1160f0fc26d742319888",
+      "stdlib": "libstdc++ 20240904",
+      "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "rust_host": "x86_64-unknown-linux-gnu",
+      "argv": [
+        "native/observe",
+        "--table-effects",
+        "scripts/compat/script-vm/tables/fixtures/delete-effects.nut"
+      ]
+    },
+    {
+      "abi": "apple-libcxx-abi1-64-little",
+      "fixture": "crates/ottd-script/tests/delete-effects.txt",
+      "stdout_sha256": "6f57294a684d5260def66184fc6492619154932962989c74b8a795626b746247",
+      "native_sha256": "838558928eb77de97a737608c4f01fc87d0a1ed045d604a0da587d6067cb998a",
+      "native_pin": "14ec60f248547d4d062a1160f0fc26d742319888",
+      "source_commit": "257c3956fba549a5f3d838a7ea69f106d34a9cff",
+      "stdlib": "libc++ 200100 ABI 1",
+      "argv": [
+        "native/observe",
+        "--table-effects",
+        "scripts/compat/script-vm/tables/fixtures/delete-effects.nut"
+      ]
+    }
+  ]
+}

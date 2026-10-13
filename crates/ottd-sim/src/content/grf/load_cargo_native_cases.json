@@ -1,0 +1,877 @@
+[
+  {
+    "name": "loader-baseline",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "dynamic_engines": true,
+        "mode": "load"
+      }
+    }
+  },
+  {
+    "name": "api-v8-small-chain",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 8
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 8
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              12
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 1,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "count": 1,
+            "feature": 1,
+            "first": 88,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 16,
+            "raw": [
+              1
+            ],
+            "stage": "activation"
+          },
+          {
+            "op": "snapshot"
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-version-6",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 6
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 6
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              254
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 12,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "cargo": 12,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": true
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              81,
+              65,
+              65,
+              65,
+              80,
+              65,
+              83,
+              83
+            ],
+            "stage": "activation"
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": true
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-version-7",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 7
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 7
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              254
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 12,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "cargo": 12,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": true
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              81,
+              65,
+              65,
+              65,
+              80,
+              65,
+              83,
+              83
+            ],
+            "stage": "activation"
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": true
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-version-8",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 8
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 8
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              254
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 12,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "cargo": 12,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": true
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              81,
+              65,
+              65,
+              65,
+              80,
+              65,
+              83,
+              83
+            ],
+            "stage": "activation"
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": true
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-partial-and-invalid-first",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 8
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 8
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 8,
+            "first": 1,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65
+            ],
+            "stage": "activation"
+          },
+          {
+            "count": 1,
+            "feature": 1,
+            "first": 88,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 16,
+            "raw": [],
+            "stage": "activation"
+          },
+          {
+            "count": 2,
+            "feature": 11,
+            "first": 63,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              1,
+              2
+            ],
+            "stage": "reserve"
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-override-copy",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 8
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 8
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "op": "override",
+            "source": 1128354305,
+            "target": 1128354306
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354306,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              66,
+              66,
+              66
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              80,
+              65,
+              83,
+              83,
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 2,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              81,
+              65,
+              65,
+              65,
+              80,
+              65,
+              83
+            ],
+            "stage": "activation"
+          },
+          {
+            "grfid": 1128354306,
+            "op": "build-inverse"
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-duplicates-validity-labels",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 8
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 8
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-default"
+          },
+          {
+            "count": 2,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              12,
+              13
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 2,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65,
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 8,
+            "first": 0,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 9,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              255
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 13,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 13,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "stage": "reserve"
+          },
+          {
+            "cargo": 0,
+            "grfid": 1128354305,
+            "op": "translate",
+            "usebit": false
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 13,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "stage": "reserve"
+          },
+          {
+            "grfid": 1128354305,
+            "op": "build-inverse"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 63,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              254
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 63,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              90,
+              90,
+              90
+            ],
+            "stage": "reserve"
+          },
+          {
+            "op": "snapshot"
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  },
+  {
+    "name": "api-road-invalid-and-stage",
+    "manifest": {
+      "networking": false,
+      "files": [],
+      "cargo_identity": {
+        "api_files": [
+          {
+            "grfid": 1128354305,
+            "name": "cargo-a.grf",
+            "version": 8
+          },
+          {
+            "grfid": 1128354306,
+            "name": "cargo-b.grf",
+            "version": 8
+          }
+        ],
+        "commands": [
+          {
+            "op": "reset-retained"
+          },
+          {
+            "count": 1,
+            "feature": 1,
+            "first": 88,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 16,
+            "raw": [
+              255
+            ],
+            "stage": "activation"
+          },
+          {
+            "count": 1,
+            "feature": 1,
+            "first": 89,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 16,
+            "raw": [],
+            "stage": "activation"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 1,
+            "raw": [
+              99
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 64,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              12
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 63,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 23,
+            "raw": [
+              81,
+              65,
+              65
+            ],
+            "stage": "reserve"
+          },
+          {
+            "count": 1,
+            "feature": 11,
+            "first": 12,
+            "grfid": 1128354305,
+            "op": "property",
+            "property": 8,
+            "raw": [
+              12
+            ],
+            "stage": "activation"
+          },
+          {
+            "op": "snapshot"
+          }
+        ],
+        "dynamic_engines": true,
+        "mode": "api"
+      }
+    }
+  }
+]

@@ -1,0 +1,131 @@
+configured_empty_roots 0 0 1
+step 0 seed 0 73636f7265 integer 1
+seeded
+step 1 compile 0 0 buffer fixtures/update.nut
+compiled
+stack 4
+literal string 5 73636f7265
+op 4 1 0 2 0
+op 14 2 0 2 0
+op 2 3 1 0 0
+op 17 2 3 2 43
+op 13 1 0 1 2
+op 9 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 2 run 0 0 0
+suspend -1 0
+frame 0 root 0
+frame 1 null
+frame 2 null
+frame 3 null
+temp unsupported 134217984
+step 3 raw 0 73636f7265
+raw 73636f7265 integer 1
+step 4 advance 0 3
+suspend 0 1
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 string 5 73636f7265
+frame 3 null
+temp unsupported 134217984
+step 5 raw 0 73636f7265
+raw 73636f7265 integer 1
+step 6 advance 0 2
+suspend 0 2
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 integer 1
+frame 3 null
+temp integer 1
+step 7 raw 0 73636f7265
+raw 73636f7265 integer 1
+step 8 advance 0 2
+suspend 0 3
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 integer 1
+frame 3 integer 1
+temp integer 1
+step 9 raw 0 73636f7265
+raw 73636f7265 integer 1
+step 10 advance 0 2
+suspend 0 4
+frame 0 root 0
+frame 1 string 5 73636f7265
+frame 2 integer 2
+frame 3 integer 1
+temp integer 2
+step 11 raw 0 73636f7265
+raw 73636f7265 integer 1
+step 12 advance 0 2
+suspend 0 5
+frame 0 root 0
+frame 1 integer 2
+frame 2 integer 2
+frame 3 integer 1
+temp integer 2
+step 13 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 14 advance 0 2
+suspend 0 6
+frame 0 root 0
+frame 1 integer 2
+frame 2 integer 2
+frame 3 integer 1
+temp integer 2
+step 15 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 16 advance 0 2
+return 1 integer 2
+temp integer 2
+step 17 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 18 advance 0 2
+idle
+step 19 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 20 advance 0 2
+idle
+step 21 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 22 advance 0 2
+idle
+step 23 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 24 advance 0 2
+idle
+step 25 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 26 advance 0 2
+idle
+step 27 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 28 advance 0 2
+idle
+step 29 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 30 advance 0 2
+idle
+step 31 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 32 advance 0 2
+idle
+step 33 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 34 advance 0 2
+idle
+step 35 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 36 advance 0 2
+idle
+step 37 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 38 advance 0 2
+idle
+step 39 raw 0 73636f7265
+raw 73636f7265 integer 2
+step 40 advance 0 2000
+idle
+step 41 raw 0 73636f7265
+raw 73636f7265 integer 2

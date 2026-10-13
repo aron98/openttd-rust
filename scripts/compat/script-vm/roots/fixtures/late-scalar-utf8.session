@@ -1,0 +1,4 @@
+compile 0 0 utf8 fixtures/late-read.nut
+compile 0 1 utf8 fixtures/late-scalar.nut
+run 0 0 1000
+raw 0 4c61746572

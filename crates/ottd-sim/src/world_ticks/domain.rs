@@ -2,8 +2,14 @@ use super::{WorldTickError, unsupported};
 use crate::world_access::{field, signed, unsigned};
 use ottd_save::{WireValue, world::World};
 
-pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError> {
-    if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 {
+/// Returns whether this saved-world context admits empty-road callbacks.
+pub(super) fn validate(
+    world: &World,
+    paused: bool,
+    phases: &impl crate::WorldTickPhases,
+) -> Result<bool, WorldTickError> {
+    let stations = phases.station_tiles();
+    if unsigned(world, b"DATE", 0, "pause_mode")? & 64 != 0 && !phases.transport_activity() {
         return Err(unsupported("pause", "linkgraph pause control"));
     }
     if !matches!(field(world,b"GSDT",0,"name")?,WireValue::Bytes(bytes) if bytes.is_empty()) {
@@ -18,12 +24,20 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError
         return Err(unsupported("scripts", "GameScript state"));
     }
     if paused {
-        return Ok(());
+        return Ok(false);
     }
     for id in [
-        *b"NGRF", *b"VEHS", *b"INDY", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA",
-        *b"CAPY",
+        *b"NGRF", *b"STNN", *b"OBJS", *b"LGRP", *b"LGRJ", *b"SUBS", *b"CAPA", *b"CAPY",
     ] {
+        if id == *b"CAPA" && phases.cargo_activity() {
+            continue;
+        }
+        if id == *b"STNN" && stations {
+            continue;
+        }
+        if phases.transport_activity() && matches!(&id, b"LGRP" | b"LGRJ" | b"CAPY") {
+            continue;
+        }
         if world
             .tables()
             .get(&id)
@@ -40,6 +54,9 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError
         (b"LGRS", "running"),
         (b"LGRS", "schedule"),
     ] {
+        if id == b"LGRS" && phases.transport_activity() {
+            continue;
+        }
         if !matches!(field(world,id,0,name)?,WireValue::Array(items) if items.is_empty()) {
             return Err(unsupported("domain", name));
         }
@@ -61,9 +78,12 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError
     }
     if !matches!(
         unsigned(world, b"PATS", 0, "construction.extra_tree_placement")?,
-        0 | 3
+        0..=3
     ) {
-        return Err(unsupported("trees", "tree spreading"));
+        return Err(unsupported(
+            "trees",
+            "setting outside native tree placement range",
+        ));
     }
     if signed(world, b"ECMY", 0, "fluct")? <= 0 {
         return Err(unsupported("economy", "recession"));
@@ -79,7 +99,10 @@ pub(super) fn validate(world: &World, paused: bool) -> Result<(), WorldTickError
         ));
     }
     validate_towns(world)?;
-    validate_companies(world)
+    validate_companies(world)?;
+    super::houses::validate(world)?;
+    super::industries::validate(world)?;
+    validate_roads(world, stations)
 }
 fn validate_companies(world: &World) -> Result<(), WorldTickError> {
     let companies = world
@@ -87,11 +110,12 @@ fn validate_companies(world: &World) -> Result<(), WorldTickError> {
         .get(b"PLYR")
         .ok_or_else(|| unsupported("company", "pool"))?;
     for id in companies.records().keys() {
-        for name in ["is_ai", "bankrupt_asked", "months_of_bankruptcy", "name_1"] {
+        for name in ["is_ai", "bankrupt_asked", "months_of_bankruptcy"] {
             if unsigned(world, b"PLYR", *id, name)? != 0 {
                 return Err(unsupported("company", name));
             }
         }
+        super::company_name::validate(world, *id)?;
         if unsigned(world, b"PLYR", *id, "location_of_HQ")? != u64::from(u32::MAX) {
             return Err(unsupported("company", "headquarters"));
         }
@@ -124,3 +148,44 @@ fn validate_towns(world: &World) -> Result<(), WorldTickError> {
     }
     Ok(())
 }
+
+fn validate_roads(world: &World, stations: bool) -> Result<bool, WorldTickError> {
+    if !world
+        .map()
+        .tiles()
+        .iter()
+        .any(|tile| tile.tile_type() >> 4 == 2)
+    {
+        return Ok(false);
+    }
+    let towns = world
+        .tables()
+        .get(b"CITY")
+        .ok_or_else(|| unsupported("road_tile_loop", "missing town pool"))?;
+    for id in towns.records().keys() {
+        if unsigned(world, b"CITY", *id, "road_build_months")? != 0 {
+            return Err(unsupported("road_tile_loop", "town roadworks program"));
+        }
+    }
+    for tile in world.map().tiles() {
+        if !(matches!(tile.tile_type() >> 4, 0 | 2 | 3 | 4 | 7 | 8)
+            || stations && tile.tile_type() >> 4 == 5)
+        {
+            return Err(unsupported(
+                "road_tile_loop",
+                "requires clear/road/house/tree/void map",
+            ));
+        }
+        if tile.tile_type() >> 4 == 2
+            && tile.m5() >> 6 == 0
+            && !towns.records().contains_key(&u32::from(tile.m2()))
+        {
+            return Err(unsupported("road_tile_loop", "missing cached road town"));
+        }
+    }
+    Ok(true)
+}
+
+#[cfg(test)]
+#[path = "domain_cargo_tests.rs"]
+mod cargo_tests;

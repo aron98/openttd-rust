@@ -1,0 +1,14 @@
+suspend -1 0
+refs suspended 0
+suspend 0 0
+refs suspended 0
+suspend 0 1
+refs suspended 0
+suspend 0 2
+refs suspended 2
+suspend 0 3
+refs suspended 2
+runtime_error 1
+refs error 1
+refs drop_error_closure 1
+closed

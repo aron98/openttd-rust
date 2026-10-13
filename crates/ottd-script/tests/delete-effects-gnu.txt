@@ -1,0 +1,9 @@
+result 0 9981
+held count 1
+cursor 2 string 1 62
+integer 9
+copy count 2
+cursor 2 string 1 62
+integer 9
+cursor 4 string 1 61
+integer 7

@@ -1,0 +1,207 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 buffer fixtures/nested-and-cycle-0.nut
+compiled
+stack 4
+op 31 1 1 0 0
+op 31 2 1 0 0
+op 2 3 1 0 0
+op 32 2 3 0 0
+op 32 1 2 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 10000
+return 9994 array 1 length 1
+temp array 1 length 1
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 array 2 length 1
+array_refs 1 2
+array_state 2 length 1
+element 2 0 integer 1
+array_refs 2 1
+step 2 compile 0 1 buffer fixtures/nested-and-cycle-1.nut
+compiled
+stack 3
+op 31 1 1 0 0
+op 20 2 1 0 0
+op 32 1 2 0 0
+op 2 2 0 0 0
+op 13 2 1 2 1
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 array 2 length 1
+array_refs 1 2
+array_state 2 length 1
+element 2 0 integer 1
+array_refs 2 1
+step 3 run 0 1 10000
+return 9994 array 3 length 1
+temp array 3 length 1
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 3
+step 4 hold-result 0 0
+handle 0 array 3 length 1
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_result 0
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 3
+step 5 clear-result 0
+result_released
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 3
+step 6 drop-handle 0 0
+handle_released 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 2
+step 7 compile 0 2 buffer fixtures/scalar-return.nut
+compiled
+stack 2
+op 2 1 0 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_program 2 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 2
+step 8 run 0 2 1000
+return 998 integer 0
+temp integer 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_program 2 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 1
+step 9 drop 0 0
+program_released
+stack_top 0 0
+external_child 1
+external_program 1 vm 0
+external_program 2 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 1
+step 10 drop 0 1
+program_released
+stack_top 0 0
+external_child 1
+external_program 2 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 1
+step 11 drop 0 2
+program_released
+stack_top 0 0
+external_child 1
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_state 3 length 1
+element 3 0 array 3 length 1
+array_refs 3 1
+step 12 collect 0
+collected 1
+stack_top 0 0
+external_child 1
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_dead 1
+array_dead 2
+array_dead 3

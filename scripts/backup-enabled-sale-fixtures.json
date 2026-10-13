@@ -1,0 +1,2221 @@
+{
+  "schema_version": 1,
+  "jobs": [
+    {
+      "kind": "edit",
+      "directory": "matrix/rate-edit",
+      "source": "matrix/prepared/save/autosave/exit.sav",
+      "output": "matrix/zero-rates.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.clear_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.terraform_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.tree_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_object_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/shared-setup",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1562,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "share",
+            "vehicle": 1,
+            "source": 0
+          },
+          {
+            "op": "share",
+            "vehicle": 2,
+            "source": 0
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 3,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "save",
+            "label": "fleet"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/shared-edit",
+      "source": "matrix/shared-setup/original/native/fleet.sav",
+      "output": "matrix/shared.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483648
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483647
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483646
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483645
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 3,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/copies-setup",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "copies-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1562,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1562,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 1,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 2,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "save",
+            "label": "fleet"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/copies-edit",
+      "source": "matrix/copies-setup/original/native/fleet.sav",
+      "output": "matrix/copies.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483648
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483647
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483646
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/copy-sale-clear",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "copy-sale-clear",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 11
+          },
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 20
+          },
+          {
+            "op": "backup",
+            "vehicle": 2,
+            "user": 30
+          },
+          {
+            "op": "save",
+            "label": "before"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "sold"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "landscape_clear",
+                "tile": 1560
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/shared-head",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-head",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 11
+          },
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 20
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/shared-middle",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-middle",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 11
+          },
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 20
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/shared-tail",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "shared-tail",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 11
+          },
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 20
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/chain-reuse",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "chain-reuse",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 11
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "head"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "middle"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "empty"
+          },
+          {
+            "op": "backup",
+            "vehicle": 3,
+            "user": 30
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/estimate",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "estimate",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/wrong-owner",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "wrong-owner",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/crashed-edit",
+      "source": "matrix/shared.sav",
+      "output": "matrix/crashed.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "vehstatus"
+            ],
+            "value": {
+              "unsigned": 138
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/crashed",
+      "source": "matrix/crashed.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "crashed",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/not-stopped-edit",
+      "source": "matrix/shared.sav",
+      "output": "matrix/not-stopped.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "vehstatus"
+            ],
+            "value": {
+              "unsigned": 8
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/not-stopped",
+      "source": "matrix/not-stopped.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "not-stopped",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/poor-edit",
+      "source": "matrix/shared.sav",
+      "output": "matrix/poor.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "value"
+            ],
+            "value": {
+              "signed": -9
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PLYR",
+            "record": 0,
+            "path": [
+              "money"
+            ],
+            "value": {
+              "signed": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/poor",
+      "source": "matrix/poor.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "poor",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/post-zero",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "post-zero",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 0
+          },
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/explicit-max",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "explicit-max",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 4294967295
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 4294967295
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/same-slot",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "same-slot",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/capacity-new",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "capacity-new",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup_users",
+            "vehicle": 0,
+            "users": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 256
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/capacity-existing",
+      "source": "matrix/shared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "capacity-existing",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup_users",
+            "vehicle": 0,
+            "users": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 2,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 1,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 128
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/empty-setup",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "empty-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "delete_orders",
+            "vehicle": 0
+          },
+          {
+            "op": "save",
+            "label": "empty"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/empty-orders",
+      "source": "matrix/empty-setup/original/native/empty.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "empty-orders",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    }
+  ],
+  "cases": [
+    "matrix/copy-sale-clear",
+    "matrix/shared-head",
+    "matrix/shared-middle",
+    "matrix/shared-tail",
+    "matrix/chain-reuse",
+    "matrix/estimate",
+    "matrix/wrong-owner",
+    "matrix/crashed",
+    "matrix/not-stopped",
+    "matrix/poor",
+    "matrix/post-zero",
+    "matrix/explicit-max",
+    "matrix/same-slot",
+    "matrix/capacity-new",
+    "matrix/capacity-existing",
+    "matrix/empty-orders"
+  ]
+}

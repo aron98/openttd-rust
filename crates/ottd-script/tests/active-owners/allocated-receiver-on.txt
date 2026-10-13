@@ -1,0 +1,13 @@
+print collect-active
+active before 9967 2 3 6 0
+stack-root 7 O
+chain O D
+collected active 0
+active after 9967 2 3 6 0
+stack-root 7 O
+chain D O
+completed 1 0 9960 integer 1
+collected released 3
+free D 88
+free O 88
+recorder 1

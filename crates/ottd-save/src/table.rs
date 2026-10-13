@@ -112,6 +112,14 @@ pub struct TableRecord {
     tail: Vec<u8>,
 }
 impl TableRecord {
+    /// Construct an ordinary wire record without a script tail.
+    /// Schema, widths and relationships are checked by table encoding and world edits.
+    pub const fn new(values: Vec<WireValue>) -> Self {
+        Self {
+            values,
+            tail: Vec::new(),
+        }
+    }
     /// Values in the owning schema's field order.
     pub fn values(&self) -> &[WireValue] {
         &self.values
@@ -162,6 +170,35 @@ impl TableChunk {
     /// Rejects invalid shapes, integer widths, tails, indices or exceeded limits.
     pub fn encode(&self) -> Result<Chunk, TableError> {
         write::encode(self)
+    }
+
+    pub(crate) fn encode_empty(&self) -> Result<Chunk, TableError> {
+        Self {
+            id: self.id,
+            kind: self.kind,
+            schema: self.schema.clone(),
+            records: BTreeMap::new(),
+            slots: 0,
+            tail_policy: self.tail_policy,
+            limits: self.limits,
+        }
+        .encode()
+    }
+
+    pub(crate) fn validated_wire_len(&self) -> Result<usize, TableError> {
+        write::validate(self)
+    }
+
+    pub(crate) fn normalize_slots(&mut self) {
+        self.slots = match self.kind {
+            ChunkKind::Table => self.slots.max(
+                self.records
+                    .last_key_value()
+                    .map_or(0, |(id, _)| id.saturating_add(1)),
+            ),
+            ChunkKind::SparseTable => u32::try_from(self.records.len()).unwrap_or(u32::MAX),
+            ChunkKind::Riff | ChunkKind::Array | ChunkKind::SparseArray => self.slots,
+        };
     }
     /// Four-byte chunk identity.
     pub const fn id(&self) -> [u8; 4] {

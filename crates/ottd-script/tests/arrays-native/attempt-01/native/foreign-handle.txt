@@ -1,0 +1,13 @@
+configured_empty_roots 0 0 1
+step 0 make-array 0 0 1 integer 1
+handle 0 array 1 length 1
+stack_top 0 0
+external_child 1
+external_handle 0 realm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 integer 1
+array_refs 1 1
+step 1 root-store-array 2 78 0

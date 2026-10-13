@@ -1,11 +1,14 @@
 # Stage 3: commands and tick execution
 
-Status: **Ready for review** in [PR #4](https://github.com/aron98/openttd-rust/pull/4).
+Status: **Completed** by the maintainer merge of
+[PR #4](https://github.com/aron98/openttd-rust/pull/4) on 2026-10-09,
+`1eec4168398757644710eb1b0876cf8121eee922`.
 Branch: `stage/03-commands-tick-execution`, based on
 the maintainer merge of [PR #3](https://github.com/aron98/openttd-rust/pull/3),
 `251da64b1b0c9eb8de897ecd3dba81f2872972ca`. Independent review approved the
 implementation and [PR CI passed](https://github.com/aron98/openttd-rust/actions/runs/37921879534).
-The maintainer's merge remains the gate to stage 4, which has not started.
+Final documentation [CI run 37923929258](https://github.com/aron98/openttd-rust/actions/runs/37923929258)
+also passed before handoff. The subsequent maintainer merge authorized stage 4.
 
 ## Goal and architecture
 
@@ -32,7 +35,7 @@ The bounded command/tick core and public replay CLI now have executable local
 native evidence. The 18-case `replays` driver is registered as
 `commands.world-ticks` in the versioned compatibility contract. This capability
 declaration covers only the bounded domain below. The acceptance checks passed
-on the reviewed implementation; the stage awaits maintainer review and merge.
+on the reviewed implementation, and the maintainer merged the stage.
 
 ## Commands and ordered replay
 

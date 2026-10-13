@@ -1,0 +1,19 @@
+--- a/src/network/network_client.cpp
++++ b/src/network/network_client.cpp
+@@ -34,6 +34,8 @@
+ #include "../social_integration.h"
+ 
+ #include "table/strings.h"
++
++#include "../saveload/reference_order_network.hpp"
+ 
+ #include "../safeguards.h"
+ 
+@@ -807,6 +809,7 @@
+ 	_network_join_status = NETWORK_JOIN_STATUS_PROCESSING;
+ 	SetWindowDirty(WC_NETWORK_STATUS_WINDOW, WN_NETWORK_STATUS_WINDOW_JOIN);
+ 
++	ReferenceOrderNetwork::Capture(this->savegame->buffer);
+ 	this->savegame->Reset();
+ 
+ 	/* The map is done downloading, load it */

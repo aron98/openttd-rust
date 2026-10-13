@@ -1,0 +1,1988 @@
+{
+  "schema_version": 1,
+  "jobs": [
+    {
+      "kind": "edit",
+      "directory": "matrix/rate-edit",
+      "source": "matrix/prepared/save/autosave/exit.sav",
+      "output": "matrix/zero-rates.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.clear_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.terraform_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.tree_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "PATS",
+            "record": 0,
+            "path": [
+              "construction.build_object_per_64k_frames"
+            ],
+            "value": {
+              "unsigned": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "matrix/copies-setup",
+      "source": "matrix/zero-rates.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "copies-setup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1560
+          },
+          {
+            "op": "build_depot",
+            "company": 0,
+            "tile": 1562
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1560,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1562,
+            "engine": 116
+          },
+          {
+            "op": "build_vehicle",
+            "company": 0,
+            "tile": 1562,
+            "engine": 116
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 1,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 0,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 2,
+            "index": 0,
+            "order": {
+              "type": 2,
+              "flags": 136,
+              "dest": 1,
+              "refit_cargo": 254,
+              "wait_time": 31,
+              "travel_time": 47,
+              "max_speed": 65535
+            }
+          },
+          {
+            "op": "save",
+            "label": "fleet"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "matrix/copies-edit",
+      "source": "matrix/copies-setup/original/native/fleet.sav",
+      "output": "matrix/copies.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483648
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 0,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483647
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 1,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "current_order_time"
+            ],
+            "value": {
+              "signed": -2147483646
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "lateness_counter"
+            ],
+            "value": {
+              "signed": -117
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_last_departure"
+            ],
+            "value": {
+              "unsigned": 123
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "depot_unbunching_next_departure"
+            ],
+            "value": {
+              "unsigned": 456
+            }
+          },
+          {
+            "kind": "field",
+            "chunk": "VEHS",
+            "record": 2,
+            "path": [
+              "roadveh",
+              0,
+              "common",
+              0,
+              "round_trip_time"
+            ],
+            "value": {
+              "signed": 789
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/properties",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "properties",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 8,
+              "flags": 0,
+              "dest": 0,
+              "refit_cargo": 254,
+              "max_speed": 65535,
+              "wait_time": 0,
+              "travel_time": 0
+            }
+          },
+          {
+            "op": "consist_fields",
+            "vehicle": 0,
+            "fields": {
+              "name": "Restored",
+              "current_order_time": -2147483648,
+              "lateness_counter": -117,
+              "timetable_start": 123,
+              "service_interval": 75,
+              "cur_real_order_index": 0,
+              "cur_implicit_order_index": 250,
+              "vehicle_flags": 824
+            }
+          },
+          {
+            "op": "save",
+            "label": "prepared"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/all-implicit",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "all-implicit",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "delete_orders",
+            "vehicle": 0
+          },
+          {
+            "op": "insert_order",
+            "vehicle": 0,
+            "index": 0,
+            "order": {
+              "type": 8,
+              "flags": 0,
+              "dest": 0,
+              "refit_cargo": 254,
+              "max_speed": 65535,
+              "wait_time": 0,
+              "travel_time": 0
+            }
+          },
+          {
+            "op": "consist_fields",
+            "vehicle": 0,
+            "fields": {
+              "name": "Restored",
+              "current_order_time": -2147483648,
+              "lateness_counter": -117,
+              "timetable_start": 123,
+              "service_interval": 75,
+              "cur_real_order_index": 0,
+              "cur_implicit_order_index": 250,
+              "vehicle_flags": 824
+            }
+          },
+          {
+            "op": "save",
+            "label": "prepared"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/empty",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "empty",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "delete_orders",
+            "vehicle": 0
+          },
+          {
+            "op": "consist_fields",
+            "vehicle": 0,
+            "fields": {
+              "name": "Restored",
+              "current_order_time": -2147483648,
+              "lateness_counter": -117,
+              "timetable_start": 123,
+              "service_interval": 75,
+              "cur_real_order_index": 0,
+              "cur_implicit_order_index": 250,
+              "vehicle_flags": 824
+            }
+          },
+          {
+            "op": "save",
+            "label": "prepared"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "edit",
+      "directory": "preparation/availability",
+      "source": "matrix/copies.sav",
+      "output": "preparation/available.sav",
+      "edits": {
+        "schema_version": 1,
+        "edits": [
+          {
+            "kind": "field",
+            "chunk": "ENGN",
+            "record": 117,
+            "path": [
+              "company_avail"
+            ],
+            "value": {
+              "unsigned": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65533-from-116-user-1",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-116-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65533,
+            "from": 116,
+            "to": 117,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65533-from-116-user-77",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-116-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65533,
+            "from": 116,
+            "to": 117,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65533-from-117-user-1",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-117-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65533,
+            "from": 117,
+            "to": 116,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65533-from-117-user-77",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-117-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65533,
+            "from": 117,
+            "to": 116,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65534-from-116-user-1",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-116-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65534,
+            "from": 116,
+            "to": 117,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65534-from-116-user-77",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-116-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65534,
+            "from": 116,
+            "to": 117,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65534-from-117-user-1",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-117-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65534,
+            "from": 117,
+            "to": 116,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "native",
+      "directory": "preparation/group-65534-from-117-user-77",
+      "source": "preparation/available.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-117-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "set_autoreplace",
+            "company": 0,
+            "group": 65534,
+            "from": 117,
+            "to": 116,
+            "when_old": false
+          },
+          {
+            "op": "restore_audit"
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "save",
+            "label": "before"
+          }
+        ]
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "owned-baseline",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "owned-baseline",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "owned-poison",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "owned-poison",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "owned-reverted",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "owned-reverted",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "consume-once",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "consume-once",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "first"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "different-tile",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "different-tile",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 1,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "estimated-before-restore",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "estimated-before-restore",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "estimate",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "estimate"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "explicit-user",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "explicit-user",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 77
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "failed-sale-before-restore",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "failed-sale-before-restore",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 1,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "fresh-sale-reuse",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "fresh-sale-reuse",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "first"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 3,
+                "sell_chain": false,
+                "backup_order": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "freed"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid-before-restore",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "invalid-before-restore",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 65535,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "failed"
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-backup",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "no-backup",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "owned-initial-id-reuse",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "owned-initial-id-reuse",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "post-zero",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "post-zero",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 0
+          },
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "primitive-zero",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "primitive-zero",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 0
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unrelated-user",
+      "source": "matrix/copies.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "unrelated-user",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "loaded-suffix",
+      "source": "preparation/loaded-nonzero.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "loaded-suffix",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "all-implicit",
+      "source": "preparation/all-implicit/original/native/prepared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "all-implicit",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty",
+      "source": "preparation/empty/original/native/prepared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "empty",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "properties",
+      "source": "preparation/properties/original/native/prepared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "properties",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unique-name",
+      "source": "preparation/properties/original/native/prepared.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "unique-name",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "sell_vehicle",
+                "location": 1560,
+                "vehicle": 0,
+                "sell_chain": false,
+                "backup_order": true,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "capacity",
+      "source": "preparation/capacity.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "capacity",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65533-from-116-user-1",
+      "source": "preparation/group-65533-from-116-user-1/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-116-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65533-from-116-user-77",
+      "source": "preparation/group-65533-from-116-user-77/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-116-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65533-from-117-user-1",
+      "source": "preparation/group-65533-from-117-user-1/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-117-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65533-from-117-user-77",
+      "source": "preparation/group-65533-from-117-user-77/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65533-from-117-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65534-from-116-user-1",
+      "source": "preparation/group-65534-from-116-user-1/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-116-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65534-from-116-user-77",
+      "source": "preparation/group-65534-from-116-user-77/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-116-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65534-from-117-user-1",
+      "source": "preparation/group-65534-from-117-user-1/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-117-user-1",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 1
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    },
+    {
+      "name": "group-65534-from-117-user-77",
+      "source": "preparation/group-65534-from-117-user-77/original/native/before.sav",
+      "descriptor": {
+        "schema_version": 1,
+        "case": "group-65534-from-117-user-77",
+        "role": "sp",
+        "exit": true,
+        "actions": [
+          {
+            "op": "backup",
+            "vehicle": 0,
+            "user": 77
+          },
+          {
+            "op": "command",
+            "request": {
+              "company": 0,
+              "mode": "post",
+              "command": {
+                "kind": "build_vehicle",
+                "tile": 1560,
+                "engine": 116,
+                "cargo": 255,
+                "use_free_vehicles": false,
+                "client_id": 0
+              }
+            }
+          },
+          {
+            "op": "save",
+            "label": "after"
+          }
+        ]
+      }
+    }
+  ],
+  "coverage": {
+    "cases": 29,
+    "actions": 96,
+    "snapshots": 250,
+    "saves": 34
+  },
+  "allocation_repetitions": {
+    "cases": [
+      "owned-baseline",
+      "owned-poison",
+      "owned-reverted"
+    ],
+    "scope": "Portable allocation repetitions; historical labels preserve descriptors. No allocator poisoning claim. Genuine Darwin poisoning is a separate retained host audit."
+  },
+  "loaded_suffix_edit": {
+    "schema_version": 1,
+    "edits": [
+      {
+        "kind": "field",
+        "chunk": "VEHS",
+        "record": 3,
+        "path": [
+          "roadveh",
+          0,
+          "common",
+          0,
+          "round_trip_time"
+        ],
+        "value": {
+          "signed": -123456789
+        }
+      }
+    ]
+  }
+}

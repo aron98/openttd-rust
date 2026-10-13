@@ -53,6 +53,7 @@ pub(super) fn rename(
         }
     }
     Ok(Plan {
+        returns: None,
         cost: CommandCost::success(0, 255),
         edits,
     })

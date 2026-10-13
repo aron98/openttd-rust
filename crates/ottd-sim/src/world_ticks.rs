@@ -2,23 +2,43 @@
 mod access;
 mod clocks;
 mod company_history;
+mod company_name;
+mod company_rating;
+mod company_rating_history;
+mod company_vehicle_rating;
 mod domain;
 mod finance;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "typed producer handoff is shared internally with station transactions"
+)]
+pub(crate) mod house_cargo;
+mod houses;
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "typed industry producer handoff is shared with transport phases"
+)]
+pub(crate) mod industries;
+mod industry_manager;
 mod phases;
-use clocks::{restore_clock, save_clock};
+mod plan;
+use clocks::save_clock;
 use phases::{competitor, daily, industry_month};
+mod tiles;
+mod town_ratings;
 mod towns;
+mod trees;
+use crate::{TickEvents, world_access::WorldAccessError};
 use crate::{
-    Landscape, MAX_TICKS, Map, TickEvents, Tile,
-    world_access::{WorldAccessError, unsigned},
+    WorldTickPhases as VehiclePhases, WorldTickState as State, unsupported_tick as unsupported,
 };
-use access::State;
-use ottd_core::{ClockEvent, ClockState};
+use ottd_core::{ClockEvent, ClockEvents, ClockPhase, ClockState};
 use ottd_save::{
-    TileRawParts, WireValue,
+    WireValue,
     world::{World, WorldEdit},
 };
 use serde::{Deserialize, Serialize};
+use tiles::tile;
 
 /// Rejected unsupported phase or invalid saved-world operation.
 #[derive(Debug, thiserror::Error)]
@@ -37,6 +57,9 @@ pub enum WorldTickError {
     /// Final saved-world validation failure.
     #[error(transparent)]
     World(#[from] ottd_save::world::WorldError),
+    /// Runtime vehicle admission or restoration failed.
+    #[error(transparent)]
+    Runtime(#[from] crate::runtime::RuntimeError),
     /// Clock validation failure.
     #[error(transparent)]
     Clock(#[from] ottd_core::ClockError),
@@ -50,12 +73,6 @@ pub enum WorldTickError {
     #[error(transparent)]
     Company(#[from] crate::PeriodicCallbackError),
 }
-fn unsupported(phase: &'static str, reason: &str) -> WorldTickError {
-    WorldTickError::Unsupported {
-        phase,
-        reason: reason.into(),
-    }
-}
 
 /// Ordered clock-boundary observations; authoritative results remain in the world.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -65,122 +82,120 @@ pub struct WorldTickReport {
 }
 
 /// Execute complete admitted state-loop calls and atomically publish their saved effects.
+///
+/// This stateless World-only API does not retain unsaved company rating slots;
+/// use `SimulationRuntime` to retain that process-owned callback cache.
 /// # Errors
 /// Rejects unsupported state or any event reached within the horizon without changing `world`.
 pub fn advance_world(world: &mut World, ticks: u32) -> Result<WorldTickReport, WorldTickError> {
-    if ticks > MAX_TICKS {
-        return Err(unsupported("budget", "tick limit"));
-    }
     if ticks == 0 {
         return Ok(WorldTickReport { ticks: Vec::new() });
     }
-    let paused = unsigned(world, b"DATE", 0, "pause_mode")? != 0;
-    domain::validate(world, paused)?;
-    let mut state = State::load(world);
-    let mut clock = restore_clock(world)?;
-    let mut landscape = if paused {
-        None
-    } else {
-        Some(Landscape::new(
-            map(world),
-            u32::try_from(unsigned(world, b"DATE", 0, "cur_tileloop_tile")?)
-                .map_err(|_| unsupported("landscape", "cursor"))?,
-        )?)
-    };
-    let mut report = WorldTickReport { ticks: Vec::new() };
-    for step in 0..ticks {
-        let result = advance(&mut state, &mut clock, &mut landscape, world, paused);
-        let events = result.map_err(|error| match error {
-            WorldTickError::Unsupported { phase, reason } => {
-                unsupported(phase, &format!("call {step}: {reason}"))
-            }
-            other => other,
-        })?;
-        report.ticks.push(events);
-    }
-    save_clock(&mut state, clock.snapshot())?;
-    let mut edits = state.edits(world)?;
-    if let Some(landscape) = landscape {
-        edits.push(crate::world_access::field_edit(
-            *b"DATE",
-            0,
-            "cur_tileloop_tile",
-            WireValue::Unsigned(
-                u64::try_from(landscape.cursor())
-                    .map_err(|_| unsupported("landscape", "cursor"))?,
-            ),
-        ));
-        for (index, (before, after)) in world
-            .map()
-            .tiles()
-            .iter()
-            .zip(landscape.map().tiles.iter())
-            .enumerate()
-        {
-            let next = ottd_save::TileState::from(TileRawParts {
-                tile_type: after.tile_type,
-                height: after.height,
-                m1: after.m1,
-                m2: after.m2,
-                m3: after.m3,
-                m4: after.m4,
-                m5: after.m5,
-                m6: after.m6,
-                m7: after.m7,
-                m8: after.m8,
-            });
-            if *before != next {
-                edits.push(WorldEdit::Tile {
-                    index: u32::try_from(index)
-                        .map_err(|_| unsupported("landscape", "tile index"))?,
-                    value: next,
-                });
-            }
-        }
-    }
-    world.edit_batch(edits)?;
+    let (candidate, report, _) = State::plan(world, ticks, &mut EmptyVehicles)?;
+    candidate.commit();
     Ok(report)
 }
 
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "the public runtime shares the empty-vehicle phase runner"
+)]
+pub(crate) struct EmptyVehicles;
+impl VehiclePhases for EmptyVehicles {
+    fn admit(&self, world: &World) -> Result<(), WorldTickError> {
+        if world
+            .tables()
+            .get(b"VEHS")
+            .is_none_or(|table| !table.records().is_empty())
+        {
+            return Err(unsupported("domain", "nonempty VEHS"));
+        }
+        Ok(())
+    }
+    fn economy_boundary(&self, _: &ClockEvents) -> Result<(), WorldTickError> {
+        Ok(())
+    }
+    fn calendar(
+        &mut self,
+        _: &mut State<'_>,
+        _: &ClockState,
+        _: bool,
+    ) -> Result<(), WorldTickError> {
+        Ok(())
+    }
+    fn ticks(&mut self, _: &mut State<'_>, _: &ClockState) -> Result<(), WorldTickError> {
+        Ok(())
+    }
+}
+
 fn advance(
-    state: &mut State,
+    state: &mut State<'_>,
     clock: &mut ClockState,
-    landscape: &mut Option<Landscape>,
-    world: &World,
+    landscape: &mut Option<crate::TileLoop>,
+    vehicles: &mut impl VehiclePhases,
     paused: bool,
 ) -> Result<TickEvents, WorldTickError> {
     let before = clock.snapshot();
-    let events = clock.advance(paused);
-    if !paused {
+    let events = clock.try_advance(paused, |phase, clock, events| {
+        save_clock(state, clock.snapshot())?;
         if clock.cache().calendar_year >= 5_000_000 || clock.cache().economy_year >= 5_000_000 {
             return Err(unsupported("clock", "maximum-year runtime cache"));
         }
-        for event in events.iter() {
-            match event {
-                ClockEvent::EconomyDay => daily(state, world)?,
-                ClockEvent::EconomyMonth => {
-                    finance::monthly(state, world, clock.cache().economy_month)?;
-                    industry_month(
-                        state,
-                        world,
-                        clock.cache().economy_month,
-                        clock.cache().economy_year,
-                        before.days_since_last_month.wrapping_add(1),
-                    )?;
-                    towns::monthly(state, clock.cache().economy_month)?;
+        match phase {
+            ClockPhase::Calendar => vehicles.calendar(state, clock, events.calendar_progressed)?,
+            ClockPhase::Economy => {
+                vehicles.economy_boundary(events)?;
+                for event in events.iter() {
+                    match event {
+                        ClockEvent::EconomyDay => daily(state)?,
+                        ClockEvent::EconomyMonth => {
+                            finance::monthly(state, clock.cache().economy_month, vehicles)?;
+                            industry_month(
+                                state,
+                                clock.cache().economy_month,
+                                clock.cache().economy_year,
+                                before.days_since_last_month.wrapping_add(1),
+                            )?;
+                            vehicles.station_month(state)?;
+                            towns::monthly(state, clock.cache().economy_month)?;
+                        }
+                        ClockEvent::EconomyYear => {
+                            finance::yearly(state)?;
+                            houses::yearly(state)?;
+                            vehicles.vehicle_year(state, clock)?;
+                        }
+                        ClockEvent::CalendarDay
+                        | ClockEvent::CalendarMonth
+                        | ClockEvent::CalendarYear
+                        | ClockEvent::EconomyWeek
+                        | ClockEvent::EconomyQuarter => {}
+                    }
                 }
-                ClockEvent::EconomyYear => finance::yearly(state)?,
-                ClockEvent::CalendarDay
-                | ClockEvent::CalendarMonth
-                | ClockEvent::CalendarYear
-                | ClockEvent::EconomyWeek
-                | ClockEvent::EconomyQuarter => {}
             }
+            ClockPhase::Tick => competitor(state)?,
         }
-        competitor(state)?;
+        Ok(())
+    })?;
+    if !paused {
         if let Some(landscape) = landscape {
-            landscape.advance(clock.snapshot().tick_counter.0);
+            landscape.advance(clock.snapshot().tick_counter.0, |index| {
+                visit(state, index, clock.snapshot().tick_counter.0, vehicles)
+            })?;
+            state.set(
+                b"DATE",
+                0,
+                "cur_tileloop_tile",
+                WireValue::Unsigned(
+                    u64::try_from(landscape.cursor())
+                        .map_err(|_| unsupported("landscape", "cursor"))?,
+                ),
+            )?;
         }
+        vehicles.ticks(state, clock)?;
+        trees::tick(state, clock.snapshot().tick_counter.0)?;
+        vehicles.stations(state)?;
+        industries::tick(state)?;
+        phases::company_tick(state)?;
         state.set_number(
             b"DATE",
             0,
@@ -190,8 +205,9 @@ fn advance(
                 .wrapping_add(1)
                 % 15,
         )?;
+        vehicles.link_graphs(state)?;
     }
-    finance::limits(state, world)?;
+    finance::limits(state)?;
     Ok(TickEvents {
         tick_counter: clock.snapshot().tick_counter.0,
         calendar_progressed: events.calendar_progressed,
@@ -199,26 +215,34 @@ fn advance(
     })
 }
 
-fn map(world: &World) -> Map {
-    Map {
-        width: world.map().width(),
-        height: world.map().height(),
-        tiles: world
-            .map()
-            .tiles()
-            .iter()
-            .map(|t| Tile {
-                tile_type: t.tile_type(),
-                height: t.height(),
-                m1: t.m1(),
-                m2: t.m2(),
-                m3: t.m3(),
-                m4: t.m4(),
-                m5: t.m5(),
-                m6: t.m6(),
-                m7: t.m7(),
-                m8: t.m8(),
-            })
-            .collect(),
+fn visit(
+    state: &mut State<'_>,
+    index: usize,
+    tick: u64,
+    vehicles: &mut impl VehiclePhases,
+) -> Result<(), WorldTickError> {
+    let index = u32::try_from(index).map_err(|_| unsupported("landscape", "tile index"))?;
+    let before = state.view().tile(index)?;
+    if before.tile_type() >> 4 == 3 {
+        return houses::visit(state, index, tick, vehicles);
     }
+    if before.tile_type() >> 4 == 8 {
+        return industries::visit(state, index, vehicles);
+    }
+    let mut tile = tile(&before);
+    if tile.tile_type >> 4 == 4 {
+        trees::visit(state, &mut tile, index, tick)?;
+    } else if tile.tile_type >> 4 == 2 {
+        houses::road(state, &mut tile, index)?;
+    } else {
+        tile.visit_landscape();
+    }
+    let after = tiles::saved(&tile);
+    if before != after {
+        state.apply(WorldEdit::Tile {
+            index,
+            value: after,
+        })?;
+    }
+    Ok(())
 }

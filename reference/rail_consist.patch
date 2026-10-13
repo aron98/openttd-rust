@@ -1,0 +1,42 @@
+diff --git a/src/openttd.cpp b/src/openttd.cpp
+index 7d585b0..73107b2 100644
+--- a/src/openttd.cpp
++++ b/src/openttd.cpp
+@@ -93,6 +93,7 @@
+ #	include <emscripten/html5.h>
+ #endif
+ 
++#include "saveload/reference_rail_consist_fixture.hpp"
+ #include "safeguards.h"
+ 
+ void CallLandscapeTick();
+@@ -1335,6 +1336,7 @@ bool RequestNewGRFScan(NewGRFScanCallback *callback)
+ 
+ void GameLoop()
+ {
++	ReferenceRailConsistFixture::Advance();
+ 	if (_game_mode == GM_BOOTSTRAP) {
+ 		/* Check for UDP stuff */
+ 		if (_network_available) NetworkBackgroundLoop();
+diff --git a/src/saveload/saveload.cpp b/src/saveload/saveload.cpp
+index ebec3d2..6201f20 100644
+--- a/src/saveload/saveload.cpp
++++ b/src/saveload/saveload.cpp
+@@ -70,6 +70,8 @@
+ 
+ #include "table/strings.h"
+ 
++#include "reference_rail_consist.hpp"
++#include "reference_rail_consist_fixture.hpp"
+ #include "../safeguards.h"
+ 
+ extern const SaveLoadVersion SAVEGAME_VERSION = (SaveLoadVersion)(SL_MAX_VERSION - 1); ///< Current savegame version of OpenTTD.
+@@ -3225,6 +3227,8 @@ static SaveOrLoadResult DoLoad(std::shared_ptr<LoadFilter> reader, bool load_che
+ 		}
+ 
+ 		_gamelog.StopAction();
++		ReferenceRailConsistFixture::Prepare();
++		ReferenceRailConsist::Observe();
+ 	}
+ 
+ 	return SL_OK;

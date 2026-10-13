@@ -1,4 +1,4 @@
-use super::{WorldTickError, access::State, unsupported};
+use super::{State, WorldTickError, unsupported};
 use crate::world_access::{signed, unsigned};
 use ottd_core::{
     CalendarDate, ClockSettings, ClockSnapshot, ClockState, DateFraction, EconomyDate, TickCounter,
@@ -46,7 +46,7 @@ pub(super) fn restore_clock(world: &World) -> Result<ClockState, WorldTickError>
         ClockSettings::new(units, minutes)?,
     )?)
 }
-pub(super) fn save_clock(state: &mut State, s: ClockSnapshot) -> Result<(), WorldTickError> {
+pub(super) fn save_clock(state: &mut State<'_>, s: ClockSnapshot) -> Result<(), WorldTickError> {
     for (name, value) in [
         ("date", i64::from(s.date.raw())),
         ("date_fract", i64::from(s.date_fract.0)),

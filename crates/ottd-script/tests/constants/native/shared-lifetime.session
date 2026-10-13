@@ -1,0 +1,19 @@
+refs 0 owned-value
+compile 0 0 buffer fixtures/seed-string.nut
+drop 0 0
+refs 0 owned-value
+lookup 1 K -
+lookup 2 K -
+compile 1 1 buffer fixtures/read.nut
+compile 0 2 buffer fixtures/replace.nut
+lookup 0 K -
+refs 0 owned-value
+run 1 1
+drop 1 1
+refs 0 owned-value
+drop 0 2
+compile 0 3 buffer fixtures/seed-enum.nut
+drop 0 3
+compile 0 4 buffer fixtures/enum-partial.nut
+lookup 0 E A
+refs 0 member-value

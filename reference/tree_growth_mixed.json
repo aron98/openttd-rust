@@ -1,0 +1,15 @@
+{
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "save_version": 362,
+  "scope": "Opt-in passive movement observer admission for the existing temperate tree growth domain; no gameplay changes",
+  "parent_observer": "reference/tree_growth.json",
+  "patch": "reference/tree_growth_mixed.patch",
+  "input": "src/saveload/reference_movement_admission.hpp",
+  "base_sha256": "d663aa96f499aff1d045e9eb4e20b050e5681b6600eac8c96fa5362ca1888a2e",
+  "patched_sha256": "3e2ac7f0042d12c1583ca1f035f8778ef4526d83cca6a879202ece9cb0bf62be",
+  "build_script": "scripts/build-tree-growth-mixed-reference.sh",
+  "driver": "scripts/check-tree-growth-mixed.py",
+  "producer_inventory": "scripts/tree-growth-source.json",
+  "capability": "private bounded interaction proof only; normal tree CI not admitted",
+  "attribution": "OpenTTD 15.3, GPL-2.0-only; original native gameplay retained, additional guard only controls observation admission"
+}

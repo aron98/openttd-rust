@@ -1,0 +1,369 @@
+{
+  "schema_version": 2,
+  "kind": "road_movement",
+  "mode": "prepare",
+  "trace": true,
+  "max_calls": 512,
+  "max_bytes": 805306368,
+  "max_seconds": 60,
+  "max_events": 200000,
+  "reservation_count": 0,
+  "prepare_settings": [
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "movement_prepare_original_acceleration",
+        "name": "vehicle.roadveh_acceleration_model",
+        "value": 0
+      }
+    }
+  ],
+  "commands": [
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 648,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 649,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 650,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 651,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 652,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 653,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 654,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 655,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 656,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 657,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 658,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 659,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 660,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 661,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 662,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 663,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 664,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 665,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 666,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 667,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 668,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 669,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 670,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 671,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road",
+        "tile": 672,
+        "pieces": 10,
+        "road_type": 0,
+        "toggle_disallowed": 0,
+        "town_id": 65535
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_road_depot",
+        "tile": 673,
+        "road_type": 0,
+        "direction": 0
+      }
+    },
+    {
+      "company": 0,
+      "mode": "post",
+      "command": {
+        "kind": "build_vehicle",
+        "tile": 673,
+        "engine": 116,
+        "use_free_vehicles": false,
+        "cargo": 255,
+        "client_id": 0
+      }
+    }
+  ],
+  "witness_tiles": [
+    650,
+    651,
+    652,
+    653,
+    654,
+    655,
+    656,
+    657,
+    658,
+    659,
+    660,
+    661,
+    662,
+    663,
+    664,
+    665,
+    666,
+    667,
+    668,
+    669,
+    670
+  ]
+}

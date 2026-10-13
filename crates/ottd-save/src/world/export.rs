@@ -4,7 +4,36 @@ use super::{
 use crate::Compression;
 use std::collections::BTreeMap;
 
+#[derive(Debug, Clone, Copy)]
+enum BackupSaveMode {
+    Preserve,
+    Omit,
+}
+
+/// Borrowed native save projection with transient order backups omitted.
+#[derive(Debug, Clone, Copy)]
+pub struct WithoutOrderBackups<'a>(&'a World);
+impl WithoutOrderBackups<'_> {
+    /// Serialize with the original BKOR schema and no backup rows.
+    /// # Errors
+    /// Propagates the ordinary save encoding errors.
+    pub fn to_savegame(self) -> Result<Savegame, WorldError> {
+        self.0.build_save_mode(&self.0.planes, BackupSaveMode::Omit)
+    }
+    /// Observe the same projected saved state without modifying live records.
+    /// # Errors
+    /// Propagates malformed saved field errors.
+    pub fn saved_json(self) -> Result<serde_json::Value, WorldError> {
+        self.0.saved_json_mode(BackupSaveMode::Omit)
+    }
+}
+
 impl World {
+    /// Borrow the native non-server save projection; offline defaults stay lossless.
+    pub const fn without_order_backups(&self) -> WithoutOrderBackups<'_> {
+        WithoutOrderBackups(self)
+    }
+
     /// Serialize authoritative state into a native save container.
     /// # Errors
     /// Propagates table/container encoding failures.
@@ -23,11 +52,22 @@ impl World {
         &self,
         planes: &BTreeMap<[u8; 4], Vec<u8>>,
     ) -> Result<Savegame, WorldError> {
+        self.build_save_mode(planes, BackupSaveMode::Preserve)
+    }
+    fn build_save_mode(
+        &self,
+        planes: &BTreeMap<[u8; 4], Vec<u8>>,
+        mode: BackupSaveMode,
+    ) -> Result<Savegame, WorldError> {
         let mut bytes = b"OTTN".to_vec();
         bytes.extend_from_slice(&self.version_bytes);
         for id in &self.order {
             if let Some(table) = self.tables.get(id) {
-                table.encode()?.write_to(&mut bytes)?;
+                let chunk = match (id, mode) {
+                    (b"BKOR", BackupSaveMode::Omit) => table.encode_empty()?,
+                    _ => table.encode()?,
+                };
+                chunk.write_to(&mut bytes)?;
             } else {
                 let plane = planes
                     .get(id)
@@ -48,10 +88,17 @@ impl World {
     /// # Errors
     /// Rejects malformed script-tail data encountered during export.
     pub fn saved_json(&self) -> Result<serde_json::Value, WorldError> {
+        self.saved_json_mode(BackupSaveMode::Preserve)
+    }
+    fn saved_json_mode(&self, mode: BackupSaveMode) -> Result<serde_json::Value, WorldError> {
         let mut chunks = serde_json::Map::new();
         for (id, table) in &self.tables {
             let mut rows = serde_json::Map::new();
-            for (index, record) in table.records() {
+            for (index, record) in table
+                .records()
+                .iter()
+                .filter(|_| !(*id == *b"BKOR" && matches!(mode, BackupSaveMode::Omit)))
+            {
                 let mut fields = record_json(table.schema(), record);
                 scripts::export(*id, record, &mut fields)?;
                 rows.insert(index.to_string(), serde_json::Value::Object(fields));
@@ -105,3 +152,6 @@ fn atomic_json(value: &WireValue) -> serde_json::Value {
         WireValue::Structs(_) => serde_json::Value::Null,
     }
 }
+
+#[cfg(test)]
+mod tests;

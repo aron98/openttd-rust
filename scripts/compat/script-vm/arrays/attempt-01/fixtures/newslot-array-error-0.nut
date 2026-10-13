@@ -1,0 +1,1 @@
+local a=[1]; a[0] <- 9; return a[0];

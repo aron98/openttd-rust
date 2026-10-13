@@ -1,0 +1,62 @@
+//! Main-frame root fields retain native receiver/key targets until a store.
+use super::{Compiler, ExpressionState, Register};
+use crate::compiler::diagnostics::CompileFailure;
+use crate::{CompileErrorKind, Instruction, Value, lexer::TokenKind};
+impl Compiler<'_> {
+    pub(super) fn explicit_root(
+        &mut self,
+        state: &mut ExpressionState,
+    ) -> Result<Option<Register>, CompileFailure> {
+        self.advance()?;
+        let root = self.push()?;
+        self.emit(Instruction {
+            opcode: 0x15,
+            arg0: root.0,
+            arg1: 0,
+            arg2: 0,
+            arg3: 0,
+        });
+        if self.token.kind == TokenKind::Parent {
+            self.parent_field(state)?;
+            return Ok(None);
+        }
+        let TokenKind::Identifier(name) = self.token.kind else {
+            return Err(self
+                .error(CompileErrorKind::UnsupportedSyntax)
+                .native("expected 'IDENTIFIER'"));
+        };
+        self.advance()?;
+        self.root_field(name, state)
+    }
+    pub(super) fn root_field(
+        &mut self,
+        name: &str,
+        state: &mut ExpressionState,
+    ) -> Result<Option<Register>, CompileFailure> {
+        let key = self.push()?;
+        self.load(key, Value::String(self.realm.string(name.as_bytes())))?;
+        if !matches!(
+            self.token.kind,
+            TokenKind::Symbol(b'=' | b'(')
+                | TokenKind::NewSlot
+                | TokenKind::Compound(_)
+                | TokenKind::Increment(_)
+        ) && (!state.deleting || matches!(self.token.kind, TokenKind::Symbol(b'.' | b'[')))
+        {
+            let key = self.pop()?;
+            let root = self.pop()?;
+            let target = self.push()?;
+            self.emit(Instruction {
+                opcode: 0x0e,
+                arg0: target.0,
+                arg1: i32::from(root.0),
+                arg2: key.0,
+                arg3: 0,
+            });
+        }
+        state.dereference = Some(key);
+        state.field = true;
+        state.capture = None;
+        Ok(None)
+    }
+}

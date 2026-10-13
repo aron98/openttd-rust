@@ -1,0 +1,159 @@
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -21,6 +21,8 @@
+ #include "newgrf_text.h"
+ #include "spritecache.h"
+ #include "currency.h"
++#include "gfxinit.h"
++#include "strings_func.h"
+ #include "landscape.h"
+ #include "newgrf_badge.h"
+ #include "newgrf_badge_config.h"
+@@ -1257,6 +1259,7 @@
+ #include "reference_grf_load_control.hpp"
+ #include "reference_grf_language.hpp"
+ #include "reference_grf_strings.hpp"
++#include "reference_grf_currency.hpp"
+ #include "reference_grf_safety.hpp"
+ 
+ static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
+@@ -1354,6 +1357,7 @@
+ 		uint8_t type = file.ReadByte();
+ 		_cur_gps.nfo_line++;
+ 		ReferenceGrfControl::Record(num, type, grf_container_version);
++		ReferenceGrfCurrency::Record(num, type, grf_container_version);
+ 		ReferenceGrfSafety::Record safety_record(stage, grf_container_version);
+ 
+ 		if (type == 0xFF) {
+@@ -1362,12 +1366,12 @@
+ 				if (num > 1024 * 1024) {
+ 					GrfMsg(0, "LoadNewGRFFile: Unexpectedly large sprite, disabling");
+ 					DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
+-					ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision();
++					ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision(); ReferenceGrfCurrency::Observe("decision");
+ 					break;
+ 				}
+ 
+ 				DecodeSpecialSprite(allocator, num, stage);
+-				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision();
++				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision(); ReferenceGrfCurrency::Observe("decision");
+ 
+ 				/* Stop all processing if we are to skip the remaining sprites */
+ 				if (_cur_gps.skip_sprites == -1) break;
+@@ -1380,7 +1384,7 @@
+ 			if (_cur_gps.skip_sprites == 0) {
+ 				GrfMsg(0, "LoadNewGRFFile: Unexpected sprite, disabling");
+ 				DisableGrf(STR_NEWGRF_ERROR_UNEXPECTED_SPRITE);
+-				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision();
++				ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision(); ReferenceGrfCurrency::Observe("decision");
+ 				break;
+ 			}
+ 
+@@ -1394,7 +1398,7 @@
+ 		}
+ 
+ 		if (_cur_gps.skip_sprites > 0) _cur_gps.skip_sprites--;
+-		ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision();
++		ReferenceGrfControl::Decision(); ReferenceGrfContext::Decision(); ReferenceGrfLanguage::Decision(); ReferenceGrfStrings::Decision(); ReferenceGrfCurrency::Observe("decision");
+ 	}
+ }
+ 
+@@ -1652,7 +1656,9 @@
+ 	/* Cached callback groups are no longer needed. */
+ 	ResetCallbacks(true);
+ 
++	ReferenceGrfCurrency::Observe("before-finalize");
+ 	FinaliseStringMapping();
++	ReferenceGrfCurrency::Observe("after-finalize");
+ 
+ 	/* Clear the action 6 override sprites. */
+ 	_grf_line_to_action6_sprite_override.clear();
+@@ -1779,6 +1785,7 @@
+ 	if (ReferenceGrfControl::active) ReferenceGrfContext::Prepare(ReferenceGrfControl::manifest);
+ 	if (ReferenceGrfControl::active) ReferenceGrfLanguage::Begin(ReferenceGrfControl::manifest);
+ 	ReferenceGrfStrings::TryRun(ReferenceGrfControl::manifest);
++	ReferenceGrfCurrency::Begin(ReferenceGrfControl::manifest);
+ 	/* In case of networking we need to "sync" the start values
+ 	 * so all NewGRFs are loaded equally. For this we use the
+ 	 * start date of the game and we set the counters, etc. to
+@@ -1810,6 +1817,7 @@
+ 	InitializePatchFlags();
+ 
+ 	ResetNewGRFData();
++	ReferenceGrfCurrency::Observe("after-reset");
+ 
+ 	/*
+ 	 * Reset the status of all files, so we can 'retry' to load them.
+@@ -1893,6 +1901,7 @@
+ 		ReferenceGrfControl::StageEnd(stage);
+ 		ReferenceGrfLanguage::StageEnd(stage);
+ 		ReferenceGrfStrings::StageEnd(stage);
++		ReferenceGrfCurrency::StageEnd(stage);
+ 	}
+ 
+ 	/* We've finished reading files. */
+@@ -1919,5 +1928,6 @@
+ 	ReferenceGrfContext::Finish();
+ 	ReferenceGrfLanguage::Finish();
+ 	ReferenceGrfStrings::Finish();
++	ReferenceGrfCurrency::Finish();
+ 	ReferenceGrfControl::End();
+ }
+--- a/src/newgrf/newgrf_stringmapping.cpp
++++ b/src/newgrf/newgrf_stringmapping.cpp
+@@ -17,6 +17,10 @@
+ #include "newgrf_stringmapping.h"
+ 
+ #include "table/strings.h"
++
++#include "../3rdparty/nlohmann/json.hpp"
++
++namespace ReferenceGrfCurrency { void MappingAdded(); void MappingApplied(); }
+ 
+ #include "../safeguards.h"
+ 
+@@ -43,6 +47,7 @@
+ {
+ 	func(STR_UNDEFINED);
+ 	_string_to_grf_mapping.emplace_back(_cur_gps.grffile->grfid, source, std::move(func));
++	ReferenceGrfCurrency::MappingAdded();
+ }
+ 
+ /**
+@@ -160,6 +165,18 @@
+ {
+ 	for (StringIDMapping &it : _string_to_grf_mapping) {
+ 		it.func(MapGRFStringID(it.grfid, it.source));
++		ReferenceGrfCurrency::MappingApplied();
+ 	}
+ 	_string_to_grf_mapping.clear();
+ }
++
++namespace ReferenceGrfCurrency {
++nlohmann::json Pending()
++{
++    nlohmann::json result = nlohmann::json::array();
++    for (const auto &entry : _string_to_grf_mapping) {
++        result.push_back({{"grfid", entry.grfid}, {"source", entry.source.base()}});
++    }
++    return result;
++}
++}
+--- a/src/saveload/afterload.cpp
++++ b/src/saveload/afterload.cpp
+@@ -10,6 +10,7 @@
+ #include "../stdafx.h"
+ 
+ void ReferenceArmGrfControl();
++void ReferenceRunGrfCurrencyReload();
+ #include "../void_map.h"
+ #include "../signs_base.h"
+ #include "../depot_base.h"
+@@ -802,6 +803,7 @@
+ 	/* Load the sprites */
+ 	ReferenceArmGrfControl();
+ 	GfxLoadSprites();
++	ReferenceRunGrfCurrencyReload();
+ 	LoadStringWidthTable();
+ 
+ 	/* Copy temporary data to Engine pool */

@@ -1,0 +1,14 @@
+{
+  "currency_owner_encoding": "bytes-v1",
+  "currency_api": [
+    {"operation":"property","grfid":7,"property":11,"first":0,"count":1,"reserve":false,"raw":[0,0,232,3]},
+    {"operation":"property","grfid":7,"property":12,"first":31,"count":1,"reserve":false,"raw":[128,255]},
+    {"operation":"property","grfid":7,"property":13,"first":0,"count":1,"reserve":false,"raw":[237,160,128,0]},
+    {"operation":"property","grfid":7,"property":14,"first":0,"count":1,"reserve":false,"raw":[255,65,1,0]},
+    {"operation":"property","grfid":7,"property":15,"first":31,"count":1,"reserve":false,"raw":[2,0]},
+    {"operation":"property","grfid":7,"property":13,"first":0,"count":2,"reserve":false,"raw":[65,0,0,0,66,67]},
+    {"operation":"property","grfid":7,"property":13,"first":0,"count":2,"reserve":true,"raw":[65,0,0,0,66,67]},
+    {"operation":"reset_currencies","preserve_custom":true},
+    {"operation":"reset_currencies","preserve_custom":false}
+  ]
+}

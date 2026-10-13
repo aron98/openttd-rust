@@ -1,0 +1,113 @@
+--- a/src/company_cmd.cpp
++++ b/src/company_cmd.cpp
+@@ -47,6 +47,7 @@
+ #include "table/strings.h"
+ #include "table/company_face.h"
+ 
++#include "saveload/reference_vehicle_year_trace.hpp"
+ #include "safeguards.h"
+ 
+ void ClearEnginesHiddenFlagOfCompany(CompanyID cid);
+@@ -810,6 +811,7 @@
+  */
+ static const IntervalTimer<TimerGameEconomy> _economy_companies_yearly({TimerGameEconomy::YEAR, TimerGameEconomy::Priority::COMPANY}, [](auto)
+ {
++	ReferenceGroupProfit::Event("company_year_enter");
+ 	/* Copy statistics */
+ 	for (Company *c : Company::Iterate()) {
+ 		/* Move expenses to previous years. */
+@@ -827,6 +829,7 @@
+ 			if (_settings_client.sound.new_year) SndPlayFx(SND_00_GOOD_YEAR);
+ 		}
+ 	}
++	ReferenceGroupProfit::Event("company_year_leave");
+ });
+ 
+ /**
+--- a/src/town_cmd.cpp
++++ b/src/town_cmd.cpp
+@@ -67,6 +67,7 @@
+ #include "table/strings.h"
+ #include "table/town_land.h"
+ 
++#include "saveload/reference_vehicle_year_trace.hpp"
+ #include "safeguards.h"
+ 
+ /* Initialize the town-pool */
+@@ -4155,11 +4156,13 @@
+ 
+ static const IntervalTimer<TimerGameEconomy> _economy_towns_yearly({TimerGameEconomy::YEAR, TimerGameEconomy::Priority::TOWN}, [](auto)
+ {
++	ReferenceGroupProfit::Event("town_year_enter");
+ 	/* Increment house ages */
+ 	for (const auto t : Map::Iterate()) {
+ 		if (!IsTileType(t, MP_HOUSE)) continue;
+ 		IncrementHouseAge(t);
+ 	}
++	ReferenceGroupProfit::Event("town_year_leave");
+ });
+ 
+ static CommandCost TerraformTile_Town(TileIndex tile, DoCommandFlags flags, int z_new, Slope tileh_new)
+--- a/src/vehicle.cpp
++++ b/src/vehicle.cpp
+@@ -65,6 +65,7 @@
+ 
+ #include "table/strings.h"
+ 
++#include "saveload/reference_vehicle_year_trace.hpp"
+ #include "safeguards.h"
+ 
+ /* Number of bits in the hash to use from each vehicle coord */
+@@ -1420,7 +1421,11 @@
+ {
+ 	if (v->economy_age < EconomyTime::MAX_DATE) {
+ 		v->economy_age++;
+-		if (v->IsPrimaryVehicle() && v->economy_age == VEHICLE_PROFIT_MIN_AGE + 1) GroupStatistics::VehicleReachedMinAge(v);
++		if (v->IsPrimaryVehicle() && v->economy_age == VEHICLE_PROFIT_MIN_AGE + 1) {
++			ReferenceGroupProfit::Event("age731_before", v->index.base());
++			GroupStatistics::VehicleReachedMinAge(v);
++			ReferenceGroupProfit::Event("age731_after", v->index.base());
++		}
+ 	}
+ }
+ 
+@@ -3010,26 +3015,37 @@
+ static const IntervalTimer<TimerGameEconomy> _economy_vehicles_yearly({TimerGameEconomy::YEAR, TimerGameEconomy::Priority::VEHICLE}, [](auto)
+ {
++	ReferenceGroupProfit::Event("vehicle_year_enter");
+ 	for (Vehicle *v : Vehicle::Iterate()) {
+ 		if (v->IsPrimaryVehicle()) {
+ 			/* show warning if vehicle is not generating enough income last 2 years (corresponds to a red icon in the vehicle list) */
+ 			Money profit = v->GetDisplayProfitThisYear();
+ 			if (v->economy_age >= VEHICLE_PROFIT_MIN_AGE && profit < 0) {
+ 				if (_settings_client.gui.vehicle_income_warn && v->owner == _local_company) {
++					ReferenceGroupProfit::Event("unprofitable_news", v->index.base(), ReferenceGroupProfit::Json{
++						{"company", v->owner.base()},
++						{"string", TimerGameEconomy::UsingWallclockUnits() ? STR_NEWS_VEHICLE_UNPROFITABLE_PERIOD : STR_NEWS_VEHICLE_UNPROFITABLE_YEAR},
++						{"profit", static_cast<int64_t>(profit)}});
+ 					AddVehicleAdviceNewsItem(AdviceType::VehicleUnprofitable,
+ 						GetEncodedString(TimerGameEconomy::UsingWallclockUnits() ? STR_NEWS_VEHICLE_UNPROFITABLE_PERIOD : STR_NEWS_VEHICLE_UNPROFITABLE_YEAR, v->index, profit),
+ 						v->index);
+ 				}
++				ReferenceGroupProfit::Event("unprofitable_ai", v->index.base(), ReferenceGroupProfit::Json{
++					{"company", v->owner.base()},
++					{"is_ai", Company::Get(v->owner)->is_ai}});
+ 				AI::NewEvent(v->owner, new ScriptEventVehicleUnprofitable(v->index));
+ 			}
+ 
+ 			v->profit_last_year = v->profit_this_year;
+ 			v->profit_this_year = 0;
+ 			SetWindowDirty(WC_VEHICLE_DETAILS, v->index);
+ 		}
+ 	}
++	ReferenceGroupProfit::Event("group_profits_before");
+ 	GroupStatistics::UpdateProfits();
++	ReferenceGroupProfit::Event("group_profits_after");
+ 	SetWindowClassesDirty(WC_TRAINS_LIST);
+ 	SetWindowClassesDirty(WC_SHIPS_LIST);
+ 	SetWindowClassesDirty(WC_ROADVEH_LIST);
+ 	SetWindowClassesDirty(WC_AIRCRAFT_LIST);
++	ReferenceGroupProfit::Event("vehicle_year_leave");
+ });
+ 
+ /**

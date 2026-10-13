@@ -164,6 +164,11 @@ impl MapState {
     pub fn tiles(&self) -> &[TileState] {
         &self.tiles
     }
+    pub(crate) fn swap_tile(&mut self, index: usize, tile: &mut TileState) {
+        if let Some(target) = self.tiles.get_mut(index) {
+            std::mem::swap(target, tile);
+        }
+    }
 }
 
 fn tile_count(width: u32, height: u32) -> Result<usize, SnapshotError> {
@@ -185,6 +190,23 @@ pub(super) fn decode(save: &Savegame) -> Result<MapState, SnapshotError> {
     let fields = table::single(required(save, *b"MAPS")?, schema::MAP)?;
     let width = table::unsigned(&fields, "dim_x")?;
     let height = table::unsigned(&fields, "dim_y")?;
+    from_planes(width, height, |id| {
+        let chunk = required(save, id)?;
+        if chunk.kind() != ChunkKind::Riff {
+            return Err(invalid(format!(
+                "invalid plane {} length or mode",
+                String::from_utf8_lossy(&id)
+            )));
+        }
+        Ok(chunk.body())
+    })
+}
+
+pub(super) fn from_planes<'a>(
+    width: u32,
+    height: u32,
+    mut plane: impl FnMut([u8; 4]) -> Result<&'a [u8], SnapshotError>,
+) -> Result<MapState, SnapshotError> {
     let count = tile_count(width, height)?;
     let mut planes = Vec::new();
     for (id, bytes) in [
@@ -199,14 +221,14 @@ pub(super) fn decode(save: &Savegame) -> Result<MapState, SnapshotError> {
         (b"MAP7", 1),
         (b"MAP8", 2),
     ] {
-        let chunk = required(save, *id)?;
-        if chunk.kind() != ChunkKind::Riff || chunk.body().len() != count.saturating_mul(bytes) {
+        let body = plane(*id)?;
+        if body.len() != count.saturating_mul(bytes) {
             return Err(invalid(format!(
                 "invalid plane {} length or mode",
                 String::from_utf8_lossy(id)
             )));
         }
-        planes.push(Reader::new(chunk.body()));
+        planes.push(Reader::new(body));
     }
     let [types, heights, m1, m2, m3, m4, m5, m6, m7, m8] = planes.as_mut_slice() else {
         return Err(invalid("map plane count"));

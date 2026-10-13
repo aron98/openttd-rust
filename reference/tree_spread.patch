@@ -1,0 +1,40 @@
+--- a/src/tree_cmd.cpp
++++ b/src/tree_cmd.cpp
+@@ -85,6 +85,7 @@
+  */
+ static void PlantTreesOnTile(TileIndex tile, TreeType treetype, uint count, TreeGrowthStage growth)
+ {
++	ReferenceTreeGrowth::Scope planting("plant_tree", tile.base());
+ 	assert(treetype != TREE_INVALID);
+ 	assert(CanPlantTreesOnTile(tile, true));
+ 
+@@ -919,6 +920,7 @@
+ 				SetTreeGrowth(tile, TreeGrowthStage::Grown);
+ 			} else {
+ 				/* just one tree, change type into MP_CLEAR */
++				ReferenceTreeGrowth::Scope clearing("clear_tree", tile.base());
+ 				switch (GetTreeGround(tile)) {
+ 					case TREE_GROUND_SHORE: MakeShore(tile); break;
+ 					case TREE_GROUND_GRASS: MakeClear(tile, CLEAR_GRASS, GetTreeDensity(tile)); break;
+--- a/src/saveload/reference_replay_commands.hpp
++++ b/src/saveload/reference_replay_commands.hpp
+@@ -35,7 +35,7 @@
+     if (kind == "tree_growth_plant") return Command<CMD_PLANT_TREE>::Post(TileIndex(command.at("tile").get<uint32_t>()), TileIndex(command.at("start_tile").get<uint32_t>()), command.at("type").get<uint8_t>(), false);
+     if (kind == "tree_growth_setting") {
+         const auto setting = command.at("value").get<int32_t>();
+-        Require(setting == 0 || setting == 3, "tree growth setting outside first atom");
++        Require(setting >= 0 && setting <= 3, "tree growth setting outside native range");
+         return Command<CMD_CHANGE_SETTING>::Post(std::string{"construction.extra_tree_placement"}, setting);
+     }
+     if (kind == "build_road_depot") return Command<CMD_BUILD_ROAD_DEPOT>::Post(TileIndex(command.at("tile").get<uint32_t>()), static_cast<RoadType>(command.at("road_type").get<uint8_t>()), static_cast<DiagDirection>(command.at("direction").get<uint8_t>()));
+--- a/src/saveload/reference_movement_admission.hpp
++++ b/src/saveload/reference_movement_admission.hpp
+@@ -38,7 +38,7 @@
+             const char *observer = std::getenv("OTTD_TREE_GROWTH_EVENTS");
+             Tile raw(tile);
+             const auto setting = _settings_game.construction.extra_tree_placement;
+-            Require(observer != nullptr && *observer != '\0' && (setting == 0 || setting == 3)
++            Require(observer != nullptr && *observer != '\0' && setting <= 3
+                 && ((raw.m2() >> 6) & 7) <= 1 && (raw.m5() & 7) <= 6 && raw.m3() < 12,
+                 "mixed tree observer domain");
+             continue;

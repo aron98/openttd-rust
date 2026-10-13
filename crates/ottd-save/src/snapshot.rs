@@ -1,9 +1,15 @@
 //! Typed version-362 state, without historical migration or simulation.
+#![expect(
+    clippy::redundant_pub_crate,
+    reason = "snapshot transaction adapters are crate-only; public visibility conflicts with unreachable_pub"
+)]
 mod date;
 mod map;
 mod model;
 mod schema;
 mod table;
+pub(crate) mod world;
+pub(crate) use model::SnapshotMetadata;
 
 pub use date::DateState;
 pub use map::{MapState, TileRawParts, TileState};

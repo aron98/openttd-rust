@@ -1,0 +1,19 @@
+stack 3
+literal string 5 706f6f6c2d
+literal string 6 736861726564
+op 4 1 0 2 1
+op 17 1 2 1 43
+op 2 2 0 0 0
+op 17 2 2 1 47
+op 19 1 2 0 0
+op 19 255 0 0 0
+suspend 0 1
+frame 1 string 5 706f6f6c2d
+frame 2 string 6 736861726564
+suspend 0 2
+frame 1 string 11 706f6f6c2d736861726564
+frame 2 string 6 736861726564
+suspend 0 3
+frame 1 string 11 706f6f6c2d736861726564
+frame 2 integer 0
+runtime_error 1

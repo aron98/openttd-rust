@@ -1,13 +1,13 @@
 """Offline identity, reference and capability checks; never an execution pass."""
 
-from dataclasses import replace
 import hashlib
-from pathlib import Path
 import re
 import tomllib
+from dataclasses import replace
+from pathlib import Path
 from typing import assert_never
 
-from contract_profiles import check_profiles
+from contract_layouts import expand_artifact_lists
 from contract_model import (
     Contract,
     ContractError,
@@ -17,6 +17,7 @@ from contract_model import (
     read_json,
     record,
 )
+from contract_profiles import check_profiles
 
 
 def local_path(root: Path, name: str) -> Path:
@@ -129,8 +130,9 @@ def load_contract(path: Path, root: Path) -> Contract:
         ]:
             if re.search(rf"{name}\s*=\s*{value}\s*;", source) is None:
                 raise ContractError(f"native protocol source pin mismatch: {name}")
+    expanded, layout_bytes = expand_artifact_lists(raw, root)
     contract = replace(
-        parse_contract(raw),
+        parse_contract(expanded),
         manifest_path=str(path.resolve()),
         manifest_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
     )
@@ -148,7 +150,9 @@ def load_contract(path: Path, root: Path) -> Contract:
         source = local_path(root, asset.path)
         if not source.is_file():
             raise ContractError(f"asset file missing: {asset.path}")
-        if hashlib.sha256(source.read_bytes()).hexdigest() != asset.sha256:
+        verified = layout_bytes.get(asset.id)
+        content = source.read_bytes() if verified is None else verified
+        if hashlib.sha256(content).hexdigest() != asset.sha256:
             raise ContractError(f"asset sha256 mismatch: {asset.id}")
         if asset.profile is not None and asset.profile not in profile_ids:
             raise ContractError(f"unknown profile: {asset.id}")

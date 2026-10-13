@@ -1,3 +1,6 @@
+#[cfg(test)]
+mod slope;
+
 use super::{Command, CommandCost, CommandError, Plan, landscape};
 use crate::world_access::unsigned;
 use ottd_save::{
@@ -94,6 +97,7 @@ pub(super) fn build(world: &World, company: u8, command: &Command) -> Result<Pla
         value: parts.into(),
     });
     Ok(Plan {
+        returns: None,
         cost: CommandCost::success(cost, 0),
         edits,
     })
@@ -156,6 +160,7 @@ fn normal_road(
             });
         }
         return Ok(Some(Plan {
+            returns: None,
             cost: CommandCost::success(0, 255),
             edits,
         }));

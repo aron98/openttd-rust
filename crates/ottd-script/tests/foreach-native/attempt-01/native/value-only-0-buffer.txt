@@ -1,0 +1,36 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 buffer value-only-0.nut
+compiled
+stack 7
+op 2 1 0 0 0
+op 31 2 3 0 0
+op 2 3 1 0 0
+op 32 2 3 0 0
+op 2 3 2 0 0
+op 32 2 3 0 0
+op 2 3 3 0 0
+op 32 2 3 0 0
+op 20 3 3 0 0
+op 51 2 4 3 0
+op 52 2 4 3 0
+op 35 6 1 4 43
+op 61 6 6 0 0
+op 24 0 -5 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 10000
+return 9977 integer 6
+temp integer 6
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1

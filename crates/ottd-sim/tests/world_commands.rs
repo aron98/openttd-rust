@@ -604,6 +604,7 @@ fn explicit_loan_saturates_balance_at_native_money_maximum() -> Result {
         }),
     )?;
     let success = ottd_sim::CommandCost {
+        extra_error: None,
         success: true,
         cost: 0,
         expenses: 12,
@@ -613,6 +614,7 @@ fn explicit_loan_saturates_balance_at_native_money_maximum() -> Result {
     assert_eq!(
         receipt,
         ottd_sim::CommandReceipt {
+            returns: None,
             posted: true,
             gate: None,
             test: Some(success.clone()),

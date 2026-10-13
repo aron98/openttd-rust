@@ -1,0 +1,84 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 unsigned fixtures/delegate-and-missing-0.nut
+compiled
+stack 3
+literal string 3 6c656e
+op 31 1 1 0 0
+op 2 2 1 0 0
+op 32 1 2 0 0
+op 9 1 0 1 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 10000
+return 9995 unsupported 134218240
+temp unsupported 134218240
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 2 compile 0 1 unsigned fixtures/delegate-and-missing-1.nut
+compiled
+stack 3
+literal string 6 616273656e74
+op 31 1 1 0 0
+op 2 2 1 0 0
+op 32 1 2 0 0
+op 9 1 0 1 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_result 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 3 run 0 1 10000
+runtime_error 9996 string 33 74686520696e6465782027616273656e742720646f6573206e6f74206578697374
+temp unsupported 134217984
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 4 compile 0 2 unsigned fixtures/delegate-and-missing-2.nut
+compiled
+stack 3
+op 31 1 1 0 0
+op 2 2 1 0 0
+op 32 1 2 0 0
+op 22 2 1 0 0
+op 14 1 1 2 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_program 2 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 5 run 0 2 10000
+runtime_error 9995 string 31 74686520696e6465782027626f6f6c2720646f6573206e6f74206578697374
+temp unsupported 134217984
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+external_program 1 vm 0
+external_program 2 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1

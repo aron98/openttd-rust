@@ -1,12 +1,13 @@
 """Execute existing comparison drivers and retain fresh evidence receipts."""
 
-from dataclasses import asdict, dataclass
+import json
 import os
 import signal
-import json
-from pathlib import Path
 import subprocess
+import sys
 import time
+from dataclasses import asdict, dataclass
+from pathlib import Path
 
 from contract_model import Contract, ContractError, Driver, Status
 from contract_validate import local_path
@@ -21,6 +22,22 @@ class DriverResult:
     artifacts: str | None
     error: str | None
     elapsed_seconds: float
+
+
+def report_failure(result: DriverResult, directory: Path) -> None:
+    if result.passed:
+        return
+    print(
+        f"FAIL {result.id}: exit={result.exit_code}; {result.error}",
+        file=sys.stderr,
+        flush=True,
+    )
+    with (directory / "stderr.log").open("rb") as stderr:
+        stderr.seek(0, os.SEEK_END)
+        stderr.seek(max(0, stderr.tell() - 4096))
+        tail = stderr.read().decode("utf-8", errors="replace")
+    if tail:
+        print(tail, file=sys.stderr, flush=True)
 
 
 def run_driver(driver: Driver, root: Path, directory: Path) -> DriverResult:
@@ -100,6 +117,7 @@ def run_driver(driver: Driver, root: Path, directory: Path) -> DriverResult:
         round(time.monotonic() - start, 3),
     )
     (directory / "result.json").write_text(json.dumps(asdict(result), indent=2) + "\n")
+    report_failure(result, directory)
     return result
 
 

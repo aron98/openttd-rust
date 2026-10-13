@@ -1,0 +1,25 @@
+temp 0
+compile 0 0 utf8 fixtures/a.nut
+temp 0
+refs 0 636f6d70696c652d6f776e65722d41
+compile 0 1 utf8 fixtures/b.nut
+temp 0
+refs 0 636f6d70696c652d6f776e65722d42
+run 0 0 0
+temp 0
+refs 0 636f6d70696c652d6f776e65722d41
+refs 0 636f6d70696c652d6f776e65722d42
+drop 0 1
+temp 0
+refs 0 636f6d70696c652d6f776e65722d42
+advance 0 1000
+temp 0
+drop 0 0
+refs 0 636f6d70696c652d6f776e65722d41
+compile 0 2 utf8 fixtures/c.nut
+temp 0
+refs 0 636f6d70696c652d6f776e65722d41
+run 0 2 1000
+temp 0
+refs 0 636f6d70696c652d6f776e65722d41
+drop 0 2

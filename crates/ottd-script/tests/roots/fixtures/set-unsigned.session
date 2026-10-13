@@ -1,0 +1,9 @@
+seed 0 73636f7265 integer 7
+compile 0 0 unsigned fixtures/set.nut
+run 0 0 0
+advance 0 1
+advance 0 1
+advance 0 1000
+raw 0 73636f7265
+raw 0 616273656e74
+temp 0

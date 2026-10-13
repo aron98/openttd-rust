@@ -1,0 +1,819 @@
+{
+  "base": "f2bb707278e864160d35a2b60505ab7ef60d4d91",
+  "cases": [
+    {
+      "id": "integer-buffer",
+      "source": "fixtures/integer.nut",
+      "session": "fixtures/integer-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "integer-unsigned",
+      "source": "fixtures/integer.nut",
+      "session": "fixtures/integer-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "integer-utf8",
+      "source": "fixtures/integer.nut",
+      "session": "fixtures/integer-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "character-buffer",
+      "source": "fixtures/character.nut",
+      "session": "fixtures/character-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "character-unsigned",
+      "source": "fixtures/character.nut",
+      "session": "fixtures/character-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "character-utf8",
+      "source": "fixtures/character.nut",
+      "session": "fixtures/character-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "negative-buffer",
+      "source": "fixtures/negative.nut",
+      "session": "fixtures/negative-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "negative-unsigned",
+      "source": "fixtures/negative.nut",
+      "session": "fixtures/negative-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "negative-utf8",
+      "source": "fixtures/negative.nut",
+      "session": "fixtures/negative-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "float-buffer",
+      "source": "fixtures/float.nut",
+      "session": "fixtures/float-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "float-unsigned",
+      "source": "fixtures/float.nut",
+      "session": "fixtures/float-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "float-utf8",
+      "source": "fixtures/float.nut",
+      "session": "fixtures/float-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "string-buffer",
+      "source": "fixtures/string.nut",
+      "session": "fixtures/string-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "string-unsigned",
+      "source": "fixtures/string.nut",
+      "session": "fixtures/string-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "string-utf8",
+      "source": "fixtures/string.nut",
+      "session": "fixtures/string-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "embedded-zero-buffer",
+      "source": "fixtures/embedded-zero.nut",
+      "session": "fixtures/embedded-zero-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "embedded-zero-unsigned",
+      "source": "fixtures/embedded-zero.nut",
+      "session": "fixtures/embedded-zero-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "embedded-zero-utf8",
+      "source": "fixtures/embedded-zero.nut",
+      "session": "fixtures/embedded-zero-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "unicode-buffer",
+      "source": "fixtures/unicode.nut",
+      "session": "fixtures/unicode-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "unicode-unsigned",
+      "source": "fixtures/unicode.nut",
+      "session": "fixtures/unicode-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "unicode-utf8",
+      "source": "fixtures/unicode.nut",
+      "session": "fixtures/unicode-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "bool-buffer",
+      "source": "fixtures/bool.nut",
+      "session": "fixtures/bool-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "bool-unsigned",
+      "source": "fixtures/bool.nut",
+      "session": "fixtures/bool-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "bool-utf8",
+      "source": "fixtures/bool.nut",
+      "session": "fixtures/bool-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "null-buffer",
+      "source": "fixtures/null.nut",
+      "session": "fixtures/null-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "null-unsigned",
+      "source": "fixtures/null.nut",
+      "session": "fixtures/null-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "null-utf8",
+      "source": "fixtures/null.nut",
+      "session": "fixtures/null-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "reference-buffer",
+      "source": "fixtures/reference.nut",
+      "session": "fixtures/reference-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "reference-unsigned",
+      "source": "fixtures/reference.nut",
+      "session": "fixtures/reference-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "reference-utf8",
+      "source": "fixtures/reference.nut",
+      "session": "fixtures/reference-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "parenthesized-buffer",
+      "source": "fixtures/parenthesized.nut",
+      "session": "fixtures/parenthesized-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "parenthesized-unsigned",
+      "source": "fixtures/parenthesized.nut",
+      "session": "fixtures/parenthesized-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "parenthesized-utf8",
+      "source": "fixtures/parenthesized.nut",
+      "session": "fixtures/parenthesized-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "expression-buffer",
+      "source": "fixtures/expression.nut",
+      "session": "fixtures/expression-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "expression-unsigned",
+      "source": "fixtures/expression.nut",
+      "session": "fixtures/expression-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "expression-utf8",
+      "source": "fixtures/expression.nut",
+      "session": "fixtures/expression-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "plus-buffer",
+      "source": "fixtures/plus.nut",
+      "session": "fixtures/plus-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "plus-unsigned",
+      "source": "fixtures/plus.nut",
+      "session": "fixtures/plus-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "plus-utf8",
+      "source": "fixtures/plus.nut",
+      "session": "fixtures/plus-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-counter-buffer",
+      "source": "fixtures/enum-counter.nut",
+      "session": "fixtures/enum-counter-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-counter-unsigned",
+      "source": "fixtures/enum-counter.nut",
+      "session": "fixtures/enum-counter-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-counter-utf8",
+      "source": "fixtures/enum-counter.nut",
+      "session": "fixtures/enum-counter-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-duplicates-buffer",
+      "source": "fixtures/enum-duplicates.nut",
+      "session": "fixtures/enum-duplicates-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-duplicates-unsigned",
+      "source": "fixtures/enum-duplicates.nut",
+      "session": "fixtures/enum-duplicates-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-duplicates-utf8",
+      "source": "fixtures/enum-duplicates.nut",
+      "session": "fixtures/enum-duplicates-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-mixed-buffer",
+      "source": "fixtures/enum-mixed.nut",
+      "session": "fixtures/enum-mixed-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-mixed-unsigned",
+      "source": "fixtures/enum-mixed.nut",
+      "session": "fixtures/enum-mixed-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-mixed-utf8",
+      "source": "fixtures/enum-mixed.nut",
+      "session": "fixtures/enum-mixed-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-empty-buffer",
+      "source": "fixtures/enum-empty.nut",
+      "session": "fixtures/enum-empty-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-empty-unsigned",
+      "source": "fixtures/enum-empty.nut",
+      "session": "fixtures/enum-empty-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-empty-utf8",
+      "source": "fixtures/enum-empty.nut",
+      "session": "fixtures/enum-empty-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-bare-buffer",
+      "source": "fixtures/enum-bare.nut",
+      "session": "fixtures/enum-bare-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-bare-unsigned",
+      "source": "fixtures/enum-bare.nut",
+      "session": "fixtures/enum-bare-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-bare-utf8",
+      "source": "fixtures/enum-bare.nut",
+      "session": "fixtures/enum-bare-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-index-buffer",
+      "source": "fixtures/enum-index.nut",
+      "session": "fixtures/enum-index-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-index-unsigned",
+      "source": "fixtures/enum-index.nut",
+      "session": "fixtures/enum-index-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-index-utf8",
+      "source": "fixtures/enum-index.nut",
+      "session": "fixtures/enum-index-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-missing-buffer",
+      "source": "fixtures/enum-missing.nut",
+      "session": "fixtures/enum-missing-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-missing-unsigned",
+      "source": "fixtures/enum-missing.nut",
+      "session": "fixtures/enum-missing-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-missing-utf8",
+      "source": "fixtures/enum-missing.nut",
+      "session": "fixtures/enum-missing-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "local-shadow-buffer",
+      "source": "fixtures/local-shadow.nut",
+      "session": "fixtures/local-shadow-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "local-shadow-unsigned",
+      "source": "fixtures/local-shadow.nut",
+      "session": "fixtures/local-shadow-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "local-shadow-utf8",
+      "source": "fixtures/local-shadow.nut",
+      "session": "fixtures/local-shadow-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "dead-branch-buffer",
+      "source": "fixtures/dead-branch.nut",
+      "session": "fixtures/dead-branch-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "dead-branch-unsigned",
+      "source": "fixtures/dead-branch.nut",
+      "session": "fixtures/dead-branch-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "dead-branch-utf8",
+      "source": "fixtures/dead-branch.nut",
+      "session": "fixtures/dead-branch-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "after-return-buffer",
+      "source": "fixtures/after-return.nut",
+      "session": "fixtures/after-return-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "after-return-unsigned",
+      "source": "fixtures/after-return.nut",
+      "session": "fixtures/after-return-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "after-return-utf8",
+      "source": "fixtures/after-return.nut",
+      "session": "fixtures/after-return-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "failed-later-buffer",
+      "source": "fixtures/failed-later.nut",
+      "session": "fixtures/failed-later-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "failed-later-unsigned",
+      "source": "fixtures/failed-later.nut",
+      "session": "fixtures/failed-later-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "failed-later-utf8",
+      "source": "fixtures/failed-later.nut",
+      "session": "fixtures/failed-later-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "const-next-decode-buffer",
+      "source": "fixtures/const-next-decode.nut",
+      "session": "fixtures/const-next-decode-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "const-next-decode-unsigned",
+      "source": "fixtures/const-next-decode.nut",
+      "session": "fixtures/const-next-decode-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "const-next-decode-utf8",
+      "source": "fixtures/const-next-decode.nut",
+      "session": "fixtures/const-next-decode-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-next-decode-buffer",
+      "source": "fixtures/enum-next-decode.nut",
+      "session": "fixtures/enum-next-decode-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-next-decode-unsigned",
+      "source": "fixtures/enum-next-decode.nut",
+      "session": "fixtures/enum-next-decode-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-next-decode-utf8",
+      "source": "fixtures/enum-next-decode.nut",
+      "session": "fixtures/enum-next-decode-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-partial-buffer",
+      "source": "fixtures/enum-partial.nut",
+      "session": "fixtures/enum-partial-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-partial-unsigned",
+      "source": "fixtures/enum-partial.nut",
+      "session": "fixtures/enum-partial-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "enum-partial-utf8",
+      "source": "fixtures/enum-partial.nut",
+      "session": "fixtures/enum-partial-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "const-nul-buffer",
+      "source": "fixtures/const-nul.nut",
+      "session": "fixtures/const-nul-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "const-nul-unsigned",
+      "source": "fixtures/const-nul.nut",
+      "session": "fixtures/const-nul-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "const-nul-utf8",
+      "source": "fixtures/const-nul.nut",
+      "session": "fixtures/const-nul-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "constructor-buffer",
+      "source": "fixtures/constructor.nut",
+      "session": "fixtures/constructor-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "constructor-unsigned",
+      "source": "fixtures/constructor.nut",
+      "session": "fixtures/constructor-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "constructor-utf8",
+      "source": "fixtures/constructor.nut",
+      "session": "fixtures/constructor-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "assignment-buffer",
+      "source": "fixtures/assignment.nut",
+      "session": "fixtures/assignment-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "assignment-unsigned",
+      "source": "fixtures/assignment.nut",
+      "session": "fixtures/assignment-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "assignment-utf8",
+      "source": "fixtures/assignment.nut",
+      "session": "fixtures/assignment-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "assignment-rhs-buffer",
+      "source": "fixtures/assignment-rhs.nut",
+      "session": "fixtures/assignment-rhs-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "assignment-rhs-unsigned",
+      "source": "fixtures/assignment-rhs.nut",
+      "session": "fixtures/assignment-rhs-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "assignment-rhs-utf8",
+      "source": "fixtures/assignment-rhs.nut",
+      "session": "fixtures/assignment-rhs-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "compound-buffer",
+      "source": "fixtures/compound.nut",
+      "session": "fixtures/compound-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "compound-unsigned",
+      "source": "fixtures/compound.nut",
+      "session": "fixtures/compound-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "compound-utf8",
+      "source": "fixtures/compound.nut",
+      "session": "fixtures/compound-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "prefix-buffer",
+      "source": "fixtures/prefix.nut",
+      "session": "fixtures/prefix-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "prefix-unsigned",
+      "source": "fixtures/prefix.nut",
+      "session": "fixtures/prefix-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "prefix-utf8",
+      "source": "fixtures/prefix.nut",
+      "session": "fixtures/prefix-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "seed-string-buffer",
+      "source": "fixtures/seed-string.nut",
+      "session": "fixtures/seed-string-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "seed-string-unsigned",
+      "source": "fixtures/seed-string.nut",
+      "session": "fixtures/seed-string-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "seed-string-utf8",
+      "source": "fixtures/seed-string.nut",
+      "session": "fixtures/seed-string-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "read-buffer",
+      "source": "fixtures/read.nut",
+      "session": "fixtures/read-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "read-unsigned",
+      "source": "fixtures/read.nut",
+      "session": "fixtures/read-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "read-utf8",
+      "source": "fixtures/read.nut",
+      "session": "fixtures/read-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "replace-buffer",
+      "source": "fixtures/replace.nut",
+      "session": "fixtures/replace-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "replace-unsigned",
+      "source": "fixtures/replace.nut",
+      "session": "fixtures/replace-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "replace-utf8",
+      "source": "fixtures/replace.nut",
+      "session": "fixtures/replace-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "seed-enum-buffer",
+      "source": "fixtures/seed-enum.nut",
+      "session": "fixtures/seed-enum-buffer.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "seed-enum-unsigned",
+      "source": "fixtures/seed-enum.nut",
+      "session": "fixtures/seed-enum-unsigned.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "seed-enum-utf8",
+      "source": "fixtures/seed-enum.nut",
+      "session": "fixtures/seed-enum-utf8.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "shared-lifetime",
+      "session": "fixtures/shared-lifetime.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "updates",
+      "session": "fixtures/updates.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "replacement-failure",
+      "session": "fixtures/replacement-failure.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    },
+    {
+      "id": "release-child",
+      "session": "fixtures/release-child.session",
+      "classification": "native-observation-pending",
+      "expected_verdict": null
+    }
+  ],
+  "excluded_domains": [
+    {
+      "kind": "unsupported-increment",
+      "domain": "postfix constant reference target-stack semantics",
+      "policy_category": null
+    },
+    {
+      "kind": "unsupported-increment",
+      "domain": "negation of minimum native integer",
+      "policy_category": null
+    }
+  ],
+  "approved_lexer_policy": "unchanged; no new category or exempted input"
+}

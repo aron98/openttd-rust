@@ -1,0 +1,36 @@
+{
+  "undefined": [
+    "unicode_010.nut",
+    "unicode_014.nut",
+    "unicode_018.nut",
+    "unicode_022.nut",
+    "unicode_026.nut",
+    "unicode_030.nut",
+    "unicode_034.nut",
+    "unicode_038.nut",
+    "strings_policy_hex_00.nut",
+    "strings_policy_hex_01.nut",
+    "strings_policy_hex_02.nut",
+    "strings_policy_hex_03.nut",
+    "strings_policy_hex_04.nut",
+    "strings_policy_hex_05.nut",
+    "strings_policy_hex_06.nut",
+    "strings_policy_hex_07.nut",
+    "strings_policy_hex_08.nut"
+  ],
+  "defined": [
+    "strings_defined_plain_low.nut",
+    "strings_defined_plain_euro.nut",
+    "strings_bytes_0_0.nut",
+    "strings_defined_verbatim_unicode.nut",
+    "strings_defined_character_unicode.nut",
+    "strings_defined_hex_ascii_terminator.nut",
+    "strings_defined_hex_byte233.nut",
+    "strings_defined_hex_byte255.nut",
+    "strings_defined_hex_fifth_ascii.nut",
+    "strings_defined_earlier_escape.nut",
+    "strings_defined_nul_suffix.nut",
+    "strings_defined_comment_unicode.nut",
+    "strings_defined_hex_nul.nut"
+  ]
+}

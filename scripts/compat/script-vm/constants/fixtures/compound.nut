@@ -1,0 +1,2 @@
+const K=7;
+ local a=(K+=2); return a+K;

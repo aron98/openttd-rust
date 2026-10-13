@@ -1,0 +1,16 @@
+step 0 compile 0 0 utf8 fixtures/enum-duplicates.nut
+compiled
+stack 2
+op 2 1 2 0 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+step 1 lookup 0 K -
+lookup K - absent
+step 2 lookup 0 E -
+lookup E - enum
+step 3 lookup 0 E A
+lookup E A integer 1
+step 4 lookup 0 E B
+lookup E B integer 2
+step 5 lookup 0 E D
+lookup E D missing_member

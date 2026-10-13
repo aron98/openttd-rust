@@ -1,0 +1,64 @@
+--- a/src/town_cmd.cpp
++++ b/src/town_cmd.cpp
+@@ -67,6 +67,7 @@
+ #include "table/strings.h"
+ #include "table/town_land.h"
+ 
++#include "reference_house_observer.hpp"
+ #include "safeguards.h"
+ 
+ /* Initialize the town-pool */
+@@ -602,6 +603,7 @@
+  */
+ static void TileLoop_Town(TileIndex tile)
+ {
++	ReferenceHouse::Scope observation(tile.base());
+ 	HouseID house_id = GetHouseType(tile);
+ 
+ 	/* NewHouseTileLoop returns false if Callback 21 succeeded, i.e. the house
+--- a/src/saveload/reference_replay_commands.hpp
++++ b/src/saveload/reference_replay_commands.hpp
+@@ -10,11 +10,13 @@
+ #include "../terraform_cmd.h"
+ #include "../vehicle_cmd.h"
+ #include "../command_func.h"
++#include "reference_house_prepare.hpp"
+ 
+ namespace ReferenceReplay {
+ inline bool Post(const Json &command)
+ {
+     const std::string kind = command.at("kind");
++    if (kind.starts_with("house_")) return HouseCommand(command);
+     if (kind == "movement_prepare_original_acceleration") {
+         for (const char *name : {"OTTD_MOVEMENT_OBSERVE", "OTTD_MOVEMENT_PREPARE"}) {
+             const char *enabled = std::getenv(name);
+--- a/src/saveload/reference_replay.hpp
++++ b/src/saveload/reference_replay.hpp
+@@ -21,6 +21,7 @@
+ #include "reference_replay_cost.hpp"
+ #include "reference_replay_commands.hpp"
+ #include "reference_replay_fixture.hpp"
++#include "../reference_house_observer.hpp"
+ 
+ namespace ReferenceReplay {
+ inline Json Runtime()
+@@ -49,6 +50,10 @@
+     setenv("OTTD_WORLD_PATH", (stem + ".world.json").c_str(), 1);
+     setenv("OTTD_WORLD_SCHEMA_PATH", (stem + ".schema.json").c_str(), 1);
+     setenv("OTTD_WORLD_DERIVED_PATH", (stem + ".derived.json").c_str(), 1);
++    if (std::getenv("OTTD_HOUSE_CACHE") != nullptr) {
++        Write(stem + ".houses.json", ReferenceHouse::Cache());
++        Write(stem + ".house-specs.json", ReferenceHouse::Specs());
++    }
+     const Json before = Runtime();
+     Require(SaveOrLoad(stem + ".sav", SLO_SAVE, DFT_GAME_FILE, NO_DIRECTORY, false) == SL_OK, "native checkpoint save failed");
+     ReferenceWorld::AfterLoad();
+@@ -65,7 +70,7 @@
+     const char *path = std::getenv("OTTD_REPLAY_PATH");
+     static bool active = false;
+     static bool done = false;
+-    if (path == nullptr || active || done || _game_mode != GM_NORMAL) return false;
++    if (path == nullptr || active || done || (_game_mode != GM_NORMAL && !(_game_mode == GM_EDITOR && HousePreparationEnabled()))) return false;
+     TreeRatingEnabled();
+     active = true;
+     std::ifstream input(path);

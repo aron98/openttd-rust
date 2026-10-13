@@ -1,0 +1,1753 @@
+{
+  "schema_version": 1,
+  "sp_order": [
+    "empty-allocator-history",
+    "shared-three-members",
+    "timetable-payload-combinations",
+    "nearest-current-versus-scheduled",
+    "unrelated-order-namespaces",
+    "users-at-tile-and-replacement",
+    "explicit-invalid-tile-reset",
+    "explicit-invalid-tile-user-reset",
+    "remote-owned-nearest-and-clone",
+    "clone-head-middle-alternatives",
+    "group-only-invalidation",
+    "capacity-and-sparse-reuse",
+    "sp-transient-save"
+  ],
+  "descriptors": {
+    "sp/cases/capacity-and-sparse-reuse": {
+      "schema_version": 1,
+      "case": "capacity-and-sparse-reuse",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup_users",
+          "vehicle": 0,
+          "users": [
+            1000,
+            1001,
+            1002,
+            1003,
+            1004,
+            1005,
+            1006,
+            1007,
+            1008,
+            1009,
+            1010,
+            1011,
+            1012,
+            1013,
+            1014,
+            1015,
+            1016,
+            1017,
+            1018,
+            1019,
+            1020,
+            1021,
+            1022,
+            1023,
+            1024,
+            1025,
+            1026,
+            1027,
+            1028,
+            1029,
+            1030,
+            1031,
+            1032,
+            1033,
+            1034,
+            1035,
+            1036,
+            1037,
+            1038,
+            1039,
+            1040,
+            1041,
+            1042,
+            1043,
+            1044,
+            1045,
+            1046,
+            1047,
+            1048,
+            1049,
+            1050,
+            1051,
+            1052,
+            1053,
+            1054,
+            1055,
+            1056,
+            1057,
+            1058,
+            1059,
+            1060,
+            1061,
+            1062,
+            1063,
+            1064,
+            1065,
+            1066,
+            1067,
+            1068,
+            1069,
+            1070,
+            1071,
+            1072,
+            1073,
+            1074,
+            1075,
+            1076,
+            1077,
+            1078,
+            1079,
+            1080,
+            1081,
+            1082,
+            1083,
+            1084,
+            1085,
+            1086,
+            1087,
+            1088,
+            1089,
+            1090,
+            1091,
+            1092,
+            1093,
+            1094,
+            1095,
+            1096,
+            1097,
+            1098,
+            1099,
+            1100,
+            1101,
+            1102,
+            1103,
+            1104,
+            1105,
+            1106,
+            1107,
+            1108,
+            1109,
+            1110,
+            1111,
+            1112,
+            1113,
+            1114,
+            1115,
+            1116,
+            1117,
+            1118,
+            1119,
+            1120,
+            1121,
+            1122,
+            1123,
+            1124,
+            1125,
+            1126,
+            1127,
+            1128,
+            1129,
+            1130,
+            1131,
+            1132,
+            1133,
+            1134,
+            1135,
+            1136,
+            1137,
+            1138,
+            1139,
+            1140,
+            1141,
+            1142,
+            1143,
+            1144,
+            1145,
+            1146,
+            1147,
+            1148,
+            1149,
+            1150,
+            1151,
+            1152,
+            1153,
+            1154,
+            1155,
+            1156,
+            1157,
+            1158,
+            1159,
+            1160,
+            1161,
+            1162,
+            1163,
+            1164,
+            1165,
+            1166,
+            1167,
+            1168,
+            1169,
+            1170,
+            1171,
+            1172,
+            1173,
+            1174,
+            1175,
+            1176,
+            1177,
+            1178,
+            1179,
+            1180,
+            1181,
+            1182,
+            1183,
+            1184,
+            1185,
+            1186,
+            1187,
+            1188,
+            1189,
+            1190,
+            1191,
+            1192,
+            1193,
+            1194,
+            1195,
+            1196,
+            1197,
+            1198,
+            1199,
+            1200,
+            1201,
+            1202,
+            1203,
+            1204,
+            1205,
+            1206,
+            1207,
+            1208,
+            1209,
+            1210,
+            1211,
+            1212,
+            1213,
+            1214,
+            1215,
+            1216,
+            1217,
+            1218,
+            1219,
+            1220,
+            1221,
+            1222,
+            1223,
+            1224,
+            1225,
+            1226,
+            1227,
+            1228,
+            1229,
+            1230,
+            1231,
+            1232,
+            1233,
+            1234,
+            1235,
+            1236,
+            1237,
+            1238,
+            1239,
+            1240,
+            1241,
+            1242,
+            1243,
+            1244,
+            1245,
+            1246,
+            1247,
+            1248,
+            1249,
+            1250,
+            1251,
+            1252,
+            1253,
+            1254
+          ]
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 5000
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 1000
+        },
+        {
+          "op": "reset_user",
+          "user": 1037
+        },
+        {
+          "op": "reset_user",
+          "user": 1128
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 5001
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 5002
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/clone-head-middle-alternatives": {
+      "schema_version": 1,
+      "case": "clone-head-middle-alternatives",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 1,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 101
+        },
+        {
+          "op": "clear_vehicle",
+          "vehicle": 0
+        },
+        {
+          "op": "clear_vehicle",
+          "vehicle": 2
+        },
+        {
+          "op": "clear_vehicle",
+          "vehicle": 1
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/empty-allocator-history": {
+      "schema_version": 1,
+      "case": "empty-allocator-history",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup_users",
+          "vehicle": 0,
+          "users": [
+            100,
+            101
+          ]
+        },
+        {
+          "op": "reset_tile",
+          "tile": 1556
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/explicit-invalid-tile-reset": {
+      "schema_version": 1,
+      "case": "explicit-invalid-tile-reset",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 3,
+          "user": 101
+        },
+        {
+          "op": "reset_tile",
+          "tile": 4294967295
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/explicit-invalid-tile-user-reset": {
+      "schema_version": 1,
+      "case": "explicit-invalid-tile-user-reset",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 3,
+          "user": 101
+        },
+        {
+          "op": "reset_user",
+          "user": 101,
+          "tile": 4294967295
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/group-only-invalidation": {
+      "schema_version": 1,
+      "case": "group-only-invalidation",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 3,
+          "user": 101
+        },
+        {
+          "op": "clear_group",
+          "group": 0
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/nearest-current-versus-scheduled": {
+      "schema_version": 1,
+      "case": "nearest-current-versus-scheduled",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/remote-owned-nearest-and-clone": {
+      "schema_version": 1,
+      "case": "remote-owned-nearest-and-clone",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 3,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 4,
+          "user": 101
+        },
+        {
+          "op": "backup",
+          "vehicle": 5,
+          "user": 102
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/shared-three-members": {
+      "schema_version": 1,
+      "case": "shared-three-members",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/sp-transient-save": {
+      "schema_version": 1,
+      "case": "sp-transient-save",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 100
+        },
+        {
+          "op": "save",
+          "label": "transient"
+        },
+        {
+          "op": "snapshot",
+          "label": "after-save"
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/timetable-payload-combinations": {
+      "schema_version": 1,
+      "case": "timetable-payload-combinations",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/unrelated-order-namespaces": {
+      "schema_version": 1,
+      "case": "unrelated-order-namespaces",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/cases/users-at-tile-and-replacement": {
+      "schema_version": 1,
+      "case": "users-at-tile-and-replacement",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 1,
+          "user": 101
+        },
+        {
+          "op": "backup",
+          "vehicle": 2,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 3,
+          "user": 102
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "sp/fleet": {
+      "schema_version": 1,
+      "case": "fleet",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "build_depot",
+          "company": 0,
+          "tile": 1560
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1556,
+          "engine": 116
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1556,
+          "engine": 116
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1556,
+          "engine": 116
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1560,
+          "engine": 116
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1560,
+          "engine": 116
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1560,
+          "engine": 116
+        },
+        {
+          "op": "save",
+          "label": "fleet"
+        }
+      ]
+    },
+    "sp/setup/capacity-and-sparse-reuse": {
+      "schema_version": 1,
+      "case": "capacity-and-sparse-reuse-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/clone-head-middle-alternatives": {
+      "schema_version": 1,
+      "case": "clone-head-middle-alternatives-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 1,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 1,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 2,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 17,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "share",
+          "vehicle": 1,
+          "source": 0
+        },
+        {
+          "op": "share",
+          "vehicle": 2,
+          "source": 0
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/empty-allocator-history": {
+      "schema_version": 1,
+      "case": "empty-allocator-history-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/explicit-invalid-tile-reset": {
+      "schema_version": 1,
+      "case": "explicit-invalid-tile-reset-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/explicit-invalid-tile-user-reset": {
+      "schema_version": 1,
+      "case": "explicit-invalid-tile-user-reset-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/group-only-invalidation": {
+      "schema_version": 1,
+      "case": "group-only-invalidation-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "create_group",
+          "company": 0
+        },
+        {
+          "op": "add_group",
+          "vehicle": 0,
+          "group": 0
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/nearest-current-versus-scheduled": {
+      "schema_version": 1,
+      "case": "nearest-current-versus-scheduled-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 18,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 0,
+          "order": {
+            "type": 2,
+            "flags": 18,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/remote-owned-nearest-and-clone": {
+      "schema_version": 1,
+      "case": "remote-owned-nearest-and-clone-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 1,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 1,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 2,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 17,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "share",
+          "vehicle": 1,
+          "source": 0
+        },
+        {
+          "op": "share",
+          "vehicle": 2,
+          "source": 0
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 3,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 5,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 18,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "share",
+          "vehicle": 4,
+          "source": 0
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/shared-three-members": {
+      "schema_version": 1,
+      "case": "shared-three-members-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 1,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 1,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 2,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 17,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "share",
+          "vehicle": 1,
+          "source": 0
+        },
+        {
+          "op": "share",
+          "vehicle": 2,
+          "source": 0
+        },
+        {
+          "op": "current_order",
+          "vehicle": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 1,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 2,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/sp-transient-save": {
+      "schema_version": 1,
+      "case": "sp-transient-save-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "consist_fields",
+          "vehicle": 0,
+          "fields": {
+            "name": "Native order width probe",
+            "current_order_time": -2147483648,
+            "lateness_counter": -2147483647,
+            "timetable_start": 4294967301,
+            "service_interval": 121,
+            "cur_real_order_index": 0,
+            "cur_implicit_order_index": 0,
+            "vehicle_flags": 1023
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/timetable-payload-combinations": {
+      "schema_version": 1,
+      "case": "timetable-payload-combinations-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 0,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 0,
+          "order": {
+            "type": 194,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 53,
+            "travel_time": 59,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 1,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 10,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 0,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 1,
+          "order": {
+            "type": 194,
+            "flags": 10,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 53,
+            "travel_time": 59,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 2,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 130,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 2,
+          "order": {
+            "type": 194,
+            "flags": 130,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 53,
+            "travel_time": 59,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 3,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 138,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 3,
+          "order": {
+            "type": 194,
+            "flags": 138,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 53,
+            "travel_time": 59,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/unrelated-order-namespaces": {
+      "schema_version": 1,
+      "case": "unrelated-order-namespaces-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 1,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 1,
+          "order": {
+            "type": 8,
+            "flags": 2,
+            "dest": 1,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 2,
+          "order": {
+            "type": 6,
+            "flags": 2,
+            "dest": 2,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 3,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 1,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "sp/setup/users-at-tile-and-replacement": {
+      "schema_version": 1,
+      "case": "users-at-tile-and-replacement-setup",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "hangar/airport": {
+      "schema_version": 1,
+      "case": "original-airport-before-station-coverage",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "build_airport",
+          "company": 0,
+          "tile": 1580,
+          "airport_type": 1,
+          "layout": 0
+        },
+        {
+          "op": "save",
+          "label": "airport"
+        }
+      ]
+    },
+    "hangar/case": {
+      "schema_version": 1,
+      "case": "placed-hangar-backup-namespace",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 0,
+          "user": 100
+        },
+        {
+          "op": "backup",
+          "vehicle": 2,
+          "user": 101
+        },
+        {
+          "op": "invalidate_depot",
+          "depot_id": 0,
+          "tile": 1556
+        },
+        {
+          "op": "snapshot",
+          "label": "after-invalidation"
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "hangar/fleet": {
+      "schema_version": 1,
+      "case": "original-aircraft-and-road-fleet",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1585,
+          "engine": 215
+        },
+        {
+          "op": "build_vehicle",
+          "company": 0,
+          "tile": 1556,
+          "engine": 116
+        },
+        {
+          "op": "save",
+          "label": "fleet"
+        }
+      ]
+    },
+    "hangar/setup": {
+      "schema_version": 1,
+      "case": "genuine-hangar-and-road-destination-collision",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "insert_order",
+          "vehicle": 0,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "insert_order",
+          "vehicle": 2,
+          "index": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 0,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "current_order",
+          "vehicle": 2,
+          "order": {
+            "type": 2,
+            "flags": 2,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "initial"
+        }
+      ]
+    },
+    "orphan/orphan": {
+      "schema_version": 1,
+      "case": "orphan-afterload-cache",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "snapshot",
+          "label": "loaded-orphan"
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "orphan/setup": {
+      "schema_version": 1,
+      "case": "orphan-original-constructor",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "orphan_order",
+          "order": {
+            "type": 2,
+            "flags": 138,
+            "dest": 0,
+            "refit_cargo": 0,
+            "wait_time": 31,
+            "travel_time": 47,
+            "max_speed": 123
+          }
+        },
+        {
+          "op": "save",
+          "label": "orphan"
+        }
+      ]
+    },
+    "network/single/server": {
+      "schema_version": 1,
+      "case": "authentic-server-backups",
+      "role": "server",
+      "exit": false,
+      "actions": [
+        {
+          "op": "backup",
+          "vehicle": 1,
+          "user": 100
+        },
+        {
+          "op": "share",
+          "vehicle": 0,
+          "source": 0,
+          "mode": 2
+        },
+        {
+          "op": "save",
+          "label": "server-live"
+        },
+        {
+          "op": "await_file",
+          "label": "clientdone"
+        },
+        {
+          "op": "snapshot",
+          "label": "client-connected"
+        }
+      ]
+    },
+    "network/single/client": {
+      "schema_version": 1,
+      "case": "authentic-client-backup-load",
+      "role": "client",
+      "exit": false,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "clear_vehicle",
+          "vehicle": 0
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "network/multi/server": {
+      "schema_version": 1,
+      "case": "authentic-server-backups",
+      "role": "server",
+      "exit": false,
+      "actions": [
+        {
+          "op": "backup",
+          "vehicle": 1,
+          "user": 100
+        },
+        {
+          "op": "share",
+          "vehicle": 0,
+          "source": 0,
+          "mode": 2
+        },
+        {
+          "op": "backup",
+          "vehicle": 3,
+          "user": 101
+        },
+        {
+          "op": "save",
+          "label": "server-live"
+        },
+        {
+          "op": "await_file",
+          "label": "clientdone"
+        },
+        {
+          "op": "snapshot",
+          "label": "client-connected"
+        }
+      ]
+    },
+    "network/multi/client": {
+      "schema_version": 1,
+      "case": "authentic-client-backup-load",
+      "role": "client",
+      "exit": false,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "clear_vehicle",
+          "vehicle": 0
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "role/sp": {
+      "schema_version": 1,
+      "case": "loaded-ID0-sp-backup-lifetime",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 1,
+          "user": 101
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "role/server": {
+      "schema_version": 1,
+      "case": "loaded-ID0-server-backup-lifetime",
+      "role": "server",
+      "exit": true,
+      "actions": [
+        {
+          "op": "save",
+          "label": "before"
+        },
+        {
+          "op": "backup",
+          "vehicle": 1,
+          "user": 101
+        },
+        {
+          "op": "save",
+          "label": "after"
+        }
+      ]
+    },
+    "boundary/sp": {
+      "schema_version": 1,
+      "case": "loaded-index-boundary-sp",
+      "role": "sp",
+      "exit": true,
+      "actions": [
+        {
+          "op": "snapshot",
+          "label": "unreachable"
+        }
+      ]
+    },
+    "boundary/server": {
+      "schema_version": 1,
+      "case": "loaded-index-boundary-server",
+      "role": "server",
+      "exit": true,
+      "actions": [
+        {
+          "op": "snapshot",
+          "label": "unreachable"
+        }
+      ]
+    },
+    "boundary/client": {
+      "schema_version": 1,
+      "case": "client-loaded-index-deletion-boundary",
+      "role": "client",
+      "exit": false,
+      "actions": [
+        {
+          "op": "reset_user",
+          "user": 101
+        }
+      ]
+    }
+  }
+}

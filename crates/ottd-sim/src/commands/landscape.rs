@@ -1,4 +1,5 @@
-use super::{CommandCost, CommandError, Plan};
+use super::{CommandCost, CommandError, Plan, terrain_read::TerrainRead};
+use crate::content::{ContentCatalog, Price, Prices};
 use crate::world_access::{field_edit, unsigned};
 use ottd_save::{
     TileRawParts, TileState, WireValue,
@@ -34,12 +35,28 @@ pub(super) fn clear(
     tile: u32,
     automatic: bool,
 ) -> Result<Plan, CommandError> {
-    let source = tile_at(world, tile)?;
+    let catalog = ContentCatalog::from_world(world)?;
+    clear_with_prices(
+        TerrainRead::Committed(world),
+        company,
+        tile,
+        automatic,
+        catalog.prices(),
+    )
+}
+pub(super) fn clear_with_prices(
+    world: TerrainRead<'_>,
+    company: u8,
+    tile: u32,
+    automatic: bool,
+    prices: &Prices,
+) -> Result<Plan, CommandError> {
+    let source = world.tile(tile)?;
     if source.tile_type() >> 4 != 0 {
         return Err(CommandError::Unsupported("clearing non-clear terrain"));
     }
     let company = u32::from(company);
-    let limit = unsigned(world, b"PLYR", company, "clear_limit")?;
+    let limit = world.unsigned(*b"PLYR", company, "clear_limit")?;
     if !automatic && limit >> 16 == 0 {
         return Ok(Plan::empty(CommandCost::failure(
             "STR_ERROR_CLEARING_LIMIT_REACHED",
@@ -47,28 +64,53 @@ pub(super) fn clear(
     }
     let ground = (source.m5() >> 2) & 7;
     let base = match ground {
-        0 => 20,
-        1 | 4 | 5 => 40,
-        2 => 200,
-        3 => 500,
+        0 => Price::ClearGrass,
+        1 | 4 | 5 => Price::ClearRough,
+        2 => Price::ClearRocks,
+        3 => Price::ClearFields,
         _ => return Err(CommandError::Unsupported("invalid clear ground")),
     };
     let snow = source.m3() & 16 != 0;
     let mut cost = if snow || ground != 0 || source.m5() & 3 != 0 {
-        price(world, base)?
+        prices.get(base)
     } else {
         0
     };
     if snow {
         cost = cost
             .checked_add(
-                price(world, 40)?
-                    .checked_sub(price(world, 20)?)
+                prices
+                    .get(Price::ClearRough)
+                    .checked_sub(prices.get(Price::ClearGrass))
                     .and_then(i64::checked_abs)
                     .ok_or(CommandError::Overflow("snow price"))?,
             )
             .ok_or(CommandError::Overflow("snow clearing"))?;
     }
+    let mut edits = clear_square(world, tile)?;
+    if !automatic {
+        edits.push(field_edit(
+            *b"PLYR",
+            company,
+            "clear_limit",
+            WireValue::Unsigned(
+                limit
+                    .checked_sub(65_536)
+                    .ok_or(CommandError::Overflow("clear limit"))?,
+            ),
+        ));
+    }
+    Ok(Plan {
+        returns: None,
+        cost: CommandCost::success(cost, 0),
+        edits,
+    })
+}
+pub(super) fn clear_square(
+    world: TerrainRead<'_>,
+    tile: u32,
+) -> Result<Vec<WorldEdit>, CommandError> {
+    let source = world.tile(tile)?;
     let clear = TileRawParts {
         tile_type: source.tile_type() & 15,
         height: source.height(),
@@ -86,26 +128,12 @@ pub(super) fn clear(
         value: clear.into(),
     }];
     edits.extend(clear_neighbor_water(world, tile)?);
-    if !automatic {
-        edits.push(field_edit(
-            *b"PLYR",
-            company,
-            "clear_limit",
-            WireValue::Unsigned(
-                limit
-                    .checked_sub(65_536)
-                    .ok_or(CommandError::Overflow("clear limit"))?,
-            ),
-        ));
-    }
-    Ok(Plan {
-        cost: CommandCost::success(cost, 0),
-        edits,
-    })
+    Ok(edits)
 }
-fn clear_neighbor_water(world: &World, tile: u32) -> Result<Vec<WorldEdit>, CommandError> {
+
+fn clear_neighbor_water(world: TerrainRead<'_>, tile: u32) -> Result<Vec<WorldEdit>, CommandError> {
     let mut edits = Vec::new();
-    let width = i64::from(world.map().width());
+    let width = i64::from(world.size().width());
     let previous = width
         .checked_sub(1)
         .ok_or(CommandError::Overflow("map width"))?;
@@ -128,14 +156,12 @@ fn clear_neighbor_water(world: &World, tile: u32) -> Result<Vec<WorldEdit>, Comm
         else {
             continue;
         };
-        let Some(neighbour) = usize::try_from(index)
-            .ok()
-            .and_then(|i| world.map().tiles().get(i))
-        else {
+        if index >= world.size().count()? {
             continue;
-        };
+        }
+        let neighbour = world.tile(index)?;
         if neighbour.tile_type() >> 4 == 6 {
-            let mut parts = TileRawParts::from(neighbour);
+            let mut parts = TileRawParts::from(&neighbour);
             parts.m3 &= !1;
             edits.push(WorldEdit::Tile {
                 index,

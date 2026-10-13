@@ -1,0 +1,15 @@
+snapshot attached
+object A 1 1 0 -
+object B 1 1 0 -
+object D 1 1 0 -
+object O 1 1 2 D
+snapshot released
+object A 0
+object B 0
+object D 0
+object O 0
+free O 88
+free B 88
+free A 88
+free D 88
+recorder 1

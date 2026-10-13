@@ -1,0 +1,13 @@
+[package]
+name = "ottd-script"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# Ryu is used under its Boost Software License 1.0 option.
+ryu = "=1.0.23"

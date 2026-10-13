@@ -3,14 +3,33 @@ use super::{
     invalid,
 };
 use crate::{Chunk, ChunkKind};
+#[cfg(test)]
+mod tests;
 
 pub(super) fn encode(table: &TableChunk) -> Result<Chunk, TableError> {
+    let output = write(table, true, false)?;
+    Ok(Chunk::from_table(table.id, table.kind, output.bytes)?)
+}
+
+pub(super) fn validate(table: &TableChunk) -> Result<usize, TableError> {
+    let output = write(table, false, false)?;
+    write(table, false, true)?;
+    Ok(output.length)
+}
+
+fn write(table: &TableChunk, capture: bool, decode_budget: bool) -> Result<Output, TableError> {
     let tails = allow_tail(table.id, table.tail_policy)?;
     let mut budget = Budget::new(table.limits);
-    let mut output = Output::new(table.limits.max_bytes);
-    let mut header = Output::new(table.limits.max_bytes);
+    if decode_budget {
+        schema_name_budget(&table.schema, &mut budget)?;
+        for row in table.records.values() {
+            budget.charge(0, row.tail.len())?;
+        }
+    }
+    let mut output = Output::new(table.limits.max_bytes, capture);
+    let mut header = Output::new(table.limits.max_bytes, capture);
     schema(&table.schema, &mut header, &mut budget, 1)?;
-    output.frame(&header.bytes)?;
+    output.frame(&header)?;
     match table.kind {
         ChunkKind::Table => {
             let last = table.records.last_key_value().map_or(Ok(0), |(id, _)| {
@@ -24,7 +43,7 @@ pub(super) fn encode(table: &TableChunk) -> Result<Chunk, TableError> {
             for index in 0..count {
                 match table.records.get(&index) {
                     Some(row) => {
-                        let mut encoded = Output::new(table.limits.max_bytes);
+                        let mut encoded = Output::new(table.limits.max_bytes, capture);
                         record(
                             row,
                             &table.schema,
@@ -34,13 +53,13 @@ pub(super) fn encode(table: &TableChunk) -> Result<Chunk, TableError> {
                             &format!("record[{index}]"),
                         )?;
                         tail(row, tails, &mut encoded)?;
-                        if encoded.bytes.is_empty() {
+                        if encoded.length == 0 {
                             return Err(invalid(
                                 "record",
                                 "empty ordinary record is indistinguishable from a hole",
                             ));
                         }
-                        output.frame(&encoded.bytes)?;
+                        output.frame(&encoded)?;
                     }
                     None => output.gamma(1)?,
                 }
@@ -49,7 +68,7 @@ pub(super) fn encode(table: &TableChunk) -> Result<Chunk, TableError> {
         ChunkKind::SparseTable => {
             budget.items::<(u32, TableRecord)>(table.records.len())?;
             for (index, row) in &table.records {
-                let mut encoded = Output::new(table.limits.max_bytes);
+                let mut encoded = Output::new(table.limits.max_bytes, capture);
                 encoded.gamma(
                     usize::try_from(*index).map_err(|_| invalid("record", "index overflow"))?,
                 )?;
@@ -62,7 +81,7 @@ pub(super) fn encode(table: &TableChunk) -> Result<Chunk, TableError> {
                     &format!("record[{index}]"),
                 )?;
                 tail(row, tails, &mut encoded)?;
-                output.frame(&encoded.bytes)?;
+                output.frame(&encoded)?;
             }
         }
         ChunkKind::Riff | ChunkKind::Array | ChunkKind::SparseArray => {
@@ -70,7 +89,23 @@ pub(super) fn encode(table: &TableChunk) -> Result<Chunk, TableError> {
         }
     }
     output.byte(0)?;
-    Ok(Chunk::from_table(table.id, table.kind, output.bytes)?)
+    Ok(output)
+}
+fn schema_name_budget(schema: &TableSchema, budget: &mut Budget) -> Result<(), TableError> {
+    for field in &schema.fields {
+        budget.charge(
+            0,
+            field
+                .name
+                .len()
+                .checked_mul(2)
+                .ok_or(TableError::Limit("allocation bytes"))?,
+        )?;
+        if let Some(child) = &field.child {
+            schema_name_budget(child, budget)?;
+        }
+    }
+    Ok(())
 }
 fn tail(row: &TableRecord, allowed: bool, output: &mut Output) -> Result<(), TableError> {
     if !allowed && !row.tail.is_empty() {
@@ -208,41 +243,55 @@ fn scalar(value: &WireValue, kind: u8, output: &mut Output, path: &str) -> Resul
 }
 struct Output {
     bytes: Vec<u8>,
+    length: usize,
+    capture: bool,
     limit: usize,
 }
 impl Output {
-    const fn new(limit: usize) -> Self {
+    const fn new(limit: usize, capture: bool) -> Self {
         Self {
             bytes: Vec::new(),
+            length: 0,
+            capture,
             limit,
         }
     }
-    fn extend(&mut self, bytes: &[u8]) -> Result<(), TableError> {
+    fn advance(&mut self, count: usize) -> Result<(), TableError> {
         let length = self
-            .bytes
-            .len()
-            .checked_add(bytes.len())
+            .length
+            .checked_add(count)
             .ok_or(TableError::Limit("wire bytes"))?;
         if length > self.limit {
             return Err(TableError::Limit("wire bytes"));
         }
-        self.bytes
-            .try_reserve(bytes.len())
-            .map_err(|_| TableError::Limit("allocation bytes"))?;
-        self.bytes.extend_from_slice(bytes);
+        self.length = length;
+        Ok(())
+    }
+    fn extend(&mut self, bytes: &[u8]) -> Result<(), TableError> {
+        self.advance(bytes.len())?;
+        if self.capture {
+            self.bytes
+                .try_reserve(bytes.len())
+                .map_err(|_| TableError::Limit("allocation bytes"))?;
+            self.bytes.extend_from_slice(bytes);
+        }
         Ok(())
     }
     fn byte(&mut self, byte: u8) -> Result<(), TableError> {
         self.extend(&[byte])
     }
-    fn frame(&mut self, bytes: &[u8]) -> Result<(), TableError> {
+    fn frame(&mut self, child: &Self) -> Result<(), TableError> {
         self.gamma(
-            bytes
-                .len()
+            child
+                .length
                 .checked_add(1)
                 .ok_or(TableError::Limit("wire bytes"))?,
         )?;
-        self.extend(bytes)
+        if self.capture {
+            self.extend(&child.bytes)
+        } else {
+            self.advance(child.length)
+        }
     }
     fn gamma(&mut self, value: usize) -> Result<(), TableError> {
         let value = u32::try_from(value).map_err(|_| TableError::Limit("gamma length"))?;

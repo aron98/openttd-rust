@@ -1,0 +1,14 @@
+print collect-active
+active before 9996 2 2 5 0
+array-reference 1 2
+chain A O D
+collected active 1
+active after 9996 2 2 5 0
+array-reference 1 0
+chain
+free O 88
+free D 88
+completed 1 0 9994 integer 1
+collected released 0
+free A 72
+recorder 1

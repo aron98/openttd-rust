@@ -23,6 +23,19 @@ pub(super) fn validate(tables: &Tables, map: &MapState) -> Result<(), WorldError
                 return Err(invalid(&path, "pool ID out of range"));
             }
         }
+        if chunk == b"ENGN"
+            && table
+                .records()
+                .keys()
+                .copied()
+                .zip(0..)
+                .any(|(id, expected)| id != expected)
+        {
+            return Err(invalid(
+                "ENGN",
+                "engine records must be contiguous from zero",
+            ));
+        }
     }
     validate_variants(tables)?;
     validate_vehicle_edges(tables)?;

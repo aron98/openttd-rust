@@ -1,0 +1,2 @@
+compile 0 0 unsigned legacy-foreach.nut
+run 0 0 10000

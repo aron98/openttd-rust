@@ -1,0 +1,14 @@
+seed 0 74657874 string 61626364
+seed 0 656666656374 integer 0
+compile 0 0 unsigned root-before.nut
+run 0 0 0
+seed 0 74657874 string 7a
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 10000
+temp 0
+raw 0 74657874
+raw 0 656666656374

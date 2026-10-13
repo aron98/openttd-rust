@@ -1,0 +1,1321 @@
+{
+  "controls": [
+    {
+      "case": "too-many-commands",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "snapshot"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host API input budget",
+      "executed": false
+    },
+    {
+      "case": "wide-first",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 65536,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host unsigned input",
+      "executed": false
+    },
+    {
+      "case": "wide-count",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 3,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host unsigned input",
+      "executed": false
+    },
+    {
+      "case": "negative-byte",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                -1
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host unsigned input",
+      "executed": false
+    },
+    {
+      "case": "wide-byte",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                256
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host unsigned input",
+      "executed": false
+    },
+    {
+      "case": "raw-budget",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host raw budget",
+      "executed": false
+    },
+    {
+      "case": "property-scope",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 2,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host property scope",
+      "executed": false
+    },
+    {
+      "case": "stage",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "init"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host stage",
+      "executed": false
+    },
+    {
+      "case": "static-type",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": 1
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host static flag",
+      "executed": false
+    },
+    {
+      "case": "mixed-currency",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        },
+        "currency_load": true
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host mixed observer modes",
+      "executed": false
+    },
+    {
+      "case": "schema-extra",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": true,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false,
+              "extra": 0
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host schema",
+      "executed": false
+    },
+    {
+      "case": "dynamic-type",
+      "manifest": {
+        "networking": false,
+        "files": [],
+        "engine_specs": {
+          "mode": "api",
+          "dynamic_engines": 1,
+          "commands": [
+            {
+              "op": "reset-default"
+            },
+            {
+              "op": "snapshot"
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757889,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "acquire",
+              "grfid": 1162757890,
+              "local_id": 0,
+              "static": false
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                80
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 9,
+              "raw": [
+                7
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 15,
+              "raw": [
+                42
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 0,
+              "count": 1,
+              "property": 17,
+              "raw": [
+                11
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 1,
+              "count": 1,
+              "property": 8,
+              "raw": [],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 2,
+              "count": 1,
+              "property": 1,
+              "raw": [
+                99
+              ],
+              "stage": "activation"
+            },
+            {
+              "op": "property",
+              "grfid": 1162757889,
+              "first": 3,
+              "count": 1,
+              "property": 8,
+              "raw": [
+                4
+              ],
+              "stage": "reserve"
+            },
+            {
+              "op": "reset-retained"
+            }
+          ]
+        }
+      },
+      "scope": "native-host",
+      "expected_diagnostic": "engine-spec host dynamic flag",
+      "executed": false
+    }
+  ]
+}

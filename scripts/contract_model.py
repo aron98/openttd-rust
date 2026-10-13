@@ -1,8 +1,10 @@
 """Typed metadata boundary for the compatibility contract."""
 
+import json
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import StrEnum
-import json
+from functools import partial
 from pathlib import Path
 from typing import TypeAlias
 
@@ -97,14 +99,23 @@ def unique_object(pairs: list[tuple[str, Json]]) -> dict[str, Json]:
     return result
 
 
+decode_value: Callable[[bytes], Json] = partial(
+    json.loads, object_pairs_hook=unique_object
+)
+
+
 def read_json(path: Path) -> Json:
     with path.open("rb") as source:
         data = source.read(1024 * 1024 + 1)
     if len(data) > 1024 * 1024:
         raise ContractError("manifest byte limit exceeded (1 MiB)")
+    return decode_json(data)
+
+
+def decode_json(data: bytes) -> Json:
     try:
-        return json.loads(data, object_pairs_hook=unique_object)
-    except (UnicodeError, RecursionError) as error:
+        return decode_value(data)
+    except (UnicodeError, RecursionError, json.JSONDecodeError) as error:
         raise ContractError(f"invalid JSON encoding/depth: {error}") from error
 
 
@@ -143,9 +154,9 @@ def strings(value: Json) -> tuple[str, ...]:
     return tuple(text(item) for item in array(value))
 
 
-def parse_contract(raw: dict[str, Json]) -> Contract:
-    assets = []
-    for item in array(raw["assets"]):
+def parse_assets(value: Json) -> tuple[Asset, ...]:
+    assets: list[Asset] = []
+    for item in array(value):
         row = record(item, "id path sha256 kind provenance save_version profile")
         version = row["save_version"]
         assets.append(
@@ -159,10 +170,15 @@ def parse_contract(raw: dict[str, Json]) -> Contract:
                 optional_text(row["profile"]),
             )
         )
-    profiles = []
+    return tuple(assets)
+
+
+def parse_contract(raw: dict[str, Json]) -> Contract:
+    assets = parse_assets(raw["assets"])
+    profiles: list[Profile] = []
     for item in array(raw["profiles"]):
         row = record(item, "id settings settings_assets content_metadata content")
-        contents = []
+        contents: list[Content] = []
         for entry in array(row["content"]):
             content = record(entry, "asset grfid md5 parameters")
             contents.append(
@@ -182,7 +198,7 @@ def parse_contract(raw: dict[str, Json]) -> Contract:
                 tuple(contents),
             )
         )
-    drivers = []
+    drivers: list[Driver] = []
     for item in array(raw["drivers"]):
         row = record(
             item,
@@ -203,7 +219,7 @@ def parse_contract(raw: dict[str, Json]) -> Contract:
                 integer(row["timeout_seconds"]),
             )
         )
-    scenarios = []
+    scenarios: list[Scenario] = []
     for item in array(raw["scenarios"]):
         row = record(
             item, "id status scope domain expected driver assets source_refs evidence"

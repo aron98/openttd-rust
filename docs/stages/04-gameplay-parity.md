@@ -1,0 +1,1436 @@
+# Stage 4: gameplay parity implementation plan
+
+Status: **In progress**. Branch: `stage/04-gameplay-parity`, based on the
+maintainer merge of [PR #4](https://github.com/aron98/openttd-rust/pull/4),
+`1eec4168398757644710eb1b0876cf8121eee922`. The approved roadmap authorizes this
+stage. One stage PR collects verified atomic increments; only the maintainer's
+merge authorizes stage 5.
+
+Progress is collected in draft [PR #5](https://github.com/aron98/openttd-rust/pull/5).
+
+Latest source composition: `3babb29` credits the native road vehicle pool
+(all five fields) and every company's road unit-number `next` in the
+whole-runtime evidence test against fresh forest/late-disaster/older-whole
+captures (`580eb6a`, pins `bfa224d`), and materializes the idle native
+session graph: the complete initial 13 shared tables, 66 default closures,
+four base closures, primary context and empty four-slot RefTable in native
+source order, proven against fresh native receipts with capability
+refusals before mutation (`0717292` pins). Both slices passed independent
+adversarial review; each review caught and repaired stale source-hash
+pins before integration. The workspace suite passes 947 tests with 162
+separately counted ignored cases; Python admissions pass 910 tests with
+29,377 subtests; 125 dependency-free tests pass. The four genuine
+shared-table/friend graph failures remain. Default-method execution,
+active graph attachment, Runner execution and the AI/GameScript host
+remain required. All seven broad stage gates remain OPEN.
+
+Previous source composition: `57d5e33` combines the reviewed company/annual/script
+runtime with disabled-disaster reset and the cumulative script metadata
+prerequisite. Both component reviews approve their exact frozen source. Atomic
+source, test, binding and metadata-layout commits remain in nonsquash history.
+All 5,443 product file origins and 23,007 source-hash bindings are checked; no
+parent files are removed. Final whole-integration QA/review and PR CI remain
+separate gates. All seven broad stage gates remain OPEN.
+
+Remote development instructions and the next-agent prompt are committed in
+[the remote handoff](04-remote-handoff.md). The small
+[original-input bundle](../../fixtures/stage04-handoff/README.md) supplies six
+unchanged saves/configs/action protocols for fresh-platform observation; native
+binaries and large local historical archives are not prerequisites to clone.
+
+The single-primary-road runtime now advances annual profit rotation and three
+owned group-profit fields, with the native finance/house/vehicle ordering, strict
+minimum-profit age threshold and exact age731 transition. Full native-backed
+23,930-call wood and 18,818-call passenger annual horizons pass. Named/default
+groups and reciprocal load origins are checked. Unsupported warning/news/AI
+contexts preserve committed state; these event queues remain required.
+
+The bounded quarterly company calculation now preserves all 150 raw score slots,
+including raw minimum profit before display shifting, native component weights,
+history rotation and fresh-process cache ownership. Original-backed profitable
+post-year 6,660-call and whole 25,478-call continuations, older reload and January
+boundaries pass. Both simulated save origins reach their next supported quarter.
+A genuine later disaster refusal after a changed 27,009-call prefix preserves the
+complete committed world, rating cache and actual worker ownership. Native pool
+arrays, wider company contexts, positive multi-fleet weighting and event queues
+remain required.
+
+Script operands now distinguish reference ownership from public host roots.
+Reference-live finalized storage preserves native table metadata, and edge
+release occurs in the native order outside heap borrows. Active-root tests cover
+a real allocated stack slot above the logical top. Public HostRoot Clone, const
+Runner construction and borrowed error accessors retain their behavior. These
+fixes do not implement the complete native shared VM, RefTable, defaults or
+AI/GameScript host.
+
+The combined author passes 928 workspace tests with 158 separately counted ignored
+cases, 910 Python tests plus 29,275 subtests, 125 stdlib tests, Clippy and formatting. Current normal
+script comparison covers 10,666 defined inputs and 153 explicit Rust-only
+refusals of source-proven undefined inputs; valid Unicode strings/comments remain
+covered in the identified script source epoch. The combined source retains fresh
+Cargo selections and focused native consumers; this is not a new full normal-driver
+execution. All 143 scenario statuses/scopes/evidence, 36 expanded drivers and six
+profiles are preserved. The 1,604 current asset digests validate in the 1,046,121-byte
+contract, below the unchanged 1 MiB cap. The exact 334-entry worlds artifact list now
+uses the existing bounded external-list mechanism. The prior company composition's
+27 distinct inventories/55 recorded rows and its large proof counts remain historical,
+not relabeled as this source epoch.
+
+The disabled-disaster timer now consumes the native reset draw before daily industry
+work. Original-backed 27,010-call and uninterrupted 33,744-call road continuations,
+and forest/house/timer 60,680-call continuations, pass the declared complete
+World/derived/cache/group/raw-rating scope. The three historical rollback-named
+60,680 selectors prove positive continuation only. A separate genuine annual-warning
+case matches the full 27,009-call prefix, then refuses the unsupported warning callback
+while preserving complete committed state and the real worker lease.
+
+Script metadata now describes 70 source registrations and 44 callback identities,
+with separately owned masks and explicit uncatchable default-function refusals.
+The existing four native bodies remain supported. The `3babb29` idle session
+materializes the initial 13 shared tables, 66 default closures, four base
+closures, primary context and empty four-slot RefTable in source order against
+fresh native receipts, with idle construction, collection and close order
+proven exactly and capability refusals before mutation. Default bodies,
+active graph attachment, full shared VM execution and the AI/GameScript host
+remain required. Four genuine
+shared-table/friend graph comparisons still fail in the two component profiles;
+the combined debug tests preserve both failures. No synthetic graph gains credit.
+
+Required failures remain explicit. Enabled disasters, warning event queues and
+broader simulation/content/script behavior remain required. Forest passes 36/38
+cuts and five of six simulated-origin continuations; tick512/tick6400 and the
+native3081 origin retain transport failures. The fresh raw561 success belongs
+to a distinct scheduling epoch and does not replace retained failures. A scale
+cycle, paused-load initial movement and unsaved interactive-RNG comparisons also
+remain FALSE. No retries, additional polling, prejoins or normalization earn
+compatibility credit.
+
+Previous reviewed composition: `7c682e5` integrated optional passive Rust causal
+tracing. Its author retained pending raw561 results at both checkpoints; root
+and reviewer trace-OFF failed at the last route checkpoint and passed at the
+later one, while trace-ON passed both. Those observations and earlier forest
+epochs remain retained separately. The newer annual and ownership results above
+do not erase unrelated compatibility failures.
+
+Previous published composition: `935121d` integrates passive original-engine async
+tracing with the published forest, script and stopped-consist runtime. The trace
+records existing branch-used readiness samples, pause callbacks, publication and
+owner lifetimes without additional polls or scheduling controls. Both producers
+require exact source membership, bytes and modes. The unchanged 1,513-item
+artifact list now uses the existing bounded external-list mechanism.
+
+Vanilla temperate forest production uses the existing recipient/distribution
+pipeline and matches original stock/history, graphics/RNG, packets and nine
+declared cache coordinates at verified handoff, regrowth, loaded continuation
+and normal scale300 graphics boundaries. Processing-industry delivery and payment
+remain required; the original station does not accept wood.
+
+The `935121d` author's 38-cut portfolio passes 36 cuts. Tick512 and tick6400 retain
+original job0 pending versus completed Rust failures. Five of six continuations
+from saves genuinely simulated by both engines pass; the native3081 origin fails
+at its initial pending-job comparison. Root observes an independent tick6400 pass,
+which does not replace either failure. Earlier `644b9e3` counts of 37/38 and six
+continuations describe a distinct epoch. Raw561, YAPF1247, automatic demand/old
+flows and the natural vehicle-year refusal remain open. Initial unsaved
+interactive-RNG differences also remain failed full-state comparisons.
+
+Separate after-load APIs restore stopped vanilla single locomotives and one
+straight consist on flat normal rail. Five authentic original-command rosters
+match per-part caches, links, stopped getters, RNG and saved/derived state
+through both serialized load origins. Unsupported and late-failing contexts
+leave the committed World unchanged. Train movement remains required.
+Passenger cargo has native-backed loading/delivery/payment, manual-distribution
+job publication and continuation from saves actually simulated by both engines.
+The `580eb6a` credit compares the native road vehicle pool (all five
+fields) and every company's road unit-number `next` in the whole-runtime
+evidence test against fresh forest/late-disaster/older-whole captures;
+the follow-up keys the restored unit allocators per (company, vehicle
+type) like native `Company::freeunits`, and credits the native units
+`count` (`group_all[VEH_ROAD].num_vehicle`) by mirroring the native
+load-time recomputation exactly: the field is NOSAVE, `UpdateAfterLoad`
+counts front road vehicles from restored records, and restoration admits
+only single-part front road vehicles, so the live per-company record
+count equals the native value across all fresh captures.
+
+The `935121d` candidate passes 835 workspace tests with 148 separately counted
+ignored cases, 678 Python tests plus 25,339 subtests, 89 dependency-free tests,
+Clippy, formatting and scoped strict Python checks. Root executes 1,530 debug
+table/trap comparisons, eight actual corruption controls, three native error-owner
+captures consumed by current Rust tests, two command-built consists through both
+serialized origins, passenger/forest continuations, scale300 graphics and real
+threaded-worker rollback. The fresh reviewer repeats guarded pause tracing and
+forest handoff and audits the complete root executions. Author coverage includes
+both script profiles, all five consist rosters and 10,666 strict normal-driver
+comparisons with 153 Rust-only refusals of source-proven undefined inputs. Valid
+Unicode strings/comments are preserved. All 143 scenarios and 36 expanded drivers
+remain intact. Complete proof readback verifies 59,100 logical author artifacts,
+24,376 deduplicated blobs, 97,965 nested normal members and 5,249 Git source files
+with necessary bytes and modes retained. The merged native observer is genuinely
+rebuilt from its current source; predecessor binaries retain distinct identities.
+
+Current reviewed script publication includes bounded `try`/`catch`/`throw`, nested
+trap unwinding, exact error-object ownership/diagnostics, user closures, nested
+frames and frame-owned variadic arguments. Policy, internal and source-proven
+undefined errors remain explicitly uncatchable. Complete native shared-state and
+context-root materialization remains a separate private integration. Full VM/GC,
+AI/GameScript APIs, NewGRF execution, reciprocal modded continuation and all seven
+broad completion gates below remain **OPEN**. These milestones preserve the agreed
+stage boundary; only maintainer merge of the completed stage authorizes stage 5.
+
+Latest reviewed content increment: `415fe8e` adds bounded raw cargo identities
+and translation tables after the engine/spec loading completed in `e032dd2`.
+Script increment `d43c8fa` binds aggregate graph storage (`e17d7fb`) and
+first-class native roots (`a69500b`), following deletion/cloning at `257c395`.
+Gameplay increment `6d02ffe`,
+with current bindings at `7b78b96`, adds bounded terminal bus/truck station
+construction after station/depot order insertion. World increment `5e0fbf4`, with current bindings at `0047eb2`, adds
+bounded temperate spreading and genuine placement to complete world ticks. Increment `59fe7f6`
+enables normal CI for the reviewed bounded single-vehicle road movement corpus.
+Road increment `7779f39` integrates ordinary empty-cargo bus/truck round trips
+and their routing/loading/payment/job prerequisites in six product atoms plus
+separate current bindings. Wider cargo, asynchronous timing and transport
+behavior remain in progress. Script increment `32490c7` adds native
+CALL/PREPCALL/PREPCALLK, real host-held main closures and four bare-root native
+functions. Independent review repeats 930 baseline plus 156 call comparisons
+per debug/release profile and adds 36 comparisons per profile. The integrated
+candidate passes 764 workspace tests, 580 Python tests with 21,221 subtests,
+strict static checks and 143 declaration checks. Source and complete proof
+archives retain 4,976 Git blobs and 33,294 verified members. User functions,
+general callable collection remain required. Focused GNU run `38144208950`
+on published head `5af6964` supplies the bounded native-call proof: both profiles
+pass 930 baseline plus 156 call comparisons; root audits all 16,552 artifact
+files, original source identity and raw invocation receipts.
+
+House increment `b355101` integrates seven atomic construction, production,
+zero-AI timer, cache-publication and current-binding changes. Root and independent
+reviewer each execute 63,881 calls with 89 complete house boundaries, both
+simulation save origins, real monthly/year transitions and observer controls.
+The combined candidate passes 765 ordinary Rust tests, 587 Python tests with
+21,402 subtests, strict static checks and 143 declarations. Current proof
+retains 4,998 source Git blobs and 6,884 verified archive members. Active cargo
+recipients, growth/rebuild, animations, NewGRF and wider industries remain
+required. At that increment, user closures, industry-manager and populated cargo
+were in private development; subsequent reviewed increments are recorded here.
+All seven completion gates remain open.
+CI correction `3d15d6d` integrates four separately reviewable source/binding
+atoms. It repairs stale scalar/root/array names and selects exactly the original
+34 required frame consumers without weakening membership guards. Twelve cohesive
+Python modules preserve the original helper APIs and behavior. All nine moved
+helpers now belong to the required, hashed, retained ScriptVM source closure;
+a first review rejected their omission, and fresh review verifies the fix.
+Root and reviewer each execute 10,666 original/Rust comparisons and 153 explicit
+undefined-input refusals. All 596 Python tests and 21,456 subtests pass, alongside
+nine omission checks, nine real retained-byte corruptions and three frame-argv
+corruptions. Current proof verifies 5,007 source blobs, 4,287 recipe inputs and
+1,276 compact archive members, including the rejected proof epoch. Published
+GNU/normal interoperability results remain pending. All seven gates stay open.
+
+Asynchronous increment `19f7a34` integrates six atomic executor, pause,
+transactional ownership, house-cache composition and current-binding changes.
+Independent review approves actual host execution for the bounded zero-demand
+job pipeline, saved-order restart, scheduled waits and rollback-safe leases.
+Root verifies 75 complete road pairs, 24 narrower routing pairs, four controlled
+worker consumers and seven timer comparisons. Root and reviewer each run
+63,881 current Rust house calls with 89 complete boundaries against genuine
+original captures; the native primary corpus is reused and both save-origin
+continuations execute the original anew. The combined candidate passes 772
+ordinary Rust tests, 596 Python tests with 21,608 subtests, strict checks and
+143 declarations. Its complete proof verifies 6,316 members and 5,015 source
+Git blobs. Two live completion observations and seven zero-call pause
+comparisons remain explicit, uncredited timing mismatches. Natural original
+slow prejoin, populated solvers, broader gameplay and GNU proof remain required;
+all seven completion gates stay open.
+
+Industry increment `c033301` integrates eight atomic observer, generated-name,
+fund-only manager, vanilla forest, proof, async-cache adaptation, formatting and
+current-binding changes. Root executes 66,130 forest calls with 45 complete
+World/derived/town/industry-cache boundaries and 69,974 empty-manager calls with
+27 World/derived/town boundaries plus live original builder comparisons.
+Independent review adds 56,776 lifecycle/manager calls, fresh original command
+preparation and both genuinely simulated forest save-origin continuations.
+Fresh mixed bus/forest comparisons cover 156 physical/content and 156 actual
+town/industry-cache boundaries. The house regression, 52 complete road pairs,
+24 routing pairs, seven timers, controlled jobs and late rollback/corruption
+checks pass. Source/proof archives verify 5,039 Git blobs, 202 raw Cargo depfiles
+and 12,003 complete proof files. Historical CMake wrapper reconstruction is
+explicitly distinguished from captured build files. Active forest recipients,
+graphics17/regrowth, other industries/climates, automatic creation and GNU/normal
+industry CI remain required. Populated cargo and script closure/variadic work
+remain private; their known diagnostic gaps are required fixes. All seven
+completion gates stay open.
+
+Earlier milestones and their bounded verification results are recorded below.
+
+Independent review approves exact `7779f39` after repeating 52 complete
+saved/derived/defined-runtime pairs and 24 separately scoped routing pairs,
+including both save origins, quarterly assets, graph compression and idle
+station regressions. Five injected late faults and two genuine joined-stop
+refusals preserve the complete saved World and runtime. The combined candidate
+passes 755 workspace tests, strict Clippy/formatting, 577 Python tests and 143
+declaration checks. Current source archives retain 4,957 exact Git blobs;
+the complete root proof retains 2,808 verified members including the full
+9,469-member original worker proof. Normal route CI admission and GNU execution
+for this exact road increment are pending.
+
+The ordinary immediate link-job spawn at 1057 is a retained, uncredited
+full-runtime mismatch: original worker pending, Rust synchronous empty result.
+Two native repeats were both pending; no observed timing variability is claimed.
+This backend follows the original thread-creation-failure fallback only.
+Default asynchronous execution, load/pause/join behavior and populated graph
+algorithms remain required, alongside populated cargo, breakdown/effect
+lifecycles, service, multiple vehicles/stops and the other vehicle classes.
+
+The earlier graph/root script increment uses common physical table storage for roots and
+graph values, real native closure identities and metadata, native default
+registration, mutable reserved `this`, and independent configured-root lookup.
+Its collector follows the original physical traversal, mark-on-enqueue LIFO
+and persistent-chain rules for the admitted host sequences. Forward/reverse
+alias orders retain the original collected counts 1 and 5 without normalization.
+Root independently executes 930 strict original/Rust comparisons per profile,
+180 script tests, fresh external registration/hash checks and twelve real
+corruption rejections. The current combined candidate passes 753 workspace
+tests, strict Clippy/formatting, 520 Python tests and 143 declaration checks.
+Independent review repeats the script tests and seven native host sessions,
+audits all 4,921 source blobs and 11,979 complete proof members, and approves
+exact `d43c8fa`. Subsequent PR head `f9536b3` passes the focused GNU job in
+run `38137706226`: root audits all 13,425 artifact files, both profiles'
+930 comparisons and all 1,523 pinned native source blobs. Its ordinary GNU
+workspace run passes 753 tests without an ABI-fixture override. This proves
+the graph/root epoch; the subsequent native-call GNU proof above is a distinct
+source epoch.
+General VM/shared/host GC
+ordering, callable functions, delegates, weakrefs and full AI/GameScript remain
+required; bounded storage/ownership proof does not close a broad stage gate.
+
+Inventory correction `7758500` adds the fifteen new tree proof inputs to each
+affected cargo/engine/currency-properties source inventory. Root reproduces
+the original CI failures, retains existing tests, and verifies all old source
+pairs and non-source fields are unchanged. Independent review approves the
+correction. Its ordinary Linux Rust job in run `38136540979` passes all 744
+workspace tests on merge `388cced`, including the ABI effects test without an
+override. This is separate from the later verified GNU graph/root epoch and the
+still-running full interoperability baseline.
+
+Road order insertion preserves validation and nested error precedence, shared
+list allocation and indices, existing conditional-order retargeting, timetable
+and unbunching resets, and command cost/location receipts. Native no-refit value
+254 is accepted; 255 is rejected. Saved records and live order caches publish
+as one transaction. The frozen product proof compares 16 CLI commands and 18
+checkpoints, 32 public-runtime actions and 16 save checkpoints, with continued
+original/Rust saves in both directions. All 3,458 archive members are verified.
+Root adds twelve complete World/derived/runtime comparisons; independent review
+adds 31 native/CLI edge commands, shared-order actions and malformed-input checks.
+Integration `bb77aa7` preserves the product bytes and separately updates current
+source inventories. Broader order commands, complete station construction,
+station entry, loading, payment and complete transport cycles remain required.
+
+Scalar tables preserve native capacity, collision chains, free-node selection,
+rehash order and traversal, typed scalar keys, shared identity and temporary
+ownership. Actual compiler/VM operations cover literals, own-slot reads/writes
+and suspended foreach mutation. Invisible null-key storage follows the original
+behavior. Both frozen debug and optimized profiles pass 267 focused comparisons
+and 32,776 native string-hash vectors, alongside 10,539 strict legacy comparisons
+and 153 unchanged lexer-policy checks. Five archives contain 138,757 verified
+members. Root adds 36 native/Rust comparisons; independent review adds 54, runs
+162 selected tests plus the external hash test per profile, and checks the full
+archives and current source closure. Integrated product bytes match the frozen
+private implementation. Current binding changes at `db417c2` are a separate
+metadata epoch, not a new native execution claim. The Apple hash ABI has actual
+native proof. Focused GNU CI run `38125486543` also passes both profiles: 267
+strict comparisons, 162 crate tests, the external native hash test and five
+observation-corruption controls per profile. Root audits all 4,995 artifact
+files and all 1,523 original source blobs against the pinned Git tree. This run
+executes PR merge `70920af`, with source head `2a1db7a`; no local GNU execution
+is claimed. Other
+ABIs, aggregate edges, delegates, root storage unification,
+functions, closures, cycle collection, host APIs and full AI/GameScript remain
+required.
+
+The combined order/table integration passes 716 executed workspace tests,
+strict locked workspace/all-target/all-feature Clippy, formatting and all 143
+offline contract declarations. The 77 ignored external tests are not credited
+by the workspace run; their native proofs are recorded separately above.
+
+The broader Rust CI job at `2a1db7a` fails two Python stale-source inventory
+checks. Both copy producers retain every top-level scripts/reference file;
+their declared copied paths omitted three newly added helpers. Root reproduces
+the same two failures. Corrective increment `46f6d33` adds those exact paths and
+updates the two asset hashes, preserving producers, tests and scenario claims.
+Fresh root and independent-review discovery each pass all 73 tests. Both also
+audit actual copies of all 380 files per guard, including exact bytes and the
+deliberate stale-header newline. Independent review approves this correction.
+The Linux Rust job at `b0b0cbd` passes in run `38126258630`; the complete normal
+interoperability baseline remains pending. CI for the new tree revision is
+separate from these results.
+
+Tree integration `ed878c7` preserves temperate grass/rough growth under settings
+0 and 3, including grass work before the no-growth return, all seven stages,
+counts 1 through 4, one Grown Random draw and Dead-stage reset. The native tree
+placement counter remains 225 because the original returns early for these
+settings. The complete pure proof covers 36,864 calls, 9,216 callbacks and
+165,888 ordered events, seven naturally planted lifecycles and all eight Grown
+branches. A distinct passive observer epoch proves 115 complete mixed tree/road
+checkpoints, including natural tree RNG, vehicle crossings, daily RNG and saves
+continued in both directions. Root independently executes a different 36+38
+split with 78 complete comparisons. Independent review verifies both archives
+(8,598 and 8,050 files), recomputes all 193 mixed checkpoints, checks the pure
+event sequence and adds native/Rust runs and corruption controls. Current
+bindings preserve the frozen source/binary epochs. The exact integrated tree
+candidate passes 723 workspace tests, strict Clippy and formatting; 78 ignored
+external tests are not counted. Spreading, genuine tree placement, other
+climates, water and planting commands remain required. Normal tree CI and new
+Linux tree execution are not claimed; no broad completion gate is closed.
+
+Delete/clone integration `257c395` preserves the native compiler and existing
+VM dispatch, physical table removal/shrink and clone reinsertion, independent
+scalar-array identity, own-root deletion, ownership and suspension. Initial
+review found that decimal case names overwrote process receipts. The correction
+appends extensions to complete names and rechecks unique source/process
+membership, budgets, argv, status, hashes and expected result stages before
+publishing success. The old incomplete proof is preserved without renewed
+credit. Four fresh complete profiles each retain 750 comparisons, including
+execution of the exact frozen product binaries. Rebuilt debug/release profiles
+each pass 171 crate tests and the external native hash test. Independent review
+verifies all 20,663 proof files and 4,853 source blobs, adds 30 guarded comparisons
+and 14 retention-corruption checks, and repeats native ownership/storage/effect
+sessions. Root separately adds 60 product comparisons, 36 correction comparisons
+and eight receipt controls. No new Rust behavior is attributed to the receipt fix.
+
+Actual [GNU CI run `38130117301`](https://github.com/aron98/openttd-rust/actions/runs/38130117301)
+passes the new delete/clone corpus in both profiles: 750 comparisons, 171 crate
+tests, one explicit external hash test and five comparator-corruption controls
+per profile. Root audits all 11,125 downloaded files, 1,523 pinned original source
+blobs and every retained invocation/source/output. The executed merge is
+`bcc1c17`, with source head `257c395`; this is remote GNU execution, not a local
+GNU claim. Aggregate graphs, physical root unification, delegates, functions,
+closures, cycle collection, host APIs and full AI/GameScript remain required.
+
+The ordinary Rust job on `533313b` exposed an ABI-specific test fixture:
+GNU correctly produces physical cursor 4 where the embedded Apple trace has 3.
+Corrective increment `1b53083` selects the exact native fixture for the already
+admitted 64-bit little-endian Apple/GNU targets. Runtime, hashing and raw equality
+remain unchanged. The GNU bytes come from the independently audited original
+artifact above; fresh Apple execution reproduces the unchanged Apple bytes.
+Both Rust profiles pass without an override and reject the wrong ABI trace with
+exit 101. Independent review verifies all 4,875 source blobs and 9,644 proof
+members, complete receipts, current source closure and unchanged historical
+bindings. Root's exact corrected candidate passes 738 workspace tests, strict
+Clippy/formatting, 75 Python checks and 143 declarations. Actual ordinary
+GNU execution on corrected head `15fa7b4` passes all 738 workspace tests, including
+the effects test without an override. Root verifies the complete job log and
+merge source `97c2a90`. Focused GNU run `38133016835` also passes both profiles;
+root audits all 11,125 artifact files, 1,523 original source blobs and retained
+comparisons. Rust and full movement-capture jobs on `15fa7b4` pass; its complete
+normal interoperability baseline remains pending.
+
+Station integration `7b78b96` preserves all 35 frozen product files. It supports
+vanilla flat 1x1 terminal bus/truck stops, all four entrances and explicit owned
+joins, with native command precedence, costs, town ratings, naming/RNG, sparse
+station/stop allocation, facility chains, infrastructure and checked catchment.
+Saved records and live caches publish together; estimates are pure and late
+pool/cache failures roll back. The frozen proof has 40 complete command/state
+boundaries, public CLI composition and saves continued in both directions.
+Root adds 13 boundaries and independent review adds 12, rechecks all 65 complete
+saved/derived/runtime/RNG comparisons and all 4,652 archive members, and executes
+fresh CLI and rollback cases. The corrected-base current inventories include
+all 64 native header stamp inputs without relabeling historical execution.
+Native-valid X=0 sentinel behavior, wider stations/acceptance, moving transport,
+loading/payment and normal station CI admission remain required. The exact
+combined candidate passes 738 workspace tests, strict locked Clippy, formatting,
+75 Python checks and 143 declaration checks; 79 ignored external tests are not
+credited by that workspace run.
+
+Tree integration `0047eb2` preserves native temperate settings 1/2 lifecycle,
+neighbor spreading/count/death and the saved post-vehicle placement counter,
+map scaling and Random order. Its complete native proof covers 32,768 setting-2
+calls, 4,096 setting-1 calls and genuine 512² placement. A mixed vehicle/tree
+world agrees through vehicle Random followed by tree Random and natural tile-52
+placement, including saves continued in both directions. Root adds 78 complete
+state/runtime boundaries and 40 uninterrupted mappings. Independent review
+recomputes 270 mixed boundaries, 79 mappings and 48 pure view comparisons, adds
+nine fresh complete cross-engine boundaries, and verifies rollback after a
+prefix containing natural placement. The native asserted out-of-map neighbor
+boundary remains an explicit transactional refusal; crash saves are diagnostic.
+The 4,096² case proves counter arithmetic only. All three complete archives,
+current source closure and historical execution identities are verified. The
+exact integrated candidate passes 744 workspace tests, strict Clippy/formatting,
+75 Python checks and 143 declarations; 81 ignored external tests are not credited.
+Other climates, snow/desert/water, planting commands, new GNU tree execution and
+normal tree CI admission remain required.
+
+Private work continues with terminal entry/loading and complete road cycles,
+shared script graph/root storage, and the remaining world gameplay families.
+Directed routing and graph storage prerequisites are frozen with native proof,
+but still require current-source integration and independent review. All seven
+broad completion gates remain open; the complete normal interoperability baseline
+remains pending.
+
+The full four-case bounded road movement capture now passes locally at
+`e167929`, followed by separate live recorded-corpus verification. The final
+archive validates 27,839 members. Actual producer runs exposed duplicate source
+inputs, a native/CLI result-inventory mix-up and temporary/archive filesystem
+races; regression-backed corrections preserve strict missing-evidence and
+corruption rejection. Independent review approves those corrections; root owns
+the complete capture result. PR run `38084351336` at `a715adf` also completed
+the Linux capture and separate live verification successfully. Its complete
+archive validates 27,841 members, including all 4,777 tracked source inputs;
+the preceding interoperability job stopped at the explicit pending-admission
+gate. Increment `59fe7f6` now enables that bounded normal gate after a fresh
+normal run and live verification passed locally. Root CLI checks compare twelve
+complete World/derived snapshots and verify three unsupported horizons publish
+no output. Independent review approves admission after auditing both complete
+captures and reproducing the CLI checks. The full normal Linux job on the
+activated revision remains pending.
+
+Byte-string foreach preserves native byte offsets and target C-char values,
+including NUL, suspension, local/root rebinding and temporary ownership.
+Complete debug and optimized profiles each pass 255 strict foreach sessions,
+136 selected Rust tests and 15 foreach corruption controls, alongside the
+existing scalar comparisons and lexer-policy checks. Each archive contains
+98,067 verified members. Those full profiles belong to private `ac26e02`;
+integration preserves all 3,749 execution-bearing inputs and separately records
+the source-inventory and README differences. Integrated verification passes
+702 workspace tests, strict Clippy and formatting. Root adds 21 native/Rust
+comparisons; independent review checks both profiles and adds six comparisons
+and six original sessions. Full AI/GameScript, general iterables, functions,
+host APIs and GC remain open. Linux validation for this increment is pending.
+
+The preceding array foreach increment preserves the retained iterable, index/value/cursor locals,
+instruction costs, suspension, host mutation and shared ownership. Both complete
+debug and optimized profiles pass 10,666 strict comparisons, 153 separate
+lexer-policy checks, 124 selected Rust tests and 135 foreach sessions, with
+96,528 validated archive members each. The sessions distinguish 129 stateful
+projections from six native-valid string iteration cases that compile exactly
+but stop at an explicit unsupported runtime boundary. An initial packaging run
+failed on 30 incorrect manifest paths; an actual producer regression and fresh
+complete profiles verify the correction. Root checks pass 667 workspace tests,
+strict Rust checks, 73 metadata tests and 21 foreach admission tests. Independent
+review verifies both archives, reproduces the original production failures,
+executes the public API and adds seven original/Rust differential cases.
+General iterables, functions, host APIs, cycles/GC and full AI/GS remain open.
+
+Private raw cargo loading preserves owners, labels/masks, defining-file identity,
+version-dependent fallback/explicit translation, override copying and road
+default-cargo allocation/read ordering. Fresh normal admission compares 151 raw
+snapshots across nine original/Rust cases, 66 API commands and 250 retained events.
+It passes 24 guards, ten focused tests, thirteen actual admission-corruption
+controls and complete validation of 1,340 archive members. The 99 lifecycle
+snapshots and ambient engine context remain explicitly excluded. Root verification
+passes 655 workspace tests, strict Rust checks, 72 Python tests, 66 adjacent
+admission tests and a publication regression; the existing engine suite also
+passes on identical compiled inputs. The first normal run failed because its
+driver omitted the dispatcher's required success message. The failure is retained,
+a regression reproduces it, and a fresh corrected normal run passes. Independent
+review verifies all committed source/native bindings and archive members, reruns
+the corpus/guard validators, ten original-binary tests and thirteen admission tests.
+Finalized catalogs, configured-world restoration, EIDS and broader cargo gameplay
+remain open; see [cargo identity scope](../cargo-identity.md).
+
+Scalar arrays preserve shared identity, fresh allocation per execution, indexing,
+mutation, root persistence and suspended-frame ownership through the existing VM.
+Both complete debug and optimized profiles pass 10,666 strict comparisons,
+153 separate lexer-policy checks, 114 selected Rust tests, 115 constant sessions,
+90 root sessions and 93 array sessions, with 94,756 indexed artifacts each.
+The array corpus distinguishes 78 stateful projections, 12 implementation-boundary
+sessions and three actual observer protocol refusals. Raw pointer-bearing output
+remains retained with a narrow portability check and no pointer-text parity claim.
+Root verification passes 645 workspace tests, strict Rust checks, 72 Python tests,
+93 admission tests and 13,833 subtests. Independent review approves the exact
+commit after rerunning 114 tests per profile, 25 admission tests, six native/Rust
+pairs and the complete debug validator. Nested arrays, cycles/GC, methods,
+general objects/functions and full AI/GS remain open.
+
+Private raw engine/spec loading preserves original construction/reset, scoped
+vehicle-ID mappings and Road Action0 properties 08/09/0F/11. Extended local IDs
+retain their u16 identity; substitute selection performs the native uint8
+conversion before the table-count minimum. New non-original Road owners use the
+native value-initialized running-cost class. Ten whole-state native/Rust cases
+cover 48 API commands, six loader checkpoints and 280 native events, with eight
+focused tests, 21 guards and 13 actual admission-corruption refusals. Verification
+passes 614 workspace tests, strict Rust checks and 72 Python tests. Independent
+review reproduces the original constructor failures, all 24 final engine tests,
+and complete source/archive validation. Four adjacent copied-source rosters now
+include the constructor inputs. Configured-world restoration, non-original Rail,
+cargo/refit finalization and saved dynamic engine/EIDS restoration remain open.
+
+Configured scalar roots retain shared slot identity while persistent runners keep
+independent temporary ownership and failure history. Root reads and stores,
+idle root replacement, compile-time constants and suspended execution follow the
+pinned native semantics through the existing VM loop. Both complete debug and
+optimized profiles pass 10,666 strict comparisons and 153 separately classified
+lexer-policy rejections, 101 selected Rust tests, 90 root sessions and 115 constant
+sessions. The root sessions distinguish 72 supported stateful projections from
+18 typed implementation boundaries. Each profile validates all 93,531 indexed
+artifacts and feeds fresh native captures into the selected Rust unit executable.
+Root verification passes 629 workspace tests, strict Rust checks and 72 Python
+tests. Independent review validates both complete packages, reruns 101 tests per
+profile and 19 admission tests, and adds 48 native/Rust comparisons. General
+objects, functions, host APIs, scheduling and full AI/GS remain open.
+
+Empty-world ticks now visit admitted flat temperate normal roads and depots
+through the existing landscape scheduler and saved-world transaction. Natural
+visits change Barren roadside to Grass; depot and stable Grass state are
+preserved. The registered driver checks eight original processes, six construction
+commands, seven Rust replays and 100 process receipts. Root verification passes
+568 workspace tests, strict checks, 66 Python tests and four fresh original/Rust
+continuation pairs. Independent review verifies the complete archive and fresh
+two-way save probes. Populated vehicle movement, roadworks, slopes, houses,
+custom road types and broader road domains remain open.
+
+Currency properties 0B-0F preserve rates, separator/position, exact symbol bytes
+and euro years through activation and reload. The complete normal driver passes
+14 API cases with 3,951 operations and 21 loader cases with 26 loads and 1,443
+events. Root passes 562 workspace tests, strict checks and the existing property
+0A driver. Independent review verifies both archives and reproduces 297 operations,
+163,404 semantic controls and focused tests. Formatting, annual euro switching
+and configured-content world restoration remain open.
+
+Shared-order restoration composes live backup consumption with same-owner road
+purchases in the default group. Native list insertion, full-capacity reuse,
+property copying and shared timing resets publish atomically. Sixteen original/Rust
+pairs cover 71 actions, 174 snapshots and 16 saves; the full 29-case owned-order
+regression also passes. Independent review approves the increment after archive,
+source and corruption checks. Nondefault groups remain outside this domain.
+
+Owned script strings preserve length-delimited bytes, native escapes, comparisons,
+concatenation, scalar formatting, instruction costs and suspended frame ownership.
+Compilation realms share a weak string interner across programs. Root verification
+passes 584 workspace tests, strict checks, 70 Python tests and 114 additional native
+comparisons. The final complete debug profile passes 10,666 strict comparisons and
+153 separately checked undefined-input rejections, with lifetime sessions, source
+feeds and 23,071 raw-f32 formatting patterns. The earlier optimized profile tests
+identical executed inputs; its actual source epoch remains explicit. Independent
+review verifies the complete final package and reproduces 66 native comparisons,
+1,030 float patterns, 18 private tests and four native lifetime sessions. Globals,
+objects, functions, host APIs and full AI/GS remain open.
+
+Compiler constants and closed enums now share a Realm-owned namespace. Declaration
+publication follows native parser timing, including changes retained after later
+compilation failures. Local shadowing, enum counters, replacement, interned names
+and values, and temporary updates have original-derived checks. Both complete
+debug and optimized profiles pass 10,666 strict comparisons and 153 separate
+policy rejections, plus 115 native constant sessions and four actual validator
+admission/rejection controls. Each profile runs 88 script tests and validates a
+92,076-file evidence archive. Verification includes 592 workspace tests; final
+strict workspace checks, 70 Python tests and 13 new admission tests pass.
+Independent review additionally runs 96 differential comparisons, 115 native
+sessions and both complete archive validators. Runtime root lookup, constant
+postfix updates, minimum-integer declaration negation, general objects/functions
+and full AI/GS remain outside this increment.
+
+Tree clearing now preserves costs, clear limits, nearest-town selection and
+rating changes through TerraformLand and LevelLand test/execute phases. Nested
+test scopes share temporary ratings; successful execution publishes terrain,
+town fields and company accounting through the saved-world transaction. The
+new driver executes 117 original invocations, compares ordered events and
+saved/runtime state, and checks observer independence, reload and split/resume.
+Nine trace corruptions and eight unsupported-setting vectors are rejected.
+Root verification passes 540 Rust tests, strict workspace checks, all 44 replay
+scenarios, the context driver and the full 29-case owned-restoration regression.
+Independent review reproduced 13 Rust selectors and nine Python tests and
+verified both complete tree and restoration archives. Tree growth, water and
+bridge construction, no-town and ground-vehicle/tree witnesses, and arbitrary
+helper flags remain open; company 15 has state/result evidence only.
+
+Currency property 0A includes owner defaults, deferred StringID mapping,
+ordered writes, and reload/reset. Five direct API cases and 20 loader cases
+cover 25 load passes; all six affected native drivers pass. Independent review
+verified their complete archives and reproduced 23 native API operations,
+14 Rust tests, 11 Python tests, and corruption rejection. Properties 0B-0F are
+covered by the later increment above; formatting and annual euro conversion
+remain separate work.
+
+Owned/default-group order restoration composes purchase, backup consumption,
+copied properties, allocation, payment/RNG, and runtime caches in one
+transaction. The full driver matches 29 original/Rust pairs, 96 actions,
+250 snapshots, and 34 saves, including full order-list capacity, sparse ID
+reuse, implicit orders, signed timetable fields, client IDs, renewal rules,
+and strict loaded continuation. Root verification passes 537 Rust tests,
+strict workspace checks, 59 standard-library Python tests, 25 focused Python
+tests, and complete purchase, sale, and order-lifecycle regressions.
+Independent review verified all four archives and ran 27 Rust tests,
+25 Python tests, three fresh native/Rust pairs, and 18 corruption rejections.
+The later shared/default-group increment is described above. Nondefault-group
+restoration, movement, and multiplayer dispatch remain required. The existing
+fresh native duration exception is restricted
+to proven new owned incarnations and requires Rust zero; loaded values stay
+strict.
+
+Latest branch-wide CI is pending. A preceding Linux run failed the script-VM
+comparison; investigation of an earlier failure found platform-dependent
+undefined byte-character classification in the original lexer. On 2026-10-10
+the maintainer approved explicit Rust rejection when lexing reaches that
+undefined input domain, while preserving defined behavior and Unicode in
+ordinary strings and comments. `2c74d24` implements typed rejection and separate
+CI accounting; its [Linux run](https://github.com/aron98/openttd-rust/actions/runs/38041414571)
+passes both jobs. `f55927b` preserves defined octal continuation through the
+original char-narrowed predicate. Later string support extends the policy to
+reached hexadecimal escape classifiers while retaining defined Unicode payloads.
+
+Depot removal matches 34 original-engine cases, 117 actions, 302 snapshots and
+69 save checkpoints. Shared orders, infrastructure, pool reuse, costs and
+rollback are checked together. Legal above-ground occupancy witnesses remain
+an explicit gap; the live-backup sale sequence below covers same-tile removal.
+
+Review caught supplementary Unicode being accepted inside script comments.
+The correction matches native lazy decoding, malformed-byte rejection,
+encoded-surrogate acceptance and NUL termination through `compile_bytes`.
+Both debug and optimized profiles pass 7,642 native comparisons, 59 tests and
+nine native frame witnesses. A fresh reviewer approved the correction and
+original supported comments/switch after another 1,132 comparisons. The
+integrated workspace passes 467 tests, strict Clippy and formatting; 58 Python
+tests and the complete order/depot comparison drivers also pass. Strings,
+globals, objects, host APIs and full AI/GameScript behavior remain required.
+
+`de84670` adds sale of stopped vanilla single-part road vehicles with owned or
+shared orders, with backups disabled and an empty backup pool. Order detachment,
+last-owner list removal, refunds and runtime allocation publish through one
+validated transaction. Twelve original-engine pairs, 28 actions and 14 strict
+save checkpoints pass. The integrated workspace passes 472 tests; all six
+affected native drivers pass. Independent review approved the increment after
+six fresh native/Rust pairs and complete source/archive checks. `4a90c5d` adds
+its native observer prerequisites, and `5f8357d` corrects the language evidence
+result inventory. The observer also passed all 44 existing baseline replays
+using the preceding reviewed Rust executable.
+
+`3c28479` admits sale with live order backups in ordinary single player while
+keeping backup creation disabled. Backup cleanup observes the original shared
+chain and publishes with order detachment, vehicle removal and refunds in one
+transaction. Ten original/Rust pairs cover 49 actions, 118 snapshots and 15
+saves, including backup, sale and depot removal without reloading. Four
+renewal-state regressions caught and corrected an accidental guard relaxation
+before integration. Independent review approved the corrected commit after
+seven fresh pairs, eight controls and five observer refusal tests.
+
+`851b504` adds NewGRF session strings with generic Action 4 names and the admitted
+Action 13 translation domain. One private table preserves allocation order,
+first-definition defaults, language selection and exact fallback bytes. Original
+comparisons cover ten API cases and 90 loader cases, with 102,315 comparator
+rejections and seven invocation guards. The integrated workspace passes 502
+tests. Language, context, 248-case loader control, order-state and live-backup
+sale regressions also pass. Baseline/specification owners, arbitrary formatted
+errors, broader finalization, and content-dependent world restoration remain
+open; this does not admit arbitrary modded worlds.
+
+Backup-enabled sale now composes backup creation, candidate-state cleanup and
+order detachment before one validated publication. The admitted domain remains
+stopped vanilla single-part road vehicles in ordinary single player. Local
+command client zero becomes server client one; the backup primitive keeps a
+literal user zero. Same-slot replacement and the full 255-slot pool are checked
+against the original operation order. Existing backup-disabled behavior and
+renewal-state guards remain enforced.
+
+Sixteen original/Rust pairs cover 73 actions, 178 snapshots and 21 saves. These
+include 25 command receipts, 20 executed commands and 21 successful results;
+refused commands are distinct from successful differential comparisons. Fourteen
+native invocation refusals, eleven focused Rust tests, five semantic mutations
+and executable/source admission controls pass. The integrated workspace passes
+512 tests, with 59 standard-library Python tests and 42 sale-evidence tests.
+Restore, purchases with live backups, vehicle movement and multiplayer command
+dispatch remain separate requirements.
+
+Linux CI exposed a separate script compatibility boundary: the original lexer
+passes decoded characters above 255 to byte character-classification functions.
+The same surrogate-encoded input compiles on the observed Linux build and fails
+on macOS. The historical strict comparison remains failed. The approved policy
+requires explicit rejection at the reached classifier, including identifier,
+number and string-escape lookahead, rather than whole-input Unicode rejection.
+Local macOS results do not establish portable behavior for that domain. The
+explicit policy now passes the Linux run linked above; historical divergent
+observations remain preserved.
+
+Private work continues on mutable engine specifications, scoped engine mappings
+and road properties 08/09/0F/11, with live CI integration still pending. Complete
+native snapshots cover constructor/reset state, allocation and partial failures;
+an additional unknown-property/following-record boundary is under investigation.
+Configured-world content restoration remains blocked until its full dependencies
+are implemented.
+
+Original-only movement observations now include a vehicle built and started by
+real commands, a loaded 37-tick road crossing, and 74 uninterrupted ticks compared
+with a 37-tick save/load split. Final original saves are byte-identical. Saved
+state and captured noninteractive runtime agree; each process retains its own
+observed, unsaved interactive RNG inputs, whose differences remain recorded.
+This evidence supports the first Rust movement implementation; it is not yet
+Rust/native movement parity. The broad stage gates below are unchanged.
+
+For agentic workers: use the subagent-driven development workflow, with explicit
+ownership, native-source evidence, independent review and tests before integration.
+
+**Goal:** execute the pinned OpenTTD gameplay inventory in Rust, including
+content-dependent restoration, existing NewGRFs and Squirrel scripts, with native
+state equality and two-way persisted continuation across representative worlds.
+
+**Architecture:** keep `ottd-save::world::World` authoritative for saved state.
+Restore content and gameplay runtime in `ottd-sim`; the save crate must not
+depend on simulation. Host filesystem, content acquisition, clocks and transport
+remain outside deterministic simulation. Native C++ is an independent test oracle,
+never a runtime implementation behind a Rust wrapper.
+
+**Target:** OpenTTD 15.3, upstream
+`14ec60f248547d4d062a1160f0fc26d742319888`, save version 362; Rust workspace,
+native original-engine checkpoints, and Python/CMake verification drivers.
+
+## Scope and completion gates
+
+This is the full stage 4 boundary agreed in the roadmap. An initial vehicle,
+construction command or content catalog is an internal milestone. Passing it
+does not complete the stage or authorize omitting a gameplay family.
+
+| Contract requirement | Required behavior and evidence |
+| --- | --- |
+| `world.content-dependent-restoration` | Vanilla and modded engine/specification, vehicle physics/capacity, house population, industry, station/catchment, infrastructure, price and airport-noise runtime matches original after load and after changes. Save/reload reconstructs the same runtime and preserves continuation. |
+| `gameplay.construction-terrain-water` | Construction/removal and ownership for roads/trams, rail/signals, stations/airports/docks, bridges/tunnels, depots, objects, terrain and water. Costs, errors, partial-success semantics, limits and effects match. Climate/snow/desert, animation and flooding execute in original phase order. |
+| `gameplay.vehicles-pathfinding` | Rail, road, ships and aircraft, including supported native subtypes and consists: movement, routing/reservations, orders, loading/refits, depot/service/reliability/breakdowns/aging and replacement. Native saved state, runtime and RNG agree through relevant boundaries. |
+| `gameplay.cargo-stations` | Generation, destinations, routing/linkgraphs, transfers/payments, packets, station facilities/ratings/catchment and periodic effects, with deterministic job publication and save/reload. |
+| `gameplay.towns-industries-economy` | Real town/house growth and authorities; all industry economy modes, production/building/closure; prices/inflation, subsidies, company finance, bankruptcy and mergers. Observe map/pool creation and destruction, money and RNG. |
+| `content.newgrf` | Unmodified content identity/dependencies, parameters, load order, feature variables/callbacks/sprites and persistent state. Test more than one feature and interacting content; saved-byte preservation alone is insufficient. |
+| `scripts.ai-gamescript` | Compatible OpenTTD Squirrel semantics, versioned APIs, events, instruction budgets, scheduling, commands and save/load of existing scripts. Exercise both AI and GameScript; the original's modified VM is the authority. |
+
+UI and playable network transport remain their later stages. Simulation-side
+command order, persistent-storage transitions and host-independent state must
+remain suitable for those stages. Existing admitted-domain rejection stays in
+place until the corresponding behavior is implemented and verified; it is not
+evidence that the missing behavior is complete.
+
+## Parallel ownership and dependency order
+
+Three workers can run alongside the integration lead in this environment. Use
+all three for independent slices. Rotate an available slot into independent
+review after implementation freezes; an author cannot approve their own change.
+
+- **Content/runtime owner:** specifications, content resolution, NewGRF and
+  script dependencies; new `ottd-sim/src/content*` modules and content tests.
+- **Transport owner:** vehicle/order/cargo/station behavior; initially the shared
+  saved-object lifecycle prerequisite in `ottd-save/src/world*` and its tests.
+- **World owner:** geometry, construction, terrain/water, town/industry/economy
+  behavior; initially new `ottd-core/src/terrain.rs` and its simulation adapter.
+- **Integration lead:** shared interfaces, stage plan, serialized atomic commits,
+  root QA, native build scheduling, independent reviewers and the single stage PR.
+  Shared-file integration is assigned explicitly to one worker at a time.
+
+Run the following dependency waves. Each substantive slice is committed with
+its direct regression/native evidence before dependent work expands it.
+
+1. **Independent foundations:** content/prices/catalogs; transactional pool
+   records; terrain geometry. None depends on another's unfinished product API.
+2. **Runtime restoration:** engine/vehicle and station/town/infrastructure
+   projections, exact native pool allocation, cache invalidation and runtime
+   ownership. Content-free restoration remains in the save crate.
+3. **First complete transport cycle:** construction/depot/vehicle/order commands,
+   road vehicle movement, town cargo, station loading/delivery/payment, service
+   and persisted continuation. Expand the whole-world loop only with matching
+   native phase effects, including ambient terrain/economy work.
+4. **Concurrent gameplay families:** rail/signals/reservations, ships/water,
+   aircraft/airports; world growth/industries/company lifecycle. Content loading
+   and callback execution progress alongside the systems that consume them.
+5. **Content and scripts integration:** complete NewGRF feature callbacks and
+   persistent storage, compatible Squirrel execution/API scheduling, modded
+   vehicle/house/industry/station scenarios, and content-aware after-load parity.
+6. **Whole-stage closure:** cross-family interactions, full command inventory,
+   runtime restoration, negative controls, saved continuation, compatibility
+   declarations, independent reviews and PR CI. No required family is deferred.
+
+## First implementation wave
+
+### A. Source-derived vanilla content and price catalog
+
+Create typed modules under `crates/ottd-sim/src/content/`, with a public module
+and focused tests. Derive specifications from pinned native tables and native
+initialization, retaining field widths, landscape mappings, cargo labels,
+engine types and native price arithmetic. Explicitly distinguish base specs from
+mutable saved engine state and NewGRF-resolved properties. Do not manufacture
+modded properties from vanilla defaults.
+
+- [x] Record exact native source fields and Rust API before editing.
+- [x] Write failing comparisons for all vanilla climates and supported base
+      specifications, including price settings, inflation and numeric bounds.
+- [x] Implement typed catalogs and price restoration with no fixture/runtime
+      C++ dependency; retain source attribution for ported static tables.
+- [x] Export the corresponding original runtime values through a passive native
+      observer, compare actual native output, and retain negative controls.
+- [x] Verify the atomic increment, review it independently and integrate it.
+
+### B. Validated saved-object lifecycle
+
+Extend `crates/ottd-save/src/world.rs` and `world/edit.rs` with explicit-ID
+`InsertRecord`, `RemoveRecord` and `ReplaceRecord` edits for native pool tables.
+Use `TableRecord` values and existing schema/limit/reference validation. Native
+ID allocation policy belongs to runtime, not the save serializer. Add focused
+tests in `crates/ottd-save/tests/world_runtime.rs` or a dedicated lifecycle test.
+
+- [x] Test linked cargo insertion and owner update in one transaction; compare
+      rebuilt ownership/aggregates and serialized reload with expected state.
+- [x] Test unlink plus deletion and invalid intermediate-but-valid-final edits.
+- [x] Require duplicate insertion, missing remove/replace, invalid target pool,
+      malformed schema, out-of-range IDs and dangling references to roll back
+      the entire batch, including earlier unrelated valid edits.
+- [x] Implement the minimal explicit record operations. Preserve complete-world
+      validation; do not bypass it or add runtime allocation to `ottd-save`.
+- [x] Reopen the resulting native save in original OpenTTD and compare complete
+      saved/structural observations at matching lifecycle boundaries.
+- [x] Verify, independently review and integrate this prerequisite atomically.
+
+### C. Native terrain geometry
+
+Create `crates/ottd-core/src/terrain.rs` for typed slopes/corners/foundations and
+`crates/ottd-sim/src/terrain.rs` for saved-map tile geometry. Authority:
+`slope_type.h`, `slope_func.h`, `landscape.cpp` and `tile_map.cpp` in the pinned
+native tree, including `GetPartialPixelZ`, `GetSlopeZInCorner`,
+`GetSlopePixelZOnEdge`, `ApplyFoundationToSlope` and `GetTileSlopeZ`.
+
+- [x] Define checked native slope/foundation values and supported combinations.
+- [x] Test every valid slope across the 16-by-16 pixel grid, steep slopes,
+      corners/edges, foundations and map borders against original functions.
+- [x] Implement geometry without modifying command/tick admission yet.
+- [x] Add a separate passive native observer and reproducible vector comparison;
+      do not use a probe that disables ambient callbacks as whole-world evidence.
+- [x] Verify, independently review and integrate the geometry prerequisite.
+- [ ] Use the geometry in native construction commands with actual
+      costs, limits and partial results.
+
+## Second implementation wave
+
+The first save-object increment is committed with native interop evidence. Its
+independent review found that `ENGN` records must be contiguous from zero;
+common world validation now rejects holes transactionally, and a fresh reviewer
+verified the correction. Terrain and vanilla catalog increments have passed
+isolated workspace checks and fresh exhaustive native comparisons. Independent
+review approved the catalog, terrain and observers at `8c4ef60`, with no blockers.
+That tree passed 220 Rust tests, strict workspace Clippy and formatting. Native
+comparisons covered 52 catalog configurations and exhaustive terrain vectors in
+both map-edge modes; deliberately altered observations were rejected. These are
+prerequisite milestones, not evidence of complete gameplay execution.
+
+Proceed with these disjoint slices while reviews run. Fixes to a prerequisite
+take precedence over dependent integration, and no milestone closes the stage.
+
+### A. Road runtime restoration
+
+Create `ottd-sim/src/runtime.rs`, `runtime/road_cache.rs`,
+`runtime/saved_vehicle.rs`, `runtime/saved_engine.rs` and focused/runtime-native
+tests. Add a passive `reference/runtime_road.hpp` observer and native runner.
+The content owner also serializes shared module/observer registration.
+
+- [x] Introduce an owned `SimulationRuntime::restore_vanilla(World)` with private
+      authoritative World, immutable content snapshot and only implemented
+      typed caches; expose borrowed world/content/cache access and `into_world`.
+      The initial constructor admits the declared ordinary road-vehicle domain;
+      no placeholder caches or broad gameplay `advance` method are introduced.
+- [x] Restore actual native road/consist length, speed, power, cargo age period,
+      mass, tractive effort, slope/axle resistance, drag and roadtype properties.
+      Separate load-initialized trip/speed history from recomputable physics.
+- [x] Read saved ENGN state, cargo capacity, age/reliability and saved road paths
+      through borrowed typed views. Do not rerun engine introduction RNG or
+      overwrite saved fields with constructor defaults.
+- [x] Observe native after-load order and represent saved fixups explicitly.
+      Compare empty/loaded buses and trucks, original/realistic acceleration,
+      different engines, slope settings and sparse IDs. Reject unimplemented
+      contexts before claiming restoration success.
+- [x] Verify complete saved-state/RNG preservation for no-fixup cases, exact
+      runtime field equality, and wrong-cache/missing/stale negative controls.
+      Invalidation and live ticking remain subsequent implementation work.
+
+Road restoration and its coverage correction passed independent review at
+`1f6945b`: 24 configurations, 870 native rows, sparse IDs through 128, all eight
+admitted road tile categories and 32 precise unsupported-shape checks. Saved
+JSON, encoded bytes and RNG remain unchanged. Live cache invalidation and
+vehicle movement are separate outstanding gates.
+
+### B. Native ID allocation
+
+Create `ottd-sim/src/runtime/pools.rs` with focused tests and a separate passive
+native allocation observer. The transport owner owns allocation algorithms;
+the runtime owner registers the module. Authority is `core/pool_type.hpp`,
+`core/pool_func.hpp` and native `FreeUnitIDGenerator`.
+
+- [x] Reproduce logical pool allocation after sparse explicit-ID loading, first
+      free selection, release/reuse, high-water behavior, reset and exhaustion.
+      Keep native per-pool limits authoritative; do not substitute monotonic IDs
+      or a different free-list order.
+- [x] Separately reproduce per-company/per-vehicle-type unit numbers, including
+      their reserved values. These are not global vehicle pool indices.
+- [x] Compare operation traces against the actual native allocator templates
+      and unit-number generator, including holes and boundary capacities.
+- [ ] Keep allocation metadata transactional with its future World insertion.
+      This increment must not expose unvalidated object creation or claim that
+      logical allocation alone implements vehicle construction.
+- [x] Specify the saved-world journal/read-through transaction API before
+      replacing whole-world cloning/serialization in hot gameplay paths.
+
+### C. Terraform construction command
+
+Create `ottd-sim/src/commands/terraform.rs` and command/native replay tests.
+The world owner owns command enum/pipeline changes and replay command/return
+instrumentation; coordinate shared library exports with the runtime owner.
+
+- [x] Add `TerraformLand { tile, slope: u8, dir_up }` with native AllTiles/Auto
+      traits, raw low-four-bit corner mask semantics and native company/pause
+      gates. Do not reject native successful zero/high-only masks as geometry.
+- [x] Preserve native requested-corner order, depth-first neighbor propagation,
+      sorted two-pass surface checks, typed prices, limit/error/cash precedence,
+      merged clearing/height changes and read-only tunnel obstruction checks.
+- [x] Extend receipts additively with typed test/exec/result tuple returns,
+      preserving money and tile sentinels from the actual native command.
+      Existing cost-only receipts remain unchanged. The native observer records
+      actual return tuples instead of reconstructing them from input arguments.
+- [x] Compare basic/cascading/multi-mask changes, bounds, limits, cash, pause,
+      tunnel obstruction and resumed execution on native prepared populated
+      worlds. Validate all map bytes, receipts, money, limits, RNG and saves.
+- [ ] Keep bridge-over-clear and other not-yet-ported tile procedures explicit.
+      Follow with every remaining tile procedure and `LevelLand`'s distinct
+      NoTest/partial-money semantics before closing construction parity.
+
+Shared native headers/builds remain frozen during a running comparison. The
+lead batches new hooks into scheduled builds, retains exact source/binary
+provenance, and integrates each reviewed behavior atomically.
+
+## Saved-world transaction prerequisite
+
+The allocation primitive in `2e35e16` passed independent review.
+Its isolated tree passed 224 Rust tests, strict workspace Clippy and formatting;
+fresh original pool traces matched 1,177 operations plus 17 unit-number
+operations, and a changed cursor was rejected. The save transaction work below
+is independent of that frozen primitive.
+
+The transport/save owner implements a sparse transaction overlay in `ottd-save`,
+with minimal private table/snapshot adapters. The runtime and construction
+owners retain their simulation files. No simulation dependency enters the save
+crate. The current clone/encode/decode edit path remains a differential test
+oracle until the new boundary passes its equivalence checks.
+
+- [x] Provide `World::transaction`, staged `apply` and candidate reads, fallible
+      `prepare`, then infallible `commit`. Retain each touched record or tile once.
+      Failed staging poisons the transaction. The public transaction leaves World
+      unchanged until commit, including when safe code uses `mem::forget`.
+- [x] Candidate reads observe prior writes without exposing a partially valid
+      World or stale derived indexes. Prepared reads expose validated candidate
+      projections so simulation caches can be computed before publication.
+- [x] If prepare temporarily installs candidate values to reuse validators, keep
+      that swap/restore guard private and unexposed. No user callback executes
+      while candidate values are installed; all error/unwind paths restore the
+      original before returning a prepared overlay or failure.
+- [x] Share exact wire validation and budget accounting with table encoding;
+      reuse native limits, semantic, reference, ownership, chain, script and
+      snapshot checks. Validate final coupled state, preserving temporarily
+      invalid intermediate relationships and dense ENGN loading requirements.
+- [x] Avoid whole-world cloning and whole-save serialization during mutation.
+      A complete validation and structural reconstruction once per batch is an
+      intermediate implementation, not a claim of incremental validation.
+- [x] Compare all edit variants with the existing implementation, including
+      repeated writes, insert/remove/reinsert, nested lists, map-object links,
+      malformed data, failure after valid changes, and uncommitted drop.
+      Reopen coupled output in the original and compare full saved/derived state.
+- [ ] Coordinate tentative allocator, RNG and simulation cache values under one
+      runtime borrow: all fallible work precedes saved-state commit and the
+      remaining publication operations are infallible. Failed cache computation
+      must still roll back the prepared saved transaction.
+- [ ] Measure the batch boundary on realistic maps/pools before admitting broad
+      populated ticks. Preserve all compatibility checks when optimizing it.
+
+The saved transaction prerequisite in `61acfe3` passed independent review:
+108 focused save tests, independent lifecycle/map/unwind probes and a fresh
+original-engine reload with complete saved/derived comparisons. Integration
+checks passed 248 workspace tests and all 29 replay cases. The prepared-discard
+test was subsequently clarified in `725711a`; it makes no cache-failure claim.
+Road purchase now exercises cache/allocator publication; other mutation families
+and populated-tick performance remain open.
+
+## Shared integration rules
+
+### NewGRF file scanning milestone
+
+The v1/v2 framing and bounded FILESCAN implementation `1f6945b` passed
+independent review, 64 fresh native scanner cases and 96 additional native
+boundary probes. It retains compressed physical spans, sprite variants,
+native checksum extent, raw Action8 metadata and skip-handler behavior.
+Comparator controls were strengthened in `7abb45d` and all 64 cases rerun.
+
+Action14 metadata now has ordered recursive nodes, localized text, parameter
+masks/defaults/ranges, version and palette rules, and original text-code
+translation. Its fresh-config native matrix covers 1,720 scans, 2,446 direct
+translations and 17,200 compatibility decisions, with 11,456 altered-observation
+controls. The integrated Rust tree passed 280 tests and strict workspace Clippy;
+the actual metadata CI dispatcher and its archived control evidence passed.
+Independent review approved the increment with no findings, including another
+1,792 mixed text comparisons and the unchanged 64-case native scanner matrix.
+This increment assumes fresh language/string registries; later loading must
+supply the populated registry context.
+Loading passes, properties, spritegroups, callbacks,
+modded runtime restoration and Squirrel execution remain required. Parsing
+files does not activate content or satisfy the broad `content.newgrf` gate.
+
+### LevelLand execution extension
+
+The clear/void TerraformLand increment `ac73117` passed independent review,
+235 workspace tests and all 29 replay cases. Its propagation and surface helpers
+are separated before expansion. The next command uses the saved transaction
+overlay; it must preserve the original's distinct NoTest semantics.
+
+- [x] Add a private terrain reader over either committed World or CandidateView,
+      with immutable map dimensions captured from the validated starting world.
+      Reuse borrowed records and typed prices; do not introduce a general World
+      trait or expose partially valid mutable state.
+- [x] Preserve native rectangle and diagonal iterator order, target-height rules
+      and raw mode validation. Test the outer command even with NoTest enabled.
+- [x] Estimates repeatedly query unchanged terrain and preserve the native
+      local-limit decrement/order, including limit-one zero-cost behavior.
+- [x] Execution observes each successfully staged prefix. Failed native steps
+      add no edits; partial-money completion retains its prefix and reports the
+      next full step cost, not the cash deficit. Test, execution and final costs
+      and tuples may differ.
+- [x] Stage prefix and final accounting in one transaction, with one terminal
+      prepare/commit. Never clone, encode or validate the complete world for
+      each nested Terraform call. Rust scope/invariant failures remain explicit
+      and roll back the candidate instead of impersonating native partial success.
+- [x] Compare ordinary/diagonal selections, overlap, limits, cash, errors and
+      save/resume against actual native dispatch, with altered extra-money,
+      prefix and order controls. Initial tile scope matches current clear/void
+      Terraform; remaining tile procedures are subsequent required increments.
+
+The LevelLand increment `b0720d5` passed 262 isolated workspace tests and all
+44 replay cases, including 15 new LevelLand cases, controls, save/resume and
+original continuation. All 5,689 required replay evidence paths were present.
+Independent review approved the increment with no findings, including additional
+native boundary probes; this does not close construction parity.
+
+### Road service and native CI admission
+
+The service-interval command in `ceca244` preserves original owner/error order,
+percent/calendar/wallclock bounds, company defaults and flag updates. Its ten
+native scenarios cover 88 command actions, complete saved/derived comparisons,
+original reloads and split/resume, with five comparator controls and 475 process
+receipts. The owned runtime admits this cache-independent mutation. Vehicle
+construction, movement and actual servicing remain separate requirements.
+
+Dedicated foundation and service drivers now run their native matrices in
+pull-request CI. Independent review passed service semantics but found that a
+renamed terrain test could silently execute zero tests. `9edc1bf` requires exact
+test execution; the reviewer's actual zero-test dispatcher probe now fails and
+the normal driver passes. `4e2fcfe` gives the service CLI a typed argument
+boundary; the exact scoped type check now reports no warnings. Fresh independent
+review approved both corrections with no findings, reproducing the real negative
+probe, normal foundation run and all 475 service process receipts.
+
+### Owned-runtime road purchases
+
+The purchase increment `5d4a78a` constructs every saved field explicitly for
+single-part vanilla road vehicles. Allocation, unit numbers and RNG remain
+tentative until saved-state validation and creation-cache computation succeed.
+The original acceleration model's creation caches differ from after-load caches;
+native observations compare them before saving. The obsolete `cargo_paid_for`
+serializer global is retained separately, including a nonzero value, instead of
+being reset when a new vehicle is constructed.
+
+The native matrix covers 16 cases, 345 actions and all 88 vanilla road engines,
+including four climates, both acceleration models, sloped depots, failures,
+limits, cash and save/resume. It compares 194 successful executions and rejects
+27 altered observations. The dedicated CI driver verifies all 1,011 process
+receipts, 6,844 retained evidence files, and the identity of the two actual Rust
+test executables across 19 invocations. Integration passed 295 Rust tests,
+22 Python tests, strict Clippy/formatting and all 44 existing native replay cases.
+Review found that the affordability check incorrectly rejected a zero-cost
+purchase when company cash was negative. `86ad8c3` restores the original
+positive-cost guard and adds the exact regression to the native CI matrix.
+Fresh independent review approved the correction after reproducing the exact
+native mismatch, the expanded CI matrix and rejection of a zero-test run.
+The follow-up `dc9146e` separates immutable purchase planning and cohesive test
+modules. A fresh review verified unchanged function bodies, assertions and
+native test selectors; the full expanded purchase matrix still passes.
+The original `BaseConsist::round_trip_time` has no initializer. Linux emitted
+48 for a fresh stopped vehicle; native allocator poisoning emitted the exact
+0xAAAAAAAA allocation pattern. This is an explicit fresh-initialization
+exception: Rust initializes new vehicles to zero, while every loaded value is
+preserved. The purchase comparator admits only that signed-int32 native field
+for IDs proved by matching successful execution receipts, absent at initial
+load, and still stopped in depot with no orders. Every admitted path, native
+value and creation ordinal is recorded without changing raw worlds or saves.
+Initial/resumed vehicles, other fields, receipts and all reloads remain strict;
+every Rust checkpoint is also compared strictly against its decoded save.
+Sixteen additional real comparator rejection controls enforce the boundary.
+This purchase-only lifetime model rejects ticks and commands other than build;
+future sale/depot matrices must explicitly track reset, removal and ID reuse.
+Refits, articulated/modded vehicles, order
+backup restoration, sales and movement remain subsequent required work.
+
+### Depot runtime restoration
+
+`5c94483` adds original loader/depot observation hooks, and `bac7236` restores
+depot allocation metadata and all 63 road/tram infrastructure counters per
+company. The native matrix covers sparse depot IDs, all counter slots, road
+surfaces, ownership and both ends of bridges and tunnels across 428 vectors.
+The counter-only road-type fixtures restore the original registry and tiles;
+complete saved-state comparisons confirm that the probes leave no changes.
+They do not claim activated NewGRF road-type compatibility.
+
+Native comparison exposed a tunnel endpoint bug: height means the minimum of
+the four clamped tile corners. A shared corner reader now supplies both that
+query and the existing slope query. Integration passed 302 Rust tests, 22 Python
+tests, strict checks and the expanded foundation CI driver. Independent review
+approved both commits after another native 428-vector run and source audit.
+The observation hooks also preserve all 44 existing replay cases and metadata
+comparisons. Depot create/rotate/remove commands remain subsequent work.
+
+### Configured NewGRF loading control
+
+`261b4f7` implements the original stage-major LABELSCAN, INIT, RESERVE and
+ACTIVATION order for configured standalone Action6/7/8/9/D/10 control programs.
+The executor preserves ordered config and dynamic-file identities, filename
+aliases, labels, conditional jumps, parameters and persistent byte overrides.
+Source, record visits, labels, override work and emitted trace storage have
+explicit cumulative limits; host limits never become native disabled results.
+
+The corrected original-engine matrix matches 248 case identities, 9,711 events,
+7,727 configured record decisions and 1,549 final configurations. Its actual
+comparator rejects 4,766 altered observations. The dedicated CI driver checks
+complete case membership, actual test-executable identities, source hashes,
+5,353 retained raw/archive files and real stale/reused/zero-test/subset guards.
+Independent review found that maximum-file rejection must preserve labels on
+an earlier file with the same filename. `a73999c` fixes that native divergence;
+a fresh reviewer approved the correction after executing the counterexample,
+focused tests and complete evidence audit.
+
+The native oracle executes its original baseline files. Rust independently
+scans their actual source identities and rejects queries that need their
+unexecuted runtime state; it does not fabricate baseline status or properties.
+This control profile cannot yet publish a gameplay content catalog. Actual
+baseline sprite/group/language handlers, properties and finalization, callback
+execution and content-dependent restoration remain required next work.
+
+### Road sales and depot creation
+
+`cd7f904` implements sale of supported fresh, stopped, single-part vanilla road
+vehicles, with transactional saved removal, pool/unit reuse and survivor cache
+preservation. All/default group and engine counts derive from authoritative
+records. Order backups, shared orders, cargo destruction, aged/group profit
+and renewal lifecycle remain explicit unsupported dependencies.
+
+The native sale matrix covers 22 cases, 571 commands and 370 executions across
+88 engines, with 26 corruption controls and 4,542 archived matrix files. Its
+native uninitialized-duration exception is bound to successful build/sale
+incarnations and occupied IDs. Reuse cannot inherit eligibility from a loaded
+vehicle; Rust fresh values must be zero. Loaded fields, other state, receipts,
+self-decode and original reload comparisons remain strict.
+
+`c92868e` creates and rotates vanilla road depots on supported clear terrain.
+It preserves native validation and cost precedence, including nested failure
+expense/foundation cost, naming holes and maximum-ground-corner occupancy.
+Tile and depot insertion validate together before allocation and infrastructure
+publication. `9df6b13` adds the complete native CI driver: 178 scenarios,
+676 commands, 201 executions, seven corruption controls, original reload and
+split/resume, with 49,998 archived files and 182 actual test bindings.
+
+The combined product passed 333 workspace tests, strict Clippy/formatting and
+20 focused Python tests. Independent review approved exact `9df6b13`, audited
+complete source/executable/raw evidence, revalidated all saved/live/receipt
+comparisons and ran five fresh native cases. Linux PR CI for this revision is
+separate from that local approval. Depot removal, broader clearing/occupancy,
+orders/destructors and vehicle movement remain required.
+
+### Loading context and occupancy witnesses
+
+`ff4226c` adds test-only original loader-context and road-ground observers;
+production Rust never delegates gameplay to them. `ebf0e49` supplies typed
+saved clocks/settings to the existing private loader executor, including
+network normalization/restoration, globals, patch flags and special targets.
+Public control-profile admission remains bounded until actual baseline,
+specification, resource allocation, language/error/safety and callback handlers
+are complete.
+
+The integrated private context matches 66 original cases, 67,828 events,
+67,300 decisions and 121 configurations. Its comparators reject 1,980 altered
+context fields and 66 altered traces; 18 actual host-refusal controls pass.
+Host date-domain admission errors remain distinct from native GRF disabling.
+`8b1132c` separately checks four original road occupancy cutoffs on valid flat
+and sloped sources, with complete saved/live/reload and hash-order restoration
+and an actual corrupted-result rejection. This does not admit arbitrary
+above-ground saved vehicles or mixed vehicle families.
+
+The combined source passed 346 workspace tests, strict checks and direct
+66/18/4 native executions. The new original observer also passed all 44 existing
+replays and the 428-vector depot regression. `aab990e` adds complete CI admission,
+retaining 1,586 context and 535 occupancy evidence files with 80 and eight native
+invocation bindings. Independent review approved this increment after repeating
+the context matrix, guards and actual occupancy restoration/control probes.
+
+### Scalar script execution and road-slope prerequisites
+
+`c822d7e` and `9eb9cc5` introduce the initial scalar Squirrel compiler, register VM
+and original-VM CI comparisons. Review found that Rust accepted form-feed
+whitespace rejected by native Squirrel; `733d5a9` fixes that boundary and retains
+actual control-byte fixtures. Fresh review approved the correction and initial
+scalar domain. Debug and optimization-level-3 dispatchers each pass 414 native
+comparisons and 16 tests; each archive retains 5,012 evidence files, 73 source
+inputs and 1,523 pristine native source blobs. The remaining 51 opcodes, objects,
+GC, host APIs and full AI/GameScript scheduling and persistence remain required.
+
+`1757e19` and `b724296` add original CheckRoadSlope observations and a private Rust
+primitive. All 155,648 combinations of natural slope, requested/existing/other
+road bits and build-on-slopes setting match, including requested-piece mutation
+on failure. Five signed price probes and four actual corrupted-output rejections
+pass. Complete saved/live state and temporary settings/prices restore. The
+integrated workspace passes 368 tests and the new observer passes all 44 existing
+replay scenarios, controls and save/resume checks. This helper remains test-only
+until a real road command consumes it; it does not implement BuildRoad or removal.
+
+`4bf5419` moves the unchanged 5,689 replay evidence requirements into a SHA-pinned
+literal asset. The effective drivers and scenario declarations are unchanged;
+the root manifest's 1 MiB cap remains, with separate bounded external reads.
+`a69c7c1` adds the road-slope CI driver and complete 223-file archive admission.
+Independent review approved these road-slope and manifest increments, including
+fresh native comparisons and complete evidence admission.
+
+The Linux PR run for `9df6b13` passed both jobs, including loader, sale and depot
+milestones, with 1,046 of 1,050 native compiler calls served from cache (99.62%).
+The subsequent PR run for `733d5a9` passed its Rust job and all 18 baseline
+drivers, but evidence upload failed because test-selector colons appeared in
+artifact paths. `e6f3f63` encodes evidence path components while preserving
+original process arguments, checks complete archive paths, and prints bounded
+failure diagnostics while retaining full stderr. `3765b4f` also fixes standalone
+Python test discovery; `b38418e` updates the exact context freshness evidence
+membership after adding road and safety observers. Independent review approved
+these corrections. The `e6f3f63` run successfully uploaded evidence but exposed a
+stale VM source pin for the changed shared helper. The scalar integration
+refreshed that pin. The subsequent `4a556df` run passed both Rust and the complete
+interoperability baseline, including evidence upload, with 1,044 of 1,050 native
+compiler calls served from cache (99.43%). CI runs on pull requests only.
+
+### Static NewGRF safety and continuing dependencies
+
+`acc6a5d`, `170bf4c`, `98bfaac` and `cbcf859` add original static-safety
+observations, native lazy FILESCAN behavior, Rust safety scanning and complete
+CI evidence. The original FillGRFDetails path supplies 893 cases and 1,867
+decisions; 13,794 deliberate comparison alterations and ten host-refusal controls
+are rejected. The final integrated proof also reruns context, occupancy and road
+slope against the same immutable native build. All 385 workspace tests and
+strict checks pass, and independent review approved exact `e6f3f63`.
+
+This scanner does not activate gameplay content or execute arbitrary callbacks.
+Current parallel work covers real language-pack inputs and ordered language
+maps, further Squirrel syntax and runtime dependencies, and command-level depot
+removal using the reviewed shared-order/live-backup primitives below. Each
+remains subject to original-engine proof and independent review.
+Diagnostics/inhibition, GRM, actual baseline/spec execution,
+the remaining VM/object/host API behavior and gameplay consumers are still
+required. None of these increments closes a broad stage requirement.
+
+### Scalar locals and structured control flow
+
+`a26db01` and its review correction `5e2dcf4` add local declarations and
+assignment, comparisons, short-circuit expressions, blocks, if/else, while,
+break and continue. The compiler preserves native target-register aliasing,
+optimization barriers and expression-state lifetime; the VM preserves branch
+offsets, private register cleanup and operation debt across suspension. Review
+caught both incorrectly accepted parenthesized assignments and incorrectly
+rejected native-valid expression targets. The correction ports the original
+expression-state rules and keeps the destination register separate.
+
+Fresh debug and optimization-level-3 runs each pass 3,058 original/Rust
+comparisons, 30 public tests, four native-backed private-frame tests and eleven
+corruption controls. The full workspace passes 403 tests and strict checks.
+Fresh independent review approved `5e2dcf4` after another 1,332 differential
+comparisons and complete source, executable and archive verification. Each
+profile retains 26,827 evidence files. This is 21 of 62 opcode handlers;
+remaining operators, objects, GC, calls, host APIs and full AI/GameScript
+scheduling and persistence remain required. Remote CI for this increment is
+separate from these local acceptance results.
+
+### Canonical shared orders and live backups
+
+`16c3fa2`, `822d48a` and `d4403e9` add native order observations and actual
+network-received save capture, canonical ORDL/VEHS/BKOR runtime operations, and
+complete CI admission. Host role is explicit and immutable at load. Runtime
+single-player/client saves omit transient backups; offline World serialization
+remains lossless. Loaded client pool slots and original object indices remain
+distinct. Native assertions on deleting nonzero loaded slots are recorded as
+boundaries, with Rust rejecting before any state publication.
+
+The original/Rust driver passes 19 pairs, 89 actions, 216 snapshots, 39 save
+checkpoints and 40 vanilla airport geometry rows. Thirteen semantic corruptions,
+nine capture mutations, zero/subset execution and native freshness controls are
+rejected; three native assertion cases are excluded from successful parity.
+All 421 workspace tests, both prior scalar profiles, context comparisons and
+44 replay/control/resume cases pass. Independent review approved `d4403e9`
+after a fresh shared-order challenge and full source/archive verification.
+BackupRestore, ordered sale, command-level depot removal, movement and custom
+airports remain required. The native client fixture is not mixed multiplayer
+compatibility.
+
+### Scalar updates and iteration
+
+`0e9362b` adds bitwise operations and shifts, comma and ternary expressions,
+arithmetic compound assignment, prefix/postfix updates, and for/do loops.
+It preserves native expression-state and destination aliasing, update store
+order, increment re-emission quirks and suspension debt. Defined shifts accept
+all integer bit patterns with counts 0 through 63; undefined counts have a
+distinct typed boundary rather than a successful compatibility claim.
+
+Debug and optimization-level-3 native profiles each pass 5,638 comparisons:
+618 fixtures under nine schedules plus 76 targeted budgets. All previous
+fixtures remain; 280 distinct additions cover the new behavior. Each profile
+passes 37 public and seven private tests, seven native frame witnesses and
+16 corruption controls. Root's additional 408 comparisons and the reviewer's
+118 comparisons match. Ten actual implementation mutants and 19 admission
+attacks are rejected. The integrated workspace passes 431 tests, and the order
+driver passes after its shared source bindings are updated. Independent review
+approved exact `0e9362b`. An early dependency-free unittest now detects stale
+live VM source pins, with a real stale-helper red/green witness.
+
+This reaches 26 of 62 handlers. Comments/switch/foreach, strings and objects,
+call frames and closures, GC, host APIs, scheduling, persistence and documented
+native-undefined arithmetic domains remain open. None of these increments
+closes a broad stage 4 gate.
+
+Tree/water additions must account for nested test-only town ratings, nearest-town
+tie rules, Auto clear-limit bypass, ownership, vehicle geometry and neighboring
+water bits. Add those coupled effects separately after the LevelLand boundary;
+do not append them as unverified branches to the existing clear-only procedure.
+
+World operations must preserve native identity, iteration/allocation order and
+ownership. Changes spanning records and tiles validate as one transaction.
+Performance improvements must retain the same safety and wire constraints;
+cloning or decoding the full world per object per tick is not a viable final
+runtime architecture.
+
+Runtime restoration and execution use explicit content inputs, deterministic
+RNG and cache ownership. Saved fields and disposable caches must not become
+competing authoritative models. Cache invalidation after a command is tested
+against the same fields restored after a save/reload.
+
+Follow native `StateGameLoop`: persistent-storage enter, animation, calendar
+timers and vehicle calendar scheduler, economy timers, tick timers, tile loop,
+vehicle ticks, landscape ticks, persistent-storage leave, AI, GameScript and
+landscaping limits. Paused GameScript behavior is included. Do not skip an
+unimplemented callback or alter RNG order to make a scenario match.
+
+Each gameplay family adds commands, native observations and meaningful world
+fixtures together. Compare complete saved fields/raw map, defined runtime,
+receipts, object lifecycles and RNG at matching native boundaries. Native
+fixture preparation and after-load are distinct from replay execution. Expand
+the runtime observation schema deliberately; never normalize away differences.
+
+The integration lead schedules shared reference setup/builds so workers cannot
+overwrite one another's instrumented source or binary. New observer files can
+be authored in parallel; common patches/setup scripts have one owner per wave.
+
+## Stage acceptance and handoff
+
+- [ ] Every seven-family requirement above has original-versus-Rust scenarios,
+      including relevant vanilla/modded state and save/reload during execution.
+- [ ] Content-dependent after-load state and invalidation after commands match.
+- [ ] All vehicle classes and construction/terrain/water families are covered.
+- [ ] Cargo/station, town/industry/economy/company lifecycle effects agree.
+- [ ] Existing NewGRF and AI/GameScript execution passes the declared baseline.
+- [ ] Cross-family command/tick ordering, RNG and persisted continuation agree.
+- [ ] Native evidence freshness and wrong-state/order/cost/RNG controls fail.
+- [ ] Existing stage 1-3 regressions remain green; CI runs only for PRs and
+      preserves native compiler caching and auditable artifacts.
+- [ ] Independent reviews and required local/PR checks pass; one stage PR is
+      ready for maintainer review. Stage 5 has not started.
+
+Per-increment verification includes meaningful red/green regressions and native
+comparisons. Integration gates remain `cargo fmt --all -- --check`, strict
+workspace/all-target/all-feature locked Clippy, workspace tests, Python contract
+tests/validation and the complete versioned baseline. External ignored tests
+must run through their actual drivers. New claims and exact required evidence
+are added to `compatibility/contract.json` only when executable evidence exists.

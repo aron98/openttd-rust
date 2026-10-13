@@ -1,0 +1,108 @@
+--- a/src/newgrf.cpp
++++ b/src/newgrf.cpp
+@@ -1260,6 +1260,7 @@
+ #include "reference_grf_language.hpp"
+ #include "reference_grf_strings.hpp"
+ #include "reference_grf_currency.hpp"
++#include "reference_engine_specs.hpp"
+ #include "reference_grf_safety.hpp"
+ 
+ static void DecodeSpecialSprite(ReusableBuffer<uint8_t> &allocator, uint num, GrfLoadingStage stage)
+@@ -1657,6 +1658,7 @@
+ 	ResetCallbacks(true);
+ 
+ 	ReferenceGrfCurrency::Observe("before-finalize");
++	ReferenceEngineSpecs::Observe("before-finalize");
+ 	FinaliseStringMapping();
+ 	ReferenceGrfCurrency::Observe("after-finalize");
+ 
+@@ -1770,6 +1772,7 @@
+ 	FinalisePriceBaseMultipliers();
+ 
+ 	/* Deallocate temporary loading data */
++	ReferenceEngineSpecs::Observe("before-temp-release");
+ 	_gted.clear();
+ 	_grm_sprites.clear();
+ }
+@@ -1782,6 +1785,7 @@
+ void LoadNewGRF(SpriteID load_index, uint num_baseset)
+ {
+ 	ReferenceGrfControl::Begin(num_baseset);
++	ReferenceEngineSpecs::Begin(ReferenceGrfControl::manifest);
+ 	if (ReferenceGrfControl::active) ReferenceGrfContext::Prepare(ReferenceGrfControl::manifest);
+ 	if (ReferenceGrfControl::active) ReferenceGrfLanguage::Begin(ReferenceGrfControl::manifest);
+ 	ReferenceGrfStrings::TryRun(ReferenceGrfControl::manifest);
+@@ -1818,6 +1822,7 @@
+ 
+ 	ResetNewGRFData();
+ 	ReferenceGrfCurrency::Observe("after-reset");
++	ReferenceEngineSpecs::Observe("after-reset");
+ 
+ 	/*
+ 	 * Reset the status of all files, so we can 'retry' to load them.
+@@ -1902,6 +1907,7 @@
+ 		ReferenceGrfLanguage::StageEnd(stage);
+ 		ReferenceGrfStrings::StageEnd(stage);
+ 		ReferenceGrfCurrency::StageEnd(stage);
++		ReferenceEngineSpecs::Observe("stage-end");
+ 	}
+ 
+ 	/* We've finished reading files. */
+@@ -1930,4 +1936,5 @@
+ 	ReferenceGrfStrings::Finish();
+ 	ReferenceGrfCurrency::Finish();
+ 	ReferenceGrfControl::End();
+-}
++	ReferenceEngineSpecs::Finish();
++}
+--- a/src/newgrf/newgrf_act0_roadvehs.cpp
++++ b/src/newgrf/newgrf_act0_roadvehs.cpp
+@@ -16,6 +16,7 @@
+ #include "newgrf_bytereader.h"
+ #include "newgrf_internal_vehicle.h"
+ #include "newgrf_internal.h"
++#include "../reference_engine_specs_hooks.hpp"
+ 
+ #include "../safeguards.h"
+ 
+@@ -29,11 +30,13 @@
+  */
+ static ChangeInfoResult RoadVehicleChangeInfo(uint first, uint last, int prop, ByteReader &buf)
+ {
++	ReferenceEngineSpecsRoadScope observation(first, last, prop, buf);
+ 	ChangeInfoResult ret = CIR_SUCCESS;
+ 
+ 	for (uint id = first; id < last; ++id) {
+ 		Engine *e = GetNewEngine(_cur_gps.grffile, VEH_ROAD, id);
+-		if (e == nullptr) return CIR_INVALID_ID; // No engine could be allocated, so neither can any next vehicles
++		ReferenceEngineSpecsAllocated(id, e, buf.Remaining());
++		if (e == nullptr) { observation.result = CIR_INVALID_ID; return CIR_INVALID_ID; } // No engine could be allocated, so neither can any next vehicles
+ 
+ 		EngineInfo *ei = &e->info;
+ 		RoadVehicleInfo *rvi = &e->VehInfo<RoadVehicleInfo>();
+@@ -231,6 +234,7 @@
+ 		}
+ 	}
+ 
++	observation.result = ret;
+ 	return ret;
+ }
+ 
+--- a/src/saveload/afterload.cpp
++++ b/src/saveload/afterload.cpp
+@@ -11,6 +11,7 @@
+ 
+ void ReferenceArmGrfControl();
+ void ReferenceRunGrfCurrencyReload();
++void ReferenceEngineSpecsAfterSavedOverlay();
+ #include "../void_map.h"
+ #include "../signs_base.h"
+ #include "../depot_base.h"
+@@ -808,6 +809,7 @@
+ 
+ 	/* Copy temporary data to Engine pool */
+ 	CopyTempEngineData();
++	ReferenceEngineSpecsAfterSavedOverlay();
+ 
+ 	/* Connect front and rear engines of multiheaded trains and converts
+ 	 * subtype to the new format */

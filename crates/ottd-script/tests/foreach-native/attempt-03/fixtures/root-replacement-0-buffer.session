@@ -1,0 +1,12 @@
+make-array 0 0 3 integer 1 integer 2 integer 3
+root-store-array 0 70656e64696e67 0
+compile 0 0 buffer root-replacement-0.nut
+run 0 0 0
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 2
+advance 0 2
+make-array 0 1 2 integer 8 integer 9
+root-store-array 0 70656e64696e67 1
+advance 0 10000

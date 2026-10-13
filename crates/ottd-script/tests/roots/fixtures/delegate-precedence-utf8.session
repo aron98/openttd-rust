@@ -1,0 +1,5 @@
+compile 0 0 utf8 fixtures/len-read.nut
+compile 0 1 utf8 fixtures/len-constant.nut
+run 0 0 1000
+seed 0 6c656e integer 3
+run 0 0 1000

@@ -1,0 +1,48 @@
+configured_empty_roots 0 0 1
+step 0 compile 0 0 utf8 fixtures/after-write-failure-0.nut
+compiled
+stack 4
+literal string 7 70656e64696e67
+op 1 1 0 0 0
+op 31 2 1 0 0
+op 2 3 1 0 0
+op 32 2 3 0 0
+op 11 1 0 1 2
+op 9 1 0 0 0
+op 2 2 0 0 0
+op 2 3 7 0 0
+op 13 1 1 2 3
+op 9 1 0 0 0
+op 2 2 2 0 0
+op 14 1 1 2 0
+op 19 1 1 0 0
+op 19 255 0 0 0
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+step 1 run 0 0 10000
+runtime_error 9988 string 28 74686520696e6465782027322720646f6573206e6f74206578697374
+temp array 1 length 1
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 integer 7
+array_refs 1 2
+step 2 raw 0 70656e64696e67
+raw array 1 length 1
+stack_top 0 0
+external_child 1
+external_program 0 vm 0
+vm_root 0 0 active -1
+vm_root 1 0 active -1
+vm_root 2 1 active -1
+array_state 1 length 1
+element 1 0 integer 7
+array_refs 1 2

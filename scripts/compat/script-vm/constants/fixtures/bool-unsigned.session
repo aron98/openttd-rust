@@ -1,0 +1,6 @@
+compile 0 0 unsigned fixtures/bool.nut
+lookup 0 K -
+lookup 0 E -
+lookup 0 E A
+lookup 0 E B
+lookup 0 E D

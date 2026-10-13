@@ -1,0 +1,45 @@
+{
+  "upstream_commit": "14ec60f248547d4d062a1160f0fc26d742319888",
+  "save_version": 362,
+  "scope": "temperate WorldTick tree tiles; settings 0/3; grass/rough; stages 0..6; count 1..4",
+  "base_rust_commit": "9520ffc0fd33991ace25237cebdc7bae63a9c2ca",
+  "native30_binary_sha256": "18c67eb3decb67493fc9c0cce904f3fd97a4bba4e938966eb167ebc272762c01",
+  "native_source_inputs": {
+    "src/tree_cmd.cpp": {
+      "base_sha256": "6a3afef06af8acb99ad4c8b970b33758e66f653a7f4ee5d1fc70a3f805340578",
+      "patched_sha256": "0018000c85f0a0f3fb35628b4617d9300ce0c5fb491c83b709a6356d1e6a1f20"
+    },
+    "src/openttd.cpp": {
+      "base_sha256": "00a0c5090ed0697dfa3f580bd2c76799ff1cc03fd1162f6c999ec64005bfecca",
+      "patched_sha256": "f4d1a195cca5b3eb1bedf5a0b4f9e58002c4463cb1636ee80bcb43e7449b20fa"
+    },
+    "src/saveload/reference_replay_commands.hpp": {
+      "base_sha256": "7ccb7d58a9bb262914a7ec84b912942b30a7eb2eadd69c065b91d18321b44a19",
+      "patched_sha256": "eebde26ed9f7f552b2caea09ca5e0c2ed515e9e288bb9e450ac982e9e0f29565"
+    },
+    "src/saveload/reference_tree_fixture.hpp": {
+      "base_sha256": "503acdf97d50ba0839f57aca0469f819f016685f937e0865c37b586d79f93857",
+      "patched_sha256": "e78d9a2036faf573f432ddc8fa94a5fb9fdb235ab089957faa9236ab7acd16a0"
+    }
+  },
+  "observer": {
+    "path": "reference/tree_growth_observer.hpp",
+    "sha256": "b227005bdcd5450d3ff9f988e2dbbc62fbab85719dadfe008e7b8e7d5ac3c15d"
+  },
+  "build_script": "scripts/build-tree-growth-reference.sh",
+  "driver": "scripts/check-tree-growth.py",
+  "test": "native_world_trees::native_tree_events_match_complete_world_ticks",
+  "later_required": [
+    "spreading settings 1/2",
+    "OnTick_Trees map scaling and byte underflow",
+    "Arctic/Tropic/snow/desert",
+    "water/shore tree callbacks"
+  ],
+  "normal_road_movement_gate": "unchanged true",
+  "driver_sources": [
+    "scripts/check-tree-growth.py",
+    "scripts/tree_growth_run.py",
+    "scripts/tree_growth_proof.py",
+    "scripts/tree_growth_recipe.py"
+  ]
+}

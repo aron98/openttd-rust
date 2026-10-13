@@ -1,0 +1,1 @@
+enum E { A, A, B } return E.B;

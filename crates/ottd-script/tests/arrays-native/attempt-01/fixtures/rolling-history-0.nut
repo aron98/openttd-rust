@@ -1,0 +1,1 @@
+history <- [0,0,0]; cursor <- 0; return 0;

@@ -1,0 +1,1 @@
+return "owned"+1;

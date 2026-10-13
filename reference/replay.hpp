@@ -56,12 +56,28 @@ inline Json Checkpoint(const std::filesystem::path &directory, const std::string
     Write(stem + ".runtime.json", {{"before_save", before}, {"after_save", after}});
     return {{"label", label}, {"runtime", after}};
 }
+}
+#include "reference_movement_replay.hpp"
+namespace ReferenceReplay {
+inline std::ofstream route_search;
+inline uint64_t route_search_sequence = 0;
+inline void ObserveRouteSearch(const ReferenceMovement::RouteEvent &event)
+{
+    route_search << Json{{"sequence", route_search_sequence++}, {"runtime", Runtime()},
+        {"phase", event.phase}, {"tile", event.tile}, {"track", event.track},
+        {"end_tile", event.end_tile}, {"end_track", event.end_track},
+        {"parent_tile", event.parent_tile}, {"parent_track", event.parent_track},
+        {"cost", event.cost}, {"estimate", event.estimate}, {"slot", event.slot},
+        {"count", event.count}}.dump() << '\n';
+}
 inline bool Run()
 {
+    if (std::getenv("OTTD_MOVEMENT_OBSERVE") != nullptr) return ReferenceMovement::Run();
     const char *path = std::getenv("OTTD_REPLAY_PATH");
     static bool active = false;
     static bool done = false;
     if (path == nullptr || active || done || _game_mode != GM_NORMAL) return false;
+    TreeRatingEnabled();
     active = true;
     std::ifstream input(path);
     Require(input.good(), "cannot open native replay input");
@@ -71,6 +87,14 @@ inline bool Run()
     Require(output != nullptr, "native replay output directory required");
     const std::filesystem::path directory(output);
     std::filesystem::create_directories(directory);
+    std::ofstream route_trace;
+    if (std::getenv("OTTD_ROAD_ROUTE_OBSERVE") != nullptr) {
+        route_trace.exceptions(std::ios::failbit | std::ios::badbit);
+        route_trace.open(directory / "route.jsonl");
+        route_search.exceptions(std::ios::failbit | std::ios::badbit);
+        route_search.open(directory / "route-search.jsonl");
+        ReferenceMovement::route_sink = ObserveRouteSearch;
+    }
     Require(!std::filesystem::exists(directory / "results.json"), "stale native replay results");
     Json results = {{"schema_version", 1}, {"actions", Json::array()}, {"checkpoints", Json::array()}};
     if (protocol.contains("fixture")) {
@@ -97,7 +121,20 @@ inline bool Run()
             const uint32_t count = action.at("count");
             total_ticks += count;
             Require(total_ticks <= 100000, "native replay tick limit exceeded");
-            for (uint32_t i = 0; i < count; ++i) StateGameLoop();
+            for (uint32_t i = 0; i < count; ++i) {
+                StateGameLoop();
+                if (route_trace.is_open()) {
+                    Json stops = Json::array();
+                    for (const RoadStop *stop : RoadStop::Iterate()) stops.push_back({{"id", stop->index.base()}, {"tile", stop->xy.base()}, {"status", stop->status}});
+                    Json loading = Json::array();
+                    for (const Station *station : Station::Iterate()) {
+                        Json vehicles = Json::array();
+                        for (const Vehicle *vehicle : station->loading_vehicles) vehicles.push_back(vehicle->index.base());
+                        loading.push_back({{"id", station->index.base()}, {"vehicles", vehicles}, {"counter", station->delete_ctr}});
+                    }
+                    route_trace << Json{{"runtime", Runtime()}, {"movement", ReferenceMovement::Snapshot()}, {"stops", stops}, {"loading", loading}}.dump() << '\n';
+                }
+            }
         } else if (op == "checkpoint") {
             results["checkpoints"].push_back(Checkpoint(directory, action.at("label")));
         } else {
@@ -107,6 +144,7 @@ inline bool Run()
         results["actions"].push_back(std::move(observation));
     }
     results["checkpoints"].push_back(Checkpoint(directory, "final"));
+    ReferenceMovement::route_sink = nullptr;
     Write(directory / "results.json", results);
     unsetenv("OTTD_WORLD_PATH");
     unsetenv("OTTD_WORLD_SCHEMA_PATH");

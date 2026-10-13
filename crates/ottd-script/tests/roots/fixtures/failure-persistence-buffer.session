@@ -1,0 +1,9 @@
+seed 0 73636f7265 integer 1
+compile 0 0 buffer fixtures/failure-persistence.nut
+run 0 0 0
+advance 0 1
+advance 0 1
+advance 0 1000
+raw 0 73636f7265
+raw 0 616273656e74
+temp 0

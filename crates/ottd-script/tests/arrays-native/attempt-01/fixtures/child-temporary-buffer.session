@@ -1,0 +1,12 @@
+make-array 0 0 1 string 6368696c64
+root-store-array 0 70656e64696e67 0
+compile 1 0 buffer fixtures/return-pending.nut
+run 1 0 1000
+seed 0 70656e64696e67 null -
+drop-handle 0 0
+clear-result 1
+drop 1 0
+weak-state 0 1
+release-child 1
+weak-state 0 1
+refs 0 6368696c64

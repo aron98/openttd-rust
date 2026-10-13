@@ -54,6 +54,7 @@ impl SimulationRuntime {
             transport: self.transport.clone(),
             group_profits: self.group_profits.clone(),
             company_ratings: self.company_ratings.clone(),
+            news: self.news.clone(),
         };
         let (candidate, report, towns) = State::plan(&mut self.world, ticks, &mut runner)?;
         let vehicle = SavedVehicleView::candidate(candidate.view(), id)?;
@@ -67,6 +68,7 @@ impl SimulationRuntime {
         self.transport = runner.transport;
         self.group_profits = runner.group_profits;
         self.company_ratings = runner.company_ratings;
+        self.news = runner.news;
         if let Some(towns) = towns {
             self.towns = towns;
         }

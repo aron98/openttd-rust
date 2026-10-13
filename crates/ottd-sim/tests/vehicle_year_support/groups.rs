@@ -19,6 +19,19 @@ fn profit(value: &serde_json::Value) -> NativeProfitResult<serde_json::Value> {
     Ok(serde_json::Value::Object(fields))
 }
 
+/// Extract the native news-queue length exported by the group snapshot.
+///
+/// # Errors
+/// Returns an error when the native counter is missing or not a length.
+fn owned_news_queue(value: &serde_json::Value) -> NativeProfitResult<usize> {
+    usize::try_from(
+        value["news_queue"]
+            .as_u64()
+            .ok_or("missing native news_queue counter")?,
+    )
+    .map_err(|_| "native news_queue counter range".into())
+}
+
 /// Extract the three owned profit fields without calculating native cache values.
 ///
 /// # Errors

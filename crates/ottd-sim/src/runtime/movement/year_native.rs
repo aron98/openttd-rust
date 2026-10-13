@@ -52,5 +52,10 @@ pub(super) fn compare(runtime: &SimulationRuntime, native: &Path, label: &str) -
         serde_json::to_value(runtime.group_profit_caches())?,
         owned_native(&expected)?
     );
+    assert_eq!(
+        runtime.news_queue().len(),
+        owned_news_queue(&expected)?,
+        "{label}: process-owned news queue length"
+    );
     Ok(())
 }

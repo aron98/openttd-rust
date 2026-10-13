@@ -28,6 +28,11 @@ fn compare(runtime: &SimulationRuntime, output: &Path, label: &str) -> Result {
         serde_json::to_value(runtime.group_profit_caches())?,
         owned_native(&groups)?
     );
+    assert_eq!(
+        runtime.news_queue().len(),
+        owned_news_queue(&groups)?,
+        "{label}: process-owned news queue length"
+    );
     fs::write(
         output.join(format!("{label}.ratings.json")),
         serde_json::to_vec(runtime.company_rating_caches())?,

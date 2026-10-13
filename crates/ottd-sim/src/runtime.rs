@@ -13,7 +13,7 @@ mod dispatch;
 pub(crate) mod towns;
 pub use towns::{TownHouseCache, TownHouseCaches};
 mod movement;
-pub use movement::SingleRoadTileOccupancy;
+pub use movement::{NewsQueue, SingleRoadTileOccupancy};
 mod order_state;
 pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 #[cfg(test)]
@@ -117,6 +117,7 @@ pub struct SimulationRuntime {
     industries: IndustryCaches,
     group_profits: GroupProfitCaches,
     company_ratings: CompanyRatingCaches,
+    news: movement::NewsQueue,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -206,6 +207,7 @@ impl SimulationRuntime {
             industries: IndustryCaches::restore(&world)?,
             group_profits: GroupProfitCaches::restore(&world)?,
             company_ratings: CompanyRatingCaches::fresh_process(),
+            news: movement::NewsQueue::fresh_process(),
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
             transport: transport::TransportRuntime::restore(&world, &content)?,
@@ -242,6 +244,11 @@ impl SimulationRuntime {
     /// Native raw rating slots for this independent process context; not save-derived.
     pub const fn company_rating_caches(&self) -> &CompanyRatingCaches {
         &self.company_ratings
+    }
+
+    /// Process-owned vehicle-advice news queue; never serialized, front-inserted.
+    pub const fn news_queue(&self) -> &movement::NewsQueue {
+        &self.news
     }
 
     /// Station pool allocation metadata.

@@ -1,5 +1,5 @@
 //! Complete native positive prefix precedes a labelled late candidate-cache fault.
-use super::{RoadPhases, SavedVehicleView, State, spatial, stations};
+use super::{NewsQueue, RoadPhases, SavedVehicleView, State, spatial, stations};
 use crate::runtime::{SimulationRuntime, pools::PoolAllocator};
 use ottd_save::{Savegame, world::World};
 use std::path::{Path, PathBuf};
@@ -39,6 +39,7 @@ fn transported_and_joined_prefix_then_late_cache_fault_is_atomic() -> Result {
             transport: runtime.transport.clone(),
             group_profits: runtime.group_profits.clone(),
             company_ratings: runtime.company_ratings.clone(),
+            news: NewsQueue::fresh_process(),
         };
         let (candidate, report, towns) = State::plan(&mut runtime.world, 8192, &mut runner)?;
         assert_eq!(report.ticks.len(), 8192);

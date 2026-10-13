@@ -1,5 +1,5 @@
 //! Synthetic saturation/countdown controls start from genuine loaded native cargo.
-use super::{RoadPhases, State, number, set, spatial, stations};
+use super::{NewsQueue, RoadPhases, State, number, set, spatial, stations};
 use crate::runtime::SimulationRuntime;
 use ottd_save::{Savegame, world::World};
 
@@ -35,6 +35,7 @@ fn packet_age_saturation_countdown_and_candidate_rollback() -> Result {
             transport: runtime.transport.clone(),
             group_profits: runtime.group_profits.clone(),
             company_ratings: runtime.company_ratings.clone(),
+            news: NewsQueue::fresh_process(),
         };
         runner.cache.cargo_age_period = period;
         {

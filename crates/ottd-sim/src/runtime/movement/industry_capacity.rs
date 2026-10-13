@@ -1,5 +1,5 @@
 //! Synthetic false capacity exercises real forest ordering without claiming a full native pool.
-use super::{RoadPhases, State, spatial, stations};
+use super::{NewsQueue, RoadPhases, State, spatial, stations};
 use crate::runtime::{
     SimulationRuntime, pools::PoolAllocator, stations::saved::StationRow,
     transport::cargo::read::Read,
@@ -33,6 +33,7 @@ fn synthetic_false_capacity_preserves_fraction_and_actual_transported_history() 
             transport: runtime.transport.clone(),
             group_profits: runtime.group_profits.clone(),
             company_ratings: runtime.company_ratings.clone(),
+            news: NewsQueue::fresh_process(),
         };
         // Given a deliberately synthetic full one-item allocator, unrelated to actual native pool capacity.
         runner.transport.cargo.pool = PoolAllocator::restore(1, 1024, [0])?;

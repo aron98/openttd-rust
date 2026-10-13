@@ -36,6 +36,11 @@ fn restored_group_profits_match_original_afterload() -> Result {
         "all three owned fields for every native company/type/group"
     );
     assert_eq!(
+        runtime.news_queue().len(),
+        owned_news_queue(&expected)?,
+        "process-owned news queue length"
+    );
+    assert_eq!(
         runtime.saved_json()?,
         World::decode(&Savegame::decode(&input, ottd_save::DEFAULT_MAX_BYTES)?)?.saved_json()?
     );

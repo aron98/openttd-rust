@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Final
 
 from scripts.movement_ci.value import (
     DECODE,
@@ -49,7 +50,11 @@ class Event:
     sequence: int
     phase: str
     vehicle: int
+    extra: Json
     snapshot: Snapshot
+
+
+MAX_NEWS_AMOUNT: Final = 1 << 10
 
 
 def number(value: Json, lower: int, upper: int) -> int:
@@ -104,7 +109,18 @@ def statistics(raw: Json) -> Statistics:
 
 
 def snapshot(raw: Json) -> Snapshot:
-    keys(raw, {"schema_version", "companies", "groups", "vehicles", "context", "clock"})
+    keys(
+        raw,
+        {
+            "schema_version",
+            "companies",
+            "groups",
+            "vehicles",
+            "news_queue",
+            "context",
+            "clock",
+        },
+    )
     require(
         "unsupported group schema", condition=integer(field(raw, "schema_version")) == 1
     )
@@ -151,6 +167,7 @@ def snapshot(raw: Json) -> Snapshot:
             )
         )
     validate_context(raw)
+    _ = number(field(raw, "news_queue"), 0, MAX_NEWS_AMOUNT)
     return Snapshot(tuple(groups), raw)
 
 
@@ -226,12 +243,32 @@ def read_snapshot(path: Path) -> Snapshot:
     return snapshot(DECODE(path.read_text()))
 
 
+def probe(phase: str, raw: Json) -> Json:
+    """Validate the probe context of one year-trace event against the native branch."""
+    if phase == "unprofitable_news":
+        keys(raw, {"company", "string", "profit"})
+        _ = number(field(raw, "company"), 0, 14)
+        _ = number(field(raw, "string"), 0, 2**32 - 1)
+        _ = number(field(raw, "profit"), -(2**63), 2**63 - 1)
+        return raw
+    if phase == "unprofitable_ai":
+        keys(raw, {"company", "is_ai"})
+        _ = number(field(raw, "company"), 0, 14)
+        _ = boolean(field(raw, "is_ai"))
+        return raw
+    require(
+        "unexpected probe context on a passive year phase",
+        condition=raw is None,
+    )
+    return raw
+
+
 def read_events(path: Path) -> tuple[Event, ...]:
     events: list[Event] = []
     with path.open() as stream:
         for line in stream:
             raw = DECODE(line)
-            keys(raw, {"sequence", "phase", "vehicle", "snapshot"})
+            keys(raw, {"sequence", "phase", "vehicle", "extra", "snapshot"})
             sequence = integer(field(raw, "sequence"))
             require(
                 "noncontiguous year event sequence", condition=sequence == len(events)
@@ -251,13 +288,17 @@ def read_events(path: Path) -> tuple[Event, ...]:
                     "group_profits_after",
                     "age731_before",
                     "age731_after",
+                    "unprofitable_news",
+                    "unprofitable_ai",
                 },
             )
+            extra = probe(phase, field(raw, "extra"))
             events.append(
                 Event(
                     sequence,
                     phase,
                     number(field(raw, "vehicle"), 0, 4294967295),
+                    extra,
                     snapshot(field(raw, "snapshot")),
                 )
             )

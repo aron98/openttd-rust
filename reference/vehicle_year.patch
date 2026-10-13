@@ -71,15 +71,32 @@
  	}
  }
  
-@@ -3036,6 +3041,7 @@
- 
+@@ -3010,26 +3015,37 @@
  static const IntervalTimer<TimerGameEconomy> _economy_vehicles_yearly({TimerGameEconomy::YEAR, TimerGameEconomy::Priority::VEHICLE}, [](auto)
  {
 +	ReferenceGroupProfit::Event("vehicle_year_enter");
  	for (Vehicle *v : Vehicle::Iterate()) {
  		if (v->IsPrimaryVehicle()) {
  			/* show warning if vehicle is not generating enough income last 2 years (corresponds to a red icon in the vehicle list) */
-@@ -3054,11 +3060,14 @@
+ 			Money profit = v->GetDisplayProfitThisYear();
+ 			if (v->economy_age >= VEHICLE_PROFIT_MIN_AGE && profit < 0) {
+ 				if (_settings_client.gui.vehicle_income_warn && v->owner == _local_company) {
++					ReferenceGroupProfit::Event("unprofitable_news", v->index.base(), ReferenceGroupProfit::Json{
++						{"company", v->owner.base()},
++						{"string", TimerGameEconomy::UsingWallclockUnits() ? STR_NEWS_VEHICLE_UNPROFITABLE_PERIOD : STR_NEWS_VEHICLE_UNPROFITABLE_YEAR},
++						{"profit", static_cast<int64_t>(profit)}});
+ 					AddVehicleAdviceNewsItem(AdviceType::VehicleUnprofitable,
+ 						GetEncodedString(TimerGameEconomy::UsingWallclockUnits() ? STR_NEWS_VEHICLE_UNPROFITABLE_PERIOD : STR_NEWS_VEHICLE_UNPROFITABLE_YEAR, v->index, profit),
+ 						v->index);
+ 				}
++				ReferenceGroupProfit::Event("unprofitable_ai", v->index.base(), ReferenceGroupProfit::Json{
++					{"company", v->owner.base()},
++					{"is_ai", Company::Get(v->owner)->is_ai}});
+ 				AI::NewEvent(v->owner, new ScriptEventVehicleUnprofitable(v->index));
+ 			}
+ 
+ 			v->profit_last_year = v->profit_this_year;
+ 			v->profit_this_year = 0;
  			SetWindowDirty(WC_VEHICLE_DETAILS, v->index);
  		}
  	}

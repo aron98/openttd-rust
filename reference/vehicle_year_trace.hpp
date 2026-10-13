@@ -4,7 +4,7 @@
 #include "reference_group_profit_snapshot.hpp"
 #include <fstream>
 namespace ReferenceGroupProfit {
-inline void Event(const char *phase, uint32_t vehicle = UINT32_MAX)
+inline void Event(const char *phase, uint32_t vehicle = UINT32_MAX, Json extra = Json())
 {
     if (!Enabled()) return;
     static std::ofstream stream;
@@ -14,7 +14,7 @@ inline void Event(const char *phase, uint32_t vehicle = UINT32_MAX)
         stream.open(std::getenv("OTTD_VEHICLE_YEAR_TRACE"));
     }
     stream << Json{{"sequence", sequence++}, {"phase", phase}, {"vehicle", vehicle},
-        {"snapshot", Snapshot()}}.dump() << '\n';
+        {"extra", extra}, {"snapshot", Snapshot()}}.dump() << '\n';
 }
 }
 #endif

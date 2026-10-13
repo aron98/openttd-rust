@@ -6,10 +6,10 @@ import unittest
 from collections.abc import Callable
 
 from scripts.movement_ci.value import EvidenceError, Json
-from scripts.vehicle_year_model import Snapshot, Statistics, snapshot, statistics
+from scripts.vehicle_year_model import Snapshot, Statistics, probe, snapshot, statistics
 
 
-def rejects(action: Callable[[], Statistics | Snapshot]) -> None:
+def rejects(action: Callable[[], object]) -> None:
     try:
         _ = action()
     except EvidenceError:
@@ -71,3 +71,84 @@ class SnapshotTests(unittest.TestCase):
     def test_rejects_missing_group_coordinate(self) -> None:
         given: Json = {"schema_version": 1, "companies": [], "vehicles": []}
         rejects(lambda: snapshot(given))
+
+
+def empty_world() -> Json:
+    return {
+        "schema_version": 1,
+        "companies": [],
+        "groups": [],
+        "vehicles": [],
+        "news_queue": 0,
+        "context": {
+            "current_company": 16,
+            "local_company": 0,
+            "networking": False,
+            "network_server": False,
+            "vehicle_income_warn": True,
+            "old_vehicle_warn": True,
+        },
+        "clock": {
+            "tick": 1,
+            "economy_date": 0,
+            "economy_fract": 0,
+            "economy_year": 0,
+            "calendar_date": 0,
+            "calendar_fract": 0,
+        },
+    }
+
+
+class NewsQueueTests(unittest.TestCase):
+    def test_accepts_empty_process_with_news_queue(self) -> None:
+        given = empty_world()
+        actual = snapshot(given)
+        assert actual.groups == ()
+        assert actual.raw == given
+
+    def test_rejects_missing_news_queue_when_world_only_supplied(self) -> None:
+        given = empty_world()
+        assert isinstance(given, dict)
+        del given["news_queue"]
+        rejects(lambda: snapshot(given))
+
+    def test_rejects_news_queue_above_native_maximum(self) -> None:
+        given = empty_world()
+        assert isinstance(given, dict)
+        given["news_queue"] = (1 << 10) + 1
+        rejects(lambda: snapshot(given))
+
+    def test_rejects_boolean_news_queue_length(self) -> None:
+        given = empty_world()
+        assert isinstance(given, dict)
+        given["news_queue"] = True
+        rejects(lambda: snapshot(given))
+
+
+class ProbeTests(unittest.TestCase):
+    def test_accepts_unprofitable_news_probe(self) -> None:
+        given: Json = {"company": 0, "string": 761, "profit": -1125}
+        assert probe("unprofitable_news", given) == given
+
+    def test_accepts_unprofitable_ai_probe_with_human_owner(self) -> None:
+        given: Json = {"company": 0, "is_ai": False}
+        assert probe("unprofitable_ai", given) == given
+
+    def test_rejects_missing_profit_in_unprofitable_news(self) -> None:
+        given: Json = {"company": 0, "string": 761}
+        rejects(lambda: probe("unprofitable_news", given))
+
+    def test_rejects_boolean_company_in_unprofitable_ai(self) -> None:
+        given: Json = {"company": True, "is_ai": False}
+        rejects(lambda: probe("unprofitable_ai", given))
+
+    def test_rejects_integer_is_ai_in_unprofitable_ai(self) -> None:
+        given: Json = {"company": 0, "is_ai": 0}
+        rejects(lambda: probe("unprofitable_ai", given))
+
+    def test_rejects_probe_context_on_passive_phase(self) -> None:
+        given: Json = {"company": 0, "string": 761, "profit": -1125}
+        rejects(lambda: probe("vehicle_year_enter", given))
+
+    def test_accepts_absent_context_on_passive_phase(self) -> None:
+        assert probe("vehicle_year_enter", None) is None

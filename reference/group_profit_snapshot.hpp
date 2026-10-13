@@ -6,6 +6,7 @@
 #include "../vehicle_base.h"
 #include "../settings_type.h"
 #include "../network/network.h"
+#include "../news_gui.h"
 #include "../timer/timer_game_calendar.h"
 #include "../timer/timer_game_economy.h"
 #include "../timer/timer_game_tick.h"
@@ -52,6 +53,7 @@ inline Json Snapshot()
             {"profit_last_year", static_cast<int64_t>(vehicle->profit_last_year)}});
     }
     return {{"schema_version", 1}, {"companies", companies}, {"groups", groups}, {"vehicles", vehicles},
+        {"news_queue", GetNews().size()},
         {"context", {{"current_company", _current_company.base()}, {"local_company", _local_company.base()},
             {"networking", _networking}, {"network_server", _network_server},
             {"vehicle_income_warn", _settings_client.gui.vehicle_income_warn},

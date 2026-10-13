@@ -47,6 +47,7 @@ def snapshot() -> dict[str, Json]:
             "companies": [],
             "groups": [],
             "vehicles": [],
+            "news_queue": 0,
             "context": {
                 "current_company": 16,
                 "local_company": 0,

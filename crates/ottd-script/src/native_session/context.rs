@@ -154,6 +154,10 @@ impl ContextSlot {
     pub(super) const fn record(&self) -> Option<&ContextRecord> {
         self.record.as_ref()
     }
+    /// The mutable registry record of an occupied slot.
+    pub(super) const fn record_mut(&mut self) -> Option<&mut ContextRecord> {
+        self.record.as_mut()
+    }
 }
 /// One registry record: identity, lifecycle, numeric persistent-field
 /// memberships and the storage kind.
@@ -162,13 +166,6 @@ pub(super) struct ContextRecord {
     pub(super) id: ContextId,
     pub(super) life: ContextLife,
     pub(super) storage: ContextStorage,
-    #[cfg_attr(
-        not(test),
-        expect(
-            dead_code,
-            reason = "friend memberships arrive with the retained-friend atom's records"
-        )
-    )]
     pub(super) membership: [RootMembership; 5],
 }
 impl ContextRecord {

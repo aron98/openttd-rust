@@ -126,7 +126,7 @@ impl RefTable {
         }
         released
     }
-    /// `RefTable::EnqueueMarkObject` (`sqstate.cpp:391-398`) in ascending
+    /// `RefTable::EnqueueMarkObject` (`sqstate.cpp:386-396`) in ascending
     /// slot order: every occupied slot enqueues, but a string only occupies
     /// its slot — `SQSharedState::EnqueueMarkObject` skips it
     /// (`sqstate.cpp:280-291`), so no root edge follows.

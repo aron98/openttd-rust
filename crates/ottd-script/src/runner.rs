@@ -6,6 +6,15 @@ use crate::{CompileError, Program, Realm, Storage, Table, Temporary, Value, Vm, 
 pub struct RootEnvironment {
     pub(crate) realm: Realm,
     pub(crate) table: Table,
+    /// The realm's materialized native session, if this realm has one; the
+    /// root environment is the host's owning reference on it, so the shared
+    /// tables live exactly as long as the realm's configured roots do. The
+    /// field is retained ownership, not read state.
+    #[expect(
+        dead_code,
+        reason = "The owning reference is the root environment's sole purpose for it"
+    )]
+    pub(crate) session: Option<std::rc::Rc<crate::native_session::SharedState>>,
 }
 impl RootEnvironment {
     #[expect(
@@ -13,14 +22,21 @@ impl RootEnvironment {
         reason = "The existing empty_root API is infallible; native table creation likewise requires allocation"
     )]
     pub(crate) fn new(realm: Realm) -> Self {
+        let session = realm.heap.native_session();
         let table = realm.table().expect("empty root allocation");
-        Self { realm, table }
+        Self {
+            realm,
+            table,
+            session,
+        }
     }
     /// Configure an existing first-class table as a root without copying slots.
     pub fn from_table(table: Table) -> Self {
+        let session = table.0.realm.heap.native_session();
         Self {
             realm: table.0.realm.clone(),
             table,
+            session,
         }
     }
     /// Retain this root as an ordinary table value, without copying its slots.
@@ -102,16 +118,14 @@ impl RootEnvironment {
     }
 }
 impl Realm {
-    /// Allocate and populate the pinned bare VM's original root table.
+    /// The realm's primary root table, materialized through the native
+    /// session factory: the complete initial graph of the pinned native
+    /// build (thirteen shared tables, seventy default closures, the primary
+    /// context and this root table) comes with it, exactly like `sq_open`.
     /// # Errors
-    /// Returns Allocation if table or closure storage cannot be allocated.
+    /// Returns Allocation if a checked construction reservation fails.
     pub fn default_root(&self) -> Result<RootEnvironment, VmError> {
-        let root = RootEnvironment {
-            realm: self.clone(),
-            table: self.table()?,
-        };
-        root.register_defaults()?;
-        Ok(root)
+        crate::native_session::default_root(self)
     }
 }
 /// Rust diagnostic history, not the native error object's string identity.
@@ -130,7 +144,7 @@ pub trait PrintSink: std::fmt::Debug {
 /// Persistent configured execution context with independent temporary ownership.
 #[derive(Debug)]
 pub struct Runner {
-    pub(crate) root: RootSlot<RootEnvironment>,
+    pub(crate) root: crate::RunnerRoot,
     pub(crate) native_error: RootSlot<Value>,
     pub(crate) temporary: RootSlot<Temporary>,
     pub(crate) failure: Option<RunnerFailure>,
@@ -140,7 +154,7 @@ impl Runner {
     /// Create an idle context sharing this root, with no prior temporary or failure.
     pub const fn new(root: RootEnvironment) -> Self {
         Self {
-            root: RootSlot::new(root),
+            root: crate::RunnerRoot::new(root),
             native_error: RootSlot::new(Value::Null),
             temporary: RootSlot::new(Temporary::Value(Value::Null)),
             failure: None,
@@ -168,9 +182,24 @@ impl Runner {
         self.native_error.set(Value::Null);
     }
     /// Create a friend context sharing the current root and re-registering defaults.
+    ///
+    /// On a materialized realm this is the native `sq_newthread` recipe
+    /// (`sqapi.cpp:72-88`): a real collectable friend context, `Init` from
+    /// the current root with `sq_base_register`, then the friend local's
+    /// sole reference, which never roots the context for collection.
     /// # Errors
     /// Allocation failure may leave the same partial registration as the native host.
     pub fn friend(&self) -> Result<Self, VmError> {
+        let realm = &self.root.as_ref().realm;
+        if let Some(state) = realm.heap.native_session() {
+            let mut friend = Self::new(self.root.as_ref().clone());
+            let current = Value::Table(friend.root.as_ref().table.clone());
+            let stored = crate::heap::Stored::from_value(current, realm)?;
+            let context = crate::native_session::local_friend(&state, stored, 256)
+                .map_err(|_| VmError::Allocation)?;
+            friend.root.bind_context(context);
+            return Ok(friend);
+        }
         self.root.as_ref().register_defaults()?;
         Ok(Self::new(self.root.as_ref().clone()))
     }

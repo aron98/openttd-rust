@@ -102,6 +102,14 @@ impl<'a> Probe<'a> {
         self.output.push_str("recorder 1\n");
     }
 }
+impl Drop for Probe<'_> {
+    /// End the observation window when the probe ends: the materialized
+    /// session's close-order retirements happen after its own scope and are
+    /// not recorded, exactly like the native recorder detaching.
+    fn drop(&mut self) {
+        *self.heap.retired.borrow_mut() = None;
+    }
+}
 
 pub(super) fn native(mode: &str, frozen: &str) -> std::io::Result<String> {
     let raw = if let Ok(directory) = std::env::var("OTTD_SCRIPT_DELEGATE_OWNER_DIR") {

@@ -18,6 +18,7 @@ mod friend;
 mod friend_init;
 mod friend_view;
 mod graph;
+mod ordinary;
 #[expect(
     clippy::redundant_pub_crate,
     reason = "The heap object kind needs the actual context payload storage type"
@@ -52,6 +53,16 @@ pub use friend::RetainedNativeFriend;
 pub use friend_view::{NativeFriendField, NativeFriendScalars, NativeFriendView};
 #[expect(
     clippy::redundant_pub_crate,
+    reason = "The heap and the Runner-level path read the live-session phase and factory bridge"
+)]
+pub(crate) use ordinary::{default_root, local_friend, publish_primary_root};
+#[expect(
+    clippy::redundant_pub_crate,
+    reason = "The heap reads the live-session phase of its attached native session"
+)]
+pub(crate) use session::Phase;
+#[expect(
+    clippy::redundant_pub_crate,
     reason = "The heap holds a weak hook to the session's shared state"
 )]
 pub(crate) use session::SharedState;
@@ -67,6 +78,8 @@ mod graph_tests;
 mod identity_tests;
 #[cfg(test)]
 mod observation;
+#[cfg(test)]
+mod ordinary_tests;
 #[cfg(test)]
 mod receipt_tests;
 #[cfg(test)]

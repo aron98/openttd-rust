@@ -44,6 +44,7 @@ pub use script_closure::ScriptClosure;
 mod native_session;
 mod realm;
 mod root_slot;
+pub(crate) use root_slot::RunnerRoot;
 mod runner;
 pub use native_session::{
     NativeCapability, NativeCollector, NativeContextError, NativeFriendField, NativeFriendScalars,
@@ -91,6 +92,10 @@ pub(crate) enum Temporary {
     MainProgram { _program: ScriptClosure },
 }
 #[derive(Debug)]
+#[expect(
+    clippy::large_enum_variant,
+    reason = "The owned runner carries the bound friend-context reference of the native-session path"
+)]
 pub(crate) enum Storage<'a> {
     Owned(Runner),
     Borrowed(&'a mut Runner),

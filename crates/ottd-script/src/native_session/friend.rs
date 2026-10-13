@@ -94,7 +94,28 @@ pub(super) fn retain_friend(
         &realm,
         Object::Context(Box::new(payload::ContextPayload::allocated())),
     )?;
-    let membership = match init_from_primary(state, &friend, initial_slots) {
+    // The retained friend's `Init` copies the primary's `_roottable` owner
+    // (`sqvm.cpp:330`), so the shared root table reference comes out of the
+    // primary payload before the friend allocation begins.
+    #[expect(
+        clippy::unreachable,
+        reason = "The live session's primary context owns its root table"
+    )]
+    let root = primary_handle(state)?.read(|object| match object {
+        Object::Context(data) => match data.persistent()[payload::ROOT] {
+            Stored::Table(ref root) => Edge::clone(root),
+            Stored::Scalar(_)
+            | Stored::Array(_)
+            | Stored::NativeClosure(_)
+            | Stored::ScriptClosure(_)
+            | Stored::Context(_) => unreachable!("the primary root table"),
+        },
+        Object::Array(_)
+        | Object::NativeClosure(_)
+        | Object::ScriptClosure(_)
+        | Object::Table(_) => unreachable!("the primary context payload"),
+    });
+    let membership = match init_from_primary(state, &friend, initial_slots, &root) {
         Ok(membership) => membership,
         Err(failure) => {
             // Native has no tested `Init` failure oracle (design §103); this

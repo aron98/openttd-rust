@@ -1,5 +1,5 @@
 //! Test-only scalar copies from actual storage; no graph owners or observer actions.
-use super::{Handle, Heap, Object, ObjectId};
+use super::{Handle, Heap, Object, ObjectId, Stored};
 use crate::Value;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -143,6 +143,49 @@ impl ValueSnapshot {
         Self {
             kind,
             identity: Some(handle.observation_identity()),
+        }
+    }
+    /// Snapshot one stored persistent field piece without adding an owner;
+    /// its kind and numeric identity are read like a borrowed native value.
+    #[expect(
+        clippy::unreachable,
+        reason = "A materialized context is never a persistent script value"
+    )]
+    pub(crate) fn stored(stored: &Stored) -> Self {
+        match stored {
+            Stored::Table(_) => Self::stored_edge(ValueKind::Table, stored),
+            Stored::Array(_) => Self::stored_edge(ValueKind::Array, stored),
+            Stored::NativeClosure(_) => Self::stored_edge(ValueKind::NativeClosure, stored),
+            Stored::ScriptClosure(_) => Self::stored_edge(ValueKind::ScriptClosure, stored),
+            Stored::Context(_) => {
+                unreachable!("a materialized context is never a persistent script value")
+            }
+            Stored::Scalar(crate::table::scalar::Scalar::Null) => Self {
+                kind: ValueKind::Null,
+                identity: None,
+            },
+            Stored::Scalar(crate::table::scalar::Scalar::Bool(_)) => Self {
+                kind: ValueKind::Bool,
+                identity: None,
+            },
+            Stored::Scalar(crate::table::scalar::Scalar::Integer(_)) => Self {
+                kind: ValueKind::Integer,
+                identity: None,
+            },
+            Stored::Scalar(crate::table::scalar::Scalar::Float(_)) => Self {
+                kind: ValueKind::Float,
+                identity: None,
+            },
+            Stored::Scalar(crate::table::scalar::Scalar::String(_)) => Self {
+                kind: ValueKind::String,
+                identity: None,
+            },
+        }
+    }
+    fn stored_edge(kind: ValueKind, stored: &Stored) -> Self {
+        Self {
+            kind,
+            identity: stored.edge().map(|edge| edge.identity().into()),
         }
     }
     pub(crate) fn value(value: &Value) -> Self {

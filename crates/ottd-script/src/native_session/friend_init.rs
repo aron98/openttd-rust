@@ -10,7 +10,8 @@ use crate::{
 use std::rc::Rc;
 
 /// `SQVM::Init` friend path (`sqvm.cpp:318-337`): size the physical stack
-/// and four call records, copy the primary's roottable, errorhandler and
+/// and four call records, publish the passed roottable owner (the caller's
+/// primary root reference) together with the primary's errorhandler and
 /// debughook fields, then run `sq_base_register` against the friend's own
 /// stack; the shared root table's existing keys are overwritten and their
 /// displaced closure owners released (`sqtable.cpp:99-106`). The registry
@@ -18,12 +19,13 @@ use std::rc::Rc;
 /// record.
 #[expect(
     clippy::unreachable,
-    reason = "The primary context and root table of a live session always exist"
+    reason = "The primary context of a live session always exists"
 )]
 pub(super) fn init_from_primary(
     state: &Rc<SharedState>,
     friend: &Unpublished,
     initial_slots: usize,
+    root: &Edge,
 ) -> Result<[RootMembership; 5], NativeContextError> {
     let realm = &state.realm;
     // _stack.resize / four call records (sqvm.cpp:320-326).
@@ -38,15 +40,10 @@ pub(super) fn init_from_primary(
         .map_err(NativeContextError::from)?;
     // Field copies (sqvm.cpp:329-333).
     let primary = primary_handle(state)?;
-    let (root_edge, error, handler, debug) = primary.read(|object| match object {
+    let (error, handler, debug) = primary.read(|object| match object {
         Object::Context(data) => {
             let fields = data.persistent();
-            let root = match &fields[payload::ROOT] {
-                Stored::Table(edge) => Edge::clone(edge),
-                _ => unreachable!("the primary root table"),
-            };
             (
-                root,
                 fields[payload::ERROR].clone(),
                 fields[payload::HANDLER].clone(),
                 fields[payload::DEBUG].clone(),
@@ -55,9 +52,10 @@ pub(super) fn init_from_primary(
         Object::Array(_)
         | Object::NativeClosure(_)
         | Object::ScriptClosure(_)
-        | Object::Table(_) => unreachable!("the primary root table"),
+        | Object::Table(_) => unreachable!("the primary context payload"),
     });
     drop(primary);
+    let root_edge = Edge::clone(root);
     friend.mutate(|object| match object {
         Object::Context(data) => {
             data.publish_friend_fields(root_edge.clone(), error, handler, debug);
@@ -71,7 +69,7 @@ pub(super) fn init_from_primary(
     // root reference, and the table is mutated through that reference, like
     // native `CreateSlot` walking the pushed stack slot.
     let access = Handle {
-        edge: Edge::internal(&root_edge),
+        edge: Edge::internal(root),
         realm: realm.clone(),
     };
     let insert = |scalar: Scalar, hash: u64, value: Stored| {

@@ -1,6 +1,7 @@
 //! Native marking order and unmarked-object finalization.
 use super::ownership::Ownership;
-use super::{Edge, Entry, Heap, Object, ObjectId};
+use super::{Edge, Entry, Handle, Heap, Object, ObjectId};
+use crate::Realm;
 
 enum Finalization {
     Table,
@@ -11,19 +12,47 @@ enum Finalization {
 
 impl Heap {
     pub(crate) fn collect(&self) -> usize {
-        let roots = {
-            let entries = self.entries.borrow();
-            let mut roots = Vec::new();
-            for entry in &*entries {
-                if let Some(life) = &entry.life {
-                    if life.external.get() > 0 {
-                        roots.push(life.id);
-                    }
+        let roots = self.external_ids();
+        // A live materialized session runs its source-ordered native
+        // collection, which also retains the legacy external root class of
+        // the Runner-level path (`heap/collection.rs` external edges stand
+        // in for the frame writers of the later slot-binding atom).
+        if let Some(state) = self.native_session() {
+            return crate::native_session::collect_shared_state(&state);
+        }
+        self.collect_roots(&roots)
+    }
+    /// External host-root identities of the legacy collection root class.
+    pub(crate) fn external_ids(&self) -> Vec<ObjectId> {
+        let entries = self.entries.borrow();
+        let mut roots = Vec::new();
+        for entry in &*entries {
+            if let Some(life) = &entry.life {
+                if life.external.get() > 0 {
+                    roots.push(life.id);
                 }
             }
-            roots
-        };
-        self.collect_roots(&roots)
+        }
+        roots
+    }
+    /// The live materialized session attached to this realm's heap, if any;
+    /// a closed or dropped session upgrades to nothing.
+    pub(crate) fn native_session(&self) -> Option<std::rc::Rc<crate::native_session::SharedState>> {
+        let native = self.native.borrow();
+        let state = native.as_ref()?.upgrade()?;
+        (state.phase() == crate::native_session::Phase::Live).then_some(state)
+    }
+    /// One external host handle for the live object at a numeric identity.
+    pub(crate) fn handle_at(&self, realm: &Realm, id: ObjectId) -> Option<Handle> {
+        let entries = self.entries.borrow();
+        let entry = entries
+            .get(id.index)
+            .filter(|entry| entry.generation == id.generation)?;
+        let life = entry.life.as_ref()?;
+        Some(Handle {
+            edge: Edge::retain(life, Ownership::HostRoot),
+            realm: realm.clone(),
+        })
     }
     /// Collect with the given source-ordered root identities, mirroring
     /// native `SQSharedState::CollectGarbage`: marking happens at enqueue,

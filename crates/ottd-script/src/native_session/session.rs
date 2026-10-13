@@ -10,7 +10,7 @@ use std::rc::Rc;
 /// Lifecycle phases of the shared state; collection has no valid native
 /// capability while closing or closed.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub(super) enum Phase {
+pub(crate) enum Phase {
     /// Fully constructed and idle.
     Live,
     /// The source close sequence is releasing owners.
@@ -30,8 +30,16 @@ pub(crate) struct SharedState {
     pub(super) refs: RefCell<Option<RefTable>>,
     pub(super) contexts: RefCell<Vec<ContextSlot>>,
 }
+impl Drop for SharedState {
+    /// The last strong owner runs the exact source close sequence, exactly
+    /// like the native shared state dying with its final owning reference;
+    /// later drops of a closed state are inert.
+    fn drop(&mut self) {
+        close::close(self);
+    }
+}
 impl SharedState {
-    pub(super) fn phase(&self) -> Phase {
+    pub(crate) fn phase(&self) -> Phase {
         self.phase.get()
     }
     pub(super) fn live_generation(&self) -> u64 {
@@ -120,25 +128,8 @@ impl NativeSession {
     /// Returns `InvalidInitialSlots` for a zero-sized stack, or `Allocation`
     /// when a checked construction reservation fails.
     pub fn open(initial_slots: usize) -> Result<Self, NativeContextError> {
-        if initial_slots == 0 {
-            return Err(NativeContextError::InvalidInitialSlots);
-        }
         let realm = Realm::new();
-        // C++ member construction runs before the shared constructor body, so
-        // the physical RefTable with its four slots exists before anything else.
-        let refs = RefTable::new()?;
-        let builder = Builder::new(&realm);
-        let (roots, record) = builder.build(initial_slots)?;
-        let shared = Rc::new(SharedState {
-            realm: realm.clone(),
-            phase: Cell::new(Phase::Live),
-            generation: Cell::new(1),
-            collecting: Cell::new(false),
-            roots: RefCell::new(Some(roots)),
-            refs: RefCell::new(Some(refs)),
-            contexts: RefCell::new(vec![ContextSlot::from_record(record)]),
-        });
-        realm.heap.install_native_session(Rc::downgrade(&shared));
+        let shared = build_shared_state(&realm, initial_slots)?;
         Ok(Self { realm, shared })
     }
     /// The materialized realm; ordinary collection on it dispatches to the
@@ -205,8 +196,40 @@ impl NativeSession {
     /// (`sq_close` plus `~SQSharedState`), releasing every owner in order.
     pub fn close(self) {}
 }
+/// Materialize one realm's complete initial graph and attach its weak root
+/// enumerator to the realm's heap; the Runner-level default-root construction
+/// uses this same factory as `NativeSession::open` (design §133).
+/// # Errors
+/// Returns `InvalidInitialSlots` for a zero-sized stack, or `Allocation`
+/// when a checked construction reservation fails.
+pub(super) fn build_shared_state(
+    realm: &Realm,
+    initial_slots: usize,
+) -> Result<Rc<SharedState>, NativeContextError> {
+    if initial_slots == 0 {
+        return Err(NativeContextError::InvalidInitialSlots);
+    }
+    // C++ member construction runs before the shared constructor body, so
+    // the physical RefTable with its four slots exists before anything else.
+    let refs = RefTable::new()?;
+    let builder = Builder::new(realm);
+    let (roots, record) = builder.build(initial_slots)?;
+    let shared = Rc::new(SharedState {
+        realm: realm.clone(),
+        phase: Cell::new(Phase::Live),
+        generation: Cell::new(1),
+        collecting: Cell::new(false),
+        roots: RefCell::new(Some(roots)),
+        refs: RefCell::new(Some(refs)),
+        contexts: RefCell::new(vec![ContextSlot::from_record(record)]),
+    });
+    realm.heap.install_native_session(Rc::downgrade(&shared));
+    Ok(shared)
+}
 impl Drop for NativeSession {
     fn drop(&mut self) {
+        // The explicit source close precedes the owning reference's drop;
+        // the shared state's own drop re-runs it inertly if it already ran.
         close::close(&self.shared);
     }
 }

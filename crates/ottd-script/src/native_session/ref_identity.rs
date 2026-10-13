@@ -62,7 +62,7 @@ impl RawSlot {
         self.raw
     }
     /// The exact native type tag; source equality needs raw value AND type
-    /// (`sqstate.cpp:473-474`).
+    /// (`sqstate.cpp:476`).
     pub(super) const fn tag(&self) -> u32 {
         self.tag
     }

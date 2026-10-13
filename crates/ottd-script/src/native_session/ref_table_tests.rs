@@ -131,7 +131,7 @@ fn distinct_live_objects_with_equal_type_tags_do_not_alias() {
     table.add_ref(second, second_key).expect("add");
     assert_eq!(table.slotused(), 2, "two live tables never share a node");
     // The exact type tag is part of the source equality, so the same raw
-    // value under a different type is a distinct node (sqstate.cpp:473-474).
+    // value under a different type is a distinct node (sqstate.cpp:476).
     let (other, other_key) = table_stored(&realm);
     drop(other);
     add_key(&mut table, other_key.raw(), OT_THREAD);

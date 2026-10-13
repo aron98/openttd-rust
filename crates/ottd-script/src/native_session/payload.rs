@@ -5,11 +5,11 @@ use std::fmt::{Debug, Formatter, Result as FmtResult};
 
 /// Index of the persistent `SQObjectPtr` fields, in native enqueue order
 /// (`_lasterror`, `_errorhandler`, `_debughook`, `_roottable`, `temp_reg`).
-pub(super) const ERROR: usize = 0;
-pub(super) const HANDLER: usize = 1;
-pub(super) const DEBUG: usize = 2;
-pub(super) const ROOT: usize = 3;
-pub(super) const TEMP: usize = 4;
+pub(crate) const ERROR: usize = 0;
+pub(crate) const HANDLER: usize = 1;
+pub(crate) const DEBUG: usize = 2;
+pub(crate) const ROOT: usize = 3;
+pub(crate) const TEMP: usize = 4;
 
 /// Actual `SQVM` storage: source scalar widths, persistent fields, physical
 /// stack/vararg/call buffers. Field assignment order differs per native
@@ -107,6 +107,12 @@ impl ContextPayload {
     /// Publish the root table owner into its persistent field.
     pub(crate) fn publish_root(&mut self, root: Edge) {
         self.persistent[ROOT] = Stored::Table(root);
+    }
+    /// Take the persistent root owner out of its field, like the native
+    /// primary VM's single `_roottable` reference moving into its bound
+    /// runner slot; the field stays Null and can be republished later.
+    pub(crate) const fn take_root(&mut self) -> Stored {
+        std::mem::replace(&mut self.persistent[ROOT], Stored::null())
     }
     /// `SQVM::Init` friend path (`sqvm.cpp:329-333`): copy the friend VM's
     /// roottable, errorhandler and debughook fields, each assignment

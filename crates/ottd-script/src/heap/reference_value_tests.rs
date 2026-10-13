@@ -212,6 +212,10 @@ fn run(kind: Kind) {
     assert_eq!(retired, expected_retirements);
     assert_eq!(trace.borrow().states, expected(kind, &native));
     drop(retained);
+    // End the recorder before the session's own close-order retirements,
+    // which happen after this observation window exactly like the native
+    // recorder detaching before the shared state's teardown.
+    *realm.heap.retired.borrow_mut() = None;
 }
 #[test]
 fn reference_owned_array_remains_accessible_after_active_finalization() {

@@ -70,5 +70,11 @@ pub(crate) fn collect_shared_state(state: &SharedState) -> usize {
         }
     }
     ids.extend(edges.iter().map(|edge| edge.identity()));
+    // The Runner-level path retains the legacy external root class until the
+    // frame writers of the later slot-binding atom exist: its host handles
+    // stand in for physical stack/frame storage, so their targets enqueue
+    // after the source-ordered session roots. A session-only realm has no
+    // external owner, leaving its native chain order unchanged.
+    ids.extend(state.realm.heap.external_ids());
     state.realm.heap.collect_native(&ids)
 }

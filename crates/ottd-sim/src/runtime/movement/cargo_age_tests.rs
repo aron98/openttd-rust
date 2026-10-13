@@ -1,6 +1,7 @@
 //! Synthetic saturation/countdown controls start from genuine loaded native cargo.
-use super::{NewsQueue, RoadPhases, State, number, set, spatial, stations};
+use super::{RoadPhases, State, number, set, spatial, stations};
 use crate::runtime::SimulationRuntime;
+use crate::runtime::types::NewsQueue;
 use ottd_save::{Savegame, world::World};
 
 type Result = std::result::Result<(), Box<dyn std::error::Error>>;

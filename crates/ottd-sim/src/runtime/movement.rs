@@ -41,7 +41,6 @@ use access::{number, random, set};
 use ottd_core::ClockState;
 use ottd_save::{WireValue, world::World};
 pub use spatial::SingleRoadTileOccupancy;
-pub use year::NewsQueue;
 
 struct RoadPhases<'a> {
     id: VehicleId,
@@ -53,7 +52,7 @@ struct RoadPhases<'a> {
     transport: super::transport::TransportRuntime,
     group_profits: super::GroupProfitCaches,
     company_ratings: super::CompanyRatingCaches,
-    news: NewsQueue,
+    news: super::NewsQueue,
 }
 impl VehiclePhases for RoadPhases<'_> {
     fn company_rating(&mut self, owner: u32, parts: [i64; 10]) -> Result<(), WorldTickError> {

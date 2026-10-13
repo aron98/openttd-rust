@@ -1,5 +1,6 @@
 //! Synthetic false capacity exercises real forest ordering without claiming a full native pool.
-use super::{NewsQueue, RoadPhases, State, spatial, stations};
+use super::{RoadPhases, State, spatial, stations};
+use crate::runtime::types::NewsQueue;
 use crate::runtime::{
     SimulationRuntime, pools::PoolAllocator, stations::saved::StationRow,
     transport::cargo::read::Read,

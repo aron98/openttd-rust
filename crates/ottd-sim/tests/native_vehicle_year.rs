@@ -60,31 +60,44 @@ fn unprofitable_probes(native: &Path) -> Result<Vec<Probe>> {
     let mut probes = Vec::new();
     for line in text.lines() {
         let row: Value = serde_json::from_str(line)?;
-        let phase = row["phase"]
-            .as_str()
+        let phase = row
+            .get("phase")
+            .and_then(Value::as_str)
             .ok_or("native probe phase")?
             .to_string();
         if phase != "unprofitable_news" && phase != "unprofitable_ai" {
             continue;
         }
-        let snapshot = &row["snapshot"];
-        let vehicle = snapshot["vehicles"]
-            .as_array()
+        let snapshot = row.get("snapshot").ok_or("native probe snapshot")?;
+        let vehicle = snapshot
+            .get("vehicles")
+            .and_then(Value::as_array)
             .ok_or("native probe vehicles")?
             .iter()
-            .find(|entry| entry["id"] == 0)
+            .find(|entry| entry.get("id").is_some_and(|id| *id == 0))
             .ok_or("native probe vehicle 0")?;
         probes.push(Probe {
-            sequence: row["sequence"].as_u64().ok_or("native probe sequence")?,
-            vehicle: row["vehicle"].as_u64().ok_or("native probe vehicle")?,
-            news_queue: snapshot["news_queue"]
-                .as_u64()
+            sequence: row
+                .get("sequence")
+                .and_then(Value::as_u64)
+                .ok_or("native probe sequence")?,
+            vehicle: row
+                .get("vehicle")
+                .and_then(Value::as_u64)
+                .ok_or("native probe vehicle")?,
+            news_queue: snapshot
+                .get("news_queue")
+                .and_then(Value::as_u64)
                 .ok_or("native probe queue")?,
-            economy_age: vehicle["economy_age"].as_i64().ok_or("native probe age")?,
-            profit_this_year: vehicle["profit_this_year"]
-                .as_i64()
+            economy_age: vehicle
+                .get("economy_age")
+                .and_then(Value::as_i64)
+                .ok_or("native probe age")?,
+            profit_this_year: vehicle
+                .get("profit_this_year")
+                .and_then(Value::as_i64)
                 .ok_or("native probe profit")?,
-            extra: row["extra"].clone(),
+            extra: row.get("extra").cloned().ok_or("native probe context")?,
             phase,
         });
     }
@@ -211,7 +224,7 @@ fn original_unprofitable_warning_matches_native_news_parity() -> Result {
         .ok_or("unprofitable_ai probe")?;
     assert_eq!(news.vehicle, 0);
     assert_eq!(news.economy_age, 1094);
-    assert_eq!(news.profit_this_year, -287985);
+    assert_eq!(news.profit_this_year, -287_985);
     assert_eq!(
         news.extra,
         json!({"company": 0, "string": 761, "profit": -1125})

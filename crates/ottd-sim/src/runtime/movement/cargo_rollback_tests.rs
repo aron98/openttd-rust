@@ -1,5 +1,6 @@
 //! Complete native positive prefix precedes a labelled late candidate-cache fault.
-use super::{NewsQueue, RoadPhases, SavedVehicleView, State, spatial, stations};
+use super::{RoadPhases, SavedVehicleView, State, spatial, stations};
+use crate::runtime::types::NewsQueue;
 use crate::runtime::{SimulationRuntime, pools::PoolAllocator};
 use ottd_save::{Savegame, world::World};
 use std::path::{Path, PathBuf};

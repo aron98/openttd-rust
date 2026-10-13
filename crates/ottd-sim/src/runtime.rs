@@ -1,7 +1,7 @@
 //! Vanilla runtime over one authoritative saved world and derived road caches.
 mod allocation;
 mod types;
-pub use types::{RuntimeError, VehicleId};
+pub use types::{NewsItem, NewsQueue, RuntimeError, VehicleId};
 #[cfg(feature = "async-trace")]
 pub mod async_trace;
 mod industries;
@@ -13,7 +13,7 @@ mod dispatch;
 pub(crate) mod towns;
 pub use towns::{TownHouseCache, TownHouseCaches};
 mod movement;
-pub use movement::{NewsQueue, SingleRoadTileOccupancy};
+pub use movement::SingleRoadTileOccupancy;
 mod order_state;
 pub use order_state::{BackupReset, OrderLoadReceipt, RuntimeSaveContext};
 #[cfg(test)]
@@ -46,6 +46,7 @@ mod purchase_native;
 #[cfg(test)]
 mod purchase_tests;
 mod road_cache;
+pub use road_cache::RoadVehicleCache;
 mod road_record;
 mod road_sale;
 pub use group_counts::{CompanyRoadCounts, RoadGroupCounts};
@@ -58,49 +59,7 @@ use crate::content::ContentCatalog;
 use ottd_save::world::World;
 pub use saved_engine::SavedEngineView;
 pub use saved_vehicle::SavedVehicleView;
-use serde::Serialize;
 use std::collections::BTreeMap;
-
-/// Native road caches after final after-load initialization.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-pub struct RoadVehicleCache {
-    /// Native vehicle pool ID.
-    pub id: VehicleId,
-    /// Resolved native road type.
-    pub road_type: u8,
-    /// Native powered road-type mask.
-    pub compatible_roadtypes: u64,
-    /// Front engine ID for trailing parts; none for a front.
-    pub first_engine: Option<u16>,
-    /// Length in eighths of a standard vehicle.
-    pub vehicle_length: u8,
-    /// Consist length in the same units.
-    pub total_length: u16,
-    /// Native internal maximum speed.
-    pub max_speed: u16,
-    /// Ticks between cargo aging.
-    pub cargo_age_period: u16,
-    /// Resolved visual-effect bit field.
-    pub visual_effect: u8,
-    /// Consist weight in tonnes, clamped to at least one.
-    pub weight: u32,
-    /// Part slope resistance in newtons.
-    pub slope_resistance: u32,
-    /// Native narrowed axle resistance.
-    pub axle_resistance: u16,
-    /// Consist power in horsepower.
-    pub power: u32,
-    /// Native maximum tractive effort.
-    pub max_tractive_effort: u32,
-    /// Road-type-limited internal speed.
-    pub max_track_speed: u16,
-    /// Native air-drag coefficient.
-    pub air_drag: u32,
-    /// Load-initialized display-speed cache.
-    pub last_speed: u16,
-    /// Native load-initialized occupancy percentage.
-    pub trip_occupancy: i8,
-}
 
 /// One authoritative saved world with immutable content and derived road caches.
 #[derive(Debug)]
@@ -117,7 +76,7 @@ pub struct SimulationRuntime {
     industries: IndustryCaches,
     group_profits: GroupProfitCaches,
     company_ratings: CompanyRatingCaches,
-    news: movement::NewsQueue,
+    news: NewsQueue,
     serializer_cargo_paid_for: u16,
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -207,7 +166,7 @@ impl SimulationRuntime {
             industries: IndustryCaches::restore(&world)?,
             group_profits: GroupProfitCaches::restore(&world)?,
             company_ratings: CompanyRatingCaches::fresh_process(),
-            news: movement::NewsQueue::fresh_process(),
+            news: NewsQueue::fresh_process(),
             depot: depot::DepotRuntime::restore(&world)?,
             stations: stations::StationRuntime::restore(&world)?,
             transport: transport::TransportRuntime::restore(&world, &content)?,
@@ -247,7 +206,7 @@ impl SimulationRuntime {
     }
 
     /// Process-owned vehicle-advice news queue; never serialized, front-inserted.
-    pub const fn news_queue(&self) -> &movement::NewsQueue {
+    pub const fn news_queue(&self) -> &NewsQueue {
         &self.news
     }
 

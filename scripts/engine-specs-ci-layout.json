@@ -792,7 +792,7 @@
     "crates/ottd-sim/tests/native_sale/cleanup.rs": "a5cdf5bdb56d959e61ebb5bdcf5757159ff942691d28b252547f2aa875e54fea",
     "crates/ottd-sim/tests/native_sale/inputs.rs": "14cfe6f4dc1ddc09c11b09f1019cdb58cbe30c830ae6b3695167045c40e47ad6",
     "crates/ottd-sim/tests/native_service.rs": "2edaa65162425a46384b1a0588e0a0c85de73c3243cba75fad0827e4a15d464c",
-    "crates/ottd-sim/tests/native_vehicle_year.rs": "25b07129ef734f060817cba9d702a4385e7a139146e3ac484087b7d10e74bded",
+    "crates/ottd-sim/tests/native_vehicle_year.rs": "fdacc6cc046993f2f32160679f4fb0cb3193f3fbe84bd2c7a2e7b61a2c094533",
     "crates/ottd-sim/tests/native_vehicle_year_cache.rs": "fc6331286c4e108ff5549d43acd60794697fdc7b55089b79c22c727b63311419",
     "crates/ottd-sim/tests/native_whole_runtime.rs": "f004373985b316b7bbe618c94d7c3a5cdd2b76326b13ba3fdae1323210e08302",
     "crates/ottd-sim/tests/native_world_commands.rs": "9398ec290c728371e51c41065464d606facefba692974f38c7c470b613ee78d2",

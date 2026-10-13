@@ -28,13 +28,14 @@ separate recipes.
 | timer | 60680 | prefix 1 | Positive competitor timer/random continuation |
 | late-disaster | 27010 | prefix 27009 | Positive company-rating continuation |
 | older-whole | 33744 | year2102 20350; age730 28490; age731 28564; quarter_prefix 33743 | Positive older-vehicle quarter continuation |
-| annual-warning | 27010 | prefix 27009 | Positive prefix, then unsupported warning callback with complete rollback |
+| annual-warning | 27010 | prefix 27009 | Positive whole request with unprofitable-warning news parity |
 
 The three 60680-call test selectors retain historical rollback names. They now require
-successful continuation and give **no rollback credit**. The annual-warning final
-native call succeeds, while Rust deliberately refuses the unimplemented
-`unprofitable warning/news and AI event context` callback; a passing rollback test
-must prove unchanged committed state and retention of the one threaded worker lease.
+successful continuation and give **no rollback credit**. The annual-warning case now
+executes the native unprofitable-vehicle warning on the final call: the regenerated
+observer probes (`unprofitable_news`, `unprofitable_ai`) and the `news_queue` group
+snapshot counter compare exactly against the Rust process-owned news queue; the
+human-owner AI event is a native drop before storage.
 
 ## Verify the bundle
 
@@ -234,20 +235,19 @@ check_one "$run_root/older-whole-test.log" env \
   original_quarter_matches_complete_world_and_raw_rating_cache -- --ignored --exact --nocapture
 
 check_one "$run_root/annual-warning-test.log" env \
-  RATING_ROLLBACK_NATIVE="$run_root/annual-warning-native" \
-  RATING_ROLLBACK_OUTPUT="$run_root/annual-warning-rust" RATING_ROLLBACK_CALLS=27010 \
-  RATING_ROLLBACK_REASON='unprofitable warning/news and AI event context' RATING_ROLLBACK_WORKERS=1 \
-  cargo test --locked -p ottd-sim --lib \
-  runtime::movement::company_rollback::genuine_post_quarter_refusal_preserves_world_ratings_and_worker_leases \
-  -- --ignored --exact --nocapture
+  INDUSTRY_RECIPIENT_NATIVE="$run_root/annual-warning-native" \
+  VEHICLE_YEAR_OUTPUT="$run_root/annual-warning-rust" VEHICLE_YEAR_CALLS=27010 \
+  cargo test --locked -p ottd-sim --test native_vehicle_year \
+  original_unprofitable_warning_matches_native_news_parity -- --ignored --exact --nocapture
 ```
 
 Timer deliberately loads the **new native capture's** `initial.sav`; the native
 capture itself still starts from the unchanged bundle `input.sav`. Check emitted
-`PASS.json` for forest/house/timer (`calls:60680`, `rollback_credit:false`) and
-annual-warning (positive prefix, unchanged committed state, one retained lease).
-Company cases emit `result.json` with successful full calls plus complete comparison
-artifacts. Retain those outputs and all test logs even on failure.
+`PASS.json` for forest/house/timer (`calls:60680`, `rollback_credit:false`).
+Company cases and annual-warning emit `result.json` with successful full calls plus
+complete comparison artifacts; annual-warning additionally proves news-queue parity
+against the probed native warning branch. Retain those outputs and all test logs even
+on failure.
 
 Native worker scheduling can produce a pending-state timing difference, including
 `false` where a historical run observed `true`. Preserve the actual result and report

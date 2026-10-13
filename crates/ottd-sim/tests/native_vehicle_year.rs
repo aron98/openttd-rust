@@ -36,7 +36,59 @@ fn compare_groups(
         owned_native(&expected)?,
         "{label}: all three owned group-profit fields"
     );
+    assert_eq!(
+        runtime.news_queue().len(),
+        owned_news_queue(&expected)?,
+        "{label}: process-owned news queue length"
+    );
     Ok(())
+}
+
+/// One probed native unprofitable-branch event from the regenerated year trace.
+struct Probe {
+    sequence: u64,
+    phase: String,
+    vehicle: u64,
+    extra: Value,
+    news_queue: u64,
+    economy_age: i64,
+    profit_this_year: i64,
+}
+
+fn unprofitable_probes(native: &Path) -> Result<Vec<Probe>> {
+    let text = fs::read_to_string(native.join("year.jsonl"))?;
+    let mut probes = Vec::new();
+    for line in text.lines() {
+        let row: Value = serde_json::from_str(line)?;
+        let phase = row["phase"]
+            .as_str()
+            .ok_or("native probe phase")?
+            .to_string();
+        if phase != "unprofitable_news" && phase != "unprofitable_ai" {
+            continue;
+        }
+        let snapshot = &row["snapshot"];
+        let vehicle = snapshot["vehicles"]
+            .as_array()
+            .ok_or("native probe vehicles")?
+            .iter()
+            .find(|entry| entry["id"] == 0)
+            .ok_or("native probe vehicle 0")?;
+        probes.push(Probe {
+            sequence: row["sequence"].as_u64().ok_or("native probe sequence")?,
+            vehicle: row["vehicle"].as_u64().ok_or("native probe vehicle")?,
+            news_queue: snapshot["news_queue"]
+                .as_u64()
+                .ok_or("native probe queue")?,
+            economy_age: vehicle["economy_age"].as_i64().ok_or("native probe age")?,
+            profit_this_year: vehicle["profit_this_year"]
+                .as_i64()
+                .ok_or("native probe profit")?,
+            extra: row["extra"].clone(),
+            phase,
+        });
+    }
+    Ok(probes)
 }
 #[test]
 #[ignore = "requires unchanged original initial/final saves, groups and all nine cache coordinates"]
@@ -101,45 +153,87 @@ fn original_age731_split_calls_preserve_exact_threshold() -> Result {
 }
 
 #[test]
-#[ignore = "requires actual original warning-boundary initial/final snapshots"]
-fn original_warning_context_remains_refused_without_committed_changes() -> Result {
+#[ignore = "requires regenerated original warning-boundary initial/prefix/final snapshots"]
+fn original_unprofitable_warning_matches_native_news_parity() -> Result {
     let native = PathBuf::from(std::env::var("INDUSTRY_RECIPIENT_NATIVE")?);
     let output = PathBuf::from(std::env::var("VEHICLE_YEAR_OUTPUT")?);
+    let calls: u32 = std::env::var("VEHICLE_YEAR_CALLS")?.parse()?;
     fs::create_dir(&output)?;
-    let mut runtime = SimulationRuntime::restore_vanilla(World::decode(&Savegame::decode(
+    let world = World::decode(&Savegame::decode(
         &fs::read(native.join("initial.sav"))?,
         ottd_save::DEFAULT_MAX_BYTES,
-    )?)?)?;
-    native_views::compare(&runtime, &output, "initial")?;
-    compare_groups(&runtime, &native, &output, "initial")?;
-    let original_final = World::decode(&Savegame::decode(
-        &fs::read(native.join("final.sav"))?,
-        ottd_save::DEFAULT_MAX_BYTES,
     )?)?;
-    assert_ne!(runtime.saved_json()?, original_final.saved_json()?);
+    // Given the regenerated capture, the positive prefix stops one call short of the warning.
+    let mut positive = SimulationRuntime::restore_vanilla(world.clone())?;
+    native_views::compare(&positive, &output, "initial")?;
+    compare_groups(&positive, &native, &output, "initial")?;
+    assert_eq!(
+        positive
+            .advance_world(calls.checked_sub(1).ok_or("empty prefix")?)?
+            .ticks
+            .len(),
+        usize::try_from(calls - 1)?
+    );
+    native_views::compare(&positive, &output, "prefix")?;
+    compare_groups(&positive, &native, &output, "prefix")?;
+    assert!(positive.news_queue().is_empty());
+    // When the full request executes the implemented native unprofitable branch.
+    let mut runtime = SimulationRuntime::restore_vanilla(world)?;
     let before = snapshot(&runtime)?;
-    let result = runtime.advance_world(1);
+    let result = runtime.advance_world(calls);
+    let success = result.is_ok();
     let after = snapshot(&runtime)?;
     fs::write(
         output.join("result.json"),
         serde_json::to_vec_pretty(&json!({
-            "error":result.as_ref().err().map(ToString::to_string),"unchanged":before==after,
-            "native_warning_context_only":true,"news_queue_parity":false
+            "success":success,"calls":calls,"unchanged":before==after,
+            "native_warning_context_only":false,"news_queue_parity":success,
         }))?,
     )?;
-    let error = result.expect_err("native warning/news/AI context remains required");
-    assert!(
-        error
-            .to_string()
-            .contains("call 0: unprofitable warning/news and AI event context"),
-        "{error}"
+    assert_eq!(result?.ticks.len(), usize::try_from(calls)?);
+    assert_ne!(before, after);
+    native_views::compare(&runtime, &output, "final")?;
+    compare_groups(&runtime, &native, &output, "final")?;
+    // Then the probes show exactly one news item and one human-owner AI drop.
+    let probes = unprofitable_probes(&native)?;
+    assert_eq!(
+        probes.len(),
+        2,
+        "exactly one news probe and one AI drop probe"
     );
-    assert_eq!(before, after);
-    for (label, value) in [("before", before), ("after", after)] {
-        fs::write(
-            output.join(format!("{label}.json")),
-            serde_json::to_vec(&value)?,
-        )?;
-    }
+    let news = probes
+        .iter()
+        .find(|probe| probe.phase == "unprofitable_news")
+        .ok_or("unprofitable_news probe")?;
+    let ai = probes
+        .iter()
+        .find(|probe| probe.phase == "unprofitable_ai")
+        .ok_or("unprofitable_ai probe")?;
+    assert_eq!(news.vehicle, 0);
+    assert_eq!(news.economy_age, 1094);
+    assert_eq!(news.profit_this_year, -287985);
+    assert_eq!(
+        news.extra,
+        json!({"company": 0, "string": 761, "profit": -1125})
+    );
+    assert_eq!(news.news_queue, 0, "the news probe fires before the insert");
+    assert_eq!(ai.vehicle, 0);
+    assert_eq!(ai.extra, json!({"company": 0, "is_ai": false}));
+    assert_eq!(ai.news_queue, 1, "the AI drop probe fires after the insert");
+    assert!(
+        news.sequence < ai.sequence,
+        "the news item is inserted before the AI event drop"
+    );
+    // And the Rust process-owned queue matches the native probe exactly.
+    assert_eq!(
+        serde_json::to_value(runtime.news_queue())?,
+        json!({"vehicle_income_warn": true, "items":
+            [{"company": 0, "vehicle": 0, "string": 761, "profit": -1125}]}),
+        "process-owned news queue parity with the native probe"
+    );
+    fs::write(
+        output.join("final.sav"),
+        runtime.to_savegame()?.encode(Compression::Zlib)?,
+    )?;
     Ok(())
 }
